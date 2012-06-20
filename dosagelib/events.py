@@ -1,3 +1,5 @@
+# -*- coding: iso-8859-1 -*-
+# Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 import os.path
 import time
 import rss

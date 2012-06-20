@@ -1,3 +1,6 @@
+# -*- coding: iso-8859-1 -*-
+# Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
+# Copyright (C) 2012 Bastian Kleineidam
 """
 Automated webcomic downloader. Dosage traverses webcomic websites in
 order to download each strip of the comic. The intended use is for

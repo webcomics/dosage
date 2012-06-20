@@ -1,9 +1,12 @@
+# -*- coding: iso-8859-1 -*-
+# Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 import urllib2
 import os
 import locale
 import rfc822
 import time
 import shutil
+# XXX why is this done??
 locale.setlocale(locale.LC_ALL, '')
 
 from .output import out

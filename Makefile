@@ -86,3 +86,7 @@ deb:
 
 comics:
 	./dosage -v @@ > comics.log 2>&1
+
+.PHONY: update-copyright
+update-copyright:
+	update-copyright --holder="Bastian Kleineidam"

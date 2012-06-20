@@ -1,3 +1,5 @@
+# -*- coding: iso-8859-1 -*-
+# Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # TODO: Not sure if this RSS output is "valid", should be though.
 #       Might also be nice categorise Comics under one Item
 

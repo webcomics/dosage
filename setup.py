@@ -1,7 +1,9 @@
 #!/usr/bin/env python
+# -*- coding: iso-8859-1 -*-
 
 # Dosage, the webcomic downloader
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
+# Copyright (C) 2012 Bastian Kleineidam
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of version 2 of the GNU General Public License as
