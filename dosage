@@ -51,7 +51,8 @@ def setupOptions():
 
 class Dosage(object):
 
-    def __init__(self):
+    def __init__(self, settings):
+        self.settings = settings
         self.errors = 0
 
     def setOutputInfo(self):
@@ -119,10 +120,11 @@ class Dosage(object):
     def doList(self, columnList):
         out.write('Available comic scrapers:')
         scrapers = self.getScrapers()
-        if columnList:
-            self.doColumnList(scrapers)
-        else:
-            self.doSingleList(scrapers)
+        if len(scrapers) > 0:
+            if columnList:
+                self.doColumnList(scrapers)
+            else:
+                self.doSingleList(scrapers)
         out.write('%d supported comics.' % len(scrapers))
 
     def doSingleList(self, scrapers):
@@ -133,14 +135,9 @@ class Dosage(object):
             screenWidth = getWindowSize()
         except NotImplementedError:
             screenWidth = 80
-
-        if len(scrapers) == 0:
-            return
-
         names = [scraper.get_name() for scraper in scrapers]
         maxlen = max([len(name) for name in names])
         namesPerLine = int(screenWidth / (maxlen + 1))
-
         while names:
             print ''.join([name.ljust(maxlen) for name in names[:namesPerLine]])
             del names[:namesPerLine]
@@ -193,8 +190,7 @@ class Dosage(object):
         print Copyright
         print Freeware
 
-    def run(self, settings, comics):
-        self.settings = settings
+    def run(self, comics):
         self.setOutputInfo()
         self.comics = comics
 
@@ -221,8 +217,8 @@ def main():
     try:
         parser = setupOptions()
         options, args = parser.parse_args()
-        d = Dosage()
-        d.run(options.__dict__, args)
+        d = Dosage(options.__dict__)
+        d.run(args)
         if d.errors:
             res = 1
         else:
