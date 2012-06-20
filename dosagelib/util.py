@@ -2,8 +2,6 @@ from __future__ import division
 
 import urllib2, urlparse
 import sys
-import struct
-import array
 import os
 import cgi
 import re
@@ -14,6 +12,12 @@ from math import log, floor
 
 from .output import out
 from .configuration import UserAgent, AppName, App, SupportUrl
+from .fileutil import has_module, is_tty
+
+has_wconio = has_module("WConio")
+has_curses = has_module("curses")
+has_fcntl = has_module('fcntl')
+has_termios = has_module('termios')
 
 class NoMatchError(Exception): pass
 
@@ -148,21 +152,41 @@ def urlopen(url, referrer=None, retries=5):
 
     return urlobj
 
-def getWindowSize():
-    try:
-        from fcntl import ioctl
-        from termios import TIOCGWINSZ
-    except ImportError:
-        raise NotImplementedError
-    st = 'HHHH'
-    names = 'ws_row', 'ws_col', 'ws_xpixel', 'ws_ypixel'
-    buf = array.array('b', ' ' * struct.calcsize(st))
-    try:
-        ioctl(sys.stderr, TIOCGWINSZ, buf, True)
-    except IOError:
-        raise NotImplementedError
-    winsize = dict(zip(names, struct.unpack(st, buf.tostring())))
-    return winsize['ws_col']
+
+def get_columns (fp):
+    """Return number of columns for given file."""
+    if not is_tty(fp):
+        return 80
+    if has_wconio:
+        import WConio
+        # gettextinfo() returns a tuple
+        # - left, top, right, bottom: window coordinates
+        # - textattr, normattr: current attributes
+        # - videomode: current video mode
+        # - height, width: screen size
+        # - curx, cury: current cursor position
+        # return the width:
+        return WConio.gettextinfo()[8]
+    if has_curses:
+        import curses
+        try:
+            curses.setupterm()
+            return curses.tigetnum("cols")
+        except curses.error:
+           pass
+    if has_fcntl and has_termios:
+        import fcntl, termios, array, struct
+        st = 'HHHH'
+        names = 'ws_row', 'ws_col', 'ws_xpixel', 'ws_ypixel'
+        buf = array.array('b', ' ' * struct.calcsize(st))
+        try:
+            fcntl.ioctl(fp, termios.TIOCGWINSZ, buf, True)
+            winsize = dict(zip(names, struct.unpack(st, buf.tostring())))
+            return winsize['ws_col']
+        except IOError:
+            pass
+    return 80
+
 
 suffixes = ('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB')
 
