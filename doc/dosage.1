@@ -1,0 +1,185 @@
+.TH MAINLINE 1
+.SH NAME
+mainline \- command line interface to Dosage
+.SH SYNOPSIS
+.B mainline
+.RI [ options ]
+.I module
+.RI [ module .\|.\|.]
+.SH DESCRIPTION
+.B mainline
+is a command line interface to Dosage. Dosage is a an application designed
+to keep a local \(oqmirror\(cq of specific web comics and other picture\-based
+content, such as \(oqPicture Of The Day\(cq sites, with a variety of options
+for updating and maintaining collections.
+.SH OPTIONS
+.TP
+.BI \-b " PATH" "\fR,\fP \-\^\-base\--path=" PATH
+Specifies a base path to put comic subdirectories. The default is \(oqComics\(cq.
+.TP
+.BI \-\^\-base\-url= PATH
+Specifies the base URL for output events. The default is a local file URI.
+.TP
+.BR \-c ", " \-\^\-catch-up
+Traverses all available strips until an (identical) existing one is found.
+This can be useful if your collection was previously up to date,
+but you've missed a few days worth of strips. Alternatively you can specify
+.B \-c
+twice for a \(oqfull catchup\(cq, which will not stop until all comics
+have been traversed. Catchups can \(oqresumed\(cq by using the index syntax, see
+the
+.B INDEX SYNTAX
+and
+.B SPECIAL SYNTAX
+sections for more information.
+.TP
+.BR \-h ", " \-\^\-help
+Output brief help information.
+.TP
+.BR \-l ", " \-\^\-list
+List available comic modules in multi\-column fashion.
+.TP
+.BR \-\^\-single\-list
+List available comic modules in single-column fashion.
+.TP
+.BI \-m " MODULE" "\fR,\fP \-\^\-module-help=" MODULE
+Output module-specific help for
+.IR MODULE .
+.TP
+.BI \-o " OUTPUT" "\fR,\fP \-\^\-output=" OUTPUT
+.I OUTPUT
+may be any one of the following:
+.PP
+.RS
+.BR "text " \-
+Provides no additional output and is the default value.
+.RE
+.PP
+.RS
+.BR "html " \-
+Writes out an HTML file linking to the strips actually downloaded in the
+current run, named by date (ala dailystrips). The files can be found in the
+\'html' directory of your Comics directory.
+.RE
+.PP
+.RS
+.BR "rss " \-
+Writes out an RSS feed detailing what strips were downloaded in the last 24
+hours. The feed can be found in Comics/dailydose.xml.
+.RE
+.PP
+.RS
+.BR "rss " \-
+Writes an RSS feed with all of the strips downloaded during the run, for use
+with your favourite RSS aggregator.
+.RE
+.TP
+.BR \-p ", " \-\^\-progress
+Display a progress bar while downloading comics.
+.TP
+.BR \-t ", " \-\^\-timestamps
+Print timestamps for all output at any level.
+.TP
+.BR \-v ", " \-\^\-verbose
+Increase the output level by one with each occurence.
+.TP
+.BR \-V ", " \-\^\-version
+Display the version number.
+.I module
+At least one valid
+.I module
+must be specified. A list of valid modules can be found by passing the
+.B \-l
+option. Multiple
+.I module
+arguments can be specified on the command line.
+.SH INDEX SYNTAX
+One can indicate the start of a list of
+.B comma seperated
+indices using a
+.RB \(oq : "\(cq."
+.PP
+If
+.I \-c
+is specified with index syntax then \(oqresume\(cq mode is activated,
+where a \(oqcatchup\(cq will start at the given index.
+.PP
+Refer to
+.B EXAMPLES
+for samples.
+.SH OFFENSIVE COMICS
+Some users may find certain comics offensive and wish to disable them.
+Modules listed in
+.B /etc/dosage/disabled
+and
+.B ~/.dosage/disabled
+will be disabled. These files should contain only one module name per line.
+.SH SPECIAL SYNTAX
+.TP
+.B @
+This expands to mean all the comics currently in your \(oqComics\(cq
+directory.
+.TP
+.B @@
+This expands to mean all the comics available to Dosage.
+.PP
+.B INDEX SYNTAX
+can be used with
+.B SPECIAL SYNTAX
+but this is unlikely to be useful.
+.SH EXAMPLES
+Retrieve the latest Mega Tokyo comic:
+.RS
+.B mainline MegaTokyo
+.RE
+.PP
+Retrieve every strip from every comic that there is a module for:
+.RS
+.B mainline \-c @@
+.RE
+.PP
+Retrieve all Penny Arcade strips from (and including) a given index to
+the beginning regardless of whether they already exist or not:
+.RS
+.B mainline \-c PennyArcade:2004\-07\-22
+.RE
+.SH ENVIRONMENT
+.IP HTTP_PROXY
+.B mainline
+will use the specified HTTP proxy whenever possible.
+.SH NOTES
+Should retrieval fail on any given strip
+.B mainline
+will attempt to retry. However the retry information is only outputted
+in the
+.B second
+and successive output levels.
+.PP
+At the time of writing, a
+.B complete
+Dosage collection weighs in at around 3.0GB.
+.SH RETURN VALUE
+The return value is 2 when
+.IP \(bu
+a program error occurred.
+.PP
+The return value is 1 when
+.IP \(bu
+comics could not be found or downloaded
+.IP \(bu
+the program run was aborted with Ctrl-C
+.PP
+Else the return value is zero.
+.SH BUGS
+See
+.I http://trac.slipgate.za.net/dosage
+for a list of current development tasks and suggestions.
+.SH FILES
+.IP "\fB/etc/dosage/disabled\fR"
+Disables comic modules on a global scale.
+.IP "\fB~/.dosage/disabled\fR"
+Disables comic modules on a local scale.
+.SH AUTHORS
+.BR mainline " and " Dosage
+were written by Jonathan Jacobs <korpse@slipgate.za.net> and Tristan Seligmann
+<mithrandi@slipgate.za.net>. This manual page was written by Jonathan Jacobs.

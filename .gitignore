@@ -1,0 +1,12 @@
+*.orig
+*.pyc
+*.pyo
+/Comics
+/build
+/dist
+/.achievements
+/MANIFEST
+/todo
+/Changelog.patool*
+/_Dosage_configdata.py
+/comics.test

@@ -1,0 +1,240 @@
+#!/usr/bin/env python
+
+# Dosage, the webcomic downloader
+# Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of version 2 of the GNU General Public License as
+# published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+import sys
+import os
+import optparse
+import traceback
+
+from dosagelib import events, scraper
+from dosagelib.output import out
+from dosagelib.util import getWindowSize, internal_error
+from dosagelib.configuration import App, Freeware, Copyright
+
+def setupOptions():
+    usage = 'usage: %prog [options] comicModule [comicModule ...]'
+    parser = optparse.OptionParser(usage=usage)
+    parser.add_option('-v', '--verbose', action='count', dest='verbose', default=0, help='provides verbose output, use multiple times for more verbosity')
+    parser.add_option('-c', '--catch-up', action='count', dest='catchup', default=None, help='traverse and retrieve all available comics up until the strip that already exists locally, use twice to retrieve until all strips exist locally')
+    parser.add_option('-b', '--base-path', action='store', dest='basepath', default='Comics', help='set the path to create invidivual comic directories in, default is Comics', metavar='PATH')
+    parser.add_option('--base-url', action='store', dest='baseurl', default=None, help='the base URL of your comics directory (for RSS, HTML, etc.); this should correspond to --base-path', metavar='PATH')
+    parser.add_option('-l', '--list', action='store_const', const=1, dest='list', help='list available comic modules')
+    parser.add_option('--single-list', action='store_const', const=2, dest='list', help='list available comic modules in a single list')
+    parser.add_option('-V', '--version', action='store_true', dest='version', help='display the version number')
+    parser.add_option('-m', '--module-help', action='store_true', dest='modhelp', help='display help for comic modules')
+    parser.add_option('-t', '--timestamps', action='store_true', dest='timestamps', default=False, help='print timestamps for all output at any info level')
+    parser.add_option('-o', '--output', action='store', dest='output', choices=events.getHandlers(), help='output formatting for downloaded comics')
+    try:
+        getWindowSize()
+    except NotImplementedError:
+        progress = False
+    else:
+        progress = True
+
+    if progress:
+        parser.add_option('-p', '--progress', action='store_true', dest='progress', default=False, help='display progress bar while downloading comics')
+    return parser
+
+class Dosage(object):
+
+    def __init__(self):
+        self.errors = 0
+
+    def setOutputInfo(self):
+        out.level = 0
+        out.level += self.settings['verbose']
+        out.timestamps = self.settings['timestamps']
+
+    def saveComic(self, comic):
+        basepath = self.settings['basepath']
+        progress = self.settings.get('progress', False)
+        fn, saved = comic.save(basepath, progress)
+        return saved
+
+    def saveComics(self, comics):
+        saved = False
+        for comic in comics:
+            saved = self.saveComic(comic) or saved
+        return saved
+
+    def safeOp(self, fp, *args, **kwargs):
+        try:
+            fp(*args, **kwargs)
+        except Exception:
+            self.errors += 1
+            type, value, tb = sys.exc_info()
+            out.write('Traceback (most recent call last):', 1)
+            out.writelines(traceback.format_stack(), 1)
+            out.writelines(traceback.format_tb(tb)[1:], 1)
+            out.writelines(traceback.format_exception_only(type, value))
+
+    def getCurrent(self):
+        out.write('Retrieving the current strip...')
+        self.saveComics(self.module.getCurrentComics())
+
+    def getIndex(self, index):
+        out.write('Retrieving index "%s"....' % (index,))
+        try:
+            self.module.setStrip(index)
+            self.saveComics(self.module.getNextComics())
+        except NotImplementedError:
+            out.write('No indexed retrieval support.')
+
+    def catchup(self):
+        out.write('Catching up...')
+        for comics in self.module:
+            if not self.saveComics(comics) and self.settings['catchup'] < 2:
+                break
+
+    def catchupIndex(self, index):
+        out.write('Catching up from index "%s"...' % (index,))
+        self.module.setStrip(index)
+        for comics in self.module:
+            if not self.saveComics(comics) and self.settings['catchup'] < 2:
+                break
+
+    def getScrapers(self):
+        return scraper.items()
+
+    def getExistingComics(self):
+        for scraper in self.getScrapers():
+            dirname = scraper.get_name().replace('/', os.sep)
+            if os.path.isdir(os.path.join(self.settings['basepath'], dirname)):
+                yield scraper
+
+    def doList(self, columnList):
+        out.write('Available comic scrapers:')
+        scrapers = self.getScrapers()
+        if columnList:
+            self.doColumnList(scrapers)
+        else:
+            self.doSingleList(scrapers)
+        out.write('%d supported comics.' % len(scrapers))
+
+    def doSingleList(self, scrapers):
+        print '\n'.join(scraper.get_name() for scraper in scrapers)
+
+    def doColumnList(self, scrapers):
+        try:
+            screenWidth = getWindowSize()
+        except NotImplementedError:
+            screenWidth = 80
+
+        if len(scrapers) == 0:
+            return
+
+        names = [scraper.get_name() for scraper in scrapers]
+        maxlen = max([len(name) for name in names])
+        namesPerLine = int(screenWidth / (maxlen + 1))
+
+        while names:
+            print ''.join([name.ljust(maxlen) for name in names[:namesPerLine]])
+            del names[:namesPerLine]
+
+    def doCatchup(self):
+        for comic in self.useComics():
+            if self.indices:
+                self.safeOp(self.catchupIndex, self.indices[0])
+            else:
+                self.safeOp(self.catchup)
+
+    def doCurrent(self):
+        for comic in self.useComics():
+            if self.indices:
+                for index in self.indices:
+                    self.safeOp(self.getIndex, index)
+            else:
+                self.safeOp(self.getCurrent)
+
+    def doHelp(self):
+        for scraper in self.useComics():
+            for line in scraper.getHelp().splitlines():
+                out.write("Help: "+line)
+
+    def setupComic(self, scraper):
+        self.module = scraper()
+        out.context = scraper.get_name()
+        return self.module
+
+    def useComics(self):
+        for comic in self.comics:
+            c = comic.split(':', 2)
+            if len(c) > 1:
+                self.indices = c[1].split(',')
+            else:
+                self.indices = None
+
+            moduleName = c[0]
+            if moduleName == '@':
+                for s in self.getExistingComics():
+                    yield self.setupComic(s)
+            elif moduleName == '@@':
+                for s in self.getScrapers():
+                    yield self.setupComic(s)
+            else:
+                yield self.setupComic(scraper.get(moduleName))
+
+    def displayVersion(self):
+        print App
+        print Copyright
+        print Freeware
+
+    def run(self, settings, comics):
+        self.settings = settings
+        self.setOutputInfo()
+        self.comics = comics
+
+        om = self.settings['output']
+        events.installHandler(om, self.settings['basepath'], self.settings['baseurl'])
+        events.handler.start()
+
+        if self.settings['version']:
+            self.displayVersion()
+        elif self.settings['list']:
+            self.doList(self.settings['list'] == 1)
+        elif len(comics) <= 0:
+            out.write('Warning: No comics specified, bailing out!')
+        elif self.settings['modhelp']:
+            self.doHelp()
+        elif self.settings['catchup']:
+            self.doCatchup()
+        else:
+            self.doCurrent()
+
+        events.handler.end()
+
+def main():
+    try:
+        parser = setupOptions()
+        options, args = parser.parse_args()
+        d = Dosage()
+        d.run(options.__dict__, args)
+        if d.errors:
+            res = 1
+        else:
+            res = 0
+    except KeyboardInterrupt:
+        print "Aborted."
+        res = 1
+    except Exception:
+        internal_error()
+        res = 2
+    return res
+
+
+if __name__ == '__main__':
+    sys.exit(main())
