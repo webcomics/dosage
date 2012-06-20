@@ -78,7 +78,7 @@ distclean: clean
 
 .PHONY: test
 test:
-	$(PYTHON) $(NOSETESTS) -v --processes=$(NUMPROCESSORS) -m "^test_.*" $(TESTOPTS) $(TESTS)
+	$(PYTHON) $(NOSETESTS) -v -m "^test_.*" $(TESTOPTS) $(TESTS)
 
 .PHONY: deb
 deb:
