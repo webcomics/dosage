@@ -15,13 +15,13 @@ makes this impossible).
 Notice
 -------
 This software is in no way intended to publically "broadcast" comic strips,
-it is purely for personal use. Please be aware that by making these strips
-publically available (without the explicit permission of the author) you
-may be infringing upon various copyrights.
+it is purely for personal use. Please be aware that by making downloaded
+strips publically available (without the explicit permission of the author)
+you may be infringing upon various copyrights.
 
 Usage
 ------
-List available comics (over 4000 at the moment):
+List available comics (over 4400 at the moment):
 
 `$ dosage -l`
 
