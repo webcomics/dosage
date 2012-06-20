@@ -22,17 +22,20 @@ may be infringing upon various copyrights.
 Usage
 ------
 List available comics (over 4000 at the moment):
+
 `$ dosage -l`
 
 Get the latest comic of for example CalvinAndHobbes and save it in the "Comics"
 directory:
+
 `$ dosage CalvinAndHobbes`
 
 If you already have downloaded several comics and want to get the latest
 strip of all of them:
+
 `$ dosage @`
 
-For advanced options and features execute dosage -h or look at the dosage
+For advanced options and features execute `dosage -h` or look at the dosage
 manual page.
 
 Offensive comics
