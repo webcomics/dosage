@@ -5,8 +5,14 @@ VERSION:=$(shell $(PYTHON) setup.py --version)
 ARCHIVE:=dosage-$(VERSION).tar.gz
 PY_FILES_DIRS := dosage dosagelib tests *.py
 PY2APPOPTS ?=
-NOSETESTS:=$(shell which nosetests)
 NUMPROCESSORS:=$(shell grep -c processor /proc/cpuinfo)
+NOSETESTS:=$(shell which nosetests)
+# Nose options:
+# - do not show output of successful tests
+# - use multiple processors
+# - be verbose
+# - only run test_* methods
+NOSEOPTS:=--logging-clear-handlers --processes=$(NUMPROCESSORS) -v -m '^test_.*'
 CHMODMINUSMINUS:=--
 # which test modules to run
 TESTS ?= tests/
@@ -78,7 +84,7 @@ distclean: clean
 
 .PHONY: test
 test:
-	$(PYTHON) $(NOSETESTS) -v -m "^test_.*" $(TESTOPTS) $(TESTS)
+	$(PYTHON) $(NOSETESTS) $(NOSEOPTS) $(TESTOPTS) $(TESTS)
 
 .PHONY: deb
 deb:
