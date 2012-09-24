@@ -221,10 +221,10 @@ class ASkeweredParadise(_BasicScraper):
 
 class AGirlAndHerFed(_BasicScraper):
     starter = bounceStarter('http://www.agirlandherfed.com/',
-                            compile(r' href="(/comic/\?\d+)" class="navigationActive">Next</a>\]'))
-    imageUrl = 'http://www.agirlandherfed.com/comic/?%s'
-    imageSearch = compile(r'<img src="(/images/comics/.+?)"')
-    prevSearch = compile(r' href="(/comic/\?\d+)" class="navigationActive">Previous</a>\]')
+      compile(r'<a href="([^"]+)">[^>]+Back'))
+    imageUrl = 'http://www.agirlandherfed.com/img/strip/%s'
+    imageSearch = compile(r'<img src="(/img/strip/[^"]+\.jpg)"')
+    prevSearch = compile(r'<a href="([^"]+)">[^>]+Back')
     help = 'Index format: nnn'
 
     @classmethod
