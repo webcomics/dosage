@@ -62,6 +62,15 @@ check:
 	check-pofiles -v
 	py-tabdaddy
 	py-unittest2-compat tests/
+	$(MAKE) doccheck
+	$(MAKE) pyflakes
+
+doccheck:
+	py-check-docstrings --force \
+	  dosagelib/*.py \
+	  dosagelib/plugins/*.py \
+	  dosage \
+	  *.py
 
 .PHONY: pyflakes
 pyflakes:
