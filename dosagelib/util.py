@@ -306,8 +306,8 @@ def strtimezone():
 def tagre(tag, attribute, value):
     """Return a regular expression matching the given HTML tag, attribute
     and value. It matches the tag and attribute names case insensitive,
-    and skips arbitrary whitespace and leading HTML attributes.
-    Also, it adds a match group for the value.
+    and skips arbitrary whitespace and leading HTML attributes. The "<>" at
+    the start and end of the HTML tag is also matched.
     @param tag: the tag name
     @ptype tag: string
     @param attribute: the attribute name
@@ -322,7 +322,7 @@ def tagre(tag, attribute, value):
         attribute=case_insensitive_re(attribute),
         value=value,
     )
-    return r'<\s*%(tag)s[^>]*\s+%(attribute)s\s*=\s*"(%(value)s)"' % attrs
+    return r'<\s*%(tag)s[^>]*\s+%(attribute)s\s*=\s*"%(value)s"[^>]>' % attrs
 
 def case_insensitive_re(name):
     """Reformat the given name to a case insensitive regular expression string
