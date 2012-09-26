@@ -6,17 +6,17 @@ ARCHIVE:=dosage-$(VERSION).tar.gz
 PY_FILES_DIRS := dosage dosagelib tests *.py
 PY2APPOPTS ?=
 NUMPROCESSORS:=$(shell grep -c processor /proc/cpuinfo)
-NOSETESTS:=$(shell which nosetests)
-# Nose options:
-# - do not show output of successful tests
+MAXFAILEDTESTS:=200
+# Pytest options:
+# - stop after MAXFAILEDTESTS failed errors
 # - use multiple processors
-# - be verbose
-# - only run test_* methods
-NOSEOPTS:=--logging-clear-handlers --processes=$(NUMPROCESSORS) -v -m '^test_.*'
+# - write test results in file
+# - run all tests found in the "tests" subdirectory
+PYTESTOPTS:=--maxfail=$(MAXFAILEDTESTS) -n $(NUMPROCESSORS) --resultlog=testresults.txt
 CHMODMINUSMINUS:=--
-# which test modules to run
-TESTS ?= tests/
-# set test options, eg. to "--nologcapture"
+# directory or file with tests to run
+TESTS ?= tests
+# set test options, eg. to "--verbose"
 TESTOPTS=
 
 all:
@@ -67,8 +67,7 @@ check:
 
 doccheck:
 	py-check-docstrings --force \
-	  dosagelib/*.py \
-	  dosagelib/plugins/*.py \
+	  dosagelib \
 	  dosage \
 	  *.py
 
@@ -93,12 +92,13 @@ distclean: clean
 
 .PHONY: test
 test:
-	$(PYTHON) $(NOSETESTS) $(NOSEOPTS) $(TESTOPTS) $(TESTS)
+	$(PYTHON) -m pytest $(PYTESTOPTS) $(TESTOPTS) $(TESTS)
 
 .PHONY: deb
 deb:
 	git-buildpackage --git-export-dir=../build-area/ --git-upstream-branch=master --git-debian-branch=debian  --git-ignore-new
 
+.PHONY: comics
 comics:
 	./dosage -v @@ > comics.log 2>&1
 
