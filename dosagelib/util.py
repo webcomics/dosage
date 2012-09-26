@@ -138,7 +138,6 @@ def urlopen(url, referrer=None, retries=5):
     url = normaliseURL(url)
     req = urllib2.Request(url)
     if referrer:
-        req.add_header('Referrer', referrer)
         req.add_header('Referer', referrer)
     req.add_header('User-Agent', UserAgent)
 
