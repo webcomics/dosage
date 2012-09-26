@@ -14,12 +14,26 @@ from .util import urlopen, saneDataSize, normaliseURL
 from .progress import progressBar, OperationComplete
 from .events import handler
 
-class FetchComicError(IOError): pass
+class FetchComicError(IOError):
+    """Exception for comic fetching errors."""
+    pass
 
 class Comic(object):
+    """Download and save a single comic."""
+
     def __init__(self, moduleName, url, referrer=None, filename=None):
+        """Set URL and filename."""
         self.moduleName = moduleName
-        url = normaliseURL(url)
+        self.url = normaliseURL(url)
+        self.referrer = referrer
+        if filename is None:
+            filename = url.split('/')[-1]
+        self.filename, self.ext = os.path.splitext(filename)
+        self.filename = self.filename.replace(os.sep, '_')
+        self.ext = self.ext.replace(os.sep, '_')
+
+    def connect(self):
+        """Connect to host and get meta information."""
         out.write('Getting headers for %s...' % (url,), 2)
         try:
             self.urlobj = urlopen(url, referrer=referrer)
@@ -30,9 +44,6 @@ class Comic(object):
            self.urlobj.info().gettype() not in ('application/octet-stream', 'application/x-shockwave-flash'):
             raise FetchComicError, ('No suitable image found to retrieve.', url)
 
-        self.filename, self.ext = os.path.splitext(url.split('/')[-1])
-        self.filename = filename or self.filename
-        self.filename = self.filename.replace(os.sep, '_')
         # Always use mime type for file extension if it is sane.
         if self.urlobj.info().getmaintype() == 'image':
             self.ext = '.' + self.urlobj.info().getsubtype()
@@ -41,6 +52,7 @@ class Comic(object):
         out.write('... filename = "%s", ext = "%s", contentLength = %d' % (self.filename, self.ext, self.contentLength), 2)
 
     def touch(self, filename):
+        """Set last modified date on filename."""
         if self.lastModified:
             tt = rfc822.parsedate(self.lastModified)
             if tt:
@@ -48,6 +60,8 @@ class Comic(object):
                 os.utime(filename, (mtime, mtime))
 
     def save(self, basepath, showProgress=False):
+        """Save comic URL to filename on disk."""
+        self.connect()
         comicName, comicExt = self.filename, self.ext
         comicSize = self.contentLength
         comicDir = os.path.join(basepath, self.moduleName.replace('/', os.sep))

@@ -25,18 +25,22 @@ class _BasicScraper(object):
     help = 'Sorry, no help for this comic yet.'
 
     def __init__(self):
+        """Initialize internal variables."""
         self.currentUrl = None
         self.urls = set()
 
     def getReferrer(self, imageUrl, pageUrl):
+        """Return referrer for HTTP connection."""
         return self.referrer or pageUrl or self.getLatestUrl()
 
     def getComic(self, url, pageUrl):
+        """Get comic downloader for given URL and page."""
         if not url:
             return None
         return Comic(self.get_name(), url, filename=self.getFilename(url, pageUrl), referrer=self.getReferrer(url, pageUrl))
 
     def getCurrentComics(self):
+        """Get list of current comics."""
         self.currentUrl = self.getLatestUrl()
         comics = self.getNextComics()
         if not comics:
@@ -44,6 +48,7 @@ class _BasicScraper(object):
         return comics
 
     def getNextComics(self):
+        """Get all next comics."""
         comics = []
         while not comics and self.currentUrl and self.currentUrl not in self.urls:
             comicUrlGroups, prevUrl = fetchManyUrls(self.currentUrl, [self.imageSearch, self.prevSearch])
@@ -61,16 +66,17 @@ class _BasicScraper(object):
         return comics
 
     def setStrip(self, index):
+        """Set current comic strip URL."""
         self.currentUrl = self.imageUrl % index
 
     def getHelp(self):
+        """Return help text for this scraper."""
         return self.help
 
     def __iter__(self):
         """Iterate through the strips, starting from the current one and going backward."""
         if not self.currentUrl:
             self.currentUrl = self.getLatestUrl()
-
         comics = True
         while comics:
             comics = self.getNextComics()
@@ -79,26 +85,32 @@ class _BasicScraper(object):
 
     @classmethod
     def get_name(cls):
+        """Get scraper name."""
         if hasattr(cls, 'name'):
             return cls.name
         return cls.__name__
 
     @classmethod
     def starter(cls):
+        """Get starter URL from where to scrape comic strips."""
         return cls.latestUrl
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
+        """Return filename for given image and page URL."""
         return None
 
     def getFilename(self, imageUrl, pageUrl):
+        """Return filename for given image and page URL."""
         return self.namer(imageUrl, pageUrl)
 
     def getLatestUrl(self):
+        """Get starter URL from where to scrape comic strips."""
         return self.starter()
 
 
 def queryNamer(paramName, usePageUrl=False):
+    """Get name from URL query part."""
     @staticmethod
     def _namer(imageUrl, pageUrl):
         url = (imageUrl, pageUrl)[usePageUrl]
@@ -107,6 +119,7 @@ def queryNamer(paramName, usePageUrl=False):
 
 
 def regexNamer(regex):
+    """Get name from regular expression."""
     @staticmethod
     def _namer(imageUrl, pageUrl):
         return regex.search(imageUrl).group(1)
@@ -114,6 +127,7 @@ def regexNamer(regex):
 
 
 def constStarter(latestUrl):
+    """Start from constant URL."""
     @staticmethod
     def _starter():
         return latestUrl
@@ -121,6 +135,7 @@ def constStarter(latestUrl):
 
 
 def bounceStarter(latestUrl, nextSearch):
+    """Get start URL by "bouncing" back and forth one time."""
     @classmethod
     def _starter(cls):
         url = fetchUrl(latestUrl, cls.prevSearch)
@@ -131,6 +146,7 @@ def bounceStarter(latestUrl, nextSearch):
 
 
 def indirectStarter(baseUrl, latestSearch):
+    """Get start URL by indirection."""
     @staticmethod
     def _starter():
         return fetchUrl(baseUrl, latestSearch)
@@ -156,6 +172,7 @@ class IndirectLatestMixin(object):
     __latestUrl = None
 
     def getLatestUrl(self):
+        """Get latest comic URL."""
         if not self.__latestUrl:
             self.__latestUrl = fetchUrl(self.baseUrl, self.latestSearch)
             if hasattr(self, "nextSearch"):
@@ -170,7 +187,7 @@ class IndirectLatestMixin(object):
 
 class _PHPScraper(_BasicScraper):
     """
-    I implement IScraper for comics using phpComic/CUSP.
+    Scraper for comics using phpComic/CUSP.
 
     This provides an easy way to define scrapers for webcomics using phpComic.
     """
@@ -181,4 +198,5 @@ class _PHPScraper(_BasicScraper):
 
     @classmethod
     def starter(cls):
+        """Get starter URL."""
         return cls.basePath + cls.latestUrl

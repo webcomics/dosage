@@ -105,6 +105,7 @@ class MyInstallLib (install_lib, object):
         return self.get_conf_output()
 
     def get_conf_output (self):
+        """Get filename for distribution configuration file."""
         return self.distribution.get_conf_filename(self.install_lib)
 
     def get_outputs (self):

@@ -22,7 +22,8 @@ has_curses = has_module("curses")
 has_fcntl = has_module('fcntl')
 has_termios = has_module('termios')
 
-class NoMatchError(Exception): pass
+class NoMatchError(Exception):
+    pass
 
 def getMatchValues(matches):
     return set([match.group(1) for match in matches])

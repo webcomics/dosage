@@ -1,3 +1,6 @@
+"""
+Define basic configuration data like version or application name.
+"""
 import _Dosage_configdata as configdata
 
 Version = configdata.version

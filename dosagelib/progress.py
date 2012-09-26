@@ -8,6 +8,7 @@ import time
 from . import util
 
 class Guess(object):
+
     def __init__(self, weight):
         self.weight = weight
         self.guess = 0
@@ -18,6 +19,7 @@ class Guess(object):
 
     def distance(self, value):
         return (self.guess - value) ** 2
+
 
 class FortuneTeller(object):
     weights = (0.2, 0.3, 0.4)
@@ -34,7 +36,9 @@ class FortuneTeller(object):
     def predict(self):
         return max([(guess.best, guess) for guess in self.guesses])[1].guess
 
-class OperationComplete(Exception): pass
+
+class OperationComplete(Exception):
+    pass
 
 def drawBar(fill, total, caption):
     screenWidth = util.getWindowSize()
@@ -49,6 +53,7 @@ def drawBar(fill, total, caption):
     sys.stdout.write(mask % ('=' * fillWidth, '-' * emptyWidth))
     sys.stdout.flush()
 
+
 def drawBounceBar(pos, caption):
     screenWidth = util.getWindowSize()
     mask = '[%%s<=>%%s] %s' % (caption,)
@@ -60,6 +65,7 @@ def drawBounceBar(pos, caption):
     sys.stdout.write('\r')
     sys.stdout.write(mask % (' ' * leftWidth, ' ' * rightWidth))
     sys.stdout.flush()
+
 
 def progressBar(fn):
     completed = bps = 0

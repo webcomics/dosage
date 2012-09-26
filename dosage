@@ -28,6 +28,10 @@ from dosagelib.util import is_tty, get_columns, internal_error
 from dosagelib.configuration import App, Freeware, Copyright
 
 def setupOptions():
+    """Construct option parser.
+    @return: new option parser
+    @rtype optparse.OptionParser
+    """
     usage = 'usage: %prog [options] comicModule [comicModule ...]'
     parser = optparse.OptionParser(usage=usage)
     parser.add_option('-v', '--verbose', action='count', dest='verbose', default=0, help='provides verbose output, use multiple times for more verbosity')
@@ -44,30 +48,44 @@ def setupOptions():
         parser.add_option('-p', '--progress', action='store_true', dest='progress', default=False, help='display progress bar while downloading comics')
     return parser
 
+
+def displayVersion():
+    """Display application name, version, copyright and license."""
+    print App
+    print Copyright
+    print Freeware
+
+
 class Dosage(object):
+    """Main program executing comic commands."""
 
     def __init__(self, settings):
+        """Store settings and initialize internal variables."""
         self.settings = settings
         self.errors = 0
 
     def setOutputInfo(self):
+        """Set global output level and timestamp option."""
         out.level = 0
         out.level += self.settings['verbose']
         out.timestamps = self.settings['timestamps']
 
     def saveComic(self, comic):
+        """Save one comic strip in an output file."""
         basepath = self.settings['basepath']
         progress = self.settings.get('progress', False)
         fn, saved = comic.save(basepath, progress)
         return saved
 
     def saveComics(self, comics):
+        """Save a list of comics."""
         saved = False
         for comic in comics:
             saved = self.saveComic(comic) or saved
         return saved
 
     def safeOp(self, fp, *args, **kwargs):
+        """Run a function and catch and report any errors."""
         try:
             fp(*args, **kwargs)
         except Exception:
@@ -79,10 +97,12 @@ class Dosage(object):
             out.writelines(traceback.format_exception_only(type, value))
 
     def getCurrent(self):
+        """Retrieve and save all current comic strips."""
         out.write('Retrieving the current strip...')
         self.saveComics(self.module.getCurrentComics())
 
     def getIndex(self, index):
+        """Retrieve comcis with given index."""
         out.write('Retrieving index "%s"....' % (index,))
         try:
             self.module.setStrip(index)
@@ -91,12 +111,14 @@ class Dosage(object):
             out.write('No indexed retrieval support.')
 
     def catchup(self):
+        """Save all comics until the current date."""
         out.write('Catching up...')
         for comics in self.module:
             if not self.saveComics(comics) and self.settings['catchup'] < 2:
                 break
 
     def catchupIndex(self, index):
+        """Retrieve and save all comics from the given index."""
         out.write('Catching up from index "%s"...' % (index,))
         self.module.setStrip(index)
         for comics in self.module:
@@ -104,15 +126,18 @@ class Dosage(object):
                 break
 
     def getScrapers(self):
+        """Get list of scraper objects."""
         return scraper.items()
 
     def getExistingComics(self):
+        """Get all existing comic scrapers."""
         for scraper in self.getScrapers():
             dirname = scraper.get_name().replace('/', os.sep)
             if os.path.isdir(os.path.join(self.settings['basepath'], dirname)):
                 yield scraper
 
     def doList(self, columnList):
+        """List available comics."""
         out.write('Available comic scrapers:')
         scrapers = self.getScrapers()
         if len(scrapers) > 0:
@@ -123,9 +148,11 @@ class Dosage(object):
         out.write('%d supported comics.' % len(scrapers))
 
     def doSingleList(self, scrapers):
+        """Get list of scraper names, one per line."""
         print '\n'.join(scraper.get_name() for scraper in scrapers)
 
     def doColumnList(self, scrapers):
+        """Get list of scraper names with multiple names per line."""
         screenWidth = get_columns()
         names = [scraper.get_name() for scraper in scrapers]
         maxlen = max([len(name) for name in names])
@@ -135,6 +162,7 @@ class Dosage(object):
             del names[:namesPerLine]
 
     def doCatchup(self):
+        """Catchup comics."""
         for comic in self.useComics():
             if self.indices:
                 self.safeOp(self.catchupIndex, self.indices[0])
@@ -142,6 +170,7 @@ class Dosage(object):
                 self.safeOp(self.catchup)
 
     def doCurrent(self):
+        """Get current comics."""
         for comic in self.useComics():
             if self.indices:
                 for index in self.indices:
@@ -150,16 +179,19 @@ class Dosage(object):
                 self.safeOp(self.getCurrent)
 
     def doHelp(self):
+        """Print help for comic strips."""
         for scraper in self.useComics():
             for line in scraper.getHelp().splitlines():
                 out.write("Help: "+line)
 
     def setupComic(self, scraper):
+        """Setup the internal comic module from given scraper."""
         self.module = scraper()
         out.context = scraper.get_name()
         return self.module
 
     def useComics(self):
+        """Set all comic modules for the defined comics."""
         for comic in self.comics:
             c = comic.split(':', 2)
             if len(c) > 1:
@@ -177,12 +209,8 @@ class Dosage(object):
             else:
                 yield self.setupComic(scraper.get(moduleName))
 
-    def displayVersion(self):
-        print App
-        print Copyright
-        print Freeware
-
     def run(self, comics):
+        """Execute comic commands."""
         self.setOutputInfo()
         self.comics = comics
 
@@ -191,7 +219,7 @@ class Dosage(object):
         events.handler.start()
 
         if self.settings['version']:
-            self.displayVersion()
+            displayVersion()
         elif self.settings['list']:
             self.doList(self.settings['list'] == 1)
         elif len(comics) <= 0:
@@ -206,6 +234,7 @@ class Dosage(object):
         events.handler.end()
 
 def main():
+    """Parse options and execute commands."""
     try:
         parser = setupOptions()
         options, args = parser.parse_args()
