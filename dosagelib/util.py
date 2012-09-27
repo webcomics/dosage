@@ -132,28 +132,25 @@ def normaliseURL(url):
     pu[2] = '/' + '/'.join(segments)
     return urlparse.urlunparse(pu)
 
-
-def urlopen(url, referrer=None, retries=5):
+def urlopen(url, referrer=None, retries=5, retry_wait_seconds=10):
+    assert retries >= 0, 'invalid retry value %r' % retries
+    assert retry_wait_seconds > 0, 'invalid retry seconds value %r' % retry_wait_seconds
     # Work around urllib2 brokenness
     url = normaliseURL(url)
     req = urllib2.Request(url)
     if referrer:
         req.add_header('Referer', referrer)
     req.add_header('User-Agent', UserAgent)
-
     tries = 0
-    while 1:
+    while True:
         try:
-            urlobj = urllib2.urlopen(req)
-            break
+            return urllib2.urlopen(req)
         except IOError:
-            out.write('URL retrieval failed, sleeping %d seconds and retrying (%d)' % (2**tries, tries), 2)
-            time.sleep(2**tries)
+            out.write('URL retrieval failed; waiting %d seconds and retrying (%d)' % (retry_wait_seconds, tries), 2)
+            time.sleep(retry_wait_seconds)
             tries += 1
             if tries >= retries:
                 raise
-
-    return urlobj
 
 
 def get_columns (fp):
