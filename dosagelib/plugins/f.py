@@ -1,6 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 from re import compile, IGNORECASE, MULTILINE
+from ..util import tagre
 
 from ..helpers import _BasicScraper, indirectStarter
 
@@ -145,3 +146,12 @@ class FoxTails(_BasicScraper):
     imageSearch = compile(r'<img src=(img/.+?)[ |>]', IGNORECASE)
     prevSearch = compile(r'(?<=first.gif)*(?<=</td>)*<a.*href=\'(.+?)\'.+?<img.+?src=\'../img/prev.gif\'>', IGNORECASE)
     help = 'Index format: yyyymmdd'
+
+
+class FredoAndPidjin(_BasicScraper):
+    homepage = 'http://www.pidjin.net/'
+    help = 'Index format: yyyy/mm/dd/name'
+    imageSearch = compile(tagre('img', 'src', '(http://cdn\.pidjin\.net/wp-content/uploads/\d\d\d\d/\d\d/\d+[^"]+\.png)'))
+    prevSearch = compile(tagre('a', 'href', '([^"]+)')+"Prev</a>")
+    starter = indirectStarter(homepage,
+       compile(tagre('a', 'href', "("+homepage+r'\d\d\d\d/\d\d/\d\d/[^"]+/)')))
