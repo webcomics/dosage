@@ -34,15 +34,15 @@ class Comic(object):
 
     def connect(self):
         """Connect to host and get meta information."""
-        out.write('Getting headers for %s...' % (url,), 2)
+        out.write('Getting headers for %s...' % (self.url,), 2)
         try:
-            self.urlobj = urlopen(url, referrer=referrer)
+            self.urlobj = urlopen(self.url, referrer=self.referrer)
         except urllib2.HTTPError, he:
-            raise FetchComicError, ('Unable to retrieve URL.', url, he.code)
+            raise FetchComicError, ('Unable to retrieve URL.', self.url, he.code)
 
         if self.urlobj.info().getmaintype() != 'image' and \
            self.urlobj.info().gettype() not in ('application/octet-stream', 'application/x-shockwave-flash'):
-            raise FetchComicError, ('No suitable image found to retrieve.', url)
+            raise FetchComicError, ('No suitable image found to retrieve.', self.url)
 
         # Always use mime type for file extension if it is sane.
         if self.urlobj.info().getmaintype() == 'image':
