@@ -16,7 +16,8 @@ from math import log, floor
 from .output import out
 from .configuration import UserAgent, AppName, App, SupportUrl
 from .fileutil import has_module, is_tty
-from . import colorama
+if os.name == 'nt':
+    from . import colorama
 
 has_curses = has_module("curses")
 
