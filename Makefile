@@ -21,13 +21,10 @@ TESTOPTS=
 
 all:
 
-
-.PHONY: chmod
 chmod:
 	-chmod -R a+rX,u+w,go-w $(CHMODMINUSMINUS) *
 	find . -type d -exec chmod 755 {} \;
 
-.PHONY: dist
 dist:
 	git archive --format=tar --prefix=dosage-$(VERSION)/ HEAD | gzip -9 > ../$(ARCHIVE)
 	[ -f ../$(ARCHIVE).sha1 ] || sha1sum ../$(ARCHIVE) > ../$(ARCHIVE).sha1
@@ -36,7 +33,6 @@ dist:
 doc/dosage.1.html: doc/dosage.1
 	man2html -r $< | tail -n +2 | sed 's/Time:.*//g' | sed 's@/:@/@g' > $@
 
-.PHONY: release
 release: distclean releasecheck dist
 	git tag v$(VERSION)
 #	@echo "Register at Python Package Index..."
@@ -44,7 +40,6 @@ release: distclean releasecheck dist
 #	freecode-submit < dosage.freecode
 
 
-.PHONY: releasecheck
 releasecheck: check test
 	@if egrep -i "xx\.|xxxx|\.xx" doc/changelog.txt > /dev/null; then \
 	  echo "Could not release: edit doc/changelog.txt release date"; false; \
@@ -55,7 +50,6 @@ releasecheck: check test
 
 # The check programs used here are mostly local scripts on my private system.
 # So for other developers there is no need to execute this target.
-.PHONY: check
 check:
 	[ ! -d .svn ] || check-nosvneolstyle -v
 	check-copyright
@@ -71,37 +65,35 @@ doccheck:
 	  dosage \
 	  *.py
 
-.PHONY: pyflakes
 pyflakes:
 	pyflakes $(PY_FILES_DIRS)
 
-.PHONY: count
 count:
 	@sloccount dosage dosagelib | grep "Total Physical Source Lines of Code"
 
-.PHONY: clean
 clean:
 	find . -name \*.pyc -delete
 	find . -name \*.pyo -delete
 	rm -rf build dist
 
-PHONY: distclean
 distclean: clean
 	rm -rf build dist Dosage.egg-info
 	rm -f _Dosage_configdata.py MANIFEST
 
-.PHONY: test
-test:
+localbuild:
+	$(PYTHON) setup.py build
+
+test:	localbuild
 	$(PYTHON) -m pytest $(PYTESTOPTS) $(TESTOPTS) $(TESTS)
 
-.PHONY: deb
 deb:
 	git-buildpackage --git-export-dir=../build-area/ --git-upstream-branch=master --git-debian-branch=debian  --git-ignore-new
 
-.PHONY: comics
 comics:
 	./dosage -v @@ > comics.log 2>&1
 
-.PHONY: update-copyright
 update-copyright:
 	update-copyright --holder="Bastian Kleineidam"
+
+.PHONY: update-copyright comics deb test clean distclean count pyflakes
+.PHONY: doccheck check releasecheck release dist chmod localbuild
