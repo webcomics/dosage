@@ -160,7 +160,8 @@ def normaliseURL(url):
     pu[2] = '/' + '/'.join(segments)
     return urlparse.urlunparse(pu)
 
-def urlopen(url, referrer=None, retries=5, retry_wait_seconds=10):
+def urlopen(url, referrer=None, retries=3, retry_wait_seconds=5):
+    out.write('Open URL %s' % url, 2)
     assert retries >= 0, 'invalid retry value %r' % retries
     assert retry_wait_seconds > 0, 'invalid retry seconds value %r' % retry_wait_seconds
     # Work around urllib2 brokenness
@@ -173,8 +174,9 @@ def urlopen(url, referrer=None, retries=5, retry_wait_seconds=10):
     while True:
         try:
             return urllib2.urlopen(req)
-        except IOError:
-            out.write('URL retrieval failed; waiting %d seconds and retrying (%d)' % (retry_wait_seconds, tries), 2)
+        except IOError, msg:
+            out.write('URL retrieval failed: %s' % msg)
+            out.write('waiting %d seconds and retrying (%d)' % (retry_wait_seconds, tries), 2)
             time.sleep(retry_wait_seconds)
             tries += 1
             if tries >= retries:
