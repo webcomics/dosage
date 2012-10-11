@@ -110,7 +110,6 @@ def fetchUrls(url, imageSearch, prevSearch=None):
             out.write('matched previous URL %r' % prevUrl, 2)
             prevUrl = urlparse.urljoin(baseUrl, prevUrl)
         else:
-            print data
             out.write('no previous URL %s at %s' % (prevSearch.pattern, url), 2)
             prevUrl = None
         return imageUrls, prevUrl
