@@ -9,8 +9,8 @@ from ..helpers import regexNamer, bounceStarter, indirectStarter
 class ALessonIsLearned(_BasicScraper):
     latestUrl = 'http://www.alessonislearned.com/'
     imageUrl = 'http://www.alessonislearned.com/lesson%s.html'
-    imageSearch = compile(tagre("img", "src", r"(cmx/lesson.+?)"))
-    prevSearch = compile(tagre("a", "href", r"(index\.php\?comic=.+?)")+r".+?previous")
+    imageSearch = compile(tagre("img", "src", r"(cmx/lesson\d+\.[a-z]+)"))
+    prevSearch = compile(tagre("a", "href", r"(index\.php\?comic=\d+)", quote="'")+r"[^>]+previous")
     help = 'Index format: nnn'
 
 
@@ -18,7 +18,7 @@ class ASofterWorld(_BasicScraper):
     latestUrl = 'http://www.asofterworld.com/'
     imageUrl = 'http://www.asofterworld.com/index.php?id=%s'
     imageSearch = compile(tagre("img", "src", r'(http://www\.asofterworld\.com/clean/[^"]+)'))
-    prevSearch = compile(r'"([^"]+)">back')
+    prevSearch = compile(tagre("a", "href", "(index\.php\?id=\d+)")+'< back')
     help = 'Index format: n (unpadded)'
 
 
