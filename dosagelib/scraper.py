@@ -5,6 +5,7 @@ import os
 from . import loader
 from .util import fetchUrls
 from .comic import ComicStrip
+from .output import out
 
 disabled = []
 def init_disabled():
@@ -37,14 +38,23 @@ class _BasicScraper(object):
     '''
     help = 'Sorry, no help for this comic yet.'
 
-    def __init__(self, indices=None):
+    def __init__(self, indexes=None):
         """Initialize internal variables."""
         self.urls = set()
-        self.indices = indices
+        self.indexes = indexes
 
-    def getCurrentStrip(self):
+    def getCurrentStrips(self):
         """Get current comic strip."""
-        return self.getStrip(self.getLatestUrl())
+        msg = 'Retrieving the current strip'
+        if self.indexes:
+            msg += " for indexes %s" % self.indexes
+        out.write(msg+"...")
+        if self.indexes:
+            for index in self.indexes:
+                url = self.imageUrl % index
+                yield self.getStrip(url)
+        else:
+            yield self.getStrip(self.getLatestUrl())
 
     def getStrip(self, url):
         """Get comic strip for given URL."""
@@ -57,8 +67,23 @@ class _BasicScraper(object):
 
     def getAllStrips(self):
         """Get all comic strips."""
+        msg = 'Retrieving all strips'
+        if self.indexes:
+            msg += " for indexes %s" % self.indexes
+        out.write(msg+"...")
+        if self.indexes:
+            for index in self.indexes:
+                url = self.imageUrl % index
+                for strip in self.getAllStripsFor(url):
+                    yield strip
+        else:
+            url = self.getLatestUrl()
+            for strip in self.getAllStripsFor(url):
+                yield strip
+
+    def getAllStripsFor(self, url):
+        """Get all comic strips for an URL."""
         seen_urls = set()
-        url = self.getLatestUrl()
         while url:
             imageUrls, prevUrl = fetchUrls(url, self.imageSearch, self.prevSearch)
             seen_urls.add(url)

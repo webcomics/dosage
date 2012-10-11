@@ -51,7 +51,6 @@ class ComicImage(object):
 
     def connect(self):
         """Connect to host and get meta information."""
-        out.write('Getting headers for %s...' % (self.url,), 2)
         try:
             self.urlobj = urlopen(self.url, referrer=self.referrer)
         except urllib2.HTTPError, he:
