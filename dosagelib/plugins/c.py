@@ -232,8 +232,8 @@ penny = cloneManga('PennyTribute', 'penny')
 class CatAndGirl(_BasicScraper):
     latestUrl = 'http://catandgirl.com/'
     imageUrl = 'http://catandgirl.com/?p=%s'
-    imageSearch = compile(r'<img src="(http://catandgirl.com/archive/.+?)"')
-    prevSearch = compile(r'\s+<a href="(.+?)">&#9668; Previous</a>')
+    imageSearch = compile(tagre("img", "src", r'(http://catandgirl\.com/archive/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)')+r"[^<]+Previous</a>")
     help = 'Index format: n (unpadded)'
 
 

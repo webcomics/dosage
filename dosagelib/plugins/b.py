@@ -2,6 +2,7 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 from re import compile
 
+from ..util import tagre
 from ..scraper import _BasicScraper
 
 
@@ -143,21 +144,21 @@ class Bhag(_BasicScraper):
     help = 'Index format: yymmdd'
 
 
-
 def blankLabel(name, baseUrl):
     return type('BlankLabel_%s' % name,
         (_BasicScraper,),
         dict(
         name='BlankLabel/' + name,
         latestUrl=baseUrl,
-        imageUrl='d/%s.html',
-        imageSearch=compile(r'"(/comic[s|/].+?)"'),
-        prevSearch=compile(r'(?:"([^"]*(?:/d/[^"\r\n]*)|(?:/strip/.+?))")(?:(?:.{43}starshift_back.gif)|(?:.+?cxn_previous)|(?:.{43}previous)|(?:[^<>]*>[^<>]*<[^<>]*previous)|(?:.*?back_button)|(?:.*?comicnav-previous))'),
+        imageUrl='/d/%s.shtml',
+        imageSearch=compile(tagre("img", "src", r'(/comic[s|/][^"]+)')),
+        prevSearch=compile(tagre("a", "href", r'(/d/\d+\.shtml)')+r"[^>]+/images/nav_02\.gif"),
+        #prevSearch=compile(r'(?:"([^"]*(?:/d/[^"\r\n]*)|(?:/strip/.+?))")(?:(?:.{43}starshift_back.gif)|(?:.+?cxn_previous)|(?:.{43}previous)|(?:[^<>]*>[^<>]*<[^<>]*previous)|(?:.*?back_button)|(?:.*?comicnav-previous))'),
         help='Index format: yyyymmdd')
     )
 
 
-checkerboardNightmare = blankLabel('CheckerboardNightmare', 'http://www.checkerboardnightmare.com/')
+checkerboard = blankLabel('CheckerboardNightmare', 'http://www.checkerboardnightmare.com')
 courtingDisaster = blankLabel('CourtingDisaster', 'http://www.courting-disaster.com/')
 evilInc = blankLabel('EvilInc', 'http://www.evil-comic.com/')
 greystoneInn = blankLabel('GreystoneInn', 'http://www.greystoneinn.net/')
@@ -205,9 +206,9 @@ class BlankIt(_BasicScraper):
 
 class BobWhite(_BasicScraper):
     latestUrl = 'http://www.bobwhitecomics.com/'
-    imageUrl = 'http://www.bobwhitecomics.com/%s.shtml'
-    imageSearch = compile(r'src="(/comics/.+?)"')
-    prevSearch = compile(r'"><a href="(.+?)"[^>]+?><img[^>]+?src="/images/prev.jpg">')
+    imageUrl = 'http://www.bobwhitecomics.com/?webcomic_post=%s'
+    imageSearch = compile(tagre("img", "src", r"(http://www\.bobwhitecomics\.com/wp/wp-content/webcomic/untitled/\d+.jpg)"))
+    prevSearch = compile(tagre("a", "href", "(http://www\.bobwhitecomics\.com/\?webcomic_post=\d+)")+r'[^"]+Previous')
     help = 'Index format: yyyymmdd'
 
 

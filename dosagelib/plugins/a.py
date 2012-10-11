@@ -180,15 +180,6 @@ class AfterStrife(_BasicScraper):
 
 
 
-class AnUnrehearsedRiot(_BasicScraper):
-    latestUrl = 'http://unrehearsedriot.com/'
-    imageUrl = 'http://unrehearsedriot.com/%s'
-    imageSearch = compile(r'<img src="(http://unrehearsedriot.com/comics/.+?)"')
-    prevSearch = compile(r'<a href="(http://unrehearsedriot.com/.+?)" class="navi navi-prev"')
-    help = 'Index format: yyyy/mm/dd/strip-name'
-
-
-
 class ALLCAPS(_BasicScraper):
     latestUrl = 'http://www.allcapscomix.com/'
     imageUrl = 'http://www.allcapscomix.com/%s'
@@ -285,20 +276,11 @@ class Amya(_BasicScraper):
 
 
 class Angband(_BasicScraper):
-    latestUrl = 'http://angband.calamarain.net/index.php'
+    latestUrl = 'http://angband.calamarain.net/'
     imageUrl = 'http://angband.calamarain.net/view.php?date=%s'
-    imageSearch = compile(r'<img src="(comics/Strip.+?)"')
-    prevSearch = compile(r'<a href="(view.php\?date\=.+?)">Previous</a>')
+    imageSearch = compile(tagre("img", "src", r'(comics/Scroll[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(view\.php\?date\=[^"]+)')+"Previous")
     help = 'Index format: yyyy-mm-dd'
-
-
-
-class ArcticBlast(_BasicScraper):
-    latestUrl = 'http://www.arcticblastcomic.com/'
-    imageUrl = 'http://www.arcticblastcomic.com/?p=%s'
-    imageSearch = compile(r'<img src="(http://www.arcticblastcomic.com/comics/.+?)"')
-    prevSearch = compile(r'<div class="nav-previous"><a href="(http://www.arcticblastcomic.com/.+?)"')
-    help = 'Index format: nnn'
 
 
 
