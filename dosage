@@ -34,7 +34,7 @@ def setupOptions():
     usage = 'usage: %prog [options] comicModule [comicModule ...]'
     parser = optparse.OptionParser(usage=usage)
     parser.add_option('-v', '--verbose', action='count', dest='verbose', default=0, help='provides verbose output, use multiple times for more verbosity')
-    parser.add_option('-c', '--catchup', action='count', dest='catchup', default=None, help='traverse and retrieve all available comics up until the strip that already exists locally, use twice to retrieve until all strips exist locally')
+    parser.add_option('-a', '--all', action='count', dest='all', default=None, help='traverse and retrieve all available comics')
     parser.add_option('-b', '--basepath', action='store', dest='basepath', default='Comics', help='set the path to create invidivual comic directories in, default is Comics', metavar='PATH')
     parser.add_option('--baseurl', action='store', dest='baseurl', default=None, help='the base URL of your comics directory (for RSS, HTML, etc.); this should correspond to --base-path', metavar='PATH')
     parser.add_option('-l', '--list', action='store_const', const=1, dest='list', help='list available comic modules')
@@ -43,8 +43,7 @@ def setupOptions():
     parser.add_option('-m', '--modulehelp', action='store_true', dest='modhelp', help='display help for comic modules')
     parser.add_option('-t', '--timestamps', action='store_true', dest='timestamps', default=False, help='print timestamps for all output at any info level')
     parser.add_option('-o', '--output', action='store', dest='output', choices=events.getHandlers(), help='output formatting for downloaded comics')
-    if is_tty(sys.stdout):
-        parser.add_option('-p', '--progress', action='store_true', dest='progress', default=False, help='display progress bar while downloading comics')
+    parser.add_option('-p', '--progress', action='store_true', dest='progress', default=False, help='display progress bar while downloading comics')
     return parser
 
 
@@ -88,8 +87,8 @@ def getComics(options, comics):
     events.handler.start()
     for scraperobj in getScrapers(comics, options.basepath):
         out.context = scraperobj.get_name()
-        if options.catchup:
-            out.write('Catching up...')
+        if options.all:
+            out.write('Retrieving all strips...')
             strips = scraperobj.getAllStrips()
         else:
             out.write('Retrieving the current strip...')
@@ -173,6 +172,8 @@ def main():
     try:
         parser = setupOptions()
         options, args = parser.parse_args()
+        if not is_tty(sys.stdout) and options.progress:
+            options.progress = False
         res = run(options, args)
     except KeyboardInterrupt:
         print "Aborted."
