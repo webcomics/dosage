@@ -32,17 +32,17 @@ class ComicStrip(object):
 
     def getDownloader(self, url):
         filename = self.namer(url, self.parentUrl)
-        return ComicImage(self.name, self.parentUrl, url, filename)
+        return ComicImage(self.name, url, self.parentUrl, filename)
 
 
 class ComicImage(object):
-    def __init__(self, name, referrer, url, filename):
+    def __init__(self, name, url, referrer, filename):
         """Set URL and filename."""
         self.name = name
         self.referrer = referrer
         self.url = url
         if filename is None:
-            filename = url.rsplit('/')[1]
+            filename = url.rsplit('/', 1)[1]
         self.filename, self.ext = os.path.splitext(filename)
         self.filename = self.filename.replace(os.sep, '_')
         self.ext = self.ext.replace(os.sep, '_')
@@ -61,10 +61,10 @@ class ComicImage(object):
 
         # Always use mime type for file extension if it is sane.
         if self.urlobj.info().getmaintype() == 'image':
-            self.ext = '.' + self.urlobj.info().getsubtype()
+            self.ext = '.' + self.urlobj.info().getsubtype().replace('jpeg', 'jpg')
         self.contentLength = int(self.urlobj.info().get('content-length', 0))
         self.lastModified = self.urlobj.info().get('last-modified')
-        out.write('... filename = "%s", ext = "%s", contentLength = %d' % (self.filename, self.ext, self.contentLength), 2)
+        out.write('... filename = %r, ext = %r, contentLength = %d' % (self.filename, self.ext, self.contentLength), 2)
 
     def touch(self, filename):
         """Set last modified date on filename."""
