@@ -1,10 +1,9 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-import os.path
+import os
 import time
-import rss
 import urllib
-import util
+from . import rss, util, configuration
 
 class EventHandler(object):
     """Base class for writing events to files. The currently defined events are
@@ -50,7 +49,8 @@ class RSSEventHandler(EventHandler):
     """Output in RSS format."""
 
     def RFC822Date(self, indate):
-        """Format date in rfc822 format. XXX move to util module."""
+        """Format date in rfc822 format."""
+        # XXX move to util module
         return time.strftime("%a, %d %b %Y %H:%M:%S GMT", time.gmtime(indate))
 
     def getFilename(self):
@@ -64,8 +64,7 @@ class RSSEventHandler(EventHandler):
         today = time.localtime(today)
         yesterday = time.localtime(yesterday)
 
-        # XXX replace with conf var
-        link = 'https://github.com/wummel/dosage'
+        link = configuration.Url
 
         self.rssfn = self.getFilename()
 
