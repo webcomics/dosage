@@ -5,7 +5,6 @@ import os
 import locale
 import rfc822
 import time
-import shutil
 
 from .output import out
 from .util import urlopen, saneDataSize, normaliseURL
