@@ -168,7 +168,7 @@ args = dict(
     name = AppName,
     version = AppVersion,
     description = 'a powerful webcomic downloader and archiver',
-    author = 'Tristan Seligmann, Jonathan Jacobs',
+    author = 'Tristan Seligmann, Jonathan Jacobs, Bastian Kleineidam',
     maintainer = 'Bastian Kleineidam',
     maintainer_email = 'calvin@users.sourceforge.net',
     license = 'MIT',
@@ -188,4 +188,3 @@ args = dict(
 
 if __name__ == '__main__':
     setup(**args)
-
