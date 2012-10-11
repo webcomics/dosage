@@ -76,11 +76,13 @@ def getPageContent(url):
     return data, baseUrl
 
 
-def fetchUrl(url, searchRo):
+def fetchUrl(url, urlSearch):
     data, baseUrl = getPageContent(url)
-    match = searchRo.search(data)
+    match = urlSearch.search(data)
     if match:
         searchUrl = match.group(1)
+        if not searchUrl:
+            raise ValueError("Match empty URL at %s with pattern %s" % (url, urlSearch.pattern))
         out.write('matched URL %r' % searchUrl, 2)
         return urlparse.urljoin(baseUrl, searchUrl)
     return None
@@ -92,6 +94,8 @@ def fetchUrls(url, imageSearch, prevSearch=None):
     imageUrls = set()
     for match in imageSearch.finditer(data):
         imageUrl = match.group(1)
+        if not imageUrl:
+            raise ValueError("Match empty image URL at %s with pattern %s" % (url, imageSearch.pattern))
         out.write('matched image URL %r' % imageUrl, 2)
         imageUrls.add(urlparse.urljoin(baseUrl, imageUrl))
     if not imageUrls:
@@ -101,6 +105,8 @@ def fetchUrls(url, imageSearch, prevSearch=None):
         match = prevSearch.search(data)
         if match:
             prevUrl = match.group(1)
+            if not prevUrl:
+                raise ValueError("Match empty previous URL at %s with pattern %s" % (url, prevSearch.pattern))
             out.write('matched previous URL %r' % prevUrl, 2)
             prevUrl = urlparse.urljoin(baseUrl, prevUrl)
         else:
