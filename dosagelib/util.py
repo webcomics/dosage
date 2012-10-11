@@ -92,7 +92,7 @@ def fetchUrls(url, imageSearch, prevSearch=None):
         out.write('matched image URL %r' % imageUrl, 2)
         imageUrls.add(urlparse.urljoin(baseUrl, imageUrl))
     if not imageUrls:
-        raise ValueError("No images found at %s with pattern %s" % (url, imageSearch.pattern))
+        out.write("warning: no images found at %s with pattern %s" % (url, imageSearch.pattern))
     if prevSearch is not None:
         # match previous URL
         match = prevSearch.search(data)
