@@ -1,7 +1,11 @@
 # -*- coding: iso-8859-1 -*-
-
+# Copyright (C) 2012 Bastian Kleineidam
+"""
+Functions to load plugin modules.
+"""
 import os
 import sys
+
 
 def get_modules(folder, importprefix):
     """Find all valid modules in the plugins directory. A valid module

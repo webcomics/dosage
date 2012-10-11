@@ -31,18 +31,21 @@ class ComicStrip(object):
             yield self.getDownloader(normaliseURL(imageUrl))
 
     def getDownloader(self, url):
+        """Get an image downloader."""
         filename = self.namer(url, self.parentUrl)
+        if filename is None:
+            filename = url.rsplit('/', 1)[1]
         return ComicImage(self.name, url, self.parentUrl, filename)
 
 
 class ComicImage(object):
+    """A comic image downloader."""
+
     def __init__(self, name, url, referrer, filename):
         """Set URL and filename."""
         self.name = name
         self.referrer = referrer
         self.url = url
-        if filename is None:
-            filename = url.rsplit('/', 1)[1]
         self.filename, self.ext = os.path.splitext(filename)
         self.filename = self.filename.replace(os.sep, '_')
         self.ext = self.ext.replace(os.sep, '_')

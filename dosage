@@ -82,6 +82,7 @@ def displayHelp(comics, basepath):
     return 0
 
 def getComics(options, comics):
+    """Retrieve given comics."""
     errors = 0
     events.installHandler(options.output, options.basepath, options.baseurl)
     events.handler.start()

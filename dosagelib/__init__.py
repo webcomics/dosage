@@ -39,4 +39,3 @@ import sys
 if not (hasattr(sys, 'version_info') or
         sys.version_info < (2, 5, 0, 'final', 0)):
     raise SystemExit("This program requires Python 2.5 or later.")
-
