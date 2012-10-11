@@ -71,7 +71,7 @@ class RegexTest(TestCase):
     )
 
     def test_regex(self):
-        matcher = re.compile(tagre("img", "src", self.ValuePrefix+".*"))
+        matcher = re.compile(tagre("img", "src", "(%s.*)" % self.ValuePrefix))
         for tag, value, domatch in self.TagTests:
             self.match_tag(matcher, tag, value, domatch)
 
@@ -82,4 +82,3 @@ class RegexTest(TestCase):
             self.assertEqual(match.group(1), value)
         else:
             self.assertFalse(match)
-
