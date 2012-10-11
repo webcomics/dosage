@@ -13,7 +13,7 @@ Changes:
 - cmdline: Improved terminal feature detection.
 
 Fixes:
-- comics: Adjusted Xkcd href values.
+- comics: Fix a lot of comics.
 - comics: Don't add empty URLs to the list of found URLs.
 
 
