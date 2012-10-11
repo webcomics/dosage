@@ -2,7 +2,9 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 from re import compile
 
-from ..helpers import _BasicScraper, bounceStarter
+from ..scraper import _BasicScraper
+from ..helpers import bounceStarter
+
 
 class xkcd(_BasicScraper):
     starter = bounceStarter('http://xkcd.com/', compile(r'<a rel="next" href="(/?\d+/?)"[^>]*>Next'))

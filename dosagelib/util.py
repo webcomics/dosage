@@ -21,72 +21,90 @@ if os.name == 'nt':
 
 has_curses = has_module("curses")
 
-class NoMatchError(Exception):
-    pass
+MAX_FILESIZE = 1024*1024*1 # 1MB
 
-def getMatchValues(matches):
-    return set([match.group(1) for match in matches])
+def tagre(tag, attribute, value):
+    """Return a regular expression matching the given HTML tag, attribute
+    and value. It matches the tag and attribute names case insensitive,
+    and skips arbitrary whitespace and leading HTML attributes. The "<>" at
+    the start and end of the HTML tag is also matched.
+    @param tag: the tag name
+    @ptype tag: string
+    @param attribute: the attribute name
+    @ptype attribute: string
+    @param value: the attribute value
+    @ptype value: string
+    @return: the generated regular expression suitable for re.compile()
+    @rtype: string
+    """
+    attrs = dict(
+        tag=case_insensitive_re(tag),
+        attribute=case_insensitive_re(attribute),
+        value=value,
+    )
+    return r'<\s*%(tag)s[^>]*\s+%(attribute)s\s*=\s*"%(value)s"[^>]*/?>' % attrs
 
-def fetchManyMatches(url, regexes):
-    '''Returns a list containing lists of matches for each regular expression, in the same order.'''
-    out.write('Matching regex(es) %r multiple times against %s...' % ([rex.pattern for rex in regexes], url), 2)
+
+def case_insensitive_re(name):
+    """Reformat the given name to a case insensitive regular expression string
+    without using re.IGNORECASE. This way selective strings can be made case
+    insensitive.
+    @param name: the name to make case insensitive
+    @ptype name: string
+    @return: the case insenstive regex
+    @rtype: string
+    """
+    return "".join("[%s%s]" % (c.lower(), c.upper()) for c in name)
+
+
+baseSearch = re.compile(tagre("base", "href", '([^"]*)'))
+
+def getPageContent(url):
+    # read page data
     page = urlopen(url)
-    data = page.read()
-
-    matches = [getMatchValues(regex.finditer(data)) for regex in regexes]
-    if matches:
-        out.write('...found %r' % (matches,), 2)
-    else:
-        out.write('...not found!', 2)
-
-    return list(matches)
-
-def fetchMatches(url, regexes):
-    out.write('Matching regex(es) %r against %s...' % ([rex.pattern for rex in regexes], url), 2)
-    page = urlopen(url)
-    data = page.read()
-
-    matches = []
-    for regex in regexes:
-        match = regex.search(data)
-        if match:
-            matches.append(match.group(1))
-
-    if matches:
-        out.write('...found %r' % (matches,), 2)
-    else:
-        out.write('...not found!', 2)
-
-    return matches
-
-def fetchMatch(url, regex):
-    matches = fetchMatches(url, (regex,))
-    if matches:
-        return matches[0]
-    return None
-
-def fetchUrl(url, regex):
-    match = fetchMatch(url, regex)
+    data = page.read(MAX_FILESIZE)
+    # determine base URL
+    baseUrl = None
+    match = baseSearch.search(data)
     if match:
-        return urlparse.urljoin(url, match)
+        baseUrl = match.group(1)
+    else:
+        baseUrl = url
+    return data, baseUrl
+
+
+def fetchUrl(url, searchRo):
+    data, baseUrl = getPageContent(url)
+    match = searchRo.search(data)
+    if match:
+        searchUrl = match.group(1)
+        out.write('matched URL %r' % searchUrl, 2)
+        return urlparse.urljoin(baseUrl, searchUrl)
     return None
 
-baseSearch = re.compile(r'<base\s+href="([^"]*)"\s+/?>', re.IGNORECASE)
-def fetchUrls(url, regexes):
-    matches = fetchMatches(url, [baseSearch] + list(regexes))
-    baseUrl = matches.pop(0) or url
-    return [urlparse.urljoin(baseUrl, match) for match in matches]
 
-def fetchManyUrls(url, regexes):
-    matchGroups = fetchManyMatches(url, [baseSearch] + list(regexes))
-    baseUrl = matchGroups.pop(0) or [url]
-    baseUrl = baseUrl[0]
+def fetchUrls(url, imageSearch, prevSearch=None):
+    data, baseUrl = getPageContent(url)
+    # match images
+    imageUrls = set()
+    for match in imageSearch.finditer(data):
+        imageUrl = match.group(1)
+        out.write('matched image URL %r' % imageUrl, 2)
+        imageUrls.add(urlparse.urljoin(baseUrl, imageUrl))
+    if not imageUrls:
+        raise ValueError("No images found at %s with pattern %s" % (url, imageSearch.pattern))
+    if prevSearch is not None:
+        # match previous URL
+        match = prevSearch.search(data)
+        if match:
+            prevUrl = match.group(1)
+            out.write('matched previous URL %r' % prevUrl, 2)
+            prevUrl = urlparse.urljoin(baseUrl, prevUrl)
+        else:
+            prevUrl = None
+        return imageUrls, prevUrl
+    return imageUrls
 
-    xformedGroups = []
-    for matchGroup in matchGroups:
-        xformedGroups.append([urlparse.urljoin(baseUrl, match) for match in matchGroup])
-
-    return xformedGroups
 
 def _unescape(text):
     """
@@ -278,37 +296,3 @@ def strtimezone():
     else:
         zone = time.timezone
     return "%+04d" % (-zone//3600)
-
-
-def tagre(tag, attribute, value):
-    """Return a regular expression matching the given HTML tag, attribute
-    and value. It matches the tag and attribute names case insensitive,
-    and skips arbitrary whitespace and leading HTML attributes. The "<>" at
-    the start and end of the HTML tag is also matched.
-    @param tag: the tag name
-    @ptype tag: string
-    @param attribute: the attribute name
-    @ptype attribute: string
-    @param value: the attribute value
-    @ptype value: string
-    @return: the generated regular expression suitable for re.compile()
-    @rtype: string
-    """
-    attrs = dict(
-        tag=case_insensitive_re(tag),
-        attribute=case_insensitive_re(attribute),
-        value=value,
-    )
-    return r'<\s*%(tag)s[^>]*\s+%(attribute)s\s*=\s*"%(value)s"[^>]>' % attrs
-
-def case_insensitive_re(name):
-    """Reformat the given name to a case insensitive regular expression string
-    without using re.IGNORECASE. This way selective strings can be made case
-    insensitive.
-    @param name: the name to make case insensitive
-    @ptype name: string
-    @return: the case insenstive regex
-    @rtype: string
-    """
-    return "".join("[%s%s]" % (c.lower(), c.upper()) for c in name)
-

@@ -3,7 +3,8 @@
 from re import compile, MULTILINE, IGNORECASE, sub
 from os.path import splitext
 
-from ..helpers import _BasicScraper, bounceStarter, indirectStarter
+from ..scraper import _BasicScraper
+from ..helpers import bounceStarter, indirectStarter
 
 
 class SailorsunOrg(_BasicScraper):

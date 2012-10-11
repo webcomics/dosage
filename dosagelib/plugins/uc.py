@@ -2,8 +2,8 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 from re import compile, IGNORECASE, sub
 
-from ..helpers import _BasicScraper
-from ..util import fetchManyMatches, fetchUrl
+from ..scraper import _BasicScraper
+from ..util import fetchUrl
 
 
 class _UClickScraper(_BasicScraper):
@@ -24,6 +24,7 @@ class _UClickScraper(_BasicScraper):
             'index',
             )
 
+        # XXX refactor this mess
         submoduleSearch = compile(r'(<A HREF="http://content.uclick.com/content/\w+.html">[^>]+?</a>)', IGNORECASE)
         partsMatch = compile(r'<A HREF="http://content.uclick.com/content/(\w+?).html">([^>]+?)</a>', IGNORECASE)
         matches = fetchManyMatches(cls.homepage, (submoduleSearch,))[0]

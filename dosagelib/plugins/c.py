@@ -2,18 +2,23 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 from re import compile
 
-from ..helpers import (
-    _BasicScraper, constStarter, bounceStarter, indirectStarter)
-from ..util import getQueryParams
+from ..scraper import _BasicScraper
+from ..helpers import constStarter, bounceStarter, indirectStarter
+from ..util import tagre, getQueryParams
 
 
 class CalvinAndHobbes(_BasicScraper):
-    latestUrl = 'http://www.gocomics.com/calvinandhobbes/'
+    starter = bounceStarter('http://www.gocomics.com/calvinandhobbes/',
+      compile(tagre("a", "href", "(/calvinandhobbes/\d+/\d+/\d+)")+"Next feature</a>"))
     imageUrl = 'http://www.gocomics.com/calvinandhobbes/%s'
-    imageSearch = compile(r'src="(http://picayune\.uclick\.com/comics/ch/[^"]+\.gif)"')
-    prevSearch = compile(r'href="(.*?)"\s+onclick="[^"]*">Previous day</a>')
+    imageSearch = compile(tagre("img", "src", "(http://assets\.amuniversal\.com/[a-f0-9]+)"))
+    prevSearch = compile(tagre("a", "href", "(/calvinandhobbes/\d+/\d+/\d+)")+"Previous feature</a>")
     help = 'Index format: yyyy/mm/dd'
 
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        prefix, year, month, day = pageUrl.rsplit('/', 3)
+        return "%s%s%s.gif" % (year, month, day)
 
 
 class CandyCartoon(_BasicScraper):

@@ -2,8 +2,7 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 from re import compile, MULTILINE
 
-from ..helpers import _BasicScraper
-
+from ..scraper import _BasicScraper
 
 
 class Jack(_BasicScraper):

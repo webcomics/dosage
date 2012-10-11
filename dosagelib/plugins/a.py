@@ -2,14 +2,14 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 from re import compile, MULTILINE
 from ..util import tagre
-
-from ..helpers import _BasicScraper, regexNamer, bounceStarter, indirectStarter
+from ..scraper import _BasicScraper
+from ..helpers import regexNamer, bounceStarter, indirectStarter
 
 
 class ALessonIsLearned(_BasicScraper):
     latestUrl = 'http://www.alessonislearned.com/'
     imageUrl = 'http://www.alessonislearned.com/lesson%s.html'
-    imageSearch = compile(tagre("img", "src", r"(cmx/.+?)"))
+    imageSearch = compile(tagre("img", "src", r"(cmx/lesson.+?)"))
     prevSearch = compile(tagre("a", "href", r"(index\.php\?comic=.+?)")+r".+?previous")
     help = 'Index format: nnn'
 

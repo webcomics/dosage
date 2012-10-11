@@ -2,7 +2,8 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 from re import compile, IGNORECASE, DOTALL
 
-from ..helpers import _BasicScraper, queryNamer, bounceStarter
+from ..scraper import _BasicScraper
+from ..helpers import queryNamer, bounceStarter
 
 
 class WayfarersMoon(_BasicScraper):

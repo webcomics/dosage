@@ -1,9 +1,10 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 from re import compile, IGNORECASE, MULTILINE
-from ..util import tagre
 
-from ..helpers import _BasicScraper, indirectStarter
+from ..util import tagre
+from ..scraper import _BasicScraper
+from ..helpers import indirectStarter
 
 
 class FalconTwin(_BasicScraper):

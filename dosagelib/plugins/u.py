@@ -2,7 +2,8 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 from re import compile, IGNORECASE
 
-from ..helpers import _BasicScraper, bounceStarter, indirectStarter
+from ..scraper import _BasicScraper
+from ..helpers import bounceStarter, indirectStarter
 from ..util import getQueryParams
 
 

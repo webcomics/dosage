@@ -6,8 +6,6 @@ import locale
 import rfc822
 import time
 import shutil
-# XXX why is this done??
-locale.setlocale(locale.LC_ALL, '')
 
 from .output import out
 from .util import urlopen, saneDataSize, normaliseURL
@@ -18,16 +16,34 @@ class FetchComicError(IOError):
     """Exception for comic fetching errors."""
     pass
 
-class Comic(object):
-    """Download and save a single comic."""
+class ComicStrip(object):
+    """A list of comic image URLs."""
 
-    def __init__(self, moduleName, url, referrer=None, filename=None):
+    def __init__(self, name, parentUrl, imageUrls, namer):
+        """Store the image URL list."""
+        self.name = name
+        self.parentUrl = parentUrl
+        self.imageUrls = imageUrls
+        self.namer = namer
+
+    def getImages(self):
+        """Get a list of image downloaders."""
+        for imageUrl in self.imageUrls:
+            yield self.getDownloader(normaliseURL(imageUrl))
+
+    def getDownloader(self, url):
+        filename = self.namer(url, self.parentUrl)
+        return ComicImage(self.name, self.parentUrl, url, filename)
+
+
+class ComicImage(object):
+    def __init__(self, name, referrer, url, filename):
         """Set URL and filename."""
-        self.moduleName = moduleName
-        self.url = normaliseURL(url)
+        self.name = name
         self.referrer = referrer
+        self.url = url
         if filename is None:
-            filename = url.split('/')[-1]
+            filename = url.rsplit('/')[1]
         self.filename, self.ext = os.path.splitext(filename)
         self.filename = self.filename.replace(os.sep, '_')
         self.ext = self.ext.replace(os.sep, '_')
@@ -62,13 +78,13 @@ class Comic(object):
     def save(self, basepath, showProgress=False):
         """Save comic URL to filename on disk."""
         self.connect()
-        comicName, comicExt = self.filename, self.ext
+        filename = "%s%s" % (self.filename, self.ext)
         comicSize = self.contentLength
-        comicDir = os.path.join(basepath, self.moduleName.replace('/', os.sep))
+        comicDir = os.path.join(basepath, self.name.replace('/', os.sep))
         if not os.path.isdir(comicDir):
             os.makedirs(comicDir)
 
-        fn = os.path.join(comicDir, '%s%s' % (self.filename, self.ext))
+        fn = os.path.join(comicDir, filename)
         if os.path.isfile(fn) and os.path.getsize(fn) >= comicSize:
             self.urlobj.close()
             self.touch(fn)
@@ -76,10 +92,8 @@ class Comic(object):
             return fn, False
 
         try:
-            tmpFn = os.path.join(comicDir, '__%s%s' % (self.filename, self.ext))
-            out.write('Writing comic to temporary file %s...' % (tmpFn,), 3)
-            comicOut = file(tmpFn, 'wb')
-            try:
+            out.write('Writing comic to file %s...' % (fn,), 3)
+            with open(fn, 'wb') as comicOut:
                 startTime = time.time()
                 if showProgress:
                     def pollData():
@@ -92,12 +106,12 @@ class Comic(object):
                 else:
                     comicOut.write(self.urlobj.read())
                 endTime = time.time()
-            finally:
-                comicOut.close()
-            out.write('Copying temporary file (%s) to %s...' % (tmpFn, fn), 3)
-            shutil.copy2(tmpFn, fn)
             self.touch(fn)
-
+        except:
+            if os.path.isfile(fn):
+                os.remove(fn)
+            raise
+        else:
             size = os.path.getsize(fn)
             bytes = locale.format('%d', size, True)
             if endTime != startTime:
@@ -106,13 +120,8 @@ class Comic(object):
                 speed = '???'
             attrs = dict(fn=fn, bytes=bytes, speed=speed)
             out.write('Saved "%(fn)s" (%(bytes)s bytes, %(speed)s/sec).' % attrs, 1)
-            handler.comicDownloaded(self.moduleName, fn)
-            self.urlobj.close()
+            handler.comicDownloaded(self.name, fn)
         finally:
-            try:
-                out.write('Removing temporary file %s...' % (tmpFn,), 3)
-                os.remove(tmpFn)
-            except:
-                pass
+            self.urlobj.close()
 
         return fn, True

@@ -2,47 +2,122 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012 Bastian Kleineidam
 import os
-import sys
-
-from .helpers import _BasicScraper
+from . import loader
+from .util import fetchUrls
+from .comic import ComicStrip
 
 disabled = []
 def init_disabled():
     filename = os.path.expanduser('~/.dosage/disabled')
-    if not os.path.isfile(filename):
-        return
-    with open(filename) as f:
-        for line in f:
-            if line and not line.startswith('#'):
-                disabled.append(line.rstrip())
+    if os.path.isfile(filename):
+        with open(filename) as f:
+            for line in f:
+                if line and not line.startswith('#'):
+                    disabled.append(line.rstrip())
 init_disabled()
 
 class DisabledComicError(ValueError):
     pass
 
 
-def get(comicName):
+class _BasicScraper(object):
+    '''Base class with scrape functions for comics.
+
+    @type latestUrl: C{string}
+    @cvar latestUrl: The URL for the latest comic strip.
+    @type imageUrl: C{string}
+    @cvar imageUrl: A string that is interpolated with the strip index
+        to yield the URL for a particular strip.
+    @type imageSearch: C{regex}
+    @cvar imageSearch: A compiled regex that will locate the strip image URL
+        when applied to the strip page.
+    @type prevSearch: C{regex}
+    @cvar prevSearch: A compiled regex that will locate the URL for the
+        previous strip when applied to a strip page.
+    '''
+    help = 'Sorry, no help for this comic yet.'
+
+    def __init__(self, indices=None):
+        """Initialize internal variables."""
+        self.urls = set()
+        self.indices = indices
+
+    def getCurrentStrip(self):
+        """Get current comic strip."""
+        return self.getStrip(self.getLatestUrl())
+
+    def getStrip(self, url):
+        """Get comic strip for given URL."""
+        imageUrls = fetchUrls(url, self.imageSearch)
+        return self.getComicStrip(url, imageUrls)
+
+    def getComicStrip(self, url, imageUrls):
+        """Get comic strip downloader for given URL and images."""
+        return ComicStrip(self.get_name(), url, imageUrls, self.namer)
+
+    def getAllStrips(self):
+        """Get all comic strips."""
+        seen_urls = set()
+        url = self.getLatestUrl()
+        while url:
+            imageUrls, prevUrl = fetchUrls(url, self.imageSearch, self.prevSearch)
+            seen_urls.add(url)
+            yield self.getComicStrip(url, imageUrls)
+            # avoid recursive URL loops
+            url = prevUrl if prevUrl not in seen_urls else None
+
+    def setStrip(self, index):
+        """Set current comic strip URL."""
+        self.currentUrl = self.imageUrl % index
+
+    def getHelp(self):
+        """Return help text for this scraper."""
+        return self.help
+
+    @classmethod
+    def get_name(cls):
+        """Get scraper name."""
+        if hasattr(cls, 'name'):
+            return cls.name
+        return cls.__name__
+
+    @classmethod
+    def starter(cls):
+        """Get starter URL from where to scrape comic strips."""
+        return cls.latestUrl
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        """Return filename for given image and page URL."""
+        return None
+
+    def getFilename(self, imageUrl, pageUrl):
+        """Return filename for given image and page URL."""
+        return self.namer(imageUrl, pageUrl)
+
+    def getLatestUrl(self):
+        """Get starter URL from where to scrape comic strips."""
+        return self.starter()
+
+
+def get_scraper(comic):
     """Returns a comic module object."""
     candidates = []
-    for scraper in get_scrapers():
-        lname = scraper.get_name().lower()
-        cname = comicName.lower()
+    cname = comic.lower()
+    for scraperclass in get_scrapers():
+        lname = scraperclass.get_name().lower()
         if lname == cname:
             # perfect match
-            return scraper
+            return scraperclass
         if cname in lname:
-            candidates.append(scraper)
+            candidates.append(scraperclass)
     if len(candidates) == 1:
         return candidates[0]
     elif candidates:
         comics = ", ".join(x.get_name() for x in candidates)
         raise ValueError('Multiple comics %s found.' % comics)
     else:
-        raise ValueError('Comic %r not found.' % comicName)
-
-
-def items():
-    return get_scrapers()
+        raise ValueError('Comic %r not found.' % comic)
 
 
 _scrapers = None
@@ -54,91 +129,23 @@ def get_scrapers():
     """
     global _scrapers
     if _scrapers is None:
-        _scrapers = list(get_all_plugins(get_modules()))
+        folder = os.path.join(os.path.dirname(__file__), 'plugins')
+        importprefix = 'dosagelib.plugins.'
+        modules = loader.get_modules(folder, importprefix)
+        plugins = loader.get_plugins(modules, _BasicScraper)
+        _scrapers = list(plugins)
         _scrapers.sort(key=lambda s: s.get_name())
         check_scrapers()
     return _scrapers
 
 
 def check_scrapers():
+    """Check for duplicate scraper class names."""
     d = {}
-    for s in _scrapers:
-        name = s.get_name().lower()
+    for scraperclass in _scrapers:
+        name = scraperclass.get_name().lower()
         if name in d:
-            name1 = s.get_name()
+            name1 = scraperclass.get_name()
             name2 = d[name].get_name()
             raise ValueError('Duplicate scrapers %s and %s found' % (name1, name2))
-        d[name] = s
-
-
-def get_modules():
-    """Find all valid modules in the plugins directory. A valid module
-    must have a .py extension, and is importable.
-    @return: all loaded valid modules
-    @rtype: iterator of module
-    """
-    # load from the plugins folder
-    folder = os.path.join(os.path.dirname(__file__), 'plugins')
-    for filename in get_importable_modules(folder):
-        try:
-            module = load_module(filename)
-            if module is not None:
-                yield module
-        except StandardError, msg:
-            print "ERROR", msg
-
-
-def get_importable_modules(folder):
-    """Find all module files in the given folder that end witn '.py' and
-    don't start with an underscore.
-    @return module filenames
-    @rtype: iterator of string
-    """
-    for fname in os.listdir(folder):
-        if fname.endswith('.py') and not fname.startswith('_'):
-            yield os.path.join(folder, fname)
-
-
-def load_module(filename):
-    """Load and return the module given by the filename.
-    Other exceptions than ImportError are not catched.
-    @return: loaded module or None on import errors
-    @rtype: module or None
-    """
-    name = os.path.splitext(os.path.basename(filename))[0]
-    modulename = "dosagelib.plugins.%s" % name
-    __import__(modulename)
-    return sys.modules[modulename]
-
-
-def get_all_plugins(modules):
-    """Find all scrapers in all modules.
-    @param modules: the modules to search
-    @ptype modules: iterator of modules
-    @return: found scrapers
-    @rytpe: iterator of class objects
-    """
-    for module in modules:
-        for plugin in get_plugins(module):
-            yield plugin
-
-
-def get_plugins(module):
-    """Return all subclasses of _BasicScraper in the module.
-    If the module defines __all__, only those entries will be searched,
-    otherwise all objects not starting with '_' will be searched.
-    """
-    try:
-        names = module.__all__
-    except AttributeError:
-        names = [x for x in vars(module) if not x.startswith('_')]
-    for name in names:
-        try:
-            obj = getattr(module, name)
-        except AttributeError:
-            continue
-        try:
-            if issubclass(obj, _BasicScraper):
-                yield obj
-        except TypeError:
-            continue
+        d[name] = scraperclass
