@@ -33,17 +33,9 @@ class AbleAndBaker(_BasicScraper):
 class AbominableCharlesChristopher(_BasicScraper):
     latestUrl = 'http://abominable.cc/'
     imageUrl = 'http://abominable.cc/%s'
-    imageSearch = compile(r'cc(/comics/.+?)"')
-    prevSearch = compile(r'cc(/.+?)".+?prev')
+    imageSearch = compile(tagre("img", "src", r'(http://www\.abominable\.cc/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)')+"[^<]+Previous")
     help = 'Index format: yyyy/mm/dd/comicname'
-
-
-class AbstractGender(_BasicScraper):
-    latestUrl = 'http://www.abstractgender.com/'
-    imageUrl = 'http://www.abstractgender.com/?comic=%s'
-    imageSearch = compile(tagre('img', 'src', r'(comics/\d+\.\w+)'))
-    prevSearch = compile(tagre('a', 'href', r"(\?comic=\d+)")+tagre("img", "id", "comic_menu_prev"))
-    help = 'Index format: n (unpadded)'
 
 
 class AbsurdNotions(_BasicScraper):
@@ -200,8 +192,8 @@ class AnUnrehearsedRiot(_BasicScraper):
 class ALLCAPS(_BasicScraper):
     latestUrl = 'http://www.allcapscomix.com/'
     imageUrl = 'http://www.allcapscomix.com/%s'
-    imageSearch = compile(r'<img src="(http://www.allcapscomix.com/comics/.+?)"')
-    prevSearch = compile(r'href="(.+?)">(&#9668; Previous|<span class="prev">)')
+    imageSearch = compile(tagre("img", "src", r'(http://www\.allcapscomix\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)')+r"[^<]+Previous</a>")
     help = 'Index format: yyyy/mm/strip-name'
 
 
@@ -209,8 +201,8 @@ class ALLCAPS(_BasicScraper):
 class ASkeweredParadise(_BasicScraper):
     latestUrl = 'http://aspcomics.net/'
     imageUrl = 'http://aspcomics.net/archindex.php?strip_id=%s'
-    imageSearch = compile(r'<img src="(istrip_files/strips/.+?)"')
-    prevSearch = compile(r'</a><a href="(.+?)"><img src="images/previous_day.jpg"')
+    imageSearch = compile(tagre("img", "src", r'(http://aspcomics\.net/sites/default/files[^"]*/asp\d+\.jpg)[^"]+'))
+    prevSearch = compile(tagre("a", "href", "(/comic/\d+)")+r"[^>]+Previous")
     help = 'Index format: nnn'
 
 
@@ -219,7 +211,7 @@ class AGirlAndHerFed(_BasicScraper):
     starter = bounceStarter('http://www.agirlandherfed.com/',
       compile(r'<a href="([^"]+)">[^>]+Back'))
     imageUrl = 'http://www.agirlandherfed.com/img/strip/%s'
-    imageSearch = compile(r'<img src="(/img/strip/[^"]+\.jpg)"')
+    imageSearch = compile(tagre("img", "src", r'(img/strip/[^"]+\.jpg)'))
     prevSearch = compile(r'<a href="([^"]+)">[^>]+Back')
     help = 'Index format: nnn'
 
