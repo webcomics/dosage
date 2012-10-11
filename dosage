@@ -118,9 +118,13 @@ def run(options, comics):
     if len(comics) <= 0:
         out.write('Warning: No comics specified, bailing out!')
         return 1
-    if options.modhelp:
-        return displayHelp(comics, options.basepath)
-    return getComics(options, comics)
+    try:
+        if options.modhelp:
+            return displayHelp(comics, options.basepath)
+        return getComics(options, comics)
+    except ValueError, msg:
+        out.write("Error: %s" % msg)
+    return 1
 
 
 def doList(columnList):
