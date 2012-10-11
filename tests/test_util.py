@@ -76,9 +76,10 @@ class RegexTest(TestCase):
             self.match_tag(matcher, tag, value, domatch)
 
     def match_tag(self, matcher, tag, value, domatch=True):
-        match = matcher.match(tag % value)
+        text = tag % value
+        match = matcher.search(text)
         if domatch:
-            self.assertTrue(match)
+            self.assertTrue(match, "%s should match %s" % (matcher.pattern, text))
             self.assertEqual(match.group(1), value)
         else:
-            self.assertFalse(match)
+            self.assertFalse(match, "%s should not match %s" % (matcher.pattern, text))

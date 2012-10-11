@@ -45,7 +45,7 @@ def tagre(tag, attribute, value, quote='"'):
         value=value,
         quote=quote,
     )
-    return r'<\s*%(tag)s\s+[^>]*%(attribute)s\s*=\s*%(quote)s%(value)s%(quote)s[^>]*>' % attrs
+    return r'<\s*%(tag)s\s+(?:[^>]*\s+)?%(attribute)s\s*=\s*%(quote)s%(value)s%(quote)s[^>]*>' % attrs
 
 
 def case_insensitive_re(name):
