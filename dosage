@@ -112,7 +112,7 @@ def run(options, comics):
         return 1
     if options.modhelp:
         return displayHelp(comics, options.basepath)
-    errors = getComics(options, comics)
+    return getComics(options, comics)
 
 
 def doList(columnList):
@@ -155,20 +155,18 @@ def getScrapers(comics, basepath=None):
                 yield scraperclass()
     elif '@@' in comics:
         # all scrapers
-        if len(comics) > 1:
-            out.write("WARN: using '@@' as comic name ignores all other specified comics.\n")
         for scraperclass in scraper.get_scrapers():
             yield scraperclass()
     else:
         # only selected
         for comic in comics:
-            c = comic.split(':', 2)
-            if len(c) > 1:
-                indices = c[1].split(',')
+            if ':' in comic:
+                name, index = comic.split(':', 1)
+                indices = index.split(',')
             else:
+                name = comic
                 indices = None
-            moduleName = c[0]
-            yield scraper.get_scraper(moduleName)(indices=indices)
+            yield scraper.get_scraper(name)(indices=indices)
 
 def main():
     """Parse options and execute commands."""
