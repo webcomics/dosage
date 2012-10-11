@@ -8,7 +8,6 @@ import time
 
 from .output import out
 from .util import urlopen, saneDataSize, normaliseURL
-from .progress import progressBar, OperationComplete
 from .events import handler
 
 class FetchComicError(IOError):
@@ -77,7 +76,7 @@ class ComicImage(object):
                 mtime = time.mktime(tt)
                 os.utime(filename, (mtime, mtime))
 
-    def save(self, basepath, showProgress=False):
+    def save(self, basepath):
         """Save comic URL to filename on disk."""
         self.connect()
         filename = "%s%s" % (self.filename, self.ext)
@@ -97,16 +96,7 @@ class ComicImage(object):
             out.write('Writing comic to file %s...' % (fn,), 3)
             with open(fn, 'wb') as comicOut:
                 startTime = time.time()
-                if showProgress:
-                    def pollData():
-                        data = self.urlobj.read(8192)
-                        if not data:
-                            raise OperationComplete
-                        comicOut.write(data)
-                        return len(data), self.contentLength
-                    progressBar(pollData)
-                else:
-                    comicOut.write(self.urlobj.read())
+                comicOut.write(self.urlobj.read())
                 endTime = time.time()
             self.touch(fn)
         except:
