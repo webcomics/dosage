@@ -12,7 +12,7 @@ MAXFAILEDTESTS:=10
 # - use multiple processors
 # - write test results in file
 # - run all tests found in the "tests" subdirectory
-PYTESTOPTS:=--maxfail=$(MAXFAILEDTESTS) -n $(NUMPROCESSORS) --resultlog=testresults.txt
+PYTESTOPTS:=--maxfail=$(MAXFAILEDTESTS) -n $(NUMPROCESSORS) --resultlog=testresults.txt --tb=short
 CHMODMINUSMINUS:=--
 # directory or file with tests to run
 TESTS ?= tests
