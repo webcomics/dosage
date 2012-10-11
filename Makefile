@@ -61,7 +61,7 @@ check:
 
 doccheck:
 	py-check-docstrings --force \
-	  dosagelib \
+	  dosagelib/*.py \
 	  dosage \
 	  *.py
 
