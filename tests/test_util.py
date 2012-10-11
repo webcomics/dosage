@@ -68,10 +68,11 @@ class RegexTest(TestCase):
         ('<Img src="%s">', ValuePrefix, True),
         ('<img SrC="%s">', ValuePrefix, True),
         ('<img src="%s">', ValuePrefix[:-1], False),
+        ('<img class="prev" src="%s" a="b">', ValuePrefix, True),
     )
 
     def test_regex(self):
-        matcher = re.compile(tagre("img", "src", "(%s.*)" % self.ValuePrefix))
+        matcher = re.compile(tagre("img", "src", '(%s[^"]*)' % self.ValuePrefix))
         for tag, value, domatch in self.TagTests:
             self.match_tag(matcher, tag, value, domatch)
 
