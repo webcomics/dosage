@@ -3,7 +3,7 @@
 # Copyright (C) 2012 Bastian Kleineidam
 import tempfile
 import shutil
-from itertools import izip
+from itertools import islice
 from unittest import TestCase
 from dosagelib import scraper
 
@@ -21,8 +21,8 @@ class _ComicTester(TestCase):
         # on at least 4 pages.
         scraperobj = self.scraperclass()
         num = empty = 0
-        for n, strip in izip(xrange(5), scraperobj.getAllStrips()):
-            images = strips.getImages()
+        for strip in islice(scraperobj.getAllStrips(), 0, 5):
+            images = strip.getImages()
             if len(images) == 0:
                 empty += 1
             for image in images:
@@ -46,10 +46,10 @@ class _ComicTester(TestCase):
 
 
 def generate_comic_testers():
-    """For each comic scraper, create a test class.
-    This currently generates over 4000 test classes (one for each comic),
-    so this takes a while."""
-    for scraperclass in scraper.get_scrapers():
+    """For each comic scraper, create a test class."""
+    # Limit number of scraper tests for now
+    max_scrapers = 10
+    for scraperclass in islice(scraper.get_scrapers(), 0, max_scrapers):
         name = 'Test'+scraperclass.__name__
         globals()[name] = type(name,
             (_ComicTester,),
