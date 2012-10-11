@@ -22,11 +22,12 @@ class _ComicTester(TestCase):
         scraperobj = self.scraperclass()
         num = empty = 0
         for strip in islice(scraperobj.getAllStrips(), 0, 5):
-            images = strip.getImages()
-            if len(images) == 0:
-                empty += 1
-            for image in images:
+            images = 0
+            for image in strip.getImages():
+                images += 1
                 self.save(image)
+            if not images:
+                empty += 1
             num += 1
         self.check(num >= 4, 'traversal failed after %d strips.' % num)
         self.check(empty <= 1, 'failed to find images on %d pages.' % empty)
