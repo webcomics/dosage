@@ -23,7 +23,7 @@ has_curses = has_module("curses")
 
 MAX_FILESIZE = 1024*1024*1 # 1MB
 
-def tagre(tag, attribute, value):
+def tagre(tag, attribute, value, quote='"'):
     """Return a regular expression matching the given HTML tag, attribute
     and value. It matches the tag and attribute names case insensitive,
     and skips arbitrary whitespace and leading HTML attributes. The "<>" at
@@ -34,6 +34,8 @@ def tagre(tag, attribute, value):
     @ptype attribute: string
     @param value: the attribute value
     @ptype value: string
+    @param quote: the attribute quote (default ")
+    @ptype quote: string
     @return: the generated regular expression suitable for re.compile()
     @rtype: string
     """
@@ -41,8 +43,9 @@ def tagre(tag, attribute, value):
         tag=case_insensitive_re(tag),
         attribute=case_insensitive_re(attribute),
         value=value,
+        quote=quote,
     )
-    return r'<\s*%(tag)s[^>]*\s+%(attribute)s\s*=\s*"%(value)s"[^>]*/?>' % attrs
+    return r'<\s*%(tag)s\s+[^>]*%(attribute)s\s*=\s*%(quote)s%(value)s%(quote)s[^>]*>' % attrs
 
 
 def case_insensitive_re(name):
@@ -101,6 +104,8 @@ def fetchUrls(url, imageSearch, prevSearch=None):
             out.write('matched previous URL %r' % prevUrl, 2)
             prevUrl = urlparse.urljoin(baseUrl, prevUrl)
         else:
+            print data
+            out.write('no previous URL %s at %s' % (prevSearch.pattern, url), 2)
             prevUrl = None
         return imageUrls, prevUrl
     return imageUrls
