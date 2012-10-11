@@ -14,6 +14,7 @@ class _ComicTester(TestCase):
 
     def setUp(self):
         self.name = self.scraperclass.get_name()
+        self.url = self.scraperclass.starter()
 
     def test_comic(self):
         # Test a scraper. It must be able to traverse backward for
@@ -43,7 +44,7 @@ class _ComicTester(TestCase):
             shutil.rmtree(tmpdir)
 
     def check(self, condition, msg):
-        self.assertTrue(condition, "%s: %s" % (self.name, msg))
+        self.assertTrue(condition, "%s %s %s" % (self.name, self.url, msg))
 
 
 def generate_comic_testers():
