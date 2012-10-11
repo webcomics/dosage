@@ -1,37 +1,39 @@
-.TH MAINLINE 1
+.TH DOSAGE 1
 .SH NAME
-mainline \- command line interface to Dosage
+dosage \- comic strip downloader
 .SH SYNOPSIS
-.B mainline
+.B dosage
 .RI [ options ]
 .I module
 .RI [ module .\|.\|.]
 .SH DESCRIPTION
-.B mainline
-is a command line interface to Dosage. Dosage is a an application designed
-to keep a local \(oqmirror\(cq of specific web comics and other picture\-based
-content, such as \(oqPicture Of The Day\(cq sites, with a variety of options
+.B dosage
+is an application designed to keep a local \(oqmirror\(cq of specific
+web comics and other picture\-based content, such as
+\(oqPicture Of The Day\(cq sites, with a variety of options
 for updating and maintaining collections.
 .SH OPTIONS
 .TP
-.BI \-b " PATH" "\fR,\fP \-\^\-base\--path=" PATH
+.BI \-b " PATH" "\fR,\fP \-\^\-basepath=" PATH
 Specifies a base path to put comic subdirectories. The default is \(oqComics\(cq.
 .TP
-.BI \-\^\-base\-url= PATH
+.BI \-\^\-baseurl= PATH
 Specifies the base URL for output events. The default is a local file URI.
 .TP
-.BR \-c ", " \-\^\-catch-up
-Traverses all available strips until an (identical) existing one is found.
-This can be useful if your collection was previously up to date,
-but you've missed a few days worth of strips. Alternatively you can specify
-.B \-c
-twice for a \(oqfull catchup\(cq, which will not stop until all comics
-have been traversed. Catchups can \(oqresumed\(cq by using the index syntax, see
+.BR \-a ", " \-\^\-all
+Traverses all available strips backwards from the current one.
+This can be useful you want a full collection of a new comic strip,
+or update an existing one where files are missing.
+.
+Catchups can start at a specific image by using the index syntax, see
 the
 .B INDEX SYNTAX
 and
 .B SPECIAL SYNTAX
-sections for more information.
+sections for more information. This is useful when you missed some days 
+and want only to download the missing files. To make this task easy,
+the traversal ends at the first existing image file when starting from
+an index (excluding the index itself).
 .TP
 .BR \-h ", " \-\^\-help
 Output brief help information.
@@ -39,21 +41,16 @@ Output brief help information.
 .BR \-l ", " \-\^\-list
 List available comic modules in multi\-column fashion.
 .TP
-.BR \-\^\-single\-list
+.BR \-\^\-singlelist
 List available comic modules in single-column fashion.
 .TP
-.BI \-m " MODULE" "\fR,\fP \-\^\-module-help=" MODULE
+.BI \-m " MODULE" "\fR,\fP \-\^\-modulehelp=" MODULE
 Output module-specific help for
 .IR MODULE .
 .TP
 .BI \-o " OUTPUT" "\fR,\fP \-\^\-output=" OUTPUT
 .I OUTPUT
 may be any one of the following:
-.PP
-.RS
-.BR "text " \-
-Provides no additional output and is the default value.
-.RE
 .PP
 .RS
 .BR "html " \-
@@ -93,20 +90,17 @@ must be specified. A list of valid modules can be found by passing the
 option. Multiple
 .I module
 arguments can be specified on the command line.
+Module names are case insensitive, and it is sufficient to specify a
+unique substring of the module name.
 .SH INDEX SYNTAX
 One can indicate the start of a list of
 .B comma seperated
 indices using a
 .RB \(oq : "\(cq."
 .PP
-If
-.I \-c
-is specified with index syntax then \(oqresume\(cq mode is activated,
-where a \(oqcatchup\(cq will start at the given index.
-.PP
-Refer to
-.B EXAMPLES
-for samples.
+The index format is documented when using the \fB\-\-modulehelp\fP option.
+An alternative method is to use an existing filename as index, since images
+are always stored in index format.
 .SH OFFENSIVE COMICS
 Some users may find certain comics offensive and wish to disable them.
 Modules listed in
@@ -118,30 +112,44 @@ will be disabled. These files should contain only one module name per line.
 .TP
 .B @
 This expands to mean all the comics currently in your \(oqComics\(cq
-directory.
+directory. All other specified comic module names will be ignored.
 .TP
 .B @@
 This expands to mean all the comics available to Dosage.
 .PP
 .B INDEX SYNTAX
-can be used with
+can not be used with
 .B SPECIAL SYNTAX
-but this is unlikely to be useful.
+.
 .SH EXAMPLES
-Retrieve the latest Mega Tokyo comic:
+Retrieve all Mega Tokyo comics:
 .RS
-.B mainline MegaTokyo
+.B dosage \-a megatokyo
 .RE
 .PP
-Retrieve every strip from every comic that there is a module for:
+Retrieve the current comic of Cyanide and Happiness:
 .RS
-.B mainline \-c @@
+.B dosage cyanideandhappiness
 .RE
 .PP
-Retrieve all Penny Arcade strips from (and including) a given index to
-the beginning regardless of whether they already exist or not:
+Retrieve the current strip of all comics in your \(oqComics\(cq directory:
 .RS
-.B mainline \-c PennyArcade:2004\-07\-22
+.B dosage @
+.RE
+.PP
+Retrieve the current strip of every comic that there is a module for:
+.RS
+.B dosage @@
+.RE
+.PP
+Retrieve the Penny Arcade strip for a given index:
+.RS
+.B dosage pennyarcade:2004\-07\-22
+.RE
+Retrieve Calvin and Hobbes strips from a given index going backwards to
+the beginning until an existing file is found:
+.RS
+.B dosage \-c calvinandhobbes:20120722
 .RE
 .SH ENVIRONMENT
 .IP HTTP_PROXY
@@ -159,11 +167,9 @@ At the time of writing, a
 .B complete
 Dosage collection weighs in at around 3.0GB.
 .SH RETURN VALUE
-The return value is 2 when
+The return value greater than zero when
 .IP \(bu
 a program error occurred.
-.PP
-The return value is 1 when
 .IP \(bu
 comics could not be found or downloaded
 .IP \(bu
@@ -174,12 +180,19 @@ Else the return value is zero.
 See
 .I http://trac.slipgate.za.net/dosage
 for a list of current development tasks and suggestions.
+
 .SH FILES
 .IP "\fB/etc/dosage/disabled\fR"
 Disables comic modules on a global scale.
 .IP "\fB~/.dosage/disabled\fR"
 Disables comic modules on a local scale.
 .SH AUTHORS
-.BR mainline " and " Dosage
-were written by Jonathan Jacobs <korpse@slipgate.za.net> and Tristan Seligmann
-<mithrandi@slipgate.za.net>. This manual page was written by Jonathan Jacobs.
+Jonathan Jacobs <korpse@slipgate.za.net>
+.br
+Tristan Seligmann <mithrandi@slipgate.za.net>
+.br
+Bastian Kleineidam <calvin@users.sourceforge.net>
+.SH COPYRIGHT
+Copyright \(co 2004-2005 Tristan Seligmann and Jonathan Jacobs
+.br
+Copyright \(co 2012 Bastian Kleineidam

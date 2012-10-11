@@ -1,19 +1,19 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML><HEAD><TITLE>Man page of MAINLINE</TITLE>
+<HTML><HEAD><TITLE>Man page of DOSAGE</TITLE>
 </HEAD><BODY>
-<H1>MAINLINE</H1>
+<H1>DOSAGE</H1>
 Section: User Commands  (1)<BR><A HREF="#index">Index</A>
 <A HREF="../index.html">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
 <H2>NAME</H2>
 
-mainline - command line interface to Dosage
+dosage - comic strip downloader
 <A NAME="lbAC">&nbsp;</A>
 <H2>SYNOPSIS</H2>
 
-<B>mainline</B>
+<B>dosage</B>
 
 [<I>options</I>]
 
@@ -24,41 +24,41 @@ mainline - command line interface to Dosage
 <A NAME="lbAD">&nbsp;</A>
 <H2>DESCRIPTION</H2>
 
-<B>mainline</B>
+<B>dosage</B>
 
-is a command line interface to Dosage. Dosage is a an application designed
-to keep a local 'mirror' of specific web comics and other picture-based
-content, such as 'Picture Of The Day' sites, with a variety of options
+is an application designed to keep a local 'mirror' of specific
+web comics and other picture-based content, such as
+'Picture Of The Day' sites, with a variety of options
 for updating and maintaining collections.
 <A NAME="lbAE">&nbsp;</A>
 <H2>OPTIONS</H2>
 
 <DL COMPACT>
-<DT><B>-b</B><I> PATH</I><B></B>, --base--path=<I>PATH</I>
+<DT><B>-b</B><I> PATH</I><B></B>, --basepath=<I>PATH</I>
 
 <DD>
 Specifies a base path to put comic subdirectories. The default is 'Comics'.
-<DT><B>--base-url=</B><I>PATH</I>
+<DT><B>--baseurl=</B><I>PATH</I>
 
 <DD>
 Specifies the base URL for output events. The default is a local file URI.
-<DT><B>-c</B>, <B>--catch-up</B>
+<DT><B>-a</B>, <B>--all</B>
 
 <DD>
-Traverses all available strips until an (identical) existing one is found.
-This can be useful if your collection was previously up to date,
-but you've missed a few days worth of strips. Alternatively you can specify
-<B>-c</B>
-
-twice for a 'full catchup', which will not stop until all comics
-have been traversed. Catchups can 'resumed' by using the index syntax, see
+Traverses all available strips backwards from the current one.
+This can be useful you want a full collection of a new comic strip,
+or update an existing one where files are missing.
+Catchups can start at a specific image by using the index syntax, see
 the
 <B>INDEX SYNTAX</B>
 
 and
 <B>SPECIAL SYNTAX</B>
 
-sections for more information.
+sections for more information. This is useful when you missed some days 
+and want only to download the missing files. To make this task easy,
+the traversal ends at the first existing image file when starting from
+an index (excluding the index itself).
 <DT><B>-h</B>, <B>--help</B>
 
 <DD>
@@ -67,11 +67,11 @@ Output brief help information.
 
 <DD>
 List available comic modules in multi-column fashion.
-<DT><B>--single-list</B>
+<DT><B>--singlelist</B>
 
 <DD>
 List available comic modules in single-column fashion.
-<DT><B>-m</B><I> MODULE</I><B></B>, --module-help=<I>MODULE</I>
+<DT><B>-m</B><I> MODULE</I><B></B>, --modulehelp=<I>MODULE</I>
 
 <DD>
 Output module-specific help for
@@ -84,14 +84,6 @@ Output module-specific help for
 
 may be any one of the following:
 </DL>
-<P>
-
-<DL COMPACT><DT><DD>
-<B>text </B>-
-
-Provides no additional output and is the default value.
-</DL>
-
 <P>
 
 <DL COMPACT><DT><DD>
@@ -149,6 +141,8 @@ option. Multiple
 <I>module</I>
 
 arguments can be specified on the command line.
+Module names are case insensitive, and it is sufficient to specify a
+unique substring of the module name.
 </DL>
 <A NAME="lbAF">&nbsp;</A>
 <H2>INDEX SYNTAX</H2>
@@ -161,17 +155,9 @@ indices using a
 
 <P>
 
-If
-<I>-c</I>
-
-is specified with index syntax then 'resume' mode is activated,
-where a 'catchup' will start at the given index.
-<P>
-
-Refer to
-<B>EXAMPLES</B>
-
-for samples.
+The index format is documented when using the <B>--modulehelp</B> option.
+An alternative method is to use an existing filename as index, since images
+are always stored in index format.
 <A NAME="lbAG">&nbsp;</A>
 <H2>OFFENSIVE COMICS</H2>
 
@@ -191,7 +177,7 @@ will be disabled. These files should contain only one module name per line.
 
 <DD>
 This expands to mean all the comics currently in your 'Comics'
-directory.
+directory. All other specified comic module names will be ignored.
 <DT><B>@@</B>
 
 <DD>
@@ -201,33 +187,54 @@ This expands to mean all the comics available to Dosage.
 
 <B>INDEX SYNTAX</B>
 
-can be used with
+can not be used with
 <B>SPECIAL SYNTAX</B>
 
-but this is unlikely to be useful.
 <A NAME="lbAI">&nbsp;</A>
 <H2>EXAMPLES</H2>
 
-Retrieve the latest Mega Tokyo comic:
+Retrieve all Mega Tokyo comics:
 <DL COMPACT><DT><DD>
-<B>mainline MegaTokyo</B>
+<B>dosage -a megatokyo</B>
 
 </DL>
 
 <P>
 
-Retrieve every strip from every comic that there is a module for:
+Retrieve the current comic of Cyanide and Happiness:
 <DL COMPACT><DT><DD>
-<B>mainline -c @@</B>
+<B>dosage cyanideandhappiness</B>
 
 </DL>
 
 <P>
 
-Retrieve all Penny Arcade strips from (and including) a given index to
-the beginning regardless of whether they already exist or not:
+Retrieve the current strip of all comics in your 'Comics' directory:
 <DL COMPACT><DT><DD>
-<B>mainline -c PennyArcade:2004-07-22</B>
+<B>dosage @</B>
+
+</DL>
+
+<P>
+
+Retrieve the current strip of every comic that there is a module for:
+<DL COMPACT><DT><DD>
+<B>dosage @@</B>
+
+</DL>
+
+<P>
+
+Retrieve the Penny Arcade strip for a given index:
+<DL COMPACT><DT><DD>
+<B>dosage pennyarcade:2004-07-22</B>
+
+</DL>
+
+Retrieve Calvin and Hobbes strips from a given index going backwards to
+the beginning until an existing file is found:
+<DL COMPACT><DT><DD>
+<B>dosage -c calvinandhobbes:20120722</B>
 
 </DL>
 
@@ -260,15 +267,10 @@ Dosage collection weighs in at around 3.0GB.
 <A NAME="lbAL">&nbsp;</A>
 <H2>RETURN VALUE</H2>
 
-The return value is 2 when
+The return value greater than zero when
 <DL COMPACT>
 <DT>&bull;<DD>
 a program error occurred.
-</DL>
-<P>
-
-The return value is 1 when
-<DL COMPACT>
 <DT>&bull;<DD>
 comics could not be found or downloaded
 <DT>&bull;<DD>
@@ -284,6 +286,7 @@ See
 <I><A HREF="http://trac.slipgate.za.net/dosage">http://trac.slipgate.za.net/dosage</A></I>
 
 for a list of current development tasks and suggestions.
+<P>
 <A NAME="lbAN">&nbsp;</A>
 <H2>FILES</H2>
 
@@ -296,10 +299,20 @@ Disables comic modules on a local scale.
 <A NAME="lbAO">&nbsp;</A>
 <H2>AUTHORS</H2>
 
-<B>mainline</B> and <B>Dosage</B>
+Jonathan Jacobs &lt;<A HREF="mailto:korpse@slipgate.za.net">korpse@slipgate.za.net</A>&gt;
+<BR>
 
-were written by Jonathan Jacobs &lt;<A HREF="mailto:korpse@slipgate.za.net">korpse@slipgate.za.net</A>&gt; and Tristan Seligmann
-&lt;<A HREF="mailto:mithrandi@slipgate.za.net">mithrandi@slipgate.za.net</A>&gt;. This manual page was written by Jonathan Jacobs.
+Tristan Seligmann &lt;<A HREF="mailto:mithrandi@slipgate.za.net">mithrandi@slipgate.za.net</A>&gt;
+<BR>
+
+Bastian Kleineidam &lt;<A HREF="mailto:calvin@users.sourceforge.net">calvin@users.sourceforge.net</A>&gt;
+<A NAME="lbAP">&nbsp;</A>
+<H2>COPYRIGHT</H2>
+
+Copyright &#169; 2004-2005 Tristan Seligmann and Jonathan Jacobs
+<BR>
+
+Copyright &#169; 2012 Bastian Kleineidam
 <P>
 
 <HR>
@@ -319,6 +332,7 @@ were written by Jonathan Jacobs &lt;<A HREF="mailto:korpse@slipgate.za.net">korp
 <DT><A HREF="#lbAM">BUGS</A><DD>
 <DT><A HREF="#lbAN">FILES</A><DD>
 <DT><A HREF="#lbAO">AUTHORS</A><DD>
+<DT><A HREF="#lbAP">COPYRIGHT</A><DD>
 </DL>
 <HR>
 This document was created by
