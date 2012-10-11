@@ -49,7 +49,7 @@ class _ComicTester(TestCase):
 def generate_comic_testers():
     """For each comic scraper, create a test class."""
     # Limit number of scraper tests for now
-    max_scrapers = 10
+    max_scrapers = 100
     for scraperclass in islice(scraper.get_scrapers(), 0, max_scrapers):
         name = 'Test'+scraperclass.__name__
         globals()[name] = type(name,

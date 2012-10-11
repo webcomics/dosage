@@ -6,7 +6,7 @@ ARCHIVE:=dosage-$(VERSION).tar.gz
 PY_FILES_DIRS := dosage dosagelib tests *.py
 PY2APPOPTS ?=
 NUMPROCESSORS:=$(shell grep -c processor /proc/cpuinfo)
-MAXFAILEDTESTS:=1
+MAXFAILEDTESTS:=10
 # Pytest options:
 # - stop after MAXFAILEDTESTS failed errors
 # - use multiple processors
