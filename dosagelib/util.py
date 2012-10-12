@@ -42,6 +42,10 @@ def tagre(tag, attribute, value, quote='"', before="", after=""):
     @return: the generated regular expression suitable for re.compile()
     @rtype: string
     """
+    if before:
+        before += "[^>]*"
+    if after:
+        after += "[^>]*"
     attrs = dict(
         tag=case_insensitive_re(tag),
         attribute=case_insensitive_re(attribute),
@@ -50,7 +54,7 @@ def tagre(tag, attribute, value, quote='"', before="", after=""):
         before=before,
         after=after,
     )
-    return r'<\s*%(tag)s\s+(?:[^>]*%(before)s[^>]*\s+)?%(attribute)s\s*=\s*%(quote)s%(value)s%(quote)s[^>]*%(after)s[^>]*>' % attrs
+    return r'<\s*%(tag)s\s+(?:[^>]*%(before)s\s+)?%(attribute)s\s*=\s*%(quote)s%(value)s%(quote)s[^>]*%(after)s>' % attrs
 
 
 def case_insensitive_re(name):
