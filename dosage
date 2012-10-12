@@ -132,27 +132,31 @@ def doList(columnList):
     out.write('Available comic scrapers:')
     scrapers = getScrapers(['@@'])
     if columnList:
-        doColumnList(scrapers)
+        num = doColumnList(scrapers)
     else:
-        doSingleList(scrapers)
-    out.write('%d supported comics.' % len(scrapers))
+        num = doSingleList(scrapers)
+    out.write('%d supported comics.' % num)
     return 0
 
 
 def doSingleList(scrapers):
     """Get list of scraper names, one per line."""
-    print '\n'.join(scraperobj.get_name() for scraperobj in scrapers)
+    for num, scraperobj in enumerate(scrapers):
+        print scraperobj.get_name()
+    return num
 
 
 def doColumnList(scrapers):
     """Get list of scraper names with multiple names per line."""
-    screenWidth = get_columns()
+    screenWidth = get_columns(sys.stdout)
     names = [scraperobj.get_name() for scraperobj in scrapers]
+    num = len(names)
     maxlen = max([len(name) for name in names])
     namesPerLine = int(screenWidth / (maxlen + 1))
     while names:
         print ''.join([name.ljust(maxlen) for name in names[:namesPerLine]])
         del names[:namesPerLine]
+    return num
 
 
 def getScrapers(comics, basepath=None):
