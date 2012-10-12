@@ -101,14 +101,6 @@ class Brink(_BasicScraper):
 
 
 
-class BonoboConspiracy(_BasicScraper):
-    latestUrl = 'http://ansuz.sooke.bc.ca/bonobo-conspiracy/'
-    imageUrl = 'http://ansuz.sooke.bc.ca/bonobo-conspiracy/%s'
-    imageSearch = compile(r'<P.+?<IMG SRC="(.+?)" ALT')
-    prevSearch = compile(r'ansuz.+?/(\?i=.+?)".+?Previous')
-    help = 'Index format: nnn'
-
-
 class BoredAndEvil(_BasicScraper):
     latestUrl = 'http://www.boredandevil.com/'
     imageUrl = 'http://www.boredandevil.com/archive.php?date=%s'
@@ -152,7 +144,7 @@ def blankLabel(name, baseUrl):
         latestUrl=baseUrl,
         imageUrl='/d/%s.shtml',
         imageSearch=compile(tagre("img", "src", r'(/comic[s|/][^"]+)')),
-        prevSearch=compile(tagre("a", "href", r'(/d/\d+\.shtml)')+r"[^>]+/images/nav_02\.gif"),
+        prevSearch=compile(tagre("a", "href", r'[^"]*(/d/\d+\.s?html)')+r"[^>]+/images/(?:nav_02|previous_day)\.gif"),
         #prevSearch=compile(r'(?:"([^"]*(?:/d/[^"\r\n]*)|(?:/strip/.+?))")(?:(?:.{43}starshift_back.gif)|(?:.+?cxn_previous)|(?:.{43}previous)|(?:[^<>]*>[^<>]*<[^<>]*previous)|(?:.*?back_button)|(?:.*?comicnav-previous))'),
         help='Index format: yyyymmdd')
     )
@@ -183,15 +175,6 @@ class BeePower(_BasicScraper):
     imageSearch = compile(r'src="(/comics/.+?)"')
     prevSearch = compile(r'(\d+\.html)"><img[^>]+?src="/images/previous_day.png"')
     help = 'Index format: yyyy/mm/dd'
-
-
-
-class Bellen(_BasicScraper):
-    latestUrl = 'http://boxbrown.com/'
-    imageUrl = 'http://boxbrown.com/?p=%s'
-    imageSearch = compile(r'<img src="(http://boxbrown.com/comics/[^"]+)"')
-    prevSearch = compile(r'<a href="(.+?)"><span class="prev">')
-    help = 'Index format: nnn'
 
 
 

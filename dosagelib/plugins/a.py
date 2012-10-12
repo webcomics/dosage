@@ -148,8 +148,8 @@ class AppleGeeksLite(_BasicScraper):
 class Achewood(_BasicScraper):
     latestUrl = 'http://www.achewood.com/'
     imageUrl = 'http://www.achewood.com/index.php?date=%s'
-    imageSearch = compile(r'<img src="(http://m.assetbar.com/achewood/autaux.+?)"')
-    prevSearch = compile(r'<a href="(index\.php\?date=\d{8})" class="dateNav" title="Previous comic"')
+    imageSearch = compile(tagre("img", "src", r'(/comic\.php\?date=\d+)'))
+    prevSearch = compile(tagre("a", "href", r'(index\.php\?date=\d+)', after="Previous"))
     help = 'Index format: mmddyyyy'
     namer = regexNamer(compile(r'date%3D(\d{8})'))
 

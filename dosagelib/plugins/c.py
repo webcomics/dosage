@@ -238,26 +238,32 @@ class CatAndGirl(_BasicScraper):
 
 
 def comicsDotCom(name, section):
-    baseUrl = 'http://www.comics.com/%s/%s/archive/' % (section, name)
+    latestUrl = 'http://www.gocomics.com/%s' % name
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
-        htmlname = pageUrl.split('/')[-1]
-        filename = htmlname.split('.')[0]
-        return filename
+        prefix, year, month, day = pageUrl.split('/', 3)
+        return "%s_%s%s%s.gif" % (name, year, month, day)
 
-    return type('ComicsDotCom_%s' % name,
+    return type('GoComicsDotCom_%s' % name,
         (_BasicScraper,),
         dict(
-        name='ComicsDotCom/' + name,
-        starter=indirectStarter(baseUrl, compile(r'<A HREF="(/[\w/]+?/archive/\w+?-\d{8}\.html)">(?:<IMG SRC="/[\w/]+?/images/arrow_right.gif|(?:<font[^>]*?>)?Next Day)')),
-        imageUrl=baseUrl + 'name-%s.html',
-        imageSearch=compile(r'SRC="(/[\w/]+?/archive/images/\w+?\d+\..+?)"'),
-        prevSearch=compile(r'<A HREF="(/[\w/]+?/archive/\w+?-\d{8}\.html)">(?:<IMG SRC="/[\w/]+?/images/arrow_left.gif|(?:<font[^>]*?>)?Previous Day)'),
-        help='Index format: yyyymmdd',
+        name='GoComicsDotCom/' + name,
+        imageUrl=latestUrl + '/%s',
+        imageSearch=compile(tagre("img", "src", r'(http://assets\.amuniversal\.com/[0-9a-f]+)')),
+        prevSearch=compile(tagre("a", "href", "(/%s/\d+/\d+/\d+)")+"Previous"),
+        help='Index format: yyyy/mm/dd',
         namer=namer)
     )
 
+# http://www.gocomics.com/features
+# XXX
+
+# http://www.gocomics.com/explore/editorial_list
+# XXX
+
+# http://www.gocomics.com/explore/sherpa_list
+# XXX
 
 acaseinpoint = comicsDotCom('acaseinpoint', 'comics')
 agnes = comicsDotCom('agnes', 'creators')
