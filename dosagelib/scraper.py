@@ -140,9 +140,9 @@ def get_scraper(comic):
         return candidates[0]
     elif candidates:
         comics = ", ".join(x.get_name() for x in candidates)
-        raise ValueError('Multiple comics %s found.' % comics)
+        raise ValueError('Multiple comics found: %s' % comics)
     else:
-        raise ValueError('Comic %r not found.' % comic)
+        raise ValueError('Comic %r not found' % comic)
 
 
 _scrapers = None
