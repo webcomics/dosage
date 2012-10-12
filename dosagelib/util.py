@@ -23,7 +23,7 @@ has_curses = has_module("curses")
 
 MAX_FILESIZE = 1024*1024*1 # 1MB
 
-def tagre(tag, attribute, value, quote='"'):
+def tagre(tag, attribute, value, quote='"', before="", after=""):
     """Return a regular expression matching the given HTML tag, attribute
     and value. It matches the tag and attribute names case insensitive,
     and skips arbitrary whitespace and leading HTML attributes. The "<>" at
@@ -36,6 +36,9 @@ def tagre(tag, attribute, value, quote='"'):
     @ptype value: string
     @param quote: the attribute quote (default ")
     @ptype quote: string
+    @param after: match after attribute value but before end
+    @ptype after: string
+
     @return: the generated regular expression suitable for re.compile()
     @rtype: string
     """
@@ -44,8 +47,10 @@ def tagre(tag, attribute, value, quote='"'):
         attribute=case_insensitive_re(attribute),
         value=value,
         quote=quote,
+        before=before,
+        after=after,
     )
-    return r'<\s*%(tag)s\s+(?:[^>]*\s+)?%(attribute)s\s*=\s*%(quote)s%(value)s%(quote)s[^>]*>' % attrs
+    return r'<\s*%(tag)s\s+(?:[^>]*%(before)s[^>]*\s+)?%(attribute)s\s*=\s*%(quote)s%(value)s%(quote)s[^>]*%(after)s[^>]*>' % attrs
 
 
 def case_insensitive_re(name):
