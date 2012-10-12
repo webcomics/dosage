@@ -8,7 +8,7 @@ import time
 
 from .output import out
 from .util import urlopen, saneDataSize, normaliseURL
-from .events import handler
+from .events import getHandler
 
 class FetchComicError(IOError):
     """Exception for comic fetching errors."""
@@ -111,7 +111,7 @@ class ComicImage(object):
                 speed = '???'
             attrs = dict(fn=fn, bytes=bytes, speed=speed)
             out.write('Saved "%(fn)s" (%(bytes)s bytes, %(speed)s/sec).' % attrs, 1)
-            handler.comicDownloaded(self.name, fn)
+            getHandler().comicDownloaded(self.name, fn)
         finally:
             self.urlobj.close()
 

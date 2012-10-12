@@ -86,8 +86,9 @@ def displayHelp(comics, basepath):
 def getComics(options, comics):
     """Retrieve given comics."""
     errors = 0
-    events.installHandler(options.output, options.basepath, options.baseurl)
-    events.handler.start()
+    if options.output:
+        events.installHandler(options.output, options.basepath, options.baseurl)
+    events.getHandler().start()
     for scraperobj in getScrapers(comics, options.basepath):
         out.context = scraperobj.get_name()
         if options.all:
@@ -104,7 +105,7 @@ def getComics(options, comics):
                 out.write("Stop retrieval because image file already exists")
                 break
             first = False
-    events.handler.end()
+    events.getHandler().end()
     return errors
 
 

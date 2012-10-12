@@ -41,9 +41,6 @@ class EventHandler(object):
         """Emit an end event. Should be overridden in subclass."""
         pass
 
-class TextEventHandler(EventHandler):
-    """Output nothing. XXX why?"""
-    pass
 
 class RSSEventHandler(EventHandler):
     """Output in RSS format."""
@@ -164,7 +161,6 @@ class HtmlEventHandler(EventHandler):
 
 
 handlers = {
-    'text': TextEventHandler,
     'html': HtmlEventHandler,
     'rss': RSSEventHandler,
 }
@@ -173,13 +169,14 @@ def getHandlers():
     """Get sorted handler names."""
     return sorted(handlers.keys())
 
-def installHandler(name=None, basepath=None, baseurl=None):
+_handler = EventHandler(".", None)
+
+def installHandler(name, basepath=None, baseurl=None):
     """Install a global handler with given name."""
-    global handler
-    if name is None:
-        name = 'text'
+    global _handler
     if basepath is None:
         basepath = '.'
-    handler = handlers[name](basepath, baseurl)
+    _handler = handlers[name](basepath, baseurl)
 
-installHandler()
+def getHandler():
+    return _handler
