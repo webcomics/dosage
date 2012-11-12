@@ -128,14 +128,6 @@ class ButternutSquash(_BasicScraper):
 
 
 
-class Bhag(_BasicScraper):
-    latestUrl = 'http://bhag.sackofjustice.com/'
-    imageUrl = 'http://bhag.sackofjustice.com/daily.php?date='
-    imageSearch = compile(r'/(comics/.+?)">')
-    prevSearch = compile(r'first.+?/(daily.php\?date=.+?)".+?previous')
-    help = 'Index format: yymmdd'
-
-
 def blankLabel(name, baseUrl):
     return type('BlankLabel_%s' % name,
         (_BasicScraper,),

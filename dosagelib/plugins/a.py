@@ -248,15 +248,6 @@ class AlienShores(_BasicScraper):
 
 
 
-class AllKindsOfBees(_BasicScraper):
-    latestUrl = 'http://www.allkindsofbees.com/'
-    imageUrl = 'http://www.allkindsofbees.com/?p=%s'
-    imageSearch = compile(r'<img src="(http://www.allkindsofbees.com/comics/.+?)"')
-    prevSearch = compile(r'<div class="nav-previous"><a href="(http://www.allkindsofbees.com/.+?)">')
-    help = 'Index format: nnn'
-
-
-
 class AllTheGrowingThings(_BasicScraper):
     latestUrl = 'http://typodmary.com/growingthings/'
     imageUrl = 'http://typodmary.com/growingthings/%s/'
@@ -268,10 +259,10 @@ class AllTheGrowingThings(_BasicScraper):
 
 class Amya(_BasicScraper):
     latestUrl = 'http://www.amyachronicles.com/'
-    imageUrl = 'http://www.amyachronicles.com/archives/%s'
-    imageSearch = compile(r'<img src="(http://www.amyachronicles.com/comics/.+?)"')
-    prevSearch = compile(r'<div class="nav-previous"><a href="(http://www.amyachronicles.com/archives/.+?)"')
-    help = 'Index format: nnn'
+    imageUrl = 'http://www.amyachronicles.com/comics/%s.jpg'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.amyachronicles\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.amyachronicles\.com/archives/\d+)', after="Previous"))
+    help = 'Index format: yyyy-mm-dd'
 
 
 

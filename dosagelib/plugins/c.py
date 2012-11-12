@@ -50,10 +50,10 @@ class CaribbeanBlue(_BasicScraper):
 
 class Catena(_BasicScraper):
     latestUrl = 'http://catenamanor.com/'
-    imageUrl = 'http://catenamanor.com/index.php?comic=%s'
-    imageSearch = compile(r'(comics/catena/.+?)"')
-    prevSearch = compile(r'First</a>.+?"(.+?)".+?Previous')
-    help = 'Index format: n (unpadded)'
+    imageUrl = 'http://catenamanor.com/%s.gif'
+    imageSearch = compile(tagre("img", "src", r'(http://catenamanor\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'[^"]+', after='rel="prev"'))
+    help = 'Index format: yyyy-mm-dd-<name>'
 
 
 class Catharsis(_BasicScraper):
@@ -197,15 +197,16 @@ class Curvy(_BasicScraper):
 
 
 def cloneManga(name, shortName, lastStrip=None):
-    baseUrl = 'http://manga.clone-army.org/%s.php' % (shortName,)
+    url = 'http://manga.clone-army.org'
+    baseUrl = '%s/%s.php' % (url, shortName)
     imageUrl = baseUrl + '?page=%s'
     if lastStrip is None:
-        starter = bounceStarter(baseUrl, compile(r'<a href="([^"]+)"><img src="next\.gif"'))
+        starter = bounceStarter(baseUrl, compile(tagre("a", "href", r'([^"]+)')+tagre("img", "src", r"next\.gif")))
     else:
-        starter = constStarter(imageUrl % (lastStrip,))
+        starter = constStarter(imageUrl % lastStrip)
 
     def namer(self, imageUrl, pageUrl):
-        return '%03d' % (int(getQueryParams(pageUrl)['page'][0]),)
+        return '%03d' % int(getQueryParams(pageUrl)['page'][0])
 
     return type('CloneManga_%s' % name,
         (_BasicScraper,),
@@ -213,8 +214,8 @@ def cloneManga(name, shortName, lastStrip=None):
             name='CloneManga/' + name,
             starter=starter,
             imageUrl=imageUrl,
-            imageSearch=compile(r'<img src="(http://manga\.clone-army\.org/[^"]+)"'),
-            prevSearch=compile(r'<a href="([^"]+)"><img src="previous\.gif"'),
+            imageSearch=compile(tagre("img", "src", r'((?:%s)?/%s/[^"]+)' % (url, shortName), after="center")),
+            prevSearch=compile(tagre("a", "href", r'([^"]+)')+tagre("img", "src", r"previous\.gif")),
             help='Index format: n',
             namer=namer)
     )
