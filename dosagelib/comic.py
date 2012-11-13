@@ -17,10 +17,10 @@ class FetchComicError(IOError):
 class ComicStrip(object):
     """A list of comic image URLs."""
 
-    def __init__(self, name, parentUrl, imageUrls, namer):
+    def __init__(self, name, stripUrl, imageUrls, namer):
         """Store the image URL list."""
         self.name = name
-        self.parentUrl = parentUrl
+        self.stripUrl = stripUrl
         self.imageUrls = imageUrls
         self.namer = namer
 
@@ -31,10 +31,10 @@ class ComicStrip(object):
 
     def getDownloader(self, url):
         """Get an image downloader."""
-        filename = self.namer(url, self.parentUrl)
+        filename = self.namer(url, self.stripUrl)
         if filename is None:
             filename = url.rsplit('/', 1)[1]
-        return ComicImage(self.name, url, self.parentUrl, filename)
+        return ComicImage(self.name, url, self.stripUrl, filename)
 
 
 class ComicImage(object):

@@ -3,6 +3,7 @@
 # Copyright (C) 2012 Bastian Kleineidam
 import tempfile
 import shutil
+import re
 from itertools import islice
 from unittest import TestCase
 from dosagelib import scraper
@@ -18,7 +19,7 @@ class _ComicTester(TestCase):
 
     def test_comic(self):
         # Test a scraper. It must be able to traverse backward for
-        # at least 5 pages from the start, and find strip images
+        # at least 5 strips from the start, and find strip images
         # on at least 4 pages.
         scraperobj = self.scraperclass()
         num = empty = 0
@@ -27,7 +28,12 @@ class _ComicTester(TestCase):
             for image in strip.getImages():
                 images += 1
                 self.save(image)
-            if not images:
+            if images:
+                # test that the stripUrl regex matches the retrieved strip URL
+                urlmatch = re.escape(self.scraperclass.stripUrl).replace("%s", r".+")
+                mo = re.compile(urlmatch).match(strip.stripUrl)
+                self.check(mo is not None, 'strip URL %r does not match %r' % (strip.stripUrl, self.scraperclass.stripUrl))
+            else:
                 empty += 1
             num += 1
         self.check(num >= 4, 'traversal failed after %d strips.' % num)

@@ -19,7 +19,9 @@ def regexNamer(regex):
     """Get name from regular expression."""
     @staticmethod
     def _namer(imageUrl, pageUrl):
-        return regex.search(imageUrl).group(1)
+        mo = regex.search(imageUrl)
+        if mo:
+            return mo.group(1)
     return _namer
 
 

@@ -73,7 +73,7 @@ class Alice(_BasicScraper):
     latestUrl = 'http://alice.alicecomics.com/'
     stripUrl = 'http://alice.alicecomics.com/wp-content/webcomic/alicecomics/%s.jpg'
     imageSearch = compile(tagre("img", "src", r'(http://alice\.alicecomics\.com/wp-content/webcomic/alicecomics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://alice.alicecomics.com/archive/[^!]+)', after="previous"))
+    prevSearch = compile(tagre("a", "href", r'(http://alice.alicecomics.com/archive/[^"]+)', after="previous"))
     help = 'Index format: yyyy-mm-dd'
 
 

@@ -52,7 +52,7 @@ class Catena(_BasicScraper):
     latestUrl = 'http://catenamanor.com/'
     stripUrl = 'http://catenamanor.com/%s.gif'
     imageSearch = compile(tagre("img", "src", r'(http://catenamanor\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'[^"]+', after='rel="prev"'))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)', after='rel="prev"'))
     help = 'Index format: yyyy-mm-dd-<name>'
 
 
@@ -127,15 +127,6 @@ class Comedity(_BasicScraper):
     help = 'Index format: n (no padding)'
 
 
-class Comet7(_BasicScraper):
-    latestUrl = 'http://www.comet7.com/'
-    imageUrl = 'http://www.comet7.com/archive_page.php?id=%s'
-    imageSearch = compile(r'"(.*?/strips/.*?)"')
-    prevSearch = compile(r'"(.*?)".*?previous_stripf')
-    help = 'Index format: n (unpadded)'
-
-
-
 class Commissioned(_BasicScraper):
     latestUrl = 'http://www.commissionedcomic.com/'
     stripUrl = 'http://www.commissionedcomic.com/index.php?strip=%s'
@@ -148,8 +139,8 @@ class Commissioned(_BasicScraper):
 class CoolCatStudio(_BasicScraper):
     latestUrl = 'http://www.coolcatstudio.com/'
     stripUrl = 'http://www.coolcatstudio.com/index.php?p=%s'
-    imageSearch = compile(r'(/comics/.+?)"')
-    prevSearch = compile(r"href='(.+?)'>PREV")
+    imageSearch = compile(tagre("img", "src", r'(http://www.coolcatstudio.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.coolcatstudio\.com/strips-cat/[^"]+)', before="cniprevt"))
     help = 'Index format: n'
 
 
@@ -214,7 +205,7 @@ def cloneManga(name, shortName, lastStrip=None):
             name='CloneManga/' + name,
             starter=starter,
             stripUrl=stripUrl,
-            imageSearch=compile(tagre("img", "src", r'((?:%s)?/%s/[^"]+)' % (url, shortName), after="center")),
+            imageSearch=compile(tagre("img", "src", r'((?:%s/)?%s/[^"]+)' % (url, shortName), after="center")),
             prevSearch=compile(tagre("a", "href", r'([^"]+)')+tagre("img", "src", r"previous\.gif")),
             help='Index format: n',
             namer=namer)

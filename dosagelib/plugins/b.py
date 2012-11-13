@@ -10,7 +10,7 @@ class BadlyDrawnKitties(_BasicScraper):
     latestUrl = 'http://www.badlydrawnkitties.com/'
     stripUrl = 'http://www.badlydrawnkitties.com/new/%s.html'
     imageSearch = compile(r'<img src="(/new/.+?)">')
-    prevSearch = compile(r'"(/new/.+?)".+?previous.gif')
+    prevSearch = compile(tagre("a", "href", r'(/[^"]+)') + tagre("img", "src", r'/images/previous\.gif'))
     help = 'Index format: n (unpadded)'
 
 
@@ -123,7 +123,7 @@ class ButternutSquash(_BasicScraper):
     latestUrl = 'http://www.butternutsquash.net/'
     stripUrl = 'http://www.butternutsquash.net/v3/%s'
     imageSearch = compile(tagre("img", "src", r'(http://www\.butternutsquash\.net/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.butternutsquash\.net/[^!]+)', after="prev"))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.butternutsquash\.net/[^"]+)', after="prev"))
     help = 'Index format: yyyy/mm/dd/strip-name-author-name'
 
 
@@ -245,8 +245,8 @@ class BloodBound(_BasicScraper):
 class BookOfBiff(_BasicScraper):
     latestUrl = 'http://www.thebookofbiff.com/'
     stripUrl = 'http://www.thebookofbiff.com/%s'
-    imageSearch = compile(r'<img src="(http://www.thebookofbiff.com/comics/.+?)"')
-    prevSearch = compile(r'<a href="(http://www.thebookofbiff.com/.+?)">&#9668; Previous</a>')
+    imageSearch = compile(tagre("img", "src", r'([^"]+/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)', after="Previous"))
     help = 'Index format: yyyy/mm/dd/stripnum-strip-name'
 
 
