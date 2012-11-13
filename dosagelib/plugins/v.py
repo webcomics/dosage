@@ -12,7 +12,7 @@ class _VGCats(_BasicScraper):
     help = 'Index format: n (unpadded)'
 
     @property
-    def imageUrl(self):
+    def stripUrl(self):
         return self.latestUrl + '?strip_id=%s'
 
 
@@ -31,7 +31,7 @@ class Adventure(_VGCats):
 
 class ViiviJaWagner(_BasicScraper):
     latestUrl = 'http://www.hs.fi/viivijawagner/'
-    imageUrl = 'http://www.hs.fi/viivijawagner/%s'
+    stripUrl = 'http://www.hs.fi/viivijawagner/%s'
     imageSearch = compile(r'<img id="strip\d+"\s+src="([^"]+)"', IGNORECASE)
     prevSearch = compile(r'<a href="(.+?)"[^>]+?>\nEdellinen&nbsp;\n<img src="http://www.hs.fi/static/hs/img/viivitaakse.gif"', MULTILINE | IGNORECASE)
     help = 'Index format: shrugs!'

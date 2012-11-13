@@ -9,7 +9,7 @@ from ..helpers import indirectStarter
 
 class FalconTwin(_BasicScraper):
     latestUrl = 'http://www.falcontwin.com/'
-    imageUrl = 'http://www.falcontwin.com/index.html?strip=%s'
+    stripUrl = 'http://www.falcontwin.com/index.html?strip=%s'
     imageSearch = compile(r'"(strips/.+?)"')
     prevSearch = compile(r'"prev"><a href="(index.+?)"')
     help = 'Index format: nnn'
@@ -17,14 +17,14 @@ class FalconTwin(_BasicScraper):
 
 class FauxPas(_BasicScraper):
     latestUrl = 'http://www.ozfoxes.net/cgi/pl-fp1.cgi'
-    imageUrl = 'http://www.ozfoxes.net/cgi/pl-fp1.cgi?%s'
+    stripUrl = 'http://www.ozfoxes.net/cgi/pl-fp1.cgi?%s'
     imageSearch = compile(r'<img .*src="(.*fp/fp.*(png|jpg|gif))"')
     prevSearch = compile(r'<a href="(pl-fp1\.cgi\?\d+)">Previous Strip')
     help = 'Index format: nnn'
 
 
 class FeyWinds(_BasicScraper):
-    imageUrl = 'http://kitsune.rydia.net/comic/page.php?id=%s'
+    stripUrl = 'http://kitsune.rydia.net/comic/page.php?id=%s'
     imageSearch = compile(r"(../comic/pages//.+?)'")
     prevSearch = compile(r"(page.php\?id=.+?)'.+?navprevious.png")
     help = 'Index format: n (unpadded)'
@@ -35,7 +35,7 @@ class FeyWinds(_BasicScraper):
 
 class FightCastOrEvade(_BasicScraper):
     latestUrl = 'http://www.fightcastorevade.net/'
-    imageUrl = 'http://www.fightcastorevade.net/d/%s'
+    stripUrl = 'http://www.fightcastorevade.net/d/%s'
     imageSearch = compile(r'<img src="(http://www.fightcastorevade.net/comics/.+?)"')
     prevSearch = compile(r'"(.+?/d/.+?)".+?previous')
     help = 'Index format: yyyymmdd.html'
@@ -44,7 +44,7 @@ class FightCastOrEvade(_BasicScraper):
 
 class FilibusterCartoons(_BasicScraper):
     latestUrl = 'http://www.filibustercartoons.com/'
-    imageUrl = 'http://www.filibustercartoons.com/index.php/%s'
+    stripUrl = 'http://www.filibustercartoons.com/index.php/%s'
     imageSearch = compile(r'<img src="(http://www.filibustercartoons.com/comics/.+?)"')
     prevSearch = compile(r'<a href="(.+?)"><img src=\'(.+?/arrow-left.gif)\'')
     help = 'Index format: yyyy/mm/dd/name'
@@ -53,7 +53,7 @@ class FilibusterCartoons(_BasicScraper):
 
 class FlakyPastry(_BasicScraper):
     latestUrl = 'http://flakypastry.runningwithpencils.com/index.php'
-    imageUrl = 'http://flakypastry.runningwithpencils.com/comic.php\?strip_id=%s'
+    stripUrl = 'http://flakypastry.runningwithpencils.com/comic.php\?strip_id=%s'
     imageSearch = compile(r'<img src="(comics/.+?)"')
     prevSearch = compile(r'<a href="(.+?)".+?btn_back')
     help = 'Index format: nnnn'
@@ -61,7 +61,7 @@ class FlakyPastry(_BasicScraper):
 
 class Flipside(_BasicScraper):
     latestUrl = 'http://www.flipsidecomics.com/comic.php'
-    imageUrl = 'http://www.flipsidecomics.com/comic.php?i=%s'
+    stripUrl = 'http://www.flipsidecomics.com/comic.php?i=%s'
     imageSearch = compile(r'<IMG SRC="(comic/.+?)"')
     prevSearch = compile(r'<A HREF="(comic.php\?i=\d+?)">&lt')
     help = 'Index format: nnnn'
@@ -69,7 +69,7 @@ class Flipside(_BasicScraper):
 
 class Footloose(_BasicScraper):
     latestUrl = 'http://footloosecomic.com/footloose/today.php'
-    imageUrl = 'http://footloosecomic.com/footloose/pages.php?page=%s'
+    stripUrl = 'http://footloosecomic.com/footloose/pages.php?page=%s'
     imageSearch = compile(r'<img src="/footloose/(.+?)"')
     prevSearch = compile(r'(?:first.+?[^>]).+?(/footloose/.+?)".+?(?:prev)')
 #    prevSearch = compile(r'(?:first.+?[^>]).+?(/footloose/.+?html).+?(?:prev|Prev)')
@@ -79,7 +79,7 @@ class Footloose(_BasicScraper):
 
 class FragileGravity(_BasicScraper):
     latestUrl = 'http://www.fragilegravity.com/'
-    imageUrl = 'http://www.fragilegravity.com/core.php?archive=%s'
+    stripUrl = 'http://www.fragilegravity.com/core.php?archive=%s'
     imageSearch = compile(r'<IMG SRC="(strips/.+?)"')
     prevSearch = compile(r'<A HREF="(.+?)"\nonMouseover="window.status=\'Previous Strip', MULTILINE | IGNORECASE)
     help = 'Index format: yyyymmdd'
@@ -88,7 +88,7 @@ class FragileGravity(_BasicScraper):
 
 class Freefall(_BasicScraper):
     latestUrl = 'http://freefall.purrsia.com/default.htm'
-    imageUrl = 'http://freefall.purrsia.com/ff%s/fc%s.htm'
+    stripUrl = 'http://freefall.purrsia.com/ff%s/fc%s.htm'
     imageSearch = compile(r'<img src="(/ff\d+/.+?.\w{3,4})"')
     prevSearch = compile(r'<A HREF="(/ff\d+/.+?.htm)">Previous</A>')
     help = 'Index format: nnnn/nnnnn'
@@ -96,7 +96,7 @@ class Freefall(_BasicScraper):
 
 
 class FantasyRealms(_BasicScraper):
-    imageUrl = 'http://www.fantasyrealmsonline.com/manga/%s.php'
+    stripUrl = 'http://www.fantasyrealmsonline.com/manga/%s.php'
     imageSearch = compile(r'<img src="(\d{1,4}.\w{3,4})" width="540"', IGNORECASE)
     prevSearch = compile(r'<a href="(.+?)"><img src="../images/nav-back.gif"', IGNORECASE)
     help = 'Index format: nnn'
@@ -107,14 +107,14 @@ class FantasyRealms(_BasicScraper):
 
 class FullFrontalNerdity(_BasicScraper):
     latestUrl = 'http://nodwick.humor.gamespy.com/ffn/index.php'
-    imageUrl = None
+    stripUrl = None
     imageSearch = compile(r'<img src="(http://nodwick.humor.gamespy.com/ffn/strips/[^"]*)"', IGNORECASE)
     prevSearch = compile(r'<a href="(index.php\?date=[0-9-]*)"><img src="back.jpg"', IGNORECASE)
 
 
 class FunInJammies(_BasicScraper):
     latestUrl = 'http://www.funinjammies.com/'
-    imageUrl = 'http://www.funinjammies.com/comic.php?issue=%s'
+    stripUrl = 'http://www.funinjammies.com/comic.php?issue=%s'
     imageSearch = compile(r'(/comics/.+?)"')
     prevSearch = compile(r'(/comic.php.+?)" id.+?prev')
     help = 'Index format: n (unpadded)'
@@ -122,7 +122,7 @@ class FunInJammies(_BasicScraper):
 
 
 class Fallen(_BasicScraper):
-    imageUrl = 'http://www.fallencomic.com/pages/part%s/%s-p%s.htm'
+    stripUrl = 'http://www.fallencomic.com/pages/part%s/%s-p%s.htm'
     imageSearch = compile(r'<IMG SRC="(page/.+?)"', IGNORECASE)
     prevSearch = compile(r'<A HREF="(.+?)"><FONT FACE="Courier">Back', IGNORECASE)
     help = 'Index format: nn-m (comicNumber-partNumber)'
@@ -137,13 +137,13 @@ class Fallen(_BasicScraper):
 
     def setStrip(self, index):
         index, part = index.split('-')
-        self.currentUrl = self.imageUrl % (part, index, part)
+        self.currentUrl = self.stripUrl % (part, index, part)
 
 
 
 class FoxTails(_BasicScraper):
     latestUrl = 'http://www.magickitsune.com/strips/current.html'
-    imageUrl = 'http://www.magickitsune.com/strips/%s'
+    stripUrl = 'http://www.magickitsune.com/strips/%s'
     imageSearch = compile(r'<img src=(img/.+?)[ |>]', IGNORECASE)
     prevSearch = compile(r'(?<=first.gif)*(?<=</td>)*<a.*href=\'(.+?)\'.+?<img.+?src=\'../img/prev.gif\'>', IGNORECASE)
     help = 'Index format: yyyymmdd'

@@ -26,8 +26,8 @@ class _BasicScraper(object):
 
     @type latestUrl: C{string}
     @cvar latestUrl: The URL for the latest comic strip.
-    @type imageUrl: C{string}
-    @cvar imageUrl: A string that is interpolated with the strip index
+    @type stripUrl: C{string}
+    @cvar stripUrl: A string that is interpolated with the strip index
         to yield the URL for a particular strip.
     @type imageSearch: C{regex}
     @cvar imageSearch: A compiled regex that will locate the strip image URL
@@ -51,7 +51,7 @@ class _BasicScraper(object):
         out.write(msg+"...")
         if self.indexes:
             for index in self.indexes:
-                url = self.imageUrl % index
+                url = self.stripUrl % index
                 yield self.getStrip(url)
         else:
             yield self.getStrip(self.getLatestUrl())
@@ -73,7 +73,7 @@ class _BasicScraper(object):
         out.write(msg+"...")
         if self.indexes:
             for index in self.indexes:
-                url = self.imageUrl % index
+                url = self.stripUrl % index
                 for strip in self.getAllStripsFor(url):
                     yield strip
         else:
@@ -93,7 +93,7 @@ class _BasicScraper(object):
 
     def setStrip(self, index):
         """Set current comic strip URL."""
-        self.currentUrl = self.imageUrl % index
+        self.currentUrl = self.stripUrl % index
 
     def getHelp(self):
         """Return help text for this scraper."""

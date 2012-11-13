@@ -9,14 +9,14 @@ from ..util import getQueryParams
 
 class UnderPower(_BasicScraper):
     latestUrl = 'http://underpower.non-essential.com/'
-    imageUrl = 'http://underpower.non-essential.com/index.php?comic=%s'
+    stripUrl = 'http://underpower.non-essential.com/index.php?comic=%s'
     imageSearch = compile(r'<img src="(comics/\d{8}\..+?)"')
     prevSearch = compile(r'<a href="(/index.php\?comic=\d{8})"><img src="images/previous-comic\.gif"')
     help = 'Index format: yyyymmdd'
 
 
 class Undertow(_BasicScraper):
-    imageUrl = 'http://undertow.dreamshards.org/%s'
+    stripUrl = 'http://undertow.dreamshards.org/%s'
     imageSearch = compile(r'<img src="(.+?)"')
     prevSearch = compile(r'href="(.+?)".+?teynpoint')
     help = 'Index format: good luck !'
@@ -26,7 +26,7 @@ class Undertow(_BasicScraper):
 
 class UnicornJelly(_BasicScraper):
     latestUrl = 'http://unicornjelly.com/uni666.html'
-    imageUrl = 'http://unicornjelly.com/uni%s.html'
+    stripUrl = 'http://unicornjelly.com/uni%s.html'
     imageSearch = compile(r'</TABLE>(?:<FONT COLOR="BLACK">)?<IMG SRC="(images/[^"]+)" WIDTH=')
     prevSearch = compile(r'<A HREF="(uni\d{3}[bcs]?\.html)">(<FONT COLOR="BLACK">)?<IMG SRC="images/back00\.gif"')
     help = 'Index format: nnn'
@@ -34,7 +34,7 @@ class UnicornJelly(_BasicScraper):
 
 class UserFriendly(_BasicScraper):
     starter = bounceStarter('http://ars.userfriendly.org/cartoons/?mode=classic', compile(r'<area shape="rect" href="(/cartoons/\?id=\d{8}&mode=classic)" coords="[\d, ]+?" alt="">'))
-    imageUrl = 'http://ars.userfriendly.org/cartoons/?id=%s&mode=classic'
+    stripUrl = 'http://ars.userfriendly.org/cartoons/?id=%s&mode=classic'
     imageSearch = compile(r'<img border="0" src="(http://www.userfriendly.org/cartoons/archives/\d{2}\w{3}/.+?\.gif)"')
     prevSearch = compile(r'<area shape="rect" href="(/cartoons/\?id=\d{8}&mode=classic)" coords="[\d, ]+?" alt="Previous Cartoon">')
     help = 'Index format: yyyymmdd'
@@ -46,14 +46,14 @@ class UserFriendly(_BasicScraper):
 
 class UndeadFriend(_BasicScraper):
     latestUrl = 'http://www.undeadfriend.com/'
-    imageUrl = 'http://www.undeadfriend.com/d/%s.html'
+    stripUrl = 'http://www.undeadfriend.com/d/%s.html'
     imageSearch = compile(r'src="(http://www\.undeadfriend\.com/comics/.+?)"', IGNORECASE)
     prevSearch = compile(r'<a.+?href="(http://www\.undeadfriend\.com/d/\d+?\.html)"><img border="0" name="previous_day" alt="Previous comic" src="http://www\.undeadfriend\.com/images/previous_day\.jpg', IGNORECASE)
     help = 'Index format: yyyymmdd'
 
 
 class UnspeakableVault(_BasicScraper):
-    imageUrl = 'http://www.macguff.fr/goomi/unspeakable/WEBIMAGES/CARTOON/vault%s.html'
+    stripUrl = 'http://www.macguff.fr/goomi/unspeakable/WEBIMAGES/CARTOON/vault%s.html'
     imageSearch = compile(r'(WEBIMAGES/CARTOON/.+?)"')
     prevSearch = compile(r'PREVIOUS.+?" href="(.+?)"')
     help = 'Index format: nn or nnn'

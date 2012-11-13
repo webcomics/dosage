@@ -8,7 +8,7 @@ from ..helpers import indirectStarter
 
 class LasLindas(_BasicScraper):
     latestUrl = 'http://www.katbox.net/laslindas/'
-    imageUrl = 'http://www.katbox.net/laslindas/index.php?strip_id=%s'
+    stripUrl = 'http://www.katbox.net/laslindas/index.php?strip_id=%s'
     imageSearch = compile(r'"(istrip_files/strips/.+?)"')
     prevSearch = compile(r'<a href="(.+?)"><[^>]+?alt="Back"')
     help = 'Index format: n (unpadded)'
@@ -17,7 +17,7 @@ class LasLindas(_BasicScraper):
 
 class LastBlood(_BasicScraper):
     latestUrl = 'http://www.lastblood.net/main/'
-    imageUrl = 'http://www.lastblood.net/main/%s'
+    stripUrl = 'http://www.lastblood.net/main/%s'
     imageSearch = compile(r'(/comicfolder/.+?)" alt')
     prevSearch = compile(r'Previous Comic:</small><br />&laquo; <a href="(.+?)">')
     help = 'Index format: yyyy/mm/dd/(page number and name)'
@@ -26,7 +26,7 @@ class LastBlood(_BasicScraper):
 
 class LesbianPiratesFromOuterSpace(_BasicScraper):
     latestUrl = 'http://rosalarian.com/lesbianpirates/'
-    imageUrl = 'http://rosalarian.com/lesbianpirates/?p=%s'
+    stripUrl = 'http://rosalarian.com/lesbianpirates/?p=%s'
     imageSearch = compile(r'(/lesbianpirates/comics/.+?)"')
     prevSearch = compile(r'/(\?p=.+?)">&laquo')
     help = 'Index format: n'
@@ -35,7 +35,7 @@ class LesbianPiratesFromOuterSpace(_BasicScraper):
 
 class Lint(_BasicScraper):
     latestUrl = 'http://www.purnicellin.com/lint/'
-    imageUrl = 'http://www.purnicellin.com/lint/%s'
+    stripUrl = 'http://www.purnicellin.com/lint/%s'
     imageSearch = compile(r'<img src="(http://www.purnicellin.com/lint/comics/.+?)"')
     prevSearch = compile(r'\| <a href="([^"]+)" rel="prev">')
     help = 'Index format: yyyy/mm/dd/num-name'
@@ -44,7 +44,7 @@ class Lint(_BasicScraper):
 
 class LookingForGroup(_BasicScraper):
     latestUrl = 'http://www.lfgcomic.com/page/latest'
-    imageUrl = 'http://www.lfgcomic.com/page/%s'
+    stripUrl = 'http://www.lfgcomic.com/page/%s'
     imageSearch = compile(r'<img src="(http://newcdn.lfgcomic.com/uploads/comics/.+?)"')
     prevSearch = compile(r'<a href="(/page/\d+)" id="navtop-prev"')
     starter = indirectStarter('http://www.lfgcomic.com/', compile(r'<a href="(/page/\d+)" id="feature-preview"'))
@@ -58,7 +58,7 @@ class LookingForGroup(_BasicScraper):
 
 class Loserz(_BasicScraper):
     latestUrl = 'http://bukucomics.com/loserz/'
-    imageUrl = 'http://bukucomics.com/loserz/go/%s'
+    stripUrl = 'http://bukucomics.com/loserz/go/%s'
     imageSearch = compile(r'<img src="(http://bukucomics.com/loserz/comics/.+?)"')
     prevSearch = compile(r'<a href="(.+?)"> &nbsp;&lt;&nbsp;')
     help = 'Index format: n (unpadded)'
@@ -67,7 +67,7 @@ class Loserz(_BasicScraper):
 
 class LittleGamers(_BasicScraper):
     latestUrl = 'http://www.little-gamers.com/'
-    imageUrl = 'http://www.little-gamers.com/%s'
+    stripUrl = 'http://www.little-gamers.com/%s'
     imageSearch = compile(r'<img src="(http://www.little-gamers.com/comics/[^"]+)"')
     prevSearch = compile(r'href="(.+?)"><img id="comic-nav-prev"')
     help = 'Index format: yyyy/mm/dd/name'
@@ -76,7 +76,7 @@ class LittleGamers(_BasicScraper):
 
 class LegoRobot(_BasicScraper):
     latestUrl = 'http://www.legorobotcomics.com/'
-    imageUrl = 'http://www.legorobotcomics.com/?id=%s'
+    stripUrl = 'http://www.legorobotcomics.com/?id=%s'
     imageSearch = compile(r'id="the_comic" src="(comics/.+?)"')
     prevSearch = compile(r'(\?id=\d+)"><img src="images/back.png"')
     help = 'Index format: nnnn'
@@ -85,7 +85,7 @@ class LegoRobot(_BasicScraper):
 
 class LeastICouldDo(_BasicScraper):
     latestUrl = 'http://www.leasticoulddo.com/'
-    imageUrl = 'http://www.leasticoulddo.com/comic/%s'
+    stripUrl = 'http://www.leasticoulddo.com/comic/%s'
     imageSearch = compile(r'<img src="(http://cdn.leasticoulddo.com/comics/\d{8}.\w{1,4})" />')
     prevSearch = compile(r'<a href="(/comic/\d{8})">Previous</a>')
     help = 'Index format: yyyymmdd'

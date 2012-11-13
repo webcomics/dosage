@@ -9,7 +9,7 @@ from ..helpers import indirectStarter, _PHPScraper
 
 class NamirDeiter(_BasicScraper):
     latestUrl = 'http://www.namirdeiter.com/'
-    imageUrl = 'http://www.namirdeiter.com/comics/index.php?date=%s'
+    stripUrl = 'http://www.namirdeiter.com/comics/index.php?date=%s'
     imageSearch = compile(r'<img.+?(/comics/\d{8}.+?)[\'|\"]')
     prevSearch = compile(r'(/comics/index.php\?date=.+?|http://www.namirdeiter.com/comics/index.php\?date=.+?)[\'|\"].+?previous')
     help = 'Index format: yyyymmdd'
@@ -18,7 +18,7 @@ class NamirDeiter(_BasicScraper):
 
 class NeoEarth(_BasicScraper):
     latestUrl = 'http://www.neo-earth.com/NE/'
-    imageUrl = 'http://www.neo-earth.com/NE/index.php?date=%s'
+    stripUrl = 'http://www.neo-earth.com/NE/index.php?date=%s'
     imageSearch = compile(r'<img src="(strips/.+?)"')
     prevSearch = compile(r'<a href="(.+?)">Previous</a>')
     help = 'Index format: yyyy-mm-dd'
@@ -27,7 +27,7 @@ class NeoEarth(_BasicScraper):
 
 class Nervillsaga(_BasicScraper):
     latestUrl = 'http://www.nervillsaga.com/'
-    imageUrl = 'http://www.nervillsaga.com/index.php?s=%s'
+    stripUrl = 'http://www.nervillsaga.com/index.php?s=%s'
     imageSearch = compile(r'"(pic/.+?)"')
     prevSearch = compile(r'"(.+?)">Previous')
     help = 'Index format: nnn'
@@ -36,7 +36,7 @@ class Nervillsaga(_BasicScraper):
 
 class NewAdventuresOfBobbin(_BasicScraper):
     latestUrl = 'http://bobbin-comic.com/'
-    imageUrl = 'http://www.bobbin-comic.com/wordpress/?p=%s'
+    stripUrl = 'http://www.bobbin-comic.com/wordpress/?p=%s'
     imageSearch = compile(r'<img src="(http://www.bobbin-comic.com/wordpress/comics/.+?)"')
     prevSearch = compile(r'<a href="(.+?)"><span class="prev">')
     help = 'Index format: n'
@@ -45,7 +45,7 @@ class NewAdventuresOfBobbin(_BasicScraper):
 
 class NewWorld(_BasicScraper):
     latestUrl = 'http://www.tfsnewworld.com/'
-    imageUrl = 'http://www.tfsnewworld.com/%s'
+    stripUrl = 'http://www.tfsnewworld.com/%s'
     imageSearch = compile(r'<img src="(http://www.tfsnewworld.com/comics/.+?)"')
     prevSearch = compile(r'<div class="nav-previous"><a href="([^"]+)" rel="prev">')
     help = 'Index format: yyyy/mm/dd/stripn'
@@ -54,7 +54,7 @@ class NewWorld(_BasicScraper):
 
 class Nicky510(_BasicScraper):
     latestUrl = 'http://www.nicky510.com/'
-    imageUrl = 'http://www.nicky510.com/%s'
+    stripUrl = 'http://www.nicky510.com/%s'
     imageSearch = compile(r'(http://www.nicky510.com/comics/.+?)"')
     prevSearch = compile(r'<a href="(http://www.nicky510.com/.+?)" class="navi navi-prev"')
     help = 'Index format: yyyy/mm/dd/stripname/'
@@ -63,7 +63,7 @@ class Nicky510(_BasicScraper):
 
 class NoNeedForBushido(_BasicScraper):
     latestUrl = 'http://www.noneedforbushido.com/latest/'
-    imageUrl = 'http://www.noneedforbushido.com/%s'
+    stripUrl = 'http://www.noneedforbushido.com/%s'
     imageSearch = compile(r'<div class="comics"><img src="([^"]+)"')
     prevSearch = compile(r'<a href="([^"]+)" title="[^"]*" class="previous-comic-link')
     help = 'Index format: yyyy/comic/nnn'
@@ -72,7 +72,7 @@ class NoNeedForBushido(_BasicScraper):
 
 class Nukees(_BasicScraper):
     latestUrl = 'http://www.nukees.com/'
-    imageUrl = 'http://www.nukees.com/d/%s'
+    stripUrl = 'http://www.nukees.com/d/%s'
     imageSearch = compile(r'"comic".+?"(/comics/.+?)"')
     prevSearch = compile(r'"(/d/.+?)".+?previous')
     help = 'Index format: yyyymmdd.html'
@@ -92,7 +92,7 @@ class _NuklearPower(_BasicScraper):
         return self.baseUrl
 
     @property
-    def imageUrl(self):
+    def stripUrl(self):
         return self.baseUrl + '%s'
 
 
@@ -129,7 +129,7 @@ class NekoTheKitty(_PHPScraper):
 
 
 class NichtLustig(_BasicScraper):
-    imageUrl = 'http://www.nichtlustig.de/toondb/%s.html'
+    stripUrl = 'http://www.nichtlustig.de/toondb/%s.html'
     imageSearch = compile(r'<img src="([^"]+)" id="cartoon"', IGNORECASE)
     prevSearch = compile(r'<a href="(\d+\.html)"[^<>]*><img[^<>]*id="pfeil_links', IGNORECASE)
     help = 'Index format: yymmdd'
@@ -139,17 +139,17 @@ class NichtLustig(_BasicScraper):
 
 class NinthElsewhere(_BasicScraper):
     latestUrl = 'http://www.9thelsewhere.com/icenter.html'
-    imageUrl = 'http://www.9thelsewhere.com/%s/9e%s_%s.html'
+    stripUrl = 'http://www.9thelsewhere.com/%s/9e%s_%s.html'
     imageSearch = compile(r'<img src="([^"]*9e\d+_\d+\.jpg)"')
     prevSearch = compile(r'<a href="([^"]+\.html)">\s*PREV')
     help = 'Index format: year-chapter-page'
 
     def setStrip(self, index):
-        self.currentUrl = self.imageUrl % tuple(map(int, index.split('-')))
+        self.currentUrl = self.stripUrl % tuple(map(int, index.split('-')))
 
 
 class Nodwick(_BasicScraper):
-    imageUrl = None
+    stripUrl = None
     imageSearch = compile(r'<img src="(http://nodwick.humor.gamespy.com/gamespyarchive/strips/[^"]*)"', IGNORECASE)
     prevSearch = compile(r'<a href="(index.php\?date=[0-9-]*)"><img src="back.jpg"', IGNORECASE)
     starter = indirectStarter('http://nodwick.humor.gamespy.com/gamespyarchive/index.php', prevSearch)
@@ -159,7 +159,7 @@ class Nodwick(_BasicScraper):
 
 class NekkoAndJoruba(_BasicScraper):
     latestUrl = 'http://www.nekkoandjoruba.com/'
-    imageUrl = 'http://www.nekkoandjoruba.com/?p=%s'
+    stripUrl = 'http://www.nekkoandjoruba.com/?p=%s'
     imageSearch = compile(r'<img src="(http://www.nekkoandjoruba.com/comics/.+?)"')
     prevSearch = compile(r'<a href="(.+?)">&lsaquo;</a>')
     help = 'Index format: nnn'
@@ -168,7 +168,7 @@ class NekkoAndJoruba(_BasicScraper):
 
 class NobodyScores(_BasicScraper):
     latestUrl = 'http://nobodyscores.loosenutstudio.com/'
-    imageUrl = 'http://nobodyscores.loosenutstudio.com/index.php?id=%s'
+    stripUrl = 'http://nobodyscores.loosenutstudio.com/index.php?id=%s'
     imageSearch = compile(r'><img src="(http://nobodyscores.loosenutstudio.com/comix/.+?)"')
     prevSearch = compile(r'<a href="(http://nobodyscores.loosenutstudio.com/index.php.+?)">the one before </a>')
     help = 'Index format: nnn'

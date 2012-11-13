@@ -12,7 +12,7 @@ def drunkDuck(shortName):
         (_BasicScraper,),
         dict(
         name='DrunkDuck/' + shortName,
-        imageUrl='index.php?p=%s' % (shortName,),
+        stripUrl='index.php?p=%s' % (shortName,),
         imageSearch=compile(r"<img src='(http://[a-z0-9]*.drunkduck.com/[^/]*/pages/[^'/]+)'>", IGNORECASE),
         prevSearch=compile(linkSearch % ('previous',), IGNORECASE),
         help='Index format: n (unpadded)',

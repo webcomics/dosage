@@ -9,7 +9,7 @@ from ..util import fetchUrl
 class _UClickScraper(_BasicScraper):
     homepage = 'http://content.uclick.com/a2z.html'
     baseUrl = 'http://www.uclick.com/client/zzz/%s/'
-    imageUrl = property(lambda self: self.latestUrl + '%s/')
+    stripUrl = property(lambda self: self.latestUrl + '%s/')
     imageSearch = compile(r'<img[^>]+src="(http://synd.imgsrv.uclick.com/comics/\w+/\d{4}/[^"]+\.gif)"', IGNORECASE)
     prevSearch = compile(r'<a href="(/client/zzz/\w+/\d{4}/\d{2}/\d{2}/)">Previous date', IGNORECASE)
     help = 'Index format: yyyy/mm/dd'

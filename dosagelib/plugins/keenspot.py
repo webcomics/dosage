@@ -7,7 +7,7 @@ from ..scraper import _BasicScraper
 
 def keenSpot(comics):
     class _KeenSpotScraper(_BasicScraper):
-        imageUrl = property(lambda self: self.baseUrl + 'd/%s.html')
+        stripUrl = property(lambda self: self.baseUrl + 'd/%s.html')
         imageSearch = compile(r'<img[^>]+?src="([^"]*?comics/.+?)"', IGNORECASE)
         prevSearch = compile(r'<a href="([^"]*?d/\d{8}\.html)"[^>]*>(?:<img[^>]+?(?:name="previous_day"|alt="Previous"|src="[^"]*back[^"]*")|Previous comic)', IGNORECASE)
         help = 'Index format: yyyymmdd'
