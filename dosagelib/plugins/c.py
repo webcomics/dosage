@@ -3,7 +3,7 @@
 from re import compile
 
 from ..scraper import _BasicScraper
-from ..helpers import constStarter, bounceStarter, indirectStarter
+from ..helpers import constStarter, bounceStarter
 from ..util import tagre, getQueryParams
 
 
@@ -427,10 +427,10 @@ class CasuallyKayla(_BasicScraper):
 
 class Collar6(_BasicScraper):
     latestUrl = 'http://collar6.com/'
-    imageUrl = 'http://collar6.com/%s'
-    imageSearch = compile(r'src="(http://collar6.com/comics/.+?)"')
-    prevSearch = compile(r' href="(http://collar6.com/\d+/\S+)">&#9668; Previous')
-    help = 'Index format: yyyy/namednumber'
+    imageUrl = 'http://collar6.com/wp-content/webcomic/collar6/%s.jpg'
+    imageSearch = compile(tagre("img", "src", r'(http://collar6\.com/wp-content/webcomic/collar6/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://collar6\.com/archive/[^"]+)', after="previous"))
+    help = 'Index format: yyyy-mm-dd-Collar-n-nnn'
 
 
 

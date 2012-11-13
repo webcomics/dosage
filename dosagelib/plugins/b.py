@@ -122,8 +122,8 @@ class BoyOnAStickAndSlither(_BasicScraper):
 class ButternutSquash(_BasicScraper):
     latestUrl = 'http://www.butternutsquash.net/'
     imageUrl = 'http://www.butternutsquash.net/v3/%s'
-    imageSearch = compile(r'<img src="(http://www.butternutsquash.net/v3/comics/.+?)"')
-    prevSearch = compile(r'<a href="(http://www.butternutsquash.net/v3/.+?)">(<span class="prev">&#9668;|&#8656; Previous</a>)')
+    imageSearch = compile(tagre("img", "src", r'(http://www\.butternutsquash\.net/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.butternutsquash\.net/[^!]+)', after="prev"))
     help = 'Index format: yyyy/mm/dd/strip-name-author-name'
 
 

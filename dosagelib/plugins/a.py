@@ -64,17 +64,17 @@ class AbstruseGoose(_BasicScraper):
 class AcademyVale(_BasicScraper):
     latestUrl = 'http://imagerie.com/vale/'
     imageUrl = 'http://imagerie.com/vale/avarch.cgi?%s'
-    imageSearch = compile(tagre('img', 'src', r'(avale\d{4}-\d{2}\..*?)'))
-    prevSearch = compile(tagre('a', 'href', r'(avarch.*?)') + tagre('img', 'src', 'AVNavBack\.gif'))
+    imageSearch = compile(tagre('img', 'src', r'(avale\d{4}-\d{2}\.gif)'))
+    prevSearch = compile(tagre('a', 'href', r'(avarch[^"]+)') + tagre('img', 'src', 'AVNavBack\.gif'))
     help = 'Index format: nnn'
 
 
 class Alice(_BasicScraper):
     latestUrl = 'http://alice.alicecomics.com/'
-    imageUrl = 'http://alice.alicecomics.com/%s'
-    imageSearch = compile(r'(/comics/.+?)"')
-    prevSearch = compile(r'	.+"?com(/.+?)" rel="prev')
-    help = 'Index format: non'
+    imageUrl = 'http://alice.alicecomics.com/wp-content/webcomic/alicecomics/%s.jpg'
+    imageSearch = compile(tagre("img", "src", r'(http://alice\.alicecomics\.com/wp-content/webcomic/alicecomics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://alice.alicecomics.com/archive/[^!]+)', after="previous"))
+    help = 'Index format: yyyy-mm-dd'
 
 
 class AlienLovesPredator(_BasicScraper):
@@ -131,18 +131,9 @@ class Angels2200(_BasicScraper):
 class AppleGeeks(_BasicScraper):
     latestUrl = 'http://www.applegeeks.com/'
     imageUrl = 'http://www.applegeeks.com/comics/viewcomic.php?issue=%s'
-    imageSearch = compile(r'<img src="((?:/comics/)?issue\d+?\..+?)"')
+    imageSearch = compile(tagre("img", "src", r'"(strips/\d+?\..+?)"'))
     prevSearch = compile(r'<div class="caption">Previous Comic</div>\s*<p><a href="([^"]+)">', MULTILINE)
     help = 'Index format: n (unpadded)'
-
-
-class AppleGeeksLite(_BasicScraper):
-    latestUrl = 'http://www.applegeeks.com/lite/'
-    imageUrl = 'http://applegeeks.com/lite/index.php?aglitecomic=%s'
-    imageSearch = compile(r'<img src="(strips/.+?)"')
-    prevSearch = compile(r'<a href="(index.php\?aglitecomic=.+?)".+?back')
-    help = 'Index format: yyyy-mm-dd'
-
 
 
 class Achewood(_BasicScraper):
