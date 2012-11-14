@@ -166,6 +166,9 @@ def normaliseURL(url):
     while segments and segments[0] == '':
         del segments[0]
     pu[2] = '/' + '/'.join(segments)
+    # remove leading '&' from query
+    if pu[3].startswith('&'):
+        pu[3] = pu[3][1:]
     return urlparse.urlunparse(pu)
 
 def urlopen(url, referrer=None, retries=3, retry_wait_seconds=5):

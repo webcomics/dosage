@@ -134,7 +134,7 @@ def blankLabel(name, baseUrl):
         dict(
         name='BlankLabel/' + name,
         latestUrl=baseUrl,
-        stripUrl=baseUrl+'d/%s.shtml',
+        stripUrl=baseUrl+'d/%s.html',
         imageSearch=compile(tagre("img", "src", r'(/comic[s|/][^"]+)')),
         prevSearch=compile(tagre("a", "href", r'[^"]*(/d/\d+\.s?html)')+r"[^>]+/images/(?:nav_02|previous_day)\.gif"),
         #prevSearch=compile(r'(?:"([^"]*(?:/d/[^"\r\n]*)|(?:/strip/.+?))")(?:(?:.{43}starshift_back.gif)|(?:.+?cxn_previous)|(?:.{43}previous)|(?:[^<>]*>[^<>]*<[^<>]*previous)|(?:.*?back_button)|(?:.*?comicnav-previous))'),
