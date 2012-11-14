@@ -10,11 +10,11 @@ from ..util import getQueryParams
 
 class DMFA(_BasicScraper):
     latestUrl = 'http://www.missmab.com/'
-    stripUrl = 'http://missmab.com/Comics/Vol_%s.php'
-    imageSearch = compile(r'<IMG SRC="(Comics/.+?|Vol.+?)">', IGNORECASE)
-    prevSearch = compile(r'<A HREF="(.+?)"><IMG SRC="(Images/comicprev.gif|../Images/comicprev.gif)" ', MULTILINE | IGNORECASE)
+    stripUrl = latestUrl + 'Comics/Vol_%s.php'
+    imageSearch = compile(tagre("img", "src", r'(Comics/[^"]+|Vol[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'([^"])+')+
+      tagre("img", "src", r'(Images/comicprev.gif|../Images/comicprev.gif)'))
     help = 'Index format: nnn (normally, some specials)'
-
 
 
 class DandyAndCompany(_BasicScraper):

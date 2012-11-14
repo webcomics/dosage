@@ -138,10 +138,10 @@ class Commissioned(_BasicScraper):
 
 class CoolCatStudio(_BasicScraper):
     latestUrl = 'http://www.coolcatstudio.com/'
-    stripUrl = 'http://www.coolcatstudio.com/index.php?p=%s'
+    stripUrl = 'http://www.coolcatstudio.com/strips-cat/ccs%s'
     imageSearch = compile(tagre("img", "src", r'(http://www.coolcatstudio.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.coolcatstudio\.com/strips-cat/[^"]+)', before="cniprevt"))
-    help = 'Index format: n'
+    help = 'Index format: yyyymmdd'
 
 
 
@@ -190,7 +190,7 @@ class Curvy(_BasicScraper):
 def cloneManga(name, shortName, lastStrip=None):
     url = 'http://manga.clone-army.org'
     baseUrl = '%s/%s.php' % (url, shortName)
-    stripUrl = baseUrl + '?page=%s'
+    stripUrl = baseUrl + '?&page=%s'
     if lastStrip is None:
         starter = bounceStarter(baseUrl, compile(tagre("a", "href", r'([^"]+)')+tagre("img", "src", r"next\.gif")))
     else:
@@ -418,10 +418,10 @@ class CasuallyKayla(_BasicScraper):
 
 class Collar6(_BasicScraper):
     latestUrl = 'http://collar6.com/'
-    stripUrl = 'http://collar6.com/wp-content/webcomic/collar6/%s.jpg'
+    stripUrl = 'http://collar6.com/archive/%s'
     imageSearch = compile(tagre("img", "src", r'(http://collar6\.com/wp-content/webcomic/collar6/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://collar6\.com/archive/[^"]+)', after="previous"))
-    help = 'Index format: yyyy-mm-dd-Collar-n-nnn'
+    help = 'Index format: <name>'
 
 
 

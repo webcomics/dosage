@@ -123,8 +123,10 @@ class AltermetaOld(Altermeta):
 
 class Angels2200(_BasicScraper):
     latestUrl = 'http://www.janahoffmann.com/angels/'
-    imageSearch = compile(r"<img src='(http://www.janahoffmann.com/angels/comics/[^']+)'>")
-    prevSearch = compile(r'<a href="([^"]+)">&laquo; Previous</a>')
+    stripUrl = latestUrl + '%s'
+    imageSearch = compile(tagre("img", "src", r"(http://www\.janahoffmann\.com/angels/comics/[^']+)"))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)')+"&laquo; Previous"))
+    help = 'Index format: yyyy/mm/dd/part-<n>-comic-<n>'
 
 
 
@@ -250,10 +252,10 @@ class AllTheGrowingThings(_BasicScraper):
 
 class Amya(_BasicScraper):
     latestUrl = 'http://www.amyachronicles.com/'
-    stripUrl = 'http://www.amyachronicles.com/comics/%s.jpg'
+    stripUrl = 'http://www.amyachronicles.com/archives/%s'
     imageSearch = compile(tagre("img", "src", r'(http://www\.amyachronicles\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.amyachronicles\.com/archives/\d+)', after="Previous"))
-    help = 'Index format: yyyy-mm-dd'
+    help = 'Index format: n'
 
 
 

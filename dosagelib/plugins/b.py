@@ -121,7 +121,7 @@ class BoyOnAStickAndSlither(_BasicScraper):
 
 class ButternutSquash(_BasicScraper):
     latestUrl = 'http://www.butternutsquash.net/'
-    stripUrl = 'http://www.butternutsquash.net/v3/%s'
+    stripUrl = 'http://www.butternutsquash.net/%s'
     imageSearch = compile(tagre("img", "src", r'(http://www\.butternutsquash\.net/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.butternutsquash\.net/[^"]+)', after="prev"))
     help = 'Index format: yyyy/mm/dd/strip-name-author-name'
@@ -134,7 +134,7 @@ def blankLabel(name, baseUrl):
         dict(
         name='BlankLabel/' + name,
         latestUrl=baseUrl,
-        stripUrl='/d/%s.shtml',
+        stripUrl=baseUrl+'d/%s.shtml',
         imageSearch=compile(tagre("img", "src", r'(/comic[s|/][^"]+)')),
         prevSearch=compile(tagre("a", "href", r'[^"]*(/d/\d+\.s?html)')+r"[^>]+/images/(?:nav_02|previous_day)\.gif"),
         #prevSearch=compile(r'(?:"([^"]*(?:/d/[^"\r\n]*)|(?:/strip/.+?))")(?:(?:.{43}starshift_back.gif)|(?:.+?cxn_previous)|(?:.{43}previous)|(?:[^<>]*>[^<>]*<[^<>]*previous)|(?:.*?back_button)|(?:.*?comicnav-previous))'),
@@ -142,7 +142,7 @@ def blankLabel(name, baseUrl):
     )
 
 
-checkerboard = blankLabel('CheckerboardNightmare', 'http://www.checkerboardnightmare.com')
+checkerboard = blankLabel('CheckerboardNightmare', 'http://www.checkerboardnightmare.com/')
 courtingDisaster = blankLabel('CourtingDisaster', 'http://www.courting-disaster.com/')
 evilInc = blankLabel('EvilInc', 'http://www.evil-comic.com/')
 greystoneInn = blankLabel('GreystoneInn', 'http://www.greystoneinn.net/')
