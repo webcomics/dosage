@@ -28,11 +28,14 @@ class _ComicTester(TestCase):
             for image in strip.getImages():
                 images += 1
                 self.save(image)
-            if images:
+            if num > 0:
                 # test that the stripUrl regex matches the retrieved strip URL
-                urlmatch = re.escape(self.scraperclass.stripUrl).replace("%s", r".+")
-                mo = re.compile(urlmatch).match(strip.stripUrl)
-                self.check(mo is not None, 'strip URL %r does not match %r' % (strip.stripUrl, self.scraperclass.stripUrl))
+                urlmatch = re.escape(self.scraperclass.stripUrl)
+                urlmatch = urlmatch.replace(r"\%s", r".+")
+                urlmatch = "^%s$" % urlmatch
+                ro = re.compile(urlmatch)
+                mo = ro.search(strip.stripUrl)
+                self.check(mo is not None, 'strip URL %r does not match %s' % (strip.stripUrl, urlmatch))
             else:
                 empty += 1
             num += 1
