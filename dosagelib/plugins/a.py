@@ -125,7 +125,7 @@ class Angels2200(_BasicScraper):
     latestUrl = 'http://www.janahoffmann.com/angels/'
     stripUrl = latestUrl + '%s'
     imageSearch = compile(tagre("img", "src", r"(http://www\.janahoffmann\.com/angels/comics/[^']+)"))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)')+"&laquo; Previous"))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)')+"&laquo; Previous")
     help = 'Index format: yyyy/mm/dd/part-<n>-comic-<n>'
 
 
