@@ -154,9 +154,7 @@ def get_scrapers():
     """
     global _scrapers
     if _scrapers is None:
-        folder = os.path.join(os.path.dirname(__file__), 'plugins')
-        importprefix = 'dosagelib.plugins.'
-        modules = loader.get_modules(folder, importprefix)
+        modules = loader.get_modules()
         plugins = loader.get_plugins(modules, _BasicScraper)
         _scrapers = list(plugins)
         _scrapers.sort(key=lambda s: s.get_name())

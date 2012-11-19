@@ -7,6 +7,7 @@ Features:
 
 Changes:
 - installation: Added support for dynamic configuration values.
+- installation: Require and use Python 2.7
 - comics: Removed the twisted and zope dependencies by adding
   an internal plugin search mechanism.
 - testing: Refactored the test comic routine in proper unit tests.

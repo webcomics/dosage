@@ -50,7 +50,7 @@ home directory, usually "C:\Documents and Settings\UserName".
 
 Dependencies
 -------------
-Dosage is requires Python version 2.5 or higher, which can be downloaded
+Dosage requires Python version 2.7 or higher, which can be downloaded
 from http://www.python.org.
 No external Python modules are required - only the Python Standard Library
 that gets installed with Python.

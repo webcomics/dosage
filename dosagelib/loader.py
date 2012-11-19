@@ -4,45 +4,33 @@
 Functions to load plugin modules.
 """
 import os
-import sys
+import importlib
 
 
-def get_modules(folder, importprefix):
-    """Find all valid modules in the plugins directory. A valid module
+def get_modules(folder='plugins'):
+    """Find all valid modules in the plugins subdirectory. A valid module
     must have a .py extension, and is importable.
     @return: all loaded valid modules
     @rtype: iterator of module
     """
-    for filename in get_importable_modules(folder):
+    dirname = os.path.join(os.path.dirname(__file__), folder)
+    for modname in get_importable_modules(dirname):
         try:
-            module = load_module(filename, importprefix)
-            if module is not None:
-                yield module
+            name ="..%s.%s" % (folder, modname)
+            yield importlib.import_module(name, __name__)
         except StandardError, msg:
-            print "ERROR: could not load module %s: %s" % (filename, msg)
+            print "ERROR: could not load module %s: %s" % (modname, msg)
 
 
 def get_importable_modules(folder):
     """Find all module files in the given folder that end witn '.py' and
     don't start with an underscore.
-    @return module filenames
+    @return module names
     @rtype: iterator of string
     """
     for fname in sorted(os.listdir(folder)):
         if fname.endswith('.py') and not fname.startswith('_'):
-            yield os.path.join(folder, fname)
-
-
-def load_module(filename, importprefix):
-    """Load and return the module given by the filename.
-    Other exceptions than ImportError are not catched.
-    @return: loaded module or None on import errors
-    @rtype: module or None
-    """
-    name = os.path.splitext(os.path.basename(filename))[0]
-    modulename = "%s%s" % (importprefix, name)
-    __import__(modulename)
-    return sys.modules[modulename]
+            yield fname[:-3]
 
 
 def get_plugins(modules, classobj):
