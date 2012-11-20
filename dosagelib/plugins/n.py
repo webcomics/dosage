@@ -9,16 +9,16 @@ from ..helpers import indirectStarter, _PHPScraper
 
 class NamirDeiter(_BasicScraper):
     latestUrl = 'http://www.namirdeiter.com/'
-    stripUrl = 'http://www.namirdeiter.com/comics/index.php?date=%s'
+    stripUrl = latestUrl + 'comics/index.php?date=%s'
     imageSearch = compile(r'<img.+?(/comics/\d{8}.+?)[\'|\"]')
-    prevSearch = compile(r'(/comics/index.php\?date=.+?|http://www.namirdeiter.com/comics/index.php\?date=.+?)[\'|\"].+?previous')
+    prevSearch = compile(r'(/comics/index.php\?date=.+?|http://www\.namirdeiter\.com/comics/index.php\?date=.+?)[\'|\"].+?previous')
     help = 'Index format: yyyymmdd'
 
 
 
 class NeoEarth(_BasicScraper):
     latestUrl = 'http://www.neo-earth.com/NE/'
-    stripUrl = 'http://www.neo-earth.com/NE/index.php?date=%s'
+    stripUrl = latestUrl + 'index.php?date=%s'
     imageSearch = compile(r'<img src="(strips/.+?)"')
     prevSearch = compile(r'<a href="(.+?)">Previous</a>')
     help = 'Index format: yyyy-mm-dd'
@@ -27,7 +27,7 @@ class NeoEarth(_BasicScraper):
 
 class Nervillsaga(_BasicScraper):
     latestUrl = 'http://www.nervillsaga.com/'
-    stripUrl = 'http://www.nervillsaga.com/index.php?s=%s'
+    stripUrl = latestUrl + 'index.php?s=%s'
     imageSearch = compile(r'"(pic/.+?)"')
     prevSearch = compile(r'"(.+?)">Previous')
     help = 'Index format: nnn'
@@ -35,8 +35,8 @@ class Nervillsaga(_BasicScraper):
 
 
 class NewAdventuresOfBobbin(_BasicScraper):
-    latestUrl = 'http://bobbin-comic.com/'
-    stripUrl = 'http://www.bobbin-comic.com/wordpress/?p=%s'
+    latestUrl = 'http://www.bobbin-comic.com/'
+    stripUrl = latestUrl + 'wordpress/?p=%s'
     imageSearch = compile(r'<img src="(http://www.bobbin-comic.com/wordpress/comics/.+?)"')
     prevSearch = compile(r'<a href="(.+?)"><span class="prev">')
     help = 'Index format: n'
@@ -45,7 +45,7 @@ class NewAdventuresOfBobbin(_BasicScraper):
 
 class NewWorld(_BasicScraper):
     latestUrl = 'http://www.tfsnewworld.com/'
-    stripUrl = 'http://www.tfsnewworld.com/%s'
+    stripUrl = latestUrl + '%s'
     imageSearch = compile(r'<img src="(http://www.tfsnewworld.com/comics/.+?)"')
     prevSearch = compile(r'<div class="nav-previous"><a href="([^"]+)" rel="prev">')
     help = 'Index format: yyyy/mm/dd/stripn'
@@ -54,7 +54,7 @@ class NewWorld(_BasicScraper):
 
 class Nicky510(_BasicScraper):
     latestUrl = 'http://www.nicky510.com/'
-    stripUrl = 'http://www.nicky510.com/%s'
+    stripUrl = latestUrl + '%s'
     imageSearch = compile(r'(http://www.nicky510.com/comics/.+?)"')
     prevSearch = compile(r'<a href="(http://www.nicky510.com/.+?)" class="navi navi-prev"')
     help = 'Index format: yyyy/mm/dd/stripname/'
@@ -72,7 +72,7 @@ class NoNeedForBushido(_BasicScraper):
 
 class Nukees(_BasicScraper):
     latestUrl = 'http://www.nukees.com/'
-    stripUrl = 'http://www.nukees.com/d/%s'
+    stripUrl = latestUrl + 'd/%s'
     imageSearch = compile(r'"comic".+?"(/comics/.+?)"')
     prevSearch = compile(r'"(/d/.+?)".+?previous')
     help = 'Index format: yyyymmdd.html'
@@ -159,7 +159,7 @@ class Nodwick(_BasicScraper):
 
 class NekkoAndJoruba(_BasicScraper):
     latestUrl = 'http://www.nekkoandjoruba.com/'
-    stripUrl = 'http://www.nekkoandjoruba.com/?p=%s'
+    stripUrl = latestUrl + '?p=%s'
     imageSearch = compile(r'<img src="(http://www.nekkoandjoruba.com/comics/.+?)"')
     prevSearch = compile(r'<a href="(.+?)">&lsaquo;</a>')
     help = 'Index format: nnn'
@@ -168,7 +168,7 @@ class NekkoAndJoruba(_BasicScraper):
 
 class NobodyScores(_BasicScraper):
     latestUrl = 'http://nobodyscores.loosenutstudio.com/'
-    stripUrl = 'http://nobodyscores.loosenutstudio.com/index.php?id=%s'
-    imageSearch = compile(r'><img src="(http://nobodyscores.loosenutstudio.com/comix/.+?)"')
-    prevSearch = compile(r'<a href="(http://nobodyscores.loosenutstudio.com/index.php.+?)">the one before </a>')
+    stripUrl = latestUrl + 'index.php?id=%s'
+    imageSearch = compile(r'><img src="(http://nobodyscores\.loosenutstudio\.com/comix/.+?)"')
+    prevSearch = compile(r'<a href="(http://nobodyscores\.loosenutstudio\.com/index.php.+?)">the one before </a>')
     help = 'Index format: nnn'

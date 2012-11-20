@@ -35,20 +35,20 @@ class _ComicTester(TestCase):
                 urlmatch = "^%s$" % urlmatch
                 ro = re.compile(urlmatch)
                 mo = ro.search(strip.stripUrl)
-                self.check(mo is not None, 'strip URL %r does not match %s' % (strip.stripUrl, urlmatch))
+                self.check(mo is not None, 'strip URL %r does not match stripUrl pattern %s' % (strip.stripUrl, urlmatch))
             else:
                 empty += 1
             num += 1
-        self.check(num >= 4, 'traversal failed after %d strips.' % num)
-        self.check(empty <= 1, 'failed to find images on %d pages.' % empty)
+        self.check(num >= 4, 'traversal failed after %d strips, check the prevSearch pattern.' % num)
+        self.check(empty <= 1, 'failed to find images on %d pages, check the imageSearch pattern.' % empty)
 
     def save(self, image):
         # create a temporary directory
         tmpdir = tempfile.mkdtemp()
         try:
             image.save(tmpdir)
-        except Exception, msg:
-            self.check(False, 'could not save to %s: %s' % (tmpdir, msg))
+        except Exception as msg:
+            self.check(False, 'could not save %s to %s: %s' % (image.url, tmpdir, msg))
         finally:
             shutil.rmtree(tmpdir)
 

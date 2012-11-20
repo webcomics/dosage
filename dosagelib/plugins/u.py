@@ -4,12 +4,20 @@ from re import compile, IGNORECASE
 
 from ..scraper import _BasicScraper
 from ..helpers import bounceStarter, indirectStarter
-from ..util import getQueryParams
+from ..util import getQueryParams, tagre
+
+
+class UglyHill(_BasicScraper):
+    latestUrl = 'http://www.uglyhill.com/'
+    stripUrl = latestUrl + 'd/%s.html'
+    imageSearch = compile(tagre("img", "src", r'(/comic[s|/][^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'[^"]*(/d/\d+\.s?html)')+r"[^>]+/images/(?:nav_02|previous_day)\.gif")
+    help = 'Index format: yyyymmdd'
 
 
 class UnderPower(_BasicScraper):
     latestUrl = 'http://underpower.non-essential.com/'
-    stripUrl = 'http://underpower.non-essential.com/index.php?comic=%s'
+    stripUrl = latestUrl + 'index.php?comic=%s'
     imageSearch = compile(r'<img src="(comics/\d{8}\..+?)"')
     prevSearch = compile(r'<a href="(/index.php\?comic=\d{8})"><img src="images/previous-comic\.gif"')
     help = 'Index format: yyyymmdd'
@@ -46,7 +54,7 @@ class UserFriendly(_BasicScraper):
 
 class UndeadFriend(_BasicScraper):
     latestUrl = 'http://www.undeadfriend.com/'
-    stripUrl = 'http://www.undeadfriend.com/d/%s.html'
+    stripUrl = latestUrl + 'd/%s.html'
     imageSearch = compile(r'src="(http://www\.undeadfriend\.com/comics/.+?)"', IGNORECASE)
     prevSearch = compile(r'<a.+?href="(http://www\.undeadfriend\.com/d/\d+?\.html)"><img border="0" name="previous_day" alt="Previous comic" src="http://www\.undeadfriend\.com/images/previous_day\.jpg', IGNORECASE)
     help = 'Index format: yyyymmdd'

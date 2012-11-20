@@ -23,7 +23,7 @@ class xkcd(_BasicScraper):
 
 class xkcdSpanish(_BasicScraper):
     latestUrl = 'http://es.xkcd.com/xkcd-es/'
-    stripUrl = 'http://es.xkcd.com/xkcd-es/strips/%s/'
+    stripUrl = latestUrl + 'strips/%s/'
     imageSearch = compile(r'src="(/site_media/strips/.+?)"')
     prevSearch = compile(r'<a rel="prev" href="(http://es.xkcd.com/xkcd-es/strips/.+?)">Anterior</a>')
     help = 'Index format: stripname'

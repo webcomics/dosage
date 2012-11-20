@@ -53,12 +53,12 @@ class ComicImage(object):
         """Connect to host and get meta information."""
         try:
             self.urlobj = urlopen(self.url, referrer=self.referrer)
-        except urllib2.HTTPError, he:
-            raise FetchComicError, ('Unable to retrieve URL.', self.url, he.code)
+        except urllib2.HTTPError as he:
+            raise FetchComicError('Unable to retrieve URL.', self.url, he.code)
 
         if self.urlobj.info().getmaintype() != 'image' and \
            self.urlobj.info().gettype() not in ('application/octet-stream', 'application/x-shockwave-flash'):
-            raise FetchComicError, ('No suitable image found to retrieve.', self.url)
+            raise FetchComicError('No suitable image found to retrieve.', self.url)
 
         # Always use mime type for file extension if it is sane.
         if self.urlobj.info().getmaintype() == 'image':

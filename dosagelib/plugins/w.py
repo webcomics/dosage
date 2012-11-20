@@ -8,7 +8,7 @@ from ..helpers import queryNamer, bounceStarter
 
 class WayfarersMoon(_BasicScraper):
     latestUrl = 'http://www.wayfarersmoon.com/'
-    stripUrl = 'http://www.wayfarersmoon.com/index.php\?page=%s'
+    stripUrl = latestUrl + 'index.php\?page=%s'
     imageSearch = compile(r'<img src="(/admin.+?)"')
     prevSearch = compile(r'<a href="(.+?)".+?btn_back.gif')
     help = 'Index format: nn'
@@ -42,7 +42,7 @@ class WhyTheLongFace(_BasicScraper):
 
 class Wigu(_BasicScraper):
     latestUrl = 'http://www.wigu.com/wigu/'
-    stripUrl = 'http://www.wigu.com/wigu/?date=%s'
+    stripUrl = latestUrl + '?date=%s'
     imageSearch = compile(r'<img src="(strips/\d{8}\..+?)" alt=""')
     prevSearch = compile(r'<a href="(.+?)"[^>]+?>< PREV COMIC</a> ')
     help = 'Index format: yyyymmdd'
@@ -51,7 +51,7 @@ class Wigu(_BasicScraper):
 
 class WiguTV(_BasicScraper):
     latestUrl = 'http://jjrowland.com/'
-    stripUrl = 'http://jjrowland.com/archive/%s.html'
+    stripUrl = latestUrl + 'archive/%s.html'
     imageSearch = compile(r'"(/comics/.+?)"')
     prevSearch = compile(r'<a href="(/archive/.+?)"[^>]+?>&nbsp;')
     help = 'Index format: yyyymmdd'
@@ -60,7 +60,7 @@ class WiguTV(_BasicScraper):
 
 class WotNow(_BasicScraper):
     latestUrl = 'http://shadowburn.binmode.com/wotnow/'
-    stripUrl = 'http://shadowburn.binmode.com/wotnow/comic.php?comic_id=%s'
+    stripUrl = latestUrl + 'comic.php?comic_id=%s'
     imageSearch = compile(r'<IMG SRC="(comics/.+?)"')
     prevSearch = compile(r'<A HREF="(.+?)"><IMG SRC="images/b_prev.gif" ')
     help = 'Index format: n (unpadded)'
@@ -69,15 +69,14 @@ class WotNow(_BasicScraper):
 
 class WorldOfWarcraftEh(_BasicScraper):
     latestUrl = 'http://woweh.com/'
-    stripUrl = 'http://woweh.com/?p='
+    stripUrl = None
     imageSearch = compile(r'http://woweh.com/(comics/.+?)"')
     prevSearch = compile(r'woweh.com/(\?p=.+:?)".+:?="prev')
-    help = 'Index format: non'
 
 
 class Wulffmorgenthaler(_BasicScraper):
     latestUrl = 'http://www.wulffmorgenthaler.com/'
-    stripUrl = 'http://www.wulffmorgenthaler.com/Default.aspx?id=%s'
+    stripUrl = latestUrl + 'Default.aspx?id=%s'
     imageSearch = compile(r'img id="ctl00_content_Strip1_imgStrip".+?class="strip" src="(striphandler\.ashx\?stripid=[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})"')
     prevSearch = compile(r'<a href="(/default\.aspx\?id=[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})" id="ctl00_content_Strip1_aPrev">')
     help = 'Index format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (GUID)'
@@ -129,7 +128,7 @@ class WhiteNoise(_BasicScraper):
 
 class WapsiSquare(_BasicScraper):
     latestUrl = 'http://wapsisquare.com/'
-    stripUrl = 'http://wapsisquare.com/comic/%s'
+    stripUrl = latestUrl + 'comic/%s'
     imageSearch = compile(r'<img src="(http://wapsisquare.com/comics/.+?)"')
     prevSearch = compile(r'<a href="(.+?)"[^>]+?>Previous</a>')
     help = 'Index format: strip-name'
@@ -138,7 +137,7 @@ class WapsiSquare(_BasicScraper):
 
 class WrongWay(_BasicScraper):
     latestUrl = 'http://www.wrongwaycomics.com/'
-    stripUrl = 'http://www.wrongwaycomics.com/%s.html'
+    stripUrl = latestUrl + '%s.html'
     imageSearch = compile(r'<img src="(comics/.+?)"')
     prevSearch = compile(r' <a class="comicNav" href="(.+?)" onmouseover="previousLinkIn\(\)"')
     help = 'Index format: nnn'
@@ -147,7 +146,6 @@ class WrongWay(_BasicScraper):
 
 class WeCanSleepTomorrow(_BasicScraper):
     latestUrl = 'http://wecansleeptomorrow.com/'
-    stripUrl = 'http://wecansleeptomorrow.com/2009/12/07/smothered/'
     imageSearch = compile(r'<img src="(http://wecansleeptomorrow.com/comics/.+?)"')
     prevSearch = compile(r'<div class="nav-previous"><a href="(.+?)">')
     help = 'Index format: yyyy/mm/dd/stripname'
@@ -208,8 +206,8 @@ class Stellar(_WLP):
 
 
 class Wondermark(_BasicScraper):
-    latestUrl = 'http://wondermark.com'
-    stripUrl = 'http://wondermark.com/%s/'
+    latestUrl = 'http://wondermark.com/'
+    stripUrl = latestUrl + '%s/'
     imageSearch = compile(r'<img src="(http://wondermark.com/c/.+?)"')
     prevSearch = compile(r'<a href="(.+?)" rel="prev">')
     help = 'Index format: nnn'

@@ -1,6 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012 Bastian Kleineidam
+from __future__ import print_function
 import time
 
 class Output(object):
@@ -20,7 +21,7 @@ class Output(object):
             timestamp = time.strftime('%H:%M:%S ')
         else:
             timestamp = ''
-        print '%s%s> %s' % (timestamp, self.context, s)
+        print('%s%s> %s' % (timestamp, self.context, s))
 
     def writelines(self, lines, level=0):
         """Write multiple messages."""

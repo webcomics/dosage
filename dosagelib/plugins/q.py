@@ -7,7 +7,7 @@ from ..scraper import _BasicScraper
 
 class QuestionableContent(_BasicScraper):
     latestUrl = 'http://www.questionablecontent.net/'
-    stripUrl = 'http://www.questionablecontent.net/view.php?comic=%s'
+    stripUrl = latestUrl + 'view.php?comic=%s'
     imageSearch = compile(r'/(comics/\d+\.png)"')
     prevSearch = compile(r'<a href="(view.php\?comic=\d+)">Previous')
     help = 'Index format: n (unpadded)'
@@ -16,7 +16,7 @@ class QuestionableContent(_BasicScraper):
 
 class Qwantz(_BasicScraper):
     latestUrl = 'http://www.qwantz.com/index.php'
-    stripUrl = 'http://www.qwantz.com/index.php?comic=%s'
+    stripUrl = latestUrl + '?comic=%s'
     imageSearch = compile(r'<img src="(http://www.qwantz.com/comics/.+?)" class="comic"')
     prevSearch = compile(r'"><a href="(.+?)">&larr; previous</a>')
     help = 'Index format: n'

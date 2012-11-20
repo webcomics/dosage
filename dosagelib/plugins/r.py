@@ -8,7 +8,7 @@ from ..helpers import bounceStarter
 
 class RadioactivePanda(_BasicScraper):
     latestUrl = 'http://www.radioactivepanda.com/'
-    stripUrl = 'http://www.radioactivepanda.com/comic/%s'
+    stripUrl = latestUrl + 'comic/%s'
     imageSearch = compile(r'<img src="(/Assets/.*?)".+?"comicimg"')
     prevSearch = compile(r'<a href="(/comic/.*?)".+?previous_btn')
     help = 'Index format: n (no padding)'
@@ -24,7 +24,7 @@ class Rascals(_BasicScraper):
 
 class RealLife(_BasicScraper):
     latestUrl = 'http://www.reallifecomics.com/'
-    stripUrl = 'http://www.reallifecomics.com/achive/%s.html'
+    stripUrl = latestUrl + 'achive/%s.html'
     imageSearch = compile(r'"(/comics/.+?)"')
     prevSearch = compile(r'"(/archive/.+?)".+?nav_previous')
     help = 'Index format: yymmdd)'
@@ -33,7 +33,7 @@ class RealLife(_BasicScraper):
 
 class RedString(_BasicScraper):
     latestUrl = 'http://www.redstring.strawberrycomics.com/'
-    stripUrl = 'http://www.redstring.strawberrycomics.com/?p=%s'
+    stripUrl = latestUrl + '?p=%s'
     imageSearch = compile(r'<img src="(http://www.redstring.strawberrycomics.com/comics/.+?)"')
     prevSearch = compile(r'<a href="(.+?)">Previous Comic</a>')
     help = 'Index format: nnn'
@@ -42,7 +42,7 @@ class RedString(_BasicScraper):
 
 class Roza(_BasicScraper):
     latestUrl = 'http://www.junglestudio.com/roza/index.php'
-    stripUrl = 'http://www.junglestudio.com/roza/index.php\?date=%s'
+    stripUrl = latestUrl + '?date=%s'
     imageSearch = compile(r'<img src="(pages/.+?)"')
     prevSearch = compile(r'<a href="(index.php\?date=.+?)">[^>].+?navtable_01.gif')
     help = 'Index format: yyyy-mm-dd'
@@ -61,7 +61,7 @@ class RedMeat(_BasicScraper):
 
 class RunningWild(_BasicScraper):
     latestUrl = 'http://runningwild.katbox.net/'
-    stripUrl = 'http://runningwild.katbox.net/index.php?strip_id=%s'
+    stripUrl = latestUrl + 'index.php?strip_id=%s'
     imageSearch = compile(r'="(.+?strips/.+?)"')
     prevSearch = compile(r'(index.php\?strip_id=.+?)".+?navigation_back')
     help = 'Index format: n (unpadded)'

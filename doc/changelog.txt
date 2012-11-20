@@ -10,11 +10,12 @@ Changes:
 - installation: Require and use Python 2.7
 - comics: Removed the twisted and zope dependencies by adding
   an internal plugin search mechanism.
+- comics: Remove the disable mechanism.
 - testing: Refactored the test comic routine in proper unit tests.
 - cmdline: Improved terminal feature detection.
 
 Fixes:
-- comics: Fix a lot of comics.
+- comics: Fix a lot of comics; however there are still some that won't work.
 - comics: Don't add empty URLs to the list of found URLs.
 
 

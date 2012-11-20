@@ -1,17 +1,17 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-from re import compile, IGNORECASE, sub
+from re import compile, sub
 
 from ..scraper import _BasicScraper
-from ..util import fetchUrl
+from ..util import fetchUrl, tagre
 
 
 class _UClickScraper(_BasicScraper):
     homepage = 'http://content.uclick.com/a2z.html'
     baseUrl = 'http://www.uclick.com/client/zzz/%s/'
     stripUrl = property(lambda self: self.latestUrl + '%s/')
-    imageSearch = compile(r'<img[^>]+src="(http://synd.imgsrv.uclick.com/comics/\w+/\d{4}/[^"]+\.gif)"', IGNORECASE)
-    prevSearch = compile(r'<a href="(/client/zzz/\w+/\d{4}/\d{2}/\d{2}/)">Previous date', IGNORECASE)
+    imageSearch = compile(tagre("img", "src", r'(http://synd\.imgsrv\.uclick\.com/comics/\w+/\d{4}/[^"]+\.gif)'))
+    prevSearch = compile(tagre("a", "href", r'(/client/zzz/\w+/\d{4}/\d{2}/\d{2}/)') + 'Previous date')
     help = 'Index format: yyyy/mm/dd'
 
     @classmethod
@@ -20,13 +20,11 @@ class _UClickScraper(_BasicScraper):
 
     @classmethod
     def fetchSubmodules(cls):
-        exclusions = (
-            'index',
-            )
+        exclusions = ('index',)
 
         # XXX refactor this mess
-        submoduleSearch = compile(r'(<A HREF="http://content.uclick.com/content/\w+.html">[^>]+?</a>)', IGNORECASE)
-        partsMatch = compile(r'<A HREF="http://content.uclick.com/content/(\w+?).html">([^>]+?)</a>', IGNORECASE)
+        submoduleSearch = compile(tagre("a", "href", r'(http://content\.uclick\.com/content/\w+\.html)'))
+        partsMatch = compile(tagre("a", "href", r'http://content\.uclick\.com/content/(\w+?)\.html'))
         matches = fetchManyMatches(cls.homepage, (submoduleSearch,))[0]
         possibles = [partsMatch.match(match).groups() for match in matches]
 
@@ -37,7 +35,8 @@ class _UClickScraper(_BasicScraper):
         def fetchSubmodule(module):
             try:
                 return fetchUrl(cls.baseUrl % module, cls.imageSearch)
-            except:
+            except Exception:
+                # XXX log error
                 return False
 
         return [normalizeName(name) for part, name in possibles if part not in exclusions and fetchSubmodule(part)]

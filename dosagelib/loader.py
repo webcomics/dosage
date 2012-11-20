@@ -18,12 +18,12 @@ def get_modules(folder='plugins'):
         try:
             name ="..%s.%s" % (folder, modname)
             yield importlib.import_module(name, __name__)
-        except StandardError, msg:
+        except ImportError as msg:
             print "ERROR: could not load module %s: %s" % (modname, msg)
 
 
 def get_importable_modules(folder):
-    """Find all module files in the given folder that end witn '.py' and
+    """Find all module files in the given folder that end with '.py' and
     don't start with an underscore.
     @return module names
     @rtype: iterator of string

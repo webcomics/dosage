@@ -19,15 +19,15 @@ class DMFA(_BasicScraper):
 
 class DandyAndCompany(_BasicScraper):
     latestUrl = 'http://www.dandyandcompany.com/'
-    stripUrl = 'http://www.dandyandcompany.com/%s'
-    imageSearch = compile(r'<img src="(.*?/strips/.+?)"')
+    stripUrl = latestUrl + '%s'
+    imageSearch = compile(tagre("img", "src", r'([^"]*/strips/[^"]+)'))
     prevSearch = compile(r'<a href="(.*)" class="prev"')
     help = 'Index format: yyyy/mm/dd'
 
 
 class DarkWings(_BasicScraper):
     latestUrl = 'http://www.flowerlarkstudios.com/dark-wings/'
-    stripUrl = 'http://www.flowerlarkstudios.com/dark-wings/archive.php?day=%s'
+    stripUrl = latestUrl + 'archive.php?day=%s'
     imageSearch = compile(r'(comics/.+?)" W')
     prevSearch = compile(r"first_day.+?/(archive.+?)'.+?previous_day")
     help = 'Index format: yyyymmdd'
@@ -35,7 +35,7 @@ class DarkWings(_BasicScraper):
 
 class DeathToTheExtremist(_BasicScraper):
     latestUrl = 'http://www.dtecomic.com/'
-    stripUrl = 'http://www.dtecomic.com/?n=%s'
+    stripUrl = latestUrl + '?n=%s'
     imageSearch = compile(r'"(comics/.*?)"')
     prevSearch = compile(r'</a> <a href="(\?n=.*?)"><.+?/aprev.gif"')
     help = 'Index format: nnn'
@@ -43,7 +43,7 @@ class DeathToTheExtremist(_BasicScraper):
 
 class DeepFried(_BasicScraper):
     latestUrl = 'http://www.whatisdeepfried.com/'
-    stripUrl = 'http://www.whatisdeepfried.com/%s'
+    stripUrl = latestUrl + '%s'
     imageSearch = compile(r'(http://www.whatisdeepfried.com/comics/.+?)"')
     prevSearch = compile(r'"(http://www.whatisdeepfried.com/.+?)"><span class="prev">')
     help = 'Index format: non'
@@ -52,7 +52,7 @@ class DeepFried(_BasicScraper):
 
 class DoemainOfOurOwn(_BasicScraper):
     latestUrl = 'http://www.doemain.com/'
-    stripUrl = 'http://www.doemain.com/index.cgi/%s'
+    stripUrl = latestUrl + 'index.cgi/%s'
     imageSearch = compile(r"<img border='0' width='\d+' height='\d+' src='(/strips/\d{4}/\d{6}-[^\']+)'")
     prevSearch = compile(r'<a href="(/index\.cgi/\d{4}-\d{2}-\d{2})"><img width="\d+" height="\d+" border="\d+" alt="Previous Strip"')
     help = 'Index format: yyyy-mm-dd'
@@ -70,8 +70,8 @@ class DrFun(_BasicScraper):
 
 class Dracula(_BasicScraper):
     latestUrl = 'http://draculacomic.net/'
-    stripUrl = 'http://draculacomic.net/comic.php?comicID=%s'
-    imageSearch = compile(r'<img src="(comics/.+?)"')
+    stripUrl = latestUrl + 'comic.php?comicID=%s'
+    imageSearch = compile(tagre("img", "src", r'(comics/[^"]+)'))
     prevSearch = compile(r'&nbsp;<a class="archivelink" href="(.+?)">&laquo; Prev</a>')
     help = 'Index format: nnn'
 
@@ -79,7 +79,7 @@ class Dracula(_BasicScraper):
 
 class DragonTails(_BasicScraper):
     latestUrl = 'http://www.dragon-tails.com/'
-    stripUrl = 'http://www.dragon-tails.com/archive.php?date=%s'
+    stripUrl = latestUrl + 'archive.php?date=%s'
     imageSearch = compile(r'"(newcomic/.+?)"')
     prevSearch = compile(r'"(archive.+?)">.+n_2')
     help = 'Index format: yyyy-mm-dd'
@@ -87,7 +87,7 @@ class DragonTails(_BasicScraper):
 
 class DreamKeepersPrelude(_BasicScraper):
     latestUrl = 'http://www.dreamkeeperscomic.com/Prelude.php'
-    stripUrl = 'http://www.dreamkeeperscomic.com/Prelude.php?pg=%s'
+    stripUrl = latestUrl + '?pg=%s'
     imageSearch = compile(r'(images/PreludeNew/.+?)"')
     prevSearch = compile(r'(Prelude.php\?pg=.+?)"')
     help = 'Index format: n'
@@ -95,7 +95,7 @@ class DreamKeepersPrelude(_BasicScraper):
 
 class Drowtales(_BasicScraper):
     latestUrl = 'http://www.drowtales.com/mainarchive.php'
-    stripUrl = 'http://www.drowtales.com/mainarchive.php?location=%s'
+    stripUrl = latestUrl + '?location=%s'
     imageSearch = compile(r'src=".(/tmpmanga/.+?)"')
     prevSearch = compile(r'<a href="mainarchive.php(\?location=\d+)"><img src="[^"]*previousday\.gif"')
     help = 'Index format: yyyymmdd'
@@ -112,7 +112,7 @@ class DungeonCrawlInc(_BasicScraper):
 
 class DieselSweeties(_BasicScraper):
     latestUrl = 'http://www.dieselsweeties.com/'
-    stripUrl = 'http://www.dieselsweeties.com/archive/%s'
+    stripUrl = latestUrl + 'archive/%s'
     imageSearch = compile(r'src="(/hstrips/.+?)"')
     prevSearch = compile(r'href="(/archive/.+?)">(<img src="http://www.dieselsweeties.com/ximages/blackbackarrow160.png|previous webcomic)')
     help = 'Index format: n (unpadded)'
@@ -126,7 +126,7 @@ class DieselSweeties(_BasicScraper):
 
 class DominicDeegan(_BasicScraper):
     latestUrl = 'http://www.dominic-deegan.com/'
-    stripUrl = 'http://www.dominic-deegan.com/view.php?date=%s'
+    stripUrl = latestUrl + 'view.php?date=%s'
     imageSearch = compile(r'<img src="(.+?save-as=.+?)" alt')
     prevSearch = compile(r'"(view.php\?date=.+?)".+?prev21')
     help = 'Index format: yyyy-mm-dd'
@@ -157,7 +157,7 @@ class DresdenCodak(_BasicScraper):
 
 class DonkBirds(_BasicScraper):
     latestUrl = 'http://www.donkbirds.com/'
-    stripUrl = 'http://www.donkbirds.com/index.php?date=%s'
+    stripUrl = latestUrl + 'index.php?date=%s'
     imageSearch = compile(r'<img src="(strips/.+?)"')
     prevSearch = compile(r'<a href="(.+?)">Previous</a>')
     help = 'Index format: yyyy-mm-dd'

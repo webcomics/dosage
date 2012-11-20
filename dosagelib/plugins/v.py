@@ -16,11 +16,9 @@ class _VGCats(_BasicScraper):
         return self.latestUrl + '?strip_id=%s'
 
 
-
 class Super(_VGCats):
     name = 'VGCats/Super'
     latestUrl = 'http://www.vgcats.com/super/'
-
 
 
 class Adventure(_VGCats):
@@ -31,7 +29,7 @@ class Adventure(_VGCats):
 
 class ViiviJaWagner(_BasicScraper):
     latestUrl = 'http://www.hs.fi/viivijawagner/'
-    stripUrl = 'http://www.hs.fi/viivijawagner/%s'
     imageSearch = compile(r'<img id="strip\d+"\s+src="([^"]+)"', IGNORECASE)
     prevSearch = compile(r'<a href="(.+?)"[^>]+?>\nEdellinen&nbsp;\n<img src="http://www.hs.fi/static/hs/img/viivitaakse.gif"', MULTILINE | IGNORECASE)
+    # XXX ?
     help = 'Index format: shrugs!'

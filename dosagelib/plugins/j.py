@@ -7,7 +7,7 @@ from ..scraper import _BasicScraper
 
 class Jack(_BasicScraper):
     latestUrl = 'http://www.pholph.com/'
-    stripUrl = 'http://www.pholph.com/strip.php?id=5&sid=%s'
+    stripUrl = latestUrl + 'strip.php?id=5&sid=%s'
     imageSearch = compile(r'<img src="(./artwork/.+?/Jack.+?)"')
     prevSearch = compile(r'\|<a href="(.+?)">Previous Strip</a>')
     help = 'Index format: n (unpadded)'
@@ -16,7 +16,7 @@ class Jack(_BasicScraper):
 
 class JerkCity(_BasicScraper):
     latestUrl = 'http://www.jerkcity.com/'
-    stripUrl = 'http://www.jerkcity.com/jerkcity%s'
+    stripUrl = latestUrl + 'jerkcity%s'
     imageSearch = compile(r'"jerkcity.+?">.+?"(/jerkcity.+?)"')
     prevSearch = compile(r'"(jerkcity.+?)">.+?"/jerkcity.+?"')
     help = 'Index format: unknown'
@@ -25,7 +25,7 @@ class JerkCity(_BasicScraper):
 
 class JoeAndMonkey(_BasicScraper):
     latestUrl = 'http://www.joeandmonkey.com/'
-    stripUrl = 'http://www.joeandmonkey.com/%s'
+    stripUrl = latestUrl + '%s'
     imageSearch = compile(r'"(/comic/[^"]+)"')
     prevSearch = compile(r"<a href='(/\d+)'>Previous")
     help = 'Index format: nnn'

@@ -18,7 +18,7 @@ class OctopusPie(_BasicScraper):
 
 class OddFish(_BasicScraper):
     latestUrl = 'http://www.odd-fish.net/'
-    stripUrl = 'http://www.odd-fish.net/viewing.php?&comic_id=%s'
+    stripUrl = latestUrl + 'viewing.php?&comic_id=%s'
     imageSearch = compile(r'<img src="(images/\d{1,4}.\w{3,4})" ')
     prevSearch = compile(r'<a href="(.+?)"><img src="http://www.odd-fishing.net/i/older.gif" ')
     help = 'Index format: n (unpadded)'
@@ -27,7 +27,7 @@ class OddFish(_BasicScraper):
 
 class OhMyGods(_BasicScraper):
     latestUrl = 'http://ohmygods.co.uk/'
-    stripUrl = 'http://ohmygods.co.uk/strips/%s'
+    stripUrl = latestUrl + 'strips/%s'
     imageSearch = compile(r'<p class="omgs-strip"><img src="(/system/files/.+?)"')
     prevSearch = compile(r'<li class="custom_pager_prev"><a href="(/strips/.+?)"')
     help = 'Index format: yyyy-mm-dd'
@@ -45,7 +45,7 @@ class OnTheEdge(_BasicScraper):
 
 class OneQuestion(_BasicScraper):
     latestUrl = 'http://onequestioncomic.com/'
-    stripUrl = 'http://onequestioncomic.com/comics/%s/'
+    stripUrl = latestUrl + 'comics/%s/'
     imageSearch = compile(r'(istrip_files.+?)"')
     prevSearch = compile(r'First.+?"(comic.php.+?)".+?previous.png')
     help = 'Index format: n (unpadded)'
@@ -54,7 +54,7 @@ class OneQuestion(_BasicScraper):
 
 class OurHomePlanet(_BasicScraper):
     latestUrl = 'http://gdk.gd-kun.net/'
-    stripUrl = 'http://gdk.gd-kun.net/%s.html'
+    stripUrl = latestUrl + '%s.html'
     imageSearch = compile(r'<img src="(pages/comic.+?)"')
     prevSearch = compile(r'coords="50,18,95,65".+?href="(.+?\.html)".+?alt=')
     help = 'Index format: n (unpadded)'
@@ -81,7 +81,7 @@ class Oglaf(_BasicScraper):
 
 class OverCompensating(_BasicScraper):
     latestUrl = 'http://www.overcompensating.com/'
-    stripUrl = 'http://www.overcompensating.com/posts/%s.html'
+    stripUrl = latestUrl + 'posts/%s.html'
     imageSearch = compile(r'<img src="(/comics/.+?)"')
     prevSearch = compile(r'"><a href="(.+?)"[^>]+?>&nbsp;\<\- &nbsp;</a>')
     help = 'Index format: yyyymmdd'

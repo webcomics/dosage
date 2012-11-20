@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012 Bastian Kleineidam
-from __future__ import division
+from __future__ import division, print_function
 
 import urllib2, urlparse
 import sys
@@ -185,8 +185,8 @@ def urlopen(url, referrer=None, retries=3, retry_wait_seconds=5):
     while True:
         try:
             return urllib2.urlopen(req)
-        except IOError, msg:
-            out.write('URL retrieval failed: %s' % msg)
+        except IOError as msg:
+            out.write('URL retrieval of %s failed: %s' % (url, msg))
             out.write('waiting %d seconds and retrying (%d)' % (retry_wait_seconds, tries), 2)
             time.sleep(retry_wait_seconds)
             tries += 1
@@ -251,8 +251,8 @@ def getQueryParams(url):
 
 def internal_error(out=sys.stderr, etype=None, evalue=None, tb=None):
     """Print internal error message (output defaults to stderr)."""
-    print >> out, os.linesep
-    print >> out, """********** Oops, I did it again. *************
+    print(os.linesep, file=out)
+    print("""********** Oops, I did it again. *************
 
 You have found an internal error in %(app)s. Please write a bug report
 at %(url)s and include the following information:
@@ -262,7 +262,7 @@ at %(url)s and include the following information:
 Not disclosing some of the information above due to privacy reasons is ok.
 I will try to help you nonetheless, but you have to give me something
 I can work with ;) .
-""" % dict(app=AppName, url=SupportUrl)
+""" % dict(app=AppName, url=SupportUrl), file=out)
     if etype is None:
         etype = sys.exc_info()[0]
     if evalue is None:
@@ -274,15 +274,15 @@ I can work with ;) .
     print_app_info(out=out)
     print_proxy_info(out=out)
     print_locale_info(out=out)
-    print >> out, os.linesep, \
-            "******** %s internal error, over and out ********" % AppName
+    print(os.linesep,
+            "******** %s internal error, over and out ********" % AppName, file=out)
 
 
 def print_env_info(key, out=sys.stderr):
     """If given environment key is defined, print it out."""
     value = os.getenv(key)
     if value is not None:
-        print >> out, key, "=", repr(value)
+        print(key, "=", repr(value), file=out)
 
 
 def print_proxy_info(out=sys.stderr):
@@ -298,12 +298,12 @@ def print_locale_info(out=sys.stderr):
 
 def print_app_info(out=sys.stderr):
     """Print system and application info (output defaults to stderr)."""
-    print >> out, "System info:"
-    print >> out, App
-    print >> out, "Python %(version)s on %(platform)s" % \
-                    {"version": sys.version, "platform": sys.platform}
+    print("System info:", file=out)
+    print(App, file=out)
+    print("Python %(version)s on %(platform)s" %
+                    {"version": sys.version, "platform": sys.platform}, file=out)
     stime = strtime(time.time())
-    print >> out, "Local time:", stime
+    print("Local time:", stime, file=out)
 
 
 def strtime(t):

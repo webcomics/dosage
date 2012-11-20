@@ -7,7 +7,7 @@ from ..scraper import _BasicScraper
 
 class YAFGC(_BasicScraper):
     latestUrl = 'http://yafgc.shipsinker.com/'
-    stripUrl = 'http://yafgc.shipsinker.com/index.php?strip_id=%s'
+    stripUrl = latestUrl + 'index.php?strip_id=%s'
     imageSearch = compile(r'(istrip_.+?)"')
     prevSearch = compile(r'(/.+?)">\r\n.+?prev.gif', MULTILINE)
     help = 'Index format: n'
@@ -23,7 +23,7 @@ class YouSayItFirst(_BasicScraper):
 
 class Yirmumah(_BasicScraper):
     latestUrl = 'http://yirmumah.net/archives.php'
-    stripUrl = 'http://yirmumah.net/archives.php?date=%s'
+    stripUrl = latestUrl + '?date=%s'
     imageSearch = compile(r'<img src="(strips/\d{8}\..*?)"')
     prevSearch = compile(r'<a href="(\?date=\d{8})">.*Previous')
     help = 'Index format: yyyymmdd'

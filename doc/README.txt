@@ -38,16 +38,6 @@ strip of all of them:
 For advanced options and features execute `dosage -h` or look at the dosage
 manual page.
 
-Offensive comics
------------------
-There are some comics supported by Dosage that may be offensive to readers or
-to others that have access to the downloaded images.
-SexyLosers is one module that has been discussed. Dosage offers a mechanism
-to disable such modules. Modules listed in "/etc/dosage/disabled" and
-"~/.dosage/disabled" will be disabled. These files should contain only one
-module name per line. Note: Under Windows "~" will also expand to the user's
-home directory, usually "C:\Documents and Settings\UserName".
-
 Dependencies
 -------------
 Dosage requires Python version 2.7 or higher, which can be downloaded

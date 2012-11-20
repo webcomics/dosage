@@ -8,7 +8,7 @@ from ..helpers import indirectStarter
 
 class TalesOfPylea(_BasicScraper):
     latestUrl = 'http://talesofpylea.com/'
-    stripUrl = 'http://talesofpylea.com/%s/'
+    stripUrl = latestUrl + '%s/'
     imageSearch = compile(r'<img src="(istrip_files/strips/.+?)"')
     prevSearch = compile(r' <a href="(.+?)">Back</a>')
     help = 'Index format: nnn'
@@ -17,7 +17,7 @@ class TalesOfPylea(_BasicScraper):
 
 class TheNoob(_BasicScraper):
     latestUrl = 'http://www.thenoobcomic.com/index.php'
-    stripUrl = 'http://www.thenoobcomic.com/index.php?pos=%'
+    stripUrl = latestUrl + '?pos=%'
     imageSearch = compile(r'<img src="(/headquarters/comics/.+?)"')
     prevSearch = compile(r'<a class="comic_nav_previous_button" href="(.+?)"></a>')
     help = 'Index format: nnnn'
@@ -26,7 +26,7 @@ class TheNoob(_BasicScraper):
 
 class TheOrderOfTheStick(_BasicScraper):
     latestUrl = 'http://www.giantitp.com/'
-    stripUrl = 'http://www.giantitp.com/comics/images/%s'
+    stripUrl = latestUrl + 'comics/images/%s'
     imageSearch = compile(r'<IMG src="(/comics/images/.+?)">')
     prevSearch = compile(r'<A href="(/comics/oots\d{4}\.html)"><IMG src="/Images/redesign/ComicNav_Back.gif"')
     help = 'Index format: n (unpadded)'
@@ -45,7 +45,7 @@ class TheParkingLotIsFull(_BasicScraper):
 
 class TheWotch(_BasicScraper):
     latestUrl = 'http://www.thewotch.com/'
-    stripUrl = 'http://www.thewotch.com/?epDate=%s'
+    stripUrl = latestUrl + '?epDate=%s'
     imageSearch = compile(r"<img.+?src='(comics/.+?)'")
     prevSearch = compile(r"<link rel='Previous' href='(\?epDate=\d+-\d+-\d+)'")
     help = 'Index format: yyyy-mm-dd'
@@ -62,7 +62,7 @@ class Thorn(_BasicScraper):
 
 class TwoTwoOneFour(_BasicScraper):
     latestUrl = 'http://www.nitrocosm.com/go/2214_classic/'
-    stripUrl = 'http://www.nitrocosm.com/go/2214_classic/%s/'
+    stripUrl = latestUrl + '%s/'
     imageSearch = compile(r'<img class="gallery_display" src="([^"]+)"')
     prevSearch = compile(r'<a href="([^"]+)"[^>]*><button type="submit" class="nav_btn_previous">')
     help = 'Index format: n (unpadded)'
@@ -71,7 +71,7 @@ class TwoTwoOneFour(_BasicScraper):
 
 class TheWhiteboard(_BasicScraper):
     latestUrl = 'http://www.the-whiteboard.com/'
-    stripUrl = 'http://www.the-whiteboard.com/auto%s.html'
+    stripUrl = latestUrl + 'auto%s.html'
     imageSearch = compile(r'<img SRC="(autotwb\d{1,4}.+?|autowb\d{1,4}.+?)">', IGNORECASE)
     prevSearch = compile(r'&nbsp<a href="(.+?)">previous</a>', IGNORECASE)
     help = 'Index format: twb or wb + n wg. twb1000'
@@ -119,7 +119,7 @@ class MalloryChan(_TheFallenAngel):
 class HMHigh(_BasicScraper):
     name = 'TheFallenAngel/HMHigh'
     latestUrl = 'http://www.thefallenangel.co.uk/hmhigh/'
-    stripUrl = 'http://www.thefallenangel.co.uk/hmhigh/?id=%s'
+    stripUrl = latestUrl + '?id=%s'
     imageSearch = compile(r'<img src="(http://www.thefallenangel.co.uk/hmhigh/img/comic/.+?)"')
     prevSearch = compile(r' <a href="(http://www.thefallenangel.co.uk/.+?)" title=".+?">Prev</a>')
     help = 'Index format: nnn'
@@ -128,7 +128,7 @@ class HMHigh(_BasicScraper):
 
 class TheOuterQuarter(_BasicScraper):
     latestUrl = 'http://theouterquarter.com/'
-    stripUrl = 'http://theouterquarter.com/comic/%s'
+    stripUrl = latestUrl + 'comic/%s'
     imageSearch = compile(r'<img src="(http://theouterquarter.com/comics/.+?)"')
     prevSearch = compile(r'<div class="nav-previous"><a href="([^"]+)" rel="prev">')
     help = 'Index format: nnn'
@@ -137,7 +137,7 @@ class TheOuterQuarter(_BasicScraper):
 
 class TheHorrificAdventuresOfFranky(_BasicScraper):
     latestUrl = 'http://www.boneyardfranky.com/'
-    stripUrl = 'http://www.boneyardfranky.com/?p=%s'
+    stripUrl = latestUrl + '?p=%s'
     imageSearch = compile(r'<img src="(http://www.boneyardfranky.com/comics/.+?)"')
     prevSearch = compile(r'<div class="nav-previous"><a href="(.+?)">')
     help = 'Index format: nnn'

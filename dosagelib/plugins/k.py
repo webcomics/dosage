@@ -3,11 +3,12 @@
 from re import compile, IGNORECASE
 
 from ..scraper import _BasicScraper
+from ..util import tagre
 
 
 class KernelPanic(_BasicScraper):
     latestUrl = 'http://www.ubersoft.net/kpanic/'
-    stripUrl = 'http://www.ubersoft.net/kpanic/d/%s'
+    stripUrl = latestUrl + 'd/%s'
     imageSearch = compile(r'src="(.+?/kp/kp.+?)" ')
     prevSearch = compile(r'<li class="previous"><a href="(.+?)">')
     help = 'Index format: yyyymmdd.html'
@@ -29,7 +30,7 @@ class Key(_BasicScraper):
 
 class Krakow(_BasicScraper):
     latestUrl = 'http://www.krakowstudios.com/'
-    stripUrl = 'http://www.krakowstudios.com/archive.php?date=%s'
+    stripUrl = latestUrl + 'archive.php?date=%s'
     imageSearch = compile(r'<img src="(comics/.+?)"')
     prevSearch = compile(r'<a href="(archive\.php\?date=.+?)"><img border=0 name=previous_day')
     help = 'Index format: yyyymmdd'
@@ -45,7 +46,7 @@ class Kukuburi(_BasicScraper):
 
 class KevinAndKell(_BasicScraper):
     latestUrl = 'http://www.kevinandkell.com/'
-    stripUrl = 'http://www.kevinandkell.com/%s/kk%s%s.html'
+    stripUrl = latestUrl + '%s/kk%s%s.html'
     imageSearch = compile(r'<img.+?src="(/?(\d+/)?strips/kk\d+.gif)"', IGNORECASE)
     prevSearch = compile(r'<a.+?href="(/?(\.\./)?\d+/kk\d+\.html)"[^>]*><span>Previous Strip', IGNORECASE)
     help = 'Index format: yyyy-mm-dd'
@@ -54,10 +55,18 @@ class KevinAndKell(_BasicScraper):
         self.currentUrl = self.stripUrl % tuple(map(int, index.split('-')))
 
 
-
 class KillerKomics(_BasicScraper):
     latestUrl = 'http://www.killerkomics.com/web-comics/index_ang.cfm'
     stripUrl = 'http://www.killerkomics.com/web-comics/%s.cfm'
     imageSearch = compile(r'<img src="(http://www.killerkomics.com/FichiersUpload/Comics/.+?)"')
     prevSearch = compile(r'<div id="precedent"><a href="(.+?)"')
     help = 'Index format: strip-name'
+
+
+class KrazyLarry(_BasicScraper):
+    latestUrl = 'http://www.krazylarry.com/'
+    stripUrl = latestUrl + 'd/%s.html'
+    imageSearch = compile(tagre("img", "src", r'(/comic[s|/][^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'[^"]*(/d/\d+\.s?html)')+r"[^>]+/images/(?:nav_02|previous_day)\.gif")
+    help = 'Index format: yyyymmdd'
+

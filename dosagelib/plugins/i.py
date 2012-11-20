@@ -3,11 +3,12 @@
 from re import compile, IGNORECASE
 
 from ..scraper import _BasicScraper
+from ..util import tagre
 
 
 class IDreamOfAJeanieBottle(_BasicScraper):
     latestUrl = 'http://jeaniebottle.com/'
-    stripUrl = 'http://jeaniebottle.com/review.php?comicID='
+    stripUrl = latestUrl + 'review.php?comicID='
     imageSearch = compile(r'(/comics/.+?)"')
     prevSearch = compile(r'First".+?(review.php.+?)".+?prev_a.gif')
     help = 'Index format: n (unpadded)'
@@ -15,7 +16,7 @@ class IDreamOfAJeanieBottle(_BasicScraper):
 
 class IrregularWebcomic(_BasicScraper):
     latestUrl = 'http://www.irregularwebcomic.net/'
-    stripUrl = 'http://www.irregularwebcomic.net/cgi-bin/comic.pl?comic=%s'
+    stripUrl = latestUrl + 'cgi-bin/comic.pl?comic=%s'
     imageSearch = compile(r'<img .*src="(.*comics/.*(png|jpg|gif))".*>')
     prevSearch = compile(r'<a href="(/\d+\.html|/cgi-bin/comic\.pl\?comic=\d+)">Previous ')
     help = 'Index format: nnn'
@@ -23,7 +24,7 @@ class IrregularWebcomic(_BasicScraper):
 
 class InsideOut(_BasicScraper):
     latestUrl = 'http://www.insideoutcomic.com/'
-    stripUrl = 'http://www.insideoutcomic.com/html/%s.html'
+    stripUrl = latestUrl + 'html/%s.html'
     imageSearch = compile(r'Picture12LYR.+?C="(.+?/assets/images/.+?)"')
     prevSearch = compile(r'Picture7LYR.+?F="(.+?/html/.+?)"')
     help = 'Index format: n_comic_name'
@@ -75,3 +76,12 @@ class ICantDrawFeet(_BasicScraper):
     imageSearch = compile(r'src="(http://icantdrawfeet.com/comics/.+?)"')
     prevSearch = compile(r'<a href="(http://icantdrawfeet.com/.+?)"><img src="http://icantdrawfeet.com/pageimages/prev.png"')
     help = 'Index format: yyyy/mm/dd/stripname'
+
+
+class ItsWalky(_BasicScraper):
+    latestUrl = 'http://www.itswalky.com/'
+    stripUrl = latestUrl + 'd/%s.html'
+    imageSearch = compile(tagre("img", "src", r'(/comic[s|/][^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'[^"]*(/d/\d+\.s?html)')+r"[^>]+/images/(?:nav_02|previous_day)\.gif")
+    help = 'Index format: yyyymmdd'
+

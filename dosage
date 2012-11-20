@@ -17,6 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+from __future__ import print_function
 import sys
 import os
 import optparse
@@ -24,7 +25,7 @@ import optparse
 from dosagelib import events, scraper
 from dosagelib.output import out
 from dosagelib.util import get_columns, internal_error
-from dosagelib.configuration import App, Freeware, Copyright
+from dosagelib.configuration import App, Freeware, Copyright, SupportUrl
 
 def setupOptions():
     """Construct option parser.
@@ -48,9 +49,10 @@ def setupOptions():
 
 def displayVersion():
     """Display application name, version, copyright and license."""
-    print App
-    print Copyright
-    print Freeware
+    print(App)
+    print(Copyright)
+    print(Freeware)
+    print("For support see", SupportUrl)
     return 0
 
 
@@ -70,7 +72,7 @@ def saveComicStrip(strip, basepath):
             filename, saved = image.save(basepath)
             if saved:
                 allskipped = False
-        except IOError, msg:
+        except IOError as msg:
             out.write('Error saving %s: %s' % (image.filename, msg))
             errors += 1
     return errors, allskipped
@@ -123,7 +125,7 @@ def run(options, comics):
         if options.modhelp:
             return displayHelp(comics, options.basepath)
         return getComics(options, comics)
-    except ValueError, msg:
+    except ValueError as msg:
         out.write("Error: %s" % msg)
     return 1
 
@@ -143,7 +145,7 @@ def doList(columnList):
 def doSingleList(scrapers):
     """Get list of scraper names, one per line."""
     for num, scraperobj in enumerate(scrapers):
-        print scraperobj.get_name()
+        print(scraperobj.get_name())
     return num
 
 
@@ -155,7 +157,7 @@ def doColumnList(scrapers):
     maxlen = max([len(name) for name in names])
     namesPerLine = int(screenWidth / (maxlen + 1))
     while names:
-        print ''.join([name.ljust(maxlen) for name in names[:namesPerLine]])
+        print(''.join([name.ljust(maxlen) for name in names[:namesPerLine]]))
         del names[:namesPerLine]
     return num
 
@@ -192,7 +194,7 @@ def main():
         options, args = parser.parse_args()
         res = run(options, args)
     except KeyboardInterrupt:
-        print "Aborted."
+        print("Aborted.")
         res = 1
     except Exception:
         internal_error()

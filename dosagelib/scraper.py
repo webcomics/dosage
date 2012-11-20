@@ -1,24 +1,10 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012 Bastian Kleineidam
-import os
 from . import loader
 from .util import fetchUrls
 from .comic import ComicStrip
 from .output import out
-
-disabled = []
-def init_disabled():
-    filename = os.path.expanduser('~/.dosage/disabled')
-    if os.path.isfile(filename):
-        with open(filename) as f:
-            for line in f:
-                if line and not line.startswith('#'):
-                    disabled.append(line.rstrip())
-init_disabled()
-
-class DisabledComicError(ValueError):
-    pass
 
 
 class _BasicScraper(object):

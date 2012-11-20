@@ -3,6 +3,7 @@
 """
 File and path utilities.
 """
+import importlib
 
 def has_module (name):
     """Test if given module can be imported.
@@ -10,7 +11,7 @@ def has_module (name):
     @rtype: bool
     """
     try:
-        exec "import %s as _bla" % name
+        importlib.import_module(name)
         return True
     except (OSError, ImportError):
         # some modules (for example HTMLtidy) raise OSError

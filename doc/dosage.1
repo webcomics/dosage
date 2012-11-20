@@ -2,30 +2,27 @@
 .SH NAME
 dosage \- comic strip downloader
 .SH SYNOPSIS
-.B dosage
-.RI [ options ]
-.I module
-.RI [ module .\|.\|.]
+\fBdosage\fP [\fIoptions\fP] \fImodule\fP...
 .SH DESCRIPTION
 .B dosage
-is an application designed to keep a local \(oqmirror\(cq of specific
+is an application designed to keep a local mirror of specific
 web comics and other picture\-based content, such as
-\(oqPicture Of The Day\(cq sites, with a variety of options
+\fIPicture Of The Day\fP sites, with a variety of options
 for updating and maintaining collections.
 .SH OPTIONS
 .TP
-.BI \-b " PATH" "\fR,\fP \-\^\-basepath=" PATH
-Specifies a base path to put comic subdirectories. The default is \(oqComics\(cq.
+\fB\-b\fP \fIPATH\fP, \fB\-\-basepath=\fP\fIPATH\fP
+Specifies a base path to put comic subdirectories. The default is \fBComics\fP.
 .TP
-.BI \-\^\-baseurl= PATH
+\fB\-\-baseurl=\fP\fIPATH\fP
 Specifies the base URL for output events. The default is a local file URI.
 .TP
-.BR \-a ", " \-\^\-all
+\fB\-a\fP, \fB\-\-all\fP
 Traverses all available strips backwards from the current one.
 This can be useful you want a full collection of a new comic strip,
 or update an existing one where files are missing.
 .
-Catchups can start at a specific image by using the index syntax, see
+Catchups can start at a specific strip by using the index syntax, see
 the
 .B INDEX SYNTAX
 and
@@ -35,34 +32,32 @@ and want only to download the missing files. To make this task easy,
 the traversal ends at the first existing image file when starting from
 an index (excluding the index itself).
 .TP
-.BR \-h ", " \-\^\-help
+\fB\-h\fP, \fB\-\-help\fP
 Output brief help information.
 .TP
-.BR \-l ", " \-\^\-list
+\fB\-l\fP, \fB\-\-list\fP
 List available comic modules in multi\-column fashion.
 .TP
-.BR \-\^\-singlelist
+\fB\-\-singlelist\fP
 List available comic modules in single-column fashion.
 .TP
-.BI \-m " MODULE" "\fR,\fP \-\^\-modulehelp=" MODULE
-Output module-specific help for
-.IR MODULE .
+\fB\-m\fP \fIMODULE\fP, \fB\-\-modulehelp=\fP\fIMODULE\fP
+Output module-specific help for \fIMODULE\fP.
 .TP
-.BI \-o " OUTPUT" "\fR,\fP \-\^\-output=" OUTPUT
-.I OUTPUT
-may be any one of the following:
+\fB\-o\fP \fIOUTPUT\fP, \fB\-\-output=\fP\fIOUTPUT\fP
+\fIOUTPUT\fP may be any one of the following:
 .PP
 .RS
 .BR "html " \-
 Writes out an HTML file linking to the strips actually downloaded in the
 current run, named by date (ala dailystrips). The files can be found in the
-\'html' directory of your Comics directory.
+\fBhtml\fP directory of your \fBComics\fP directory.
 .RE
 .PP
 .RS
 .BR "rss " \-
 Writes out an RSS feed detailing what strips were downloaded in the last 24
-hours. The feed can be found in Comics/dailydose.xml.
+hours. The feed can be found in \fBComics/dailydose.xml\fP.
 .RE
 .PP
 .RS
@@ -71,13 +66,13 @@ Writes an RSS feed with all of the strips downloaded during the run, for use
 with your favourite RSS aggregator.
 .RE
 .TP
-.BR \-t ", " \-\^\-timestamps
+\fB\-t\fP, \fB\-\-timestamps\fP
 Print timestamps for all output at any level.
 .TP
-.BR \-v ", " \-\^\-verbose
+\fB\-v\fP, \fB\-\-verbose\fP
 Increase the output level by one with each occurence.
 .TP
-.BR \-V ", " \-\^\-version
+\fB\-V\fP, \fB\-\-version\fP
 Display the version number.
 .I module
 At least one valid
@@ -90,32 +85,24 @@ arguments can be specified on the command line.
 Module names are case insensitive, and it is sufficient to specify a
 unique substring of the module name.
 .SH INDEX SYNTAX
-One can indicate the start of a list of
-.B comma seperated
-indices using a
-.RB \(oq : "\(cq."
+Instead of starting at the latest comic strip, an index lets dosage start
+at a certain strip. The index can be specified by appending a colon \fB:\fP
+and the index name after the module. Multiple comma-spearated indices can
+also be specified.
 .PP
-The index format is documented when using the \fB\-\-modulehelp\fP option.
-.SH OFFENSIVE COMICS
-Some users may find certain comics offensive and wish to disable them.
-Modules listed in
-.B /etc/dosage/disabled
-and
-.B ~/.dosage/disabled
-will be disabled. These files should contain only one module name per line.
+The index name itself usually is the part of the comic strip URL that identifiess
+a strip, eg. a number or a date. The expected format is documented when using
+the \fB\-\-modulehelp\fP option.
 .SH SPECIAL SYNTAX
 .TP
 .B @
-This expands to mean all the comics currently in your \(oqComics\(cq
+This expands to mean all the comics currently in your \fBComics\fP
 directory. All other specified comic module names will be ignored.
 .TP
 .B @@
 This expands to mean all the comics available to Dosage.
 .PP
-.B INDEX SYNTAX
-can not be used with
-.B SPECIAL SYNTAX
-.
+\fBINDEX SYNTAX\fP can not be used with \fBSPECIAL SYNTAX\fP.
 .SH EXAMPLES
 Retrieve all Mega Tokyo comics:
 .RS
@@ -127,7 +114,7 @@ Retrieve the current comic of Cyanide and Happiness:
 .B dosage cyanideandhappiness
 .RE
 .PP
-Retrieve the current strip of all comics in your \(oqComics\(cq directory:
+Retrieve the current strip of all comics in your \fBComics\fP directory:
 .RS
 .B dosage @
 .RE
@@ -149,7 +136,7 @@ the beginning until an existing file is found:
 .SH ENVIRONMENT
 .IP HTTP_PROXY
 .B mainline
-will use the specified HTTP proxy whenever possible.
+will use the specified HTTP proxy when downloading URL contents.
 .SH NOTES
 Should retrieval fail on any given strip
 .B mainline
@@ -172,15 +159,8 @@ the program run was aborted with Ctrl-C
 .PP
 Else the return value is zero.
 .SH BUGS
-See
-.I http://trac.slipgate.za.net/dosage
-for a list of current development tasks and suggestions.
-
-.SH FILES
-.IP "\fB/etc/dosage/disabled\fR"
-Disables comic modules on a global scale.
-.IP "\fB~/.dosage/disabled\fR"
-Disables comic modules on a local scale.
+Users can report or view bugs, patches or feature suggestions at
+.I https://github.com/wummel/dosage/issues
 .SH AUTHORS
 Jonathan Jacobs <korpse@slipgate.za.net>
 .br
