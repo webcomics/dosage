@@ -1,55 +1,45 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-from re import compile, IGNORECASE
+# Copyright (C) 2012 Bastian Kleineidam
 
+from re import compile
 from ..scraper import _BasicScraper
 from ..helpers import indirectStarter
+from ..util import tagre
 
 
 class OctopusPie(_BasicScraper):
-    starter = indirectStarter('http://www.octopuspie.com/2007-05-14/001-pea-wiggle/',
-                              compile(r'<a href="(http://www.octopuspie.com/.+?)"><b>latest comic</b>', IGNORECASE))
+    starter = indirectStarter('http://www.octopuspie.com/',
+        compile(tagre("a", "href", r'(http://www\.octopuspie\.com/[^"]+)') +
+                tagre("img", "src", r'http://www\.octopuspie\.com/junk/latest\.png')))
     stripUrl = 'http://www.octopuspie.com/%s'
-    imageSearch = compile(r'<img src="(http://www.octopuspie.com/strippy/.+?)"')
-    prevSearch = compile(r'<link rel=\'prev\'[^>]+?href=\'(http://www.octopuspie.com/.+?)\'')
+    imageSearch = compile(tagre("img", "src", r'(http://www\.octopuspie\.com/strippy/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.octopuspie\.com/[^"]+)', after="prev"))
     help = 'Index format: yyyy-mm-dd/nnn-strip-name'
-
 
 
 class OddFish(_BasicScraper):
     latestUrl = 'http://www.odd-fish.net/'
-    stripUrl = latestUrl + 'viewing.php?&comic_id=%s'
-    imageSearch = compile(r'<img src="(images/\d{1,4}.\w{3,4})" ')
-    prevSearch = compile(r'<a href="(.+?)"><img src="http://www.odd-fishing.net/i/older.gif" ')
-    help = 'Index format: n (unpadded)'
-
-
-
-class OhMyGods(_BasicScraper):
-    latestUrl = 'http://ohmygods.co.uk/'
-    stripUrl = latestUrl + 'strips/%s'
-    imageSearch = compile(r'<p class="omgs-strip"><img src="(/system/files/.+?)"')
-    prevSearch = compile(r'<li class="custom_pager_prev"><a href="(/strips/.+?)"')
-    help = 'Index format: yyyy-mm-dd'
-
+    stripUrl = latestUrl + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.odd-fish\.net/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.odd-fish\.net/[^"]+)', after="navi-prev"))
+    help = 'Index format: stripname'
 
 
 class OnTheEdge(_BasicScraper):
-    latestUrl = 'http://www.ontheedgecomics.com/'
+    latestUrl = 'http://ontheedgecomics.com/'
     stripUrl = 'http://ontheedgecomics.com/comic/ote%s'
     imageSearch = compile(r'<img src="(http://ontheedgecomics.com/comics/.+?)"')
     prevSearch = compile(r'<a href="([^"]+)" rel="prev">')
     help = 'Index format: nnn (unpadded)'
 
 
-
 class OneQuestion(_BasicScraper):
     latestUrl = 'http://onequestioncomic.com/'
-    stripUrl = latestUrl + 'comics/%s/'
-    imageSearch = compile(r'(istrip_files.+?)"')
-    prevSearch = compile(r'First.+?"(comic.php.+?)".+?previous.png')
+    stripUrl = latestUrl + 'comic.php?strip_id=%s'
+    imageSearch = compile(tagre("img", "src", r'(istrip_files/strips/\d+\.jpg)'))
+    prevSearch = compile(tagre("a", "href", r'(comic\.php\?strip_id=\d+)') + tagre("img", "src", r'img/arrow_prev\.jpg'))
     help = 'Index format: n (unpadded)'
-
 
 
 class OurHomePlanet(_BasicScraper):
@@ -61,22 +51,19 @@ class OurHomePlanet(_BasicScraper):
 
 
 class OkCancel(_BasicScraper):
-    stripUrl = 'http://www.ok-cancel.com/comic/%s.html'
-    imageSearch = compile(r'src="(http://www.ok-cancel.com/strips/okcancel\d{8}.gif)"', IGNORECASE)
-    prevSearch = compile(r'<div class="previous"><a href="(http://www.ok-cancel.com/comic/\d{1,4}.html)">', IGNORECASE)
-    starter = indirectStarter('http://www.ok-cancel.com/', prevSearch)
+    stripUrl = 'http://okcancel.com/comic/%s.html'
+    imageSearch = compile(tagre("img", "src", r'(http://okcancel\.com/strips/okcancel\d{8}\.gif)'))
+    prevSearch = compile(tagre("div", "class", "previous") + tagre("a", "href", r'(http://okcancel\.com/comic/\d{1,4}\.html)'))
+    starter = indirectStarter('http://okcancel.com/', prevSearch)
     help = 'Index format: yyyymmdd'
 
 
-
 class Oglaf(_BasicScraper):
-    starter = indirectStarter('http://oglaf.com/',
-                              compile(r'<a href="(.+?)"><img src="over18.gif"', IGNORECASE))
-    stripUrl = 'http://oglaf.com/%s.html'
-    imageSearch = compile(r'/><img src="(.+?)"[^>]+?width="760" height="596"', IGNORECASE)
-    prevSearch = compile(r'<a href="(.+?)"[^>]+?><img src="prev.gif"', IGNORECASE)
-    help = 'Index format: nn'
-
+    latestUrl = 'http://oglaf.com/'
+    stripUrl = latestUrl + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(/media/comic/[^"]+)', before="strip"))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)') + tagre("div", "id", "pvs"))
+    help = 'Index format: stripname/nn'
 
 
 class OverCompensating(_BasicScraper):

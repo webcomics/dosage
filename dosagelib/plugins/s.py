@@ -1,20 +1,20 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
+# Copyright (C) 2012 Bastian Kleineidam
+
 from re import compile, MULTILINE, IGNORECASE, sub
 from os.path import splitext
-
 from ..scraper import _BasicScraper
-from ..helpers import bounceStarter, indirectStarter
+from ..helpers import indirectStarter
 from ..util import tagre
 
 
 class SailorsunOrg(_BasicScraper):
     latestUrl = 'http://www.sailorsun.org/'
-    stripUrl = latestUrl + 'browse.php?comicID=%s'
-    imageSearch = compile(r'(comics/.+?)"')
-    prevSearch = compile(r'/(browse.php.+?)".+?/prev.gif')
+    stripUrl = latestUrl + '?p=%s'
+    imageSearch = compile(tagre("img", "src", r'(http://sailorsun\.org/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://sailorsun\.org/\?p=\d+)', after="prev"))
     help = 'Index format: n (unpadded)'
-
 
 
 class SamAndFuzzy(_BasicScraper):
@@ -25,53 +25,51 @@ class SamAndFuzzy(_BasicScraper):
     help = 'Index format: nnnn'
 
 
-
 class SarahZero(_BasicScraper):
     latestUrl = 'http://www.sarahzero.com/'
     stripUrl = latestUrl + 'sz_%s.html'
-    imageSearch = compile(r'<img src="(z_(?:(?:spreads)|(?:temp)).+?)" alt=""')
-    prevSearch = compile(r'onmouseout="changeImages\(\'sz_05_nav\',\'z_site/sz_05_nav.gif\'\);return true" href="(sz_.+?)">')
+    imageSearch = compile(tagre("img", "src", r'(z_spreads/sz_[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(sz_\d+\.html)') + tagre("img", "src", r'z_site/sz_05_nav\.gif'))
     help = 'Index format: nnnn'
-
 
 
 class ScaryGoRound(_BasicScraper):
     latestUrl = 'http://www.scarygoround.com/'
     stripUrl = latestUrl + '?date=%s'
-    imageSearch = compile(r'<img src="(strips/\d{8}\..{3})"')
-    prevSearch = compile(r'f><a href="(.+?)"><img src="site-images/previous.png"')
+    imageSearch = compile(tagre("img", "src", r'(strips/\d+\.png)'))
+    prevSearch = compile(tagre("a", "href", r'(\?date=\d+)') + "Previous")
     help = 'Index format: n (unpadded)'
 
 
 class SchlockMercenary(_BasicScraper):
     latestUrl = 'http://www.schlockmercenary.com/'
-    stripUrl = latestUrl + 'd/%s.html'
-    imageSearch = compile(tagre("img", "src", r'(/comic[s|/][^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'[^"]*(/d/\d+\.s?html)')+r"[^>]+/images/(?:nav_02|previous_day)\.gif")
-    help = 'Index format: yyyymmdd'
+    stripUrl = latestUrl + '%s'
+    imageSearch = compile(tagre("img", "src", r'(http://static\.schlockmercenary\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(/d+)', after="nav-previous"))
+    help = 'Index format: yyyy-mm-dd'
 
 
 class SchoolBites(_BasicScraper):
-    latestUrl = 'http://www.schoolbites.net/'
+    latestUrl = 'http://schoolbites.net/'
     stripUrl = latestUrl + 'd/%s.html'
-    imageSearch = compile(r'(/comics/.+?)"')
-    prevSearch = compile(r'first_day.+?(/d/.+?.html).+?/previous_day.gif')
+    imageSearch = compile(tagre("img", "src", r'(http://cdn\.schoolbites\.net/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://schoolbites\.net/d/\d+\.html)', after="prev"))
     help = 'Index format: yyyymmdd'
 
 
 class Sheldon(_BasicScraper):
     latestUrl = 'http://www.sheldoncomics.com/'
-    stripUrl = latestUrl + 'd/%s.html'
-    imageSearch = compile(tagre("img", "src", r'(/comic[s|/][^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'[^"]*(/d/\d+\.s?html)')+r"[^>]+/images/(?:nav_02|previous_day)\.gif")
-    help = 'Index format: yyyymmdd'
+    stripUrl = latestUrl + 'archive/%s.html'
+    imageSearch = compile(tagre("img", "src", r'(/strips/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'/archive/\d+\.html)', after="sidenav-prev"))
+    help = 'Index format: yymmdd'
 
 
 class Shortpacked(_BasicScraper):
     latestUrl = 'http://www.shortpacked.com/'
     stripUrl = latestUrl + 'd/%s.html'
-    imageSearch = compile(tagre("img", "src", r'(/comic[s|/][^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'[^"]*(/d/\d+\.s?html)')+r"[^>]+/images/(?:nav_02|previous_day)\.gif")
+    imageSearch = compile(tagre("img", "src", r'(http://www\.shortpacked\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.shortpacked\.com/\d+/comic/[^"]+)', after="prev"))
     help = 'Index format: yyyymmdd'
 
 
@@ -85,12 +83,11 @@ class SinFest(_BasicScraper):
 
 
 class SlightlyDamned(_BasicScraper):
-    latestUrl = 'http://raizap.com/sdamned/index.php'
-    stripUrl = 'http://raizap.com/sdamned/pages.php\?comicID=%s'
-    imageSearch = compile(r'"(.+?comics2/.+?)"')
-    prevSearch = compile(r'</a>.+?(pages.php\?comicID=.+?)".+?back1')
-    help = 'Index format: n (unpadded)'
-
+    latestUrl = 'http://www.sdamned.com/'
+    stripUrl = latestUrl + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.sdamned\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.sdamned\.com/[^"]+)', after="prev"))
+    help = 'Index format: yyyy/mm/number'
 
 
 class SluggyFreelance(_BasicScraper):
@@ -103,81 +100,51 @@ class SluggyFreelance(_BasicScraper):
 
 
 class SodiumEyes(_BasicScraper):
-    stripUrl = 'http://sodiumeyes.com/%s'
-    imageSearch = compile(r'(/comic/.+?)"')
-    prevSearch = compile(r'"http://sodiumeyes.com/(.+?/)"><.+?comic-prev')
-    help = 'Index format: nnn'
-    starter = indirectStarter('http://sodiumeyes.com/',
-                              compile(r'<a href="http://sodiumeyes.com/(\d\d\d\d.+?/)">'))
-
+    latestUrl = 'http://sodiumeyes.com/'
+    stripUrl = latestUrl + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://sodiumeyes\.com/comic/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://sodiumeyes\.com/[^"]+)', after="prev"))
+    help = 'Index format: yyyy/mm/dd/stripname'
 
 
 class SpareParts(_BasicScraper):
-    latestUrl = 'http://www.sparepartscomics.com/'
-    stripUrl = latestUrl + 'comics/\\?date=s%'
-    imageSearch = compile(r'(/comics/2.+?)[" ]')
-    prevSearch = compile(r'(/comics/.+?|index.php\?.+?)".+?Prev')
-    help = 'Index format: yyyymmdd'
-
-
-class StarslipCrisis(_BasicScraper):
-    latestUrl = 'http://www.starslipcrisis.com/'
-    stripUrl = latestUrl + 'd/%s.html'
-    imageSearch = compile(tagre("img", "src", r'(/comic[s|/][^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'[^"]*(/d/\d+\.s?html)')+r"[^>]+/images/(?:nav_02|previous_day)\.gif")
+    baseUrl = 'http://www.sparepartscomics.com/'
+    latestUrl = baseUrl + 'comics/?date=20080328'
+    stripUrl = baseUrl + 'comics/?date=s%'
+    imageSearch = compile(tagre("img", "src", r'http://www\.sparepartscomics\.com/comics/[^"]+'))
+    prevSearch = compile(tagre("a", "href", r'(index\.php\?date=\d+)') + "Previous Comic")
     help = 'Index format: yyyymmdd'
 
 
 class Stubble(_BasicScraper):
-    latestUrl = 'http://www.stubblecomics.com/d/20051230.html'
-    stripUrl = 'http://www.stubblecomics.com/d/%s.html'
-    imageSearch = compile(r'"(/comics/.*?)"')
-    prevSearch = compile(r'"(.*?)".*?backarrow')
-    help = 'Index format: yyyymmdd'
-
+    latestUrl = 'http://stubblecomics.com/'
+    stripUrl = latestUrl + '?p=%s'
+    imageSearch = compile(tagre("img", "src", r'(http://stubblecomics\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://stubblecomics\.com/\?p=\d+)', after="navi-prev"))
+    help = 'Index format: number'
 
 
 class StrawberryDeathCake(_BasicScraper):
-    latestUrl = 'http://rainchildstudios.com/strawberry/'
-    stripUrl = latestUrl + '?p=%s'
-    imageSearch = compile(r'/(comics/.+?)"')
-    prevSearch = compile(r'strawberry/(\?p=.+?)".+?span class="prev"')
-    help = 'Index format: n (good luck)'
-
+    latestUrl = 'http://strawberrydeathcake.com/'
+    stripUrl = latestUrl + 'archive/%s/'
+    imageSearch = compile(tagre("img", "src", r'http://strawberrydeathcake\.com/wp-content/webcomic/[^"]+'))
+    prevSearch = compile(tagre("a", "href", r'(http://strawberrydeathcake\.com/archive/[^"]+)', after="previous"))
+    help = 'Index format: stripname'
 
 
 class SuburbanTribe(_BasicScraper):
     latestUrl = 'http://www.pixelwhip.com/'
-    stripUrl = latestUrl + '?p%s'
-    imageSearch = compile(r'<img src="(http://www.pixelwhip.com/comics/.+?)"')
-    prevSearch = compile(r'<div class="nav-previous"><a href="([^"]+)" rel="prev">')
+    stripUrl = latestUrl + '?p=%s'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.pixelwhip\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.pixelwhip\.com/\?p=\d+)', after="prev"))
     help = 'Index format: nnnn'
-
-
-
-class SuccubusJustice(_BasicScraper):
-    latestUrl = 'http://www.succubus-justice.com/Com%20main%20frame.htm'
-    stripUrl = 'http://www.succubus-justice.com/%s%%20frame.htm'
-    imageSearch = compile(r'<p align="center"><img src="(/\d+.\w{3,4})"')
-    prevSearch = compile(r'<a href="(/[\w%]+\.htm|[\w%]+\.htm)"[^>]+?><img src="124.gif"')
-    help = 'Index format: nnn'
-
-
-
-class Supafine(_BasicScraper):
-    latestUrl = 'http://www.supafine.com/comics/classic.php'
-    stripUrl = latestUrl + '?comicID=%s'
-    imageSearch = compile(r'<img src="(http://www.supafine.com/comics/.+?)"')
-    prevSearch = compile(r'<a href="(http://www.supafine.com/comics/classic.php\?.+?)"><img src="http://supafine.com/comikaze/images/previous.gif" ')
-    help = 'Index format: nnn'
-
 
 
 class SomethingPositive(_BasicScraper):
     latestUrl = 'http://www.somethingpositive.net/'
     stripUrl = latestUrl + 'sp%s.shtml'
-    imageSearch = compile(r'<img src="(/arch/sp\d+.\w{3,4}|/sp\d+.\w{3,4})"')
-    prevSearch = compile(r'<a \n?href="(sp\d{8}\.shtml)">(<font size=1\nface=".+?"\nSTYLE=".+?">Previous|<img src="images2/previous|<img src="images/previous.gif")', MULTILINE | IGNORECASE)
+    imageSearch = compile(tagre("img", "src", r'(sp\d+\.png)'))
+    prevSearch = compile(tagre("a", "href", r'(sp\d+\.shtml)') + "Previous")
     help = 'Index format: mmddyyyy'
 
     @classmethod
@@ -202,48 +169,6 @@ class SexyLosers(_BasicScraper):
 
 
 
-def smackJeeves(names):
-    # XXX mature content can be viewed directly with:
-    # http://www.smackjeeves.com/mature.php?ref=<percent-encoded-url>
-    class _SJScraper(_BasicScraper):
-        stripUrl = property(lambda self: self.baseUrl + self.shortName)
-        imageSearch = compile(r'<img src="(http://www\.smackjeeves\.com/images/uploaded/comics/[^"]*)"', IGNORECASE)
-        prevSearch = compile(r'<a href="(/comics/\d+/[^"]*)"><img[^>]*alt="< Previous"', IGNORECASE)
-        help = 'Index format: nnnn (some increasing number)'
-
-        @classmethod
-        def namer(cls, imageUrl, pageUrl):
-            return pageUrl.split('/')[-2]
-
-
-    def makeScraper(shortName):
-        baseUrl = 'http://%s.smackjeeves.com/comics/' % shortName
-        return type('SmackJeeves_%s' % shortName,
-            (_SJScraper,),
-            dict(
-            name='SmackJeeves/' + shortName,
-            baseUrl=baseUrl,
-            starter=bounceStarter(baseUrl, compile(r'<a href="(/comics/\d+/[^"]*)"><img[^>]*alt="Next >"', IGNORECASE)))
-        )
-    return dict((name, makeScraper(name)) for name in names)
-
-
-globals().update(smackJeeves([
-    '20galaxies',
-    'axe13',
-    'beartholomew',
-    'bliss',
-    'durian',
-    'heard',
-    'mpmcomic',
-    'nlmo-project',
-    'paranoidloyd',
-    'thatdreamagain',
-    'wowcomics',
-    ]))
-
-
-
 class StarCrossdDestiny(_BasicScraper):
     latestUrl = 'http://www.starcrossd.net/comic.html'
     stripUrl = 'http://www.starcrossd.net/archives/%s.html'
@@ -263,19 +188,6 @@ class StarCrossdDestiny(_BasicScraper):
         return directory + '-' + filename
 
 
-
-class SGVY(_BasicScraper):
-    stripUrl = 'http://www.sgvy.com/Edda%s/Issue%s/Page%s.html'
-    imageSearch = compile(r'"comic" src="((?:\.\./)+images/sgvy/sgvy-[-\w\d]+\.\w+)"')
-    prevSearch = compile(r'<a href="((?:\.\./)+(?:Edda\d+|Holiday)/(?:Issue\d+/Page\d+|Cover)\.html)">Prev</a>')
-    help = 'Index format: edda-issue-page'
-
-    starter = indirectStarter('http://www.sgvy.com/', compile(r'<a href="(archives/(?:Edda\d+|Holiday)/(?:Issue\d+/Page\d+|Cover)\.html)">'))
-
-    def setStrip(self, index):
-        self.currentUrl = self.stripUrl % tuple(map(int, index.split('-')))
-
-
 class Spamusement(_BasicScraper):
     stripUrl = 'http://spamusement.com/index.php/comics/view/%s'
     imageSearch = compile(r'<img src="(http://spamusement.com/gfx/\d+\..+?)"', IGNORECASE)
@@ -285,61 +197,12 @@ class Spamusement(_BasicScraper):
     starter = indirectStarter('http://spamusement.com/', prevSearch)
 
 
-
-def snafuComics():
-    class _SnafuComics(_BasicScraper):
-        imageSearch = compile(r'<img src=http://\w+\.snafu-comics\.com/(comics/\d{6}_\w*\.\w{3,4})')
-        prevSearch = compile(r'<a href="(\?comic_id=\d+)">Previous</a>')
-        help = 'Index format: n (unpadded)'
-
-        @property
-        def stripUrl(self):
-            return self.latestUrl + 'index.php?strip_id=%s'
-
-    comics = {
-        'Grim': 'grim',
-        'KOF': 'kof',
-        'PowerPuffGirls': 'ppg',
-        'Snafu': 'www',
-        'Tin': 'tin',
-        'TW': 'tw',
-        'Sugar': 'sugar',
-        'SF': 'sf',
-        'Titan': 'titan',
-        'EA': 'ea',
-        'Zim': 'zim',
-        'Soul': 'soul',
-        'FT': 'ft',
-        'Bunnywith': 'bunnywith',
-        'Braindead': 'braindead',
-        }
-
-    url = 'http://%s.snafu-comics.com/'
-    return dict((name, type('SnafuComics_%s' % name,
-                            (_SnafuComics,),
-                             dict(name='SnafuComics/' + name,
-                             latestUrl=url % host)))
-                for name, host in comics.items())
-
-globals().update(snafuComics())
-
-
-
-class SosiaalisestiRajoittuneet(_BasicScraper):
-    latestUrl = 'http://sosiaalisestirajoittuneet.fi/index_nocomment.php'
-    stripUrl = latestUrl + '?date=%s'
-    imageSearch = compile(r'<img src="(strips/web/\d+.jpg)" alt=".*?"   />')
-    prevSearch = compile(r'<a href="(index_nocomment\.php\?date=\d+)"><img\s+src="images/active_edellinen\.gif"', MULTILINE)
-
-
-
 class StrangeCandy(_BasicScraper):
     latestUrl = 'http://www.strangecandy.net/'
     stripUrl = latestUrl + 'd/%s.html'
-    imageSearch = compile(r'src="(http://www.strangecandy.net/comics/\d{8}.\w{1,4})"')
-    prevSearch = compile(r'<a href="(http://www.strangecandy.net/d/\d{8}.html)"><img[^>]+?src="http://www.strangecandy.net/images/previous_day.gif"')
+    imageSearch = compile(tagre("img", "src", r'(/comics/\d+\.jpg)'))
+    prevSearch = compile(tagre("a", "href", r'(/d/\d+\.html)') + tagre("img", "alt", "Previous comic"))
     help = 'Index format: yyyyddmm'
-
 
 
 class SMBC(_BasicScraper):
@@ -357,21 +220,3 @@ class SomethingLikeLife(_BasicScraper):
     imageSearch = compile(r'<img src="(http://www.pulledpunches.com/comics/[^"]*)"')
     prevSearch = compile(r'</a> <a href="(http://www.pulledpunches.com/\?p=[^"]*)"><img src="back1.gif"')
     help = 'Index format: nn'
-
-
-
-class StickEmUpComics(_BasicScraper):
-    latestUrl = 'http://stickemupcomics.com/'
-    stripUrl = latestUrl + '%s'
-    imageSearch = compile(r'<img src="(http://stickemupcomics.com/comics/.+?)"')
-    prevSearch = compile(r'<a href="(.+?)"><span class="prev">')
-    help = 'Index format: yyyy/mm/dd/stripname'
-
-
-
-class SexDemonBag(_BasicScraper):
-    latestUrl = 'http://www.sexdemonbag.com/'
-    stripUrl = latestUrl + '?p=%s'
-    imageSearch = compile(r'<img src="(http://www.sexdemonbag.com/comics/.+?)"')
-    prevSearch = compile(r'<div class="nav-previous"><a href="(.+?)">')
-    help = 'Index format: nnn'

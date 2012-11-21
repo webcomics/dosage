@@ -93,7 +93,7 @@ def fetchUrl(url, urlSearch):
         if not searchUrl:
             raise ValueError("Match empty URL at %s with pattern %s" % (url, urlSearch.pattern))
         out.write('matched URL %r' % searchUrl, 2)
-        return urlparse.urljoin(baseUrl, searchUrl)
+        return normaliseURL(urlparse.urljoin(baseUrl, searchUrl))
     return None
 
 
@@ -106,7 +106,7 @@ def fetchUrls(url, imageSearch, prevSearch=None):
         if not imageUrl:
             raise ValueError("Match empty image URL at %s with pattern %s" % (url, imageSearch.pattern))
         out.write('matched image URL %r' % imageUrl, 2)
-        imageUrls.add(urlparse.urljoin(baseUrl, imageUrl))
+        imageUrls.add(normaliseURL(urlparse.urljoin(baseUrl, imageUrl)))
     if not imageUrls:
         out.write("warning: no images found at %s with pattern %s" % (url, imageSearch.pattern))
     if prevSearch is not None:
@@ -117,12 +117,12 @@ def fetchUrls(url, imageSearch, prevSearch=None):
             if not prevUrl:
                 raise ValueError("Match empty previous URL at %s with pattern %s" % (url, prevSearch.pattern))
             out.write('matched previous URL %r' % prevUrl, 2)
-            prevUrl = urlparse.urljoin(baseUrl, prevUrl)
+            prevUrl = normaliseURL(urlparse.urljoin(baseUrl, prevUrl))
         else:
             out.write('no previous URL %s at %s' % (prevSearch.pattern, url), 2)
             prevUrl = None
         return imageUrls, prevUrl
-    return imageUrls
+    return imageUrls, None
 
 
 def _unescape(text):
@@ -150,7 +150,8 @@ def _unescape(text):
             text = text.encode('utf-8')
             text = urllib2.quote(text, safe=';/?:@&=+$,')
         return text
-    return re.sub("&#?\w+;", _fixup, text)
+    return re.sub(r"&#?\w+;", _fixup, text)
+
 
 def normaliseURL(url):
     """
@@ -159,24 +160,24 @@ def normaliseURL(url):
     """
     # XXX: brutal hack
     url = _unescape(url)
-    url = url.replace(' ', '%20')
 
     pu = list(urlparse.urlparse(url))
-    segments = pu[2].replace(' ', '%20').split('/')
+    segments = pu[2].split('/')
     while segments and segments[0] == '':
         del segments[0]
-    pu[2] = '/' + '/'.join(segments)
+    pu[2] = '/' + '/'.join(segments).replace(' ', '%20')
     # remove leading '&' from query
-    if pu[3].startswith('&'):
-        pu[3] = pu[3][1:]
+    if pu[4].startswith('&'):
+        pu[4] = pu[4][1:]
+    # remove anchor
+    pu[5] = ""
     return urlparse.urlunparse(pu)
+
 
 def urlopen(url, referrer=None, retries=3, retry_wait_seconds=5):
     out.write('Open URL %s' % url, 2)
     assert retries >= 0, 'invalid retry value %r' % retries
     assert retry_wait_seconds > 0, 'invalid retry seconds value %r' % retry_wait_seconds
-    # Work around urllib2 brokenness
-    url = normaliseURL(url)
     req = urllib2.Request(url)
     if referrer:
         req.add_header('Referer', referrer)
@@ -185,13 +186,14 @@ def urlopen(url, referrer=None, retries=3, retry_wait_seconds=5):
     while True:
         try:
             return urllib2.urlopen(req)
-        except IOError as msg:
-            out.write('URL retrieval of %s failed: %s' % (url, msg))
+        except IOError as err:
+            msg = 'URL retrieval of %s failed: %s' % (url, err)
+            out.write(msg)
             out.write('waiting %d seconds and retrying (%d)' % (retry_wait_seconds, tries), 2)
             time.sleep(retry_wait_seconds)
             tries += 1
             if tries >= retries:
-                raise
+                raise IOError(msg)
 
 
 def get_columns (fp):
@@ -212,6 +214,7 @@ def get_columns (fp):
 
 suffixes = ('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB')
 
+
 def saneDataSize(size):
     if size == 0:
         return 'unk B'
@@ -221,6 +224,7 @@ def saneDataSize(size):
     factor = 1024 ** index
     return '%0.3f %s' % (float(size) / factor, suffixes[index])
 
+
 def splitpath(path):
     c = []
     head, tail = os.path.split(path)
@@ -229,10 +233,10 @@ def splitpath(path):
         head, tail = os.path.split(head)
     return c
 
+
 def getRelativePath(basepath, path):
     basepath = splitpath(os.path.abspath(basepath))
     path = splitpath(os.path.abspath(path))
-
     afterCommon = False
     for c in basepath:
         if afterCommon or path[0] != c:
@@ -240,8 +244,8 @@ def getRelativePath(basepath, path):
             afterCommon = True
         else:
             del path[0]
-
     return os.path.join(*path)
+
 
 def getQueryParams(url):
     query = urlparse.urlsplit(url)[3]
@@ -267,7 +271,7 @@ I can work with ;) .
         etype = sys.exc_info()[0]
     if evalue is None:
         evalue = sys.exc_info()[1]
-    print >> out, etype, evalue
+    print(etype, evalue, file=out)
     if tb is None:
         tb = sys.exc_info()[2]
     traceback.print_exception(etype, evalue, tb, None, out)

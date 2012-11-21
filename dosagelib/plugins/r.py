@@ -1,9 +1,11 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-from re import compile
+# Copyright (C) 2012 Bastian Kleineidam
 
+from re import compile
 from ..scraper import _BasicScraper
 from ..helpers import bounceStarter
+from ..util import tagre
 
 
 class RadioactivePanda(_BasicScraper):
@@ -14,30 +16,29 @@ class RadioactivePanda(_BasicScraper):
     help = 'Index format: n (no padding)'
 
 
+# XXX add other comics at http://petitesymphony.com/comics/
 class Rascals(_BasicScraper):
-    latestUrl = 'http://petitesymphony.com/rascals'
-    stripUrl = 'http://petitesymphony.com/comic/rascals/%s'
-    imageSearch = compile(r'(http://petitesymphony.com/comics/.+?)"')
-    prevSearch = compile(r"KR-nav-previous.><a href=.(http.+?).>")
-    help = 'Index format: non'
+    latestUrl = 'http://rascals.petitesymphony.com/'
+    stripUrl = latestUrl + '/comic/rascals-pg-%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://rascals\.petitesymphony\.com/files/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://rascals\.petitesymphony\.com/comic/[^"]+)', after="Previous"))
+    help = 'Index format: num'
 
 
 class RealLife(_BasicScraper):
     latestUrl = 'http://www.reallifecomics.com/'
-    stripUrl = latestUrl + 'achive/%s.html'
-    imageSearch = compile(r'"(/comics/.+?)"')
-    prevSearch = compile(r'"(/archive/.+?)".+?nav_previous')
+    stripUrl = latestUrl + 'archive/%s.html'
+    imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(/archive/\d+.html)') + tagre("img", "src", r'/images/nav_prev\.png'))
     help = 'Index format: yymmdd)'
-
 
 
 class RedString(_BasicScraper):
     latestUrl = 'http://www.redstring.strawberrycomics.com/'
-    stripUrl = latestUrl + '?p=%s'
-    imageSearch = compile(r'<img src="(http://www.redstring.strawberrycomics.com/comics/.+?)"')
-    prevSearch = compile(r'<a href="(.+?)">Previous Comic</a>')
+    stripUrl = latestUrl + 'index.php?id=%s'
+    imageSearch = compile(tagre("img", "src", r'("comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(/index\.php\?id=\d+)', after="prev"))
     help = 'Index format: nnn'
-
 
 
 class Roza(_BasicScraper):
@@ -58,10 +59,3 @@ class RedMeat(_BasicScraper):
     @classmethod
     def namer(cls, imageUrl, pageUrl):
         return imageUrl.split('/')[-2]
-
-class RunningWild(_BasicScraper):
-    latestUrl = 'http://runningwild.katbox.net/'
-    stripUrl = latestUrl + 'index.php?strip_id=%s'
-    imageSearch = compile(r'="(.+?strips/.+?)"')
-    prevSearch = compile(r'(index.php\?strip_id=.+?)".+?navigation_back')
-    help = 'Index format: n (unpadded)'

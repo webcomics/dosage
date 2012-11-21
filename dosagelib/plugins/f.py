@@ -1,5 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
+# Copyright (C) 2012 Bastian Kleineidam
+
 from re import compile, IGNORECASE, MULTILINE
 
 from ..util import tagre
@@ -32,35 +34,24 @@ class FeyWinds(_BasicScraper):
                               compile(r'(comic/page.php\?id.+?)"'))
 
 
-
-class FightCastOrEvade(_BasicScraper):
-    latestUrl = 'http://www.fightcastorevade.net/'
-    stripUrl = latestUrl + 'd/%s'
-    imageSearch = compile(tagre("img", "src", r'"(http://www\.fightcastorevade\.net/comics/[^"]+)'))
-    prevSearch = compile(r'"(.+?/d/.+?)".+?previous')
-    help = 'Index format: yyyymmdd.html'
-
-
-
 class FilibusterCartoons(_BasicScraper):
     latestUrl = 'http://www.filibustercartoons.com/'
     stripUrl = latestUrl + 'index.php/%s'
     imageSearch = compile(tagre("img", "src", r'(http://www\.filibustercartoons\.com/comics/[^"]+)'))
-    prevSearch = compile(r'<a href="(.+?)"><img src=\'(.+?/arrow-left.gif)\'')
+    prevSearch = compile(tagre("a", "href", r'(http://www\.filibustercartoons\.com/[^"]+)', after="prev"))
     help = 'Index format: yyyy/mm/dd/name'
-
 
 
 class FlakyPastry(_BasicScraper):
     latestUrl = 'http://flakypastry.runningwithpencils.com/index.php'
-    stripUrl = 'http://flakypastry.runningwithpencils.com/comic.php\?strip_id=%s'
+    stripUrl = 'http://flakypastry.runningwithpencils.com/comic.php?strip_id=%s'
     imageSearch = compile(r'<img src="(comics/.+?)"')
     prevSearch = compile(r'<a href="(.+?)".+?btn_back')
     help = 'Index format: nnnn'
 
-
+# XXX move to keenspot
 class Flipside(_BasicScraper):
-    latestUrl = 'http://www.flipsidecomics.com/comic.php'
+    latestUrl = 'http://flipside.keenspot.com/comic.php'
     stripUrl = latestUrl + '?i=%s'
     imageSearch = compile(r'<IMG SRC="(comic/.+?)"')
     prevSearch = compile(r'<A HREF="(comic.php\?i=\d+?)">&lt')
@@ -72,18 +63,7 @@ class Footloose(_BasicScraper):
     stripUrl = 'http://footloosecomic.com/footloose/pages.php?page=%s'
     imageSearch = compile(r'<img src="/footloose/(.+?)"')
     prevSearch = compile(r'(?:first.+?[^>]).+?(/footloose/.+?)".+?(?:prev)')
-#    prevSearch = compile(r'(?:first.+?[^>]).+?(/footloose/.+?html).+?(?:prev|Prev)')
     help = 'Index format: n (unpadded)'
-
-
-
-class FragileGravity(_BasicScraper):
-    latestUrl = 'http://www.fragilegravity.com/'
-    stripUrl = latestUrl + 'core.php?archive=%s'
-    imageSearch = compile(r'<IMG SRC="(strips/.+?)"')
-    prevSearch = compile(r'<A HREF="(.+?)"\nonMouseover="window.status=\'Previous Strip', MULTILINE | IGNORECASE)
-    help = 'Index format: yyyymmdd'
-
 
 
 class Freefall(_BasicScraper):
@@ -92,7 +72,6 @@ class Freefall(_BasicScraper):
     imageSearch = compile(r'<img src="(/ff\d+/.+?.\w{3,4})"')
     prevSearch = compile(r'<A HREF="(/ff\d+/.+?.htm)">Previous</A>')
     help = 'Index format: nnnn/nnnnn'
-
 
 
 class FantasyRealms(_BasicScraper):
@@ -104,21 +83,12 @@ class FantasyRealms(_BasicScraper):
                               compile(r'<a href="(manga/.+?)"><img src="preview.jpg"', IGNORECASE))
 
 
-
-class FullFrontalNerdity(_BasicScraper):
-    latestUrl = 'http://nodwick.humor.gamespy.com/ffn/index.php'
-    stripUrl = None
-    imageSearch = compile(r'<img src="(http://nodwick.humor.gamespy.com/ffn/strips/[^"]*)"', IGNORECASE)
-    prevSearch = compile(r'<a href="(index.php\?date=[0-9-]*)"><img src="back.jpg"', IGNORECASE)
-
-
 class FunInJammies(_BasicScraper):
     latestUrl = 'http://www.funinjammies.com/'
     stripUrl = latestUrl + 'comic.php?issue=%s'
     imageSearch = compile(r'(/comics/.+?)"')
     prevSearch = compile(r'(/comic.php.+?)" id.+?prev')
     help = 'Index format: n (unpadded)'
-
 
 
 class Fallen(_BasicScraper):
@@ -140,19 +110,12 @@ class Fallen(_BasicScraper):
         self.currentUrl = self.stripUrl % (part, index, part)
 
 
-
-class FoxTails(_BasicScraper):
-    latestUrl = 'http://www.magickitsune.com/strips/current.html'
-    stripUrl = 'http://www.magickitsune.com/strips/%s'
-    imageSearch = compile(r'<img src=(img/.+?)[ |>]', IGNORECASE)
-    prevSearch = compile(r'(?<=first.gif)*(?<=</td>)*<a.*href=\'(.+?)\'.+?<img.+?src=\'../img/prev.gif\'>', IGNORECASE)
-    help = 'Index format: yyyymmdd'
-
-
 class FredoAndPidjin(_BasicScraper):
     homepage = 'http://www.pidjin.net/'
+    stripUrl = None
     help = 'Index format: yyyy/mm/dd/name'
     imageSearch = compile(tagre('img', 'src', '(http://cdn\.pidjin\.net/wp-content/uploads/\d\d\d\d/\d\d/\d+[^"]+\.png)'))
     prevSearch = compile(tagre('a', 'href', '([^"]+)')+"Prev</a>")
     starter = indirectStarter(homepage,
        compile(tagre('a', 'href', "("+homepage+r'\d\d\d\d/\d\d/\d\d/[^"]+/)')))
+

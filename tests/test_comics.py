@@ -29,18 +29,25 @@ class _ComicTester(TestCase):
                 images += 1
                 self.save(image)
             if num > 0:
-                # test that the stripUrl regex matches the retrieved strip URL
-                urlmatch = re.escape(self.scraperclass.stripUrl)
-                urlmatch = urlmatch.replace(r"\%s", r".+")
-                urlmatch = "^%s$" % urlmatch
-                ro = re.compile(urlmatch)
-                mo = ro.search(strip.stripUrl)
-                self.check(mo is not None, 'strip URL %r does not match stripUrl pattern %s' % (strip.stripUrl, urlmatch))
+                self.check_stripurl(strip)
             else:
                 empty += 1
             num += 1
-        self.check(num >= 4, 'traversal failed after %d strips, check the prevSearch pattern.' % num)
+        if self.scraperclass.prevSearch:
+            self.check(num >= 4, 'traversal failed after %d strips, check the prevSearch pattern.' % num)
         self.check(empty <= 1, 'failed to find images on %d pages, check the imageSearch pattern.' % empty)
+
+    def check_stripurl(self, strip):
+        if not self.scraperclass.stripUrl:
+            # no indexing support
+            return
+        # test that the stripUrl regex matches the retrieved strip URL
+        urlmatch = re.escape(self.scraperclass.stripUrl)
+        urlmatch = urlmatch.replace(r"\%s", r".+")
+        urlmatch = "^%s$" % urlmatch
+        ro = re.compile(urlmatch)
+        mo = ro.search(strip.stripUrl)
+        self.check(mo is not None, 'strip URL %r does not match stripUrl pattern %s' % (strip.stripUrl, urlmatch))
 
     def save(self, image):
         # create a temporary directory

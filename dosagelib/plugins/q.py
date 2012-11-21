@@ -1,8 +1,10 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-from re import compile
+# Copyright (C) 2012 Bastian Kleineidam
 
+from re import compile
 from ..scraper import _BasicScraper
+from ..util import tagre
 
 
 class QuestionableContent(_BasicScraper):
@@ -13,10 +15,9 @@ class QuestionableContent(_BasicScraper):
     help = 'Index format: n (unpadded)'
 
 
-
 class Qwantz(_BasicScraper):
     latestUrl = 'http://www.qwantz.com/index.php'
     stripUrl = latestUrl + '?comic=%s'
-    imageSearch = compile(r'<img src="(http://www.qwantz.com/comics/.+?)" class="comic"')
-    prevSearch = compile(r'"><a href="(.+?)">&larr; previous</a>')
+    imageSearch = compile(tagre("img", "src", r'(http://www\.qwantz\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.qwantz\.com/index\.php\?comic=\d+)', before="prev"))
     help = 'Index format: n'

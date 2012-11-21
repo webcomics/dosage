@@ -25,21 +25,16 @@ def regexNamer(regex):
     return _namer
 
 
-def constStarter(latestUrl):
-    """Start from constant URL."""
-    @staticmethod
-    def _starter():
-        return latestUrl
-    return _starter
-
-
 def bounceStarter(latestUrl, nextSearch):
     """Get start URL by "bouncing" back and forth one time."""
     @classmethod
     def _starter(cls):
         url = fetchUrl(latestUrl, cls.prevSearch)
-        if url:
-            url = fetchUrl(url, nextSearch)
+        if not url:
+            raise ValueError("could not find prevSearch pattern %r in %s" % (cls.prevSearch.pattern, latestUrl))
+        url = fetchUrl(url, nextSearch)
+        if not url:
+            raise ValueError("could not find nextSearch pattern %r in %s" % (nextSearch.pattern, latestUrl))
         return url
     return _starter
 
@@ -48,7 +43,10 @@ def indirectStarter(baseUrl, latestSearch):
     """Get start URL by indirection."""
     @staticmethod
     def _starter():
-        return fetchUrl(baseUrl, latestSearch)
+        url = fetchUrl(baseUrl, latestSearch)
+        if not url:
+            raise ValueError("could not find latestSearch pattern %r in %s" % (latestSearch.pattern, baseUrl))
+        return url
     return _starter
 
 

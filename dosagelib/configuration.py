@@ -1,3 +1,4 @@
+# Copyright (C) 2012 Bastian Kleineidam
 """
 Define basic configuration data like version or application name.
 """

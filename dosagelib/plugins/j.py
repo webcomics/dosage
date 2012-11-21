@@ -1,26 +1,18 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
+# Copyright (C) 2012 Bastian Kleineidam
+
 from re import compile, MULTILINE
-
 from ..scraper import _BasicScraper
-
-
-class Jack(_BasicScraper):
-    latestUrl = 'http://www.pholph.com/'
-    stripUrl = latestUrl + 'strip.php?id=5&sid=%s'
-    imageSearch = compile(r'<img src="(./artwork/.+?/Jack.+?)"')
-    prevSearch = compile(r'\|<a href="(.+?)">Previous Strip</a>')
-    help = 'Index format: n (unpadded)'
-
+from ..util import tagre
 
 
 class JerkCity(_BasicScraper):
     latestUrl = 'http://www.jerkcity.com/'
-    stripUrl = latestUrl + 'jerkcity%s'
-    imageSearch = compile(r'"jerkcity.+?">.+?"(/jerkcity.+?)"')
-    prevSearch = compile(r'"(jerkcity.+?)">.+?"/jerkcity.+?"')
-    help = 'Index format: unknown'
-
+    stripUrl = latestUrl + '_jerkcity%s.html'
+    imageSearch = compile(tagre("img", "src", r'(/jerkcity[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(/_jerkcity[^"]+)') + r'&lt;&lt;Previous')
+    help = 'Index format: n'
 
 
 class JoeAndMonkey(_BasicScraper):
@@ -31,10 +23,10 @@ class JoeAndMonkey(_BasicScraper):
     help = 'Index format: nnn'
 
 
-
 class JoyOfTech(_BasicScraper):
-    latestUrl = 'http://www.geekculture.com/joyoftech/index.html'
-    stripUrl = 'http://www.geekculture.com/joyoftech/joyarchives/%s.html'
-    imageSearch = compile(r'<img src="(joyimages/.+?|../joyimages/.+?)" alt="The Joy')
-    prevSearch = compile(r'<a href="((?:joyarchives/)?\w+\.\w{3,4})">(?:<font[^>]*>)?<img[^>]*><br>[\s\n]*Previous Joy', MULTILINE)
+    latestUrl = 'http://www.geekculture.com/joyoftech/'
+    stripUrl = latestUrl + 'joyarchives/%s.html'
+    imageSearch = compile(tagre("img", "src", r'(joyimages/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(joyarchives/[^"]+)') + r'.+?Previous', MULTILINE)
     help = 'Index format: nnn'
+

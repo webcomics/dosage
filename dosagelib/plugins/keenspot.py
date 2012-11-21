@@ -1,32 +1,30 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-from re import compile, IGNORECASE
+# Copyright (C) 2012 Bastian Kleineidam
 
+from re import compile
 from ..scraper import _BasicScraper
+from ..util import tagre
 
 
-def keenSpot(comics):
-    class _KeenSpotScraper(_BasicScraper):
-        stripUrl = property(lambda self: self.baseUrl + 'd/%s.html')
-        imageSearch = compile(r'<img[^>]+?src="([^"]*?comics/.+?)"', IGNORECASE)
-        prevSearch = compile(r'<a href="([^"]*?d/\d{8}\.html)"[^>]*>(?:<img[^>]+?(?:name="previous_day"|alt="Previous"|src="[^"]*back[^"]*")|Previous comic)', IGNORECASE)
-        help = 'Index format: yyyymmdd'
+def keenSpot(name, urls):
+    if not isinstance(urls, tuple):
+        baseUrl = latestUrl = urls
+    else:
+        baseUrl, latestUrl = urls
 
-    for name, urls in keenspotComics.items():
-        if not isinstance(urls, tuple):
-            baseUrl = latestUrl = urls
-        else:
-            baseUrl, latestUrl = urls
-
-        comics[name] = type('KeenSpot_%s' % name,
-            (_KeenSpotScraper,),
-            dict(
-                name='KeenSpot/' + name,
-                latestUrl=latestUrl or baseUrl
-            )
+    return type('KeenSpot_%s' % name,
+        (_BasicScraper,),
+        dict(
+            name='KeenSpot/' + name,
+            latestUrl=latestUrl,
+            stripUrl=baseUrl + 'd/%s.html',
+            imageSearch = compile(tagre("img", "src", r'([^"]*comics/[^"]+)')),
+            prevSearch = compile(tagre("a", "href", r'"([^"]*d/\d{8}\.html)') +
+              '(?:<img[^>]+?(?:name="previous_day"|alt="Previous"|src="[^"]*back[^"]*")|Previous comic)'),
+            help = 'Index format: yyyymmdd',
         )
-
-    return comics
+    )
 
 
 keenspotComics = {
@@ -1524,4 +1522,5 @@ keenspotComics = {
     'ZuraZura': 'http://zurazura.comicgenesis.com/',
     }
 
-globals().update(keenSpot(keenspotComics))
+for name, urls in keenspotComics.items():
+    globals()[name] = keenSpot(name, urls)

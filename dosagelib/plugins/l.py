@@ -1,34 +1,27 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-from re import compile
+# Copyright (C) 2012 Bastian Kleineidam
 
+from re import compile
 from ..scraper import _BasicScraper
 from ..helpers import indirectStarter
+from ..util import tagre
 
 
 class LasLindas(_BasicScraper):
-    latestUrl = 'http://www.katbox.net/laslindas/'
-    stripUrl = latestUrl + 'index.php?strip_id=%s'
-    imageSearch = compile(r'"(istrip_files/strips/.+?)"')
-    prevSearch = compile(r'<a href="(.+?)"><[^>]+?alt="Back"')
-    help = 'Index format: n (unpadded)'
-
-
-
-class LastBlood(_BasicScraper):
-    latestUrl = 'http://www.lastblood.net/main/'
-    stripUrl = latestUrl + '%s'
-    imageSearch = compile(r'(/comicfolder/.+?)" alt')
-    prevSearch = compile(r'Previous Comic:</small><br />&laquo; <a href="(.+?)">')
-    help = 'Index format: yyyy/mm/dd/(page number and name)'
+    latestUrl = 'http://laslindas.katbox.net/'
+    stripUrl = latestUrl + 'archive/%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://laslindas\.katbox\.net/wp-content/webcomic/las-lindas/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://laslindas\.katbox\.net/archive/[^"]+)', after="previous"))
+    help = 'Index format: stripname'
 
 
 
 class LesbianPiratesFromOuterSpace(_BasicScraper):
     latestUrl = 'http://rosalarian.com/lesbianpirates/'
-    stripUrl = latestUrl + '?p=%s'
-    imageSearch = compile(r'(/lesbianpirates/comics/.+?)"')
-    prevSearch = compile(r'/(\?p=.+?)">&laquo')
+    stripUrl = latestUrl + 'index.php?p=%s'
+    imageSearch = compile(tagre("img", "src", r'("comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(/index\.php\?id=\d+)', after="prev"))
     help = 'Index format: n'
 
 
@@ -55,31 +48,12 @@ class LookingForGroup(_BasicScraper):
         return self.nameSearch.search(pageUrl).group(1)
 
 
-
-class Loserz(_BasicScraper):
-    latestUrl = 'http://bukucomics.com/loserz/'
-    stripUrl = latestUrl + 'go/%s'
-    imageSearch = compile(r'<img src="(http://bukucomics.com/loserz/comics/.+?)"')
-    prevSearch = compile(r'<a href="(.+?)"> &nbsp;&lt;&nbsp;')
-    help = 'Index format: n (unpadded)'
-
-
-
 class LittleGamers(_BasicScraper):
     latestUrl = 'http://www.little-gamers.com/'
-    stripUrl = latestUrl + '%s'
-    imageSearch = compile(r'<img src="(http://www.little-gamers.com/comics/[^"]+)"')
-    prevSearch = compile(r'href="(.+?)"><img id="comic-nav-prev"')
+    stripUrl = latestUrl + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.little-gamers\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www.little-gamers.com/[^"]+)', before="comic-nav-prev-link"))
     help = 'Index format: yyyy/mm/dd/name'
-
-
-
-class LegoRobot(_BasicScraper):
-    latestUrl = 'http://www.legorobotcomics.com/'
-    stripUrl = latestUrl + '?id=%s'
-    imageSearch = compile(r'id="the_comic" src="(comics/.+?)"')
-    prevSearch = compile(r'(\?id=\d+)"><img src="images/back.png"')
-    help = 'Index format: nnnn'
 
 
 
