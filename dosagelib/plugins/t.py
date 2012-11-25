@@ -8,27 +8,18 @@ from ..helpers import indirectStarter
 from ..util import tagre
 
 
-class TalesOfPylea(_BasicScraper):
-    latestUrl = 'http://talesofpylea.com/'
-    stripUrl = latestUrl + '%s/'
-    imageSearch = compile(r'<img src="(istrip_files/strips/.+?)"')
-    prevSearch = compile(r' <a href="(.+?)">Back</a>')
-    help = 'Index format: nnn'
-
-
-
 class TheNoob(_BasicScraper):
     latestUrl = 'http://www.thenoobcomic.com/index.php'
     stripUrl = latestUrl + '?pos=%'
-    imageSearch = compile(r'<img src="(/headquarters/comics/.+?)"')
-    prevSearch = compile(r'<a class="comic_nav_previous_button" href="(.+?)"></a>')
+    imageSearch = compile(tagre("img", "src", r'(/headquarters/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(\?pos=\d+)', before="comic_nav_previous_button"))
     help = 'Index format: nnnn'
 
 
 
 class TheOrderOfTheStick(_BasicScraper):
-    latestUrl = 'http://www.giantitp.com/'
-    stripUrl = latestUrl + 'comics/images/%s'
+    latestUrl = 'http://www.giantitp.com/comics/oots0863.html'
+    stripUrl = latestUrl + 'comics/oots%s.html'
     imageSearch = compile(r'<IMG src="(/comics/images/.+?)">')
     prevSearch = compile(r'<A href="(/comics/oots\d{4}\.html)"><IMG src="/Images/redesign/ComicNav_Back.gif"')
     help = 'Index format: n (unpadded)'
@@ -38,7 +29,7 @@ class TheOrderOfTheStick(_BasicScraper):
 
 class TheParkingLotIsFull(_BasicScraper):
     latestUrl = 'http://plif.courageunfettered.com/archive/arch2002.htm'
-    stripUrl = 'http://plif.courageunfettered.com/archive/wc%s.gif'
+    stripUrl = 'http://plif.courageunfettered.com/archive/arch%s.htm'
     imageSearch = compile(r'<td align="center"><A TARGET=_parent HREF="(wc\d+\..+?)">')
     prevSearch = compile(r'-\s*\n\s*<A HREF="(arch\d{4}\.htm)">\d{4}</A>')
     help = 'Index format: nnn'
@@ -47,35 +38,26 @@ class TheParkingLotIsFull(_BasicScraper):
 
 class TheWotch(_BasicScraper):
     latestUrl = 'http://www.thewotch.com/'
-    stripUrl = latestUrl + '?epDate=%s'
+    stripUrl = latestUrl + '?date=%s'
     imageSearch = compile(r"<img.+?src='(comics/.+?)'")
-    prevSearch = compile(r"<link rel='Previous' href='(\?epDate=\d+-\d+-\d+)'")
+    prevSearch = compile(r"<link rel='Previous' href='(\?date=\d+-\d+-\d+)'")
     help = 'Index format: yyyy-mm-dd'
-
-
-class Thorn(_BasicScraper):
-    latestUrl = 'http://www.mimisgrotto.com/thorn/index.html'
-    stripUrl = 'http://www.mimisgrotto.com/thorn/%s.html'
-    imageSearch = compile(r'"(strips/.+?)"')
-    prevSearch = compile(r'(\d[\d][\d].html)">Prev')
-    help = 'Index format: nnn'
 
 
 class TinyKittenTeeth(_BasicScraper):
     latestUrl = 'http://www.tinykittenteeth.com/'
-    stripUrl = latestUrl + 'index.php?current=%s'
+    stripUrl = latestUrl + '%s/'
     imageSearch = compile(tagre("img", "src", r'(http://www\.tinykittenteeth\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)', after="Previous"))
-    help = 'Index format: n (unpadded)'
+    help = 'Index format: yyyy/mm/dd/stripname (unpadded)'
 
 
 class TwoTwoOneFour(_BasicScraper):
     latestUrl = 'http://www.nitrocosm.com/go/2214_classic/'
     stripUrl = latestUrl + '%s/'
-    imageSearch = compile(r'<img class="gallery_display" src="([^"]+)"')
-    prevSearch = compile(r'<a href="([^"]+)"[^>]*><button type="submit" class="nav_btn_previous">')
+    imageSearch = compile(tagre("img", "src", r'(http://content\.nitrocosm\.com/[^"]+)', before="gallery_display"))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.nitrocosm\.com/go/2214_classic/\d+/)', after="Previous"))
     help = 'Index format: n (unpadded)'
-
 
 
 class TheWhiteboard(_BasicScraper):
@@ -102,13 +84,4 @@ class TheOuterQuarter(_BasicScraper):
     stripUrl = latestUrl + 'comic/%s'
     imageSearch = compile(r'<img src="(http://theouterquarter.com/comics/.+?)"')
     prevSearch = compile(r'<div class="nav-previous"><a href="([^"]+)" rel="prev">')
-    help = 'Index format: nnn'
-
-
-
-class TheHorrificAdventuresOfFranky(_BasicScraper):
-    latestUrl = 'http://www.boneyardfranky.com/'
-    stripUrl = latestUrl + '?p=%s'
-    imageSearch = compile(r'<img src="(http://www.boneyardfranky.com/comics/.+?)"')
-    prevSearch = compile(r'<div class="nav-previous"><a href="(.+?)">')
     help = 'Index format: nnn'

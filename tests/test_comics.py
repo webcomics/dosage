@@ -28,14 +28,14 @@ class _ComicTester(TestCase):
             for image in strip.getImages():
                 images += 1
                 self.save(image)
+            if images == 0:
+                empty += 1
             if num > 0:
                 self.check_stripurl(strip)
-            else:
-                empty += 1
             num += 1
         if self.scraperclass.prevSearch:
             self.check(num >= 4, 'traversal failed after %d strips, check the prevSearch pattern.' % num)
-        self.check(empty <= 1, 'failed to find images on %d pages, check the imageSearch pattern.' % empty)
+        self.check(empty == 0, 'failed to find images on %d pages, check the imageSearch pattern.' % empty)
 
     def check_stripurl(self, strip):
         if not self.scraperclass.stripUrl:
