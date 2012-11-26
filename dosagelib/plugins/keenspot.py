@@ -1522,11 +1522,3 @@ comics = {
 
 for name, urls in comics.items():
     add(name, urls)
-
-
-#class Yirmumah(_BasicScraper):
-#    #http://yirmumah.keenspot.com/
-#    stripUrl = latestUrl + '?date=%s'
-#    imageSearch = compile(r'<img src="(strips/\d{8}\..*?)"')
-#    prevSearch = compile(r'<a href="(\?date=\d{8})">.*Previous')
-#    help = 'Index format: yyyymmdd'

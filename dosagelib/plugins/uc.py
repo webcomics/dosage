@@ -45,7 +45,7 @@ def add(name, category):
     )
 
 
-# List is from http://www.universaluclick.com/comics/list
+# http://www.universaluclick.com/comics/list
 comics = {
     '9 Chickweed Lane': 'strip',
 }

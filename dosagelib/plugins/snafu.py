@@ -10,6 +10,7 @@ def add(name, host):
     classname = 'SnafuComics_%s' % name
 
     globals()[classname] = make_scraper(classname,
+        name='SnafuComics/%s' % name,
         latestUrl = baseUrl,
         stripUrl = baseUrl + 'index.php?strip_id=%s',
         imageSearch = compile(r'<img src=http://\w+\.snafu-comics\.com/(comics/\d{6}_\w*\.\w{3,4})'),

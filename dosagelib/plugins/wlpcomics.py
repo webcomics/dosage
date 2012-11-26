@@ -9,13 +9,14 @@ from ..helpers import bounceStarter
 
 def add(name, path):
     baseUrl = 'http://www.wlpcomics.com/' + path
-    classname = 'WLP/' + name
+    classname = 'WLP_' + name
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
         return pageUrl.split('/')[-1].split('.')[0]
 
     globals()[classname] = make_scraper(classname,
+       name = 'WLP/' + name,
        starter = bounceStarter(baseUrl, compile(r'</a> <A HREF="(\w+.html)">Next Page</a>', IGNORECASE)),
        stripUrl = baseUrl + '%s.html',
        imageSearch = compile(r'SRC="(http://www.wlpcomics.com/adult/.+?|http://www.wlpcomics.com/general/.+?)"', IGNORECASE),

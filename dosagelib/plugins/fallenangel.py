@@ -23,4 +23,3 @@ def add(name, shortname):
 add('HighMaintenance', 'hm')
 add('FAWK', 'fawk')
 add('MalloryChan', 'mallorychan')
-
