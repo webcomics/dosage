@@ -324,3 +324,8 @@ def strtimezone():
     else:
         zone = time.timezone
     return "%+04d" % (-zone//3600)
+
+
+def asciify(name):
+    """Remove non-ascii characters from string."""
+    return re.sub("[^0-9a-zA-Z_]", "", name)

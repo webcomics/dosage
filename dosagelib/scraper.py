@@ -158,3 +158,8 @@ def check_scrapers():
             name2 = d[name].get_name()
             raise ValueError('Duplicate scrapers %s and %s found' % (name1, name2))
         d[name] = scraperclass
+
+
+def make_scraper(classname, **attributes):
+    """Make a new scraper class with given name and attributes."""
+    return type(classname, (_BasicScraper,), attributes)
