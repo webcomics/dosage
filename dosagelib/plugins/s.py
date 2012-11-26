@@ -61,7 +61,7 @@ class Sheldon(_BasicScraper):
     latestUrl = 'http://www.sheldoncomics.com/'
     stripUrl = latestUrl + 'archive/%s.html'
     imageSearch = compile(tagre("img", "src", r'(/strips/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'/archive/\d+\.html)', after="sidenav-prev"))
+    prevSearch = compile(tagre("a", "href", r'(/archive/\d+\.html)', after="sidenav-prev"))
     help = 'Index format: yymmdd'
 
 

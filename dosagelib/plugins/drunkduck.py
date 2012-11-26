@@ -4,22 +4,29 @@
 
 from re import compile
 from ..scraper import make_scraper
-from ..helpers import bounceStarter, queryNamer
+from ..helpers import bounceStarter
 from ..util import tagre
 
 
 def add(name):
     classname = 'DrunkDuck_%s' % name
     url = 'http://www.drunkduck.com/%s/' % name
-    linkSearch = tagre("a", "href", r"(/[^/]*/index\.php\?p=\d+)", quote="'", after="The %s page")
+    linkSearch = tagre("a", "href", r"(/%s/\d+/)" % name)
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        index = int(pageUrl.rstrip('/').split('/')[-1])
+        ext = imageUrl.rsplit('.')[-1]
+        return '%d.%s' % (index, ext)
+
     globals()[classname] = make_scraper(classname,
         name = 'DrunkDuck/' + name,
-        starter = bounceStarter(url, compile(linkSearch % 'next')),
-        stripUrl = url + 'index.php?p=%s' % name,
-        imageSearch = compile(tagre("img", "src", r"(http://[a-z0-9]*\.drunkduck\.com/[^/]*/pages/[^'/]+)", quote="'")),
-        prevSearch= compile(linkSearch % 'previous'),
+        starter = bounceStarter(url, compile(linkSearch + tagre("img", "class", "arrow_next"))),
+        stripUrl = url + '%s/',
+        imageSearch = compile(tagre("img", "src", r'(http://media\.drunkduck\.com\.s3\.amazonaws\.com:80/[^"]+)', before="page-image")),
+        prevSearch= compile(linkSearch + tagre("img", "class", "arrow_prev")),
         help = 'Index format: n (unpadded)',
-        namer = queryNamer('p', usePageUrl=True),
+        namer = namer,
     )
 
 comics = (

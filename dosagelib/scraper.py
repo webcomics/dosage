@@ -22,6 +22,9 @@ class _BasicScraper(object):
     @cvar prevSearch: A compiled regex that will locate the URL for the
         previous strip when applied to a strip page.
     '''
+    # if more than one image per URL is expected
+    multipleImagesPerStrip = False
+    # usually the index format help
     help = 'Sorry, no help for this comic yet.'
 
     def __init__(self, indexes=None):
@@ -44,7 +47,9 @@ class _BasicScraper(object):
 
     def getStrip(self, url):
         """Get comic strip for given URL."""
-        imageUrls = fetchUrls(url, self.imageSearch)
+        imageUrls = fetchUrls(url, self.imageSearch)[0]
+        if len(imageUrls) > 1 and not self.multipleImagesPerStrip:
+            raise ValueError("found %d images with %s" % (len(imageUrls), self.imageSearch.pattern))
         return self.getComicStrip(url, imageUrls)
 
     def getComicStrip(self, url, imageUrls):
@@ -140,11 +145,13 @@ def get_scrapers():
     """
     global _scrapers
     if _scrapers is None:
+        out.write("Loading comic modules...")
         modules = loader.get_modules()
         plugins = loader.get_plugins(modules, _BasicScraper)
         _scrapers = list(plugins)
         _scrapers.sort(key=lambda s: s.get_name())
         check_scrapers()
+        out.write("... %d modules loaded." % len(_scrapers))
     return _scrapers
 
 

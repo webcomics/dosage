@@ -4,6 +4,7 @@ Features:
 - cmdline: Added proper return codes for error conditions.
 - comics: Added more robust regular expressions for HTML tags.
   They match case insensitive and ignore whitespaces now.
+- comics: Use the python-requests module for HTTP requests.
 
 Changes:
 - installation: Added support for dynamic configuration values.

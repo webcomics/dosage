@@ -18,9 +18,9 @@ def add(name, urls):
         name='KeenSpot/' + name,
         latestUrl=latestUrl,
         stripUrl=baseUrl + 'd/%s.html',
-        imageSearch = compile(tagre("img", "src", r'([^"]*comics/[^"]+)')),
-        prevSearch = compile(tagre("a", "href", r'"([^"]*d/\d{8}\.html)') +
-           '(?:<img[^>]+?(?:name="previous_day"|alt="Previous"|src="[^"]*back[^"]*")|Previous comic)'),
+        imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]+)')),
+        prevSearch = compile(tagre("a", "href", r'([^"]*/d/\d{8}\.html)') +
+           '(?:Previous comic|'+tagre("img", "alt", "Previous comic")+')'),
         help = 'Index format: yyyymmdd',
     )
 

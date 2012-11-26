@@ -2,7 +2,6 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012 Bastian Kleineidam
 
-import urllib2
 import os
 import locale
 import rfc822
@@ -55,18 +54,24 @@ class ComicImage(object):
         """Connect to host and get meta information."""
         try:
             self.urlobj = urlopen(self.url, referrer=self.referrer)
-        except urllib2.HTTPError as he:
+        except IOError as he:
             raise FetchComicError('Unable to retrieve URL.', self.url, he.code)
 
-        if self.urlobj.info().getmaintype() != 'image' and \
-           self.urlobj.info().gettype() not in ('application/octet-stream', 'application/x-shockwave-flash'):
+        content_type = self.urlobj.headers.get('content-type')
+        content_type = content_type.split(';', 1)[0]
+        if '/' in content_type:
+            maintype, subtype = content_type.split('/', 1)
+        else:
+            maintype = content_type
+            subtype = None
+        if maintype != 'image' and content_type not in ('application/octet-stream', 'application/x-shockwave-flash'):
             raise FetchComicError('No suitable image found to retrieve.', self.url)
 
         # Always use mime type for file extension if it is sane.
-        if self.urlobj.info().getmaintype() == 'image':
-            self.ext = '.' + self.urlobj.info().getsubtype().replace('jpeg', 'jpg')
-        self.contentLength = int(self.urlobj.info().get('content-length', 0))
-        self.lastModified = self.urlobj.info().get('last-modified')
+        if maintype == 'image':
+            self.ext = '.' + subtype.replace('jpeg', 'jpg')
+        self.contentLength = int(self.urlobj.headers.get('content-length', 0))
+        self.lastModified = self.urlobj.headers.get('last-modified')
         out.write('... filename = %r, ext = %r, contentLength = %d' % (self.filename, self.ext, self.contentLength), 2)
 
     def touch(self, filename):
@@ -88,7 +93,6 @@ class ComicImage(object):
 
         fn = os.path.join(comicDir, filename)
         if os.path.isfile(fn) and os.path.getsize(fn) >= comicSize:
-            self.urlobj.close()
             self.touch(fn)
             out.write('Skipping existing file "%s".' % (fn,), 1)
             return fn, False
@@ -97,7 +101,7 @@ class ComicImage(object):
             out.write('Writing comic to file %s...' % (fn,), 3)
             with open(fn, 'wb') as comicOut:
                 startTime = time.time()
-                comicOut.write(self.urlobj.read())
+                comicOut.write(self.urlobj.content)
                 endTime = time.time()
             self.touch(fn)
         except:
@@ -114,7 +118,5 @@ class ComicImage(object):
             attrs = dict(fn=fn, bytes=bytes, speed=speed)
             out.write('Saved "%(fn)s" (%(bytes)s bytes, %(speed)s/sec).' % attrs, 1)
             getHandler().comicDownloaded(self.name, fn)
-        finally:
-            self.urlobj.close()
 
         return fn, True

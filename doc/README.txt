@@ -40,10 +40,11 @@ manual page.
 
 Dependencies
 -------------
-Dosage requires Python version 2.7 or higher, which can be downloaded
-from http://www.python.org.
-No external Python modules are required - only the Python Standard Library
-that gets installed with Python.
+Python version 2.7 or higher, which can be downloaded
+from http://www.python.org/
+
+Also the python-requests module must be installed, which can be downloaded
+from http://docs.python-requests.org/en/latest/
 
 Installation
 -------------
@@ -59,7 +60,7 @@ or if you do not have root permissions:
 
 Technical Description
 ----------------------
-Dosage is written entirely in Python and relies on regular expressions to
+Dosage is written in Python and relies on regular expressions to
 do most of the grunt work.
 
 For each webcomic Dosage has a plugin module, found in the "plugins"

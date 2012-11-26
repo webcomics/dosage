@@ -1,280 +1,54 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012 Bastian Kleineidam
-
-from re import compile, sub
+"""
+The Universal comics only have some samples, but those samples are always the newest ones.
+"""
+import datetime
+from re import compile, escape
 from ..scraper import make_scraper
-from ..util import fetchUrl, tagre
+from ..util import tagre, asciify, getPageContent
 
 
-def add(name, shortName):
-    homepage = 'http://content.uclick.com/a2z.html'
-    baseUrl = 'http://www.uclick.com/client/zzz/%s/'
-    latestUrl = baseUrl % shortName
-    classname = 'UClick_%s' % name
+def parse_strdate(strdate):
+    """Parse date string. XXX this is locale dependant but it should not be."""
+    return datetime.datetime.strptime(strdate, "%A, %B %d, %Y")
+
+
+def add(name, category):
+    shortname = name.replace(' ', '').lower()
+    latestUrl = 'http://www.universaluclick.com/comics/%s/%s' % (category, shortname)
+    classname = 'UClick_%s' % asciify(name)
 
     @classmethod
-    def fetchSubmodules(cls):
-        exclusions = ('index',)
-        # XXX refactor this mess
-        submoduleSearch = compile(tagre("a", "href", r'(http://content\.uclick\.com/content/\w+\.html)'))
-        partsMatch = compile(tagre("a", "href", r'http://content\.uclick\.com/content/(\w+?)\.html'))
-        matches = fetchManyMatches(cls.homepage, (submoduleSearch,))[0]
-        possibles = [partsMatch.match(match).groups() for match in matches]
-
-        def normalizeName(name):
-            name = sub(r'&(.)acute;', r'\1', name).title()
-            return ''.join([c for c in name if c.isalnum()])
-
-        def fetchSubmodule(module):
-            try:
-                return fetchUrl(cls.baseUrl % module, cls.imageSearch)
-            except Exception:
-                # XXX log error
-                return False
-
-        return [normalizeName(name) for part, name in possibles if part not in exclusions and fetchSubmodule(part)]
+    def namer(cls, imageUrl, pageUrl):
+        """Parse publish date from page content which looks like:
+         <img alt="Marmaduke" src="http://assets.amuniversal.com/07e7f270fa08012ff506001dd8b71c47" />
+         <h4>published: Sunday, November 11, 2012</h4>
+        """
+        data = getPageContent(pageUrl)[0]
+        ro = compile(tagre("img", "src", escape(imageUrl)) + r'\s+<h4>published: ([^<]+)')
+        mo = ro.search(data)
+        if mo:
+             strdate = mo.group(1)
+             return parse_strdate(strdate).strftime("%Y%m%d")
 
     globals()[classname] = make_scraper(classname,
         name='UClick/' + name,
         latestUrl = latestUrl,
         stripUrl = latestUrl + '%s/',
-        imageSearch = compile(tagre("img", "src", r'(http://synd\.imgsrv\.uclick\.com/comics/\w+/\d{4}/[^"]+\.gif)')),
-        prevSearch = compile(tagre("a", "href", r'(/client/zzz/\w+/\d{4}/\d{2}/\d{2}/)') + 'Previous date'),
-        help = 'Index format: yyyy/mm/dd',
+        imageSearch = compile(tagre("img", "src", r'(http://assets\.amuniversal\.com/[^"]+)') + r'\s+<h4>published'),
+        multipleImagesPerStrip = True,
+        prevSearch = None,
+        help = 'Index format: none',
+        namer = namer,
     )
 
 
+# List is from http://www.universaluclick.com/comics/list
 comics = {
-    '5thWave': 'fw',
-    '9To5': 'tmntf',
-    'AdamHome': 'ad',
-    'Agnes': 'cragn',
-    'AlcarazLalo': 'la',
-    'AlcarazLaloSpanish': 'spla',
-    'AndersonNick': 'wpnan',
-    'AndyCapp': 'crcap',
-    'AnimalCrackers': 'tmani',
-    'Annie': 'tmann',
-    'AsayChuck': 'crcas',
-    'AskShagg': 'crask',
-    'AuthTony': 'ta',
-    'BadReporter': 'bad',
-    'Baldo': 'ba',
-    'BaldoSpanish': 'be',
-    'BallardStreet': 'crbal',
-    'BarkEaterLake': 'bark',
-    'BarstowDonna': 'dba',
-    'BC': 'crbc',
-    'BCSpanish': 'crbcs',
-    'BeattieBruce': 'crbbe',
-    'BennetClay': 'wpcbe',
-    'BensonLisa': 'wplbe',
-    'BensonSteve': 'crsbe',
-    'BigTop': 'bt',
-    'Biographic': 'biov',
-    'Bleeker': 'blk',
-    'BobTheSquirrel': 'bob',
-    'BoilingPoint': 'boil',
-    'BokChip': 'crcbo',
-    'BoNanas': 'bon',
-    'Boomerangs': 'boom',
-    'BoondocksThe': 'bo',
-    'BottomLiners': 'tmbot',
-    'BoundAndGagged': 'tmbou',
-    'Brainwaves': 'bwv',
-    'BreenSteve': 'crsbr',
-    'BrendaStarr': 'tmbre',
-    'BrewsterRockit': 'tmrkt',
-    'BrittChris': 'crcbr',
-    'BroomHilda': 'tmbro',
-    'Candorville': 'cand',
-    'CarlsonStuart': 'sc',
-    'CatalinoKen': 'crkca',
-    'Cathy': 'ca',
-    'CathySpanish': 'spca',
-    'CEstLaVie': 'clv',
-    'CityThe': 'derf',
-    'ClearBlueWater': 'cbw',
-    'Cleats': 'cle',
-    'CloseToHome': 'cl',
-    'CombsPaul': 'tmcmb',
-    'CompuToon': 'tmcom',
-    'Condorito': 'cond',
-    'ConradPaul': 'tmpco',
-    'Cornered': 'co',
-    'CulDeSac': 'cds',
-    'DanzigerJeff': 'jd',
-    'DaviesMatt': 'tmmda',
-    'DeepCover': 'deep',
-    'DeeringJohn': 'crjde',
-    'DickTracy': 'tmdic',
-    'DinetteSetThe': 'crdin',
-    'DogEatDoug': 'crdog',
-    'DonWright': 'tmdow',
-    'Doodles': 'tmdoo',
-    'Doonesbury': 'db',
-    'DuplexThe': 'dp',
-    'Eek': 'eek',
-    'ElderberriesThe': 'eld',
-    'FacesInTheNews': 'kw',
-    'FlightDeck': 'crfd',
-    'FloAndFriends': 'crflo',
-    'FlyingMccoysThe': 'fmc',
-    'ForBetterOrForWorse': 'fb',
-    'ForHeavenSSake': 'crfhs',
-    'FoxtrotClassics': 'ftcl',
-    'Foxtrot': 'ft',
-    'FoxtrotSpanish': 'spft',
-    'FrankAndErnest': 'fa',
-    'FredBassetSpanish': 'spfba',
-    'FredBasset': 'tmfba',
-    'FrogApplause': 'frog',
-    'FuscoBrothersThe': 'fu',
-    'Garfield': 'ga',
-    'GarfieldSpanish': 'gh',
-    'GasolineAlley': 'tmgas',
-    'GaturroSpanish': 'spgat',
-    'GilThorp': 'tmgil',
-    'GingerMeggs': 'gin',
-    'GingerMeggsSpanish': 'spgin',
-    'GirlsAndSports': 'crgis',
-    'GorrellBob': 'crbgo',
-    'GoTeamBob': 'gtb',
-    'HammondBruce': 'hb',
-    'HandelsmanWalt': 'tmwha',
-    'HeartOfTheCity': 'hc',
-    'Heathcliff': 'crhea',
-    'HeathcliffSpanish': 'crhes',
-    'HerbAndJamaal': 'crher',
-    'HigginsJack': 'jh',
-    'HomeAndAway': 'wphaa',
-    'HorseyDavid': 'tmdho',
-    'Housebroken': 'tmhou',
-    'HubertAndAbby': 'haa',
-    'IdiotBox': 'ibox',
-    'ImagineThis': 'imt',
-    'InkPen': 'ink',
-    'InTheBleachers': 'bl',
-    'ItsAllAboutYou': 'wpiay',
-    'JamesBondSpanish': 'spjb',
-    'JonesClay': 'crcjo',
-    'KallaugherKevin': 'cwkal',
-    'KChroniclesThe': 'kk',
-    'KelleySteve': 'crske',
-    'Kudzu': 'tmkud',
-    'LaCucaracha': 'lc',
-    'LegendOfBill': 'lob',
-    'LibertyMeadows': 'crlib',
-    'Lio': 'lio',
-    'LittleDogLost': 'wpldl',
-    'LocherDick': 'tmdlo',
-    'LooseParts': 'tmloo',
-    'LostSheep': 'lost',
-    'LoweChan': 'tmclo',
-    'LuckovichMike': 'crmlu',
-    'LuckyCow': 'luc',
-    'MarkstienGary': 'crgma',
-    'MarletteDoug': 'tmdma',
-    'MccoyGlenn': 'gm',
-    'MeaningOfLilaThe': 'crlil',
-    'MeehanStreak': 'tmmee',
-    'MiddletonsThe': 'tmmid',
-    'MinimumSecurity': 'ms',
-    'ModestyBlaiseSpanish': 'spmb',
-    'Momma': 'crmom',
-    'MorinJim': 'cwjmo',
-    'MuttJeffSpanish': 'spmut',
-    'MythTickle': 'myth',
-    'NAoQV': 'naqv',
-    'NaturalSelection': 'crns',
-    'NestHeads': 'cpnst',
-    'Neurotica': 'neu',
-    'NonSequitur': 'nq',
-    'OhmanJack': 'tmjoh',
-    'OliphantPat': 'po',
-    'OnAClaireDay': 'crocd',
-    'OneBigHappy': 'crobh',
-    'OtherCoastThe': 'crtoc',
-    'OutOfTheGenePool': 'wpgen',
-    'Overboard': 'ob',
-    'OverboardSpanish': 'spob',
-    'PepeSpanish': 'sppep',
-    'PettJoel': 'jp',
-    'Pibgorn': 'pib',
-    'Pickles': 'wppic',
-    'Pluggers': 'tmplu',
-    'PoochCafe': 'poc',
-    'PoochCafeSpanish': 'sppoc',
-    'PopCulture': 'pop',
-    'PowellDwane': 'crdpo',
-    'Preteena': 'pr',
-    'PricklyCity': 'prc',
-    'QuigmansThe': 'tmqui',
-    'RallComic': 'tr',
-    'RamirezMicheal': 'crmrm',
-    'RamseyMarshall': 'crmra',
-    'RealLifeAdventures': 'rl',
-    'RedAndRover': 'wpred',
-    'RedMeat': 'red',
-    'ReynoldsUnwrapped': 'rw',
-    'RonaldinhoGaucho': 'ron',
-    'RonaldinhoGauchoSpanish': 'spron',
-    'Rubes': 'crrub',
-    'SackSteve': 'tmssa',
-    'SargentBen': 'bs',
-    'SargentBenSpanish': 'spbs',
-    'SendHelp': 'send',
-    'ShenemanDrew': 'tmdsh',
-    'SherffiusDrew': 'crjsh',
-    'Shoecabbage': 'shcab',
-    'Shoe': 'tmsho',
-    'SigmundSpanish': 'spsig',
-    'Slowpoke': 'slow',
-    'SmallWorld': 'small',
-    'SpaceIsThePlace': 'sitp',
-    'SpeedBump': 'crspe',
-    'StanisScott': 'crsst',
-    'StateOfTheUnion': 'crsou',
-    'StayskalWayne': 'tmwst',
-    'StoneSoup': 'ss',
-    'StrangeBrew': 'crstr',
-    'SummersDana': 'tmdsu',
-    'SuttonImpact': 'stn',
-    'Sylvia': 'tmsyl',
-    'SzepPaul': 'crpsz',
-    'TankMcnamara': 'tm',
-    'TeenageMutantNinjaTurtles': 'tmnt',
-    'TelnaesAnn': 'tmate',
-    'TheArgyleSweater': 'tas',
-    'ThePinkPanther': 'tmpnk',
-    'TheWizardOfId': 'crwiz',
-    'TheWizardOfIdSpanish': 'crwis',
-    'ThInk': 'think',
-    'ThompsonMike': 'crmth',
-    'ThroughThickAndThin': 'cpthk',
-    'TinySepuku': 'tiny',
-    'Toby': 'toby',
-    'TolesTom': 'tt',
-    'TomTheDancingBug': 'td',
-    'TooMuchCoffeeMan': 'tmcm',
-    'Trevor': 'trev',
-    'TutelandiaSpanish': 'sptut',
-    'VarvelGary': 'crgva',
-    'WassermanDan': 'tmdwa',
-    'WatchYourHead': 'wpwyh',
-    'Waylay': 'min',
-    'WeePals': 'crwee',
-    'WinnieThePooh': 'crwin',
-    'WitOfTheWorld': 'cwwit',
-    'WorkingItOut': 'crwio',
-    'WriteDon': 'tmdow',
-    'YennySpanish': 'spyen',
-    'Yenny': 'yen',
-    'ZackHill': 'crzhi',
-    'ZiggySpanish': 'spzi',
-    'Ziggy': 'zi',
+    '9 Chickweed Lane': 'strip',
 }
 
-for name, shortname in comics.items():
-    add(name, shortname)
+for name, category in comics.items():
+    add(name, category)

@@ -4,6 +4,7 @@
 from __future__ import division, print_function
 
 import urllib2, urlparse
+import requests
 import sys
 import os
 import cgi
@@ -42,10 +43,6 @@ def tagre(tag, attribute, value, quote='"', before="", after=""):
     @return: the generated regular expression suitable for re.compile()
     @rtype: string
     """
-    if before:
-        before += "[^>]*"
-    if after:
-        after += "[^>]*"
     attrs = dict(
         tag=case_insensitive_re(tag),
         attribute=case_insensitive_re(attribute),
@@ -54,7 +51,7 @@ def tagre(tag, attribute, value, quote='"', before="", after=""):
         before=before,
         after=after,
     )
-    return r'<\s*%(tag)s\s+(?:[^>]*%(before)s\s+)?%(attribute)s\s*=\s*%(quote)s%(value)s%(quote)s[^>]*%(after)s>' % attrs
+    return r'<\s*%(tag)s\s+(?:[^>]*%(before)s[^>]*\s+)?%(attribute)s\s*=\s*%(quote)s%(value)s%(quote)s[^>]*%(after)s[^>]*>' % attrs
 
 
 def case_insensitive_re(name):
@@ -74,7 +71,7 @@ baseSearch = re.compile(tagre("base", "href", '([^"]*)'))
 def getPageContent(url):
     # read page data
     page = urlopen(url)
-    data = page.read(MAX_FILESIZE)
+    data = page.text
     # determine base URL
     baseUrl = None
     match = baseSearch.search(data)
@@ -105,7 +102,7 @@ def fetchUrls(url, imageSearch, prevSearch=None):
         imageUrl = match.group(1)
         if not imageUrl:
             raise ValueError("Match empty image URL at %s with pattern %s" % (url, imageSearch.pattern))
-        out.write('matched image URL %r' % imageUrl, 2)
+        out.write('matched image URL %r with pattern %s' % (imageUrl, imageSearch.pattern), 2)
         imageUrls.add(normaliseURL(urlparse.urljoin(baseUrl, imageUrl)))
     if not imageUrls:
         out.write("warning: no images found at %s with pattern %s" % (url, imageSearch.pattern))
@@ -178,22 +175,18 @@ def urlopen(url, referrer=None, retries=3, retry_wait_seconds=5):
     out.write('Open URL %s' % url, 2)
     assert retries >= 0, 'invalid retry value %r' % retries
     assert retry_wait_seconds > 0, 'invalid retry seconds value %r' % retry_wait_seconds
-    req = urllib2.Request(url)
+    headers = {'User-Agent': UserAgent}
+    config = {"max_retries": retries}
     if referrer:
-        req.add_header('Referer', referrer)
-    req.add_header('User-Agent', UserAgent)
-    tries = 0
-    while True:
-        try:
-            return urllib2.urlopen(req)
-        except IOError as err:
-            msg = 'URL retrieval of %s failed: %s' % (url, err)
-            out.write(msg)
-            out.write('waiting %d seconds and retrying (%d)' % (retry_wait_seconds, tries), 2)
-            time.sleep(retry_wait_seconds)
-            tries += 1
-            if tries >= retries:
-                raise IOError(msg)
+        headers['Referer'] = referrer
+    try:
+        req = requests.get(url, headers=headers, config=config)
+        req.raise_for_status()
+        return req
+    except requests.exceptions.RequestException as err:
+        msg = 'URL retrieval of %s failed: %s' % (url, err)
+        out.write(msg)
+        raise IOError(msg)
 
 
 def get_columns (fp):
@@ -259,11 +252,9 @@ def internal_error(out=sys.stderr, etype=None, evalue=None, tb=None):
     print("""********** Oops, I did it again. *************
 
 You have found an internal error in %(app)s. Please write a bug report
-at %(url)s and include the following information:
-- your commandline arguments and any configuration file in ~/.dosage/
-- the system information below
+at %(url)s and include at least the information below:
 
-Not disclosing some of the information above due to privacy reasons is ok.
+Not disclosing some of the information below due to privacy reasons is ok.
 I will try to help you nonetheless, but you have to give me something
 I can work with ;) .
 """ % dict(app=AppName, url=SupportUrl), file=out)
@@ -308,6 +299,7 @@ def print_app_info(out=sys.stderr):
                     {"version": sys.version, "platform": sys.platform}, file=out)
     stime = strtime(time.time())
     print("Local time:", stime, file=out)
+    print("sys.argv", sys.argv, file=out)
 
 
 def strtime(t):
