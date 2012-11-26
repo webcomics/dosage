@@ -2,28 +2,27 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012 Bastian Kleineidam
 
-from re import compile, IGNORECASE
-
-from ..scraper import _BasicScraper
+from re import compile
+from ..scraper import make_scraper
 from ..helpers import bounceStarter, queryNamer
+from ..util import tagre
 
 
-def drunkDuck(shortName):
-    linkSearch = r"<a href='(/[^/]*/index\.php\?p=\d+)' title='The %s page!'>"
-    return type('DrunkDuck_%s' % shortName,
-        (_BasicScraper,),
-        dict(
-        name='DrunkDuck/' + shortName,
-        stripUrl='index.php?p=%s' % (shortName,),
-        imageSearch=compile(r"<img src='(http://[a-z0-9]*.drunkduck.com/[^/]*/pages/[^'/]+)'>", IGNORECASE),
-        prevSearch=compile(linkSearch % ('previous',), IGNORECASE),
-        help='Index format: n (unpadded)',
-        namer=queryNamer('p', usePageUrl=True),
-        starter=bounceStarter('http://www.drunkduck.com/%s/' % (shortName,), compile(linkSearch % ('next',), IGNORECASE))
-        )
+def add(name):
+    classname = 'DrunkDuck_%s' % name
+    url = 'http://www.drunkduck.com/%s/' % name
+    linkSearch = tagre("a", "href", r"(/[^/]*/index\.php\?p=\d+)", quote="'", after="The %s page")
+    globals()[classname] = make_scraper(classname,
+        name = 'DrunkDuck/' + name,
+        starter = bounceStarter(url, compile(linkSearch % 'next')),
+        stripUrl = url + 'index.php?p=%s' % name,
+        imageSearch = compile(tagre("img", "src", r"(http://[a-z0-9]*\.drunkduck\.com/[^/]*/pages/[^'/]+)", quote="'")),
+        prevSearch= compile(linkSearch % 'previous'),
+        help = 'Index format: n (unpadded)',
+        namer = queryNamer('p', usePageUrl=True),
     )
 
-duckComics = [
+comics = (
     '0_Opposites_attract_0',
     '0_eight',
     '101_Ways_to_Drive_a_Maren_Insane',
@@ -2275,7 +2274,7 @@ duckComics = [
     'yay_ponys',
     'yoshi_freaks_real_life',
     'zuchini',
-    ]
+)
 
-for shortName in duckComics:
-    globals()[shortName] = drunkDuck(shortName)
+for name in comics:
+    add(name)

@@ -3,27 +3,19 @@
 # Copyright (C) 2012 Bastian Kleineidam
 
 from re import compile, sub
-
-from ..scraper import _BasicScraper
+from ..scraper import make_scraper
 from ..util import fetchUrl, tagre
 
 
-class _UClickScraper(_BasicScraper):
+def add(name, shortName):
     homepage = 'http://content.uclick.com/a2z.html'
     baseUrl = 'http://www.uclick.com/client/zzz/%s/'
-    stripUrl = property(lambda self: self.latestUrl + '%s/')
-    imageSearch = compile(tagre("img", "src", r'(http://synd\.imgsrv\.uclick\.com/comics/\w+/\d{4}/[^"]+\.gif)'))
-    prevSearch = compile(tagre("a", "href", r'(/client/zzz/\w+/\d{4}/\d{2}/\d{2}/)') + 'Previous date')
-    help = 'Index format: yyyy/mm/dd'
-
-    @classmethod
-    def starter(cls):
-        return cls.baseUrl % (cls.shortName,)
+    latestUrl = baseUrl % shortName
+    classname = 'UClick_%s' % name
 
     @classmethod
     def fetchSubmodules(cls):
         exclusions = ('index',)
-
         # XXX refactor this mess
         submoduleSearch = compile(tagre("a", "href", r'(http://content\.uclick\.com/content/\w+\.html)'))
         partsMatch = compile(tagre("a", "href", r'http://content\.uclick\.com/content/(\w+?)\.html'))
@@ -43,11 +35,15 @@ class _UClickScraper(_BasicScraper):
 
         return [normalizeName(name) for part, name in possibles if part not in exclusions and fetchSubmodule(part)]
 
+    globals()[classname] = make_scraper(classname,
+        name='UClick/' + name,
+        latestUrl = latestUrl,
+        stripUrl = latestUrl + '%s/',
+        imageSearch = compile(tagre("img", "src", r'(http://synd\.imgsrv\.uclick\.com/comics/\w+/\d{4}/[^"]+\.gif)')),
+        prevSearch = compile(tagre("a", "href", r'(/client/zzz/\w+/\d{4}/\d{2}/\d{2}/)') + 'Previous date'),
+        help = 'Index format: yyyy/mm/dd',
+    )
 
-def uclick(name, shortName):
-    return type('UClick_%s' % name,
-                (_UClickScraper,),
-                dict(name='UClick/' + name, shortName=shortName))
 
 comics = {
     '5thWave': 'fw',
@@ -278,6 +274,7 @@ comics = {
     'ZackHill': 'crzhi',
     'ZiggySpanish': 'spzi',
     'Ziggy': 'zi',
-    }
+}
 
-globals().update(dict((item[0], uclick(*item)) for item in comics.items()))
+for name, shortname in comics.items():
+    add(name, shortname)

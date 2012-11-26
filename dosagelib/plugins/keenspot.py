@@ -3,31 +3,29 @@
 # Copyright (C) 2012 Bastian Kleineidam
 
 from re import compile
-from ..scraper import _BasicScraper
+from ..scraper import make_scraper
 from ..util import tagre
 
 
-def keenSpot(name, urls):
+def add(name, urls):
+    classname = 'KeenSpot_%s' % name
     if not isinstance(urls, tuple):
         baseUrl = latestUrl = urls
     else:
         baseUrl, latestUrl = urls
 
-    return type('KeenSpot_%s' % name,
-        (_BasicScraper,),
-        dict(
-            name='KeenSpot/' + name,
-            latestUrl=latestUrl,
-            stripUrl=baseUrl + 'd/%s.html',
-            imageSearch = compile(tagre("img", "src", r'([^"]*comics/[^"]+)')),
-            prevSearch = compile(tagre("a", "href", r'"([^"]*d/\d{8}\.html)') +
-              '(?:<img[^>]+?(?:name="previous_day"|alt="Previous"|src="[^"]*back[^"]*")|Previous comic)'),
-            help = 'Index format: yyyymmdd',
-        )
+    globals()[classname] = make_scraper(classname,
+        name='KeenSpot/' + name,
+        latestUrl=latestUrl,
+        stripUrl=baseUrl + 'd/%s.html',
+        imageSearch = compile(tagre("img", "src", r'([^"]*comics/[^"]+)')),
+        prevSearch = compile(tagre("a", "href", r'"([^"]*d/\d{8}\.html)') +
+           '(?:<img[^>]+?(?:name="previous_day"|alt="Previous"|src="[^"]*back[^"]*")|Previous comic)'),
+        help = 'Index format: yyyymmdd',
     )
 
 
-keenspotComics = {
+comics = {
     '13thLabour': 'http://the13labour.comicgenesis.com/',
     '1StComing': 'http://toon.comicgenesis.com/',
     '1StGradeArt': 'http://art.comicgenesis.com/',
@@ -1520,7 +1518,15 @@ keenspotComics = {
     'Zortic': 'http://www.zortic.com/',
     'ZosKias': 'http://kojika.comicgenesis.com/',
     'ZuraZura': 'http://zurazura.comicgenesis.com/',
-    }
+}
 
-for name, urls in keenspotComics.items():
-    globals()[name] = keenSpot(name, urls)
+for name, urls in comics.items():
+    add(name, urls)
+
+
+#class Yirmumah(_BasicScraper):
+#    #http://yirmumah.keenspot.com/
+#    stripUrl = latestUrl + '?date=%s'
+#    imageSearch = compile(r'<img src="(strips/\d{8}\..*?)"')
+#    prevSearch = compile(r'<a href="(\?date=\d{8})">.*Previous')
+#    help = 'Index format: yyyymmdd'

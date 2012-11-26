@@ -2,21 +2,21 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012 Bastian Kleineidam
 
-from ..scraper import _BasicScraper
-from ..util import tagre
+from re import compile
+from ..scraper import make_scraper
+from ..util import tagre, asciify
 
-def creators(name, shortname):
+def add(name, shortname):
     baseUrl = 'http://www.creators.com/comics/'
-    return type('Creators_%s' % name,
-        (_BasicScraper,),
-        dict(
-        name='Creators/' + name,
-        latestUrl='%s%s.html' % (baseUrl, shortname),
-        stripUrl='%s%s/%%s.html' % (baseUrl, shortname),
-        imageSearch=compile(tagre("img", "src", r'(/comics/\d+/[^"]+)')),
-        prevSearch=compile(tagre("a", "href", r'(/comics/%s/\d+\.html)' % shortname) +
+    classname = 'Creators_%s' % asciify(name)
+    globals()[classname] = make_scraper(classname,
+        name = 'Creators/' + name,
+        latestUrl = baseUrl + shortname + '.html',
+        stripUrl = baseUrl + shortname + '/%s.html',
+        imageSearch = compile(tagre("img", "src", r'(/comics/\d+/[^"]+)')),
+        prevSearch = compile(tagre("a", "href", r'(/comics/%s/\d+\.html)' % shortname) +
           tagre("img", "src", r'/img_comics/arrow_l\.gif')),
-        help='Index format: n')
+        help = 'Index format: n',
     )
 
 
@@ -52,9 +52,9 @@ comics = {
     'Momma': 'momma',
     'NestHeads': 'nest-heads',
     'OneBigHappy': 'one-big-happy',
-    'OnAClaireDay': 'on-a-clair-day',
-    'TheOtherCoast': 'other-coast',
-    'TheQuigmans': 'quigmans',
+    'OnAClaireDay': 'on-a-claire-day',
+    'TheOtherCoast': 'the-other-coast',
+    'TheQuigmans': 'the-quigmans',
     'Rubes': 'rubes',
     'Rugrats': 'rugrats',
     'ScaryGary': 'scary-gary',
@@ -78,4 +78,4 @@ comics = {
 }
 
 for name, shortname in comics.items():
-    globals()[name] = creators(name, shortname)
+    add(name, shortname)

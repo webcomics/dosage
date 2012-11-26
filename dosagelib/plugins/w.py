@@ -2,15 +2,15 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012 Bastian Kleineidam
 
-from re import compile, IGNORECASE, DOTALL
+from re import compile, IGNORECASE
 
 from ..scraper import _BasicScraper
-from ..helpers import queryNamer, bounceStarter
+from ..util import tagre
 
 
 class WayfarersMoon(_BasicScraper):
     latestUrl = 'http://www.wayfarersmoon.com/'
-    stripUrl = latestUrl + 'index.php\?page=%s'
+    stripUrl = latestUrl + 'index.php?page=%s'
     imageSearch = compile(r'<img src="(/admin.+?)"')
     prevSearch = compile(r'<a href="(.+?)".+?btn_back.gif')
     help = 'Index format: nn'
@@ -32,7 +32,6 @@ class WhiteNoise(_BasicScraper):
     help = 'Index format: n'
 
 
-
 class WhyTheLongFace(_BasicScraper):
     latestUrl = 'http://www.absurdnotions.org/wtlf200709.html'
     stripUrl = 'http://www.absurdnotions.org/wtlf%s.html'
@@ -41,23 +40,12 @@ class WhyTheLongFace(_BasicScraper):
     help = 'Index format: yyyymm'
 
 
-
 class Wigu(_BasicScraper):
-    latestUrl = 'http://www.wigu.com/wigu/'
-    stripUrl = latestUrl + '?date=%s'
-    imageSearch = compile(r'<img src="(strips/\d{8}\..+?)" alt=""')
-    prevSearch = compile(r'<a href="(.+?)"[^>]+?>< PREV COMIC</a> ')
-    help = 'Index format: yyyymmdd'
-
-
-
-class WiguTV(_BasicScraper):
-    latestUrl = 'http://jjrowland.com/'
-    stripUrl = latestUrl + 'archive/%s.html'
-    imageSearch = compile(r'"(/comics/.+?)"')
-    prevSearch = compile(r'<a href="(/archive/.+?)"[^>]+?>&nbsp;')
-    help = 'Index format: yyyymmdd'
-
+    latestUrl = 'http://wigucomics.com/'
+    stripUrl = latestUrl + 'adventures/index.php?comic=%s'
+    imageSearch = compile(tagre("img", "src", r'(/adventures/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(/adventures/index\.php\?comic=\d+)', after="go back"))
+    help = 'Index format: n'
 
 
 class WotNow(_BasicScraper):
@@ -68,7 +56,6 @@ class WotNow(_BasicScraper):
     help = 'Index format: n (unpadded)'
 
 
-
 class WorldOfWarcraftEh(_BasicScraper):
     latestUrl = 'http://woweh.com/'
     stripUrl = None
@@ -77,46 +64,11 @@ class WorldOfWarcraftEh(_BasicScraper):
 
 
 class Wulffmorgenthaler(_BasicScraper):
-    latestUrl = 'http://www.wulffmorgenthaler.com/'
-    stripUrl = latestUrl + 'Default.aspx?id=%s'
-    imageSearch = compile(r'img id="ctl00_content_Strip1_imgStrip".+?class="strip" src="(striphandler\.ashx\?stripid=[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})"')
-    prevSearch = compile(r'<a href="(/default\.aspx\?id=[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})" id="ctl00_content_Strip1_aPrev">')
-    help = 'Index format: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (GUID)'
-    namer = queryNamer('stripid')
-
-
-def webcomicsNation():
-    class _WebcomicsNation(_BasicScraper):
-        imageSearch = compile(r'<a name="strip\d*?">.*?<img[^>]+?src="([^"]*?memberimages/.+?)"', IGNORECASE + DOTALL)
-        prevSearch = compile(r'href="([^"]*?whichbutton=prev[^"]*?)"', IGNORECASE)
-        help = 'Index format: nnnn (non-contiguous)'
-
-        @property
-        def stripUrl(self):
-            return self.baseUrl + '?view=archive&amp;chapter=%s'
-
-    comics = {
-        'AgnesQuill': 'daveroman/agnes/',
-        'Elvenbaath': 'tdotodot2k/elvenbaath/',
-        'IrrationalFears': 'uvernon/irrationalfears/',
-        'KismetHuntersMoon': 'laylalawlor/huntersmoon/',
-        'SaikoAndLavender': 'gc/saiko/',
-        'MyMuse': 'gc/muse/',
-        'NekkoAndJoruba': 'nekkoandjoruba/nekkoandjoruba/',
-        'JaxEpoch': 'johngreen/quicken/',
-        'QuantumRockOfAges': 'DreamchildNYC/quantum/',
-        'ClownSamurai' : 'qsamurai/clownsamurai/',
-        }
-
-    return dict((name, type('WebcomicsNation_%s' % name,
-                (_WebcomicsNation,),
-                dict(name='WebcomicsNation/' + name,
-                latestUrl='http://www.webcomicsnation.com/' + subpath)))
-                for name, subpath in comics.items())
-
-
-globals().update(webcomicsNation())
-
+    latestUrl = 'http://wumocomicstrip.com/'
+    stripUrl = latestUrl + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(/img/strip/thumb/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)') + "<span>Previous")
+    help = 'Index format: yyyy/mm/dd'
 
 
 class WhiteNoise(_BasicScraper):
@@ -127,7 +79,6 @@ class WhiteNoise(_BasicScraper):
     help = 'Index format: n'
 
 
-
 class WapsiSquare(_BasicScraper):
     latestUrl = 'http://wapsisquare.com/'
     stripUrl = latestUrl + 'comic/%s'
@@ -136,75 +87,12 @@ class WapsiSquare(_BasicScraper):
     help = 'Index format: strip-name'
 
 
-
-class WrongWay(_BasicScraper):
-    latestUrl = 'http://www.wrongwaycomics.com/'
-    stripUrl = latestUrl + '%s.html'
-    imageSearch = compile(r'<img src="(comics/.+?)"')
-    prevSearch = compile(r' <a class="comicNav" href="(.+?)" onmouseover="previousLinkIn\(\)"')
-    help = 'Index format: nnn'
-
-
-
 class WeCanSleepTomorrow(_BasicScraper):
     latestUrl = 'http://wecansleeptomorrow.com/'
-    imageSearch = compile(r'<img src="(http://wecansleeptomorrow.com/comics/.+?)"')
-    prevSearch = compile(r'<div class="nav-previous"><a href="(.+?)">')
+    stripUrl = latestUrl + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://wecansleeptomorrow\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://wecansleeptomorrow\.com/[^"]+)', after="prev"))
     help = 'Index format: yyyy/mm/dd/stripname'
-
-
-
-class _WLP(_BasicScraper):
-    imageSearch=compile(r'SRC="(http://www.wlpcomics.com/adult/.+?|http://www.wlpcomics.com/general/.+?)"', IGNORECASE)
-    prevSearch=compile(r'</a> <A HREF="(\w+.html)">Previous Page</a>', IGNORECASE)
-    help='Index format: nnn'
-
-    @property
-    def baseUrl(self):
-        return 'http://www.wlpcomics.com/%s' % (self.path,)
-
-    @property
-    def stripUrl(self):
-        return self.baseUrl + '%s.html'
-
-    def namer(self, imageUrl, pageUrl):
-        return pageUrl.split('/')[-1].split('.')[0]
-
-    def starter(self):
-        # XXX: ergh
-        meth = bounceStarter(self.baseUrl, compile(r'</a> <A HREF="(\w+.html)">Next Page</a>', IGNORECASE))
-        return meth.__get__(self, type(self))()
-
-
-
-class ChichiChan(_WLP):
-    name = 'WLP/ChichiChan'
-    path = 'adult/chichi/'
-
-
-
-class ChocolateMilkMaid(_WLP):
-    name = 'WLP/ChocolateMilkMaid'
-    path = 'adult/cm/'
-
-
-
-class MaidAttack(_WLP):
-    name = 'WLP/MaidAttack'
-    path = 'general/maidattack/'
-
-
-
-class ShadowChasers(_WLP):
-    name = 'WLP/ShadowChasers'
-    path = 'general/shadowchasers/'
-
-
-
-class Stellar(_WLP):
-    name = 'WLP/Stellar'
-    path = 'adult/stellar/'
-
 
 
 class Wondermark(_BasicScraper):

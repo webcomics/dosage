@@ -2,11 +2,13 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012 Bastian Kleineidam
 
-from re import compile, IGNORECASE, MULTILINE
+from re import compile
 
 from ..scraper import _BasicScraper
+from ..util import tagre
 
 
+# XXX make dynamic
 class _VGCats(_BasicScraper):
     latestUrl = 'http://www.vgcats.com/comics/'
     imageSearch = compile(r'<img src="(images/\d{6}\..+?)"')
@@ -31,7 +33,6 @@ class Adventure(_VGCats):
 
 class ViiviJaWagner(_BasicScraper):
     latestUrl = 'http://www.hs.fi/viivijawagner/'
-    imageSearch = compile(r'<img id="strip\d+"\s+src="([^"]+)"', IGNORECASE)
-    prevSearch = compile(r'<a href="(.+?)"[^>]+?>\nEdellinen&nbsp;\n<img src="http://www.hs.fi/static/hs/img/viivitaakse.gif"', MULTILINE | IGNORECASE)
-    # XXX ?
-    help = 'Index format: shrugs!'
+    imageSearch = compile(tagre("link", "href", r'(http://hs12\.snstatic\.fi/webkuva/oletus/[^"]+)', before="image_src"))
+    prevSearch = compile(tagre("a", "href", r'(/viivijawagner/\d+)', before="prev-cm"))
+    help = 'Index format: none'

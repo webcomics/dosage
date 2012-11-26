@@ -2,7 +2,7 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012 Bastian Kleineidam
 
-from re import compile, sub
+from re import compile
 from ..scraper import _BasicScraper
 from ..helpers import indirectStarter, _PHPScraper
 from ..util import tagre
@@ -62,35 +62,6 @@ class Nukees(_BasicScraper):
     prevSearch = compile(r'"(/d/.+?)".+?previous')
     help = 'Index format: yyyymmdd.html'
 
-
-
-def nuklearpower(name, shortname):
-    baseUrl = 'http://www.nuklearpower.com/'
-    latestUrl = "%s%s/" % (baseUrl, shortname)
-    classname = sub("[^0-9a-zA-Z_]", "", name)
-
-    globals()[classname] = type('NuklearPower_%s' % classname,
-        (_BasicScraper,),
-        dict(
-        name='NuklearPower/' + classname,
-        latestUrl = latestUrl,
-        stripUrl = latestUrl + '%s',
-        imageSearch = compile(tagre("img", "src", r'(http://www\.nuklearpower\.com/comics/[^"]+)')),
-        prevSearch = compile(tagre("a", "href", r'([^"]+)') + "Previous"),
-        help = 'Index format: yyyy/mm/dd/name',
-        )
-    )
-
-
-npstrips = {
-    '8BitTheater': '8-bit-theater',
-    'Warbot': 'warbot',
-    'HowIKilledYourMaster': 'hikym',
-    'AtomicRobo': 'atomic-robo',
-}
-
-for name, shortname in npstrips.items():
-    nuklearpower(name, shortname)
 
 
 class NekoTheKitty(_PHPScraper):

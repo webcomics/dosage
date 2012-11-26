@@ -2,41 +2,34 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012 Bastian Kleineidam
 
-from ..scraper import _BasicScraper
+from re import compile
+from ..scraper import make_scraper
 
-def snafuComics():
-    class _SnafuComics(_BasicScraper):
-        imageSearch = compile(r'<img src=http://\w+\.snafu-comics\.com/(comics/\d{6}_\w*\.\w{3,4})')
-        prevSearch = compile(r'<a href="(\?comic_id=\d+)">Previous</a>')
-        help = 'Index format: n (unpadded)'
+def add(name, host):
+    baseUrl = 'http://%s.snafu-comics.com/' % host
+    classname = 'SnafuComics_%s' % name
 
-        @property
-        def stripUrl(self):
-            return self.latestUrl + 'index.php?strip_id=%s'
+    globals()[classname] = make_scraper(classname,
+        latestUrl = baseUrl,
+        stripUrl = baseUrl + 'index.php?strip_id=%s',
+        imageSearch = compile(r'<img src=http://\w+\.snafu-comics\.com/(comics/\d{6}_\w*\.\w{3,4})'),
+        prevSearch = compile(r'<a href="(\?comic_id=\d+)">Previous</a>'),
+        help = 'Index format: n (unpadded)',
+    )
 
-    comics = {
-        'Grim': 'grim',
-        'KOF': 'kof',
-        'PowerPuffGirls': 'ppg',
-        'Snafu': 'www',
-        'Tin': 'tin',
-        'TW': 'tw',
-        'Sugar': 'sugar',
-        'SF': 'sf',
-        'Titan': 'titan',
-        'EA': 'ea',
-        'Zim': 'zim',
-        'Soul': 'soul',
-        'FT': 'ft',
-        'Bunnywith': 'bunnywith',
-        'Braindead': 'braindead',
-        }
 
-    url = 'http://%s.snafu-comics.com/'
-    return dict((name, type('SnafuComics_%s' % name,
-                            (_SnafuComics,),
-                             dict(name='SnafuComics/' + name,
-                             latestUrl=url % host)))
-                for name, host in comics.items())
-
-globals().update(snafuComics())
+add('Grim', 'grim')
+add('KOF', 'kof')
+add('PowerPuffGirls', 'ppg')
+add('Snafu', 'www')
+add('Tin', 'tin')
+add('TW', 'tw')
+add('Sugar', 'sugar')
+add('SF', 'sf')
+add('Titan', 'titan')
+add('EA', 'ea')
+add('Zim', 'zim')
+add('Soul', 'soul')
+add('FT', 'ft')
+add('Bunnywith', 'bunnywith')
+add('Braindead', 'braindead')

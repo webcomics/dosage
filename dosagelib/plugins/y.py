@@ -2,30 +2,24 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012 Bastian Kleineidam
 
-from re import compile, MULTILINE
-
 from ..scraper import _BasicScraper
+from ..util import tagre
 
 
 class YAFGC(_BasicScraper):
-    latestUrl = 'http://yafgc.shipsinker.com/'
-    stripUrl = latestUrl + 'index.php?strip_id=%s'
-    imageSearch = compile(r'(istrip_.+?)"')
-    prevSearch = compile(r'(/.+?)">\r\n.+?prev.gif', MULTILINE)
+    latestUrl = 'http://yafgc.net/'
+    stripUrl = latestUrl + '?id=%s'
+    imageSearch = compile(tagre("img", "src", r'(http://yafgc\.net/img/comic/\d+\.jpg)'))
+    prevSearch = compile(tagre("a", "href", r'(http://yafgc\.net/\?id=\d+)') +
+      tagre("img", "src", r'/img/navbar/go_to_previous\.gif'))
     help = 'Index format: n'
 
 
 class YouSayItFirst(_BasicScraper):
     latestUrl = 'http://www.yousayitfirst.com/'
-    stripUrl = 'http://www.soapylemon.com/comics/index.php?date=%s'
-    imageSearch = compile(r'(http://.+?comics/.+?.jpg)[^<]')
-    prevSearch = compile(r'(/comics/index.php\?date=.+?)".+?P')
+    stripUrl = latestUrl + 'comics/index.php?date=%s'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.yousayitfirst\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.yousayitfirst\.com/comics/index\.php\?date=\d+)') + "Previous")
     help = 'Index format: yyyymmdd'
 
 
-class Yirmumah(_BasicScraper):
-    latestUrl = 'http://yirmumah.net/archives.php'
-    stripUrl = latestUrl + '?date=%s'
-    imageSearch = compile(r'<img src="(strips/\d{8}\..*?)"')
-    prevSearch = compile(r'<a href="(\?date=\d{8})">.*Previous')
-    help = 'Index format: yyyymmdd'

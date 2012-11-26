@@ -3,20 +3,24 @@
 # Copyright (C) 2012 Bastian Kleineidam
 
 from re import compile
-
 from ..scraper import _BasicScraper
+from ..util import tagre
+from ..helpers import bounceStarter
 
 
 class Zapiro(_BasicScraper):
-    latestUrl = 'http://www.mg.co.za/zapiro/all'
-    imageSearch = compile(r'<img src="(cartoons/[^"]+)"')
-    prevSearch = compile(r'<a href="([^"]+)">&gt;')
-
+    baseUrl = 'http://www.mg.co.za/zapiro/'
+    starter = bounceStarter(baseUrl,
+      compile(tagre("a", "href", r'(http://mg\.co\.za/cartoon/[^"]+)')+"Newer"))
+    stripUrl = 'http://mg.co.za/cartoon/%s'
+    imageSearch = compile(tagre("img", "src", r'(http://cdn\.mg\.co\.za/crop/content/cartoons/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://mg\.co\.za/cartoon/[^"]+)')+"Older")
+    help = 'Index format: yyyy-mm-dd-stripname'
 
 
 class ZombieHunters(_BasicScraper):
     latestUrl = 'http://www.thezombiehunters.com/'
-    stripUrl = latestUrl + 'index.php?strip_id=%s'
-    imageSearch = compile(r'"(.+?strips/.+?)"')
-    prevSearch = compile(r'</a><a href="(.+?)"><img id="prevcomic" ')
+    stripUrl = latestUrl + '?strip_id=%s'
+    imageSearch = compile(tagre("img", "src", r'(/istrip_files/strips/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(\?strip_id=\d+)') + tagre("img", "id", "prevcomic"))
     help = 'Index format: n(unpadded)'

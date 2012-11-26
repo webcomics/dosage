@@ -1,6 +1,8 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012 Bastian Kleineidam
+from ..scraper import _BasicScraper
+
 
 def fallenangel(name, shortname):
     pass # XXX
