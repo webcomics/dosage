@@ -3,7 +3,7 @@ PYVER:=2.7
 PYTHON:=python$(PYVER)
 VERSION:=$(shell $(PYTHON) setup.py --version)
 ARCHIVE:=dosage-$(VERSION).tar.gz
-PY_FILES_DIRS := dosage dosagelib tests *.py
+PY_FILES_DIRS := dosage dosagelib scripts tests *.py
 PY2APPOPTS ?=
 NUMPROCESSORS:=$(shell grep -c processor /proc/cpuinfo)
 # Pytest options:
@@ -33,8 +33,8 @@ doc/dosage.1.html: doc/dosage.1
 
 release: distclean releasecheck dist
 	git tag v$(VERSION)
-#	@echo "Register at Python Package Index..."
-#	$(PYTHON) setup.py register
+	@echo "Register at Python Package Index..."
+	$(PYTHON) setup.py register
 #	freecode-submit < dosage.freecode
 
 
@@ -75,7 +75,7 @@ clean:
 	rm -rf build dist
 
 distclean: clean
-	rm -rf build dist Dosage.egg-info
+	rm -rf build dist Dosage.egg-info dosage.prof test.sh testresults.txt
 	rm -f _Dosage_configdata.py MANIFEST
 
 localbuild:
@@ -87,11 +87,8 @@ test:	localbuild
 deb:
 	git-buildpackage --git-export-dir=../build-area/ --git-upstream-branch=master --git-debian-branch=debian  --git-ignore-new
 
-comics:
-	./dosage -v @@ > comics.log 2>&1
-
 update-copyright:
 	update-copyright --holder="Bastian Kleineidam"
 
-.PHONY: update-copyright comics deb test clean distclean count pyflakes
+.PHONY: update-copyright deb test clean distclean count pyflakes
 .PHONY: doccheck check releasecheck release dist chmod localbuild

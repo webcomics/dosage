@@ -83,7 +83,7 @@ def GetConsoleScreenBufferInfo(stream_id=STDOUT):
     """Get console screen buffer info object."""
     handle = handles[stream_id]
     csbi = CONSOLE_SCREEN_BUFFER_INFO()
-    success = windll.kernel32.GetConsoleScreenBufferInfo(
+    windll.kernel32.GetConsoleScreenBufferInfo(
         handle, byref(csbi))
     return csbi
 

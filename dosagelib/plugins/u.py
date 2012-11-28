@@ -6,7 +6,7 @@ from re import compile
 
 from ..scraper import _BasicScraper
 from ..helpers import bounceStarter, indirectStarter
-from ..util import getQueryParams, tagre
+from ..util import getQueryParams
 
 
 class Undertow(_BasicScraper):

@@ -33,6 +33,7 @@ class Adventure(_VGCats):
 
 class ViiviJaWagner(_BasicScraper):
     latestUrl = 'http://www.hs.fi/viivijawagner/'
-    imageSearch = compile(tagre("link", "href", r'(http://hs12\.snstatic\.fi/webkuva/oletus/[^"]+)', before="image_src"))
-    prevSearch = compile(tagre("a", "href", r'(/viivijawagner/\d+)', before="prev-cm"))
+    stripUrl = None
+    imageSearch = compile(tagre("link", "href", r'(http://hs\d+\.snstatic\.fi/webkuva/oletus/[^"]+)', before="image_src"))
+    prevSearch = compile(tagre("a", "href", r'(/viivijawagner/[^"]+)', before="prev-cm"))
     help = 'Index format: none'

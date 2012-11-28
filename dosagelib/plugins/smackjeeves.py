@@ -6,6 +6,8 @@ from ..scraper import make_scraper
 from ..helpers import bounceStarter
 from ..util import tagre
 
+_imageSearch = compile(tagre("img", "src", r'(http://www\.smackjeeves\.com/images/uploaded/comics/[^"]*)'))
+_prevSearch = compile(tagre("a", "href", r'(/comics/\d+/[^"]*)') + '<img[^>]*alt="< Previous"')
 
 def add(name):
     classname = 'SmackJeeves/' + name
@@ -20,8 +22,8 @@ def add(name):
     globals()[classname] = make_scraper(classname,
         starter=bounceStarter(baseUrl, compile(tagre("a", "href", r'(/comics/\d+/[^"]*)') + '<img[^>]*alt="Next >"')),
         stripUrl = baseUrl,
-        imageSearch = compile(tagre("img", "src", r'(http://www\.smackjeeves\.com/images/uploaded/comics/[^"]*)')),
-        prevSearch = compile(tagre("a", "href", r'(/comics/\d+/[^"]*)') + '<img[^>]*alt="< Previous"'),
+        imageSearch = _imageSearch,
+        prevSearch = _prevSearch,
         help = 'Index format: nnnn (some increasing number)',
         namer = namer,
     )

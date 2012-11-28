@@ -8,7 +8,7 @@ import rfc822
 import time
 
 from .output import out
-from .util import urlopen, saneDataSize, normaliseURL
+from .util import urlopen, saneDataSize, normaliseURL, unquote
 from .events import getHandler
 
 class FetchComicError(IOError):
@@ -54,10 +54,10 @@ class ComicImage(object):
         """Connect to host and get meta information."""
         try:
             self.urlobj = urlopen(self.url, referrer=self.referrer)
-        except IOError as he:
-            raise FetchComicError('Unable to retrieve URL.', self.url, he.code)
+        except IOError as msg:
+            raise FetchComicError('Unable to retrieve URL.', self.url, msg)
 
-        content_type = self.urlobj.headers.get('content-type')
+        content_type = unquote(self.urlobj.headers.get('content-type'))
         content_type = content_type.split(';', 1)[0]
         if '/' in content_type:
             maintype, subtype = content_type.split('/', 1)
@@ -65,7 +65,7 @@ class ComicImage(object):
             maintype = content_type
             subtype = None
         if maintype != 'image' and content_type not in ('application/octet-stream', 'application/x-shockwave-flash'):
-            raise FetchComicError('No suitable image found to retrieve.', self.url)
+            raise FetchComicError('Content type %r is not an image.' % content_type, self.url)
 
         # Always use mime type for file extension if it is sane.
         if maintype == 'image':

@@ -7,11 +7,15 @@ from ..scraper import make_scraper
 from ..helpers import bounceStarter
 from ..util import tagre
 
+# note: adding the compile() functions inside add() is a major performance hog
+_imageSearch =  compile(tagre("img", "src", r'(http://media\.drunkduck\.com\.s3\.amazonaws\.com:80/[^"]+)', before="page-image"))
+_linkSearch = tagre("a", "href", r'(/[^"]+/\d+/)')
+_prevSearch = compile(_linkSearch + tagre("img", "class", "arrow_prev"))
+_nextSearch = compile(_linkSearch + tagre("img", "class", "arrow_next"))
 
 def add(name):
     classname = 'DrunkDuck_%s' % name
     url = 'http://www.drunkduck.com/%s/' % name
-    linkSearch = tagre("a", "href", r"(/%s/\d+/)" % name)
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
@@ -21,2267 +25,1387 @@ def add(name):
 
     globals()[classname] = make_scraper(classname,
         name = 'DrunkDuck/' + name,
-        starter = bounceStarter(url, compile(linkSearch + tagre("img", "class", "arrow_next"))),
+        starter = bounceStarter(url, _nextSearch),
         stripUrl = url + '%s/',
-        imageSearch = compile(tagre("img", "src", r'(http://media\.drunkduck\.com\.s3\.amazonaws\.com:80/[^"]+)', before="page-image")),
-        prevSearch= compile(linkSearch + tagre("img", "class", "arrow_prev")),
+        imageSearch = _imageSearch,
+        prevSearch = _prevSearch,
         help = 'Index format: n (unpadded)',
         namer = namer,
     )
 
-comics = (
-    '0_Opposites_attract_0',
-    '0_eight',
-    '101_Ways_to_Drive_a_Maren_Insane',
-    '12_Men_Died_Making_This_Strip',
-    '1337_Ninjas',
-    '16_and_Up',
-    '20_Galaxies',
-    '25_Years',
-    '2G_Pokemon',
-    '2Masters',
-    '2Masters_Prelouges',
-    '2_Bitter_4_Words',
-    '2nd_Shift',
-    '2s_a_company',
-    '3D_Glasses',
-    '3RD_EARTH_issue_2',
-    '3_guardian_Goddess',
-    '3_stoires',
-    '3rd_Party_Fantasy',
-    '4_Humor',
-    '8Bit_Adventure',
-    'AACMAW',
-    'AB_the_virus',
-    'AComicMadeOutOfBoredom',
-    'AD_1997',
-    'AFG_Part_1',
-    'AFG_Part_2',
-    'AGENCY',
-    'AHAB',
-    'AKA_Limzee',
-    'AN2090',
-    'ANGELOU_____Las_aventuras_de_Nikole',
-    'ANIME_WARS',
-    'ARCTIC_BLAST',
-    'AUTO_ROBO',
-    'AWES0ME',
-    'AWESOME_HIGH_FIVE_EDITION',
-    'A_Dim_View',
-    'A_Disease_Called_Puberty',
-    'A_Dynasty_of_Random_Megaman',
-    'A_Faulty_Future',
-    'A_Knights_Tale',
-    'A_Little_Piece_of_Insanity',
-    'A_Loonatics_Tale',
-    'A_Note_On_My_Life',
-    'A_Place_called_Random',
-    'A_Roll_of_the_Dice',
-    'A_Shaggy_Dog_Story',
-    'A_Spot_of_Sunshine',
-    'A_Tale_of_Two_Sprites',
-    'A_Veteran_Lounge_Tale',
-    'A_Way_to_the_Stars',
-    'A_collection_of_Gothic_Literature',
-    'Abram_goes_to_hell',
-    'According_To_Plan',
-    'Achievement_Wh0rz',
-    'Acrobat',
-    'Acting_Out',
-    'Adam_and_Sei',
-    'Advanced_Placement',
-    'Adventures_Guild',
-    'Adventures_of_Jon_and_Andrew',
-    'Adventures_of_Tails_and_Klonoa',
-    'After_Lily',
-    'Age_of_Ends',
-    'Ageless_Legend',
-    'Air_Raid_Robertson',
-    'Akashik',
-    'Akatoshi',
-    'Akniatt',
-    'Al_De_Baran',
-    'Al_and_Scout',
-    'Alecto_Songbook',
-    'Aleion',
-    'Alenas_Tank_Patrol',
-    'Alexander_and_Lucas',
-    'Alien_Circus',
-    'Alien_Concepts',
-    'Alone',
-    'Also_Bagels',
-    'Altimatium',
-    'Am_I_Still_Here',
-    'Ambrosia_Syndrome',
-    'Amya',
-    'Anathema',
-    'Anatta',
-    'And_Then_There_Was_Fred',
-    'Androgynous',
-    'Angel_Ninja_vs_Devil_Ninja',
-    'Angelfish',
-    'Angelic_Tourniquet',
-    'Angelos',
-    'Angels',
-    'Angels_Apology',
-    'Angels_Dont_Cry',
-    'Angels_of_Shadows',
-    'Animania',
-    'Animania_Shadows_of_Time',
-    'Anime_Remix',
-    'Animosity_Sonata',
-    'Another_Articifial_Time',
-    'Another_Beginning',
-    'Another_Sonic_Comic',
-    'Another_Stickman_Comic',
-    'Another_Story',
-    'Another_Unidentified_Comic',
-    'Answers',
-    'Antcomics',
-    'Antcomics_Fan_Art',
-    'Anthem',
-    'Anti_Christ_Daiji',
-    'Anubis_Dreams',
-    'Anwar_And_Chad_Show',
-    'Anyone_but_Virginia',
-    'Anything_About_Nothing',
-    'Anything_Goes',
-    'ApAp',
-    'Apartment_408_Full_Size',
-    'Applied_Living',
-    'Ar_Oh_Ef_El',
-    'Arachnid_Goddess',
-    'Ardra',
-    'Arghh_What_a_life',
-    'Arrowflight_Chronicles',
-    'Art_School_Sub_Rosa',
-    'Art_School_Sub_Rosa_Fanart_Contest',
-    'Art_and_sketches',
-    'Arthur_King',
-    'Artificial_Blood',
-    'Artwork____The_Mirror_of_Life',
-    'As_the_Galaxy_Turns',
-    'Ask_a_Stupid_Question',
-    'Assassin_Assassin',
-    'Assorted_moments',
-    'Asteroid_of_Doom',
-    'Asylum_Story',
-    'At_The_Library',
-    'Atavism',
-    'Atlantis_Rising',
-    'Atta_boy',
-    'Attach_This',
-    'Avast_Ye',
-    'Avian_insanity',
-    'Aw_Nuts_2',
-    'Awakenings_Online',
-    'BANG_Reku_and_Kiyoshis_Spiritual_Detective_Agency',
-    'BERZERK_issue_2',
-    'BFF',
-    'BIOLOGICAL_INDESTRUCTIBLE_TACTICAL_COMBAT_HYBRID_SQUAD',
-    'BIONICLE_Reworded',
-    'BIONICLE_Zeroes',
-    'BK_Shadow_Nemesis',
-    'BLADE_OF_THE_FREAK',
-    'BLANK_LIFE_insert_player_rokulily',
-    'BLOOP',
-    'BVC_Scrap_Book',
-    'Bacon_Strips',
-    'Bad_Coffee',
-    'Bad_Grafiks',
-    'Bad_Guy_High',
-    'Bad_Taste',
-    'Bad_Troll_Comic',
-    'Badly_Drawn_Penguins',
-    'Badly_Drawn_Webcomic',
-    'Bally_Who',
-    'Banango',
-    'Bar_d',
-    'Barely_Listening',
-    'Baroque_Viceroyalty',
-    'Battle_Dawn_Comics',
-    'Be_Faithful',
-    'Bear_Versus_Zombies',
-    'Bear_and_The_Boy',
-    'Bearly_Abel',
-    'BeastWARs_lost_memories',
-    'Beautiful_Disaster',
-    'Beautiful_Skies',
-    'Beauty_Into_Beast',
-    'Beauty_and_Horror',
-    'Because_I_Can',
-    'Because_of_Ivan',
-    'Because_of_You',
-    'Been_Better',
-    'Beer_Noodles',
-    'Beneficially_challenged',
-    'Berserk_Final',
-    'Beta',
-    'Better_Luck_Next_Time',
-    'Betting_On_Love',
-    'Between_Failures',
-    'Between_Worlds',
-    'Beware_of_Walking_Mushrooms',
-    'Beyond_Fiction',
-    'BffSatan',
-    'Bico_s_Place',
-    'Biff',
-    'Bilaran_Wars',
-    'Bill_and_Po',
-    'Binding_Shadows',
-    'Bipolar_Is_A_Laughing_Matter',
-    'Birth_Of_Genesis',
-    'BitchSnake',
-    'Bitter_Sweet_Melancholy',
-    'Black_Hole_Dawn',
-    'Blackaby',
-    'Blade_of_Toshubi',
-    'Blazes_Rumble',
-    'Bleach_Asylum_Behind_Closed_Eyes',
-    'Bleach_Asylum_Yonkoma',
-    'Blood_Bound',
-    'Blood_Groove',
-    'Blood_Martian_Flowers',
-    'Blood_Nation',
-    'Blood_Reign_and_Devil_Jack',
-    'Blood_sign',
-    'Bloodlust_Eternal_Conflict',
-    'BluDoo',
-    'Blue0',
-    'Blue_Ninja_and_Red_Pirate',
-    'Blue_Strawberry',
-    'Bob_and_Pete',
-    'Bob_the_Alien',
-    'Bobby_Monos_Crappy_Comics',
-    'Bobby_the_fetus',
-    'BombSquad',
-    'Bomb_Shrapnel',
-    'Bombshell',
-    'Bonds_That_Break',
-    'Boner_And_Punkin',
-    'Boo',
-    'Boogey_Dancing',
-    'Book_of_Desolation',
-    'Bored_as_Hell',
-    'Bored_by_the_Bus_Stop',
-    'Boredom_Blabber_Mania',
-    'Boredom_Comics',
-    'Bots',
-    'Bottle_Cap',
-    'Bowser_wars',
-    'Bowsers_Plan_B',
-    'Boxdog',
-    'Brain_Dump',
-    'Brain_Pork',
-    'Brainfuzz',
-    'Brathalla',
-    'Breaking_the_Ice',
-    'Bright_Earth',
-    'Brinkerhoff',
-    'Broken_Reploid',
-    'Broken_Things',
-    'Broken_Wings',
-    'Brutus',
-    'Brymstone',
-    'Bulletproof',
-    'Bunny_Comic',
-    'But_Not_Really',
-    'Butte',
-    'Button_Bashers',
-    'CATS_AND_ICECREAM',
-    'CCC_Presents',
-    'CIM_1_Final',
-    'CLM_Training_Academy',
-    'COCA',
-    'CODIGO_SAGRADO__based_on_M_R_Hagen_Vampire_The_Masquerade',
-    'CONtrail_Residuals',
-    'CQB_Epics',
-    'CROSS_WORLDS_NEXXUS',
-    'CRY_The_Story_of_the_the_lost_Humanity',
-    'CS_Battlegrounds',
-    'CYPICO',
-    'Caggage',
-    'Caissa_hates_me',
-    'Canadian_Gamers',
-    'Cancerous_AIDS',
-    'Captain_Communism',
-    'Carnies',
-    'Carrot_and_Roper',
-    'Cartoon_Egoist',
-    'Case_1313666xBlind_an_Blue',
-    'Cashcow',
-    'Casmajor_Druids',
-    'Catboy_at_th_Con',
-    'Caution_May_Contain_Nuts',
-    'Caves_and_Critters',
-    'Cecil_Dragon_Slayer',
-    'Celebrity_Stalker',
-    'Cerintha',
-    'Certified_Monster',
-    'Chad_the_Fat_Kid',
-    'Chain_of_Stuff',
-    'Chains',
-    'Chalkdust',
-    'Changing_Worlds',
-    'Chaos_Punks',
-    'Chaos_Reigns',
-    'Chaos_Sonic',
-    'CharCole',
-    'Character_Cave',
-    'Charby_the_Vampirate',
-    'Cherry_Knot',
-    'Children_of_the_Night',
-    'Choking_Dolphins',
-    'Chooken',
-    'Chris_And_Vernbugg',
-    'Christian_Humber_Reloaded',
-    'Chronicles_of_Calays',
-    'Chronicles_of_Gathion',
-    'Chronicles_of_Trent',
-    'Chrono_Chaos',
-    'Chu_and_Kenny',
-    'Circle_Arcadia',
-    'City_of_Lost_Souls',
-    'City_of_Weirdos',
-    'Civil_Servitude',
-    'Clandestine_Rhapsody',
-    'ClashDown',
-    'Clipped_Together',
-    'Clique_Me',
-    'Clock_drawings',
-    'Cloud_Eagle',
-    'Cloudy_in_Rainbow_Town',
-    'Coalition_of_the_Reluctant',
-    'Cockroach_Theater',
-    'Code_Twilight',
-    'Coffee_Boy',
-    'Coffee_Time',
-    'Cold_Pizza',
-    'Coloured_Stuff',
-    'Columbian_Messianic_Society',
-    'Comic_Book_Whore',
-    'Comic_Pie',
-    'Comic_Tutorials',
-    'Comics_I_Made_While_Blindfolded',
-    'Coming_Soon',
-    'Commedia_dellArte',
-    'Commedia_dellArte_2',
-    'Common_Symptoms',
-    'Complex_Love',
-    'Conduit_Flux',
-    'Coney_island_Disco_Palace',
-    'Confetti_Surprise_Volume_One',
-    'Consumed',
-    'Contemporary_Eclipse',
-    'Convenient_Hell_A_DDCW_Event',
-    'Conventional_Wisdom',
-    'Cooks_Assistant',
-    'CorruptHardware',
-    'Counterfeit',
-    'Coveinant_Journey',
-    'Cowboys_and_Aliens_II',
-    'Crab_Bucket',
-    'Crack_Bird_and_Company',
-    'Crackwalker',
-    'Cramberries',
-    'Crash_Redux',
-    'Creepy_Carly',
-    'Creepy_Girl_and_Her_Zombie_Dog',
-    'Crimson_Dark',
-    'Crimson_Veil',
-    'Crisscross',
-    'Crossbones',
-    'Crossover',
-    'Crossover_High',
-    'Crossover_Street',
-    'Crossoverlord',
-    'Crossoville',
-    'Crow',
-    'Crowhaven',
-    'Cru_The_DwarF',
-    'Cryptic_Allusions',
-    'Cubicles',
-    'Culture_Shock',
-    'Curtis_Lawsons_Grindhouse',
-    'Cwens_Quest',
-    'CyBoar',
-    'Cyberspace',
-    'Cynical_Optimism',
-    'DANGERMOTH',
-    'DARK_RISING',
-    'DHF_Jam',
-    'DIAMOND_English_version',
-    'DIS',
-    'DRAKKAR',
-    'DTF_6',
-    'D_Contract',
-    'D_R_I_G_S',
-    'D_U_S_K',
-    'DaKirbinator',
-    'Da_gratest_avenshure_ov_all_time',
-    'Daemonslayers_Heritage',
-    'Daidal_Tapestry',
-    'Daisy_and_Moira_and_Roy',
-    'DamCho_Jam_Comics',
-    'Danielle_Dark',
-    'Dannysawesomenessfavoriteme',
-    'Dansk_Folly',
-    'Daphne_Descends',
-    'Dare_To_Dream',
-    'Dark_Dark_Reign',
-    'Dark_Fenrir_X',
-    'Dark_Light',
-    'Dark_Worlds',
-    'Dark_Worlds_Trilogy',
-    'Darkness_Labors',
-    'Darkside',
-    'Darlos_Life_Journal',
-    'Daron',
-    'Dasien',
-    'DeAtH_pLaYs_ChEsS',
-    'DeadEnd',
-    'DeadFingers',
-    'Dead_Blood',
-    'Dead_Door_goldwater',
-    'Dead_End_Zone_Act_3',
-    'Dead_Men',
-    'Dead_Men_Tell_No_Tales',
-    'Dead_Strangers',
-    'Dead_Wrong',
-    'Deadend_comic',
-    'Deadhead_Zero',
-    'Deadpill',
-    'Dear_Diary',
-    'Death_By_Bunny',
-    'Death_By_Pixel',
-    'Death_by_Spikes',
-    'Death_work',
-    'Deathbeamz_Classic_Presents_Mercs',
-    'Deaths_Embrace',
-    'Decepticomics',
-    'DeepHurting',
-    'Defining_Logic',
-    'Defunct_Ialus',
-    'Demon_Blues',
-    'Demon_Eater',
-    'Demon_Hells_Touniment',
-    'Demon_Slayers',
-    'Demon_Slayers_en_Espanol',
-    'Demon_hunters',
-    'Demonology',
-    'Denizens__Attention',
-    'Der_Hundt',
-    'Despotize',
-    'Detective_Fork',
-    'Detective_Fork_2',
-    'Detulux_Incorporated',
-    'Deus_Ex_Machina',
-    'Develles',
-    'Deviant_Prophets',
-    'Devoid_of_Life',
-    'Devon_Legacy_Bios',
-    'Dice_n_Dice',
-    'Differences',
-    'DigiChronicles',
-    'DigiMini_Strips',
-    'DigiMon_Inc',
-    'Digimon_Chaos',
-    'Digimon_Legend',
-    'Digimon_V',
-    'Digital_Exodus',
-    'Digital_Heart',
-    'Digital_Screensaver',
-    'Din_Krakatau',
-    'Dirtheads',
-    'Dis_Reality',
-    'Discount_City',
-    'Distant_Embrace',
-    'Divine_Leap',
-    'Divine_Wrath',
-    'Divisible_by_Zero',
-    'Do_Not_Tell',
-    'Dog_the_Spot',
-    'Dogs_Eye_View',
-    'Dollar_Store_Caviar',
-    'Dollar_Store_Haircut',
-    'Dome_busta',
-    'Don_Josh',
-    'Doodlerama',
-    'Doodles_by_Slothed',
-    'Doodles_in_Time',
-    'Doodlez',
-    'Dot_TXT',
-    'Dot_TXT_Bold',
-    'Doug_N_Exile',
-    'Dougs_Hugs',
-    'Down_Home',
-    'Down_The_Stairs_in_Bethany_Hospital',
-    'Dragon_Ball_Z_Future_Perfect',
-    'Dragon_Ball_Z_Story',
-    'Dragon_City',
-    'Dragon_Kingdoms_Remake',
-    'Dragon_Maiden',
-    'Dragonballz__Smash_Tournament',
-    'Dragons_Quest___Crystals_of_the_Elder',
-    'Drawn_Blog',
-    'Drawn_to_you',
-    'Drawnsword',
-    'Dread_Sisterhood_of_Randomnessossity',
-    'Dreaded_Eater',
-    'Dream_Chronicles',
-    'Dream_of_the_Dragon',
-    'Dreams_in_Synergy',
-    'Dreams_of_Stone',
-    'Dregs_of_Society',
-    'Drifters_Tale',
-    'DrunkDuck_Poop',
-    'DrunkDuck_Speesheez',
-    'Drunk_Duck_Awards_2009',
-    'Drunk_Duck_Beauty_Contest',
-    'Drunk_Duck_Fan_Arts',
-    'Drunk_Satan_Robot',
-    'Due_East',
-    'Duh',
-    'Dungeons_and_Dumbasses',
-    'Dystopia_City',
-    'ELO',
-    'EPIC_Q',
-    'EXTRAordinary',
-    'Echzeon',
-    'Ed_Contradictory',
-    'Edepth_Angel',
-    'Edgey_Sketchy',
-    'Educen_Bacillus',
-    'Eff_Eff_Ex',
-    'Ekoa',
-    'El_Oh_El',
-    'Elemental_Eye_in_Schools',
-    'Elemental_Heir',
-    'Elemental_Revolution',
-    'Elementary_Aspects',
-    'Elementas_Protectors_of_the_Universe',
-    'Elements_Classic',
-    'Elspeth',
-    'Elven_Legend',
-    'Em_oi',
-    'Emerald_Winter',
-    'Endstone',
-    'Endstone_Attic',
-    'Engine',
-    'Enter_the_Duck_3',
-    'Enthalpy',
-    'Ephemeral',
-    'Epic_Brundala',
-    'Erehwon',
-    'Erth',
-    'Es_war_einmal_im_Mittelalter',
-    'Eskimo_Dave',
-    'Esoterica',
-    'Essay_Bee_Comics_Presents_Fusion',
-    'Essence_Babies',
-    'Essence_of_Time',
-    'Estatic_Gods',
-    'Eternal_Flame',
-    'Eternal_Illusion',
-    'Eternity_Comic',
-    'Eternity_Complex',
-    'Eternity_Dreams',
-    'EtheC',
-    'Ethereal',
-    'Ethos',
-    'Even_For_a_Lunch_Meat',
-    'Evergreen_Comics',
-    'Every_Day',
-    'Everybodys_Sonics_Friend',
-    'Everyday_Life_of_Sho_and_Kye',
-    'Everything_Else_and_More',
-    'Eves_Apple',
-    'Evil_Dawn',
-    'Evil_Empire_Moratorium',
-    'Evil_Snowman',
-    'Excitement_Abounding',
-    'Explo',
-    'Explorers_Of_the_Unknown',
-    'Explosion_Proof',
-    'Extra_stuff_of_the_other_comics',
-    'Eye_For_a_Lie',
-    'FACARA',
-    'FBOF',
-    'FIGHT',
-    'FIGHT_2',
-    'FRANKENSTEIN__Her_Majestys_Secret_Service',
-    'FUZZY_BUNNIES_FROM_HELL',
-    'Faelings',
-    'Faerie_Tale',
-    'FaeryTale_Grimm',
-    'Failtrain',
-    'Falling_Petals',
-    'False_Gods',
-    'Familiarize',
-    'FanDanGo',
-    'Fan_Dan_Go',
-    'Fan_art_of_the_Grin',
-    'Fandom',
-    'Fantasy_Characters_in_Storytown',
-    'Far_Out_There',
-    'Farmillia',
-    'Fascination',
-    'Fatal_Edge',
-    'Fate_Running_Wild',
-    'Fate_of_the_Blue_Star',
-    'Fated_Feather',
-    'Fates_Bitch',
-    'FauL3_TuR',
-    'Faults',
-    'Faust',
-    'Faux_Fur',
-    'FeedthyRobot',
-    'Feeling_Lonely',
-    'Feeling_Rushed',
-    'Feral_City',
-    'Fifth_Dimension',
-    'Fight_of_Metal_Gears',
-    'Fighter_House',
-    'Figment_of_Freux',
-    'Final_Fantasies_Revived',
-    'Final_Fantasy_28__Devils_Chase',
-    'Final_Fantasy_3_Point_1',
-    'Final_Fantasy_Massively_Multiplayer_Mayhem',
-    'Final_Fantasy_The_Legend_of_the_Dragon_Blade',
-    'Final_Fantasy_X_LOL_edition',
-    'Finding_Yourself',
-    'Finding_the_One',
-    'FireBorn',
-    'Fire_Fighter',
-    'Firefly_Cross',
-    'FirstImpressions',
-    'Fish_Stick',
-    'Five_Bullets_Til_Revenge',
-    'Five_Dollar_Fate',
-    'Fizz',
-    'Flaming_Fuzzy_Comics',
-    'Flaming_Fuzzy_People',
-    'Flammable_Pants',
-    'Flapjacks',
-    'Flick_and_Jube',
-    'Flying_Under_the_Influence',
-    'Fn_Lugans',
-    'Fools_and_such',
-    'For_Gods_Sake',
-    'Forever_September',
-    'Forsaken_Valor',
-    'Four_Bats',
-    'Four_Seasons',
-    'Four_Swords_Adventures',
-    'Foxy_Smoochies',
-    'Frame_by_Frame',
-    'Frank_Baron_NSO',
-    'Frank_and_Vinny',
-    'Freaky_World',
-    'Fred_Peterson_The_Mighty_Warlord_Book_1',
-    'FreeFall_Drift',
-    'Freeworld',
-    'Friction',
-    'Frogstaff_Comics',
-    'From_bad_to_worse',
-    'Front_Beat',
-    'Ftmark',
-    'Fuds',
-    'Full_Moon_Charm_Archives',
-    'Fullmoon_Stories',
-    'Function_Over_Fashion',
-    'Furry_Dav',
-    'Fuse',
-    'GATE',
-    'GBCink',
-    'GENOPSIDA_XERO',
-    'GIF_Showcase',
-    'GIRL_JESUS',
-    'GOLDEN',
-    'GOTT_GAUSS',
-    'Gaijin_Hi',
-    'Galactic_Divine',
-    'Galactic_Hub_Serreven',
-    'Galaxy_Wars',
-    'Gambit_as_Bishounen',
-    'GameFace_Live_The_Comic',
-    'Gamenoy_legends',
-    'Gamer_Man_Awsome',
-    'Gamers_Anonymous',
-    'Games_of_the_Mad',
-    'GansWorks',
-    'Gary_the_Alchemist',
-    'Gaylings',
-    'GeeKz',
-    'Gello_Apocalypse',
-    'Gelotology',
-    'Geminni',
-    'General_Madness',
-    'Genrica_Comica',
-    'George_the_Dragon',
-    'Getting_Into_The_MiddleGround',
-    'Ghost_Hunters_Online_Manga',
-    'Ghosting',
-    'Gift',
-    'Girl_Comic',
-    'Girl_Love',
-    'Girls_cant_be_funny',
-    'Give_Me_The_Sky',
-    'Glass_Hearts',
-    'Gloom',
-    'Gloop_and_Glop',
-    'Gnartoons',
-    'Gnoph',
-    'Go_A_Viking_The_Sword_of_Kings',
-    'Go_For_it',
-    'God_Complex',
-    'God_Damn_It',
-    'God_Shaped_Holes',
-    'God_of_Destruction',
-    'Godot',
-    'Golden_Edge_Mystery',
-    'Goldfish',
-    'Golem_x_Pineapple',
-    'Goo_From_Another_Dimension',
-    'Good_Guy',
-    'Good_Riddance',
-    'Good_Taste',
-    'Got_Moxie',
-    'Gotcha',
-    'Gothenreich_Chronicles',
-    'Graces_Wings',
-    'Graer_Babbin_Sheets',
-    'Grandpa_Sex_Machine',
-    'Graphical_Deviants',
-    'Graphite_Den',
-    'Greed_over_Need',
-    'GreenSoup',
-    'Greenstar_Comics',
-    'Grey_Legacy',
-    'Grim_Is_Our_Game',
-    'Grog',
-    'Grog_Extras',
-    'Grounded_Angel',
-    'Growth',
-    'Guardian_Chronicles',
-    'Guatama',
-    'Gundula_un_de_Stuventiger',
-    'Guys_n_Ghouls',
-    'HAPPYATTACK',
-    'HEY_MAC_ADVENTURES_OF_A_MIDDLE_AGED_COW',
-    'H_I_K_A_R_I',
-    'HaTs',
-    'Habit',
-    'Hainted_Holler',
-    'Hakkum_Town',
-    'Hall_of_Randomness_Revamped',
-    'Halo_Annihilation',
-    'Hanako_Story',
-    'Happyface_Comics',
-    'Harkovast',
-    'Hartists_Rants',
-    'Hatpire',
-    'Haunting_Nights_Christmas_Dreams_Issue_1',
-    'Hazy_Daisy_Jam',
-    'Hearts_and_Nails',
-    'Hedgehog_Champion',
-    'Hefs_adventures',
-    'Hellbent',
-    'Hercules',
-    'Hero_Force',
-    'Hero_SComic_PK5',
-    'Heroes_Adventures',
-    'Hexagon_Death_Squad',
-    'Hey_Professor',
-    'High_school',
-    'Hikari_The_Demon_Swordsman',
-    'Historiography',
-    'Hitorihitori',
-    'Holding_Chaos',
-    'Holiday_Village_Doodles',
-    'Hollow_High',
-    'Hollow_Secrets',
-    'Homestore',
-    'Hometown_Gangsters',
-    'Hopscotch',
-    'Horribleville',
-    'HotShot_Hunters',
-    'HotelSoul',
-    'House_of_the_Muses_3',
-    'House_of_the_Muses_4',
-    'House_of_the_Muses_5_House_of_Many_Kings',
-    'House_of_the_Muses_clips_previews_and_outtakes',
-    'How_Unfortunate',
-    'Human_Nature',
-    'Humorous_Stories_of_the_Explicit_Randomness',
-    'Hurrocks_Fardel',
-    'Hyacinth_Duck',
-    'IZ_Acceptance',
-    'I_Come_From_Mars',
-    'I_Fell_Down_The_Stairs',
-    'I_Hate_my_Life_Comics',
-    'I_Heart_Sushi',
-    'I_Love_You',
-    'I_Was_Kidnapped_By_Lesbian_Pirates_From_Outer_Space',
-    'I_am',
-    'I_got_it_in_my_mouth',
-    'I_had_a_dream',
-    'I_think_my_polar_bear_whistles',
-    'Ialus',
-    'Iconoclasm',
-    'Illegal_Aliens',
-    'Illogical',
-    'Illusional_Beauty',
-    'Im_a_shaman',
-    'Imaginary_Daughter',
-    'Imaginary_Daughter_Bonus',
-    'Imaginary_Tactics',
-    'Immortal_Elementals',
-    'Important_Business',
-    'In_One_Time',
-    'Inappropriate_Irving',
-    'Inchoatica',
-    'Inconsistent_Biomix',
-    'Incursion',
-    'Infiltration_of_Graveyard_Fortress',
-    'Insanity_of_Xade',
-    'Insert_Something_Here',
-    'Inside_The_OC_Convention',
-    'Insomnia_The_Comic',
-    'Instant_Tea',
-    'Interim_State',
-    'Internet_Superbuddies',
-    'Intersection',
-    'Inu',
-    'InuYasha_got_Hair_Cut',
-    'Inuyasha_Desire_to_be_Stronger',
-    'Inverted_Polarity',
-    'Irony_in_a_Jar',
-    'Is_That_Even_Legal',
-    'Ishi_Alliance',
-    'Island_Of_Submission',
-    'Italian_Godfather',
-    'Its_Ninja_Time',
-    'Its_The_Thought_That_Counts',
-    'ItzWrAiTh',
-    'Ixion',
-    'JATM',
-    'JRs_Minutemen',
-    'Jac_Strips_for_You',
-    'Jackrabbit_Days',
-    'Jake_the_Evil_Hare',
-    'Japanofail',
-    'Jarret',
-    'Jason_Vs',
-    'Jenny_Everywhere_and_the_Golden_Key',
-    'Jesi_The_Genie',
-    'Jet_and_Joe',
-    'Jhulene_the_Paladin',
-    'Jim_Reaper',
-    'Jim_and_Shawn',
-    'Jiraiyas_Quest_for_Tsunade',
-    'Jix',
-    'JixandDragonCityfanart',
-    'Joe_Bivins_Man_Genius',
-    'John',
-    'John_Clyde_the_Nature_Guide',
-    'Jonkos_Picture_Diary',
-    'Jos_Pokemon_Adventure',
-    'Jos_Pokemon_Journey_Kanto_Version',
-    'JoshRants',
-    'Judo_Man',
-    'Jules_Comics_Promo_Comic',
-    'JuliusModels_the_Comic',
-    'Jump',
-    'Junk_Food',
-    'Juno',
-    'Jurbas',
-    'JustAnotherDay',
-    'Just_Call_Me_Freedom',
-    'Just_Liam',
-    'Just_Like_James',
-    'KALA_dan',
-    'KAMs_Fanart',
-    'KDS_Pokemon_Adventure_Kanto_Version',
-    'KH_X_Bleach',
-    'KOTWR_EXTRA_Under_the_Cherry_Tree',
-    'Kaiju_Girl_theatre',
-    'Kaiths_Komics',
-    'Kaizu',
-    'Kakeiro',
-    'Karl_and_his_feasable_sketching',
-    'Karrel',
-    'Katts__Eyes',
-    'Keeper_of_the_White_Rose',
-    'Kemono_Densetsu',
-    'Kenesis_Cronicles_Broken_Bonds',
-    'Kenji_Nin',
-    'Keptn_Iglu',
-    'Kerea',
-    'Kevin_Z',
-    'Keyguard_Active',
-    'Keys',
-    'Kha_War_of_the_Mounts',
-    'Kidnapped',
-    'Kids_With_Gas_Eat_Free',
-    'Killer_Body',
-    'Killer_Kittenz',
-    'Kincaid',
-    'King_Me',
-    'King_of_Hearts',
-    'Kingdom_Naruto_Hearts',
-    'Kingdom_Sonic_Trilogy',
-    'Kirby_Advance_Adventures',
-    'Kirby_Komiks',
-    'Knights_of_the_New_Republic',
-    'Knightwatch',
-    'Knock_on_Wood',
-    'Knots',
-    'Knuckles_Adventure',
-    'KoanHead',
-    'Kombat_Kubs',
-    'Kung_Fu_Komix',
-    'Kunt_k',
-    'Kurenai_Mashin',
-    'Kuro_Shouri',
-    'Kuro_Shouri_Fanart',
-    'Kuromaka',
-    'Kusarno_Adventure',
-    'KvS',
-    'LASTFantasy',
-    'LAX_Light_Motion_Dreams',
-    'LA_ESPADA_DEL_ANORMAL',
-    'LIFE_DEATH',
-    'LOE_Plus',
-    'LOT',
-    'LOVEFEAST',
-    'L_odyssee_des_bras_casses',
-    'Lady_Doom',
-    'Laggoo_and_the_Kings_Trident',
-    'Lama_Glama',
-    'Laments_of_Having_Too_Much_Time_On_Your_Hands',
-    'Lamora',
-    'Land_of_the_Joel',
-    'Land_of_the_Lords',
-    'Larry_the_Taco',
-    'Last_Call',
-    'Last_Chance_The_Beast_Hunter',
-    'Last_Of_The_Wilds',
-    'Last_Place_Comics',
-    'Laughter_at_Tymoczkos',
-    'Lavender_Legend',
-    'Laxative',
-    'Le_Farce',
-    'LeeEXE',
-    'Left',
-    'Legacy_Unlimited',
-    'Legacy_of_Blaze',
-    'Legend_Sketchbook',
-    'Legend_of_Setar',
-    'Legend_of_Terrar',
-    'Legend_of_Zelda_Curse_of_Courage',
-    'Legend_of_the_King',
-    'Legendary_Beings_Ara_and_Celi',
-    'Legendary_pkmn',
-    'Leggo_my_Ego',
-    'Lego_Space',
-    'LetsBrawl',
-    'LetsBrawl2',
-    'Life_Plus',
-    'Life_Poorly_Drawn',
-    'Life_Under_The_Top_Hat',
-    'Life_and_Death',
-    'Life_and_Maybe_Death_of_Ed',
-    'Life_as_an_8bit',
-    'Life_as_an_8bit_2',
-    'Life_as_told_by_Rutger',
-    'Life_at_Halesowen',
-    'Life_on_the_Fringe',
-    'Light_Apprentice_Nate',
-    'Like_Fish_in_Water',
-    'Link_Skywalker',
-    'Linked_Fate',
-    'Linnyanie',
-    'Listen_To_Yer_Mama',
-    'Livin_On_The_Edge',
-    'Living_Large',
-    'Living_With_Insanity',
-    'Lizzy',
-    'Local_Look_Awesometown_Editorials',
-    'Locoma',
-    'Locoma_the_archive',
-    'Logic_Sucks',
-    'Lola',
-    'London_Underworld',
-    'Loser_Corner',
-    'Lost_Chapters_of_Megaman',
-    'Lost_in_Transition',
-    'Lotus_Root_Children',
-    'Louder_Than_Bombs',
-    'Lovarian_Adventures',
-    'Love_Annotated',
-    'Love_Curse',
-    'Love_Story',
-    'Love_you_like_crazy',
-    'Lovegood',
-    'Lucid_Moments',
-    'Luciefer',
-    'Lucky_Dawg',
-    'Lunas_Journey',
-    'Lupin_III_FLL',
-    'MAG_ISA',
-    'MAYA_1',
-    'MAYA_The_Temple_of_Warriors',
-    'MAYA_____The_legend_of_Wolf',
-    'MAYA_la_leyenda_del_lobo',
-    'MEDABOTS_Time_Space',
-    'ME_FREAK',
-    'MIKYAGU',
-    'MKIA_The_Sprite_Comic',
-    'MMM_BooGrrs',
-    'MMZX_Changeable_worlds',
-    'MMZ_After_Zero',
-    'MS_Pain',
-    'MSpaint_relationships',
-    'MY_LIFE_NOT_REAL_COMIC',
-    'MY_MAFFIA',
-    'Mad_World',
-    'Madison',
-    'Madness_to_my_Method',
-    'Magenta_the_Witchgirl',
-    'Maggot_Boy',
-    'Magic_Eater',
-    'Magical_Mania',
-    'Magical_Misfits',
-    'Magical_Misfits_Gallery',
-    'Magicians_Quest',
-    'Magiversity',
-    'Maidens_Monsters_and_Madmen_the_Tim_Tyler_sketchbook',
-    'Majoring_in_Evil',
-    'Makeshift_Man',
-    'ManBoys',
-    'Manifestations',
-    'Maple_Legacy',
-    'Maple_Syrup',
-    'Mario_Can_Has_Cheeseburger',
-    'Mario_and_Luigi_Misadventures',
-    'Mario_in_Johto',
-    'Marios_Day_Job',
-    'Marital_Bliss',
-    'Marooned',
-    'Marred_Visage',
-    'Martin_and_Machs_sketches_of_life',
-    'Martin_and_Mitchell',
-    'Martins_House',
-    'Master_the_Tiger',
-    'Mastermind_BTRN',
-    'Mastorism',
-    'Matka',
-    'Matt_and_Karls_Pokemon_Adventure',
-    'McEvens_Times',
-    'Meardnom',
-    'Mech_Academy',
-    'MegaMan_Theater',
-    'MegaMan_Zero_the_ghousts_of_Past',
-    'MegaNonsense',
-    'Mega_Child_Xtreme',
-    'Megaman_9_the_comic',
-    'Megaman_Omega_Zero',
-    'Megaman_ZXA',
-    'Megaman_ZX_Prime',
-    'Megaman__the_Comic',
-    'Megaman_and_BetaFlame',
-    'Megaman_and_the_Demons',
-    'Megaman_battle_network_continues',
-    'Megamantics',
-    'Meh_Comic_Tester',
-    'Memesink',
-    'Mental_Meltdown',
-    'Merej',
-    'Messed_Up_Final_Fantasy_IV',
-    'Messing_Around',
-    'Metal_Breakdown',
-    'Metal_Gear_Again',
-    'Metroid_Vengeance',
-    'Michael',
-    'Mikame',
-    'Mike_And_The_Captain',
-    'Mildly_mundane',
-    'Millennium',
-    'Milo_and_John',
-    'Mind_Under_Matter',
-    'Mindless',
-    'Minion',
-    'Mirada_Atras',
-    'Misadventures_of_Classic_MegaMan',
-    'Misfire_Reactional',
-    'Misfits_of_Fandom',
-    'Misfits_of_Mischief',
-    'Mishap_Mania',
-    'Miss_Grey',
-    'Missing_days_of_february',
-    'Mission_Control',
-    'Mistake_Girl',
-    'Mob_Ties',
-    'Modern_Day_Witchdoctor',
-    'Modern_Morality_with_Bill_and_Phil',
-    'Molapro_Comics',
-    'Momiji',
-    'MonkXDevil',
-    'Monkey_Boogie',
-    'Monkey_Pot',
-    'Monkeys_and_Midgets_B_and_W',
-    'Monkeyshine',
-    'Monkeyshine_Supplemental',
-    'Monster_in_a_Cave',
-    'Moon_Reflected_in_Water',
-    'Moonguin',
-    'Moonlight_Motel',
-    'Moose_Shoe',
-    'Morning_Squirtz',
-    'Morph_Man_Heir',
-    'Morphic',
-    'Mortifer',
-    'MrCoffee',
-    'Much_the_Millers_Son',
-    'Murder_She_Sprited',
-    'Murder_in_the_Mushroom_Kingdom',
-    'Musical_Farm',
-    'Mutant_Batchelors',
-    'My_Chao_Your_Problem',
-    'My_Hero',
-    'My_Imaginary_Life',
-    'My_Immortal',
-    'My_Insult_To_Society',
-    'My_Lady',
-    'My_Last_Day',
-    'My_Life_In_The_Trenches',
-    'My_Name_Is_Billy_I_Made_These',
-    'My_New_Job',
-    'My_No_1_comic____a_DD_comunity_project',
-    'My_Pet_Demon',
-    'My_Sister_prequel_Eclipse',
-    'My_Sister_the_Awakening',
-    'My_Sister_the_Damned',
-    'My_Sister_the_Witch_0',
-    'My_Strange_Love',
-    'My_Thingie',
-    'My_Zombie_Life',
-    'My_colection_of_pokemon_shorts',
-    'Myo_Min_Myo',
-    'Mysteries_of_the_Arcana',
-    'Mystery_Science_Lets_Play_3000',
-    'Mythological_Chronicle',
-    'Myths_And_Legends',
-    'N2Deep',
-    'NALO_COMICS',
-    'NEGLIGENCE_filler_and_fan_art',
-    'NOT_ANOTHER_SONIC_COMIC',
-    'NPC',
-    'Nadya',
-    'Nahim',
-    'NaiveXP',
-    'NanKan_Minis',
-    'Nano_Bits',
-    'Nargle_Arts',
-    'Narou',
-    'NaruHina_Forgotten',
-    'Naruto_AM',
-    'Naruto_Comic_Album',
-    'Naruto_Pains_Wrath',
-    'Naruto_Shippuden_Ninja_Strife_To_The_End',
-    'Naruto_The_Comic',
-    'Naruto_The_Ninja_Tournament',
-    'National_Dex',
-    'Natty_Patty',
-    'Navi_Civil_War',
-    'NecroLupus',
-    'Necro_Magic',
-    'Nectar_of_the_Gods',
-    'Negate_Never',
-    'Negligence',
-    'Neko_Sprite_Comic',
-    'Nerdcore',
-    'Nerdy_Boy',
-    'Net_Ghosts',
-    'New_America',
-    'New_Challenger_Approaches',
-    'New_Jerusalem',
-    'New_Nation',
-    'New_Supa_Comics',
-    'Nibbles_Comic',
-    'Nightfall_GN',
-    'Nimahs_Quest',
-    'Nine',
-    'Nine_Shot_Sonata',
-    'Ninjoy',
-    'NintenDuh',
-    'Nintendo_Super_Squad',
-    'Nintendos_Untold_Legends',
-    'NoCharCom',
-    'NoWhere_Fast',
-    'NoX_LEGACY',
-    'No_Bees_Please',
-    'No_Capes',
-    'No_Horse_Town',
-    'No_Need_for_Bushido_Remix',
-    'No_Pun_Intended',
-    'No_Sprites_For_You',
-    'No_Talent',
-    'No_Taste',
-    'No_nightsticks_for_you',
-    'Noise_Pollution',
-    'Nolans_Closet',
-    'Normal_Is_Boring',
-    'Normalcy_is_for_Wimps',
-    'Not_Neurotypical',
-    'Notebook',
-    'Novusgenesis_Hype',
-    'Noxious',
-    'Nr_101_and_Other_Weird_Tales',
-    'Nu_and_Me',
-    'Numerals',
-    'Nutcase_Fraternity',
-    'Nzabob',
-    'OH_SNAPS_comics',
-    'OMEGAN_SURVIVORS',
-    'OYGWTFBBQ',
-    'Obiit',
-    'Oblivion_Chaos',
-    'Odd_Days',
-    'Odds_n_ends',
-    'Of_Cyndaquil_and_Totodile',
-    'Off_Hours',
-    'Ogrifina_Redbottom',
-    'Oh_Brother_Qlippoth',
-    'Oh_Momo',
-    'Oh_Pokemon',
-    'Oh_gawd',
-    'Old_Comic',
-    'Old_Pond',
-    'Omega_Chase',
-    'Omega_Soul',
-    'Omikami',
-    'On_the_Grind',
-    'One_AM',
-    'One_Girl_Guy_Army',
-    'One_Shot',
-    'One_Sixth_Sense',
-    'Only_Love_and_Music',
-    'Opaque_Dreams',
-    'Operator',
-    'Orange_Cloud',
-    'Orbit',
-    'Oridnary_Awkwardness',
-    'Ouch',
-    'Our_little_kirby',
-    'Out_Post_7',
-    'Out_To_Lunch',
-    'Out_of_Context',
-    'Out_of_Curiosity',
-    'Outcast',
-    'Outlawed',
-    'Outskirts_of_Orgrimmar',
-    'Over',
-    'Overshadow',
-    'Oyer',
-    'POKeMON_GSC',
-    'POLO',
-    'PSI',
-    'PUTRID_MEAT',
-    'P_O_V',
-    'Pagan_Zoetrope',
-    'Paint_Heroes',
-    'Palestra',
-    'Pancakes',
-    'Panda_panda',
-    'Pandemonium',
-    'Panel_De_Pun___Stupid_Comic_Thing',
-    'Panthea_Obscura',
-    'Paradox_of_Chaos',
-    'Paranoia_and_Denial',
-    'Paranormal_Activity',
-    'Parker_Lot',
-    'Parody_Paridise',
-    'Patchs_Revenge',
-    'Pater_Hiob_Dynamit_im_Sarg',
-    'Pegwarmers',
-    'Pelaiah',
-    'Penis_Fun',
-    'Per_Ardua',
-    'Perceived',
-    'Percius',
-    'Perfect_Impact',
-    'Perfect_Nightmare_Overkill',
-    'Perfectly_Normal_Insanity',
-    'Perpendicular_Universe',
-    'Persona_3_FTW',
-    'Pewfell',
-    'Phantasmagoric_Fragrance_of_Flowers_Past',
-    'Pharmacy_Time_Comics',
-    'Phayrh',
-    'Philly',
-    'Phobophobia',
-    'Photos_from_Japan',
-    'Phychd',
-    'PiLLI__ADVENTURE',
-    'Pictures',
-    'PicturesThat_Have_No_Relation_To_Each_Other',
-    'Pink_Lady',
-    'Pink_Sapphire',
-    'Pinkerton',
-    'Pinky_TA',
-    'Pirates_ate_my_neighbors',
-    'Pixel_Plumbers',
-    'Planet_B',
-    'Planet_Chaser',
-    'Plastic',
-    'Please_Insert_Humor',
-    'Plokmans_Misadventures',
-    'Plooshies',
-    'Plum',
-    'PoKeMoN_HEROES',
-    'PoKeMoN_Shiny_Diamond',
-    'PoKemon_Pyrite_Version',
-    'Pocket_Dragon',
-    'Poetry',
-    'Poharex',
-    'Poisonapples',
-    'PokeBall_Z',
-    'PokeSprites',
-    'Poke_ZTX',
-    'Pokedex',
-    'Pokemon_AM',
-    'Pokemon_Amethyst',
-    'Pokemon_Batle_Tent_Reborn',
-    'Pokemon_Battle_Tent_Mania',
-    'Pokemon_Blue_Moon',
-    'Pokemon_Contest_Challenge',
-    'Pokemon_Copa_Version',
-    'Pokemon_DS_Hope_in_Kanto',
-    'Pokemon_Decade',
-    'Pokemon_Delta_Storm',
-    'Pokemon_Dhanmondi_Legends',
-    'Pokemon_Dynamic_Fantasy_Version',
-    'Pokemon_Edge_2009',
-    'Pokemon_FTW',
-    'Pokemon_Gold__Brendan_in_Kanto',
-    'Pokemon_Granite',
-    'Pokemon_Graphite',
-    'Pokemon_Haven',
-    'Pokemon_J_Blaze',
-    'Pokemon_Jade',
-    'Pokemon_Legacy_Version',
-    'Pokemon_Mystery_Dungeon_Legendary_Adventure',
-    'Pokemon_Nightshade_Blossom',
-    'Pokemon_Perils',
-    'Pokemon_Phantom_Flame',
-    'Pokemon_Random_Kanto',
-    'Pokemon_Shadow',
-    'Pokemon_Shroom_Version',
-    'Pokemon_Silver_State_Version',
-    'Pokemon_Soaring_Soul',
-    'Pokemon_Special_The_Sprite_Comic',
-    'Pokemon_Survival',
-    'Pokemon_The_Untold_Legend',
-    'Pokemon_Twist_Of_Fate',
-    'Pokemon_Warpers',
-    'Pokemon_XS',
-    'Pokemon_Yellow_Comics',
-    'Pokemon_yellow_the_sprite_comic',
-    'Poking_FUN',
-    'Polandball',
-    'Politics_The_Tankers_Way',
-    'PolkOut',
-    'PollyMorfs',
-    'Polygon_dot_Wars',
-    'Pooky',
-    'Pop',
-    'Por_Kulpa_del_Moai',
-    'Posted',
-    'PowerTrip',
-    'Powerup_Adventure',
-    'Powerup_Comics',
-    'Prelude',
-    'Present_Day',
-    'Pretarsus',
-    'Pretty_Stump_Bunny',
-    'Prim_and_Proper',
-    'Prince_of_Darkness_IS',
-    'Prince_of_Ice',
-    'Princess_Natsumi',
-    'Professor_Prince',
-    'Professor_Procto',
-    'Project_217',
-    'Project_Cartographer',
-    'Project_Cyber_World',
-    'Project_Demonhunter',
-    'Project_Josprens',
-    'Project_Mango',
-    'Proof_of_Existence',
-    'Prophet_Abel',
-    'Proto_Bio_Crisis_Shock_FES',
-    'Proto_Culture_Comics',
-    'Psych_Ward',
-    'Psycho_Filler_Freakout',
-    'Psycotic_Gestures',
-    'Public_Domain_Funnies',
-    'Public_Misfit_Kids',
-    'Pulp_Fantasy',
-    'Punk_Pink',
-    'Puppets_and_Strings',
-    'Purgatory_Tower',
-    'Pwnd_Randomness',
-    'Pyro_Damo_The_Beginning',
-    'QUANTUM_Rock_of_Ages',
-    'QUEST',
-    'Que_Pasa_Contigo',
-    'Quest_For_Zanvadas',
-    'Quim',
-    'Qwerty',
-    'RAWRNESS',
-    'RE_KINGDOM_HEARTS_Chain_of_Pointlessness',
-    'RIOT_and_FadeOut_From_the_Top',
-    'RPGcrazed',
-    'RPJay',
-    'RSVP_Peace',
-    'RTTT',
-    'Raging_flame_Mizume',
-    'Ragnadventure',
-    'Ragnarok_Online_A_boys_destiny',
-    'Rags_to_Whiskers',
-    'Raidou_Kuzunoha_the_19th',
-    'Rainbow_Carousel',
-    'Raison_Detre',
-    'Rakina',
-    'Rampant_Cynicism',
-    'Random_Chibi',
-    'Random_Gmod_days',
-    'Random_Logic',
-    'Random_Malfuntion',
-    'Random_Megaman',
-    'Random_Moments',
-    'Random_Moments_In_Fire_Emblem',
-    'Random_Plasma_Adventure',
-    'Random_Violence',
-    'Random_stupidity',
-    'Rantamantation',
-    'Rasvaar',
-    'Rated_Douk',
-    'Ravenwood',
-    'Raw_Fish',
-    'Razor_Candy',
-    'Real_Otakus',
-    'Real_Super',
-    'Reality_Stars',
-    'Realm_Adventures',
-    'Rebellion_The_Revival',
-    'Rebound',
-    'Rectangles',
-    'Red_Mantis',
-    'Red_Point',
-    'Red_String',
-    'Redeeming_Fate',
-    'Redemption_of_Heroes',
-    'Refraction',
-    'Regular_Guy',
-    'Reign_of_the_Fallen_Navis',
-    'Reliquary',
-    'Remsi',
-    'Renga_Manga',
-    'Requiem_for_Innocents',
-    'Requiems_Gate',
-    'Retrospect',
-    'Return_Zero',
-    'Return_of_the_Exile',
-    'Revenge_Addict',
-    'Revive_me_Ragnarok_Online_Webcomics',
-    'Revol_The_Original_Strips',
-    'RiTH',
-    'Rick_The_Stick',
-    'Riggs_Hell',
-    'Rileys_notebook',
-    'Rival_Angels',
-    'Riyu_and_Panja',
-    'Robomeks',
-    'Robot_Bandits',
-    'Robot_Chuck',
-    'Robots_In_My_Attic',
-    'Robukkagenerator',
-    'Rock_Band_Blues',
-    'Rogue_Agent_Axl',
-    'Rokan_Cant_Draw_Comics',
-    'Roleplay_101',
-    'Roll_For_Intelligence',
-    'Romeo',
-    'Ronin_Seraph',
-    'Room_Mates',
-    'Rose',
-    'Row_and_Bee',
-    'Rubies',
-    'Ruby',
-    'Ruby_And_Pipers_World_Of_Magical_Pink_Fearie_Unicorns',
-    'Rule_of_Three',
-    'Rules_of_Make_Believe',
-    'Rumf_Adventures',
-    'Rums_Tale',
-    'Rust_and_Brimstone',
-    'Rymes_With_Orange',
-    'Ryosaki_Uzumaki_1',
-    'Ryus_Krew_Museum',
-    'Ryushin_and_Littlerains_comic_rpg',
-    'SECKS',
-    'SONIC_IN_NARUTO_SHINOBI_LAND',
-    'SOPHIA_Awakening',
-    'SOS_Saga',
-    'SPiDERS',
-    'SSB_tourny',
-    'STICKFODDER',
-    'STIX',
-    'STOCKS',
-    'STOLIDUS_LONGINUS',
-    'SUPERSEXY__PINUP_HEROS',
-    'Sack_O_Puppies',
-    'Safety_Man',
-    'Saint_Remy',
-    'Salimah',
-    'Sally_and_Dally',
-    'Salt_The_Holly',
-    'Salt_and_Pepper',
-    'Salvation',
-    'Sam_and_Javon',
-    'Sammy_the_Skunk',
-    'Satans_Evil_Square',
-    'Saviours_X',
-    'Scar',
-    'ScareCrow_Lullaby',
-    'Scarlet',
-    'Schizophrenia_Bloom',
-    'Schools_Are_Prisons',
-    'Schrodinger',
-    'Scorch',
-    'Scrambled_Worlds',
-    'Screwball_Islands',
-    'Screws_Loose',
-    'Scribble',
-    'Scylla',
-    'Seal_of_Destiny',
-    'Searching_For_Mr_Bite',
-    'Second_Wind',
-    'Secret_Adventure',
-    'Secret_Agent_Eddie',
-    'Segcom',
-    'Senshi_Vs_Sentai',
-    'Serious_Lesbian',
-    'Seth_the_Hippo',
-    'Seven_Damnations',
-    'Sex_on_the_Beach',
-    'Shades',
-    'Shades_of_Gray',
-    'Shades_of_Illusion',
-    'Shadixs_Story',
-    'Shadow_Blood',
-    'Shadow_Bridge_2nd_Edition',
-    'Shadow_Force',
-    'Shadow_Fox',
-    'Shadow_Reaver',
-    'Shadow_Self',
-    'Shadow_Sprinters',
-    'Shadow_The_Hedgehog',
-    'Shadow_The_Weirdo',
-    'Shadowflight',
-    'Shaman_Quest',
-    'Shark_Bait',
-    'She_Who_Destroys_Light',
-    'Sherlock_Face',
-    'Shinigami_Less_Than_Symbol_3',
-    'Shining_Wolf',
-    'Shiny_Things',
-    'Ship_in_a_Bottle',
-    'Short_Bus',
-    'Short_Bus_Brothel',
-    'Short_Story_Comics',
-    'Silence_is_Golden',
-    'Silvershot',
-    'Simple',
-    'Sinful',
-    'Sins_Of_Our_Demons',
-    'Sins_of_the_Fallen',
-    'Sir_Ron_Lionhearts_Fantastic_Adventures',
-    'Sire',
-    'Sismonkey',
-    'Sketchorama',
-    'Sketchy',
-    'Sketchy_at_Best',
-    'Skewed_Reality_Origins',
-    'Skunktraining',
-    'Slackerz',
-    'Slackman',
-    'Slam_Dance',
-    'Slice_of_Life',
-    'Slight_Miscalculation',
-    'Slither_and_Friends',
-    'Slugs_of_Mystery',
-    'Sluice',
-    'Small_Wonder',
-    'Smash_Brothers_Evangelion_Wars',
-    'Smash_Hate',
-    'Smelly_Brownies',
-    'Smiley_Pie',
-    'Smoke_Manmuscle_PI',
-    'Smores',
-    'Smug_I_Could_Do',
-    'Snail_Comics',
-    'Snatches',
-    'So_Fantastic_Pork_Show_9oCLOCK',
-    'So_Sequential',
-    'Soapbox_Hill',
-    'Solar_Kiss',
-    'Some_Battling_Monsters',
-    'Some_Notes',
-    'Something_Like_Life',
-    'Something_Original',
-    'Something_To_Do',
-    'Sonic_A_Heroes_Tail',
-    'Sonic_Advance_The_Real_Story',
-    'Sonic_Advanced_Online',
-    'Sonic_Adventure_Chaos_Theory',
-    'Sonic_Bluff',
-    'Sonic_College',
-    'Sonic_Confusion',
-    'Sonic_Destination_Chaos',
-    'Sonic_Doom',
-    'Sonic_Gone_Completely_Wrong',
-    'Sonic_Heroes_Uncut',
-    'Sonic_Icons',
-    'Sonic_Meets_Megaman',
-    'Sonic_MisAdventure_ADVANCE',
-    'Sonic_NC',
-    'Sonic_Overdose',
-    'Sonic_Torment',
-    'Sonic_and_Amy_The_Dark_Doppels',
-    'Sonic_and_Amy_The_Dark_Doppels_Vol_2',
-    'Sonic_and_Amy_The_Dark_Doppels_Vol_3',
-    'Sonic_and_his_comic',
-    'Sonic_and_tails_corner',
-    'Sonic_plus_a_castle',
-    'Sonic_series',
-    'Sonic_the_Hedgehog_2_The_Real_Story',
-    'Sonic_the_Hedgehog_and_the_Black_Emerald',
-    'Sonic_the_Hedgehog_in_the_Comic',
-    'Sonic_with_Brains',
-    'SoulLesser',
-    'Soul_Less',
-    'Soul_Palisade',
-    'Soup',
-    'SpacePatrol',
-    'Space_Flakes',
-    'Spacefighters_on_Earth',
-    'Speeder_and_Red',
-    'Speesheez',
-    'Spike_and_Fuzzy',
-    'Spikey_Hair_Vs_Top_Hat',
-    'Spirit_X',
-    'Spitfire',
-    'Splash_Damage',
-    'Splash_Damage_Extra_Stuff',
-    'Splices_of_Life',
-    'Sprite_City',
-    'Sprite_Life___Nineteen_Eternal',
-    'Sprite_Rejects',
-    'Sprite_Wars',
-    'Sprited_in_Real_Life',
-    'Spritely',
-    'Spyr',
-    'Square',
-    'Square_One',
-    'Squircle',
-    'Stack_of_Buttons',
-    'Stanleys_Place',
-    'StarFox_Hunters_Journal',
-    'Star_Crossed_Destiny',
-    'Star_Trax',
-    'Star_Wars_Tales__Fury_and_Intensity',
-    'Starcraft',
-    'Startoons_Super_Force',
-    'Stealth',
-    'Stetson_Kennedy',
-    'Stickguy',
-    'Sticking_Sporks_in_Something_Else',
-    'Stickman_and_Cube',
-    'Stolen_Blood',
-    'Stories_of_Strangeness',
-    'Stormclaw_Shadows',
-    'Story_of_My_Life',
-    'Strawberry_Death_Cake',
-    'Stripes_of_Life',
-    'Stripper_Rippers',
-    'Stuftassic_Park',
-    'Stupidity_in_Magic',
-    'Stupidity_is_a_Virtue',
-    'Styles',
-    'SubStandard_Comics',
-    'Subsidery',
-    'Subway_and_Julian',
-    'Such_A_Simple_Life',
-    'Such_Is_Life',
-    'Sugarcoat',
-    'Summer_Fangs',
-    'Sunset_Grill',
-    'Supacat',
-    'Super_Haters',
-    'Super_Heights',
-    'Super_Larry',
-    'Super_Mario_And_Luigi_Adventures',
-    'Super_Mario_RPG_2',
-    'Super_Shroom',
-    'Super_Smash_Bros_Royale',
-    'Super_Temps',
-    'Superman_Comics',
-    'Supermassive_Black_Hole_A_Star',
-    'Supernaturals_Presents',
-    'Surreal_pseudophotographic_thought_diary',
-    'Sword_in_Hand',
-    'Sword_of_Heaven',
-    'Sword_of_Tears',
-    'Swordsong',
-    'Syndicate',
-    'Synthetic_Aggressive_Trilobite',
-    'TAK',
-    'TCCPC',
-    'TCCPC_1',
-    'TFGMs_Doodles',
-    'THANG_THANG',
-    'THE_FALL',
-    'THE_KIBA_CHRONICLES',
-    'TOASTERHEAD',
-    'TORNEO_CLM',
-    'TV_Man',
-    'T_and_S',
-    'Taco_El_Gato_Issue_2',
-    'Tails_female_twin',
-    'Taint_of_Exile',
-    'Tainted_White',
-    'Takiras_Secret_Realm',
-    'Tales_from_Two_Tiny_Tittybars',
-    'Tales_of_Rayqui',
-    'Tales_of_Strange',
-    'Tales_of_the_Traveling_Gnome',
-    'Tama_Chronicles',
-    'Tama_Krato',
-    'Tamashi_no_hon',
-    'Tangerines',
-    'Tankadin',
-    'Tantei_Deka',
-    'Taste_my_Beanpaste',
-    'Tater_and_Farces_MSPaint_Video_Game_Comic_Assfuck_Jamboree',
-    'Team_Heroes',
-    'Team_Rainbow',
-    'Ted_The_Terrible_Superhero',
-    'Ted_and_Zed',
-    'Temp_Test',
-    'Tenacious_D_The_sprite_comic',
-    'Tera_Forming',
-    'Terra_online_comic',
-    'Terran_Sandz',
-    'That_Damn_Furby',
-    'That_Lucas_Curl',
-    'That_Which_Is_Summoned',
-    'Thats_Comical',
-    'TheNewLuciefer',
-    'The_12the_Planet',
-    'The_3rd',
-    'The_7th_hurt_soul',
-    'The_Adept',
-    'The_Adventure_of_the_Goat_Chin_Pirates',
-    'The_Adventures_of_Crunch_Crakerton',
-    'The_Adventures_of_Hybrid',
-    'The_Adventures_of_Master_Chief',
-    'The_Adventures_of_Starbuck_Jones',
-    'The_Adventures_of_Steven_and_Joe',
-    'The_Adventures_of_kirby_and_the_semi_amazing_town_of_threed',
-    'The_Amazing_Kiteboy',
-    'The_Arcadia_Anthology',
-    'The_Art_of_Joe_Jarin',
-    'The_Asim_Stone',
-    'The_Auragon_Base',
-    'The_Author_Realm',
-    'The_Authors_Corner',
-    'The_Awkward_Communicator',
-    'The_Black_Flag',
-    'The_Black_Scale',
-    'The_Blazing_Storm_Tournament',
-    'The_Broken',
-    'The_Burned',
-    'The_CHOSEN',
-    'The_Carriers',
-    'The_Chelation_Kid',
-    'The_Chronicles_of_Wyrden',
-    'The_Chronicles_of_Your_Mom',
-    'The_Comical_Bit_o_Time_Wasting_Nonsense',
-    'The_Compozerz',
-    'The_Continentals',
-    'The_Corner_Store_Crew',
-    'The_Corvette_Game',
-    'The_Cristmas_Spirit',
-    'The_Crossroads',
-    'The_Crypt_Kid',
-    'The_Cure',
-    'The_Curious_Adventures_of_Aldus_Maycombe',
-    'The_Dark_Truth',
-    'The_Darkness_Returns',
-    'The_Dashing_Rogue',
-    'The_Death_of_Sydney_Walls',
-    'The_Deed',
-    'The_Deity',
-    'The_Deletion',
-    'The_Demon_Inside',
-    'The_Devon_Legacy_Random_Art',
-    'The_Djinn_Jihad',
-    'The_Door',
-    'The_Dragon_Fists_of_Smorty_Smythe',
-    'The_Dreggs',
-    'The_ECS_Strips',
-    'The_Electric_Owl',
-    'The_Elemental_Storm_Volume_4',
-    'The_Endlessly_Agonizing_Sufferings_of_Miranda_the_Emo_Balloon',
-    'The_Ends',
-    'The_Ensuing_Tales_of_Jayden_and_Crusader',
-    'The_Epic',
-    'The_Epic_237',
-    'The_Epic_goes_to_Hell',
-    'The_Errant_Apprentice',
-    'The_Exaggerated_Life_Story',
-    'The_Facts_of_Life',
-    'The_Fantastic_Felixii',
-    'The_Fantastic_Webcomick_of_Archiba_Pews',
-    'The_Farm_story',
-    'The_Featureless_Plane',
-    'The_Fifty_Peso_Ninja',
-    'The_Fighting_Stranger',
-    'The_Final_Phenomenon_ACT_I',
-    'The_Final_Zone',
-    'The_Flaming_Chicken',
-    'The_Forgotten_Memories',
-    'The_Funisher',
-    'The_Garden',
-    'The_Gift_of_the_Gun',
-    'The_Gimblians',
-    'The_Goblin_Apprentice',
-    'The_Gods_are_Laughing_at_us',
-    'The_Gods_of_ArrKelaan',
-    'The_Golden_Sun_Struggle',
-    'The_Green_Room',
-    'The_Greener_Side',
-    'The_Harvest_Lottery',
-    'The_Heist',
-    'The_Holiday_Doctor',
-    'The_Hollow',
-    'The_Horribles',
-    'The_House_of_Other_Worlds',
-    'The_House_of_Sonic',
-    'The_Hub',
-    'The_Hunting',
-    'The_Impractical_Mr_Imp',
-    'The_JDL',
-    'The_KAMics',
-    'The_Kick_Assers',
-    'The_Lamp',
-    'The_Last_Days_of_War',
-    'The_Leftovers',
-    'The_Legend_of_Ample_Alison',
-    'The_Legend_of_Zelda_Echoes_of_Time',
-    'The_Legend_of_Zelda_Palace_of_the_Clockwork_Martinet',
-    'The_Legend_of_Zelda_Souls_of_Darkness',
-    'The_Legend_of_Zelda_The_Sun_Cat',
-    'The_Life_Death_and_Rebirth_of_Elicia',
-    'The_Life_and_Times_of_Copa',
-    'The_Life_of_a_Young_WoW_Addict',
-    'The_Mage_Did_It',
-    'The_Magic_Flute',
-    'The_Magnificent_Misadventures_of_Mustardo',
-    'The_Many_Misfortunes_of_Lady_Luck',
-    'The_Many_Stories_of_Sonic_the_Hedgehog',
-    'The_MatFkkinRix',
-    'The_Meaning_Of_Life',
-    'The_Mighty_Omega',
-    'The_Minimal_Adventures_of_Pippa_and_Cici',
-    'The_Misadventures_Of_Metalix',
-    'The_Misadventures_of_Suicidary_Man',
-    'The_Mobius_Chronicles',
-    'The_Mugen_Comic_Club',
-    'The_Mystery_of_the_Golden_Edge',
-    'The_NEW_Life_Of_TimmY',
-    'The_Nameless_Double_Authored_Comic',
-    'The_NanKan_Agency',
-    'The_New_Amy_Rose',
-    'The_Nineteenth_Century_Industrialist',
-    'The_Ninth_Doctor',
-    'The_Omega_Key',
-    'The_Onett_Suite',
-    'The_Oozer',
-    'The_Open_Minded',
-    'The_Order_vol_1',
-    'The_Other_Side_of_High_School',
-    'The_Pen_is_Mightier',
-    'The_People_That_Melt_in_The_Rain',
-    'The_Perfect_Love_letter',
-    'The_Perfect_Score',
-    'The_Pirate_Terminators',
-    'The_Planet_Closest_To_Heaven',
-    'The_Pond_of_Realms',
-    'The_Pools_of_Zara',
-    'The_Prime_of_Ambition',
-    'The_Princess',
-    'The_Princess_and_the_Giant',
-    'The_Queen_of_Hearts',
-    'The_Railyard',
-    'The_Rambling_Crazy_Man',
-    'The_Random_Stick_Show',
-    'The_Reborn',
-    'The_Red_Prince',
-    'The_Reluctant_Catalyst',
-    'The_Renagades',
-    'The_Repository_of_Dangerous_Things',
-    'The_Retributionist',
-    'The_Return_of_the_Blobs_in_Blue_and_Green',
-    'The_Revenger_Tradgedy',
-    'The_Revolution',
-    'The_Rose_Killer',
-    'The_Rube_Goldberg_Machine',
-    'The_SSA',
-    'The_Savior_of_Hell',
-    'The_Secret_Files_of_MAX',
-    'The_Secret_Lives_Of_Penguins',
-    'The_Secret_life_of_a_Teenage_Sprite_Comic',
-    'The_Sevii_Island_Saga',
-    'The_Shadow_Pokemon_Revived',
-    'The_Shape_of_the_Heart',
-    'The_Ski_Mask_Thug',
-    'The_Sok_Comic',
-    'The_Sonic_Saga',
-    'The_Star_Droids',
-    'The_Stuff_Zone',
-    'The_Stupid_Adventures',
-    'The_Stupid_Adventures_Year_Two',
-    'The_SuperFogeys',
-    'The_Surgeon',
-    'The_Surreal_Adventures_of_Edgar_Allan_Poo',
-    'The_Surrealist',
-    'The_Symbolocity',
-    'The_Symmetrical_Breadpazoid',
-    'The_Thesaian_killers',
-    'The_Traveling_Assist',
-    'The_Trouble_With_Martians',
-    'The_Truth_About_Corey_Strode',
-    'The_Twisted_Life_of_Clifford_Robotnik',
-    'The_Uncanny_Uper_Dave',
-    'The_Unnamed_Fellowship',
-    'The_Untold_Legends_of_Ice',
-    'The_Urban_Knight',
-    'The_Urban_Legends',
-    'The_Water_Phoenix_King',
-    'The_Way_of_the_Flaim',
-    'The_Weapon',
-    'The_Webcomic_Review_Comic_On_The_Web',
-    'The_Weekly_Life_in_Simons_Basement',
-    'The_Winged_One',
-    'The_Wonderful_Adventures_of_Everyday_Life',
-    'The_World_According_to_Mongruels',
-    'The_World_Robot_Competition',
-    'The_World_Tournament',
-    'The_World_of_Higal',
-    'The_Wrong_Hero',
-    'The_Y_Team',
-    'The_Young_Defenders',
-    'The__Flea',
-    'The_lost_boys_of_hometown',
-    'The_most_random_sprite_comic_in_the_whole_entire_world',
-    'The_new_Megaman',
-    'The_story_of_Quark',
-    'The_true_Kingdom_Hearts',
-    'The_world_of_Stickmen',
-    'There_Life',
-    'They_All_Bleed_the_Same',
-    'Thing_Thing_The_comic',
-    'Things_I_Did_Recently',
-    'Third_World_Think_Tank',
-    'Third_World_Truth',
-    'Thirteen_Under_Seven_The_Manga',
-    'This_Ego_of_Mine',
-    'This_Is_What_I_Do',
-    'Thistil_Mistil_Kistil',
-    'Thog_Infinitron',
-    'Thorns_on_a_Rose',
-    'Thoughts_Of_the_Judicous',
-    'Threshold',
-    'Tides_of_Hopes',
-    'Tim_and_Steph_get_married',
-    'Time_Breakers',
-    'Time_Killers',
-    'Times_Like_This',
-    'Timestone',
-    'Timothy_Green',
-    'TnT_the_Comic',
-    'To_Be_Loved',
-    'TogetherInMind',
-    'Tokyo_101',
-    'Tomb_of_the_King',
-    'Tomb_of_the_King_2',
-    'Toshubis_pinup_and_fanart',
-    'Total_Immersion',
-    'Totally_Cool_Comic',
-    'Touch_and_Go_Tommy',
-    'Toy_Story_X',
-    'Toys_vs_Toys',
-    'Tozzer',
-    'Tracking_Inspiration',
-    'Trail_Mix',
-    'Travesty_of_the_Night',
-    'Triangular_Hats',
-    'Trinity_Legends_of_Zevera',
-    'Trip',
-    'Trolling_Around',
-    'Troop_37',
-    'Troop_of_Bad_Angels',
-    'True_Power',
-    'Try_Everything_Once',
-    'Tsubasa_Randomness',
-    'Tsubomi_Blue_Dreams',
-    'Tweedledum',
-    'Twisted_Chronicles',
-    'Twisted_Logic',
-    'Twisted_Mirrors',
-    'TwoMoons',
-    'Two_Faces_One_Coin',
-    'Two_Strings',
-    'Two_Weeks_Notice',
-    'Two_pods_in_a_pea',
-    'Twonks_and_Plonkers',
-    'Tygar',
-    'Tyler_This_is_Your_Life',
-    'Tylerth',
-    'USB',
-    'USB_Extras',
-    'U_Chuu_No_Hoshi_Hotoshi_Tsuko',
-    'Uber1337',
-    'Ukeke_and_Shyguys_Adventures_and_Stuff',
-    'Ultimate_tourny_of_ultimate_fighting',
-    'UnNatural_Order',
-    'Under_CONstruction',
-    'Under_an_Alien_Star',
-    'Under_the_Helmet',
-    'Unfunny_comics',
-    'Unicorns_and_Razorblades',
-    'Unique',
-    'University_Plus_1',
-    'Unknown_Experiement',
-    'Unknown_Feathers',
-    'Unlife_is_Unfair',
-    'Unlucky_In_A_Tin_Can',
-    'Unmature',
-    'Unplotful',
-    'Unsound_of_Mind',
-    'Unsung_Heroes_Of_Subtlety',
-    'Untitled_Comic',
-    'Urban_Legends',
-    'Used_Books',
-    'Used_Books_Bios',
-    'VP_Fancomics',
-    'VUS',
-    'Vampire_Phantasm_X',
-    'Vampire_Rising',
-    'VampyrFetal',
-    'Vanguard',
-    'Vegetarian_Zombies',
-    'Verge_the_Paranormal_Detective',
-    'Versus',
-    'Vi_is_Manor',
-    'Vibes_And_The_OtherKinds',
-    'Vic_and_Edwards',
-    'Vice_and_Virtue',
-    'Victory_Theme',
-    'Vieil_Etang',
-    'Viera_Dimension',
-    'Vigil_1to_4',
-    'Vile_Withering',
-    'Villainy_Minor',
-    'Villans_Untld',
-    'Villian_Next_Door',
-    'Vinnie_and_Debrah',
-    'Vinny_the_Villain',
-    'Virtual_reality',
-    'Visible_Invaders_From_Beyond',
-    'Vivid_Imagery',
-    'Vultures_Eat_the_Dead',
-    'WGO',
-    'WHACKED',
-    'WIRES',
-    'WIRES_2',
-    'WIRES_3',
-    'WWE_The_Comic',
-    'W_V_W',
-    'Wakon_Yosai',
-    'Wallys',
-    'Warped_Archive',
-    'WarriorBorn',
-    'Warriors_of_the_night',
-    'Wasteland',
-    'Wave',
-    'Way_the_Cookie_Crumbles',
-    'Wayfinder',
-    'Weave',
-    'WeirdStar',
-    'Weird_Adventures_in_Unemployment',
-    'Weird_Void',
-    'Welcome_To_Border_City',
-    'Well_crap',
-    'Wer_Carastrix_Thaczil',
-    'WetComa',
-    'What_I_Learned_Today',
-    'What_The_Fucking_Shit_Fuck_Ass_Fuck_Is_Mario_Gonna_Do_Now',
-    'What_You_Dont_See',
-    'What_happens_when_theyre_not_working',
-    'What_is_Super',
-    'What_is_this',
-    'Whateverland_USA',
-    'When_Sunlight_Skips',
-    'White_Noise',
-    'Why_Not',
-    'Wibble',
-    'WiffleWorld',
-    'Wild_Heart',
-    'William_Feist__Paranormal_Investigator',
-    'Willow_And_Timothy',
-    'Wind_Riders',
-    'Wintergreen',
-    'Wish',
-    'With_All_Your_Might',
-    'Within_Shadows',
-    'Woah_Roscoe',
-    'Wolf',
-    'Wolfeye_City',
-    'Wolfies_World',
-    'Women',
-    'Wonkedo',
-    'WoolleyComix',
-    'Woolley_Thinking',
-    'Workdays',
-    'World_Domination_Plan_Z',
-    'World_One',
-    'World_of_Orenda',
-    'Wrinkles',
-    'WyrmLaird',
-    'XAZ_A_Megaman_X_Fancomic',
-    'Xenoes_313',
-    'Xiomania',
-    'Xs_everyday_life',
-    'YO_Comix',
-    'YU_GI_OH_NL',
-    'Yamase',
-    'Yamete_Kudasai',
-    'Yaoi_Seth',
-    'Year_of_the_Turtle',
-    'Yheilm_Wide_Tragedy',
-    'Yoshi_Saga',
-    'Young_Studs',
-    'Your_Number_One_Bishounen',
-    'Youre_So_Gay',
-    'Youre_mine',
-    'ZODIAC_An_Anthropomorphic_Web_Comic',
-    'ZaWorld_Zero',
-    'Zephyr_of_Fate',
-    'Zero7',
-    'Zero_G',
-    'Zo__Adventures',
-    'ZomBen',
-    'Zombi_Minacity',
-    'Zombie_Mojo',
-    'Zombiepocalypse',
-    'Zombies_Are_People_Too',
-    'Zuber_Zakari',
-    'a_devils_life',
-    'action',
-    'amoebaville',
-    'an_unencumbered_postbox',
-    'and_Id',
-    'andilire',
-    'binary_cupcakes',
-    'blackheart',
-    'buski_and_shnop',
-    'civil_war',
-    'delightfully_evil',
-    'desolation_angel_tango',
-    'devil_grass',
-    'dickandfart',
-    'digimon_break',
-    'disaffection',
-    'disorder_and_disarray',
-    'ePUNKS',
-    'eliada',
-    'estuche_patito_cuakman',
-    'eternal_darkness',
-    'featuring_Talking_Guinea_Pigs',
-    'geebo',
-    'girl_robot',
-    'greenbrook',
-    'greys_journey',
-    'hardKORE_Legends',
-    'hiro',
-    'just_junk',
-    'just_random',
-    'kAI',
-    'l_Anachrotist',
-    'laughAlittle',
-    'light_within_shadow',
-    'mr_Sandman',
-    'mr_red_and_mr_blue',
-    'my_bloody_nobelen',
-    'nerdStrip',
-    'nicola_and_belmondo',
-    'oldguy_and_young_guy',
-    'operation_blakck_sun',
-    'planet_of_the_sonic',
-    'pokemon_war',
-    'project_kokiro',
-    'prophecy',
-    'public_humiliation',
-    'pyroicon',
-    'random_anime_fanart_comics',
-    'random_ass_friday_comics',
-    'say_hello',
-    'shinji_the_great_freak',
-    'shonenpunk',
-    'signifikat',
-    'simply_sarah',
-    'sonic_vs_life',
-    'sonicsomething',
-    'soulflare',
-    'stickhappens',
-    'story_irc',
-    'stupid_machine_comics',
-    'superSUPER',
-    'super_smash_bros_omega',
-    'te_quiero_____matar',
-    'the_Grim_Sibz',
-    'the_kibble_legion',
-    'the_life_and_times_of_tammie',
-    'the_milkyway',
-    'the_random_archives_of_TJ',
-    'the_untold_legend_of_pokemon',
-    'toolagged',
-    'trythesoup',
-    'umm',
-    'unlingual',
-    'wanderblue_shorts',
-    'watchdogs',
-    'what_errant_beast',
-    'word',
-    'xAll_Things_Consideredx',
-    'yay_ponys',
-    'yoshi_freaks_real_life',
-    'zuchini',
-)
-
-for name in comics:
-    add(name)
+# do not edit anything below since these entries are generated from scripts/update.sh
+# DO NOT REMOVE
+add('12_Men_Died_Making_This_Strip')
+add('1337_Joe_and_Fellow_Seth')
+add('20_Galaxies')
+add('2Masters')
+add('2_Bitter_4_Words')
+add('2s_a_company')
+add('3D_Glasses')
+add('3rd_Party_Fantasy')
+add('4_Humor')
+add('70_Seas')
+add('AD_1997')
+add('AGENCY')
+add('AKA_Limzee')
+add('ALTER')
+add('ANGELOU_____Las_aventuras_de_Nikole')
+add('ANIME_WARS')
+add('AWES0ME')
+add('AWESOME_HIGH_FIVE_EDITION')
+add('A_Burden')
+add('A_Call_to_Destiny_Reloaded')
+add('A_Call_to_Destiny__NC_17')
+add('A_Day_in_the_Life_for_Erik')
+add('A_Deviant_Mind')
+add('A_Different_Perspective')
+add('A_Dim_View')
+add('A_Fairly_Twisted_Reality')
+add('A_Few_Brain_Cells_Short_of_Normal')
+add('A_Jagged_Mind')
+add('A_Loonatics_Tale')
+add('A_Note_On_My_Life')
+add('A_Paige_Comic')
+add('A_PoKeMoN_comic_that_everyone_will_ignore_even_though_the_author_puts_way_more_work_into_it_than_some_other_very_popular_PoKeMoN_comics_that_get_over_nine_thousand_views_on_days_they_DONT_update_What_the_hell')
+add('A_Roll_of_the_Dice')
+add('A_Step_Out_of_Phase')
+add('A_Tale_of_Two_Sprites')
+add('A_Way_to_the_Stars')
+add('A_Word_Of_Wisdom')
+add('A_town_called_Alandale')
+add('Acrobat')
+add('Across_the_Way')
+add('Acting_Out')
+add('Adam_and_Darcys_Shenanigans')
+add('Adsecula_The_Seventh_Serpent')
+add('Adventures_Guild')
+add('Adventures_in_StuffedAnimalLand')
+add('Adventures_of_Lucrezia')
+add('Adventures_of_Martin')
+add('Adventures_of_Wristance')
+add('Aerians')
+add('Air_Raid_Robertson')
+add('Akniatt')
+add('Al_De_Baran')
+add('Al_and_Scout')
+add('Alien_Circus')
+add('Alien_Concepts')
+add('Aliens_Anonymous')
+add('All_Saints')
+add('Allan')
+add('Altimatium')
+add('Amazing_Superteam')
+add('America_Jr')
+add('Amya')
+add('An_Act_of_Aggression')
+add('Anachronism')
+add('Anarchy_2090')
+add('Anathema')
+add('Anecdote')
+add('Angel_Guardian')
+add('Angelfish_A_COV_comic')
+add('Angry_D_Monkey')
+add('Animania')
+add('Anime_Remix')
+add('Animosity_Sonata')
+add('Anomic_v2')
+add('Another_Articifial_Time')
+add('Answers')
+add('Antcomics')
+add('Anything_could_happen')
+add('Apartment_408_Full_Size')
+add('Apathy_cigarettes_and_valentines')
+add('Apple_Valley')
+add('Apt_408_Minis')
+add('Ar_Oh_Ef_El')
+add('Arachnid_Goddess')
+add('Ardra')
+add('Arrowflight_Chronicles')
+add('Art_Captions')
+add('Art_and_sketches')
+add('Art_table_of_Duck')
+add('Artist_Adventure')
+add('Artwork____The_Mirror_of_Life')
+add('As_the_Galaxy_Turns')
+add('Assassin_Assassin')
+add('Asshole')
+add('Asteroid_of_Doom')
+add('Atavism')
+add('Atlantis_Rising')
+add('Attack_of_the_Robofemoids')
+add('Augustos')
+add('Avatar_of_Fire')
+add('Aw_Nuts_2')
+add('Awakenings_Online')
+add('Awesomataz')
+add('Ax_Crazy')
+add('AyaTakeo')
+add('BALLMAN')
+add('BASO')
+add('BFF')
+add('BIBLE_BELT')
+add('BK_Shadow_Nemesis')
+add('BK_Shattered_Hate')
+add('BLADE_OF_THE_FREAK')
+add('BLANK_LIFE_insert_player_rokulily')
+add('BRINK')
+add('Ba_Ba')
+add('Bacon_Strips')
+add('BadBlood')
+add('Bad_Guy_High')
+add('Badly_Drawn_Penguins')
+add('Badly_Drawn_Webcomic')
+add('Banango')
+add('Baroque_Viceroyalty')
+add('Barry_Reviews_Webcomics')
+add('Bass_Rebirth_of_Amp')
+add('Battle_of_the_Robofemoids')
+add('Bear_Versus_Zombies')
+add('Bearly_Abel')
+add('Beautiful_Skies')
+add('Beauty_Into_Beast')
+add('Because_of_Ivan')
+add('Been_Better')
+add('Beer_Noodles')
+add('Beluga_Weekly')
+add('Benders_and_Brawlers')
+add('Beta')
+add('Better_Luck_Next_Time')
+add('Betting_On_Love')
+add('Between_Worlds')
+add('BffSatan')
+add('Bhaddland')
+add('Billy_Learns_To_Rock')
+add('Binary_Souls_Other_Dimensions')
+add('Bird_and_Worm')
+add('Birdman')
+add('Bitter_Sweet_Melancholy')
+add('Blade_of_Toshubi')
+add('Blitz')
+add('Blood_Bound')
+add('Blood_Nation')
+add('Bloodlust_Eternal_Conflict')
+add('Blue_Comics')
+add('Blue_Strawberry')
+add('Blues_Rhapsody')
+add('Bobby_Monos_Crappy_Comics')
+add('Bobby_the_fetus')
+add('Bombshell')
+add('Bombshell_Fights_For_America')
+add('Boobs_Ahoy')
+add('Boogey_Dancing')
+add('Bored_by_the_Bus_Stop')
+add('Bouncing_Orbs_of_Beauty')
+add('Bounty')
+add('Bowsers_Plan_B')
+add('Brainfuzz')
+add('Brathalla')
+add('Breaking_the_Ice')
+add('Bricktown')
+add('Brinkerhoff')
+add('Broken_Wings')
+add('Brymstone')
+add('Bulletproof')
+add('Busty_Solar')
+add('CATS_AND_ICECREAM')
+add('CDA')
+add('COMPANY_MAN')
+add('CRAZED')
+add('CROSS_WORLDS_NEXXUS')
+add('Caggage')
+add('Camera_Obscura')
+add('Camp_Calomine')
+add('Canadian_Gamers')
+add('Captain_Communism')
+add('Carbon_and_Space')
+add('Carnivore_Carnival')
+add('Carrot_and_Roper')
+add('Case_1048_Blind_and_Blue')
+add('Cashcow')
+add('Cataclysm')
+add('Catboy_at_th_Con')
+add('Celebrity_Stalker')
+add('Cerintha')
+add('Chad_the_Fat_Kid')
+add('Chain_of_Stuff')
+add('Changes')
+add('Changes_Redux')
+add('Changing_Worlds')
+add('Chaos_Punks')
+add('Chaos_Reigns')
+add('Character_Development')
+add('Charby_the_Vampirate')
+add('Chester_and_Ferdie')
+add('Children_at_Play')
+add('Children_of_the_Tiger')
+add('Chimera')
+add('Chomp')
+add('Christopher')
+add('Chrono_Redux')
+add('Chu_and_Kenny')
+add('Circle_Arcadia')
+add('City_of_Dream')
+add('Civil_Servitude')
+add('ClashDown')
+add('Clockwork_Atrium')
+add('Cloud_Eagle')
+add('Coalition_of_the_Reluctant')
+add('Cockroach_Theater')
+add('Coffee_Time')
+add('Coga_Suro')
+add('Coga_Suro_2')
+add('Collision')
+add('Comic_Pie')
+add('Comic_Remix')
+add('Comicarotica')
+add('Coming_Soon')
+add('Conventional_Wisdom')
+add('Cooks_Assistant')
+add('Corporate_Life')
+add('CorruptHardware')
+add('Covalence')
+add('Coveinant_Journey')
+add('Cowboys_and_Aliens_II')
+add('Crack')
+add('Crack_Bird_and_Company')
+add('Crackwalker')
+add('Cramberries')
+add('Crap_on_a_Stick')
+add('CrayonS')
+add('Crazy_Duck')
+add('Creepy_Girl_and_Her_Zombie_Dog')
+add('Crickets_Creature')
+add('Crimson_Dark')
+add('Crossover')
+add('Crossover_High')
+add('Crossoverkill')
+add('Crossoverlord')
+add('Crossoville')
+add('Cru_The_DwarF')
+add('Ctownstrips')
+add('Culture_Shock')
+add('Cumic_relief')
+add('CuoreVoodoo')
+add('Curse_of_The_Black_Terror')
+add('Cute_N_Spicy')
+add('Cuttley_Bear')
+add('Cwens_Quest')
+add('CyBoar')
+add('Cyberspace')
+add('Cybertech')
+add('DD24hour_2010')
+add('DD24hour_2011')
+add('DDSR')
+add('DHF_Jam')
+add('DIAMOND_English_version')
+add('DIS')
+add('DR_Valume_1')
+add('D_U_E')
+add('Danielle_Dark')
+add('Dansk_Folly')
+add('Daqueran')
+add('DarkKyos_Short')
+add('Dark_Sisters')
+add('Darken')
+add('Darkling_Visions_of_a_Madmans_Soul')
+add('Daryl_and_Susie')
+add('Dasien')
+add('Day_in_the_Life_of_a_Cosplayer')
+add('DeadFingers')
+add('Dead_Men')
+add('Dead_Strangers')
+add('Death_Brigade')
+add('Death_P0rn')
+add('Decimated_Eden')
+add('DeepHurting')
+add('Demon_Eater')
+add('Demon_Fist')
+add('Demon_Slayers')
+add('Demonics')
+add('Denizens__Attention')
+add('Depths_of_My_Empty_Soul')
+add('Desperate_Angels')
+add('Despotize')
+add('Destroying_The_Illusion')
+add('Deviant_Prophets')
+add('Diamond')
+add('Din_Krakatau')
+add('Dirtheads')
+add('Distant_Embrace')
+add('Divine_Engine_Experimental_Prototype')
+add('Divine_Grace')
+add('Divine_Leap')
+add('Dobutsu_no_Tamashii')
+add('Doctor_Death_vs_The_Zombie_')
+add('Dog_the_Spot')
+add('Dogs_Eye_View')
+add('Don_Josh')
+add('Dont_Eat_the_Bread')
+add('Doodlerama')
+add('Dot_Dot_Dot')
+add('Dot_TXT')
+add('Double_Coupons')
+add('Dragon_City')
+add('Dragon_Kingdoms')
+add('Dragonaur')
+add('Dragonaur_Mini')
+add('Dragonballz__Smash_Tournament')
+add('Dragonet')
+add('Dragons_Quest___Crystals_of_the_Elder')
+add('Drawn_to_you')
+add('Dread_Sisterhood_of_Randomnessossity')
+add('Dreadnought_Invasion_Six')
+add('DreamCatcher')
+add('Dream_Chronicles')
+add('Dreams_in_Synergy')
+add('Dribble_For_Kids')
+add('DrunkDuck_Poop')
+add('Drunk_Duck_Awards_2011')
+add('Drunk_Duck_Awards_2012')
+add('Drunk_Duck_Beauty_Contest')
+add('Drunk_Duck_Gift_Exchanges')
+add('Drunk_Duck_Zombies')
+add('Duck_and_Quail')
+add('Ducks_of_Doom')
+add('Due_East')
+add('Dungeon_Hordes')
+add('Dying_to_Live')
+add('ELEMENT')
+add('ELO')
+add('Edepth_Angel')
+add('Edge_of_December')
+add('Educomix')
+add('Elastik_Dreamz')
+add('Electronic_Revolutions_The_Burnhams')
+add('Elemental_Animarus')
+add('Elements_CYOA')
+add('Elf_N_Hood')
+add('Elijah_and_Azuu')
+add('Elijah_and_Azuu_Classic')
+add('Elsewhere')
+add('Elves_With_Mecha')
+add('Em_oi')
+add('Emerald_Winter')
+add('Emma')
+add('Endstone')
+add('Energize')
+add('Engine')
+add('Enter_the_Duck_2')
+add('Enter_the_Duck_3')
+add('Ephemeral')
+add('Epic_Brundala')
+add('Epic_adventures')
+add('Erth')
+add('Essay_Bee_Comics_Presents_Fusion')
+add('Estatic_Gods')
+add('Eternal_Flame')
+add('EternityComplex')
+add('Eternity_Comic')
+add('Eternity_Complex')
+add('Ethereal')
+add('Evan_Yeti')
+add('Even_For_a_Lunch_Meat')
+add('Evergreen_Comics')
+add('Everybody_Loves_Zero')
+add('Everybody_hates_Herb')
+add('Eves_Apple')
+add('Evil_Dawn')
+add('Evil_Empire_Moratorium')
+add('Evil_Inc')
+add('Evil_Plan')
+add('Evilish')
+add('Explorers_Of_the_Unknown')
+add('Extra_stuff_of_the_other_comics')
+add('FIGHT')
+add('FIGHT_2')
+add('FRANKENSTEIN__Her_Majestys_Secret_Service')
+add('Fahei_Volume_1__Firefly')
+add('Fainting_Spells')
+add('FanDanGo')
+add('FantastiTeam')
+add('Far_Out_There')
+add('Fated_Feather')
+add('Faults')
+add('Faust')
+add('Feeling_Rushed')
+add('Fifth_Dimension')
+add('Fighter_House')
+add('Fightsplosion_Legends')
+add('Figured_It_Out')
+add('Final_Blasphemy')
+add('Fizz')
+add('Flame_of_Earth')
+add('Flaming_Codfish')
+add('Flaming_Fuzzy_People')
+add('Floyd_and_Mike')
+add('Flying_Under_the_Influence')
+add('For_Your_Eyes_Only')
+add('Forsaken_Valor')
+add('Fortress_Avalon')
+add('Found_Art')
+add('Four_Bats')
+add('Frame_by_Frame')
+add('Frank_and_Steinway')
+add('Frank_and_Vinny')
+add('Fred_Peterson_The_Mighty_Warlord_Book_1')
+add('Frobert_the_Demon')
+add('Frog_Skin_Boots')
+add('Frontier__2170')
+add('Fun_Times')
+add('Function_Over_Fashion')
+add('Funday_Morning')
+add('Fuse')
+add('Fusion')
+add('GAAK')
+add('GIF_Showcase')
+add('GNight_Shade')
+add('GRIND')
+add('Gambit_as_Bishounen')
+add('Gamers_Anonymous')
+add('Gametard')
+add('Gary_the_Alchemist')
+add('Gello_Apocalypse')
+add('Gelotology')
+add('Geminni')
+add('Geminni_LEVEL_UP')
+add('Gemutations__Plague')
+add('George_the_Dragon')
+add('Get_Up_and_Go')
+add('Getting_Into_The_MiddleGround')
+add('Ghost_Hunters_Online_Manga')
+add('Ghosting')
+add('Gift')
+add('Gifted')
+add('Ginger_and_Shadow')
+add('Give_Me_The_Sky')
+add('Glass_Hearts')
+add('Gnoph')
+add('Go_A_Viking_The_Sword_of_Kings')
+add('Go_For_it')
+add('Goblin_Hollow')
+add('God_Complex')
+add('God_Damn_It')
+add('God_of_Destruction')
+add('Godlings')
+add('Godot')
+add('Gods_Playing_Poker')
+add('Golden_Gamers')
+add('Goo_From_Another_Dimension')
+add('Goober_Nice_To_Meep_You')
+add('Good_Guy')
+add('Good_Sir_Cat')
+add('Good_Taste')
+add('Goosetown_and_Lunch_Break')
+add('Graphical_Deviants')
+add('Grayling')
+add('Grim')
+add('Grog')
+add('Grounded_Angel')
+add('Growth')
+add('Guardian_of_Twilight')
+add('Guinea_Something_Good')
+add('Gundula_un_de_Stuventiger')
+add('HASBEN_AND_HASH')
+add('HSW_Remix')
+add('HUSS')
+add('H_A_R_D')
+add('H_I_K_A_R_I')
+add('Hakkum_Town')
+add('Hand_Drawn')
+add('Happyface_Comics')
+add('Harkovast')
+add('Head_over_Heart')
+add('Headless_Cross')
+add('Heart_of_a_Dragon')
+add('Hearts_and_Nails')
+add('Heavy_Mech')
+add('Hellbent')
+add('Hellscream')
+add('Hephaestus')
+add('Here_Comes_the_Chavalry_and_other_random_things_we_decided_to_draw')
+add('Hero_Force')
+add('Heroes_Alliance')
+add('Heroes_Unite')
+add('Hexagon_Death_Squad')
+add('Hi_Res_Heroes')
+add('Hikari_The_Demon_Swordsman')
+add('Hit_and_Miss')
+add('Holon')
+add('Horribleville')
+add('Hospitality_Included')
+add('HotelSoul')
+add('House_of_the_Muses_1')
+add('How_I_Killed_The_Gods')
+add('How_Unfortunate')
+add('Hurrocks_Fardel')
+add('Hyper_Death_Babies')
+add('Hyperactive_Comics')
+add('IF_I_GET_LOCKED_UP_TONITE')
+add('IRC')
+add('I_Come_From_Mars')
+add('I_Drew_150_Pokemon')
+add('I_Fell_Down_The_Stairs')
+add('I_Was_Kidnapped_By_Lesbian_Pirates_From_Outer_Space')
+add('I_got_it_in_my_mouth')
+add('Illusional_Beauty')
+add('ImaginaryFriends')
+add('Imaginary_Daughter_Bonus')
+add('Imaginary_Tactics')
+add('Inappropriate_Irving')
+add('Inchoatica')
+add('Incorporated_Hate')
+add('Indigo_Bunting__Vampire')
+add('Infinity_Burger')
+add('Inhuman')
+add('Insanity_Untamed')
+add('Insanity_of_Xade')
+add('Inside_OuT')
+add('Insomnia_The_Comic')
+add('Insomniart')
+add('Intergalactic_Continental_Dimension_Travelers')
+add('Internet_Superbuddies')
+add('Iornhart')
+add('Iron_Wolf')
+add('Irrumator')
+add('Ishi_Alliance')
+add('Island_Of_Submission')
+add('Its_A_Boy_Thing')
+add('Its_Ninja_Time')
+add('ItzWrAiTh')
+add('JRs_Minutemen')
+add('JUNK_a_story')
+add('Jac_Strips_for_You')
+add('Jack')
+add('Jake_the_Evil_Hare')
+add('Jays_Internet_Fight_Club')
+add('Jeriah')
+add('Jericho')
+add('Jerk_Wadz')
+add('Jet_and_Joe')
+add('Jhulene_the_Paladin')
+add('Jix')
+add('Joe_Bivins_Man_Genius')
+add('Joe_Pop')
+add('John')
+add('Jonkos_Picture_Diary')
+add('Journey_to_Raifina')
+add('Jump')
+add('Junk_Food')
+add('Jurbas')
+add('JustAnotherDay')
+add('Just_Call_Me_Freedom')
+add('Just_Liam')
+add('Just_My_Luck')
+add('KAKA_PENCIL_magical_pen')
+add('KALA_dan')
+add('KAMs_Fanart')
+add('KISS_4K_the_webcomic')
+add('Karabear_Comics_Unlimited')
+add('Karen_the_Marilith')
+add('Kat_and_Dogg')
+add('Kawaii_Daigakusei')
+add('Kazei_5_Rebirth')
+add('Keeping_Up_with_Thursday')
+add('Kemono_Densetsu')
+add('Kenji_Nin')
+add('Kevin_Wards_A_Frickin_Ninja_Story')
+add('Keyguard_Active')
+add('Kids_With_Gas_Eat_Free')
+add('Killer_Kittenz')
+add('Kimeral')
+add('King_Me')
+add('Kirby_Komiks')
+add('Kitty_Litter')
+add('Knights_Requiem')
+add('Knock_on_Wood')
+add('Kokuahiru_comics')
+add('Kroniki_Black_Dragons')
+add('Kung_Fu_Komix')
+add('Kurenai_Mashin')
+add('Kuro_Shouri')
+add('LASTFantasy')
+add('LA_ESPADA_DEL_ANORMAL')
+add('LOE_Plus')
+add('Lacerated_Veil')
+add('Laggoo_and_the_Kings_Trident')
+add('Lancaster_the_Ghost_Detective')
+add('Last_Chance_The_Beast_Hunter')
+add('Last_Of_The_Wilds')
+add('Last_Place_Comics')
+add('Last_War')
+add('Last_words')
+add('Latchkey')
+add('Laurentinas_Improv_Studio_The_Comic_Art')
+add('Lavender_Legend')
+add('Led_by_a_Mad_Man')
+add('LeeEXE')
+add('Legacy_of_Blaze')
+add('Legacy_of_Kain_Laugh_Reaver')
+add('Legend_of_Link')
+add('Legend_of_Setar')
+add('Legend_of_Zelda__Ocarina_of_Tim')
+add('Legends_of_Idiocy')
+add('Leggo_my_Ego')
+add('Lego_Space')
+add('Lena')
+add('Leo')
+add('Lexcore')
+add('Life_Blowz')
+add('Life_and_Death')
+add('Life_and_Maybe_Death_of_Ed')
+add('Life_as_an_8bit')
+add('Life_with_Dragons')
+add('Lifeblood')
+add('Like_Fish_in_Water')
+add('Lil_Hero_Artists_Manga_Edition')
+add('Link_Skywalker')
+add('Linnyanie')
+add('Liquid_Lunch')
+add('Lite_bites')
+add('Little_Bat_Koku')
+add('Little_Black_Dress')
+add('Little_Digital_People')
+add('Little_Terrors')
+add('Live_to_tell')
+add('Livin_On_The_Edge')
+add('Living_With_Insanity')
+add('Lizzy')
+add('Locoma')
+add('Lola')
+add('London_Underworld')
+add('Long_Conversations_About_Nothing')
+add('Loose_Lips')
+add('Lost')
+add('Lost_Chapters_of_Megaman')
+add('Lost_Invisible')
+add('Lost_Tribe_of_Pen_GUin')
+add('Lost_in_Transition')
+add('Louder_Than_Bombs')
+add('Lovarian_Adventures')
+add('Love_And_Chaos')
+add('Love_Story')
+add('Lovecraft_Yaoi')
+add('Lucidfairy')
+add('Lucky_Dawg')
+add('Lugnor_Riders')
+add('MAG_ISA')
+add('MAYA_____The_legend_of_Wolf')
+add('MAYA_la_leyenda_del_lobo')
+add('MIKYAGU')
+add('MISFIT_ASSASSINS')
+add('MKIA_The_Sprite_Comic')
+add('MMM_BooGrrs')
+add('MMZ_After_Zero')
+add('MOSAIC')
+add('MS_Pain')
+add('M_Organ_Art')
+add('Mad_World')
+add('Madness_to_my_Method')
+add('Mafital')
+add('Mage')
+add('Magellan')
+add('Maggot_Boy')
+add('Magical_Misfits')
+add('Magicians_Quest')
+add('Magiversity')
+add('Maidens_Monsters_and_Madmen_the_Tim_Tyler_sketchbook')
+add('Malefic')
+add('Malefic_Tales')
+add('ManBoys')
+add('Mario_and_Luigi_Misadventures')
+add('Mario_in_Johto')
+add('Marios_Day_Job')
+add('Marital_Bliss')
+add('Mary_Sue_Academy')
+add('Mask_of_the_Aryans')
+add('Master')
+add('Master_the_Tiger')
+add('Mastermind_BTRN')
+add('Mastorism')
+add('Matthews_crazy_adventure')
+add('Max_Zing')
+add('Mayhem_the_Comic')
+add('Mech_Academy')
+add('MegaNonsense')
+add('Mega_Child_Xtreme')
+add('Mega_Maiden_and_the_Chop_Chop_Princess')
+add('Megaman_EXE')
+add('Megaman_Neo_Adventures')
+add('Megaman_The_Megamissions')
+add('Megaman_Zero')
+add('Megaman_battle_network_continues')
+add('Melody_and_Macabre')
+add('Memories_from_Requiem')
+add('Mental_Meltdown')
+add('Mercs')
+add('Messenger')
+add('Metal_Breakdown')
+add('Metroid_Vengeance')
+add('Mildly_mundane')
+add('Milo_and_John')
+add('Mind_Under_Matter')
+add('Mindmistress_at_Drunk_Duck')
+add('Minion')
+add('Misadventures_of_Classic_MegaMan')
+add('Misfire_Reactional')
+add('Misfits_of_Fandom')
+add('Mishap_Mania')
+add('Miss_Grey')
+add('Mixed_Bag_Comics')
+add('Mob_Ties')
+add('Modern_Day_Witchdoctor')
+add('Modest_Medusa')
+add('Monkey_Pot')
+add('Monster_Lover')
+add('Monster_Lover_Destinys_Path')
+add('Monster_Soup')
+add('Moon_Reflected_in_Water')
+add('Moonlight_Doll')
+add('Moose_Shoe')
+add('Morning_Squirtz')
+add('Morning_Squirtz_lite')
+add('Morph_Man_Heir')
+add('Morphic')
+add('MrRiot_Theater')
+add('Much_the_Millers_Son')
+add('Murder_in_the_Mushroom_Kingdom')
+add('Muse_of_a_Knight')
+add('Musical_Farm')
+add('My_Angel_and_My_Devil')
+add('My_Imaginary_Life')
+add('My_Parents_are_Nobodies')
+add('My_Pet_Demon')
+add('My_Shining_Knight')
+add('My_Sister_The_Demon')
+add('My_Sister_The_Goddess')
+add('My_Sister_prequel_Eclipse')
+add('My_Sister_the_Awakening')
+add('My_Sister_the_Damned')
+add('My_Sister_the_Witch_0')
+add('My_TV_is_Evil')
+add('My_Thingie')
+add('Myo_Min_Myo')
+add('Mystery_World')
+add('Myths_And_Legends')
+add('NEC')
+add('NPC')
+add('NUTS')
+add('N_N_Sp')
+add('Nahim')
+add('Namco_Wars')
+add('Naruto_Blood_Inheritance')
+add('Naruto_The_Comic')
+add('Necromancer_Troubadour')
+add('Nectar_of_the_Gods')
+add('Negate_Never')
+add('Negligence')
+add('Neil_And_Ryan')
+add('Nemution_Jewel')
+add('Nemution_Redux')
+add('Nerdcore')
+add('NewGirl')
+add('New_America')
+add('New_Challenger_Approaches')
+add('New_Jerusalem')
+add('New_Pages')
+add('Newton_the_Newt')
+add('Niego')
+add('Nightmistress')
+add('Ninja_Shizatch')
+add('Ninjoy')
+add('Nintendo_Super_Squad')
+add('Nintendo_randomness')
+add('Nintendos_Untold_Legends')
+add('No_Capes')
+add('No_Need_for_Bushido')
+add('No_Parking')
+add('No_Talent')
+add('Nocturne_21')
+add('Normalcy_is_for_Wimps')
+add('Not_Faust')
+add('Nothing_Really_Serious')
+add('Novusgenesis_Hype')
+add('OTENBA_Files')
+add('O_deer')
+add('Obiit')
+add('Oblivion')
+add('Obnoxious_High')
+add('Odd_Days')
+add('Off_Hours')
+add('Off_White')
+add('Oh_Brother_Qlippoth')
+add('Okonomi_Yaki')
+add('Old_Batman_Comics')
+add('Old_Comic')
+add('Old_Pond')
+add('Omikami')
+add('One_Piece_Grand_Line_3_point_5')
+add('One_Question')
+add('One_Sixth_Sense')
+add('One_Third_Of_Your_Life_Is_Spent_Sleeping_One_Third_Of_Your_Life_Is_Spent_Working_And_Half_Of_One_Third_Is_Spent_Waiting_The_Question_Is_It_Really_Your_Life')
+add('One_last_breath')
+add('Opey_the_Warhead')
+add('Our_Amazing_Adventures')
+add('Out_of_Curiosity')
+add('Outer_Space_Alien_Nazis_From_Outer_Space')
+add('Outlawed')
+add('Overshadow')
+add('Oyer')
+add('POKETTO_MONSUTAA_SPECIAL_SUPER_EX_ADVENTURE_XXXVX_THE_CHRONICLES_OF_RED_BLUE_GREEN_AND_A_BUNCH_OF_OTHER_KIDS_WITH_COLORS_FOR_NAMES')
+add('PSI')
+add('PUTRID_MEAT')
+add('Pagan_Zoetrope')
+add('Paint_Heroes')
+add('Panacea')
+add('Panda_panda')
+add('Pandemonium')
+add('Paper_Cuts')
+add('Paranoia_and_Denial')
+add('Paranormal_Activity')
+add('Parker_Lot')
+add('Parody_Paridise')
+add('Pegwarmers')
+add('Per_Ardua')
+add('Peregrination_of_the_Deliverer')
+add('Perpendicular_Universe')
+add('Persona_3_FTW')
+add('Persona_4TW')
+add('Persona_Won')
+add('Perspectives')
+add('Peter_And_The_Wolf')
+add('Phayrh')
+add('Philly')
+add('Phineus_Magician_for_Hire')
+add('Phobophobia')
+add('PiLLI__ADVENTURE')
+add('Pinkerton')
+add('Pinky_TA')
+add('Pinnacle_of_Evolution')
+add('Pixel_Plumbers')
+add('Pizza_Project')
+add('Planet_B')
+add('Planet_Chaser')
+add('Plastic_Bullets')
+add('Plumber_Switch_a_rio')
+add('PoKeMoN_HEROES')
+add('Poharex_issues_1_to_11')
+add('Pokemon_Contest_Challenge')
+add('Pokemon_Edge_2009')
+add('Pokemon_Granite')
+add('Pokemon_Haven')
+add('Pokemon_Jade')
+add('Pokemon_Light_and_Dark')
+add('Pokemon_Mystery_Dungeon_Strikedown_Chronicles')
+add('Pokemon_Random_Kanto')
+add('Pokemon_Shroom_Version')
+add('Pokemon_Silver_State_Version')
+add('Pokemon_Sinnoh_Surfer')
+add('Pokemon_Warpers')
+add('Pokemon_World_Trainers')
+add('Pokemon_Yellow_Comics')
+add('Politics_The_Tankers_Way')
+add('Ponzi')
+add('Potpourri_of_Lascivious_Whimsy')
+add('Powell_and_Derry_Product_')
+add('PowerTrip')
+add('Powerjeff')
+add('Powerup_Adventure')
+add('Powerup_Comics')
+add('Pr0nCrest')
+add('Prelude')
+add('Present_Day')
+add('Princess_Natsumi')
+add('Professor_Dolphin_presents_Pokemon')
+add('Project_217')
+add('Project_Darklight')
+add('Project_GTH')
+add('Proto_Culture_Comics')
+add('Proyecto_GTH')
+add('Pugnuggle_Tales')
+add('Pulp_Fantasy')
+add('Pulse_Comics')
+add('Punk_Pink')
+add('Puppetry')
+add('Puppets_and_Strings')
+add('QUANTUM_Rock_of_Ages')
+add('Quickening')
+add('REAL_Men_Wear_Lipstick')
+add('RIDDICK_Q_LOSS_TALES')
+add('RIOT_and_FadeOut_From_the_Top')
+add('Radio_Active_Rainbows')
+add('Raiders_of_The_Lost_Mind')
+add('Raidou_Kuzunoha_the_19th')
+add('Rain_Of_Gods')
+add('Rainbow_Carousel')
+add('Rainbow_Connection_2')
+add('Rakina')
+add('Randi')
+add('Random_Ramblings')
+add('Random_Sonic_Stories')
+add('Random_Street_Theater')
+add('Rangetsu')
+add('Rasvaar')
+add('Ravenwood')
+add('Raw_Fish')
+add('Razor_Candy')
+add('Rebound')
+add('Reckless_Youth')
+add('Red_Dog_Venue')
+add('Red_Moon')
+add('Red_String')
+add('Redemption_of_Heroes')
+add('Redneck_Comics')
+add('Remote_Angel')
+add('Requiem_for_Innocents')
+add('Requiems_Gate')
+add('Retake')
+add('RiTH')
+add('Riggs_Hell')
+add('Rileys_notebook')
+add('Rival_Angels')
+add('Robomeks')
+add('Robot_Chuck')
+add('Robot_Friday')
+add('Robot_Wars')
+add('Robukkagenerator')
+add('Rock_Paper_Cynic')
+add('Rocketship_A_GoGo')
+add('Rococo_Eternal')
+add('Rogue_Agent_Axl')
+add('Rogues_of_Clwyd_Rhan')
+add('Roll_Call')
+add('Roll_For_Intelligence')
+add('Romeo')
+add('Room_Mates')
+add('Row_and_Bee')
+add('Roy_Barley')
+add('Royal_Icing')
+add('Ruby')
+add('Ruby_And_Pipers_World_Of_Magical_Pink_Fearie_Unicorns')
+add('Rule_of_Three')
+add('Rules_of_Make_Believe')
+add('Rune')
+add('Runway')
+add('Ryosaki_Uzumaki_1')
+add('SECKS')
+add('SFA')
+add('SHELL')
+add('SOPHIA_Awakening')
+add('SPOON')
+add('STARSEARCHERS')
+add('STICKFODDER')
+add('Safety_Man')
+add('Sailor_Soldiers_of_Justice')
+add('Saint_Remy')
+add('Salvation_Of_Morrowind')
+add('Satans_Evil_Square')
+add('Saturday_Morning_')
+add('Saviours_X')
+add('ScareCrow_Lullaby')
+add('Schadenfreude')
+add('Schizophrenia_Bloom')
+add('School_Spirit')
+add('School_of__Rumble')
+add('Scorch')
+add('Screwball_Islands')
+add('Seedy_Comics')
+add('Senretsu_Gaiden')
+add('Senshi_Vs_Sentai')
+add('Serai')
+add('Seth_the_Hippo')
+add('Shades')
+add('Shades_of_Gray')
+add('Shades_of_Illusion')
+add('Shadow_Root')
+add('Shadow_Sprinters')
+add('Shaman_Quest')
+add('Shelter_of_Wings')
+add('Shiny_Things')
+add('Shiro_Karasu')
+add('Short_Bus')
+add('Silver_Vein')
+add('Sinful')
+add('Sire')
+add('Sketchy')
+add('Skewed_Reality_Origins')
+add('Skooland')
+add('Slice_of_Life')
+add('Slugs_of_Mystery')
+add('Small_Wonder')
+add('Smash_Bros_Royale')
+add('Smoke_Manmuscle_PI')
+add('So_Fantastic_Pork_Show_9oCLOCK')
+add('SoapOperaGoneWrong')
+add('Soapbox_Hill')
+add('Solar_Salvage')
+add('Some_Notes')
+add('Something_Else_Anime_Theater')
+add('Something_Like_Life')
+add('Something_To_Do')
+add('Somewhere_in_San_Fransisco_Half_Way_Beyond_The_Bridge_and_The_Tower_Lies_A_Place_Where_Nothing_is_Ever_What_It_Seems_On_A_Day_to_Day_Basis_Because_That_Is_What_Happens_in_This_Kinda_Place')
+add('Songs_of_An_Angel')
+add('Sonic_A_Heroes_Tail')
+add('Sonic_Advance_The_Real_Story')
+add('Sonic_Advanced_Online')
+add('Sonic_Adventurz')
+add('Sonic_Bluff')
+add('Sonic_College')
+add('Sonic_Destination_Chaos')
+add('Sonic_Meets_Megaman')
+add('Sonic_Overdose')
+add('Sonic_Unreal')
+add('Sonic_and_tails_corner')
+add('Sonic_plus_a_castle')
+add('Sonic_the_Hedgehog_in_the_Comic')
+add('Soul_Less')
+add('Soul_Palisade')
+add('Soul_Symphony')
+add('South_Of_Sanity')
+add('Spellmon')
+add('Spitfire')
+add('Splash_Damage')
+add('Splices_of_Life')
+add('Sprite_Happy_Comic')
+add('Sprite_Life___Nineteen_Eternal')
+add('Spritely')
+add('St_Dyphnia_Academy')
+add('Stafettserien')
+add('Star_Crossed_Destiny')
+add('Starcrossed')
+add('Starfox__Declassified')
+add('Startoons_Super_Force')
+add('Starving_Artists')
+add('Status_Update')
+add('Stellar_Arcana')
+add('Stellar_Arcana_Spanish')
+add('Step_It_Up')
+add('Stick_Figure_Comics')
+add('Stickman_and_Cube')
+add('Stories_of_Strangeness')
+add('Story_of_My_Life')
+add('Story_of_a_Robot')
+add('Strange_Attractors')
+add('Stranger_Things_have_Happened')
+add('Strangers_and_Friends')
+add('Strawberry_Death_Cake')
+add('Stupidity_in_Magic')
+add('SubStandard_Comics')
+add('Such_A_Simple_Life')
+add('Such_Is_Life')
+add('SunSpots')
+add('Sun_Fish_Moon_Fish')
+add('Sune')
+add('Sunset_Grill')
+add('Super_Mario_super_comic')
+add('Super_Smash_Bros_Grand_Tour')
+add('Super_Smash_Bros_Royale')
+add('Super_Temps')
+add('Superior_Day')
+add('Supermassive_Black_Hole_A_Star')
+add('Surviving_Older_Schools')
+add('Sword_in_Hand')
+add('Sword_of_Heaven')
+add('Syndicate')
+add('Synthea')
+add('TCCPC')
+add('THE_RANCAT')
+add('THRUD_Goddess_Of_Thunder')
+add('TRUBBLE')
+add('Taint_of_Exile')
+add('Taking_Stock')
+add('Tales_of_Kenah')
+add('Tales_of_Magid')
+add('Tales_of_Schlock')
+add('Tales_of_The_Sly_Ditt_Inn')
+add('Team_Kim_Possible')
+add('Tears_will_Shatter_Steel')
+add('Ted_The_Terrible_Superhero')
+add('TeenTeam')
+add('Teenage_Wasteland')
+add('Tennisball_Man')
+add('Tera_Forming')
+add('Tern_and_Zebra')
+add('Terra_online_comic')
+add('Terror_Of_The_Undead')
+add('That_Which_Is_Summoned')
+add('Thats_Comical')
+add('The_3rd')
+add('The_600')
+add('The_Adventure_of_the_Goat_Chin_Pirates')
+add('The_Adventures_Of_Vindibudd_Superhero_In_Training')
+add('The_Adventures_of_Chad_Cleanly')
+add('The_Apocalypse')
+add('The_Art_of_Joe_Jarin')
+add('The_Asim_Stone')
+add('The_Auragon_Base')
+add('The_Author')
+add('The_Authors_Corner')
+add('The_Beast_Legion')
+add('The_Begining_of_an_End')
+add('The_Bend')
+add('The_Black_Dragons_Chronicles')
+add('The_Bluenoser')
+add('The_Cafe_d_Alizee')
+add('The_Chelation_Kid')
+add('The_Chronicles_of_Drew')
+add('The_Chronicles_of_Gaddick')
+add('The_Chronicles_of_Wyrden')
+add('The_Compozerz')
+add('The_Continentals')
+add('The_Crossroads')
+add('The_Dashing_Rogue')
+add('The_Death_Pact')
+add('The_Deed')
+add('The_Demonic_Adventures_of_Angel_Witch_Pita')
+add('The_Devils_Horn')
+add('The_Devon_Legacy_Prologue')
+add('The_Dragon_Doctors')
+add('The_Dragon_Fists_of_Smorty_Smythe')
+add('The_Dragon_and_the_Lemur')
+add('The_Drunk_Duck_Mafia')
+add('The_ECS_Strips')
+add('The_Emerald_City')
+add('The_Errant_Apprentice')
+add('The_Escapists')
+add('The_Essyane_Warriors')
+add('The_Fabled_Travelers')
+add('The_Faction')
+add('The_Fifty_Peso_Ninja')
+add('The_Fighting_Stranger')
+add('The_Final_Zone')
+add('The_Garden')
+add('The_Gimblians')
+add('The_Girl_Next_Door')
+add('The_Goblin_Apprentice')
+add('The_Gods_of_ArrKelaan')
+add('The_Greening_Wars')
+add('The_Hero_Factor')
+add('The_Horribles')
+add('The_KAMics')
+add('The_Lamp')
+add('The_Last_Element')
+add('The_Loserz')
+add('The_Manual')
+add('The_Many_Misfortunes_of_Lady_Luck')
+add('The_MatFkkinRix')
+add('The_Mephit_Plot')
+add('The_Mercs')
+add('The_Mighty_Omega')
+add('The_Misadventures_of_Everyone')
+add('The_Muffinman')
+add('The_NEW_Life_Of_TimmY')
+add('The_Necropolis_Chronicles')
+add('The_Nineteenth_Century_Industrialist')
+add('The_Nonstandard_Assembly')
+add('The_Omega_Key')
+add('The_Onett_Suite')
+add('The_Only_Half_Saga')
+add('The_Order_vol_1')
+add('The_Path')
+add('The_People_That_Melt_in_The_Rain')
+add('The_Pirate_Balthasar')
+add('The_Planet_Closest_To_Heaven')
+add('The_Portland_Express')
+add('The_Princess')
+add('The_Princess_and_the_Giant')
+add('The_Pure_Soul')
+add('The_Realms_of_Aegis')
+add('The_Reborn')
+add('The_Repository_of_Dangerous_Things')
+add('The_Rift')
+add('The_Rose_Killer')
+add('The_Rube_Goldberg_Machine')
+add('The_SMW_Chronicles')
+add('The_SSA')
+add('The_Shape_of_the_Heart')
+add('The_Silver_Eye')
+add('The_Sok_Comic')
+add('The_SuperFogeys')
+add('The_Surreal_Adventures_of_Edgar_Allan_Poo')
+add('The_Symmetrical_Breadpazoid')
+add('The_Tainted')
+add('The_Temple_of_a_Thousand_Tears')
+add('The_Tonberry_Spritedom')
+add('The_Truth_About_Corey_Strode')
+add('The_Uncanny_Uper_Dave')
+add('The_Unthinkable_Hybrid')
+add('The_Vanguard')
+add('The_WAVAM_Project')
+add('The_World_Robot_Competition')
+add('The_World_of_Higal')
+add('The_Young_Defenders')
+add('The__Flea')
+add('The__Porch')
+add('The_idiotic_odyssey')
+add('The_lost_boys_of_hometown')
+add('The_story_of_Quark')
+add('The_world_of_Aeria')
+add('They_Are_Night_Zombies_They_Are_Neighbors_They_Have_Come_Back_From_The_Dead_Ahhhhh')
+add('This_Ego_of_Mine')
+add('This_Is_What_I_Do')
+add('This_is_a_random_comic')
+add('Thog_Infinitron')
+add('Thunder_Roarer')
+add('Timed_chaos')
+add('Times_Like_This')
+add('Tony_The_Hedgehog')
+add('Too_Many_Authors')
+add('Total_Immersion')
+add('Total_Insanity')
+add('Toy_Story_X')
+add('Tozzer')
+add('Trail_Mix')
+add('TransUMan')
+add('Trapped_in_a_Comic')
+add('Tri_Noble')
+add('Trinity_Legends_of_Zevera')
+add('Triple_Torture')
+add('Troop_37')
+add('TrueNuff')
+add('True_North')
+add('True_Power')
+add('Try_Everything_Once')
+add('Twenty_Eight')
+add('Twisted_Chronicles')
+add('Twisted_Mind_of_Stranger')
+add('Twisted_Mirrors')
+add('TwoMoons')
+add('Two_Rooks')
+add('Two_Weeks_Notice')
+add('Twonks_and_Plonkers')
+add('Typical_Strange')
+add('UNA_Frontiers_Commentary')
+add('USB')
+add('U_Chuu_No_Hoshi_Hotoshi_Tsuko')
+add('Ultimate_X')
+add('Ultimate_tourny_of_ultimate_fighting')
+add('Ultranimu')
+add('Un_Re_Stop_Comics')
+add('Underscore')
+add('Unfunny_comics')
+add('Unlife_is_Unfair')
+add('Unsound_of_Mind')
+add('Unsung_Heroes_Of_Subtlety')
+add('Unwanted_Eyes')
+add('Used_Books')
+add('Utterly_Rucked')
+add('Valentines_Dei')
+add('Vampire_Chronicles__Dark_Lust')
+add('Vampire_Phantasm_X')
+add('VampyrFetal')
+add('Vanguard')
+add('Version_2_Fantasy')
+add('Vi_is_Manor')
+add('Vic_and_Edwards')
+add('Vice_and_Virtue')
+add('Viera_Dimension')
+add('Vigil_1to_4')
+add('Vile_Withering')
+add('Villian_Next_Door')
+add('Virtual_reality')
+add('Vita_Di_Vetro')
+add('Voodoo_Walrus')
+add('Vreakerz')
+add('WACOT')
+add('WIRES_2')
+add('WTF_Renewed')
+add('WWE_The_Comic')
+add('Wakon_Yosai')
+add('Wanted_Dead_or_dead')
+add('WarMage')
+add('WarriorBorn')
+add('Warriors_of_the_night')
+add('Waste_Of_Time')
+add('Wasted_Potential')
+add('Watashi_No_Ame')
+add('Weave')
+add('WeirdStar')
+add('Weirdlings')
+add('Welcome_To_Border_City')
+add('What_I_Learned_Today')
+add('What_The_Fucking_Shit_Fuck_Ass_Fuck_Is_Mario_Gonna_Do_Now')
+add('What_You_Dont_See')
+add('When_Video_Games_Collided')
+add('White_Noise')
+add('Will_And_Tokyo')
+add('Wintergreen')
+add('Witchthorn')
+add('With_Friends_like_these')
+add('Within_Shadows')
+add('Woah_Roscoe')
+add('Wolf')
+add('Working_Stiffs')
+add('World_of_Orenda')
+add('Worlds_Apart')
+add('Wren')
+add('Wyyrd_Vintage')
+add('XAZ_A_Megaman_X_Fancomic')
+add('XTIN__The_Dragons_Dream_World')
+add('XYZ_Identity')
+add('X_UP')
+add('Xenogenesis')
+add('Xolta')
+add('YO_Comix')
+add('Yamase')
+add('Yamete_Kudasai')
+add('Yami_No_Tainai')
+add('Yaoi_Seth')
+add('Yeah_wait_what')
+add('Yoshi_Saga')
+add('Zandars_Saga')
+add('Zodiac_Battle')
+add('Zombie_Mojo')
+add('Zombies_Are_People_Too')
+add('Zorphbert_and_Fred')
+add('Zos_Kias')
+add('Zuber_Zakari')
+add('action')
+add('amoebaville')
+add('and_Id')
+add('atxs')
+add('blackheart')
+add('breeding_ground')
+add('brick')
+add('cowtoon')
+add('dairyaire')
+add('dead_ducks')
+add('dot_EXE_Saga')
+add('drag_them_down')
+add('eliada')
+add('featuring_Talking_Guinea_Pigs')
+add('ffff')
+add('girl_robot')
+add('greys_journey')
+add('grin_n_spirit')
+add('hanged_doll')
+add('hiro')
+add('jenffers_show')
+add('just_random')
+add('kirby_supah_star')
+add('light_within_shadow')
+add('magick')
+add('metroid_primed')
+add('nicola_and_belmondo')
+add('operation_blakck_sun')
+add('patent_pending')
+add('project_kokiro')
+add('public_humiliation')
+add('punished_girls')
+add('pyroicon')
+add('random_anime_fanart_comics')
+add('roastytoasty')
+add('rubber_girls')
+add('signifikat')
+add('simply_sarah')
+add('story_irc')
+add('stupid_machine_comics')
+add('supahnariobros')
+add('super_smash_bros_omega')
+add('the_Many_Deaths_of_Mario')
+add('the_hedgehogs')
+add('the_random_archives_of_TJ')
+add('vnd')
+add('what_comes_first')
+add('what_errant_beast')
+add('whensdays')
+add('xAll_Things_Consideredx')

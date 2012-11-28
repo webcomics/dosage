@@ -145,13 +145,13 @@ def get_scrapers():
     """
     global _scrapers
     if _scrapers is None:
-        out.write("Loading comic modules...")
+        out.write("Loading comic modules...", 2)
         modules = loader.get_modules()
         plugins = loader.get_plugins(modules, _BasicScraper)
         _scrapers = list(plugins)
         _scrapers.sort(key=lambda s: s.get_name())
         check_scrapers()
-        out.write("... %d modules loaded." % len(_scrapers))
+        out.write("... %d modules loaded." % len(_scrapers), 2)
     return _scrapers
 
 

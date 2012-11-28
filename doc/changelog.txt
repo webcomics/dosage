@@ -12,7 +12,10 @@ Changes:
 - comics: Removed the twisted and zope dependencies by adding
   an internal plugin search mechanism.
 - comics: Remove the disable mechanism.
-- testing: Refactored the test comic routine in proper unit tests.
+- comcis: Add scripts to automate comic listings for Creators, Universal,
+  KeenSpot, GoComics and DrunkDuck.
+- testing: Refactored the test comic routine into fully automatic and complete
+  tests cases for every comic.
 - cmdline: Improved terminal feature detection.
 
 Fixes:

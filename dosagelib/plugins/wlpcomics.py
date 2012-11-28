@@ -7,6 +7,11 @@ from ..scraper import make_scraper
 from ..helpers import bounceStarter
 
 
+_imageSearch = compile(r'SRC="(http://www\.wlpcomics\.com/adult/.+?|http://www\.wlpcomics\.com/general/.+?)"', IGNORECASE)
+_prevSearch = compile(r'</a> <A HREF="(\w+.html)">Previous Page</a>', IGNORECASE)
+_nextSearch = compile(r'</a> <A HREF="(\w+.html)">Next Page</a>', IGNORECASE)
+
+
 def add(name, path):
     baseUrl = 'http://www.wlpcomics.com/' + path
     classname = 'WLP_' + name
@@ -17,10 +22,10 @@ def add(name, path):
 
     globals()[classname] = make_scraper(classname,
        name = 'WLP/' + name,
-       starter = bounceStarter(baseUrl, compile(r'</a> <A HREF="(\w+.html)">Next Page</a>', IGNORECASE)),
+       starter = bounceStarter(baseUrl, _nextSearch),
        stripUrl = baseUrl + '%s.html',
-       imageSearch = compile(r'SRC="(http://www.wlpcomics.com/adult/.+?|http://www.wlpcomics.com/general/.+?)"', IGNORECASE),
-       prevSearch = compile(r'</a> <A HREF="(\w+.html)">Previous Page</a>', IGNORECASE),
+       imageSearch = _imageSearch,
+       prevSearch = _prevSearch,
        namer = namer,
        help = 'Index format: nnn',
     )

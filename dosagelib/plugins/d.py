@@ -143,4 +143,10 @@ class DresdenCodak(_BasicScraper):
     starter = indirectStarter('http://dresdencodak.com/', compile(r'<div id="preview"><a href="http://dresdencodak.com/(\d+/\d+/\d+/.*?)">'))
 
 
-# XXX dilbert.com
+class Dilbert(_BasicScraper):
+    latestUrl = 'http://dilbert.com/'
+    stripUrl = latestUrl + '%s/'
+    prevSearch = compile(tagre("a", "href", r'(/\d+-\d+-\d+/)', after="STR_Prev"))
+    imageSearch = compile(tagre("img", "src", r'(/dyn/str_strip/[^"]+\.strip\.zoom\.gif)'))
+    help = 'Index format: yyyy-mm-dd'
+    # XXX namer

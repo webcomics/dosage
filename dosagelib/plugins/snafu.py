@@ -5,6 +5,10 @@
 from re import compile
 from ..scraper import make_scraper
 
+_imageSearch = compile(r'<img src=http://\w+\.snafu-comics\.com/(comics/\d{6}_\w*\.\w{3,4})')
+_prevSearch = compile(r'<a href="(\?comic_id=\d+)">Previous</a>')
+
+
 def add(name, host):
     baseUrl = 'http://%s.snafu-comics.com/' % host
     classname = 'SnafuComics_%s' % name
@@ -13,8 +17,8 @@ def add(name, host):
         name='SnafuComics/%s' % name,
         latestUrl = baseUrl,
         stripUrl = baseUrl + 'index.php?strip_id=%s',
-        imageSearch = compile(r'<img src=http://\w+\.snafu-comics\.com/(comics/\d{6}_\w*\.\w{3,4})'),
-        prevSearch = compile(r'<a href="(\?comic_id=\d+)">Previous</a>'),
+        imageSearch = _imageSearch,
+        prevSearch = _prevSearch,
         help = 'Index format: n (unpadded)',
     )
 

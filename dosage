@@ -202,5 +202,20 @@ def main():
     return res
 
 
+def profile():
+    """Profile the loading of all scrapers."""
+    import cProfile
+    cProfile.run("scraper.get_scrapers()", "dosage.prof")
+
+
+def viewprof():
+    """View profile stats."""
+    import pstats
+    stats = pstats.Stats("dosage.prof")
+    stats.strip_dirs().sort_stats("cumulative").print_stats(100)
+
+
 if __name__ == '__main__':
     sys.exit(main())
+    #profile()
+    #viewprof()

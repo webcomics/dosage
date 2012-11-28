@@ -5,6 +5,9 @@
 from re import compile, IGNORECASE, DOTALL
 from ..scraper import make_scraper
 
+_imageSearch = compile(r'<a name="strip\d*?">.*?<img[^>]+?src="([^"]*?memberimages/.+?)"', IGNORECASE + DOTALL)
+_prevSearch = compile(r'href="([^"]*?whichbutton=prev[^"]*?)"', IGNORECASE)
+
 
 def add(name, subpath):
     baseUrl = 'http://www.webcomicsnation.com/'
@@ -13,8 +16,8 @@ def add(name, subpath):
         name = 'WebcomicsNation/' + name,
         latestUrl = baseUrl + subpath,
         stripUrl = baseUrl + '?view=archive&amp;chapter=%s',
-        imageSearch = compile(r'<a name="strip\d*?">.*?<img[^>]+?src="([^"]*?memberimages/.+?)"', IGNORECASE + DOTALL),
-        prevSearch = compile(r'href="([^"]*?whichbutton=prev[^"]*?)"', IGNORECASE),
+        imageSearch = _imageSearch,
+        prevSearch = _prevSearch,
         help = 'Index format: nnnn (non-contiguous)',
     )
 

@@ -3,7 +3,7 @@
 # Copyright (C) 2012 Bastian Kleineidam
 from __future__ import division, print_function
 
-import urllib2, urlparse
+import urllib, urllib2, urlparse
 import requests
 import sys
 import os
@@ -43,15 +43,19 @@ def tagre(tag, attribute, value, quote='"', before="", after=""):
     @return: the generated regular expression suitable for re.compile()
     @rtype: string
     """
+    if before:
+        prefix = r"[^>]*%s[^>]*\s+" % before
+    else:
+        prefix = r"(?:[^>]*\s+)?"
     attrs = dict(
         tag=case_insensitive_re(tag),
         attribute=case_insensitive_re(attribute),
         value=value,
         quote=quote,
-        before=before,
+        prefix=prefix,
         after=after,
     )
-    return r'<\s*%(tag)s\s+(?:[^>]*%(before)s[^>]*\s+)?%(attribute)s\s*=\s*%(quote)s%(value)s%(quote)s[^>]*%(after)s[^>]*>' % attrs
+    return r'<\s*%(tag)s\s+%(prefix)s%(attribute)s\s*=\s*%(quote)s%(value)s%(quote)s[^>]*%(after)s[^>]*>' % attrs
 
 
 def case_insensitive_re(name):
@@ -122,7 +126,7 @@ def fetchUrls(url, imageSearch, prevSearch=None):
     return imageUrls, None
 
 
-def _unescape(text):
+def unescape(text):
     """
     Replace HTML entities and character references.
     """
@@ -156,7 +160,7 @@ def normaliseURL(url):
     HTML entities and character references.
     """
     # XXX: brutal hack
-    url = _unescape(url)
+    url = unescape(url)
 
     pu = list(urlparse.urlparse(url))
     segments = pu[2].split('/')
@@ -321,3 +325,9 @@ def strtimezone():
 def asciify(name):
     """Remove non-ascii characters from string."""
     return re.sub("[^0-9a-zA-Z_]", "", name)
+
+
+def unquote(text):
+    while '%' in text:
+        text = urllib.unquote(text)
+    return text

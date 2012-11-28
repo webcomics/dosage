@@ -6,6 +6,9 @@ from re import compile
 from ..scraper import make_scraper
 from ..util import tagre
 
+_imageSearch = compile(tagre("img", "src", r'(http://www\.nuklearpower\.com/comics/[^"]+)'))
+_prevSearch = compile(tagre("a", "href", r'([^"]+)') + "Previous")
+
 def add(name, shortname):
     baseUrl = 'http://www.nuklearpower.com/' + shortname + '/'
     classname = 'NuklearPower_%s' % name
@@ -14,8 +17,8 @@ def add(name, shortname):
         name='NuklearPower/' + name,
         latestUrl = baseUrl,
         stripUrl = baseUrl + '%s',
-        imageSearch = compile(tagre("img", "src", r'(http://www\.nuklearpower\.com/comics/[^"]+)')),
-        prevSearch = compile(tagre("a", "href", r'([^"]+)') + "Previous"),
+        imageSearch = _imageSearch,
+        prevSearch = _prevSearch,
         help = 'Index format: yyyy/mm/dd/name',
     )
 

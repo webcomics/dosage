@@ -4,7 +4,6 @@
 
 from re import compile, IGNORECASE
 from ..scraper import _BasicScraper
-from ..util import tagre
 
 
 class Key(_BasicScraper):

@@ -7,6 +7,9 @@ from ..scraper import make_scraper
 from ..util import asciify
 
 
+_imageSearch = compile(r'SRC="(http://www\.thefallenangel\.co\.uk/\w+comics/.+?)"')
+_prevSearch = compile(r' <a href="(http://www\.thefallenangel\.co\.uk/.+?)"><img[^>]+?src="http://www\.thefallenangel\.co\.uk/images/previousday\.jpg"')
+
 def add(name, shortname):
     latestUrl = 'http://www.thefallenangel.co.uk/cgi-bin/%sautokeen/autokeenlite.cgi' % shortname
     classname = asciify(name)
@@ -14,8 +17,8 @@ def add(name, shortname):
         latestUrl = latestUrl,
         stripUrl = latestUrl + '?date=%s',
         name='FallenAngel/' + name,
-        imageSearch = compile(r'SRC="(http://www.thefallenangel.co.uk/\w+comics/.+?)"'),
-        prevSearch = compile(r' <a href="(http://www.thefallenangel.co.uk/.+?)"><img[^>]+?src="http://www.thefallenangel.co.uk/images/previousday.jpg"'),
+        imageSearch = _imageSearch,
+        prevSearch = _prevSearch,
         help = 'Index format: yyyymmdd',
     )
 

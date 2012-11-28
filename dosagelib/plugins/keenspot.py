@@ -7,1518 +7,1278 @@ from ..scraper import make_scraper
 from ..util import tagre
 
 
-def add(name, urls):
+_imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]+)'))
+_prevSearch = compile(tagre("a", "href", r'([^"]*/d/\d{8}\.html)') +
+   '(?:Previous comic|'+tagre("img", "alt", "Previous comic")+')')
+
+def add(name, url):
     classname = 'KeenSpot_%s' % name
-    if not isinstance(urls, tuple):
-        baseUrl = latestUrl = urls
-    else:
-        baseUrl, latestUrl = urls
 
     globals()[classname] = make_scraper(classname,
         name='KeenSpot/' + name,
-        latestUrl=latestUrl,
-        stripUrl=baseUrl + 'd/%s.html',
-        imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]+)')),
-        prevSearch = compile(tagre("a", "href", r'([^"]*/d/\d{8}\.html)') +
-           '(?:Previous comic|'+tagre("img", "alt", "Previous comic")+')'),
+        latestUrl=url,
+        stripUrl=url + 'd/%s.html',
+        imageSearch = _imageSearch,
+        prevSearch = _prevSearch,
         help = 'Index format: yyyymmdd',
     )
 
-
-comics = {
-    '13thLabour': 'http://the13labour.comicgenesis.com/',
-    '1StComing': 'http://toon.comicgenesis.com/',
-    '1StGradeArt': 'http://art.comicgenesis.com/',
-    '21StCenturyCoeds': 'http://twentyfirstcenturycoeds.comicgenesis.com/',
-    '21stCenturyFox': 'http://techfox.comicgenesis.com/',
-    '24fps': 'http://filmbuff.comicgenesis.com/',
-    '2DormsDown': 'http://mindflenzing.comicgenesis.com/',
-    '2WayMirror': 'http://tande.comicgenesis.com/',
-    '3RdEstate': 'http://tasch.comicgenesis.com/',
-    '6X9College': 'http://sixbyninecollege.comicgenesis.com/',
-    '72Bunnies': 'http://seventy2bunnies.comicgenesis.com/',
-    '8to1': 'http://yeahduff.comicgenesis.com/',
-    'AberdawnKnights': 'http://aberdawnknights.comicgenesis.com/',
-    'AboveMan': 'http://aman.comicgenesis.com/',
-    'AbsoluteZero': 'http://absolutezero.comicgenesis.com/',
-    'Academy': 'http://theacademy.comicgenesis.com/',
-    'Ace147': 'http://ace147.comicgenesis.com/',
-    'Ac': 'http://theac.comicgenesis.com/',
-    'ACorporateSlave': 'http://cartoongraveyard.comicgenesis.com/',
-    'ActiveStuporHeroes': 'http://stuporheroes.comicgenesis.com/',
-    'AdamAndSei': ('http://adamandsei.comicgenesis.com/', 'http://adamandsei.comicgenesis.com/comic.html'),
-    'AdiosAngel86': 'http://aa86.comicgenesis.com/',
-    'AdventuresInVastia': 'http://aiv.comicgenesis.com/',
-    'AdventuresOfChifley': 'http://chifley.comicgenesis.com/',
-    'AdventuresOfGotty': 'http://gotty.comicgenesis.com/',
-    'AdventuresOfKeystone': 'http://keystonecomic.comicgenesis.com/',
-    'AdventuresOfKiltboi': 'http://realmenwearkilts.comicgenesis.com/',
-    'AdventuresOfMattAndChris': 'http://matthewabel.comicgenesis.com/',
-    'AdventuresOfPie': 'http://loonybin.comicgenesis.com/',
-    'AdventuresOfPopsicleman': 'http://popsicleman.comicgenesis.com/',
-    'AdventuresOfSpaceDevil': 'http://spacedevil.comicgenesis.com/',
-    'AdventuresOfTheOffenders': 'http://jmsnooks.comicgenesis.com/',
-    'AdventuresOfTheSTeam': 'http://ianthealy.comicgenesis.com/',
-    'AdventuresOfToasterboy': 'http://toaster.comicgenesis.com/',
-    'AdventuresOfUs': 'http://adventuresofus.comicgenesis.com/',
-    'AfterTheRain': 'http://ladyoftherealm.comicgenesis.com/',
-    'AFunnyThingHappened': 'http://funnything.comicgenesis.com/',
-    'AgaricChampAndEcircTre': 'http://agaric.comicgenesis.com/',
-    'AGeekTragedy': 'http://geektragedy.comicgenesis.com/',
-    'AjsLife': 'http://ajworks.comicgenesis.com/',
-    'AldusMaycombe': 'http://aldus.comicgenesis.com/',
-    'AlexHigh': 'http://alexhigh.comicgenesis.com/',
-    'AllRosesHaveThorns': 'http://allroses.comicgenesis.com/',
-    'AlphaBetaSoup': 'http://abs.comicgenesis.com/',
-    'AlphaLuna': 'http://alphaluna.comicgenesis.com/',
-    'AlternateDelusions': 'http://altdelusions.comicgenesis.com/',
-    'AlwaysAnotherDay': 'http://alwaysanotherday.comicgenesis.com/',
-    'AmazingNewWorlds': 'http://anw.comicgenesis.com/',
-    'AmbersLife': 'http://amberslife.comicgenesis.com/',
-    'AmericanGothicDaily': 'http://americangothic.comicgenesis.com/',
-    'Amerika': 'http://amerika.comicgenesis.com/',
-    'Amethyst': 'http://amethyst.comicgenesis.com/',
-    'AmhelakiMisadventures': 'http://amhelaki.comicgenesis.com/',
-    'AnarchyAndAnthros': 'http://creepylilgothkids.comicgenesis.com/',
-    'Andellon': 'http://andellon.comicgenesis.com/',
-    'AndShineHeavenNow': 'http://hellsing.comicgenesis.com/',
-    'AngelBlood': 'http://angelblood.comicgenesis.com/',
-    'Angel': 'http://angelink.comicgenesis.com/',
-    'AngryAidenSComic': 'http://angryaidenscomic.comicgenesis.com/',
-    'AngryArtwerks': 'http://angrydwarf.comicgenesis.com/',
-    'AngryComicShopGuy': 'http://angrycomicshopguy.comicgenesis.com/',
-    'AngstIsAFiveLetterWord': 'http://aiaflw.comicgenesis.com/',
-    'AngstMedieval': 'http://gothiccomic.comicgenesis.com/',
-    'AnimalInstinct': 'http://animalinstinct.comicgenesis.com/',
-    'AnimalTesting': 'http://animaltesting.comicgenesis.com/',
-    'AnimeMomentsInHistory': 'http://animehistory.comicgenesis.com/',
-    'Animi': 'http://animi.comicgenesis.com/',
-    'Anna': 'http://anna.comicgenesis.com/',
-    'AnnaMariaAndMaryAnne': 'http://missjaney.comicgenesis.com/',
-    'ANT': 'http://ant.comicgenesis.com/',
-    'Antibunny': 'http://www.antibunny.com/',
-    'AntiChristDaiji': 'http://clad.comicgenesis.com/',
-    'Antics': 'http://antics.comicgenesis.com/',
-    'AntiFeline': 'http://antifeline.comicgenesis.com/',
-    'Antinomies': 'http://antinomies.comicgenesis.com/',
-    'AnywhereButHere': 'http://anywherebuthere.comicgenesis.com/',
-    'ApocalypseWow': 'http://endofdayspress.comicgenesis.com/',
-    'Apotheosis': 'http://apotheosis.comicgenesis.com/',
-    'Arbitrator': 'http://arbitrator.comicgenesis.com/',
-    'Armz': 'http://armz.comicgenesis.com/',
-    'ArnieGattonGalleryOfComics': 'http://agallery.comicgenesis.com/',
-    'ARtificialTIme': 'http://artificialtime.comicgenesis.com/',
-    'Asianosity': 'http://asianosity.comicgenesis.com/',
-    'AskillWar': 'http://askillwar.comicgenesis.com/',
-    'AsNarratedByDrakenred': 'http://drakenred.comicgenesis.com/',
-    'AssO9Tails': 'http://asso9tails.comicgenesis.com/',
-    'Astorauth': 'http://www.astorauth.com/',
-    'AtaraxiaTheatre': 'http://ataraxia.comicgenesis.com/',
-    'Atavism': 'http://atavism.comicgenesis.com/',
-    'AThinLine': 'http://thinline.comicgenesis.com/',
-    'AtPerfect': 'http://atperfect.comicgenesis.com/',
-    'AugustThe15Th': 'http://jamesgannon.comicgenesis.com/',
-    'AU': 'http://auie.comicgenesis.com/',
-    'Avalon2': 'http://avalon.comicgenesis.com/',
-    'AWasteOfPaper': 'http://monotypical.comicgenesis.com/',
-    'AwesomeGamerz': 'http://awesomegamerz.com/',
-    'AwfullyGeneric': 'http://awfullygeneric.comicgenesis.com/',
-    'AwolAdventures': 'http://awol.comicgenesis.com/',
-    'Backroads': 'http://backroads.comicgenesis.com/',
-    'BadassBrat': 'http://badassbrat.comicgenesis.com/',
-    'BadlyDrawnPenguins': 'http://badlydrawnpenguins.comicgenesis.com/',
-    'BakaKun': 'http://bakakun.comicgenesis.com/',
-    'BananaTwist': 'http://bananatwist.comicgenesis.com/',
-    'BARAKA': 'http://baraka.comicgenesis.com/',
-    'Basics': 'http://moonbay.comicgenesis.com/',
-    'BasilFlintMiniseries': 'http://basilflint.keenspot.com/',
-    'Bastion': 'http://bastion.comicgenesis.com/',
-    'BathathonHeled': 'http://bathathonheled.comicgenesis.com/',
-    'BattleCry': 'http://battlecry.comicgenesis.com/',
-    'BeastOfEden': 'http://beast.comicgenesis.com/',
-    'BeautifulSkies': 'http://bskies.comicgenesis.com/',
-    'BecauseOfMathClass': 'http://mathclass.comicgenesis.com/',
-    'Beecham': 'http://beecham.comicgenesis.com/',
-    'BeforeDawn': 'http://beforedawn.comicgenesis.com/',
-    'BetterLifeThanThis': 'http://abetterlifethanthis.comicgenesis.com/',
-    'BetweenRealities': 'http://realities.comicgenesis.com/',
-    'BeyAndEmerald': 'http://bey.comicgenesis.com/',
-    'BeyondGoodNEvil': 'http://goodnevil.comicgenesis.com/',
-    'BeyondHalo': 'http://beyondhalo.comicgenesis.com/',
-    'BeyondReality': 'http://orion.comicgenesis.com/',
-    'BeyondTheRadiator': 'http://radiator.comicgenesis.com/',
-    'Bigheads': 'http://thebigheads.comicgenesis.com/',
-    'BigTom': 'http://bigtom.comicgenesis.com/',
-    'Bikou': 'http://bikou.comicgenesis.com/',
-    'Bing': 'http://caitlinf.comicgenesis.com/',
-    'BinOfInsanity': 'http://boi.comicgenesis.com/',
-    'BirthOfGenesis': 'http://birthofgenesis.comicgenesis.com/',
-    'BiscuitsForBreakfast': 'http://valuedan.comicgenesis.com/',
-    'BiteTheWaxTadpole': 'http://bitethewaxtadpole.comicgenesis.com/',
-    'BitterSweetBS': 'http://bsbs.comicgenesis.com/',
-    'Blackaby': 'http://blackaby.comicgenesis.com/',
-    'Blackbird27': 'http://blackbird27.comicgenesis.com/',
-    'BlackHoleBlues': 'http://blackholeblues.comicgenesis.com/',
-    'BlacklightTwilight': 'http://nekkoxiii.comicgenesis.com/',
-    'BlackPlague': 'http://blackplague.keenspot.com/',
-    'BlackTapestries': 'http://blacktapestries.comicgenesis.com/',
-    'BlackTie': 'http://blacktiecomics.comicgenesis.com/',
-    'BlankGeorge': 'http://blankgeorge.comicgenesis.com/',
-    'Blatah': 'http://blatah.comicgenesis.com/',
-    'BleistiftansatzSissy': 'http://bleistiftansatz.comicgenesis.com/',
-    'BlindPath': 'http://skyline.comicgenesis.com/',
-    'Blindworks': 'http://blindworks.comicgenesis.com/',
-    'BloodBound': 'http://www.bloodboundcomic.com/',
-    'Blooddrop': 'http://blooddrop.comicgenesis.com/',
-    'BloodOfTheDragon': 'http://bdragon.comicgenesis.com/',
-    'BloodWing': 'http://bloodwing.comicgenesis.com/',
-    'BlueAndOrange': 'http://blueandorange.comicgenesis.com/',
-    'BlueBalled': 'http://sunder.comicgenesis.com/',
-    'BlueCollarCleanup': 'http://franko.comicgenesis.com/',
-    'BlueEyedDevil': 'http://blueeyeddevil.comicgenesis.com/',
-    'Blunderclod': 'http://blunderclod.comicgenesis.com/',
-    'BobAndSkull': 'http://bobandskull.comicgenesis.com/',
-    'BobsSpiffORama': 'http://spifforama.comicgenesis.com/',
-    'BobTheBlock': 'http://bobtheblock.comicgenesis.com/',
-    'Bobville': 'http://mekryd.comicgenesis.com/',
-    'Bohumilek': 'http://bohumilek.comicgenesis.com/',
-    'BoobsAhoy': 'http://boobsahoy.comicgenesis.com/',
-    'Bookwyrms': 'http://bookwyrms.comicgenesis.com/',
-    'BoomerExpress': 'http://www.boomerexpress.com/',
-    'BootCamp': 'http://bootcamp.comicgenesis.com/',
-    'Borderline': 'http://chinookpictures.comicgenesis.com/',
-    'BowspiritsAim': 'http://bowspirits.comicgenesis.com/',
-    'BoxJamsDoodle': 'http://boxjamsdoodle.com/',
-    'BoyMeetsBoy': 'http://boymeetsboy.keenspot.com/',
-    'BradleyDrawn': 'http://bradleydrawn.comicgenesis.com/',
-    'BreckenChronicles': 'http://brecken.comicgenesis.com/',
-    'BringYourOwnController': 'http://byoc.comicgenesis.com/',
-    'Brinkerhoff': 'http://www.brinkcomic.com/',
-    'BrokenCompass': 'http://brokencompass.comicgenesis.com/',
-    'BrokenGlass': 'http://brokenglass.comicgenesis.com/',
-    'BrokenWorlds': 'http://brokenworlds.comicgenesis.com/',
-    'BrooklynBeatdown': 'http://bklynite20.comicgenesis.com/',
-    'Brunswick': 'http://brunswick.comicgenesis.com/',
-    'Burgundycomics': 'http://bci.stripspace.com/',
-    'BusterAndFriends': 'http://busterandfriends.comicgenesis.com/',
-    'ButtonsTooHyperToThink': 'http://buttonscrew.comicgenesis.com/',
-    'CAGE': 'http://cage.comicgenesis.com/',
-    'CallToDestiny': 'http://madgoblin.comicgenesis.com/',
-    'Cameocomic': 'http://cameocomic.comicgenesis.com/',
-    'CamiXAlex': ('http://camixalex.comicgenesis.com/', 'http://camixalex.comicgenesis.com/home.html'),
-    'Candidate': 'http://kennystrife.comicgenesis.com/',
-    'Candi': 'http://www.candicomics.com/',
-    'Candy': 'http://candy.comicgenesis.com/',
-    'CanisLupus': 'http://cheetahfox.comicgenesis.com/',
-    'CannedHam': 'http://cannedham.comicgenesis.com/',
-    'CantStopTheMusic': 'http://cantstopthemusic.comicgenesis.com/',
-    'CaptainMike': 'http://captainmike.comicgenesis.com/',
-    'CaptainMortua': 'http://captainmortua.comicgenesis.com/',
-    'CaptureTheFlag': 'http://kramerthebird.comicgenesis.com/',
-    'Carnivores': 'http://carnivores.comicgenesis.com/',
-    'CascadeFailure': 'http://cascadefailure.comicgenesis.com/',
-    'CasualtiesOfWar': 'http://casualtiesofwar.comicgenesis.com/',
-    'CatAndMouse': 'http://catandmouse.comicgenesis.com/',
-    'CatboyAtTheCon': 'http://trades.comicgenesis.com/',
-    'Catpaint': 'http://catpaint.comicgenesis.com/',
-    'Catsick': 'http://catsick.comicgenesis.com/',
-    'Catvomit': 'http://catvomit.comicgenesis.com/',
-    'CaughtenHigh': 'http://caughtenhigh.comicgenesis.com/',
-    'CCCC': 'http://horesy.comicgenesis.com/',
-    'Cerintha': 'http://cerintha.comicgenesis.com/',
-    'Chainroaker': 'http://chainroaker.comicgenesis.com/',
-    'Chalkdust': 'http://chalkdustcomic.comicgenesis.com/',
-    'Changes': 'http://changescomic.comicgenesis.com/',
-    'ChaosGeorge': 'http://kawzkaos.comicgenesis.com/',
-    'ChaoticNeutral': 'http://chaoticneutral.comicgenesis.com/',
-    'ChildrenAtPlay': 'http://childrenatplay.comicgenesis.com/',
-    'ChildrenOfDanu': 'http://childofdanu.comicgenesis.com/',
-    'ChildrenOfMoloch': 'http://moloch.comicgenesis.com/',
-    'ChimeraQuest': 'http://doggirl.comicgenesis.com/',
-    'ChoppingBlock': 'http://choppingblock.org/',#### only grabs 1
-    'ChronicalsOfTheBlueSquirrel': 'http://cotbs.comicgenesis.com/',
-    'ChroniclesOfSalterre': 'http://salterre.comicgenesis.com/',
-    'ChroniclesOfWesnoth': 'http://wescron.comicgenesis.com/',
-    'ChronicMisadventures': 'http://chronic.comicgenesis.com/',
-    'ChrusherComix': 'http://chrusher.comicgenesis.com/',
-    'Chu': 'http://chu.comicgenesis.com/',
-    'Cimmerian': 'http://cimmerian.comicgenesis.com/',
-    'CircleArcadiaKnightsOfTheGoddess': 'http://arcadia.comicgenesis.com/',
-    'Citron': 'http://citron.comicgenesis.com/',
-    'CityStreets': 'http://poisondusk.comicgenesis.com/',
-    'ClassMenagerie': 'http://www.theclassm.com/',
-    'ClearwaterClan': 'http://clearwaterclan.comicgenesis.com/',
-    'Clematis': 'http://clematis.comicgenesis.com/',
-    'Cliche': 'http://blaedlocke.comicgenesis.com/',
-    'ClippedWings': 'http://clippedwings.comicgenesis.com/',
-    'ClockworkEmpire': 'http://clockworkemp.comicgenesis.com/',
-    'ClownsInABlender': 'http://clownsinablender.comicgenesis.com/',
-    'CMD': 'http://cmd.comicgenesis.com/',
-    'Cnetr': 'http://cnetr.comicgenesis.com/',
-    'CodeBlack': 'http://codeblack.comicgenesis.com/',
-    'Codename9': 'http://codename9.comicgenesis.com/',
-    'Cody': 'http://cody.comicgenesis.com/',
-    'ColdFeet': 'http://coldfeet.comicgenesis.com/',
-    'ColdPlanet': 'http://coldplanet.comicgenesis.com/',
-    'ColdServings': 'http://www.coldservings.com/',
-    'ColdWhiteNorth': 'http://coldwhitenorth.comicgenesis.com/',
-    'CollidingWorlds': 'http://fearunianadv.comicgenesis.com/',
-    'ComfortablyNumb': 'http://comfortablynumb.comicgenesis.com/',
-    'ComicCreatorz': 'http://creatorz.comicgenesis.com/',
-    'ComicGraveyard': 'http://comicgraveyard.comicgenesis.com/',
-    'Commonplace': 'http://commonplace.comicgenesis.com/',
-    'CommonSense': 'http://commonsense.comicgenesis.com/',
-    'ComputerGameAddicts': 'http://cgaddicts.comicgenesis.com/',
-    'Concession': 'http://concession.comicgenesis.com/',
-    'ConfessionsOfAnEnglishCatburglar': 'http://catburglars.comicgenesis.com/',
-    'Conned': 'http://con.comicgenesis.com/',
-    'ConstantFlux': 'http://constantflux.comicgenesis.com/',
-    'CookieWorld': 'http://cookie.comicgenesis.com/',
-    'CoolCatStudios': ('http://www.coolcatstudio.com/', 'http://www.coolcatstudio.com/d/20020415.html'),
-    'Cooties': 'http://cooties.comicgenesis.com/',
-    'CornerAlley13': 'http://corneralley.comicgenesis.com/',
-    'CorporateLife': 'http://amacher.comicgenesis.com/',
-    'CorridorZ': 'http://billybones.comicgenesis.com/',
-    'CosmicAwareness': 'http://cosmicawareness.comicgenesis.com/',
-    'CosmicDesign': 'http://cosmicdesign.comicgenesis.com/',
-    'CountYourSheep': 'http://www.countyoursheep.com/',
-    'CoyoteDance': 'http://cdance.comicgenesis.com/',
-    'CracklingSilence': 'http://crackling.comicgenesis.com/',
-    'Crackwalker': 'http://crackwalker.comicgenesis.com/',
-    'CreateAComicProject': 'http://ccproject.comicgenesis.com/',
-    'CreatureKeeper': 'http://creature.comicgenesis.com/',
-    'CriminalMastermind': 'http://criminalmastermind.comicgenesis.com/',
-    'CrimsonWings': 'http://sdcomics.comicgenesis.com/',
-    'CriticalMiss': 'http://criticalmiss.comicgenesis.com/',
-    'CrookedHalo': 'http://chaoscricket.comicgenesis.com/',
-    'Crossroads': 'http://anivasion.comicgenesis.com/',
-    'CrossroadsOfBoogerCounty': 'http://cobc.comicgenesis.com/',
-    'CrossStreetBlues': 'http://crossstreet.comicgenesis.com/',
-    'CrossToBear': 'http://crosstobear.comicgenesis.com/',
-    'CRouge': 'http://crouge.comicgenesis.com/',
-    'CrowsScrapbook': 'http://crowsscrapbook.comicgenesis.com/',
-    'CruelFate': ('http://cruelfate.keenspot.com/', 'http://cruelfate.keenspot.com/d/20000630.html'),
-    'CrystalHearts': 'http://chs.comicgenesis.com/',
-    'Cube30': 'http://cube30.comicgenesis.com/',
-    'Cutethulhu': 'http://www.cutethulhu.com/',
-    'DaisyMaesBazaar': 'http://daisymaebazaar.comicgenesis.com/',
-    'DanskFolly': 'http://danskfolly.comicgenesis.com/',
-    'DarkAges': 'http://darkages.comicgenesis.com/',
-    'DarkDays': 'http://darkdays.comicgenesis.com/',
-    'Darken': 'http://www.darkencomic.com/',
-    'DarkForests': 'http://darkforests.comicgenesis.com/',
-    'DarkJediAndFriends': 'http://darkjedi.comicgenesis.com/',
-    'DarknessVersusLight': 'http://dvsl.comicgenesis.com/',
-    'Darksided': 'http://darksided.comicgenesis.com/',
-    'DasienSuperheroWebcomic': 'http://www.dasiencomic.com/',
-    'DataChasers': 'http://datachasers.comicgenesis.com/',
-    'DATAROM': 'http://datarom.comicgenesis.com/',
-    'Davin': 'http://davin.comicgenesis.com/',
-    'Daydreamer': 'http://daydreamer.comicgenesis.com/',
-    'DayDream': 'http://manganese.comicgenesis.com/',
-    'DayInTheLifeOfACosplayer': 'http://ditloac.comicgenesis.com/',
-    'DDiary': 'http://ddiary.comicgenesis.com/',
-    'DeadBeats': 'http://deadbeats.comicgenesis.com/',
-    'DearBrotherMine': 'http://lancha.comicgenesis.com/',
-    'DearDiary': 'http://deardiary.comicgenesis.com/',
-    'DeathByChibi': 'http://deathbychibi.comicgenesis.com/',
-    'DecadentAndDepraved': 'http://depraved.comicgenesis.com/',
-    'Decypher': 'http://decypher.comicgenesis.com/',
-    'DedEnd': 'http://dedend.comicgenesis.com/',
-    'Deep': 'http://deep.comicgenesis.com/',
-    'DefectiveChineseGirl': 'http://eclipsearikado.comicgenesis.com/',
-    'DefinitelyNotAnotherWebcomicWhere': 'http://dna2w.comicgenesis.com/',
-    'DelusionsOfAdequacy': 'http://dofa.comicgenesis.com/',
-    'DementedEmu': 'http://dementedemu.comicgenesis.com/',
-    'DemonChroniclesOfKyo': 'http://demonchronicles.comicgenesis.com/',
-    'DemonicBoppu': 'http://demonicboppu.comicgenesis.com/',
-    'Demonic': 'http://alyafenume.comicgenesis.com/',
-    'DemonicPoint': 'http://demonicpoint.comicgenesis.com/',
-    'Demonocity': 'http://demonocity.comicgenesis.com/',
-    'DemonSlayers': 'http://demonslayers.comicgenesis.com/',
-    'DemonWing': 'http://demonwing.comicgenesis.com/',
-    'DemoralizedLogic': 'http://lostmind.comicgenesis.com/',
-    'Deo': 'http://deo.comicgenesis.com/',
-    'DesolationAngelTango': 'http://desolationangel.comicgenesis.com/',
-    'Detalitum': 'http://abaddon.comicgenesis.com/',
-    'DetalitumPl': 'http://detalitum.comicgenesis.com/',
-    'DetFemteEss': 'http://haykay.comicgenesis.com/',
-    'DeusExMinineko': 'http://dem.comicgenesis.com/',
-    'DevilsPanties':'http://www.thedevilspanties.com/',
-    'DevilsPlayground': 'http://devilsplayground.comicgenesis.com/',
-    'DewbackWing': 'http://td501.comicgenesis.com/',
-    'DexLives': 'http://dexlives.comicgenesis.com/',
-    'DigitalAge': 'http://digitalage.comicgenesis.com/',
-    'DigitalWar': 'http://www.digitalwar.co.uk/',
-    'DimBulbComics': 'http://www.dimbulbcomics.com/',
-    'Dindsneys': 'http://xxxx.comicgenesis.com/',
-    'Disorder': 'http://disorder.comicgenesis.com/',
-    'DistantEras': 'http://distanteras.comicgenesis.com/',
-    'DistantScreaming': 'http://distantscreaming.comicgenesis.com/',
-    'DNPIO': 'http://dnpio.comicgenesis.com/',
-    'DocHyperion': 'http://dochyperion.comicgenesis.com/',
-    'DocTarantula': 'http://doctarantula.comicgenesis.com/',
-    'DoctorPepperShow': 'http://doctorpepper.comicgenesis.com/',
-    'DogAndPony': 'http://dogandpony.comicgenesis.com/',
-    'DogBomb': 'http://dogbomb.comicgenesis.com/',
-    'DogDays': 'http://dogdays.comicgenesis.com/',
-    'DogTheSpot': 'http://dogthespot.comicgenesis.com/',
-    'DoomArmy': 'http://experimental.comicgenesis.com/',
-    'DoomCheese': 'http://doomcheese.comicgenesis.com/',
-    'Doppies': 'http://doppies.comicgenesis.com/',
-    'DoTheBearcat': 'http://dtbc.comicgenesis.com/',
-    'DownToEarth': 'http://www.downtoearthcomic.com/',
-    'DownwardBound': 'http://downwardbound.comicgenesis.com/',
-    'Dragonaur': 'http://dragonaur.comicgenesis.com/',
-    'DragonBallTm': 'http://dragonballtm.comicgenesis.com/',
-    'DragonBoy': 'http://dragonboy.comicgenesis.com/',
-    'DragonInTheCourtyard': 'http://ditc.comicgenesis.com/',
-    'DragonKingdoms': 'http://dragonkingdoms.comicgenesis.com/',
-    'DragonMail': 'http://dragonmail.comicgenesis.com/',
-    'DragonSchoolAndStuff': 'http://dragonss.comicgenesis.com/',
-    'Drapetomania': 'http://drapetomania.comicgenesis.com/',
-    'DRAW': 'http://draw.comicgenesis.com/',
-    'DrawnAndQuartered': 'http://drawnandquartered.comicgenesis.com/',
-    'DreamersDynasty': 'http://kidneo66.comicgenesis.com/',
-    'DreamLikeDestiny': 'http://dreamlikedestiny.comicgenesis.com/',
-    'DreamOfAWorld': 'http://doaw.comicgenesis.com/',
-    'DreamsAndMemories': 'http://meghasissues.comicgenesis.com/',
-    'DreamwaltzerZera': 'http://dwz.comicgenesis.com/',
-    'DreamWay': 'http://dreamway.comicgenesis.com/',
-    'Drewford': 'http://drewford.comicgenesis.com/',
-    'DriveThruBlues': 'http://drivethrublues.comicgenesis.com/',
-    'DrowNazi': 'http://drownazi.comicgenesis.com/',
-    'Drunkenkite': 'http://drunkenkite.comicgenesis.com/',
-    'DualHorizon': 'http://dualhorizon.comicgenesis.com/',
-    'DuaVeno': 'http://wizarddog.comicgenesis.com/',
-    'DuchessMew': 'http://duchessmew.comicgenesis.com/',
-    'Dugger': 'http://dugger.comicgenesis.com/',
-    'DumbAngel': 'http://dumbangel.comicgenesis.com/',
-    'DungeonDamage': 'http://dungeondamage.comicgenesis.com/',
-    'DysfunctionJunction': 'http://dysfunctionjunction.comicgenesis.com/',
-    'DysonsCreek': 'http://dysonscreek.comicgenesis.com/',
-    'E2e': 'http://e2e.comicgenesis.com/',
-    'EarlAndMyrtle': 'http://earlandmyrtle.comicgenesis.com/',
-    'EatingTheInternet': 'http://eating.comicgenesis.com/',
-    'EatTheRoses': 'http://eattheroses.com/',
-    'Echzeon': 'http://echzeon.comicgenesis.com/',
-    'EdensChronicle': 'http://blackeden.comicgenesis.com/',
-    'Educated': 'http://educated.comicgenesis.com/',
-    'EgoTrip': 'http://egotrip.comicgenesis.com/',
-    'EinstiensDesk': 'http://einstiensdesk.comicgenesis.com/',
-    'EitherWay': 'http://deadspace.comicgenesis.com/',
-    'ElCieloDeLosEspermatozoides': 'http://fjgarcia.comicgenesis.com/',
-    'Eldritch': 'http://eldritch.comicgenesis.com/',
-    'ElfOnlyInn': 'http://www.elfonlyinn.net/',
-    'ElleAndAllTheOthers': 'http://elle.comicgenesis.com/',
-    'ElSuenoDeLaRazonProduceMonstruos': 'http://cubanaloca.comicgenesis.com/',
-    'ElvenExploration': 'http://www.theelven.com/',
-    'Emma': 'http://miruku.comicgenesis.com/',
-    'Emo': 'http://emo.comicgenesis.com/',
-    'EMotel': 'http://emotel.comicgenesis.com/',
-    'EmperorOfOrphans': 'http://emperoroforphans.comicgenesis.com/',
-    'EmptyTheater': 'http://mttheater.comicgenesis.com/',
-    'EmSquaredACartoon': 'http://emacartoon.comicgenesis.com/',
-    'EndlessLimit': 'http://endlesslimit.comicgenesis.com/',
-    'EndOfThings': 'http://endofthings.comicgenesis.com/',
-    'Ensuing': 'http://ensuing.comicgenesis.com/',
-    'EnterTheStory': 'http://savedgames.comicgenesis.com/',
-    'Entropy': 'http://entropycomix.comicgenesis.com/',
-    'Envoy': 'http://envoy.comicgenesis.com/',
-    'EpicTalesOfLaminir': 'http://jideiro.comicgenesis.com/',
-    'ErrantVenture': 'http://errantventure.comicgenesis.com/',
-    'ESAndD': 'http://esnd.comicgenesis.com/',
-    'Esc': 'http://esc.comicgenesis.com/',
-    'EshByEsh': 'http://esh.comicgenesis.com/',
-    'Essence': 'http://fusion.comicgenesis.com/',
-    'EternalQuest': ('http://luniara.comicgenesis.com/', 'http://luniara.comicgenesis.com/in.html'),
-    'EternityComplex': ('http://eternitycomplex.comicgenesis.com/', 'http://eternitycomplex.comicgenesis.com/current.html'),
-    'EtherealEuphoriaTheSweetestEscape': 'http://beccat.comicgenesis.com/',
-    'EveOfCloves': 'http://eveofcloves.comicgenesis.com/',
-    'EverscapeNet': 'http://everscape.comicgenesis.com/',
-    'EverydaySam': 'http://everydaysam.comicgenesis.com/',
-    'EverythingJake': 'http://www.everythingjake.com/',
-    'EvilNeedsCandyToo': 'http://evilneedscandytoo.comicgenesis.com/',
-    'EvilOverlordsUnited': 'http://eou.comicgenesis.com/',
-    'EvilThatMenDo': 'http://theevilthatmendo.comicgenesis.com/',
-    'EvilWenchesIncorporated': 'http://evilwenchesinc.comicgenesis.com/',
-    'ExterminatusNow': 'http://exterminatusnow.comicgenesis.com/',
-    'EyeForAnEye': 'http://spirat.comicgenesis.com/',
-    'EyeOfTheMonkey': 'http://eyeofthemonkey.comicgenesis.com/',
-    'Faces': 'http://faces.comicgenesis.com/',
-    'FadedBrightness': 'http://faebs.comicgenesis.com/',
-    'FadeToBlack': 'http://fadetoblack.comicgenesis.com/',
-    'FadingInnocence': 'http://fadinginnocence.comicgenesis.com/',
-    'FaerieTales': ('http://faerietales.comicgenesis.com/', 'http://faerietales.comicgenesis.com/todayscomics.html'),
-    'Fagz': 'http://fagz.comicgenesis.com/',
-    'FAIL': 'http://fail.comicgenesis.com/',
-    'FallenAngelsUsedBooks': 'http://www.faubcomic.com/',
-    'FalseGods': 'http://falsegod.comicgenesis.com/',
-    'FamiliarBlue': 'http://familiarblue.comicgenesis.com/',
-    'FamiliarMagic': 'http://familiarmagic.comicgenesis.com/',
-    'FanserviceMeteorologyWin': 'http://aod.comicgenesis.com/',
-    'FantasticalBestiary': 'http://fantasticalbestiary.comicgenesis.com/',
-    'FantasyQwest': 'http://creatorauthorman.comicgenesis.com/',
-    'FaultyLogic': 'http://faultylogic.comicgenesis.com/',
-    'Feathers': 'http://feathers.comicgenesis.com/',
-    'FelixAndTheKidneyEater': 'http://fnk.comicgenesis.com/',
-    'Fellonist': 'http://thefellonist.comicgenesis.com/',
-    'FellowFreaks': 'http://fellowfreaks.comicgenesis.com/',
-    'FemmeFatale': 'http://femmefatale.comicgenesis.com/',
-    'FERAL': 'http://feral.comicgenesis.com/',
-    'FFTSB': 'http://fftsb.comicgenesis.com/',
-    'FightCastOrEvade': 'http://fightcastorevade.comicgenesis.com/',
-    'Filler': 'http://filler.comicgenesis.com/',
-    'FilthyLies': 'http://www.filthylies.net/',
-    'FinalDraft': 'http://finaldraft.comicgenesis.com/',
-    'FireflyCross': 'http://fireflycross.comicgenesis.com/',
-    'FirstKingdom': 'http://firstkingdom.comicgenesis.com/',
-    'FishFry': 'http://fishfry.comicgenesis.com/',
-    'Fish': 'http://fish.comicgenesis.com/',
-    'FishMachine': 'http://fishmachine.comicgenesis.com/',
-    'Fishman': 'http://fishmancomics.comicgenesis.com/',
-    'FistofTheSarariman': 'http://fots.comicgenesis.com/',
-    'Fizzle': 'http://fizzle.comicgenesis.com/',
-    'FLATLINE': 'http://loadobject.comicgenesis.com/',
-    'Flem': 'http://www.flemcomics.com/',
-    'FletcherApts': 'http://fletcherapts.comicgenesis.com/',
-    'FlinchAndFriends': 'http://flinch.comicgenesis.com/',
-    'FloorIsLava': 'http://floorislava.comicgenesis.com/',
-    'FlowfieldUnity': 'http://unityflow.comicgenesis.com/',
-    'FluffyAndMervin': 'http://debbieann.comicgenesis.com/',
-    'Flunkies': 'http://flunkies.comicgenesis.com/',
-    'Flux': 'http://flux.comicgenesis.com/',
-    'FlyingHighAndLow': 'http://highandlow.comicgenesis.com/',
-    'Foma': 'http://foma.comicgenesis.com/',
-    'FoolsGold': 'http://foolsgold.comicgenesis.com/',
-    'ForestOfIllusion': 'http://angelizland.comicgenesis.com/',
-    'Forgiven': 'http://forgiven.comicgenesis.com/',
-    'FortunesFools': 'http://fortunesfools.comicgenesis.com/',
-    'FortyTwoPlusNineteen': 'http://fpn.comicgenesis.com/',
-    'FoundAPeanut': 'http://dice.comicgenesis.com/',
-    'FourthWall': 'http://fourthwall.comicgenesis.com/',
-    'FoxfireChronicles': 'http://foxfire.comicgenesis.com/',
-    'FoxsFreakyAdventures': 'http://basa.comicgenesis.com/',
-    'FoxTails': 'http://foxtails.comicgenesis.com/',
-    'Fr33St0FfPlz': 'http://fr33st0ffplz.comicgenesis.com/',
-    'FracturedService': 'http://fracturedservice.comicgenesis.com/',
-    'FramedArtOnTheRun': 'http://artontherun.comicgenesis.com/',
-    'FreaksAndG33K': 'http://freaksandgeeks.comicgenesis.com/',
-    'FreakU': 'http://freaku.comicgenesis.com/',
-    'FreakzTheComic': 'http://freakzcomic.comicgenesis.com/',
-    'FredBarlowe': 'http://fredbarlowe.comicgenesis.com/',
-    'FredTheDot': 'http://fredthedot.comicgenesis.com/',
-    'FreedomFries': 'http://freedomfries.comicgenesis.com/',
-    'FriendlyHostility': 'http://friendlyhostility.com/',
-    'FrogSkinBoots': 'http://ashdesignsonline.comicgenesis.com/',
-    'FromTheDeskOf': 'http://fromthedeskof.comicgenesis.com/',
-    'FromTheMargin': 'http://fromthemargin.comicgenesis.com/',
-    'FromThenOnForth': 'http://fromthenonforth.comicgenesis.com/',
-    'FullCircle': 'http://fullcircle.comicgenesis.com/',
-    'FunnyFarm': 'http://www.funnyfarmcomics.com/',
-    'FunWithPants': 'http://funwithpants.comicgenesis.com/',
-    'Furmentation': 'http://xodin.comicgenesis.com/',
-    'FurryWars': 'http://furrywars.comicgenesis.com/',
-    'FurthiaHigh': 'http://furthiahigh.comicgenesis.com/',
-    'FyshbowlComics': 'http://fysh.comicgenesis.com/',
-    'GalacticAcademy': 'http://galacticacademy.comicgenesis.com/',
-    'GambitAsBishounen': 'http://snigepippi.comicgenesis.com/',
-    'GameJumpers': 'http://gamejumpers.comicgenesis.com/',
-    'GameMisconduct': 'http://gmhockey.comicgenesis.com/',
-    'GameOver': 'http://gameover.comicgenesis.com/',
-    'GamerChicks': 'http://gamerchicks.comicgenesis.com/',
-    'GamerKingSenshi': 'http://minion.comicgenesis.com/',
-    'GamerPsychotica': 'http://gp.comicgenesis.com/',
-    'GameScreenInvestigators': 'http://gsi.comicgenesis.com/',
-    'GamingGuardians': 'http://gamingguardians.com/',
-    'Gamingreality': 'http://gamingreality.comicgenesis.com/',
-    'Garasade': 'http://garasade.comicgenesis.com/',
-    'GaryAndSteve': 'http://garyandsteve.comicgenesis.com/',
-    'GeebasOnParade': 'http://geebasonparade.keenspot.com/',
-    'GeekBlather': 'http://geekblather.comicgenesis.com/',
-    'GeekWay': 'http://geekway.comicgenesis.com/',
-    'Gemini': 'http://gemini.comicgenesis.com/',
-    'GemutationsPlague': 'http://darwin.comicgenesis.com/',
-    'GeneCatlow': 'http://www.genecatlow.com/',
-    'GenerationDumb': 'http://generationdumb.comicgenesis.com/',
-    'GenevievesShadesOfGrey': 'http://genevieve.comicgenesis.com/',
-    'GForGenesis': 'http://g4g.comicgenesis.com/',
-    'Ghastly': 'http://www.ghastlycomic.com/',
-    'GhostHunter': 'http://ghosthunter.comicgenesis.com/',
-    'Ghoul': 'http://ghoul.comicgenesis.com/',
-    'GirlFromBOLT': 'http://bolt.comicgenesis.com/',
-    'GirlNextDoor': 'http://squeakyboo.comicgenesis.com/',
-    'Gnerds2000': 'http://gnerds.comicgenesis.com/',
-    'GobbleDeeGook': 'http://crissyg.comicgenesis.com/',
-    'Goblins': 'http://goblinscomic.com/',
-    'GodMode': 'http://www.godmodeonline.com/',
-    'Godsboxers': 'http://godsboxers.comicgenesis.com/',
-    'GoForIt': 'http://goforit.comicgenesis.com/',
-    'GoingNowhereFast': 'http://gnf.comicgenesis.com/',
-    'GoldenAge': 'http://goldenage.comicgenesis.com/',
-    'GoldenCrystals': 'http://goldencrystals.comicgenesis.com/',
-    'GoneAstray': 'http://goneastray.comicgenesis.com/',
-    'GoodTimingNoRhythm': 'http://gtnr.comicgenesis.com/',
-    'GoosebumpCity': 'http://gbc.comicgenesis.com/',
-    'GorgeousPrincessCreamyBeamy': 'http://creamybeamy.comicgenesis.com/',
-    'GotPride': 'http://gotpride.comicgenesis.com/',
-    'GrandTheftAuto': 'http://gtaweb.comicgenesis.com/',
-    'GreaterOfTwoEvils': 'http://g2e.comicgenesis.com/',
-    'GreatTree': 'http://tgt.comicgenesis.com/',
-    'GreenAvenger': 'http://www.green-avenger.com/',
-    'GreenCircle': 'http://greencircle.comicgenesis.com/',
-    'GreenLightGo': 'http://glg.comicgenesis.com/',
-    'GreenTea': 'http://greentea.comicgenesis.com/',
-    'Greymatters': 'http://greymatters.comicgenesis.com/',
-    'Grit': 'http://grit.comicgenesis.com/',
-    'Gropesville': 'http://gropesville.comicgenesis.com/',
-    'GroundFloor': 'http://groundfloor.comicgenesis.com/',
-    'Grubs': 'http://www.grubscomic.com/',
-    'GrumpyTheFatHamster': 'http://burp.comicgenesis.com/',
-    'GuitarFlatTheWebcomic': 'http://guitarflat.comicgenesis.com/',
-    'GunmetalAnnie': 'http://mercuryhat.comicgenesis.com/',
-    'HackersAnonymous': 'http://hackersanonymous.comicgenesis.com/',
-    'HagsPoint': 'http://hagspoint.comicgenesis.com/',
-    'HalloweenMonsters': 'http://holloweenmonsters.comicgenesis.com/',
-    'HamstaPowah': 'http://hamstapowah.comicgenesis.com/',
-    'HauntedByMoonlight': 'http://hauntedbymoonlight.comicgenesis.com/',
-    'HaveANiceDay': 'http://yellowsnow.comicgenesis.com/',
-    'Hazardswake': 'http://hazardswake.comicgenesis.com/',
-    'HbombsBrandNewComic': 'http://hbombshow.comicgenesis.com/',
-    'HeadDoctorProductions': 'http://headdoctor.comicgenesis.com/',
-    'HeavyMetalChemist': 'http://heavymetalchemist.comicgenesis.com/',
-    'Hellbenders': 'http://hellbenders.comicgenesis.com/',
-    'Hellroy': 'http://hellroy.comicgenesis.com/',
-    'Hepcats': 'http://hepcats.comicgenesis.com/',
-    'HerbieAndJeff': 'http://haj.comicgenesis.com/',
-    'Hereafter': 'http://hereafter.comicgenesis.com/',
-    'Here_After': 'http://keath.comicgenesis.com/',
-    'HeroesOfMittNMagic': 'http://heroesofmittenmagic.comicgenesis.com/',
-    'HeroInTraining': 'http://thereisnosaurus.comicgenesis.com/',
-    'HerosHandbook': 'http://theheroshandbook.comicgenesis.com/',
-    'HeyFox': 'http://heyfox.comicgenesis.com/',
-    'Hiakuma': 'http://hiakuma.comicgenesis.com/',
-    'HiddenCakeMagic': 'http://hiddencakemagic.comicgenesis.com/',
-    'Hiderikan': 'http://hiderikan.comicgenesis.com/',
-    'HighSchoolUteM': 'http://hsutem.comicgenesis.com/',
-    'Hiro': 'http://hiro.comicgenesis.com/',
-    'Hiruko': 'http://happypuke.comicgenesis.com/',
-    'HoldingChaos': 'http://holdingchaos.comicgenesis.com/',
-    'HomeBySeven': 'http://homebyseven.comicgenesis.com/',
-    'HomeFries': 'http://friedgreencomics.comicgenesis.com/',
-    'HopeAndLaurie': 'http://hopeandlaurie.comicgenesis.com/',
-    'Hopscotch': 'http://hopscotch.comicgenesis.com/',
-    'HotAndBothered': 'http://hotandbothered.comicgenesis.com/',
-    'HotChocolateIceCream': 'http://hotchocolate.comicgenesis.com/',
-    'HouseOfAThousandSeekerlets': 'http://seekerlets.comicgenesis.com/',
-    'HouseOfBob': 'http://dustbunny.comicgenesis.com/',
-    'HouseOfLimbo': 'http://houseoflimbo.comicgenesis.com/',
-    'HouseOfLSD': 'http://houseoflsd.comicgenesis.com/',
-    'HowISeeIt': 'http://toasterpip.comicgenesis.com/',
-    'HowToBeNormal': 'http://howtobenormal.comicgenesis.com/',
-    'Humans': 'http://humans.comicgenesis.com/',
-    'HuntersBlade': 'http://huntersblade.comicgenesis.com/',
-    'HuntersGuardian': 'http://huntersguardian.comicgenesis.com/',
-    'Hyperboy': 'http://hyperboycomics.comicgenesis.com/',
-    'HypothesisNo': 'http://hypothesisno.comicgenesis.com/',
-    'IAlwaysWakeUpLazy': 'http://www.alwayslazy.com/',
-    'IAmMacdoogle': 'http://americana.comicgenesis.com/',
-    'ICanFeelARatScratchingMyBrain': 'http://lowkianseong.comicgenesis.com/',
-    'IcarusDreams': 'http://icarusdreams.comicgenesis.com/',
-    'Idget': 'http://idget.comicgenesis.com/',
-    'Idiots': 'http://idiots.comicgenesis.com/',
-    'IEatFood': 'http://ieatfood.comicgenesis.com/',
-    'IfThenElse': 'http://ifthenelse.comicgenesis.com/',
-    'IllegalElian': ('http://illegalelian.keenspot.com/', 'http://illegalelian.keenspot.com/d/20000531.html'),
-    'ImAlwaysRight': 'http://alwaysright.comicgenesis.com/',
-    'IMO': 'http://imo.comicgenesis.com/',
-    'InAPerfectWorld': 'http://iapw.comicgenesis.com/',
-    'Incomplete': 'http://incomplete.comicgenesis.com/',
-    'Indavo': 'http://indavo.comicgenesis.com/',
-    'IndefensiblePositions': ('http://indepos.comicgenesis.com/', 'http://indepos.comicgenesis.com/d/20070904.html'),
-    'Industry': 'http://twelfthgecko.comicgenesis.com/',
-    'InexplicableAdventuresOfBob': 'http://bobadventures.comicgenesis.com/',
-    'Infamous': 'http://theinfamous.comicgenesis.com/',
-    'Inferno': 'http://zaliria.comicgenesis.com/',
-    'InfinityClub': 'http://infinityclub.comicgenesis.com/',
-    'InMyPants': 'http://ilpalazzo.comicgenesis.com/',
-    'InniesAndOutties': 'http://inniesandoutties.comicgenesis.com/',
-    'InsaneUndertakings': 'http://insaneundertakings.comicgenesis.com/',
-    'InSanity': 'http://deviantyouth.comicgenesis.com/',
-    'InSearchOfHappyEndings': 'http://isohe.comicgenesis.com/',
-    'InsertCoin': 'http://mistermarioman.comicgenesis.com/',
-    'InsideTheBox': 'http://boxcomics.com/',
-    'InstituteOfMetaphysics': 'http://iofm.comicgenesis.com/',
-    'IntermittentTangents': 'http://manekochan.comicgenesis.com/',
-    'InternationalHopeFoundation': 'http://ihf.comicgenesis.com/',
-    'InternetFriends': 'http://internetfriends.comicgenesis.com/',
-    'Interns': 'http://theinterns.comicgenesis.com/',
-    'InTheCompanyOfSerpents': 'http://serpents.comicgenesis.com/',
-    'InTransit': 'http://squazzy.comicgenesis.com/',
-    'IpsoFacto': 'http://ipsofactocomic.comicgenesis.com/',
-    'Irlhell': 'http://irlhell.comicgenesis.com/',
-    'IslameyOrientalFantasy': 'http://islamey.comicgenesis.com/',
-    'ITalkToTheWind': 'http://talk.comicgenesis.com/',
-    'ItSAMadMadMadMadDucksWorld': 'http://doctorzaius.comicgenesis.com/',
-    'IWasAtMyCenterThenDoubtCreepsIn': 'http://iwas.comicgenesis.com/',
-    'JackDaftIII': 'http://jackdaftiii.comicgenesis.com/',
-    'JackiesFridge': 'http://jackiesfridge.comicgenesis.com/',
-    'Jaded': 'http://www.thejaded.co.uk/',
-    'JagerRising': 'http://jinoku.comicgenesis.com/',
-    'JannaCom': 'http://janna.comicgenesis.com/',
-    'JerryLittle': 'http://suits.comicgenesis.com/',
-    'JesusX': 'http://jesusx.comicgenesis.com/',
-    'JimBobComics': 'http://falos.comicgenesis.com/',
-    'Jitterati': 'http://jitterati.comicgenesis.com/',
-    'JoeAverage': 'http://www.joeaverage.org/',
-    'JonesAvenue': 'http://jonesave.comicgenesis.com/',
-    'JoshInTheGhetto': 'http://joshintheghetto.comicgenesis.com/',
-    'Joyride': 'http://www.joyridecomic.com/',
-    'JRockShellShock': 'http://jrock.comicgenesis.com/',
-    'JulyStreet': 'http://julystreet.comicgenesis.com/',
-    'Jump': 'http://jump.comicgenesis.com/',
-    'JunkRIOT': 'http://junkriot.comicgenesis.com/',
-    'JunkWorld': 'http://junkworld.comicgenesis.com/',
-    'JustAnEscape': 'http://justanescape.comicgenesis.com/',
-    'JustAnotherEscape': 'http://www.justanotherescape.com/',
-    'JusticeMan': 'http://justiceman.comicgenesis.com/',
-    'JustTheLifeOfShoe': 'http://justshoe.comicgenesis.com/',
-    'JustWarmAndFuzzy': 'http://jwaf.comicgenesis.com/',
-    'JuvenileDiversion': 'http://juvenilediversion.comicgenesis.com/',
-    'JWalkin': 'http://jwalkin.comicgenesis.com/',
-    'KageToOdoru': 'http://kagetoodoru.comicgenesis.com/',
-    'KakashiScarecrow': 'http://kakashi.comicgenesis.com/',
-    'Kalten': 'http://kalten.comicgenesis.com/',
-    'KalusDailyDoodleRequests': 'http://kalu.comicgenesis.com/',
-    'KariAndDoug': 'http://karindoug.comicgenesis.com/',
-    'Kazei5Rebirth': 'http://whiterabbit.comicgenesis.com/',
-    'KeenonballRun': 'http://keenonballrun.keenspot.com/',
-    'Keisarinna': 'http://keisarinna.comicgenesis.com/',
-    'KenjiTheSmallSamurai': 'http://kenji.comicgenesis.com/',
-    'KillingMonday': 'http://killingmonday.comicgenesis.com/',
-    'KillingMoon': 'http://thekillingmoon.comicgenesis.com/',
-    'KindaLikeReality': 'http://klr.comicgenesis.com/',
-    'KindaQueer': 'http://kindaqueer.comicgenesis.com/',
-    'KirbyAndSambo': 'http://kirbyandsambo.comicgenesis.com/',
-    'KitchenSink': 'http://kitchensink.comicgenesis.com/',
-    'Kitewinds': 'http://kitewinds.comicgenesis.com/',
-    'KitNKayBoodle': 'http://kitnkayboodle.comicgenesis.com/',
-    'Kitsch': 'http://kitsch.comicgenesis.com/',
-    'Kizmet': 'http://kizmet.comicgenesis.com/',
-    'KnightsOfTheNexus': 'http://www.knightsofthenexus.com/',
-    'KnightsOfVesteria': 'http://www.kovcomic.com/',
-    'KodamaNoNikki': 'http://www.skimlines.com/',
-    'Kokiro': 'http://kokiro.comicgenesis.com/',
-    'KottaKokoro': 'http://kottakokoro.comicgenesis.com/',
-    'Kungfounded': 'http://kungfounded.comicgenesis.com/',
-    'KungFuPandas': 'http://kungfupandas.comicgenesis.com/',
-    'KurenaiMashin': 'http://km.comicgenesis.com/',
-    'LabBratz': 'http://labbratz.comicgenesis.com/',
-    'Lacunae': 'http://lacunae.comicgenesis.com/',
-    'Landis': 'http://elisalandis.com/',
-    'LandOfGreed': 'http://zarrillo.comicgenesis.com/',
-    'LangLang': 'http://langlang.comicgenesis.com/',
-    'LarryAndOliver': 'http://lao.comicgenesis.com/',
-    'LastManStanding': 'http://www.lms-comic.com/',
-    'LastWorld': 'http://lastworld.comicgenesis.com/',
-    'LaundromatComics': 'http://laundromatcomics.comicgenesis.com/',
-    'LauraSeabrooksWebComix': 'http://lauraseabrook.comicgenesis.com/',
-    'LawOfPurple': 'http://dragongirl.comicgenesis.com/',
-    'LeagueOfExtraordinaryFurries': 'http://lxfurries.comicgenesis.com/',
-    'LeanOnMe': 'http://jadaze.comicgenesis.com/',
-    'LeapingWizards': 'http://leapingwizards.comicgenesis.com/',
-    'LecheBotte': 'http://rastopopolus.comicgenesis.com/',
-    'LeftAngle': 'http://theleftangle.comicgenesis.com/',
-    'LegallyDeadMan': 'http://penultima.comicgenesis.com/',
-    'Legendary': 'http://legendary.comicgenesis.com/',
-    'LegendOfTheFour': 'http://legendoffour.comicgenesis.com/',
-    'LegendOfThyme': 'http://midnightcat.comicgenesis.com/',
-    'LegendOfTrinity': 'http://legendoftrinity.comicgenesis.com/',
-    'LegionInc': 'http://legion.comicgenesis.com/',
-    'LegostarGalactica': 'http://legostargalactica.comicgenesis.com/',
-    'Leo': 'http://leoninecomics.comicgenesis.com/',
-    'LessThanThree': 'http://lessthanthree.comicgenesis.com/',
-    'LetThereBeLight': 'http://ltbl.comicgenesis.com/',
-    'LeuAndYar': 'http://leunam12.comicgenesis.com/',
-    'LibertysJewells': 'http://makdaddymizark.comicgenesis.com/',
-    'LieToMe': 'http://lietome.comicgenesis.com/',
-    'Lif3': 'http://lif3.comicgenesis.com/',
-    'LifeAsSheKnowsIt': 'http://laski.comicgenesis.com/',
-    'LifeAtBayside': 'http://bayside.comicgenesis.com/',
-    'LifeGoesOn': 'http://lgo.comicgenesis.com/',
-    'LifeIsUnfair': 'http://lifeisunfair.comicgenesis.com/',
-    'LifeOfBuddha': 'http://lifeofbuddha.comicgenesis.com/',
-    'LifeOfLars': 'http://lifeoflars.comicgenesis.com/',
-    'LifeOfTheKalahari': 'http://lifeofthekalahari.comicgenesis.com/',
-    'LifeOnForbez': 'http://cdc.comicgenesis.com/',
-    'LifeOnTheFourthFloor': 'http://fourthfloorcomics.comicgenesis.com/',
-    'LifesAWitch': 'http://lifesawitch.comicgenesis.com/',
-    'LifeSuchAsItIs': 'http://lifesuchasitis.comicgenesis.com/',
-    'LifeSucks': 'http://mdjt.comicgenesis.com/',
-    'Lightbringer': 'http://lightbringer.comicgenesis.com/',
-    'LikeItIs': 'http://likeitis.comicgenesis.com/',
-    'LilDude': 'http://lildudecomics.comicgenesis.com/',
-    'LilFas': 'http://lilfas.comicgenesis.com/',
-    'LilFreddyVsMiniJason': ('http://fredvsjay.comicgenesis.com/', 'http://fredvsjay.comicgenesis.com/lateststrip.html'),
-    'LilianeBiDyke': 'http://liliane.comicgenesis.com/',
-    'LindleyHallProjectMk2': 'http://tlhp.comicgenesis.com/',
-    'LingeringNight': 'http://lingeringnight.comicgenesis.com/',
-    'Linnyanie': 'http://linnyanie.comicgenesis.com/',
-    'LionDamhain': 'http://wyrd.comicgenesis.com/',
-    'LittleStrangers': 'http://littlestrangers.comicgenesis.com/',
-    'LittleVisconte': 'http://visconte.comicgenesis.com/',
-    'LiveFromThe7ThCircle': 'http://seventhcircle.comicgenesis.com/',
-    'LivingGallery': 'http://livinggallery.comicgenesis.com/',
-    'Living': 'http://living.comicgenesis.com/',
-    'Llamoo': 'http://llamoo.comicgenesis.com/',
-    'Loath': 'http://loath.comicgenesis.com/',
-    'LOGO': 'http://www.logocomic.com/',
-    'Lola': 'http://lola.comicgenesis.com/',
-    'LonelyWorlds': 'http://lonelyworlds.comicgenesis.com/',
-    'LoneSwordsman': 'http://theloneswordsman.comicgenesis.com/',
-    'LongestSojourn': 'http://longestsojourn.comicgenesis.com/',
-    'LongestWalk': 'http://tlw.comicgenesis.com/',
-    'LookIntoTheMind': 'http://litm.comicgenesis.com/',
-    'LookWhatIBroughtHome': 'http://lookwhatibroughthome.com/',
-    'LordOfTheShepherd': 'http://lots.comicgenesis.com/',
-    'LordWhatFoolsTheseMortalsBe': 'http://lordwhatfools.comicgenesis.com/',
-    'LostAndFound': 'http://www.lostandfoundcomic.com/',
-    'Lounge': 'http://thelounge.comicgenesis.com/',
-    'LoveMeNot': 'http://lovemenot.comicgenesis.com/',
-    'LovesRequiem': 'http://lovesrequiem.comicgenesis.com/',
-    'Lowroad75': 'http://lowroad75.comicgenesis.com/',
-    'LucidDelirium': 'http://luciddelirium.comicgenesis.com/',
-    'LucyTheGhost': 'http://lucytheghost.comicgenesis.com/',
-    'Lumina': 'http://lumina.comicgenesis.com/',
-    'Luna': 'http://www.lunacomic.com/',
-    'LunaticChaos': 'http://lunaticchaos.comicgenesis.com/',
-    'LususNaturae': 'http://lususnaturae.comicgenesis.com/',
-    'MadAboutU': 'http://madaboutu.keenspot.com/',
-    'MadBrothers': 'http://madbrothers.comicgenesis.com/',
-    'MadeInHeaven': 'http://mih.comicgenesis.com/',
-    'MadHatComics': 'http://madhat.comicgenesis.com/',
-    'MadWorld': 'http://madworld.comicgenesis.com/',
-    'Magick': 'http://magick.comicgenesis.com/',
-    'MagusFerox': 'http://magusferox.comicgenesis.com/',
-    'MakeshiftTheatreBrigade': 'http://makeshift.comicgenesis.com/',
-    'Malcolm': 'http://www.malcolmcomics.com/',
-    'Malefactor': 'http://malefactor.comicgenesis.com/',
-    'MangoInDreamland': 'http://mango.comicgenesis.com/',
-    'ManicGraffiti': 'http://manic.comicgenesis.com/',
-    'ManorJam': 'http://manorjam.comicgenesis.com/',
-    'MansionOfE': 'http://mansionofe.comicgenesis.com/',
-    'MANTIS': 'http://mantis.comicgenesis.com/',
-    'ManWhoHatesFun': 'http://mwhf.comicgenesis.com/',
-    'ManyTidingsGrim': 'http://grimtidings.comicgenesis.com/',
-    'Maq041': 'http://maq041.comicgenesis.com/',
-    'MaraChan': 'http://marachan.comicgenesis.com/',
-    'MarchingToADifferentAccordion': 'http://accordion.comicgenesis.com/',
-    'MariposaRevelation': 'http://mariposa.comicgenesis.com/',
-    'MartianTv': 'http://martiantv.comicgenesis.com/',
-    'MarvAndBoop': 'http://marvandboop.comicgenesis.com/',
-    'MaryComic': 'http://themarycomic.comicgenesis.com/',
-    'MaryQuiteContrary': 'http://marycontrary.comicgenesis.com/',
-    'MARYSTATUES': 'http://marystatues.comicgenesis.com/',
-    'MaverickHeart': 'http://maverickheart.comicgenesis.com/',
-    'MaxSloan': 'http://maxsloan.comicgenesis.com/',
-    'MayIHelpYou': 'http://mayihelpyou.comicgenesis.com/',
-    'McDuffies': 'http://mcduffies.comicgenesis.com/',
-    'McremnantReport': 'http://mcrreport.comicgenesis.com/',
-    'Medialia': 'http://www.medialia-comic.com/',
-    'MediocreGothBoi': 'http://gothboi.comicgenesis.com/',
-    'MediocreManga': 'http://mediocremanga.comicgenesis.com/',
-    'Mediocres': 'http://mediocres.comicgenesis.com/',
-    'MeetTheDweebles': 'http://dweebles.comicgenesis.com/',
-    'MegaCrap': 'http://megacrap.comicgenesis.com/',
-    'Meiosis': 'http://meiosis.comicgenesis.com/',
-    'Melankoliasta': 'http://melankoliasta.comicgenesis.com/',
-    'MelEveryman': 'http://everyman.comicgenesis.com/',
-    'MelfTheElf': 'http://melf.comicgenesis.com/',
-    'MemoirsOfAnImmortal': 'http://immortal.comicgenesis.com/',
-    'Memories': 'http://squaz.comicgenesis.com/',
-    'MenageA3': 'http://www.menagea3.net/',
-    'Menagerie': 'http://menagerie.comicgenesis.com/',
-    'MercsForHire': 'http://mercsforhire.comicgenesis.com/',
-    'MichikoMonagatari': ('http://isukiyomi.comicgenesis.com/', 'http://isukiyomi.comicgenesis.com/index2.html'),
-    'Midcentral': 'http://midcentral.comicgenesis.com/',
-    'MidnightDetectives': 'http://midnightdetectives.comicgenesis.com/',
-    'MikeTheMulletThing': 'http://mikethemulletthing.comicgenesis.com/',
-    'MindingMyOwnBusiness': 'http://mmob.comicgenesis.com/',
-    'MindOfAChild': 'http://tmoac.comicgenesis.com/',
-    'MiniatureAlley': 'http://noctology.comicgenesis.com/',
-    'MinimalismSucks': 'http://minisuck.comicgenesis.com/',
-    'MinionsForHire': 'http://www.minionsforhire.com/',
-    'MintWhelpSaga': 'http://mintwhelp.comicgenesis.com/',
-    'MiryokutekiMonogatari': 'http://miryomono.comicgenesis.com/',
-    'MisadventuresInPhysics': ('http://mip.comicgenesis.com/', 'http://mip.comicgenesis.com/comic.htm'),
-    'MisadventuresOfOkk': 'http://okk.comicgenesis.com/',
-    'MisadventuresOfTheDrowWizard': 'http://motdw.comicgenesis.com/',
-    'Misanthropes': 'http://misanthropes.comicgenesis.com/',
-    'MixedBagComics': 'http://lowresatari.comicgenesis.com/',
-    'Mobties': 'http://mobties.comicgenesis.com/',
-    'ModernDayWitchdoctor': 'http://witchdoctor.comicgenesis.com/',
-    'ModernLove': 'http://modernlove.comicgenesis.com/',
-    'MolesHole': 'http://l33tgamerz.comicgenesis.com/',
-    'MolotovCocktail': 'http://molotovcocktail.comicgenesis.com/',
-    'Monkey': 'http://monkey.comicgenesis.com/',
-    'MonopolyOfTruth': 'http://monopolyoftruth.comicgenesis.com/',
-    'MonsterAffen': 'http://monsteraffen.comicgenesis.com/',
-    'MonsterVsTheWorld': 'http://monsterworld.comicgenesis.com/',
-    'MooneyTheTurtle': 'http://jwcornelius.comicgenesis.com/',
-    'MoonlightFeathers': 'http://moonfea.comicgenesis.com/',
-    'MoonlightKnight': 'http://redmoons.comicgenesis.com/',
-    'Morningstar': 'http://morningstar.comicgenesis.com/',
-    'MortalitysEnd': 'http://mortalitysend.comicgenesis.com/',
-    'MortalRevelation': 'http://mortalrevelation.comicgenesis.com/',
-    'MouseOfTime': 'http://mouseoftime.comicgenesis.com/',
-    'MousesTail': 'http://mouse.comicgenesis.com/',
-    'Mp4C': 'http://mp4c.comicgenesis.com/',
-    'MrBoffleAndFriends': 'http://mrboffle.comicgenesis.com/',
-    'MTheory': 'http://mtheory.comicgenesis.com/',
-    'Muertitos': 'http://muertitos.comicgenesis.com/',
-    'MundaneNirvana': 'http://mundanenirvana.comicgenesis.com/',
-    'MusicOfTheWoods': 'http://sumimasen.comicgenesis.com/',
-    'Mutant59': 'http://wrathofautumn.comicgenesis.com/',
-    'MyAngelYouAreAngel': ('http://angel.comicgenesis.com/', 'http://angel.comicgenesis.com/mainpage.html'),
-    'MyBrainHurts': 'http://mybrainhurts.comicgenesis.com/',
-    'MyLifeAsATeenageElvenMaid': 'http://mlaatem.comicgenesis.com/',
-    'MyLifeInBlue': 'http://mylifeinblue.comicgenesis.com/',
-    'MyRegards': 'http://myregards.comicgenesis.com/',
-    'MySoCalledKnife': 'http://radewagon.comicgenesis.com/',
-    'MysteriousDrX': 'http://obeydrx.comicgenesis.com/',
-    'MysticFantasy': 'http://mysticfantasy.comicgenesis.com/',
-    'MythChild': 'http://mysya.comicgenesis.com/',
-    'NahastLandsOfStrife': 'http://nahast.comicgenesis.com/',
-    'NakedElf': 'http://nakedelf.comicgenesis.com/',
-    'NamelessStory': 'http://klest.comicgenesis.com/',
-    'NastyChocolates': 'http://nastychocolates.comicgenesis.com/',
-    'Necronomicomics': 'http://necronomicomics.comicgenesis.com/',
-    'NeedsMoreInspiration': 'http://needsmoreinspiration.comicgenesis.com/',
-    'Neighborhood': 'http://neighborhood.comicgenesis.com/',
-    'Nekotime': 'http://nekotime.comicgenesis.com/',
-    'NemutionJewel': 'http://nemution.comicgenesis.com/',
-    'Nerdgasm': 'http://nerdgasm.comicgenesis.com/',
-    'NerdRage': 'http://nerdrage.comicgenesis.com/',
-    'Netjeru': 'http://netjeru.comicgenesis.com/',
-    'NeverYouMind': 'http://neveryoumind.comicgenesis.com/',
-    'NewAndImproved': 'http://nai.comicgenesis.com/',
-    'Newgirl': 'http://newgirl.comicgenesis.com/',
-    'Newlife': 'http://birdie.comicgenesis.com/',
-    'NEWPORTGRL55': 'http://newportgrl55.comicgenesis.com/',
-    'Newscast': 'http://newscast.comicgenesis.com/',
-    'NewtonsTheory': 'http://stevestacy.comicgenesis.com/',
-    'NextDoor': 'http://nextdoor.comicgenesis.com/',
-    'NickMaticPrivateEye': 'http://nickmatic.comicgenesis.com/',
-    'NieceWeb': 'http://www.nieceweb.com/',
-    'NighthawkDayhawk': 'http://nighthawkdayhawk.comicgenesis.com/',
-    'NightmareHunters': 'http://nightmarehunters.comicgenesis.com/',
-    'NightShiftWebComix': 'http://webcomix.comicgenesis.com/',
-    'NinjaGirls': 'http://devonhibberd.comicgenesis.com/',
-    'NinjaJohn': 'http://dangerchair.comicgenesis.com/',
-    'Niunia': 'http://niunia.comicgenesis.com/',
-    'NobTheBlob': 'http://nobtheblob.comicgenesis.com/',
-    'NoCrap': 'http://nocrap.comicgenesis.com/',
-    'Nocturnia': 'http://nocturnia.comicgenesis.com/',
-    'NoiseInMyHead': 'http://nimh.comicgenesis.com/',
-    'NoPinkPonies': 'http://www.nopinkponies.com/',
-    'NoRoomForMagic': 'http://noroomformagic.com/',
-    'NorthBy530': 'http://northby530.comicgenesis.com/',
-    'NoSecondDateRequired': 'http://nsdr.comicgenesis.com/',
-    'NosesOptional': 'http://nosesoptional.comicgenesis.com/',
-    'NoSoapRadio': 'http://nosoapradio.comicgenesis.com/',
-    'NosveRelease': 'http://nosve.comicgenesis.com/',
-    'NothingComesNaturally': 'http://nocona.comicgenesis.com/',
-    'NothingLikeSanity': 'http://nothinglikesanity.comicgenesis.com/',
-    'NothingSpecial': 'http://nothingspecial.comicgenesis.com/',
-    'NothingUnusual': 'http://nothingunusual.comicgenesis.com/',
-    'NotQuiteHeroes': 'http://notquiteheroes.comicgenesis.com/',
-    'NoVacancy': 'http://novacancy.comicgenesis.com/',
-    'NowhereUniversity': 'http://nowhereu.comicgenesis.com/',
-    'NthDimension': 'http://nthdimension.comicgenesis.com/',
-    'NUCD': 'http://nucd.comicgenesis.com/',
-    'NucleolusSuperheroCell': 'http://nucleolus.comicgenesis.com/',
-    'NurseryRhymes': 'http://nrnm.comicgenesis.com/',
-    'Nutcracker': 'http://nutcracker.comicgenesis.com/',
-    'NyteFlyte': 'http://flyte.comicgenesis.com/',
-    'NyuterranChronicles': 'http://www.nyuterra.com/',
-    'ObsidianDawn': 'http://obsidiandawn.comicgenesis.com/',
-    'ODARKCITY': 'http://odark.comicgenesis.com/',
-    'OddsAndEnds': 'http://oddends.comicgenesis.com/',
-    'OdysseyStar': 'http://odysseystar.comicgenesis.com/',
-    'OffCampus': 'http://theoc.comicgenesis.com/',
-    'OfficeBitch': 'http://picklejuice.comicgenesis.com/',
-    'OhPanda': 'http://ohpanda.comicgenesis.com/',
-    'OkayComics': 'http://okaycomics.comicgenesis.com/',
-    'OldLadyAndTheTroll': ('http://scottmcd.comicgenesis.com/', 'http://scottmcd.comicgenesis.com/d/20070129.html'),
-    'OMG': 'http://omg.comicgenesis.com/',
-    'OnceUponAnAlmaMater': 'http://onceuponanalmamater.comicgenesis.com/',
-    'OnceUponAStar': 'http://lonestar.comicgenesis.com/',
-    'OnceUponATable': 'http://onatable.comicgenesis.com/',
-    'OneHourComics': 'http://onehour.comicgenesis.com/',
-    'OneOverZero': 'http://oneoverzero.comicgenesis.com/',
-    'OnHiatus': 'http://onhiatus.comicgenesis.com/',
-    'OnlyOnTuesdays': 'http://onlyontuesdays.comicgenesis.com/',
-    'OnTheNose': 'http://lemonbar77.comicgenesis.com/',
-    'OopsNevermind': 'http://www.nevermindcomic.com/',
-    'OpenMinded': 'http://openminded.comicgenesis.com/',
-    'OperationNEKO': 'http://operationneko.comicgenesis.com/',
-    'OralSex': 'http://birdland.comicgenesis.com/',
-    'OrangeArrow': 'http://orangearrow.comicgenesis.com/',
-    'OrangeRevolution': 'http://orangerevolution.comicgenesis.com/',
-    'OrcishSpam': 'http://orcishspam.comicgenesis.com/',
-    'Origins': 'http://origins.comicgenesis.com/',
-    'OurOddWorld': 'http://oddworld.comicgenesis.com/',
-    'OurTripThruHell': 'http://phritzi.comicgenesis.com/',
-    'OutOfCharacterComics': 'http://ooccomic.comicgenesis.com/',
-    'OutOfOrder': 'http://outoforder.comicgenesis.com/',
-    'OutOfTheLoops': 'http://theloops.comicgenesis.com/',
-    'Overclocked': 'http://overclocked.comicgenesis.com/',
-    'OverpoweredNoobs': 'http://overpowered.comicgenesis.com/',
-    'Owlie': 'http://owliecomics.com/',
-    'OzyAndMillie': 'http://www.ozyandmillie.org/',
-    'Palestra': 'http://palestra.comicgenesis.com/',
-    'Pals': 'http://pals.comicgenesis.com/',
-    'Pandala': 'http://pandala.comicgenesis.com/',
-    'PANDECT': 'http://pandect.comicgenesis.com/',
-    'PANDORA': 'http://pandoranohako.comicgenesis.com/',
-    'Panic7': 'http://panic7.comicgenesis.com/',
-    'PanicHighSchool': 'http://panichighschool.comicgenesis.com/',
-    'Pantheon': 'http://www.pantheoncomic.com/',
-    'PantsOfDeath': 'http://pantsofdeath.comicgenesis.com/',
-    'Papercut': 'http://cdrake.comicgenesis.com/',
-    'ParallelDementia': 'http://paralleldementia.comicgenesis.com/',
-    'PartiallyIndebted': 'http://partiallyindebted.comicgenesis.com/',
-    'PatchworkChampions': 'http://yeti.comicgenesis.com/',
-    'Patchwork': 'http://patchwork.comicgenesis.com/',
-    'Patheticity': 'http://patheticity.comicgenesis.com/',
-    'PCsDayOut': 'http://pc.keenspot.com/',
-    'PeabodyComics': 'http://peabody.comicgenesis.com/',
-    'PeaceKeeperForce': 'http://www.thepkf.com/',
-    'Peno': 'http://peno.comicgenesis.com/',
-    'PeopleIHate': 'http://peopleihate.comicgenesis.com/',
-    'PerfectRoll': 'http://morbidfreak.comicgenesis.com/',
-    'Perjury': 'http://perjury.comicgenesis.com/',
-    'PestProductions': 'http://pestproductions.comicgenesis.com/',
-    'PET': 'http://petcomic.comicgenesis.com/',
-    'PhatypusProductions': 'http://random.comicgenesis.com/',
-    'PhillerSpace': 'http://phillerspace.comicgenesis.com/',
-    'PhilLikesTacos': 'http://philtaco.comicgenesis.com/',
-    'PhilosophyMonkey': 'http://philosophymonkey.comicgenesis.com/',
-    'PhineusMagicianForHire': 'http://phinmagic.comicgenesis.com/',
-    'Picatrix': 'http://picatrix.comicgenesis.com/',
-    'PictureDiary': 'http://thepicturediary.comicgenesis.com/',
-    'PillarsOfFaith': 'http://pillarsoffaith.comicgenesis.com/',
-    'PILL': 'http://nurseangel.comicgenesis.com/',
-    'Pineys': 'http://pineys.comicgenesis.com/',
-    'PinkyTa': 'http://ozoneocean.comicgenesis.com/',
-    'PiratesVsVikings': 'http://piratesvsvikings.comicgenesis.com/',
-    'PiresAway': 'http://piresaway.comicgenesis.com/',
-    'PkersUnited': 'http://pkersunited.comicgenesis.com/',
-    'PlagueGround': 'http://plagueground.comicgenesis.com/',
-    'PlayingWithKnives': 'http://pwk.comicgenesis.com/',
-    'PlotlessViolence': 'http://plotlessviolence.comicgenesis.com/',
-    'PluggedNickel': 'http://pluggednickel.comicgenesis.com/',
-    'PockyOfJustice': 'http://poj.comicgenesis.com/',
-    'Poesy': 'http://poesy.comicgenesis.com/',
-    'PointGuardian': 'http://www.pointguardian.com/',
-    'Pointless': 'http://pointless.comicgenesis.com/',
-    'PointsAtRandom': 'http://clubpar.comicgenesis.com/',
-    'PokeChow': 'http://blueguy.comicgenesis.com/',
-    'PokemonX': 'http://pokemonx.comicgenesis.com/',
-    'PonderAndEnlightening': 'http://pande.comicgenesis.com/',
-    'PoorlyDrawn': 'http://poorlydrawn.comicgenesis.com/',
-    'PowerStalkers': 'http://powerstalkers.comicgenesis.com/',
-    'Pr0Ncrest': 'http://pr0ncrest.comicgenesis.com/',
-    'PrepareForTomorrow': 'http://preparefortomorrow.comicgenesis.com/',
-    'PrimeOfAmbition': 'http://jaadrih.comicgenesis.com/',
-    'PrimordialChaos': 'http://shianra.comicgenesis.com/',
-    'PrinceOfCastles': 'http://princeofcastles.comicgenesis.com/',
-    'Prismatic': 'http://prismatic.comicgenesis.com/',
-    'PrismaticVodka': 'http://drunkenscribblings.comicgenesis.com/',
-    'PrivateSchoolBoys': 'http://ethancerin.comicgenesis.com/',
-    'ProbabilityOfStupidity': 'http://nutpos.comicgenesis.com/',
-    'ProfessionalThievery': 'http://pthievery.comicgenesis.com/',
-    'Project5': 'http://project5.comicgenesis.com/',
-    'ProjectADAM': 'http://themortician.comicgenesis.com/',
-    'ProjectB': 'http://projectb.comicgenesis.com/',
-    'ProjectSeraph': 'http://projectseraph.comicgenesis.com/',
-    'ProjectWhatever': 'http://projectwhatever.comicgenesis.com/',
-    'ProjectY': 'http://zaphin.comicgenesis.com/',
-    'PropertyOfGwen': 'http://propertyofgwen.comicgenesis.com/',
-    'Psionika': 'http://premier666.comicgenesis.com/',
-    'Psiotechniqa': 'http://psitech.comicgenesis.com/',
-    'PsychoticDesires': 'http://psychoticdesires.comicgenesis.com/',
-    'PsychoticKiss': 'http://psychotickiss.comicgenesis.com/',
-    'PulpHeroes': 'http://pulpheroes.comicgenesis.com/',
-    'Puppetry': 'http://wordsandpictures.comicgenesis.com/',
-    'Purgatory': 'http://cocytuz.comicgenesis.com/',
-    'PurplePussy': 'http://www.purplepussy.net/',
-    'PursuitOfThePast': 'http://pursuit.comicgenesis.com/',
-    'PwushChronicles': 'http://pwush.comicgenesis.com/',
-    'Pylon': 'http://pylon.comicgenesis.com/',
-    'QueenOfWands': 'http://www.queenofwands.net/',
-    'QueensOfRandomness': 'http://marshmallow.comicgenesis.com/',
-    'Queer': 'http://queer.comicgenesis.com/',
-    'QuestForTheHolyStrawberry': 'http://bart.comicgenesis.com/',
-    'Quest': 'http://quest.comicgenesis.com/',
-    'QuickBiteMe': 'http://quickbiteme.comicgenesis.com/',
-    'QuittingTime': 'http://quitting-time.com/',
-    'RadsFilesRanosSeries': 'http://radsfilesranos.comicgenesis.com/',
-    'RagingChinchilla': 'http://rcch.comicgenesis.com/',
-    'RagnarokOnlife': 'http://ragnarokonlife.comicgenesis.com/',
-    'Ragtag': 'http://ragtag.comicgenesis.com/',
-    'RallyHippo': 'http://annie.comicgenesis.com/',
-    'RandomAssembly': 'http://randomassembly.comicgenesis.com/',
-    'RandomChocolate': 'http://randomchocolate.comicgenesis.com/',
-    'Randomity': 'http://bandoffour.comicgenesis.com/',
-    'RandomReality': 'http://randomreality.comicgenesis.com/',
-    'RandomThoughts': 'http://randomthoughtscomics.comicgenesis.com/',
-    'RandyTheCat': 'http://randythecat.comicgenesis.com/',
-    'Rangers': 'http://rangers.comicgenesis.com/',
-    'RapidEyeMovement': 'http://rem.comicgenesis.com/',
-    'RauchVorFeuer': 'http://rauchvorfeuer.comicgenesis.com/',
-    'RaveKitty': 'http://ravekitty.comicgenesis.com/',
-    'RayzorComicsAndChrisChrushercomix': 'http://rayzor.comicgenesis.com/',
-    'READITANDWEEP': 'http://readitandweep.comicgenesis.com/',
-    'ReadyOrNot': 'http://ron.comicgenesis.com/',
-    'ReadySetRetreat': 'http://breakdance.comicgenesis.com/',
-    'ReadyWit': 'http://witsend.comicgenesis.com/',
-    'RealFantasy': 'http://realfantasy.comicgenesis.com/',
-    'RealityChallenged': 'http://insearchofdreams.comicgenesis.com/',
-    'RealityStream': 'http://stream.comicgenesis.com/',
-    'RealmOfKaerwyn': 'http://kaerwyn.comicgenesis.com/',
-    'ReasonedCognition': 'http://www.reasonedcognition.com/',
-    'ReasonImEverythingYouWant': 'http://everythingyouwant.comicgenesis.com/',
-    'RecklessYouth': 'http://recklessyouth.comicgenesis.com/',
-    'Reclamation': 'http://reclamation.comicgenesis.com/',
-    'RedLexi': 'http://redlexi.comicgenesis.com/',
-    'RedTape': 'http://redtape.comicgenesis.com/',
-    'ReflectionsThroughAWarpedMind': 'http://rtwm.comicgenesis.com/',
-    'Remembrance': 'http://remembrance.comicgenesis.com/',
-    'Reporterz': 'http://reporterz.comicgenesis.com/',
-    'ResetButton': 'http://theresetbutton.comicgenesis.com/',
-    'ResistanceLine': 'http://resistanceline.comicgenesis.com/',
-    'RetrogressiveIndexingAndFiling': 'http://spools.comicgenesis.com/',
-    'ReturnToEden': 'http://returntoeden.comicgenesis.com/',
-    'Reveillerie': 'http://hootoo.comicgenesis.com/',
-    'RidingTheMediumBus': 'http://pencilears.comicgenesis.com/',
-    'Rifles': 'http://marshcomics.comicgenesis.com/',
-    'RingsOfFate': 'http://angelzash.comicgenesis.com/',
-    'Riot': 'http://riotoffee.comicgenesis.com/',
-    'RIPNormality': 'http://ripnormality.comicgenesis.com/',
-    'RitasComic': 'http://ritascomic.comicgenesis.com/',
-    'RituallyImpaired': 'http://crowskin.comicgenesis.com/',
-    'RobmanShow': 'http://therobmanshow.comicgenesis.com/',
-    'RogerAndDominic': 'http://roganddom.comicgenesis.com/',
-    'RoguesOfClwydRhan': 'http://rocr.comicgenesis.com/',
-    'RoleOfTheDie': 'http://www.roleofthedie.com/',
-    'Room': 'http://theroom.comicgenesis.com/',
-    'RoswellNewton': 'http://roswellnewton.comicgenesis.com/',
-    'Roughies': 'http://www.roughies.com/',
-    'RowAndBee': 'http://rowbee.comicgenesis.com/',
-    'RoxxorUniversity': 'http://roxxoru.comicgenesis.com/',
-    'RoxyComicBookSuperhero': 'http://roxycomic.comicgenesis.com/',
-    'RoyalBlue': 'http://royalblue.comicgenesis.com/',
-    'RPGWorld': 'http://www.rpgworldcomic.com/',
-    'RTPM': 'http://rtpm.comicgenesis.com/',
-    'RubyPearl': 'http://rubypearl.comicgenesis.com/',
-    'RueTheDay': 'http://ruetheday.comicgenesis.com/',
-    'Ruination': 'http://ruination.comicgenesis.com/',
-    'RumfAdventures': 'http://rumfus.comicgenesis.com/',
-    'SacredGround': 'http://sground.comicgenesis.com/',
-    'Sadama': 'http://sadama.comicgenesis.com/',
-    'SadismOfAStudent': 'http://rynnadragonheart.comicgenesis.com/',
-    'SagaOfGager': 'http://gager.comicgenesis.com/',
-    'SaigoNoDensetsuLastLegend': 'http://saigo.comicgenesis.com/',
-    'SamAndElisAdventures': 'http://sameliadv.comicgenesis.com/',
-    'Sam': 'http://sam.keenspot.com/',
-    'SamuraiMushroom': 'http://samuraimushroom.comicgenesis.com/',
-    'Sandgate': 'http://sandgate.comicgenesis.com/',
-    'Sandusky': 'http://sandusky.comicgenesis.com/',
-    'SandwichWorld': 'http://sandwichworld.comicgenesis.com/',
-    'Sanitarium3': 'http://san3.comicgenesis.com/',
-    'SasjhwasStudio': 'http://sasjhwa.comicgenesis.com/',
-    'SaturdayMorningBreakfastCereal': 'http://smbc.comicgenesis.com/',
-    'SavannDuh': 'http://savannduh.comicgenesis.com/',
-    'SaveUsProcrastinatron': 'http://procrastinatron.comicgenesis.com/',
-    'SaveVsMagic': 'http://svmagic.comicgenesis.com/',
-    'ScandalSheet': 'http://scandalsheet.comicgenesis.com/',
-    'Scarecrow': 'http://scarecrow.comicgenesis.com/',
-    'ScaryLittleRyn': 'http://scarylittleryn.comicgenesis.com/',
-    'Scatterplot': 'http://scatterplot.comicgenesis.com/',
-    'ScentOfASong': 'http://scentofasong.comicgenesis.com/',
-    'Schadenfreude': 'http://xschadenfreude.comicgenesis.com/',
-    'ScrantonvilleKids': 'http://scrantonvillekids.keenspot.com/',
-    'Scratch': 'http://rene.comicgenesis.com/',
-    'ScrewJeffOwens': 'http://screwjeffowens.comicgenesis.com/',
-    'ScrollDynasty': 'http://scrolldynasty.comicgenesis.com/',
-    'Scrued': 'http://www.scrued.com/',
-    'Seagate': 'http://seatgate.comicgenesis.com/',
-    'SecondStage': 'http://secondstage.comicgenesis.com/',
-    'SemiRealTales': 'http://semirealtales.comicgenesis.com/',
-    'Senioritis': 'http://senioritis.comicgenesis.com/',
-    'SequelLife': 'http://sequellife.comicgenesis.com/',
-    'SeriesOfFortunateEvents': 'http://fortunateevents.comicgenesis.com/',
-    'SerifFearTheDot': 'http://fearthedot.comicgenesis.com/',
-    'SeriouslySuzy': 'http://suzy.comicgenesis.com/',
-    'SerpentsInnocence': 'http://halcogeth.comicgenesis.com/',
-    'Seven': 'http://eris.comicgenesis.com/',
-    'SevenOfSpades': 'http://sevenofspades.comicgenesis.com/',
-    'SeventhSoldier': 'http://kirbythestampede.comicgenesis.com/',
-    'SexAndViolence': 'http://mrbang.net/',
-    'SexLiesAndFord': 'http://slaf.comicgenesis.com/',
-    'SexPercussions': 'http://sexpercussions.comicgenesis.com/',
-    'ShadowPlanet': 'http://shadowplanet.comicgenesis.com/',
-    'Shaman': 'http://graphicpamphleteer.comicgenesis.com/',
-    'SharingAUniverse': 'http://sharingauniverse.comicgenesis.com/',
-    'Sharper': 'http://sharper.comicgenesis.com/',
-    'ShelbyAndPenguin': 'http://shelbyandpenguin.comicgenesis.com/',
-    'Shenanigans': 'http://shenanigans.comicgenesis.com/',
-    'Shifters': 'http://shifters.comicgenesis.com/',
-    'ShineGetDumplingsGoGoTower': 'http://shinegotower.comicgenesis.com/',
-    'Shinseki': 'http://shinseki.comicgenesis.com/',
-    'Shmorky': 'http://www.shmorky.com/',
-    'ShonenAiKudasai': 'http://kudasai.stripspace.com/',
-    'ShortEnd': 'http://theshortend.comicgenesis.com/',
-    'Shrooms': 'http://shrooms.comicgenesis.com/',
-    'Shy': ('http://shy.comicgenesis.com/', 'http://shy.comicgenesis.com/welcome.htm'),
-    'SideEffects': 'http://sideeffects.comicgenesis.com/',
-    'SidekickForSale': 'http://sidekickforsale.comicgenesis.com/',
-    'Sidenote': 'http://ntc.comicgenesis.com/',
-    'SiegelDerDoppelseele': 'http://siegel.comicgenesis.com/',
-    'SillyScriptures': 'http://scriptures.comicgenesis.com/',
-    'SilverBirchForest': 'http://tsbf.comicgenesis.com/',
-    'SilveryCentipede': ('http://silverycentipede.keenspot.com/', 'http://silverycentipede.keenspot.com/d/20000428.html'),
-    'Silvette': 'http://silvette.comicgenesis.com/',
-    'SimpleMinded': 'http://simpleminded.comicgenesis.com/',
-    'Simpletown': 'http://simpletown.comicgenesis.com/',
-    'Simplistk': 'http://rechan.comicgenesis.com/',
-    'SinisterBedfellows': 'http://mckenzee.comicgenesis.com/',
-    'SinkOrDrown': 'http://sinkordrown.comicgenesis.com/',
-    'SinPerspectiva': 'http://mysp.comicgenesis.com/',
-    'SinsAgainstNature': 'http://sane.comicgenesis.com/',
-    'SippansSerie': 'http://sippan.comicgenesis.com/',
-    'SiteMap': 'http://sitemap.comicgenesis.com/',
-    'SixDragons': 'http://sixdragons.comicgenesis.com/',
-    'SixSeconds': 'http://sixseconds.comicgenesis.com/',
-    'SkardOneInc': 'http://skardoneinc.comicgenesis.com/',
-    'Sketchbook': 'http://sss.comicgenesis.com/',
-    'SkewedReality': ('http://skewedreality.comicgenesis.com/', 'http://skewedreality.comicgenesis.com/home.html'),
-    'SkirtingDanger': 'http://skirtingdanger.keenspot.com/',
-    'Skunkadoo': 'http://skunkadoo.comicgenesis.com/',
-    'Skunk': 'http://www.skunkcomic.com/',
-    'SLAYERSREWIND': 'http://wyldcherry.comicgenesis.com/',
-    'SmallestCoherentSliceOfInfinity': 'http://scsoi.comicgenesis.com/',
-    'Smitty': 'http://smitty.comicgenesis.com/',
-    'Snapshot': 'http://chibchub.comicgenesis.com/',
-    'SnowflakeStudios': 'http://snowflakestudios.comicgenesis.com/',
-    'SoapOnARope': 'http://www.soaprope.com/',
-    'SoccerIsFullOfCheese': 'http://soccercheese.comicgenesis.com/',
-    'SocializedMedicine': 'http://socializedmedicine.comicgenesis.com/',
-    'Sockd': 'http://www.sockd.com/',
-    'SodapopJunkies': 'http://sodapopjunkies.comicgenesis.com/',
-    'SoilentIndustriesInc': 'http://soilent.comicgenesis.com/',
-    'SoKeiItHurts': 'http://sokeiithurts.comicgenesis.com/',
-    'Solipsism': 'http://solipsism.comicgenesis.com/',
-    'SomeplaceElse': 'http://someplace.comicgenesis.com/',
-    'SomethingStrange': 'http://somethingstrange.comicgenesis.com/',
-    'SomewhereCalledHemel': 'http://hemel.comicgenesis.com/',
-    'SomewhereIBelong': 'http://zhongda.comicgenesis.com/',
-    'SoreThumbs': 'http://www.sorethumbsonline.com/',
-    'SouthSprings': 'http://southsprings.comicgenesis.com/',
-    'SoWhat': 'http://sowhat.comicgenesis.com/',
-    'SpaceTimeFunnies': 'http://spacetimefunnies.comicgenesis.com/',
-    'Spacial': 'http://spacial.comicgenesis.com/',
-    'SpareChange': 'http://sparechange.comicgenesis.com/',
-    'Special': 'http://special.comicgenesis.com/',
-    'SpellBinder': ('http://wizard.comicgenesis.com/', 'http://wizard.comicgenesis.com/mainpage.html'),
-    'SpiderBubblegum': 'http://spiderbubblegum.comicgenesis.com/',
-    'SplendiforousEscapades': 'http://splendiforous.comicgenesis.com/',
-    'SporkMan': 'http://www.sporkman.com/',
-    'SpqrBlues': 'http://spqrblues.comicgenesis.com/',
-    'SpritevilleUSA': 'http://spriteville.comicgenesis.com/',
-    'SPUG': 'http://spug.comicgenesis.com/',
-    'SquareAndRhomboid': 'http://sar.comicgenesis.com/',
-    'SquidGideon': 'http://silus.comicgenesis.com/',
-    'SquidNinja': 'http://www.squidninja.com/',
-    'SsComix': 'http://sscomix.comicgenesis.com/',
-    'SSDD': 'http://poisonedminds.com/',
-    'StagnantWaters': 'http://stagnantwaters.comicgenesis.com/',
-    'Stalag99': 'http://www.stalag99.net/',
-    'StaleChocolates': 'http://stalechocolates.comicgenesis.com/',
-    'StalkingMillionaries': 'http://packrat.comicgenesis.com/',
-    'StalkingSnape': 'http://snape.comicgenesis.com/',
-    'Starbooze': 'http://starbooze.comicgenesis.com/',
-    'StarBored': 'http://oosterwijk.comicgenesis.com/',
-    'StarshipMoonhawk': 'http://starshipmoonhawk.comicgenesis.com/',
-    'StartWreck': 'http://startwreck.comicgenesis.com/',
-    'Steamcrows': 'http://eldritch48.comicgenesis.com/',
-    'StephanieToTheMax': 'http://stephanietothemax.comicgenesis.com/',
-    'StepTooFar': 'http://asoftercore.comicgenesis.com/',
-    'SteveAndMac': 'http://steveandmac.comicgenesis.com/',
-    'STFU': 'http://stfu.comicgenesis.com/',
-    'StickFigureDragons': 'http://feychild.comicgenesis.com/',
-    'Stick': 'http://stick.comicgenesis.com/',
-    'StickmenFromHell': 'http://hellstick.comicgenesis.com/',
-    'Stillville': 'http://stillville.comicgenesis.com/',
-    'StolenWish': 'http://kimhura.comicgenesis.com/',
-    'StraightAhead': 'http://straightahead.comicgenesis.com/',
-    'StraightJacketFreedomForce': 'http://tsjff.comicgenesis.com/',
-    'StrangeCandy': 'http://www.strangecandy.net/',
-    'StrangeDaze': 'http://strangedaze.comicgenesis.com/',
-    'StrangeEmployment': 'http://strangeemployment.comicgenesis.com/',
-    'StrangeHappenings': 'http://strangehappenings.comicgenesis.com/',
-    'StreetsWeCallTheZoo': 'http://streets.comicgenesis.com/',
-    'StripErs': 'http://stripers.comicgenesis.com/',
-    'StrippedAgain': 'http://strippedagain.comicgenesis.com/',
-    'Striptease': 'http://www.stripteasecomic.com/',
-    'StubbsComics': 'http://stubbscomics.comicgenesis.com/',
-    'StuffOfLegends': 'http://stuffoflegends.comicgenesis.com/',
-    'Styx': 'http://ziggys.comicgenesis.com/',
-    'Subconscious': 'http://subconscious.comicgenesis.com/',
-    'SubliminalObsession': 'http://subliminalobsession.comicgenesis.com/',
-    'Subplot': 'http://reashi.comicgenesis.com/',
-    'SubstituteClassImago': 'http://sci.comicgenesis.com/',
-    'SuburbanJungle': 'http://www.suburbanjungle.com/',
-    'SuburbanSaints': 'http://suburbansaints.comicgenesis.com/',
-    'SuicidalKillers': 'http://suicidalkillers.comicgenesis.com/',
-    'SuicideForHire': 'http://suicideforhire.comicgenesis.com/',
-    'SummerRain': 'http://summerrain.comicgenesis.com/',
-    'Summoners': 'http://summoners.comicgenesis.com/',
-    'SundaeConnection': 'http://sundaeconnection.comicgenesis.com/',
-    'SunlessMorning': 'http://allegory42.comicgenesis.com/',
-    'SuperChibiDeathBots': 'http://scdb.comicgenesis.com/',
-    'Superfightfight': 'http://superfightfight.comicgenesis.com/',
-    'SuperFinalFantasyMarioWorld': 'http://sffmw.comicgenesis.com/',
-    'SuperheroSportsBar': 'http://superbar.comicgenesis.com/',
-    'SuperPeoples': 'http://superpeoples.comicgenesis.com/',
-    'SuperSmashInn': 'http://supersmashinn.comicgenesis.com/',
-    'SuperTeenAngst': 'http://superteenangst.comicgenesis.com/',
-    'SuperTemps': 'http://megaskunjii.comicgenesis.com/',
-    'Superzero': 'http://superzerocomic.comicgenesis.com/',
-    'SurrealKins': 'http://www.surreal-kins.com/',
-    'SushiComics': 'http://sushi.comicgenesis.com/',
-    'SushiDatabase': 'http://sushidatabase.comicgenesis.com/',
-    'SwordsAreCool': 'http://gunsnstuff.comicgenesis.com/',
-    'TABU': 'http://tabu.comicgenesis.com/',
-    'TacosGoHere': 'http://thetacosgohere.comicgenesis.com/',
-    'TacoTuesday': 'http://tacotuesdays.comicgenesis.com/',
-    'Taffyhat': 'http://taffyhat.comicgenesis.com/',
-    'TailsOfIxinia': 'http://nalkari.comicgenesis.com/',
-    'Tainted': 'http://tainted.comicgenesis.com/',
-    'TaintedTruth': 'http://taintedtruth.comicgenesis.com/',
-    'TakeSteveToSchool': 'http://takestevetoschool.comicgenesis.com/',
-    'TakingUpSpace': 'http://takingupspace.keenspot.com/',
-    'TalesOfAReceptionist': 'http://toar.comicgenesis.com/',
-    'TalesOfEpicProportion': 'http://linzmerica.comicgenesis.com/',
-    'TalesOfPylea': 'http://talesofpylea.comicgenesis.com/',
-    'TalesOfTheDark': 'http://talesofthedark.comicgenesis.com/',
-    'TangsWeeklyComic': 'http://tang.comicgenesis.com/',
-    'Tankd': 'http://tanked.comicgenesis.com/',
-    'Tansocks': 'http://tansocks.comicgenesis.com/',
-    'TarAndFeathers': 'http://tarandfeathers.comicgenesis.com/',
-    'Tari': 'http://tari.comicgenesis.com/',
-    'Tartarus': 'http://tartarus.comicgenesis.com/',
-    'TAVision': 'http://tav.comicgenesis.com/',
-    'TeaCastle': 'http://teacastle.comicgenesis.com/',
-    'TeacosiesWithIrony': 'http://teacosieswithirony.comicgenesis.com/',
-    'TeacosiesWithIronyLP': 'http://teacosieswithironylargeprint.comicgenesis.com/',
-    'TeamZodiak': 'http://teamzodiak.comicgenesis.com/',
-    'TeddyBearAntiChrist': 'http://tbac.comicgenesis.com/',
-    'TeeDubbleyuEffSee': 'http://twfc.comicgenesis.com/',
-    'Tehuti': ('http://tehuti.comicgenesis.com/', 'http://tehuti.comicgenesis.com/index2.html'),
-    'TemuranMyLove': 'http://dhqx.comicgenesis.com/',
-    'TeriyakiSavior': 'http://lunaticrage.comicgenesis.com/',
-    'TharanFayth': 'http://tharanfayth.comicgenesis.com/',
-    'Thatguy': 'http://thatguy.comicgenesis.com/',
-    'TheKitchenSink': 'http://thekitchensink.comicgenesis.com/',
-    'TheLiving': 'http://theliving.comicgenesis.com/',
-    'ThereIsNoCheese': 'http://nocheese.comicgenesis.com/',
-    'ThereMayBeNinjas': 'http://tmbn.comicgenesis.com/',
-    'TheresACivilizationOnMyFork': 'http://www.tacomf.com/',
-    'TheriThere': 'http://therithere.comicgenesis.com/',
-    'Thespiphobia': 'http://thespiphobia.comicgenesis.com/',
-    'ThinginessOfChaos': 'http://thinginess.comicgenesis.com/',
-    'ThingInTheGrass': 'http://thinginthegrass.comicgenesis.com/',
-    'ThirdCity': 'http://cityonedge.comicgenesis.com/',
-    'ThirdDementia': 'http://thirddementia.comicgenesis.com/',
-    'ThirteenthMonth': 'http://thethirteenthmonth.comicgenesis.com/',
-    'ThisIs': 'http://cwcomics.comicgenesis.com/',
-    'ThisISLife': 'http://thisislife.comicgenesis.com/',
-    'ThisSideUp': 'http://tsu.comicgenesis.com/',
-    'ThisWeeksAdventureInPerth': 'http://twaip.comicgenesis.com/',
-    'ThoroughlyUseless': 'http://thoroughlyuseless.comicgenesis.com/',
-    'Thoughts': 'http://thoughts.comicgenesis.com/',
-    'TieGuy': 'http://tieguy.comicgenesis.com/',
-    'Tightsight': 'http://tightsight.comicgenesis.com/',
-    'Tile': 'http://tile.comicgenesis.com/',
-    'TimePig': 'http://timepig.comicgenesis.com/',
-    'Timmy': 'http://timmy.keenspot.com/',
-    'TipOfTheSword': 'http://tipofthesword.comicgenesis.com/',
-    'TitlePending': 'http://titlepend.comicgenesis.com/',
-    'ToddAndPenguin': 'http://www.toddandpenguin.com/',
-    'ToLightYourWay': 'http://badlydubbed.comicgenesis.com/',
-    'TonjaSteele': 'http://tonjasteele.comicgenesis.com/',
-    'Toolshed': 'http://toolshed.comicgenesis.com/',
-    'ToonPimpsPalace': 'http://mhitmand.comicgenesis.com/',
-    'TorchlightShootout': 'http://tlso.comicgenesis.com/',
-    'Torio': 'http://torio.comicgenesis.com/',
-    'TORMENT': 'http://torment.comicgenesis.com/',
-    'Tove': 'http://tove.comicgenesis.com/',
-    'Towner': ('http://towner.comicgenesis.com/', 'http://towner.comicgenesis.com/d/20070603.html'),
-    'TracyAndTristan': 'http://tandt.comicgenesis.com/',
-    'Transaction': 'http://transaction.comicgenesis.com/',
-    'Transplant': 'http://transplant.comicgenesis.com/',
-    'TreadingGround': 'http://treadingground.comicgenesis.com/',
-    'TreasureHunters': 'http://treasurehunters.keenspot.com/',
-    'TreeSprocket': 'http://treesprocket.comicgenesis.com/',
-    'TrentTheEmogoth': 'http://lifeispain.comicgenesis.com/',
-    'TrialAndError': 'http://trialanderror.comicgenesis.com/',
-    'TrialsInTheLight': 'http://trials.comicgenesis.com/',
-    'Triggerpoint': 'http://triggerpoint.comicgenesis.com/',
-    'TrikeEpoch': 'http://trikeepoch.comicgenesis.com/',
-    'TrilinkSaga': 'http://trilink.comicgenesis.com/',
-    'TripleTrouble': 'http://tripletrouble.comicgenesis.com/',
-    'TriquetraCats': 'http://triquetracats.comicgenesis.com/',
-    'TriumphantLosers': 'http://triumphantlosers.comicgenesis.com/',
-    'TrueBums': 'http://truebums.comicgenesis.com/',
-    'TrueGroove': 'http://truegroove.comicgenesis.com/',
-    'TupmansTheater': 'http://tupmans.comicgenesis.com/',
-    'TurboNinjaBastard': 'http://tnb.comicgenesis.com/',
-    'TurboTrak': 'http://turbotrak.comicgenesis.com/',
-    'TuringsFollyII': 'http://proteancomics.comicgenesis.com/',
-    'TwiceDestined': 'http://twicedestined.comicgenesis.com/',
-    'Twilight': 'http://zilelabelle.comicgenesis.com/',
-    'TwilightOfASorceress': 'http://kenjiandmokoto.comicgenesis.com/',
-    'TwistedTales': 'http://www.jastiv.com/',
-    'TwobitHeros': 'http://twobitheros.comicgenesis.com/',
-    'TwoEvilScientists': 'http://twoevilscientists.comicgenesis.com/',
-    'TwoLumps': 'http://www.twolumps.net/',
-    'TypeMismatch': 'http://typemismatch.comicgenesis.com/',
-    'UberBean': 'http://theuberbean.comicgenesis.com/',
-    'UbergeekSpriteWorld': 'http://www.ubergeekthecomic.com/',
-    'UglyGirl': 'http://nanda.comicgenesis.com/',
-    'UltimateAsshole': 'http://ultimateasshole.keenspot.com/',
-    'UmlautHouse': 'http://umlauthouse.comicgenesis.com/',
-    'UnbreakblePromises': 'http://unbreakablepromises.comicgenesis.com/',
-    'UncertaintyPrinciple': 'http://uncertaintyprinciple.comicgenesis.com/',
-    'UnchronologicalChroniclesOfFrank': 'http://joelathon.comicgenesis.com/',
-    'UnfamiliarReflection': 'http://emri.comicgenesis.com/',
-    'UnfunnyComputerFunnies': 'http://unfunny.comicgenesis.com/',
-    'Uni': 'http://uni.comicgenesis.com/',
-    'UnityARockstarSaga': 'http://elementalseekers.comicgenesis.com/',
-    'UnknownDarkness': 'http://unknowndarkness.comicgenesis.com/',
-    'UnknownSuperheroes': 'http://unknownheroes.comicgenesis.com/',
-    'UnlifeOnline': 'http://unlifeonline.comicgenesis.com/',
-    'UnoTheAlien': 'http://unothealien.comicgenesis.com/',
-    'UnrealCity': 'http://unrealcity.comicgenesis.com/',
-    'UnrealityCheck': 'http://unrealitycheck.comicgenesis.com/',
-    'Unrepentant': 'http://whyyy.comicgenesis.com/',
-    'UnsteadyEddie': 'http://steadyeddie.comicgenesis.com/',
-    'Untitled': 'http://untitled.comicgenesis.com/',
-    'UntitledLoveSong': 'http://west.comicgenesis.com/',
-    'Untouchables': 'http://untouchables.comicgenesis.com/',
-    'Upheaval': 'http://upheaval.comicgenesis.com/',
-    'UrbanFable': 'http://urbanfable.comicgenesis.com/',
-    'UsagiNoMori': 'http://usaginomori.comicgenesis.com/',
-    'Users': 'http://users.comicgenesis.com/',
-    'UsersVsUsers': 'http://usersvsusers.comicgenesis.com/',
-    'Vaeille': 'http://fox.comicgenesis.com/',
-    'VaguelyAmazing': 'http://vaguelyamazing.comicgenesis.com/',
-    'ValkyrieSymphony': 'http://allegranova.comicgenesis.com/',
-    'Valrar': 'http://valrar.comicgenesis.com/',
-    'VampiresCurse': 'http://vampire.comicgenesis.com/',
-    'VaporLock': 'http://vaporlock.comicgenesis.com/',
-    'Veena': 'http://veena.comicgenesis.com/',
-    'VengeanceAndWrath': 'http://vengeanceandwrath.comicgenesis.com/',
-    'VenusAscending': 'http://catgirldo.comicgenesis.com/',
-    'VenusEnvy': 'http://venusenvy.comicgenesis.com/',
-    'VermilionCage': 'http://vermilioncage.comicgenesis.com/',
-    'VerySpaceyDrama': 'http://spaceydrama.comicgenesis.com/',
-    'VetoXZahi': 'http://vetoxzahi.comicgenesis.com/',
-    'VicAndEdwards': 'http://vicandedwards.comicgenesis.com/',
-    'VictorianTimes': 'http://victorian.comicgenesis.com/',
-    'Victory': 'http://victoryman.comicgenesis.com/',
-    'Vikodin': 'http://vikodin.comicgenesis.com/',
-    'VirtualRodeo': 'http://virtualrodeo.comicgenesis.com/',
-    'Void': 'http://angrypotatostudios.comicgenesis.com/',
-    'VolatileMachinations': 'http://volatilemachinations.comicgenesis.com/',
-    'Volet': 'http://volet.comicgenesis.com/',
-    'Vreakerz': 'http://vreakerz.comicgenesis.com/',
-    'WackyAdventuresOfLunarAndKirk': 'http://lunarandkirk.comicgenesis.com/',
-    'Wacoon': 'http://wacoon.comicgenesis.com/',
-    'WaistHigh': 'http://waisthigh.comicgenesis.com/',
-    'WanderingOnes': 'http://wanderingones.com/',
-    'Wanted': 'http://wanted.comicgenesis.com/',
-    'WarningBucketsOfBlood': 'http://chaoticcomics.comicgenesis.com/',
-    'WarOfWinds': 'http://warofwinds.comicgenesis.com/',
-    'WarpedReality': 'http://warpedreality.comicgenesis.com/',
-    'WastedOnGaia': ('http://wog.comicgenesis.com/', 'http://wog.comicgenesis.com/Comic.html'),
-    'WayOfTheDodo': 'http://dodocomic.comicgenesis.com/',
-    'WeCouldntSing': 'http://wecouldntsing.comicgenesis.com/',
-    'WeGrewFur': 'http://m1nion.comicgenesis.com/',
-    'WelcomeToLemonHouseApartment': 'http://llewenayah.comicgenesis.com/',
-    'WelcomeToParadise': 'http://paradise.comicgenesis.com/',
-    'Werechild': 'http://werechild.comicgenesis.com/',
-    'Wereworld': 'http://wereworld.comicgenesis.com/',
-    'WestOfBathurst': 'http://westofbathurst.comicgenesis.com/',
-    'WHACKED': 'http://whackedcomic.comicgenesis.com/',
-    'Whatever': 'http://www.whatevercomic.com/',
-    'WhatTheHell': 'http://whatthehell.comicgenesis.com/',
-    'WhatYouDontSee': 'http://phantomlady4.comicgenesis.com/',
-    'WhereGodsAndMortalsDance': 'http://wgmd.comicgenesis.com/',
-    'WhiskeyAndMelancholy': 'http://sesquipedalophobe.comicgenesis.com/',
-    'WhiteAsh': 'http://whiteash.comicgenesis.com/',
-    'WhiteFeather': 'http://whitefeathermanga.comicgenesis.com/',
-    'WhymeComics': 'http://whymecomics.comicgenesis.com/',
-    'WhyNot': 'http://wynt.comicgenesis.com/',
-    'Wingmen': 'http://wingmen.comicgenesis.com/',
-    'WingsOfChange': 'http://wingsofchange.comicgenesis.com/',
-    'WinterHall': 'http://house.comicgenesis.com/',
-    'WishInOneHand': 'http://wishin1hand.comicgenesis.com/',
-    'WitchAndCat': 'http://witchandcat.comicgenesis.com/',
-    'Witchprickers': 'http://buxompiratewench.comicgenesis.com/',
-    'Witticisma': 'http://witticisma.comicgenesis.com/',
-    'WizardAndWarrior': 'http://wizardandwarrior.comicgenesis.com/',
-    'WlcdTheNewsChicks': 'http://lcd.comicgenesis.com/',
-    'Wolftigerfox': 'http://wolftigerfox.comicgenesis.com/',
-    'Wonderflu': 'http://wonderflu.comicgenesis.com/',
-    'WoodenLeg': 'http://thewoodenleg.comicgenesis.com/',
-    'WoodsForTheTrees': 'http://woodsforthetrees.comicgenesis.com/',
-    'WorldDomination': 'http://wdomination.comicgenesis.com/',
-    'WorldOfFenninRo': 'http://wofr.comicgenesis.com/',
-    'WorldOfFizz': 'http://fergoandenrique.comicgenesis.com/',
-    'WorldUpsideDown': 'http://nekofan.comicgenesis.com/',
-    'WorldWarp': 'http://ivstudios.comicgenesis.com/',
-    'WouldBeAngelsWouldBeGods': 'http://nekomimi.comicgenesis.com/',
-    'WrathOfHeaven': 'http://wrath.comicgenesis.com/',
-    'WrongBand': 'http://thewrongband.comicgenesis.com/',
-    'XCHOPSTICKSxNeo': 'http://chopsticksneo.comicgenesis.com/',
-    'Xenization': 'http://xenization.comicgenesis.com/',
-    'XGC': 'http://shaddowflight.comicgenesis.com/',
-    'YangChild': 'http://yangchild.comicgenesis.com/',
-    'YellowMoon': 'http://yellowmoon.comicgenesis.com/',
-    'YinAndYang': 'http://www.yin-and-yang.com/',
-    'YouDontGetItDoYou': 'http://youdontgetit.comicgenesis.com/',
-    'YourInAiryTract': 'http://yourinairytract.comicgenesis.com/',
-    'YouScrewedUp': 'http://youscrewedup.comicgenesis.com/',
-    'Z0MgTheComic': 'http://z0mg.comicgenesis.com/',
-    'Zap': 'http://www.zapinspace.com/',
-    'Zarla': 'http://zarla.comicgenesis.com/',
-    'ZebraGirl': 'http://zebragirl.keenspot.com/',
-    'ZeeraTheSpacePirate': 'http://zeera.comicgenesis.com/',
-    'Zelon': 'http://zelon.comicgenesis.com/',
-    'ZenekAndJozek': 'http://znj.comicgenesis.com/',
-    'Zeta': 'http://zetahome.comicgenesis.com/',
-    'ZeuU': 'http://zeurinu.comicgenesis.com/',
-    'ZilchAndSolo': 'http://zilchandsolo.comicgenesis.com/',
-    'ZombieHouse': 'http://zhouse.comicgenesis.com/',
-    'Zoology': 'http://thezoo.comicgenesis.com/',
-    'ZorroAndEster': 'http://zorroandester.comicgenesis.com/',
-    'Zortic': 'http://www.zortic.com/',
-    'ZosKias': 'http://kojika.comicgenesis.com/',
-    'ZuraZura': 'http://zurazura.comicgenesis.com/',
-}
-
-for name, urls in comics.items():
-    add(name, urls)
+# do not edit anything below since these entries are generated from scripts/update.sh
+# DO NOT REMOVE
+add('10', 'http://oneoverzero.comicgenesis.com/')
+add('13thLabour', 'http://the13labour.comicgenesis.com/')
+add('1999', 'http://mooneytheturtle.comicgenesis.com/')
+add('1stcoming', 'http://toon.comicgenesis.com/')
+add('21stCenturyCoeds', 'http://twentyfirstcenturycoeds.comicgenesis.com/')
+add('21stCenturyFox', 'http://techfox.comicgenesis.com/')
+add('2WayMirror', 'http://tande.comicgenesis.com/')
+add('54sinRed', 'http://final54sred.comicgenesis.com/')
+add('6D4', 'http://sixdfour.comicgenesis.com/')
+add('AAAAA', 'http://aaaaa.comicgenesis.com/')
+add('ABetterLifeThanThis', 'http://abetterlifethanthis.comicgenesis.com/')
+add('ACDeceptibotscomic', 'http://acdbot.comicgenesis.com/')
+add('ADVENTURERS', 'http://adventurers.comicgenesis.com/')
+add('AKitsuneKotaroStory', 'http://kitsunekotaro.comicgenesis.com/')
+add('AStepTooFar', 'http://asoftercore.comicgenesis.com/')
+add('ATasteofEvil', 'http://atasteofevil.comicgenesis.com/')
+add('AaaSoCAwesomenessandaSliceofCheese', 'http://retography.comicgen.com/')
+add('Acalltodestiny', 'http://madgoblin.comicgenesis.com/')
+add('Ace147', 'http://ace147.comicgenesis.com/')
+add('AcrossthePond', 'http://atp.comicgenesis.com/')
+add('ActiveStuporHeroes', 'http://stuporheroes.comicgenesis.com/')
+add('AdamandSei', 'http://adamandsei.comicgenesis.com/')
+add('AdamsRoadGang', 'http://adamsroadgang.comicgenesis.com/')
+add('Adente', 'http://adente.comicgenesis.com/')
+add('AdietheHomicidalManiac', 'http://spiffystuff.comicgenesis.com/')
+add('AdventuresInVastia', 'http://aiv.comicgenesis.com/')
+add('AdventuresofKiltman', 'http://kiltman.comicgenesis.com/')
+add('AdventuresoftheSTeam', 'http://ianthealy.comicgenesis.com/')
+add('Aggravation', 'http://aggravation.comicgenesis.com/')
+add('AiYaiYai', 'http://aiyaiyai.comicgenesis.com/')
+add('AinoYasha', 'http://ainoyasha.comicgenesis.com/')
+add('AllAboutEda', 'http://aae.comicgenesis.com/')
+add('AllRosesHaveThorns', 'http://allroses.comicgenesis.com/')
+add('AllWishes', 'http://allwishes.comicgenesis.com/')
+add('AlltheCommies', 'http://atc.comicgen.com/')
+add('AlphaBetaSoup', 'http://abs.comicgenesis.com/')
+add('AlphaLuna', 'http://alphaluna.comicgenesis.com/')
+add('AltaModaMetro', 'http://www.am-metro.net/')
+add('AltarGirl', 'http://altargirl.comicgenesis.com/')
+add('AlternateDelusions', 'http://altdelusions.comicgenesis.com/')
+add('AmazonSpaceRangers', 'http://amazons.comicgenesis.com/')
+add('Amerika', 'http://amerika.comicgenesis.com/')
+add('Amhelakimisadventures', 'http://amhelaki.comicgenesis.com/')
+add('AmorModerno', 'http://amormoderno.comicgenesis.com/')
+add('AndShineHeavenNow', 'http://hellsing.comicgenesis.com/')
+add('Andellon', 'http://andellon.comicgenesis.com/')
+add('AneirinsDen', 'http://aden.comicgenesis.com/')
+add('AngelBlood', 'http://angelblood.comicgenesis.com/')
+add('AngelWarriorComics', 'http://angelwarriorcomics.comicgenesis.com/')
+add('Angels', 'http://angelscomic.comicgenesis.com/')
+add('AngryDMonkey', 'http://www.angrydmonkey.com/')
+add('AngryPeople', 'http://angrypeople.comicgenesis.com/')
+add('AngrySoul', 'http://angrysoul.comicgen.com/')
+add('Angst', 'http://oldskool.comicgenesis.com/')
+add('AnimalInstinct', 'http://animalinstinct.comicgenesis.com/')
+add('AnimeMomentsinHistory', 'http://animehistory.comicgenesis.com/')
+add('Animenifesto', 'http://animenifesto.comicgenesis.com/')
+add('Anna', 'http://anna.comicgen.com/')
+add('AnthropomorphicHardware', 'http://hardware.comicgen.com/')
+add('AntiBunny', 'http://www.antibunny.com/')
+add('AntiChristDaiji', 'http://clad.comicgenesis.com/')
+add('AntiZombieArmy', 'http://antizombiearmy.comicgenesis.com/')
+add('Antifeline', 'http://antifeline.comicgenesis.com/')
+add('AnythingBut', 'http://anythingbut.comicgenesis.com/')
+add('AnythingButRealLife', 'http://anythingbutreallife.comicgenesis.com/')
+add('AnywhereButHere', 'http://anywherebuthere.comicgenesis.com/')
+add('Apathy', 'http://andrewtaylor.comicgenesis.com/')
+add('ApocHigh', 'http://apochigh.comicgenesis.com/')
+add('Apotheosis', 'http://apotheosis.comicgenesis.com/')
+add('Arcana', 'http://arcana.comicgenesis.com/')
+add('Ardra', 'http://ardra.comicgenesis.com/')
+add('Area15', 'http://area15.comicgenesis.com/')
+add('ArkkanysChibiTheater', 'http://arkkanystheater.comicgenesis.com/')
+add('ArnieGattonGalleryofComics', 'http://agallery.comicgenesis.com/')
+add('ArroganceinSimplicity', 'http://arrogance.comicgenesis.com/')
+add('ArtificialTime', 'http://artificialtime.comicgenesis.com/')
+add('Artwork', 'http://artwork.comicgenesis.com/')
+add('AscendingHeaven', 'http://ascendingheaven.comicgenesis.com/')
+add('Asianosity', 'http://asianosity.comicgenesis.com/')
+add('AssO279Tails', 'http://asso9tails.comicgenesis.com/')
+add('AsylumHeights', 'http://asylumheights.comicgenesis.com/')
+add('Avalon', 'http://avalon.comicgenesis.com/')
+add('BabeintheWoods', 'http://babeinthewoods.comicgenesis.com/')
+add('BackwaterPlanet', 'http://bobthespirit.comicgenesis.com/')
+add('BaidheTu', 'http://baidhetu.comicgenesis.com/')
+add('BallofYarn', 'http://ballofyarn.comicgenesis.com/')
+add('Balls', 'http://balls.comicgenesis.com/')
+add('BasilFlint', 'http://basilflint.comicgenesis.com/')
+add('BearCatBummers', 'http://bearcatbummers.comicgenesis.com/')
+add('BeautifulSkies', 'http://bskies.comicgenesis.com/')
+add('BebsinVideogameLand', 'http://videogame.comicgenesis.com/')
+add('BecauseofMathClass', 'http://mathclass.comicgenesis.com/')
+add('BeforeDawn', 'http://beforedawn.comicgenesis.com/')
+add('BelovedLeader', 'http://belovedleader.comicgenesis.com/')
+add('BendyStrawVampires', 'http://bsvampires.comicgenesis.com/')
+add('BetatheStrip', 'http://strangefour.comicgenesis.com/')
+add('BetweenRealities', 'http://realities.comicgenesis.com/')
+add('BeyondtheRadiator', 'http://radiator.comicgenesis.com/')
+add('Bhag', 'http://bhag.comicgenesis.com/')
+add('BigMouthComics', 'http://deathless.comicgenesis.com/')
+add('BigTom', 'http://bigtom.comicgenesis.com/')
+add('Bikou', 'http://bikou.comicgenesis.com/')
+add('BilltheMagician', 'http://billrocks.comicgen.com/')
+add('BishoujoKishiSailorHellsing', 'http://sailorhellsing.comicgenesis.com/')
+add('BishounenHunters', 'http://bishihunters.comicgenesis.com/')
+add('BitterSweetBS', 'http://bsbs.comicgenesis.com/')
+add('BlackBlue', 'http://blackandblue.comicgenesis.com/')
+add('BlackMagic', 'http://naohiro.comicgen.com/')
+add('BlackTapestries', 'http://blacktapestries.comicgen.com/')
+add('Blackaby', 'http://blackaby.comicgenesis.com/')
+add('Blahsville', 'http://blahsville.comicgenesis.com/')
+add('BlankGeorge', 'http://blankgeorge.comicgenesis.com/')
+add('Blatah', 'http://blatah.comicgenesis.com/')
+add('BleistiftAnsatzSissy', 'http://bleistiftansatz.comicgenesis.com/')
+add('BlindSight', 'http://blindsight.comicgenesis.com/')
+add('BloeCloudedNinja', 'http://bloeninja.comicgenesis.com/')
+add('BloodBound', 'http://www.bloodboundcomic.com/')
+add('BloodWing', 'http://bloodwing.comicgenesis.com/')
+add('BlottoStreet', 'http://blottostreet.comicgenesis.com/')
+add('BlueCollarCleanup', 'http://franko.comicgenesis.com/')
+add('BlueSkunkthewebcomic', 'http://freakofnature.comicgenesis.com/')
+add('BlueZombie', 'http://entity.comicgenesis.com/')
+add('BlueandOrange', 'http://blueandorange.comicgenesis.com/')
+add('Blunderclod', 'http://blunderclod.comicgenesis.com/')
+add('BoB', 'http://ymmot.comicgenesis.com/')
+add('BobNEd', 'http://bobned.comicgenesis.com/')
+add('BobOnline', 'http://bobonline.comicgenesis.com/')
+add('BoldStyle', 'http://boldstyle.comicgenesis.com/')
+add('BondsofBlood', 'http://bondsofblood.comicgenesis.com/')
+add('BoobsAhoy', 'http://boobsahoy.comicgenesis.com/')
+add('Bookwyrms', 'http://bookwyrms.comicgenesis.com/')
+add('BoomerExpress', 'http://www.boomerexpress.com/')
+add('BorderlineSanity', 'http://brdrline.comicgenesis.com/')
+add('BottomFlavor', 'http://bottomflavor.comicgen.com/')
+add('BradTheVampire', 'http://bradthevampire.comicgenesis.com/')
+add('Brainfries', 'http://www.brainfries.com/')
+add('BreakingtheDoldrum', 'http://breakingthedoldrum.comicgenesis.com/')
+add('BreakpointCity', 'http://breakpointcity.comicgenesis.com/')
+add('BreckenChronicles', 'http://brecken.comicgenesis.com/')
+add('Bridgette27sBelly', 'http://bridgette.comicgenesis.com/')
+add('BrightSpark', 'http://brightspark.comicgenesis.com/')
+add('Brinkerhoff', 'http://www.brinkcomic.com/')
+add('BrokenGlass', 'http://brokenglass.comicgenesis.com/')
+add('BrokenWorlds', 'http://brokenworlds.comicgenesis.com/')
+add('Brunswick', 'http://brunswick.comicgenesis.com/')
+add('BubbaandAlice', 'http://bubba.comicgenesis.com/')
+add('CAGE', 'http://cage.comicgenesis.com/')
+add('CTRO', 'http://llv.comicgenesis.com/')
+add('CUltureShocked', 'http://kitsune76.comicgenesis.com/')
+add('CameoComic', 'http://cameocomic.comicgenesis.com/')
+add('CampAlaska', 'http://campalaska.comicgen.com/')
+add('CampusLife', 'http://campuslife.comicgenesis.com/')
+add('CampusSafari', 'http://shivae2.comicgenesis.com/')
+add('CanYouKeepaSecret', 'http://cykas.comicgenesis.com/')
+add('Candi', 'http://www.candicomics.com/')
+add('CanisLupus', 'http://cheetahfox.comicgenesis.com/')
+add('CaptainGreyhound', 'http://captaingreyhound.comicgenesis.com/')
+add('CaptainMike', 'http://captainmike.comicgenesis.com/')
+add('CaptainSNES', 'http://captainsnes.comicgenesis.com/')
+add('CaptainSuppository', 'http://suppository.comicgenesis.com/')
+add('CapturetheMoment', 'http://capturethemoment.comicgenesis.com/')
+add('CarameledSugar', 'http://carameledsugar.comicgenesis.com/')
+add('Carnivores', 'http://carnivores.comicgenesis.com/')
+add('CarriedbytheWind', 'http://carried.comicgenesis.com/')
+add('CascadeFailure', 'http://cascadefailure.comicgenesis.com/')
+add('CaseyandAndy', 'http://sephalon.comicgenesis.com/')
+add('Catalyst', 'http://catalyst.comicgenesis.com/')
+add('CatboyattheCon', 'http://trades.comicgenesis.com/')
+add('Cats', 'http://cats.comicgenesis.com/')
+add('Chainroaker', 'http://chainroaker.comicgen.com/')
+add('Chair', 'http://chair.comicgen.com/')
+add('Chalkdust', 'http://chalkdustcomic.comicgenesis.com/')
+add('ChaosInc', 'http://chaosinc.comicgenesis.com/')
+add('ChaosKnot', 'http://chaosknot.comicgenesis.com/')
+add('ChaosRPG', 'http://chaosrpg.comicgenesis.com/')
+add('Chicanery', 'http://chicanery.comicgenesis.com/')
+add('ChildrenAtPlay', 'http://childrenatplay.comicgenesis.com/')
+add('Chris27sCollectionofCrappyComix', 'http://chrisread.comicgenesis.com/')
+add('ChronicMisadventures', 'http://chronic.comicgenesis.com/')
+add('ChubbyandNot', 'http://chubbyandnot.comicgen.com/')
+add('Cinderblock', 'http://cinderblock.comicgenesis.com/')
+add('Citron', 'http://citron.comicgenesis.com/')
+add('CitrusHouse', 'http://citrushouse.comicgenesis.com/')
+add('ClearwaterClan', 'http://clearwaterclan.comicgenesis.com/')
+add('Clematis', 'http://clematis.comicgenesis.com/')
+add('ClippedWings', 'http://clippedwings.comicgenesis.com/')
+add('ClosetOddity', 'http://closetoddity.comicgenesis.com/')
+add('CoACityofAscii', 'http://woot.comicgenesis.com/')
+add('CodeRage', 'http://coderage.comicgenesis.com/')
+add('Codename9', 'http://codename9.comicgenesis.com/')
+add('ColdPlanet', 'http://coldplanet.comicgenesis.com/')
+add('Collidingworlds', 'http://fearunianadv.comicgenesis.com/')
+add('Colour', 'http://colour.comicgenesis.com/')
+add('ComicLikeHell', 'http://comiclikehell.comicgenesis.com/')
+add('ComicMischief', 'http://foxdemon.comicgenesis.com/')
+add('Comicollage', 'http://comicollage.comicgenesis.com/')
+add('Comowilemdurniu', 'http://cmd.comicgenesis.com/')
+add('ComputerGameAddicts', 'http://cgaddicts.comicgenesis.com/')
+add('Concession', 'http://concession.comicgenesis.com/')
+add('ConfessionsofanEnglishCatburglar', 'http://catburglars.comicgenesis.com/')
+add('ConstantFlux', 'http://constantflux.comicgenesis.com/')
+add('Cooties', 'http://cooties.comicgenesis.com/')
+add('CornerAlley13', 'http://corneralley.comicgenesis.com/')
+add('CorporateLife', 'http://corporatelife.comicgenesis.com/')
+add('CorridorZ', 'http://billybones.comicgenesis.com/')
+add('CosmicAwareness', 'http://cosmicawareness.comicgenesis.com/')
+add('CosmicDrift', 'http://cosmicdrift.comicgenesis.com/')
+add('Countyoursheep', 'http://sheep123.comicgenesis.com/')
+add('CracklingSilence', 'http://crackling.comicgenesis.com/')
+add('Crackwalker', 'http://crackwalker.comicgenesis.com/')
+add('CrashBoomMagic', 'http://www.crash-boom-magic.com/')
+add('CrazySlowlyGoing', 'http://crazyslowlygoing.comicgenesis.com/')
+add('CreepyHead', 'http://creepyhead.comicgen.com/')
+add('CrimsonWings', 'http://sdcomics.comicgenesis.com/')
+add('CrookedHalo', 'http://chaoscricket.comicgenesis.com/')
+add('CrossRoads', 'http://anivasion.comicgenesis.com/')
+add('CrossStreetBlues', 'http://crossstreet.comicgenesis.com/')
+add('CrossroadsOfBoogerCounty', 'http://cobc.comicgenesis.com/')
+add('CryHavoc', 'http://cryhavoc.comicgenesis.com/')
+add('CuteThulhu', 'http://www.cutethulhu.com/')
+add('DATAROM', 'http://datarom.comicgen.com/')
+add('DBZRPGTheComic', 'http://dbzrpg.comicgenesis.com/')
+add('DIABOLICA', 'http://diabolica.comicgenesis.com/')
+add('DIVE', 'http://dive.comicgenesis.com/')
+add('DIfIK', 'http://difik.comicgenesis.com/')
+add('DakotasRidge', 'http://dakotasridge.comicgenesis.com/')
+add('DanskFolly', 'http://danskfolly.comicgenesis.com/')
+add('DarkKnight', 'http://dk.comicgenesis.com/')
+add('DarkSneakers', 'http://darksneakers.comicgenesis.com/')
+add('DarkWelkin', 'http://darkwelkin.comicgenesis.com/')
+add('Dasien', 'http://www.dasiencomic.com/')
+add('DataChasers', 'http://datachasers.comicgenesis.com/')
+add('David27sCrappy22Art22', 'http://earth.comicgenesis.com/')
+add('DavidandJohn', 'http://davidandjohn.comicgenesis.com/')
+add('DayintheLifeofaCosplayer', 'http://ditloac.comicgenesis.com/')
+add('DazeinaHaze', 'http://dazehaze.comicgenesis.com/')
+add('DeViations', 'http://dirkdancer.comicgenesis.com/')
+add('DeadEndStudios', 'http://deadendstudios.comicgenesis.com/')
+add('DeadlyAngels', 'http://deadlyangels.comicgenesis.com/')
+add('DecorativeEdison', 'http://dece.comicgenesis.com/')
+add('DedEnd', 'http://dedend.comicgenesis.com/')
+add('Delinquents', 'http://delinquents.comicgenesis.com/')
+add('DemonEater', 'http://demoneater.comicgenesis.com/')
+add('DemonicBoppu', 'http://demonicboppu.comicgenesis.com/')
+add('DemoralizedLogic', 'http://lostmind.comicgenesis.com/')
+add('DepthDefyingAdventuresofCaptNemo', 'http://captnemo.comicgenesis.com/')
+add('DetFemteEss', 'http://haykay.comicgenesis.com/')
+add('DexLives', 'http://dexlives.comicgenesis.com/')
+add('DigitalAge', 'http://digitalage.comicgenesis.com/')
+add('DigitalWar', 'http://www.digitalwar.co.uk/')
+add('DimBulbComics', 'http://www.dimbulbcomics.com/')
+add('Dindsneys', 'http://xxxx.comicgenesis.com/')
+add('DinoandSam', 'http://dinoandsam.comicgenesis.com/')
+add('DirkCrimsonEightBitDetective', 'http://dirkcrimson.comicgenesis.com/')
+add('DirtySocks', 'http://dirtysocks.comicgenesis.com/')
+add('DmxStoleMyCar', 'http://juggaloscrub.comicgenesis.com/')
+add('DogDays', 'http://dogdays.comicgen.com/')
+add('DogandPony', 'http://dogandpony.comicgen.com/')
+add('DogtheSpot', 'http://dogthespot.comicgenesis.com/')
+add('DominicDeegan', 'http://dominicdeegan.comicgenesis.com/')
+add('DominicDurgan', 'http://dominicdurgan.comicgenesis.com/')
+add('DonutKitty', 'http://donutkitty.comicgenesis.com/')
+add('DoodleDiaries', 'http://doodlediaries.comicgenesis.com/')
+add('DoomedUntoEternalVigilanceForever', 'http://duevf.comicgenesis.com/')
+add('DormSweetDorm', 'http://dormsweetdorm.comicgenesis.com/')
+add('DoubleyouTeeEff', 'http://doubleyouteeeff.comicgenesis.com/')
+add('Downscale', 'http://downscale.comicgenesis.com/')
+add('DownwardBound', 'http://downwardbound.comicgenesis.com/')
+add('Dragon27sBane', 'http://jasonwhitewaterz.comicgenesis.com/')
+add('DragonBallTM', 'http://dragonballtm.comicgenesis.com/')
+add('DragonBoy', 'http://dragonboy.comicgenesis.com/')
+add('DragonKingdoms', 'http://dragonkingdoms.comicgenesis.com/')
+add('Dragonaur', 'http://dragonaur.comicgenesis.com/')
+add('DragonintheCourtyard', 'http://ditc.comicgenesis.com/')
+add('DragonstarComics', 'http://www.fogclub.net/')
+add('DramaClub', 'http://dramaclub.comicgenesis.com/')
+add('DrawingTheLine', 'http://drawingtheline.comicgenesis.com/')
+add('DreamWay', 'http://dreamway.comicgenesis.com/')
+add('Dreamaniac', 'http://dreamaniaccomic.comicgenesis.com/')
+add('DreamersDynasty', 'http://kidneo66.comicgenesis.com/')
+add('DreamofaWorld', 'http://doaw.comicgenesis.com/')
+add('Drewford', 'http://drewford.comicgenesis.com/')
+add('DrunkMonkeyComicsPresents', 'http://drunkmonkey.comicgenesis.com/')
+add('DungeonDamage', 'http://dungeondamage.comicgenesis.com/')
+add('Dylan', 'http://roryobannion.comicgenesis.com/')
+add('DysfunctionJunction', 'http://dysfunctionjunction.comicgenesis.com/')
+add('Dyson27sCreek', 'http://dysonscreek.comicgen.com/')
+add('E2', 'http://e2e.comicgenesis.com/')
+add('ECWorldofFenninRo', 'http://wofr.comicgenesis.com/')
+add('ESHbyESH', 'http://esh.comicgenesis.com/')
+add('EarlandMyrtle', 'http://earlandmyrtle.comicgenesis.com/')
+add('EarthRiser', 'http://jscomix.comicgenesis.com/')
+add('EastLyme', 'http://airdeck007.comicgenesis.com/')
+add('EdgetheDevilhunter', 'http://edgeknight.comicgenesis.com/')
+add('EdibleDirt', 'http://catmydog.comicgenesis.com/')
+add('Eggbert', 'http://eggbert.comicgenesis.com/')
+add('Einstien27sDesk', 'http://einstiensdesk.comicgenesis.com/')
+add('ElementsSong', 'http://zina.comicgenesis.com/')
+add('ElfMadness', 'http://elfmadness.comicgenesis.com/')
+add('ElfOnlyInn', 'http://elfonlyinn.comicgenesis.com/')
+add('ElnifiChronicles', 'http://elnifichronicles.comicgenesis.com/')
+add('ElvenFate', 'http://elvenfate.comicgenesis.com/')
+add('Emma', 'http://miruku.comicgenesis.com/')
+add('EmperorofOrphans', 'http://emperoroforphans.comicgenesis.com/')
+add('EndlessLimit', 'http://endlesslimit.comicgenesis.com/')
+add('Ensuing', 'http://ensuing.comicgenesis.com/')
+add('Epigenesis', 'http://epigenesis.comicgenesis.com/')
+add('ErrorLevel3', 'http://errorboy.comicgenesis.com/')
+add('EscapemanAdventures', 'http://escapeman.comicgenesis.com/')
+add('Etcetera', 'http://etc.comicgen.com/')
+add('EternalCaffeineJunkie', 'http://ecj.comicgenesis.com/')
+add('EternityComplex', 'http://eternitycomplex.comicgenesis.com/')
+add('EvesApple', 'http://evesapple.comicgenesis.com/')
+add('EvilNeedsCandyToo', 'http://evilneedscandytoo.comicgenesis.com/')
+add('EvilOverlordsUnited', 'http://eou.comicgenesis.com/')
+add('EvilWenchesIncorporated', 'http://evilwenchesinc.comicgenesis.com/')
+add('Evilish', 'http://evilish.comicgenesis.com/')
+add('EvolBara', 'http://evolbara.comicgenesis.com/')
+add('EyeoftheMonkey', 'http://eyeofthemonkey.comicgenesis.com/')
+add('Ezailia', 'http://ezailia.comicgenesis.com/')
+add('FLEMComics', 'http://flem.comicgenesis.com/')
+add('Faces', 'http://faces.comicgenesis.com/')
+add('FaerieTales', 'http://faerietales.comicgenesis.com/')
+add('FairestandFallen', 'http://fairestandfallen.comicgenesis.com/')
+add('FairyTaleNewVillage', 'http://taiwanimation.comicgenesis.com/')
+add('FakingSanity', 'http://fakingsanity.comicgenesis.com/')
+add('FalseGods', 'http://falsegod.comicgenesis.com/')
+add('FancyThat', 'http://fancythat.comicgenesis.com/')
+add('FanserviceMeteorologyWin', 'http://aod.comicgen.com/')
+add('FantasyQwest', 'http://creatorauthorman.comicgenesis.com/')
+add('Fantazine', 'http://fantazin.comicgenesis.com/')
+add('FarchieArchie', 'http://farchie.comicgenesis.com/')
+add('Farmboy', 'http://farmboy.comicgenesis.com/')
+add('Fate27sTear', 'http://firecloud.comicgenesis.com/')
+add('FaultyLogic', 'http://faultylogic.comicgenesis.com/')
+add('FearfulAsymptote', 'http://fearful.comicgenesis.com/')
+add('FellowFreaks', 'http://fellowfreaks.comicgenesis.com/')
+add('Felney', 'http://felneycomic.comicgenesis.com/')
+add('FemmeFatale', 'http://femmefatale.comicgen.com/')
+add('FeverDream', 'http://feverdream.comicgenesis.com/')
+add('FiddlyBits', 'http://fiddlybits.comicgenesis.com/')
+add('FightCastorEvade', 'http://fightcastorevade.comicgenesis.com/')
+add('FilmFunnies', 'http://filmfunnies.comicgenesis.com/')
+add('FinalDraft', 'http://finaldraft.comicgenesis.com/')
+add('FireflyCross', 'http://fireflycross.comicgenesis.com/')
+add('FireontheMountain', 'http://fotm.comicgenesis.com/')
+add('FiveBucksanHour', 'http://fivebucksanhour.comicgenesis.com/')
+add('FiveMinuteComic', 'http://fiveminute.comicgenesis.com/')
+add('Fizzle', 'http://fizzle.comicgenesis.com/')
+add('Flatwood', 'http://flatwood.comicgenesis.com/')
+add('FletchersCave', 'http://fletcherscave.comicgenesis.com/')
+add('FlinchandFriends', 'http://flinch.comicgen.com/')
+add('FlipandSplog', 'http://fas.comicgenesis.com/')
+add('Flounderville', 'http://flounderville.comicgenesis.com/')
+add('FloydCartoons', 'http://floydcartoons.comicgenesis.com/')
+add('Flunkies', 'http://flunkies.comicgenesis.com/')
+add('Flux', 'http://flux.comicgenesis.com/')
+add('Flyinghighandlow', 'http://highandlow.comicgenesis.com/')
+add('FnK', 'http://fnk.comicgenesis.com/')
+add('FollowTheLeaderAndTurnip', 'http://jadesche.comicgenesis.com/')
+add('Foma', 'http://foma.comicgenesis.com/')
+add('FoolsGold', 'http://foolsgold.comicgenesis.com/')
+add('Footballman', 'http://footballman.comicgenesis.com/')
+add('ForcesofGoodandEvil', 'http://goodandevil.comicgenesis.com/')
+add('ForfeitZero', 'http://forfeitzero.comicgenesis.com/')
+add('FortheLoveofYaoi', 'http://fortheloveofyaoi.comicgenesis.com/')
+add('FourDays', 'http://fourdays.comicgenesis.com/')
+add('Fourboys', 'http://fourboys.comicgenesis.com/')
+add('Fox27sFreakyAdventures', 'http://basa.comicgenesis.com/')
+add('FoxTails', 'http://foxtails.comicgenesis.com/')
+add('Framed', 'http://framed.comicgenesis.com/')
+add('FreakU', 'http://freaku.comicgenesis.com/')
+add('FreaksandG33k', 'http://freaksandgeeks.comicgenesis.com/')
+add('FredtheDot', 'http://fredthedot.comicgenesis.com/')
+add('FreeParking', 'http://freeparking.comicgenesis.com/')
+add('FromTheAntiCulture', 'http://anticulture.comicgenesis.com/')
+add('FromTheMargin', 'http://fromthemargin.comicgenesis.com/')
+add('FruitFlies', 'http://fruitflies.comicgenesis.com/')
+add('FunwithPants', 'http://funwithpants.comicgenesis.com/')
+add('Furmentation', 'http://xodin.comicgenesis.com/')
+add('FurryBlackDevil', 'http://www.furryblackdevil.com/')
+add('FurthiaHigh', 'http://furthiahigh.comicgenesis.com/')
+add('FyshbowlComics', 'http://fysh.comicgenesis.com/')
+add('GEM', 'http://keltzy.comicgenesis.com/')
+add('GODLIKE', 'http://godlike.comicgenesis.com/')
+add('GUComics', 'http://gucomics.comicgenesis.com/')
+add('GalacticAcademy', 'http://galacticacademy.comicgenesis.com/')
+add('Galacticus', 'http://galacticus.comicgenesis.com/')
+add('GambitasBishounen', 'http://snigepippi.comicgenesis.com/')
+add('GameJumpers', 'http://gamejumpers.comicgenesis.com/')
+add('GameMisconduct', 'http://gmhockey.comicgenesis.com/')
+add('Gameboy', 'http://gameboy.comicgenesis.com/')
+add('GamerPsychotica', 'http://gp.comicgenesis.com/')
+add('GamersParadox', 'http://gamersparadox.comicgenesis.com/')
+add('GamingGuardians', 'http://gamingguardians.comicgenesis.com/')
+add('GamingReality', 'http://gamingreality.comicgenesis.com/')
+add('Gao', 'http://gao.comicgenesis.com/')
+add('GeebasonParade', 'http://geebasonparade.comicgenesis.com/')
+add('Gemini', 'http://gemini.comicgenesis.com/')
+add('GeminiBright', 'http://geminibright.comicgenesis.com/')
+add('GemutationsPlague', 'http://darwin.comicgenesis.com/')
+add('GenerationDumb', 'http://generationdumb.comicgenesis.com/')
+add('GeorgetheSecond', 'http://george2.comicgenesis.com/')
+add('GhastlysGhastlyComic', 'http://www.ghastlycomic.com/')
+add('Ghostz', 'http://ghostz.comicgenesis.com/')
+add('GlamourLust', 'http://glamourlust.comicgenesis.com/')
+add('GlickGlidewell', 'http://glickglidewell.comicgenesis.com/')
+add('Gnerds2000', 'http://gnerds.comicgenesis.com/')
+add('Gnomes', 'http://gnomes.comicgenesis.com/')
+add('GoCrazy', 'http://gocrazy.comicgenesis.com/')
+add('GoFish', 'http://gofish.comicgenesis.com/')
+add('GoForIt', 'http://goforit.comicgen.com/')
+add('GodtheDevilandaMonkey', 'http://godthedevilandamonkey.comicgenesis.com/')
+add('GoldenAge', 'http://goldenage.comicgenesis.com/')
+add('GoneAstray', 'http://goneastray.comicgenesis.com/')
+add('Gonefor300days', 'http://g4300d.comicgenesis.com/')
+add('GoodnEvil', 'http://gne.comicgenesis.com/')
+add('GorgeousPrincessCreamyBeamy', 'http://creamybeamy.comicgenesis.com/')
+add('GothBoy', 'http://gothboymo.comicgenesis.com/')
+add('GothyMcGee', 'http://gothymcgee.comicgenesis.com/')
+add('GratuitousMangaStyle', 'http://mangastyle.comicgenesis.com/')
+add('GreenLightGo', 'http://glg.comicgenesis.com/')
+add('Grimage', 'http://grimage.comicgenesis.com/')
+add('GrossePointeDogs', 'http://gpdogs.comicgenesis.com/')
+add('GroundFloor', 'http://groundfloor.comicgenesis.com/')
+add('Grumpythefathamster', 'http://burp.comicgenesis.com/')
+add('GuiShinTaeChiAKAGhostHunter', 'http://ghosthunter.comicgenesis.com/')
+add('HERZBLUT', 'http://herzblut.comicgenesis.com/')
+add('HalflightBreaking', 'http://halflight.comicgenesis.com/')
+add('HangingAround', 'http://hangingaround.comicgenesis.com/')
+add('Hans', 'http://hans.comicgenesis.com/')
+add('HardUnderbelly', 'http://underbelly.comicgenesis.com/')
+add('HaypennyRag', 'http://haypenny.comicgenesis.com/')
+add('HazardousScience', 'http://hazsci.comicgenesis.com/')
+add('HazardsWake', 'http://hazardswake.comicgenesis.com/')
+add('Hbomb27sBrandNewComic', 'http://hbombshow.comicgenesis.com/')
+add('HeadDoctorProductions', 'http://headdoctor.comicgenesis.com/')
+add('HealerOnFeatheredWings', 'http://selsachronicles.comicgenesis.comhttp://selsachronicles.comicgenesis.com//')
+add('HeartofaDragon', 'http://heartofadragon.comicgenesis.com/')
+add('Hedgehogs', 'http://hedgehogs.comicgenesis.com/')
+add('HellSweetHell', 'http://hellsweethell.comicgen.com/')
+add('Hepcats', 'http://hepcats.comicgenesis.com/')
+add('HereThereBeDragons', 'http://heretherebedragons.comicgenesis.com/')
+add('HeroAcademy', 'http://heroacademy.comicgenesis.com/')
+add('HeroAndapossGuild', 'http://herosguild.comicgenesis.com/')
+add('HeroInTraining', 'http://thereisnosaurus.comicgenesis.com/')
+add('HeyFox', 'http://heyfox.comicgenesis.com/')
+add('Hiakuma', 'http://hiakuma.comicgenesis.com/')
+add('HighMaintenance', 'http://highmaintenance.comicgenesis.com/')
+add('HighSchoolRPG', 'http://highschoolrpg.comicgenesis.com/')
+add('HitoTsukitoHoshinoTama', 'http://htht.comicgenesis.com/')
+add('HoleintheWall', 'http://holeinthewall.comicgenesis.com/')
+add('HomeFries', 'http://friedgreencomics.comicgenesis.com/')
+add('HoosierDaddy', 'http://hoosiermorons.comicgenesis.com/')
+add('Horndog', 'http://horndog.comicgenesis.com/')
+add('HorriblyOldSchoolSuperFightFight', 'http://superfightfight.comicgenesis.com/')
+add('HorseshoesandHandgrenades', 'http://handgrenades.comicgenesis.com/')
+add('HotelGrim', 'http://hotelgrim.comicgenesis.com/')
+add('HouseofBob', 'http://dustbunny.comicgen.com/')
+add('HowISeeIt', 'http://toasterpip.comicgenesis.com/')
+add('HowNottoRunAComic', 'http://hownottorunacomic.comicgenesis.com/')
+add('HowtoCookaSpasticChicken', 'http://wench.comicgenesis.com/')
+add('HurricaneParty', 'http://hurricaneparty.comicgenesis.com/')
+add('Hypnoholic', 'http://hypnoholic.comicgenesis.com/')
+add('IAlwaysWakeUpLazy', 'http://www.alwayslazy.com/')
+add('IBlameDanny', 'http://vileterror.comicgenesis.com/')
+add('IDGet', 'http://idget.comicgenesis.com/')
+add('IDIC398TS', 'http://idiots.comicgenesis.com/')
+add('IEatFood', 'http://ieatfood.comicgen.com/')
+add('IdleMinds', 'http://idleminds.comicgenesis.com/')
+add('Ifeeltwitchy', 'http://meghasissues.comicgenesis.com/')
+add('Ihopeyoualldie', 'http://ihateyou.comicgenesis.com/')
+add('IllicitMiracles', 'http://illicitmiracles.comicgenesis.com/')
+add('ImpendingDoom', 'http://impending.comicgenesis.com/')
+add('InANutshell', 'http://nutshellcomics.comicgenesis.com/')
+add('InSearchofHappyEndings', 'http://isohe.comicgenesis.com/')
+add('InSpriteOfTheFaqs', 'http://inspriteofthefaqs.comicgenesis.com/')
+add('InTransit', 'http://squazzy.comicgenesis.com/')
+add('InappropriateIrving', 'http://irving.comicgenesis.com/')
+add('IndefensiblePositions', 'http://indepos.comicgenesis.com/')
+add('InfiniteSouls', 'http://keyoko.comicgenesis.com/')
+add('InkyorShaggy', 'http://inkyorshaggy.comicgenesis.com/')
+add('InsanityFair', 'http://insanityfair.comicgenesis.com/')
+add('InsideJoke', 'http://insidejoke.comicgenesis.com/')
+add('InsidetheBox', 'http://inside.comicgenesis.com/')
+add('IntergalacticSpaceSheriffs', 'http://spacesheriffs.comicgenesis.com/')
+add('InternationalHopeFoundation', 'http://ihf.comicgenesis.com/')
+add('IpsoFacto', 'http://ipsofactocomic.comicgenesis.com/')
+add('ItHurtsToBeThatStupid', 'http://ihtbts.comicgenesis.com/')
+add('ItsGravy', 'http://itsgravy.comicgenesis.com/')
+add('JAndSOddjobs', 'http://oddworld.comicgen.com/')
+add('JBBcomics', 'http://jbbcomics.comicgenesis.com/')
+add('JRockShellShock', 'http://jrock.comicgenesis.com/')
+add('JWalkinAndapos', 'http://jwalkin.comicgenesis.com/')
+add('JackSplat', 'http://jacksplat.comicgenesis.com/')
+add('JackiesFridge', 'http://jackiesfridge.comicgenesis.com/')
+add('JagerRising', 'http://jinoku.comicgenesis.com/')
+add('JamieandNick', 'http://www.jamieandnick.com/')
+add('JapanimationFist', 'http://japanimationfist.comicgenesis.com/')
+add('JasonLovesHisGrandpa', 'http://jlhg.comicgenesis.com/')
+add('JavanteasFate', 'http://javantea.comicgenesis.com/')
+add('JedandDark', 'http://jedndark.comicgenesis.com/')
+add('Jersey', 'http://jersey.comicgenesis.com/')
+add('JeuDeVivre', 'http://gameoflife.comicgenesis.com/')
+add('JimTheVikingTheUnanimatedSeries', 'http://jtv.comicgenesis.com/')
+add('Jirale', 'http://jirale.comicgenesis.com/')
+add('Jitterati', 'http://jitterati.comicgenesis.com/')
+add('JoBeth', 'http://www.jobeth.net/')
+add('JoeandPip', 'http://joeandpip.comicgenesis.com/')
+add('JonesAvenue', 'http://jonesave.comicgenesis.com/')
+add('JourneysDown', 'http://journeys.comicgenesis.com/')
+add('Joyride', 'http://www.joyridecomic.com/')
+add('JulyStreet', 'http://julystreet.comicgenesis.com/')
+add('JustAnotherEscape', 'http://www.justanotherescape.com/')
+add('JustWeird', 'http://justweird.comicgenesis.com/')
+add('JuvenileDiversion', 'http://juvenilediversion.comicgenesis.com/')
+add('KariandDoug', 'http://karindoug.comicgenesis.com/')
+add('KarmaSlave', 'http://karmaslave.comicgenesis.com/')
+add('Kazei5Rebirth', 'http://whiterabbit.comicgenesis.com/')
+add('KeatonandCompany', 'http://keaton.comicgenesis.com/')
+add('KeenLace', 'http://keenlace.comicgenesis.com/')
+add('Kelen', 'http://kelen.comicgenesis.com/')
+add('KernyMantisComics', 'http://kernymantis.comicgenesis.com/')
+add('KiagiSwordscat', 'http://kiagi.comicgenesis.com/')
+add('KidsStuff', 'http://kidsstuff.comicgenesis.com/')
+add('KillingTime', 'http://killingtime.comicgenesis.com/')
+add('KindaLikeReality', 'http://klr.comicgenesis.com/')
+add('KissthePan', 'http://kissthepan.comicgenesis.com/')
+add('KitnKayBoodle', 'http://kitnkayboodle.comicgenesis.com/')
+add('KitsuneJewel', 'http://kitsunejewel.comicgenesis.com/')
+add('KittyCattyGames', 'http://kittycattygames.comicgenesis.com/')
+add('KiwiDay', 'http://kiwiday.comicgenesis.com/')
+add('KiwiDayN', 'http://kiwidayn.comicgenesis.com/')
+add('KnightsOfTheNexus', 'http://www.knightsofthenexus.com/')
+add('KnightsoftheOldCoding', 'http://kotoc.comicgenesis.com/')
+add('KoFightClub', 'http://www.kofightclub.com/')
+add('KodomoNomo', 'http://kodomonomo.comicgenesis.com/')
+add('Kokiro', 'http://kokiro.comicgenesis.com/')
+add('KungFounded', 'http://kungfounded.comicgenesis.com/')
+add('KungFuPandas', 'http://kungfupandas.comicgenesis.com/')
+add('KurenaiMashin', 'http://km.comicgen.com/')
+add('LCDLowestCommonDenominator', 'http://lcd.comicgenesis.com/')
+add('LXFTheLeagueofExtraordinaryFurries', 'http://lxfurries.comicgenesis.com/')
+add('LabBratz', 'http://labbratz.comicgenesis.com/')
+add('LabGoatsInc', 'http://labgoats.comicgenesis.com/')
+add('Lacunae', 'http://lacunae.comicgenesis.com/')
+add('LandofGreed', 'http://zarrillo.comicgenesis.com/')
+add('LangLang', 'http://langlang.comicgenesis.com/')
+add('LarryandOliver', 'http://lao.comicgenesis.com/')
+add('Laserwing', 'http://laserwing.comicgenesis.com/')
+add('LatentIntent', 'http://latentintent.comicgenesis.com/')
+add('LeanOnMe', 'http://jadaze.comicgenesis.com/')
+add('LegendOfTheFour', 'http://legendoffour.comicgen.com/')
+add('LegendaryMagicalAngelPrincessCeleste', 'http://celeste.comicgenesis.com/')
+add('LegendoftheGalaxyWar', 'http://galaxylegend.comicgenesis.com/')
+add('LegendsofRovana', 'http://rovana.comicgenesis.com/')
+add('Leo', 'http://leoninecomics.comicgenesis.com/')
+add('LetThereBeLight', 'http://ltbl.comicgenesis.com/')
+add('LeuandYar', 'http://leunam12.comicgenesis.com/')
+add('Life27saWitch', 'http://lifesawitch.comicgenesis.com/')
+add('LifeGoesOn', 'http://lgo.comicgenesis.com/')
+add('LifeatBayside', 'http://bayside.comicgenesis.com/')
+add('LifeinBellCounty', 'http://bellcountylife.comicgen.com/')
+add('LifeinaNutshell', 'http://hiroslife.comicgenesis.com/')
+add('LifeisUnfair', 'http://lifeisunfair.comicgen.com/')
+add('LifeofBuddha', 'http://lifeofbuddha.comicgenesis.com/')
+add('LifeonForbez', 'http://cdc.comicgenesis.com/')
+add('Lifesuchasitis', 'http://lifesuchasitis.comicgenesis.com/')
+add('Lightbringer', 'http://lightbringer.comicgenesis.com/')
+add('LikeItIs', 'http://likeitis.comicgenesis.com/')
+add('LilDude', 'http://lildudecomics.comicgenesis.com/')
+add('LilFAS', 'http://lilfas.comicgenesis.com/')
+add('LilianeBiDyke', 'http://liliane.comicgenesis.com/')
+add('LinT', 'http://lint.comicgenesis.com/')
+add('LineGuy', 'http://lineguy.comicgenesis.com/')
+add('LinktotheBoards', 'http://linked.comicgenesis.com/')
+add('Linnyanie', 'http://linnyanie.comicgenesis.com/')
+add('LiterallySpeaking', 'http://literallyspeaking.comicgenesis.com/')
+add('LittleSaiyalings', 'http://saiyalings.comicgenesis.com/')
+add('LobbyGirlsHaveAReputation', 'http://lobbygirls.comicgenesis.com/')
+add('Loserz', 'http://loserzcomic.comicgenesis.com/')
+add('LostinTransit', 'http://lostintransit.comicgenesis.com/')
+add('LostinTranslation', 'http://lit.comicgenesis.com/')
+add('LoveBites', 'http://lovebites.comicgenesis.com/')
+add('LoveMeNot', 'http://lovemenot.comicgen.com/')
+add('LowerPlace', 'http://lowerplace.comicgenesis.com/')
+add('LoxieAndZoot', 'http://loxieandzoot.comicgenesis.com/')
+add('Lumia27sKingdom', 'http://lumia.comicgenesis.com/')
+add('LunchTime', 'http://lunchtime.comicgenesis.com/')
+add('Lunchtable', 'http://lunchtableonline.comicgenesis.com/')
+add('LustForFreelance', 'http://imabubble.comicgenesis.com/')
+add('MEHComics', 'http://mehcomics.comicgenesis.com/')
+add('MORONS', 'http://morons.comicgenesis.com/')
+add('MTranc3', 'http://mtranc3.comicgenesis.com/')
+add('MacHall', 'http://machall.comicgenesis.com/')
+add('MadWorld', 'http://madworld.comicgenesis.com/')
+add('Maddland', 'http://maddland.comicgenesis.com/')
+add('MadeInHeaven', 'http://mih.comicgenesis.com/')
+add('Magellan', 'http://magellan.comicgenesis.com/')
+add('MagiIndustries', 'http://magiindustries.comicgenesis.com/')
+add('MahouShoujoerUsagi', 'http://usagi.comicgenesis.com/')
+add('Majestic7', 'http://majestic7.comicgenesis.com/')
+add('ManicGraffiti', 'http://manic.comicgenesis.com/')
+add('ManorJam', 'http://manorjam.comicgenesis.com/')
+add('Marachan', 'http://marachan.comicgenesis.com/')
+add('MarchingToADifferentAccordion', 'http://accordion.comicgenesis.com/')
+add('MaryQuiteContrary', 'http://marycontrary.comicgenesis.com/')
+add('MassProduction', 'http://massproduction.comicgenesis.com/')
+add('MasterMizzysHappyHorribleMutantMachine', 'http://megarose.comicgenesis.com/')
+add('MaximumWhimsy', 'http://maximumwhimsy.comicgenesis.com/')
+add('MayIHelpYou', 'http://mayihelpyou.comicgenesis.com/')
+add('McVille', 'http://mcville.comicgenesis.com/')
+add('MechagicalGirlLisaANT', 'http://ant.comicgenesis.com/')
+add('MediumRare', 'http://mediumrare.comicgenesis.com/')
+add('MeetTheDweebles', 'http://dweebles.comicgenesis.com/')
+add('MegaCool', 'http://megacool.comicgenesis.com/')
+add('Meiosis', 'http://meiosis.comicgenesis.com/')
+add('MelEverymanAndHisSarcasticTalkingHousepetAmbrose', 'http://everyman.comicgenesis.com/')
+add('MenschunsererZeitGerman', 'http://muz.comicgenesis.com/')
+add('Michikomonogatari', 'http://isukiyomi.comicgenesis.com/')
+add('Midcentral', 'http://midcentral.comicgenesis.com/')
+add('MidnorthFlourCo', 'http://mnflourco.comicgen.com/')
+add('MiketheMulletThing', 'http://mikethemulletthing.comicgenesis.com/')
+add('Mindmistress', 'http://mindmistress.comicgenesis.com/')
+add('Mindtap', 'http://mindtap.comicgenesis.com/')
+add('MinimalismSucks', 'http://minisuck.comicgenesis.com/')
+add('MinimumSecurityUniversity', 'http://mshs.comicgenesis.com/')
+add('MintCondition', 'http://mintcondition.comicgenesis.com/')
+add('MisadventuresinPhysics', 'http://mip.comicgenesis.com/')
+add('MisadventuresoftheDrowWizard', 'http://motdw.comicgenesis.com/')
+add('MixedMyth', 'http://mixedmyth.comicgenesis.com/')
+add('MobileMadness', 'http://mobilemadness.comicgenesis.com/')
+add('ModelStudent', 'http://darkmaxtor.comicgenesis.com/')
+add('MolluskAntics', 'http://molluskantics.comicgenesis.com/')
+add('MoonCrest24', 'http://mooncrest.comicgenesis.com/')
+add('MorganintheMorning', 'http://mitm.comicgenesis.com/')
+add('MorysEducation', 'http://mory.comicgenesis.com/')
+add('MrBoffleandFriends', 'http://mrboffle.comicgenesis.com/')
+add('MrBubbles', 'http://profound.comicgenesis.com/')
+add('MrFooAdventures', 'http://foo.comicgenesis.com/')
+add('MrPinkBlob', 'http://mrpinkblob.comicgenesis.com/')
+add('MrScience', 'http://mrscience.comicgenesis.com/')
+add('Muertitos', 'http://muertitos.comicgenesis.com/')
+add('Muffythelitlerabbit', 'http://muffyrabbit.comicgenesis.com/')
+add('MugenAnime', 'http://mugen.comicgenesis.com/')
+add('MugenCrosswires', 'http://mugencrosswires.comicgenesis.com/')
+add('Mushian', 'http://tentoumushi.comicgenesis.com/')
+add('Mutant59', 'http://wrathofautumn.comicgenesis.com/')
+add('MyAngelYouAreAngel', 'http://angel.comicgenesis.com/')
+add('MyBrainHurts', 'http://mybrainhurts.comicgenesis.com/')
+add('MyLifeinBlue', 'http://mylifeinblue.comicgenesis.com/')
+add('MysteryCastle', 'http://mysterycastle.comicgenesis.com/')
+add('MysticRevolution', 'http://mysticrevolution.comicgen.com/')
+add('MythocorpIntl', 'http://mythocorp.comicgenesis.com/')
+add('NAFTANorthAmericanFreeToonAgreementalsoYankuckcanee', 'http://nafta.comicgenesis.com/')
+add('NKatz', 'http://nkatz.comicgenesis.com/')
+add('NahastLandsofStrife', 'http://nahast.comicgenesis.com/')
+add('NardManga', 'http://nardmanga.comicgenesis.com/')
+add('NastyChocolates', 'http://nastychocolates.comicgenesis.com/')
+add('NeTrek', 'http://netrek.comicgen.com/')
+add('NeedleandThread', 'http://needleandthread.comicgenesis.com/')
+add('NeglectedMarioCharacterComix', 'http://nccomix.comicgenesis.com/')
+add('NekkoandJoruba', 'http://nekkoandjoruba.comicgen.com/')
+add('NekoTheKitty', 'http://nekothekitty.comicgenesis.com/')
+add('Nekotime', 'http://nekotime.comicgenesis.com/')
+add('Nemutionjewel', 'http://nemution.comicgenesis.com/')
+add('Nerdgasm', 'http://nerdgasm.comicgenesis.com/')
+add('Nerdz', 'http://www.screwballmcgoo.net/')
+add('Nervillsaga', 'http://nervillsaga.comicgenesis.com/')
+add('NetherOakasuburbanadventure', 'http://netheroak.comicgenesis.com/')
+add('Netjeru', 'http://netjeru.comicgenesis.com/')
+add('NeverYouMind', 'http://neveryoumind.comicgenesis.com/')
+add('NewProject', 'http://forumite.comicgenesis.com/')
+add('NewTechLab', 'http://gaiata.comicgenesis.com/')
+add('NewTraditionalists', 'http://newtraditionalists.comicgenesis.com/')
+add('Newscast', 'http://newscast.comicgenesis.com/')
+add('NiceGuysFinishLast', 'http://niceguys.comicgenesis.com/')
+add('NightShiftWEBComix', 'http://webcomix.comicgenesis.com/')
+add('NighthawkDayhawk', 'http://nighthawkdayhawk.comicgenesis.com/')
+add('NightwolfCentral', 'http://nightwolfcentral.comicgenesis.com/')
+add('No4thWalltoBreak', 'http://no4thwalltobreak.comicgenesis.com/')
+add('NoCrap', 'http://nocrap.comicgen.com/')
+add('NoNeedForBushido', 'http://noneedforbushido.comicgenesis.com/')
+add('NoTimeForLife', 'http://randyraven.comicgenesis.com/')
+add('NobtheBlob', 'http://nobtheblob.comicgen.com/')
+add('NoneMoreComic', 'http://nonemore.comicgenesis.com/')
+add('NosesOptional', 'http://nosesoptional.comicgenesis.com/')
+add('NothingLikeSanity', 'http://nothinglikesanity.comicgenesis.com/')
+add('NothingSpecial', 'http://nothingspecial.comicgenesis.com/')
+add('NowhereUniversity', 'http://nowhereu.comicgenesis.com/')
+add('NthDimension', 'http://nthdimension.comicgenesis.com/')
+add('NymphsoftheWest', 'http://hesperides.comicgenesis.com/')
+add('ODARKCITY', 'http://odark.comicgenesis.com/')
+add('ODCKS', 'http://odcks.comicgenesis.com/')
+add('ORBVS', 'http://orbvs.comicgenesis.com/')
+add('Oddities', 'http://oddities.comicgen.com/')
+add('OfDoom', 'http://ofdoom.comicgenesis.com/')
+add('OfSomethingandNothinginParticular', 'http://osanip.comicgenesis.com/')
+add('OffTheWall', 'http://offthewall.comicgenesis.com/')
+add('Olliverandthatotherguy', 'http://olliverotherguy.comicgenesis.com/')
+add('OmakeOmatsuri', 'http://omakeomatsuri.comicgenesis.com/')
+add('Omoshiroku', 'http://omoshiroku.comicgenesis.com/')
+add('OnThePlayground', 'http://otp.comicgenesis.com/')
+add('OnandAcross', 'http://theopell.comicgenesis.com/')
+add('OnceUponASTAR', 'http://lonestar.comicgenesis.com/')
+add('OneHourAxis', 'http://kectug.comicgenesis.com/')
+add('OnlyOne', 'http://www.onlyonecomic.com/')
+add('OopsNevermind', 'http://www.nevermindcomic.com/')
+add('OpportunityofaLifetime', 'http://carpathia.comicgenesis.com/')
+add('OralSex', 'http://birdland.comicgenesis.com/')
+add('OrangePenguins', 'http://orangepenguins.comicgenesis.com/')
+add('Orbz', 'http://orbz.comicgenesis.com/')
+add('OrdinaryPeople', 'http://ordinarypeople.comicgenesis.com/')
+add('OtakuKyokai', 'http://otakukyokai.comicgenesis.com/')
+add('OtenbaFiles', 'http://neohazard.comicgenesis.com/')
+add('OurTripThruHell', 'http://phritzi.comicgenesis.com/')
+add('OutOfCharacterComics', 'http://ooccomic.comicgenesis.com/')
+add('OwMySanity', 'http://owmysanity.comicgenesis.com/')
+add('PANDORA', 'http://pandoranohako.comicgenesis.com/')
+add('PET', 'http://petcomic.comicgenesis.com/')
+add('PPMBnGRF', 'http://ppmbngrf.comicgenesis.com/')
+add('PSIAPessimisticSenseofInadequacy', 'http://fesworks.comicgenesis.com/')
+add('PacoStand', 'http://paco.comicgenesis.com/')
+add('PaladinsAndaposHaven', 'http://paladin.comicgen.com/')
+add('PandP', 'http://pandpcomic.comicgenesis.com/')
+add('Pandala', 'http://pandala.comicgen.com/')
+add('Pander', 'http://pander.comicgenesis.com/')
+add('Pandimaniacs', 'http://pandimaniacs.comicgenesis.com/')
+add('PanelsTheExperimentation', 'http://panels.comicgenesis.com/')
+add('Panic7', 'http://panic7.comicgenesis.com/')
+add('PanicHighSchool', 'http://panichighschool.comicgenesis.com/')
+add('PantsofDeath', 'http://pantsofdeath.comicgenesis.com/')
+add('Paradigm', 'http://paradigm.comicgenesis.com/')
+add('ParallelDementia', 'http://paralleldementia.comicgenesis.com/')
+add('PartyGoers', 'http://partygoers.comicgenesis.com/')
+add('PatchworkChampions', 'http://yeti.comicgenesis.com/')
+add('Patheticity', 'http://patheticity.comicgenesis.com/')
+add('PeopleIHateacollectabletradingcardgame', 'http://peopleihate.comicgenesis.com/')
+add('Pfft', 'http://pffft.comicgenesis.com/')
+add('PhantomThesis', 'http://phantomthesis.comicgenesis.com/')
+add('PhatypusProductions', 'http://random.comicgenesis.com/')
+add('PhilAndBob', 'http://drjon.comicgenesis.com/')
+add('PhillerSpace', 'http://phillerspace.comicgenesis.com/')
+add('PhillikesTacos', 'http://philtaco.comicgenesis.com/')
+add('PhilosophyBites', 'http://phbites.comicgenesis.com/')
+add('PhilosophyMonkey', 'http://philosophymonkey.comicgen.com/')
+add('Phoenix', 'http://phoenix1.comicgenesis.com/')
+add('PicpakDog', 'http://picpak.comicgenesis.com/')
+add('PictureDiary', 'http://picturediary.comicgenesis.com/')
+add('PillarsofFaith', 'http://pillarsoffaith.comicgenesis.com/')
+add('Pimpette', 'http://pimpette.comicgenesis.com/')
+add('PinkyTA', 'http://ozoneocean.comicgenesis.com/')
+add('PiresAway', 'http://piresaway.comicgenesis.com/')
+add('PixieVale', 'http://pixievale.comicgenesis.com/')
+add('PlanetsCollide', 'http://ruthcomix.comicgenesis.com/')
+add('PlayingwithKnives', 'http://pwk.comicgenesis.com/')
+add('PockyofJustice', 'http://poj.comicgenesis.com/')
+add('Poesy', 'http://poesy.comicgenesis.com/')
+add('Point', 'http://pointcomics.comicgenesis.com/')
+add('PointGuardian', 'http://www.pointguardian.com/')
+add('Pointless', 'http://pointless.comicgenesis.com/')
+add('PokC3A9Chow', 'http://blueguy.comicgenesis.com/')
+add('PolleninArabia', 'http://pollen.comicgenesis.com/')
+add('PonderandEnlightening', 'http://pande.comicgenesis.com/')
+add('Pr0nCrest', 'http://pr0ncrest.comicgenesis.com/')
+add('PranMan', 'http://www.pran-man.com/')
+add('PrismaticVodka', 'http://drunkenscribblings.comicgenesis.com/')
+add('ProfessionalThieveryCircleofCzernobog', 'http://pthievery.comicgenesis.com/')
+add('ProfessorSaltine27sAstrodynamicDirigible', 'http://drsaltine.comicgenesis.com/')
+add('ProjectADAM', 'http://themortician.comicgenesis.com/')
+add('ProjectSERAPH', 'http://projectseraph.comicgenesis.com/')
+add('PropertyofGwen', 'http://propertyofgwen.comicgenesis.com/')
+add('ProtectMyBalls', 'http://protectmyballs.comicgenesis.com/')
+add('Psiotechniqa', 'http://psitech.comicgenesis.com/')
+add('PsychicDyslexiaInstitute', 'http://pdi.comicgenesis.com/')
+add('PublicidadeEnganosa', 'http://publicidadeenganosa.comicgenesis.com/')
+add('Puppetry', 'http://wordsandpictures.comicgenesis.com/')
+add('PurpleDuckMambo', 'http://purpleduckmambo.comicgenesis.com/')
+add('QueensOfRandomness', 'http://marshmallow.comicgenesis.com/')
+add('QuestionableQuestersandShadowsofFate', 'http://qqandsof.comicgen.com/')
+add('QuestionableTales', 'http://questionabletales.comicgenesis.com/')
+add('Quickbiteme', 'http://quickbiteme.comicgenesis.com/')
+add('Quuren', 'http://quuren.comicgenesis.com/')
+add('RM27sothercomics', 'http://tom.comicgenesis.com/')
+add('Rad27sFilesRanosSeries', 'http://radsfilesranos.comicgenesis.com/')
+add('RadioactiveFanboys', 'http://radioactivefanboys.comicgenesis.com/')
+add('RandomAssembly', 'http://randomassembly.comicgenesis.com/')
+add('RandomAxeOfKindness', 'http://randomaxe.comicgenesis.com/')
+add('RandomInk', 'http://randomink.comicgenesis.com/')
+add('RandytheCat', 'http://randythecat.comicgenesis.com/')
+add('Rangers', 'http://rangers.comicgenesis.com/')
+add('Rationale', 'http://rationale.comicgenesis.com/')
+add('RealityCheque', 'http://realitycheque.comicgenesis.com/')
+add('ReceptorFatigue', 'http://receptorfatigue.comicgenesis.com/')
+add('Reclamation', 'http://reclamation.comicgenesis.com/')
+add('RedLexi', 'http://redlexi.comicgenesis.com/')
+add('Remsi', 'http://remsi.comicgenesis.com/')
+add('ReploidFriends', 'http://reploidfriends.comicgenesis.com/')
+add('Requiem', 'http://erech.comicgen.com/')
+add('Reset', 'http://reset.comicgenesis.com/')
+add('ResistanceLine', 'http://resistanceline.comicgen.com/')
+add('Restaurant', 'http://restaurant.comicgenesis.com/')
+add('RetailWeekly', 'http://retail.comicgenesis.com/')
+add('ReturntoDonnelly', 'http://returntodonnelly.comicgen.com/')
+add('ReturntoEden', 'http://returntoeden.comicgenesis.com/')
+add('ReverendRanda', 'http://reverendranda.comicgenesis.com/')
+add('Riboflavin', 'http://riboflavin.comicgenesis.com/')
+add('RidingtheMediumBus', 'http://pencilears.comicgenesis.com/')
+add('Rita27sComic', 'http://ritascomic.comicgenesis.com/')
+add('RitualsandOfferings', 'http://serverustare.comicgenesis.com/')
+add('RiverCityHigh', 'http://rivercityhigh.comicgenesis.com/')
+add('RoadfromNowhere', 'http://nowhere.comicgenesis.com/')
+add('RoboFlan', 'http://lewiscode.comicgenesis.com/')
+add('RobotandBoy', 'http://faeta.comicgenesis.com/')
+add('RogerAndDominic', 'http://roganddom.comicgenesis.com/')
+add('RoguesofClwydRhan', 'http://rocr.comicgenesis.com/')
+add('RoleoftheDie', 'http://www.roleofthedie.com/')
+add('RonnieRaccoon', 'http://www.ronnieraccoon.com/')
+add('RosalarianAndapossRandomCreepyTales', 'http://rosalarian.comicgenesis.com/')
+add('Roughies', 'http://www.roughies.com/')
+add('RoxxorUniversity', 'http://roxxoru.comicgenesis.com/')
+add('Rugg', 'http://rugg.comicgenesis.com/')
+add('RulesofMakeBelieve', 'http://ju-lian.comicgenesis.com/')
+add('RuneMaster', 'http://runemaster.comicgenesis.com/')
+add('Rveillerie', 'http://hootoo.comicgenesis.com/')
+add('SLAGIT', 'http://slagit.comicgenesis.com/')
+add('SLAYERSREWIND', 'http://wyldcherry.comicgen.com/')
+add('SMACK', 'http://smack.comicgenesis.com/')
+add('SPQRBlues', 'http://spqrblues.comicgenesis.com/')
+add('SSComix', 'http://sscomix.comicgenesis.com/')
+add('STFU', 'http://stfu.comicgen.com/')
+add('SaintPeter27sCross', 'http://saintpeterscross.comicgenesis.com/')
+add('SalemUncommons', 'http://salemuncommons.comicgenesis.com/')
+add('SamandElisAdventures', 'http://sameliadv.comicgenesis.com/')
+add('SamuraiMushroom', 'http://samuraimushroom.comicgenesis.com/')
+add('SandwichWorld', 'http://sandwichworld.comicgenesis.com/')
+add('SarahZero', 'http://plughead.comicgenesis.com/')
+add('SaturdayMorningBreakfastCereal', 'http://smbc.comicgenesis.com/')
+add('Saturnalia', 'http://saturnalia.keenspace.com/')
+add('SavageIslands', 'http://poobert.comicgenesis.com/')
+add('SaveMeGebus', 'http://savemegebus.comicgenesis.com/')
+add('Sawdust', 'http://sawdust.comicgenesis.com/')
+add('ScandalSheet', 'http://scandalsheet.comicgenesis.com/')
+add('Scatterplot', 'http://scatterplot.comicgenesis.com/')
+add('SceneMan', 'http://sceneman.comicgenesis.com/')
+add('SchoolDaze', 'http://schooldaze.comicgenesis.com/')
+add('Scooterboy1234', 'http://scooterboy1234.comicgenesis.com/')
+add('ScrewJeffOwens', 'http://screwjeffowens.comicgenesis.com/')
+add('ScrollDynasty', 'http://scrolldynasty.comicgenesis.com/')
+add('Seabrook27sWebComicSerials', 'http://lauraseabrook.comicgenesis.com/')
+add('Seagate', 'http://seatgate.comicgenesis.com/')
+add('SeaofInsanity', 'http://fractuslux.comicgenesis.com/')
+add('SearchfortheSevenCrystals', 'http://sevencrystals.comicgenesis.com/')
+add('SecondNight', 'http://secondnight.comicgenesis.com/')
+add('SecondStage', 'http://secondstage.comicgenesis.com/')
+add('Section12', 'http://section12.comicgenesis.com/')
+add('Section972', 'http://section972.comicgenesis.com/')
+add('SecurityBlanket', 'http://insecurities.comicgenesis.com/')
+add('Sempiternal', 'http://nya.comicgenesis.com/')
+add('Senioritis', 'http://senioritis.comicgenesis.com/')
+add('ShadowPlanet', 'http://shadowplanet.comicgenesis.com/')
+add('ShadowedLight', 'http://shadowedlight.comicgenesis.com/')
+add('Shapes', 'http://shapes.comicgenesis.com/')
+add('Shifters', 'http://shifters.comicgen.com/')
+add('ShineGetDumplingsGoGoTower', 'http://shinegotower.comicgen.com/')
+add('Shinkutokimekisempukaku', 'http://yamcha.comicgenesis.com/')
+add('ShinobiHigh', 'http://shinobihigh.comicgenesis.com/')
+add('ShivaeStudios', 'http://shivae.comicgenesis.com/')
+add('ShonenAiKudasai', 'http://kudasai.stripspace.com/')
+add('ShonenChikara', 'http://shonenchikara.comicgenesis.com/')
+add('ShootMeNow', 'http://shootmenow.comicgenesis.com/')
+add('SidandLasker', 'http://sidandlasker.comicgenesis.com/')
+add('SideEffects', 'http://sideeffects.comicgenesis.com/')
+add('SidekickGirl', 'http://sidekickgirl.comicgenesis.com/')
+add('SillyConeV', 'http://sillyconev.comicgenesis.com/')
+add('SimonsWorld', 'http://simonsworld.comicgenesis.com/')
+add('SinPerspectiva', 'http://mysp.comicgenesis.com/')
+add('SinisterBedfellows', 'http://mckenzee.comicgenesis.com/')
+add('SinkorDrown', 'http://sinkordrown.comicgenesis.com/')
+add('SinsAgainstNature', 'http://sane.comicgen.com/')
+add('SippansSerie', 'http://sippan.comicgenesis.com/')
+add('SitandSpin', 'http://sitandspin.comicgenesis.com/')
+add('SixByNineCollege', 'http://sixbyninecollege.comicgenesis.com/')
+add('SixSeconds', 'http://sixseconds.comicgenesis.com/')
+add('Sketchbook', 'http://sss.comicgenesis.com/')
+add('Skunk', 'http://www.skunkcomic.com/')
+add('SlackersandLosers', 'http://slackersandlosers.comicgenesis.com/')
+add('Sluggy', 'http://sluggy.comicgenesis.com/')
+add('Smapdi', 'http://smapdi.comicgenesis.com/')
+add('SmithStone', 'http://smithstone.comicgenesis.com/')
+add('Smitty', 'http://smitty.comicgenesis.com/')
+add('SnowflakeStudios', 'http://snowflakestudios.comicgenesis.com/')
+add('SoManyLevels', 'http://www.somanylevelscomic.com/')
+add('SoWhat', 'http://sowhat.comicgenesis.com/')
+add('Sock27d', 'http://www.sockd.com/')
+add('Soks', 'http://soks.comicgenesis.com/')
+add('Something', 'http://something.comicgenesis.com/')
+add('SomethingSoft', 'http://somethingsoft.comicgenesis.com/')
+add('SomewhereCalledHemel', 'http://hemel.comicgenesis.com/')
+add('SomewhereIBelong', 'http://zhongda.comicgenesis.com/')
+add('Sorcery101', 'http://www.sorcery101.net/')
+add('Sorryfortheinconvenience', 'http://ranreppowned.comicgenesis.com/')
+add('SpaceLosers', 'http://spacelosers.comicgenesis.com/')
+add('SpareChange', 'http://sparechange.comicgenesis.com/')
+add('Special', 'http://special.comicgenesis.com/')
+add('SpellBinder', 'http://wizard.comicgenesis.com/')
+add('SplendiforousEscapades', 'http://splendiforous.comicgenesis.com/')
+add('SpoononHighandFireontheMountian', 'http://spoon.comicgenesis.com/')
+add('SpoutingNonsense', 'http://spoutingnonsense.comicgenesis.com/')
+add('SpringerandKonijn', 'http://springerandkonijn.comicgenesis.com/')
+add('SpriteShow', 'http://spriteshow.comicgenesis.com/')
+add('SpriteU', 'http://spriteu.comicgenesis.com/')
+add('SpritesofDOOM', 'http://sodoom.comicgenesis.com/')
+add('SquareAndRhomboid', 'http://sar.comicgenesis.com/')
+add('Squaresville', 'http://squaresville.comicgenesis.com/')
+add('SquidNinja', 'http://www.squidninja.com/')
+add('SquishyTales', 'http://dmg.comicgenesis.com/')
+add('StagnantWaters', 'http://stagnantwaters.comicgenesis.com/')
+add('StalkingMillionaires', 'http://packrat.comicgenesis.com/')
+add('StarBored', 'http://oosterwijk.comicgenesis.com/')
+add('StarShip', 'http://starship.comicgenesis.com/')
+add('StartWreck', 'http://startwreck.comicgenesis.com/')
+add('StationV3', 'http://www.stationv3.com/')
+add('SteveandMac', 'http://steveandmac.comicgenesis.com/')
+add('StickmanLimited', 'http://stickmanltd.comicgenesis.com/')
+add('SticksandStuff', 'http://nifboy.comicgenesis.com/')
+add('StickyEvil', 'http://stickyevil.comicgenesis.com/')
+add('StickyFingers', 'http://stickyfingers.comicgenesis.com/')
+add('StraightAhead', 'http://straightahead.comicgenesis.com/')
+add('StrangeDaze', 'http://strangedaze.comicgenesis.com/')
+add('StrangeFruit', 'http://strangefruit.comicgenesis.com/')
+add('StrippedAgain', 'http://strippedagain.comicgenesis.com/')
+add('Stubble', 'http://stubble.comicgenesis.com/')
+add('StuffofLegends', 'http://stuffoflegends.comicgenesis.com/')
+add('StupidComics', 'http://stupidcomics.comicgenesis.com/')
+add('SubjectToChange', 'http://subjecttochange.comicgenesis.com/')
+add('Sublunary', 'http://sublunary.comicgen.com/')
+add('SueC3B1osdelSur', 'http://sds.comicgenesis.com/')
+add('SuicideForHire', 'http://suicideforhire.comicgenesis.com/')
+add('Summoners', 'http://summoners.comicgenesis.com/')
+add('SuperChibiDeathBots', 'http://scdb.comicgenesis.com/')
+add('SuperFightFight', 'http://sff.comicgenesis.com/')
+add('SuperTemps', 'http://megaskunjii.comicgenesis.com/')
+add('SuperZero', 'http://superzerocomic.comicgenesis.com/')
+add('SupersonicSoniica', 'http://triples.comicgenesis.com/')
+add('SurrealKins', 'http://www.surreal-kins.com/')
+add('SurrealU', 'http://surrealu.comicgenesis.com/')
+add('SushiComics', 'http://sushi.comicgenesis.com/')
+add('SwirlyMarkYume', 'http://swirlymark.comicgenesis.com/')
+add('SynapticMisfires', 'http://synapticmisfires.comicgenesis.com/')
+add('SynapticMisfiring', 'http://synapticmisfiring.comicgenesis.com/')
+add('Synapticisms', 'http://synapticisms.comicgenesis.com/')
+add('TAVISION', 'http://tav.comicgenesis.com/')
+add('TChanCardMasterJunichiAsktheProfessorandMore', 'http://tsunamichan.comicgenesis.com/')
+add('THELEGENDofCHUCKOLIANG', 'http://chuckoliang.comicgenesis.com/')
+add('TORMENT', 'http://torment.comicgenesis.com/')
+add('Tabletron', 'http://tabletron.comicgenesis.com/')
+add('TailsofIxinia', 'http://nalkari.comicgenesis.com/')
+add('TakingStock', 'http://mapaghimagsik.comicgenesis.com/')
+add('TalesOfPylea', 'http://talesofpylea.comicgenesis.com/')
+add('TalesoftheQuestor', 'http://npc.comicgenesis.com/')
+add('Talkin', 'http://talkin.comicgenesis.com/')
+add('TalkingHead', 'http://talkinghead.comicgenesis.com/')
+add('Tandava', 'http://tandava.comicgenesis.com/')
+add('TangsComics', 'http://tang.comicgenesis.com/')
+add('TapeLoop', 'http://jisk.comicgenesis.com/')
+add('TeacosiesWithIronyLargePrint', 'http://teacosieswithironylargeprint.comicgenesis.com/')
+add('TeddyBearAntiChrist', 'http://tbac.comicgenesis.com/')
+add('TemplarArizona', 'http://templaraz.comicgenesis.com/')
+add('ThatWasMcPherson', 'http://mcpherson.comicgenesis.com/')
+add('The6GUYSInMyHead', 'http://www.6guys.com/')
+add('TheAcademy', 'http://theacademy.comicgenesis.com/')
+add('TheAdventuresofCaptainMooki', 'http://cmooki.comicgenesis.com/')
+add('TheAdventuresofGralax', 'http://gralax.comicgenesis.com/')
+add('TheAdventuresofKaniraBaxter', 'http://kanirabaxter.comicgenesis.com/')
+add('TheAdventuresofLi27lDenverPastrami', 'http://lildenverpastrami.comicgen.com/')
+add('TheAdventuresofPeppyThePipingPirate', 'http://akira.comicgenesis.com/')
+add('TheAdventuresofPopsicleman', 'http://popsicleman.comicgenesis.com/')
+add('TheAdventuresofSpaceDevil', 'http://spacedevil.comicgenesis.com/')
+add('TheAdventuresofSuperGeometryDude', 'http://supergeometrydude.comicgenesis.com/')
+add('TheAdventuresofUs', 'http://adventuresofus.comicgenesis.com/')
+add('TheAdventuresofVindibuddSuperheroInTraining', 'http://vindibudd.comicgenesis.com/')
+add('TheAdventuresofWharsMeBrainDude', 'http://jamellan.comicgenesis.com/')
+add('TheAmoeba', 'http://www.theamoebaonline.co.uk/')
+add('TheAnarchist', 'http://theanarchist.comicgenesis.com/')
+add('TheAvatar', 'http://theavatar.comicgenesis.com/')
+add('TheBessEffectGerman', 'http://tbe.comicgenesis.com/')
+add('TheBestandtheBrightest', 'http://www.flyovercountry.net/')
+add('TheBigheads', 'http://thebigheads.comicgenesis.com/')
+add('TheBlazeArmada', 'http://blazearmada.comicgenesis.com/')
+add('TheBookOfHuzzah', 'http://theboh.comicgenesis.com/')
+add('TheBrainAnOwnersManual', 'http://thebrain.comicgenesis.com/')
+add('TheCallofWhatever', 'http://tcow.comicgenesis.com/')
+add('TheCandidate', 'http://kennystrife.comicgenesis.com/')
+add('TheChiWanChikiDojo', 'http://chiwanchiki.comicgenesis.com/')
+add('TheChildrenofMoloch', 'http://moloch.comicgenesis.com/')
+add('TheCorruptionofTed', 'http://corruption.comicgenesis.com/')
+add('TheCovetedPorch', 'http://covetedporch.comicgenesis.com/')
+add('TheCrossoverlord', 'http://crossoverlord.comicgenesis.com/')
+add('TheDOOMArmy', 'http://experimental.comicgenesis.com/')
+add('TheDayitSnowed', 'http://tdis.comicgenesis.com/')
+add('TheDementiaofMagic', 'http://dementia.comicgenesis.com/')
+add('TheDevilsPanties', 'http://thedevilspanties.comicgenesis.com/')
+add('TheDoctorPepperShow', 'http://doctorpepper.comicgenesis.com/')
+add('TheEarwigChronicles', 'http://rnes.comicgenesis.com/')
+add('TheEasyBreather', 'http://easybreather.comicgenesis.com/')
+add('TheEvilThatMenDo', 'http://theevilthatmendo.comicgenesis.com/')
+add('TheFantasticalBestiary', 'http://fantasticalbestiary.comicgenesis.com/')
+add('TheFinalFantasy6Comic', 'http://ff6comic.comicgenesis.com/')
+add('TheFoolishAdventuresofKirbyandSambo', 'http://kirbyandsambo.comicgenesis.com/')
+add('TheFoxfireChronicles', 'http://foxfire.comicgenesis.com/')
+add('TheFreneticAdventuresofFredBarlowe', 'http://fredbarlowe.comicgenesis.com/')
+add('TheGeekWay', 'http://geekway.comicgenesis.com/')
+add('TheGodlyandtheDamned', 'http://gandd.comicgenesis.com/')
+add('TheGods27Pack', 'http://godspack.comicgenesis.com/')
+add('TheGreatTree', 'http://tgt.comicgen.com/')
+add('TheGreenAvenger', 'http://www.green-avenger.com/')
+add('TheGrimbles', 'http://grimbles.comicgenesis.com/')
+add('TheHappyPenis', 'http://happypenis.comicgenesis.com/')
+add('TheHoojieCrew', 'http://hoojiecrew.comicgenesis.com/')
+add('TheInexplicableAdventuresofBob', 'http://bobadventures.comicgenesis.com/')
+add('TheInfamous', 'http://theinfamous.comicgenesis.com/')
+add('TheInstituteofMetaphysics', 'http://iofm.comicgenesis.com/')
+add('TheInterns', 'http://theinterns.comicgenesis.com/')
+add('TheJaded', 'http://www.thejaded.co.uk/')
+add('TheKillingMoon', 'http://thekillingmoon.comicgenesis.com/')
+add('TheLawofPurple', 'http://dragongirl.comicgenesis.com/')
+add('TheLilWorldofMeekerz', 'http://meekerz.comicgenesis.com/')
+add('TheLindleyHallProjectMk2', 'http://tlhp.comicgenesis.com/')
+add('TheLoneSwordsman', 'http://theloneswordsman.comicgenesis.com/')
+add('TheLounge', 'http://thelounge.comicgenesis.com/')
+add('TheMadBrothers', 'http://madbrothers.comicgenesis.com/')
+add('TheManWhoHatesFun', 'http://mwhf.comicgenesis.com/')
+add('TheMariposaRevelation', 'http://mariposa.comicgenesis.com/')
+add('TheMaryComic', 'http://themarycomic.comicgenesis.com/')
+add('TheMcRemnantReport', 'http://mcrreport.comicgenesis.com/')
+add('TheMediocres', 'http://mediocres.comicgenesis.com/')
+add('TheMidlands', 'http://midlands.comicgenesis.com/')
+add('TheMintWhelpSaga', 'http://mintwhelp.comicgenesis.com/')
+add('TheMisadventuresofOkk', 'http://okk.comicgenesis.com/')
+add('TheNEWTalesfromWollemiHeights', 'http://wollemi.comicgenesis.com/')
+add('TheNakedElf', 'http://nakedelf.comicgenesis.com/')
+add('TheNamelessStory', 'http://klest.comicgenesis.com/')
+add('TheNextLevel', 'http://chrisandcrew.comicgenesis.com/')
+add('TheNineteenthCenturyIndustrialist', 'http://thebaron.comicgenesis.com/')
+add('TheNutcracker', 'http://nutcracker.comicgenesis.com/')
+add('TheOfficeBitch', 'http://picklejuice.comicgenesis.com/')
+add('TheOrangeArrow', 'http://orangearrow.comicgenesis.com/')
+add('ThePantheon', 'http://pantheon.comicgenesis.com/')
+add('ThePath', 'http://thepath.comicgenesis.com/')
+add('ThePictureDiary', 'http://thepicturediary.comicgenesis.com/')
+add('ThePolygonReports', 'http://polygonreports.comicgenesis.com/')
+add('ThePoptasticLeague', 'http://poptasticleague.comicgenesis.com/')
+add('ThePrimeofAmbition', 'http://jaadrih.comicgenesis.com/')
+add('TheProfessor', 'http://xuanwu.comicgenesis.com/')
+add('TheRobmanShow', 'http://therobmanshow.comicgenesis.com/')
+add('TheSagaofGagerff2', 'http://gager.comicgenesis.com/')
+add('TheSailorNeopetsRPG', 'http://snrpg.comicgen.com/')
+add('TheShortEnd', 'http://theshortend.comicgenesis.com/')
+add('TheSiteMap', 'http://sitemap.comicgenesis.com/')
+add('TheSomethingSomethingofSomethingSomethingness', 'http://somethingstrange.comicgen.com/')
+add('TheStickFigureDragons', 'http://feychild.comicgenesis.com/')
+add('TheStraightJacketFreedomForce', 'http://tsjff.comicgenesis.com/')
+add('TheSuperPeoples', 'http://superpeoples.comicgenesis.com/')
+add('TheSuperSmashInn', 'http://supersmashinn.comicgenesis.com/')
+add('TheTalesofKalduras', 'http://kalduras.comicgenesis.com/')
+add('TheVolet', 'http://volet.comicgenesis.com/')
+add('TheWarofWinds', 'http://warofwinds.comicgenesis.com/')
+add('TheWayoftheWorld', 'http://wayworld.comicgenesis.com/')
+add('TheWhole9Yards', 'http://nineyards.comicgenesis.com/')
+add('TheWingsOfChange', 'http://wingsofchange.comicgen.com/')
+add('TheWoodenLeg', 'http://thewoodenleg.comicgenesis.com/')
+add('TheWorldofUh', 'http://seganut82.comicgenesis.com/')
+add('TheWotch', 'http://thewotch.comicgenesis.com/')
+add('TheWrongBand', 'http://thewrongband.comicgenesis.com/')
+add('Thelifeofthekalahari', 'http://lifeofthekalahari.comicgenesis.com/')
+add('Thenoob', 'http://www.thenoobcomic.com/')
+add('Thespiphobia', 'http://thespiphobia.comicgenesis.com/')
+add('TheyCallMePhatDragon', 'http://callmephat.comicgenesis.com/')
+add('ThinginessofChaos', 'http://thinginess.comicgenesis.com/')
+add('ThirdDementia', 'http://thirddementia.comicgenesis.com/')
+add('ThisDonAndapostMakeNoSense', 'http://makesnosense.comicgenesis.com/')
+add('ThisISLife', 'http://thisislife.comicgenesis.com/')
+add('ThreeCatsAndAMouse', 'http://team3c1m.comicgenesis.com/')
+add('ThroughTheseEyes', 'http://hindsight2117.comicgenesis.com/')
+add('Throwback', 'http://wintersolstice.comicgenesis.com/')
+add('ThunderandLightning', 'http://www.talcomic.com/')
+add('Thwack', 'http://thwack.comicgenesis.com/')
+add('Tie_Guy', 'http://tieguy.comicgenesis.com/')
+add('TimePig', 'http://timepig.comicgenesis.com/')
+add('TinysWorld', 'http://tinysworld.comicgenesis.com/')
+add('TipoftheSword', 'http://tipofthesword.comicgenesis.com/')
+add('TonjaSteele', 'http://tonjasteele.comicgenesis.com/')
+add('ToonPimp27sPalace', 'http://mhitmand.comicgenesis.com/')
+add('Tossers', 'http://www.grimeystudios.com/')
+add('Towner', 'http://towner.comicgenesis.com/')
+add('Townies', 'http://townies.comicgenesis.com/')
+add('ToyDivision', 'http://toydivision.comicgenesis.com/')
+add('TracyandTristan', 'http://tandt.comicgenesis.com/')
+add('TrappedInAComic', 'http://mrsynnerster75.comicgenesis.com/')
+add('TreeSprocket', 'http://treesprocket.comicgenesis.com/')
+add('TrenttheEmoGoth', 'http://lifeispain.comicgenesis.com/')
+add('Trevino', 'http://noskillz.comicgenesis.com/')
+add('TrialandError', 'http://trialanderror.comicgenesis.com/')
+add('TrialsintheLight', 'http://trials.comicgenesis.com/')
+add('TripleTrouble', 'http://tripletrouble.comicgenesis.com/')
+add('TriumphantLosers', 'http://triumphantlosers.comicgenesis.com/')
+add('TrueBums', 'http://truebums.comicgenesis.com/')
+add('TurboNinjaBastard', 'http://tnb.comicgen.com/')
+add('TurboTrak', 'http://turbotrak.comicgen.com/')
+add('Turing27sFollyIITheAdventuresOfPhil', 'http://proteancomics.comicgenesis.com/')
+add('Tutelar', 'http://coffeystreet.comicgenesis.com/')
+add('TwiceDestined', 'http://twicedestined.comicgenesis.com/')
+add('TwistedTales', 'http://www.jastiv.com/')
+add('TwoEvilScientists', 'http://twoevilscientists.comicgenesis.com/')
+add('TwoLumps', 'http://twolumps.comicgenesis.com/')
+add('TwoSidesWide', 'http://twosideswide.comicgenesis.com/')
+add('UBERGEEKSpriteWorld', 'http://www.ubergeekthecomic.com/')
+add('URCult', 'http://urcult.comicgenesis.com/')
+add('UltrafreakcomicsSygnosis', 'http://ultrafreak.comicgenesis.com/')
+add('UncertaintyPrinciple', 'http://uncertaintyprinciple.comicgenesis.com/')
+add('Unconventional', 'http://unconventional.comicgenesis.com/')
+add('UnfamiliarReflection', 'http://emri.comicgenesis.com/')
+add('UnlifeOnline', 'http://unlifeonline.comicgenesis.com/')
+add('UnseenFate', 'http://unseenfate.comicgenesis.com/')
+add('UntitledAgain', 'http://untitledagain.comicgenesis.com/')
+add('UrbanFable', 'http://urbanfable.comicgenesis.com/')
+add('VRPG', 'http://vrpg.comicgenesis.com/')
+add('ValkyrieSymphony', 'http://allegranova.comicgenesis.com/')
+add('VampiresCurse', 'http://vampire.comicgenesis.com/')
+add('VampiresandCannibals', 'http://vannibals.comicgenesis.com/')
+add('VaporLock', 'http://vaporlock.comicgenesis.com/')
+add('Veena', 'http://veena.comicgenesis.com/')
+add('Vendetta', 'http://vendetta.comicgenesis.com/')
+add('VenusAscending', 'http://catgirldo.comicgenesis.com/')
+add('VeritysArk', 'http://veritycomic.comicgenesis.com/')
+add('VicandEdwards', 'http://vicandedwards.comicgenesis.com/')
+add('ViciousLies', 'http://viciouslies.comicgenesis.com/')
+add('VictimsoftheSystem', 'http://victims.comicgenesis.com/')
+add('Victor', 'http://victor.comicgenesis.com/')
+add('VictorianTimes', 'http://victorian.comicgenesis.com/')
+add('VideoGameAddicts', 'http://vgaddicts.comicgenesis.com/')
+add('WARPZONEthinkwithinthecube', 'http://warpzonecube.comicgen.com/')
+add('WORLDDICTATORComicsPresentsWhenImWorldDictator', 'http://worlddictator.comicgenesis.com/')
+add('WadeintheDeepEnd', 'http://wade.comicgenesis.com/')
+add('WakeUpScreaming', 'http://wakeupscreaming.comicgenesis.com/')
+add('WakingtheHouseofRaeux', 'http://viistar.comicgenesis.com/')
+add('WarMageNC17', 'http://warmage.comicgenesis.com/')
+add('WarningBucketsOfBlood', 'http://chaoticcomics.comicgen.com/')
+add('WayoftheDodo', 'http://dodocomic.comicgenesis.com/')
+add('WebcomicTheWebcomicWebcomicWebcomicWebcomic', 'http://dannormnsanidey.comicgenesis.com/')
+add('Wedontgetiteither', 'http://wdgie.comicgenesis.com/')
+add('WeekendWarriors', 'http://weekendwarriors.comicgenesis.com/')
+add('WeirdnessRules', 'http://weirdness.comicgenesis.com/')
+add('WeirdosUtopia', 'http://weirdosutopia.comicgenesis.com/')
+add('WeishauptScholars', 'http://wscholars.comicgenesis.com/')
+add('WelcomeToRoxboro', 'http://roxborocomic.comicgenesis.com/')
+add('WelcometoShior', 'http://shior.comicgenesis.com/')
+add('Werechild', 'http://werechild.comicgenesis.com/')
+add('WestofBathurst', 'http://westofbathurst.comicgenesis.com/')
+add('Whale', 'http://whale.comicgenesis.com/')
+add('WhatHappensNext', 'http://whn.comicgenesis.com/')
+add('WhatYouDontSee', 'http://phantomlady4.comicgenesis.com/')
+add('Whatever', 'http://www.whatevercomic.com/')
+add('Whatthehell', 'http://whatthehell.comicgenesis.com/')
+add('WhereGodsandMortalsDance', 'http://wgmd.comicgenesis.com/')
+add('WhiskeyAndMelancholy', 'http://sesquipedalophobe.comicgenesis.com/')
+add('WhiteFeather', 'http://whitefeathermanga.comicgenesis.com/')
+add('WhiteHouseinOrbit', 'http://whio.comicgenesis.com/')
+add('WhyImNotAnArtist', 'http://whyimnotanartist.comicgenesis.com/')
+add('WhyMeComics', 'http://whymecomics.comicgenesis.com/')
+add('WiCCAN', 'http://wiccan.comicgenesis.com/')
+add('Wierdman', 'http://asa.comicgenesis.com/')
+add('WillyMorgan', 'http://willymorgan.comicgenesis.com/')
+add('Wingmen', 'http://wingmen.comicgenesis.com/')
+add('WishInOneHand', 'http://wishin1hand.comicgenesis.com/')
+add('Witchprickers', 'http://buxompiratewench.comicgenesis.com/')
+add('Witticisma', 'http://witticisma.comicgen.com/')
+add('WizardAndWarrior', 'http://wizardandwarrior.comicgenesis.com/')
+add('Wizztards', 'http://wizztards.comicgenesis.com/')
+add('WonTonHammer', 'http://wonton.comicgenesis.com/')
+add('WonderWig', 'http://wonderwig.comicgenesis.com/')
+add('WoodsForTheTrees', 'http://woodsforthetrees.comicgenesis.com/')
+add('WorldofFizz', 'http://fergoandenrique.comicgenesis.com/')
+add('WrathofHeaven', 'http://wrath.comicgenesis.com/')
+add('XartinDelic', 'http://xartindelic.comicgenesis.com/')
+add('YARKRAMERSFIRSTREALITY', 'http://firstreality.comicgenesis.com/')
+add('YKAnime', 'http://ykanime.comicgenesis.com/')
+add('YOSH', 'http://yosh.comicgen.com/')
+add('YUMEdream', 'http://yume.comicgen.com/')
+add('YahtzeeTakesOnTheWorld', 'http://yahtzee.comicgenesis.com/')
+add('YangChild', 'http://yangchild.comicgenesis.com/')
+add('YellowMoon', 'http://yellowmoon.comicgenesis.com/')
+add('YellowSticky', 'http://yellowsticky.comicgenesis.com/')
+add('YinandYang', 'http://www.yin-and-yang.com/')
+add('YouScrewedUp', 'http://youscrewedup.comicgenesis.com/')
+add('YourGuideToMakeupAnarchyandAnthros', 'http://creepylilgothkids.comicgenesis.com/')
+add('YourInAiryTract', 'http://yourinairytract.comicgenesis.com/')
+add('Youtoo', 'http://youtoo.comicgenesis.com/')
+add('Yvette', 'http://yvette.comicgenesis.com/')
+add('Zap', 'http://zap.comicgenesis.com/')
+add('Zarla', 'http://zarla.comicgenesis.com/')
+add('ZebraGirl', 'http://zebragirl.comicgenesis.com/')
+add('Zeek', 'http://zeek.comicgenesis.com/')
+add('ZeeratheSpacePirate', 'http://zeera.comicgenesis.com/')
+add('Zelon', 'http://zelon.comicgen.com/')
+add('ZeuU', 'http://zeurinu.comicgenesis.com/')
+add('Zoology', 'http://thezoo.comicgenesis.com/')
+add('Zootz', 'http://digitalvigilante.comicgenesis.com/')
+add('ZorroAndEster', 'http://zorroandester.comicgenesis.com/')
+add('Zortic', 'http://zortic.comicgenesis.com/')
+add('ZosKias', 'http://kojika.comicgenesis.com/')
+add('ZowieMyerson', 'http://camcorder.comicgenesis.com/')
+add('adayinthelife', 'http://bangoe23.comicgenesis.com/')
+add('beerkada', 'http://beerkada.comicgenesis.com/')
+add('bloodofthedragon', 'http://bdragon.comicgenesis.com/')
+add('capn', 'http://capn.comicgenesis.com/')
+add('catscradle', 'http://catscradle.comicgenesis.com/')
+add('choukousei', 'http://choukousei.comicgenesis.com/')
+add('chu', 'http://chu.comicgenesis.com/')
+add('desolationangeltango', 'http://desolationangel.comicgenesis.com/')
+add('etch', 'http://etch.comicgenesis.com/')
+add('fagz', 'http://fagz.comicgenesis.com/')
+add('fallinglessons', 'http://fallinglessons.comicgenesis.com/')
+add('fromthedeskof', 'http://fromthedeskof.comicgenesis.com/')
+add('geeks', 'http://geekstryingtobefunny.comicgen.com/')
+add('heysuburbia', 'http://rockyfoxtop.comicgenesis.com/')
+add('hyperghostbroadcasts', 'http://hyperghostbroadcasts.comicgenesis.com/')
+add('ifthenelse', 'http://ifthenelse.comicgenesis.com/')
+add('ihatesteve', 'http://ihatesteve.comicgenesis.com/')
+add('inconsistentshorts', 'http://ics.comicgenesis.com/')
+add('junkRIOT', 'http://junkriot.comicgen.com/')
+add('khaoskomic', 'http://komix.comicgenesis.com/')
+add('laMouettetheseagullfromMars', 'http://lamouette.comicgenesis.com/')
+add('leapingwizards', 'http://leapingwizards.comicgenesis.com/')
+add('mcDuffies', 'http://mcduffies.comicgenesis.com/')
+add('mediocregothboi', 'http://gothboi.comicgenesis.com/')
+add('monkey', 'http://monkey.comicgenesis.com/')
+add('mtheory', 'http://mtheory.comicgenesis.com/')
+add('noidea', 'http://noidea.comicgenesis.com/')
+add('nothingcomesnaturally', 'http://nocona.comicgenesis.com/')
+add('riot', 'http://riotoffee.comicgenesis.com/')
+add('silvette', 'http://silvette.comicgenesis.com/')
+add('skimlinescomAcollectionofthings', 'http://www.skimlines.com/')
+add('smut', 'http://smut.comicgenesis.com/')
+add('socializedmedicine', 'http://socializedmedicine.comicgenesis.com/')
+add('spacejams', 'http://spacejams.comicgenesis.com/')
+add('spiderfrogballoon', 'http://spiderfrogballoon.comicgenesis.com/')
+add('theadventuresofmegamanandlink', 'http://takeru.comicgenesis.com/')
+add('theendofthings', 'http://endofthings.comicgen.com/')
+add('themisanthropes', 'http://misanthropes.comicgenesis.com/')
+add('themouseoftime', 'http://mouseoftime.comicgenesis.com/')
+add('ttskr', 'http://ttskr.comicgenesis.com/')
+add('twelvedragons', 'http://twelvedragons.comicgenesis.com/')
+add('umlauthouse', 'http://umlauthouse.comicgenesis.com/')
+add('usrbinw00t', 'http://usrbinw00t.comicgenesis.com/')
+add('xCHOPSTICKSxNeo', 'http://chopsticksneo.comicgen.com/')
