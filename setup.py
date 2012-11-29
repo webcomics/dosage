@@ -167,7 +167,7 @@ class MyDistribution (Distribution, object):
 args = dict(
     name = AppName,
     version = AppVersion,
-    description = 'a powerful webcomic downloader and archiver',
+    description = 'a commandline webcomic downloader and archiver',
     author = 'Tristan Seligmann, Jonathan Jacobs, Bastian Kleineidam',
     maintainer = 'Bastian Kleineidam',
     maintainer_email = 'calvin@users.sourceforge.net',

@@ -1,7 +1,7 @@
 Dosage
 =======
 
-Dosage is a powerful webcomic downloader and archiver.
+Dosage is a commandline webcomic downloader and archiver.
 
 Introduction
 -------------
