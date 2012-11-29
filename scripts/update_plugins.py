@@ -1,4 +1,5 @@
 #!/bin/sh -e
+# Copyright (C) 2012 Bastian Kleineidam
 set -u
 
 mincomics=100

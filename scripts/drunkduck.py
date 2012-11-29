@@ -10,14 +10,14 @@ import os
 import json
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dosagelib.util import tagre, getPageContent
+from scriptutil import contains_case_insensitive
 
 json_file = __file__.replace(".py", ".json")
 
-def contains_case_insensitive(adict, akey):
-    for key in adict:
-        if key.lower() == akey.lower():
-            return True
-    return False
+# names of comics to exclude
+exclude_comics = [
+    "Twonks_and_Plonkers", # broken images, no real content
+]
 
 
 def handle_url(url, url_matcher, num_matcher, res):
@@ -33,6 +33,8 @@ def handle_url(url, url_matcher, num_matcher, res):
         if contains_case_insensitive(res, name):
             # we cannot handle two comics that only differ in case
             print("WARN: skipping possible duplicate", name, file=sys.stderr)
+            continue
+        if name in exclude_comics:
             continue
         # find out how many images this comic has
         end = match.end(1)
@@ -71,6 +73,8 @@ def print_results(min_strips):
     with open(json_file, "rb") as f:
         comics = json.load(f)
     for name, num in sorted(comics.items()):
+        if name in exclude_comics:
+            continue
         if num >= min_strips:
             print("add('%s')" % name)
 

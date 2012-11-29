@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# Copyright (C) 2012 Bastian Kleineidam
 """Remove all lines after a given marker line.
 """
 from __future__ import print_function

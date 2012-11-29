@@ -11,6 +11,7 @@ import json
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dosagelib.util import getPageContent, asciify, unescape, tagre
 from dosagelib.scraper import get_scrapers
+from scriptutil import contains_case_insensitive
 
 json_file = __file__.replace(".py", ".json")
 
@@ -18,13 +19,11 @@ json_file = __file__.replace(".py", ".json")
 url_matcher = re.compile(r'<div class="comictitle"><strong>' + tagre("a", "href", r'(http://[^"]+)') + r'([^<]+)</a>')
 num_matcher = re.compile(r'Number of Days: (\d+)')
 
-def contains_case_insensitive(adict, akey):
-    for key in adict:
-        if key.lower() == akey.lower():
-            return True
-    return False
+# names of comics to exclude
+exclude_comics = [
+]
 
- 
+
 def handle_url(url, res):
     """Parse one search result page."""
     print("Parsing", url, file=sys.stderr)
@@ -37,6 +36,8 @@ def handle_url(url, res):
         url = match.group(1) + '/'
         name = unescape(match.group(2))
         name = asciify(name.replace('&', 'And').replace('@', 'At'))
+        if name in exclude_comics:
+            continue
         if contains_case_insensitive(res, name):
             # we cannot handle two comics that only differ in case
             print("WARN: skipping possible duplicate", name, file=sys.stderr)
@@ -83,6 +84,8 @@ def print_results(args):
     with open(json_file, "rb") as f:
         comics = json.load(f)
     for name, entry in sorted(comics.items()):
+        if name in exclude_comics:
+            continue
         url, num = entry
         if num < min_comics:
             continue

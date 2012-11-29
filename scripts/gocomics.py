@@ -11,19 +11,18 @@ import json
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dosagelib.util import tagre, getPageContent, asciify, unescape
 from dosagelib.scraper import get_scrapers
+from scriptutil import contains_case_insensitive
 
 json_file = __file__.replace(".py", ".json")
 
 #<a href="/shortname" class="alpha_list updated">name</a>
 url_matcher = re.compile(tagre("a", "href", r'(/[^"]+)', after="alpha_list") + r"([^<]+)</a>")
 
-def contains_case_insensitive(adict, akey):
-    for key in adict:
-        if key.lower() == akey.lower():
-            return True
-    return False
+# names of comics to exclude
+exclude_comics = [
+]
 
- 
+
 def handle_url(url, res):
     """Parse one search result page."""
     print("Parsing", url, file=sys.stderr)
@@ -36,6 +35,8 @@ def handle_url(url, res):
         shortname = match.group(1)
         name = unescape(match.group(2))
         name = asciify(name.replace('&', 'And').replace('@', 'At'))
+        if name in exclude_comics:
+            continue
         if contains_case_insensitive(res, name):
             # we cannot handle two comics that only differ in case
             print("WARN: skipping possible duplicate", name, file=sys.stderr)
@@ -73,6 +74,8 @@ def print_results(args):
     with open(json_file, "rb") as f:
         comics = json.load(f)
     for name, shortname in sorted(comics.items()):
+        if name in exclude_comics:
+            continue
         if has_creators_comic(name):
             prefix = '#'
         else:
