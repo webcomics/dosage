@@ -66,7 +66,10 @@ def get_content(filename):
         for line in f:
             if line.startswith((". ", "F ")) and "test_comics" in line:
                 num_tests += 1
-                tests.append(get_test(line))
+                try:
+                    tests.append(get_test(line))
+                except Exception as msg:
+                    print("WARNING:", msg, file=sys.stderr)
             if num_tests % 5 == 0:
                 print(num_tests, end=" ", file=sys.stderr)
     tests.sort()

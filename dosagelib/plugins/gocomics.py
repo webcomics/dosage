@@ -5,9 +5,11 @@
 from re import compile
 from ..scraper import make_scraper
 from ..util import tagre
+from ..helpers import bounceStarter
 
 _imageSearch = compile(tagre("img", "src", r'(http://assets\.amuniversal\.com/[0-9a-f]+)'))
 _prevSearch = compile(tagre("a", "href", r'(/[^"]+/\d+/\d+/\d+)', after="prev"))
+_nextSearch = compile(tagre("a", "href", r'(/[^"]+/\d+/\d+/\d+)', after="next"))
 
 def add(name, shortname):
     baseUrl = 'http://www.gocomics.com'
@@ -15,11 +17,11 @@ def add(name, shortname):
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
-        prefix, year, month, day = pageUrl.split('/', 3)
-        return "%s_%s%s%s.gif" % (shortname, year, month, day)
+        prefix, year, month, day = pageUrl.rsplit('/', 3)
+        return "%s_%s%s%s.gif" % (name, year, month, day)
 
     globals()[classname] = make_scraper(classname,
-        latestUrl=baseUrl + shortname,
+        starter = bounceStarter(baseUrl + shortname, _nextSearch),
         name='GoComics/' + name,
         stripUrl=baseUrl + shortname + '/%s',
         imageSearch = _imageSearch,
@@ -223,7 +225,6 @@ add('Frazz', '/frazz')
 add('FredBasset', '/fredbasset')
 #add('FreeRange', '/freerange')
 add('FreshlySqueezed', '/freshlysqueezed')
-add('FrikkFrakkAndFrank', '/frikk-frakk-frank')
 add('FrizziToons', '/frizzitoons')
 add('FrogApplause', '/frogapplause')
 add('Garfield', '/garfield')

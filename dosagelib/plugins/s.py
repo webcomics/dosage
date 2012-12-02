@@ -67,10 +67,10 @@ class Sheldon(_BasicScraper):
 
 class Shortpacked(_BasicScraper):
     latestUrl = 'http://www.shortpacked.com/'
-    stripUrl = latestUrl + 'd/%s.html'
+    stripUrl = latestUrl + '%s/'
     imageSearch = compile(tagre("img", "src", r'(http://www\.shortpacked\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.shortpacked\.com/\d+/comic/[^"]+)', after="prev"))
-    help = 'Index format: yyyymmdd'
+    help = 'Index format: yyyy/comic/book-nn/mm-name1/name2'
 
 
 class SinFest(_BasicScraper):

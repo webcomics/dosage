@@ -8,27 +8,25 @@ from ..scraper import _BasicScraper
 from ..util import tagre
 
 
-# XXX make dynamic
-class _VGCats(_BasicScraper):
+class VGCats(_BasicScraper):
     latestUrl = 'http://www.vgcats.com/comics/'
-    imageSearch = compile(r'<img src="(images/\d{6}\..+?)"')
-    prevSearch = compile(r'<a href="(\?strip_id=\d+)"><img src="back.gif" border="0"')
+    stripUrl = latestUrl + '?strip_id=%s'
+    imageSearch = compile(tagre("img", "src", r'(images/\d{6}\.[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(\?strip_id=\d+)') +
+      tagre("img", "src", r"back\.gif"))
     help = 'Index format: n (unpadded)'
 
-    @property
-    def stripUrl(self):
-        return self.latestUrl + '?strip_id=%s'
 
-
-class Super(_VGCats):
+class VGCatsSuper(VGCats):
     name = 'VGCats/Super'
     latestUrl = 'http://www.vgcats.com/super/'
+    stripUrl = latestUrl + '?strip_id=%s'
 
 
-class Adventure(_VGCats):
+class VGCatsAdventure(VGCats):
     name = 'VGCats/Adventure'
     latestUrl = 'http://www.vgcats.com/ffxi/'
-
+    stripUrl = latestUrl + '?strip_id=%s'
 
 
 class ViiviJaWagner(_BasicScraper):

@@ -5,14 +5,15 @@
 from re import compile, MULTILINE
 from ..util import tagre
 from ..scraper import _BasicScraper
-from ..helpers import regexNamer, bounceStarter
+from ..helpers import regexNamer, bounceStarter, indirectStarter
 
 
 class ALessonIsLearned(_BasicScraper):
-    latestUrl = 'http://www.alessonislearned.com/'
-    stripUrl = latestUrl + 'index.php?comic=%s'
-    imageSearch = compile(tagre("img", "src", r"(cmx/lesson\d+\.[a-z]+)"))
+    baseUrl = 'http://www.alessonislearned.com/'
     prevSearch = compile(tagre("a", "href", r"(index\.php\?comic=\d+)", quote="'")+r"[^>]+previous")
+    starter = indirectStarter(baseUrl, prevSearch)
+    stripUrl = baseUrl + 'index.php?comic=%s'
+    imageSearch = compile(tagre("img", "src", r"(cmx/lesson\d+\.[a-z]+)"))
     help = 'Index format: nnn'
 
 
@@ -44,6 +45,7 @@ class AbsurdNotions(_BasicScraper):
     latestUrl = 'http://www.absurdnotions.org/page129.html'
     stripUrl = 'http://www.absurdnotions.org/page%s.html'
     imageSearch = compile(tagre('img', 'src', r'(an[^"]+)'))
+    multipleImagesPerStrip = True
     prevSearch = compile(tagre('a', 'href', r'([^"]+)') + tagre('img', 'src', 'nprev\.gif'))
     help = 'Index format: n (unpadded)'
 
@@ -82,7 +84,7 @@ class Alice(_BasicScraper):
 class AlienLovesPredator(_BasicScraper):
     latestUrl = 'http://alienlovespredator.com/'
     stripUrl = latestUrl + '%s'
-    imageSearch = compile(tagre("img", "src", r'(http://alienlovespredator\.com/strips/strip_\d\.jpg)'))
+    imageSearch = compile(tagre("img", "src", r'([^"]+)', after='border="1" alt="" width="750"'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)', after="prev"))
     help = 'Index format: yyyy/mm/dd/name/'
 
@@ -105,7 +107,7 @@ class AltermetaOld(Altermeta):
 class Angels2200(_BasicScraper):
     latestUrl = 'http://www.janahoffmann.com/angels/'
     stripUrl = latestUrl + '%s'
-    imageSearch = compile(tagre("img", "src", r"(http://www\.janahoffmann\.com/angels/comics/[^'\"]+)"))
+    imageSearch = compile(tagre("img", "src", r"(http://www\.janahoffmann\.com/angels/comics/[^']+)", quote="'"))
     prevSearch = compile(tagre("a", "href", r'([^"]+)')+"&laquo; Previous")
     help = 'Index format: yyyy/mm/dd/part-<n>-comic-<n>'
 
@@ -113,7 +115,7 @@ class Angels2200(_BasicScraper):
 class AppleGeeks(_BasicScraper):
     latestUrl = 'http://www.applegeeks.com/'
     stripUrl = latestUrl + 'comics/viewcomic.php?issue=%s'
-    imageSearch = compile(tagre("img", "src", r'"(strips/\d+?\..+?)"'))
+    imageSearch = compile(tagre("img", "src", r'((?:/comics/)?issue\d+\.jpg)'))
     prevSearch = compile(r'<div class="caption">Previous Comic</div>\s*<p><a href="([^"]+)">', MULTILINE)
     help = 'Index format: n (unpadded)'
 
@@ -124,7 +126,7 @@ class Achewood(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(/comic\.php\?date=\d+)'))
     prevSearch = compile(tagre("a", "href", r'(index\.php\?date=\d+)', after="Previous"))
     help = 'Index format: mmddyyyy'
-    namer = regexNamer(compile(r'date%3D(\d{8})'))
+    namer = regexNamer(compile(r'date=(\d+)'))
 
 
 class AstronomyPOTD(_BasicScraper):
@@ -132,7 +134,7 @@ class AstronomyPOTD(_BasicScraper):
         'http://antwrp.gsfc.nasa.gov/apod/astropix.html',
         compile(r'<a href="(ap\d{6}\.html)">&gt;</a>'))
     stripUrl = 'http://antwrp.gsfc.nasa.gov/apod/ap%s.html'
-    imageSearch = compile(r'<a href="(image/\d{4}/.+\..+?)">')
+    imageSearch = compile(r'<a href="(image/\d{4}/[^"]+)"')
     prevSearch = compile(r'<a href="(ap\d{6}\.html)">&lt;</a>')
     help = 'Index format: yymmdd'
 
@@ -246,6 +248,6 @@ class AlsoBagels(_BasicScraper):
 class Annyseed(_BasicScraper):
     latestUrl = 'http://www.colourofivy.com/annyseed_webcomic_latest.htm'
     stripUrl = 'http://www.colourofivy.com/annyseed_webcomic%s.htm'
-    imageSearch = compile(r'<td width="570" height="887" valign="top"><img src="(.+?)"')
-    prevSearch = compile(r'<a href="(http://www.colourofivy.com/.+?)"><img src="Last.gif"')
+    imageSearch = compile(tagre("img", "src", r'(Annyseed[^"]+)'))
+    prevSearch = compile(r'<a href="(http://www\.colourofivy\.com/[^"]+)"><img src="Last.gif"')
     help = 'Index format: nnn'

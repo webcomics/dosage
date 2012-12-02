@@ -17,6 +17,13 @@ json_file = __file__.replace(".py", ".json")
 # names of comics to exclude
 exclude_comics = [
     "Twonks_and_Plonkers", # broken images, no real content
+    "U_Chuu_No_Hoshi_Hotoshi_Tsuko", # broken images
+    "Red_Dog_Venue", # start page is broken
+    "Monster_Lover", # start page is broken
+    "Legacy_of_Blaze", # broken images
+    "Dead_Strangers", # broken images
+    "Crack", # broken images
+    "Iron_Wolf", # broken images
 ]
 
 

@@ -21,8 +21,28 @@ num_matcher = re.compile(r'Number of Days: (\d+)')
 
 # names of comics to exclude
 exclude_comics = [
+    "JuvenileDiversion", # page moved
+    "JustWeird", # page has 403 forbidden
+    "MobileMadness", # page does not follow standard layout
+    "KnightsOfTheNexus", # page does not follow standard layout
+    "RogerAndDominic", # page does not follow standard layout
+    "TheAvatar", # page does not follow standard layout
+    "Michikomonogatari", # page does not follow standard layout
+    "DungeonDamage", # page does not follow standard layout
+    "SaveMeGebus", # page does not follow standard layout
+    "BlueZombie", # broken page
+    "BoomerExpress", # redirection to another page
+    "FaultyLogic", # page does not follow standard layout
+    "EarthRiser", # redirects to a new page
+    "GoForIt", # page is gone
+    "ACDeceptibotscomic", # no images
+
 ]
 
+url_overrides = {
+    # link to last valid strip
+    "BallofYarn": "http://ballofyarn.comicgenesis.com/d/20020624.html",
+}
 
 def handle_url(url, res):
     """Parse one search result page."""
@@ -49,7 +69,7 @@ def handle_url(url, res):
             print("ERROR:", repr(data[end:end+300], file=sys.stderr))
             continue
         num = int(mo.group(1))
-        res[name] = (url, num)
+        res[name] = (url_overrides.get(name, url), num)
 
 
 def save_result(res):
@@ -89,6 +109,7 @@ def print_results(args):
         url, num = entry
         if num < min_comics:
             continue
+        url = url.replace("comicgen.com", "comicgenesis.com")
         if has_comic(name):
             prefix = '#'
         else:

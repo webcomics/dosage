@@ -12,7 +12,6 @@ import re
 import traceback
 import time
 from htmlentitydefs import name2codepoint
-from math import log, floor
 
 from .output import out
 from .configuration import UserAgent, AppName, App, SupportUrl
@@ -209,19 +208,6 @@ def get_columns (fp):
     return 80
 
 
-suffixes = ('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB')
-
-
-def saneDataSize(size):
-    if size == 0:
-        return 'unk B'
-    index = int(floor(log(abs(size), 1024)))
-    index = min(index, len(suffixes) - 1)
-    index = max(index, 0)
-    factor = 1024 ** index
-    return '%0.3f %s' % (float(size) / factor, suffixes[index])
-
-
 def splitpath(path):
     c = []
     head, tail = os.path.split(path)
@@ -331,3 +317,24 @@ def unquote(text):
     while '%' in text:
         text = urllib.unquote(text)
     return text
+
+
+def strsize (b):
+    """Return human representation of bytes b. A negative number of bytes
+    raises a value error."""
+    if b < 0:
+        raise ValueError("Invalid negative byte number")
+    if b < 1024:
+        return "%dB" % b
+    if b < 1024 * 10:
+        return "%dKB" % (b // 1024)
+    if b < 1024 * 1024:
+        return "%.2fKB" % (float(b) / 1024)
+    if b < 1024 * 1024 * 10:
+        return "%.2fMB" % (float(b) / (1024*1024))
+    if b < 1024 * 1024 * 1024:
+        return "%.1fMB" % (float(b) / (1024*1024))
+    if b < 1024 * 1024 * 1024 * 10:
+        return "%.2fGB" % (float(b) / (1024*1024*1024))
+    return "%.1fGB" % (float(b) / (1024*1024*1024))
+

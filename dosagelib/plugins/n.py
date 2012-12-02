@@ -49,7 +49,7 @@ class Nicky510(_BasicScraper):
 
 class NoNeedForBushido(_BasicScraper):
     latestUrl = 'http://noneedforbushido.com/latest/'
-    stripUrl = latestUrl + '%s/'
+    stripUrl = 'http://noneedforbushido.com/%s/'
     imageSearch = compile(tagre("img", "src", r'(http://noneedforbushido\.com/comics/comic/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://noneedforbushido\.com/[^"]+)', after="previous-comic-link"))
     help = 'Index format: yyyy/comic/nnn'

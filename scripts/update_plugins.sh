@@ -11,4 +11,3 @@ for script in creators gocomics drunkduck universal keenspot; do
   "${d}/removeafter.py" "$target" "# DO NOT REMOVE"
   "${d}/${script}.py" $mincomics >> "$target"
 done
-

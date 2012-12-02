@@ -14,6 +14,7 @@ class CaptainSNES(_BasicScraper):
     stripUrl = latestUrl + '%s/'
     imageSearch = compile(r"<img src='(http://www\.captainsnes\.com/comics/[^']+)'")
     prevSearch = compile(r'<a href="(http://www\.captainsnes\.com/[^"]+)"><span class="prev">')
+    multipleImagesPerStrip = True
     help = 'Index format: yyyy/mm/dd/nnn-stripname'
 
 
@@ -124,8 +125,8 @@ class CrapIDrewOnMyLunchBreak(_BasicScraper):
 class CtrlAltDel(_BasicScraper):
     latestUrl = 'http://www.cad-comic.com/cad/'
     stripUrl = latestUrl + '%s'
-    imageSearch = compile(r'<img src="(/comics/\w+/\d{8}\..+?)"')
-    prevSearch = compile(r'<a href="(/\w+/\d{8})" class="nav-back')
+    imageSearch = compile(tagre("img", "src", r'(http://v\.cdn\.cad-comic\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)', after="nav-back"))
     help = 'Index format: yyyymmdd'
 
 
@@ -249,7 +250,7 @@ class CalamitiesOfNature(_BasicScraper):
 class Champ2010(_BasicScraper):
     # the latest URL is hard coded since the comic is discontinued
     latestUrl = 'http://jedcollins.com/champ2010/champ-12-30-10.html'
-    stripUrl = 'http://jedcollins.com/champ2010/champ-%s.html'
+    stripUrl = 'http://jedcollins.com/champ2010/%s.html'
     imageSearch = compile(tagre("img", "src", r'(http://jedcollins\.com/champ2010/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://jedcollins\.com/champ2010/[^"]+)', after="Previous"))
     help = 'Index format: yy-dd-mm'

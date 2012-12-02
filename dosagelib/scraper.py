@@ -77,6 +77,7 @@ class _BasicScraper(object):
         seen_urls = set()
         while url:
             imageUrls, prevUrl = fetchUrls(url, self.imageSearch, self.prevSearch)
+            prevUrl = self.prevUrlModifier(prevUrl)
             seen_urls.add(url)
             yield self.getComicStrip(url, imageUrls)
             # avoid recursive URL loops
@@ -106,6 +107,14 @@ class _BasicScraper(object):
     def namer(cls, imageUrl, pageUrl):
         """Return filename for given image and page URL."""
         return None
+
+    @classmethod
+    def prevUrlModifier(cls, prevUrl):
+        """Optional modification of parsed previous URLs. Useful if
+        there are domain redirects. The default implementation does
+        not modify the URL.
+        """
+        return prevUrl
 
     def getFilename(self, imageUrl, pageUrl):
         """Return filename for given image and page URL."""

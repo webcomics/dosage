@@ -6,8 +6,10 @@ from ..scraper import make_scraper
 from ..helpers import bounceStarter
 from ..util import tagre
 
-_imageSearch = compile(tagre("img", "src", r'(http://www\.smackjeeves\.com/images/uploaded/comics/[^"]*)'))
-_prevSearch = compile(tagre("a", "href", r'(/comics/\d+/[^"]*)') + '<img[^>]*alt="< Previous"')
+_imageSearch = compile(tagre("img", "src", r'(http://(?:www|img2)\.smackjeeves\.com/images/uploaded/comics/[^"]+)'))
+_linkSearch = tagre("a", "href", r'([^"]*/comics/\d+/[^"]*)')
+_prevSearch = compile(_linkSearch + '(?:<img[^>]*alt="< Previous"|&lt; Back)')
+_nextSearch = compile(_linkSearch + '(?:<img[^>]*alt="Next >"|Next &gt;)')
 
 def add(name):
     classname = 'SmackJeeves/' + name
@@ -20,8 +22,8 @@ def add(name):
         return pageUrl.split('/')[-2]
 
     globals()[classname] = make_scraper(classname,
-        starter=bounceStarter(baseUrl, compile(tagre("a", "href", r'(/comics/\d+/[^"]*)') + '<img[^>]*alt="Next >"')),
-        stripUrl = baseUrl,
+        starter=bounceStarter(baseUrl, _nextSearch),
+        stripUrl = baseUrl + '%s/',
         imageSearch = _imageSearch,
         prevSearch = _prevSearch,
         help = 'Index format: nnnn (some increasing number)',

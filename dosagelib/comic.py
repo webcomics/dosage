@@ -3,12 +3,11 @@
 # Copyright (C) 2012 Bastian Kleineidam
 
 import os
-import locale
 import rfc822
 import time
 
 from .output import out
-from .util import urlopen, saneDataSize, normaliseURL, unquote
+from .util import urlopen, normaliseURL, unquote, strsize
 from .events import getHandler
 
 class FetchComicError(IOError):
@@ -94,29 +93,21 @@ class ComicImage(object):
         fn = os.path.join(comicDir, filename)
         if os.path.isfile(fn) and os.path.getsize(fn) >= comicSize:
             self.touch(fn)
-            out.write('Skipping existing file "%s".' % (fn,), 1)
+            out.write('Skipping existing file "%s".' % fn, 1)
             return fn, False
 
         try:
-            out.write('Writing comic to file %s...' % (fn,), 3)
+            out.write('Writing comic to file %s...' % fn, 3)
             with open(fn, 'wb') as comicOut:
-                startTime = time.time()
                 comicOut.write(self.urlobj.content)
-                endTime = time.time()
             self.touch(fn)
-        except:
+        except Exception:
             if os.path.isfile(fn):
                 os.remove(fn)
             raise
         else:
-            size = os.path.getsize(fn)
-            bytes = locale.format('%d', size, True)
-            if endTime != startTime:
-                speed = saneDataSize(size / (endTime - startTime))
-            else:
-                speed = '???'
-            attrs = dict(fn=fn, bytes=bytes, speed=speed)
-            out.write('Saved "%(fn)s" (%(bytes)s bytes, %(speed)s/sec).' % attrs, 1)
+            size = strsize(os.path.getsize(fn))
+            out.write("Saved %s (%s)." % (fn, size), 1)
             getHandler().comicDownloaded(self.name, fn)
 
         return fn, True

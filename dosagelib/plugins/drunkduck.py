@@ -4,33 +4,48 @@
 
 from re import compile
 from ..scraper import make_scraper
-from ..helpers import bounceStarter
-from ..util import tagre
+from ..util import tagre, fetchUrl
 
 # note: adding the compile() functions inside add() is a major performance hog
 _imageSearch =  compile(tagre("img", "src", r'(http://media\.drunkduck\.com\.s3\.amazonaws\.com:80/[^"]+)', before="page-image"))
 _linkSearch = tagre("a", "href", r'(/[^"]+/\d+/)')
 _prevSearch = compile(_linkSearch + tagre("img", "class", "arrow_prev"))
 _nextSearch = compile(_linkSearch + tagre("img", "class", "arrow_next"))
+_lastSearch = compile(_linkSearch + tagre("img", "class", "arrow_last"))
 
 def add(name):
     classname = 'DrunkDuck_%s' % name
-    url = 'http://www.drunkduck.com/%s/' % name
+    _url = 'http://www.drunkduck.com/%s/' % name
 
     @classmethod
-    def namer(cls, imageUrl, pageUrl):
+    def _namer(cls, imageUrl, pageUrl):
         index = int(pageUrl.rstrip('/').split('/')[-1])
         ext = imageUrl.rsplit('.')[-1]
         return '%d.%s' % (index, ext)
 
+    @classmethod
+    def _starter(cls):
+        # first, try hopping to previous and next comic
+        url = fetchUrl(_url, _prevSearch)
+        if not url:
+            # no previous link found, try hopping to last comic
+            url = fetchUrl(_url, _lastSearch)
+            if not url:
+                raise ValueError("could not find lastSearch pattern %r in %s" % (_lastSearch.pattern, _url))
+            return url
+        url = fetchUrl(url, _nextSearch)
+        if not url:
+            raise ValueError("could not find nextSearch pattern %r in %s" % (_nextSearch.pattern, _url))
+        return url
+
     globals()[classname] = make_scraper(classname,
         name = 'DrunkDuck/' + name,
-        starter = bounceStarter(url, _nextSearch),
-        stripUrl = url + '%s/',
+        starter = _starter,
+        stripUrl = _url + '%s/',
         imageSearch = _imageSearch,
         prevSearch = _prevSearch,
         help = 'Index format: n (unpadded)',
-        namer = namer,
+        namer = _namer,
     )
 
 # do not edit anything below since these entries are generated from scripts/update.sh
@@ -266,7 +281,6 @@ add('CorruptHardware')
 add('Covalence')
 add('Coveinant_Journey')
 add('Cowboys_and_Aliens_II')
-add('Crack')
 add('Crack_Bird_and_Company')
 add('Crackwalker')
 add('Cramberries')
@@ -313,7 +327,6 @@ add('Dasien')
 add('Day_in_the_Life_of_a_Cosplayer')
 add('DeadFingers')
 add('Dead_Men')
-add('Dead_Strangers')
 add('Death_Brigade')
 add('Death_P0rn')
 add('Decimated_Eden')
@@ -565,7 +578,6 @@ add('Insomniart')
 add('Intergalactic_Continental_Dimension_Travelers')
 add('Internet_Superbuddies')
 add('Iornhart')
-add('Iron_Wolf')
 add('Irrumator')
 add('Ishi_Alliance')
 add('Island_Of_Submission')
@@ -639,7 +651,6 @@ add('Laurentinas_Improv_Studio_The_Comic_Art')
 add('Lavender_Legend')
 add('Led_by_a_Mad_Man')
 add('LeeEXE')
-add('Legacy_of_Blaze')
 add('Legacy_of_Kain_Laugh_Reaver')
 add('Legend_of_Link')
 add('Legend_of_Setar')
@@ -756,7 +767,6 @@ add('Mob_Ties')
 add('Modern_Day_Witchdoctor')
 add('Modest_Medusa')
 add('Monkey_Pot')
-add('Monster_Lover')
 add('Monster_Lover_Destinys_Path')
 add('Monster_Soup')
 add('Moon_Reflected_in_Water')
@@ -950,7 +960,6 @@ add('Raw_Fish')
 add('Razor_Candy')
 add('Rebound')
 add('Reckless_Youth')
-add('Red_Dog_Venue')
 add('Red_Moon')
 add('Red_String')
 add('Redemption_of_Heroes')
@@ -1275,7 +1284,6 @@ add('Two_Weeks_Notice')
 add('Typical_Strange')
 add('UNA_Frontiers_Commentary')
 add('USB')
-add('U_Chuu_No_Hoshi_Hotoshi_Tsuko')
 add('Ultimate_X')
 add('Ultimate_tourny_of_ultimate_fighting')
 add('Ultranimu')
