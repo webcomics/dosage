@@ -36,6 +36,7 @@ class WhyTheLongFace(_BasicScraper):
     latestUrl = 'http://www.absurdnotions.org/wtlf200709.html'
     stripUrl = 'http://www.absurdnotions.org/wtlf%s.html'
     imageSearch = compile(r'<img src="(http://www.absurdnotions.org/wtlf.+?|lf\d+.\w{1,4})"', IGNORECASE)
+    multipleImagesPerStrip = True
     prevSearch = compile(r'HREF="(.+?)"><IMG SRC="nprev.gif" ')
     help = 'Index format: yyyymm'
 
@@ -66,7 +67,7 @@ class WorldOfWarcraftEh(_BasicScraper):
 class Wulffmorgenthaler(_BasicScraper):
     latestUrl = 'http://wumocomicstrip.com/'
     stripUrl = latestUrl + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(/img/strip/thumb/[^"]+)'))
+    imageSearch = compile(tagre("img", "src", r'(/img/strip/[^/"]+)'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)') + "<span>Previous")
     help = 'Index format: yyyy/mm/dd'
 

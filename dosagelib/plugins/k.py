@@ -4,7 +4,7 @@
 
 from re import compile, IGNORECASE
 from ..scraper import _BasicScraper
-
+from ..util import tagre
 
 class Key(_BasicScraper):
     latestUrl = 'http://key.shadilyn.com/latestpage.html'
@@ -25,7 +25,7 @@ class Krakow(_BasicScraper):
 class Kukuburi(_BasicScraper):
     latestUrl = 'http://www.kukuburi.com/current/'
     stripUrl = 'http://www.kukuburi.com/v2/%s/'
-    imageSearch = compile(r'img src="(http://www.kukuburi.com/../comics/.+?)"')
+    imageSearch = compile(tagre("img", "src", r'(http://www\.kukuburi\.com/v2/comics/[^"]+)', after='alt="[^"]'))
     prevSearch = compile(r'nav-previous.+?"(http.+?)"')
     help = 'Index format: yyyy/mm/dd/stripname'
 

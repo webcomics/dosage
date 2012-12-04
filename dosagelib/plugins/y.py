@@ -19,8 +19,8 @@ class YAFGC(_BasicScraper):
 class YouSayItFirst(_BasicScraper):
     latestUrl = 'http://www.yousayitfirst.com/'
     stripUrl = latestUrl + 'comics/index.php?date=%s'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.yousayitfirst\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.yousayitfirst\.com/comics/index\.php\?date=\d+)') + "Previous")
+    imageSearch = compile(tagre("img", "src", r"(http://www\.yousayitfirst\.com/comics/[^>']+)", quote="'?"))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.yousayitfirst\.com/comics/index\.php\?date=\d+)', quote="'") + "Previous")
     help = 'Index format: yyyymmdd'
 
 

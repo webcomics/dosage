@@ -1,10 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012 Bastian Kleineidam
-import re
-
 from .util import fetchUrl, getQueryParams
-from .scraper import _BasicScraper
 
 def queryNamer(paramName, usePageUrl=False):
     """Get name from URL query part."""
@@ -81,19 +78,3 @@ class IndirectLatestMixin(object):
 
     latestUrl = property(getLatestUrl)
 
-
-class _PHPScraper(_BasicScraper):
-    """
-    Scraper for comics using phpComic/CUSP.
-
-    This provides an easy way to define scrapers for webcomics using phpComic.
-    """
-    imageUrl = property(lambda self: self.basePath + 'daily.php?date=%s')
-    imageSearch = property(lambda self: re.compile(r'<img alt=[^>]+ src="(%scomics/\d{6}\..+?)">' % (self.basePath,)))
-
-    help = 'Index format: yymmdd'
-
-    @classmethod
-    def starter(cls):
-        """Get starter URL."""
-        return cls.basePath + cls.latestUrl

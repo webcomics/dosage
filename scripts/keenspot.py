@@ -21,27 +21,59 @@ num_matcher = re.compile(r'Number of Days: (\d+)')
 
 # names of comics to exclude
 exclude_comics = [
+    "10", # page is gone
+    "54sinRed", # page is 403 forbidden
+    "6D4", # redirected to another page
+    "AaaSoCAwesomenessandaSliceofCheese", # broken images
+    "AcrossthePond", # page moved
+    "ACDeceptibotscomic", # no images
+    "AdamandSei", # page has 403 forbidden
+    "AdamsRoadGang", # page is gone
+    "ADVENTURERS", # page is gone
+    "AiYaiYai", # page moved
+    "AlltheCommies", # missing images
+    "AltaModaMetro", # page redirected
+    "AltarGirl", # page redirected
+    "Amerika", # no images
+    "Angels", # page has 403 forbidden
+    "AngryDMonkey", # page redirected
+    "Angst", # page redirected
+    "Animenifesto", # too few images
+    "Anna", # no images
+    "Arcana", # archive broken
+    "Area15", # no images
+    "BaidheTu", # no images
+    "BasilFlint", # page redirected
+    "beerkada", # no images
+    "BelovedLeader", # broken images
+    "BigMouthComics", # page does not follow standard layout
+    "", # page is gone
+    "", # page is gone
+    "", # page is gone
+    "BlueZombie", # broken page
+    "BoomerExpress", # redirection to another page
+    "DungeonDamage", # page does not follow standard layout
+    "EarthRiser", # redirects to a new page
+    "FaultyLogic", # page does not follow standard layout
+    "GoForIt", # page is gone
     "JuvenileDiversion", # page moved
     "JustWeird", # page has 403 forbidden
+    "Michikomonogatari", # page does not follow standard layout
     "MobileMadness", # page does not follow standard layout
     "KnightsOfTheNexus", # page does not follow standard layout
     "RogerAndDominic", # page does not follow standard layout
-    "TheAvatar", # page does not follow standard layout
-    "Michikomonogatari", # page does not follow standard layout
-    "DungeonDamage", # page does not follow standard layout
     "SaveMeGebus", # page does not follow standard layout
-    "BlueZombie", # broken page
-    "BoomerExpress", # redirection to another page
-    "FaultyLogic", # page does not follow standard layout
-    "EarthRiser", # redirects to a new page
-    "GoForIt", # page is gone
-    "ACDeceptibotscomic", # no images
-
+    "TheAvatar", # page does not follow standard layout
 ]
 
+# links to last valid strips
 url_overrides = {
-    # link to last valid strip
     "BallofYarn": "http://ballofyarn.comicgenesis.com/d/20020624.html",
+    "AmazonSpaceRangers": "http://amazons.comicgenesis.com/d/20051015.html",
+    "ArroganceinSimplicity": "http://arrogance.comicgenesis.com/d/20030217.html",
+    "ATasteofEvil": "http://atasteofevil.comicgenesis.com/d/20050314.html",
+    "": "",
+    "": "",
 }
 
 def handle_url(url, res):

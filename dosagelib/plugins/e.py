@@ -20,15 +20,9 @@ class EerieCuties(_BasicScraper):
 class Eriadan(_BasicScraper):
     latestUrl = 'http://www.shockdom.com/webcomics/eriadan/'
     stripUrl = latestUrl + '%s'
-    # XXX fix image search
-    imageSearch = compile(r'title="[^"]+?" src="http://www\.shockdom\.com/eriadan/(wp-content/uploads/.+?)"')
+    imageSearch = compile(tagre("img", "src", r'(http://www\.shockdom\.com/webcomics/eriadan/files/[^"]+)', after='alt=""'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)', after="prev"))
     help = 'Index format: yyyy/mm/dd/nnn (unpadded)'
-
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        return '%d' % (int(compile(r'p=(\d+)').search(pageUrl).group(1)))
-
 
 
 class ElGoonishShive(_BasicScraper):
@@ -38,7 +32,6 @@ class ElGoonishShive(_BasicScraper):
     imageSearch = compile(r"'(comics/.+?)'")
     prevSearch = compile(r"<a href='(/\?date=.+?)'.+?arrow_prev.gif")
     help = 'Index format: yyyy-mm-dd'
-
 
 
 class ElGoonishShiveNP(_BasicScraper):
@@ -52,12 +45,10 @@ class ElGoonishShiveNP(_BasicScraper):
 
 class EmergencyExit(_BasicScraper):
     latestUrl = 'http://www.eecomics.net/'
-    stripUrl = None
+    stripUrl = latestUrl + "?strip_id=%s"
     imageSearch = compile(r'"(comics/.+?)"')
-    prevSearch = compile(r'START.+?"(.+?)"')
-    # XXX ?
-    help = 'God help us now!'
-
+    prevSearch = compile(tagre("a", "href", r'(\?strip_id=\d+)') + tagre("img", "alt", r"Prior"))
+    help = 'Index format: n'
 
 
 class ErrantStory(_BasicScraper):
@@ -102,7 +93,7 @@ class EvilInc(_BasicScraper):
 class Exiern(_BasicScraper):
     latestUrl = 'http://www.exiern.com/'
     stripUrl = latestUrl + '?p=%s'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.exiern\.com/comics/[^"])'))
+    imageSearch = compile(tagre("img", "src", r'(http://www\.exiern\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.exiern\.com/[^"]+)', after="prev"))
     help = 'Index format: n'
 
@@ -154,7 +145,6 @@ class ExploitationNow(_BasicScraper):
 class Ellerbisms(_BasicScraper):
     latestUrl = 'http://www.ellerbisms.com/'
     stripUrl = latestUrl + '?p=%s'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.ellerbisms\.com/wp-content/uploads/[^"]+)'))
+    imageSearch = compile(tagre("img", "src", r'(http://www\.ellerbisms\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.ellerbisms\.com/[^"]+)', after="prev"))
     help = 'Index format: nnn'
-

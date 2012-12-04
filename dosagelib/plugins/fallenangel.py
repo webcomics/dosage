@@ -12,7 +12,7 @@ _prevSearch = compile(r' <a href="(http://www\.thefallenangel\.co\.uk/.+?)"><img
 
 def add(name, shortname):
     latestUrl = 'http://www.thefallenangel.co.uk/cgi-bin/%sautokeen/autokeenlite.cgi' % shortname
-    classname = asciify(name)
+    classname = "FallenAngel_" + asciify(name)
     globals()[classname] = make_scraper(classname,
         latestUrl = latestUrl,
         stripUrl = latestUrl + '?date=%s',

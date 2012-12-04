@@ -78,6 +78,7 @@ class _BasicScraper(object):
         while url:
             imageUrls, prevUrl = fetchUrls(url, self.imageSearch, self.prevSearch)
             prevUrl = self.prevUrlModifier(prevUrl)
+            out.write("Matched previous URL %s" % prevUrl, 2)
             seen_urls.add(url)
             yield self.getComicStrip(url, imageUrls)
             # avoid recursive URL loops

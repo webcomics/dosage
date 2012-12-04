@@ -67,8 +67,8 @@ class Melonpool(_BasicScraper):
 class Misfile(_BasicScraper):
     latestUrl = 'http://www.misfile.com/'
     stripUrl = latestUrl + '?date=%s'
-    imageSearch = compile(tagre("img", "src", r'(comics/[^"]+)'))
-    prevSearch = compile(tagre("link", "href", r'([^"]+)', before="Previous"))
+    imageSearch = compile(tagre("img", "src", r"(comics/[^']+)", quote="'"))
+    prevSearch = compile(tagre("link", "href", r"([^']+)", quote="'", before="Previous"))
     help = 'Index format: yyyy-mm-dd'
 
 
@@ -76,15 +76,6 @@ class MysteriesOfTheArcana(_BasicScraper):
     latestUrl = 'http://mysteriesofthearcana.com/'
     stripUrl = latestUrl + 'index.php?action=comics&cid=%s'
     imageSearch = compile(tagre("img", "src", r'(image\.php\?type=com&i=[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'()', after="navprevius"))
+    prevSearch = compile(tagre("a", "href", r'(index\.php[^"]+)', after="navprevious"))
     help = 'Index format: n (unpadded)'
 
-
-
-# XXX move to keenspot?
-class MysticRevolution(_BasicScraper):
-    latestUrl = 'http://mysticrevolution.keenspot.com/'
-    stripUrl = latestUrl + '?cid=%s'
-    imageSearch = compile(tagre("img", "src", r'(http://cdn\.mysticrevolution\.keenspot\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("link", "rel", r'(\?cid=\d+)', before="prev"))
-    help = 'Index format: n (unpadded)'

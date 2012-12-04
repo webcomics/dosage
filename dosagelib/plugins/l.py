@@ -16,23 +16,12 @@ class LasLindas(_BasicScraper):
     help = 'Index format: stripname'
 
 
-
-class LesbianPiratesFromOuterSpace(_BasicScraper):
-    latestUrl = 'http://rosalarian.com/lesbianpirates/'
-    stripUrl = latestUrl + 'index.php?p=%s'
-    imageSearch = compile(tagre("img", "src", r'("comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/index\.php\?id=\d+)', after="prev"))
-    help = 'Index format: n'
-
-
-
 class Lint(_BasicScraper):
     latestUrl = 'http://www.purnicellin.com/lint/'
     stripUrl = latestUrl + '%s'
     imageSearch = compile(r'<img src="(http://www.purnicellin.com/lint/comics/.+?)"')
     prevSearch = compile(r'\| <a href="([^"]+)" rel="prev">')
     help = 'Index format: yyyy/mm/dd/num-name'
-
 
 
 class LookingForGroup(_BasicScraper):
@@ -51,8 +40,8 @@ class LookingForGroup(_BasicScraper):
 class LittleGamers(_BasicScraper):
     latestUrl = 'http://www.little-gamers.com/'
     stripUrl = latestUrl + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.little-gamers\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www.little-gamers.com/[^"]+)', before="comic-nav-prev-link"))
+    imageSearch = compile(tagre("img", "src", r'(http://little-gamers\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.little-gamers.com/[^"]+)', before="comic-nav-prev-link"))
     help = 'Index format: yyyy/mm/dd/name'
 
 

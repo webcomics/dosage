@@ -163,7 +163,7 @@ def normaliseURL(url):
 
     pu = list(urlparse.urlparse(url))
     segments = pu[2].split('/')
-    while segments and segments[0] == '':
+    while segments and segments[0] in ('', '..'):
         del segments[0]
     pu[2] = '/' + '/'.join(segments).replace(' ', '%20')
     # remove leading '&' from query

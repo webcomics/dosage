@@ -5,8 +5,8 @@
 from re import compile
 
 from ..scraper import _BasicScraper
-from ..helpers import bounceStarter, indirectStarter
-from ..util import tagre, getQueryParams
+from ..helpers import bounceStarter
+from ..util import tagre
 
 
 class CaptainSNES(_BasicScraper):
@@ -142,37 +142,6 @@ class Curvy(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(/c/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/\?date=\d+)') + tagre("img", "src", "/nav/prev\.png"))
     help = 'Index format: yyyymmdd'
-
-
-def cloneManga(name, shortName, lastStrip=None):
-    url = 'http://manga.clone-army.org'
-    baseUrl = '%s/%s.php' % (url, shortName)
-
-    def namer(self, imageUrl, pageUrl):
-        return '%03d' % int(getQueryParams(pageUrl)['page'][0])
-
-    attrs = dict(
-        name='CloneManga/' + name,
-        stripUrl = baseUrl + '?page=%s',
-        imageSearch=compile(tagre("img", "src", r'((?:%s/)?%s/[^"]+)' % (url, shortName), after="center")),
-        prevSearch=compile(tagre("a", "href", r'([^"]+)')+tagre("img", "src", r"previous\.gif")),
-        help='Index format: n',
-        namer=namer,
-    )
-    if lastStrip is None:
-        attrs['starter'] = indirectStarter(baseUrl, compile(tagre("a", "href", r'([^"]+)')+tagre("img", "src", r"last\.gif")))
-    else:
-        attrs['latestUrl'] = attrs['stripUrl'] % lastStrip
-    return type('CloneManga_%s' % name, (_BasicScraper,), attrs)
-
-
-anm = cloneManga('AprilAndMay', 'anm')
-kanami = cloneManga('Kanami', 'kanami')
-momoka = cloneManga('MomokaCorner', 'momoka')
-nana = cloneManga('NanasEverydayLife', 'nana', '78')
-pxi = cloneManga('PaperEleven', 'pxi', '311')
-t42r = cloneManga('Tomoyo42sRoom', 't42r')
-penny = cloneManga('PennyTribute', 'penny')
 
 
 class CatAndGirl(_BasicScraper):

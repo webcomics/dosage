@@ -28,7 +28,7 @@ class OddFish(_BasicScraper):
 
 class OnTheEdge(_BasicScraper):
     latestUrl = 'http://ontheedgecomics.com/'
-    stripUrl = 'http://ontheedgecomics.com/comic/ote%s'
+    stripUrl = 'http://ontheedgecomics.com/comic/%s'
     imageSearch = compile(r'<img src="(http://ontheedgecomics.com/comics/.+?)"')
     prevSearch = compile(r'<a href="([^"]+)" rel="prev">')
     help = 'Index format: nnn (unpadded)'

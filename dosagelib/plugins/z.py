@@ -17,6 +17,11 @@ class Zapiro(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(http://mg\.co\.za/cartoon/[^"]+)')+"Older")
     help = 'Index format: yyyy-mm-dd-stripname'
 
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        name = imageUrl.split('/')[-3]
+        return name
+
 
 class ZombieHunters(_BasicScraper):
     latestUrl = 'http://www.thezombiehunters.com/'

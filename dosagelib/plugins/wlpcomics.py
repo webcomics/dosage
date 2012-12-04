@@ -2,14 +2,15 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012 Bastian Kleineidam
 
-from re import compile, IGNORECASE
+from re import compile
+from ..util import tagre
 from ..scraper import make_scraper
 from ..helpers import bounceStarter
 
 
-_imageSearch = compile(r'SRC="(http://www\.wlpcomics\.com/adult/.+?|http://www\.wlpcomics\.com/general/.+?)"', IGNORECASE)
-_prevSearch = compile(r'</a> <A HREF="(\w+.html)">Previous Page</a>', IGNORECASE)
-_nextSearch = compile(r'</a> <A HREF="(\w+.html)">Next Page</a>', IGNORECASE)
+_imageSearch = compile(tagre("img", "src", r'(http://www\.wlpcomics\.com/(?:adult|general)/[^"]+)'))
+_prevSearch = compile(tagre("a", "href", r'(\w+.html)') + 'Previous')
+_nextSearch = compile(tagre("a", "href", r'(\w+.html)') + 'Next')
 
 
 def add(name, path):
@@ -35,4 +36,3 @@ add('ChichiChan', 'adult/chichi/')
 add('ChocolateMilkMaid', 'adult/cm/')
 add('MaidAttack', 'general/maidattack/')
 add('ShadowChasers', 'general/shadowchasers/')
-add('Stellar', 'adult/stellar/')

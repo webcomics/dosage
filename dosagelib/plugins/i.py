@@ -9,9 +9,9 @@ from ..util import tagre
 
 class IDreamOfAJeanieBottle(_BasicScraper):
     latestUrl = 'http://jeaniebottle.com/'
-    stripUrl = latestUrl + 'review.php?comicID='
+    stripUrl = latestUrl + '?p=%s'
     imageSearch = compile(r'(/comics/.+?)"')
-    prevSearch = compile(r'First".+?(review.php.+?)".+?prev_a.gif')
+    prevSearch = compile(tagre("a", "href", r'(http://jeaniebottle\.com/\?p=\d+)', after="prev"))
     help = 'Index format: n (unpadded)'
 
 

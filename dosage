@@ -98,15 +98,19 @@ def getComics(options, comics):
         else:
             strips = scraperobj.getCurrentStrips()
         first = True
-        for strip in strips:
-            _errors, skipped = saveComicStrip(strip, options.basepath)
-            errors += _errors
-            if not first and scraperobj.indexes:
-                # stop when indexed retrieval skipped all images for one
-                # comie strip (except the first one)
-                out.write("Stop retrieval because image file already exists")
-                break
-            first = False
+        try:
+            for strip in strips:
+                _errors, skipped = saveComicStrip(strip, options.basepath)
+                errors += _errors
+                if not first and scraperobj.indexes:
+                    # stop when indexed retrieval skipped all images for one
+                    # comie strip (except the first one)
+                    out.write("Stop retrieval because image file already exists")
+                    break
+                first = False
+        except IOError as msg:
+            out.write('Error getting strip: %s' % msg)
+            errors += 1
     events.getHandler().end()
     return errors
 

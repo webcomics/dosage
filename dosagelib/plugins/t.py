@@ -10,7 +10,7 @@ from ..util import tagre
 
 class TheNoob(_BasicScraper):
     latestUrl = 'http://www.thenoobcomic.com/index.php'
-    stripUrl = latestUrl + '?pos=%'
+    stripUrl = latestUrl + '?pos=%s'
     imageSearch = compile(tagre("img", "src", r'(/headquarters/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(\?pos=\d+)', before="comic_nav_previous_button"))
     help = 'Index format: nnnn'
@@ -19,7 +19,7 @@ class TheNoob(_BasicScraper):
 
 class TheOrderOfTheStick(_BasicScraper):
     latestUrl = 'http://www.giantitp.com/comics/oots0863.html'
-    stripUrl = latestUrl + 'comics/oots%s.html'
+    stripUrl = 'http://www.giantitp.com/comics/oots%s.html'
     imageSearch = compile(r'<IMG src="(/comics/images/.+?)">')
     prevSearch = compile(r'<A href="(/comics/oots\d{4}\.html)"><IMG src="/Images/redesign/ComicNav_Back.gif"')
     help = 'Index format: n (unpadded)'
@@ -31,7 +31,8 @@ class TheParkingLotIsFull(_BasicScraper):
     latestUrl = 'http://plif.courageunfettered.com/archive/arch2002.htm'
     stripUrl = 'http://plif.courageunfettered.com/archive/arch%s.htm'
     imageSearch = compile(r'<td align="center"><A TARGET=_parent HREF="(wc\d+\..+?)">')
-    prevSearch = compile(r'-\s*\n\s*<A HREF="(arch\d{4}\.htm)">\d{4}</A>')
+    multipleImagesPerStrip = True
+    prevSearch = compile(r'\d{4} -\s+<A HREF="(arch\d{4}\.htm)">\d{4}')
     help = 'Index format: nnn'
 
 
@@ -40,7 +41,7 @@ class TheWotch(_BasicScraper):
     latestUrl = 'http://www.thewotch.com/'
     stripUrl = latestUrl + '?date=%s'
     imageSearch = compile(r"<img.+?src='(comics/.+?)'")
-    prevSearch = compile(r"<link rel='Previous' href='(\?date=\d+-\d+-\d+)'")
+    prevSearch = compile(r"<link rel='Previous' href='(/\?date=\d+-\d+-\d+)'")
     help = 'Index format: yyyy-mm-dd'
 
 

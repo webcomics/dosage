@@ -49,12 +49,12 @@ class FlakyPastry(_BasicScraper):
     prevSearch = compile(r'<a href="(.+?)".+?btn_back')
     help = 'Index format: nnnn'
 
-# XXX move to keenspot
+
 class Flipside(_BasicScraper):
     latestUrl = 'http://flipside.keenspot.com/comic.php'
     stripUrl = latestUrl + '?i=%s'
-    imageSearch = compile(r'<IMG SRC="(comic/.+?)"')
-    prevSearch = compile(r'<A HREF="(comic.php\?i=\d+?)">&lt')
+    imageSearch = compile(tagre("img", "src", r'(http://cdn\.flipside\.keenspot\.com/comic/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://flipside\.keenspot\.com/comic\.php\?i=\d+)', after="prev"))
     help = 'Index format: nnnn'
 
 
@@ -114,7 +114,8 @@ class FredoAndPidjin(_BasicScraper):
     homepage = 'http://www.pidjin.net/'
     stripUrl = None
     help = 'Index format: yyyy/mm/dd/name'
-    imageSearch = compile(tagre('img', 'src', '(http://cdn\.pidjin\.net/wp-content/uploads/\d\d\d\d/\d\d/\d+[^"]+\.png)'))
+    imageSearch = compile(tagre('img', 'src', '(http://cdn\.pidjin\.net/wp-content/uploads/\d+/\d+/[^"]+\.png)'))
+    multipleImagesPerStrip = True
     prevSearch = compile(tagre('a', 'href', '([^"]+)')+"Prev</a>")
     starter = indirectStarter(homepage,
        compile(tagre('a', 'href', "("+homepage+r'\d\d\d\d/\d\d/\d\d/[^"]+/)')))

@@ -2,7 +2,7 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012 Bastian Kleineidam
 
-from re import compile, MULTILINE
+from re import compile
 from ..scraper import _BasicScraper
 from ..util import tagre
 
@@ -21,12 +21,3 @@ class JoeAndMonkey(_BasicScraper):
     imageSearch = compile(r'"(/comic/[^"]+)"')
     prevSearch = compile(r"<a href='(/\d+)'>Previous")
     help = 'Index format: nnn'
-
-
-class JoyOfTech(_BasicScraper):
-    latestUrl = 'http://www.geekculture.com/joyoftech/'
-    stripUrl = latestUrl + 'joyarchives/%s.html'
-    imageSearch = compile(tagre("img", "src", r'(joyimages/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(joyarchives/[^"]+)') + r'.+?Previous', MULTILINE)
-    help = 'Index format: nnn'
-

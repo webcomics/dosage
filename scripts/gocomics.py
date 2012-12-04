@@ -21,6 +21,22 @@ url_matcher = re.compile(tagre("a", "href", r'(/[^"]+)', after="alpha_list") + r
 # names of comics to exclude
 exclude_comics = [
     "FrikkFrakkAndFrank", # too few comics
+    "Apocalypseharry", # too few comics
+    "BatkidandBatrat", # too few comics
+    "BETWEENTHELINES", # comic unavailable
+    "Bonner", # missing page
+    "Buster", # comic unavailabe
+    "DALTONDOG", # comic unavailable
+    "DellAndSteve", # too few comics
+    "Dilbert", # redirect
+    "InkeeDoodles", # comic unavailable
+    "MaggiesComics", # too few comics
+    "OfMiceandMud", # too few comics
+    "OysterWar", # too few comics
+    "PIGTIMES", # comic unavailable
+    "PS", # comic unavailable
+    "SherpaAid", # comic unavailable
+    "SparComics", # comic unavailable
 ]
 
 

@@ -33,30 +33,31 @@ class _ComicTester(TestCase):
         # at least 5 strips from the start, and find strip images
         # on at least 4 pages.
         scraperobj = self.scraperclass()
-        num = empty = 0
+        num = 0
         max_strips = 5
         for strip in islice(scraperobj.getAllStrips(), 0, max_strips):
             images = 0
             for image in strip.getImages():
                 images += 1
                 self.save(image)
-            if images == 0:
-                empty += 1
+            self.check(images > 0, 'failed to find images at %s' % strip.stripUrl)
+            if not self.scraperclass.multipleImagesPerStrip:
+                self.check(images == 1, 'found %d instead of 1 image at %s' % (images, strip.stripUrl))
             if num > 0:
                 self.check_stripurl(strip)
             num += 1
         if self.scraperclass.prevSearch:
-            self.check(num >= 4, 'traversal failed after %d strips, check the prevSearch pattern.' % num)
-            # check that at exactly or for multiple pages at least 5 images are saved
+            self.check(num >= 4, 'traversal failed after %d strips, check the prevSearch pattern at %s.' % (num, strip.stripUrl))
+            # Check that exactly or for multiple pages at least 5 images are saved.
+            # This is different than the image number check above since it checks saved files,
+            # ie. it detects duplicate filenames.
             saved_images = self.get_saved_images()
             num_images = len(saved_images)
+            attrs = (num_images, saved_images, max_strips, self.tmpdir)
             if self.scraperclass.multipleImagesPerStrip:
-                self.check(num_images >= max_strips, 
-                  'saved %d %s instead of at least %d images in %s' % (num_images, saved_images, max_strips, self.tmpdir))
+                self.check(num_images >= max_strips, 'saved %d %s instead of at least %d images in %s' % attrs)
             else:
-                self.check(num_images == max_strips, 
-                  'saved %d %s instead of %d images in %s' % (num_images, saved_images, max_strips, self.tmpdir))
-        self.check(empty == 0, 'failed to find images on %d pages, check the imageSearch pattern.' % empty)
+                self.check(num_images == max_strips, 'saved %d %s instead of %d images in %s' % attrs)
 
     def check_stripurl(self, strip):
         if not self.scraperclass.stripUrl:

@@ -35,7 +35,7 @@ def add(name):
             return url
         url = fetchUrl(url, _nextSearch)
         if not url:
-            raise ValueError("could not find nextSearch pattern %r in %s" % (_nextSearch.pattern, _url))
+            raise ValueError("could not find nextSearch pattern %r in %s" % (_nextSearch.pattern, url))
         return url
 
     globals()[classname] = make_scraper(classname,

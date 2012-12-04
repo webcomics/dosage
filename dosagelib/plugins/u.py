@@ -6,12 +6,12 @@ from re import compile
 
 from ..scraper import _BasicScraper
 from ..helpers import bounceStarter, indirectStarter
-from ..util import getQueryParams
+from ..util import getQueryParams, tagre
 
 
 class Undertow(_BasicScraper):
     stripUrl = 'http://undertow.dreamshards.org/%s'
-    imageSearch = compile(r'<img src="(.+?)"')
+    imageSearch = compile(tagre("img", "src", r'([^"]+\.jpg)'))
     prevSearch = compile(r'href="(.+?)".+?teynpoint')
     help = 'Index format: good luck !'
     starter = indirectStarter('http://undertow.dreamshards.org/',
