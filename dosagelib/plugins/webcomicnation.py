@@ -17,18 +17,16 @@ def add(name, subpath):
         latestUrl = baseUrl + subpath,
         stripUrl = baseUrl + '?view=archive&amp;chapter=%s',
         imageSearch = _imageSearch,
+        multipleImagesPerStrip = True,
         prevSearch = _prevSearch,
+        # the prevSearch is a redirect
+        prevUrlMatchesStripUrl = False,
         help = 'Index format: nnnn (non-contiguous)',
     )
 
 
 add('AgnesQuill', 'daveroman/agnes/')
-add('Elvenbaath', 'tdotodot2k/elvenbaath/')
-add('IrrationalFears', 'uvernon/irrationalfears/')
-add('KismetHuntersMoon', 'laylalawlor/huntersmoon/')
-add('SaikoAndLavender', 'gc/saiko/')
 add('MyMuse', 'gc/muse/')
 add('NekkoAndJoruba', 'nekkoandjoruba/nekkoandjoruba/')
 add('JaxEpoch', 'johngreen/quicken/')
-add('QuantumRockOfAges', 'DreamchildNYC/quantum/')
 add('ClownSamurai', 'qsamurai/clownsamurai/')

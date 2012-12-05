@@ -7,7 +7,7 @@ import rfc822
 import time
 
 from .output import out
-from .util import urlopen, normaliseURL, unquote, strsize
+from .util import getImageObject, normaliseURL, unquote, strsize
 from .events import getHandler
 
 class FetchComicError(IOError):
@@ -52,7 +52,7 @@ class ComicImage(object):
     def connect(self):
         """Connect to host and get meta information."""
         try:
-            self.urlobj = urlopen(self.url, referrer=self.referrer)
+            self.urlobj = getImageObject(self.url, self.referrer)
         except IOError as msg:
             raise FetchComicError('Unable to retrieve URL.', self.url, msg)
 

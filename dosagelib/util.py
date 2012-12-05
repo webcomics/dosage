@@ -21,7 +21,12 @@ if os.name == 'nt':
 
 has_curses = has_module("curses")
 
-MAX_FILESIZE = 1024*1024*1 # 1MB
+# Maximum content size for HTML pages
+MaxContentBytes = 1024 * 1024 * 2 # 2 MB
+
+# Maximum content size for images
+MaxImageBytes = 1024 * 1024 * 20 # 20 MB
+
 
 def tagre(tag, attribute, value, quote='"', before="", after=""):
     """Return a regular expression matching the given HTML tag, attribute
@@ -71,9 +76,9 @@ def case_insensitive_re(name):
 
 baseSearch = re.compile(tagre("base", "href", '([^"]*)'))
 
-def getPageContent(url):
+def getPageContent(url, max_content_bytes=MaxContentBytes):
     # read page data
-    page = urlopen(url)
+    page = urlopen(url, max_content_bytes=max_content_bytes)
     data = page.text
     # determine base URL
     baseUrl = None
@@ -83,6 +88,11 @@ def getPageContent(url):
     else:
         baseUrl = url
     return data, baseUrl
+
+
+def getImageObject(url, referrer, max_content_bytes=MaxImageBytes):
+    """Get response object for given image URL."""
+    return urlopen(url, referrer=referrer, max_content_bytes=max_content_bytes)
 
 
 def fetchUrl(url, urlSearch):
@@ -116,7 +126,6 @@ def fetchUrls(url, imageSearch, prevSearch=None):
             prevUrl = match.group(1)
             if not prevUrl:
                 raise ValueError("Match empty previous URL at %s with pattern %s" % (url, prevSearch.pattern))
-            out.write('matched previous URL %r' % prevUrl, 2)
             prevUrl = normaliseURL(urlparse.urljoin(baseUrl, prevUrl))
         else:
             out.write('no previous URL %s at %s' % (prevSearch.pattern, url), 2)
@@ -174,7 +183,7 @@ def normaliseURL(url):
     return urlparse.urlunparse(pu)
 
 
-def urlopen(url, referrer=None, retries=3, retry_wait_seconds=5):
+def urlopen(url, referrer=None, retries=3, retry_wait_seconds=5, max_content_bytes=None):
     out.write('Open URL %s' % url, 2)
     assert retries >= 0, 'invalid retry value %r' % retries
     assert retry_wait_seconds > 0, 'invalid retry seconds value %r' % retry_wait_seconds
@@ -183,13 +192,23 @@ def urlopen(url, referrer=None, retries=3, retry_wait_seconds=5):
     if referrer:
         headers['Referer'] = referrer
     try:
-        req = requests.get(url, headers=headers, config=config)
+        req = requests.get(url, headers=headers, config=config, prefetch=False)
+        check_content_size(url, req.headers, max_content_bytes)
         req.raise_for_status()
         return req
     except requests.exceptions.RequestException as err:
         msg = 'URL retrieval of %s failed: %s' % (url, err)
         out.write(msg)
         raise IOError(msg)
+
+def check_content_size(url, headers, max_content_bytes):
+    if not max_content_bytes:
+        return
+    if 'content-length' in headers:
+        size = int(headers['content-length'])
+        if size > max_content_bytes:
+            msg = 'URL content of %s with %d Bytes exceeds %d Bytes.' % (url, size, max_content_bytes)
+            raise IOError(msg)
 
 
 def get_columns (fp):

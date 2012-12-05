@@ -17,12 +17,21 @@ htmltemplate = """
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dosage.css">
+    <script src="js/masonry.min.js"></script>
 </head>
 <body>
-    <p>Dosage test results from %(date)s</p>
-    <ul>
-%(content)s 
-    </ul>
+<p>Dosage test results from %(date)s</p>
+<div id="container">
+%(content)s
+</div>
+<script>
+window.onload = function() {
+  var wall = new Masonry( document.getElementById('container'), {
+    columnWidth: 240
+  });
+};
+</script>
 </body>
 </html>
 """
@@ -80,7 +89,7 @@ def get_content(filename):
             inner = '<a href="%s" class="%s">%s</a>' % (url, css, name)
         else:
             inner = '<span class="%s">%s</span>' % (css, name)
-        res.append('    <li>%s</li>' % inner)
+        res.append('    <div class="item">%s</div>' % inner)
     return os.linesep.join(res)
 
 

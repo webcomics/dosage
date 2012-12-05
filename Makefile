@@ -68,7 +68,7 @@ pyflakes:
 	pyflakes $(PY_FILES_DIRS)
 
 count:
-	@sloccount dosage dosagelib | grep "Total Physical Source Lines of Code"
+	@sloccount $(PY_FILES_DIRS) | grep "Total Physical Source Lines of Code"
 
 clean:
 	find . -name \*.pyc -delete

@@ -8,8 +8,8 @@ from ..util import tagre
 
 _imageSearch = compile(tagre("img", "src", r'(http://(?:www|img2)\.smackjeeves\.com/images/uploaded/comics/[^"]+)'))
 _linkSearch = tagre("a", "href", r'([^"]*/comics/\d+/[^"]*)')
-_prevSearch = compile(_linkSearch + '(?:<img[^>]*alt="< Previous"|&lt; Back)')
-_nextSearch = compile(_linkSearch + '(?:<img[^>]*alt="Next >"|Next &gt;)')
+_prevSearch = compile(_linkSearch + '(?:<img[^>]*alt="< Previous"|&lt; Back|. previous)')
+_nextSearch = compile(_linkSearch + '(?:<img[^>]*alt="Next >"|Next &gt;|next )')
 
 def add(name):
     classname = 'SmackJeeves/' + name
@@ -39,6 +39,3 @@ add('durian')
 add('heard')
 add('mpmcomic')
 add('nlmo-project')
-add('paranoidloyd')
-add('thatdreamagain')
-add('wowcomics')

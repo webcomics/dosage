@@ -43,7 +43,7 @@ class _ComicTester(TestCase):
             self.check(images > 0, 'failed to find images at %s' % strip.stripUrl)
             if not self.scraperclass.multipleImagesPerStrip:
                 self.check(images == 1, 'found %d instead of 1 image at %s' % (images, strip.stripUrl))
-            if num > 0:
+            if num > 0 and self.scraperclass.prevUrlMatchesStripUrl:
                 self.check_stripurl(strip)
             num += 1
         if self.scraperclass.prevSearch:

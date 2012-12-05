@@ -9,7 +9,10 @@ from ..util import tagre
 
 _imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]+)'))
 _prevSearch = compile(tagre("a", "href", r'([^"]*/d/\d{8}\.html)') +
-   '(?:Previous comic|'+tagre("img", "alt", "Previous comic")+')')
+   '(?:Previous comic' + '|' +
+    tagre("img", "alt", "Previous comic") + '|' +
+    tagre("img", "src", "images/back\.gif") +
+    ')')
 
 def add(name, url):
     classname = 'KeenSpot_%s' % name
@@ -17,7 +20,9 @@ def add(name, url):
     @classmethod
     def _prevUrlModifier(cls, prevUrl):
         if prevUrl:
-            return prevUrl.replace("keenspace", "comicgenesis"
+            return prevUrl.replace("keenspace.com", "comicgenesis.com"
+              ).replace("keenspot.com", "comicgenesis.com"
+              ).replace("toonspace.com", "comicgenesis.com"
               ).replace("comicgen.com", "comicgenesis.com")
 
     globals()[classname] = make_scraper(classname,

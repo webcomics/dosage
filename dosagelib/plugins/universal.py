@@ -18,7 +18,7 @@ _imageSearch = compile(tagre("img", "src", r'(http://assets\.amuniversal\.com/[^
 
 def add(name, shortname):
     latestUrl = 'http://www.universaluclick.com%s' % shortname
-    classname = 'UClick_%s' % name
+    classname = 'Universal_%s' % name
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
@@ -34,7 +34,7 @@ def add(name, shortname):
              return parse_strdate(strdate).strftime("%Y%m%d")
 
     globals()[classname] = make_scraper(classname,
-        name='UClick/' + name,
+        name='Universal/' + name,
         latestUrl = latestUrl,
         stripUrl = latestUrl + '%s/',
         imageSearch = _imageSearch,

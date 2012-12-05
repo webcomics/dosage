@@ -170,7 +170,7 @@ def handle_url(url, url_matcher, num_matcher, res):
         end = match.end(1)
         mo = num_matcher.search(data[end:])
         if not mo:
-            print("ERROR:", repr(data[end:end+300], file=sys.stderr))
+            print("ERROR:", repr(data[end:end+300]), file=sys.stderr)
             continue
         num = int(mo.group(1))
         res[name] = num

@@ -22,10 +22,16 @@ class _BasicScraper(object):
     @cvar prevSearch: A compiled regex that will locate the URL for the
         previous strip when applied to a strip page.
     '''
+
     # if more than one image per URL is expected
     multipleImagesPerStrip = False
+
+    # set to False if previous URLs do not match the strip URL (ie. because of redirects)
+    prevUrlMatchesStripUrl = True
+
     # usually the index format help
     help = 'Sorry, no help for this comic yet.'
+
 
     def __init__(self, indexes=None):
         """Initialize internal variables."""

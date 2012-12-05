@@ -23,10 +23,8 @@ def add(name, host):
     )
 
 
-add('Grim', 'grim')
 add('KOF', 'kof')
 add('PowerPuffGirls', 'ppg')
-add('Snafu', 'www')
 add('Tin', 'tin')
 add('TW', 'tw')
 add('Sugar', 'sugar')

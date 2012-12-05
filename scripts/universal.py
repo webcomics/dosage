@@ -20,6 +20,20 @@ url_matcher = re.compile(r'<li><a href="(/comics/[^"]+)">([^<]+)</a>')
 
 # names of comics to exclude
 exclude_comics = [
+    "BusinessAndFinance", # not a comic
+    "ComicPanel", # not a comic
+    "ComicsAZ", # not a comic
+    "ComicStrip", # not a comic
+    "Espaol", # not a comic
+    "Family", # not a comic
+    "ForKids", # not a comic
+    "JamesBond", # not a comic
+    "Men", # not a comic
+    "NEA", # not a comic
+    "Pets", # not a comic
+    "SundayOnly", # not a comic
+    "WebExclusive", # not a comic
+    "Women", # not a comic
 ]
 
 
