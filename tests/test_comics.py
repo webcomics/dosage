@@ -36,13 +36,13 @@ class _ComicTester(TestCase):
         num = 0
         max_strips = 5
         for strip in islice(scraperobj.getAllStrips(), 0, max_strips):
-            images = 0
+            images = []
             for image in strip.getImages():
-                images += 1
+                images.append(image.url)
                 self.save(image)
-            self.check(images > 0, 'failed to find images at %s' % strip.stripUrl)
+            self.check(images, 'failed to find images at %s' % strip.stripUrl)
             if not self.scraperclass.multipleImagesPerStrip:
-                self.check(images == 1, 'found %d instead of 1 image at %s' % (images, strip.stripUrl))
+                self.check(len(images) == 1, 'found more than 1 image at %s: %s' % (strip.stripUrl, images))
             if num > 0 and self.scraperclass.prevUrlMatchesStripUrl:
                 self.check_stripurl(strip)
             num += 1

@@ -28,5 +28,4 @@ def add(name, subpath):
 add('AgnesQuill', 'daveroman/agnes/')
 add('MyMuse', 'gc/muse/')
 add('NekkoAndJoruba', 'nekkoandjoruba/nekkoandjoruba/')
-add('JaxEpoch', 'johngreen/quicken/')
 add('ClownSamurai', 'qsamurai/clownsamurai/')

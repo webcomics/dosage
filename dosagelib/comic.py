@@ -7,7 +7,7 @@ import rfc822
 import time
 
 from .output import out
-from .util import getImageObject, normaliseURL, unquote, strsize
+from .util import getImageObject, normaliseURL, unquote, strsize, getDirname, getFilename
 from .events import getHandler
 
 class FetchComicError(IOError):
@@ -34,20 +34,21 @@ class ComicStrip(object):
         filename = self.namer(url, self.stripUrl)
         if filename is None:
             filename = url.rsplit('/', 1)[1]
-        return ComicImage(self.name, url, self.stripUrl, filename)
+        dirname = getDirname(self.name)
+        return ComicImage(self.name, url, self.stripUrl, dirname, filename)
 
 
 class ComicImage(object):
     """A comic image downloader."""
 
-    def __init__(self, name, url, referrer, filename):
+    def __init__(self, name, url, referrer, dirname, filename):
         """Set URL and filename."""
         self.name = name
         self.referrer = referrer
         self.url = url
+        self.dirname = dirname
+        filename = getFilename(filename)
         self.filename, self.ext = os.path.splitext(filename)
-        self.filename = self.filename.replace(os.sep, '_')
-        self.ext = self.ext.replace(os.sep, '_')
 
     def connect(self):
         """Connect to host and get meta information."""
@@ -71,7 +72,7 @@ class ComicImage(object):
             self.ext = '.' + subtype.replace('jpeg', 'jpg')
         self.contentLength = int(self.urlobj.headers.get('content-length', 0))
         self.lastModified = self.urlobj.headers.get('last-modified')
-        out.write('... filename = %r, ext = %r, contentLength = %d' % (self.filename, self.ext, self.contentLength), 2)
+        out.debug('... filename = %r, ext = %r, contentLength = %d' % (self.filename, self.ext, self.contentLength))
 
     def touch(self, filename):
         """Set last modified date on filename."""
@@ -86,18 +87,18 @@ class ComicImage(object):
         self.connect()
         filename = "%s%s" % (self.filename, self.ext)
         comicSize = self.contentLength
-        comicDir = os.path.join(basepath, self.name.replace('/', os.sep))
+        comicDir = os.path.join(basepath, self.dirname)
         if not os.path.isdir(comicDir):
             os.makedirs(comicDir)
 
         fn = os.path.join(comicDir, filename)
         if os.path.isfile(fn) and os.path.getsize(fn) >= comicSize:
             self.touch(fn)
-            out.write('Skipping existing file "%s".' % fn, 1)
+            out.info('Skipping existing file "%s".' % fn, 1)
             return fn, False
 
         try:
-            out.write('Writing comic to file %s...' % fn, 3)
+            out.debug('Writing comic to file %s...' % fn)
             with open(fn, 'wb') as comicOut:
                 comicOut.write(self.urlobj.content)
             self.touch(fn)
@@ -107,7 +108,7 @@ class ComicImage(object):
             raise
         else:
             size = strsize(os.path.getsize(fn))
-            out.write("Saved %s (%s)." % (fn, size), 1)
+            out.info("Saved %s (%s)." % (fn, size), 1)
             getHandler().comicDownloaded(self.name, fn)
 
         return fn, True

@@ -27,6 +27,8 @@ MaxContentBytes = 1024 * 1024 * 2 # 2 MB
 # Maximum content size for images
 MaxImageBytes = 1024 * 1024 * 20 # 20 MB
 
+# Default connection timeout
+ConnectionTimeoutSecs = 60
 
 def tagre(tag, attribute, value, quote='"', before="", after=""):
     """Return a regular expression matching the given HTML tag, attribute
@@ -102,7 +104,7 @@ def fetchUrl(url, urlSearch):
         searchUrl = match.group(1)
         if not searchUrl:
             raise ValueError("Match empty URL at %s with pattern %s" % (url, urlSearch.pattern))
-        out.write('matched URL %r' % searchUrl, 2)
+        out.debug('matched URL %r' % searchUrl)
         return normaliseURL(urlparse.urljoin(baseUrl, searchUrl))
     return None
 
@@ -115,10 +117,10 @@ def fetchUrls(url, imageSearch, prevSearch=None):
         imageUrl = match.group(1)
         if not imageUrl:
             raise ValueError("Match empty image URL at %s with pattern %s" % (url, imageSearch.pattern))
-        out.write('matched image URL %r with pattern %s' % (imageUrl, imageSearch.pattern), 2)
+        out.debug('matched image URL %r with pattern %s' % (imageUrl, imageSearch.pattern))
         imageUrls.add(normaliseURL(urlparse.urljoin(baseUrl, imageUrl)))
     if not imageUrls:
-        out.write("warning: no images found at %s with pattern %s" % (url, imageSearch.pattern))
+        out.warn("no images found at %s with pattern %s" % (url, imageSearch.pattern))
     if prevSearch is not None:
         # match previous URL
         match = prevSearch.search(data)
@@ -128,7 +130,7 @@ def fetchUrls(url, imageSearch, prevSearch=None):
                 raise ValueError("Match empty previous URL at %s with pattern %s" % (url, prevSearch.pattern))
             prevUrl = normaliseURL(urlparse.urljoin(baseUrl, prevUrl))
         else:
-            out.write('no previous URL %s at %s' % (prevSearch.pattern, url), 2)
+            out.debug('no previous URL %s at %s' % (prevSearch.pattern, url))
             prevUrl = None
         return imageUrls, prevUrl
     return imageUrls, None
@@ -183,8 +185,9 @@ def normaliseURL(url):
     return urlparse.urlunparse(pu)
 
 
-def urlopen(url, referrer=None, retries=3, retry_wait_seconds=5, max_content_bytes=None):
-    out.write('Open URL %s' % url, 2)
+def urlopen(url, referrer=None, retries=3, retry_wait_seconds=5, max_content_bytes=None,
+            timeout=ConnectionTimeoutSecs):
+    out.debug('Open URL %s' % url)
     assert retries >= 0, 'invalid retry value %r' % retries
     assert retry_wait_seconds > 0, 'invalid retry seconds value %r' % retry_wait_seconds
     headers = {'User-Agent': UserAgent}
@@ -192,13 +195,12 @@ def urlopen(url, referrer=None, retries=3, retry_wait_seconds=5, max_content_byt
     if referrer:
         headers['Referer'] = referrer
     try:
-        req = requests.get(url, headers=headers, config=config, prefetch=False)
+        req = requests.get(url, headers=headers, config=config, prefetch=False, timeout=timeout)
         check_content_size(url, req.headers, max_content_bytes)
         req.raise_for_status()
         return req
     except requests.exceptions.RequestException as err:
         msg = 'URL retrieval of %s failed: %s' % (url, err)
-        out.write(msg)
         raise IOError(msg)
 
 def check_content_size(url, headers, max_content_bytes):
@@ -251,7 +253,7 @@ def getRelativePath(basepath, path):
 
 def getQueryParams(url):
     query = urlparse.urlsplit(url)[3]
-    out.write('Extracting query parameters from %r (%r)...' % (url, query), 3)
+    out.debug('Extracting query parameters from %r (%r)...' % (url, query))
     return cgi.parse_qs(query)
 
 
@@ -334,9 +336,15 @@ def asciify(name):
 
 def unquote(text):
     while '%' in text:
-        text = urllib.unquote(text)
+        newtext = urllib.unquote(text)
+        if newtext == text:
+            break
+        text = newtext
     return text
 
+
+def quote(text):
+    return urllib.quote(text)
 
 def strsize (b):
     """Return human representation of bytes b. A negative number of bytes
@@ -357,3 +365,20 @@ def strsize (b):
         return "%.2fGB" % (float(b) / (1024*1024*1024))
     return "%.1fGB" % (float(b) / (1024*1024*1024))
 
+def getDirname(name):
+    """Replace slashes with path separator of name."""
+    return name.replace('/', os.sep)
+
+
+def getFilename(name):
+    # first replace all illegal chars
+    name = re.sub(r"[^0-9a-zA-Z_\-\.]", "_", name)
+    # then remove double dots and underscores
+    while ".." in name:
+        name = name.replace('..', '.')
+    while "__" in name:
+        name = name.replace('__', '_')
+    # remove a leading dot or minus
+    if name.startswith((".", "-")):
+        name = name[1:]
+    return name

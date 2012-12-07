@@ -9,14 +9,14 @@ from ..helpers import indirectStarter
 from ..util import tagre
 
 
-class DMFA(_BasicScraper):
-    latestUrl = 'http://www.missmab.com/'
-    stripUrl = latestUrl + 'Comics/Vol_%s.php'
-    imageSearch = compile(tagre("img", "src", r'((?:Comics/|Vol)[^"]+)'))
-    multipleImagesPerStrip = True
-    prevSearch = compile(tagre("a", "href", r'((?:Comics/)?Vol[^"]+)')+
-      tagre("img", "src", r'(?:../)?Images/comicprev\.gif'))
-    help = 'Index format: nnn (normally, some specials)'
+class DailyDose(_BasicScraper):
+    baseUrl = 'http://dailydoseofcomics.com/'
+    starter = indirectStarter(baseUrl,
+      compile(tagre("a", "href", r'(http://dailydoseofcomics\.com/[^"]+)', after="preview")))
+    stripUrl = baseUrl + '%s/'
+    imageSearch = compile(tagre("img", "src", r'([^"]+)', before="align(?:none|center)"))
+    prevSearch = compile(tagre("a", "href", r'(http://dailydoseofcomics\.com/[^"]+)', after="prev"))
+    help = 'Index format: stripname'
 
 
 class DandyAndCompany(_BasicScraper):
@@ -50,6 +50,16 @@ class DeepFried(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(http://www\.whatisdeepfried\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.whatisdeepfried\.com/[^"]+)', after="prev"))
     help = 'Index format: non'
+
+
+class DMFA(_BasicScraper):
+    latestUrl = 'http://www.missmab.com/'
+    stripUrl = latestUrl + 'Comics/Vol_%s.php'
+    imageSearch = compile(tagre("img", "src", r'((?:Comics/|Vol)[^"]+)'))
+    multipleImagesPerStrip = True
+    prevSearch = compile(tagre("a", "href", r'((?:Comics/)?Vol[^"]+)')+
+      tagre("img", "src", r'(?:../)?Images/comicprev\.gif'))
+    help = 'Index format: nnn (normally, some specials)'
 
 
 class DoemainOfOurOwn(_BasicScraper):

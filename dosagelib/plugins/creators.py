@@ -6,7 +6,7 @@ from re import compile
 from ..scraper import make_scraper
 from ..util import tagre
 
-_imageSearch = compile(tagre("img", "src", r'(/comics/\d+/[^"]+)'))
+_imageSearch = compile(tagre("a", "href", r'(/comics/\d+/[^"]+)'))
 
 def add(name, path):
     baseurl = 'http://www.creators.com'

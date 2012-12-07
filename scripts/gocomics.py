@@ -35,6 +35,7 @@ exclude_comics = [
     "OysterWar", # too few comics
     "PIGTIMES", # comic unavailable
     "PS", # comic unavailable
+    "RichardsPoorAlmanac", # missing images
     "SherpaAid", # comic unavailable
     "SparComics", # comic unavailable
 ]

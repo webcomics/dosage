@@ -11,7 +11,7 @@ NUMPROCESSORS:=$(shell grep -c processor /proc/cpuinfo)
 # - write test results in file
 # - run all tests found in the "tests" subdirectory
 TESTOUTPUT?=testresults.txt
-PYTESTOPTS:=-n $(NUMPROCESSORS) --resultlog=$(TESTOUTPUT) --tb=short
+PYTESTOPTS?=-n $(NUMPROCESSORS) --resultlog=$(TESTOUTPUT) --tb=short
 CHMODMINUSMINUS:=--
 # directory or file with tests to run
 TESTS ?= tests

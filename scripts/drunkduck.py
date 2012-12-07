@@ -47,6 +47,7 @@ exclude_comics = [
     "Emerald_Winter", # broken images
     "Enter_the_Duck_2", # broken images
     "ffff", # broken images
+    "Found_Art", # broken images
     "Function_Over_Fashion", # broken images
     "Funday_Morning", # broken images
     "greys_journey", # broken images
@@ -69,6 +70,7 @@ exclude_comics = [
     "Louder_Than_Bombs", # broken images
     "Lucky_Dawg", # broken images
     "Mario_in_Johto", # broken images
+    "Mary_Sue_Academy", # borken images
     "Master", # start page requires login
     "Mastermind_BTRN", # broken images
     "MAYA_____The_legend_of_Wolf", # broken images

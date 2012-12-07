@@ -149,10 +149,6 @@ class SomethingPositive(_BasicScraper):
       "(?:" + tagre("img", "src", r'images/previous\.gif') + "|Previous)")
     help = 'Index format: mmddyyyy'
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        return pageUrl.split('/')[-1].split('.')[0]
-
 
 class SexyLosers(_BasicScraper):
     stripUrl = 'http://www.sexylosers.com/%s.html'

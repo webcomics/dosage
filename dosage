@@ -24,7 +24,7 @@ import optparse
 
 from dosagelib import events, scraper
 from dosagelib.output import out
-from dosagelib.util import get_columns, internal_error
+from dosagelib.util import get_columns, internal_error, getDirname
 from dosagelib.configuration import App, Freeware, Copyright, SupportUrl
 
 def setupOptions():
@@ -35,7 +35,8 @@ def setupOptions():
     usage = 'usage: %prog [options] comicModule [comicModule ...]'
     parser = optparse.OptionParser(usage=usage)
     parser.add_option('-v', '--verbose', action='count', dest='verbose', default=0, help='provides verbose output, use multiple times for more verbosity')
-    parser.add_option('-a', '--all', action='count', dest='all', default=None, help='traverse and retrieve all available comics')
+    parser.add_option('-n', '--numstrips', action='store', dest='numstrips', type='int', default=0, help='traverse and retrieve the given number of comic strips; use --all to retrieve all comic strips')
+    parser.add_option('-a', '--all', action='store_true', dest='all', default=None, help='traverse and retrieve all comic strips')
     parser.add_option('-b', '--basepath', action='store', dest='basepath', default='Comics', help='set the path to create invidivual comic directories in, default is Comics', metavar='PATH')
     parser.add_option('--baseurl', action='store', dest='baseurl', default=None, help='the base URL of your comics directory (for RSS, HTML, etc.); this should correspond to --base-path', metavar='PATH')
     parser.add_option('-l', '--list', action='store_const', const=1, dest='list', help='list available comic modules')
@@ -73,20 +74,26 @@ def saveComicStrip(strip, basepath):
             if saved:
                 allskipped = False
         except IOError as msg:
-            out.write('Error saving %s: %s' % (image.filename, msg))
+            out.error('Could not save %s: %s' % (image.filename, msg))
             errors += 1
     return errors, allskipped
 
 
 def displayHelp(comics, basepath):
     """Print help for comic strips."""
-    for scraperobj in getScrapers(comics, basepath):
-        for line in scraperobj.getHelp().splitlines():
-            out.write("Help: "+line)
+    try:
+        for scraperobj in getScrapers(comics, basepath):
+            for line in scraperobj.getHelp().splitlines():
+                out.info("Help: "+line)
+    except ValueError as msg:
+        out.error(msg)
+        return 1
     return 0
+
 
 def getComics(options, comics):
     """Retrieve given comics."""
+    # XXX refactor
     errors = 0
     if options.output:
         events.installHandler(options.output, options.basepath, options.baseurl)
@@ -95,6 +102,8 @@ def getComics(options, comics):
         out.context = scraperobj.get_name()
         if options.all:
             strips = scraperobj.getAllStrips()
+        elif options.numstrips:
+            strips = scraperobj.getAllStrips(options.numstrips)
         else:
             strips = scraperobj.getCurrentStrips()
         first = True
@@ -105,12 +114,13 @@ def getComics(options, comics):
                 if not first and scraperobj.indexes:
                     # stop when indexed retrieval skipped all images for one
                     # comie strip (except the first one)
-                    out.write("Stop retrieval because image file already exists")
+                    out.info("Stop retrieval because image file already exists")
                     break
                 first = False
-        except IOError as msg:
-            out.write('Error getting strip: %s' % msg)
+        except (ValueError, IOError) as msg:
+            out.error(msg)
             errors += 1
+            continue
     events.getHandler().end()
     return errors
 
@@ -123,26 +133,22 @@ def run(options, comics):
     if options.list:
         return doList(options.list == 1)
     if len(comics) <= 0:
-        out.write('Warning: No comics specified, bailing out!')
+        out.warn('No comics specified, bailing out!')
         return 1
-    try:
-        if options.modhelp:
-            return displayHelp(comics, options.basepath)
-        return getComics(options, comics)
-    except ValueError as msg:
-        out.write("Error: %s" % msg)
-    return 1
+    if options.modhelp:
+        return displayHelp(comics, options.basepath)
+    return getComics(options, comics)
 
 
 def doList(columnList):
     """List available comics."""
-    out.write('Available comic scrapers:')
+    out.info('Available comic scrapers:')
     scrapers = getScrapers(['@@'])
     if columnList:
         num = doColumnList(scrapers)
     else:
         num = doSingleList(scrapers)
-    out.write('%d supported comics.' % num)
+    out.info('%d supported comics.' % num)
     return 0
 
 
@@ -171,9 +177,9 @@ def getScrapers(comics, basepath=None):
     if '@' in comics:
         # only scrapers whose directory already exists
         if len(comics) > 1:
-            out.write("WARN: using '@' as comic name ignores all other specified comics.\n")
+            out.warn("using '@' as comic name ignores all other specified comics.")
         for scraperclass in scraper.get_scrapers():
-            dirname = scraperclass.get_name().replace('/', os.sep)
+            dirname = getDirname(scraperclass.get_name())
             if os.path.isdir(os.path.join(basepath, dirname)):
                 yield scraperclass()
     elif '@@' in comics:
@@ -181,7 +187,9 @@ def getScrapers(comics, basepath=None):
         for scraperclass in scraper.get_scrapers():
             yield scraperclass()
     else:
-        # only selected
+        # get only selected comic scrapers
+        # store them in a list to catch naming errors early
+        scrapers = []
         for comic in comics:
             if ':' in comic:
                 name, index = comic.split(':', 1)
@@ -189,14 +197,19 @@ def getScrapers(comics, basepath=None):
             else:
                 name = comic
                 indexes = None
-            yield scraper.get_scraper(name)(indexes=indexes)
+            scrapers.append(scraper.get_scraper(name)(indexes=indexes))
+        for s in scrapers:
+            yield s
+
 
 def main():
     """Parse options and execute commands."""
     try:
         parser = setupOptions()
         options, args = parser.parse_args()
-        res = run(options, args)
+        # eliminate duplicate comic names
+        comics = set(args)
+        res = run(options, comics)
     except KeyboardInterrupt:
         print("Aborted.")
         res = 1

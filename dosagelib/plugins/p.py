@@ -162,7 +162,3 @@ class PlanescapeSurvival(_BasicScraper):
     imageSearch = compile(r'src="(comics/.+?)"')
     prevSearch = compile(r'<a href="(.+?)"><img alt="Previous" ')
     help = 'Index format: nnn'
-
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        return pageUrl.split('/')[-1].split('.')[0]

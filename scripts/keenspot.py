@@ -72,6 +72,7 @@ exclude_comics = [
     "ComicMischief", # page moved
     "ComputerGameAddicts", # page moved
     "Concession", # page moved
+    "Countyoursheep", # broken links
     "CorridorZ", # page does not follow standard layout
     "CrashBoomMagic", # page moved
     "CrazySlowlyGoing", # page has 403 forbidden
@@ -85,6 +86,7 @@ exclude_comics = [
     "DimBulbComics", # page is gone
     "DIVE", # page is gone
     "DominicDeegan", # page moved
+    "DownwardBound", # page does not follow standard layout
     "DungeonDamage", # page does not follow standard layout
     "Dylan", # page has 403 forbidden
     "EarthRiser", # redirects to a new page
@@ -99,6 +101,7 @@ exclude_comics = [
     "Evilish", # page moved
     "EvolBara", # page is gone
     "FaerieTales", # page does not follow standard layout
+    "FairestandFallen", # page does not follow standard layout
     "FairyTaleNewVillage", # missing images
     "Fate27sTear", # page moved
     "FaultyLogic", # page does not follow standard layout
@@ -107,9 +110,12 @@ exclude_comics = [
     "Flatwood", # page moved
     "FLEMComics", # page moved
     "FletchersCave", # page is broken
+    "FlipandSplog", # page does not follow standard layout
     "ForcesofGoodandEvil", # page does not follow standard layout
+    "Framed", # page does not follow standard layout
     "FurryBlackDevil", # page moved
     "Galacticus", # page has 403 forbidden
+    "GamerPsychotica", # page does not follow standard layout
     "GeebasonParade", # page does not follow standard layout
     "geeks", # page moved
     "GeminiBright", # page does not follow standard layout
@@ -119,9 +125,11 @@ exclude_comics = [
     "GODLIKE", # page has 403 forbidden
     "GoForIt", # page is gone
     "GothBoy", # page moved
+    "Gravity", # page does not follow standard layout
     "Grimage", # page moved
     "GrossePointeDogs", # page is broken
     "GUComics", # page moved
+    "HalflightBreaking", # page does not follow standard layout
     "HardUnderbelly", # page does not follow standard layout
     "HazardousScience", # page is gone
     "HereThereBeDragons", # page moved
@@ -138,6 +146,7 @@ exclude_comics = [
     "InsideJoke", # page is gone
     "InsidetheBox", # page has 403 forbidden
     "InternationalHopeFoundation", # page does not follow standard layout
+    "Inverloch", # page does not follow standard layout
     "JamieandNick", # page moved
     "JasonLovesHisGrandpa", # page is gone
     "JavanteasFate", # page is gone
@@ -165,8 +174,10 @@ exclude_comics = [
     "LinktotheBoards", # page does not follow standard layout
     "LinT", # page moved
     "LiterallySpeaking", # page does not follow standard layout
+    "LifeonForbez", # missing images
     "LoxieAndZoot", # page does not follow standard layout
     "Lunchtable", # missing images
+    "MacHall", # page does not follow standard layout
     "MadWorld", # page has 403 forbidden
     "Magellan", # page does not follow standard layout
     "Marachan", # missing images
@@ -175,13 +186,16 @@ exclude_comics = [
     "Meiosis", # page moved
     "Michikomonogatari", # page does not follow standard layout
     "MidnorthFlourCo", # page has 403 forbidden
+    "Mindmistress", # page does not follow standard layout
     "MintCondition", # page moved
     "MisadventuresinPhysics", # page has 403 forbidden
     "MobileMadness", # page does not follow standard layout
+    "MrPinkBlob", # page does not follow standard layout
     "MyAngelYouAreAngel", # page is gone
     "MyBrainHurts", # page does not follow standard layout
     "NAFTANorthAmericanFreeToonAgreementalsoYankuckcanee", # page does not follow standard layout
     "NeglectedMarioCharacterComix", # page does not follow standard layout
+    "NekoTheKitty", # page does not follow standard layout
     "Nemutionjewel", # page does not follow standard layout
     "Nerdgasm", # missing images
     "Nerdz", # page is gone
@@ -249,6 +263,7 @@ exclude_comics = [
     "SoManyLevels", # page moved
     "SomethingSoft", # page is gone
     "Sorcery101", # page moved
+    "spacejams", # page does not follow standard layout
     "SpellBinder", # page is gone
     "SPQRBlues", # page moved
     "StationV3", # page moved
@@ -294,6 +309,7 @@ exclude_comics = [
     "TwoEvilScientists", # page moved
     "TwoLumps", # page moved
     "TwoSidesWide", # page moved
+    "Untitled", # page does not follow standard layout
     "Vendetta", # page moved
     "VictimsoftheSystem", # page moved
     "Victor", # page moved
@@ -318,23 +334,19 @@ url_overrides = {
     "AmazonSpaceRangers": "http://amazons.comicgenesis.com/d/20051015.html",
     "ArroganceinSimplicity": "http://arrogance.comicgenesis.com/d/20030217.html",
     "ATasteofEvil": "http://atasteofevil.comicgenesis.com/d/20050314.html",
+    'Candi': 'http://candicomics.com/',
     "CanYouKeepaSecret": "http://cykas.comicgenesis.com/d/20041035.html",
     "CapturetheMoment": "http://capturethemoment.comicgenesis.com/d/20100927.html",
     "CornerAlley13": "http://corneralley.comicgenesis.com/d/20101010.html",
-    "Countyoursheep": "http://countyoursheep.keenspot.com/",
-    "FreakU": "http://freaku.comicgenesis.com//d/20080827.html",
-    "FreeParking": "http://freeparking.comicgenesis.com//d/20051029.html",
-    "GamerPsychotica": "http://gp.comicgenesis.com/d/20060113.html",
+    "FreakU": "http://freaku.comicgenesis.com/d/20080827.html",
+    "FreeParking": "http://freeparking.comicgenesis.com/d/20051029.html",
     "GoneAstray": "http://goneastray.comicgenesis.com/d/20100305.html",
     "GoodnEvil": "http://gne.comicgenesis.com/d/20040814.html",
-    "HalflightBreaking": "http://halflight.comicgenesis.com/d/20021031.html",
     "HealerOnFeatheredWings": "http://selsachronicles.comicgenesis.com/",
     "HowNottoRunAComic": "http://hownottorunacomic.comicgenesis.com/d/19950719.html",
     "HurricaneParty": "http://hurricaneparty.comicgenesis.com/d/20040123.html",
-    "MacHall": "http://machall.comicgenesis.com/d/20020125.html",
     "MaryQuiteContrary": "http://marycontrary.comicgenesis.com/d/20070824.html",
     "MoonCrest24": "http://mooncrest.comicgenesis.com/d/20121117.html",
-    "MrPinkBlob": "http://mrpinkblob.comicgenesis.com/d/100.html",
     "NekkoandJoruba": "http://nekkoandjoruba.comicgenesis.com/d/20050816.html",
     "No4thWalltoBreak": "http://no4thwalltobreak.comicgenesis.com/d/20041025.html",
     "OtakuKyokai": "http://otakukyokai.comicgenesis.com/d/20060818.html",
@@ -345,7 +357,6 @@ url_overrides = {
     "PlanetsCollide": "http://ruthcomix.comicgenesis.com/d/20010706.html",
     "RuneMaster": "http://runemaster.comicgenesis.com/d/20050607.html",
     "ShinobiHigh": "http://shinobihigh.comicgenesis.com/d/20020118.html",
-    "spacejams": "http://spacejams.comicgenesis.com/d/20020820.html",
     "TheAdventuresofVindibuddSuperheroInTraining": "http://vindibudd.comicgenesis.com/d/20070720.html",
     "TriumphantLosers": "http://triumphantlosers.comicgenesis.com/d/20081006.html",
     "Zortic": "http://zortic.comicgenesis.com/d/20030922.html",

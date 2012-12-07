@@ -4,7 +4,7 @@
 
 from re import compile
 from ..scraper import make_scraper
-from ..util import tagre
+from ..util import tagre, quote
 from ..helpers import bounceStarter
 
 _imageSearch = compile(tagre("img", "src", r'(http://assets\.amuniversal\.com/[0-9a-f]+)'))
@@ -23,7 +23,7 @@ def add(name, shortname):
     globals()[classname] = make_scraper(classname,
         starter = bounceStarter(baseUrl + shortname, _nextSearch),
         name='GoComics/' + name,
-        stripUrl=baseUrl + shortname + '/%s',
+        stripUrl=baseUrl + quote(shortname) + '/%s',
         imageSearch = _imageSearch,
         prevSearch = _prevSearch,
         help='Index format: yyyy/mm/dd',
@@ -433,7 +433,6 @@ add('Rechid', '/rechid')
 add('RedMeat', '/redmeat')
 add('RedandRover', '/redandrover')
 add('ReplyAll', '/replyall')
-add('RichardsPoorAlmanac', '/richards-poor-almanac')
 add('RipHaywire', '/riphaywire')
 add('RipleysBelieveItorNot', '/ripleysbelieveitornot')
 add('Risible', '/risible')

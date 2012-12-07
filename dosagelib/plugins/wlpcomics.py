@@ -8,7 +8,7 @@ from ..scraper import make_scraper
 from ..helpers import bounceStarter
 
 
-_imageSearch = compile(tagre("img", "src", r'(http://www\.wlpcomics\.com/(?:adult|general)/[^"]+)'))
+_imageSearch = compile(tagre("img", "src", r'(http://www\.wlpcomics\.com/(?:adult|general)/[^"]+/comics/[^"]+)'))
 _prevSearch = compile(tagre("a", "href", r'(\w+.html)') + 'Previous')
 _nextSearch = compile(tagre("a", "href", r'(\w+.html)') + 'Next')
 

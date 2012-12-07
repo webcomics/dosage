@@ -19,6 +19,7 @@ htmltemplate = """
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/dosage.css">
     <script src="js/masonry.min.js"></script>
+    <script src="http://use.edgefonts.net/open-sans.js"></script>
 </head>
 <body>
 <p>Dosage test results from %(date)s</p>
@@ -85,6 +86,8 @@ def get_content(filename):
     res = []
     for name, url in tests:
         css = name.split()[-1].lower()
+        if len(name) > 25 and '/' in name:
+            name = name.replace('/', '/ ')
         if url:
             inner = '<a href="%s" class="%s">%s</a>' % (url, css, name)
         else:
@@ -94,7 +97,7 @@ def get_content(filename):
 
 
 def main(args):
-    filename = "testresults.txt"
+    filename = args[0]
     modified = get_mtime(filename)
     content = get_content(filename)
     attrs = {"date": strdate(modified), "content": content}

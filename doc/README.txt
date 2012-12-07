@@ -21,7 +21,7 @@ you may be infringing upon various copyrights.
 
 Usage
 ------
-List available comics (over 3500 at the moment):
+List available comics (over 3000 at the moment):
 
 `$ dosage -l`
 

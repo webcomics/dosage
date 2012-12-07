@@ -43,7 +43,7 @@ class _BasicScraper(object):
         msg = 'Retrieving the current strip'
         if self.indexes:
             msg += " for indexes %s" % self.indexes
-        out.write(msg+"...")
+        out.info(msg+"...")
         if self.indexes:
             for index in self.indexes:
                 url = self.stripUrl % index
@@ -55,40 +55,48 @@ class _BasicScraper(object):
         """Get comic strip for given URL."""
         imageUrls = fetchUrls(url, self.imageSearch)[0]
         if len(imageUrls) > 1 and not self.multipleImagesPerStrip:
-            raise ValueError("found %d images with %s" % (len(imageUrls), self.imageSearch.pattern))
+            out.warn("found %d images instead of 1 with %s" % (len(imageUrls), self.imageSearch.pattern))
         return self.getComicStrip(url, imageUrls)
 
     def getComicStrip(self, url, imageUrls):
         """Get comic strip downloader for given URL and images."""
         return ComicStrip(self.get_name(), url, imageUrls, self.namer)
 
-    def getAllStrips(self):
+    def getAllStrips(self, maxstrips=None):
         """Get all comic strips."""
-        msg = 'Retrieving all strips'
-        if self.indexes:
-            msg += " for indexes %s" % self.indexes
-        out.write(msg+"...")
+        if maxstrips:
+            msg = 'Retrieving %d strips' % maxstrips
+        elif self.indexes:
+            msg += "Retrieving %d strips for indexes %s" % (len(self.indexes), self.indexes)
+        else:
+            msg = 'Retrieving all strips'
+        out.info(msg+"...")
         if self.indexes:
             for index in self.indexes:
                 url = self.stripUrl % index
-                for strip in self.getAllStripsFor(url):
+                for strip in self.getStripsFor(url, 1):
                     yield strip
         else:
             url = self.getLatestUrl()
-            for strip in self.getAllStripsFor(url):
+            for strip in self.getStripsFor(url, maxstrips):
                 yield strip
 
-    def getAllStripsFor(self, url):
-        """Get all comic strips for an URL."""
+    def getStripsFor(self, url, maxstrips):
+        """Get comic strips for an URL. If maxstrips is a positive number, stop after
+        retrieving the given number of strips."""
         seen_urls = set()
         while url:
             imageUrls, prevUrl = fetchUrls(url, self.imageSearch, self.prevSearch)
             prevUrl = self.prevUrlModifier(prevUrl)
-            out.write("Matched previous URL %s" % prevUrl, 2)
+            out.debug("Matched previous URL %s" % prevUrl)
             seen_urls.add(url)
             yield self.getComicStrip(url, imageUrls)
             # avoid recursive URL loops
             url = prevUrl if prevUrl not in seen_urls else None
+            if maxstrips is not None:
+                maxstrips -= 1
+                if maxstrips <= 0:
+                    break
 
     def setStrip(self, index):
         """Set current comic strip URL."""
@@ -161,13 +169,13 @@ def get_scrapers():
     """
     global _scrapers
     if _scrapers is None:
-        out.write("Loading comic modules...", 2)
+        out.debug("Loading comic modules...")
         modules = loader.get_modules()
         plugins = loader.get_plugins(modules, _BasicScraper)
         _scrapers = list(plugins)
         _scrapers.sort(key=lambda s: s.get_name())
         check_scrapers()
-        out.write("... %d modules loaded." % len(_scrapers), 2)
+        out.debug("... %d modules loaded." % len(_scrapers))
     return _scrapers
 
 

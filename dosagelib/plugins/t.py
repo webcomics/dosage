@@ -16,15 +16,17 @@ class TheNoob(_BasicScraper):
     help = 'Index format: nnnn'
 
 
-
 class TheOrderOfTheStick(_BasicScraper):
     latestUrl = 'http://www.giantitp.com/comics/oots0863.html'
     stripUrl = 'http://www.giantitp.com/comics/oots%s.html'
-    imageSearch = compile(r'<IMG src="(/comics/images/.+?)">')
+    imageSearch = compile(r'<IMG src="(/comics/images/[^"]+)">')
     prevSearch = compile(r'<A href="(/comics/oots\d{4}\.html)"><IMG src="/Images/redesign/ComicNav_Back.gif"')
     help = 'Index format: n (unpadded)'
     starter = indirectStarter('http://www.giantitp.com/', compile(r'<A href="(/comics/oots\d{4}\.html)"'))
 
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        return pageUrl.rsplit('/', 1)[-1][:-5]
 
 
 class TheParkingLotIsFull(_BasicScraper):
@@ -34,7 +36,6 @@ class TheParkingLotIsFull(_BasicScraper):
     multipleImagesPerStrip = True
     prevSearch = compile(r'\d{4} -\s+<A HREF="(arch\d{4}\.htm)">\d{4}')
     help = 'Index format: nnn'
-
 
 
 class TheWotch(_BasicScraper):

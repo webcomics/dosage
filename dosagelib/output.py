@@ -3,6 +3,7 @@
 # Copyright (C) 2012 Bastian Kleineidam
 from __future__ import print_function
 import time
+import sys
 
 class Output(object):
     """Print output with context, indentation and optional timestamps."""
@@ -13,7 +14,19 @@ class Output(object):
         self.level = 0
         self.timestamps = False
 
-    def write(self, s, level=0):
+    def info(self, s, level=0):
+        self.write(s, level=level)
+
+    def debug(self, s):
+        self.write(s, level=2)
+
+    def warn(self, s):
+        self.write("WARN: %s" % s, file=sys.stderr)
+
+    def error(self, s):
+        self.write("ERROR: %s" % s, file=sys.stderr)
+
+    def write(self, s, level=0, file=sys.stdout):
         """Write message with indentation, context and optional timestamp."""
         if level > self.level:
             return
@@ -21,7 +34,8 @@ class Output(object):
             timestamp = time.strftime('%H:%M:%S ')
         else:
             timestamp = ''
-        print('%s%s> %s' % (timestamp, self.context, s))
+        print('%s%s> %s' % (timestamp, self.context, s), file=file)
+        file.flush()
 
     def writelines(self, lines, level=0):
         """Write multiple messages."""

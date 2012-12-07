@@ -101,6 +101,10 @@ class BoyOnAStickAndSlither(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(/page/\d+)') + "<span>Next page")
     help = 'Index format: n (unpadded)'
 
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        return pageUrl.rsplit('/')[-1]
+
 
 class ButternutSquash(_BasicScraper):
     latestUrl = 'http://www.butternutsquash.net/'
@@ -205,13 +209,4 @@ class BetweenFailures(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(http://betweenfailures\.com/wp-content/webcomic/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://betweenfailures\.com/archives/archive/[^"]+)', after="previous"))
     help = 'Index format: stripnum-strip-name'
-
-
-class BillyTheBeaker(_BasicScraper):
-    latestUrl = 'http://billy.defectivejunk.com/'
-    stripUrl = latestUrl + 'index.php?strip=%s'
-    multipleImagesPerStrip = True
-    imageSearch = compile(tagre("img", "src", r'(bub\d+_\d+[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(index\.php\?strip\=[^"]+)', after="Previous strip"))
-    help = 'Index format: nnn'
 

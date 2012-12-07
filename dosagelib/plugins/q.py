@@ -10,8 +10,8 @@ from ..util import tagre
 class QuestionableContent(_BasicScraper):
     latestUrl = 'http://www.questionablecontent.net/'
     stripUrl = latestUrl + 'view.php?comic=%s'
-    imageSearch = compile(r'/(comics/\d+\.png)"')
-    prevSearch = compile(r'<a href="(view.php\?comic=\d+)">Previous')
+    imageSearch = compile(tagre("img", "src", r'([^"]+/comics/[^"]+)', before="strip"))
+    prevSearch = compile(tagre("a", "href", r'(view\.php\?comic=\d+)') + 'Previous')
     help = 'Index format: n (unpadded)'
 
 

@@ -26,6 +26,15 @@ class CaribbeanBlue(_BasicScraper):
     help = 'Index format: nnn-stripname'
 
 
+class Catalyst(_BasicScraper):
+    baseUrl = "http://catalyst.spiderforest.com/"
+    latestUrl = baseUrl + "comic.php?comic_id=415"
+    stripUrl = baseUrl + "comic.php?comic_id=%s"
+    imageSearch = compile(tagre("img", "src", r'(http://catalyst\.spiderforest\.com/comics/[^"]+)'))
+    prevSearch = compile("<center>" + tagre("a", "href", r'(http://catalyst\.spiderforest\.com/comic\.php\?comic_id=\d+)'))
+    help = 'Index format: number'
+
+
 class Catena(_BasicScraper):
     latestUrl = 'http://catenamanor.com/'
     stripUrl = latestUrl + '%s'
@@ -96,6 +105,14 @@ class Commissioned(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(http://www\.commissionedcomic\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.commissionedcomic\.com/\?p=\d+)', after="prev"))
     help = 'Index format: n'
+
+
+class Concession(_BasicScraper):
+    latestUrl = 'http://concessioncomic.com/'
+    stripUrl = latestUrl + 'index.php?pid=%s'
+    imageSearch = compile(tagre("img", "src", r'(http://concessioncomic\.com/comics/[^"]+)', after="Comic"))
+    prevSearch = compile(tagre("a", "href", r'(http://concessioncomic\.com/index\.php\?pid=\d+)', after="nav-prev"))
+    help = 'Index format: number'
 
 
 class CoolCatStudio(_BasicScraper):

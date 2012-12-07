@@ -20,7 +20,7 @@ class EerieCuties(_BasicScraper):
 class Eriadan(_BasicScraper):
     latestUrl = 'http://www.shockdom.com/webcomics/eriadan/'
     stripUrl = latestUrl + '%s'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.shockdom\.com/webcomics/eriadan/files/[^"]+)', after='alt=""'))
+    imageSearch = compile(tagre("img", "src", r'(http://www\.shockdom\.com/webcomics/eriadan/files/[^"]+)', after='width="800"'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)', after="prev"))
     help = 'Index format: yyyy/mm/dd/nnn (unpadded)'
 

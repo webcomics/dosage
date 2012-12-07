@@ -135,6 +135,7 @@ class AstronomyPOTD(_BasicScraper):
         compile(r'<a href="(ap\d{6}\.html)">&gt;</a>'))
     stripUrl = 'http://antwrp.gsfc.nasa.gov/apod/ap%s.html'
     imageSearch = compile(r'<a href="(image/\d{4}/[^"]+)"')
+    multipleImagesPerStrip = True
     prevSearch = compile(r'<a href="(ap\d{6}\.html)">&lt;</a>')
     help = 'Index format: yymmdd'
 
@@ -175,10 +176,6 @@ class AGirlAndHerFed(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(img/strip/[^"]+\.jpg)'))
     prevSearch = compile(r'<a href="([^"]+)">[^>]+Back')
     help = 'Index format: nnn'
-
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        return pageUrl.split('?')[-1]
 
 
 class AetheriaEpics(_BasicScraper):

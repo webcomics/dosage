@@ -1,0 +1,18 @@
+body {
+  font-family: open-sans, sans-serif;
+}
+.item {
+  width: 100px;
+  margin: 10px;
+  float: left;
+}
+
+.ok
+{
+  color: #119911;
+}
+
+.failed
+{
+  color: #992200;
+}

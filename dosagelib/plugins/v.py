@@ -35,3 +35,7 @@ class ViiviJaWagner(_BasicScraper):
     imageSearch = compile(tagre("link", "href", r'(http://hs\d+\.snstatic\.fi/webkuva/oletus/[^"]+)', before="image_src"))
     prevSearch = compile(tagre("a", "href", r'(/viivijawagner/[^"]+)', before="prev-cm"))
     help = 'Index format: none'
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        return imageUrl.split('=')[1]

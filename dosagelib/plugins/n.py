@@ -27,6 +27,7 @@ class NeoEarth(_BasicScraper):
 class NewAdventuresOfBobbin(_BasicScraper):
     latestUrl = 'http://www.bobbin-comic.com/bobbin_strips/'
     imageSearch = compile(tagre("a", "href", r'(\d+\.gif)'))
+    multipleImagesPerStrip = True
     prevSearch = None
     help = 'Index format: none'
 
