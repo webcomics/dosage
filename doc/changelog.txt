@@ -11,15 +11,15 @@ Changes:
 - installation: Require and use Python 2.7
 - comics: Removed the twisted and zope dependencies by adding
   an internal plugin search mechanism.
-- comics: Remove the disable mechanism.
+- comics: Replace the disable mechanism with an adult option.
 - comcis: Add scripts to automate comic listings for Creators, Universal,
   KeenSpot, GoComics and DrunkDuck.
-- testing: Refactored the test comic routine into fully automatic and complete
-  tests cases for every comic.
+- testing: Refactored the test comic routine into fully automatic and
+  complete tests cases for every comic.
 - cmdline: Improved terminal feature detection.
 
 Fixes:
-- comics: Fix a lot of comics; however there are still some that won't work.
+- comics: Fix all comics!
 - comics: Don't add empty URLs to the list of found URLs.
 
 
