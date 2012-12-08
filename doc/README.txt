@@ -19,6 +19,11 @@ it is purely for personal use. Please be aware that by making downloaded
 strips publically available (without the explicit permission of the author)
 you may be infringing upon various copyrights.
 
+Adult content
+--------------
+Some comics contain adult content. They can only be downloaded by
+using the --adult option, thereby confirming that the user is of age.
+
 Usage
 ------
 List available comics (over 3000 at the moment):
@@ -72,9 +77,9 @@ which help define the plugins for all comics of this syndicate.
 
 Extending Dosage
 -----------------
-In order to add a new webcoming, a new module class has to be created in one of the
-*.py files in the dosagelib/plugins subdirectory. Look at the existing
-module classes for examples.
+In order to add a new webcomic, a new module class has to be created in
+one of the *.py files in the dosagelib/plugins subdirectory.
+Look at the existing module classes for examples.
 
 Reporting Bugs
 ---------------
