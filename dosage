@@ -45,6 +45,7 @@ def setupOptions():
     parser.add_option('-m', '--modulehelp', action='store_true', dest='modhelp', help='display help for comic modules')
     parser.add_option('-t', '--timestamps', action='store_true', dest='timestamps', default=False, help='print timestamps for all output at any info level')
     parser.add_option('-o', '--output', action='store', dest='output', choices=events.getHandlers(), help='output formatting for downloaded comics')
+    parser.add_option('--adult', action='store_true', dest='adult', default=False, help='confirms that you are old enough to view adult content')
     return parser
 
 
@@ -93,12 +94,11 @@ def displayHelp(comics, basepath):
 
 def getComics(options, comics):
     """Retrieve given comics."""
-    # XXX refactor
     errors = 0
     if options.output:
         events.installHandler(options.output, options.basepath, options.baseurl)
     events.getHandler().start()
-    for scraperobj in getScrapers(comics, options.basepath):
+    for scraperobj in getScrapers(comics, options.basepath, options.adult):
         out.context = scraperobj.get_name()
         if options.all:
             strips = scraperobj.getAllStrips()
@@ -172,19 +172,25 @@ def doColumnList(scrapers):
     return num
 
 
-def getScrapers(comics, basepath=None):
+def getScrapers(comics, basepath=None, adult=True):
     """Get scraper objects for the given comics."""
     if '@' in comics:
         # only scrapers whose directory already exists
         if len(comics) > 1:
             out.warn("using '@' as comic name ignores all other specified comics.")
         for scraperclass in scraper.get_scrapers():
+            if not adult and scraperclass.adult:
+                out.warn("skipping adult comic %s" % scraperclass.get_name())
+                continue
             dirname = getDirname(scraperclass.get_name())
             if os.path.isdir(os.path.join(basepath, dirname)):
                 yield scraperclass()
     elif '@@' in comics:
         # all scrapers
         for scraperclass in scraper.get_scrapers():
+            if not adult and scraperclass.adult:
+                out.warn("skipping adult comic %s" % scraperclass.get_name())
+                continue
             yield scraperclass()
     else:
         # get only selected comic scrapers
@@ -197,7 +203,11 @@ def getScrapers(comics, basepath=None):
             else:
                 name = comic
                 indexes = None
-            scrapers.append(scraper.get_scraper(name)(indexes=indexes))
+            scraperclass = scraper.get_scraper(name)
+            if not adult and scraperclass.adult:
+                out.warn("skipping adult comic %s" % scraperclass.get_name())
+                continue
+            scrapers.append(scraperclass(indexes=indexes))
         for s in scrapers:
             yield s
 
