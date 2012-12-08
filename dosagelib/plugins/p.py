@@ -2,7 +2,7 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012 Bastian Kleineidam
 
-from re import compile, IGNORECASE
+from re import compile
 from ..scraper import _BasicScraper
 from ..helpers import bounceStarter, queryNamer, indirectStarter
 from ..util import tagre
@@ -66,13 +66,20 @@ class PeppermintSaga(_BasicScraper):
     help = 'Index format: number'
 
 
+class PicPakDog(_BasicScraper):
+    latestUrl = 'http://www.picpak.net/'
+    stripUrl = latestUrl + 'comics/%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.picpak\.net/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.picpak\.net/comics/[^"]+)', after="navi-prev"))
+    help = 'Index format: yyyy/mm/dd/stripname'
+
+
 class Pixel(_BasicScraper):
     latestUrl = 'http://pixelcomic.net/'
     stripUrl = latestUrl + '%s.php'
     imageSearch = compile(tagre("img", "src", r'(\d+\.png)'))
     prevSearch = compile(tagre("a", "href", r'(http://pixelcomic\.net/\d+\.php)', before="prev"))
     help = 'Index format: nnn'
-
 
 
 class PiledHigherAndDeeper(_BasicScraper):
@@ -82,6 +89,14 @@ class PiledHigherAndDeeper(_BasicScraper):
     prevSearch = compile(r'<a href=(archive\.php\?comicid=\d+)><img height=52 width=49 src=images/prev_button\.gif border=0 align=middle>')
     help = 'Index format: n (unpadded)'
     namer = queryNamer('comicid', usePageUrl=True)
+
+
+class Pimpette(_BasicScraper):
+    latestUrl = 'http://pimpette.ca/'
+    stripUrl = latestUrl + 'index.php?date=%s'
+    imageSearch = compile(tagre("img", "src", r'(strips/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(index\.php\?date=\d+)') + "Previous")
+    help = 'Index format: yyyymmdd'
 
 
 class Precocious(_BasicScraper):
@@ -103,39 +118,12 @@ class PvPonline(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
-
-def pensAndTales(name, baseUrl):
-    return type('PensAndTales_%s' % name,
-        (_BasicScraper,),
-        dict(
-        name='PensAndTales/' + name,
-        latestUrl=baseUrl,
-        stripUrl=baseUrl + '?date=%s',
-        imageSearch=compile(r'<img[^>]+?src="([^"]*?comics/.+?)"', IGNORECASE),
-        prevSearch=compile(r'<a href="([^"]*?\?date=\d+)">(:?<img[^>]+?alt=")?Previous Comic', IGNORECASE),
-        help='Index format: yyyymmdd')
-    )
-
-
-# XXX: using custom Wordpress layout
-# th = pensAndTales('TreasureHunters', 'http://th.pensandtales.com/')
-# XXX: comic broken, no content
-# strangekith = pensAndTales('Strangekith', 'http://strangekith.pensandtales.com/')
-# XXX: comic broken
-# fireflycross = pensAndTales('FireflyCross', 'http://fireflycross.pensandtales.com/')
-evilish = pensAndTales('Evilish', 'http://evilish.pensandtales.com/')
-# XXX: moved / layout changed
-#ynt = pensAndTales('YamiNoTainai', 'http://ynt.pensandtales.com/')
-
-
-
 class ProperBarn(_BasicScraper):
     latestUrl = 'http://www.nitrocosm.com/go/gag/'
     stripUrl = latestUrl + '%s/'
     imageSearch = compile(tagre("img", "src", r'(http://content\.nitrocosm\.com/gag/\d+\.[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.nitrocosm\.com/go/gag/\d+/)', after="nav_btn_previous"))
     help = 'Index format: nnn'
-
 
 
 class PunksAndNerds(_BasicScraper):
@@ -146,14 +134,12 @@ class PunksAndNerds(_BasicScraper):
     help = 'Index format: nnn'
 
 
-
 class PunksAndNerdsOld(_BasicScraper):
     latestUrl = 'http://original.punksandnerds.com/'
     stripUrl = latestUrl + 'd/%s.html'
     imageSearch = compile(r' src="(/comics/.+?)"')
     prevSearch = compile(r'><strong><a href="(.+?)"[^>]+?><img[^>]+?src="/previouscomic.gif">')
     help = 'Index format: yyyymmdd'
-
 
 
 class PlanescapeSurvival(_BasicScraper):

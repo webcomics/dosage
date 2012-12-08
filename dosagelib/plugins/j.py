@@ -7,6 +7,14 @@ from ..scraper import _BasicScraper
 from ..util import tagre
 
 
+class JackCannon(_BasicScraper):
+    latestUrl = 'http://fancyadventures.com/'
+    stripUrl = latestUrl + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://fancyadventures\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://fancyadventures\.com/[^"]+)', after="prev"))
+    help = 'Index format: yyyy/mm/dd/page-nnn'
+
+
 class JerkCity(_BasicScraper):
     latestUrl = 'http://www.jerkcity.com/'
     stripUrl = latestUrl + '_jerkcity%s.html'
@@ -21,3 +29,12 @@ class JoeAndMonkey(_BasicScraper):
     imageSearch = compile(r'"(/comic/[^"]+)"')
     prevSearch = compile(r"<a href='(/\d+)'>Previous")
     help = 'Index format: nnn'
+
+
+class JustAnotherEscape(_BasicScraper):
+    latestUrl = 'http://www.justanotherescape.com/'
+    stripUrl = latestUrl + 'index.cgi?date=%s'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.justanotherescape\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.justanotherescape\.com//index\.cgi\?date=\d+)')
+     + tagre("img", "alt", "Previous Comic"))
+    help = 'Index format: yyyymmdd'

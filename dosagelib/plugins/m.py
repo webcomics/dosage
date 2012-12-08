@@ -48,6 +48,14 @@ class MegaTokyo(_BasicScraper):
     help = 'Index format: nnnn'
 
 
+class Meiosis(_BasicScraper):
+    latestUrl = 'http://meiosiswebcomic.com/'
+    stripUrl = latestUrl + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://meiosiswebcomic\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://meiosiswebcomic\.com/[^"]+)', after="navi-prev"))
+    help = 'Index format: yyyy/mm/ddmmyyyy'
+
+
 class MacHall(_BasicScraper):
     latestUrl = 'http://www.machall.com/'
     stripUrl = latestUrl + 'view.php?date=%s'
@@ -62,6 +70,14 @@ class Melonpool(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(http://www\.melonpool\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.melonpool\.com/\?p=\d+)', after="prev"))
     help = 'Index format: n'
+
+
+class MintCondition(_BasicScraper):
+    latestUrl = 'http://www.mintconditioncomic.com/'
+    stripUrl = latestUrl + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.mintconditioncomic\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.mintconditioncomic\.com/[^"]+)', after="prev"))
+    help = 'Index format: yyyy/mm/dd/stripname'
 
 
 class Misfile(_BasicScraper):

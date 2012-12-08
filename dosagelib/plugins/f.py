@@ -50,6 +50,15 @@ class FlakyPastry(_BasicScraper):
     help = 'Index format: nnnn'
 
 
+class Flemcomics(_BasicScraper):
+    latestUrl = 'http://www.flemcomics.com/'
+    stripUrl = latestUrl + 'd/%s.html'
+    imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(/d/\d+\.html)') +
+      tagre("img", "src", r'/images/previous_day\.jpg'))
+    help = 'Index format: yyyymmdd'
+
+
 class Flipside(_BasicScraper):
     latestUrl = 'http://flipside.keenspot.com/comic.php'
     stripUrl = latestUrl + '?i=%s'

@@ -41,9 +41,27 @@ class KevinAndKell(_BasicScraper):
         self.currentUrl = self.stripUrl % tuple(map(int, index.split('-')))
 
 
+class KhaosKomix(_BasicScraper):
+    adult = True
+    latestUrl = 'http://www.khaoskomix.com/'
+    stripUrl = latestUrl + 'komix/%s'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.khaoskomix\.com/komiximg/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.khaoskomix\.com/komix/[^"]+)', after="Prev"))
+    help = 'Index format: stripname'
+
+
 class KillerKomics(_BasicScraper):
     latestUrl = 'http://www.killerkomics.com/web-comics/index_ang.cfm'
     stripUrl = 'http://www.killerkomics.com/web-comics/%s.cfm'
     imageSearch = compile(r'<img src="(http://www.killerkomics.com/FichiersUpload/Comics/.+?)"')
     prevSearch = compile(r'<div id="precedent"><a href="(.+?)"')
     help = 'Index format: strip-name'
+
+
+class Kofightclub(_BasicScraper):
+    latestUrl = 'http://www.kofightclub.com/'
+    stripUrl = latestUrl + 'd/%s.html'
+    imageSearch = compile(tagre("img", "src", r'(\.\./images/\d+[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'((?:http://www\.kofightclub\.com)?/d/\d+\.html)')
+     + tagre("img", "alt", "Previous comic"))
+    help = 'Index format: yyyymmdd'

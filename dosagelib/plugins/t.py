@@ -8,6 +8,14 @@ from ..helpers import indirectStarter
 from ..util import tagre
 
 
+class TheDevilsPanties(_BasicScraper):
+    latestUrl = 'http://thedevilspanties.com/'
+    stripUrl = latestUrl + 'archives/%s'
+    imageSearch = compile(tagre("img", "src", r'(http://cdn\.thedevilspanties\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(/archives/\d+)', after="Previous"))
+    help = 'Index format: number'
+
+
 class TheNoob(_BasicScraper):
     latestUrl = 'http://www.thenoobcomic.com/index.php'
     stripUrl = latestUrl + '?pos=%s'
@@ -46,12 +54,29 @@ class TheWotch(_BasicScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
+class ThunderAndLightning(_BasicScraper):
+    baseUrl = 'http://www.talcomic.com/wp/'
+    latestUrl = baseUrl + '?latestcomic'
+    stripUrl = baseUrl + '%s/'
+    prevSearch = compile(tagre("a", "href", r'(http://www\.talcomic\.com/wp/[^"]+)', after="prev"))
+    imageSearch = compile(tagre("img", "src", r'(http://www\.talcomic\.com/wp/comics/[^"]+)'))
+    help = 'Index format: yyyy/mm/dd/page-nn'
+
+
 class TinyKittenTeeth(_BasicScraper):
     latestUrl = 'http://www.tinykittenteeth.com/'
     stripUrl = latestUrl + '%s/'
     imageSearch = compile(tagre("img", "src", r'(http://www\.tinykittenteeth\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)', after="Previous"))
     help = 'Index format: yyyy/mm/dd/stripname (unpadded)'
+
+
+class TwoLumps(_BasicScraper):
+    latestUrl = 'http://www.twolumps.net/'
+    stripUrl = latestUrl + 'd/%s.html'
+    imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(/d/\d+\.html)', after="prev"))
+    help = 'Index format: yyyymmdd'
 
 
 class TwoTwoOneFour(_BasicScraper):
@@ -87,3 +112,11 @@ class TheOuterQuarter(_BasicScraper):
     imageSearch = compile(r'<img src="(http://theouterquarter.com/comics/.+?)"')
     prevSearch = compile(r'<div class="nav-previous"><a href="([^"]+)" rel="prev">')
     help = 'Index format: nnn'
+
+
+class TracyAndTristan(_BasicScraper):
+    latestUrl = 'http://tandt.thecomicseries.com/'
+    stripUrl = latestUrl + 'comics/%s'
+    imageSearch = compile(tagre("img", "src", r'(http://tandt\.thecomicseries\.com/images/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(/comics/\d+)', after="prev"))
+    help = 'Index format: number'

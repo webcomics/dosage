@@ -9,6 +9,14 @@ from ..scraper import _BasicScraper
 from ..util import tagre
 
 
+class EdibleDirt(_BasicScraper):
+    latestUrl = 'http://eddirt.frozenreality.co.uk/'
+    stripUrl = latestUrl + 'index.php?id=%s'
+    imageSearch = compile(tagre("img", "src", r'(strips/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r"(index\.php\?id=\d+)")+"Previous")
+    help = 'Index format: number'
+
+
 class EerieCuties(_BasicScraper):
     latestUrl = 'http://www.eeriecuties.com/'
     stripUrl = latestUrl + 'strips-ec/%s'
@@ -23,6 +31,15 @@ class Eriadan(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(http://www\.shockdom\.com/webcomics/eriadan/files/[^"]+)', after='width="800"'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)', after="prev"))
     help = 'Index format: yyyy/mm/dd/nnn (unpadded)'
+
+
+class ElfOnlyInn(_BasicScraper):
+    latestUrl = 'http://www.elfonlyinn.net/'
+    stripUrl = latestUrl + 'd/%s.html'
+    imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(/d/\d+\.html)') +
+      tagre("img", "src", r'/images/previous_day\.gif'))
+    help = 'Index format: yyyymmdd'
 
 
 class ElGoonishShive(_BasicScraper):

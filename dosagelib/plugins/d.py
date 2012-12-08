@@ -19,6 +19,15 @@ class DailyDose(_BasicScraper):
     help = 'Index format: stripname'
 
 
+class Damonk(_BasicScraper):
+    latestUrl = 'http://www.damonk.com/'
+    stripUrl = latestUrl + 'd/%s.html'
+    imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(/d/\d+\.html)') +
+      tagre("img", "src", r'/images/previous_day\.gif'))
+    help = 'Index format: yyyymmdd'
+
+
 class DandyAndCompany(_BasicScraper):
     latestUrl = 'http://www.dandyandcompany.com/'
     stripUrl = None
@@ -125,12 +134,11 @@ class DieselSweeties(_BasicScraper):
         return 'sw%02d' % (index,)
 
 
-
 class DominicDeegan(_BasicScraper):
     latestUrl = 'http://www.dominic-deegan.com/'
     stripUrl = latestUrl + 'view.php?date=%s'
     imageSearch = compile(tagre("img", "src", r'(comics/\d+\.gif)'))
-    prevSearch = compile(r'"(view.php\?date=.+?)".+?prev21')
+    prevSearch = compile(r'"(view.php\?date=[^"]+)".+?prev21')
     help = 'Index format: yyyy-mm-dd'
 
 

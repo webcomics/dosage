@@ -18,6 +18,15 @@ class CaptainSNES(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/nnn-stripname'
 
 
+class CaseyAndAndy(_BasicScraper):
+    latestUrl = 'http://www.galactanet.com/comic/'
+    stripUrl = latestUrl + 'view.php?strip=%s'
+    imageSearch = compile(tagre("img", "src", r'(Strip\d+\.gif)'))
+    prevSearch = compile(tagre("a", "href", r'(view\.php\?strip=\d+)')
+     + tagre("img", "src", r'previous\.gif'))
+    help = 'Index format: number'
+
+
 class CaribbeanBlue(_BasicScraper):
     latestUrl = 'http://cblue.katbox.net/'
     stripUrl = latestUrl + 'archive/%s'

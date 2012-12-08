@@ -66,6 +66,14 @@ class Sheldon(_BasicScraper):
     help = 'Index format: yymmdd'
 
 
+class Shivae(_BasicScraper):
+    latestUrl = 'http://shivae.net/'
+    stripUrl = latestUrl + 'blog/%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://shivae\.net/files/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://shivae\.net/blog/[^"]+)', after="Previous"))
+    help = 'Index format: yyyy/mm/dd/stripname'
+
+
 class Shortpacked(_BasicScraper):
     latestUrl = 'http://www.shortpacked.com/'
     stripUrl = latestUrl + '%s/'
@@ -99,7 +107,6 @@ class SluggyFreelance(_BasicScraper):
     help = 'Index format: yymmdd'
 
 
-
 class SodiumEyes(_BasicScraper):
     latestUrl = 'http://sodiumeyes.com/'
     stripUrl = latestUrl + '%s/'
@@ -108,12 +115,38 @@ class SodiumEyes(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
+class Sorcery101(_BasicScraper):
+    baseUrl = 'http://www.sorcery101.net/'
+    latestUrl = baseUrl + 'sorcery-101/'
+    stripUrl = baseUrl + 'sorcery101/%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.sorcery101\.net/comics/sorcery101/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.sorcery101\.net/sorcery101/[^"]+)', after="previous-comic-link"))
+    help = 'Index format: stripname'
+
+
 class SpareParts(_BasicScraper):
     baseUrl = 'http://www.sparepartscomics.com/'
     latestUrl = baseUrl + 'comics/?date=20080328'
     stripUrl = baseUrl + 'comics/index.php?date=%s'
     imageSearch = compile(tagre("img", "src", r'(http://www\.sparepartscomics\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(index\.php\?date=\d+)', quote="'") + "Previous Comic")
+    help = 'Index format: yyyymmdd'
+
+
+class SPQRBlues(_BasicScraper):
+    latestUrl = 'http://spqrblues.com/IV/'
+    stripUrl = latestUrl + '?p=%s'
+    imageSearch = compile(tagre("img", "src", r'(http://spqrblues\.com/IV/comics/\d+\.png)'))
+    prevSearch = compile(tagre("a", "href", r'(http://spqrblues\.com/IV/\?p=\d+)', after="prev"))
+    help = 'Index format: number'
+
+
+class StationV3(_BasicScraper):
+    latestUrl = 'http://www.stationv3.com/'
+    stripUrl = latestUrl + 'd/%s.html'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.stationv3\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.stationv3\.com/d/\d+\.html)') +
+      tagre("img", "src", r'http://www\.stationv3\.com/images/previous\.gif'))
     help = 'Index format: yyyymmdd'
 
 

@@ -8,6 +8,15 @@ from ..scraper import _BasicScraper
 from ..util import tagre
 
 
+class Vendetta(_BasicScraper):
+    latestUrl = 'http://www.vendettacomic.com/'
+    stripUrl = latestUrl + 'archive.php?date=%s.jpg'
+    imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(archive\.php\?date=\d+\.jpg)') +
+      tagre("img", "src", r"/images/prev\.jpg"))
+    help = 'Index format: yyyymmdd'
+
+
 class VGCats(_BasicScraper):
     latestUrl = 'http://www.vgcats.com/comics/'
     stripUrl = latestUrl + '?strip_id=%s'
@@ -27,6 +36,14 @@ class VGCatsAdventure(VGCats):
     name = 'VGCats/Adventure'
     latestUrl = 'http://www.vgcats.com/ffxi/'
     stripUrl = latestUrl + '?strip_id=%s'
+
+
+class VictimsOfTheSystem(_BasicScraper):
+    latestUrl = 'http://www.votscomic.com/'
+    stripUrl = latestUrl + '?id=%s.jpg'
+    imageSearch = compile(tagre("img", "src", r'(comicpro/strips/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(\?id=\d+-\d+\.jpg)') + "Previous")
+    help = 'Index format: nnn-nnn'
 
 
 class ViiviJaWagner(_BasicScraper):
