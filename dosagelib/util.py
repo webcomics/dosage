@@ -78,9 +78,10 @@ def case_insensitive_re(name):
 
 baseSearch = re.compile(tagre("base", "href", '([^"]*)'))
 
-def getPageContent(url, max_content_bytes=MaxContentBytes):
+def getPageContent(url, max_content_bytes=MaxContentBytes, cookies=None):
     # read page data
-    page = urlopen(url, max_content_bytes=max_content_bytes)
+    page = urlopen(url, max_content_bytes=max_content_bytes,
+      cookies=cookies)
     data = page.text
     # determine base URL
     baseUrl = None
@@ -97,8 +98,8 @@ def getImageObject(url, referrer, max_content_bytes=MaxImageBytes):
     return urlopen(url, referrer=referrer, max_content_bytes=max_content_bytes)
 
 
-def fetchUrl(url, urlSearch):
-    data, baseUrl = getPageContent(url)
+def fetchUrl(url, urlSearch, cookies=None):
+    data, baseUrl = getPageContent(url, cookies=cookies)
     match = urlSearch.search(data)
     if match:
         searchUrl = match.group(1)
@@ -109,8 +110,8 @@ def fetchUrl(url, urlSearch):
     return None
 
 
-def fetchUrls(url, imageSearch, prevSearch=None):
-    data, baseUrl = getPageContent(url)
+def fetchUrls(url, imageSearch, prevSearch=None, cookies=None):
+    data, baseUrl = getPageContent(url, cookies=cookies)
     # match images
     imageUrls = set()
     for match in imageSearch.finditer(data):
@@ -186,7 +187,7 @@ def normaliseURL(url):
 
 
 def urlopen(url, referrer=None, retries=3, retry_wait_seconds=5, max_content_bytes=None,
-            timeout=ConnectionTimeoutSecs):
+            timeout=ConnectionTimeoutSecs, cookies=None):
     out.debug('Open URL %s' % url)
     assert retries >= 0, 'invalid retry value %r' % retries
     assert retry_wait_seconds > 0, 'invalid retry seconds value %r' % retry_wait_seconds
@@ -194,8 +195,11 @@ def urlopen(url, referrer=None, retries=3, retry_wait_seconds=5, max_content_byt
     config = {"max_retries": retries}
     if referrer:
         headers['Referer'] = referrer
+    if not cookies:
+        cookies = {}
     try:
-        req = requests.get(url, headers=headers, config=config, prefetch=False, timeout=timeout)
+        req = requests.get(url, headers=headers, config=config,
+          prefetch=False, timeout=timeout, cookies=cookies)
         check_content_size(url, req.headers, max_content_bytes)
         req.raise_for_status()
         return req

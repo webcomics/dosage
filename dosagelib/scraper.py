@@ -29,6 +29,12 @@ class _BasicScraper(object):
     # set to False if previous URLs do not match the strip URL (ie. because of redirects)
     prevUrlMatchesStripUrl = True
 
+    # cookies to send for requests
+    cookies = None
+
+    # set to True if this comic contains adult content
+    adult = False
+
     # usually the index format help
     help = 'Sorry, no help for this comic yet.'
 
@@ -53,7 +59,7 @@ class _BasicScraper(object):
 
     def getStrip(self, url):
         """Get comic strip for given URL."""
-        imageUrls = fetchUrls(url, self.imageSearch)[0]
+        imageUrls = fetchUrls(url, self.imageSearch, cookies=self.cookies)[0]
         if len(imageUrls) > 1 and not self.multipleImagesPerStrip:
             out.warn("found %d images instead of 1 with %s" % (len(imageUrls), self.imageSearch.pattern))
         return self.getComicStrip(url, imageUrls)
@@ -86,13 +92,17 @@ class _BasicScraper(object):
         retrieving the given number of strips."""
         seen_urls = set()
         while url:
-            imageUrls, prevUrl = fetchUrls(url, self.imageSearch, self.prevSearch)
+            imageUrls, prevUrl = fetchUrls(url, self.imageSearch,
+              self.prevSearch, cookies=self.cookies)
             prevUrl = self.prevUrlModifier(prevUrl)
             out.debug("Matched previous URL %s" % prevUrl)
             seen_urls.add(url)
             yield self.getComicStrip(url, imageUrls)
-            # avoid recursive URL loops
-            url = prevUrl if prevUrl not in seen_urls else None
+            if prevUrl in seen_urls:
+                # avoid recursive URL loops
+                out.warn("Already seen previous URL %r" % prevUrl)
+                break
+            url = prevUrl
             if maxstrips is not None:
                 maxstrips -= 1
                 if maxstrips <= 0:
