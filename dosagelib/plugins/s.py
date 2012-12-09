@@ -184,6 +184,7 @@ class SomethingPositive(_BasicScraper):
 
 
 class SexyLosers(_BasicScraper):
+    adult = True
     stripUrl = 'http://www.sexylosers.com/%s.html'
     imageSearch = compile(r'<img src\s*=\s*"\s*(comics/[\w\.]+?)"', IGNORECASE)
     prevSearch = compile(r'<a href="(/\d{3}\.\w+?)"><font color = FFAAAA><<', IGNORECASE)
@@ -196,7 +197,6 @@ class SexyLosers(_BasicScraper):
         index = pageUrl.split('/')[-1].split('.')[0]
         title = imageUrl.split('/')[-1].split('.')[0]
         return index + '-' + title
-
 
 
 class StarCrossdDestiny(_BasicScraper):
@@ -241,4 +241,3 @@ class SMBC(_BasicScraper):
     imageSearch = compile(r'<img src=\'(.+?\d{8}.\w{1,4})\'>')
     prevSearch = compile(r'131,13,216,84"\n\s+href="(.+?)#comic"\n>', MULTILINE)
     help = 'Index format: nnnn'
-

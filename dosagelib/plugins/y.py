@@ -22,5 +22,3 @@ class YouSayItFirst(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r"(http://www\.yousayitfirst\.com/comics/[^>']+)", quote="'?"))
     prevSearch = compile(tagre("a", "href", r'(http://www\.yousayitfirst\.com/comics/index\.php\?date=\d+)', quote="'") + "Previous")
     help = 'Index format: yyyymmdd'
-
-

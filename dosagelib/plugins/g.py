@@ -134,4 +134,3 @@ class GreystoneInn(_BasicScraper):
     imageSearch=compile(tagre("img", "src", r'(/comic[s|/][^"]+)'))
     prevSearch=compile(tagre("a", "href", r'[^"]*(/d/\d+\.s?html)')+r"[^>]+/images/(?:nav_02|previous_day)\.gif")
     help='Index format: yyyymmdd'
-
