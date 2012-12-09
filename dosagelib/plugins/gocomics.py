@@ -13,7 +13,7 @@ _nextSearch = compile(tagre("a", "href", r'(/[^"]+/\d+/\d+/\d+)', after="next"))
 
 def add(name, shortname):
     baseUrl = 'http://www.gocomics.com'
-    classname = 'GoComics_%s' % name
+    classname = 'GoComics_%s' % name.capitalize()
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):

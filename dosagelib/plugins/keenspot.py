@@ -15,7 +15,7 @@ _prevSearch = compile(tagre("a", "href", r'([^"]*/d/\d{8}\.html)') +
     ')')
 
 def add(name, url):
-    classname = 'KeenSpot_%s' % name
+    classname = 'KeenSpot_%s' % name.capitalize()
     if '/d/' in url:
         stripUrl = url.split('/d/')[0] + '/d/%s.html'
     else:

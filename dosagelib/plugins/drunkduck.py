@@ -14,7 +14,7 @@ _nextSearch = compile(_linkSearch + tagre("img", "class", "arrow_next"))
 _lastSearch = compile(_linkSearch + tagre("img", "class", "arrow_last"))
 
 def add(name):
-    classname = 'DrunkDuck_%s' % name
+    classname = 'DrunkDuck_%s' % name.capitalize()
     _url = 'http://www.drunkduck.com/%s/' % name
 
     @classmethod
