@@ -7,6 +7,14 @@ from ..scraper import _BasicScraper
 from ..util import tagre
 
 
+class IanJay(_BasicScraper):
+    latestUrl = 'http://ianjay.net/'
+    stripUrl = latestUrl + '?p=%s'
+    imageSearch = compile(tagre("img", "src", r'(http://ianjay\.net/comics/\d+[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://ianjay\.net/\?p=\d+)', after="Previous"))
+    help = 'Index foramt: nnn'
+
+
 class IDreamOfAJeanieBottle(_BasicScraper):
     latestUrl = 'http://jeaniebottle.com/'
     stripUrl = latestUrl + '?p=%s'
@@ -37,4 +45,3 @@ class ItsWalky(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(/comic[s|/][^"]+)'))
     prevSearch = compile(tagre("a", "href", r'[^"]*(/d/\d+\.s?html)')+r"[^>]+/images/(?:nav_02|previous_day)\.gif")
     help = 'Index format: yyyymmdd'
-

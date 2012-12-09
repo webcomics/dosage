@@ -31,6 +31,14 @@ class JoeAndMonkey(_BasicScraper):
     help = 'Index format: nnn'
 
 
+class JohnnyWander(_BasicScraper):
+    latestUrl = 'http://www.johnnywander.com/'
+    stripUrl = latestUrl + 'comics/%s'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.johnnywander\.com/files/comics/\d+\.jpg)'))
+    prevSearch = compile(tagre("a", "href", r'(/comics/\d+)') + r'prev')
+    help = 'Index format: nnn'
+
+
 class JustAnotherEscape(_BasicScraper):
     latestUrl = 'http://www.justanotherescape.com/'
     stripUrl = latestUrl + 'index.cgi?date=%s'
