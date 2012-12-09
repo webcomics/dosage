@@ -4,6 +4,9 @@
 from __future__ import print_function
 import time
 import sys
+import threading
+
+lock = threading.Lock()
 
 class Output(object):
     """Print output with context, indentation and optional timestamps."""
@@ -34,8 +37,9 @@ class Output(object):
             timestamp = time.strftime('%H:%M:%S ')
         else:
             timestamp = ''
-        print('%s%s> %s' % (timestamp, self.context, s), file=file)
-        file.flush()
+        with lock:
+            print('%s%s> %s' % (timestamp, self.context, s), file=file)
+            file.flush()
 
     def writelines(self, lines, level=0):
         """Write multiple messages."""
