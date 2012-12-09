@@ -22,7 +22,8 @@ you may be infringing upon various copyrights.
 Adult content
 --------------
 Some comics contain adult content. They can only be downloaded by
-using the --adult option, thereby confirming that the user is of age.
+using the --adult option, which confirms that you are old enough to
+view those comics.
 
 Usage
 ------
@@ -63,6 +64,10 @@ or if you do not have root permissions:
 
 `python setup.py install --home=$HOME`
 
+Another option is to use pip:
+
+`pip install dosage`
+
 Technical Description
 ----------------------
 Dosage is written in Python and relies on regular expressions to
@@ -89,4 +94,3 @@ https://github.com/wummel/dosage/issues
 Dosage currently supports a large number of comics and that number grows on
 a regular basis. If you feel that there are comics that Dosage does not
 currently support but should support, please feel free to request them.
-
