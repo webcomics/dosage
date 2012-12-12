@@ -94,7 +94,7 @@ class ComicImage(object):
         fn = os.path.join(comicDir, filename)
         if os.path.isfile(fn) and os.path.getsize(fn) >= comicSize:
             self.touch(fn)
-            out.info('Skipping existing file "%s".' % fn, 1)
+            out.info('Skipping existing file "%s".' % fn)
             return fn, False
 
         try:
@@ -108,7 +108,7 @@ class ComicImage(object):
             raise
         else:
             size = strsize(os.path.getsize(fn))
-            out.info("Saved %s (%s)." % (fn, size), 1)
+            out.info("Saved %s (%s)." % (fn, size))
             getHandler().comicDownloaded(self.name, fn)
 
         return fn, True

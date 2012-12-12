@@ -1,5 +1,5 @@
 # These functions are part of the python-colorama module
-# They have been adjusted slightly for Dosage
+# They have been adjusted slightly for dosage
 #
 # Copyright: (C) 2010 Jonathan Hartley <tartley@tartley.com>
 # All rights reserved.
@@ -32,7 +32,7 @@ STDOUT = -11
 STDERR = -12
 
 from ctypes import (windll, byref, Structure, c_char, c_short, c_uint32,
-  c_ushort)
+  c_ushort, ArgumentError, WinError)
 
 handles = {
     STDOUT: windll.kernel32.GetStdHandle(STDOUT),
@@ -83,8 +83,10 @@ def GetConsoleScreenBufferInfo(stream_id=STDOUT):
     """Get console screen buffer info object."""
     handle = handles[stream_id]
     csbi = CONSOLE_SCREEN_BUFFER_INFO()
-    windll.kernel32.GetConsoleScreenBufferInfo(
+    success = windll.kernel32.GetConsoleScreenBufferInfo(
         handle, byref(csbi))
+    if not success:
+        raise WinError()
     return csbi
 
 
@@ -116,10 +118,16 @@ _default_style = None
 def init():
     """Initialize foreground and background attributes."""
     global _default_foreground, _default_background, _default_style
-    attrs = GetConsoleScreenBufferInfo(STDOUT).wAttributes
-    _default_foreground = attrs & 7
-    _default_background = (attrs >> 4) & 7
-    _default_style = attrs & BRIGHT
+    try:
+        attrs = GetConsoleScreenBufferInfo().wAttributes
+    except ArgumentError:
+        _default_foreground = GREY
+        _default_background = BLACK
+        _default_style = NORMAL
+    else:
+        _default_foreground = attrs & 7
+        _default_background = (attrs >> 4) & 7
+        _default_style = attrs & BRIGHT
 
 
 def get_attrs(foreground, background, style):
@@ -146,4 +154,4 @@ def reset_console(stream=STDOUT):
 
 def get_console_size():
     """Get the console size."""
-    return GetConsoleScreenBufferInfo(STDOUT).dwSize
+    return GetConsoleScreenBufferInfo().dwSize
