@@ -75,7 +75,7 @@ MSVCP90Token = '1fc8b3b9a1e18e3b'
 
 data_files = []
 if os.name == 'nt':
-    data_files.append(('share', ['doc/dosage.txt']))
+    data_files.append(('share', ['doc/README.txt']))
 else:
     data_files.append(('share/man/man1', ['doc/dosage.1']))
 
