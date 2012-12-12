@@ -27,12 +27,14 @@ AppVersion = '1.7'
 AppName = 'Dosage'
 
 py_excludes = ['doctest', 'unittest', 'Tkinter', 'pdb',
-  'email', 'calendar', 'ftplib', 'pickle',
+  'email', 'ftplib', 'pickle',
 ]
+py_includes = ['dosagelib.plugins.*']
 # py2exe options for Windows packaging
 py2exe_options = dict(
     packages=["encodings"],
     excludes=py_excludes,
+    includes=py_includes,
     # silence py2exe error about not finding msvcp90.dll
     dll_excludes=['MSVCP90.dll'],
     compressed=1,
