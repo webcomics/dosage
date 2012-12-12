@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # Copyright (C) 2012 Bastian Kleineidam
 """
-Script to get keenspot comics and save the info in a JSON file for further processing.
+Script to get a list of creators.com comics and save the info in a JSON file for further processing.
 """
 from __future__ import print_function
 import re
@@ -10,11 +10,10 @@ import os
 import json
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dosagelib.util import getPageContent, asciify, unescape, tagre
-from scriptutil import contains_case_insensitive
+from scriptutil import contains_case_insensitive, capfirst
 
 json_file = __file__.replace(".py", ".json")
 
-# <a href="/comics/agnes.html"><strong>Agnes</strong></a>
 url_matcher = re.compile(tagre("a", "href", r'(/comics/[^/]+)\.html') + r'<strong>([^<]+)</strong>')
 
 # names of comics to exclude
@@ -33,6 +32,7 @@ def handle_url(url, res):
         url = match.group(1)
         name = unescape(match.group(2))
         name = asciify(name.replace('&', 'And').replace('@', 'At'))
+        name = capfirst(name)
         if name in exclude_comics:
             continue
         if contains_case_insensitive(res, name):

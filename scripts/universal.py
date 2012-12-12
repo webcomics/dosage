@@ -11,7 +11,7 @@ import json
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dosagelib.util import getPageContent, asciify, unescape
 from dosagelib.scraper import get_scrapers
-from scriptutil import contains_case_insensitive
+from scriptutil import contains_case_insensitive, capfirst
 
 json_file = __file__.replace(".py", ".json")
 
@@ -49,6 +49,7 @@ def handle_url(url, res):
         shortname = match.group(1)
         name = unescape(match.group(2))
         name = asciify(name.replace('&', 'And').replace('@', 'At'))
+        name = capfirst(name)
         if name in exclude_comics:
             continue
         if contains_case_insensitive(res, name):

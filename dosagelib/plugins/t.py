@@ -95,7 +95,6 @@ class TheWhiteboard(_BasicScraper):
     help = 'Index format: twb or wb + n wg. twb1000'
 
 
-
 class HMHigh(_BasicScraper):
     name = 'TheFallenAngel/HMHigh'
     latestUrl = 'http://www.thefallenangel.co.uk/hmhigh/'
@@ -103,7 +102,6 @@ class HMHigh(_BasicScraper):
     imageSearch = compile(r'<img src="(http://www.thefallenangel.co.uk/hmhigh/img/comic/.+?)"')
     prevSearch = compile(r' <a href="(http://www.thefallenangel.co.uk/.+?)" title=".+?">Prev</a>')
     help = 'Index format: nnn'
-
 
 
 class TheOuterQuarter(_BasicScraper):

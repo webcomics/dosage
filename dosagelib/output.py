@@ -1,35 +1,41 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012 Bastian Kleineidam
-from __future__ import print_function
 import time
 import sys
+import os
 import threading
+from .ansicolor import Colorizer
 
 lock = threading.Lock()
 
 class Output(object):
     """Print output with context, indentation and optional timestamps."""
 
-    def __init__(self):
+    def __init__(self, stream=sys.stdout):
         """Initialize context and indentation."""
         self.context = ''
         self.level = 0
         self.timestamps = False
+        self.stream = Colorizer(stream)
 
     def info(self, s, level=0):
+        """Write an informational message."""
         self.write(s, level=level)
 
     def debug(self, s):
-        self.write(s, level=2)
+        """Write a debug message."""
+        self.write(s, level=2, color='white')
 
     def warn(self, s):
-        self.write("WARN: %s" % s, file=sys.stderr)
+        """Write a warning message."""
+        self.write("WARN: %s" % s, color='bold;yellow')
 
     def error(self, s):
-        self.write("ERROR: %s" % s, file=sys.stderr)
+        """Write an error message."""
+        self.write("ERROR: %s" % s, color='light;red')
 
-    def write(self, s, level=0, file=sys.stdout):
+    def write(self, s, level=0, color=None):
         """Write message with indentation, context and optional timestamp."""
         if level > self.level:
             return
@@ -38,8 +44,10 @@ class Output(object):
         else:
             timestamp = ''
         with lock:
-            print('%s%s> %s' % (timestamp, self.context, s), file=file)
-            file.flush()
+            self.stream.write('%s%s> ' % (timestamp, self.context))
+            self.stream.write('%s' % s, color=color)
+            self.stream.write(os.linesep)
+            self.stream.flush()
 
     def writelines(self, lines, level=0):
         """Write multiple messages."""

@@ -45,11 +45,6 @@ class EventHandler(object):
 class RSSEventHandler(EventHandler):
     """Output in RSS format."""
 
-    def RFC822Date(self, indate):
-        """Format date in rfc822 format."""
-        # XXX move to util module
-        return time.strftime("%a, %d %b %Y %H:%M:%S GMT", time.gmtime(indate))
-
     def getFilename(self):
         """Return RSS filename."""
         return os.path.abspath(os.path.join(self.basepath, 'dailydose.rss'))
@@ -78,8 +73,8 @@ class RSSEventHandler(EventHandler):
         args = (
             '%s - %s' % (comic, os.path.basename(filename)),
             url,
-            '<a href="%s">View Comic</a>' % (url,),
-            self.RFC822Date(time.time())
+            '<a href="%s">View Comic</a>' % url,
+            util.rfc822date(time.time())
         )
 
         if self.newfile:
@@ -179,4 +174,5 @@ def installHandler(name, basepath=None, baseurl=None):
     _handler = handlers[name](basepath, baseurl)
 
 def getHandler():
+    """Get installed event handler."""
     return _handler

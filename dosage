@@ -1,22 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
-
 # Dosage, the webcomic downloader
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012 Bastian Kleineidam
-#
-# This program is free software; you can redistribute it and/or modify
-# it under the terms of version 2 of the GNU General Public License as
-# published by the Free Software Foundation.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 from __future__ import print_function
 import sys
 import os
@@ -24,7 +10,8 @@ import optparse
 
 from dosagelib import events, scraper
 from dosagelib.output import out
-from dosagelib.util import get_columns, internal_error, getDirname
+from dosagelib.util import internal_error, getDirname, strlimit
+from dosagelib.ansicolor import get_columns
 from dosagelib.configuration import App, Freeware, Copyright, SupportUrl
 
 def setupOptions():
@@ -46,6 +33,11 @@ def setupOptions():
     parser.add_option('-t', '--timestamps', action='store_true', dest='timestamps', default=False, help='print timestamps for all output at any info level')
     parser.add_option('-o', '--output', action='store', dest='output', choices=events.getHandlers(), help='output formatting for downloaded comics')
     parser.add_option('--adult', action='store_true', dest='adult', default=False, help='confirms that you are old enough to view adult content')
+    try:
+        import optcomplete
+        optcomplete.autocomplete(parser)
+    except ImportError:
+        pass
     return parser
 
 
@@ -80,16 +72,29 @@ def saveComicStrip(strip, basepath):
     return errors, allskipped
 
 
-def displayHelp(comics, basepath):
+def displayHelp(comics):
     """Print help for comic strips."""
     try:
-        for scraperobj in getScrapers(comics, basepath):
-            for line in scraperobj.getHelp().splitlines():
-                out.info("Help: "+line)
+        for scraperobj in getScrapers(comics):
+            displayComicHelp(scraperobj)
     except ValueError as msg:
         out.error(msg)
         return 1
     return 0
+
+
+def displayComicHelp(scraperobj):
+    """Print description and help for a comic."""
+    out.context = scraperobj.get_name()
+    try:
+        if scraperobj.description:
+            for line in scraperobj.description.splitlines():
+                out.info(line)
+        if scraperobj.help:
+            for line in scraperobj.help.splitlines():
+                out.info(line)
+    finally:
+        out.context = ''
 
 
 def getComics(options, comics):
@@ -98,30 +103,42 @@ def getComics(options, comics):
     if options.output:
         events.installHandler(options.output, options.basepath, options.baseurl)
     events.getHandler().start()
-    for scraperobj in getScrapers(comics, options.basepath, options.adult):
-        out.context = scraperobj.get_name()
-        if options.all:
-            strips = scraperobj.getAllStrips()
-        elif options.numstrips:
-            strips = scraperobj.getAllStrips(options.numstrips)
-        else:
-            strips = scraperobj.getCurrentStrips()
-        first = True
-        try:
-            for strip in strips:
-                _errors, skipped = saveComicStrip(strip, options.basepath)
-                errors += _errors
-                if not first and scraperobj.indexes:
-                    # stop when indexed retrieval skipped all images for one
-                    # comie strip (except the first one)
-                    out.info("Stop retrieval because image file already exists")
-                    break
-                first = False
-        except (ValueError, IOError) as msg:
-            out.error(msg)
-            errors += 1
-            continue
-    events.getHandler().end()
+    try:
+        for scraperobj in getScrapers(comics, options.basepath, options.adult):
+            errors += getStrips(scraperobj, options)
+    except ValueError as msg:
+        out.error(msg)
+        errors += 1
+    finally:
+        out.context = ''
+        events.getHandler().end()
+    return errors
+
+
+def getStrips(scraperobj, options):
+    """Get all strips from a scraper."""
+    errors = 0
+    out.context = scraperobj.get_name()
+    if options.all:
+        strips = scraperobj.getAllStrips()
+    elif options.numstrips:
+        strips = scraperobj.getAllStrips(options.numstrips)
+    else:
+        strips = scraperobj.getCurrentStrips()
+    first = True
+    try:
+        for strip in strips:
+            _errors, skipped = saveComicStrip(strip, options.basepath)
+            errors += _errors
+            if not first and skipped and scraperobj.indexes:
+                # stop when indexed retrieval skipped all images for one
+                # comic strip (except the first one)
+                out.info("Stop retrieval because image file already exists")
+                break
+            first = False
+    except (ValueError, IOError) as msg:
+        out.error(msg)
+        errors += 1
     return errors
 
 
@@ -136,7 +153,7 @@ def run(options, comics):
         out.warn('No comics specified, bailing out!')
         return 1
     if options.modhelp:
-        return displayHelp(comics, options.basepath)
+        return displayHelp(comics)
     return getComics(options, comics)
 
 
@@ -149,27 +166,39 @@ def doList(columnList):
     else:
         num = doSingleList(scrapers)
     out.info('%d supported comics.' % num)
+    out.info('comics marked with [A] require age confirmation with the --adult option.')
     return 0
 
 
 def doSingleList(scrapers):
     """Get list of scraper names, one per line."""
     for num, scraperobj in enumerate(scrapers):
-        print(scraperobj.get_name())
+        print(getScraperName(scraperobj))
     return num
 
 
 def doColumnList(scrapers):
     """Get list of scraper names with multiple names per line."""
     screenWidth = get_columns(sys.stdout)
-    names = [scraperobj.get_name() for scraperobj in scrapers]
+    # limit name length so at least two columns are there
+    limit = (screenWidth / 2) - 8
+    names = [getScraperName(scraperobj, limit=limit) for scraperobj in scrapers]
     num = len(names)
-    maxlen = max([len(name) for name in names])
-    namesPerLine = int(screenWidth / (maxlen + 1))
+    maxlen = max(len(name) for name in names)
+    namesPerLine = max(int(screenWidth / (maxlen + 1)), 1)
     while names:
-        print(''.join([name.ljust(maxlen) for name in names[:namesPerLine]]))
+        print(''.join(name.ljust(maxlen) for name in names[:namesPerLine]))
         del names[:namesPerLine]
     return num
+
+
+def getScraperName(scraperobj, limit=None):
+    """Get comic scraper name."""
+    suffix = " [A]" if scraperobj.adult else ""
+    name = scraperobj.get_name()
+    if limit is not None:
+        name = strlimit(name, limit)
+    return name + suffix
 
 
 def getScrapers(comics, basepath=None, adult=True):
@@ -180,7 +209,7 @@ def getScrapers(comics, basepath=None, adult=True):
             out.warn("using '@' as comic name ignores all other specified comics.")
         for scraperclass in scraper.get_scrapers():
             if not adult and scraperclass.adult:
-                out.warn("skipping adult comic %s" % scraperclass.get_name())
+                warn_adult(scraperclass)
                 continue
             dirname = getDirname(scraperclass.get_name())
             if os.path.isdir(os.path.join(basepath, dirname)):
@@ -189,7 +218,7 @@ def getScrapers(comics, basepath=None, adult=True):
         # all scrapers
         for scraperclass in scraper.get_scrapers():
             if not adult and scraperclass.adult:
-                out.warn("skipping adult comic %s" % scraperclass.get_name())
+                warn_adult(scraperclass)
                 continue
             yield scraperclass()
     else:
@@ -205,15 +234,22 @@ def getScrapers(comics, basepath=None, adult=True):
                 indexes = None
             scraperclass = scraper.get_scraper(name)
             if not adult and scraperclass.adult:
-                out.warn("skipping adult comic %s" % scraperclass.get_name())
+                warn_adult(scraperclass)
                 continue
             scrapers.append(scraperclass(indexes=indexes))
         for s in scrapers:
             yield s
 
 
+def warn_adult(scraperclass):
+    """Print warning about adult content."""
+    out.warn("skipping adult comic %s; use the --adult option to confirm your age" % scraperclass.get_name())
+
+
 def main():
     """Parse options and execute commands."""
+    if sys.argv[0].endswith("mainline"):
+        out.warn("the 'mainline' program is deprecated, please use the new 'dosage' program")
     try:
         parser = setupOptions()
         options, args = parser.parse_args()

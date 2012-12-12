@@ -45,7 +45,6 @@ class LittleGamers(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/name'
 
 
-
 class LeastICouldDo(_BasicScraper):
     latestUrl = 'http://www.leasticoulddo.com/'
     stripUrl = latestUrl + 'comic/%s'

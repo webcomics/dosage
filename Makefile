@@ -3,15 +3,14 @@ PYVER:=2.7
 PYTHON:=python$(PYVER)
 VERSION:=$(shell $(PYTHON) setup.py --version)
 ARCHIVE:=dosage-$(VERSION).tar.gz
-PY_FILES_DIRS := dosage dosagelib scripts tests *.py
+PY_FILES_DIRS := dosage dosagelib scripts tests
 PY2APPOPTS ?=
-NUMPROCESSORS:=$(shell grep -c processor /proc/cpuinfo)
-# Pytest options:
-# - use multiple processors
-# - write test results in file
-# - run all tests found in the "tests" subdirectory
-TESTOUTPUT?=testresults.txt
-PYTESTOPTS?=-n $(NUMPROCESSORS) --resultlog=$(TESTOUTPUT) --tb=short
+# Default pytest options:
+# Do not use parallel testing with -n: it makes some tests fail since
+# some web servers have limits on the number of parallel connections.
+# Also note that using -n silently swallows test creation exceptions like
+# import errors.
+PYTESTOPTS?=--resultlog=testresults.txt --tb=short
 CHMODMINUSMINUS:=--
 # directory or file with tests to run
 TESTS ?= tests
@@ -39,7 +38,7 @@ release: distclean releasecheck dist
 #	freecode-submit < dosage.freecode
 
 
-releasecheck: check test
+releasecheck: check
 	@if egrep -i "xx\.|xxxx|\.xx" doc/changelog.txt > /dev/null; then \
 	  echo "Could not release: edit doc/changelog.txt release date"; false; \
 	fi
@@ -83,10 +82,10 @@ localbuild:
 	$(PYTHON) setup.py build
 
 test:	localbuild
-	$(PYTHON) -m pytest $(PYTESTOPTS) $(TESTOPTS) $(TESTS)
+	env LANG=en_US.utf-8 http_proxy="" $(PYTHON) -m pytest $(PYTESTOPTS) $(TESTOPTS) $(TESTS)
 
 deb:
-	git-buildpackage --git-export-dir=../build-area/ --git-upstream-branch=master --git-debian-branch=debian  --git-ignore-new
+	git-buildpackage --git-upstream-branch=master --git-debian-branch=debian  --git-ignore-new
 
 update-copyright:
 	update-copyright --holder="Bastian Kleineidam"

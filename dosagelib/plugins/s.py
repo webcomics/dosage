@@ -74,7 +74,8 @@ class Shivae(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
-class Shortpacked(_BasicScraper):
+# XXX disallowed by robots.txt
+class _Shortpacked(_BasicScraper):
     latestUrl = 'http://www.shortpacked.com/'
     stripUrl = latestUrl + '%s/'
     imageSearch = compile(tagre("img", "src", r'(http://www\.shortpacked\.com/comics/[^"]+)'))
@@ -178,7 +179,7 @@ class SomethingPositive(_BasicScraper):
     latestUrl = 'http://www.somethingpositive.net/'
     stripUrl = latestUrl + 'sp%s.shtml'
     imageSearch = compile(tagre("img", "src", r'(sp\d+\.png)'))
-    prevSearch = compile(tagre("a", "href", r'(sp\d+\.shtml)') + 
+    prevSearch = compile(tagre("a", "href", r'(sp\d+\.shtml)') +
       "(?:" + tagre("img", "src", r'images/previous\.gif') + "|Previous)")
     help = 'Index format: mmddyyyy'
 

@@ -16,15 +16,6 @@ class RadioactivePanda(_BasicScraper):
     help = 'Index format: n (no padding)'
 
 
-# XXX add other comics at http://petitesymphony.com/comics/
-class Rascals(_BasicScraper):
-    latestUrl = 'http://rascals.petitesymphony.com/'
-    stripUrl = latestUrl + 'comic/rascals-pg-%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://rascals\.petitesymphony\.com/files/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://rascals\.petitesymphony\.com/comic/[^"]+)', after="Previous"))
-    help = 'Index format: num'
-
-
 class RealLife(_BasicScraper):
     latestUrl = 'http://www.reallifecomics.com/'
     stripUrl = latestUrl + 'archive/%s.html'

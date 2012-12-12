@@ -89,9 +89,13 @@ def make_comic_tester(name, **kwargs):
 def generate_comic_testers():
     """For each comic scraper, create a test class."""
     g = globals()
-    # Limit number of scraper tests for now
-    max_scrapers = 10000
-    for scraperclass in islice(scraper.get_scrapers(), 0, max_scrapers):
+    # optional: limit number of scraper tests
+    max_scrapers = 0
+    if max_scrapers:
+        scrapers = islice(scraper.get_scrapers(), 0, max_scrapers)
+    else:
+        scrapers = scraper.get_scrapers()
+    for scraperclass in scrapers:
         name = 'Test'+scraperclass.__name__
         g[name] = make_comic_tester(name, scraperclass=scraperclass)
 

@@ -1,6 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012 Bastian Kleineidam
+import requests
 from . import loader
 from .util import fetchUrls
 from .comic import ComicStrip
@@ -29,15 +30,17 @@ class _BasicScraper(object):
     # set to False if previous URLs do not match the strip URL (ie. because of redirects)
     prevUrlMatchesStripUrl = True
 
-    # cookies to send for requests
-    cookies = None
-
     # set to True if this comic contains adult content
     adult = False
 
-    # usually the index format help
-    help = 'Sorry, no help for this comic yet.'
+    # a description of the comic contents
+    description = ''
 
+    # usually the index format help
+    help = ''
+
+    # HTTP session storing cookies
+    session = requests.session()
 
     def __init__(self, indexes=None):
         """Initialize internal variables."""
@@ -59,7 +62,7 @@ class _BasicScraper(object):
 
     def getStrip(self, url):
         """Get comic strip for given URL."""
-        imageUrls = fetchUrls(url, self.imageSearch, cookies=self.cookies)[0]
+        imageUrls = fetchUrls(url, self.imageSearch, session=self.session)[0]
         if len(imageUrls) > 1 and not self.multipleImagesPerStrip:
             out.warn("found %d images instead of 1 with %s" % (len(imageUrls), self.imageSearch.pattern))
         return self.getComicStrip(url, imageUrls)
@@ -76,7 +79,9 @@ class _BasicScraper(object):
             msg += "Retrieving %d strips for indexes %s" % (len(self.indexes), self.indexes)
         else:
             msg = 'Retrieving all strips'
-        out.info(msg+"...")
+        if self.adult:
+            msg += " (includes adult content)"
+        out.info(msg)
         if self.indexes:
             for index in self.indexes:
                 url = self.stripUrl % index
@@ -93,7 +98,7 @@ class _BasicScraper(object):
         seen_urls = set()
         while url:
             imageUrls, prevUrl = fetchUrls(url, self.imageSearch,
-              self.prevSearch, cookies=self.cookies)
+              self.prevSearch, session=self.session)
             prevUrl = self.prevUrlModifier(prevUrl)
             out.debug("Matched previous URL %s" % prevUrl)
             seen_urls.add(url)
@@ -111,10 +116,6 @@ class _BasicScraper(object):
     def setStrip(self, index):
         """Set current comic strip URL."""
         self.currentUrl = self.stripUrl % index
-
-    def getHelp(self):
-        """Return help text for this scraper."""
-        return self.help
 
     @classmethod
     def get_name(cls):
@@ -152,6 +153,8 @@ class _BasicScraper(object):
 
 def get_scraper(comic):
     """Returns a comic module object."""
+    if not comic:
+        raise ValueError("empty comic name")
     candidates = []
     cname = comic.lower()
     for scraperclass in get_scrapers():
@@ -165,9 +168,9 @@ def get_scraper(comic):
         return candidates[0]
     elif candidates:
         comics = ", ".join(x.get_name() for x in candidates)
-        raise ValueError('Multiple comics found: %s' % comics)
+        raise ValueError('multiple comics found: %s' % comics)
     else:
-        raise ValueError('Comic %r not found' % comic)
+        raise ValueError('comic %r not found' % comic)
 
 
 _scrapers = None
@@ -197,7 +200,7 @@ def check_scrapers():
         if name in d:
             name1 = scraperclass.get_name()
             name2 = d[name].get_name()
-            raise ValueError('Duplicate scrapers %s and %s found' % (name1, name2))
+            raise ValueError('duplicate scrapers %s and %s found' % (name1, name2))
         d[name] = scraperclass
 
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # Copyright (C) 2012 Bastian Kleineidam
 """
-Script to get gocomics and save the info in a JSON file for further processing.
+Script to get a list of gocomics and save the info in a JSON file for further processing.
 """
 from __future__ import print_function
 import re
@@ -11,7 +11,7 @@ import json
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dosagelib.util import tagre, getPageContent, asciify, unescape
 from dosagelib.scraper import get_scrapers
-from scriptutil import contains_case_insensitive
+from scriptutil import contains_case_insensitive, capfirst
 
 json_file = __file__.replace(".py", ".json")
 
@@ -53,6 +53,7 @@ def handle_url(url, res):
         shortname = match.group(1)
         name = unescape(match.group(2))
         name = asciify(name.replace('&', 'And').replace('@', 'At'))
+        name = capfirst(name)
         if name in exclude_comics:
             continue
         if contains_case_insensitive(res, name):
@@ -85,7 +86,7 @@ def has_creators_comic(name):
         if lname == cname.lower():
             return True
     return False
- 
+
 
 def print_results(args):
     """Print all comics that have at least the given number of minimum comic strips."""

@@ -5,7 +5,7 @@ set -u
 mincomics=100
 d=$(dirname $0)
 
-for script in creators gocomics drunkduck universal keenspot; do
+for script in creators gocomics drunkduck universal keenspot smackjeeves; do
   target="${d}/../dosagelib/plugins/${script}.py"
   echo "Upating $target"
   "${d}/removeafter.py" "$target" "# DO NOT REMOVE"

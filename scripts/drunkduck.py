@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # Copyright (C) 2012 Bastian Kleineidam
 """
-Script to get drunkduck comics and save the info in a JSON file for further processing.
+Script to get a list of drunkduck comics and save the info in a JSON file for further processing.
 """
 from __future__ import print_function
 import re
@@ -9,8 +9,8 @@ import sys
 import os
 import json
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
-from dosagelib.util import tagre, getPageContent
-from scriptutil import contains_case_insensitive
+from dosagelib.util import tagre, getPageContent, unquote, unescape, asciify
+from scriptutil import contains_case_insensitive, capfirst
 
 json_file = __file__.replace(".py", ".json")
 
@@ -30,7 +30,7 @@ exclude_comics = [
     "Apartment_408_Full_Size", # broken images
     "Apple_Valley", # broken images
     "Apt_408_Minis", # broken images
-    "atxs", # broken images
+    "Atxs", # broken images
     "A_Word_Of_Wisdom", # broken images
     "Brathalla", # broken images
     "Binary_Souls_Other_Dimensions", # broken images
@@ -40,17 +40,17 @@ exclude_comics = [
     "Coga_Suro_2", # broken images
     "Creepy_Girl_and_Her_Zombie_Dog", # broken images
     "CuoreVoodoo", # broken images
-    "dairyaire", # broken images
+    "Dairyaire", # broken images
     "DIS", # broken images
     "Dot_TXT", # broken images
     "Dreadnought_Invasion_Six", # broken images
     "Emerald_Winter", # broken images
     "Enter_the_Duck_2", # broken images
-    "ffff", # broken images
+    "Ffff", # broken images
     "Found_Art", # broken images
     "Function_Over_Fashion", # broken images
     "Funday_Morning", # broken images
-    "greys_journey", # broken images
+    "Greys_journey", # broken images
     "Head_over_Heart", # broken images
     "Hurrocks_Fardel", # broken images
     "Bhaddland", # start page requires login
@@ -96,7 +96,7 @@ exclude_comics = [
     "Pokemon_World_Trainers", # broken images
     "Potpourri_of_Lascivious_Whimsy", # start page requires login
     "Pr0nCrest", # start page requires login
-    "punished_girls", # start page requires login
+    "Punished_girls", # start page requires login
     "Powerjeff", # broken images
     "Comicarotica", # start page requires login
     "Dark_Sisters", # start page requires login
@@ -106,7 +106,7 @@ exclude_comics = [
     "GRIND", # start page requires login
     "HUSS", # start page requires login
     "Red_Dog_Venue", # start page is broken
-    "rubber_girls", # start page requires login
+    "Rubber_girls", # start page requires login
     "Robomeks", # broken images
     "Robot_Friday", # broken images
     "SFA", # start page requires login
@@ -160,8 +160,9 @@ def handle_url(url, url_matcher, num_matcher, res):
         print("ERROR:", msg, file=sys.stderr)
         return
     for match in url_matcher.finditer(data):
-        comicurl = match.group(1)
-        name = comicurl[:-1].rsplit('/')[-1]
+        comicurl = unquote(unescape(match.group(1)))
+        path = comicurl[:-1].rsplit('/')[-1]
+        name = capfirst(asciify(path))
         if contains_case_insensitive(res, name):
             # we cannot handle two comics that only differ in case
             print("WARN: skipping possible duplicate", name, file=sys.stderr)
@@ -175,7 +176,7 @@ def handle_url(url, url_matcher, num_matcher, res):
             print("ERROR:", repr(data[end:end+300]), file=sys.stderr)
             continue
         num = int(mo.group(1))
-        res[name] = num
+        res[name] = (path, num)
 
 
 def save_result(res):
@@ -204,11 +205,12 @@ def print_results(min_strips):
     """Print all comics that have at least the given number of minimum comic strips."""
     with open(json_file, "rb") as f:
         comics = json.load(f)
-    for name, num in sorted(comics.items()):
+    for name, entry in sorted(comics.items()):
         if name in exclude_comics:
             continue
+        path, num = entry
         if num >= min_strips:
-            print("add('%s')" % name)
+            print("add(%r, %r)" % (str(name), str(path)))
 
 
 if __name__ == '__main__':

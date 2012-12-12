@@ -128,4 +128,3 @@ class FredoAndPidjin(_BasicScraper):
     prevSearch = compile(tagre('a', 'href', '([^"]+)')+"Prev</a>")
     starter = indirectStarter(homepage,
        compile(tagre('a', 'href', "("+homepage+r'\d\d\d\d/\d\d/\d\d/[^"]+/)')))
-

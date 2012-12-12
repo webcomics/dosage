@@ -209,4 +209,3 @@ class BetweenFailures(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(http://betweenfailures\.com/wp-content/webcomic/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://betweenfailures\.com/archives/archive/[^"]+)', after="previous"))
     help = 'Index format: stripnum-strip-name'
-

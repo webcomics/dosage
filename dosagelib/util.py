@@ -4,6 +4,7 @@
 from __future__ import division, print_function
 
 import urllib, urllib2, urlparse
+import robotparser
 import requests
 import sys
 import os
@@ -13,11 +14,10 @@ import traceback
 import time
 from htmlentitydefs import name2codepoint
 
+from .decorators import memoized
 from .output import out
 from .configuration import UserAgent, AppName, App, SupportUrl
-from .fileutil import has_module, is_tty
-if os.name == 'nt':
-    from . import colorama
+from .fileutil import has_module
 
 has_curses = has_module("curses")
 
@@ -78,10 +78,12 @@ def case_insensitive_re(name):
 
 baseSearch = re.compile(tagre("base", "href", '([^"]*)'))
 
-def getPageContent(url, max_content_bytes=MaxContentBytes, cookies=None):
+def getPageContent(url, max_content_bytes=MaxContentBytes, session=None):
+    """Get text content of given URL."""
+    check_robotstxt(url)
     # read page data
     page = urlopen(url, max_content_bytes=max_content_bytes,
-      cookies=cookies)
+      session=session)
     data = page.text
     # determine base URL
     baseUrl = None
@@ -98,8 +100,9 @@ def getImageObject(url, referrer, max_content_bytes=MaxImageBytes):
     return urlopen(url, referrer=referrer, max_content_bytes=max_content_bytes)
 
 
-def fetchUrl(url, urlSearch, cookies=None):
-    data, baseUrl = getPageContent(url, cookies=cookies)
+def fetchUrl(url, urlSearch, session=None):
+    """Search for given URL pattern in a HTML page."""
+    data, baseUrl = getPageContent(url, session=session)
     match = urlSearch.search(data)
     if match:
         searchUrl = match.group(1)
@@ -110,8 +113,9 @@ def fetchUrl(url, urlSearch, cookies=None):
     return None
 
 
-def fetchUrls(url, imageSearch, prevSearch=None, cookies=None):
-    data, baseUrl = getPageContent(url, cookies=cookies)
+def fetchUrls(url, imageSearch, prevSearch=None, session=None):
+    """Search for given image and previous URL pattern in a HTML page."""
+    data, baseUrl = getPageContent(url, session=session)
     # match images
     imageUrls = set()
     for match in imageSearch.finditer(data):
@@ -138,10 +142,9 @@ def fetchUrls(url, imageSearch, prevSearch=None, cookies=None):
 
 
 def unescape(text):
-    """
-    Replace HTML entities and character references.
-    """
+    """Replace HTML entities and character references."""
     def _fixup(m):
+        """Replace HTML entities."""
         text = m.group(0)
         if text[:2] == "&#":
             # character reference
@@ -166,8 +169,7 @@ def unescape(text):
 
 
 def normaliseURL(url):
-    """
-    Removes any leading empty segments to avoid breaking urllib2; also replaces
+    """Removes any leading empty segments to avoid breaking urllib2; also replaces
     HTML entities and character references.
     """
     # XXX: brutal hack
@@ -186,54 +188,75 @@ def normaliseURL(url):
     return urlparse.urlunparse(pu)
 
 
+def get_roboturl(url):
+    """Get robots.txt URL from given URL."""
+    pu = urlparse.urlparse(url)
+    return urlparse.urlunparse((pu[0], pu[1], "/robots.txt", "", "", ""))
+
+
+def check_robotstxt(url):
+    """Check if robots.txt allows our user agent for the given URL.
+    @raises: IOError if URL is not allowed
+    """
+    roboturl = get_roboturl(url)
+    rp = get_robotstxt_parser(roboturl)
+    if not rp.can_fetch(UserAgent, url):
+        raise IOError("%s is disallowed by robots.txt" % url)
+
+
+@memoized
+def get_robotstxt_parser(url):
+    """Get a RobotFileParser for the given robots.txt URL."""
+    rp = robotparser.RobotFileParser()
+    req = urlopen(url, max_content_bytes=MaxContentBytes, raise_for_status=False)
+    if req.status_code in (401, 403):
+        rp.disallow_all = True
+    elif req.status_code >= 400:
+        rp.allow_all = True
+    elif req.status_code == 200:
+        rp.parse(req.content.splitlines())
+    return rp
+
+
 def urlopen(url, referrer=None, retries=3, retry_wait_seconds=5, max_content_bytes=None,
-            timeout=ConnectionTimeoutSecs, cookies=None):
+            timeout=ConnectionTimeoutSecs, session=None, raise_for_status=True):
+    """Open an URL and return the response object."""
     out.debug('Open URL %s' % url)
     assert retries >= 0, 'invalid retry value %r' % retries
     assert retry_wait_seconds > 0, 'invalid retry seconds value %r' % retry_wait_seconds
     headers = {'User-Agent': UserAgent}
-    config = {"max_retries": retries}
     if referrer:
         headers['Referer'] = referrer
-    if not cookies:
-        cookies = {}
+    config = {"max_retries": retries}
+    if session is None:
+        session = requests
     try:
-        req = requests.get(url, headers=headers, config=config,
-          prefetch=False, timeout=timeout, cookies=cookies)
+        req = session.get(url, headers=headers, config=config,
+          prefetch=False, timeout=timeout)
         check_content_size(url, req.headers, max_content_bytes)
-        req.raise_for_status()
+        if raise_for_status:
+            req.raise_for_status()
         return req
     except requests.exceptions.RequestException as err:
         msg = 'URL retrieval of %s failed: %s' % (url, err)
         raise IOError(msg)
 
+
 def check_content_size(url, headers, max_content_bytes):
+    """Check that content length in URL response headers do not exceed the
+    given maximum bytes.
+    """
     if not max_content_bytes:
         return
     if 'content-length' in headers:
         size = int(headers['content-length'])
         if size > max_content_bytes:
-            msg = 'URL content of %s with %d Bytes exceeds %d Bytes.' % (url, size, max_content_bytes)
+            msg = 'URL content of %s with %d bytes exceeds %d bytes.' % (url, size, max_content_bytes)
             raise IOError(msg)
 
 
-def get_columns (fp):
-    """Return number of columns for given file."""
-    if not is_tty(fp):
-        return 80
-    if os.name == 'nt':
-        return colorama.get_console_size().X
-    if has_curses:
-        import curses
-        try:
-            curses.setupterm(os.environ.get("TERM"), fp.fileno())
-            return curses.tigetnum("cols")
-        except curses.error:
-           pass
-    return 80
-
-
 def splitpath(path):
+    """Split a path in its components."""
     c = []
     head, tail = os.path.split(path)
     while tail:
@@ -243,6 +266,7 @@ def splitpath(path):
 
 
 def getRelativePath(basepath, path):
+    """Get a path that is relative to the given base path."""
     basepath = splitpath(os.path.abspath(basepath))
     path = splitpath(os.path.abspath(path))
     afterCommon = False
@@ -256,6 +280,7 @@ def getRelativePath(basepath, path):
 
 
 def getQueryParams(url):
+    """Get URL query parameters."""
     query = urlparse.urlsplit(url)[3]
     out.debug('Extracting query parameters from %r (%r)...' % (url, query))
     return cgi.parse_qs(query)
@@ -333,12 +358,18 @@ def strtimezone():
     return "%+04d" % (-zone//3600)
 
 
+def rfc822date(indate):
+    """Format date in rfc822 format."""
+    return time.strftime("%a, %d %b %Y %H:%M:%S GMT", time.gmtime(indate))
+
+
 def asciify(name):
     """Remove non-ascii characters from string."""
     return re.sub("[^0-9a-zA-Z_]", "", name)
 
 
 def unquote(text):
+    """Replace all percent-encoded entities in text."""
     while '%' in text:
         newtext = urllib.unquote(text)
         if newtext == text:
@@ -348,6 +379,7 @@ def unquote(text):
 
 
 def quote(text):
+    """Percent-encode given text."""
     return urllib.quote(text)
 
 def strsize (b):
@@ -369,12 +401,14 @@ def strsize (b):
         return "%.2fGB" % (float(b) / (1024*1024*1024))
     return "%.1fGB" % (float(b) / (1024*1024*1024))
 
+
 def getDirname(name):
     """Replace slashes with path separator of name."""
     return name.replace('/', os.sep)
 
 
 def getFilename(name):
+    """Get a filename from given name without dangerous or incompatible characters."""
     # first replace all illegal chars
     name = re.sub(r"[^0-9a-zA-Z_\-\.]", "_", name)
     # then remove double dots and underscores
@@ -386,3 +420,21 @@ def getFilename(name):
     if name.startswith((".", "-")):
         name = name[1:]
     return name
+
+
+def strlimit (s, length=72):
+    """If the length of the string exceeds the given limit, it will be cut
+    off and three dots will be appended.
+
+    @param s: the string to limit
+    @type s: string
+    @param length: maximum length
+    @type length: non-negative integer
+    @return: limited string, at most length+3 characters long
+    """
+    assert length >= 0, "length limit must be a non-negative integer"
+    if not s or len(s) <= length:
+        return s
+    if length == 0:
+        return ""
+    return "%s..." % s[:length]

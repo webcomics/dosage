@@ -61,11 +61,8 @@ def get_test_name(line):
 
 def get_test(line):
     name, url = get_test_name(line)
-    if line.startswith(". "):
-        name += " OK"
-    else:
-        name += " FAILED"
-    return name, url
+    result = "OK" if line.startswith(". ") else "FAILED"
+    return [name, url, result, ""]
 
 
 def get_content(filename):
@@ -78,20 +75,24 @@ def get_content(filename):
                 num_tests += 1
                 try:
                     tests.append(get_test(line))
+                    add_reason = line.startswith("F ")
                 except Exception as msg:
                     print("WARNING:", msg, file=sys.stderr)
+            elif add_reason and line.startswith(" E "):
+                reason = line[3:].strip()
+                tests[-1][-1] = reason
             if num_tests % 5 == 0:
                 print(num_tests, end=" ", file=sys.stderr)
     tests.sort()
     res = []
-    for name, url in tests:
-        css = name.split()[-1].lower()
+    for name, url, result, reason in tests:
+        css = result.lower()
         if len(name) > 25 and '/' in name:
             name = name.replace('/', '/ ')
         if url:
-            inner = '<a href="%s" class="%s">%s</a>' % (url, css, name)
+            inner = '<a href="%s" title="%s" class="%s">%s %s</a>' % (url, reason, css, name, result)
         else:
-            inner = '<span class="%s">%s</span>' % (css, name)
+            inner = '<span title="%s" class="%s">%s %s</span>' % (reason, css, name, result)
         res.append('    <div class="item">%s</div>' % inner)
     return os.linesep.join(res)
 

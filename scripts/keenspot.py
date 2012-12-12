@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # Copyright (C) 2012 Bastian Kleineidam
 """
-Script to get keenspot comics and save the info in a JSON file for further processing.
+Script to get a list of keenspot comics and save the info in a JSON file for further processing.
 """
 from __future__ import print_function
 import re
@@ -11,7 +11,7 @@ import json
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dosagelib.util import getPageContent, asciify, unescape, tagre
 from dosagelib.scraper import get_scrapers
-from scriptutil import contains_case_insensitive
+from scriptutil import contains_case_insensitive, capfirst
 
 json_file = __file__.replace(".py", ".json")
 
@@ -67,7 +67,7 @@ exclude_comics = [
     "Cats", # broken images
     "Chair", # page moved
     "ChildrenAtPlay", # page does not follow standard layout
-    "chu", # broken images
+    "Chu", # broken images
     "CoACityofAscii", # only ascii images
     "ComicMischief", # page moved
     "ComputerGameAddicts", # page moved
@@ -117,7 +117,7 @@ exclude_comics = [
     "Galacticus", # page has 403 forbidden
     "GamerPsychotica", # page does not follow standard layout
     "GeebasonParade", # page does not follow standard layout
-    "geeks", # page moved
+    "Geeks", # page moved
     "GeminiBright", # page does not follow standard layout
     "GemutationsPlague", # page does not follow standard layout
     "GeorgetheSecond", # page does not follow standard layout
@@ -139,7 +139,7 @@ exclude_comics = [
     "HorseshoesandHandgrenades", # missing images
     "HotelGrim", # missing images
     "IAlwaysWakeUpLazy", # page moved
-    "ihatesteve", # page is gone
+    "Ihatesteve", # page is gone
     "IllicitMiracles", # page does not follow standard layout
     "IndefensiblePositions", # page does not follow standard layout
     "InsanityFair", # page does not follow standard layout
@@ -202,7 +202,7 @@ exclude_comics = [
     "Nervillsaga", # page does not follow standard layout
     "NetherOakasuburbanadventure", # page does not follow standard layout
     "NoNeedForBushido", # page moved
-    "nothingcomesnaturally", # page does not follow standard layout
+    "Nothingcomesnaturally", # page does not follow standard layout
     "NymphsoftheWest", # too few images
     "OffTheWall", # page does not follow standard layout
     "OneHourAxis", # page is gone
@@ -263,7 +263,7 @@ exclude_comics = [
     "SoManyLevels", # page moved
     "SomethingSoft", # page is gone
     "Sorcery101", # page moved
-    "spacejams", # page does not follow standard layout
+    "Spacejams", # page does not follow standard layout
     "SpellBinder", # page is gone
     "SPQRBlues", # page moved
     "StationV3", # page moved
@@ -304,8 +304,8 @@ exclude_comics = [
     "Townies", # page is gone
     "TracyandTristan", # page moved
     "TrialsintheLight", # page does not follow standard layout
-    "ttskr", # page does not follow standard layout
-    "twelvedragons", # page does not follow standard layout
+    "Ttskr", # page does not follow standard layout
+    "Twelvedragons", # page does not follow standard layout
     "TwoEvilScientists", # page moved
     "TwoLumps", # page moved
     "TwoSidesWide", # page moved
@@ -374,6 +374,7 @@ def handle_url(url, res):
         url = match.group(1) + '/'
         name = unescape(match.group(2))
         name = asciify(name.replace('&', 'And').replace('@', 'At'))
+        name = capfirst(name)
         if name in exclude_comics:
             continue
         if contains_case_insensitive(res, name):
@@ -384,7 +385,7 @@ def handle_url(url, res):
         end = match.end()
         mo = num_matcher.search(data[end:])
         if not mo:
-            print("ERROR:", repr(data[end:end+300], file=sys.stderr))
+            print("ERROR:", repr(data[end:end+300]), file=sys.stderr)
             continue
         num = int(mo.group(1))
         res[name] = (url_overrides.get(name, url), num)
@@ -414,7 +415,7 @@ def has_comic(name):
         if lname == cname or lname == gname:
             return True
     return False
- 
+
 
 def print_results(args):
     """Print all comics that have at least the given number of minimum comic strips."""

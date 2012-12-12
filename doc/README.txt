@@ -19,15 +19,27 @@ it is purely for personal use. Please be aware that by making downloaded
 strips publically available (without the explicit permission of the author)
 you may be infringing upon various copyrights.
 
+Additionally, dosage respects the robots.txt exclusion protocol. This
+makes sure no content is accessed in an automatic way without consent
+by the publishers.
+
+If you are a publisher of comics and want dosage to access your files,
+add the following entry to your robotst.txt file:
+
+```
+User-agent: dosage
+Allow: *
+```
+
 Adult content
 --------------
-Some comics contain adult content. They can only be downloaded by
-using the --adult option, which confirms that you are old enough to
-view those comics.
+Some comics contain adult content and require age confirmation.
+These comics can only be downloaded by using the --adult option,
+which confirms that you are old enough to view them.
 
 Usage
 ------
-List available comics (over 3000 at the moment):
+List available comics (ca. 3000 at the moment):
 
 `$ dosage -l`
 

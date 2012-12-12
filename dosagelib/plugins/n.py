@@ -100,7 +100,6 @@ class NekkoAndJoruba(_BasicScraper):
     help = 'Index format: nnn'
 
 
-
 class NobodyScores(_BasicScraper):
     latestUrl = 'http://nobodyscores.loosenutstudio.com/'
     stripUrl = latestUrl + 'index.php?id=%s'
