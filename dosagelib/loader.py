@@ -4,7 +4,14 @@
 Functions to load plugin modules.
 """
 import os
+import sys
+import zipfile
 import importlib
+
+
+def is_frozen ():
+    """Return True if running inside a py2exe-generated executable."""
+    return hasattr(sys, "frozen")
 
 
 def get_modules(folder='plugins'):
@@ -13,8 +20,18 @@ def get_modules(folder='plugins'):
     @return: all loaded valid modules
     @rtype: iterator of module
     """
-    dirname = os.path.join(os.path.dirname(__file__), folder)
-    for modname in get_importable_modules(dirname):
+    if is_frozen():
+        # find modules in library.zip filename
+        zipname = os.path.dirname(os.path.dirname(__file__))
+        with zipfile.ZipFile(zipname, 'r') as f:
+            modnames = [os.path.splitext(n[17:])[0]
+              for n in f.namelist()
+              if n.startswith("dosagelib/%s" % folder)
+              and "__init__" not in n]
+    else:
+        dirname = os.path.join(os.path.dirname(__file__), folder)
+        modnames = get_importable_modules(dirname)
+    for modname in modnames:
         try:
             name ="..%s.%s" % (folder, modname)
             yield importlib.import_module(name, __name__)
