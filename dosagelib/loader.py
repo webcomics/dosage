@@ -24,10 +24,10 @@ def get_modules(folder='plugins'):
         # find modules in library.zip filename
         zipname = os.path.dirname(os.path.dirname(__file__))
         with zipfile.ZipFile(zipname, 'r') as f:
-            modnames = [os.path.splitext(n[17:])[0]
+            prefix = "dosagelib/%s/" % folder
+            modnames = [os.path.splitext(n[len(prefix):])[0]
               for n in f.namelist()
-              if n.startswith("dosagelib/%s" % folder)
-              and "__init__" not in n]
+              if n.startswith(prefix) and "__init__" not in n]
     else:
         dirname = os.path.join(os.path.dirname(__file__), folder)
         modnames = get_importable_modules(dirname)
