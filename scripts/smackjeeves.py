@@ -40,6 +40,8 @@ exclude_comics = [
     "MylifewithFel", # does not follow standard layout
     "NegativeZen", # does not follow standard layout
     "NightShot", # does not follow standard layout
+    "NormalIsBoring", # does not follow standard layout
+    "Okamirai", # images are 403 forbidden
     "OmnisSpriteShowcase", # missing images
     "OpticalDisarray", # does not follow standard layout
     "PicturesofYou", # does not follow standard layout
@@ -49,6 +51,7 @@ exclude_comics = [
     "Ribon", # does not follow standard layout
     "SecretSanta2011", # missing images
     "ShinkaTheLastEevee", # does not follow standard layout
+    "SimplePixel", # does not follow standard layout
     "SJArtCollab", # missing images
     "SlightlyDifferent", # missing images
     "TheAfterSubtract", # does not follow standard layout

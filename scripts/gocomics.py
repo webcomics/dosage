@@ -38,6 +38,7 @@ exclude_comics = [
     "RichardsPoorAlmanac", # missing images
     "SherpaAid", # comic unavailable
     "SparComics", # comic unavailable
+    "SurvivingSingle", # comic unavailable
 ]
 
 

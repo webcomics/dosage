@@ -72,14 +72,6 @@ class Melonpool(_BasicScraper):
     help = 'Index format: n'
 
 
-class MintCondition(_BasicScraper):
-    latestUrl = 'http://www.mintconditioncomic.com/'
-    stripUrl = latestUrl + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.mintconditioncomic\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.mintconditioncomic\.com/[^"]+)', after="prev"))
-    help = 'Index format: yyyy/mm/dd/stripname'
-
-
 class Misfile(_BasicScraper):
     latestUrl = 'http://www.misfile.com/'
     stripUrl = latestUrl + '?date=%s'

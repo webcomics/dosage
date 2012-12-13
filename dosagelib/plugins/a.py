@@ -226,14 +226,6 @@ class Angband(_BasicScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
-class ActionAthena(_BasicScraper):
-    latestUrl = 'http://actionathena.com/'
-    stripUrl = latestUrl + '2%s'
-    imageSearch = compile(r'<img src=\'(http://actionathena.com/comics/.+?)\'>')
-    prevSearch = compile(r'<a href="(http://actionathena.com/.+?)">&laquo; Previous</a>')
-    help = 'Index format: yyyy/mm/dd/strip-name'
-
-
 class AlsoBagels(_BasicScraper):
     latestUrl = 'http://alsobagels.com/'
     stripUrl = latestUrl + 'index.php/comic/%s/'

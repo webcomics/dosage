@@ -181,7 +181,7 @@ class CatAndGirl(_BasicScraper):
 class CyanideAndHappiness(_BasicScraper):
     latestUrl = 'http://www.explosm.net/comics/'
     stripUrl = latestUrl + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(http:\/\/www\.explosm\.net/db/files/Comics/[^"]+)'))
+    imageSearch = compile(tagre("img", "src", r'(http://(?:www\.)?explosm\.net/db/files/Comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/comics/\d+/)', before="prev"))
     help = 'Index format: n (unpadded)'
 
@@ -231,14 +231,6 @@ class Chester5000XYV(_BasicScraper):
     stripUrl = latestUrl + '?p=%s'
     imageSearch = compile(tagre("img", "src", r'(http://jessfink\.com/Chester5000XYV/comics/[^"]+)'))
     prevSearch = compile(r'<a href="(.+?)"><span class="prev">')
-    help = 'Index format: nnn'
-
-
-class CalamitiesOfNature(_BasicScraper):
-    latestUrl = 'http://www.calamitiesofnature.com/'
-    stripUrl = latestUrl + 'archive/?c=%s'
-    imageSearch = compile(tagre("img", "src", r'(archive/\d+[^"]+|http://www\.calamitiesofnature\.com/archive/\d+[^"]+)'))
-    prevSearch = compile(r'<a id="previous" href="(http://www.calamitiesofnature.com/archive/\?c\=\d+)">')
     help = 'Index format: nnn'
 
 

@@ -28,7 +28,8 @@ class Damonk(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
-class DandyAndCompany(_BasicScraper):
+# XXX disallowed /search by robots.txt
+class _DandyAndCompany(_BasicScraper):
     latestUrl = 'http://www.dandyandcompany.com/'
     stripUrl = None
     multipleImagesPerStrip = True

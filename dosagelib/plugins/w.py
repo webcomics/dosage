@@ -57,7 +57,8 @@ class WotNow(_BasicScraper):
     help = 'Index format: n (unpadded)'
 
 
-class WorldOfWarcraftEh(_BasicScraper):
+# XXX disallowed by robots.txt
+class _WorldOfWarcraftEh(_BasicScraper):
     latestUrl = 'http://woweh.com/'
     stripUrl = None
     imageSearch = compile(r'http://woweh.com/(comics/.+?)"')

@@ -26,7 +26,8 @@ class UnicornJelly(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class UserFriendly(_BasicScraper):
+# XXX disallowed by robots.txt
+class _UserFriendly(_BasicScraper):
     starter = bounceStarter('http://ars.userfriendly.org/cartoons/?mode=classic', compile(r'<area shape="rect" href="(/cartoons/\?id=\d{8}&mode=classic)" coords="[\d, ]+?" alt="">'))
     stripUrl = 'http://ars.userfriendly.org/cartoons/?id=%s&mode=classic'
     imageSearch = compile(r'<img border="0" src="\s*(http://www.userfriendly.org/cartoons/archives/\d{2}\w{3}/.+?\.gif)"')

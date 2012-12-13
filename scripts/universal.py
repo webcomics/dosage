@@ -30,6 +30,7 @@ exclude_comics = [
     "JamesBond", # not a comic
     "Men", # not a comic
     "NEA", # not a comic
+    "PeanutsPortuguese", # not found
     "Pets", # not a comic
     "SundayOnly", # not a comic
     "WebExclusive", # not a comic

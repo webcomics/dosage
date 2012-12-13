@@ -71,7 +71,8 @@ class TinyKittenTeeth(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/stripname (unpadded)'
 
 
-class TwoLumps(_BasicScraper):
+# XXX disallowed by robots.txt
+class _TwoLumps(_BasicScraper):
     latestUrl = 'http://www.twolumps.net/'
     stripUrl = latestUrl + 'd/%s.html'
     imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))

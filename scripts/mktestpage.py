@@ -23,6 +23,9 @@ htmltemplate = """
 </head>
 <body>
 <p>Dosage test results from %(date)s</p>
+<p>Note that it is almost impossible to get a 100% OK test run
+due to temporary network failures or sites that are just updating
+the comic page.</p>
 <div id="container">
 %(content)s
 </div>
@@ -70,14 +73,16 @@ def get_content(filename):
     with open(filename, "r") as f:
         print("Tests parsed: 0", end=" ", file=sys.stderr)
         num_tests = 0
+        add_reason = False
         for line in f:
             if line.startswith((". ", "F ")) and "test_comics" in line:
+                add_reason = line.startswith("F ")
                 num_tests += 1
                 try:
                     tests.append(get_test(line))
-                    add_reason = line.startswith("F ")
                 except Exception as msg:
                     print("WARNING:", msg, file=sys.stderr)
+                    continue
             elif add_reason and line.startswith(" E "):
                 reason = line[3:].strip()
                 tests[-1][-1] = reason

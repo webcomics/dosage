@@ -30,6 +30,7 @@ exclude_comics = [
     "Apartment_408_Full_Size", # broken images
     "Apple_Valley", # broken images
     "Apt_408_Minis", # broken images
+    "Art_dump", # broken images
     "Atxs", # broken images
     "A_Word_Of_Wisdom", # broken images
     "Brathalla", # broken images
@@ -64,6 +65,7 @@ exclude_comics = [
     "Inside_OuT", # broken images
     "Journey_to_Raifina", # broken images
     "KALA_dan", # broken images
+    "Kuro_Shouri", # page moved
     "Live_to_tell", # start page requires login
     "Locoma", # broken images
     "London_Underworld", # broken images
@@ -141,7 +143,7 @@ exclude_comics = [
     "Weave", # broken images
     "Weirdlings", # template error
     "Welcome_To_Border_City", # broken images
-    "what_comes_first", # start page requires login
+    "What_comes_first", # start page requires login
     "Within_Shadows", # broken images
     "Xolta", # start page requires login
     "XTIN__The_Dragons_Dream_World", # start page requires login

@@ -58,10 +58,19 @@ class KillerKomics(_BasicScraper):
     help = 'Index format: strip-name'
 
 
-class Kofightclub(_BasicScraper):
+# XXX disallowed by robots.txt
+class _Kofightclub(_BasicScraper):
     latestUrl = 'http://www.kofightclub.com/'
     stripUrl = latestUrl + 'd/%s.html'
     imageSearch = compile(tagre("img", "src", r'(\.\./images/\d+[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'((?:http://www\.kofightclub\.com)?/d/\d+\.html)')
      + tagre("img", "alt", "Previous comic"))
     help = 'Index format: yyyymmdd'
+
+
+class KuroShouri(_BasicScraper):
+   latestUrl = 'http://kuroshouri.com/'
+   stripUrl = latestUrl + '?webcomic_post=%s'
+   imageSearch = compile(tagre("img", "src", r"(http://kuroshouri\.com/wp-content/webcomic/kuroshouri/[^'\"]+)", quote="['\"]"))
+   prevSearch = compile(tagre("a", "href", r'(http://kuroshouri\.com/\?webcomic_post=[^"]+)', after="previous"))
+   help = 'Index format: chapter-n-page-m'

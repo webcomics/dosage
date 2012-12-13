@@ -142,7 +142,8 @@ class SPQRBlues(_BasicScraper):
     help = 'Index format: number'
 
 
-class StationV3(_BasicScraper):
+# XXX disallowed by robots.txt
+class _StationV3(_BasicScraper):
     latestUrl = 'http://www.stationv3.com/'
     stripUrl = latestUrl + 'd/%s.html'
     imageSearch = compile(tagre("img", "src", r'(http://www\.stationv3\.com/comics/[^"]+)'))
@@ -228,7 +229,8 @@ class Spamusement(_BasicScraper):
     starter = indirectStarter('http://spamusement.com/', prevSearch)
 
 
-class StrangeCandy(_BasicScraper):
+# XXX disallowed by robots.txt
+class _StrangeCandy(_BasicScraper):
     latestUrl = 'http://www.strangecandy.net/'
     stripUrl = latestUrl + 'd/%s.html'
     imageSearch = compile(tagre("img", "src", r'(/comics/\d+\.jpg)'))

@@ -13,12 +13,12 @@ _attrs = dict(
     next = case_insensitive_re("next"),
 )
 _prevSearch = compile(_linkSearch +
-  r'(?:<img[^>]+alt="[^"]*%(prev)s|<img[^>]+(?:button_previous|nav_prev4)\.|[^<]*%(back)s|\s*<<? (?:%(back)s|%(prev)s)|[^<]*%(prev)s)' % _attrs)
+  r'(?:<img[^>]+alt="[^"]*%(prev)s|<img[^>]+(?:button_previous|naviButtons_Previous|nav_prev4|prev|previous|webbuttonback|PrevArrow)\.|[^<]*%(back)s|\s*<<? (?:%(back)s|%(prev)s)|[^<]*%(prev)s)' % _attrs)
 _nextSearch = compile(_linkSearch +
-  r'(?:<img[^>]+alt="%(next)s|<img[^>]+(?:button_next|nav_next4)\.|\s*<?[^<]*%(next)s)' % _attrs)
+  r'(?:<img[^>]+alt="%(next)s|<img[^>]+(?:button_next|naviButtons_Next|nav_next4|next|webbuttonnext-1|NextArrow)\.|\s*<?[^<]*%(next)s)' % _attrs)
 
 def add(name, url, description, adult, bounce):
-    classname = 'SmackJeeves/' + name
+    classname = 'SmackJeeves_' + name
 
     def modifier(pageUrl):
         if adult:
@@ -48,6 +48,7 @@ def add(name, url, description, adult, bounce):
         return "%s_%s" % (name, num)
 
     globals()[classname] = make_scraper(classname,
+        name = 'SmackJeeves/' + name,
         adult = adult,
         starter = _starter,
         prevUrlModifier = lambda cls, url: modifier(url),
