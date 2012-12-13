@@ -1,0 +1,12 @@
+Project: dosage
+Version: 1.7
+Release-Focus: Major feature enhancements
+Hide: N
+Website-URL: https://github.com/wummel/dosage
+Changelog-URL: https://github.com/wummel/dosage/blob/master/doc/changelog.txt
+Tar/GZ-URL: XXX
+GIT-Tree-URL: https://github.com/wummel/dosage.git
+Windows-installer-URL: XXX
+
+All of the comics have been fixed and the source code has been modernized.
+Robots.txt protocol support has been added.

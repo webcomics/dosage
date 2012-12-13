@@ -35,7 +35,7 @@ release: distclean releasecheck dist
 	git tag v$(VERSION)
 	@echo "Register at Python Package Index..."
 	$(PYTHON) setup.py register
-#	freecode-submit < dosage.freecode
+	freecode-submit < dosage.freecode
 
 
 releasecheck: check
