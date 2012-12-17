@@ -2,7 +2,18 @@
 PYVER:=2.7
 PYTHON:=python$(PYVER)
 VERSION:=$(shell $(PYTHON) setup.py --version)
-ARCHIVE:=dosage-$(VERSION).tar.gz
+MAINTAINER:=$(shell $(PYTHON) setup.py --maintainer)
+AUTHOR:=$(shell $(PYTHON) setup.py --author)
+APPNAME:=$(shell $(PYTHON) setup.py --name)
+LAPPNAME:=$(shell echo $(APPNAME)|tr "[A-Z]" "[a-z]")
+ARCHIVE_SOURCE:=$(LAPPNAME)-$(VERSION).tar.gz
+ARCHIVE_WIN32:=$(LAPPNAME)-$(VERSION).exe
+GITUSER:=wummel
+GITREPO:=$(LAPPNAME)
+HOMEPAGE:=$(HOME)/public_html/$(LAPPNAME).git
+DEBUILDDIR:=$(HOME)/projects/debian/unofficial
+DEBORIGFILE:=$(DEBUILDDIR)/$(LAPPNAME)_$(VERSION).orig.tar.gz
+DEBPACKAGEDIR:=$(DEBUILDDIR)/$(LAPPNAME)-$(VERSION)
 PY_FILES_DIRS := dosage dosagelib scripts tests
 PY2APPOPTS ?=
 # Default pytest options:
@@ -24,32 +35,57 @@ chmod:
 	find . -type d -exec chmod 755 {} \;
 
 dist:
-	git archive --format=tar --prefix=dosage-$(VERSION)/ HEAD | gzip -9 > ../$(ARCHIVE)
-	[ -f ../$(ARCHIVE).sha1 ] || sha1sum ../$(ARCHIVE) > ../$(ARCHIVE).sha1
-	[ -f ../$(ARCHIVE).asc ] || gpg --detach-sign --armor ../$(ARCHIVE)
+	[ -d dist ] || mkdir dist
+	git archive --format=tar --prefix=$(LAPPNAME)-$(VERSION)/ HEAD | gzip -9 > dist/$(ARCHIVE_SOURCE)
+	[ ! -f ../$(ARCHIVE_WIN32) ] || cp ../$(ARCHIVE_WIN32) dist
 
-doc/dosage.1.html: doc/dosage.1
-	man2html -r $< | tail -n +2 | sed 's/Time:.*//g' | sed 's@/:@/@g' > $@
+sign:
+	[ -f dist/$(ARCHIVE_SOURCE).asc ] || gpg --detach-sign --armor dist/$(ARCHIVE_SOURCE)
+	[ -f dist/$(ARCHIVE_WIN32).asc ] || gpg --detach-sign --armor dist/$(ARCHIVE_WIN32)
 
-release: distclean releasecheck dist
-	git tag v$(VERSION)
+upload:
+	github-upload $(GITUSRE) $(GITREPO) \
+	  dist/$(ARCHIVE_SOURCE) dist/$(ARCHIVE_WIN32) \
+	  dist/$(ARCHIVE_SOURCE).asc dist/$(ARCHIVE_WIN32).asc
+
+testresults:
+	scripts/mktestpage.py testresults.txt > $(HOMEPAGE)/content/testresults.html
+
+homepage:
+# update metadata
+	@echo "version: $(VERSION)" > $(HOMEPAGE)/info.yaml
+	@echo "name: $(APPNAME)" >> $(HOMEPAGE)/info.yaml
+	@echo "lname: $(LAPPNAME)" >> $(HOMEPAGE)/info.yaml
+	@echo "maintainer: $(MAINTAINER)" >> $(HOMEPAGE)/info.yaml
+	@echo "author: $(AUTHOR)" >> $(HOMEPAGE)/info.yaml
+# generate static files
+	$(MAKE) -C doc
+	cp doc/$(LAPPNAME).1.html $(HOMEPAGE)/content
+	make -C $(HOMEPAGE) gen
+
+release: distclean releasecheck dist sign upload homepage tag register
+
+tag:
+	git tag upstream/$(VERSION)
+	git push --tags origin upstream/$(VERSION)
+
+register:
 	@echo "Register at Python Package Index..."
 	$(PYTHON) setup.py register
-	freecode-submit < dosage.freecode
-
+	@echo "Submit to freecode..."
+	freecode-submit < $(LAPPNAME).freecode
 
 releasecheck: check
 	@if egrep -i "xx\.|xxxx|\.xx" doc/changelog.txt > /dev/null; then \
 	  echo "Could not release: edit doc/changelog.txt release date"; false; \
 	fi
-#	@if ! grep "Version: $(VERSION)" dosage.freecode > /dev/null; then \
-#	  echo "Could not release: edit dosage.freecode version"; false; \
-#	fi
+	@if ! grep "Version: $(VERSION)" $(LAPPNAME).freecode > /dev/null; then \
+	  echo "Could not release: edit $(LAPPNAME).freecode version"; false; \
+	fi
 
 # The check programs used here are mostly local scripts on my private system.
 # So for other developers there is no need to execute this target.
 check:
-	[ ! -d .svn ] || check-nosvneolstyle -v
 	check-copyright
 	check-pofiles -v
 	py-tabdaddy
@@ -67,7 +103,7 @@ pyflakes:
 	pyflakes $(PY_FILES_DIRS)
 
 count:
-	@sloccount $(PY_FILES_DIRS) | grep "Total Physical Source Lines of Code"
+	@sloccount $(PY_FILES_DIRS)
 
 clean:
 	find . -name \*.pyc -delete
@@ -75,8 +111,8 @@ clean:
 	rm -rf build dist
 
 distclean: clean
-	rm -rf build dist Dosage.egg-info dosage.prof test.sh testresults.txt
-	rm -f _Dosage_configdata.py MANIFEST
+	rm -rf build dist $(APPNAME).egg-info dosage.prof test.sh testresults.txt
+	rm -f _$(APPNAME)_configdata.py MANIFEST
 
 localbuild:
 	$(PYTHON) setup.py build
@@ -84,11 +120,32 @@ localbuild:
 test:	localbuild
 	env LANG=en_US.utf-8 http_proxy="" $(PYTHON) -m pytest $(PYTESTOPTS) $(TESTOPTS) $(TESTS)
 
+doc/$(LAPPNAME).txt: doc/$(LAPPNAME).1
+# make text file from man page for Windows builds
+	cols=`stty size | cut -d" " -f2`; stty cols 72; man -l $< | sed -e 's/.\cH//g' > $@; stty cols $$cols
+
 deb:
-	git-buildpackage --git-upstream-branch=master --git-debian-branch=debian  --git-ignore-new
+# build a debian package
+	[ -f $(DEBORIGFILE) ] || cp dist/$(ARCHIVE_SOURCE) $(DEBORIGFILE) $(DEBUILDDIR)/$(LAPPNAME)_$(VERSION).orig.tar.gz
+	sed -i 's/VERSION:=.*/VERSION:=$(VERSION)/' $(DEBUILDDIR)/$(LAPPNAME).mak
+	[ -d $(DEBPACKAGEDIR) ] || (cd $(DEBUILDDIR); \
+	  patool extract $(DEBORIGFILE); \
+	  cd $(CURDIR); \
+	  git checkout debian; \
+	  cp -r debian $(DEBPACKAGEDIR); \
+	  git checkout master)
+	rm -f $(DEBUILDDIR)/$(LAPPNAME)
+	$(MAKE) -C $(DEBUILDDIR) $(LAPPNAME)
 
 update-copyright:
-	update-copyright --holder="Bastian Kleineidam"
+# update-copyright is a local tool which updates the copyright year for each
+# modified file.
+	update-copyright --holder="$(MAINTAINER)"
 
-.PHONY: update-copyright deb test clean distclean count pyflakes
-.PHONY: doccheck check releasecheck release dist chmod localbuild
+changelog:
+# github-changelog is a local tool which parses the changelog and automatically
+# closes issues mentioned in the changelog entries.
+	github-changelog $(DRYRUN) $(GITUSER) $(GITREPO) doc/changelog.txt
+
+.PHONY: update-copyright deb test clean distclean count pyflakes changelog
+.PHONY: doccheck check releasecheck release dist chmod localbuild sign register tag

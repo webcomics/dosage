@@ -3,30 +3,25 @@
 from __future__ import print_function
 import sys
 import os
-import stat
 import time
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dosagelib.scraper import get_scrapers
 
 htmltemplate = """
-<!DOCTYPE html>
-<head>
-    <meta charset="utf-8">
-    <title>Dosage test results</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/dosage.css">
-    <script src="js/masonry.min.js"></script>
-    <script src="http://use.edgefonts.net/open-sans.js"></script>
-</head>
-<body>
-<p>Dosage test results from %(date)s</p>
-<p>Note that it is almost impossible to get a 100% OK test run
-due to temporary network failures or sites that are just updating
-the comic page.</p>
-<div id="container">
+---
+extends: base.j2
+default_block: content
+title: Dosage by Bastian Kleineidam
+description: a commandline webcomic downloader and archiver
+---
+
+<div class="inner clearfix">
+<section id="main-content">
+
+<h2>Dosage test results from %(date)s</h2>
+<p>Note that it is almost impossible to get a 100%% OK test run
+due to temporary site failures.</p>
+<div id="testresults">
 %(content)s
 </div>
 <script>
@@ -36,14 +31,12 @@ window.onload = function() {
   });
 };
 </script>
-</body>
-</html>
 """
 
 
 def get_mtime (filename):
     """Return modification time of filename."""
-    return os.stat(filename)[stat.ST_MTIME]
+    return os.path.getmtime(filename)
 
 
 def strdate(t):

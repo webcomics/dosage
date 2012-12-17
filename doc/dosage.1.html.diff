@@ -1,0 +1,22 @@
+diff --git i/doc/dosage.1.html w/doc/dosage.1.html
+index e4f07f0..b8110eb 100644
+--- i/doc/dosage.1.html
++++ w/doc/dosage.1.html
+@@ -4,7 +4,7 @@
+ </HEAD><BODY>
+ <H1>DOSAGE</H1>
+ Section: User Commands  (1)<BR><A HREF="#index">Index</A>
+-<A HREF="../index.html">Return to Main Contents</A><HR>
++<A HREF="index.html">Return to Main Contents</A><HR>
+ 
+ <A NAME="lbAB">&nbsp;</A>
+ <H2>NAME</H2>
+@@ -269,7 +269,7 @@ Copyright &#169; 2012 Bastian Kleineidam
+ </DL>
+ <HR>
+ This document was created by
+-<A HREF="/cgi-bin/man/man2html">man2html</A>,
++man2html,
+ using the manual pages.<BR>
+ 
+ </BODY>

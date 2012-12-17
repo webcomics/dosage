@@ -20,6 +20,7 @@ except ImportError:
     has_py2exe = False
 from distutils.core import setup, Distribution
 from distutils.command.install_lib import install_lib
+from distutils.command.register import register
 from distutils import util
 from distutils.file_util import write_file
 
@@ -339,6 +340,16 @@ except ImportError:
         pass
 
 
+class MyRegister (register, object):
+    """Custom register command."""
+
+    def build_post_data(self, action):
+        """Force application name to lower case."""
+        data = super(MyRegister, self).build_post_data(action)
+        data['name'] = data['name'].lower()
+        return data
+
+
 args = dict(
     name = AppName,
     version = AppVersion,
@@ -361,6 +372,7 @@ args = dict(
     cmdclass = {
         'install_lib': MyInstallLib,
         'py2exe': MyPy2exe,
+        'register': MyRegister,
     },
     options = {
         "py2exe": py2exe_options,
