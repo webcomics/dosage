@@ -10,11 +10,14 @@ from dosagelib.scraper import get_scrapers
 htmltemplate = """
 ---
 extends: base.j2
-default_block: content
 title: Dosage by Bastian Kleineidam
 description: a commandline webcomic downloader and archiver
 ---
+{% block js %}
+<script src="media/js/masonry.min.js"></script>
+{% endblock js %}
 
+{% block content %}
 <div class="inner clearfix">
 <section id="main-content">
 
@@ -31,6 +34,7 @@ window.onload = function() {
   });
 };
 </script>
+{% endblock content %}
 """
 
 
