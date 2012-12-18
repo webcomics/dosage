@@ -73,8 +73,8 @@ tag:
 register:
 	@echo "Register at Python Package Index..."
 	$(PYTHON) setup.py register
-	@echo "Submit to freecode..."
-	freecode-submit < $(LAPPNAME).freecode
+#	@echo "Submit to freecode..."
+#	freecode-submit < $(LAPPNAME).freecode
 
 releasecheck: check
 	@if egrep -i "xx\.|xxxx|\.xx" doc/changelog.txt > /dev/null; then \
