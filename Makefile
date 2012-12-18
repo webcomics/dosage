@@ -63,7 +63,8 @@ homepage:
 	cp doc/$(LAPPNAME).1.html $(HOMEPAGE)/content
 	make -C $(HOMEPAGE) gen
 
-release: distclean releasecheck dist sign upload homepage tag register
+release: distclean releasecheck
+	$(MAKE) dist sign upload homepage tag register deb
 
 tag:
 	git tag upstream/$(VERSION)
@@ -79,9 +80,14 @@ releasecheck: check
 	@if egrep -i "xx\.|xxxx|\.xx" doc/changelog.txt > /dev/null; then \
 	  echo "Could not release: edit doc/changelog.txt release date"; false; \
 	fi
+	@if [ ! -f ../$(ARCHIVE_WIN32) ]; then \
+	  echo "Missing WIN32 distribution archive at ../$(ARCHIVE_WIN32)"; \
+	  false; \
+	fi
 	@if ! grep "Version: $(VERSION)" $(LAPPNAME).freecode > /dev/null; then \
 	  echo "Could not release: edit $(LAPPNAME).freecode version"; false; \
 	fi
+	$(PYTHON) setup.py check --restructuredtext
 
 # The check programs used here are mostly local scripts on my private system.
 # So for other developers there is no need to execute this target.
@@ -111,7 +117,7 @@ clean:
 	rm -rf build dist
 
 distclean: clean
-	rm -rf build dist $(APPNAME).egg-info dosage.prof test.sh testresults.txt
+	rm -rf build dist $(APPNAME).egg-info $(LAPPNAME).prof test.sh
 	rm -f _$(APPNAME)_configdata.py MANIFEST
 
 localbuild:
@@ -120,22 +126,17 @@ localbuild:
 test:	localbuild
 	env LANG=en_US.utf-8 http_proxy="" $(PYTHON) -m pytest $(PYTESTOPTS) $(TESTOPTS) $(TESTS)
 
-doc/$(LAPPNAME).txt: doc/$(LAPPNAME).1
-# make text file from man page for Windows builds
-	cols=`stty size | cut -d" " -f2`; stty cols 72; man -l $< | sed -e 's/.\cH//g' > $@; stty cols $$cols
-
 deb:
 # build a debian package
-	[ -f $(DEBORIGFILE) ] || cp dist/$(ARCHIVE_SOURCE) $(DEBORIGFILE) $(DEBUILDDIR)/$(LAPPNAME)_$(VERSION).orig.tar.gz
-	sed -i 's/VERSION:=.*/VERSION:=$(VERSION)/' $(DEBUILDDIR)/$(LAPPNAME).mak
+	[ -f $(DEBORIGFILE) ] || cp dist/$(ARCHIVE_SOURCE) $(DEBORIGFILE)
+	sed -i -e 's/VERSION_$(LAPPNAME):=.*/VERSION_$(LAPPNAME):=$(VERSION)/' $(DEBUILDDIR)/$(LAPPNAME).mak
 	[ -d $(DEBPACKAGEDIR) ] || (cd $(DEBUILDDIR); \
 	  patool extract $(DEBORIGFILE); \
 	  cd $(CURDIR); \
 	  git checkout debian; \
 	  cp -r debian $(DEBPACKAGEDIR); \
 	  git checkout master)
-	rm -f $(DEBUILDDIR)/$(LAPPNAME)
-	$(MAKE) -C $(DEBUILDDIR) $(LAPPNAME)
+	$(MAKE) -C $(DEBUILDDIR) $(LAPPNAME)_clean $(LAPPNAME)
 
 update-copyright:
 # update-copyright is a local tool which updates the copyright year for each
