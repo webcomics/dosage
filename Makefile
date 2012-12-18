@@ -44,7 +44,7 @@ sign:
 	[ -f dist/$(ARCHIVE_WIN32).asc ] || gpg --detach-sign --armor dist/$(ARCHIVE_WIN32)
 
 upload:
-	github-upload $(GITUSRE) $(GITREPO) \
+	github-upload $(GITUSER) $(GITREPO) \
 	  dist/$(ARCHIVE_SOURCE) dist/$(ARCHIVE_WIN32) \
 	  dist/$(ARCHIVE_SOURCE).asc dist/$(ARCHIVE_WIN32).asc
 
