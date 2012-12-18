@@ -29,7 +29,7 @@ due to temporary site failures.</p>
 </div>
 <script>
 window.onload = function() {
-  var wall = new Masonry( document.getElementById('container'), {
+  var wall = new Masonry(document.getElementById('testresults'), {
     columnWidth: 240
   });
 };
