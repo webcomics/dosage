@@ -4,6 +4,7 @@ from __future__ import print_function
 import sys
 import os
 import time
+import cgi
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dosagelib.scraper import get_scrapers
 
@@ -13,11 +14,11 @@ extends: base.j2
 title: Dosage by Bastian Kleineidam
 description: a commandline webcomic downloader and archiver
 ---
-{% block js %}
+{%% block js %%}
 <script src="media/js/masonry.min.js"></script>
-{% endblock js %}
+{%% endblock js %%}
 
-{% block content %}
+{%% block content %%}
 <div class="inner clearfix">
 <section id="main-content">
 
@@ -34,7 +35,7 @@ window.onload = function() {
   });
 };
 </script>
-{% endblock content %}
+{%% endblock content %%}
 """
 
 
@@ -89,14 +90,18 @@ def get_content(filename):
     res = []
     for name, url, result, reason in tests:
         css = result.lower()
-        if len(name) > 25 and '/' in name:
-            name = name.replace('/', '/ ')
+        if len(name) > 40:
+            name = name[:37] + "..."
         if url:
-            inner = '<a href="%s" title="%s" class="%s">%s %s</a>' % (url, reason, css, name, result)
+            inner = '<a href="%s" title="%s" class="%s">%s</a>' % quote_all(url, reason, css, name)
         else:
-            inner = '<span title="%s" class="%s">%s %s</span>' % (reason, css, name, result)
+            inner = '<span title="%s" class="%s">%s</span>' % quote_all(reason, css, name)
         res.append('    <div class="item">%s</div>' % inner)
     return os.linesep.join(res)
+
+
+def quote_all(*args):
+    return tuple(cgi.escape(x, quote=True) for x in args)
 
 
 def main(args):
