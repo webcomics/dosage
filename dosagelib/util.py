@@ -27,8 +27,15 @@ MaxContentBytes = 1024 * 1024 * 2 # 2 MB
 # Maximum content size for images
 MaxImageBytes = 1024 * 1024 * 20 # 20 MB
 
+# Default number of retries
+MaxRetries = 3
+
 # Default connection timeout
 ConnectionTimeoutSecs = 60
+
+if hasattr(requests, 'adapters'):
+    # requests >= 1.0
+    requests.adapters.DEFAULT_RETRIES = MaxRetries
 
 def tagre(tag, attribute, value, quote='"', before="", after=""):
     """Return a regular expression matching the given HTML tag, attribute
@@ -218,21 +225,25 @@ def get_robotstxt_parser(url):
     return rp
 
 
-def urlopen(url, referrer=None, retries=3, retry_wait_seconds=5, max_content_bytes=None,
+def urlopen(url, referrer=None, max_content_bytes=None,
             timeout=ConnectionTimeoutSecs, session=None, raise_for_status=True):
     """Open an URL and return the response object."""
     out.debug('Open URL %s' % url)
-    assert retries >= 0, 'invalid retry value %r' % retries
-    assert retry_wait_seconds > 0, 'invalid retry seconds value %r' % retry_wait_seconds
     headers = {'User-Agent': UserAgent}
     if referrer:
         headers['Referer'] = referrer
-    config = {"max_retries": retries}
     if session is None:
         session = requests
+    kwargs = {
+        "headers": headers,
+        "timeout": timeout,
+    }
+    if not hasattr(requests, 'adapters'):
+        # requests << 1.0
+        kwargs["prefetch"] = False
+        kwargs["config"] = {"max_retries": MaxRetries}
     try:
-        req = session.get(url, headers=headers, config=config,
-          prefetch=False, timeout=timeout)
+        req = session.get(url, **kwargs)
         check_content_size(url, req.headers, max_content_bytes)
         if raise_for_status:
             req.raise_for_status()

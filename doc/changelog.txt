@@ -1,3 +1,10 @@
+Dosage 1.8 (released 19.12.2012)
+
+Changes:
+- comics: Add compatibility to requests module >= 1.0.
+- comics: Updated the comic list with the generator scripts.
+
+
 Dosage 1.7 (released 18.12.2012)
 
 Features:
