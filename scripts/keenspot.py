@@ -7,11 +7,10 @@ from __future__ import print_function
 import re
 import sys
 import os
-import json
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dosagelib.util import getPageContent, asciify, unescape, tagre
 from dosagelib.scraper import get_scrapers
-from scriptutil import contains_case_insensitive, capfirst
+from scriptutil import contains_case_insensitive, capfirst, save_result, load_result
 
 json_file = __file__.replace(".py", ".json")
 
@@ -379,7 +378,7 @@ def handle_url(url, res):
             continue
         if contains_case_insensitive(res, name):
             # we cannot handle two comics that only differ in case
-            print("WARN: skipping possible duplicate", name, file=sys.stderr)
+            print("INFO: skipping possible duplicate", name, file=sys.stderr)
             continue
         # find out how many images this comic has
         end = match.end()
@@ -391,12 +390,6 @@ def handle_url(url, res):
         res[name] = (url_overrides.get(name, url), num)
 
 
-def save_result(res):
-    """Save result to file."""
-    with open(json_file, 'wb') as f:
-        json.dump(res, f, sort_keys=True)
-
-
 def get_results():
     """Parse all search result pages."""
     # store info in a dictionary {name -> shortname}
@@ -404,7 +397,7 @@ def get_results():
     base = 'http://guide.comicgenesis.com/Keenspace_%s.html'
     for c in '0ABCDEFGHIJKLMNOPQRSTUVWXYZ':
         handle_url(base % c, res)
-    save_result(res)
+    save_result(res, json_file)
 
 
 def has_comic(name):
@@ -420,9 +413,7 @@ def has_comic(name):
 def print_results(args):
     """Print all comics that have at least the given number of minimum comic strips."""
     min_comics = int(args[0])
-    with open(json_file, "rb") as f:
-        comics = json.load(f)
-    for name, entry in sorted(comics.items()):
+    for name, entry in sorted(load_result(json_file).items()):
         if name in exclude_comics:
             continue
         url, num = entry

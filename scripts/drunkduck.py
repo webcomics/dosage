@@ -7,10 +7,9 @@ from __future__ import print_function
 import re
 import sys
 import os
-import json
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dosagelib.util import tagre, getPageContent, unquote, unescape, asciify
-from scriptutil import contains_case_insensitive, capfirst
+from scriptutil import contains_case_insensitive, capfirst, save_result, load_result
 
 json_file = __file__.replace(".py", ".json")
 
@@ -167,7 +166,7 @@ def handle_url(url, url_matcher, num_matcher, res):
         name = capfirst(asciify(path))
         if contains_case_insensitive(res, name):
             # we cannot handle two comics that only differ in case
-            print("WARN: skipping possible duplicate", name, file=sys.stderr)
+            print("INFO: skipping possible duplicate", name, file=sys.stderr)
             continue
         if name in exclude_comics:
             continue
@@ -179,12 +178,6 @@ def handle_url(url, url_matcher, num_matcher, res):
             continue
         num = int(mo.group(1))
         res[name] = (path, num)
-
-
-def save_result(res):
-    """Save result to file."""
-    with open(json_file, 'wb') as f:
-        json.dump(res, f, sort_keys=True)
 
 
 def get_results():
@@ -200,14 +193,12 @@ def get_results():
     for i in range(1, result_pages + 1):
         print(i, file=sys.stderr, end=" ")
         handle_url(base % i, href, num, res)
-    save_result(res)
+    save_result(res, json_file)
 
 
 def print_results(min_strips):
     """Print all comics that have at least the given number of minimum comic strips."""
-    with open(json_file, "rb") as f:
-        comics = json.load(f)
-    for name, entry in sorted(comics.items()):
+    for name, entry in sorted(load_result(json_file).items()):
         if name in exclude_comics:
             continue
         path, num = entry
