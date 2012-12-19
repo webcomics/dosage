@@ -21,7 +21,7 @@ PY2APPOPTS ?=
 # some web servers have limits on the number of parallel connections.
 # Also note that using -n silently swallows test creation exceptions like
 # import errors.
-PYTESTOPTS?=--resultlog=testresults.txt --tb=short
+PYTESTOPTS?=--resultlog=testresults.txt --tb=short --durations=0
 CHMODMINUSMINUS:=--
 # directory or file with tests to run
 TESTS ?= tests
