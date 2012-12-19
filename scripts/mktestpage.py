@@ -93,10 +93,12 @@ def get_content(filename):
         if len(name) > 40:
             name = name[:37] + "..."
         if url:
-            inner = '<a href="%s" title="%s" class="%s">%s</a>' % quote_all(url, reason, css, name)
+            args = quote_all(url, reason, css, name)
+            inner = '<a href="%s" title="%s" class="%s">%s</a>' % args
         else:
-            inner = '<span title="%s" class="%s">%s</span>' % quote_all(reason, css, name)
-        res.append('    <div class="item">%s</div>' % inner)
+            args = quote_all(reason, css, name)
+            inner = '<span title="%s" class="%s">%s</span>' % args
+        res.append('<div class="item">%s</div>' % inner)
     return os.linesep.join(res)
 
 
