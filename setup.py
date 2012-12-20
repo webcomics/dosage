@@ -320,6 +320,8 @@ class InnoScript:
             print("No signed installer: certificate %s not found." % pfxfile)
 
 def get_windows_sdk_path():
+    """Return path of Microsoft Windows SDK installation, or None if
+    not found."""
     try:
         import _winreg as winreg
     except ImportError:
