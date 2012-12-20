@@ -256,6 +256,7 @@ class InnoScript:
 
     def create(self, pathname=r"dist\omt.iss"):
         """Create Inno script."""
+        print("*** creating the inno setup script ***")
         self.pathname = pathname
         self.distfilebase = "%s-%s" % (self.name, self.version)
         self.distfile = self.distfilebase + ".exe"
@@ -298,18 +299,36 @@ class InnoScript:
 
     def compile (self):
         """Compile Inno script with iscc.exe."""
+        print("*** compiling the inno setup script ***")
         progpath = get_nt_platform_vars()[0]
         cmd = r'%s\Inno Setup 5\iscc.exe' % progpath
         subprocess.check_call([cmd, self.pathname])
 
     def sign (self):
         """Sign InnoSetup installer with local self-signed certificate."""
+        print("*** signing the inno setup installer ***")
         pfxfile = r'C:\dosage.pfx'
         if os.path.isfile(pfxfile):
-            cmd = ['signtool.exe', 'sign', '/f', pfxfile, self.distfile]
-            subprocess.check_call(cmd)
+            path = get_windows_sdk_path()
+            signtool = os.path.join(path, "bin", "signtool.exe")
+            if os.path.isfile(signtool):
+                cmd = [signtool, 'sign', '/f', pfxfile, self.distfile]
+                subprocess.check_call(cmd)
+            else:
+                print("No signed installer: signtool.exe not found.")
         else:
             print("No signed installer: certificate %s not found." % pfxfile)
+
+def get_windows_sdk_path():
+    try:
+        import _winreg as winreg
+    except ImportError:
+        import winreg
+    sub_key = r"Software\Microsoft\Microsoft SDKs\Windows"
+    with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, sub_key) as key:
+        name = "CurrentInstallFolder"
+        return winreg.QueryValueEx(key, name)[0]
+    return None
 
 try:
     from py2exe.build_exe import py2exe as py2exe_build
@@ -329,9 +348,7 @@ try:
             script = InnoScript(lib_dir, dist_dir, self.windows_exe_files,
                 self.console_exe_files, self.service_exe_files,
                 self.comserver_files, self.lib_files)
-            print("*** creating the inno setup script ***")
             script.create()
-            print("*** compiling the inno setup script ***")
             script.compile()
             script.sign()
 except ImportError:
