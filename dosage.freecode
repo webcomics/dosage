@@ -1,12 +1,12 @@
 Project: dosage
-Version: 1.7
-Release-Focus: Major feature enhancements
+Version: 1.8
+Release-Focus: Minor bugfixes
 Hide: N
 Website-URL: https://github.com/wummel/dosage
 Changelog-URL: https://github.com/wummel/dosage/blob/master/doc/changelog.txt
-Tar/GZ-URL: XXX
+Tar/GZ-URL: http://github.com/downloads/wummel/dosage/dosage-${version}.tar.gz
 GIT-Tree-URL: https://github.com/wummel/dosage.git
-Windows-installer-URL: XXX
+Windows-installer-URL: http://github.com/downloads/wummel/dosage/dosage-${version}.exe
 
-All of the comics have been fixed and the source code has been modernized.
-Robots.txt protocol support has been added.
+Dosage is now compatible with python requests module versions 1.x.
+Several comics have also been updated.

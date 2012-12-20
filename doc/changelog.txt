@@ -1,4 +1,4 @@
-Dosage 1.8 (released 19.12.2012)
+Dosage 1.8 (released 20.12.2012)
 
 Changes:
 - comics: Add compatibility to requests module >= 1.0.
