@@ -104,6 +104,14 @@ class AltermetaOld(Altermeta):
     prevSearch = compile(r'<a href="([^"]+)">Back')
 
 
+class AmazingSuperPowers(_BasicScraper):
+    latestUrl = 'http://www.amazingsuperpowers.com/'
+    stripUrl = latestUrl + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.amazingsuperpowers\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.amazingsuperpowers\.com/[^"]+)', after="prev"))
+    help = 'Index format: yyyy/mm/name'
+
+
 class Angels2200(_BasicScraper):
     latestUrl = 'http://www.janahoffmann.com/angels/'
     stripUrl = latestUrl + '%s'
