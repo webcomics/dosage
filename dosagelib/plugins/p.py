@@ -8,6 +8,14 @@ from ..helpers import bounceStarter, queryNamer, indirectStarter
 from ..util import tagre
 
 
+class PandyLand(_BasicScraper):
+    latestUrl = 'http://pandyland.net/'
+    stripUrl = latestUrl + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://pandyland\.net/comics/[^"]+)'))
+    prevSearch =  compile(tagre("a", "href", r'(http://pandyland\.net/\d+/)', after="prev"))
+    help = 'Index format: number'
+
+
 class PartiallyClips(_BasicScraper):
     latestUrl = 'http://partiallyclips.com/'
     stripUrl = latestUrl + '%s/'
