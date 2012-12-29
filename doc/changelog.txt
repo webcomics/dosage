@@ -1,3 +1,10 @@
+Dosage 1.9 (released xx.xx.xxxx)
+
+Features:
+- comics: Added AmazingSuperPowers strip.
+- comics: Added PandyLand strip.
+
+
 Dosage 1.8 (released 20.12.2012)
 
 Changes:
