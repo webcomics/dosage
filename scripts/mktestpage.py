@@ -45,10 +45,12 @@ def get_mtime (filename):
 
 
 def strdate(t):
+    """Get formatted date string."""
     return time.strftime("%d.%m.%Y", time.localtime(t))
 
 
 def get_test_name(line):
+    """Get scraper name from test output line."""
     classname = line.split('::')[1][4:]
     for scraper in get_scrapers():
         if scraper.__name__ == classname:
@@ -61,12 +63,14 @@ def get_test_name(line):
 
 
 def get_test(line):
+    """Get test name from test output line."""
     name, url = get_test_name(line)
     result = "OK" if line.startswith(". ") else "FAILED"
     return [name, url, result, ""]
 
 
 def get_content(filename):
+    """Get HTML content for test output."""
     tests = []
     with open(filename, "r") as f:
         print("Tests parsed: 0", end=" ", file=sys.stderr)
@@ -103,10 +107,12 @@ def get_content(filename):
 
 
 def quote_all(*args):
+    """CGI-escape all arguments for."""
     return tuple(cgi.escape(x, quote=True) for x in args)
 
 
 def main(args):
+    """Generate HTML output for test result."""
     filename = args[0]
     modified = get_mtime(filename)
     content = get_content(filename)

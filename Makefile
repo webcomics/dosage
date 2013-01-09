@@ -103,6 +103,7 @@ doccheck:
 	py-check-docstrings --force \
 	  dosagelib/*.py \
 	  dosage \
+	  scripts \
 	  *.py
 
 pyflakes:

@@ -7,6 +7,7 @@ import fileinput
 import sys
 
 def main(args):
+    """Remove lines after marker."""
     filename = args[0]
     marker = args[1]
     for line in fileinput.input(filename, inplace=1):

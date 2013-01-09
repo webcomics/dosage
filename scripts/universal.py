@@ -68,6 +68,7 @@ def get_results():
 
 
 def has_comic(name):
+    """Check if comic name already exists."""
     cname = ("Creators/%s" % name).lower()
     gname = ("GoComics/%s" % name).lower()
     for scraperclass in get_scrapers():
