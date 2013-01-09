@@ -9,7 +9,7 @@ import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dosagelib.util import tagre, getPageContent, unquote, unescape, asciify
-from scriptutil import contains_case_insensitive, capfirst, save_result, load_result
+from scriptutil import contains_case_insensitive, capfirst, save_result, load_result, truncate_name
 
 json_file = __file__.replace(".py", ".json")
 
@@ -203,7 +203,7 @@ def print_results(min_strips):
             continue
         path, num = entry
         if num >= min_strips:
-            print("add(%r, %r)" % (str(name), str(path)))
+            print("add(%r, %r)" % (str(truncate_name(name)), str(path)))
 
 
 if __name__ == '__main__':

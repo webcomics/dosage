@@ -38,5 +38,11 @@ def save_result(res, json_file):
 
 
 def load_result(json_file):
+    """Load contents of a json file."""
     with open(json_file, "rb") as f:
         return json.load(f)
+
+
+def truncate_name(text):
+    """Ensure the comic name does not exceed 100 characters."""
+    return text[:100]

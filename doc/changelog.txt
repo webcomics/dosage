@@ -4,6 +4,10 @@ Features:
 - comics: Added AmazingSuperPowers strip.
 - comics: Added PandyLand strip.
 
+Fixes:
+- scripts: Ensure the generated comic names do not exceed 100 characters so they do
+  not cause problems with path length restrictions.
+
 
 Dosage 1.8 (released 20.12.2012)
 

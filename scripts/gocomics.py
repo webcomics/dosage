@@ -10,7 +10,7 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dosagelib.util import tagre, getPageContent, asciify, unescape
 from dosagelib.scraper import get_scrapers
-from scriptutil import contains_case_insensitive, capfirst, save_result, load_result
+from scriptutil import contains_case_insensitive, capfirst, save_result, load_result, truncate_name
 
 json_file = __file__.replace(".py", ".json")
 
@@ -91,7 +91,7 @@ def print_results(args):
             prefix = '#'
         else:
             prefix = ''
-        print("%sadd(%r, %r)" % (prefix, str(name), str(shortname)))
+        print("%sadd(%r, %r)" % (prefix, str(truncate_name(name)), str(shortname)))
 
 
 if __name__ == '__main__':

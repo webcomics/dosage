@@ -11,7 +11,7 @@ import urlparse
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dosagelib.util import getPageContent, asciify, unescape, tagre, unquote
 from dosagelib.scraper import get_scrapers
-from scriptutil import contains_case_insensitive, remove_html_tags, capfirst, compact_whitespace, save_result, load_result
+from scriptutil import contains_case_insensitive, remove_html_tags, capfirst, compact_whitespace, save_result, load_result, truncate_name
 
 json_file = __file__.replace(".py", ".json")
 
@@ -306,7 +306,7 @@ def print_results(args):
         else:
             prefix = ''
         print("%sadd(%r, %r, %r, %s, %s)" % (
-          prefix, str(name), str(url), desc, adult, bounce
+          prefix, str(truncate_name(name)), str(url), desc, adult, bounce
         ))
 
 

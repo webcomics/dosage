@@ -10,7 +10,7 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dosagelib.util import getPageContent, asciify, unescape
 from dosagelib.scraper import get_scrapers
-from scriptutil import contains_case_insensitive, capfirst, save_result, load_result
+from scriptutil import contains_case_insensitive, capfirst, save_result, load_result, truncate_name
 
 json_file = __file__.replace(".py", ".json")
 
@@ -79,14 +79,14 @@ def has_comic(name):
 
 def print_results(args):
     """Print all comics that have at least the given number of minimum comic strips."""
-    for name, shortname in sorted(load_result().items()):
+    for name, shortname in sorted(load_result(json_file).items()):
         if name in exclude_comics:
             continue
         if has_comic(name):
             prefix = '#'
         else:
             prefix = ''
-        print("%sadd(%r, %r)" % (prefix, str(name), str(shortname)))
+        print("%sadd(%r, %r)" % (prefix, str(truncate_name(name)), str(shortname)))
 
 
 if __name__ == '__main__':
