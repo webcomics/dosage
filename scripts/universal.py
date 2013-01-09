@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Copyright (C) 2012 Bastian Kleineidam
+# Copyright (C) 2012-2013 Bastian Kleineidam
 """
 Script to get universal comics and save the info in a JSON file for further processing.
 """
