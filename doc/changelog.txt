@@ -8,6 +8,8 @@ Features:
 
 Changes:
 - comics: CyanideAndHappiness image filename now has the strip number prefixed.
+- comics: Indexed retrieval can now retrieve all (-a) or some (-n)
+  strips, not only one.
 
 Fixes:
 - comics: Fixed LeastICouldDo image URL.

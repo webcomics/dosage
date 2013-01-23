@@ -85,7 +85,7 @@ class _BasicScraper(object):
         if self.indexes:
             for index in self.indexes:
                 url = self.stripUrl % index
-                for strip in self.getStripsFor(url, 1):
+                for strip in self.getStripsFor(url, maxstrips):
                     yield strip
         else:
             url = self.getLatestUrl()
