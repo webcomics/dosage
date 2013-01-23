@@ -14,6 +14,8 @@ Changes:
 Fixes:
 - comics: Fixed LeastICouldDo image URL.
   Closes: GH bug #1
+- comics: Fix URL norming.
+  Closes: GH bug #2
 - documentation: Fix wrong option name: it's -a instead of -c.
   Closes: GH bug #3
 - comics: Fix UnboundLocalError when using indexed retrieval.

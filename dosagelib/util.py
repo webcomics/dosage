@@ -33,9 +33,19 @@ MaxRetries = 3
 # Default connection timeout
 ConnectionTimeoutSecs = 60
 
+# The character set to encode non-ASCII characters in a URL. See also
+# http://tools.ietf.org/html/rfc2396#section-2.1
+# Note that the encoding is not really specified, but most browsers
+# encode in UTF-8 when no encoding is specified by the HTTP headers,
+# else they use the page encoding for followed link. See als
+# http://code.google.com/p/browsersec/wiki/Part1#Unicode_in_URLs
+UrlEncoding = "utf-8"
+
+
 if hasattr(requests, 'adapters'):
     # requests >= 1.0
     requests.adapters.DEFAULT_RETRIES = MaxRetries
+
 
 def tagre(tag, attribute, value, quote='"', before="", after=""):
     """Return a regular expression matching the given HTML tag, attribute
@@ -77,7 +87,7 @@ def case_insensitive_re(name):
     insensitive.
     @param name: the name to make case insensitive
     @ptype name: string
-    @return: the case insenstive regex
+    @return: the case insensitive regex
     @rtype: string
     """
     return "".join("[%s%s]" % (c.lower(), c.upper()) for c in name)
@@ -168,9 +178,6 @@ def unescape(text):
                 text = unichr(name2codepoint[text[1:-1]])
             except KeyError:
                 pass
-        if isinstance(text, unicode):
-            text = text.encode('utf-8')
-            text = urllib2.quote(text, safe=';/?:@&=+$,')
         return text
     return re.sub(r"&#?\w+;", _fixup, text)
 
@@ -179,6 +186,8 @@ def normaliseURL(url):
     """Removes any leading empty segments to avoid breaking urllib2; also replaces
     HTML entities and character references.
     """
+    if isinstance(url, unicode):
+        url = url.encode(UrlEncoding, 'ignore')
     # XXX: brutal hack
     url = unescape(url)
 
@@ -186,7 +195,7 @@ def normaliseURL(url):
     segments = pu[2].split('/')
     while segments and segments[0] in ('', '..'):
         del segments[0]
-    pu[2] = '/' + '/'.join(segments).replace(' ', '%20')
+    pu[2] = quote(unquote('/' + '/'.join(segments)))
     # remove leading '&' from query
     if pu[4].startswith('&'):
         pu[4] = pu[4][1:]
@@ -389,9 +398,10 @@ def unquote(text):
     return text
 
 
-def quote(text):
+def quote(text, safechars='/'):
     """Percent-encode given text."""
-    return urllib.quote(text)
+    return urllib.quote(text, safechars)
+
 
 def strsize (b):
     """Return human representation of bytes b. A negative number of bytes
