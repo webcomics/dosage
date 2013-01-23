@@ -6,13 +6,13 @@ MAINTAINER:=$(shell $(PYTHON) setup.py --maintainer)
 AUTHOR:=$(shell $(PYTHON) setup.py --author)
 APPNAME:=$(shell $(PYTHON) setup.py --name)
 LAPPNAME:=$(shell echo $(APPNAME)|tr "[A-Z]" "[a-z]")
-ARCHIVE_SOURCE:=$(LAPPNAME)-$(VERSION).tar.gz
+ARCHIVE_SOURCE:=$(LAPPNAME)-$(VERSION).tar.xz
 ARCHIVE_WIN32:=$(LAPPNAME)-$(VERSION).exe
 GITUSER:=wummel
 GITREPO:=$(LAPPNAME)
 HOMEPAGE:=$(HOME)/public_html/$(LAPPNAME).git
 DEBUILDDIR:=$(HOME)/projects/debian/unofficial
-DEBORIGFILE:=$(DEBUILDDIR)/$(LAPPNAME)_$(VERSION).orig.tar.gz
+DEBORIGFILE:=$(DEBUILDDIR)/$(LAPPNAME)_$(VERSION).orig.tar.xz
 DEBPACKAGEDIR:=$(DEBUILDDIR)/$(LAPPNAME)-$(VERSION)
 PY_FILES_DIRS := dosage dosagelib scripts tests
 PY2APPOPTS ?=
@@ -36,7 +36,7 @@ chmod:
 
 dist:
 	[ -d dist ] || mkdir dist
-	git archive --format=tar --prefix=$(LAPPNAME)-$(VERSION)/ HEAD | gzip -9 > dist/$(ARCHIVE_SOURCE)
+	git archive --format=tar --prefix=$(LAPPNAME)-$(VERSION)/ HEAD | xz > dist/$(ARCHIVE_SOURCE)
 	[ ! -f ../$(ARCHIVE_WIN32) ] || cp ../$(ARCHIVE_WIN32) dist
 
 sign:
