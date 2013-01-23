@@ -76,7 +76,7 @@ class _BasicScraper(object):
         if maxstrips:
             msg = 'Retrieving %d strips' % maxstrips
         elif self.indexes:
-            msg += "Retrieving %d strips for indexes %s" % (len(self.indexes), self.indexes)
+            msg = "Retrieving %d strips for indexes %s" % (len(self.indexes), self.indexes)
         else:
             msg = 'Retrieving all strips'
         if self.adult:

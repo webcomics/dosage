@@ -10,6 +10,8 @@ Changes:
 - comics: CyanideAndHappiness image filename now has the strip number prefixed.
 
 Fixes:
+- comics: Fix UnboundLocalError when using indexed retrieval.
+  Closes: GH bug #4
 - scripts: Ensure the generated comic names do not exceed 100 characters so
   they do not cause problems with path length restrictions.
 - installation: Set correct homepage url so "pip install dosage" works.
