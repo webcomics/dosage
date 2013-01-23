@@ -10,6 +10,8 @@ Changes:
 - comics: CyanideAndHappiness image filename now has the strip number prefixed.
 
 Fixes:
+- documentation: Fix wrong option name: it's -a instead of -c.
+  Closes: GH bug #3
 - comics: Fix UnboundLocalError when using indexed retrieval.
   Closes: GH bug #4
 - scripts: Ensure the generated comic names do not exceed 100 characters so

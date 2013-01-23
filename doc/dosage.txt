@@ -116,7 +116,7 @@ EXAMPLES
               dosage pennyarcade:2004-07-22
        Retrieve  Calvin  and  Hobbes  strips  from a given index going
        backwards to the beginning until an existing file is found:
-              dosage -c calvinandhobbes:20120722
+              dosage -a calvinandhobbes:20120722
 
 ENVIRONMENT
        HTTP_PROXY
