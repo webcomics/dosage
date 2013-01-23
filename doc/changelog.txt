@@ -1,15 +1,17 @@
 Dosage 1.9 (released xx.xx.xxxx)
 
 Features:
-- comics: Added AmazingSuperPowers strip.
-- comics: Added PandyLand strip.
+- comics: Added AmazingSuperPowers comic strip.
+- comics: Added PandyLand comic strip.
+- comics: Added all comic strips from Arcamax (eg. including
+  Hagar the horrible).
 
 Changes:
 - comics: CyanideAndHappiness image filename now has the strip number prefixed.
 
 Fixes:
-- scripts: Ensure the generated comic names do not exceed 100 characters so they do
-  not cause problems with path length restrictions.
+- scripts: Ensure the generated comic names do not exceed 100 characters so
+  they do not cause problems with path length restrictions.
 
 
 Dosage 1.8 (released 20.12.2012)
