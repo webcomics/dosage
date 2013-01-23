@@ -10,6 +10,8 @@ Changes:
 - comics: CyanideAndHappiness image filename now has the strip number prefixed.
 
 Fixes:
+- comics: Fixed LeastICouldDo image URL.
+  Closes: GH bug #1
 - documentation: Fix wrong option name: it's -a instead of -c.
   Closes: GH bug #3
 - comics: Fix UnboundLocalError when using indexed retrieval.
