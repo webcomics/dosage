@@ -4,6 +4,9 @@ Features:
 - comics: Added AmazingSuperPowers strip.
 - comics: Added PandyLand strip.
 
+Changes:
+- comics: CyanideAndHappiness image filename now has the strip number prefixed.
+
 Fixes:
 - scripts: Ensure the generated comic names do not exceed 100 characters so they do
   not cause problems with path length restrictions.

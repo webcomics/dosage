@@ -179,11 +179,18 @@ class CatAndGirl(_BasicScraper):
 
 
 class CyanideAndHappiness(_BasicScraper):
-    latestUrl = 'http://www.explosm.net/comics/'
-    stripUrl = latestUrl + '%s/'
+    _latestUrl = 'http://www.explosm.net/comics/'
+    starter = bounceStarter(_latestUrl, compile(tagre("a", "href", r"(/comics/\d+/)", before="next")))
+    stripUrl = _latestUrl + '%s/'
     imageSearch = compile(tagre("img", "src", r'(http://(?:www\.)?explosm\.net/db/files/Comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/comics/\d+/)', before="prev"))
     help = 'Index format: n (unpadded)'
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        imgname = imageUrl.split('/')[-1]
+        imgnum = pageUrl.split('/')[-2]
+        return '%s_%s' % (imgnum, imgname)
 
 
 class CrimsonDark(_BasicScraper):
