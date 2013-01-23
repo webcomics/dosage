@@ -8,11 +8,12 @@ Features:
 
 Changes:
 - comics: CyanideAndHappiness image filename now has the strip number prefixed.
-- installation: The source package is now in .tar.xz format.
 
 Fixes:
 - scripts: Ensure the generated comic names do not exceed 100 characters so
   they do not cause problems with path length restrictions.
+- installation: Set correct homepage url so "pip install dosage" works.
+  Closes: GH bug #5
 
 
 Dosage 1.8 (released 20.12.2012)
