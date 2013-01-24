@@ -49,7 +49,7 @@ upload:
 	  dist/$(ARCHIVE_SOURCE).asc dist/$(ARCHIVE_WIN32).asc
 
 testresults:
-	scripts/mktestpage.py testresults.txt > $(HOMEPAGE)/content/testresults.html
+	scripts/mktestpage.py testresults.txt $(HOMEPAGE)/content
 
 homepage:
 # update metadata
