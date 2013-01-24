@@ -114,9 +114,15 @@ EXAMPLES
 
        Retrieve the Penny Arcade strip for a given index:
               dosage pennyarcade:2004-07-22
+
        Retrieve  Calvin  and  Hobbes  strips  from a given index going
-       backwards to the beginning until an existing file is found:
+       backwards to the beginning.
               dosage -a calvinandhobbes:20120722
+
+       On Unix, xargs(1) can download several comic strips  in  paral‐
+       lel, for example using up to 4 processes:
+              cd  Comics && find . -type d | xargs -n1 -P4 dosage -b .
+              -v
 
 ENVIRONMENT
        HTTP_PROXY

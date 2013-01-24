@@ -5,6 +5,8 @@ Features:
 - comics: Added PandyLand comic strip.
 - comics: Added all comic strips from Arcamax (eg. including
   Hagar the horrible).
+- documentation: Document parallel download option with xargs
+  on Unix systems.
 
 Changes:
 - comics: CyanideAndHappiness image filename now has the strip number prefixed.

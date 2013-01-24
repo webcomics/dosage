@@ -128,10 +128,17 @@ Retrieve the Penny Arcade strip for a given index:
 .RS
 .B dosage pennyarcade:2004\-07\-22
 .RE
+.PP
 Retrieve Calvin and Hobbes strips from a given index going backwards to
-the beginning until an existing file is found:
+the beginning.
 .RS
 .B dosage \-a calvinandhobbes:20120722
+.RE
+.PP
+On Unix, \fBxargs(1)\fP can download several comic strips in parallel,
+for example using up to 4 processes:
+.RS
+.B cd Comics && find . -type d | xargs -n1 -P4 dosage -b . -v
 .RE
 .SH ENVIRONMENT
 .IP HTTP_PROXY

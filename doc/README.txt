@@ -53,6 +53,11 @@ strip of all of them:
 
 `$ dosage @`
 
+On Unix, ``xargs`` can download several comic strips in parallel,
+for example using up to 4 processes:
+
+`$ cd Comics && find . -type d | xargs -n1 -P4 dosage -b . -v`
+
 For advanced options and features execute `dosage -h` or look at the dosage
 manual page.
 
