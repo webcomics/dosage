@@ -3,7 +3,7 @@
 # Copyright (C) 2012-2013 Bastian Kleineidam
 from __future__ import division, print_function
 
-import urllib, urllib2, urlparse
+import urllib, urlparse
 import robotparser
 import requests
 import sys
