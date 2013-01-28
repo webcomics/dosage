@@ -5,6 +5,7 @@ import sys
 import os
 import time
 import cgi
+import codecs
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dosagelib.scraper import get_scrapers
 from dosagelib.configuration import Version as DosageVersion
@@ -17,7 +18,7 @@ class Status:
     error = "error"
     orphan = "orphan"
 
-indextemplate = """
+indextemplate = u"""
 ---
 extends: base.j2
 title: Dosage comic list
@@ -52,7 +53,7 @@ window.onload = function() {
 {%% endblock content %%}
 """
 
-comic_template = """
+comic_template = u"""
 ---
 extends: base.j2
 title: Dosage comic %(name)s
@@ -90,12 +91,12 @@ title: Dosage comic %(name)s
 {%% endblock content %%}
 """
 
-entrytemplate_url = """
+entrytemplate_url = u"""
 <a href="%(url)s" title="%(title)s" class="%(css)s">%(name)s</a>
 <div class="g-plusone" data-size="medium" data-annotation="bubble" data-href="%(url)s"></div>
 """
 
-entrytemplate_nourl = """
+entrytemplate_nourl = u"""
 <span title="%(title)s" class="%(css)s">%(name)s</span>
 """
 
@@ -127,9 +128,11 @@ def get_testinfo(filename, modified):
     orphaned.
     @return: {name -> {
                 "status": Status.*,
-                "url": string or None,
-                "description": string or None,
+                "url": string,
+                "description": string,
                 "error": string or None,
+                "since": string,
+                "adult": bool,
                }
              }
     """
@@ -168,7 +171,7 @@ def get_testentry(line):
     entry = {
         "status": Status.ok if line.startswith(". ") else Status.error,
         "name": name,
-        "url": None,
+        "url": "",
         "description": scraper.description,
         "error": None,
         "adult": scraper.adult,
@@ -231,7 +234,7 @@ def write_html(testinfo, outputdir, modified):
     date = strdate(modified)
     args = {"date": quote(date), "content": content}
     fname = os.path.join(outputdir, "comic_index.html")
-    with open(fname, 'w') as fp:
+    with codecs.open(fname, 'w', 'utf-8') as fp:
         fp.write(indextemplate % args)
     comicdir = os.path.join(outputdir, "comics")
     if not os.path.isdir(comicdir):
@@ -252,7 +255,7 @@ def write_html_comic(key, entry, outputdir, date):
         "date": quote(date),
     }
     fname = os.path.join(outputdir, key+".html")
-    with open(fname, 'w') as fp:
+    with codecs.open(fname, 'w', 'utf-8') as fp:
         fp.write(comic_template % args)
 
 
