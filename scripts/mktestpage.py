@@ -14,6 +14,7 @@ from scriptutil import load_result, save_result
 json_file = __file__.replace(".py", ".json")
 
 class Status:
+    """Status of a comic strip."""
     ok = "ok"
     error = "error"
     orphan = "orphan"
@@ -191,6 +192,7 @@ def orphan_entries(keys, testinfo):
 
 
 def update_testentry(key, entry, testinfo):
+    """Update one entry with testinfo information."""
     if key not in testinfo:
         # add dosage version for this comic
         # XXX replace this after next release
