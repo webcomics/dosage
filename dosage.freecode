@@ -1,6 +1,6 @@
 Project: dosage
-Version: 1.8
-Release-Focus: Minor bugfixes
+Version: 1.9
+Release-Focus: Minor feature enhancements
 Hide: N
 Website-URL: https://github.com/wummel/dosage
 Changelog-URL: https://github.com/wummel/dosage/blob/master/doc/changelog.txt
@@ -8,5 +8,5 @@ Tar/GZ-URL: http://github.com/downloads/wummel/dosage/dosage-${version}.tar.gz
 GIT-Tree-URL: https://github.com/wummel/dosage.git
 Windows-installer-URL: http://github.com/downloads/wummel/dosage/dosage-${version}.exe
 
-Dosage is now compatible with python requests module versions 1.x.
-Several comics have also been updated.
+The AmazingSuperPowers, PandyLand and all Arcamax comic strips are
+now supported. Several bugs have also been fixed.
