@@ -75,12 +75,12 @@ class _BasicScraper(object):
         """Get all comic strips."""
         if maxstrips:
             msg = 'Retrieving %d strips' % maxstrips
-        elif self.indexes:
-            msg = "Retrieving %d strips for indexes %s" % (len(self.indexes), self.indexes)
         else:
             msg = 'Retrieving all strips'
+        if self.indexes:
+            msg += " for indexes %s" % self.indexes
         if self.adult:
-            msg += " (includes adult content)"
+            msg += " (including adult content)"
         out.info(msg)
         if self.indexes:
             for index in self.indexes:
