@@ -8,6 +8,14 @@ from ..scraper import _BasicScraper
 from ..util import tagre
 
 
+class VampireCheerleaders(_BasicScraper):
+    latestUrl = 'http://www.vampirecheerleaders.net/'
+    stripUrl = latestUrl + 'strips-vc/%s'
+    imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.vampirecheerleaders\.net/strips-vc/[^"]+)', before="cndprev"))
+    help = 'Index format: name'
+
+
 class Vendetta(_BasicScraper):
     latestUrl = 'http://www.vendettacomic.com/'
     stripUrl = latestUrl + 'archive.php?date=%s.jpg'
