@@ -79,6 +79,14 @@ class GoneWithTheBlastwave(_BasicScraper):
         return '%02d' % int(compile(r'nro=(\d+)').search(pageUrl).group(1))
 
 
+class GrrlPower(_BasicScraper):
+    latestUrl = 'http://www.grrlpowercomic.com/'
+    stripUrl = latestUrl + 'archives/%s'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.grrlpowercomic\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.grrlpowercomic\.com/archives/\d+)', after="navi-prev"))
+    help = 'Index format: number'
+
+
 class GunnerkrigCourt(_BasicScraper):
     latestUrl = 'http://www.gunnerkrigg.com/'
     stripUrl = latestUrl + '?p=%s'
