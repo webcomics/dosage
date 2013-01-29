@@ -80,11 +80,11 @@ class GoneWithTheBlastwave(_BasicScraper):
 
 
 class GunnerkrigCourt(_BasicScraper):
-    latestUrl = 'http://www.gunnerkrigg.com/index2.php'
-    stripUrl = 'http://www.gunnerkrigg.com/archive_page.php?comicID=%s'
-    imageSearch = compile(r'<img src="(.+?//comics/.+?)"')
-    prevSearch = compile(r'<.+?(/archive_page.php\?comicID=.+?)".+?prev')
-    help = 'Index format: n'
+    latestUrl = 'http://www.gunnerkrigg.com/'
+    stripUrl = latestUrl + '?p=%s'
+    imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(\?p=\d+)') + tagre("img", "src", "http://www\.gunnerkrigg\.com/images/prev_a\.jpg"))
+    help = 'Index format: number'
 
 
 class Gunshow(_BasicScraper):
