@@ -143,6 +143,14 @@ class SpareParts(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
+class Spinnerette(_BasicScraper):
+    latestUrl = 'http://www.spinnyverse.com/'
+    stripUrl = latestUrl + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.spinnyverse\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.spinnyverse\.com/[^"]+)', before="Previous"))
+    help = 'Index format: number'
+
+
 class SPQRBlues(_BasicScraper):
     latestUrl = 'http://spqrblues.com/IV/'
     stripUrl = latestUrl + '?p=%s'

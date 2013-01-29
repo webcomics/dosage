@@ -4,6 +4,7 @@ Features:
 - comics: Added SequentialArt comic strip.
 - comics: Added VampireCheerleader comic strip.
 - comics: Added GrrlPower comic strip.
+- comics: Added Spinnerette comic strip.
 
 Fixes:
 - comics: Fixed Gunnerkrigcourt comic strip.
