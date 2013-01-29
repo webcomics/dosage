@@ -9,8 +9,8 @@ Dosage is designed to keep a local copy of specific webcomics
 and other picture-based content such as Picture of the Day sites.
 With the dosage commandline script you can get the latest strip of
 webcomic, or catch-up to the last strip downloaded, or download a
-strip for a particular date/index (except if the webcomic's site layout
-makes this impossible).
+strip for a particular date/index (if the webcomic's site layout
+makes this possible).
 
 Notice
 -------
@@ -19,11 +19,11 @@ it is purely for personal use. Please be aware that by making downloaded
 strips publically available (without the explicit permission of the author)
 you may be infringing upon various copyrights.
 
-Additionally, dosage respects the robots.txt exclusion protocol. This
+Additionally, Dosage respects the robots.txt exclusion protocol. This
 makes sure no content is accessed in an automatic way without consent
 by the publishers.
 
-If you are a publisher of comics and want dosage to access your files,
+If you are a publisher of comics and want Dosage to access your files,
 add the following entry to your robotst.txt file:
 
 ```
@@ -61,19 +61,16 @@ for example using up to 4 processes:
 For advanced options and features execute `dosage -h` or look at the dosage
 manual page.
 
-Dependencies
--------------
-Python version 2.7 or higher, which can be downloaded
-from http://www.python.org/
-
-Also the python-requests module must be installed, which can be downloaded
-from http://docs.python-requests.org/en/latest/
-
 Installation
 -------------
-You can invoke Dosage directly from the source code as "./dosage". Alternatively,
-you can install Dosage using python distutils by invoking setup.py in
-the root of the distribution. For example:
+The most convenient method is to use pip, which installs all dependencies
+automatically:
+
+`pip install dosage`
+
+If you install Dosage from source, the `dosage` script can be run directly with
+`./dosage`. Alternatively, you can install Dosage using python distutils by invoking
+setup.py in the root of the distribution. For example:
 
 `python setup.py install`
 
@@ -81,9 +78,13 @@ or if you do not have root permissions:
 
 `python setup.py install --home=$HOME`
 
-Another option is to use pip:
+Dependencies
+-------------
+Python version 2.7 or higher, which can be downloaded
+from http://www.python.org/
 
-`pip install dosage`
+Also the python-requests module is used, which can be downloaded
+from http://docs.python-requests.org/en/latest/
 
 Technical Description
 ----------------------
@@ -93,9 +94,9 @@ do most of the grunt work.
 For each webcomic Dosage has a plugin module, found in the "plugins"
 subdirectory of the dosagelib directory. Each module is a subclass of
 the _BasicComic class and specifies where to download its comic images.
-Some comic syndicates (ucomics for example) have a standard layout for all
-comics. For such cases there are general base classes derived from _BasicComic
-which help define the plugins for all comics of this syndicate.
+Some comic syndicates (GoComics for example) have a standard layout for all
+comics. For such cases a generator function creates all _BasicComic class
+instances from a given list of comic strips.
 
 Extending Dosage
 -----------------
