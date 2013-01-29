@@ -1,3 +1,12 @@
+Dosage 1.10 (released xx.xx.2013)
+
+Features:
+- comics: Added SequentialArt comic strip.
+
+Fixes:
+- comics: Fixed Gunnerkrigcourt comic strip.
+
+
 Dosage 1.9 (released 28.1.2013)
 
 Features:

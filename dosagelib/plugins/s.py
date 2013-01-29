@@ -58,6 +58,15 @@ class SchoolBites(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
+class SequentialArt(_BasicScraper):
+    latestUrl = 'http://www.collectedcurios.com/sequentialart.php'
+    stripUrl = latestUrl + '?s=%s'
+    imageSearch = compile(tagre("img", "src", r'([^"]+)', before="strip"))
+    prevSearch = compile(tagre("a", "href", r'(/sequentialart\.php\?s=\d+)')
+      + tagre("img", "src", "Nav_BackOne\.gif"))
+    help = 'Index format: name'
+
+
 class Sheldon(_BasicScraper):
     latestUrl = 'http://www.sheldoncomics.com/'
     stripUrl = latestUrl + 'archive/%s.html'
