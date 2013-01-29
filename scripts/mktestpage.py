@@ -215,7 +215,7 @@ def get_html_index(testinfo):
         if entry["error"]:
             title = entry["error"]
         elif entry["description"]:
-            title = entry["description"]
+            title = entry["description"][:100]
         else:
             title = entry["name"]
         args = {
@@ -262,8 +262,8 @@ def write_html_comic(key, entry, outputdir, date):
 
 
 def quote(arg):
-    """CGI-escape argument."""
-    return cgi.escape(arg, quote=True)
+    """CGI-escape and jinja-escape the argument."""
+    return cgi.escape(arg.replace('{', '').replace('}', ''), quote=True)
 
 
 def main(args):
