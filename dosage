@@ -158,13 +158,16 @@ def run(options, comics):
 def doList(columnList):
     """List available comics."""
     out.info('Available comic scrapers:')
+    out.info('Comics marked with [A] require age confirmation with the --adult option.')
     scrapers = getScrapers(['@@'])
-    if columnList:
-        num = doColumnList(scrapers)
-    else:
-        num = doSingleList(scrapers)
-    out.info('%d supported comics.' % num)
-    out.info('comics marked with [A] require age confirmation with the --adult option.')
+    try:
+        if columnList:
+            num = doColumnList(scrapers)
+        else:
+            num = doSingleList(scrapers)
+        out.info('%d supported comics.' % num)
+    except IOError:
+        pass
     return 0
 
 
