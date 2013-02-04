@@ -17,7 +17,7 @@ def parse_strdate(strdate):
 _imageSearch = compile(tagre("img", "src", r'(http://assets\.amuniversal\.com/[^"]+)') + r'\s+<h4>published')
 
 def add(name, shortname):
-    latestUrl = 'http://www.universaluclick.com%s' % shortname
+    url = 'http://www.universaluclick.com%s' % shortname
     classname = 'Universal_%s' % name
 
     @classmethod
@@ -35,8 +35,8 @@ def add(name, shortname):
 
     globals()[classname] = make_scraper(classname,
         name='Universal/' + name,
-        latestUrl = latestUrl,
-        stripUrl = latestUrl + '%s/',
+        url = url,
+        stripUrl = url + '%s/',
         imageSearch = _imageSearch,
         multipleImagesPerStrip = True,
         prevSearch = None,

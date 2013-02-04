@@ -6,8 +6,8 @@ from ..util import tagre
 
 
 class HorribleVille(_BasicScraper):
-    latestUrl = 'http://horribleville.com/'
-    stripUrl = latestUrl + 'd/%s.html'
+    url = 'http://horribleville.com/'
+    stripUrl = url + 'd/%s.html'
     imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/d/[^"]+)') + tagre("img", "src", r'/images/previous\.png'))
     help = 'Index format: yyyymmdd'

@@ -9,12 +9,12 @@ _prevSearch = compile(tagre("a", "href", r'(\?id=\d+)') + tagre("img", "src", r'
 _imageSearch = compile(tagre("img", "src", r'([^"]+/img/comic/[^"]+)', after="comicimg"))
 
 def add(name, shortname):
-    latestUrl = 'http://%s.webcomic.eu/' % shortname
+    url = 'http://%s.webcomic.eu/' % shortname
     classname = 'WebcomicEu_%s' % name
     globals()[classname] = make_scraper(classname,
         name = 'WebcomicEu/' + name,
-        latestUrl = latestUrl,
-        stripUrl = latestUrl + '?id=%s',
+        url = url,
+        stripUrl = url + '?id=%s',
         imageSearch = _imageSearch,
         prevSearch = _prevSearch,
         help = 'Index format: number',

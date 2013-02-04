@@ -40,6 +40,7 @@ def add(name, path):
 
     globals()[classname] = make_scraper(classname,
         name = 'DrunkDuck/' + name,
+        url = _url,
         starter = _starter,
         stripUrl = _url + '%s/',
         imageSearch = _imageSearch,

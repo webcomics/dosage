@@ -10,16 +10,17 @@ from ..util import getQueryParams, tagre
 
 
 class Undertow(_BasicScraper):
-    stripUrl = 'http://undertow.dreamshards.org/%s'
+    url = 'http://undertow.dreamshards.org/'
+    stripUrl = url + '%s'
     imageSearch = compile(tagre("img", "src", r'([^"]+\.jpg)'))
     prevSearch = compile(r'href="(.+?)".+?teynpoint')
     help = 'Index format: good luck !'
-    starter = indirectStarter('http://undertow.dreamshards.org/',
+    starter = indirectStarter(url,
                               compile(r'href="(.+?)".+?Most recent page'))
 
 
 class UnicornJelly(_BasicScraper):
-    latestUrl = 'http://unicornjelly.com/uni666.html'
+    url = 'http://unicornjelly.com/uni666.html'
     stripUrl = 'http://unicornjelly.com/uni%s.html'
     imageSearch = compile(r'</TABLE>(?:<FONT COLOR="BLACK">)?<IMG SRC="(images/[^"]+)" WIDTH=')
     prevSearch = compile(r'<A HREF="(uni\d{3}[bcs]?\.html)">(<FONT COLOR="BLACK">)?<IMG SRC="images/back00\.gif"')
@@ -28,8 +29,9 @@ class UnicornJelly(_BasicScraper):
 
 # XXX disallowed by robots.txt
 class _UserFriendly(_BasicScraper):
-    starter = bounceStarter('http://ars.userfriendly.org/cartoons/?mode=classic', compile(r'<area shape="rect" href="(/cartoons/\?id=\d{8}&mode=classic)" coords="[\d, ]+?" alt="">'))
-    stripUrl = 'http://ars.userfriendly.org/cartoons/?id=%s&mode=classic'
+    url = 'http://ars.userfriendly.org/cartoons/?mode=classic'
+    stripUrl = url + '&id=%s'
+    starter = bounceStarter(url, compile(r'<area shape="rect" href="(/cartoons/\?id=\d{8}&mode=classic)" coords="[\d, ]+?" alt="">'))
     imageSearch = compile(r'<img border="0" src="\s*(http://www.userfriendly.org/cartoons/archives/\d{2}\w{3}/.+?\.gif)"')
     prevSearch = compile(r'<area shape="rect" href="(/cartoons/\?id=\d{8}&mode=classic)" coords="[\d, ]+?" alt="Previous Cartoon">')
     help = 'Index format: yyyymmdd'

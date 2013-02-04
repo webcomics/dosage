@@ -15,7 +15,7 @@ def add(name, host):
 
     globals()[classname] = make_scraper(classname,
         name='SnafuComics/%s' % name,
-        latestUrl = baseUrl,
+        url = baseUrl,
         stripUrl = baseUrl + '?comic_id=%s',
         imageSearch = _imageSearch,
         prevSearch = _prevSearch,

@@ -10,9 +10,9 @@ from ..util import tagre
 
 
 class xkcd(_BasicScraper):
-    baseUrl = 'http://xkcd.com/'
-    starter = bounceStarter(baseUrl, compile(tagre("a", "href", r'(/\d+/)', before="next")))
-    stripUrl = baseUrl + '%s/'
+    url = 'http://xkcd.com/'
+    starter = bounceStarter(url, compile(tagre("a", "href", r'(/\d+/)', before="next")))
+    stripUrl = url + '%s/'
     imageSearch = compile(tagre("img", "src", r'(http://imgs\.xkcd\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/\d+/)', before="prev"))
     help = 'Index format: n (unpadded)'

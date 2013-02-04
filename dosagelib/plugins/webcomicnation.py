@@ -14,7 +14,7 @@ def add(name, subpath):
     classname = 'WebcomicsNation_%s' % name
     globals()[classname] = make_scraper(classname,
         name = 'WebcomicsNation/' + name,
-        latestUrl = baseUrl + subpath,
+        url = baseUrl + subpath,
         stripUrl = baseUrl + '?view=archive&amp;chapter=%s',
         imageSearch = _imageSearch,
         multipleImagesPerStrip = True,

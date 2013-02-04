@@ -10,40 +10,40 @@ from ..helpers import indirectStarter
 
 
 class FalconTwin(_BasicScraper):
-    latestUrl = 'http://www.falcontwin.com/'
-    stripUrl = latestUrl + 'index.html?strip=%s'
+    url = 'http://www.falcontwin.com/'
+    stripUrl = url + 'index.html?strip=%s'
     imageSearch = compile(r'"(strips/.+?)"')
     prevSearch = compile(r'"prev"><a href="(index.+?)"')
     help = 'Index format: nnn'
 
 
 class FauxPas(_BasicScraper):
-    latestUrl = 'http://www.ozfoxes.net/cgi/pl-fp1.cgi'
-    stripUrl = latestUrl + '?%s'
+    url = 'http://www.ozfoxes.net/cgi/pl-fp1.cgi'
+    stripUrl = url + '?%s'
     imageSearch = compile(r'<img .*src="(.*fp/fp.*(png|jpg|gif))"')
     prevSearch = compile(r'<a href="(pl-fp1\.cgi\?\d+)">Previous Strip')
     help = 'Index format: nnn'
 
 
 class FeyWinds(_BasicScraper):
+    url = 'http://kitsune.rydia.net/index.html'
     stripUrl = 'http://kitsune.rydia.net/comic/page.php?id=%s'
     imageSearch = compile(r"(../comic/pages//.+?)'")
     prevSearch = compile(r"(page.php\?id=.+?)'.+?navprevious.png")
     help = 'Index format: n (unpadded)'
-    starter = indirectStarter('http://kitsune.rydia.net/index.html',
-                              compile(r'(comic/page.php\?id.+?)"'))
+    starter = indirectStarter(url, compile(r'(comic/page.php\?id.+?)"'))
 
 
 class FilibusterCartoons(_BasicScraper):
-    latestUrl = 'http://www.filibustercartoons.com/'
-    stripUrl = latestUrl + 'index.php/%s'
+    url = 'http://www.filibustercartoons.com/'
+    stripUrl = url + 'index.php/%s'
     imageSearch = compile(tagre("img", "src", r'(http://www\.filibustercartoons\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.filibustercartoons\.com/[^"]+)', after="prev"))
     help = 'Index format: yyyy/mm/dd/name'
 
 
 class FlakyPastry(_BasicScraper):
-    latestUrl = 'http://flakypastry.runningwithpencils.com/index.php'
+    url = 'http://flakypastry.runningwithpencils.com/index.php'
     stripUrl = 'http://flakypastry.runningwithpencils.com/comic.php?strip_id=%s'
     imageSearch = compile(r'<img src="(comics/.+?)"')
     prevSearch = compile(r'<a href="(.+?)".+?btn_back')
@@ -51,8 +51,8 @@ class FlakyPastry(_BasicScraper):
 
 
 class Flemcomics(_BasicScraper):
-    latestUrl = 'http://www.flemcomics.com/'
-    stripUrl = latestUrl + 'd/%s.html'
+    url = 'http://www.flemcomics.com/'
+    stripUrl = url + 'd/%s.html'
     imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/d/\d+\.html)') +
       tagre("img", "src", r'/images/previous_day\.jpg'))
@@ -60,15 +60,15 @@ class Flemcomics(_BasicScraper):
 
 
 class Flipside(_BasicScraper):
-    latestUrl = 'http://flipside.keenspot.com/comic.php'
-    stripUrl = latestUrl + '?i=%s'
+    url = 'http://flipside.keenspot.com/comic.php'
+    stripUrl = url + '?i=%s'
     imageSearch = compile(tagre("img", "src", r'(http://cdn\.flipside\.keenspot\.com/comic/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://flipside\.keenspot\.com/comic\.php\?i=\d+)', after="prev"))
     help = 'Index format: nnnn'
 
 
 class Footloose(_BasicScraper):
-    latestUrl = 'http://footloosecomic.com/footloose/today.php'
+    url = 'http://footloosecomic.com/footloose/today.php'
     stripUrl = 'http://footloosecomic.com/footloose/pages.php?page=%s'
     imageSearch = compile(r'<img src="/footloose/(.+?)"')
     prevSearch = compile(r'(?:first.+?[^>]).+?(/footloose/.+?)".+?(?:prev)')
@@ -76,7 +76,7 @@ class Footloose(_BasicScraper):
 
 
 class Freefall(_BasicScraper):
-    latestUrl = 'http://freefall.purrsia.com/default.htm'
+    url = 'http://freefall.purrsia.com/default.htm'
     stripUrl = 'http://freefall.purrsia.com/ff%s/fc%s.htm'
     imageSearch = compile(r'<img src="(/ff\d+/.+?.\w{3,4})"')
     prevSearch = compile(r'<A HREF="(/ff\d+/.+?.htm)">Previous</A>')
@@ -84,17 +84,18 @@ class Freefall(_BasicScraper):
 
 
 class FantasyRealms(_BasicScraper):
-    stripUrl = 'http://www.fantasyrealmsonline.com/manga/%s.php'
+    url = 'http://www.fantasyrealmsonline.com/'
+    stripUrl = url + 'manga/%s.php'
     imageSearch = compile(r'<img src="(\d{1,4}.\w{3,4})" width="540"', IGNORECASE)
     prevSearch = compile(r'<a href="(.+?)"><img src="../images/nav-back.gif"', IGNORECASE)
     help = 'Index format: nnn'
-    starter = indirectStarter('http://www.fantasyrealmsonline.com/',
+    starter = indirectStarter(url,
                               compile(r'<a href="(manga/.+?)"><img src="preview.jpg"', IGNORECASE))
 
 
 class FunInJammies(_BasicScraper):
-    latestUrl = 'http://www.funinjammies.com/'
-    stripUrl = latestUrl + 'comic.php?issue=%s'
+    url = 'http://www.funinjammies.com/'
+    stripUrl = url + 'comic.php?issue=%s'
     imageSearch = compile(r'(/comics/.+?)"')
     prevSearch = compile(r'(/comic.php.+?)" id.+?prev')
     help = 'Index format: n (unpadded)'

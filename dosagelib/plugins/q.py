@@ -8,16 +8,16 @@ from ..util import tagre
 
 
 class QuestionableContent(_BasicScraper):
-    latestUrl = 'http://www.questionablecontent.net/'
-    stripUrl = latestUrl + 'view.php?comic=%s'
+    url = 'http://www.questionablecontent.net/'
+    stripUrl = url + 'view.php?comic=%s'
     imageSearch = compile(tagre("img", "src", r'([^"]+/comics/[^"]+)', before="strip"))
     prevSearch = compile(tagre("a", "href", r'(view\.php\?comic=\d+)') + 'Previous')
     help = 'Index format: n (unpadded)'
 
 
 class Qwantz(_BasicScraper):
-    latestUrl = 'http://www.qwantz.com/index.php'
-    stripUrl = latestUrl + '?comic=%s'
+    url = 'http://www.qwantz.com/index.php'
+    stripUrl = url + '?comic=%s'
     imageSearch = compile(tagre("img", "src", r'(http://www\.qwantz\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.qwantz\.com/index\.php\?comic=\d+)', before="prev"))
     help = 'Index format: n'

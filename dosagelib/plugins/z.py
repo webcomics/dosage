@@ -9,16 +9,16 @@ from ..helpers import bounceStarter
 
 
 class ZapComic(_BasicScraper):
-    latestUrl = 'http://www.zapcomic.com/'
-    stripUrl = latestUrl + '%s/'
+    url = 'http://www.zapcomic.com/'
+    stripUrl = url + '%s/'
     imageSearch = compile(tagre("img", "src", r'(http://www\.zapcomic\.com\?comic_object=\d+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.zapcomic\.com/[^"]+)', after="previous-comic-link"))
     help = 'Index format: yyyy/mm/nnn-stripname'
 
 
 class Zapiro(_BasicScraper):
-    baseUrl = 'http://www.mg.co.za/zapiro/'
-    starter = bounceStarter(baseUrl,
+    url = 'http://www.mg.co.za/zapiro/'
+    starter = bounceStarter(url,
       compile(tagre("a", "href", r'(http://mg\.co\.za/cartoon/[^"]+)')+"Newer"))
     stripUrl = 'http://mg.co.za/cartoon/%s'
     imageSearch = compile(tagre("img", "src", r'(http://cdn\.mg\.co\.za/crop/content/cartoons/[^"]+)'))
@@ -32,16 +32,16 @@ class Zapiro(_BasicScraper):
 
 
 class ZebraGirl(_BasicScraper):
-    latestUrl = 'http://www.zebragirl.net/'
-    stripUrl = latestUrl + '?date=%s'
+    url = 'http://www.zebragirl.net/'
+    stripUrl = url + '?date=%s'
     imageSearch = compile(tagre("img", "src", r"(comics/[^']+)", quote="'"))
     prevSearch = compile(tagre("link", "href", r"(/\?date=[^']+)", quote="'", before='Previous'))
     help = 'Index format: yyyy-mm-dd'
 
 
 class ZombieHunters(_BasicScraper):
-    latestUrl = 'http://www.thezombiehunters.com/'
-    stripUrl = latestUrl + '?strip_id=%s'
+    url = 'http://www.thezombiehunters.com/'
+    stripUrl = url + '?strip_id=%s'
     imageSearch = compile(tagre("img", "src", r'(/istrip_files/strips/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(\?strip_id=\d+)') + tagre("img", "id", "prevcomic"))
     help = 'Index format: n(unpadded)'

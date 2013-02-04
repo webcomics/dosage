@@ -34,7 +34,7 @@ def add(name, url):
 
     globals()[classname] = make_scraper(classname,
         name='KeenSpot/' + name,
-        latestUrl=url,
+        url=url,
         stripUrl=stripUrl,
         imageSearch = _imageSearch,
         prevSearch = _prevSearch,

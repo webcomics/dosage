@@ -172,15 +172,11 @@ def get_testentry(line):
     entry = {
         "status": Status.ok if line.startswith(". ") else Status.error,
         "name": name,
-        "url": "",
+        "url": scraper.url,
         "description": scraper.description,
         "error": None,
         "adult": scraper.adult,
     }
-    try:
-        entry["url"] = scraper.starter()
-    except Exception as msg:
-        print("WARNING:", msg, file=sys.stderr)
     return key, entry
 
 

@@ -8,40 +8,40 @@ from ..util import tagre
 
 
 class JackCannon(_BasicScraper):
-    latestUrl = 'http://fancyadventures.com/'
-    stripUrl = latestUrl + '%s/'
+    url = 'http://fancyadventures.com/'
+    stripUrl = url + '%s/'
     imageSearch = compile(tagre("img", "src", r'(http://fancyadventures\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://fancyadventures\.com/[^"]+)', after="prev"))
     help = 'Index format: yyyy/mm/dd/page-nnn'
 
 
 class JerkCity(_BasicScraper):
-    latestUrl = 'http://www.jerkcity.com/'
-    stripUrl = latestUrl + '_jerkcity%s.html'
+    url = 'http://www.jerkcity.com/'
+    stripUrl = url + '_jerkcity%s.html'
     imageSearch = compile(tagre("img", "src", r'(/jerkcity[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/_jerkcity[^"]+)') + r'&lt;&lt;Previous')
     help = 'Index format: n'
 
 
 class JoeAndMonkey(_BasicScraper):
-    latestUrl = 'http://www.joeandmonkey.com/'
-    stripUrl = latestUrl + '%s'
+    url = 'http://www.joeandmonkey.com/'
+    stripUrl = url + '%s'
     imageSearch = compile(r'"(/comic/[^"]+)"')
     prevSearch = compile(r"<a href='(/\d+)'>Previous")
     help = 'Index format: nnn'
 
 
 class JohnnyWander(_BasicScraper):
-    latestUrl = 'http://www.johnnywander.com/'
-    stripUrl = latestUrl + 'comics/%s'
+    url = 'http://www.johnnywander.com/'
+    stripUrl = url + 'comics/%s'
     imageSearch = compile(tagre("img", "src", r'(http://www\.johnnywander\.com/files/comics/\d+\.jpg)'))
     prevSearch = compile(tagre("a", "href", r'(/comics/\d+)') + r'prev')
     help = 'Index format: nnn'
 
 
 class JustAnotherEscape(_BasicScraper):
-    latestUrl = 'http://www.justanotherescape.com/'
-    stripUrl = latestUrl + 'index.cgi?date=%s'
+    url = 'http://www.justanotherescape.com/'
+    stripUrl = url + 'index.cgi?date=%s'
     imageSearch = compile(tagre("img", "src", r'(http://www\.justanotherescape\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.justanotherescape\.com//index\.cgi\?date=\d+)')
      + tagre("img", "alt", "Previous Comic"))

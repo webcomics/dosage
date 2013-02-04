@@ -11,12 +11,12 @@ _prevSearch = compile(tagre("a", "href", r'([^"]+)') + "Previous")
 
 def add(name, shortname):
     baseUrl = 'http://www.nuklearpower.com/'
-    latestUrl = baseUrl + shortname + '/'
+    url = baseUrl + shortname + '/'
     classname = 'NuklearPower_%s' % name
 
     globals()[classname] = make_scraper(classname,
         name='NuklearPower/' + name,
-        latestUrl = latestUrl,
+        url = url,
         stripUrl = baseUrl + '%s',
         imageSearch = _imageSearch,
         prevSearch = _prevSearch,

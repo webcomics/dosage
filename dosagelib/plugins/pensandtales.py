@@ -14,7 +14,7 @@ def add(name, baseUrl, param="date"):
        '[^<]+Previous' + ')')
     globals()[classname] = make_scraper(classname,
         name='PensAndTales/' + name,
-        latestUrl = baseUrl,
+        url = baseUrl,
         stripUrl = baseUrl + '?' + param + '=%s',
         imageSearch = _imageSearch,
         prevSearch = _prevSearch,

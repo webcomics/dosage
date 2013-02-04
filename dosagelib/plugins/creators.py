@@ -13,7 +13,7 @@ def add(name, path):
     classname = 'Creators_%s' % name
     globals()[classname] = make_scraper(classname,
         name = 'Creators/' + name,
-        latestUrl = baseurl + path + '.html',
+        url = baseurl + path + '.html',
         stripUrl = baseurl + path + '/%s.html',
         imageSearch = _imageSearch,
         prevSearch = compile(tagre("a", "href", r'(%s/\d+\.html)' % path) +

@@ -50,6 +50,7 @@ def add(name, url, description, adult, bounce):
     globals()[classname] = make_scraper(classname,
         name = 'SmackJeeves/' + name,
         adult = adult,
+        url = url,
         starter = _starter,
         prevUrlModifier = lambda cls, url: modifier(url),
         stripUrl = url + '%s/',

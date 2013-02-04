@@ -48,7 +48,7 @@ def add(name, shortName, imageFolder=None, lastStrip=None):
     if lastStrip is None:
         attrs['starter'] = _starter
     else:
-        attrs['latestUrl'] = attrs['stripUrl'] % lastStrip
+        attrs['url'] = attrs['stripUrl'] % lastStrip
     globals()[classname] = make_scraper(classname, **attrs)
 
 

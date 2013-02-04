@@ -11,11 +11,11 @@ _prevSearch = compile(tagre("a", "href", r'(http://[a-z0-9]+\.petitesymphony\.co
 
 def add(name):
     classname = 'PetiteSymphony_%s' % name.capitalize()
-    latestUrl = 'http://%s.petitesymphony.com/' % name
+    url = 'http://%s.petitesymphony.com/' % name
     globals()[classname] = make_scraper(classname,
         name='PetiteSymphony/' + name.capitalize(),
-        latestUrl = latestUrl,
-        stripUrl = latestUrl + 'comic/%s',
+        url = url,
+        stripUrl = url + 'comic/%s',
         imageSearch = _imageSearch,
         prevSearch = _prevSearch,
         help='Index format: named number'

@@ -23,6 +23,7 @@ def add(name, path):
 
     globals()[classname] = make_scraper(classname,
        name = 'WLP/' + name,
+       url = baseUrl,
        starter = bounceStarter(baseUrl, _nextSearch),
        stripUrl = baseUrl + '%s.html',
        imageSearch = _imageSearch,

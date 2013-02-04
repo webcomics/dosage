@@ -12,13 +12,13 @@ _imageSearch = compile(tagre("a", "href", r'(/newspics/[^"]+)', after='zoom'))
 _prevSearch = compile(tagre("a", "href", r'(/[^"]+)', before='prev'))
 
 def add(name, shortname):
-    latestUrl = 'http://www.arcamax.com%s' % shortname
+    url = 'http://www.arcamax.com%s' % shortname
     classname = 'Arcamax_%s' % name
 
     globals()[classname] = make_scraper(classname,
         name='Arcamax/' + name,
-        latestUrl = latestUrl,
-        stripUrl = latestUrl + '%s/',
+        url = url,
+        stripUrl = url + '%s/',
         imageSearch = _imageSearch,
         prevSearch = _prevSearch,
         help = 'Index format: none',

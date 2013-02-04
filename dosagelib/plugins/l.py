@@ -9,23 +9,23 @@ from ..util import tagre
 
 
 class LasLindas(_BasicScraper):
-    latestUrl = 'http://laslindas.katbox.net/'
-    stripUrl = latestUrl + 'archive/%s/'
+    url = 'http://laslindas.katbox.net/'
+    stripUrl = url + 'archive/%s/'
     imageSearch = compile(tagre("img", "src", r'(http://laslindas\.katbox\.net/wp-content/webcomic/las-lindas/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://laslindas\.katbox\.net/archive/[^"]+)', after="previous"))
     help = 'Index format: stripname'
 
 
 class Lint(_BasicScraper):
-    latestUrl = 'http://www.purnicellin.com/lint/'
-    stripUrl = latestUrl + '%s'
+    url = 'http://www.purnicellin.com/lint/'
+    stripUrl = url + '%s'
     imageSearch = compile(r'<img src="(http://www.purnicellin.com/lint/comics/.+?)"')
     prevSearch = compile(r'\| <a href="([^"]+)" rel="prev">')
     help = 'Index format: yyyy/mm/dd/num-name'
 
 
 class LookingForGroup(_BasicScraper):
-    latestUrl = 'http://www.lfgcomic.com/page/latest'
+    url = 'http://www.lfgcomic.com/page/latest'
     stripUrl = 'http://www.lfgcomic.com/page/%s'
     imageSearch = compile(r'<img src="(http://newcdn.lfgcomic.com/uploads/comics/.+?)"')
     prevSearch = compile(r'<a href="(/page/\d+)" id="navtop-prev"')
@@ -38,16 +38,16 @@ class LookingForGroup(_BasicScraper):
 
 
 class LittleGamers(_BasicScraper):
-    latestUrl = 'http://www.little-gamers.com/'
-    stripUrl = latestUrl + '%s/'
+    url = 'http://www.little-gamers.com/'
+    stripUrl = url + '%s/'
     imageSearch = compile(tagre("img", "src", r'(http://little-gamers\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.little-gamers.com/[^"]+)', before="comic-nav-prev-link"))
     help = 'Index format: yyyy/mm/dd/name'
 
 
 class LeastICouldDo(_BasicScraper):
-    latestUrl = 'http://leasticoulddo.com/'
-    stripUrl = latestUrl + 'comic/%s'
+    url = 'http://leasticoulddo.com/'
+    stripUrl = url + 'comic/%s'
     imageSearch = compile(tagre("img", "src", r'(http://cdn\.leasticoulddo\.com/wp-content/uploads/\d+/\d+/\d{8}\.\w{1,4})'))
     prevSearch = compile(r'<a href="(/comic/\d{8})">Previous</a>')
     help = 'Index format: yyyymmdd'

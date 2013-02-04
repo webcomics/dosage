@@ -127,7 +127,7 @@ class _BasicScraper(object):
     @classmethod
     def starter(cls):
         """Get starter URL from where to scrape comic strips."""
-        return cls.latestUrl
+        return cls.url
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):

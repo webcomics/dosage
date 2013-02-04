@@ -13,6 +13,7 @@ _nextSearch = compile(tagre("a", "href", r'(/[^"]+/\d+/\d+/\d+)', after="next"))
 
 def add(name, shortname):
     baseUrl = 'http://www.gocomics.com'
+    url = baseUrl + shortname
     classname = 'GoComics_%s' % name
 
     @classmethod
@@ -21,7 +22,8 @@ def add(name, shortname):
         return "%s_%s%s%s.gif" % (name, year, month, day)
 
     globals()[classname] = make_scraper(classname,
-        starter = bounceStarter(baseUrl + shortname, _nextSearch),
+        url = url,
+        starter = bounceStarter(url, _nextSearch),
         name='GoComics/' + name,
         stripUrl=baseUrl + quote(shortname) + '/%s',
         imageSearch = _imageSearch,
