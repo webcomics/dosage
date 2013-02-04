@@ -33,7 +33,10 @@ OPTIONS
               is useful when you missed some days  and  want  only  to
               download  the missing files. To make this task easy, the
               traversal ends at the first  existing  image  file  when
-              starting from an index (excluding the index itself).
+              starting  from  an  index  (excluding the index itself).
+              -c, --continue Same as --all,  but  stop  at  the  first
+              existing  image file.  Useful for cron jobs that are not
+              executed every day.
 
        -h, --help
               Output brief help information.
@@ -50,17 +53,17 @@ OPTIONS
        -o OUTPUT, --output=OUTPUT
               OUTPUT may be any one of the following:
 
-              html  -  Writes  out  an HTML file linking to the strips
-              actually downloaded in the current run,  named  by  date
-              (ala  dailystrips).  The  files can be found in the html
+              html - Writes out an HTML file  linking  to  the  strips
+              actually  downloaded  in  the current run, named by date
+              (ala dailystrips). The files can be found  in  the  html
               directory of your Comics directory.
 
-              rss - Writes out an RSS feed detailing what strips  were
-              downloaded  in  the last 24 hours. The feed can be found
+              rss  - Writes out an RSS feed detailing what strips were
+              downloaded in the last 24 hours. The feed can  be  found
               in Comics/dailydose.xml.
 
-              rss - Writes an RSS feed with all of  the  strips  down‐
-              loaded  during  the run, for use with your favourite RSS
+              rss  -  Writes  an RSS feed with all of the strips down‐
+              loaded during the run, for use with your  favourite  RSS
               aggregator.
 
        -t, --timestamps
@@ -70,26 +73,26 @@ OPTIONS
               Increase the output level by one with each occurence.
 
        -V, --version
-              Display the version number.  module At least  one  valid
+              Display  the  version number.  module At least one valid
               module must be specified. A list of valid modules can be
-              found by passing the -l option.  Multiple  module  argu‐
-              ments  can  be  specified  on  the command line.  Module
-              names are case insensitive,  and  it  is  sufficient  to
+              found  by  passing  the -l option. Multiple module argu‐
+              ments can be specified  on  the  command  line.   Module
+              names  are  case  insensitive,  and  it is sufficient to
               specify a unique substring of the module name.
 
 INDEX SYNTAX
-       Instead  of  starting  at the latest comic strip, an index lets
-       dosage start at a certain strip. The index can be specified  by
+       Instead of starting at the latest comic strip,  an  index  lets
+       dosage  start at a certain strip. The index can be specified by
        appending a colon : and the index name after the module. Multi‐
        ple comma-spearated indices can also be specified.
 
-       The index name itself usually is the part of  the  comic  strip
-       URL  that  identifiess  a  strip,  eg.  a number or a date. The
-       expected format  is  documented  when  using  the  --modulehelp
+       The  index  name  itself usually is the part of the comic strip
+       URL that identifiess a strip, eg.  a  number  or  a  date.  The
+       expected  format  is  documented  when  using  the --modulehelp
        option.
 
 SPECIAL SYNTAX
-       @      This  expands  to  mean all the comics currently in your
+       @      This expands to mean all the comics  currently  in  your
               Comics directory. All other specified comic module names
               will be ignored.
 
@@ -104,37 +107,37 @@ EXAMPLES
        Retrieve the current comic of Cyanide and Happiness:
               dosage cyanideandhappiness
 
-       Retrieve  the current strip of all comics in your Comics direc‐
+       Retrieve the current strip of all comics in your Comics  direc‐
        tory:
               dosage @
 
-       Retrieve the current strip of every comic that there is a  mod‐
+       Retrieve  the current strip of every comic that there is a mod‐
        ule for:
               dosage @@
 
        Retrieve the Penny Arcade strip for a given index:
               dosage pennyarcade:2004-07-22
 
-       Retrieve  Calvin  and  Hobbes  strips  from a given index going
+       Retrieve Calvin and Hobbes strips  from  a  given  index  going
        backwards to the beginning.
               dosage -a calvinandhobbes:20120722
 
-       On Unix, xargs(1) can download several comic strips  in  paral‐
+       On  Unix,  xargs(1) can download several comic strips in paral‐
        lel, for example using up to 4 processes:
-              cd  Comics && find . -type d | xargs -n1 -P4 dosage -b .
+              cd Comics && find . -type d | xargs -n1 -P4 dosage -b  .
               -v
 
 ENVIRONMENT
        HTTP_PROXY
-              mainline will use the specified HTTP  proxy  when  down‐
+              mainline  will  use  the specified HTTP proxy when down‐
               loading URL contents.
 
 NOTES
-       Should  retrieval fail on any given strip mainline will attempt
-       to retry. However the retry information is  only  outputted  in
+       Should retrieval fail on any given strip mainline will  attempt
+       to  retry.  However  the retry information is only outputted in
        the second and successive output levels.
 
-       At  the time of writing, a complete Dosage collection weighs in
+       At the time of writing, a complete Dosage collection weighs  in
        at around 3.0GB.
 
 RETURN VALUE
@@ -149,7 +152,7 @@ RETURN VALUE
        Else the return value is zero.
 
 BUGS
-       Users can report or view bugs, patches or  feature  suggestions
+       Users  can  report or view bugs, patches or feature suggestions
        at https://github.com/wummel/dosage/issues
 
 AUTHORS

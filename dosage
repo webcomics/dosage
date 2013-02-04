@@ -24,6 +24,7 @@ def setupOptions():
     parser.add_option('-v', '--verbose', action='count', dest='verbose', default=0, help='provides verbose output, use multiple times for more verbosity')
     parser.add_option('-n', '--numstrips', action='store', dest='numstrips', type='int', default=0, help='traverse and retrieve the given number of comic strips; use --all to retrieve all comic strips')
     parser.add_option('-a', '--all', action='store_true', dest='all', default=None, help='traverse and retrieve all comic strips')
+    parser.add_option('-c', '--continue', action='store_true', dest='cont', default=None, help='traverse and retrieve comic strips until an existing one is found')
     parser.add_option('-b', '--basepath', action='store', dest='basepath', default='Comics', help='set the path to create invidivual comic directories in, default is Comics', metavar='PATH')
     parser.add_option('--baseurl', action='store', dest='baseurl', default=None, help='the base URL of your comics directory (for RSS, HTML, etc.); this should correspond to --base-path', metavar='PATH')
     parser.add_option('-l', '--list', action='store_const', const=1, dest='list', help='list available comic modules')
@@ -125,17 +126,14 @@ def getStrips(scraperobj, options):
         strips = scraperobj.getAllStrips(options.numstrips)
     else:
         strips = scraperobj.getCurrentStrips()
-    first = True
     try:
         for strip in strips:
             _errors, skipped = saveComicStrip(strip, options.basepath)
             errors += _errors
-            if not first and skipped and scraperobj.indexes:
-                # stop when indexed retrieval skipped all images for one
-                # comic strip (except the first one)
+            if skipped and options.cont:
+                # stop when retrieval skipped an image for one comic strip
                 out.info("Stop retrieval because image file already exists")
                 break
-            first = False
     except (ValueError, IOError) as msg:
         out.error(msg)
         errors += 1

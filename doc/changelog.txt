@@ -6,6 +6,9 @@ Features:
 - comics: Added GrrlPower comic strip.
 - comics: Added Spinnerette comic strip.
 
+Changes:
+- cmdline: Added the --continue option.
+
 Fixes:
 - comics: Fixed Gunnerkrigcourt comic strip.
 
