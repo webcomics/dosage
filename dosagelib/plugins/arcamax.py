@@ -18,7 +18,7 @@ def add(name, shortname):
     globals()[classname] = make_scraper(classname,
         name='Arcamax/' + name,
         url = url,
-        stripUrl = url + '%s/',
+        stripUrl = url + '%s',
         imageSearch = _imageSearch,
         prevSearch = _prevSearch,
         help = 'Index format: none',
