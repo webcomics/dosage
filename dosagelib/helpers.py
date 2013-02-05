@@ -24,17 +24,17 @@ def regexNamer(regex):
     return _namer
 
 
-def bounceStarter(latestUrl, nextSearch):
+def bounceStarter(url, nextSearch):
     """Get start URL by "bouncing" back and forth one time."""
     @classmethod
     def _starter(cls):
         """Get bounced start URL."""
-        url = fetchUrl(latestUrl, cls.prevSearch, session=cls.session)
-        if not url:
-            raise ValueError("could not find prevSearch pattern %r in %s" % (cls.prevSearch.pattern, latestUrl))
-        url2 = fetchUrl(url, nextSearch, session=cls.session)
+        url1 = fetchUrl(url, cls.prevSearch, session=cls.session)
+        if not url1:
+            raise ValueError("could not find prevSearch pattern %r in %s" % (cls.prevSearch.pattern, url))
+        url2 = fetchUrl(url1, nextSearch, session=cls.session)
         if not url2:
-            raise ValueError("could not find nextSearch pattern %r in %s" % (nextSearch.pattern, url))
+            raise ValueError("could not find nextSearch pattern %r in %s" % (nextSearch.pattern, url1))
         return url2
     return _starter
 

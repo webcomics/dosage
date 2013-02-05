@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012 Bastian Kleineidam
+# Copyright (C) 2012-2013 Bastian Kleineidam
 
 from re import compile, IGNORECASE, MULTILINE
 
@@ -121,11 +121,11 @@ class Fallen(_BasicScraper):
 
 
 class FredoAndPidjin(_BasicScraper):
-    homepage = 'http://www.pidjin.net/'
+    url = 'http://www.pidjin.net/'
     stripUrl = None
     help = 'Index format: yyyy/mm/dd/name'
     imageSearch = compile(tagre('img', 'src', '(http://cdn\.pidjin\.net/wp-content/uploads/\d+/\d+/[^"]+\.png)'))
     multipleImagesPerStrip = True
     prevSearch = compile(tagre('a', 'href', '([^"]+)')+"Prev</a>")
-    starter = indirectStarter(homepage,
-       compile(tagre('a', 'href', "("+homepage+r'\d\d\d\d/\d\d/\d\d/[^"]+/)')))
+    starter = indirectStarter(url,
+       compile(tagre('a', 'href', "("+url+r'\d\d\d\d/\d\d/\d\d/[^"]+/)')))

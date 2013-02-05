@@ -11,8 +11,8 @@ from .output import out
 class _BasicScraper(object):
     '''Base class with scrape functions for comics.
 
-    @type latestUrl: C{string}
-    @cvar latestUrl: The URL for the latest comic strip.
+    @type url: C{string}
+    @cvar url: The URL for the comic strip.
     @type stripUrl: C{string}
     @cvar stripUrl: A string that is interpolated with the strip index
         to yield the URL for a particular strip.

@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012 Bastian Kleineidam
+# Copyright (C) 2012-2013 Bastian Kleineidam
 
 from re import compile
 
@@ -68,9 +68,10 @@ class Goats(_BasicScraper):
 
 
 class GoneWithTheBlastwave(_BasicScraper):
-    starter = indirectStarter('http://www.blastwave-comic.com/index.php?p=comic&nro=1',
+    url = 'http://www.blastwave-comic.com/index.php?p=comic&nro=1'
+    starter = indirectStarter(url,
                               compile(r'href="(index.php\?p=comic&amp;nro=\d+)"><img src="images/page/default/latest'))
-    stripUrl = 'http://www.blastwave-comic.com/index.php?p=comic&nro=%s'
+    stripUrl = url[:-1] + '%s'
     imageSearch = compile(r'<img.+src=".+(/comics/.+?)"')
     prevSearch = compile(r'href="(index.php\?p=comic&amp;nro=\d+)"><img src="images/page/default/previous')
     help = 'Index format: n'

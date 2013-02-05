@@ -1,4 +1,4 @@
-# Copyright (C) 2012 Bastian Kleineidam
+# Copyright (C) 2012-2013 Bastian Kleineidam
 
 from re import compile
 from ..scraper import _BasicScraper

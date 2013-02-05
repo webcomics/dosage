@@ -36,13 +36,7 @@ description: a list of comic strips supported by Dosage
 <div id="comics">
 %(content)s
 </div>
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 <script>
 window.onload = function() {
   var wall = new Masonry(document.getElementById('comics'), {
@@ -81,13 +75,7 @@ title: Dosage comic %(name)s
 </tr>
 </table>
 <div class="g-plusone" data-size="standard" data-annotation="inline" data-width="300"></div>
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 </section>
 {%% endblock content %%}
 """
@@ -153,10 +141,10 @@ def get_testinfo(filename, modified):
                 key, entry = get_testentry(line)
                 keys.append(key)
                 update_testentry(key, entry, testinfo)
+                if num_tests % 5 == 0:
+                    print(num_tests, end=" ", file=sys.stderr)
             elif add_error and line.startswith(" E "):
                 entry["error"] = line[3:].strip()
-            if num_tests % 5 == 0:
-                print(num_tests, end=" ", file=sys.stderr)
     orphan_entries(keys, testinfo)
     save_result(testinfo, json_file)
     return testinfo
