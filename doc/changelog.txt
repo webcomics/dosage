@@ -2,7 +2,10 @@ Dosage 1.10 (released xx.xx.2013)
 
 Features:
 - comics: Added comic strips SequentialArt, VampireCheerleader,
-  GrrlPower, Spinnerette, HijinksEnsue, Nedroid.
+  GrrlPower, Spinnerette, HijinksEnsue, Nedroid, Antics, ChannelAte,
+  ToonHole, ThisIsIndexed, WastedTalent, ChainsawSuit, ThreePanelSoul,
+  SpaceTrawler, ScenesFromAMultiverse, BroodHollow, BoxerHockey,
+  Wonderella, BadMachinery.
 
 Changes:
 - cmdline: Added the --continue option.

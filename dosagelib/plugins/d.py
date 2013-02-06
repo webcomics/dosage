@@ -166,3 +166,12 @@ class Dilbert(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(/dyn/str_strip/[^"]+\.strip\.zoom\.gif)'))
     help = 'Index format: yyyy-mm-dd'
     # XXX namer
+
+
+# XXX disallowed by robots.txt
+class _DumbingOfAge(_BasicScraper):
+    url = 'http://www.dumbingofage.com/'
+    stripUrl = url + '%s/'
+    prevSearch = compile(tagre("a", "href", r'(http://www\.dumbingofage\.com/\d+/[^"]+)', after="prev"))
+    imageSearch = compile(tagre("img", "src", r'(http://www\.dumbingofage\.com/comics/\d+-\d+-\d+[^"]+)'))
+    help = 'Index format: yyyy/comic/book-num/seriesname/stripname'

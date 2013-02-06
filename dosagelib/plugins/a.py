@@ -120,6 +120,14 @@ class Angels2200(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/part-<n>-comic-<n>'
 
 
+class Antics(_BasicScraper):
+    url = 'http://www.anticscomic.com/'
+    stripUrl = url + '?p=%s'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.anticscomic\.com/comics/\d+-\d+-\d+[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.anticscomic\.com/\?p=\d+)', after='prev'))
+    help = 'Index format: number'
+
+
 class AppleGeeks(_BasicScraper):
     url = 'http://www.applegeeks.com/'
     stripUrl = url + 'comics/viewcomic.php?issue=%s'

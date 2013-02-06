@@ -41,6 +41,14 @@ class ScaryGoRound(_BasicScraper):
     help = 'Index format: n (unpadded)'
 
 
+class ScenesFromAMultiverse(_BasicScraper):
+    url = 'http://amultiverse.com/'
+    stripUrl = url + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://amultiverse\.com/files/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://amultiverse\.com/\d+\d+/\d+/\d+/[^"]+)', after="prev"))
+    help = 'Index format: yyyy/mm/dd/stripname'
+
+
 class SchlockMercenary(_BasicScraper):
     url = 'http://www.schlockmercenary.com/'
     stripUrl = url + '%s'
@@ -132,6 +140,14 @@ class Sorcery101(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(http://www\.sorcery101\.net/comics/sorcery101/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.sorcery101\.net/sorcery101/[^"]+)', after="previous-comic-link"))
     help = 'Index format: stripname'
+
+
+class SpaceTrawler(_BasicScraper):
+    url = 'http://spacetrawler.com/'
+    stripUrl = url + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://spacetrawler\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://spacetrawler\.com/\d+/\d+/\d+/[^"]+)', after="navi-prev"))
+    help = 'Index format: yyyy/mm/dd/stripname'
 
 
 class SpareParts(_BasicScraper):

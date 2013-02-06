@@ -9,6 +9,14 @@ from ..scraper import _BasicScraper
 from ..helpers import indirectStarter
 
 
+class BadMachinery(_BasicScraper):
+    url = 'http://scarygoround.com/'
+    stripUrl = url + '?date=%s'
+    imageSearch = compile(tagre("img", "src", r'(strips/\d+[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(\?date=\d+)') + 'Previous')
+    help = 'Index format: yyyymmdd'
+
+
 class Bardsworth(_BasicScraper):
     url = 'http://www.bardsworth.com/'
     stripUrl = url + '?p=%s'
@@ -104,6 +112,40 @@ class BoyOnAStickAndSlither(_BasicScraper):
     @classmethod
     def namer(cls, imageUrl, pageUrl):
         return pageUrl.rsplit('/')[-1]
+
+
+class BoxerHockey(_BasicScraper):
+    url = 'http://boxerhockey.fireball20xl.com/'
+    stripUrl = url + '?id=%s'
+    imageSearch = compile(tagre("img", "src", r'(img/comic/[^"]+)', after="comicimg"))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.boxerhockey\.com/\?id=\d+)') +
+        r'[^>]+Previous')
+    help = 'Index format: n (unpadded)'
+
+
+class BroodHollow(_BasicScraper):
+    url = 'http://broodhollow.chainsawsuit.com/'
+    stripUrl = url + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://broodhollow\.chainsawsuit\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://broodhollow\.chainsawsuit\.com/\d+/\d+/\d+/[^"]+)', after="prev"))
+    help = 'Index format: yyyy/mm/dd/stripname'
+
+
+class ButterSafe(_BasicScraper):
+    url = 'http://buttersafe.com/'
+    stripUrl = url + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://buttersafe\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://buttersafe\.com/\d+\d+/\d+/\d+/[^"]+)', after="prev"))
+    help = 'Index format: yyyy/mm/dd/stripname'
+
+
+# XXX disallowed by robots.txt
+class _ButtercupFestival(_BasicScraper):
+    url = 'http://www.buttercupfestival.com/'
+    stripUrl = url + '%s.html'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.buttercupfestival\.com/\d+-\d+[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(\d+-\d+\.html)', quote="") + "previous")
+    help = 'Index format: number-number'
 
 
 class ButternutSquash(_BasicScraper):

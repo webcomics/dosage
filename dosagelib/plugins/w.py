@@ -16,6 +16,14 @@ class WayfarersMoon(_BasicScraper):
     help = 'Index format: nn'
 
 
+class WastedTalent(_BasicScraper):
+    url = 'http://www.wastedtalent.ca/'
+    stripUrl = url + 'comic/%s'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.wastedtalent\.ca/sites/default/files/imagecache/comic_full/comics/\d+/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(/comic/[^"]+)', after="comic_prev"))
+    help = 'Index format: stripname'
+
+
 class WhiteNinja(_BasicScraper):
     url = 'http://www.whiteninjacomics.com/comics.shtml'
     stripUrl = 'http://www.whiteninjacomics.com/comics/%s.shtml'
@@ -47,6 +55,14 @@ class Wigu(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(/adventures/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/adventures/index\.php\?comic=\d+)', after="go back"))
     help = 'Index format: n'
+
+
+class Wonderella(_BasicScraper):
+    url = 'http://nonadventures.com/'
+    stripUrl = url + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://nonadventures\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://nonadventures\.com/\d+/\d+/\d+/[^"]+)', after="prev"))
+    help = 'Index format: yyyy/mm/dd/name'
 
 
 class WotNow(_BasicScraper):

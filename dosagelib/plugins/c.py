@@ -52,6 +52,22 @@ class Catena(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/<name>'
 
 
+class ChainsawSuit(_BasicScraper):
+    url = 'http://chainsawsuit.com/'
+    stripUrl = url + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://chainsawsuit\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://chainsawsuit\.com/\d+/\d+/\d+/[^"]+)', after="prev"))
+    help = 'Index format: yyyy/mm/dd/stripname'
+
+
+class ChannelAte(_BasicScraper):
+    url = 'http://www.channelate.com/'
+    stripUrl = url + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.channelate\.com/comics/\d+-\d+-\d+[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.channelate\.com/\d+/\d+/\d+/[^"]+)', after="prev"))
+    help = 'Index format: yyyy/mm/dd/name'
+
+
 class ChasingTheSunset(_BasicScraper):
     url = 'http://www.fantasycomic.com/'
     stripUrl = url + 'index.php?p=c%s'
