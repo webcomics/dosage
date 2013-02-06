@@ -16,6 +16,14 @@ class NamirDeiter(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
+class Nedroid(_BasicScraper):
+    url = 'http://nedroid.com/'
+    stripUrl = url + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://nedroid\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://nedroid\.com/\d+/\d+/[^"]+)', after="prev"))
+    help = 'Index format: yyyy/mm/dd/name'
+
+
 class NeoEarth(_BasicScraper):
     url = 'http://www.neo-earth.com/NE/'
     stripUrl = url + 'index.php?date=%s'
