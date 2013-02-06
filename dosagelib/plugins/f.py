@@ -102,11 +102,12 @@ class FunInJammies(_BasicScraper):
 
 
 class Fallen(_BasicScraper):
+    url = 'http://www.fallencomic.com/fal-page.htm'
     stripUrl = 'http://www.fallencomic.com/pages/part%s/%s-p%s.htm'
     imageSearch = compile(r'<IMG SRC="(page/.+?)"', IGNORECASE)
     prevSearch = compile(r'<A HREF="(.+?)"><FONT FACE="Courier">Back', IGNORECASE)
     help = 'Index format: nn-m (comicNumber-partNumber)'
-    starter = indirectStarter('http://www.fallencomic.com/fal-page.htm',
+    starter = indirectStarter(url,
                               compile(r'\(NEW \d{2}/\d{2}/\d{2}\)\s*\n*\s*<a href="(pages/part\d+/\d+-p\d+\.htm)">\d+</a>', MULTILINE))
 
     @classmethod
