@@ -27,6 +27,16 @@ class OddFish(_BasicScraper):
     help = 'Index format: stripname'
 
 
+class OmakeTheater(_BasicScraper):
+    url = 'http://omaketheater.com/'
+    stripUrl = url + 'comic/%s'
+    imageSearch = compile(tagre("img", "src", r'(http://media\.omaketheater\.com/4koma/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://omaketheater\.com/comic/\d+/)', after="prev"))
+    starter = indirectStarter(url,
+        compile(tagre("a", "href", r'(http://omaketheater\.com/comic/\d+/)')))
+    help = 'Index format: number (unpadded)'
+
+
 class OnTheEdge(_BasicScraper):
     url = 'http://ontheedgecomics.com/'
     stripUrl = 'http://ontheedgecomics.com/comic/%s'

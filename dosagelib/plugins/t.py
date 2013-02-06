@@ -8,6 +8,15 @@ from ..helpers import indirectStarter
 from ..util import tagre
 
 
+class TheBrads(_BasicScraper):
+    url = 'http://bradcolbow.com/archive/C4/'
+    stripUrl = url + '%s'
+    imageSearch = compile(tagre("img", "src", r'(http://s3\.amazonaws\.com/the_brads/the-brads-[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://bradcolbow\.com/archive/C4/[^"]+)', before="prev"))
+    multipleImagesPerStrip = True
+    help = 'Index format: a letter and a number'
+
+
 class TheDevilsPanties(_BasicScraper):
     url = 'http://thedevilspanties.com/'
     stripUrl = url + 'archives/%s'

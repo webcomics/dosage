@@ -5,7 +5,8 @@ Features:
   GrrlPower, Spinnerette, HijinksEnsue, Nedroid, Antics, ChannelAte,
   ToonHole, ThisIsIndexed, WastedTalent, ChainsawSuit, ThreePanelSoul,
   SpaceTrawler, ScenesFromAMultiverse, BroodHollow, BoxerHockey,
-  Wonderella, BadMachinery.
+  Wonderella, BadMachinery, TheBrads, FirstWorldProblems,
+  Omake Theater.
 
 Changes:
 - cmdline: Added the --continue option.

@@ -42,6 +42,15 @@ class FilibusterCartoons(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/name'
 
 
+class FirstWorldProblems(_BasicScraper):
+    url = 'http://bradcolbow.com/archive/C5/'
+    stripUrl = url + '%s'
+    imageSearch = compile(tagre("img", "src", r'(http://(?:fwpcomics\.s3\.amazonaws\.com|s3\.amazonaws\.com/fwpcomics)/s1-[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://bradcolbow\.com/archive/C5/[^"]+)', before="prev"))
+    multipleImagesPerStrip = True
+    help = 'Index format: a letter and a number'
+
+
 class FlakyPastry(_BasicScraper):
     url = 'http://flakypastry.runningwithpencils.com/index.php'
     stripUrl = 'http://flakypastry.runningwithpencils.com/comic.php?strip_id=%s'
