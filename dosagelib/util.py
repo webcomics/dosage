@@ -241,6 +241,7 @@ def urlopen(url, referrer=None, max_content_bytes=None,
     headers = {'User-Agent': UserAgent}
     if referrer:
         headers['Referer'] = referrer
+    out.debug('Sending headers %s' % headers, level=3)
     if session is None:
         session = requests
     kwargs = {
