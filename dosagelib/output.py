@@ -23,9 +23,9 @@ class Output(object):
         """Write an informational message."""
         self.write(s, level=level)
 
-    def debug(self, s):
+    def debug(self, s, level=2):
         """Write a debug message."""
-        self.write(s, level=2, color='white')
+        self.write(s, level=level, color='white')
 
     def warn(self, s):
         """Write a warning message."""
