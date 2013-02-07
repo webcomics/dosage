@@ -108,7 +108,8 @@ class HtmlEventHandler(EventHandler):
         tomorrow = time.localtime(tomorrow)
 
         fn = self.fnFromDate(today)
-        assert not os.path.exists(fn), 'Comic page for today already exists!'
+        if os.path.exists(fn):
+            raise ValueError('output file %r already exists' % fn)
 
         d = os.path.dirname(fn)
         if not os.path.isdir(d):
