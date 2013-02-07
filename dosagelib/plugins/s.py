@@ -163,7 +163,7 @@ class Spinnerette(_BasicScraper):
     url = 'http://www.spinnyverse.com/'
     stripUrl = url + '%s/'
     imageSearch = compile(tagre("img", "src", r'(http://www\.spinnyverse\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.spinnyverse\.com/[^"]+)', before="Previous"))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.spinnyverse\.com/[^"]+)', before="Previous Comic"))
     help = 'Index format: number'
 
 
