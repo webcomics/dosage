@@ -6,7 +6,7 @@ Features:
   ToonHole, ThisIsIndexed, WastedTalent, ChainsawSuit, ThreePanelSoul,
   SpaceTrawler, ScenesFromAMultiverse, BroodHollow, BoxerHockey,
   Wonderella, BadMachinery, TheBrads, FirstWorldProblems,
-  Omake Theater.
+  OmakeTheater.
 
 Changes:
 - cmdline: Added the --continue option.
