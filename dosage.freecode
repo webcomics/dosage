@@ -1,5 +1,5 @@
 Project: dosage
-Version: 1.9
+Version: 1.10
 Release-Focus: Minor feature enhancements
 Hide: N
 Website-URL: https://github.com/wummel/dosage
@@ -8,5 +8,9 @@ Tar/GZ-URL: http://github.com/downloads/wummel/dosage/dosage-${version}.tar.gz
 GIT-Tree-URL: https://github.com/wummel/dosage.git
 Windows-installer-URL: http://github.com/downloads/wummel/dosage/dosage-${version}.exe
 
-The AmazingSuperPowers, PandyLand and all Arcamax comic strips are
-now supported. Several bugs have also been fixed.
+The following comic strips have been added: SequentialArt,
+VampireCheerleader, GrrlPower, Spinnerette, HijinksEnsue, Nedroid,
+Antics, ChannelAte, ToonHole, ThisIsIndexed, WastedTalent, ChainsawSuit,
+ThreePanelSoul, SpaceTrawler, ScenesFromAMultiverse, BroodHollow,
+BoxerHockey, Wonderella, BadMachinery, TheBrads, FirstWorldProblems,
+OmakeTheater, SkinDeep and ParadigmShift.
