@@ -10,6 +10,7 @@ Features:
 
 Changes:
 - cmdline: Added the --continue option.
+- output: Add encoding, inline images and guid tags to RSS output.
 
 Fixes:
 - comics: Fixed Gunnerkrigcourt comic strip.

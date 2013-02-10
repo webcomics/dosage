@@ -5,63 +5,57 @@
 
 import xml.dom.minidom
 import time
+from .configuration import App
 
 class Feed(object):
     """Write an RSS feed with comic strip images."""
 
-    def __init__(self, title, link, description, lang='en-us'):
+    def __init__(self, title, link, description, lang='en-us', encoding="utf-8"):
         """Initialize RSS writer with given title, link and description."""
+        self.encoding = encoding
         self.rss = xml.dom.minidom.Document()
-
-        rss_root = self.rss.appendChild(self.rss.createElement('rss'))
-        rss_root.setAttribute('version', '2.0')
-
-        self.channel = rss_root.appendChild(self.rss.createElement('channel'))
-
+        root = self.rss.appendChild(self.rss.createElement('rss'))
+        root.setAttribute('version', '2.0')
+        self.channel = root.appendChild(self.rss.createElement('channel'))
         self.addElement(self.channel, 'title', title)
         self.addElement(self.channel, 'link', link)
         self.addElement(self.channel, 'language', lang)
         self.addElement(self.channel, 'description', description)
+        self.addElement(self.channel, 'generator', App)
 
     def addElement(self, parent, tag, value):
         """Add an RSS item."""
-        return parent.appendChild(self.rss.createElement(tag)).appendChild(self.rss.createTextNode(value))
+        elem = self.rss.createElement(tag)
+        node = self.rss.createTextNode(value)
+        return parent.appendChild(elem).appendChild(node)
 
-    def insertHead(self, title, link, description, date):
-        """Insert an item head."""
-        item = self.rss.createElement('item')
-
-        self.addElement(item, 'title', title)
-        self.addElement(item, 'link', link)
-        self.addElement(item, 'description', description)
-        self.addElement(item, 'pubDate', date)
-
-        elems = self.rss.getElementsByTagName('item')
-        if elems:
-            self.channel.insertBefore(item, elems[0])
-        else:
-            self.channel.appendChild(item)
-
-    def addItem(self, title, link, description, date):
+    def addItem(self, title, link, description, date, append=True):
         """Insert an item."""
         item = self.rss.createElement('item')
 
         self.addElement(item, 'title', title)
         self.addElement(item, 'link', link)
         self.addElement(item, 'description', description)
+        self.addElement(item, 'guid', link)
         self.addElement(item, 'pubDate', date)
 
-        self.channel.appendChild(item)
+        if append:
+            self.channel.appendChild(item)
+        else:
+            elems = self.rss.getElementsByTagName('item')
+            if elems:
+                self.channel.insertBefore(item, elems[0])
+            else:
+                self.channel.appendChild(item)
 
     def write(self, path):
         """Write RSS content to file."""
-        file = open(path, 'w')
-        file.write(self.getXML())
-        file.close()
+        with open(path, 'w') as f:
+            f.write(self.getXML())
 
     def getXML(self):
         """Get RSS content in XML format."""
-        return self.rss.toxml()
+        return self.rss.toxml(self.encoding)
 
 
 def parseFeed(filename, yesterday):

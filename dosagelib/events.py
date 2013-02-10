@@ -70,10 +70,12 @@ class RSSEventHandler(EventHandler):
     def comicDownloaded(self, comic, filename):
         """Write RSS entry for downloaded comic."""
         url = self.getUrlFromFilename(filename)
+        title = '%s - %s' % (comic, os.path.basename(filename))
+        description = '<img src="%s"/><br/><a href="%s">View Comic</a>' % (url, url)
         args = (
-            '%s - %s' % (comic, os.path.basename(filename)),
+            title,
             url,
-            '<a href="%s">View Comic</a>' % url,
+            description,
             util.rfc822date(time.time())
         )
 
@@ -81,7 +83,7 @@ class RSSEventHandler(EventHandler):
             self.newfile = False
             self.rss.addItem(*args)
         else:
-            self.rss.insertHead(*args)
+            self.rss.addItem(*args, append=False)
 
     def end(self):
         """Write RSS data to file."""
