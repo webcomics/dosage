@@ -85,6 +85,7 @@ exclude_comics = [
     "Nemution_Redux", # start page requires login
     "New_Pages", # broken images
     "Ninja_Shizatch", # broken images
+    "No_Need_for_Bushido", # duplicate
     "Normalcy_is_for_Wimps", # broken images
     "MIKYAGU", # broken images
     "One_Third_Of_Your_Life_Is_Spent_Sleeping_One_Third_Of_Your_Life_Is_Spent_Working_And_Half_Of_One_Third_Is_Spent_Waiting_The_Question_Is_It_Really_Your_Life", # broken images
