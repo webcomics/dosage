@@ -97,6 +97,10 @@ def generate_comic_testers():
         scrapers = scraper.get_scrapers()
     for scraperclass in scrapers:
         name = 'Test'+scraperclass.__name__
+        # The DrunkDuck webpage has a *lot* of false positives.
+        # Skip them for now.
+        if name.startswith("TestDrunkDuck"):
+            continue
         g[name] = make_comic_tester(name, scraperclass=scraperclass)
 
 

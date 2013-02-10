@@ -16,12 +16,10 @@ DEBORIGFILE:=$(DEBUILDDIR)/$(LAPPNAME)_$(VERSION).orig.tar.gz
 DEBPACKAGEDIR:=$(DEBUILDDIR)/$(LAPPNAME)-$(VERSION)
 PY_FILES_DIRS := dosage dosagelib scripts tests
 PY2APPOPTS ?=
-# Default pytest options:
-# Do not use parallel testing with -n: it makes some tests fail since
-# some web servers have limits on the number of parallel connections.
-# Also note that using -n silently swallows test creation exceptions like
+# Default pytest options
+# Note that using -n silently swallows test creation exceptions like
 # import errors.
-PYTESTOPTS?=--resultlog=testresults.txt --tb=short --durations=0
+PYTESTOPTS?=--resultlog=testresults.txt --tb=short --durations=0 -n4
 CHMODMINUSMINUS:=--
 # directory or file with tests to run
 TESTS ?= tests
