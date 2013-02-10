@@ -109,6 +109,14 @@ class SinFest(_BasicScraper):
     help = 'Index format: n (unpadded)'
 
 
+class SkinDeep(_BasicScraper):
+    url = 'http://www.skindeepcomic.com/'
+    stripUrl = url + 'archive/%s/'
+    imageSearch = compile(r'<span class="webcomic-object[^>]*><img src="([^"]*)"')
+    prevSearch = compile(tagre("a", "href", r'([^"]+)', after="previous-webcomic-link"))
+    help = 'Index format: custom'
+
+
 class SlightlyDamned(_BasicScraper):
     url = 'http://www.sdamned.com/'
     stripUrl = url + '%s/'
@@ -163,7 +171,7 @@ class Spinnerette(_BasicScraper):
     url = 'http://www.spinnyverse.com/'
     stripUrl = url + '%s/'
     imageSearch = compile(tagre("img", "src", r'(http://www\.spinnyverse\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.spinnyverse\.com/[^"]+)', before="Previous"))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.spinnyverse\.com/[^"]+)', before="Previous Comic"))
     help = 'Index format: number'
 
 
