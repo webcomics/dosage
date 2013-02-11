@@ -1,3 +1,6 @@
+Dosage 1.11 (released xx.xx.2013)
+
+
 Dosage 1.10 (released 10.2.2013)
 
 Features:
