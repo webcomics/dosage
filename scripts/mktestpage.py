@@ -179,11 +179,7 @@ def update_testentry(key, entry, testinfo):
     """Update one entry with testinfo information."""
     if key not in testinfo:
         # add dosage version for this comic
-        # XXX replace this after next release
-        if key.startswith("Arcamax") or key in ("AmazingSuperPowers", "PandyLand"):
-            entry["since"] = DosageVersion
-        else:
-            entry["since"] = "1.8"
+        entry["since"] = DosageVersion
     else:
         entry["since"] = testinfo[key]["since"]
     testinfo[key] = entry

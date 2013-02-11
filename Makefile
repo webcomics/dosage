@@ -51,11 +51,11 @@ testresults:
 
 homepage:
 # update metadata
-	@echo "version: $(VERSION)" > $(HOMEPAGE)/info.yaml
-	@echo "name: $(APPNAME)" >> $(HOMEPAGE)/info.yaml
-	@echo "lname: $(LAPPNAME)" >> $(HOMEPAGE)/info.yaml
-	@echo "maintainer: $(MAINTAINER)" >> $(HOMEPAGE)/info.yaml
-	@echo "author: $(AUTHOR)" >> $(HOMEPAGE)/info.yaml
+	@echo "version: \"$(VERSION)\"" > $(HOMEPAGE)/info.yaml
+	@echo "name: \"$(APPNAME)\"" >> $(HOMEPAGE)/info.yaml
+	@echo "lname: \"$(LAPPNAME)\"" >> $(HOMEPAGE)/info.yaml
+	@echo "maintainer: \"$(MAINTAINER)\"" >> $(HOMEPAGE)/info.yaml
+	@echo "author: \"$(AUTHOR)\"" >> $(HOMEPAGE)/info.yaml
 # generate static files
 	$(MAKE) -C doc
 	cp doc/$(LAPPNAME).1.html $(HOMEPAGE)/content
