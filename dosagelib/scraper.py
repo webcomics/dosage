@@ -3,7 +3,7 @@
 # Copyright (C) 2012-2013 Bastian Kleineidam
 import requests
 from . import loader
-from .util import fetchUrls
+from .util import fetchUrl, fetchUrls, getPageContent
 from .comic import ComicStrip
 from .output import out
 
@@ -62,7 +62,8 @@ class _BasicScraper(object):
 
     def getStrip(self, url):
         """Get comic strip for given URL."""
-        imageUrls = fetchUrls(url, self.imageSearch, session=self.session)[0]
+        data, baseUrl = getPageContent(url, session=self.session)
+        imageUrls = set(fetchUrls(url, data, baseUrl, self.imageSearch))
         if len(imageUrls) > 1 and not self.multipleImagesPerStrip:
             out.warn("found %d images instead of 1 with %s" % (len(imageUrls), self.imageSearch.pattern))
         return self.getComicStrip(url, imageUrls)
@@ -97,12 +98,13 @@ class _BasicScraper(object):
         retrieving the given number of strips."""
         seen_urls = set()
         while url:
-            imageUrls, prevUrl = fetchUrls(url, self.imageSearch,
-              self.prevSearch, session=self.session)
+            data, baseUrl = getPageContent(url, session=self.session)
+            imageUrls = set(fetchUrls(url, data, baseUrl, self.imageSearch))
+            yield self.getComicStrip(url, imageUrls)
+            prevUrl = fetchUrl(url, data, baseUrl, self.prevSearch)
             prevUrl = self.prevUrlModifier(prevUrl)
             out.debug("Matched previous URL %s" % prevUrl)
             seen_urls.add(url)
-            yield self.getComicStrip(url, imageUrls)
             if prevUrl in seen_urls:
                 # avoid recursive URL loops
                 out.warn("Already seen previous URL %r" % prevUrl)

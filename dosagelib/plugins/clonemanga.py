@@ -3,7 +3,7 @@
 # Copyright (C) 2012-2013 Bastian Kleineidam
 from re import compile
 from ..scraper import make_scraper
-from ..util import tagre, getQueryParams, fetchUrl
+from ..util import tagre, getQueryParams, fetchUrl, getPageContent
 
 
 _linkTag = tagre("a", "href", r'([^"]+)')
@@ -25,17 +25,15 @@ def add(name, shortName, imageFolder=None, lastStrip=None):
     @classmethod
     def _starter(cls):
         # first, try hopping to previous and next comic
-        url = fetchUrl(baseUrl, _prevSearch)
-        if not url:
+        data, _baseUrl = getPageContent(baseUrl, session=cls.session)
+        try:
+            url = fetchUrl(baseUrl, data, _baseUrl, _prevSearch)
+        except ValueError:
             # no previous link found, try hopping to last comic
-            url = fetchUrl(baseUrl, _lastSearch)
-            if not url:
-                raise ValueError("could not find lastSearch pattern %r in %s" % (_lastSearch.pattern, baseUrl))
-            return url
-        url = fetchUrl(url, _nextSearch)
-        if not url:
-            raise ValueError("could not find nextSearch pattern %r in %s" % (_nextSearch.pattern, url))
-        return url
+            return fetchUrl(baseUrl, data, _baseUrl, _lastSearch)
+        else:
+            data, _baseUrl = getPageContent(url, session=cls.session)
+            return fetchUrl(url, data, _baseUrl, _nextSearch)
 
     attrs = dict(
         name='CloneManga/' + name,

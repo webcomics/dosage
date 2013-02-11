@@ -1,7 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2013 Bastian Kleineidam
-from .util import fetchUrl, getQueryParams
+from .util import fetchUrl, getPageContent, getQueryParams
 
 def queryNamer(paramName, usePageUrl=False):
     """Get name from URL query part."""
@@ -29,24 +29,18 @@ def bounceStarter(url, nextSearch):
     @classmethod
     def _starter(cls):
         """Get bounced start URL."""
-        url1 = fetchUrl(url, cls.prevSearch, session=cls.session)
-        if not url1:
-            raise ValueError("could not find prevSearch pattern %r in %s" % (cls.prevSearch.pattern, url))
-        url2 = fetchUrl(url1, nextSearch, session=cls.session)
-        if not url2:
-            raise ValueError("could not find nextSearch pattern %r in %s" % (nextSearch.pattern, url1))
-        return url2
+        data, baseUrl = getPageContent(url, session=cls.session)
+        url1 = fetchUrl(url, data, baseUrl, cls.prevSearch)
+        data, baseUrl = getPageContent(url1, session=cls.session)
+        return fetchUrl(url1, data, baseUrl, nextSearch)
     return _starter
 
 
-def indirectStarter(baseUrl, latestSearch):
+def indirectStarter(url, latestSearch):
     """Get start URL by indirection."""
     @classmethod
     def _starter(cls):
         """Get indirect start URL."""
-        url = fetchUrl(baseUrl, latestSearch, session=cls.session)
-        if not url:
-            raise ValueError("could not find latestSearch pattern %r in %s" % (latestSearch.pattern, baseUrl))
-        return url
+        data, baseUrl = getPageContent(url, session=cls.session)
+        return fetchUrl(url, data, baseUrl, latestSearch)
     return _starter
-

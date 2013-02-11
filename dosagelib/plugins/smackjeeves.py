@@ -3,7 +3,7 @@
 # Copyright (C) 2012-2013 Bastian Kleineidam
 from re import compile
 from ..scraper import make_scraper
-from ..util import tagre, quote, fetchUrl, case_insensitive_re
+from ..util import tagre, quote, fetchUrl, case_insensitive_re, getPageContent
 
 _imageSearch = compile(tagre("img", "src", r'([^"]+)', after='id="comic_image"'))
 _linkSearch = tagre("a", "href", r'([^>"]*/comics/\d+/[^>"]*)', quote='"?')
@@ -30,15 +30,14 @@ def add(name, url, description, adult, bounce):
     @classmethod
     def _starter(cls):
         """Get start URL."""
-        url1 = fetchUrl(modifier(url), cls.prevSearch, session=cls.session)
-        if not url1:
-            raise ValueError("could not find prevSearch pattern %r in %s" % (cls.prevSearch.pattern, modifier(url)))
+        url1 = modifier(url)
+        data, baseUrl = getPageContent(url1, session=cls.session)
+        url2 = fetchUrl(url1, data, baseUrl, cls.prevSearch)
         if bounce:
-            url2 = fetchUrl(modifier(url1), _nextSearch, session=cls.session)
-            if not url2:
-                raise ValueError("could not find nextSearch pattern %r in %s" % (_nextSearch.pattern, modifier(url1)))
-            return modifier(url2)
-        return modifier(url1)
+            data, baseUrl = getPageContent(url2, session=cls.session)
+            url3 = fetchUrl(url2, data, baseUrl, _nextSearch)
+            return modifier(url3)
+        return modifier(url2)
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):

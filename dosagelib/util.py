@@ -99,8 +99,7 @@ def getPageContent(url, max_content_bytes=MaxContentBytes, session=None):
     """Get text content of given URL."""
     check_robotstxt(url)
     # read page data
-    page = urlopen(url, max_content_bytes=max_content_bytes,
-      session=session)
+    page = urlopen(url, max_content_bytes=max_content_bytes, session=session)
     data = page.text
     # determine base URL
     baseUrl = None
@@ -117,45 +116,23 @@ def getImageObject(url, referrer, max_content_bytes=MaxImageBytes):
     return urlopen(url, referrer=referrer, max_content_bytes=max_content_bytes)
 
 
-def fetchUrl(url, urlSearch, session=None):
-    """Search for given URL pattern in a HTML page."""
-    data, baseUrl = getPageContent(url, session=session)
-    match = urlSearch.search(data)
-    if match:
+def fetchUrls(url, data, baseUrl, urlSearch):
+    """Search all entries for given URL pattern in a HTML page."""
+    searchUrls = []
+    for match in urlSearch.finditer(data):
         searchUrl = match.group(1)
         if not searchUrl:
-            raise ValueError("Match empty URL at %s with pattern %s" % (url, urlSearch.pattern))
-        out.debug('matched URL %r' % searchUrl)
-        return normaliseURL(urlparse.urljoin(baseUrl, searchUrl))
-    return None
+            raise ValueError("Pattern %s matched empty URL at %s." % (urlSearch.pattern, url))
+        out.debug('matched URL %r with pattern %s' % (searchUrl, urlSearch.pattern))
+        searchUrls.append(normaliseURL(urlparse.urljoin(baseUrl, searchUrl)))
+    if not searchUrls:
+        raise ValueError("Pattern %s not found at URL %s with data %r." % (urlSearch.pattern, url, data))
+    return searchUrls
 
 
-def fetchUrls(url, imageSearch, prevSearch=None, session=None):
-    """Search for given image and previous URL pattern in a HTML page."""
-    data, baseUrl = getPageContent(url, session=session)
-    # match images
-    imageUrls = set()
-    for match in imageSearch.finditer(data):
-        imageUrl = match.group(1)
-        if not imageUrl:
-            raise ValueError("Match empty image URL at %s with pattern %s" % (url, imageSearch.pattern))
-        out.debug('matched image URL %r with pattern %s' % (imageUrl, imageSearch.pattern))
-        imageUrls.add(normaliseURL(urlparse.urljoin(baseUrl, imageUrl)))
-    if not imageUrls:
-        out.warn("no images found at %s with pattern %s" % (url, imageSearch.pattern))
-    if prevSearch is not None:
-        # match previous URL
-        match = prevSearch.search(data)
-        if match:
-            prevUrl = match.group(1)
-            if not prevUrl:
-                raise ValueError("Match empty previous URL at %s with pattern %s" % (url, prevSearch.pattern))
-            prevUrl = normaliseURL(urlparse.urljoin(baseUrl, prevUrl))
-        else:
-            out.debug('no previous URL %s at %s' % (prevSearch.pattern, url))
-            prevUrl = None
-        return imageUrls, prevUrl
-    return imageUrls, None
+def fetchUrl(url, data, baseUrl, urlSearch):
+    """Search first entry for given URL pattern in a HTML page."""
+    return fetchUrls(url, data, baseUrl, urlSearch)[0]
 
 
 def unescape(text):
