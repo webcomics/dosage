@@ -75,6 +75,7 @@ register:
 	freecode-submit < $(LAPPNAME).freecode
 
 releasecheck: check
+	git checkout master
 	@if egrep -i "xx\.|xxxx|\.xx" doc/changelog.txt > /dev/null; then \
 	  echo "Could not release: edit doc/changelog.txt release date"; false; \
 	fi
@@ -86,6 +87,14 @@ releasecheck: check
 	  echo "Could not release: edit $(LAPPNAME).freecode version"; false; \
 	fi
 	$(PYTHON) setup.py check --restructuredtext
+	git checkout debian
+	@if ! head -1 debian/changelog | grep "$(VERSION)" > /dev/null; then \
+	  echo "Could not release: update debian/changelog version"; false; \
+	fi
+	@if head -1 debian/changelog | grep UNRELEASED >/dev/null; then \
+	  echo "Could not release: set debian/changelog release name"; false; \
+	fi
+	git checkout master
 
 # The check programs used here are mostly local scripts on my private system.
 # So for other developers there is no need to execute this target.
