@@ -225,7 +225,10 @@ def urlopen(url, referrer=None, max_content_bytes=None,
         "headers": headers,
         "timeout": timeout,
     }
-    if not hasattr(requests, 'adapters'):
+    if hasattr(requests, 'adapters'):
+        # requests >= 1.0
+        kwargs["stream"] = True
+    else:
         # requests << 1.0
         kwargs["prefetch"] = False
         kwargs["config"] = {"max_retries": MaxRetries}
