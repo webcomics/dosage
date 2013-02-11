@@ -101,6 +101,10 @@ def getPageContent(url, max_content_bytes=MaxContentBytes, session=None):
     # read page data
     page = urlopen(url, max_content_bytes=max_content_bytes, session=session)
     data = page.text
+    if not data:
+        # sometimes the python requests library is wonky - try again
+        page = urlopen(url, max_content_bytes=max_content_bytes, session=session)
+        data = page.text
     # determine base URL
     baseUrl = None
     match = baseSearch.search(data)
