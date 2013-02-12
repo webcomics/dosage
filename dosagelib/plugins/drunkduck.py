@@ -26,14 +26,14 @@ def add(name, path):
     @classmethod
     def _starter(cls):
         # first, try hopping to previous and next comic
-        data, baseUrl = getPageContent(_url, session=cls.session)
+        data, baseUrl = getPageContent(_url, cls.session)
         try:
             url = fetchUrl(_url, data, baseUrl, _prevSearch)
         except ValueError:
             # no previous link found, try hopping to last comic
             return fetchUrl(_url, data, baseUrl, _lastSearch)
         else:
-            data, baseUrl = getPageContent(url, session=cls.session)
+            data, baseUrl = getPageContent(url, cls.session)
             return fetchUrl(url, data, baseUrl, _nextSearch)
 
     globals()[classname] = make_scraper(classname,

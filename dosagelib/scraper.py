@@ -62,7 +62,7 @@ class _BasicScraper(object):
 
     def getStrip(self, url):
         """Get comic strip for given URL."""
-        data, baseUrl = getPageContent(url, session=self.session)
+        data, baseUrl = getPageContent(url, self.session)
         imageUrls = set(fetchUrls(url, data, baseUrl, self.imageSearch))
         if len(imageUrls) > 1 and not self.multipleImagesPerStrip:
             out.warn("found %d images instead of 1 with %s" % (len(imageUrls), self.imageSearch.pattern))
@@ -70,7 +70,7 @@ class _BasicScraper(object):
 
     def getComicStrip(self, url, imageUrls):
         """Get comic strip downloader for given URL and images."""
-        return ComicStrip(self.get_name(), url, imageUrls, self.namer)
+        return ComicStrip(self.get_name(), url, imageUrls, self.namer, self.session)
 
     def getAllStrips(self, maxstrips=None):
         """Get all comic strips."""
@@ -98,12 +98,19 @@ class _BasicScraper(object):
         retrieving the given number of strips."""
         seen_urls = set()
         while url:
-            data, baseUrl = getPageContent(url, session=self.session)
+            data, baseUrl = getPageContent(url, self.session)
             imageUrls = set(fetchUrls(url, data, baseUrl, self.imageSearch))
             yield self.getComicStrip(url, imageUrls)
-            prevUrl = fetchUrl(url, data, baseUrl, self.prevSearch)
-            prevUrl = self.prevUrlModifier(prevUrl)
-            out.debug("Matched previous URL %s" % prevUrl)
+            prevUrl = None
+            if self.prevSearch:
+                try:
+                    prevUrl = fetchUrl(url, data, baseUrl, self.prevSearch)
+                except ValueError as msg:
+                    # assume there is no previous URL, but print a warning
+                    out.warn("%s Assuming no previous comic strips exist." % msg)
+                else:
+                    prevUrl = self.prevUrlModifier(prevUrl)
+                    out.debug("Matched previous URL %s" % prevUrl)
             seen_urls.add(url)
             if prevUrl in seen_urls:
                 # avoid recursive URL loops

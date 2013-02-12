@@ -25,14 +25,14 @@ def add(name, shortName, imageFolder=None, lastStrip=None):
     @classmethod
     def _starter(cls):
         # first, try hopping to previous and next comic
-        data, _baseUrl = getPageContent(baseUrl, session=cls.session)
+        data, _baseUrl = getPageContent(baseUrl, cls.session)
         try:
             url = fetchUrl(baseUrl, data, _baseUrl, _prevSearch)
         except ValueError:
             # no previous link found, try hopping to last comic
             return fetchUrl(baseUrl, data, _baseUrl, _lastSearch)
         else:
-            data, _baseUrl = getPageContent(url, session=cls.session)
+            data, _baseUrl = getPageContent(url, cls.session)
             return fetchUrl(url, data, _baseUrl, _nextSearch)
 
     attrs = dict(

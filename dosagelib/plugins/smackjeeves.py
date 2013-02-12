@@ -31,10 +31,10 @@ def add(name, url, description, adult, bounce):
     def _starter(cls):
         """Get start URL."""
         url1 = modifier(url)
-        data, baseUrl = getPageContent(url1, session=cls.session)
+        data, baseUrl = getPageContent(url1, cls.session)
         url2 = fetchUrl(url1, data, baseUrl, cls.prevSearch)
         if bounce:
-            data, baseUrl = getPageContent(url2, session=cls.session)
+            data, baseUrl = getPageContent(url2, cls.session)
             url3 = fetchUrl(url2, data, baseUrl, _nextSearch)
             return modifier(url3)
         return modifier(url2)

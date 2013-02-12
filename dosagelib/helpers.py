@@ -29,9 +29,9 @@ def bounceStarter(url, nextSearch):
     @classmethod
     def _starter(cls):
         """Get bounced start URL."""
-        data, baseUrl = getPageContent(url, session=cls.session)
+        data, baseUrl = getPageContent(url, cls.session)
         url1 = fetchUrl(url, data, baseUrl, cls.prevSearch)
-        data, baseUrl = getPageContent(url1, session=cls.session)
+        data, baseUrl = getPageContent(url1, cls.session)
         return fetchUrl(url1, data, baseUrl, nextSearch)
     return _starter
 
@@ -41,6 +41,6 @@ def indirectStarter(url, latestSearch):
     @classmethod
     def _starter(cls):
         """Get indirect start URL."""
-        data, baseUrl = getPageContent(url, session=cls.session)
+        data, baseUrl = getPageContent(url, cls.session)
         return fetchUrl(url, data, baseUrl, latestSearch)
     return _starter

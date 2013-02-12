@@ -26,7 +26,7 @@ def add(name, shortname):
          <img alt="Marmaduke" src="http://assets.amuniversal.com/07e7f270fa08012ff506001dd8b71c47" />
          <h4>published: Sunday, November 11, 2012</h4>
         """
-        data = getPageContent(pageUrl)[0]
+        data = getPageContent(pageUrl, cls.session)[0]
         ro = compile(tagre("img", "src", escape(imageUrl)) + r'\s+<h4>published: ([^<]+)')
         mo = ro.search(data)
         if mo:

@@ -95,16 +95,21 @@ def case_insensitive_re(name):
 
 baseSearch = re.compile(tagre("base", "href", '([^"]*)'))
 
-def getPageContent(url, max_content_bytes=MaxContentBytes, session=None):
+def getPageContent(url, session, max_content_bytes=MaxContentBytes):
     """Get text content of given URL."""
-    check_robotstxt(url)
+    check_robotstxt(url, session)
     # read page data
-    page = urlopen(url, max_content_bytes=max_content_bytes, session=session)
+    page = urlopen(url, session, max_content_bytes=max_content_bytes)
     data = page.text
-    if not data:
+    tries = 0
+    while not data and tries < 5:
         # sometimes the python requests library is wonky - try again
-        page = urlopen(url, max_content_bytes=max_content_bytes, session=session)
+        time.sleep(5)
+        page = urlopen(url, session, max_content_bytes=max_content_bytes)
         data = page.text
+        tries += 1
+    if not data:
+        raise ValueError("Got empty data from %s" % url)
     # determine base URL
     baseUrl = None
     match = baseSearch.search(data)
@@ -115,9 +120,9 @@ def getPageContent(url, max_content_bytes=MaxContentBytes, session=None):
     return data, baseUrl
 
 
-def getImageObject(url, referrer, max_content_bytes=MaxImageBytes):
+def getImageObject(url, referrer, session, max_content_bytes=MaxImageBytes):
     """Get response object for given image URL."""
-    return urlopen(url, referrer=referrer, max_content_bytes=max_content_bytes)
+    return urlopen(url, session, referrer=referrer, max_content_bytes=max_content_bytes)
 
 
 def fetchUrls(url, data, baseUrl, urlSearch):
@@ -191,21 +196,21 @@ def get_roboturl(url):
     return urlparse.urlunparse((pu[0], pu[1], "/robots.txt", "", "", ""))
 
 
-def check_robotstxt(url):
+def check_robotstxt(url, session):
     """Check if robots.txt allows our user agent for the given URL.
     @raises: IOError if URL is not allowed
     """
     roboturl = get_roboturl(url)
-    rp = get_robotstxt_parser(roboturl)
+    rp = get_robotstxt_parser(roboturl, session)
     if not rp.can_fetch(UserAgent, url):
         raise IOError("%s is disallowed by robots.txt" % url)
 
 
 @memoized
-def get_robotstxt_parser(url):
+def get_robotstxt_parser(url, session):
     """Get a RobotFileParser for the given robots.txt URL."""
     rp = robotparser.RobotFileParser()
-    req = urlopen(url, max_content_bytes=MaxContentBytes, raise_for_status=False)
+    req = urlopen(url, session, max_content_bytes=MaxContentBytes, raise_for_status=False)
     if req.status_code in (401, 403):
         rp.disallow_all = True
     elif req.status_code >= 400:
@@ -215,16 +220,14 @@ def get_robotstxt_parser(url):
     return rp
 
 
-def urlopen(url, referrer=None, max_content_bytes=None,
-            timeout=ConnectionTimeoutSecs, session=None, raise_for_status=True):
+def urlopen(url, session, referrer=None, max_content_bytes=None,
+            timeout=ConnectionTimeoutSecs, raise_for_status=True):
     """Open an URL and return the response object."""
     out.debug('Open URL %s' % url)
     headers = {'User-Agent': UserAgent}
     if referrer:
         headers['Referer'] = referrer
     out.debug('Sending headers %s' % headers, level=3)
-    if session is None:
-        session = requests
     kwargs = {
         "headers": headers,
         "timeout": timeout,

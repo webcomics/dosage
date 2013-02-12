@@ -17,12 +17,13 @@ class FetchComicError(IOError):
 class ComicStrip(object):
     """A list of comic image URLs."""
 
-    def __init__(self, name, stripUrl, imageUrls, namer):
+    def __init__(self, name, stripUrl, imageUrls, namer, session):
         """Store the image URL list."""
         self.name = name
         self.stripUrl = stripUrl
         self.imageUrls = imageUrls
         self.namer = namer
+        self.session = session
 
     def getImages(self):
         """Get a list of image downloaders."""
@@ -35,13 +36,15 @@ class ComicStrip(object):
         if filename is None:
             filename = url.rsplit('/', 1)[1]
         dirname = getDirname(self.name)
-        return ComicImage(self.name, url, self.stripUrl, dirname, filename)
+        return ComicImage(self.name, url, self.stripUrl, dirname, filename, self.session)
 
 
 class ComicImage(object):
     """A comic image downloader."""
 
-    def __init__(self, name, url, referrer, dirname, filename):
+    ChunkBytes = 1024 * 100 # 100KB
+
+    def __init__(self, name, url, referrer, dirname, filename, session):
         """Set URL and filename."""
         self.name = name
         self.referrer = referrer
@@ -49,11 +52,12 @@ class ComicImage(object):
         self.dirname = dirname
         filename = getFilename(filename)
         self.filename, self.ext = os.path.splitext(filename)
+        self.session = session
 
     def connect(self):
         """Connect to host and get meta information."""
         try:
-            self.urlobj = getImageObject(self.url, self.referrer)
+            self.urlobj = getImageObject(self.url, self.referrer, self.session)
         except IOError as msg:
             raise FetchComicError('Unable to retrieve URL.', self.url, msg)
 
@@ -100,7 +104,8 @@ class ComicImage(object):
         try:
             out.debug('Writing comic to file %s...' % fn)
             with open(fn, 'wb') as comicOut:
-                comicOut.write(self.urlobj.content)
+                for chunk in self.urlobj.iter_content(chunk_size=self.ChunkBytes):
+                    comicOut.write(chunk)
             self.touch(fn)
         except Exception:
             if os.path.isfile(fn):
