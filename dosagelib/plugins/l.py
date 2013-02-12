@@ -25,12 +25,12 @@ class Lint(_BasicScraper):
 
 
 class LookingForGroup(_BasicScraper):
-    url = 'http://www.lfgcomic.com/page/latest'
-    stripUrl = 'http://www.lfgcomic.com/page/%s'
-    imageSearch = compile(r'<img src="(http://newcdn.lfgcomic.com/uploads/comics/.+?)"')
-    prevSearch = compile(r'<a href="(/page/\d+)" id="navtop-prev"')
-    starter = indirectStarter('http://www.lfgcomic.com/', compile(r'<a href="(/page/\d+)" id="feature-preview"'))
-    nameSearch = compile(r'/page/(\d+)')
+    url = 'http://www.lfgcomic.com/'
+    stripUrl = url + 'page/%s/'
+    imageSearch = compile(tagre("meta", "content", r'(http://cdn\.lfgcomic\.com/wp-content/uploads/[^"]+)', before="og:image"))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.lfgcomic\.com/page/\d+/)', after="navtop-prev"))
+    starter = indirectStarter(url, compile(tagre("a", "href", r'(http://www\.lfgcomic\.com/page/\d+/)', after="feature-previous")))
+    nameSearch = compile(r'/page/(\d+)/')
     help = 'Index format: nnn'
 
     def namer(self, imageUrl, pageUrl):
