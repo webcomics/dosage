@@ -36,7 +36,6 @@ description: a list of comic strips supported by Dosage
 <div id="comics">
 %(content)s
 </div>
-<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 <script>
 window.onload = function() {
   var wall = new Masonry(document.getElementById('comics'), {
@@ -82,7 +81,6 @@ title: Dosage comic %(name)s
 
 entrytemplate_url = u"""
 <a href="%(url)s" title="%(title)s" class="%(css)s">%(name)s</a>
-<div class="g-plusone" data-size="medium" data-annotation="bubble" data-href="%(url)s"></div>
 """
 
 entrytemplate_nourl = u"""
