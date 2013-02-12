@@ -18,6 +18,7 @@ def add(name):
         stripUrl = url + 'comic/%s',
         imageSearch = _imageSearch,
         prevSearch = _prevSearch,
+        multipleImagesPerStrip = True,
         help='Index format: named number'
     )
 
