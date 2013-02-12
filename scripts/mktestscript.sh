@@ -1,5 +1,6 @@
-#!/bin/sh -e
+#!/bin/sh
 # Copyright (C) 2012 Bastian Kleineidam
+set -e
 set -u
 # generates a convenience test script from failed tests
 
