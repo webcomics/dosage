@@ -135,7 +135,7 @@ def fetchUrls(url, data, baseUrl, urlSearch):
         out.debug('matched URL %r with pattern %s' % (searchUrl, urlSearch.pattern))
         searchUrls.append(normaliseURL(urlparse.urljoin(baseUrl, searchUrl)))
     if not searchUrls:
-        raise ValueError("Pattern %s not found at URL %s with data %r." % (urlSearch.pattern, url, data))
+        raise ValueError("Pattern %s not found at URL %s." % (urlSearch.pattern, url))
     return searchUrls
 
 
@@ -168,6 +168,8 @@ def unescape(text):
     return re.sub(r"&#?\w+;", _fixup, text)
 
 
+_nopathquote_chars = "-;/=,~*+()@!"
+
 def normaliseURL(url):
     """Removes any leading empty segments to avoid breaking urllib2; also replaces
     HTML entities and character references.
@@ -181,7 +183,7 @@ def normaliseURL(url):
     segments = pu[2].split('/')
     while segments and segments[0] in ('', '..'):
         del segments[0]
-    pu[2] = quote(unquote('/' + '/'.join(segments)))
+    pu[2] = quote(unquote('/' + '/'.join(segments)), safechars=_nopathquote_chars)
     # remove leading '&' from query
     if pu[4].startswith('&'):
         pu[4] = pu[4][1:]
