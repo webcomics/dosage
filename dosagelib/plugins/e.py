@@ -135,8 +135,8 @@ class ExtraLife(_BasicScraper):
 class EyeOfRamalach(_BasicScraper):
     url = 'http://theeye.katbox.net/'
     stripUrl = url + 'archive/%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://theeye\.katbox\.net/wp-content/webcomic/theeye/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://theeye\.katbox\.net/archive/[^"]+)', after="previous"))
+    imageSearch = compile(tagre("img", "src", r'(http://theeye\.katbox\.net/wp-content/uploads/[^"]+final[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://theeye\.katbox\.net/comic/[^"]+)', after="previous"))
     help = 'Index format: n (unpadded)'
 
 
