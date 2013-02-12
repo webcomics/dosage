@@ -214,7 +214,7 @@ class AirForceBlues(_BasicScraper):
 class AlienShores(_BasicScraper):
     url = 'http://alienshores.com/alienshores_band/'
     stripUrl = url + '%s'
-    imageSearch = compile(tagre("img", "src", r'(http://alienshores\.com/alienshores_band/comics/[^"]+)'))
+    imageSearch = compile(tagre("img", "src", r'(http://alienshores\.com/alienshores_band/wp-content/uploads/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://alienshores\.com/[^"]+)', after="prev"))
     help = 'Index format: yyyy/mm/dd/p<nn>/'
 
