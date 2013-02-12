@@ -8,6 +8,7 @@ import re
 import sys
 import os
 import urlparse
+import requests
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dosagelib.util import getPageContent, asciify, unescape, tagre, unquote
 from dosagelib.scraper import get_scrapers
@@ -53,6 +54,7 @@ exclude_comics = [
     "SimplePixel", # does not follow standard layout
     "SJArtCollab", # missing images
     "SlightlyDifferent", # missing images
+    "SpaceSchool", # does not follow standard layout
     "TheAfterSubtract", # does not follow standard layout
     "THEVOIDWEBCOMIC", # does not follow standard layout
     "ThreadCrashers", # has no previous comic link
@@ -212,11 +214,11 @@ num_matcher = re.compile(r'50%">\s+(\d+)\s+')
 desc_matcher = re.compile(r"</div>(.+?)</div>", re.DOTALL)
 adult_matcher = re.compile(tagre("img", "src", r'http://www\.smackjeeves\.com/images/mature_content\.png'))
 
-def handle_url(url, res):
+def handle_url(url, session, res):
     """Parse one search result page."""
     print("Parsing", url, file=sys.stderr)
     try:
-        data, baseUrl = getPageContent(url)
+        data, baseUrl = getPageContent(url, session)
     except IOError as msg:
         print("ERROR:", msg, file=sys.stderr)
         return
@@ -242,7 +244,7 @@ def handle_url(url, res):
         # search for url in extra page
         print("Getting", page_url)
         try:
-            data2, baseUrl2 = getPageContent(page_url)
+            data2, baseUrl2 = getPageContent(page_url, session)
         except IOError as msg:
             print("ERROR:", msg, file=sys.stderr)
             return
@@ -272,6 +274,7 @@ def handle_url(url, res):
 def get_results():
     """Parse all search result pages."""
     base = "http://www.smackjeeves.com/search.php?submit=Search+for+Webcomics&search_mode=webcomics&comic_title=&special=all&last_update=3&style_all=on&genre_all=on&format_all=on&sort_by=2&start=%d"
+    session = requests.Session()
     # store info in a dictionary {name -> url, number of comics, description, adult flag}
     res = {}
     # a search for an empty string returned 286 result pages
@@ -279,7 +282,7 @@ def get_results():
     print("Parsing", result_pages, "search result pages...", file=sys.stderr)
     for i in range(0, result_pages):
         print(i+1, file=sys.stderr, end=" ")
-        handle_url(base % (i*12), res)
+        handle_url(base % (i*12), session, res)
     save_result(res, json_file)
 
 

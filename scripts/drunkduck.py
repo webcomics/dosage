@@ -7,6 +7,7 @@ from __future__ import print_function
 import re
 import sys
 import os
+import requests
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dosagelib.util import tagre, getPageContent, unquote, unescape, asciify
 from scriptutil import contains_case_insensitive, capfirst, save_result, load_result, truncate_name
@@ -154,10 +155,10 @@ exclude_comics = [
 ]
 
 
-def handle_url(url, url_matcher, num_matcher, res):
+def handle_url(url, session, url_matcher, num_matcher, res):
     """Parse one search result page."""
     try:
-        data, baseUrl = getPageContent(url)
+        data, baseUrl = getPageContent(url, session)
     except IOError as msg:
         print("ERROR:", msg, file=sys.stderr)
         return
@@ -191,9 +192,10 @@ def get_results():
     # a search for an empty string returned 825 result pages
     result_pages = 825
     print("Parsing", result_pages, "search result pages...", file=sys.stderr)
+    session = requests.Session()
     for i in range(1, result_pages + 1):
         print(i, file=sys.stderr, end=" ")
-        handle_url(base % i, href, num, res)
+        handle_url(base % i, session, href, num, res)
     save_result(res, json_file)
 
 

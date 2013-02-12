@@ -7,6 +7,7 @@ from __future__ import print_function
 import re
 import sys
 import os
+import requests
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dosagelib.util import getPageContent, asciify, unescape, tagre
 from scriptutil import contains_case_insensitive, capfirst, save_result, load_result, truncate_name
@@ -19,11 +20,11 @@ url_matcher = re.compile(tagre("a", "href", r'(/comics/[^/]+)\.html') + r'<stron
 exclude_comics = [
 ]
 
-def handle_url(url, res):
+def handle_url(url, session, res):
     """Parse one search result page."""
     print("Parsing", url, file=sys.stderr)
     try:
-        data, baseUrl = getPageContent(url)
+        data, baseUrl = getPageContent(url, session)
     except IOError as msg:
         print("ERROR:", msg, file=sys.stderr)
         return
@@ -45,7 +46,8 @@ def get_results():
     """Parse all search result pages."""
     # store info in a dictionary {name -> shortname}
     res = {}
-    handle_url('http://www.creators.com/comics/cat-seeall.html', res)
+    session = requests.Session()
+    handle_url('http://www.creators.com/comics/cat-seeall.html', session, res)
     save_result(res, json_file)
 
 
