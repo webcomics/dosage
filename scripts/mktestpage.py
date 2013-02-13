@@ -63,10 +63,10 @@ title: Dosage comic %(name)s
 <th>Website</th><td><a href="%(url)s">%(url)s</a></td>
 </tr>
 <tr>
-<th>Adult content</th><td>%(adult)s</td>
+<th>Genre</th><td>%(genre)s</td>
 </tr>
 <tr>
-<th>Available since</th><td>Dosage v%(since)s</td>
+<th>Adult content</th><td>%(adult)s</td>
 </tr>
 <tr>
 <th>Status</th><td>%(status)s on %(date)s</td>
@@ -117,7 +117,7 @@ def get_testinfo(filename, modified):
                 "url": string,
                 "description": string,
                 "error": string or None,
-                "since": string,
+                "genre": string,
                 "adult": bool,
                }
              }
@@ -159,6 +159,7 @@ def get_testentry(line):
         "name": name,
         "url": scraper.url,
         "description": scraper.description,
+        "genre": "",
         "error": None,
         "adult": scraper.adult,
     }
@@ -174,11 +175,6 @@ def orphan_entries(keys, testinfo):
 
 def update_testentry(key, entry, testinfo):
     """Update one entry with testinfo information."""
-    if key not in testinfo:
-        # add dosage version for this comic
-        entry["since"] = DosageVersion
-    else:
-        entry["since"] = testinfo[key]["since"]
     testinfo[key] = entry
 
 
@@ -228,7 +224,7 @@ def write_html_comic(key, entry, outputdir, date):
         "url": quote(entry["url"]),
         "name": quote(entry["name"]),
         "adult": quote("yes" if entry["adult"] else "no"),
-        "since": quote(entry["since"]),
+        "genre": quote(entry["genre"]),
         "description": quote(entry["description"]),
         "status": quote(entry["status"]),
         "date": quote(date),
