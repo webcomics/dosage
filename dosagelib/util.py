@@ -203,13 +203,13 @@ def check_robotstxt(url, session):
     @raises: IOError if URL is not allowed
     """
     roboturl = get_roboturl(url)
-    rp = get_robotstxt_parser(roboturl, session)
+    rp = get_robotstxt_parser(roboturl, session=session)
     if not rp.can_fetch(UserAgent, url):
         raise IOError("%s is disallowed by robots.txt" % url)
 
 
 @memoized
-def get_robotstxt_parser(url, session):
+def get_robotstxt_parser(url, session=None):
     """Get a RobotFileParser for the given robots.txt URL."""
     rp = robotparser.RobotFileParser()
     req = urlopen(url, session, max_content_bytes=MaxContentBytes, raise_for_status=False)

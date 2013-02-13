@@ -11,18 +11,18 @@ class memoized (object):
         self.func = func
         self.cache = {}
 
-    def __call__(self, *args):
+    def __call__(self, *args, **kwargs):
         """Lookup and return cached result if found. Else call stored
         function with given arguments."""
         try:
             return self.cache[args]
         except KeyError:
-            self.cache[args] = value = self.func(*args)
+            self.cache[args] = value = self.func(*args, **kwargs)
             return value
         except TypeError:
             # uncachable -- for instance, passing a list as an argument.
             # Better to not cache than to blow up entirely.
-            return self.func(*args)
+            return self.func(*args, **kwargs)
 
     def __repr__(self):
         """Return the function's docstring."""
