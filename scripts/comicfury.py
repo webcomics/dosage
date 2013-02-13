@@ -51,21 +51,18 @@ def handle_url(url, session, res):
             continue
         desc = format_description(mo.group(1))
         # find out how many images this comic has
-        end = mo.end()
         mo = num_matcher.search(data[end:])
         if not mo:
             print("ERROR matching number:", repr(data[end:end+300]), file=sys.stderr)
             continue
         num = int(mo.group(1))
         # find genre
-        end = mo.end()
         mo = genre_matcher.search(data[end:])
         if not mo:
             print("ERROR matching genre:", repr(data[end:end+300]), file=sys.stderr)
             continue
         genre = mo.group(1)
         # find activity
-        end = mo.end()
         mo = activity_matcher.search(data[end:])
         if not mo:
             print("ERROR matching activity:", repr(data[end:end+300]), file=sys.stderr)
@@ -121,8 +118,8 @@ def print_results(args):
             prefix = '#'
         else:
             prefix = ''
-        print("%sadd(%r, %r, %r)" % (
-          prefix, str(truncate_name(name)), str(url), desc
+        print("%sadd(%r, %r, %r) # %d" % (
+          prefix, str(truncate_name(name)), str(url), desc, num
         ))
 
 
