@@ -11,8 +11,8 @@ from ..util import tagre
 class LasLindas(_BasicScraper):
     url = 'http://laslindas.katbox.net/'
     stripUrl = url + 'archive/%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://laslindas\.katbox\.net/wp-content/webcomic/las-lindas/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://laslindas\.katbox\.net/archive/[^"]+)', after="previous"))
+    imageSearch = compile(tagre("img", "src", r'(http://laslindas\.katbox\.net/wp-content/uploads/[^"]+)', after="attachment-full"))
+    prevSearch = compile(tagre("a", "href", r'(http://laslindas\.katbox\.net/comic/[^"]+)', after="previous"))
     help = 'Index format: stripname'
 
 
