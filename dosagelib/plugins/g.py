@@ -30,8 +30,8 @@ class Garanos(_BasicScraper):
 class GUComics(_BasicScraper):
     url = 'http://www.gucomics.com/comic/'
     stripUrl = url + '?cdate=%s'
-    imageSearch = compile(r'<IMG src="(/comics/\d{4}/gu_.*?)"')
-    prevSearch = compile(r'<A href="(/comic/\?cdate=\d+)"><IMG src="/images/cnav_prev')
+    imageSearch = compile(tagre("img", "src", r'(/comics/\d{4}/gu_[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(/comic/\?cdate=\d+)') + '&lt; Prev')
     help = 'Index format: yyyymmdd'
 
 
