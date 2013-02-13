@@ -16,6 +16,9 @@ class _BasicScraper(object):
     @type stripUrl: C{string}
     @cvar stripUrl: A string that is interpolated with the strip index
         to yield the URL for a particular strip.
+    @type firstStripUrl: C{string} optional
+    @cvar firstStripUrl: Stop searching for previous URLs at this URL.
+        If not set and no previous URL is found a warning is printed.
     @type imageSearch: C{regex}
     @cvar imageSearch: A compiled regex that will locate the strip image URL
         when applied to the strip page.
@@ -23,6 +26,9 @@ class _BasicScraper(object):
     @cvar prevSearch: A compiled regex that will locate the URL for the
         previous strip when applied to a strip page.
     '''
+
+    # stop at this URL
+    firstStripUrl = None
 
     # if more than one image per URL is expected
     multipleImagesPerStrip = False
@@ -101,6 +107,9 @@ class _BasicScraper(object):
             data, baseUrl = getPageContent(url, self.session)
             imageUrls = set(fetchUrls(url, data, baseUrl, self.imageSearch))
             yield self.getComicStrip(url, imageUrls)
+            if self.firstStripUrl == url:
+                out.debug("Stop at first URL %s" % url)
+                break
             prevUrl = None
             if self.prevSearch:
                 try:
