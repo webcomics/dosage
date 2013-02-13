@@ -16,6 +16,14 @@ class _MadamAndEve(_BasicScraper):
     prevSearch = compile(r'<a href="(weekend_cartoon.php)"')
 
 
+class ManlyGuysDoingManlyThings(_BasicScraper):
+    url = 'http://thepunchlineismachismo.com/'
+    stripUrl = url + 'archives/comic/%s'
+    imageSearch = compile(tagre("img", "src", r'(http://thepunchlineismachismo\.com/wp-content/uploads/\d+/\d+/\d+-\d+-\d+[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://thepunchlineismachismo\.com/archives/comic/[^"]+)', after="previous"))
+    help = 'Index format: ddmmyyyy'
+
+
 class Marilith(_BasicScraper):
     url = 'http://www.marilith.com/'
     stripUrl = url + 'archive.php?date=%s'
