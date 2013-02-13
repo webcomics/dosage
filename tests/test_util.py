@@ -14,13 +14,13 @@ class URLTest(TestCase):
     def test_unescape(self):
         # Test HTML replacement.
         self.assertEqual(unescape('foo&amp;bar'), 'foo&bar')
-        self.assertEqual(unescape('foo&#160;bar'), 'foo%C2%A0bar')
-        self.assertEqual(unescape('&quot;foo&quot;'), '%22foo%22')
+        self.assertEqual(unescape('foo&#160;bar'), u'foo\xa0bar')
+        self.assertEqual(unescape('&quot;foo&quot;'), '"foo"')
 
     def test_normalisation(self):
         # Test URL normalisation.
         self.assertEqual(normaliseURL('http://example.com//bar/baz&amp;baz'),
-                         'http://example.com/bar/baz&baz')
+                         u'http://example.com/bar/baz%26baz')
 
 
 class RegexTest(TestCase):
