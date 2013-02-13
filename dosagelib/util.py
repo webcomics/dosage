@@ -30,6 +30,9 @@ MaxImageBytes = 1024 * 1024 * 20 # 20 MB
 # Default number of retries
 MaxRetries = 3
 
+# Time to pause between retries
+RetryPauseSeconds = 5
+
 # Default connection timeout
 ConnectionTimeoutSecs = 60
 
@@ -95,21 +98,27 @@ def case_insensitive_re(name):
 
 baseSearch = re.compile(tagre("base", "href", '([^"]*)'))
 
+def isValidPageContent(data):
+    """Check if page content is empty or has error messages."""
+    # The python requests library sometimes returns empty data.
+    # Some webservers have a 200 OK status but have an error message as response.
+    return data and not data.startswith("Internal Server Error")
+
+
 def getPageContent(url, session, max_content_bytes=MaxContentBytes):
     """Get text content of given URL."""
     check_robotstxt(url, session)
     # read page data
     page = urlopen(url, session, max_content_bytes=max_content_bytes)
     data = page.text
-    tries = 0
-    while not data and tries < 5:
-        # sometimes the python requests library is wonky - try again
-        time.sleep(5)
+    tries = MaxRetries
+    while not isValidPageContent(data) and tries > 0:
+        time.sleep(RetryPauseSeconds)
         page = urlopen(url, session, max_content_bytes=max_content_bytes)
         data = page.text
-        tries += 1
-    if not data:
-        raise ValueError("Got empty data from %s" % url)
+        tries -= 1
+    if not isValidPageContent(data):
+        raise ValueError("Got invalid page content from %s: %r" % (url, data))
     # determine base URL
     baseUrl = None
     match = baseSearch.search(data)
