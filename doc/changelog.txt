@@ -1,12 +1,16 @@
 Dosage 1.11 (released xx.xx.2013)
 
+Features:
+- comics: Added comic strips ManlyGuysDoingManlyThings, SandraAndWoo and
+  SupernormalStep.
+
 Changes:
 - comics: Always use connection pooling when downloading pages or files.
 
 Fixes:
-- comics: Correct list of characters not to quote for URL path encoding.
+- comics: Correct the list of characters not to quote for URL path encoding.
   This fixes a lot of download errors of DrunkDuck comics.
-- comics: Fixed LookingForGroup and GUComics comic strips.
+- comics: Fixed LasLindas, LookingForGroup and GUComics comic strips.
 
 
 Dosage 1.10 (released 10.2.2013)
