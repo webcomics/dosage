@@ -6,7 +6,12 @@ set -u
 mincomics=100
 d=$(dirname $0)
 
-for script in creators gocomics drunkduck keenspot smackjeeves arcamax; do
+if [ $# -ge 1 ]; then
+  list="$*"
+else
+  list="creators gocomics drunkduck keenspot smackjeeves arcamax comicfury"
+fi
+for script in $list; do
   target="${d}/../dosagelib/plugins/${script}.py"
   echo "Upating $target"
   "${d}/removeafter.py" "$target" "# DO NOT REMOVE"
