@@ -185,8 +185,10 @@ class _BasicScraper(object):
         return self.starter()
 
 
-def get_scraper(comic):
-    """Returns a comic module object."""
+def find_scraperclasses(comic, multiple_allowed=False):
+    """Get a list comic scraper classes. Can return more than one entries if
+    multiple_allowed is True, else it raises a ValueError if multiple
+    modules match. The match is a case insensitive substring search."""
     if not comic:
         raise ValueError("empty comic name")
     candidates = []
@@ -195,16 +197,18 @@ def get_scraper(comic):
         lname = scraperclass.get_name().lower()
         if lname == cname:
             # perfect match
-            return scraperclass
-        if cname in lname:
+            if not multiple_allowed:
+                return scraperclass
+            else:
+                candidates.append(scraperclass)
+        elif cname in lname:
             candidates.append(scraperclass)
-    if len(candidates) == 1:
-        return candidates[0]
-    elif candidates:
+    if len(candidates) > 1 and not multiple_allowed:
         comics = ", ".join(x.get_name() for x in candidates)
         raise ValueError('multiple comics found: %s' % comics)
-    else:
+    elif not candidates:
         raise ValueError('comic %r not found' % comic)
+    return candidates
 
 
 _scraperclasses = None

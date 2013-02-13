@@ -35,6 +35,7 @@ def setupOptions():
     parser.add_option('-t', '--timestamps', action='store_true', dest='timestamps', default=False, help='print timestamps for all output at any info level')
     parser.add_option('-o', '--output', action='store', dest='output', choices=events.getHandlers(), help='output formatting for downloaded comics')
     parser.add_option('--adult', action='store_true', dest='adult', default=False, help='confirms that you are old enough to view adult content')
+    parser.add_option('--multimatch', action='store_true', dest='multimatch', default=False, help='')
     try:
         import optcomplete
         optcomplete.autocomplete(parser)
@@ -106,7 +107,7 @@ def getComics(options, comics):
         events.installHandler(options.output, options.basepath, options.baseurl)
     events.getHandler().start()
     try:
-        for scraperobj in getScrapers(comics, options.basepath, options.adult):
+        for scraperobj in getScrapers(comics, options.basepath, options.adult, options.multimatch):
             errors += getStrips(scraperobj, options)
     except ValueError as msg:
         out.error(msg)
@@ -203,7 +204,7 @@ def getScraperName(scraperobj, limit=None):
     return name + suffix
 
 
-def getScrapers(comics, basepath=None, adult=True):
+def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False):
     """Get scraper objects for the given comics."""
     if '@' in comics:
         # only scrapers whose directory already exists
@@ -234,14 +235,13 @@ def getScrapers(comics, basepath=None, adult=True):
             else:
                 name = comic
                 indexes = None
-            # XXX if matchmulti, search for a list of scrapers
-            scraperclass = scraper.get_scraper(name)
-            if not adult and scraperclass.adult:
-                warn_adult(scraperclass)
-                continue
-            scraperobj = scraperclass(indexes=indexes)
-            if scraperobj not in scrapers:
-                scrapers[scraperobj] = True
+            for scraperclass in scraper.find_scraperclasses(name, multiple_allowed=multiple_allowed):
+                if not adult and scraperclass.adult:
+                    warn_adult(scraperclass)
+                    continue
+                scraperobj = scraperclass(indexes=indexes)
+                if scraperobj not in scrapers:
+                    scrapers[scraperobj] = True
         for scraperobj in scrapers:
             yield scraperobj
 
