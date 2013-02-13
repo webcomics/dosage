@@ -25,6 +25,14 @@ class SamAndFuzzy(_BasicScraper):
     help = 'Index format: nnnn'
 
 
+class SandraAndWoo(_BasicScraper):
+    url = 'http://www.sandraandwoo.com/'
+    stripUrl = url + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.sandraandwoo\.com/comics/\d+-\d+-\d+-[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.sandraandwoo\.com/\d+/\d+/\d+/[^"]+/)', after="prev"))
+    help = 'Index format: yyyy/mm/dd/number-stripname'
+
+
 class SarahZero(_BasicScraper):
     url = 'http://www.sarahzero.com/'
     stripUrl = url + 'sz_%s.html'
@@ -286,3 +294,11 @@ class SMBC(_BasicScraper):
     imageSearch = compile(r'<img src=\'(.+?\d{8}.\w{1,4})\'>')
     prevSearch = compile(r'131,13,216,84"\n\s+href="(.+?)#comic"\n>', MULTILINE)
     help = 'Index format: nnnn'
+
+
+class SupernormalStep(_BasicScraper):
+    url = 'http://supernormalstep.com/'
+    stripUrl = url + '?p=%s'
+    imageSearch = compile(tagre("img", "src", r'(http://supernormalstep\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://supernormalstep\.com/\?p=\d+)', after="prev"))
+    help = 'Index format: number'
