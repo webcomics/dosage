@@ -6,7 +6,7 @@ Changes:
 Fixes:
 - comics: Correct list of characters not to quote for URL path encoding.
   This fixes a lot of download errors of DrunkDuck comics.
-- comics: Fixed LookingForGroup comic strip.
+- comics: Fixed LookingForGroup and GUComics comic strips.
 
 
 Dosage 1.10 (released 10.2.2013)
