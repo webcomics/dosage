@@ -51,7 +51,23 @@ class _BasicScraper(object):
     def __init__(self, indexes=None):
         """Initialize internal variables."""
         self.urls = set()
-        self.indexes = indexes
+        if indexes:
+            self.indexes = tuple(indexes)
+        else:
+            self.indexes = tuple()
+
+    def __cmp__(self, other):
+        if not isinstance(other, _BasicScraper):
+            return 1
+        # first, order by name
+        d = cmp(self.get_name(), other.get_name())
+        if d != 0:
+            return d
+        # then by indexes
+        return cmp(self.indexes, other.indexes)
+
+    def __hash__(self):
+        return hash((self.get_name(), self.indexes))
 
     def getCurrentStrips(self):
         """Get current comic strip."""
