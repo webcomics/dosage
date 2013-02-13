@@ -7,8 +7,7 @@ import time
 import cgi
 import codecs
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
-from dosagelib.scraper import get_scrapers
-from dosagelib.configuration import Version as DosageVersion
+from dosagelib.scraper import get_scraperclasses
 from scriptutil import load_result, save_result
 
 json_file = __file__.replace(".py", ".json")
@@ -101,9 +100,9 @@ def strdate(t):
 def get_testscraper(line):
     """Get scraper from test output line."""
     classname = line.split('::')[1][4:]
-    for scraper in get_scrapers():
-        if scraper.__name__ == classname:
-            return scraper
+    for scraperclass in get_scraperclasses():
+        if scraperclass.__name__ == classname:
+            return scraperclass
     raise ValueError("Scraper %r not found" % classname)
 
 

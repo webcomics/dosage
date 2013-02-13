@@ -166,7 +166,7 @@ def get_scraper(comic):
         raise ValueError("empty comic name")
     candidates = []
     cname = comic.lower()
-    for scraperclass in get_scrapers():
+    for scraperclass in get_scraperclasses():
         lname = scraperclass.get_name().lower()
         if lname == cname:
             # perfect match
@@ -182,29 +182,29 @@ def get_scraper(comic):
         raise ValueError('comic %r not found' % comic)
 
 
-_scrapers = None
-def get_scrapers():
+_scraperclasses = None
+def get_scraperclasses():
     """Find all comic scraper classes in the plugins directory.
     The result is cached.
     @return: list of _BasicScraper classes
     @rtype: list of _BasicScraper
     """
-    global _scrapers
-    if _scrapers is None:
+    global _scraperclasses
+    if _scraperclasses is None:
         out.debug("Loading comic modules...")
         modules = loader.get_modules()
         plugins = loader.get_plugins(modules, _BasicScraper)
-        _scrapers = list(plugins)
-        _scrapers.sort(key=lambda s: s.get_name())
+        _scraperclasses = list(plugins)
+        _scraperclasses.sort(key=lambda s: s.get_name())
         check_scrapers()
-        out.debug("... %d modules loaded." % len(_scrapers))
-    return _scrapers
+        out.debug("... %d modules loaded." % len(_scraperclasses))
+    return _scraperclasses
 
 
 def check_scrapers():
     """Check for duplicate scraper class names."""
     d = {}
-    for scraperclass in _scrapers:
+    for scraperclass in _scraperclasses:
         name = scraperclass.get_name().lower()
         if name in d:
             name1 = scraperclass.get_name()

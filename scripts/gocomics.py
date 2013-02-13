@@ -10,7 +10,7 @@ import os
 import requests
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dosagelib.util import tagre, getPageContent, asciify, unescape
-from dosagelib.scraper import get_scrapers
+from dosagelib.scraper import get_scraperclasses
 from scriptutil import contains_case_insensitive, capfirst, save_result, load_result, truncate_name
 
 json_file = __file__.replace(".py", ".json")
@@ -78,7 +78,7 @@ def get_results():
 def has_creators_comic(name):
     """Test if comic name already exists."""
     cname = "Creators/%s" % name
-    for scraperclass in get_scrapers():
+    for scraperclass in get_scraperclasses():
         lname = scraperclass.get_name().lower()
         if lname == cname.lower():
             return True

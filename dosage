@@ -7,6 +7,7 @@ from __future__ import print_function
 import sys
 import os
 import optparse
+from collections import OrderedDict
 
 from dosagelib import events, scraper
 from dosagelib.output import out
@@ -208,7 +209,7 @@ def getScrapers(comics, basepath=None, adult=True):
         # only scrapers whose directory already exists
         if len(comics) > 1:
             out.warn("using '@' as comic name ignores all other specified comics.")
-        for scraperclass in scraper.get_scrapers():
+        for scraperclass in scraper.get_scraperclasses():
             if not adult and scraperclass.adult:
                 warn_adult(scraperclass)
                 continue
@@ -217,15 +218,15 @@ def getScrapers(comics, basepath=None, adult=True):
                 yield scraperclass()
     elif '@@' in comics:
         # all scrapers
-        for scraperclass in scraper.get_scrapers():
+        for scraperclass in scraper.get_scraperclasses():
             if not adult and scraperclass.adult:
                 warn_adult(scraperclass)
                 continue
             yield scraperclass()
     else:
         # get only selected comic scrapers
-        # store them in a list to catch naming errors early
-        scrapers = []
+        # store them in an ordered set to eliminate duplicates
+        scrapers = OrderedDict()
         for comic in comics:
             if ':' in comic:
                 name, index = comic.split(':', 1)
@@ -233,13 +234,16 @@ def getScrapers(comics, basepath=None, adult=True):
             else:
                 name = comic
                 indexes = None
+            # XXX if matchmulti, search for a list of scrapers
             scraperclass = scraper.get_scraper(name)
             if not adult and scraperclass.adult:
                 warn_adult(scraperclass)
                 continue
-            scrapers.append(scraperclass(indexes=indexes))
-        for s in scrapers:
-            yield s
+            scraperobj = scraperclass(indexes=indexes)
+            if scraperobj not in scrapers:
+                scrapers[scraperobj] = True
+        for scraperobj in scrapers:
+            yield scraperobj
 
 
 def warn_adult(scraperclass):
@@ -269,7 +273,7 @@ def main():
 def profile():
     """Profile the loading of all scrapers."""
     import cProfile
-    cProfile.run("scraper.get_scrapers()", "dosage.prof")
+    cProfile.run("scraper.get_scraperclasses()", "dosage.prof")
 
 
 def viewprof():

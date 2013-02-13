@@ -7,7 +7,7 @@ from dosagelib import scraper, util
 class TestComicNames(TestCase):
 
     def test_names(self):
-        for scraperclass in scraper.get_scrapers():
+        for scraperclass in scraper.get_scraperclasses():
             name = scraperclass.get_name()
             self.assertTrue(name.count('/') <= 1, name)
             if '/' in name:
