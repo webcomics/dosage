@@ -1,6 +1,7 @@
 # Copyright (C) 2012-2013 Bastian Kleineidam
 import re
 import json
+from dosagelib.util import unescape, unquote, asciify
 
 def contains_case_insensitive(adict, akey):
     """Check if key is in adict. The search is case insensitive."""
@@ -46,3 +47,20 @@ def load_result(json_file):
 def truncate_name(text):
     """Ensure the comic name does not exceed 100 characters."""
     return text[:100]
+
+
+def format_name(text):
+    """Format a comic name."""
+    name = unescape(text)
+    name = asciify(name.replace('&', 'And').replace('@', 'At'))
+    name = capfirst(name)
+    return name
+
+
+def format_description(text):
+    """Format a comic description."""
+    desc = remove_html_tags(text)
+    desc = unescape(desc)
+    desc = unquote(desc)
+    desc = compact_whitespace(desc).strip()
+    return desc

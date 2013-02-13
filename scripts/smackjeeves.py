@@ -10,9 +10,9 @@ import os
 import urlparse
 import requests
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
-from dosagelib.util import getPageContent, asciify, unescape, tagre, unquote
-from dosagelib.scraper import get_scrapers
-from scriptutil import contains_case_insensitive, remove_html_tags, capfirst, compact_whitespace, save_result, load_result, truncate_name
+from dosagelib.util import getPageContent, tagre
+from dosagelib.scraper import get_scraperclasses
+from scriptutil import contains_case_insensitive, save_result, load_result, truncate_name, format_name, format_description
 
 json_file = __file__.replace(".py", ".json")
 
@@ -225,9 +225,7 @@ def handle_url(url, session, res):
     for match in page_matcher.finditer(data):
         page_url = match.group(1)
         page_url = urlparse.urljoin(url, page_url)
-        name = unescape(match.group(2))
-        name = asciify(name.replace('&', 'And').replace('@', 'At'))
-        name = capfirst(name)
+        name = format_name(match.group(2))
         if name in exclude_comics:
             continue
         if contains_case_insensitive(res, name):
@@ -259,10 +257,7 @@ def handle_url(url, session, res):
         if not mo:
             print("ERROR matching comic description:", repr(data2[end:end+300]), file=sys.stderr)
             continue
-        desc = remove_html_tags(mo.group(1))
-        desc = unescape(desc)
-        desc = unquote(desc)
-        desc = compact_whitespace(desc).strip()
+        desc = format_description(mo.group(1))
         # search for adult flag
         adult = adult_matcher.search(data2[end:])
         bounce = name not in repeat_comics
