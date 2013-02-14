@@ -18,32 +18,21 @@ class Status:
     error = "error"
     orphan = "orphan"
 
-indextemplate = u"""
----
-extends: base.j2
-title: Dosage comic list
-description: a list of comic strips supported by Dosage
----
-{%% block js %%}
-<script src="{{ media_url('js/masonry.min.js') }}"></script>
-{%% endblock js %%}
-
-{%% block content %%}
-<section id="main-content">
-
-<h2>Dosage comic list</h2>
-<div id="comics">
-%(content)s
-</div>
-<script>
-window.onload = function() {
-  var wall = new Masonry(document.getElementById('comics'), {
-    columnWidth: 240
-  });
-};
-</script>
-</section>
-{%% endblock content %%}
+comicdata_template = u"""
+/* generated on %(date)s */
+$(document).ready(function() {
+  $('#comics').html('<table cellpadding="0" cellspacing="0" border="0" class="display" id="comictable"></table>');
+  $('#comictable').dataTable( {
+    "aaData": [
+      %(content)s
+    ],
+    "aoColumns": [
+      { "sTitle": "Name" },
+      { "sTitle": "Genre" },
+      { "sTitle": "Status" }
+    ]
+  } );
+} );
 """
 
 comic_template = u"""
@@ -71,19 +60,20 @@ title: Dosage comic %(name)s
 <tr>
 <th>Status</th><td>%(status)s on %(date)s</td>
 </tr>
+<tr>
+<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
+ data-href="%(url)s"></div></td>
+</tr>
 </table>
-<div class="g-plusone" data-size="standard" data-annotation="inline" data-width="300"></div>
-<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
 </section>
 {%% endblock content %%}
-"""
-
-entrytemplate_url = u"""
-<a href="%(url)s" title="%(title)s" class="%(css)s">%(name)s</a>
-"""
-
-entrytemplate_nourl = u"""
-<span title="%(title)s" class="%(css)s">%(name)s</span>
 """
 
 
@@ -159,7 +149,7 @@ def get_testentry(line):
         "name": name,
         "url": scraper.url,
         "description": scraper.description,
-        "genre": "",
+        "genre": "Other", # XXX
         "error": None,
         "adult": scraper.adult,
     }
@@ -178,39 +168,31 @@ def update_testentry(key, entry, testinfo):
     testinfo[key] = entry
 
 
-def get_html_index(testinfo):
-    """Get HTML content for test output index."""
-    res = []
+def get_comicdata(testinfo):
+    """Get comic data for table listing."""
+    rows = []
     for key in sorted(testinfo.keys()):
         entry = testinfo[key]
-        css = entry["status"]
         url = "comics/%s.html" % key
-        if entry["error"]:
-            title = entry["error"]
-        elif entry["description"]:
-            title = entry["description"][:100]
-        else:
-            title = entry["name"]
         args = {
             "url": quote(url),
-            "title": quote(title),
-            "css": quote(css),
+            "status": quote(entry["status"]),
             "name": quote(entry["name"]),
+            "genre": quote(entry.get("genre", "Other")),
         }
-        template = entrytemplate_url if url else entrytemplate_nourl
-        entryhtml = template % args
-        res.append('<div class="item">%s</div>' % entryhtml)
-    return os.linesep.join(res)
+        row = '["<a href=\\"%(url)s\\">%(name)s</a>", "%(genre)s", "%(status)s"]' % args
+        rows.append(row)
+    return u",\n".join(rows)
 
 
 def write_html(testinfo, outputdir, modified):
     """Write index page and all comic pages."""
-    content = get_html_index(testinfo)
+    content = get_comicdata(testinfo)
     date = strdate(modified)
     args = {"date": quote(date), "content": content}
-    fname = os.path.join(outputdir, "comic_index.html")
+    fname = os.path.join(outputdir, "media", "js", "comicdata.js")
     with codecs.open(fname, 'w', 'utf-8') as fp:
-        fp.write(indextemplate % args)
+        fp.write(comicdata_template % args)
     comicdir = os.path.join(outputdir, "comics")
     if not os.path.isdir(comicdir):
         os.mkdir(comicdir)
@@ -224,7 +206,7 @@ def write_html_comic(key, entry, outputdir, date):
         "url": quote(entry["url"]),
         "name": quote(entry["name"]),
         "adult": quote("yes" if entry["adult"] else "no"),
-        "genre": quote(entry["genre"]),
+        "genre": quote(entry.get("genre", "Other")),
         "description": quote(entry["description"]),
         "status": quote(entry["status"]),
         "date": quote(date),
