@@ -7,6 +7,6 @@ install:
   - pip install -r requirements.txt --use-mirrors
   - pip install pytest-xdist --use-mirrors
 # command to run tests
-script: make test TESTS=tests.test_util
+script: make test TESTS=tests/test_util.py
 #notifications:
 #  email: false
