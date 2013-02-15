@@ -219,10 +219,7 @@ class MyDistribution (Distribution, object):
         for name in metanames:
             method = "get_" + name
             val = getattr(self.metadata, method)()
-            if isinstance(val, str):
-                val = unicode(val)
-            cmd = "%s = %r" % (name, val)
-            data.append(cmd)
+            data.append("%s = %r" % (name, val))
         data.append('release_date = "%s"' % get_release_date())
         # write the config file
         util.execute(write_file, (filename, data),
