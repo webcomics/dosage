@@ -20,7 +20,8 @@ class ALessonIsLearned(_BasicScraper):
 class ASofterWorld(_BasicScraper):
     url = 'http://www.asofterworld.com/'
     stripUrl = url + 'index.php?id=%s'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.asofterworld\.com/clean/[^"]+)'))
+    imageSearch = compile(tagre("p", "id", "thecomic") + r'\s*' +
+      tagre("img", "src", r'(http://www\.asofterworld\.com/clean/[^"]+)'))
     prevSearch = compile(tagre("a", "href", "(index\.php\?id=\d+)")+'< back')
     help = 'Index format: n (unpadded)'
 
