@@ -34,14 +34,6 @@ class AbleAndBaker(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class AbominableCharlesChristopher(_BasicScraper):
-    url = 'http://www.abominable.cc/'
-    stripUrl = url + '%s'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.abominable\.cc/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)')+"[^<]+Previous")
-    help = 'Index format: yyyy/mm/dd/comicname'
-
-
 class AbsurdNotions(_BasicScraper):
     url = 'http://www.absurdnotions.org/page129.html'
     stripUrl = 'http://www.absurdnotions.org/page%s.html'
@@ -54,7 +46,7 @@ class AbsurdNotions(_BasicScraper):
 class AbstruseGoose(_BasicScraper):
     url = 'http://abstrusegoose.com/'
     starter = bounceStarter(url,
-       compile(tagre('a', 'href', r'(http://abstrusegoose\.com/\d+)')+"Next &raquo;</a>"))
+       compile(tagre('a', 'href', r'(http://abstrusegoose\.com/\d+)')+"Next &raquo;"))
     stripUrl = url + '%s'
     imageSearch = compile(tagre('img', 'src', r'(http://abstrusegoose\.com/strips/[^<>"]+)'))
     prevSearch = compile(tagre('a', 'href', r'(http://abstrusegoose\.com/\d+)') + r'&laquo; Previous</a>')
