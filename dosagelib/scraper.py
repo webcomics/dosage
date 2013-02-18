@@ -57,6 +57,7 @@ class _BasicScraper(object):
             self.indexes = tuple()
 
     def __cmp__(self, other):
+        """Compare scraper by name and index list."""
         if not isinstance(other, _BasicScraper):
             return 1
         # first, order by name
@@ -67,6 +68,7 @@ class _BasicScraper(object):
         return cmp(self.indexes, other.indexes)
 
     def __hash__(self):
+        """Get hash value from name and index list."""
         return hash((self.get_name(), self.indexes))
 
     def getCurrentStrips(self):

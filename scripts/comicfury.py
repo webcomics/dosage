@@ -245,9 +245,7 @@ def handle_url(url, session, res):
             print("ERROR matching activity:", repr(data[end:end+300]), file=sys.stderr)
             continue
         active = mo.group(1).lower() == "active"
-        res[name] = [
-            comicurl, desc, num, genre, active
-        ] 
+        res[name] = [comicurl, desc, num, genre, active]
     if not res:
         print("ERROR:", "did not match any comics", file=sys.stderr)
 
