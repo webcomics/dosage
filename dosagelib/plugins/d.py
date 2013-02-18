@@ -138,7 +138,7 @@ class DieselSweeties(_BasicScraper):
 class DominicDeegan(_BasicScraper):
     url = 'http://www.dominic-deegan.com/'
     stripUrl = url + 'view.php?date=%s'
-    imageSearch = compile(tagre("img", "src", r'(comics/\d+\.gif)'))
+    imageSearch = compile(tagre("img", "src", r'(comics/[^"]+)'))
     prevSearch = compile(r'"(view.php\?date=[^"]+)".+?prev21')
     help = 'Index format: yyyy-mm-dd'
 

@@ -31,7 +31,8 @@ class GUComics(_BasicScraper):
     url = 'http://www.gucomics.com/comic/'
     stripUrl = url + '?cdate=%s'
     imageSearch = compile(tagre("img", "src", r'(/comics/\d{4}/gu_[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/comic/\?cdate=\d+)') + '&lt; Prev')
+    prevSearch = compile(tagre("a", "href", r'(/comic/\?cdate=\d+)') +
+      tagre("img", "src", r'/images/nav/prev\.png'))
     help = 'Index format: yyyymmdd'
 
 
@@ -46,7 +47,7 @@ class GirlGenius(_BasicScraper):
 class GirlsWithSlingshots(_BasicScraper):
     url = 'http://www.girlswithslingshots.com/'
     stripUrl = url + 'comic/gws-%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://cdn\.girlswithslingshots\.com/comics/[^"]+)'))
+    imageSearch = compile(tagre("img", "src", r'(http://(?:www|cdn)\.girlswithslingshots\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.girlswithslingshots\.com/comic/[^"]+)', after="prev"))
     help = 'Index format: nnn'
 

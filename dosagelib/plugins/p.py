@@ -19,7 +19,7 @@ class PandyLand(_BasicScraper):
 class ParadigmShift(_BasicScraper):
     url = 'http://www.paradigmshiftmanga.com/'
     starter = indirectStarter(url, compile(tagre("a", "href", r'([^"]+)', after="next-comic-link")))
-    imageUrl = url + 'ps/%s.html'
+    stripUrl = url + 'ps/%s.html'
     imageSearch = compile(tagre("img", "src", r'([^"]*comics/ps/[^"]*)'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)', after="previous-comic-link"))
     help = 'Index format: custom'
