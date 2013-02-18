@@ -10,7 +10,9 @@ Changes:
 Fixes:
 - comics: Correct the list of characters not to quote for URL path encoding.
   This fixes a lot of download errors of DrunkDuck comics.
-- comics: Fixed LasLindas, LookingForGroup and GUComics comic strips.
+- comics: Fixed comic strips AbstruseGoose,
+  ASofterWorld, LasLindas, LookingForGroup and GUComics.
+- comics: Removed broken comic strip AbominableCharlesChristopher.
 
 
 Dosage 1.10 (released 10.2.2013)
