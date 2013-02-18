@@ -91,7 +91,7 @@ def generate_comic_testers():
     g = globals()
     if "TRAVIS" in os.environ:
         # get limited number of scraper tests on Travis builds
-        max_scrapers = 40
+        max_scrapers = 200
         scraperclasses = islice(scraper.get_scraperclasses(), 0, max_scrapers)
     else:
         scraperclasses = scraper.get_scraperclasses()
