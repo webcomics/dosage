@@ -29,9 +29,10 @@ class CaseyAndAndy(_BasicScraper):
 
 class CaribbeanBlue(_BasicScraper):
     url = 'http://cblue.katbox.net/'
-    stripUrl = url + 'archive/%s'
-    imageSearch = compile(tagre("img", "src", r'(http://cblue\.katbox\.net/wp-content/webcomic/cblue/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://cblue\.katbox\.net/archive/[^"]+)', after="previous"))
+    stripUrl = url + 'comic/%s/'
+    #http://cblue.katbox.net/wp-content/uploads/cb270en.png?6949c1
+    imageSearch = compile(tagre("img", "src", r'(http://cblue\.katbox\.net/wp-content/uploads/cb[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://cblue\.katbox\.net/comic/[^"]+)', after="previous"))
     help = 'Index format: nnn-stripname'
 
 
@@ -200,6 +201,7 @@ class CyanideAndHappiness(_BasicScraper):
     stripUrl = url + '%s/'
     imageSearch = compile(tagre("img", "src", r'(http://(?:www\.)?explosm\.net/db/files/[^"]+)', before="a daily webcomic"))
     prevSearch = compile(tagre("a", "href", r'(/comics/\d+/)', before="prev"))
+    noImageUrls = set(["http://www.explosm.net/comics/3082/"])
     help = 'Index format: n (unpadded)'
 
     @classmethod

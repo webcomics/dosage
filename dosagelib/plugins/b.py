@@ -56,6 +56,11 @@ class Blip(_BasicScraper):
     prevSearch = compile(r'First.+?"(index.php\?strip_id=.+?)".+?prev')
     help = 'Index format: n'
 
+    @classmethod
+    def prevUrlModifier(cls, prevUrl):
+        if prevUrl:
+            return prevUrl.replace("www.blipcomic.com", "blipcomic.com")
+
 
 class BlueCrashKit(_BasicScraper):
     url = 'http://www.bluecrashkit.com/cheese/'
@@ -121,6 +126,11 @@ class BoxerHockey(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(http://www\.boxerhockey\.com/\?id=\d+)') +
         r'[^>]+Previous')
     help = 'Index format: n (unpadded)'
+
+    @classmethod
+    def prevUrlModifier(cls, prevUrl):
+        if prevUrl:
+            return prevUrl.replace("www.boxerhockey.com", "boxerhockey.fireball20xl.com")
 
 
 class BroodHollow(_BasicScraper):

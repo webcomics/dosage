@@ -145,7 +145,7 @@ class AstronomyPOTD(_BasicScraper):
     stripUrl = 'http://antwrp.gsfc.nasa.gov/apod/ap%s.html'
     imageSearch = compile(r'<a href="(image/\d{4}/[^"]+)"')
     multipleImagesPerStrip = True
-    noImageurls = set(['http://antwrp.gsfc.nasa.gov/apod/ap130218.html'])
+    noImageUrls = set(['http://antwrp.gsfc.nasa.gov/apod/ap130218.html'])
     prevSearch = compile(r'<a href="(ap\d{6}\.html)">&lt;</a>')
     help = 'Index format: yymmdd'
 
