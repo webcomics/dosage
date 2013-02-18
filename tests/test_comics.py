@@ -53,11 +53,13 @@ class _ComicTester(TestCase):
             # ie. it detects duplicate filenames.
             saved_images = self.get_saved_images()
             num_images = len(saved_images)
-            attrs = (num_images, saved_images, max_strips, self.tmpdir)
+            # subtract the number of URLs with no image from the expected image number
+            num_images_expected = max_strips - len(scraperobj.noImageUrls)
+            attrs = (num_images, saved_images, num_images_expected, self.tmpdir)
             if self.scraperclass.multipleImagesPerStrip:
-                self.check(num_images >= max_strips, 'saved %d %s instead of at least %d images in %s' % attrs)
+                self.check(num_images >= num_images_expected, 'saved %d %s instead of at least %d images in %s' % attrs)
             else:
-                self.check(num_images == max_strips, 'saved %d %s instead of %d images in %s' % attrs)
+                self.check(num_images == num_images_expected, 'saved %d %s instead of %d images in %s' % attrs)
 
     def check_stripurl(self, strip):
         if not self.scraperclass.stripUrl:

@@ -33,6 +33,9 @@ class _BasicScraper(object):
     # if more than one image per URL is expected
     multipleImagesPerStrip = False
 
+    # set of URLs that have no image (eg. only a video link)
+    noImageUrls = set()
+
     # set to False if previous URLs do not match the strip URL (ie. because of redirects)
     prevUrlMatchesStripUrl = True
 
@@ -80,9 +83,17 @@ class _BasicScraper(object):
         if self.indexes:
             for index in self.indexes:
                 url = self.stripUrl % index
-                yield self.getStrip(url)
+                if url in self.noImageUrls:
+                    out.info('Skipping no-image URL %s' % url)
+                else:
+                    yield self.getStrip(url)
+
         else:
-            yield self.getStrip(self.getLatestUrl())
+            url = self.getLatestUrl()
+            if url in self.noImageUrls:
+                out.info('Skipping no-image URL %s' % url)
+            else:
+                yield self.getStrip(self.getLatestUrl())
 
     def getStrip(self, url):
         """Get comic strip for given URL."""
@@ -123,8 +134,11 @@ class _BasicScraper(object):
         seen_urls = set()
         while url:
             data, baseUrl = getPageContent(url, self.session)
-            imageUrls = set(fetchUrls(url, data, baseUrl, self.imageSearch))
-            yield self.getComicStrip(url, imageUrls)
+            if url in self.noImageUrls:
+                out.info('Skipping no-image URL %s' % url)
+            else:
+                imageUrls = set(fetchUrls(url, data, baseUrl, self.imageSearch))
+                yield self.getComicStrip(url, imageUrls)
             if self.firstStripUrl == url:
                 out.debug("Stop at first URL %s" % url)
                 break
