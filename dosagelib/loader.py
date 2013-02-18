@@ -45,7 +45,7 @@ def get_importable_modules(folder):
     @return module names
     @rtype: iterator of string
     """
-    for fname in sorted(os.listdir(folder)):
+    for fname in os.listdir(folder):
         if fname.endswith('.py') and not fname.startswith('_'):
             yield fname[:-3]
 
@@ -71,7 +71,7 @@ def get_module_plugins(module, classobj):
         names = module.__all__
     except AttributeError:
         names = [x for x in vars(module) if not x.startswith('_')]
-    for name in sorted(names):
+    for name in names:
         try:
             obj = getattr(module, name)
         except AttributeError:
