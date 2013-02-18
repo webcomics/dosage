@@ -39,7 +39,7 @@ class Catalyst(_BasicScraper):
     baseUrl = "http://catalyst.spiderforest.com/"
     url = baseUrl + "comic.php?comic_id=415"
     stripUrl = baseUrl + "comic.php?comic_id=%s"
-    imageSearch = compile(tagre("img", "src", r'(http://catalyst\.spiderforest\.com/comics/[^"]+)'))
+    imageSearch = compile(tagre("img", "src", r'((?:http://catalyst\.spiderforest\.com/)?comics/[^"]+)'))
     prevSearch = compile("<center>" + tagre("a", "href", r'(http://catalyst\.spiderforest\.com/comic\.php\?comic_id=\d+)'))
     help = 'Index format: number'
 
