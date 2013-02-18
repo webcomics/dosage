@@ -198,7 +198,7 @@ def find_scraperclasses(comic, multiple_allowed=False):
         if lname == cname:
             # perfect match
             if not multiple_allowed:
-                return scraperclass
+                return [scraperclass]
             else:
                 candidates.append(scraperclass)
         elif cname in lname:
