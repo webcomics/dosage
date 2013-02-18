@@ -109,12 +109,12 @@ def getPageContent(url, session, max_content_bytes=MaxContentBytes):
     """Get text content of given URL."""
     check_robotstxt(url, session)
     # read page data
-    page = urlopen(url, session, max_content_bytes=max_content_bytes)
+    page = urlopen(url, session, max_content_bytes=max_content_bytes, stream=False)
     data = page.text
     tries = MaxRetries
     while not isValidPageContent(data) and tries > 0:
         time.sleep(RetryPauseSeconds)
-        page = urlopen(url, session, max_content_bytes=max_content_bytes)
+        page = urlopen(url, session, max_content_bytes=max_content_bytes, stream=False)
         data = page.text
         tries -= 1
     if not isValidPageContent(data):
@@ -232,7 +232,8 @@ def get_robotstxt_parser(url, session=None):
 
 
 def urlopen(url, session, referrer=None, max_content_bytes=None,
-            timeout=ConnectionTimeoutSecs, raise_for_status=True):
+            timeout=ConnectionTimeoutSecs, raise_for_status=True,
+            stream=True):
     """Open an URL and return the response object."""
     out.debug('Open URL %s' % url)
     headers = {'User-Agent': UserAgent}
@@ -245,10 +246,10 @@ def urlopen(url, session, referrer=None, max_content_bytes=None,
     }
     if hasattr(requests, 'adapters'):
         # requests >= 1.0
-        kwargs["stream"] = True
+        kwargs["stream"] = stream
     else:
         # requests << 1.0
-        kwargs["prefetch"] = False
+        kwargs["prefetch"] = not stream
         kwargs["config"] = {"max_retries": MaxRetries}
     try:
         req = session.get(url, **kwargs)
