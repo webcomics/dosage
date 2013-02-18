@@ -224,7 +224,6 @@ def get_scraperclasses():
         modules = loader.get_modules()
         plugins = loader.get_plugins(modules, _BasicScraper)
         _scraperclasses = list(plugins)
-        _scraperclasses.sort(key=lambda s: s.get_name())
         check_scrapers()
         out.debug("... %d modules loaded." % len(_scraperclasses))
     return _scraperclasses

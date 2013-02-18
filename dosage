@@ -161,7 +161,7 @@ def doList(columnList):
     """List available comics."""
     out.info('Available comic scrapers:')
     out.info('Comics marked with [A] require age confirmation with the --adult option.')
-    scrapers = getScrapers(['@@'])
+    scrapers = sorted(getScrapers(['@@']), key=lambda s: s.get_name())
     try:
         if columnList:
             num = doColumnList(scrapers)
