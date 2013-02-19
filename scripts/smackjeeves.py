@@ -24,21 +24,26 @@ exclude_comics = [
     "Authorbattlesthevideogame", # missing images
     "BambooArmonicKnightsGuild", # missing previous link
     "ClubLove", # does not follow standard layout
+    "Darkkyosshorts", # missing images
     "DeSTRESS", # does not follow standard layout
     "DollarStoreCaviar", # broken images
     "DreamCatcher", # does not follow standard layout
     "EdgeofDecember", # missing images
     "Fumiko", # does not follow standard layout
     "FurryExperience", # timeout
+    "GART", # does not follow standard layout
     "GBAsCrib", # timeout
     "HEARD", # missing images
+    "IwillbenapoSpamDump", # missing images
     "JennyHaniver", # does not follow standard layout
     "KiLAiLO", # does not follow standard layout
+    "KirbysoftheAlternateDimension", # missing images
     "LoudEra", # does not follow standard layout
     "LunarHill", # does not follow standard layout
     "MyLifewithFelENESPANOL", # does not follow standard layout
     "MylifewithFel", # does not follow standard layout
     "NegativeZen", # does not follow standard layout
+    "Nemutionpobae", # does not follow standard layout
     "NightShot", # does not follow standard layout
     "NormalIsBoring", # does not follow standard layout
     "Okamirai", # images are 403 forbidden
@@ -47,6 +52,7 @@ exclude_comics = [
     "PicturesofYou", # does not follow standard layout
     "PlatonicManagementDilemma", # missing images
     "Pornjunkiesstrip", # does not follow standard layout
+    "PrettyUgly", # does not follow standard layout
     "Project217", # does not follow standard layout
     "Ribon", # does not follow standard layout
     "SecretSanta2011", # missing images

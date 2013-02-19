@@ -110,10 +110,10 @@ class EvilInc(_BasicScraper):
 
 class Exiern(_BasicScraper):
     url = 'http://www.exiern.com/'
-    stripUrl = url + '?p=%s'
+    stripUrl = url + '%s/'
     imageSearch = compile(tagre("img", "src", r'(http://www\.exiern\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.exiern\.com/[^"]+)', after="prev"))
-    help = 'Index format: n'
+    help = 'Index format: yyyy/mm/dd/stripname'
 
 
 class ExiernDarkReflections(_BasicScraper):
@@ -134,10 +134,10 @@ class ExtraLife(_BasicScraper):
 
 class EyeOfRamalach(_BasicScraper):
     url = 'http://theeye.katbox.net/'
-    stripUrl = url + 'archive/%s/'
+    stripUrl = url + 'comic/%s/'
     imageSearch = compile(tagre("img", "src", r'(http://theeye\.katbox\.net/wp-content/uploads/[^"]+final[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://theeye\.katbox\.net/comic/[^"]+)', after="previous"))
-    help = 'Index format: n (unpadded)'
+    help = 'Index format: stripname'
 
 
 class EarthsongSaga(_BasicScraper):

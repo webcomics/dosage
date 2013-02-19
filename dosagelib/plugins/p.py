@@ -103,7 +103,7 @@ class PiledHigherAndDeeper(_BasicScraper):
     url = 'http://www.phdcomics.com/comics/archive.php'
     starter = bounceStarter(url, compile(r'<a href=(archive\.php\?comicid=\d+)><img height=52 width=49 src=images/next_button\.gif border=0 align=middle>'))
     stripUrl = url + '?comicid=%s'
-    imageSearch = compile(r'<img src=(http://www\.phdcomics\.com/comics/archive/phd\d+s?\.gif)')
+    imageSearch = compile(tagre("img", "src", r'(http://www\.phdcomics\.com/comics/archive/phd\d+s?\.gif)', quote=""))
     prevSearch = compile(r'<a href=(archive\.php\?comicid=\d+)><img height=52 width=49 src=images/prev_button\.gif border=0 align=middle>')
     help = 'Index format: n (unpadded)'
     namer = queryNamer('comicid', usePageUrl=True)
@@ -160,7 +160,8 @@ class PunksAndNerdsOld(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
-class PlanescapeSurvival(_BasicScraper):
+# Broken navigation: prev link at http://planescapecomic.com/201.html points to same URL.
+class _PlanescapeSurvival(_BasicScraper):
     url = 'http://planescapecomic.com/'
     stripUrl = url + '%s.html'
     imageSearch = compile(r'src="(comics/.+?)"')

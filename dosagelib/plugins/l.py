@@ -10,7 +10,7 @@ from ..util import tagre
 
 class LasLindas(_BasicScraper):
     url = 'http://laslindas.katbox.net/'
-    stripUrl = url + 'archive/%s/'
+    stripUrl = url + 'comic/%s/'
     imageSearch = compile(tagre("img", "src", r'(http://laslindas\.katbox\.net/wp-content/uploads/[^"]+)', after="attachment-full"))
     prevSearch = compile(tagre("a", "href", r'(http://laslindas\.katbox\.net/comic/[^"]+)', after="previous"))
     help = 'Index format: stripname'
@@ -49,5 +49,7 @@ class LeastICouldDo(_BasicScraper):
     url = 'http://leasticoulddo.com/'
     stripUrl = url + 'comic/%s'
     imageSearch = compile(tagre("img", "src", r'(http://cdn\.leasticoulddo\.com/wp-content/uploads/\d+/\d+/\d{8}\.\w{1,4})'))
-    prevSearch = compile(r'<a href="(/comic/\d{8})">Previous</a>')
+    prevSearch = compile(tagre("a", "href", r'(http://www\.leasticoulddo\.com/comic/\d+/)', after="Previous"))
+    starter = indirectStarter(url,
+      compile(tagre("a", "href", r'(http://www\.leasticoulddo\.com/comic/\d+/)', after="feature-comic")))
     help = 'Index format: yyyymmdd'
