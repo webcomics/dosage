@@ -36,6 +36,7 @@ exclude_comics = [
     "Brathalla", # broken images
     "Binary_Souls_Other_Dimensions", # broken images
     "BK_Shattered_Hate", # broken images
+    "Caggage", # page moved
     "Chomp", # broken images
     "Chu_and_Kenny", # broken images
     "Coga_Suro_2", # broken images

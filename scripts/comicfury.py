@@ -23,10 +23,11 @@ activity_matcher = re.compile(r'<b>Activity status:</b> <span class="comicinfo">
 
 # names of comics to exclude
 exclude_comics = [
+    "6tsc", # unsuitable navigation
     "Archininja", # unsuitable navigation
+    "BoozerandStoner", # unsuitable navigation
     "Kaze", # unsuitable navigation
     "Sweetcheeriosandorangejuice", # unsuitable navigation
-    "6tsc", # unsuitable navigation
     "Coolstorybro", # unsuitable navigation
     "BUXY", # unsuitable navigation
     "Icannotdraw", # unsuitable navigation
