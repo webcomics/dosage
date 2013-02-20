@@ -141,12 +141,15 @@ class Achewood(_BasicScraper):
 class AstronomyPOTD(_BasicScraper):
     url = 'http://antwrp.gsfc.nasa.gov/apod/astropix.html'
     starter = bounceStarter(url,
-        compile(r'<a href="(ap\d{6}\.html)">&gt;</a>'))
+        compile(tagre("a", "href", r'(ap\d{6}\.html)') + "&gt;</a>"))
     stripUrl = 'http://antwrp.gsfc.nasa.gov/apod/ap%s.html'
-    imageSearch = compile(r'<a href="(image/\d{4}/[^"]+)"')
+    imageSearch = compile(tagre("a", "href", r'(image/\d{4}/[^"]+)'))
     multipleImagesPerStrip = True
-    noImageUrls = set(['http://antwrp.gsfc.nasa.gov/apod/ap130218.html'])
-    prevSearch = compile(r'<a href="(ap\d{6}\.html)">&lt;</a>')
+    noImageUrls = set([
+        'http://antwrp.gsfc.nasa.gov/apod/ap130217.html', # video
+        'http://antwrp.gsfc.nasa.gov/apod/ap130218.html', # video
+    ])
+    prevSearch = compile(tagre("a", "href", r'(ap\d{6}\.html)') + "&lt;</a>")
     help = 'Index format: yymmdd'
 
     @classmethod
