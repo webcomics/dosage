@@ -77,7 +77,7 @@ class _ComicTester(TestCase):
         try:
             image.save(self.tmpdir)
         except Exception as msg:
-            self.check(False, 'could not save %s to %s: %s' % (image.url, self.tmpdir, msg))
+            self.check(False, 'could not save %s at %s to %s: %s' % (image.url, image.referrer, self.tmpdir, msg))
 
     def check(self, condition, msg):
         self.assertTrue(condition, "%s %s %s" % (self.name, self.url, msg))

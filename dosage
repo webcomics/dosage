@@ -70,7 +70,7 @@ def saveComicStrip(strip, basepath):
             if saved:
                 allskipped = False
         except IOError as msg:
-            out.error('Could not save %s: %s' % (image.filename, msg))
+            out.error('Could not save image at %s to %s: %s' % (image.referrer, image.filename, msg))
             errors += 1
     return errors, allskipped
 
