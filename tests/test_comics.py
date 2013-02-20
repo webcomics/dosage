@@ -53,8 +53,8 @@ class _ComicTester(TestCase):
             # ie. it detects duplicate filenames.
             saved_images = self.get_saved_images()
             num_images = len(saved_images)
-            # subtract the number of URLs with no image from the expected image number
-            num_images_expected = max_strips - len(scraperobj.noImageUrls)
+            # subtract the number of skipped URLs with no image from the expected image number
+            num_images_expected = max_strips - len(scraperobj.skippedUrls)
             attrs = (num_images, saved_images, num_images_expected, self.tmpdir)
             if self.scraperclass.multipleImagesPerStrip:
                 self.check(num_images >= num_images_expected, 'saved %d %s instead of at least %d images in %s' % attrs)

@@ -58,6 +58,7 @@ class _BasicScraper(object):
             self.indexes = tuple(indexes)
         else:
             self.indexes = tuple()
+        self.skippedUrls = set()
 
     def __cmp__(self, other):
         """Compare scraper by name and index list."""
@@ -84,16 +85,21 @@ class _BasicScraper(object):
             for index in self.indexes:
                 url = self.stripUrl % index
                 if url in self.noImageUrls:
-                    out.info('Skipping no-image URL %s' % url)
+                    self.skipUrl(url)
                 else:
                     yield self.getStrip(url)
 
         else:
             url = self.getLatestUrl()
             if url in self.noImageUrls:
-                out.info('Skipping no-image URL %s' % url)
+                self.skipUrl(url)
             else:
                 yield self.getStrip(self.getLatestUrl())
+
+    def skipUrl(self, url):
+        """Document that an URL had no images."""
+        out.info('Skipping URL %s without image' % url)
+        self.skippedUrls.add(url)
 
     def getStrip(self, url):
         """Get comic strip for given URL."""
@@ -135,7 +141,7 @@ class _BasicScraper(object):
         while url:
             data, baseUrl = getPageContent(url, self.session)
             if url in self.noImageUrls:
-                out.info('Skipping no-image URL %s' % url)
+                self.skipUrl(url)
             else:
                 imageUrls = set(fetchUrls(url, data, baseUrl, self.imageSearch))
                 yield self.getComicStrip(url, imageUrls)
