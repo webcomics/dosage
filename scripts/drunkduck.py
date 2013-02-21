@@ -46,6 +46,8 @@ exclude_comics = [
     "DIS", # broken images
     "Dot_TXT", # broken images
     "Dreadnought_Invasion_Six", # broken images
+    "Drunk_Duck_Awards_2011", # no content
+    "Drunk_Duck_Awards_2012", # no content
     "Emerald_Winter", # broken images
     "Enter_the_Duck_2", # broken images
     "Ffff", # broken images
