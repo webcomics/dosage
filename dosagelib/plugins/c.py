@@ -9,11 +9,19 @@ from ..helpers import bounceStarter
 from ..util import tagre
 
 
+class Caggage(_BasicScraper):
+    url = 'http://caggagecomic.com/'
+    stripUrl = url + 'archives/%s'
+    imageSearch = compile(tagre("img", "src", r'(http://caggagecomic\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://caggagecomic\.com/archives/\d+)', after="prev"))
+    help = 'Index format: number'
+
+
 class CaptainSNES(_BasicScraper):
     url = 'http://www.captainsnes.com/'
     stripUrl = url + '%s/'
-    imageSearch = compile(r"<img src='(http://www\.captainsnes\.com/comics/[^']+)'")
-    prevSearch = compile(r'<a href="(http://www\.captainsnes\.com/[^"]+)"><span class="prev">')
+    imageSearch = compile(tagre("img", "src", r"(http://www\.captainsnes\.com/comics/[^']+)", quote="'"))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.captainsnes\.com/[^"]+)') + tagre("span", "class", "prev"))
     multipleImagesPerStrip = True
     help = 'Index format: yyyy/mm/dd/nnn-stripname'
 

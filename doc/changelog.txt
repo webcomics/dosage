@@ -1,8 +1,8 @@
 Dosage 1.11 (released xx.xx.2013)
 
 Features:
-- comics: Added comic strips ManlyGuysDoingManlyThings, SandraAndWoo and
-  SupernormalStep.
+- comics: Added comic strips Caggage, ManlyGuysDoingManlyThings,
+  SandraAndWoo and SupernormalStep.
 
 Changes:
 - comics: Always use connection pooling when downloading pages or files.
@@ -10,9 +10,8 @@ Changes:
 Fixes:
 - comics: Correct the list of characters not to quote for URL path encoding.
   This fixes a lot of download errors of DrunkDuck comics.
-- comics: Fixed comic strips AbstruseGoose,
-  ASofterWorld, LasLindas, LookingForGroup and GUComics.
-- comics: Removed broken comic strip AbominableCharlesChristopher.
+- comics: Fixed a lot of comic strips (see git log for details).
+  Closes: GH bug #8
 
 
 Dosage 1.10 (released 10.2.2013)
