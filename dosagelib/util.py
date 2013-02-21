@@ -183,6 +183,7 @@ def normaliseURL(url):
     """Removes any leading empty segments to avoid breaking urllib2; also replaces
     HTML entities and character references.
     """
+    # XXX does not work for python3
     if isinstance(url, unicode):
         url = url.encode(UrlEncoding, 'ignore')
     # XXX: brutal hack
@@ -221,13 +222,18 @@ def check_robotstxt(url, session):
 def get_robotstxt_parser(url, session=None):
     """Get a RobotFileParser for the given robots.txt URL."""
     rp = robotparser.RobotFileParser()
-    req = urlopen(url, session, max_content_bytes=MaxContentBytes, raise_for_status=False)
-    if req.status_code in (401, 403):
-        rp.disallow_all = True
-    elif req.status_code >= 400:
+    try:
+        req = urlopen(url, session, max_content_bytes=MaxContentBytes, raise_for_status=False)
+    except Exception:
+        # connect or timeout errors are treated as an absent robotst.txt
         rp.allow_all = True
-    elif req.status_code == 200:
-        rp.parse(req.content.splitlines())
+    else:
+        if req.status_code in (401, 403):
+            rp.disallow_all = True
+        elif req.status_code >= 400:
+            rp.allow_all = True
+        elif req.status_code == 200:
+            rp.parse(req.content.splitlines())
     return rp
 
 
