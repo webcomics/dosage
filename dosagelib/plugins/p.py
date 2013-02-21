@@ -86,9 +86,9 @@ class PeppermintSaga(_BasicScraper):
 class PicPakDog(_BasicScraper):
     url = 'http://www.picpak.net/'
     stripUrl = url + 'comics/%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.picpak\.net/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.picpak\.net/comics/[^"]+)', after="navi-prev"))
-    help = 'Index format: yyyy/mm/dd/stripname'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.picpak\.net/wp-content/uploads/\d+/\d+/\d+-\d+-\d+-[^"]+\.png)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.picpak\.net/comic/[^"]+)', after="navi-prev"))
+    help = 'Index format: stripname'
 
 
 class Pixel(_BasicScraper):
@@ -131,8 +131,8 @@ class Precocious(_BasicScraper):
 class PvPonline(_BasicScraper):
     url = 'http://pvponline.com/comic'
     stripUrl = url + '%s'
-    imageSearch = compile(tagre("img", "src", r'(http://newcdn\.pvponline\.com/img/comic/pvp[^"]+\.jpg)'))
-    prevSearch = compile(tagre("a", "href", r'(http://pvponline\.com/comic/[^"]+)', after="Previous"))
+    imageSearch = compile(tagre("img", "src", r'(http://s3[^"]+\.amazonaws\.com/pvponlinenew/img/comic/\d+/\d+/pvp[^"]+\.jpg)'))
+    prevSearch = compile(tagre("a", "href", r'(/comic/[^"]+)', after="Previous"))
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
