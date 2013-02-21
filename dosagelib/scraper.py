@@ -59,6 +59,7 @@ class _BasicScraper(object):
         else:
             self.indexes = tuple()
         self.skippedUrls = set()
+        self.hitFirstStripUrl = False
 
     def __cmp__(self, other):
         """Compare scraper by name and index list."""
@@ -137,6 +138,7 @@ class _BasicScraper(object):
     def getStripsFor(self, url, maxstrips):
         """Get comic strips for an URL. If maxstrips is a positive number, stop after
         retrieving the given number of strips."""
+        self.hitFirstStripUrl = False
         seen_urls = set()
         while url:
             data, baseUrl = getPageContent(url, self.session)
@@ -147,6 +149,7 @@ class _BasicScraper(object):
                 yield self.getComicStrip(url, imageUrls)
             if self.firstStripUrl == url:
                 out.debug("Stop at first URL %s" % url)
+                self.hitFirstStripUrl = True
                 break
             prevUrl = None
             if self.prevSearch:

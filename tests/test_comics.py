@@ -46,7 +46,7 @@ class _ComicTester(TestCase):
             if num > 0 and self.scraperclass.prevUrlMatchesStripUrl:
                 self.check_stripurl(strip)
             num += 1
-        if self.scraperclass.prevSearch:
+        if self.scraperclass.prevSearch and not scraperobj.hitFirstStripUrl:
             self.check(num >= 4, 'traversal failed after %d strips, check the prevSearch pattern at %s.' % (num, strip.stripUrl))
             # Check that exactly or for multiple pages at least 5 images are saved.
             # This is different than the image number check above since it checks saved files,
