@@ -85,7 +85,7 @@ class PeppermintSaga(_BasicScraper):
 
 class PicPakDog(_BasicScraper):
     url = 'http://www.picpak.net/'
-    stripUrl = url + 'comics/%s/'
+    stripUrl = url + 'comic/%s/'
     imageSearch = compile(tagre("img", "src", r'(http://www\.picpak\.net/wp-content/uploads/\d+/\d+/\d+-\d+-\d+-[^"]+\.png)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.picpak\.net/comic/[^"]+)', after="navi-prev"))
     help = 'Index format: stripname'
