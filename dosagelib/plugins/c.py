@@ -5,7 +5,7 @@
 from re import compile
 
 from ..scraper import _BasicScraper
-from ..helpers import bounceStarter
+from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
 
 
@@ -278,9 +278,13 @@ class Champ2010(_BasicScraper):
 
 class Chucklebrain(_BasicScraper):
     url = 'http://www.chucklebrain.com/main.php'
+    starter = indirectStarter(url,
+      compile(tagre("a", "href", r'(/main\.php\?img\=\d+)', quote="'") +
+              tagre("img", "src", r'/images/last\.jpg', quote="'")))
     stripUrl = url + '?img=%s'
     imageSearch = compile(tagre("img", "src", r'(/images/strip[^"]+)'))
-    prevSearch = compile(r'<a href=\'(/main.php\?img\=\d+)\'><img src=\'/images/previous.jpg\'')
+    prevSearch = compile(tagre("a", "href", r'(/main\.php\?img\=\d+)', quote="'") +
+              tagre("img", "src", r'/images/previous\.jpg', quote="'"))
     help = 'Index format: nnn'
 
 
