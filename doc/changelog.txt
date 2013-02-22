@@ -6,6 +6,7 @@ Features:
 
 Changes:
 - comics: Always use connection pooling when downloading pages or files.
+- cmdline: Replace the deprecated argument parser optparse with argparse.
 
 Fixes:
 - comics: Correct the list of characters not to quote for URL path encoding.

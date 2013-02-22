@@ -6,7 +6,7 @@
 from __future__ import print_function
 import sys
 import os
-import optparse
+import argparse
 from collections import OrderedDict
 
 from dosagelib import events, scraper
@@ -18,29 +18,28 @@ from dosagelib.configuration import App, Freeware, Copyright, SupportUrl
 def setupOptions():
     """Construct option parser.
     @return: new option parser
-    @rtype optparse.OptionParser
+    @rtype argparse.ArgumentParser
     """
-    usage = 'usage: %prog [options] comicModule [comicModule ...]'
-    parser = optparse.OptionParser(usage=usage)
-    parser.add_option('-v', '--verbose', action='count', dest='verbose', default=0, help='provides verbose output, use multiple times for more verbosity')
-    parser.add_option('-n', '--numstrips', action='store', dest='numstrips', type='int', default=0, help='traverse and retrieve the given number of comic strips; use --all to retrieve all comic strips')
-    parser.add_option('-a', '--all', action='store_true', dest='all', default=None, help='traverse and retrieve all comic strips')
-    parser.add_option('-c', '--continue', action='store_true', dest='cont', default=None, help='traverse and retrieve comic strips until an existing one is found')
-    parser.add_option('-b', '--basepath', action='store', dest='basepath', default='Comics', help='set the path to create invidivual comic directories in, default is Comics', metavar='PATH')
-    parser.add_option('--baseurl', action='store', dest='baseurl', default=None, help='the base URL of your comics directory (for RSS, HTML, etc.); this should correspond to --base-path', metavar='PATH')
-    parser.add_option('-l', '--list', action='store_const', const=1, dest='list', help='list available comic modules')
-    parser.add_option('--singlelist', action='store_const', const=2, dest='list', help='list available comic modules in a single list')
-    parser.add_option('-V', '--version', action='store_true', dest='version', help='display the version number')
-    parser.add_option('-m', '--modulehelp', action='store_true', dest='modhelp', help='display help for comic modules')
-    parser.add_option('-t', '--timestamps', action='store_true', dest='timestamps', default=False, help='print timestamps for all output at any info level')
-    parser.add_option('-o', '--output', action='store', dest='output', choices=events.getHandlers(), help='output formatting for downloaded comics')
-    parser.add_option('--adult', action='store_true', dest='adult', default=False, help='confirms that you are old enough to view adult content')
-    parser.add_option('--multimatch', action='store_true', dest='multimatch', default=False, help='')
-    try:
-        import optcomplete
-        optcomplete.autocomplete(parser)
-    except ImportError:
-        pass
+    kwargs = {"description": "A commandline webcomic downloader and archiver."}
+    if sys.argv[0].endswith("mainline"):
+        out.warn("the 'mainline' program is deprecated, please use the new 'dosage' program")
+        kwargs["prog"] = "dosage"
+    parser = argparse.ArgumentParser(**kwargs)
+    parser.add_argument('-v', '--verbose', action='count', default=0, help='provides verbose output, use multiple times for more verbosity')
+    parser.add_argument('-n', '--numstrips', action='store', type=int, default=0, help='traverse and retrieve the given number of comic strips; use --all to retrieve all comic strips')
+    parser.add_argument('-a', '--all', action='store_true', default=None, help='traverse and retrieve all comic strips')
+    parser.add_argument('-c', '--continue', action='store_true', dest='cont', default=None, help='traverse and retrieve comic strips until an existing one is found')
+    parser.add_argument('-b', '--basepath', action='store', default='Comics', help='set the path to create invidivual comic directories in, default is Comics', metavar='PATH')
+    parser.add_argument('--baseurl', action='store', default=None, help='the base URL of your comics directory (for RSS, HTML, etc.); this should correspond to --base-path', metavar='PATH')
+    parser.add_argument('-l', '--list', action='store_const', const=1, help='list available comic modules')
+    parser.add_argument('--singlelist', action='store_const', const=2, dest='list', help='list available comic modules in a single list')
+    parser.add_argument('--version', action='store_true', help='display the version number')
+    parser.add_argument('-m', '--modulehelp', action='store_true', help='display help for comic modules')
+    parser.add_argument('-t', '--timestamps', action='store_true', default=False, help='print timestamps for all output at any info level')
+    parser.add_argument('-o', '--output', action='store', choices=events.getHandlers(), help='output formatting for downloaded comics')
+    parser.add_argument('--adult', action='store_true', default=False, help='confirms that you are old enough to view adult content')
+    parser.add_argument('--multimatch', action='store_true', default=False, help='')
+    parser.add_argument('comic', nargs='+', help='comic module name (including case insensitive substrings)')
     return parser
 
 
@@ -100,14 +99,14 @@ def displayComicHelp(scraperobj):
         out.context = ''
 
 
-def getComics(options, comics):
-    """Retrieve given comics."""
+def getComics(options):
+    """Retrieve comics."""
     errors = 0
     if options.output:
         events.installHandler(options.output, options.basepath, options.baseurl)
     events.getHandler().start()
     try:
-        for scraperobj in getScrapers(comics, options.basepath, options.adult, options.multimatch):
+        for scraperobj in getScrapers(options.comic, options.basepath, options.adult, options.multimatch):
             errors += getStrips(scraperobj, options)
     except ValueError as msg:
         out.error(msg)
@@ -142,19 +141,16 @@ def getStrips(scraperobj, options):
     return errors
 
 
-def run(options, comics):
+def run(options):
     """Execute comic commands."""
     setOutputInfo(options)
     if options.version:
         return displayVersion()
     if options.list:
         return doList(options.list == 1)
-    if len(comics) <= 0:
-        out.warn('No comics specified, bailing out!')
-        return 1
-    if options.modhelp:
-        return displayHelp(comics)
-    return getComics(options, comics)
+    if options.modulehelp:
+        return displayHelp(options.comic)
+    return getComics(options)
 
 
 def doList(columnList):
@@ -253,14 +249,9 @@ def warn_adult(scraperclass):
 
 def main():
     """Parse options and execute commands."""
-    if sys.argv[0].endswith("mainline"):
-        out.warn("the 'mainline' program is deprecated, please use the new 'dosage' program")
     try:
         parser = setupOptions()
-        options, args = parser.parse_args()
-        # eliminate duplicate comic names
-        comics = set(args)
-        res = run(options, comics)
+        res = run(parser.parse_args())
     except KeyboardInterrupt:
         print("Aborted.")
         res = 1
