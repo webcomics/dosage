@@ -48,7 +48,7 @@ class OnTheEdge(_BasicScraper):
 class OneQuestion(_BasicScraper):
     url = 'http://onequestioncomic.com/'
     stripUrl = url + 'comic.php?strip_id=%s'
-    imageSearch = compile(tagre("img", "src", r'(istrip_files/strips/\d+\.jpg)'))
+    imageSearch = compile(tagre("img", "src", r'((?:\.\./)?istrip_files/strips/\d+\.jpg)'))
     prevSearch = compile(tagre("a", "href", r'(comic\.php\?strip_id=\d+)') + tagre("img", "src", r'img/arrow_prev\.jpg'))
     help = 'Index format: n (unpadded)'
 
