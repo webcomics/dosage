@@ -88,6 +88,7 @@ exclude_comics = [
     "Nemution_Jewel", # start page requires login
     "Nemution_Redux", # start page requires login
     "New_Pages", # broken images
+    "NIGHTSHADE_THE_MERRY_WIDOW", # start page requires login
     "Ninja_Shizatch", # broken images
     "No_Need_for_Bushido", # duplicate
     "Normalcy_is_for_Wimps", # broken images
@@ -123,6 +124,7 @@ exclude_comics = [
     "Sonic_Advanced_Online", # broken images
     "Sonic_and_tails_corner", # broken images
     "Sonic_Unreal", # broken images
+    "Space_Farmer", # start page requires login
     "Tales_of_Schlock", # start page requires login
     "Splices_of_Life", # broken images
     "STARSEARCHERS", # broken images

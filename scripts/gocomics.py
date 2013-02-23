@@ -39,6 +39,8 @@ exclude_comics = [
     "SherpaAid", # comic unavailable
     "SparComics", # comic unavailable
     "SurvivingSingle", # comic unavailable
+    "WhatTheFrak", # too few comics
+    "ZeekyZebraandCompany", # too few comics
 ]
 
 
