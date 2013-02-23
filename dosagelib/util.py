@@ -193,7 +193,7 @@ def normaliseURL(url):
     segments = pu[2].split('/')
     while segments and segments[0] in ('', '..'):
         del segments[0]
-    pu[2] = quote(unquote('/' + '/'.join(segments)), safechars=_nopathquote_chars)
+    pu[2] = '/' + '/'.join(segments)
     # remove leading '&' from query
     if pu[4].startswith('&'):
         pu[4] = pu[4][1:]
