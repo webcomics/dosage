@@ -20,7 +20,7 @@ class URLTest(TestCase):
     def test_normalisation(self):
         # Test URL normalisation.
         self.assertEqual(normaliseURL('http://example.com//bar/baz&amp;baz'),
-                         u'http://example.com/bar/baz%26baz')
+                         u'http://example.com/bar/baz&baz')
 
 
 class RegexTest(TestCase):

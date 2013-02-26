@@ -29,6 +29,7 @@ exclude_comics = [
     "DALTONDOG", # comic unavailable
     "DellAndSteve", # too few comics
     "Dilbert", # redirect
+    "DutchnPals", # too few comics
     "InkeeDoodles", # comic unavailable
     "MaggiesComics", # too few comics
     "OfMiceandMud", # too few comics
@@ -37,6 +38,7 @@ exclude_comics = [
     "PS", # comic unavailable
     "RichardsPoorAlmanac", # missing images
     "SherpaAid", # comic unavailable
+    "Slowpoke", # comic moved
     "SparComics", # comic unavailable
     "SurvivingSingle", # comic unavailable
     "WhatTheFrak", # too few comics
