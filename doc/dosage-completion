@@ -10,8 +10,8 @@ _dosage() {
     cur=${COMP_WORDS[COMP_CWORD]}
     prev=${COMP_WORDS[COMP_CWORD-1]}
 
-    if type _optcomplete &> /dev/null; then
-        _optcomplete "$@"
+    if type _argcomplete &> /dev/null; then
+        _argcomplete "$@"
     fi
     return 0
 }
