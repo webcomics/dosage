@@ -40,6 +40,10 @@ def setupOptions():
     parser.add_argument('--adult', action='store_true', default=False, help='confirms that you are old enough to view adult content')
     parser.add_argument('--multimatch', action='store_true', default=False, help='')
     parser.add_argument('comic', nargs='+', help='comic module name (including case insensitive substrings)')
+    try:
+        import argcomplete
+    except:
+        argcomplete.autocomplete(parser)
     return parser
 
 
