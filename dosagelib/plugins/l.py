@@ -46,7 +46,7 @@ class LittleGamers(_BasicScraper):
 
 
 class LeastICouldDo(_BasicScraper):
-    url = 'http://leasticoulddo.com/'
+    url = 'http://www.leasticoulddo.com/'
     stripUrl = url + 'comic/%s'
     imageSearch = compile(tagre("img", "src", r'(http://cdn\.leasticoulddo\.com/wp-content/uploads/\d+/\d+/\d{8}\.\w{1,4})'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.leasticoulddo\.com/comic/\d+/)', after="Previous"))

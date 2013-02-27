@@ -150,11 +150,10 @@ class SodiumEyes(_BasicScraper):
 
 
 class Sorcery101(_BasicScraper):
-    baseUrl = 'http://www.sorcery101.net/'
-    url = baseUrl + 'sorcery-101/'
-    stripUrl = baseUrl + 'sorcery101/%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.sorcery101\.net/comics/sorcery101/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.sorcery101\.net/sorcery101/[^"]+)', after="previous-comic-link"))
+    url = 'http://www.sorcery101.net/sorcery-101/'
+    stripUrl = url + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.sorcery101\.net/wp-content/uploads/\d+/\d+/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.sorcery101\.net/sorcery-101/[^"]+)', after="previous-"))
     help = 'Index format: stripname'
 
 

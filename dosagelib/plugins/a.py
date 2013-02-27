@@ -148,6 +148,7 @@ class AstronomyPOTD(_BasicScraper):
     noImageUrls = set([
         'http://antwrp.gsfc.nasa.gov/apod/ap130217.html', # video
         'http://antwrp.gsfc.nasa.gov/apod/ap130218.html', # video
+        'http://antwrp.gsfc.nasa.gov/apod/ap130226.html', # video
     ])
     prevSearch = compile(tagre("a", "href", r'(ap\d{6}\.html)') + "&lt;</a>")
     help = 'Index format: yymmdd'
