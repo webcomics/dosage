@@ -131,7 +131,9 @@ test:	localbuild
 	env LANG=en_US.utf-8 http_proxy="" $(PYTHON) -m pytest $(PYTESTOPTS) $(TESTOPTS) $(TESTS)
 
 deb:
-# build a debian package
+# Build an official .deb package; only useful for Debian maintainers.
+# To build a local .deb package, use:
+# $ sudo apt-get build-dep dosage; apt-get source dosage; cd dosage-*; debuild binary
 	[ -f $(DEBORIGFILE) ] || cp dist/$(ARCHIVE_SOURCE) $(DEBORIGFILE)
 	sed -i -e 's/VERSION_$(LAPPNAME):=.*/VERSION_$(LAPPNAME):=$(VERSION)/' $(DEBUILDDIR)/$(LAPPNAME).mak
 	[ -d $(DEBPACKAGEDIR) ] || (cd $(DEBUILDDIR); \
