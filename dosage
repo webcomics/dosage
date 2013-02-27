@@ -42,8 +42,9 @@ def setupOptions():
     parser.add_argument('comic', nargs='+', help='comic module name (including case insensitive substrings)')
     try:
         import argcomplete
-    except:
         argcomplete.autocomplete(parser)
+    except ImportError:
+        pass
     return parser
 
 
