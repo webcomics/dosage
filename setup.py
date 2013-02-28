@@ -267,11 +267,15 @@ class InnoScript:
         print("[Setup]", file=fd)
         print("AppName=%s" % self.name, file=fd)
         print("AppVerName=%s %s" % (self.name, self.version), file=fd)
+        print("ChangesEnvironment=true", file=fd)
         print(r"DefaultDirName={pf}\%s" % self.name, file=fd)
         print("DefaultGroupName=%s" % self.name, file=fd)
         print("OutputBaseFilename=%s" % self.distfilebase, file=fd)
         print("OutputDir=..", file=fd)
         print("SetupIconFile=%s" % self.icon, file=fd)
+        print(file=fd)
+        print("[Tasks]", file=fd)
+        print("Name: modifypath; Description: Add application directory to %PATH%; Flags: checked", file=fd)
         print(file=fd)
         # List of source files
         files = self.windows_exe_files + \
@@ -287,12 +291,30 @@ class InnoScript:
         for path in self.windows_exe_files:
             print(r'Name: "{group}\%s"; Filename: "{app}\%s"' %
                   (self.name, path), file=fd)
+        for path in self.console_exe_files:
+            name = os.path.basename(path).capitalize()
+            print(r'Name: "{group}\%s help"; Filename: "cmd.exe"; Parameters "/C %s --help";' % (name, path), file=fd)
         print(r'Name: "{group}\Uninstall %s"; Filename: "{uninstallexe}"' % self.name, file=fd)
         print(file=fd)
         # Uninstall optional log files
         print('[UninstallDelete]', file=fd)
         print(r'Type: files; Name: "{pf}\%s\dosage*.exe.log"' % self.name, file=fd)
         print(file=fd)
+        # Add app dir to PATH
+        print("[Code]", file=fd)
+        print("""\
+const
+    ModPathName = 'modifypath';
+    ModPathType = 'user';
+
+function ModPathDir(): TArrayOfString;
+begin
+    setArrayLength(Result, 1)
+    Result[0] := ExpandConstant('{app}');
+end;
+#include "modpath.iss"
+""", file=fd)
+        shutil.copy(r"scripts\modpath.iss", "dist")
 
     def compile (self):
         """Compile Inno script with iscc.exe."""

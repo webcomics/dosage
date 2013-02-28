@@ -7,6 +7,8 @@ Features:
 Changes:
 - comics: Always use connection pooling when downloading pages or files.
 - cmdline: Replace the deprecated argument parser optparse with argparse.
+- installation: The Windows installer now adds a help entry to the start menu
+  and has a flag to add dosage.exe to the PATH.
 
 Fixes:
 - comics: Correct the list of characters not to quote for URL path encoding.
