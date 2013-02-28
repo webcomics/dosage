@@ -18,7 +18,7 @@ PY2APPOPTS ?=
 # Default pytest options
 # Note that using -n silently swallows test creation exceptions like
 # import errors.
-PYTESTOPTS?=--resultlog=testresults.txt --tb=short --durations=0 -n8
+PYTESTOPTS?=--resultlog=testresults.txt --tb=short -n10
 CHMODMINUSMINUS:=--
 # directory or file with tests to run
 TESTS ?= tests
