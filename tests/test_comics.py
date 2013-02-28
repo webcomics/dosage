@@ -5,9 +5,28 @@ import tempfile
 import shutil
 import re
 import os
+import multiprocessing
+import urlparse
 from itertools import islice
 from unittest import TestCase
 from dosagelib import scraper
+
+
+def get_host(url):
+    """Get host part of URL."""
+    return urlparse.urlsplit(url)[1].lower()
+
+
+# Dictionary with per-host locks.
+_locks = {}
+# Allowed number of connections per host
+MaxConnections = 4
+
+def get_lock(host):
+    """Get bounded semphore for given host."""
+    if host not in _locks:
+        _locks[host] = multiprocessing.BoundedSemaphore(MaxConnections)
+    return _locks[host]
 
 
 class _ComicTester(TestCase):
@@ -33,6 +52,12 @@ class _ComicTester(TestCase):
         # at least 5 strips from the start, and find strip images
         # on at least 4 pages.
         scraperobj = self.scraperclass()
+        # Limit number of connections to one host.
+        host = get_host(scraperobj.url)
+        with get_lock(host):
+            self._test_comic(scraperobj)
+
+    def _test_comic(self, scraperobj):
         num = 0
         max_strips = 5
         for strip in islice(scraperobj.getAllStrips(), 0, max_strips):
