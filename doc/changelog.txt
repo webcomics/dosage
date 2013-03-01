@@ -1,4 +1,4 @@
-Dosage 1.11 (released xx.xx.2013)
+Dosage 1.11 (released 1.3.2013)
 
 Features:
 - comics: Added comic strips Caggage, ManlyGuysDoingManlyThings,

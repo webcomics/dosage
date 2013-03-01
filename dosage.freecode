@@ -1,5 +1,5 @@
 Project: dosage
-Version: 1.10
+Version: 1.11
 Release-Focus: Minor feature enhancements
 Hide: N
 Website-URL: http://wummel.github.com/dosage/
@@ -8,9 +8,6 @@ Tar/GZ-URL: http://github.com/downloads/wummel/dosage/dosage-${version}.tar.gz
 GIT-Tree-URL: https://github.com/wummel/dosage.git
 Windows-installer-URL: http://github.com/downloads/wummel/dosage/dosage-${version}.exe
 
-The following comic strips have been added: SequentialArt,
-VampireCheerleader, GrrlPower, Spinnerette, HijinksEnsue, Nedroid,
-Antics, ChannelAte, ToonHole, ThisIsIndexed, WastedTalent, ChainsawSuit,
-ThreePanelSoul, SpaceTrawler, ScenesFromAMultiverse, BroodHollow,
-BoxerHockey, Wonderella, BadMachinery, TheBrads, FirstWorldProblems,
-OmakeTheater, SkinDeep and ParadigmShift.
+The following comic strips have been added: Caggage, ManlyGuysDoingManlyThings,
+SandraAndWoo and SupernormalStep. A lot of comic strips have been fixed,
+and the Windows installer now has an option to add dosage.exe to the PATH.
