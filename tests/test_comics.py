@@ -54,7 +54,11 @@ class _ComicTester(TestCase):
         scraperobj = self.scraperclass()
         # Limit number of connections to one host.
         host = get_host(scraperobj.url)
-        with get_lock(host):
+        try:
+            with get_lock(host):
+                self._test_comic(scraperobj)
+        except OSError:
+            # interprocess lock not supported
             self._test_comic(scraperobj)
 
     def _test_comic(self, scraperobj):
