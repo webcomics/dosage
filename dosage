@@ -134,8 +134,7 @@ def displayComicHelp(scraperobj):
     out.context = scraperobj.get_name()
     try:
         if scraperobj.description:
-            for line in scraperobj.description.splitlines():
-                out.info(line)
+            out.info("Description: " + scraperobj.description)
         if scraperobj.help:
             for line in scraperobj.help.splitlines():
                 out.info(line)
