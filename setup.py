@@ -238,6 +238,7 @@ class InnoScript:
         if not self.dist_dir[-1] in "\\/":
             self.dist_dir += "\\"
         self.name = AppName
+        self.lname = AppName.lower()
         self.version = AppVersion
         self.windows_exe_files = [self.chop(p) for p in windows_exe_files]
         self.console_exe_files = [self.chop(p) for p in console_exe_files]
@@ -293,12 +294,14 @@ class InnoScript:
                   (self.name, path), file=fd)
         for path in self.console_exe_files:
             name = os.path.basename(path).capitalize()
-            print(r'Name: "{group}\%s help"; Filename: "cmd.exe"; Parameters: "/K %s --help";' % (name, path), file=fd)
+            print(r'Name: "{group}\%s help"; Filename: "cmd.exe"; Parameters: "/K %s --help"' % (name, path), file=fd)
         print(r'Name: "{group}\Uninstall %s"; Filename: "{uninstallexe}"' % self.name, file=fd)
         print(file=fd)
         # Uninstall optional log files
         print('[UninstallDelete]', file=fd)
-        print(r'Type: files; Name: "{pf}\%s\dosage*.exe.log"' % self.name, file=fd)
+        for path in (self.console_exe_files + self.windows_exe_files):
+            exename = os.path.basename(path)
+            print(r'Type: files; Name: "{pf}\%s\%s.log"' % (self.lname, exename), file=fd)
         print(file=fd)
         # Add app dir to PATH
         print("[Code]", file=fd)
@@ -326,7 +329,7 @@ end;
     def sign (self):
         """Sign InnoSetup installer with local self-signed certificate."""
         print("*** signing the inno setup installer ***")
-        pfxfile = r'C:\dosage.pfx'
+        pfxfile = r'C:\%s.pfx' % self.lname
         if os.path.isfile(pfxfile):
             path = get_windows_sdk_path()
             signtool = os.path.join(path, "bin", "signtool.exe")
