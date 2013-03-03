@@ -209,6 +209,14 @@ class _StationV3(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
+class StickyDillyBuns(_BasicScraper):
+    url = 'http://www.stickydillybuns.com/'
+    stripUrl = url + 'strips-sdb/%s'
+    imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'([^"]*/strips-sdb/[^"]+)', before="cn[id]prev"))
+    help = 'Index format: name'
+
+
 class Stubble(_BasicScraper):
     url = 'http://stubblecomics.com/'
     stripUrl = url + '?p=%s'
