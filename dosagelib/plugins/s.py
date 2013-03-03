@@ -83,6 +83,15 @@ class SequentialArt(_BasicScraper):
     help = 'Index format: name'
 
 
+class ShadowGirls(_BasicScraper):
+    url = 'http://www.shadowgirlscomic.com/'
+    stripUrl = url + 'comics/%s'
+    imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]*)'))
+    prevSearch = compile(tagre("a", "href", r'([^"]*)', after='navi-prev'))
+    help = 'Index format: custom'
+    starter = indirectStarter(url, compile(tagre("a", "href", r'([^"]*/comics/[^"]+)')))
+
+
 class Sheldon(_BasicScraper):
     url = 'http://www.sheldoncomics.com/'
     stripUrl = url + 'archive/%s.html'
