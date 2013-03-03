@@ -38,6 +38,14 @@ class _DandyAndCompany(_BasicScraper):
     help = 'Index format: none'
 
 
+class DangerouslyChloe(_BasicScraper):
+    url = 'http://www.dangerouslychloe.com/'
+    stripUrl = url + 'strips-dc/%s'
+    imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'([^"]*/strips-dc/[^"]+)', before="cn[id]prevt"))
+    help = 'Index format: name'
+
+
 class DarkWings(_BasicScraper):
     url = 'http://www.flowerlarkstudios.com/dark-wings/'
     stripUrl = url + '%s'
