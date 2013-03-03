@@ -80,6 +80,15 @@ class MacHall(_BasicScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
+class MenageA3(_BasicScraper):
+    adult = True
+    url = 'http://www.ma3comic.com/'
+    stripUrl = url + 'strips-ma3/%s'
+    imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'([^"]*/strips-ma3/[^"]+)', before="cn[id]prev"))
+    help = 'Index format: name'
+
+
 class Melonpool(_BasicScraper):
     url = 'http://www.melonpool.com/'
     stripUrl = url + '?p=%s'
