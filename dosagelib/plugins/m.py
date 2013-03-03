@@ -16,6 +16,14 @@ class _MadamAndEve(_BasicScraper):
     prevSearch = compile(r'<a href="(weekend_cartoon.php)"')
 
 
+class MagickChicks(_BasicScraper):
+    url = 'http://www.magickchicks.com/'
+    stripUrl = url + 'strips-mc/%s'
+    imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'([^"]*/strips-mc/[^"]+)', before="cn[id]prevt"))
+    help = 'Index format: name'
+
+
 class ManlyGuysDoingManlyThings(_BasicScraper):
     url = 'http://thepunchlineismachismo.com/'
     stripUrl = url + 'archives/comic/%s'
