@@ -13,7 +13,6 @@ HOMEPAGE:=$(HOME)/public_html/$(LAPPNAME)-webpage.git
 DEBUILDDIR:=$(HOME)/projects/debian/official
 DEBORIGFILE:=$(DEBUILDDIR)/$(LAPPNAME)_$(VERSION).orig.tar.gz
 DEBPACKAGEDIR:=$(DEBUILDDIR)/$(LAPPNAME)-$(VERSION)
-PY_FILES_DIRS := dosage dosagelib scripts tests
 PY2APPOPTS ?=
 # Default pytest options
 # Note that using -n silently swallows test creation exceptions like
@@ -110,10 +109,10 @@ doccheck:
 	  *.py
 
 pyflakes:
-	pyflakes $(PY_FILES_DIRS)
+	pyflakes dosage *.py dosagelib scripts tests
 
 count:
-	@sloccount $(PY_FILES_DIRS)
+	@sloccount dosage dosagelib/*.py
 
 clean:
 	find . -name \*.pyc -delete
