@@ -17,9 +17,6 @@ from htmlentitydefs import name2codepoint
 from .decorators import memoized
 from .output import out
 from .configuration import UserAgent, AppName, App, SupportUrl
-from .fileutil import has_module
-
-has_curses = has_module("curses")
 
 # Maximum content size for HTML pages
 MaxContentBytes = 1024 * 1024 * 2 # 2 MB

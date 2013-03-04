@@ -55,4 +55,3 @@ class TestDosage (unittest.TestCase):
     def test_fetch(self):
         run_with_options(["-n", "2", "-b", self.tmpdir, "-o", "html", "calvinandhobbes"])
         run_with_options(["--numstrips", "2", "--baseurl", "bla", "--basepath", self.tmpdir, "--output", "rss", "--adult", "sexyloser"])
-
