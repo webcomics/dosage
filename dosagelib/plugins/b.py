@@ -108,6 +108,10 @@ class BrentalFlossFit(BrentalFloss):
         if prevUrl:
             return prevUrl.replace("\n", "")
 
+    @classmethod
+    def imageUrlModifier(cls, url):
+        if url:
+            return url.replace("\n", "")
 
 class BrentalFlossGuest(BrentalFloss):
     name = 'BrentalFloss/GuestComics'
