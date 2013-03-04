@@ -109,7 +109,7 @@ doccheck:
 	  *.py
 
 pyflakes:
-	pyflakes dosage *.py dosagelib scripts tests
+	pyflakes dosage dosagelib scripts tests
 
 count:
 	@sloccount dosage dosagelib/*.py
