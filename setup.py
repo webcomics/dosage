@@ -24,7 +24,7 @@ from distutils.command.register import register
 from distutils import util
 from distutils.file_util import write_file
 
-AppVersion = '1.11'
+AppVersion = '1.12'
 AppName = 'Dosage'
 
 py_excludes = ['doctest', 'unittest', 'Tkinter', 'pdb',
@@ -419,6 +419,16 @@ args = dict(
     options = {
         "py2exe": py2exe_options,
     },
+    classifiers = [
+        'Environment :: Console',
+        'Intended Audience :: End Users/Desktop',
+        'Topic :: Multimedia :: Graphics',
+        'Topic :: Internet :: WWW/HTTP',
+        'Development Status :: 4 - Beta',
+        'License :: OSI Approved :: GNU General Public License (GPL)',
+        'Programming Language :: Python',
+        'Operating System :: OS Independent',
+    ],
 )
 
 if __name__ == '__main__':
