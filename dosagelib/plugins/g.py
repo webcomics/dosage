@@ -107,14 +107,6 @@ class Gunshow(_BasicScraper):
     help = 'Index format: n'
 
 
-class GleefulNihilism(_BasicScraper):
-    url = 'http://gleefulnihilism.com/'
-    stripUrl = url + 'comics/%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://gleefulnihilism\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://gleefulnihilism\.com/comics/[^"]+)', after="Previous"))
-    help = 'Index format: yyyy/mm/dd/strip-name'
-
-
 class GastroPhobia(_BasicScraper):
     url = 'http://www.gastrophobia.com/'
     stripUrl = url + 'index.php?date=%s'

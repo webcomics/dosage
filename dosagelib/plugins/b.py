@@ -63,11 +63,11 @@ class Blip(_BasicScraper):
 
 
 class BlueCrashKit(_BasicScraper):
-    url = 'http://www.bluecrashkit.com/cheese/'
-    stripUrl = url + 'node/%s'
-    imageSearch = compile(r'(/cheese/files/comics/.+?)"')
-    prevSearch = compile(r'(/cheese/node/.+?)".+?previous')
-    help = 'Index format: non'
+    url = 'http://robhamm.com/bluecrashkit/'
+    stripUrl = url + 'comics/blue-crash-kit/%s'
+    imageSearch = compile(tagre("img", "src", r'(http://robhamm\.com/bluecrashkit/sites/default/files/comics/[^"]+)'))
+    prevSearch = compile(r'<li class="previous"><a href="([^"]+)">')
+    help = 'Index format: yyyy-mm-dd'
 
 
 class BMovieComic(_BasicScraper):
@@ -234,14 +234,6 @@ class BrightlyWound(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r"(comic/[^']+)", quote="'"))
     prevSearch = compile(r'<div id=\'navback\'><a href=\'(\?comic\=\d+)\'><img src=\'images/previous.png\'')
     help = 'Index format: nnn'
-
-
-class BlueCrashKit(_BasicScraper):
-    url = 'http://robhamm.com/bluecrashkit/'
-    stripUrl = url + 'comics/blue-crash-kit/%s'
-    imageSearch = compile(tagre("img", "src", r'(http://robhamm\.com/bluecrashkit/sites/default/files/comics/[^"]+)'))
-    prevSearch = compile(r'<li class="previous"><a href="([^"]+)">')
-    help = 'Index format: yyyy-mm-dd'
 
 
 class BloodBound(_BasicScraper):

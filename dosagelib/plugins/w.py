@@ -32,14 +32,6 @@ class WhiteNinja(_BasicScraper):
     help = 'Index format: s (comic name)'
 
 
-class WhiteNoise(_BasicScraper):
-    url = 'http://www.wncomic.com/archive.php'
-    stripUrl = 'http://www.wncomic.com/archive_comments.php?strip_id=%s'
-    imageSearch = compile(r'(istrip_files/strips/.+?)"')
-    prevSearch = compile(r'First .+?"(archive.+?)".+?top_back')
-    help = 'Index format: n'
-
-
 class WhyTheLongFace(_BasicScraper):
     url = 'http://www.absurdnotions.org/wtlf200709.html'
     stripUrl = 'http://www.absurdnotions.org/wtlf%s.html'
