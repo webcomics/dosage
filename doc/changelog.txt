@@ -1,5 +1,10 @@
 Dosage 1.12 (released 4.3.2013)
 
+Features:
+- comics: Added comic strips AlphaLuna, AlphaLunaSpanish, BrentalFloss
+  BrentalFlossFit, BrentalFlossGuest, DangerouslyChloe, MagickChicks,
+  MenageA3, Namesake, ShadowGirls, StickyDillyBuns.
+
 Fixes:
 - cmdline: Fix option parsing for -l, --singlelist and --version.
   Closes: GH bug #10
