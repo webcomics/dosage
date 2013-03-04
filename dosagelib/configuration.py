@@ -17,7 +17,7 @@ Copyright = u"Copyright (C) 2004-2008 " + \
 HtmlCopyright = u"Copyright &copy; 2004-2008 " + \
   (u",".join(HtmlAuthor.split(",")[:2]))+u" &copy; 2012-2013 "+HtmlMaintainer
 Url = configdata.url
-SupportUrl = Url + u"/issues"
+SupportUrl = Url + u"issues"
 Email = configdata.maintainer_email
 UserAgent = u"Mozilla/5.0 (compatible; %s/%s; +%s)" % (AppName, Version, Url)
 Freeware = AppName+u""" comes with ABSOLUTELY NO WARRANTY!
