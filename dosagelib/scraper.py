@@ -105,13 +105,14 @@ class _BasicScraper(object):
     def getStrip(self, url):
         """Get comic strip for given URL."""
         data, baseUrl = getPageContent(url, self.session)
-        imageUrls = set(fetchUrls(url, data, baseUrl, self.imageSearch))
+        return self.getComicStrip(url, data, baseUrl)
+
+    def getComicStrip(self, url, data, baseUrl):
+        """Get comic strip downloader for given URL and data."""
+        imageUrls = fetchUrls(url, data, baseUrl, self.imageSearch)
+        imageUrls = set(map(self.imageUrlModifier, imageUrls))
         if len(imageUrls) > 1 and not self.multipleImagesPerStrip:
             out.warn("found %d images instead of 1 with %s" % (len(imageUrls), self.imageSearch.pattern))
-        return self.getComicStrip(url, imageUrls)
-
-    def getComicStrip(self, url, imageUrls):
-        """Get comic strip downloader for given URL and images."""
         return ComicStrip(self.get_name(), url, imageUrls, self.namer, self.session)
 
     def getAllStrips(self, maxstrips=None):
@@ -145,8 +146,7 @@ class _BasicScraper(object):
             if url in self.noImageUrls:
                 self.skipUrl(url)
             else:
-                imageUrls = set(fetchUrls(url, data, baseUrl, self.imageSearch))
-                yield self.getComicStrip(url, imageUrls)
+                yield self.getComicStrip(url, data, baseUrl)
             if self.firstStripUrl == url:
                 out.debug("Stop at first URL %s" % url)
                 self.hitFirstStripUrl = True
@@ -200,6 +200,14 @@ class _BasicScraper(object):
         not modify the URL.
         """
         return prevUrl
+
+    @classmethod
+    def imageUrlModifier(cls, imageUrl):
+        """Optional modification of parsed image URLs. Useful if the URL
+        needs to be fixed before usage. The default implementation does
+        not modify the URL.
+        """
+        return imageUrl
 
     def getFilename(self, imageUrl, pageUrl):
         """Return filename for given image and page URL."""
