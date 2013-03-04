@@ -106,14 +106,18 @@ class ComicImage(object):
             with open(fn, 'wb') as comicOut:
                 for chunk in self.urlobj.iter_content(chunk_size=self.ChunkBytes):
                     comicOut.write(chunk)
+                comicOut.flush()
+                os.fsync(comicOut.fileno())
             self.touch(fn)
+            size = os.path.getsize(fn)
+            if size == 0:
+                raise OSError("empty file %s" % fn)
         except Exception:
             if os.path.isfile(fn):
                 os.remove(fn)
             raise
         else:
-            size = strsize(os.path.getsize(fn))
-            out.info("Saved %s (%s)." % (fn, size))
+            out.info("Saved %s (%s)." % (fn, strsize(size)))
             getHandler().comicDownloaded(self.name, fn)
 
         return fn, True
