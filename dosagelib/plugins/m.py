@@ -16,6 +16,14 @@ class _MadamAndEve(_BasicScraper):
     prevSearch = compile(r'<a href="(weekend_cartoon.php)"')
 
 
+class MagickChicks(_BasicScraper):
+    url = 'http://www.magickchicks.com/'
+    stripUrl = url + 'strips-mc/%s'
+    imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'([^"]*/strips-mc/[^"]+)', before="cn[id]prevt"))
+    help = 'Index format: name'
+
+
 class ManlyGuysDoingManlyThings(_BasicScraper):
     url = 'http://thepunchlineismachismo.com/'
     stripUrl = url + 'archives/comic/%s'
@@ -70,6 +78,15 @@ class MacHall(_BasicScraper):
     imageSearch = compile(r'<img src="(comics/.+?)"')
     prevSearch = compile(r'<a href="(.+?)"><img[^>]+?src=\'drop_shadow/previous.gif\'>')
     help = 'Index format: yyyy-mm-dd'
+
+
+class MenageA3(_BasicScraper):
+    adult = True
+    url = 'http://www.ma3comic.com/'
+    stripUrl = url + 'strips-ma3/%s'
+    imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'([^"]*/strips-ma3/[^"]+)', before="cn[id]prev"))
+    help = 'Index format: name'
 
 
 class Melonpool(_BasicScraper):

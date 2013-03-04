@@ -90,6 +90,31 @@ class BratHalla(_BasicScraper):
     help = 'Index format: non'
 
 
+class BrentalFloss(_BasicScraper):
+    url = 'http://brentalflossthecomic.com/'
+    stripUrl = url + '?id=%s'
+    imageSearch = compile(tagre("img", "src", r'([^"]*/img/comic/[^"]*)'))
+    prevSearch = compile(tagre("a", "href", r'([^"]*)') + "Prev")
+    help = 'Index format: n'
+
+
+class BrentalFlossFit(BrentalFloss):
+    name = 'BrentalFloss/FlossedInTime'
+    url = 'http://brentalflossthecomic.com/fit/'
+    stripUrl = url + '?id=%s'
+
+    @classmethod
+    def prevUrlModifier(cls, prevUrl):
+        if prevUrl:
+            return prevUrl.replace("\n", "")
+
+
+class BrentalFlossGuest(BrentalFloss):
+    name = 'BrentalFloss/GuestComics'
+    url = 'http://brentalflossthecomic.com/guestcomics/'
+    stripUrl = url + '?id=%s'
+
+
 class Brink(_BasicScraper):
     url = 'http://paperfangs.com/brink/'
     stripUrl = url + '?p=%s'

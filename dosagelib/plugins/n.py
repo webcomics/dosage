@@ -8,6 +8,19 @@ from ..helpers import indirectStarter, bounceStarter
 from ..util import tagre
 
 
+class Namesake(_BasicScraper):
+    url = 'http://namesakecomic.com/'
+    stripUrl = url + 'comic/%s'
+    imageSearch = compile(tagre("img", "src", r'([^"]*/wp-content/uploads/[^"]+)', after='title='))
+    prevSearch = compile(tagre("a", "href", r'([^"]*/comic/[^"]+)', after='navi-prev'))
+    help = 'Index format: name'
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        imgmatch = compile(r'uploads/(\d+)/(\d+)/(.+)$').search(imageUrl)
+        return '-'.join(imgmatch.groups())
+
+
 class NamirDeiter(_BasicScraper):
     url = 'http://www.namirdeiter.com/'
     stripUrl = url + 'comics/index.php?date=%s'

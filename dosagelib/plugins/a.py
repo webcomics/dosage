@@ -83,6 +83,20 @@ class AlienLovesPredator(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/name/'
 
 
+class AlphaLuna(_BasicScraper):
+    url = 'http://www.alphaluna.net/'
+    stripUrl = url + 'issue-%s/'
+    imageSearch = compile(tagre("a", "href", r'[^"]*/(?:issue-|support/upcoming)[^"]+') + tagre("img", "src", r'([^"]*/PAGINAS/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)') + tagre("img", "alt", "Prev"))
+    help = 'Index format: issue/page (e.g. 4/05)'
+
+
+class AlphaLunaSpanish(AlphaLuna):
+    name = 'AlphaLuna/Spanish'
+    url = 'http://alphaluna.net/spanish/'
+    stripUrl = url + 'issue-%s/'
+
+
 class Altermeta(_BasicScraper):
     url = 'http://altermeta.net/'
     stripUrl = url + 'archive.php?comic=%s'
