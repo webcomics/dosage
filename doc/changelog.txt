@@ -1,3 +1,11 @@
+Dosage 1.13 (released xx.xx.2013)
+
+Fixes:
+- cmdline: Catch error when piping output to another
+  program or file under Windows.
+  Closes: GH bug #13
+
+
 Dosage 1.12 (released 4.3.2013)
 
 Features:
