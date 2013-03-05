@@ -294,8 +294,8 @@ def print_results(args):
             prefix = '#'
         else:
             prefix = ''
-        print("%sadd(%r, %r, %r) # %d" % (
-          prefix, str(truncate_name(name)), str(url), desc, num
+        print("%sadd(%r, %r, %r)" % (
+          prefix, str(truncate_name(name)), str(url), desc
         ))
 
 
