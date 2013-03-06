@@ -111,4 +111,3 @@ class MysteriesOfTheArcana(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(image\.php\?type=com&i=[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(index\.php[^"]+)', after="navprevious"))
     help = 'Index format: n (unpadded)'
-

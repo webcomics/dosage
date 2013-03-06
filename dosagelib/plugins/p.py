@@ -128,6 +128,15 @@ class Pimpette(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
+# Broken navigation: prev link at http://planescapecomic.com/201.html points to same URL.
+class _PlanescapeSurvival(_BasicScraper):
+    url = 'http://planescapecomic.com/'
+    stripUrl = url + '%s.html'
+    imageSearch = compile(r'src="(comics/.+?)"')
+    prevSearch = compile(r'<a href="(.+?)"><img alt="Previous" ')
+    help = 'Index format: nnn'
+
+
 class PokeyThePenguin(_BasicScraper):
     baseurl = 'http://www.yellow5.com/pokey/archive/'
     url = baseurl + 'index558.html'
@@ -186,12 +195,3 @@ class PunksAndNerdsOld(_BasicScraper):
     imageSearch = compile(r' src="(/comics/.+?)"')
     prevSearch = compile(r'><strong><a href="(.+?)"[^>]+?><img[^>]+?src="/previouscomic.gif">')
     help = 'Index format: yyyymmdd'
-
-
-# Broken navigation: prev link at http://planescapecomic.com/201.html points to same URL.
-class _PlanescapeSurvival(_BasicScraper):
-    url = 'http://planescapecomic.com/'
-    stripUrl = url + '%s.html'
-    imageSearch = compile(r'src="(comics/.+?)"')
-    prevSearch = compile(r'<a href="(.+?)"><img alt="Previous" ')
-    help = 'Index format: nnn'

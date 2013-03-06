@@ -27,6 +27,23 @@ class OddFish(_BasicScraper):
     help = 'Index format: stripname'
 
 
+class Oglaf(_BasicScraper):
+    url = 'http://oglaf.com/'
+    stripUrl = url + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(/media/comic/[^"]+)', before="strip"))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)') + tagre("div", "id", "pvs"))
+    help = 'Index format: stripname/nn'
+
+
+class OkCancel(_BasicScraper):
+    url = 'http://okcancel.com/'
+    stripUrl = url + 'comic/%s.html'
+    imageSearch = compile(tagre("img", "src", r'(http://okcancel\.com/strips/okcancel\d{8}\.gif)'))
+    prevSearch = compile(tagre("div", "class", "previous") + tagre("a", "href", r'(http://okcancel\.com/comic/\d{1,4}\.html)'))
+    starter = indirectStarter(url, prevSearch)
+    help = 'Index format: yyyymmdd'
+
+
 class OmakeTheater(_BasicScraper):
     url = 'http://omaketheater.com/'
     stripUrl = url + 'comic/%s'
@@ -59,23 +76,6 @@ class OurHomePlanet(_BasicScraper):
     imageSearch = compile(r'<img src="(pages/comic.+?)"')
     prevSearch = compile(r'coords="50,18,95,65".+?href="(.+?\.html)".+?alt=')
     help = 'Index format: n (unpadded)'
-
-
-class OkCancel(_BasicScraper):
-    url = 'http://okcancel.com/'
-    stripUrl = url + 'comic/%s.html'
-    imageSearch = compile(tagre("img", "src", r'(http://okcancel\.com/strips/okcancel\d{8}\.gif)'))
-    prevSearch = compile(tagre("div", "class", "previous") + tagre("a", "href", r'(http://okcancel\.com/comic/\d{1,4}\.html)'))
-    starter = indirectStarter(url, prevSearch)
-    help = 'Index format: yyyymmdd'
-
-
-class Oglaf(_BasicScraper):
-    url = 'http://oglaf.com/'
-    stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(/media/comic/[^"]+)', before="strip"))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)') + tagre("div", "id", "pvs"))
-    help = 'Index format: stripname/nn'
 
 
 class OverCompensating(_BasicScraper):

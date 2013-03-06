@@ -9,6 +9,19 @@ from ..scraper import _BasicScraper
 from ..util import tagre
 
 
+class EarthsongSaga(_BasicScraper):
+    url = 'http://www.earthsongsaga.com/'
+    starter = indirectStarter(url, compile(tagre("a", "href", r'([^"]+)') + tagre("img", "src", r'[^"]+current\.jpg')))
+    stripUrl = None
+    imageSearch = compile(tagre("img", "src", r'((?:\.\./)?images/vol\d+/ch\d+/\d+\.\w+)'))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)', after="Previous"))
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        imgmatch = compile(r'images/vol(\d+)/ch(\d+)/(\d+)\.\w+$', IGNORECASE).search(imageUrl)
+        return 'vol%02d_ch%02d_%02d' % (int(imgmatch.group(1)), int(imgmatch.group(2)), int(imgmatch.group(3)))
+
+
 class EdibleDirt(_BasicScraper):
     url = 'http://eddirt.frozenreality.co.uk/'
     stripUrl = url + 'index.php?id=%s'
@@ -58,6 +71,14 @@ class ElGoonishShiveNP(_BasicScraper):
     imageSearch = compile(r'<div class=\'comic2\'><img src=\'(comics/\d{4}/\d{2}.+?)\'')
     prevSearch = compile(r'<a href=\'(.+?)\'[^>]+?onmouseover=\'\$\("navimg(6|2)"\)')
     help = 'Index format: yyyy-mm-dd'
+
+
+class Ellerbisms(_BasicScraper):
+    url = 'http://www.ellerbisms.com/'
+    stripUrl = url + '?p=%s'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.ellerbisms\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.ellerbisms\.com/[^"]+)', after="prev"))
+    help = 'Index format: nnn'
 
 
 class EmergencyExit(_BasicScraper):
@@ -124,6 +145,14 @@ class ExiernDarkReflections(_BasicScraper):
     help = 'Index format: n'
 
 
+class ExploitationNow(_BasicScraper):
+    url = 'http://www.exploitationnow.com/'
+    stripUrl = url + '%s'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.exploitationnow\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.exploitationnow\.com/[^"]+)', after="navi-prev"))
+    help = 'Index format: yyyy-mm-dd/num'
+
+
 class ExtraLife(_BasicScraper):
     url = 'http://www.myextralife.com/'
     stripUrl = url + 'comic/%s/'
@@ -138,32 +167,3 @@ class EyeOfRamalach(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(http://theeye\.katbox\.net/wp-content/uploads/[^"]+final[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://theeye\.katbox\.net/comic/[^"]+)', after="previous"))
     help = 'Index format: stripname'
-
-
-class EarthsongSaga(_BasicScraper):
-    url = 'http://www.earthsongsaga.com/'
-    starter = indirectStarter(url, compile(tagre("a", "href", r'([^"]+)') + tagre("img", "src", r'[^"]+current\.jpg')))
-    stripUrl = None
-    imageSearch = compile(tagre("img", "src", r'((?:\.\./)?images/vol\d+/ch\d+/\d+\.\w+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)', after="Previous"))
-
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        imgmatch = compile(r'images/vol(\d+)/ch(\d+)/(\d+)\.\w+$', IGNORECASE).search(imageUrl)
-        return 'vol%02d_ch%02d_%02d' % (int(imgmatch.group(1)), int(imgmatch.group(2)), int(imgmatch.group(3)))
-
-
-class ExploitationNow(_BasicScraper):
-    url = 'http://www.exploitationnow.com/'
-    stripUrl = url + '%s'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.exploitationnow\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.exploitationnow\.com/[^"]+)', after="navi-prev"))
-    help = 'Index format: yyyy-mm-dd/num'
-
-
-class Ellerbisms(_BasicScraper):
-    url = 'http://www.ellerbisms.com/'
-    stripUrl = url + '?p=%s'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.ellerbisms\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.ellerbisms\.com/[^"]+)', after="prev"))
-    help = 'Index format: nnn'

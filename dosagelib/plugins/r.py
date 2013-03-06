@@ -24,6 +24,19 @@ class RealLife(_BasicScraper):
     help = 'Index format: yymmdd)'
 
 
+class RedMeat(_BasicScraper):
+    url = 'http://www.redmeat.com/redmeat/current/index.html'
+    starter = bounceStarter(url, compile(r'<a href="(\.\./\d{4}-\d{2}-\d{2}/index\.html)">next</a>'))
+    stripUrl = 'http://www.redmeat.com/redmeat/%s/index.html'
+    imageSearch = compile(r'<img src="(index-1\.gif)" width="\d+" height="\d+" [^>]*>')
+    prevSearch = compile(r'<a href="(\.\./\d{4}-\d{2}-\d{2}/index\.html)">previous</a>')
+    help = 'Index format: yyyy-mm-dd'
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        return imageUrl.split('/')[-2]
+
+
 class RedString(_BasicScraper):
     url = 'http://www.redstring.strawberrycomics.com/'
     stripUrl = url + 'index.php?id=%s'
@@ -38,16 +51,3 @@ class Roza(_BasicScraper):
     imageSearch = compile(r'<img src="(pages/.+?)"')
     prevSearch = compile(r'<a href="(index.php\?date=.+?)">[^>].+?navtable_01.gif')
     help = 'Index format: yyyy-mm-dd'
-
-
-class RedMeat(_BasicScraper):
-    url = 'http://www.redmeat.com/redmeat/current/index.html'
-    starter = bounceStarter(url, compile(r'<a href="(\.\./\d{4}-\d{2}-\d{2}/index\.html)">next</a>'))
-    stripUrl = 'http://www.redmeat.com/redmeat/%s/index.html'
-    imageSearch = compile(r'<img src="(index-1\.gif)" width="\d+" height="\d+" [^>]*>')
-    prevSearch = compile(r'<a href="(\.\./\d{4}-\d{2}-\d{2}/index\.html)">previous</a>')
-    help = 'Index format: yyyy-mm-dd'
-
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        return imageUrl.split('/')[-2]

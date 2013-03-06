@@ -8,24 +8,6 @@ from ..scraper import _BasicScraper
 from ..helpers import regexNamer, bounceStarter, indirectStarter
 
 
-class ALessonIsLearned(_BasicScraper):
-    url = 'http://www.alessonislearned.com/'
-    prevSearch = compile(tagre("a", "href", r"(index\.php\?comic=\d+)", quote="'")+r"[^>]+previous")
-    starter = indirectStarter(url, prevSearch)
-    stripUrl = url + 'index.php?comic=%s'
-    imageSearch = compile(tagre("img", "src", r"(cmx/lesson\d+\.[a-z]+)"))
-    help = 'Index format: nnn'
-
-
-class ASofterWorld(_BasicScraper):
-    url = 'http://www.asofterworld.com/'
-    stripUrl = url + 'index.php?id=%s'
-    imageSearch = compile(tagre("p", "id", "thecomic") + r'\s*' +
-      tagre("img", "src", r'(http://www\.asofterworld\.com/clean/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", "(index\.php\?id=\d+)")+'< back')
-    help = 'Index format: n (unpadded)'
-
-
 class AbleAndBaker(_BasicScraper):
     url = 'http://www.jimburgessdesign.com/comics/index.php'
     stripUrl = url + '?comic=%s'
@@ -64,6 +46,15 @@ class AcademyVale(_BasicScraper):
     stripUrl = url + 'avarch.cgi?%s'
     imageSearch = compile(tagre('img', 'src', r'(avale\d{4}-\d{2}\.gif)'))
     prevSearch = compile(tagre('a', 'href', r'(avarch[^">]+)', quote="") + tagre('img', 'src', 'AVNavBack\.gif'))
+    help = 'Index format: nnn'
+
+
+class ALessonIsLearned(_BasicScraper):
+    url = 'http://www.alessonislearned.com/'
+    prevSearch = compile(tagre("a", "href", r"(index\.php\?comic=\d+)", quote="'")+r"[^>]+previous")
+    starter = indirectStarter(url, prevSearch)
+    stripUrl = url + 'index.php?comic=%s'
+    imageSearch = compile(tagre("img", "src", r"(cmx/lesson\d+\.[a-z]+)"))
     help = 'Index format: nnn'
 
 
@@ -150,6 +141,15 @@ class Achewood(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(index\.php\?date=\d+)', after="Previous"))
     help = 'Index format: mmddyyyy'
     namer = regexNamer(compile(r'date=(\d+)'))
+
+
+class ASofterWorld(_BasicScraper):
+    url = 'http://www.asofterworld.com/'
+    stripUrl = url + 'index.php?id=%s'
+    imageSearch = compile(tagre("p", "id", "thecomic") + r'\s*' +
+      tagre("img", "src", r'(http://www\.asofterworld\.com/clean/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", "(index\.php\?id=\d+)")+'< back')
+    help = 'Index format: n (unpadded)'
 
 
 class AstronomyPOTD(_BasicScraper):

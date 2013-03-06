@@ -79,6 +79,29 @@ class DeepFried(_BasicScraper):
     help = 'Index format: non'
 
 
+class DieselSweeties(_BasicScraper):
+    url = 'http://www.dieselsweeties.com/'
+    stripUrl = url + 'archive/%s'
+    imageSearch = compile(tagre("img", "src", r'(/hstrips/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(/archive/\d+)') +
+      tagre("img", "src", r'(?:http://www\.dieselsweeties\.com/ximages/blackbackarrow160.png|/ximages/prev\.gif)'))
+    help = 'Index format: n (unpadded)'
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        index = int(imageUrl.split('/')[-1].split('.')[0])
+        return 'sw%02d' % (index,)
+
+
+class Dilbert(_BasicScraper):
+    url = 'http://dilbert.com/'
+    stripUrl = url + '%s/'
+    prevSearch = compile(tagre("a", "href", r'(/\d+-\d+-\d+/)', after="STR_Prev"))
+    imageSearch = compile(tagre("img", "src", r'(/dyn/str_strip/[^"]+\.strip\.zoom\.gif)'))
+    help = 'Index format: yyyy-mm-dd'
+    # XXX namer
+
+
 class DMFA(_BasicScraper):
     url = 'http://www.missmab.com/'
     stripUrl = url + 'Comics/Vol_%s.php'
@@ -95,6 +118,22 @@ class DoemainOfOurOwn(_BasicScraper):
     imageSearch = compile(r"<img border='0' width='\d+' height='\d+' src='(/strips/\d{4}/\d{6}-[^\']+)'")
     prevSearch = compile(r'<a href="(/index\.cgi/\d{4}-\d{2}-\d{2})"><img width="\d+" height="\d+" border="\d+" alt="Previous Strip"')
     help = 'Index format: yyyy-mm-dd'
+
+
+class DominicDeegan(_BasicScraper):
+    url = 'http://www.dominic-deegan.com/'
+    stripUrl = url + 'view.php?date=%s'
+    imageSearch = compile(tagre("img", "src", r'(comics/[^"]+)'))
+    prevSearch = compile(r'"(view.php\?date=[^"]+)".+?prev21')
+    help = 'Index format: yyyy-mm-dd'
+
+
+class DorkTower(_BasicScraper):
+    url = 'http://www.dorktower.com/'
+    stripUrl = url + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.dorktower\.com/files/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.dorktower\.com/[^"]+)')+"Previous")
+    help = 'Index format: yyyy/mm/dd/stripname-dd-mm-yy'
 
 
 class DrFun(_BasicScraper):
@@ -130,44 +169,6 @@ class DreamKeepersPrelude(_BasicScraper):
     help = 'Index format: n'
 
 
-class Drowtales(_BasicScraper):
-    url = 'http://www.drowtales.com/mainarchive.php'
-    stripUrl = url + '?sid=%s'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.drowtales\.com/mainarchive/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(\?sid=\d+)', before="link_prev_top"))
-    help = 'Index format: number'
-
-
-class DieselSweeties(_BasicScraper):
-    url = 'http://www.dieselsweeties.com/'
-    stripUrl = url + 'archive/%s'
-    imageSearch = compile(tagre("img", "src", r'(/hstrips/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/archive/\d+)') +
-      tagre("img", "src", r'(?:http://www\.dieselsweeties\.com/ximages/blackbackarrow160.png|/ximages/prev\.gif)'))
-    help = 'Index format: n (unpadded)'
-
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        index = int(imageUrl.split('/')[-1].split('.')[0])
-        return 'sw%02d' % (index,)
-
-
-class DominicDeegan(_BasicScraper):
-    url = 'http://www.dominic-deegan.com/'
-    stripUrl = url + 'view.php?date=%s'
-    imageSearch = compile(tagre("img", "src", r'(comics/[^"]+)'))
-    prevSearch = compile(r'"(view.php\?date=[^"]+)".+?prev21')
-    help = 'Index format: yyyy-mm-dd'
-
-
-class DorkTower(_BasicScraper):
-    url = 'http://www.dorktower.com/'
-    stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.dorktower\.com/files/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.dorktower\.com/[^"]+)')+"Previous")
-    help = 'Index format: yyyy/mm/dd/stripname-dd-mm-yy'
-
-
 class DresdenCodak(_BasicScraper):
     url = 'http://dresdencodak.com/'
     stripUrl = None
@@ -176,13 +177,12 @@ class DresdenCodak(_BasicScraper):
     starter = indirectStarter('http://dresdencodak.com/', compile(r'<div id="preview"><a href="http://dresdencodak.com/(\d+/\d+/\d+/.*?)">'))
 
 
-class Dilbert(_BasicScraper):
-    url = 'http://dilbert.com/'
-    stripUrl = url + '%s/'
-    prevSearch = compile(tagre("a", "href", r'(/\d+-\d+-\d+/)', after="STR_Prev"))
-    imageSearch = compile(tagre("img", "src", r'(/dyn/str_strip/[^"]+\.strip\.zoom\.gif)'))
-    help = 'Index format: yyyy-mm-dd'
-    # XXX namer
+class Drowtales(_BasicScraper):
+    url = 'http://www.drowtales.com/mainarchive.php'
+    stripUrl = url + '?sid=%s'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.drowtales\.com/mainarchive/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(\?sid=\d+)', before="link_prev_top"))
+    help = 'Index format: number'
 
 
 # XXX disallowed by robots.txt

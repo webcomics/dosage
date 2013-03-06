@@ -83,6 +83,23 @@ class SequentialArt(_BasicScraper):
     help = 'Index format: name'
 
 
+class SexyLosers(_BasicScraper):
+    adult = True
+    url = 'http://www.sexylosers.com/'
+    stripUrl = url + '%s.html'
+    imageSearch = compile(r'<img src\s*=\s*"\s*(comics/[\w\.]+?)"', IGNORECASE)
+    prevSearch = compile(r'<a href="(/\d{3}\.\w+?)"><font color = FFAAAA><<', IGNORECASE)
+    help = 'Index format: nnn'
+    starter = indirectStarter(url,
+                              compile(r'SEXY LOSERS <A HREF="(.+?)">Latest SL Comic \(#\d+\)</A>', IGNORECASE))
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        index = pageUrl.split('/')[-1].split('.')[0]
+        title = imageUrl.split('/')[-1].split('.')[0]
+        return index + '-' + title
+
+
 class ShadowGirls(_BasicScraper):
     url = 'http://www.shadowgirlscomic.com/'
     stripUrl = url + 'comics/%s'
@@ -148,6 +165,14 @@ class SluggyFreelance(_BasicScraper):
     imageSearch = compile(r'<img src="(/images/comics/.+?)"')
     prevSearch = compile(r'<a href="(.+?)"[^>]+?><span class="ui-icon ui-icon-seek-prev">')
     help = 'Index format: yymmdd'
+
+
+class SMBC(_BasicScraper):
+    url = 'http://www.smbc-comics.com/'
+    stripUrl = url + 'index.php?db=comics&id=%s'
+    imageSearch = compile(r'<img src=\'(.+?\d{8}.\w{1,4})\'>')
+    prevSearch = compile(r'131,13,216,84"\n\s+href="(.+?)#comic"\n>', MULTILINE)
+    help = 'Index format: nnnn'
 
 
 class SnowFlame(_BasicScraper):
@@ -275,23 +300,6 @@ class SomethingPositive(_BasicScraper):
     help = 'Index format: mmddyyyy'
 
 
-class SexyLosers(_BasicScraper):
-    adult = True
-    url = 'http://www.sexylosers.com/'
-    stripUrl = url + '%s.html'
-    imageSearch = compile(r'<img src\s*=\s*"\s*(comics/[\w\.]+?)"', IGNORECASE)
-    prevSearch = compile(r'<a href="(/\d{3}\.\w+?)"><font color = FFAAAA><<', IGNORECASE)
-    help = 'Index format: nnn'
-    starter = indirectStarter(url,
-                              compile(r'SEXY LOSERS <A HREF="(.+?)">Latest SL Comic \(#\d+\)</A>', IGNORECASE))
-
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        index = pageUrl.split('/')[-1].split('.')[0]
-        title = imageUrl.split('/')[-1].split('.')[0]
-        return index + '-' + title
-
-
 class StarCrossdDestiny(_BasicScraper):
     url = 'http://www.starcrossd.net/comic.html'
     stripUrl = 'http://www.starcrossd.net/archives/%s.html'
@@ -327,14 +335,6 @@ class _StrangeCandy(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(/comics/\d+\.jpg)'))
     prevSearch = compile(tagre("a", "href", r'(/d/\d+\.html)') + tagre("img", "alt", "Previous comic"))
     help = 'Index format: yyyyddmm'
-
-
-class SMBC(_BasicScraper):
-    url = 'http://www.smbc-comics.com/'
-    stripUrl = url + 'index.php?db=comics&id=%s'
-    imageSearch = compile(r'<img src=\'(.+?\d{8}.\w{1,4})\'>')
-    prevSearch = compile(r'131,13,216,84"\n\s+href="(.+?)#comic"\n>', MULTILINE)
-    help = 'Index format: nnnn'
 
 
 class SupernormalStep(_BasicScraper):

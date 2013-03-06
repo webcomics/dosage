@@ -17,6 +17,36 @@ class FalconTwin(_BasicScraper):
     help = 'Index format: nnn'
 
 
+class Fallen(_BasicScraper):
+    url = 'http://www.fallencomic.com/fal-page.htm'
+    stripUrl = 'http://www.fallencomic.com/pages/part%s/%s-p%s.htm'
+    imageSearch = compile(r'<IMG SRC="(page/.+?)"', IGNORECASE)
+    prevSearch = compile(r'<A HREF="(.+?)"><FONT FACE="Courier">Back', IGNORECASE)
+    help = 'Index format: nn-m (comicNumber-partNumber)'
+    starter = indirectStarter(url,
+                              compile(r'\(NEW \d{2}/\d{2}/\d{2}\)\s*\n*\s*<a href="(pages/part\d+/\d+-p\d+\.htm)">\d+</a>', MULTILINE))
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        num = pageUrl.split('/')[-1].split('-')[0]
+        part = pageUrl.split('-')[-1].split('.')[0]
+        return '%s-%s' % (part, num)
+
+    def getIndexStripUrl(self, index):
+        index, part = index.split('-')
+        return self.stripUrl % (part, index, part)
+
+
+class FantasyRealms(_BasicScraper):
+    url = 'http://www.fantasyrealmsonline.com/'
+    stripUrl = url + 'manga/%s.php'
+    imageSearch = compile(r'<img src="(\d{1,4}.\w{3,4})" width="540"', IGNORECASE)
+    prevSearch = compile(r'<a href="(.+?)"><img src="../images/nav-back.gif"', IGNORECASE)
+    help = 'Index format: nnn'
+    starter = indirectStarter(url,
+                              compile(r'<a href="(manga/.+?)"><img src="preview.jpg"', IGNORECASE))
+
+
 class FauxPas(_BasicScraper):
     url = 'http://www.ozfoxes.net/cgi/pl-fp1.cgi'
     stripUrl = url + '?%s'
@@ -93,42 +123,12 @@ class Freefall(_BasicScraper):
     help = 'Index format: nnnn/nnnnn'
 
 
-class FantasyRealms(_BasicScraper):
-    url = 'http://www.fantasyrealmsonline.com/'
-    stripUrl = url + 'manga/%s.php'
-    imageSearch = compile(r'<img src="(\d{1,4}.\w{3,4})" width="540"', IGNORECASE)
-    prevSearch = compile(r'<a href="(.+?)"><img src="../images/nav-back.gif"', IGNORECASE)
-    help = 'Index format: nnn'
-    starter = indirectStarter(url,
-                              compile(r'<a href="(manga/.+?)"><img src="preview.jpg"', IGNORECASE))
-
-
 class FunInJammies(_BasicScraper):
     url = 'http://www.funinjammies.com/'
     stripUrl = url + 'comic.php?issue=%s'
     imageSearch = compile(r'(/comics/.+?)"')
     prevSearch = compile(r'(/comic.php.+?)" id.+?prev')
     help = 'Index format: n (unpadded)'
-
-
-class Fallen(_BasicScraper):
-    url = 'http://www.fallencomic.com/fal-page.htm'
-    stripUrl = 'http://www.fallencomic.com/pages/part%s/%s-p%s.htm'
-    imageSearch = compile(r'<IMG SRC="(page/.+?)"', IGNORECASE)
-    prevSearch = compile(r'<A HREF="(.+?)"><FONT FACE="Courier">Back', IGNORECASE)
-    help = 'Index format: nn-m (comicNumber-partNumber)'
-    starter = indirectStarter(url,
-                              compile(r'\(NEW \d{2}/\d{2}/\d{2}\)\s*\n*\s*<a href="(pages/part\d+/\d+-p\d+\.htm)">\d+</a>', MULTILINE))
-
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        num = pageUrl.split('/')[-1].split('-')[0]
-        part = pageUrl.split('-')[-1].split('.')[0]
-        return '%s-%s' % (part, num)
-
-    def getIndexStripUrl(self, index):
-        index, part = index.split('-')
-        return self.stripUrl % (part, index, part)
 
 
 class FredoAndPidjin(_BasicScraper):

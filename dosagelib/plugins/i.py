@@ -32,20 +32,20 @@ class IDreamOfAJeanieBottle(_BasicScraper):
     help = 'Index format: n (unpadded)'
 
 
-class IrregularWebcomic(_BasicScraper):
-    url = 'http://www.irregularwebcomic.net/'
-    stripUrl = url + '%s.html'
-    imageSearch = compile(r'<img .*src="(.*comics/.*(png|jpg|gif))".*>')
-    prevSearch = compile(r'<a href="(/\d+\.html|/cgi-bin/comic\.pl\?comic=\d+)">Previous ')
-    help = 'Index format: nnn'
-
-
 class InsideOut(_BasicScraper):
     url = 'http://www.insideoutcomic.com/'
     stripUrl = url + 'html/%s.html'
     imageSearch = compile(r'Picture12LYR.+?C="(.+?/assets/images/.+?)"')
     prevSearch = compile(r'Picture7LYR.+?F="(.+?/html/.+?)"')
     help = 'Index format: n_comic_name'
+
+
+class IrregularWebcomic(_BasicScraper):
+    url = 'http://www.irregularwebcomic.net/'
+    stripUrl = url + '%s.html'
+    imageSearch = compile(r'<img .*src="(.*comics/.*(png|jpg|gif))".*>')
+    prevSearch = compile(r'<a href="(/\d+\.html|/cgi-bin/comic\.pl\?comic=\d+)">Previous ')
+    help = 'Index format: nnn'
 
 
 class ItsWalky(_BasicScraper):

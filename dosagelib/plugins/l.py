@@ -16,12 +16,30 @@ class LasLindas(_BasicScraper):
     help = 'Index format: stripname'
 
 
+class LeastICouldDo(_BasicScraper):
+    url = 'http://www.leasticoulddo.com/'
+    stripUrl = url + 'comic/%s'
+    imageSearch = compile(tagre("img", "src", r'(http://cdn\.leasticoulddo\.com/wp-content/uploads/\d+/\d+/\d{8}\.\w{1,4})'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.leasticoulddo\.com/comic/\d+/)', after="Previous"))
+    starter = indirectStarter(url,
+      compile(tagre("a", "href", r'(http://www\.leasticoulddo\.com/comic/\d+/)', after="feature-comic")))
+    help = 'Index format: yyyymmdd'
+
+
 class Lint(_BasicScraper):
     url = 'http://www.purnicellin.com/lint/'
     stripUrl = url + '%s'
     imageSearch = compile(r'<img src="(http://www.purnicellin.com/lint/comics/.+?)"')
     prevSearch = compile(r'\| <a href="([^"]+)" rel="prev">')
     help = 'Index format: yyyy/mm/dd/num-name'
+
+
+class LittleGamers(_BasicScraper):
+    url = 'http://www.little-gamers.com/'
+    stripUrl = url + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://little-gamers\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.little-gamers.com/[^"]+)', before="comic-nav-prev-link"))
+    help = 'Index format: yyyy/mm/dd/name'
 
 
 class LoadingArtist(_BasicScraper):
@@ -45,21 +63,3 @@ class LookingForGroup(_BasicScraper):
     @classmethod
     def namer(self, imageUrl, pageUrl):
         return self.nameSearch.search(pageUrl).group(1)
-
-
-class LittleGamers(_BasicScraper):
-    url = 'http://www.little-gamers.com/'
-    stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://little-gamers\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.little-gamers.com/[^"]+)', before="comic-nav-prev-link"))
-    help = 'Index format: yyyy/mm/dd/name'
-
-
-class LeastICouldDo(_BasicScraper):
-    url = 'http://www.leasticoulddo.com/'
-    stripUrl = url + 'comic/%s'
-    imageSearch = compile(tagre("img", "src", r'(http://cdn\.leasticoulddo\.com/wp-content/uploads/\d+/\d+/\d{8}\.\w{1,4})'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.leasticoulddo\.com/comic/\d+/)', after="Previous"))
-    starter = indirectStarter(url,
-      compile(tagre("a", "href", r'(http://www\.leasticoulddo\.com/comic/\d+/)', after="feature-comic")))
-    help = 'Index format: yyyymmdd'

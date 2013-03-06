@@ -27,13 +27,20 @@ class Garanos(_BasicScraper):
     help = 'Index format: n  (unpadded)'
 
 
-class GUComics(_BasicScraper):
-    url = 'http://www.gucomics.com/comic/'
-    stripUrl = url + '?cdate=%s'
-    imageSearch = compile(tagre("img", "src", r'(/comics/\d{4}/gu_[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/comic/\?cdate=\d+)') +
-      tagre("img", "src", r'/images/nav/prev\.png'))
-    help = 'Index format: yyyymmdd'
+class GastroPhobia(_BasicScraper):
+    url = 'http://www.gastrophobia.com/'
+    stripUrl = url + 'index.php?date=%s'
+    imageSearch = compile(r'<img src="(http://gastrophobia.com/comix/[^"]+)"[^>]*>(?!<br>)')
+    prevSearch = compile(r'<a href="(.+?)"><img src="pix/prev.gif" ')
+    help = 'Index format: yyyy-mm-dd'
+
+
+class Geeks(_BasicScraper):
+    url = 'http://sevenfloorsdown.com/geeks/'
+    stripUrl = url + 'archives/%s'
+    imageSearch = compile(r'<img src=\'(http://sevenfloorsdown.com/geeks/comics/.+?)\'')
+    prevSearch = compile(r'<a href="(.+?)">&laquo; Previous')
+    help = 'Index format: nnn'
 
 
 class GirlGenius(_BasicScraper):
@@ -49,6 +56,14 @@ class GirlsWithSlingshots(_BasicScraper):
     stripUrl = url + 'comic/gws-%s/'
     imageSearch = compile(tagre("img", "src", r'(http://(?:www|cdn)\.girlswithslingshots\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.girlswithslingshots\.com/comic/[^"]+)', after="prev"))
+    help = 'Index format: nnn'
+
+
+class GlassHalfEmpty(_BasicScraper):
+    url = 'http://www.defectivity.com/ghe/index.php'
+    stripUrl = url + '?strip_id=%s'
+    imageSearch = compile(r'src="(comics/.+?)"')
+    prevSearch = compile(tagre("a", "href", r'(\?strip_id=\d+)') + tagre("img", "src", r'\.\./images/arrowbuttons/onback\.jpg'))
     help = 'Index format: nnn'
 
 
@@ -82,6 +97,14 @@ class GoneWithTheBlastwave(_BasicScraper):
         return '%02d' % int(compile(r'nro=(\d+)').search(pageUrl).group(1))
 
 
+class GreystoneInn(_BasicScraper):
+    url = 'http://www.greystoneinn.net/'
+    stripUrl = url + 'd/%s.html'
+    imageSearch=compile(tagre("img", "src", r'(/comic[s|/][^"]+)'))
+    prevSearch=compile(tagre("a", "href", r'[^"]*(/d/\d+\.s?html)')+r"[^>]+/images/(?:nav_02|previous_day)\.gif")
+    help='Index format: yyyymmdd'
+
+
 class GrrlPower(_BasicScraper):
     url = 'http://www.grrlpowercomic.com/'
     stripUrl = url + 'archives/%s'
@@ -107,33 +130,10 @@ class Gunshow(_BasicScraper):
     help = 'Index format: n'
 
 
-class GastroPhobia(_BasicScraper):
-    url = 'http://www.gastrophobia.com/'
-    stripUrl = url + 'index.php?date=%s'
-    imageSearch = compile(r'<img src="(http://gastrophobia.com/comix/[^"]+)"[^>]*>(?!<br>)')
-    prevSearch = compile(r'<a href="(.+?)"><img src="pix/prev.gif" ')
-    help = 'Index format: yyyy-mm-dd'
-
-
-class Geeks(_BasicScraper):
-    url = 'http://sevenfloorsdown.com/geeks/'
-    stripUrl = url + 'archives/%s'
-    imageSearch = compile(r'<img src=\'(http://sevenfloorsdown.com/geeks/comics/.+?)\'')
-    prevSearch = compile(r'<a href="(.+?)">&laquo; Previous')
-    help = 'Index format: nnn'
-
-
-class GlassHalfEmpty(_BasicScraper):
-    url = 'http://www.defectivity.com/ghe/index.php'
-    stripUrl = url + '?strip_id=%s'
-    imageSearch = compile(r'src="(comics/.+?)"')
-    prevSearch = compile(tagre("a", "href", r'(\?strip_id=\d+)') + tagre("img", "src", r'\.\./images/arrowbuttons/onback\.jpg'))
-    help = 'Index format: nnn'
-
-
-class GreystoneInn(_BasicScraper):
-    url = 'http://www.greystoneinn.net/'
-    stripUrl = url + 'd/%s.html'
-    imageSearch=compile(tagre("img", "src", r'(/comic[s|/][^"]+)'))
-    prevSearch=compile(tagre("a", "href", r'[^"]*(/d/\d+\.s?html)')+r"[^>]+/images/(?:nav_02|previous_day)\.gif")
-    help='Index format: yyyymmdd'
+class GUComics(_BasicScraper):
+    url = 'http://www.gucomics.com/comic/'
+    stripUrl = url + '?cdate=%s'
+    imageSearch = compile(tagre("img", "src", r'(/comics/\d{4}/gu_[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(/comic/\?cdate=\d+)') +
+      tagre("img", "src", r'/images/nav/prev\.png'))
+    help = 'Index format: yyyymmdd'

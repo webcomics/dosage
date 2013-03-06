@@ -6,30 +6,6 @@ from re import compile, IGNORECASE
 from ..scraper import _BasicScraper
 from ..util import tagre
 
-class Key(_BasicScraper):
-    url = 'http://key.shadilyn.com/latestpage.html'
-    stripUrl = 'http://key.shadilyn.com/pages/%s.html'
-    imageSearch = compile(r'"((?:images/.+?)|(?:pages/images/.+?))"')
-    prevSearch = compile(r'</a><a href="(.+?html)".+?prev')
-    help = 'Index format: nnn'
-
-
-class Krakow(_BasicScraper):
-    url = 'http://www.krakow.krakowstudios.com/'
-    stripUrl = url + 'archive.php?date=%s'
-    imageSearch = compile(r'<img src="(comics/.+?)"')
-    prevSearch = compile(r'<a href="(archive\.php\?date=.+?)"><img border=0 name=previous_day')
-    help = 'Index format: yyyymmdd'
-
-
-class Kukuburi(_BasicScraper):
-    url = 'http://www.kukuburi.com/current/'
-    stripUrl = 'http://www.kukuburi.com/v2/%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.kukuburi\.com/v2/comics/[^"]+)', after='alt="[^"]'))
-    prevSearch = compile(r'nav-previous.+?"(http.+?)"')
-    help = 'Index format: yyyy/mm/dd/stripname'
-
-
 class KevinAndKell(_BasicScraper):
     url = 'http://www.kevinandkell.com/'
     stripUrl = url + '%s/kk%s%s.html'
@@ -39,6 +15,14 @@ class KevinAndKell(_BasicScraper):
 
     def getIndexStripUrl(self, index):
         return self.stripUrl % tuple(map(int, index.split('-')))
+
+
+class Key(_BasicScraper):
+    url = 'http://key.shadilyn.com/latestpage.html'
+    stripUrl = 'http://key.shadilyn.com/pages/%s.html'
+    imageSearch = compile(r'"((?:images/.+?)|(?:pages/images/.+?))"')
+    prevSearch = compile(r'</a><a href="(.+?html)".+?prev')
+    help = 'Index format: nnn'
 
 
 class KhaosKomix(_BasicScraper):
@@ -66,6 +50,22 @@ class _Kofightclub(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'((?:http://www\.kofightclub\.com)?/d/\d+\.html)')
      + tagre("img", "alt", "Previous comic"))
     help = 'Index format: yyyymmdd'
+
+
+class Krakow(_BasicScraper):
+    url = 'http://www.krakow.krakowstudios.com/'
+    stripUrl = url + 'archive.php?date=%s'
+    imageSearch = compile(r'<img src="(comics/.+?)"')
+    prevSearch = compile(r'<a href="(archive\.php\?date=.+?)"><img border=0 name=previous_day')
+    help = 'Index format: yyyymmdd'
+
+
+class Kukuburi(_BasicScraper):
+    url = 'http://www.kukuburi.com/current/'
+    stripUrl = 'http://www.kukuburi.com/v2/%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.kukuburi\.com/v2/comics/[^"]+)', after='alt="[^"]'))
+    prevSearch = compile(r'nav-previous.+?"(http.+?)"')
+    help = 'Index format: yyyy/mm/dd/stripname'
 
 
 class KuroShouri(_BasicScraper):

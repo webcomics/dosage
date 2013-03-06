@@ -8,12 +8,12 @@ from ..scraper import _BasicScraper
 from ..util import tagre
 
 
-class WayfarersMoon(_BasicScraper):
-    url = 'http://www.wayfarersmoon.com/'
-    stripUrl = url + 'index.php?page=%s'
-    imageSearch = compile(r'<img src="(/admin.+?)"')
-    prevSearch = compile(r'<a href="(.+?)".+?btn_back.gif')
-    help = 'Index format: nn'
+class WapsiSquare(_BasicScraper):
+    url = 'http://wapsisquare.com/'
+    stripUrl = url + 'comic/%s'
+    imageSearch = compile(r'<img src="(http://wapsisquare.com/comics/.+?)"')
+    prevSearch = compile(r'<a href="(.+?)"[^>]+?>Previous</a>')
+    help = 'Index format: strip-name'
 
 
 class WastedTalent(_BasicScraper):
@@ -22,6 +22,22 @@ class WastedTalent(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(http://www\.wastedtalent\.ca/sites/default/files/imagecache/comic_full/comics/\d+/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/comic/[^"]+)', after="comic_prev"))
     help = 'Index format: stripname'
+
+
+class WayfarersMoon(_BasicScraper):
+    url = 'http://www.wayfarersmoon.com/'
+    stripUrl = url + 'index.php?page=%s'
+    imageSearch = compile(r'<img src="(/admin.+?)"')
+    prevSearch = compile(r'<a href="(.+?)".+?btn_back.gif')
+    help = 'Index format: nn'
+
+
+class WeCanSleepTomorrow(_BasicScraper):
+    url = 'http://wecansleeptomorrow.com/'
+    stripUrl = url + '%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://wecansleeptomorrow\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://wecansleeptomorrow\.com/[^"]+)', after="prev"))
+    help = 'Index format: yyyy/mm/dd/stripname'
 
 
 class WhiteNinja(_BasicScraper):
@@ -121,22 +137,6 @@ class WhiteNoise(_BasicScraper):
     imageSearch = compile(r'(istrip_files/strips/.+?)"')
     prevSearch = compile(r'</a><a href="(.+?)"><img src="images/top_back.jpg" ')
     help = 'Index format: n'
-
-
-class WapsiSquare(_BasicScraper):
-    url = 'http://wapsisquare.com/'
-    stripUrl = url + 'comic/%s'
-    imageSearch = compile(r'<img src="(http://wapsisquare.com/comics/.+?)"')
-    prevSearch = compile(r'<a href="(.+?)"[^>]+?>Previous</a>')
-    help = 'Index format: strip-name'
-
-
-class WeCanSleepTomorrow(_BasicScraper):
-    url = 'http://wecansleeptomorrow.com/'
-    stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://wecansleeptomorrow\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://wecansleeptomorrow\.com/[^"]+)', after="prev"))
-    help = 'Index format: yyyy/mm/dd/stripname'
 
 
 class Wondermark(_BasicScraper):
