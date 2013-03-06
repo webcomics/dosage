@@ -54,7 +54,7 @@ homepage:
 # generate static files
 	$(MAKE) -C doc
 	cp doc/$(LAPPNAME).1.html $(HOMEPAGE)/content
-	make -C $(HOMEPAGE) gen
+	make -C $(HOMEPAGE) gen upload
 
 release: distclean releasecheck
 	$(MAKE) dist sign upload homepage tag register deb
