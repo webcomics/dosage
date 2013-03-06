@@ -99,7 +99,12 @@ class Dilbert(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(/\d+-\d+-\d+/)', after="STR_Prev"))
     imageSearch = compile(tagre("img", "src", r'(/dyn/str_strip/[^"]+\.strip\.zoom\.gif)'))
     help = 'Index format: yyyy-mm-dd'
-    # XXX namer
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        ext = imageUrl.rsplit(".", 1)[1]
+        name = pageUrl.rsplit("/", 2)[1]
+        return "%s.%s" % (name, ext)
 
 
 class DMFA(_BasicScraper):
