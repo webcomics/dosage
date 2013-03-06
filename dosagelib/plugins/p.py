@@ -143,6 +143,7 @@ class PokeyThePenguin(_BasicScraper):
     stripUrl = baseurl + 'index%s.html'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(pokey\d+[^"]+)'))
+    prevSearch = True
     multipleImagesPerStrip = True
     help = 'Index format: number'
 
