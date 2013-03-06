@@ -7,6 +7,15 @@ from ..scraper import _BasicScraper
 from ..util import tagre
 
 
+class IAmArg(_BasicScraper):
+    url = 'http://iamarg.com/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2011/05/08/05082011'
+    imageSearch = compile(tagre("img", "src", r'(http://iamarg\.com/comics/\d+-\d+-\d+[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://iamarg\.com/\d+/\d+/\d+/[^"]+)', after="prev"))
+    help = 'Index format: yyyy/mm/dd/stripname'
+
+
 class IanJay(_BasicScraper):
     url = 'http://ianjay.net/'
     stripUrl = url + '?p=%s'

@@ -57,6 +57,40 @@ class Wonderella(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/name'
 
 
+class WorldOfMrToast(_BasicScraper):
+    baseurl = 'http://www.theimaginaryworld.com/'
+    url = baseurl + 'mrTcomicA.html'
+    stripUrl = baseurl + '%s.html'
+    imageSearch = compile(tagre("img", "src", r'(comic[^"]+)'))
+    # list the archive links since there is no prev/next navigation
+    prevurls = (
+        url,
+        baseurl + 'mrTcomicW02.html',
+        baseurl + 'mrTcomicW01.html',
+        baseurl + 'mrGcomic03.html',
+        baseurl + 'mrGcomic02.html',
+        baseurl + 'mrGcomic01.html',
+        baseurl + 'mrTcomicT05.html',
+        baseurl + 'mrTcomicT04.html',
+        baseurl + 'mrTcomicT03.html',
+        baseurl + 'mrTcomicT02.html',
+        baseurl + 'mrTcomicT01.html',
+        baseurl + 'mrTcomicIW3.html',
+        baseurl + 'mrTcomicIW2.html',
+        baseurl + 'mrTcomicIW1.html',
+    )
+    firstStripUrl = prevurls[-1]
+    multipleImagesPerStrip = True
+    help = 'Index format: none'
+
+    def getPrevUrl(self, url, data, baseUrl):
+        idx = self.prevurls.index(url)
+        try:
+            return self.prevurls[idx+1]
+        except IndexError:
+            return None
+
+
 class WotNow(_BasicScraper):
     url = 'http://shadowburn.binmode.com/wotnow/'
     stripUrl = url + 'comic.php?comic_id=%s'

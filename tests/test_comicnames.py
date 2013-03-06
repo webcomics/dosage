@@ -8,7 +8,7 @@ class TestComicNames(TestCase):
 
     def test_names(self):
         for scraperclass in scraper.get_scraperclasses():
-            name = scraperclass.get_name()
+            name = scraperclass.getName()
             self.assertTrue(name.count('/') <= 1, name)
             if '/' in name:
                 comicname = name.split('/')[1]

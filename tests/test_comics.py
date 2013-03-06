@@ -34,7 +34,7 @@ class _ComicTester(TestCase):
     scraperclass=None
 
     def setUp(self):
-        self.name = self.scraperclass.get_name()
+        self.name = self.scraperclass.getName()
         self.url = self.scraperclass.starter()
         # create a temporary directory for images
         self.tmpdir = tempfile.mkdtemp()
@@ -64,7 +64,7 @@ class _ComicTester(TestCase):
     def _test_comic(self, scraperobj):
         num = 0
         max_strips = 5
-        for strip in islice(scraperobj.getAllStrips(), 0, max_strips):
+        for strip in scraperobj.getStrips(max_strips):
             images = []
             for image in strip.getImages():
                 images.append(image.url)
@@ -122,7 +122,7 @@ def generate_comic_testers():
     g = globals()
     if "TRAVIS" in os.environ:
         # Get limited number of scraper tests on Travis builds.
-        max_scrapers = 1500
+        max_scrapers = 500
         scraperclasses = islice(scraper.get_scraperclasses(), 0, max_scrapers)
     else:
         scraperclasses = scraper.get_scraperclasses()

@@ -83,7 +83,7 @@ def has_creators_comic(name):
     """Test if comic name already exists."""
     cname = "Creators/%s" % name
     for scraperclass in get_scraperclasses():
-        lname = scraperclass.get_name().lower()
+        lname = scraperclass.getName().lower()
         if lname == cname.lower():
             return True
     return False

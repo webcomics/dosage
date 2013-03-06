@@ -69,6 +69,15 @@ class Nicky510(_BasicScraper):
     help = 'Index format: stripname'
 
 
+class Nnewts(_BasicScraper):
+    url = 'http://nnewts.com/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % 'nnewts-page-1'
+    imageSearch = compile(tagre("img", "src", r'(http://nnewts\.com/newty/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://nnewts\.com/(?:nnewts-)?page-\d+/)', after="navi-prev"))
+    help = 'Index format: page-number'
+
+
 class NoNeedForBushido(_BasicScraper):
     url = 'http://noneedforbushido.com/latest/'
     stripUrl = 'http://noneedforbushido.com/%s/'

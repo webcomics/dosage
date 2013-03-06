@@ -83,6 +83,17 @@ class PeppermintSaga(_BasicScraper):
     help = 'Index format: number'
 
 
+class PHDComics(_BasicScraper):
+    baseurl = 'http://phdcomics.com/'
+    url = baseurl + 'comics.php'
+    stripUrl = baseurl + 'comics/archive.php?comicid=%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.phdcomics\.com/comics/archive/phd[^ ]+)', quote=""))
+    prevSearch = compile(tagre("a", "href", r'((?:comics/)?archive\.php\?comicid=\d+)', quote="") +
+        tagre("img", "src", r'(?:comics/)?images/prev_button\.gif', quote=""))
+    help = 'Index format: number'
+
+
 class PicPakDog(_BasicScraper):
     url = 'http://www.picpak.net/'
     stripUrl = url + 'comic/%s/'
@@ -115,6 +126,23 @@ class Pimpette(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(strips/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(index\.php\?date=\d+)') + "Previous")
     help = 'Index format: yyyymmdd'
+
+
+class PokeyThePenguin(_BasicScraper):
+    baseurl = 'http://www.yellow5.com/pokey/archive/'
+    url = baseurl + 'index558.html'
+    stripUrl = baseurl + 'index%s.html'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = compile(tagre("img", "src", r'(pokey\d+[^"]+)'))
+    multipleImagesPerStrip = True
+    help = 'Index format: number'
+
+    def getPrevUrl(self, url, data, baseUrl):
+        """Decrease index.html number."""
+        mo = compile(r"index(\d+)\.html").search(url)
+        num = int(mo.group(1)) - 1
+        prefix = url.rsplit('/', 1)[0]
+        return "%s/index%d.html" % (prefix, num)
 
 
 class Precocious(_BasicScraper):

@@ -25,6 +25,15 @@ class Bardsworth(_BasicScraper):
     help = 'Index format: nnn'
 
 
+class Bearmageddon(_BasicScraper):
+    url = 'http://bearmageddon.com/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2011/08/01/page-1'
+    imageSearch = compile(tagre("img", "src", r'(http://bearmageddon\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://bearmageddon\.com/\d+/\d+/\d+/[^"]+)', after='navi-prev'))
+    help = 'Index format: yyyy/mm/dd/stripname'
+
+
 class BetterDays(_BasicScraper):
     url = 'http://jaynaylor.com/betterdays/'
     stripUrl = url + 'archives/%s.html'
@@ -117,6 +126,16 @@ class BrentalFlossGuest(BrentalFloss):
     name = 'BrentalFloss/GuestComics'
     url = 'http://brentalflossthecomic.com/guestcomics/'
     stripUrl = url + '?id=%s'
+
+
+# XXX disallowed by robots.txt
+class _BringBackRoomies(_BasicScraper):
+    url = "http://www.bringbackroomies.com/"
+    stripUrl = url + "comic/%s"
+    imageSearch = compile(tagre("img", "src", r'(http://www\.bringbackroomies\.com/wp-content/uploads/\d+/\d+/[^"]+)'))
+    prevSearch = compile(tagre("span", "class", "mininav-prev") +
+        tagre("a", "href", r'(http://www\.bringbackroomies\.com/comic/[^"]+)'))
+    help = 'Index format: stripname'
 
 
 class Brink(_BasicScraper):

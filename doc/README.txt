@@ -1,14 +1,14 @@
 Dosage
 =======
 
-Dosage is a commandline webcomic downloader and archiver.
+Dosage is a commandline comic downloader and archiver.
 
 Introduction
 -------------
 Dosage is designed to keep a local copy of specific webcomics
 and other picture-based content such as Picture of the Day sites.
 With the dosage commandline script you can get the latest strip of
-webcomic, or catch-up to the last strip downloaded, or download a
+a webcomic, or catch-up to the last strip downloaded, or download a
 strip for a particular date/index (if the webcomic's site layout
 makes this possible).
 
@@ -91,7 +91,7 @@ Technical Description
 Dosage is written in Python and relies on regular expressions to
 do most of the grunt work.
 
-For each webcomic Dosage has a plugin module, found in the "plugins"
+For each comic Dosage has a plugin module, found in the "plugins"
 subdirectory of the dosagelib directory. Each module is a subclass of
 the _BasicComic class and specifies where to download its comic images.
 Some comic syndicates (GoComics for example) have a standard layout for all
@@ -100,7 +100,7 @@ instances from a given list of comic strips.
 
 Extending Dosage
 -----------------
-In order to add a new webcomic, a new module class has to be created in
+In order to add a new comic, a new module class has to be created in
 one of the *.py files in the dosagelib/plugins subdirectory.
 Look at the existing module classes for examples.
 

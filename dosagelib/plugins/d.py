@@ -54,6 +54,15 @@ class DarkWings(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/page-nn-mm'
 
 
+class DeadWinter(_BasicScraper):
+    url = 'http://deadwinter.cc/'
+    stripUrl = url + 'page/%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = compile(tagre("img", "src", r"(/static/page/strip/\d+[^']+)", quote="'"))
+    prevSearch = compile(tagre("a", "href", r'(/page/\d+)') + "Previous")
+    help = 'Index format: number'
+
+
 class DeathToTheExtremist(_BasicScraper):
     url = 'http://www.dtecomic.com/'
     stripUrl = url + '?n=%s'

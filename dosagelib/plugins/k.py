@@ -37,8 +37,8 @@ class KevinAndKell(_BasicScraper):
     prevSearch = compile(r'<a.+?href="(/?(\.\./)?\d+/kk\d+\.html)"[^>]*><span>Previous Strip', IGNORECASE)
     help = 'Index format: yyyy-mm-dd'
 
-    def setStrip(self, index):
-        self.currentUrl = self.stripUrl % tuple(map(int, index.split('-')))
+    def getIndexStripUrl(self, index):
+        return self.stripUrl % tuple(map(int, index.split('-')))
 
 
 class KhaosKomix(_BasicScraper):

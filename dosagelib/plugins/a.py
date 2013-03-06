@@ -159,13 +159,16 @@ class AstronomyPOTD(_BasicScraper):
     stripUrl = 'http://antwrp.gsfc.nasa.gov/apod/ap%s.html'
     imageSearch = compile(tagre("a", "href", r'(image/\d{4}/[^"]+)'))
     multipleImagesPerStrip = True
-    noImageUrls = set([
-        'http://antwrp.gsfc.nasa.gov/apod/ap130217.html', # video
-        'http://antwrp.gsfc.nasa.gov/apod/ap130218.html', # video
-        'http://antwrp.gsfc.nasa.gov/apod/ap130226.html', # video
-    ])
     prevSearch = compile(tagre("a", "href", r'(ap\d{6}\.html)') + "&lt;</a>")
     help = 'Index format: yymmdd'
+
+    def shouldSkipUrl(self, url):
+        """Skip pages without images."""
+        return url in (
+            'http://antwrp.gsfc.nasa.gov/apod/ap130217.html', # video
+            'http://antwrp.gsfc.nasa.gov/apod/ap130218.html', # video
+            'http://antwrp.gsfc.nasa.gov/apod/ap130226.html', # video
+        )
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
@@ -269,3 +272,14 @@ class Annyseed(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(Annyseed[^"]+)'))
     prevSearch = compile(r'<a href="(http://www\.colourofivy\.com/[^"]+)"><img src="Last.gif"')
     help = 'Index format: nnn'
+
+
+class AxeCop(_BasicScraper):
+    url = 'http://axecop.com/'
+    starter = indirectStarter(url, compile(tagre("a", "href", r'(http://axecop\.com/index\.php/acepisodes/read/episode_\d+/)')))
+    stripUrl = url + 'index.php/acepisodes/read/episode_%s/'
+    firstStripUrl = stripUrl % '0'
+    imageSearch = compile(tagre("img", "src", r'(http://axecop\.com/images/uploads/axecop[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://axecop\.com/index\.php/acepisodes/read/episode_\d+/)') +
+        tagre("img", "src", r'http://axecop\.com/acimages/buttons/page_left\.png'))
+    help = 'Index format: number'

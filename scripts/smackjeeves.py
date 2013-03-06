@@ -291,7 +291,7 @@ def has_comic(name):
     """Check if comic name already exists."""
     cname = name.lower()
     for scraperclass in get_scraperclasses():
-        lname = scraperclass.get_name().lower()
+        lname = scraperclass.getName().lower()
         if lname == cname:
             return True
     return False

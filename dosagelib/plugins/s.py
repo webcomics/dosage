@@ -5,7 +5,7 @@
 from re import compile, MULTILINE, IGNORECASE, sub
 from os.path import splitext
 from ..scraper import _BasicScraper
-from ..helpers import indirectStarter
+from ..helpers import indirectStarter, bounceStarter
 from ..util import tagre
 
 
@@ -148,6 +148,31 @@ class SluggyFreelance(_BasicScraper):
     imageSearch = compile(r'<img src="(/images/comics/.+?)"')
     prevSearch = compile(r'<a href="(.+?)"[^>]+?><span class="ui-icon ui-icon-seek-prev">')
     help = 'Index format: yymmdd'
+
+
+class SnowFlame(_BasicScraper):
+    url = 'http://www.snowflamecomic.com/'
+    stripUrl = url + '?comic=snowflame-%s-%s'
+    firstStripUrl = stripUrl % ('01', '01')
+    imageSearch = compile(tagre("img", "src", r'(http://www\.snowflamecomic\.com/wp-content/uploads/\d+/\d+/[^"]+)'))
+    prevSearch = compile(tagre("span", "class", "mininav-prev") +
+        tagre("a", "href", r'(http://www\.snowflamecomic\.com/\?comic=snowflame[^"]+)'))
+    starter = bounceStarter(url,
+        compile(tagre("span", "class", "mininav-next") +
+        tagre("a", "href", r'(http://www\.snowflamecomic\.com/\?comic=snowflame[^"]+)')))
+    help = 'Index format: chapter-page'
+
+    def getStripIndexUrl(self, index):
+        return self.stripUrl % index.split('-')
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        prefix, filename = imageUrl.rsplit('/', 1)
+        ro = compile(r'snowflame-([^-]+)-([^-]+)')
+        mo = ro.search(pageUrl)
+        chapter = mo.group(1)
+        page = mo.group(2)
+        return "%s-%s-%s" % (chapter, page, filename)
 
 
 class SodiumEyes(_BasicScraper):

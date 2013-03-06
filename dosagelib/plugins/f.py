@@ -44,8 +44,8 @@ class FilibusterCartoons(_BasicScraper):
 
 class FirstWorldProblems(_BasicScraper):
     url = 'http://bradcolbow.com/archive/C5/'
-    stripUrl = url + '%s'
-    firstStripUrl = 'http://bradcolbow.com/archive/C5/P10/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % 'P10'
     imageSearch = compile(tagre("img", "src", r'(http://(?:fwpcomics\.s3\.amazonaws\.com|s3\.amazonaws\.com/fwpcomics)/s1-[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://bradcolbow\.com/archive/C5/[^"]+)', before="prev"))
     multipleImagesPerStrip = True
@@ -126,9 +126,9 @@ class Fallen(_BasicScraper):
         part = pageUrl.split('-')[-1].split('.')[0]
         return '%s-%s' % (part, num)
 
-    def setStrip(self, index):
+    def getIndexStripUrl(self, index):
         index, part = index.split('-')
-        self.currentUrl = self.stripUrl % (part, index, part)
+        return self.stripUrl % (part, index, part)
 
 
 class FredoAndPidjin(_BasicScraper):

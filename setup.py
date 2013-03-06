@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
-# Dosage, the webcomic downloader
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2013 Bastian Kleineidam
 from __future__ import print_function
@@ -394,7 +393,8 @@ class MyRegister (register, object):
 args = dict(
     name = AppName,
     version = AppVersion,
-    description = 'a commandline webcomic downloader and archiver',
+    description = 'a commandline comic downloader and archiver',
+    keywords = 'comic,webcomic,downloader,archiver',
     author = 'Tristan Seligmann, Jonathan Jacobs, Bastian Kleineidam',
     author_email = 'bastian.kleineidam@web.de',
     maintainer = 'Bastian Kleineidam',

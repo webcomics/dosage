@@ -88,6 +88,7 @@ class ComicImage(object):
 
     def save(self, basepath):
         """Save comic URL to filename on disk."""
+        out.info("Get image URL %s" % self.url, level=1)
         self.connect()
         filename = "%s%s" % (self.filename, self.ext)
         comicSize = self.contentLength
@@ -96,6 +97,7 @@ class ComicImage(object):
             os.makedirs(comicDir)
 
         fn = os.path.join(comicDir, filename)
+        # compare with >= since comicSize could be the compressed size
         if os.path.isfile(fn) and os.path.getsize(fn) >= comicSize:
             self.touch(fn)
             out.info('Skipping existing file "%s".' % fn)

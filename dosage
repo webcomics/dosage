@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
-# Dosage, the webcomic downloader
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2013 Bastian Kleineidam
 from __future__ import print_function
@@ -56,7 +55,7 @@ def setupOptions():
     @rtype argparse.ArgumentParser
     """
     kwargs = dict(
-        description = "A commandline webcomic downloader and archiver.",
+        description = "A commandline comic downloader and archiver.",
         epilog = Examples,
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
@@ -131,7 +130,7 @@ def displayHelp(comics):
 
 def displayComicHelp(scraperobj):
     """Print description and help for a comic."""
-    out.context = scraperobj.get_name()
+    out.context = scraperobj.getName()
     try:
         if scraperobj.description:
             out.info("Description: " + scraperobj.description)
@@ -163,15 +162,16 @@ def getComics(options):
 def getStrips(scraperobj, options):
     """Get all strips from a scraper."""
     errors = 0
-    out.context = scraperobj.get_name()
+    out.context = scraperobj.getName()
     if options.all:
-        strips = scraperobj.getAllStrips()
+        numstrips = None
     elif options.numstrips:
-        strips = scraperobj.getAllStrips(options.numstrips)
+        numstrips = options.numstrips
     else:
-        strips = scraperobj.getCurrentStrips()
+        # get current strip
+        numstrips = 1
     try:
-        for strip in strips:
+        for strip in scraperobj.getStrips(numstrips):
             _errors, skipped = saveComicStrip(strip, options.basepath)
             errors += _errors
             if skipped and options.cont:
@@ -206,7 +206,7 @@ def doList(columnList=True):
     """List available comics."""
     out.info('Available comic scrapers:')
     out.info('Comics marked with [A] require age confirmation with the --adult option.')
-    scrapers = sorted(getScrapers(['@@']), key=lambda s: s.get_name())
+    scrapers = sorted(getScrapers(['@@']), key=lambda s: s.getName())
     try:
         if columnList:
             num = doColumnList(scrapers)
@@ -243,7 +243,7 @@ def doColumnList(scrapers):
 def getScraperName(scraperobj, limit=None):
     """Get comic scraper name."""
     suffix = " [A]" if scraperobj.adult else ""
-    name = scraperobj.get_name()
+    name = scraperobj.getName()
     if limit is not None:
         name = strlimit(name, limit)
     return name + suffix
@@ -259,7 +259,7 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False):
             if not adult and scraperclass.adult:
                 warn_adult(scraperclass)
                 continue
-            dirname = getDirname(scraperclass.get_name())
+            dirname = getDirname(scraperclass.getName())
             if os.path.isdir(os.path.join(basepath, dirname)):
                 yield scraperclass()
     elif '@@' in comics:
@@ -293,7 +293,7 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False):
 
 def warn_adult(scraperclass):
     """Print warning about adult content."""
-    out.warn("skipping adult comic %s; use the --adult option to confirm your age" % scraperclass.get_name())
+    out.warn("skipping adult comic %s; use the --adult option to confirm your age" % scraperclass.getName())
 
 
 def main():

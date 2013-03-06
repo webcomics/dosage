@@ -33,9 +33,6 @@ class _BasicScraper(object):
     # if more than one image per URL is expected
     multipleImagesPerStrip = False
 
-    # set of URLs that have no image (eg. only a video link)
-    noImageUrls = set()
-
     # set to False if previous URLs do not match the strip URL (ie. because of redirects)
     prevUrlMatchesStripUrl = True
 
@@ -55,7 +52,7 @@ class _BasicScraper(object):
         """Initialize internal variables."""
         self.urls = set()
         if indexes:
-            self.indexes = tuple(indexes)
+            self.indexes = tuple(sorted(indexes))
         else:
             self.indexes = tuple()
         self.skippedUrls = set()
@@ -66,7 +63,7 @@ class _BasicScraper(object):
         if not isinstance(other, _BasicScraper):
             return 1
         # first, order by name
-        d = cmp(self.get_name(), other.get_name())
+        d = cmp(self.getName(), other.getName())
         if d != 0:
             return d
         # then by indexes
@@ -74,65 +71,41 @@ class _BasicScraper(object):
 
     def __hash__(self):
         """Get hash value from name and index list."""
-        return hash((self.get_name(), self.indexes))
+        return hash((self.getName(), self.indexes))
 
-    def getCurrentStrips(self):
-        """Get current comic strip."""
-        msg = 'Retrieving the current strip'
-        if self.indexes:
-            msg += " for indexes %s" % self.indexes
-        out.info(msg+"...")
-        if self.indexes:
-            for index in self.indexes:
-                url = self.stripUrl % index
-                if url in self.noImageUrls:
-                    self.skipUrl(url)
-                else:
-                    yield self.getStrip(url)
-
-        else:
-            url = self.getLatestUrl()
-            if url in self.noImageUrls:
-                self.skipUrl(url)
-            else:
-                yield self.getStrip(self.getLatestUrl())
-
-    def skipUrl(self, url):
-        """Document that an URL had no images."""
-        out.info('Skipping URL %s without image' % url)
-        self.skippedUrls.add(url)
-
-    def getStrip(self, url):
-        """Get comic strip for given URL."""
-        data, baseUrl = getPageContent(url, self.session)
-        return self.getComicStrip(url, data, baseUrl)
+    def shouldSkipUrl(self, url):
+        """Determine if search for images in given URL should be skipped."""
+        return False
 
     def getComicStrip(self, url, data, baseUrl):
         """Get comic strip downloader for given URL and data."""
         imageUrls = fetchUrls(url, data, baseUrl, self.imageSearch)
         imageUrls = set(map(self.imageUrlModifier, imageUrls))
         if len(imageUrls) > 1 and not self.multipleImagesPerStrip:
-            out.warn("found %d images instead of 1 with %s" % (len(imageUrls), self.imageSearch.pattern))
-        return ComicStrip(self.get_name(), url, imageUrls, self.namer, self.session)
+            out.warn("found %d images instead of 1 at %s with %s" % (len(imageUrls), url, self.imageSearch.pattern))
+        elif not imageUrls:
+            out.warn("found no images at %s with %s" % (url, self.imageSearch.pattern))
+        return ComicStrip(self.getName(), url, imageUrls, self.namer, self.session)
 
-    def getAllStrips(self, maxstrips=None):
-        """Get all comic strips."""
+    def getStrips(self, maxstrips=None):
+        """Get comic strips."""
         if maxstrips:
-            msg = 'Retrieving %d strips' % maxstrips
+            word = "strip" if maxstrips == 1 else "strips"
+            msg = 'Retrieving %d %s' % (maxstrips, word)
         else:
             msg = 'Retrieving all strips'
         if self.indexes:
-            msg += " for indexes %s" % self.indexes
+            if len(self.indexes) == 1:
+                msg += " for index %s" % self.indexes[0]
+            else:
+                msg += " for indexes %s" % self.indexes
+            urls = [self.getIndexStripUrl(index) for index in self.indexes]
+        else:
+            urls = [self.getLatestUrl()]
         if self.adult:
             msg += " (including adult content)"
         out.info(msg)
-        if self.indexes:
-            for index in self.indexes:
-                url = self.stripUrl % index
-                for strip in self.getStripsFor(url, maxstrips):
-                    yield strip
-        else:
-            url = self.getLatestUrl()
+        for url in urls:
             for strip in self.getStripsFor(url, maxstrips):
                 yield strip
 
@@ -142,42 +115,49 @@ class _BasicScraper(object):
         self.hitFirstStripUrl = False
         seen_urls = set()
         while url:
+            out.info('Get strip URL %s' % url, level=1)
             data, baseUrl = getPageContent(url, self.session)
-            if url in self.noImageUrls:
-                self.skipUrl(url)
+            if self.shouldSkipUrl(url):
+                out.info('Skipping URL %s' % url)
+                self.skippedUrls.add(url)
             else:
                 yield self.getComicStrip(url, data, baseUrl)
             if self.firstStripUrl == url:
                 out.debug("Stop at first URL %s" % url)
                 self.hitFirstStripUrl = True
                 break
-            prevUrl = None
-            if self.prevSearch:
-                try:
-                    prevUrl = fetchUrl(url, data, baseUrl, self.prevSearch)
-                except ValueError as msg:
-                    # assume there is no previous URL, but print a warning
-                    out.warn("%s Assuming no previous comic strips exist." % msg)
-                else:
-                    prevUrl = self.prevUrlModifier(prevUrl)
-                    out.debug("Matched previous URL %s" % prevUrl)
+            if maxstrips is not None:
+                maxstrips -= 1
+                if maxstrips <= 0:
+                    break
+            prevUrl = self.getPrevUrl(url, data, baseUrl)
             seen_urls.add(url)
             if prevUrl in seen_urls:
                 # avoid recursive URL loops
                 out.warn("Already seen previous URL %r" % prevUrl)
                 break
             url = prevUrl
-            if maxstrips is not None:
-                maxstrips -= 1
-                if maxstrips <= 0:
-                    break
 
-    def setStrip(self, index):
-        """Set current comic strip URL."""
-        self.currentUrl = self.stripUrl % index
+    def getPrevUrl(self, url, data, baseUrl):
+        """Find previous URL."""
+        prevUrl = None
+        if self.prevSearch:
+            try:
+                prevUrl = fetchUrl(url, data, baseUrl, self.prevSearch)
+            except ValueError as msg:
+                # assume there is no previous URL, but print a warning
+                out.warn("%s Assuming no previous comic strips exist." % msg)
+            else:
+                prevUrl = self.prevUrlModifier(prevUrl)
+                out.debug("Matched previous URL %s" % prevUrl)
+        return prevUrl
+
+    def getIndexStripUrl(self, index):
+        """Get comic strip URL from index."""
+        return self.stripUrl % index
 
     @classmethod
-    def get_name(cls):
+    def getName(cls):
         """Get scraper name."""
         if hasattr(cls, 'name'):
             return cls.name
@@ -209,10 +189,6 @@ class _BasicScraper(object):
         """
         return imageUrl
 
-    def getFilename(self, imageUrl, pageUrl):
-        """Return filename for given image and page URL."""
-        return self.namer(imageUrl, pageUrl)
-
     def getLatestUrl(self):
         """Get starter URL from where to scrape comic strips."""
         return self.starter()
@@ -227,7 +203,7 @@ def find_scraperclasses(comic, multiple_allowed=False):
     candidates = []
     cname = comic.lower()
     for scraperclass in get_scraperclasses():
-        lname = scraperclass.get_name().lower()
+        lname = scraperclass.getName().lower()
         if lname == cname:
             # perfect match
             if not multiple_allowed:
@@ -237,7 +213,7 @@ def find_scraperclasses(comic, multiple_allowed=False):
         elif cname in lname:
             candidates.append(scraperclass)
     if len(candidates) > 1 and not multiple_allowed:
-        comics = ", ".join(x.get_name() for x in candidates)
+        comics = ", ".join(x.getName() for x in candidates)
         raise ValueError('multiple comics found: %s' % comics)
     elif not candidates:
         raise ValueError('comic %r not found' % comic)
@@ -266,10 +242,10 @@ def check_scrapers():
     """Check for duplicate scraper class names."""
     d = {}
     for scraperclass in _scraperclasses:
-        name = scraperclass.get_name().lower()
+        name = scraperclass.getName().lower()
         if name in d:
-            name1 = scraperclass.get_name()
-            name2 = d[name].get_name()
+            name1 = scraperclass.getName()
+            name2 = d[name].getName()
             raise ValueError('duplicate scrapers %s and %s found' % (name1, name2))
         d[name] = scraperclass
 

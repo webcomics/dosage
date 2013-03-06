@@ -407,7 +407,7 @@ def has_comic(name):
     cname = ("Creators/%s" % name).lower()
     gname = ("GoComics/%s" % name).lower()
     for scraperclass in get_scraperclasses():
-        lname = scraperclass.get_name().lower()
+        lname = scraperclass.getName().lower()
         if lname == cname or lname == gname:
             return True
     return False

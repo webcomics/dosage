@@ -24,6 +24,15 @@ class Lint(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/num-name'
 
 
+class LoadingArtist(_BasicScraper):
+    url = 'http://www.loadingartist.com/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2011/01/04/born'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.loadingartist\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.loadingartist\.com/\d+/\d+/\d+/[^"]+/)', after="prev"))
+    help = 'Index format: yyyy/mm/dd/stripname'
+
+
 class LookingForGroup(_BasicScraper):
     url = 'http://www.lfgcomic.com/'
     stripUrl = url + 'page/%s/'
@@ -33,6 +42,7 @@ class LookingForGroup(_BasicScraper):
     nameSearch = compile(r'/page/(\d+)/')
     help = 'Index format: nnn'
 
+    @classmethod
     def namer(self, imageUrl, pageUrl):
         return self.nameSearch.search(pageUrl).group(1)
 

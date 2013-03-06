@@ -209,8 +209,11 @@ class CyanideAndHappiness(_BasicScraper):
     stripUrl = url + '%s/'
     imageSearch = compile(tagre("img", "src", r'(http://(?:www\.)?explosm\.net/db/files/[^"]+)', before="a daily webcomic"))
     prevSearch = compile(tagre("a", "href", r'(/comics/\d+/)', before="prev"))
-    noImageUrls = set(["http://www.explosm.net/comics/3082/"])
     help = 'Index format: n (unpadded)'
+
+    def shouldSkipUrl(self, url):
+        """Skip pages without images."""
+        return url == "http://www.explosm.net/comics/3082/"
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
