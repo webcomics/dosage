@@ -136,7 +136,7 @@ class DominicDeegan(_BasicScraper):
 class DorkTower(_BasicScraper):
     url = 'http://www.dorktower.com/'
     stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.dorktower\.com/files/[^"]+)'))
+    imageSearch = compile(tagre("img", "src", r'(http://www\.dorktower\.com/files/\d+/\d+/DorkTower[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.dorktower\.com/[^"]+)')+"Previous")
     help = 'Index format: yyyy/mm/dd/stripname-dd-mm-yy'
 
