@@ -38,10 +38,16 @@ class CaseyAndAndy(_BasicScraper):
 class CaribbeanBlue(_BasicScraper):
     url = 'http://cblue.katbox.net/'
     stripUrl = url + 'comic/%s/'
-    #http://cblue.katbox.net/wp-content/uploads/cb270en.png?6949c1
-    imageSearch = compile(tagre("img", "src", r'(http://cblue\.katbox\.net/wp-content/uploads/cb[^"]+)'))
+    imageSearch = compile(tagre("img", "src", r'(http://cblue\.katbox\.net/wp-content/uploads/sites/\d+/\d+/\d+/cb[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://cblue\.katbox\.net/comic/[^"]+)', after="previous"))
     help = 'Index format: nnn-stripname'
+
+    def shouldSkipUrl(self, url):
+        """Skip pages without images."""
+        return url in (
+            "http://cblue.katbox.net/comic/filler-stall-them/",
+            "http://cblue.katbox.net/comic/filler-kimi-figurine-now-available/",
+        )
 
 
 class Catalyst(_BasicScraper):
@@ -301,7 +307,8 @@ class CompanyY(_BasicScraper):
 
 class CorydonCafe(_BasicScraper):
     url = 'http://corydoncafe.com/'
-    starter = bounceStarter(url, compile(tagre("a", "href", r"(http://corydoncafe\.com/\d+/[^']+)", after="next", quote="'")))
+    starter = indirectStarter(url,
+        compile(tagre("a", "href", r'(\./\d+/[^"]+)')))
     stripUrl = url + '%s.php'
     imageSearch = compile(tagre("img", "src", r"(\./[^']+)", quote="'"))
     prevSearch = compile(tagre("a", "href", r"(http://corydoncafe\.com/\d+/[^']+)", after="prev", quote="'"))

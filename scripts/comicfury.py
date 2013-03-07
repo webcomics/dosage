@@ -26,6 +26,7 @@ exclude_comics = [
     "6tsc", # unsuitable navigation
     "Archininja", # unsuitable navigation
     "BoozerandStoner", # unsuitable navigation
+    "Fuzzylittleninjas", # unsuitable navigation
     "Kaze", # unsuitable navigation
     "Sweetcheeriosandorangejuice", # unsuitable navigation
     "Coolstorybro", # unsuitable navigation
@@ -173,6 +174,7 @@ exclude_comics = [
     "Slightlyeccentric", # unsuitable navigation
     "Smbhax", # unsuitable navigation
     "SpiritSquire1", # unsuitable navigation
+    "Stardustthecat", # unsuitable navigation
     "Sticklife", # unsuitable navigation
     "StickMisadventures", # unsuitable navigation
     "StrangerThanFiction", # unsuitable navigation
@@ -191,11 +193,14 @@ exclude_comics = [
     "Townburgcity", # unsuitable navigation
     "Tuhinaloota", # unsuitable navigation
     "UFPA", # unsuitable navigation
+    "V4", # unsuitable navigation
+    "Verboten", # unsuitable navigation
     "Warg", # unsuitable navigation
     "Warrior27", # unsuitable navigation
     "Wastedpotential", # unsuitable navigation
     "Wcf", # unsuitable navigation
     "Whoseline", # unsuitable navigation
+    "WindRiders", # unsuitable navigation
     "WitchesTeaParty", # unsuitable navigation
     "Woohooligan", # unsuitable navigation
     "XWingAlliance", # unsuitable navigation

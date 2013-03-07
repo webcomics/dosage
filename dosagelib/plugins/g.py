@@ -131,9 +131,9 @@ class Gunshow(_BasicScraper):
 
 
 class GUComics(_BasicScraper):
-    url = 'http://www.gucomics.com/comic/'
-    stripUrl = url + '?cdate=%s'
+    url = 'http://www.gucomics.com/'
+    stripUrl = url + '%s'
     imageSearch = compile(tagre("img", "src", r'(/comics/\d{4}/gu_[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/comic/\?cdate=\d+)') +
+    prevSearch = compile(tagre("a", "href", r'(/\d+)') +
       tagre("img", "src", r'/images/nav/prev\.png'))
     help = 'Index format: yyyymmdd'

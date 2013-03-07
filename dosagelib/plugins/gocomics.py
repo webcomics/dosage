@@ -4,7 +4,7 @@
 
 from re import compile
 from ..scraper import make_scraper
-from ..util import tagre, quote
+from ..util import tagre
 from ..helpers import bounceStarter
 
 _imageSearch = compile(tagre("img", "src", r'(http://assets\.amuniversal\.com/[0-9a-f]+)'))
@@ -25,7 +25,7 @@ def add(name, shortname):
         url = url,
         starter = bounceStarter(url, _nextSearch),
         name='GoComics/' + name,
-        stripUrl=baseUrl + quote(shortname) + '/%s',
+        stripUrl=baseUrl + shortname + '/%s',
         imageSearch = _imageSearch,
         prevSearch = _prevSearch,
         help='Index format: yyyy/mm/dd',
@@ -194,7 +194,6 @@ add('DudeandDude', '/dudedude')
 add('DumbQuestionBadAnswer', '/dumb-question-bad-answer')
 add('DustSpecks', '/dust-specks')
 add('EGGMEN', '/eggmen')
-add('EclecticCartoons', '/eclectic-cartoons')
 add('Eddie', '/eddie')
 add('Eek', '/eek')
 add('EmmyLou', '/emmy-lou')
@@ -601,7 +600,6 @@ add('ViewsLatinAmerica', '/viewslatinamerica')
 add('ViewsMidEast', '/viewsmideast')
 add('ViewsoftheWorld', '/viewsoftheworld')
 add('ViiviAndWagner', '/viivi-and-wagner')
-add('VoicesInTheDark', '/voices-in-the-dark')
 add('WTDuck', '/wtduck')
 add('WaltHandelsman', '/walthandelsman')
 add('WatchYourHead', '/watchyourhead')

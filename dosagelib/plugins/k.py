@@ -25,15 +25,6 @@ class Key(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class KhaosKomix(_BasicScraper):
-    adult = True
-    url = 'http://www.khaoskomix.com/'
-    stripUrl = url + 'komix/%s'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.khaoskomix\.com/komiximg/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.khaoskomix\.com/komix/[^"]+)', after="Prev"))
-    help = 'Index format: stripname'
-
-
 class KillerKomics(_BasicScraper):
     url = 'http://www.killerkomics.com/web-comics/index_ang.cfm'
     stripUrl = 'http://www.killerkomics.com/web-comics/%s.cfm'

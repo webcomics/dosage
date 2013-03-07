@@ -137,14 +137,6 @@ class Exiern(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
-class ExiernDarkReflections(_BasicScraper):
-    url = 'http://darkreflections.exiern.com/'
-    stripUrl = url + 'index.php?strip_id=%s'
-    imageSearch = compile(r'"(istrip.+?)"')
-    prevSearch = compile(r'First.+?(/index.+?)".+?prev')
-    help = 'Index format: n'
-
-
 class ExploitationNow(_BasicScraper):
     url = 'http://www.exploitationnow.com/'
     stripUrl = url + '%s'
