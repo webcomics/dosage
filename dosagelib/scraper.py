@@ -9,25 +9,15 @@ from .output import out
 
 
 class _BasicScraper(object):
-    '''Base class with scrape functions for comics.
+    '''Base class with scrape functions for comics.'''
 
-    @type url: C{string}
-    @cvar url: The URL for the comic strip.
-    @type stripUrl: C{string}
-    @cvar stripUrl: A string that is interpolated with the strip index
-        to yield the URL for a particular strip.
-    @type firstStripUrl: C{string} optional
-    @cvar firstStripUrl: Stop searching for previous URLs at this URL.
-        If not set and no previous URL is found a warning is printed.
-    @type imageSearch: C{regex}
-    @cvar imageSearch: A compiled regex that will locate the strip image URL
-        when applied to the strip page.
-    @type prevSearch: C{regex}
-    @cvar prevSearch: A compiled regex that will locate the URL for the
-        previous strip when applied to a strip page.
-    '''
+    # The URL for the comic strip
+    url = None
 
-    # stop at this URL
+    # A string that is interpolated with the strip index to yield the URL for a particular strip.
+    stripUrl = None
+
+    # Stop search for previous URLs at this URL
     firstStripUrl = None
 
     # if more than one image per URL is expected
@@ -41,6 +31,12 @@ class _BasicScraper(object):
 
     # a description of the comic contents
     description = ''
+
+    # compiled regular expression that will locate the URL for the previous strip in a page
+    prevSearch = None
+
+    # compiled regular expression that will locate the strip image URLs strip in a page
+    imageSearch = None
 
     # usually the index format help
     help = ''
