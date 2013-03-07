@@ -8,17 +8,18 @@ def queryNamer(paramName, usePageUrl=False):
     @classmethod
     def _namer(cls, imageUrl, pageUrl):
         """Get URL query part."""
-        url = (imageUrl, pageUrl)[usePageUrl]
+        url = pageUrl if usePageUrl else imageUrl
         return getQueryParams(url)[paramName][0]
     return _namer
 
 
-def regexNamer(regex):
+def regexNamer(regex, usePageUrl=False):
     """Get name from regular expression."""
     @classmethod
     def _namer(cls, imageUrl, pageUrl):
         """Get first regular expression group."""
-        mo = regex.search(imageUrl)
+        url = pageUrl if usePageUrl else imageUrl
+        mo = regex.search(url)
         if mo:
             return mo.group(1)
     return _namer
