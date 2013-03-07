@@ -22,6 +22,6 @@ Email = configdata.maintainer_email
 UserAgent = u"Mozilla/5.0 (compatible; %s/%s; +%s)" % (AppName, Version, Url)
 Freeware = AppName+u""" comes with ABSOLUTELY NO WARRANTY!
 This is free software, and you are welcome to redistribute it
-under certain conditions. Look at the file `LICENSE' within this
+under certain conditions. Look at the file `COPYING' within this
 distribution."""
 
