@@ -129,7 +129,7 @@ def displayHelp(comics):
     try:
         for scraperobj in getScrapers(comics):
             displayComicHelp(scraperobj)
-    except ValueError as msg:
+    except Exception as msg:
         out.error(msg)
         return 1
     return 0
@@ -157,7 +157,7 @@ def getComics(options):
     try:
         for scraperobj in getScrapers(options.comic, options.basepath, options.adult, options.multimatch):
             errors += getStrips(scraperobj, options)
-    except ValueError as msg:
+    except Exception as msg:
         out.error(msg)
         errors += 1
     finally:
@@ -185,7 +185,7 @@ def getStrips(scraperobj, options):
                 # stop when retrieval skipped an image for one comic strip
                 out.info("Stop retrieval because image file already exists")
                 break
-    except (ValueError, IOError) as msg:
+    except Exception as msg:
         out.error(msg)
         errors += 1
     return errors

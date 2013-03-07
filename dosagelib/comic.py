@@ -49,10 +49,7 @@ class ComicImage(object):
 
     def connect(self):
         """Connect to host and get meta information."""
-        try:
-            self.urlobj = getImageObject(self.url, self.referrer, self.session)
-        except IOError as msg:
-            raise IOError('error retrieving URL %s: %s' % (self.url, msg))
+        self.urlobj = getImageObject(self.url, self.referrer, self.session)
         content_type = unquote(self.urlobj.headers.get('content-type', 'application/octet-stream'))
         content_type = content_type.split(';', 1)[0]
         if '/' in content_type:
