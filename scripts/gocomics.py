@@ -26,6 +26,7 @@ exclude_comics = [
     "BETWEENTHELINES", # comic unavailable
     "Bonner", # missing page
     "Buster", # comic unavailabe
+    "CarteBlanche", # missing images
     "DALTONDOG", # comic unavailable
     "DellAndSteve", # too few comics
     "Dilbert", # redirect
