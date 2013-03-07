@@ -2,6 +2,13 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2013 Bastian Kleineidam
+#     ___
+#    /   \___  ___  __ _  __ _  ___
+#   / /\ / _ \/ __|/ _` |/ _` |/ _ \
+#  / /_// (_) \__ \ (_| | (_| |  __/
+# /___,' \___/|___/\__,_|\__, |\___|
+#                        |___/
+
 from __future__ import print_function
 import sys
 import os
@@ -76,7 +83,7 @@ def setupOptions():
     parser.add_argument('-t', '--timestamps', action='store_true', help='print timestamps for all output at any info level')
     parser.add_argument('-o', '--output', action='store', choices=events.getHandlers(), help='output formatting for downloaded comics')
     parser.add_argument('--adult', action='store_true', help='confirms that you are old enough to view adult content')
-    parser.add_argument('--multimatch', action='store_true', help='')
+    parser.add_argument('--multimatch', action='store_true', help=argparse.SUPPRESS)
     parser.add_argument('comic', nargs='*', help='comic module name (including case insensitive substrings)')
     try:
         import argcomplete
