@@ -56,4 +56,4 @@ class Zwarwald(_BasicScraper):
     help = 'Index format: number'
 
     def shouldSkipUrl(self, url):
-        return url in (stripUrl % "112",)
+        return url in ("http://www.zwarwald.de/index.php/page/112/",)

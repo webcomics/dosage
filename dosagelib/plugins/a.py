@@ -291,9 +291,9 @@ class Annyseed(_BasicScraper):
 class AxeCop(_BasicScraper):
     url = 'http://axecop.com/'
     starter = indirectStarter(url, compile(tagre("a", "href", r'(http://axecop\.com/index\.php/acepisodes/read/episode_\d+/)')))
-    stripUrl = url + 'index.php/acepisodes/read/episode_%s/'
-    firstStripUrl = stripUrl % '0'
-    imageSearch = compile(tagre("img", "src", r'(http://axecop\.com/images/uploads/(?:axecop|acmarried)[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://axecop\.com/index\.php/acepisodes/read/episode_\d+/)') +
+    stripUrl = url + 'index.php/acepisodes/read/%s/'
+    firstStripUrl = stripUrl % 'episode_0'
+    imageSearch = compile(tagre("img", "src", r'(http://axecop\.com/images/uploads/(?:axecop|AXE-COP|acmarried|nightmonster)[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://axecop\.com/index\.php/acepisodes/read/[^"]+)') +
         tagre("img", "src", r'http://axecop\.com/acimages/buttons/page_left\.png'))
-    help = 'Index format: number'
+    help = 'Index format: stripname'
