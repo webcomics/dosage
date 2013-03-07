@@ -3,6 +3,7 @@
 import os
 import time
 import urllib
+import codecs
 from . import rss, util, configuration
 
 class EventHandler(object):
@@ -120,9 +121,11 @@ class HtmlEventHandler(EventHandler):
         yesterdayUrl = self.getUrlFromFilename(self.fnFromDate(yesterday))
         tomorrowUrl = self.getUrlFromFilename(self.fnFromDate(tomorrow))
 
-        self.html = file(fn, 'w')
-        self.html.write('''<html>
+        self.html = codecs.open(fn, 'w', 'utf-8')
+        self.html.write(u'''<!DOCTYPE html>
+<html lang="en">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Comics for %s</title>
 </head>
 <body>
@@ -137,22 +140,22 @@ class HtmlEventHandler(EventHandler):
         if self.lastComic != comic:
             self.newComic(comic)
         url = self.getUrlFromFilename(filename)
-        self.html.write('        <li><a href="%s">%s</a></li>\n' % (url, os.path.basename(filename)))
+        self.html.write(u'        <li><a href="%s">%s</a></li>\n' % (url, os.path.basename(filename)))
 
     def newComic(self, comic):
         """Start new comic list in HTML."""
         if self.lastComic is not None:
-            self.html.write('    </ul>\n')
+            self.html.write(u'    </ul>\n')
         self.lastComic = comic
-        self.html.write('''    <li>%s</li>
+        self.html.write(u'''    <li>%s</li>
     <ul>
 ''' % (comic,))
 
     def end(self):
         """End HTML output."""
         if self.lastComic is not None:
-            self.html.write('    </ul>\n')
-        self.html.write('''</ul>
+            self.html.write(u'    </ul>\n')
+        self.html.write(u'''</ul>
 </body>
 </html>''')
         self.html.close()
