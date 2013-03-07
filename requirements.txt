@@ -1,2 +1,2 @@
 requests
-# optional: optcomplete
+# optional: argcomplete
