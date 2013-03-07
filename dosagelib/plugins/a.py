@@ -49,6 +49,20 @@ class AcademyVale(_BasicScraper):
     help = 'Index format: nnn'
 
 
+class AhoiPolloi(_BasicScraper):
+    url = 'http://ahoipolloi.blogger.de/'
+    stripUrl = url + '?day=%s'
+    firstStripUrl = stripUrl % '20060305'
+    multipleImagesPerStrip = True
+    imageSearch = compile(tagre('img', 'src', r'(/static/antville/ahoipolloi/images/[^"]+)'))
+    prevSearch = compile(tagre('a', 'href', r'(http://ahoipolloi\.blogger\.de/\?day=\d+)'))
+    help = 'Index format: yyyymmdd'
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        return imageUrl.rsplit('/', 1)[1]
+
+
 class ALessonIsLearned(_BasicScraper):
     url = 'http://www.alessonislearned.com/'
     prevSearch = compile(tagre("a", "href", r"(index\.php\?comic=\d+)", quote="'")+r"[^>]+previous")
@@ -279,7 +293,7 @@ class AxeCop(_BasicScraper):
     starter = indirectStarter(url, compile(tagre("a", "href", r'(http://axecop\.com/index\.php/acepisodes/read/episode_\d+/)')))
     stripUrl = url + 'index.php/acepisodes/read/episode_%s/'
     firstStripUrl = stripUrl % '0'
-    imageSearch = compile(tagre("img", "src", r'(http://axecop\.com/images/uploads/axecop[^"]+)'))
+    imageSearch = compile(tagre("img", "src", r'(http://axecop\.com/images/uploads/(?:axecop|acmarried)[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://axecop\.com/index\.php/acepisodes/read/episode_\d+/)') +
         tagre("img", "src", r'http://axecop\.com/acimages/buttons/page_left\.png'))
     help = 'Index format: number'

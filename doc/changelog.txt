@@ -1,9 +1,9 @@
 Dosage 1.13 (released xx.xx.2013)
 
 Features:
-- comics: Added comic strips AxeCop, Bearmageddon, DeadWinter,
+- comics: Added comic strips AhoiPolloi, AxeCop, Bearmageddon, DeadWinter,
   HarkAVagrant, IAmArg, LoadingArtist, Nnewts, PHDComics, PokeyThePenguin,
-  SnowFlame and WorldOfMrToast.
+  SnowFlame and WorldOfMrToast, Zwarwald.
 
 Fixes:
 - cmdline: Catch error when piping output to another

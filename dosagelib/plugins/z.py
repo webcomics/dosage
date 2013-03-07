@@ -45,3 +45,15 @@ class ZombieHunters(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(/istrip_files/strips/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(\?strip_id=\d+)') + tagre("img", "id", "prevcomic"))
     help = 'Index format: n(unpadded)'
+
+
+class Zwarwald(_BasicScraper):
+    url = "http://www.zwarwald.de/"
+    stripUrl = url + 'index.php/page/%s/'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.zwarwald\.de/images/\d+/\d+/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.zwarwald\.de/index\.php/page/\d+/)') +
+        tagre("img", "src", r'http://zwarwald\.de/images/prev\.jpg', quote="'"))
+    help = 'Index format: number'
+
+    def shouldSkipUrl(self, url):
+        return url in (stripUrl % "112",)
