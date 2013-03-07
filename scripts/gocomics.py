@@ -30,6 +30,7 @@ exclude_comics = [
     "DellAndSteve", # too few comics
     "Dilbert", # redirect
     "DutchnPals", # too few comics
+    "FlexandTone", # too few comics
     "InkeeDoodles", # comic unavailable
     "MaggiesComics", # too few comics
     "OfMiceandMud", # too few comics

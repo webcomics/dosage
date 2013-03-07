@@ -100,6 +100,9 @@ class ToonHole(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(http://www\.toonhole\.com/\d+/\d+/[^"]+)', after="prev"))
     help = 'Index format: yyyy/mm/stripname'
 
+    def shouldSkipUrl(self, url):
+        return url in ("http://www.toonhole.com/2013/03/if-game-of-thrones-was-animated/",)
+
 
 # XXX disallowed by robots.txt
 class _TwoLumps(_BasicScraper):

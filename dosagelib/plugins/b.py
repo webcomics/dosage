@@ -172,7 +172,7 @@ class BratHalla(_BasicScraper):
 
 
 class BrentalFloss(_BasicScraper):
-    url = 'http://brentalflossthecomic.com/'
+    url = 'http://www.brentalflossthecomic.com/'
     stripUrl = url + '?id=%s'
     imageSearch = compile(tagre("img", "src", r'([^"]*/img/comic/[^"]*)'))
     prevSearch = compile(tagre("a", "href", r'([^"]*)') + "Prev")
@@ -193,6 +193,7 @@ class BrentalFlossFit(BrentalFloss):
     def imageUrlModifier(cls, url):
         if url:
             return url.replace("\n", "")
+
 
 class BrentalFlossGuest(BrentalFloss):
     name = 'BrentalFloss/GuestComics'

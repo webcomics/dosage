@@ -34,7 +34,7 @@ class JoeAndMonkey(_BasicScraper):
 class JohnnyWander(_BasicScraper):
     url = 'http://www.johnnywander.com/'
     stripUrl = url + 'comics/%s'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.johnnywander\.com/files/comics/[^"]+\.jpg)'))
+    imageSearch = compile(tagre("img", "src", r'(http://www\.johnnywander\.com/files/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/comics/\d+)') + r'prev')
     help = 'Index format: nnn'
 
