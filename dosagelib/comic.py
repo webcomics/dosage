@@ -53,7 +53,7 @@ class ComicImage(object):
             self.urlobj = getImageObject(self.url, self.referrer, self.session)
         except IOError as msg:
             raise IOError('error retrieving URL %s: %s' % (self.url, msg))
-        content_type = unquote(self.urlobj.headers.get('content-type'))
+        content_type = unquote(self.urlobj.headers.get('content-type', 'application/octet-stream'))
         content_type = content_type.split(';', 1)[0]
         if '/' in content_type:
             maintype, subtype = content_type.split('/', 1)
