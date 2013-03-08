@@ -140,7 +140,7 @@ class HtmlEventHandler(EventHandler):
         if self.lastComic != comic:
             self.newComic(comic)
         url = self.getUrlFromFilename(filename)
-        self.html.write(u'        <li><a href="%s">%s</a></li>\n' % (url, os.path.basename(filename)))
+        self.html.write(u'<li><img src="%s"/></li>\n' % url)
 
     def newComic(self, comic):
         """Start new comic list in HTML."""
@@ -149,7 +149,7 @@ class HtmlEventHandler(EventHandler):
         self.lastComic = comic
         self.html.write(u'''    <li>%s</li>
     <ul>
-''' % (comic,))
+''' % comic)
 
     def end(self):
         """End HTML output."""
