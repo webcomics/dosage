@@ -33,6 +33,9 @@ class _BasicScraper(object):
     # a description of the comic contents
     description = ''
 
+    # langauge of the comic (two-letter ISO 639-1 code)
+    lang = 'en'
+
     # compiled regular expression that will locate the URL for the previous strip in a page
     prevSearch = None
 
@@ -42,7 +45,7 @@ class _BasicScraper(object):
     # usually the index format help
     help = ''
 
-    # wait time before downloading any pages or images
+    # wait time between downloading comic strips
     waitSeconds = 0
 
     # HTTP session storing cookies
@@ -137,7 +140,7 @@ class _BasicScraper(object):
                 out.warn("Already seen previous URL %r" % prevUrl)
                 break
             url = prevUrl
-            if self.waitSeconds:
+            if url and self.waitSeconds:
                 time.sleep(self.waitSeconds)
 
     def getPrevUrl(self, url, data, baseUrl):

@@ -172,7 +172,7 @@ class BratHalla(_BasicScraper):
 
 
 class BrentalFloss(_BasicScraper):
-    url = 'http://www.brentalflossthecomic.com/'
+    url = 'http://brentalflossthecomic.com/'
     stripUrl = url + '?id=%s'
     imageSearch = compile(tagre("img", "src", r'([^"]*/img/comic/[^"]*)'))
     prevSearch = compile(tagre("a", "href", r'([^"]*)') + "Prev")

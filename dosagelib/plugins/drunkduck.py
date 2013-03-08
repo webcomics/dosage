@@ -43,6 +43,7 @@ def add(name, path):
         stripUrl = _url + '%s/',
         imageSearch = _imageSearch,
         prevSearch = _prevSearch,
+        lang = 'es' if name.lower().endswith('spanish') else 'en',
         help = 'Index format: n (unpadded)',
         namer = _namer,
     )

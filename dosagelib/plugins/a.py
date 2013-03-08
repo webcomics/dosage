@@ -54,6 +54,7 @@ class AhoiPolloi(_BasicScraper):
     stripUrl = url + '?day=%s'
     firstStripUrl = stripUrl % '20060305'
     multipleImagesPerStrip = True
+    lang = 'de'
     imageSearch = compile(tagre('img', 'src', r'(/static/antville/ahoipolloi/images/[^"]+)'))
     prevSearch = compile(tagre('a', 'href', r'(http://ahoipolloi\.blogger\.de/\?day=\d+)'))
     help = 'Index format: yyyymmdd'
@@ -98,6 +99,7 @@ class AlphaLuna(_BasicScraper):
 
 class AlphaLunaSpanish(AlphaLuna):
     name = 'AlphaLuna/Spanish'
+    lang = 'es'
     url = 'http://alphaluna.net/spanish/'
     stripUrl = url + 'issue-%s/'
 

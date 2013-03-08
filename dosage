@@ -18,7 +18,7 @@ from collections import OrderedDict
 
 from dosagelib import events, scraper
 from dosagelib.output import out
-from dosagelib.util import internal_error, getDirname, strlimit
+from dosagelib.util import internal_error, getDirname, strlimit, getLangName
 from dosagelib.ansicolor import get_columns
 from dosagelib.configuration import App, Freeware, Copyright, SupportUrl
 
@@ -118,7 +118,7 @@ def saveComicStrip(strip, basepath):
             filename, saved = image.save(basepath)
             if saved:
                 allskipped = False
-        except IOError as msg:
+        except Exception as msg:
             out.error('Could not save image at %s to %s: %s' % (image.referrer, image.filename, msg))
             errors += 1
     return errors, allskipped
@@ -126,21 +126,19 @@ def saveComicStrip(strip, basepath):
 
 def displayHelp(comics):
     """Print help for comic strips."""
-    try:
-        for scraperobj in getScrapers(comics):
-            displayComicHelp(scraperobj)
-    except Exception as msg:
-        out.error(msg)
-        return 1
+    for scraperobj in getScrapers(comics):
+        displayComicHelp(scraperobj)
     return 0
 
 
 def displayComicHelp(scraperobj):
     """Print description and help for a comic."""
-    out.context = scraperobj.getName()
+    out.context = getScraperName(scraperobj)
     try:
         if scraperobj.description:
             out.info("Description: " + scraperobj.description)
+        if scraperobj.lang:
+            out.info("Language: " + getLangName(scraperobj.lang))
         if scraperobj.help:
             for line in scraperobj.help.splitlines():
                 out.info(line)
@@ -157,9 +155,6 @@ def getComics(options):
     try:
         for scraperobj in getScrapers(options.comic, options.basepath, options.adult, options.multimatch):
             errors += getStrips(scraperobj, options)
-    except Exception as msg:
-        out.error(msg)
-        errors += 1
     finally:
         out.context = ''
         events.getHandler().end()
@@ -199,7 +194,7 @@ def run(options):
     if options.list:
         return doList()
     if options.singlelist:
-        return doList(columnList=False)
+        return doList(columnList=False, verbose=options.verbose)
     # after this a list of comic strips is needed
     if not options.comic:
         out.warn('No comics specified, bailing out!')
@@ -209,26 +204,26 @@ def run(options):
     return getComics(options)
 
 
-def doList(columnList=True):
+def doList(columnList=True, verbose=False):
     """List available comics."""
     out.info('Available comic scrapers:')
     out.info('Comics marked with [A] require age confirmation with the --adult option.')
     scrapers = sorted(getScrapers(['@@']), key=lambda s: s.getName())
-    try:
-        if columnList:
-            num = doColumnList(scrapers)
-        else:
-            num = doSingleList(scrapers)
-        out.info('%d supported comics.' % num)
-    except IOError:
-        pass
+    if columnList:
+        num = doColumnList(scrapers)
+    else:
+        num = doSingleList(scrapers, verbose=verbose)
+    out.info('%d supported comics.' % num)
     return 0
 
 
-def doSingleList(scrapers):
+def doSingleList(scrapers, verbose=False):
     """Get list of scraper names, one per line."""
     for num, scraperobj in enumerate(scrapers):
-        print(getScraperName(scraperobj))
+        if verbose:
+            displayComicHelp(scraperobj)
+        else:
+            print(getScraperName(scraperobj))
     return num
 
 

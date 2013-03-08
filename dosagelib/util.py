@@ -17,6 +17,7 @@ from htmlentitydefs import name2codepoint
 from .decorators import memoized
 from .output import out
 from .configuration import UserAgent, AppName, App, SupportUrl
+from .languages import Iso2Language
 
 # Maximum content size for HTML pages
 MaxContentBytes = 1024 * 1024 * 2 # 2 MB
@@ -462,3 +463,8 @@ def strlimit (s, length=72):
     if length == 0:
         return ""
     return "%s..." % s[:length]
+
+
+def getLangName(code):
+    """Get name of language specified by ISO 693-1 code."""
+    return Iso2Language[code]

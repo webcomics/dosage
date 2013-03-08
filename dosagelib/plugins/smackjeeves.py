@@ -57,6 +57,7 @@ def add(name, url, description, adult, bounce):
         prevSearch = _prevSearch,
         prevUrlMatchesStripUrl = not adult,
         description = description,
+        lang = 'es' if name.lower().endswith('spanish') else 'en',
         help = 'Index format: nnnn (some increasing number)',
         namer = namer,
     )

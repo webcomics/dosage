@@ -50,11 +50,27 @@ class ZombieHunters(_BasicScraper):
 class Zwarwald(_BasicScraper):
     url = "http://www.zwarwald.de/"
     stripUrl = url + 'index.php/page/%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.zwarwald\.de/images/\d+/\d+/[^"]+)'))
+    # anything before page 495 seems to be flash
+    firstStripUrl = stripUrl % '495'
+    lang = 'de'
+    imageSearch = compile(tagre("img", "src", r'(http://(?:www\.zwarwald\.de|wp1163540.wp190.webpack.hosteurope.de/wordpress)/images/\d+/\d+/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.zwarwald\.de/index\.php/page/\d+/)') +
         tagre("img", "src", r'http://zwarwald\.de/images/prev\.jpg', quote="'"))
     help = 'Index format: number'
     waitSeconds = 1
 
     def shouldSkipUrl(self, url):
-        return url in (self.stripUrl % "112",)
+        """Some pages have flash content."""
+        return url in (
+            self.stripUrl % "112",
+            self.stripUrl % "222",
+            self.stripUrl % "223",
+            self.stripUrl % "246",
+            self.stripUrl % "368",
+            self.stripUrl % '495',
+        )
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        prefix, year, month, name = imageUrl.rsplit('/', 3)
+        return "%s_%s_%s" % (year, month, name)

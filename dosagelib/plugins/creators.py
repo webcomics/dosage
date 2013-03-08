@@ -15,6 +15,7 @@ def add(name, path):
         name = 'Creators/' + name,
         url = baseurl + path + '.html',
         stripUrl = baseurl + path + '/%s.html',
+        lang = 'es' if name.lower().endswith('spanish') else 'en',
         imageSearch = _imageSearch,
         prevSearch = compile(tagre("a", "href", r'(%s/\d+\.html)' % path) +
           tagre("img", "src", r'/img_comics/arrow_l\.gif')),
