@@ -54,6 +54,7 @@ class Zwarwald(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(http://www\.zwarwald\.de/index\.php/page/\d+/)') +
         tagre("img", "src", r'http://zwarwald\.de/images/prev\.jpg', quote="'"))
     help = 'Index format: number'
+    waitSeconds = 1
 
     def shouldSkipUrl(self, url):
-        return url in ("http://www.zwarwald.de/index.php/page/112/",)
+        return url in (self.stripUrl % "112",)

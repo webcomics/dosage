@@ -101,7 +101,7 @@ class ToonHole(_BasicScraper):
     help = 'Index format: yyyy/mm/stripname'
 
     def shouldSkipUrl(self, url):
-        return url in ("http://www.toonhole.com/2013/03/if-game-of-thrones-was-animated/",)
+        return url in (self.stripUrl % "2013/03/if-game-of-thrones-was-animated",)
 
 
 # XXX disallowed by robots.txt

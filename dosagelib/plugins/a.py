@@ -179,9 +179,9 @@ class AstronomyPOTD(_BasicScraper):
     def shouldSkipUrl(self, url):
         """Skip pages without images."""
         return url in (
-            'http://antwrp.gsfc.nasa.gov/apod/ap130217.html', # video
-            'http://antwrp.gsfc.nasa.gov/apod/ap130218.html', # video
-            'http://antwrp.gsfc.nasa.gov/apod/ap130226.html', # video
+            self.stripUrl % '130217', # video
+            self.stripUrl % '130218', # video
+            self.stripUrl % '130226', # video
         )
 
     @classmethod

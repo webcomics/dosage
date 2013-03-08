@@ -45,8 +45,8 @@ class CaribbeanBlue(_BasicScraper):
     def shouldSkipUrl(self, url):
         """Skip pages without images."""
         return url in (
-            "http://cblue.katbox.net/comic/filler-stall-them/",
-            "http://cblue.katbox.net/comic/filler-kimi-figurine-now-available/",
+            self.stripUrl % "filler-stall-them",
+            self.stripUrl % "filler-kimi-figurine-now-available",
         )
 
 
@@ -219,7 +219,7 @@ class CyanideAndHappiness(_BasicScraper):
 
     def shouldSkipUrl(self, url):
         """Skip pages without images."""
-        return url == "http://www.explosm.net/comics/3082/"
+        return url in (self.stripUrl % "3082",)
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
