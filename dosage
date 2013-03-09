@@ -15,6 +15,7 @@ import os
 import argparse
 import pydoc
 from collections import OrderedDict
+from cStringIO import StringIO
 
 from dosagelib import events, scraper
 from dosagelib.output import out
@@ -206,6 +207,12 @@ def run(options):
 
 def doList(columnList=True, verbose=False):
     """List available comics."""
+    page = hasattr(sys.stdout, "isatty") and sys.stdout.isatty()
+    if page:
+        fd = StringIO()
+    else:
+        fd = sys.stdout
+    out.setStream(fd)
     out.info('Available comic scrapers:')
     out.info('Comics marked with [A] require age confirmation with the --adult option.')
     scrapers = sorted(getScrapers(['@@']), key=lambda s: s.getName())
@@ -214,6 +221,8 @@ def doList(columnList=True, verbose=False):
     else:
         num = doSingleList(scrapers, verbose=verbose)
     out.info('%d supported comics.' % num)
+    if page:
+        pydoc.pager(fd.getvalue())
     return 0
 
 
@@ -223,7 +232,7 @@ def doSingleList(scrapers, verbose=False):
         if verbose:
             displayComicHelp(scraperobj)
         else:
-            print(getScraperName(scraperobj))
+            out.info(getScraperName(scraperobj))
     return num
 
 
@@ -237,7 +246,7 @@ def doColumnList(scrapers):
     maxlen = max(len(name) for name in names)
     namesPerLine = max(int(screenWidth / (maxlen + 1)), 1)
     while names:
-        print(''.join(name.ljust(maxlen) for name in names[:namesPerLine]))
+        out.info(''.join(name.ljust(maxlen) for name in names[:namesPerLine]))
         del names[:namesPerLine]
     return num
 

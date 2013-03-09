@@ -17,6 +17,10 @@ class Output(object):
         self.context = ''
         self.level = 0
         self.timestamps = False
+        self.setStream(stream)
+
+    def setStream(self, stream):
+        """Initialize context and indentation."""
         self.stream = Colorizer(stream)
 
     def info(self, s, level=0):
@@ -44,7 +48,8 @@ class Output(object):
         else:
             timestamp = ''
         with lock:
-            self.stream.write('%s%s> ' % (timestamp, self.context))
+            if self.context or timestamp:
+                self.stream.write('%s%s> ' % (timestamp, self.context))
             self.stream.write('%s' % s, color=color)
             self.stream.write(os.linesep)
             self.stream.flush()
