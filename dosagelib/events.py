@@ -70,12 +70,13 @@ class RSSEventHandler(EventHandler):
 
     def comicDownloaded(self, comic, filename):
         """Write RSS entry for downloaded comic."""
-        url = self.getUrlFromFilename(filename)
-        title = '%s - %s' % (comic, os.path.basename(filename))
-        description = '<img src="%s"/><br/><a href="%s">View Comic</a>' % (url, url)
+        imageUrl = self.getUrlFromFilename(filename)
+        title = '%s - %s' % (comic.name, os.path.basename(filename))
+        pageUrl = comic.referrer
+        description = '<img src="%s"/><br/><a href="%s">View Comic</a>' % (imageUrl, pageUrl)
         args = (
             title,
-            url,
+            imageUrl,
             description,
             util.rfc822date(time.time())
         )
@@ -125,31 +126,33 @@ class HtmlEventHandler(EventHandler):
         self.html.write(u'''<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="generator" content="%s"/>
 <title>Comics for %s</title>
 </head>
 <body>
 <a href="%s">Previous Day</a> | <a href="%s">Next Day</a>
 <ul>
-''' % (time.strftime('%Y/%m/%d', today), yesterdayUrl, tomorrowUrl))
+''' % (configuration.App, time.strftime('%Y/%m/%d', today),
+       yesterdayUrl, tomorrowUrl))
 
         self.lastComic = None
 
     def comicDownloaded(self, comic, filename):
         """Write HTML entry for downloaded comic."""
-        if self.lastComic != comic:
+        if self.lastComic != comic.name:
             self.newComic(comic)
-        url = self.getUrlFromFilename(filename)
-        self.html.write(u'<li><img src="%s"/></li>\n' % url)
+        imageUrl = self.getUrlFromFilename(filename)
+        pageUrl = comic.referrer
+        self.html.write(u'<li><a href="%s"><img src="%s"/></a></li>\n' % (pageUrl, imageUrl))
 
     def newComic(self, comic):
         """Start new comic list in HTML."""
         if self.lastComic is not None:
-            self.html.write(u'    </ul>\n')
-        self.lastComic = comic
-        self.html.write(u'''    <li>%s</li>
-    <ul>
-''' % comic)
+            self.html.write(u'</ul>\n')
+        self.lastComic = comic.name
+        self.html.write(u'<li>%s</li>\n' % comic.name)
+        self.html.write(u'<ul>\n')
 
     def end(self):
         """End HTML output."""

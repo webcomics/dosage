@@ -98,5 +98,5 @@ class ComicImage(object):
             raise
         else:
             out.info("Saved %s (%s)." % (fn, strsize(size)))
-            getHandler().comicDownloaded(self.name, fn)
+            getHandler().comicDownloaded(self, fn)
         return fn, True
