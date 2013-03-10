@@ -7,6 +7,7 @@ from . import loader
 from .util import fetchUrl, fetchUrls, getPageContent
 from .comic import ComicStrip
 from .output import out
+from .events import getHandler
 
 
 class _BasicScraper(object):
@@ -161,6 +162,7 @@ class _BasicScraper(object):
             else:
                 prevUrl = self.prevUrlModifier(prevUrl)
                 out.debug("Matched previous URL %s" % prevUrl)
+                getHandler().comicPageLink(self.getName(), url, prevUrl)
         return prevUrl
 
     def getIndexStripUrl(self, index):

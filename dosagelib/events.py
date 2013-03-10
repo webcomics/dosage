@@ -38,6 +38,10 @@ class EventHandler(object):
         """Emit a comic downloaded event. Should be overridden in subclass."""
         pass
 
+    def comicPageLink(self, comic, url, prevUrl):
+        """Emit an event to inform the handler about links between comic pages. Should be overridden in subclass."""
+        pass
+
     def end(self):
         """Emit an end event. Should be overridden in subclass."""
         pass
@@ -215,6 +219,11 @@ class MultiHandler(object):
         """Emit a comic downloaded event. Should be overridden in subclass."""
         for handler in _handlers:
             handler.comicDownloaded(comic, filename)
+
+    def comicPageLink(self, comic, url, prevUrl):
+        """Emit an event to inform the handler about links between comic pages. Should be overridden in subclass."""
+        for handler in _handlers:
+            handler.comicPageLink(comic, url, prevUrl)
 
     def end(self):
         """Emit an end event. Should be overridden in subclass."""
