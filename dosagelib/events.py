@@ -4,6 +4,7 @@ import os
 import time
 import urllib
 import codecs
+import json
 from . import rss, util, configuration
 
 class EventHandler(object):
@@ -181,6 +182,53 @@ class HtmlEventHandler(EventHandler):
         self.html.close()
 
 
+class JSONEventHandler(EventHandler):
+    """Output metadata for comics in JSON format."""
+
+    name = 'json'
+
+    def start(self):
+        """Start with empty data."""
+        self.data = {}
+
+    def jsonFn(self, comic):
+        """Get filename for the JSON file for a comic."""
+        fn = os.path.join(self.basepath, comic, 'dosage.json')
+        fn = os.path.abspath(fn)
+        return fn
+
+    def getComicData(self, comic):
+        if comic not in self.data:
+            if os.path.exists(self.jsonFn(comic)):
+                with codecs.open(self.jsonFn(comic), 'r', 'utf-8') as f:
+                    self.data[comic] = json.load(f)
+            else:
+                self.data[comic] = {'pages':{}}
+        return self.data[comic]
+
+    def getPageInfo(self, comic, url):
+        comicData = self.getComicData(comic)
+        if url not in comicData['pages']:
+            comicData['pages'][url] = {'images':{}}
+        return comicData['pages'][url]
+
+    def comicDownloaded(self, comic, filename):
+        """Add URL-to-filename mapping into JSON."""
+        pageInfo = self.getPageInfo(comic.name, comic.referrer)
+        pageInfo['images'][comic.url] = os.path.basename(filename)
+
+    def comicPageLink(self, comic, url, prevUrl):
+        """Write previous link into JSON."""
+        pageInfo = self.getPageInfo(comic, url)
+        pageInfo['prev'] = prevUrl
+
+    def end(self):
+        """Write all JSON data to files."""
+        for comic in self.data:
+            with codecs.open(self.jsonFn(comic), 'w', 'utf-8') as f:
+                json.dump(self.data[comic], f, indent=2, separators=(',', ': '), sort_keys=True)
+
+
 _handler_classes = {}
 
 def addHandlerClass(clazz):
@@ -191,6 +239,7 @@ def addHandlerClass(clazz):
 
 addHandlerClass(HtmlEventHandler)
 addHandlerClass(RSSEventHandler)
+addHandlerClass(JSONEventHandler)
 
 
 def getHandlerNames():
