@@ -158,7 +158,6 @@ def getComics(options):
         for scraperobj in getScrapers(options.comic, options.basepath, options.adult, options.multimatch):
             errors += getStrips(scraperobj, options)
     finally:
-        out.context = ''
         events.getHandler().end()
     return errors
 
@@ -166,7 +165,6 @@ def getComics(options):
 def getStrips(scraperobj, options):
     """Get all strips from a scraper."""
     errors = 0
-    out.context = scraperobj.getName()
     if options.all:
         numstrips = None
     elif options.numstrips:
@@ -175,6 +173,7 @@ def getStrips(scraperobj, options):
         # get current strip
         numstrips = 1
     try:
+        out.context = scraperobj.getName()
         for strip in scraperobj.getStrips(numstrips):
             _errors, skipped = saveComicStrip(strip, options.basepath)
             errors += _errors
@@ -185,6 +184,8 @@ def getStrips(scraperobj, options):
     except Exception as msg:
         out.error(msg)
         errors += 1
+    finally:
+        out.context = ''
     return errors
 
 
@@ -292,7 +293,12 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False):
             else:
                 name = comic
                 indexes = None
-            for scraperclass in scraper.find_scraperclasses(name, multiple_allowed=multiple_allowed):
+            try:
+                scraperclasses = scraper.find_scraperclasses(name, multiple_allowed=multiple_allowed)
+            except ValueError as msg:
+                out.error(msg)
+                continue
+            for scraperclass in scraperclasses:
                 if not adult and scraperclass.adult:
                     warn_adult(scraperclass)
                     continue

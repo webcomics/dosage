@@ -14,6 +14,8 @@ Fixes:
 - cmdline: Catch error when piping output to another
   program or file under Windows.
   Closes: GH bug #13
+- cmdline: Catch error when multiple comics match.
+  Closes: GH bug #16
 - comics: Retry download on empty content to reduce empty file errors.
 
 
