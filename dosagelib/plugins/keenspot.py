@@ -16,9 +16,6 @@ _prevSearch = compile(tagre("a", "href", r'([^"]*/d/\d{8}\.html)') +
 
 def add(name, url):
     classname = 'KeenSpot_%s' % name
-    # XXX all comics are blocked currently by robots.txt :-(
-    # disable by prefixing '_' to the classname.
-    classname = '_' + classname
     if '/d/' in url:
         stripUrl = url.split('/d/')[0] + '/d/%s.html'
     else:
@@ -42,8 +39,6 @@ def add(name, url):
         multipleImagesPerStrip = True,
         help = 'Index format: yyyymmdd',
     )
-
-# All pages are currently blocked by robots.txt, so these comics are not available.
 
 # do not edit anything below since these entries are generated from scripts/update.sh
 # DO NOT REMOVE
