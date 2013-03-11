@@ -6,8 +6,8 @@ Features:
   SnowFlame, WorldOfMrToast and Zwarwald.
 
 Changes:
-- cmdline: Comic lists are now displayed one page at a time.
-- events: HTML output now embeds the images in the page.
+- cmdline: Comic lists are displayed one page at a time.
+- events: HTML output embeds the images in the page.
 
 Fixes:
 - cmdline: Catch error when piping output to another
