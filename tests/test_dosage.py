@@ -51,6 +51,7 @@ class TestDosage (unittest.TestCase):
     def test_error(self):
         self.assertRaises(OSError, run_with_options, [])
         self.assertRaises(OSError, run_with_options, ['--imadoofus'])
+        self.assertRaises(OSError, run_with_options, ['Garfield'])
 
     def test_fetch_html(self):
         run_with_options(["-n", "2", "-b", self.tmpdir, "-o", "html", "-o", "rss", "calvinandhobbes"])

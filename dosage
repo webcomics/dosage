@@ -127,8 +127,12 @@ def saveComicStrip(strip, basepath):
 
 def displayHelp(comics):
     """Print help for comic strips."""
-    for scraperobj in getScrapers(comics):
-        displayComicHelp(scraperobj)
+    try:
+        for scraperobj in getScrapers(comics):
+            displayComicHelp(scraperobj)
+    except ValueError as msg:
+        out.error(msg)
+        return 1
     return 0
 
 
@@ -157,6 +161,9 @@ def getComics(options):
     try:
         for scraperobj in getScrapers(options.comic, options.basepath, options.adult, options.multimatch):
             errors += getStrips(scraperobj, options)
+    except ValueError as msg:
+        out.error(msg)
+        errors += 1
     finally:
         events.getHandler().end()
     return errors
@@ -293,11 +300,7 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False):
             else:
                 name = comic
                 indexes = None
-            try:
-                scraperclasses = scraper.find_scraperclasses(name, multiple_allowed=multiple_allowed)
-            except ValueError as msg:
-                out.error(msg)
-                continue
+            scraperclasses = scraper.find_scraperclasses(name, multiple_allowed=multiple_allowed)
             for scraperclass in scraperclasses:
                 if not adult and scraperclass.adult:
                     warn_adult(scraperclass)
