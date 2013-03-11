@@ -62,6 +62,7 @@ def has_comic(name):
         ("DrunkDuck/%s" % name).lower(),
         ("GoComics/%s" % name).lower(),
         ("KeenSpot/%s" % name).lower(),
+        ("ComicGenesis/%s" % name).lower(),
         ("SmackJeeves/%s" % name).lower(),
     ]
     for scraperclass in get_scraperclasses():

@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # Copyright (C) 2012-2013 Bastian Kleineidam
 """
-Script to get a list of keenspot comics and save the info in a JSON file for further processing.
+Script to get a list of ComicGenesis comics and save the info in a
+JSON file for further processing.
 """
 from __future__ import print_function
 import re
@@ -404,11 +405,13 @@ def get_results():
 
 def has_comic(name):
     """Check if comic name already exists."""
-    cname = ("Creators/%s" % name).lower()
-    gname = ("GoComics/%s" % name).lower()
+    names = [
+        ("Creators/%s" % name).lower(),
+        ("GoComics/%s" % name).lower(),
+    ]
     for scraperclass in get_scraperclasses():
         lname = scraperclass.getName().lower()
-        if lname == cname or lname == gname:
+        if lname in names:
             return True
     return False
 
