@@ -43,6 +43,15 @@ class Geeks(_BasicScraper):
     help = 'Index format: nnn'
 
 
+class GeeksNextDoor(_BasicScraper):
+    url = 'http://www.geeksnextcomic.com/'
+    stripUrl = url + '%s.html'
+    imageSearch = compile(tagre("img", "src", r'(images/GND\d+[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(\d+-\d+-\d+\.html)') +
+        tagre("img", "src", r'images/nav_prev\.png'))
+    help = 'Index format: yyyy-mm-dd'
+
+
 class GirlGenius(_BasicScraper):
     url = 'http://girlgeniusonline.com/comic.php'
     stripUrl = url + '?date=%s'

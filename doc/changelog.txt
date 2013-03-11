@@ -2,7 +2,7 @@ Dosage 1.14 (released xx.xx.2013)
 
 Features:
 - comics: Added KeenSpot comic strips, enable ComicGenesis
-  comic strips, added FullFrontalNerdity.
+  comic strips, added FullFrontalNerdity, GeeksNextDoor.
 
 
 Dosage 1.13 (released 11.3.2013)
