@@ -54,12 +54,8 @@ class LoadingArtist(_BasicScraper):
 class LookingForGroup(_BasicScraper):
     url = 'http://www.lfgcomic.com/'
     stripUrl = url + 'page/%s/'
-    imageSearch = compile(tagre("meta", "content", r'(http://cdn\.lfgcomic\.com/wp-content/uploads/[^"]+)', before="og:image"))
+    imageSearch = compile(tagre("img", "src", r'(http://cdn\.lfgcomic\.com/wp-content/uploads/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.lfgcomic\.com/page/\d+/)', after="navtop-prev"))
     starter = indirectStarter(url, compile(tagre("a", "href", r'(http://www\.lfgcomic\.com/page/\d+/)', after="feature-previous")))
     nameSearch = compile(r'/page/(\d+)/')
     help = 'Index format: nnn'
-
-    @classmethod
-    def namer(self, imageUrl, pageUrl):
-        return self.nameSearch.search(pageUrl).group(1)

@@ -17,6 +17,8 @@ Fixes:
 - cmdline: Catch error when multiple comics match.
   Closes: GH bug #16
 - comics: Retry download on empty content to reduce empty file errors.
+- comics: Don't save thumbnails in LookingForGroup
+  Closes: GH bug #17
 
 
 Dosage 1.12 (released 4.3.2013)
