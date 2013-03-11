@@ -123,14 +123,6 @@ class Freefall(_BasicScraper):
     help = 'Index format: nnnn/nnnnn'
 
 
-class FunInJammies(_BasicScraper):
-    url = 'http://www.funinjammies.com/'
-    stripUrl = url + 'comic.php?issue=%s'
-    imageSearch = compile(r'(/comics/.+?)"')
-    prevSearch = compile(r'(/comic.php.+?)" id.+?prev')
-    help = 'Index format: n (unpadded)'
-
-
 class FredoAndPidjin(_BasicScraper):
     url = 'http://www.pidjin.net/'
     stripUrl = None
@@ -140,3 +132,20 @@ class FredoAndPidjin(_BasicScraper):
     prevSearch = compile(tagre('a', 'href', '([^"]+)')+"Prev</a>")
     starter = indirectStarter(url,
        compile(tagre('a', 'href', "("+url+r'\d\d\d\d/\d\d/\d\d/[^"]+/)')))
+
+
+class FullFrontalNerdity(_BasicScraper):
+    url = 'http://ffn.nodwick.com/'
+    stripUrl = url + '?p=%s'
+    firstStripUrl = stripUrl % '6'
+    imageSearch = compile(tagre("img", "src", r'(http://ffn\.nodwick\.com/ffnstrips/\d+-\d+-\d+\.[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://ffn\.nodwick\.com/\?p=\d+)', after="prev"))
+    help = 'Index format: number'
+
+
+class FunInJammies(_BasicScraper):
+    url = 'http://www.funinjammies.com/'
+    stripUrl = url + 'comic.php?issue=%s'
+    imageSearch = compile(r'(/comics/.+?)"')
+    prevSearch = compile(r'(/comic.php.+?)" id.+?prev')
+    help = 'Index format: n (unpadded)'
