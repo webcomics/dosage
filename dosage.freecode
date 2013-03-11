@@ -1,6 +1,6 @@
 Project: dosage
-Version: 1.12
-Release-Focus: Minor bugfixes
+Version: 1.13
+Release-Focus: Minor feature enhancements
 Hide: N
 Website-URL: http://wummel.github.com/dosage/
 Changelog-URL: https://github.com/wummel/dosage/blob/master/doc/changelog.txt
@@ -8,7 +8,9 @@ Tar/GZ-URL: http://github.com/downloads/wummel/dosage/dosage-${version}.tar.gz
 GIT-Tree-URL: https://github.com/wummel/dosage.git
 Windows-installer-URL: http://github.com/downloads/wummel/dosage/dosage-${version}.exe
 
-Option parsing for -l, --singlelist and --version has been fixed.
-The following comic strips have been added: AlphaLuna, AlphaLunaSpanish,
-BrentalFloss BrentalFlossFit, BrentalFlossGuest, DangerouslyChloe,
-MagickChicks, MenageA3, Namesake, ShadowGirls, StickyDillyBuns.
+The following comic strips have been added: AhoiPolloi, AxeCop, Bearmageddon, DeadWinter,
+HarkAVagrant, IAmArg, LoadingArtist, Nnewts, PHDComics, PokeyThePenguin,
+SnowFlame, WorldOfMrToast and Zwarwald.
+The HTML output embeds the comic images now and the --output option
+can be specified multiple times.
+Several bugs have also been fixed.

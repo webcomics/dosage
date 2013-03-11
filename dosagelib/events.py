@@ -180,6 +180,7 @@ class HtmlEventHandler(EventHandler):
 _handler_classes = {}
 
 def addHandlerClass(clazz):
+    """Register handler class."""
     if not issubclass(clazz, EventHandler):
         raise ValueError("%s must be subclassed from %s" % (clazz, EventHandler))
     _handler_classes[clazz.name] = clazz
