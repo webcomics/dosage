@@ -46,6 +46,8 @@ class EventHandler(object):
 class RSSEventHandler(EventHandler):
     """Output in RSS format."""
 
+    name = 'rss'
+
     def getFilename(self):
         """Return RSS filename."""
         return os.path.abspath(os.path.join(self.basepath, 'dailydose.rss'))
@@ -95,6 +97,8 @@ class RSSEventHandler(EventHandler):
 class HtmlEventHandler(EventHandler):
     """Output in HTML format."""
 
+    name = 'html'
+
     def fnFromDate(self, date):
         """Get filename from date."""
         fn = time.strftime('comics-%Y%m%d.html', date)
@@ -135,8 +139,10 @@ class HtmlEventHandler(EventHandler):
 <ul>
 ''' % (configuration.App, time.strftime('%Y/%m/%d', today),
        yesterdayUrl, tomorrowUrl))
-
+        # last comic name (eg. CalvinAndHobbes)
         self.lastComic = None
+        # last comic strip URL (eg. http://example.com/page42)
+        self.lastUrl = None
 
     def comicDownloaded(self, comic, filename):
         """Write HTML entry for downloaded comic."""
@@ -144,44 +150,79 @@ class HtmlEventHandler(EventHandler):
             self.newComic(comic)
         imageUrl = self.getUrlFromFilename(filename)
         pageUrl = comic.referrer
-        self.html.write(u'<li><a href="%s"><img src="%s"/></a></li>\n' % (pageUrl, imageUrl))
+        if pageUrl != self.lastUrl:
+            self.html.write(u'<li><a href="%s">%s</a>\n' % (pageUrl, pageUrl))
+        self.html.write(u'<br/><img src="%s"/>\n' % imageUrl)
+        self.lastComic = comic.name
+        self.lastUrl = pageUrl
 
     def newComic(self, comic):
         """Start new comic list in HTML."""
+        if self.lastUrl is not None:
+            self.html.write(u'</li>\n')
         if self.lastComic is not None:
             self.html.write(u'</ul>\n')
-        self.lastComic = comic.name
         self.html.write(u'<li>%s</li>\n' % comic.name)
         self.html.write(u'<ul>\n')
 
     def end(self):
         """End HTML output."""
+        if self.lastUrl is not None:
+            self.html.write(u'</li>\n')
         if self.lastComic is not None:
-            self.html.write(u'    </ul>\n')
+            self.html.write(u'</ul>\n')
         self.html.write(u'''</ul>
 </body>
 </html>''')
         self.html.close()
 
 
-handlers = {
-    'html': HtmlEventHandler,
-    'rss': RSSEventHandler,
-}
+_handler_classes = {}
 
-def getHandlers():
+def addHandlerClass(clazz):
+    if not issubclass(clazz, EventHandler):
+        raise ValueError("%s must be subclassed from %s" % (clazz, EventHandler))
+    _handler_classes[clazz.name] = clazz
+
+addHandlerClass(HtmlEventHandler)
+addHandlerClass(RSSEventHandler)
+
+
+def getHandlerNames():
     """Get sorted handler names."""
-    return sorted(handlers.keys())
+    return sorted(_handler_classes.keys())
 
-_handler = EventHandler(".", None)
 
-def installHandler(name, basepath=None, baseurl=None):
+_handlers = []
+
+def addHandler(name, basepath=None, baseurl=None):
     """Install a global handler with given name."""
-    global _handler
     if basepath is None:
         basepath = '.'
-    _handler = handlers[name](basepath, baseurl)
+    _handlers.append(_handler_classes[name](basepath, baseurl))
+
+
+class MultiHandler(object):
+    """Encapsulate a list of handlers."""
+
+    def start(self):
+        """Emit a start event. Should be overridden in subclass."""
+        for handler in _handlers:
+            handler.start()
+
+    def comicDownloaded(self, comic, filename):
+        """Emit a comic downloaded event. Should be overridden in subclass."""
+        for handler in _handlers:
+            handler.comicDownloaded(comic, filename)
+
+    def end(self):
+        """Emit an end event. Should be overridden in subclass."""
+        for handler in _handlers:
+            handler.end()
+
+
+multihandler = MultiHandler()
 
 def getHandler():
     """Get installed event handler."""
-    return _handler
+    return multihandler

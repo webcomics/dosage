@@ -82,7 +82,7 @@ def setupOptions():
     parser.add_argument('--version', action='store_true', help='display the version number')
     parser.add_argument('-m', '--modulehelp', action='store_true', help='display help for comic modules')
     parser.add_argument('-t', '--timestamps', action='store_true', help='print timestamps for all output at any info level')
-    parser.add_argument('-o', '--output', action='store', choices=events.getHandlers(), help='output formatting for downloaded comics')
+    parser.add_argument('-o', '--output', action='append', dest='handler', choices=events.getHandlerNames(), help='sets output handlers for downloaded comics')
     parser.add_argument('--adult', action='store_true', help='confirms that you are old enough to view adult content')
     parser.add_argument('--multimatch', action='store_true', help=argparse.SUPPRESS)
     parser.add_argument('comic', nargs='*', help='comic module name (including case insensitive substrings)')
@@ -150,8 +150,9 @@ def displayComicHelp(scraperobj):
 def getComics(options):
     """Retrieve comics."""
     errors = 0
-    if options.output:
-        events.installHandler(options.output, options.basepath, options.baseurl)
+    if options.handler:
+        for name in options.handler:
+            events.addHandler(name, options.basepath, options.baseurl)
     events.getHandler().start()
     try:
         for scraperobj in getScrapers(options.comic, options.basepath, options.adult, options.multimatch):

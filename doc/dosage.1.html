@@ -30,7 +30,7 @@ for updating and maintaining collections.
 <DT><B>-b</B> <I>PATH</I>, <B>--basepath=</B><I>PATH</I><DD>
 Specifies a base path to put comic subdirectories. The default is <B>Comics</B>.
 <DT><B>--baseurl=</B><I>PATH</I><DD>
-Specifies the base URL for output events. The default is a local file URI.
+Specifies the base URL for output handlers. The default is a local file URI.
 <DT><B>-a</B>, <B>--all</B><DD>
 Traverses all available strips backwards from the current one.
 This can be useful you want a full collection of a new comic strip,
@@ -77,6 +77,7 @@ Writes out an RSS feed detailing what strips were downloaded in the last 24
 hours. The feed can be found in <B>Comics/dailydose.xml</B>.
 </DL>
 
+This option can be given multiple times.
 <DL COMPACT>
 <DT><B>-t</B>, <B>--timestamps</B><DD>
 Print timestamps for all output at any level.

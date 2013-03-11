@@ -15,7 +15,7 @@ for updating and maintaining collections.
 Specifies a base path to put comic subdirectories. The default is \fBComics\fP.
 .TP
 \fB\-\-baseurl=\fP\fIPATH\fP
-Specifies the base URL for output events. The default is a local file URI.
+Specifies the base URL for output handlers. The default is a local file URI.
 .TP
 \fB\-a\fP, \fB\-\-all\fP
 Traverses all available strips backwards from the current one.
@@ -61,6 +61,7 @@ current run, named by date (ala dailystrips). The files can be found in the
 Writes out an RSS feed detailing what strips were downloaded in the last 24
 hours. The feed can be found in \fBComics/dailydose.xml\fP.
 .RE
+This option can be given multiple times.
 .TP
 \fB\-t\fP, \fB\-\-timestamps\fP
 Print timestamps for all output at any level.

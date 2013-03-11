@@ -20,8 +20,8 @@ OPTIONS
               default is Comics.
 
        --baseurl=PATH
-              Specifies the base URL for output events. The default is
-              a local file URI.
+              Specifies  the base URL for output handlers. The default
+              is a local file URI.
 
        -a, --all
               Traverses all available strips backwards from  the  cur‐
@@ -61,6 +61,7 @@ OPTIONS
               rss - Writes out an RSS feed detailing what strips  were
               downloaded  in  the last 24 hours. The feed can be found
               in Comics/dailydose.xml.
+       This option can be given multiple times.
 
        -t, --timestamps
               Print timestamps for all output at any level.
