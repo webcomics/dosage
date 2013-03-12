@@ -173,7 +173,7 @@ def handle_url(url, session, url_matcher, num_matcher, res):
         name = capfirst(asciify(path))
         if contains_case_insensitive(res, name):
             # we cannot handle two comics that only differ in case
-            print("INFO: skipping possible duplicate", name, file=sys.stderr)
+            print("INFO: skipping possible duplicate", repr(name), file=sys.stderr)
             continue
         if name in exclude_comics:
             continue

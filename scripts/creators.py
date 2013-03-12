@@ -37,7 +37,7 @@ def handle_url(url, session, res):
             continue
         if contains_case_insensitive(res, name):
             # we cannot handle two comics that only differ in case
-            print("INFO: skipping possible duplicate", name, file=sys.stderr)
+            print("INFO: skipping possible duplicate", repr(name), file=sys.stderr)
             continue
         res[name] = url
 
