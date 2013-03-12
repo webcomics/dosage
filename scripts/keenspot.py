@@ -10,7 +10,7 @@ import sys
 import os
 import requests
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
-from dosagelib.util import getPageContent, asciify, unescape, tagre
+from dosagelib.util import getPageContent, asciify, unescape, tagre, check_robotstxt
 from dosagelib.scraper import get_scraperclasses
 from scriptutil import contains_case_insensitive, capfirst, save_result, load_result, truncate_name, format_description
 
@@ -26,6 +26,25 @@ desc_matcher = re.compile(r'</font><br>(.+)(?:</b>)?</td></tr>', re.DOTALL)
 
 # names of comics to exclude
 exclude_comics = [
+    "BrawlintheFamily", # non-standard navigation
+    "CrowScare", # non-standard navigation
+    "Dreamless", # non-standard navigation
+    "EV", # non-standard navigation
+    "Exposure", # non-standard navigation
+    "Flipside", # non-standard navigation
+    "HerobyNight", # non-standard navigation
+    "LastBlood", # non-standard navigation
+    "MysticRevolution", # non-standard navigation
+    "NoRoomForMagic", # non-standard navigation
+    "PunchanPie", # non-standard navigation
+    "RoadWaffles", # non-standard navigation
+    "Shadowbinders", # non-standard navigation
+    "ShockwaveDarkside", # non-standard navigation
+    "Supernovas", # non-standard navigation
+    "Twokinds", # non-standard navigation
+    "WisdomofMoo", # non-standard navigation
+    "Yirmumah", # non-standard navigation
+    "YouDamnKid", # non-standard navigation
 ]
 
 # links to last valid strips
@@ -51,7 +70,15 @@ def handle_url(url, session, res):
             continue
         if contains_case_insensitive(res, name):
             # we cannot handle two comics that only differ in case
-            print("INFO: skipping possible duplicate", name, file=sys.stderr)
+            print("INFO: skipping possible duplicate", repr(name), file=sys.stderr)
+            continue
+        try:
+            if "/d/" not in comicurl:
+                check_robotstxt(comicurl+"d/", session)
+            else:
+                check_robotstxt(comicurl, session)
+        except IOError:
+            print("INFO: robots.txt denied for", repr(name))
             continue
         res[name] = (comicurl, desc)
 
