@@ -10,7 +10,7 @@ import sys
 import os
 import requests
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
-from dosagelib.util import getPageContent, asciify, unescape, tagre
+from dosagelib.util import getPageContent, asciify, unescape, tagre, check_robotstxt
 from dosagelib.scraper import get_scraperclasses
 from scriptutil import contains_case_insensitive, capfirst, save_result, load_result, truncate_name
 
@@ -93,7 +93,7 @@ exclude_comics = [
     "EarthRiser", # redirects to a new page
     "EdgetheDevilhunter", # page is gone
     "EdibleDirt", # page moved
-    "Einstien27sDesk", # page is gone
+    "EinstiensDesk", # page is gone
     "ElfOnlyInn", # page moved
     "Ensuing", # broken links
     "etch", # broken images
@@ -104,7 +104,7 @@ exclude_comics = [
     "FaerieTales", # page does not follow standard layout
     "FairestandFallen", # page does not follow standard layout
     "FairyTaleNewVillage", # missing images
-    "Fate27sTear", # page moved
+    "FatesTear", # page moved
     "FaultyLogic", # page does not follow standard layout
     "FireontheMountain", # page does not follow standard layout
     "FiveBucksanHour", # page is gone
@@ -234,14 +234,14 @@ exclude_comics = [
     "Riboflavin", # page does not follow standard layout
     "RitualsandOfferings", # page is gone
     "RiverCityHigh", # page is gone
-    "RM27sothercomics", # page does not follow standard layout
+    "RMsothercomics", # page does not follow standard layout
     "RogerAndDominic", # page does not follow standard layout
     "RoleoftheDie", # page is gone
     "RonnieRaccoon", # page moved
     "RosalarianAndapossRandomCreepyTales", # page is gone
     "RulesofMakeBelieve", # page is gone
     "Rveillerie", # page has 403 forbidden
-    "SaintPeter27sCross", # page does not follow standard layout
+    "SaintPetersCross", # page does not follow standard layout
     "Saturnalia", # page moved
     "SavageIslands", # page has 403 forbidden
     "SaveMeGebus", # page does not follow standard layout
@@ -259,7 +259,7 @@ exclude_comics = [
     "SLAGIT", # missing images
     "SmithStone", # page has 403 forbidden
     "SnowflakeStudios", # page is gone
-    "Sock27d", # page is gone
+    "Sockd", # page is gone
     "Soks", # page is gone
     "SoManyLevels", # page moved
     "SomethingSoft", # page is gone
@@ -279,7 +279,7 @@ exclude_comics = [
     "ThatWasMcPherson", # page moved
     "The6GUYSInMyHead", # page has 403 forbidden
     "TheAdventuresofCaptainMooki", # page moved
-    "TheAdventuresofLi27lDenverPastrami", # page is gone
+    "TheAdventuresofLilDenverPastrami", # page is gone
     "TheAdventuresofPeppyThePipingPirate", # page is gone
     "TheAmoeba", # page is gone
     "TheAvatar", # page does not follow standard layout
@@ -287,7 +287,7 @@ exclude_comics = [
     "TheBestandtheBrightest", # page moved
     "TheDevilsPanties", # page moved
     "TheDoctorPepperShow", # page has 403 forbidden
-    "TheGods27Pack", # page has 403 forbidden
+    "TheGodsPack", # page has 403 forbidden
     "TheMadBrothers", # page does not follow standard layout
     "TheMediocres", # missing images
     "TheNamelessStory", # page has 403 forbidden
@@ -299,7 +299,7 @@ exclude_comics = [
     "TheWotch", # page does not follow standard layout
     "ThunderandLightning", # page moved
     "TinysWorld", # page does not follow standard layout
-    "ToonPimp27sPalace", # page moved
+    "ToonPimpsPalace", # page moved
     "Tossers", # page moved
     "Towner", # page does not follow standard layout
     "Townies", # page is gone
@@ -380,7 +380,7 @@ def handle_url(url, session, res):
             continue
         if contains_case_insensitive(res, name):
             # we cannot handle two comics that only differ in case
-            print("INFO: skipping possible duplicate", name, file=sys.stderr)
+            print("INFO: skipping possible duplicate", repr(name), file=sys.stderr)
             continue
         # find out how many images this comic has
         end = match.end()
@@ -389,7 +389,17 @@ def handle_url(url, session, res):
             print("ERROR:", repr(data[end:end+300]), file=sys.stderr)
             continue
         num = int(mo.group(1))
-        res[name] = (url_overrides.get(name, url), num)
+        url = url_overrides.get(name, url)
+        try:
+            if "/d/" not in url:
+                check_robotstxt(url+"d/", session)
+            else:
+                check_robotstxt(url, session)
+        except IOError:
+            print("INFO: robots.txt denied for", repr(name))
+            continue
+        else:
+            res[name] = (url, num)
 
 
 def get_results():
