@@ -2,8 +2,13 @@ Dosage 1.14 (released xx.xx.2013)
 
 Features:
 - comics: Added KeenSpot comic strips, enable ComicGenesis
-  comic strips, added FullFrontalNerdity, GeeksNextDoor.
+  comic strips, added DerFlix, FonFlatter, FullFrontalNerdity,
+  GeeksNextDoor, Ruthe.
   Closes: GH bug #15
+
+Changes:
+- comics: The scraper can check a list of previous and image link
+  regular expressions, not only a single one.
 
 
 Dosage 1.13 (released 11.3.2013)

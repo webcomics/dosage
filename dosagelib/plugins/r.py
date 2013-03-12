@@ -51,3 +51,13 @@ class Roza(_BasicScraper):
     imageSearch = compile(r'<img src="(pages/.+?)"')
     prevSearch = compile(r'<a href="(index.php\?date=.+?)">[^>].+?navtable_01.gif')
     help = 'Index format: yyyy-mm-dd'
+
+
+class Ruthe(_BasicScraper):
+    url = 'http://ruthe.de/'
+    stripUrl = url + 'index.php?pic=%s&sort=datum&order=ASC'
+    firstStripUrl = stripUrl % '1'
+    lang = 'de'
+    imageSearch = compile(tagre("img", "src", r'(cartoons/strip_\d+[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(index\.php\?pic=[^"]+)', before="b_back"))
+    help = 'Index format: number'

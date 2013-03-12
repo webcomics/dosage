@@ -161,7 +161,7 @@ class Precocious(_BasicScraper):
       compile(tagre("a", "href", r'(/archive/comic/[^"]+)') + tagre("img", "src", r"/templates/precocious_main/images/next_arrow\.png"))
     )
     stripUrl = url + 'archive/comic/%s'
-    imageSearch = compile(tagre("img", "src", r'(/comics/\d+\.jpg)'))
+    imageSearch = compile(tagre("img", "src", r'(/comics/\d+[^"]*\.jpg)'))
     prevSearch = compile(tagre("a", "href", r'(/archive/comic/[^"]+)') + tagre("img", "src", r"/templates/precocious_main/images/back_arrow\.png"))
     help = 'Index format: yyyy/mm/dd'
 

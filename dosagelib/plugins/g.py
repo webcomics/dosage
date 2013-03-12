@@ -52,14 +52,6 @@ class GeeksNextDoor(_BasicScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
-class GirlGenius(_BasicScraper):
-    url = 'http://girlgeniusonline.com/comic.php'
-    stripUrl = url + '?date=%s'
-    imageSearch = compile(r"(/ggmain/strips/.+?)'")
-    prevSearch = compile(r"</a> <a href=.+?(/comic.php\?date=.+?)'.+?Previous")
-    help = 'Index format: yyyymmdd'
-
-
 class GirlsWithSlingshots(_BasicScraper):
     url = 'http://www.girlswithslingshots.com/'
     stripUrl = url + 'comic/gws-%s/'

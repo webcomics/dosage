@@ -79,6 +79,17 @@ class DeepFried(_BasicScraper):
     help = 'Index format: non'
 
 
+class DerFlix(_BasicScraper):
+    url = 'http://derflix.de/'
+    stripUrl = url + 'index.php?preselect=%s'
+    firstStripUrl = stripUrl % '1'
+    lang = 'de'
+    imageSearch = compile(tagre("img", "src", r'(autocartoons/\d+\.[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(index\.php\?preselect=\d+)') +
+        tagre("img", "src", r'autocartoons/rahmen_zurueck\.jpg'))
+    help = 'Index format: number'
+
+
 class DieselSweeties(_BasicScraper):
     url = 'http://www.dieselsweeties.com/'
     stripUrl = url + 'archive/%s'

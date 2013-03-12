@@ -107,6 +107,16 @@ class Flipside(_BasicScraper):
     help = 'Index format: nnnn'
 
 
+class FonFlatter(_BasicScraper):
+    url = 'http://www.fonflatter.de/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2005/09/20/01-begegnung-mit-batman'
+    lang = 'de'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.fonflatter\.de/\d+/fred_\d+-\d+-\d+[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.fonflatter\.de/[^"]+)', after="prev"))
+    help = 'Index format: yyyy/mm/dd/number-stripname'
+
+
 class Footloose(_BasicScraper):
     url = 'http://footloosecomic.com/footloose/today.php'
     stripUrl = 'http://footloosecomic.com/footloose/pages.php?page=%s'
