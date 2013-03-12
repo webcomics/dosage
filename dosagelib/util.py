@@ -12,6 +12,7 @@ import cgi
 import re
 import traceback
 import time
+import types
 from htmlentitydefs import name2codepoint
 
 from .decorators import memoized
@@ -133,16 +134,22 @@ def getImageObject(url, referrer, session, max_content_bytes=MaxImageBytes):
 
 
 def fetchUrls(url, data, baseUrl, urlSearch):
-    """Search all entries for given URL pattern in a HTML page."""
+    """Search all entries for given URL pattern(s) in a HTML page."""
     searchUrls = []
-    for match in urlSearch.finditer(data):
-        searchUrl = match.group(1)
-        if not searchUrl:
-            raise ValueError("Pattern %s matched empty URL at %s." % (urlSearch.pattern, url))
-        out.debug('matched URL %r with pattern %s' % (searchUrl, urlSearch.pattern))
-        searchUrls.append(normaliseURL(urlparse.urljoin(baseUrl, searchUrl)))
+    if isinstance(urlSearch, (types.ListType, types.TupleType)):
+        searches = urlSearch
+    else:
+        searches = [urlSearch]
+    for search in searches:
+        for match in search.finditer(data):
+            searchUrl = match.group(1)
+            if not searchUrl:
+                raise ValueError("Pattern %s matched empty URL at %s." % (search.pattern, url))
+            out.debug('matched URL %r with pattern %s' % (searchUrl, search.pattern))
+            searchUrls.append(normaliseURL(urlparse.urljoin(baseUrl, searchUrl)))
     if not searchUrls:
-        raise ValueError("Pattern %s not found at URL %s." % (urlSearch.pattern, url))
+        patterns = [x.pattern for x in searches]
+        raise ValueError("Patterns %s not found at URL %s." % (patterns, url))
     return searchUrls
 
 

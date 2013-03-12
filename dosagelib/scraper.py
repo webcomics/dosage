@@ -37,9 +37,11 @@ class _BasicScraper(object):
     lang = 'en'
 
     # compiled regular expression that will locate the URL for the previous strip in a page
+    # this can also be a list or tuple of compiled regular expressions
     prevSearch = None
 
     # compiled regular expression that will locate the strip image URLs strip in a page
+    # this can also be a list or tuple of compiled regular expressions
     imageSearch = None
 
     # usually the index format help
