@@ -17,12 +17,12 @@ import unittest
 import sys
 import shutil
 import tempfile
-from . import dosage_cmd, run_checked
+from . import dosage_cmd, mainline_cmd, run_checked
 
 
-def run_with_options(options):
-    """Run dosage with given options."""
-    run_checked([sys.executable, dosage_cmd] + options)
+def run_with_options(options, cmd=dosage_cmd):
+    """Run dosage and the old mainline script with given options."""
+    run_checked([sys.executable, cmd] + options)
 
 
 class TestDosage (unittest.TestCase):
@@ -39,8 +39,15 @@ class TestDosage (unittest.TestCase):
         for option in ("-l", "--list", "--singlelist"):
             run_with_options([option])
 
+    def test_list_comics_mainline(self):
+        for option in ("-l", "--list", "--singlelist"):
+            run_with_options([option], cmd=mainline_cmd)
+
     def test_version(self):
         run_with_options(["--version"])
+
+    def test_version_mainline(self):
+        run_with_options(["--version"], cmd=mainline_cmd)
 
     def test_help(self):
         for option in ("-h", "--help"):
@@ -48,16 +55,36 @@ class TestDosage (unittest.TestCase):
         # module help
         run_with_options(["-m", "calvinandhobbes"])
 
+    def test_help_mainline(self):
+        for option in ("-h", "--help"):
+            run_with_options([option], cmd=mainline_cmd)
+        # module help
+        run_with_options(["-m", "calvinandhobbes"], cmd=mainline_cmd)
+
     def test_error(self):
         self.assertRaises(OSError, run_with_options, [])
         self.assertRaises(OSError, run_with_options, ['--imadoofus'])
         self.assertRaises(OSError, run_with_options, ['Garfield'])
 
+    def test_error_mainline(self):
+        self.assertRaises(OSError, run_with_options, [], mainline_cmd)
+        self.assertRaises(OSError, run_with_options, ['--imadoofus'], mainline_cmd)
+        self.assertRaises(OSError, run_with_options, ['Garfield'], mainline_cmd)
+
     def test_fetch_html(self):
         run_with_options(["-n", "2", "-b", self.tmpdir, "-o", "html", "-o", "rss", "calvinandhobbes"])
+
+    def test_fetch_html_mainline(self):
+        run_with_options(["-n", "2", "-b", self.tmpdir, "-o", "html", "-o", "rss", "calvinandhobbes"], cmd=mainline_cmd)
 
     def test_fetch_rss(self):
         run_with_options(["--numstrips", "2", "--baseurl", "bla", "--basepath", self.tmpdir, "--output", "rss", "--output", "html", "--adult", "sexyloser"])
 
+    def test_fetch_rss_mainline(self):
+        run_with_options(["--numstrips", "2", "--baseurl", "bla", "--basepath", self.tmpdir, "--output", "rss", "--output", "html", "--adult", "sexyloser"], cmd=mainline_cmd)
+
     def test_fetch_indexed(self):
         run_with_options(["-n", "2", "-b", self.tmpdir, "calvinandhobbes:2012/02/02"])
+
+    def test_fetch_indexed_mainline(self):
+        run_with_options(["-n", "2", "-b", self.tmpdir, "calvinandhobbes:2012/02/02"], cmd=mainline_cmd)

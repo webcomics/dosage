@@ -18,6 +18,8 @@ import subprocess
 
 basedir = os.path.dirname(__file__)
 dosage_cmd = os.path.join(os.path.dirname(basedir), "dosage")
+mainline_cmd = os.path.join(os.path.dirname(basedir), "mainline")
+
 
 def run (cmd, verbosity=0, **kwargs):
     """Run command without error checking.
