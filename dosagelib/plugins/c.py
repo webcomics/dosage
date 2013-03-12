@@ -325,3 +325,13 @@ class CraftedFables(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(http://www\.caf-fiends\.net/craftedfables/comics/[^"]+)'))
     prevSearch = compile(r'<a href="(http://www.caf-fiends.net/craftedfables/.+?)"><span class="prev">')
     help = 'Index format: nnn'
+
+
+class CucumberQuest(_BasicScraper):
+    url = 'http://cucumber.gigidigi.com/'
+    stripUrl = url + 'archive/page-%s/'
+    starter = indirectStarter(url + 'recent.html',
+        compile(r'window\.location="(/archive/page-\d+/)"'))
+    imageSearch = compile(tagre("img", "src", r'(http://cucumber\.gigidigi\.com/wp-content/webcomic/cq/\d+[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://cucumber\.gigidigi\.com/archive/page-\d+/)', after="previous"))
+    help = 'Index format: number'
