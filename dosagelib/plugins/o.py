@@ -70,6 +70,16 @@ class OneQuestion(_BasicScraper):
     help = 'Index format: n (unpadded)'
 
 
+class OrnerBoy(_BasicScraper):
+    url = 'http://www.orneryboy.com/'
+    stripUrl = url + 'index.php?comicID=%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = compile(tagre("img", "src", r'(comics/\d+\.[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.orneryboy\.com/index\.php\?comicID=\d+)') +
+        tagre("img", "src", r'images/prev_a\.gif'))
+    help = 'Index format: number'
+
+
 class OurHomePlanet(_BasicScraper):
     url = 'http://gdk.gd-kun.net/'
     stripUrl = url + '%s.html'
