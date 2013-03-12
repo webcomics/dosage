@@ -25,6 +25,15 @@ class Key(_BasicScraper):
     help = 'Index format: nnn'
 
 
+class KickInTheHead(_BasicScraper):
+    url = 'http://www.kickinthehead.org/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2003/03/20/ipod-envy'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.kickinthehead\.org/kickinthehead3/comics/\d+-\d+-\d+[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.kickinthehead\.org/\d+/\d+/\d+/[^"]+)', after="navi-prev"))
+    help = 'Index format: yyyy/mm/dd/stripname'
+
+
 class KillerKomics(_BasicScraper):
     url = 'http://www.killerkomics.com/web-comics/index_ang.cfm'
     stripUrl = 'http://www.killerkomics.com/web-comics/%s.cfm'
