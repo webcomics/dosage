@@ -294,6 +294,8 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False):
         # store them in an ordered set to eliminate duplicates
         scrapers = OrderedDict()
         for comic in comics:
+            if basepath and comic.startswith(basepath):
+                comic = comic[len(basepath):].lstrip("/")
             if ':' in comic:
                 name, index = comic.split(':', 1)
                 indexes = index.split(',')
