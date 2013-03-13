@@ -112,9 +112,17 @@ class FonFlatter(_BasicScraper):
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2005/09/20/01-begegnung-mit-batman'
     lang = 'de'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.fonflatter\.de/\d+/fred_\d+-\d+-\d+[^"]+)'))
+    imageSearch = compile(r'src="(http://www\.fonflatter\.de/\d+/fred_\d+-\d+-\d+[^"]+)')
     prevSearch = compile(tagre("a", "href", r'(http://www\.fonflatter\.de/[^"]+)', after="prev"))
     help = 'Index format: yyyy/mm/dd/number-stripname'
+
+    def shouldSkipUrl(self, url):
+        return url in (
+            "http://www.fonflatter.de/2006/11/30/adventskalender/",
+            "http://www.fonflatter.de/2006/09/21/danke/",
+            "http://www.fonflatter.de/2006/08/23/zgf-zuweilen-gestellte-fragen/",
+            "http://www.fonflatter.de/2005/10/19/naq-never-asked-questions/",
+       )
 
 
 class Footloose(_BasicScraper):
