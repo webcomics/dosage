@@ -295,6 +295,8 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False):
         scrapers = OrderedDict()
         for comic in comics:
             if basepath and comic.startswith(basepath):
+                # make the following command work:
+                # find Comics -type d | xargs -n1 -P10 dosage -b Comics
                 comic = comic[len(basepath):].lstrip("/")
             if ':' in comic:
                 name, index = comic.split(':', 1)
