@@ -126,7 +126,11 @@ class _BasicScraper(object):
                 out.info('Skipping URL %s' % url)
                 self.skippedUrls.add(url)
             else:
-                yield self.getComicStrip(url, data, baseUrl)
+                try:
+                    yield self.getComicStrip(url, data, baseUrl)
+                except ValueError as msg:
+                    # image not found
+                    out.error(msg)
             if self.firstStripUrl == url:
                 out.debug("Stop at first URL %s" % url)
                 self.hitFirstStripUrl = True
