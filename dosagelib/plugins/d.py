@@ -136,6 +136,14 @@ class DoemainOfOurOwn(_BasicScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
+class DogHouseDiaries(_BasicScraper):
+    url = 'http://thedoghousediaries.com/'
+    stripUrl = url + '%s'
+    prevSearch = compile(tagre("a", "href", r'(http://thedoghousediaries\.com/\d+)', after="previous-comic"))
+    imageSearch = compile(tagre("img", "src", r'(http://thedoghousediaries\.com/comics/[^"]+)'))
+    help = 'Index format: number'
+
+
 class DominicDeegan(_BasicScraper):
     url = 'http://www.dominic-deegan.com/'
     stripUrl = url + 'view.php?date=%s'

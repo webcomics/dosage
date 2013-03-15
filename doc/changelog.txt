@@ -3,13 +3,15 @@ Dosage 1.14 (released xx.xx.2013)
 Features:
 - comics: Added KeenSpot comic strips and enable ComicGenesis
   comic strips
-- comics: Added CucumberQuest, DerFlix, FonFlatter, FullFrontalNerdity,
-  GeeksNextDoor, KickInTheHead, OrnerBoy, Ruthe.
-  Closes: GH bug #15
+- comics: Added CucumberQuest, DerFlix, DogHouseDiaries, FonFlatter,
+  FullFrontalNerdity, GeeksNextDoor, KickInTheHead, OrnerBoy, Ruthe.
+  Closes: GH bug #15, #19
 
 Changes:
 - comics: The scraper can check a list of previous and image link
   regular expressions, not only a single one.
+- comics: Continue searching for images if one image is not found.
+  Closes: GH bug #18
 
 
 Dosage 1.13 (released 11.3.2013)
