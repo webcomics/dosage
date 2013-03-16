@@ -2,6 +2,16 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2013 Bastian Kleineidam
+"""
+Setup file for the distuils module.
+
+It includes the following features:
+- py2exe support (including InnoScript installer generation)
+- Microsoft Visual C++ DLL installation for py2exe
+- creation and installation of configuration files with installation data
+- automatic MANIFEST.in check
+
+"""
 from __future__ import print_function
 import os
 import sys
