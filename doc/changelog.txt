@@ -13,6 +13,10 @@ Changes:
 - comics: Continue searching for images if one image is not found.
   Closes: GH bug #18
 
+Fixes:
+- comics: Fix dilbert image naming.
+  Closes: GH bug #20
+
 
 Dosage 1.13 (released 11.3.2013)
 

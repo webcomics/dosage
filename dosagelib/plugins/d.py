@@ -5,7 +5,7 @@
 from re import compile
 
 from ..scraper import _BasicScraper
-from ..helpers import indirectStarter
+from ..helpers import indirectStarter, bounceStarter
 from ..util import tagre
 
 
@@ -107,6 +107,8 @@ class DieselSweeties(_BasicScraper):
 class Dilbert(_BasicScraper):
     url = 'http://dilbert.com/'
     stripUrl = url + '%s/'
+    starter = bounceStarter(url,
+        compile(tagre("a", "href", r'(/\d+-\d+-\d+/)', after="STR_Next")))
     prevSearch = compile(tagre("a", "href", r'(/\d+-\d+-\d+/)', after="STR_Prev"))
     imageSearch = compile(tagre("img", "src", r'(/dyn/str_strip/[^"]+\.strip\.zoom\.gif)'))
     help = 'Index format: yyyy-mm-dd'
