@@ -223,7 +223,8 @@ def doList(columnList=True, verbose=False):
         fd = sys.stdout
     out.setStream(fd)
     out.info('Available comic scrapers:')
-    out.info('Comics marked with [A] require age confirmation with the --adult option.')
+    out.info('Comics tagged with [%s] require age confirmation with the --adult option.' % TAG_ADULT)
+    out.info('Non-english comics are tagged with [%s].' % TAG_LANG)
     scrapers = sorted(getScrapers(['@@']), key=lambda s: s.getName())
     if columnList:
         num = doColumnList(scrapers)
@@ -259,10 +260,20 @@ def doColumnList(scrapers):
         del names[:namesPerLine]
     return num
 
+TAG_ADULT = "adult"
+TAG_LANG = "lang"
 
 def getScraperName(scraperobj, limit=None):
     """Get comic scraper name."""
-    suffix = " [A]" if scraperobj.adult else ""
+    tags = []
+    if scraperobj.adult:
+        tags.append(TAG_ADULT)
+    if scraperobj.lang != "en":
+        tags.append("%s:%s" % (TAG_LANG, scraperobj.lang))
+    if tags:
+        suffix = " [" + ", ".join(tags) + "]"
+    else:
+        suffix = ""
     name = scraperobj.getName()
     if limit is not None:
         name = strlimit(name, limit)
