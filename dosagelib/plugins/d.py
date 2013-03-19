@@ -107,6 +107,7 @@ class DieselSweeties(_BasicScraper):
 class Dilbert(_BasicScraper):
     url = 'http://dilbert.com/'
     stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '1989-04-16'
     starter = bounceStarter(url,
         compile(tagre("a", "href", r'(/\d+-\d+-\d+/)', after="STR_Next")))
     prevSearch = compile(tagre("a", "href", r'(/\d+-\d+-\d+/)', after="STR_Prev"))
@@ -177,14 +178,6 @@ class Dracula(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(comics/[^"]+)'))
     prevSearch = compile(r'&nbsp;<a class="archivelink" href="(.+?)">&laquo; Prev</a>')
     help = 'Index format: nnn'
-
-
-class DragonTails(_BasicScraper):
-    url = 'http://www.dragon-tails.com/'
-    stripUrl = url + 'archive.php?date=%s'
-    imageSearch = compile(r'"(newcomic/.+?)"')
-    prevSearch = compile(r'"(archive.+?)">.+n_2')
-    help = 'Index format: yyyy-mm-dd'
 
 
 class DreamKeepersPrelude(_BasicScraper):

@@ -76,8 +76,8 @@ class ALessonIsLearned(_BasicScraper):
 class Alice(_BasicScraper):
     url = 'http://alice.alicecomics.com/'
     stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://alice\.alicecomics\.com/wp-content/webcomic/alicecomics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://alice\.alicecomics\.com/archive/[^"]+)', after="previous"))
+    imageSearch = compile(tagre("img", "src", r'(http://alice\.alicecomics\.com/wp-content/uploads/\d+/\d+/\d+-\d+-\d+[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://alice\.alicecomics\.com/alicecomics/[^"]+)', after="previous"))
     help = 'Index format: name'
 
 

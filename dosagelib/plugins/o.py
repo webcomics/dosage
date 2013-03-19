@@ -30,7 +30,7 @@ class OddFish(_BasicScraper):
 class Oglaf(_BasicScraper):
     url = 'http://oglaf.com/'
     stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(/media/comic/[^"]+)', before="strip"))
+    imageSearch = compile(tagre("img", "src", r'(/media-haha/comic/[^"]+)', before="strip"))
     prevSearch = compile(tagre("a", "href", r'([^"]+)') + tagre("div", "id", "pvs"))
     help = 'Index format: stripname/nn'
 
