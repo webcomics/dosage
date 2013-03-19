@@ -28,9 +28,20 @@ class SamAndFuzzy(_BasicScraper):
 class SandraAndWoo(_BasicScraper):
     url = 'http://www.sandraandwoo.com/'
     stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2000/01/01/welcome-to-sandra-and-woo'
     imageSearch = compile(tagre("img", "src", r'(http://www\.sandraandwoo\.com/comics/\d+-\d+-\d+-[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.sandraandwoo\.com/\d+/\d+/\d+/[^"]+/)', after="prev"))
     help = 'Index format: yyyy/mm/dd/number-stripname'
+
+
+class SandraAndWooGerman(_BasicScraper):
+    url = 'http://www.sandraandwoo.com/woode/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2008/10/19/ein-ausgefuchster-waschbar'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.sandraandwoo\.com/woode/comics/\d+-\d+-\d+-[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.sandraandwoo\.com/woode/\d+/\d+/\d+/[^"]+/)', after="prev"))
+    help = 'Index format: yyyy/mm/dd/number-stripname'
+    lang = 'de'
 
 
 class SarahZero(_BasicScraper):
