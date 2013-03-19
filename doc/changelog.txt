@@ -3,7 +3,7 @@ Dosage 1.14 (released xx.xx.2013)
 Features:
 - comics: Added KeenSpot comic strips and enable ComicGenesis
   comic strips
-- comics: Added CucumberQuest, DerFlix, DogHouseDiaries, FonFlatter,
+- comics: Added CucumberQuest, DemolitionSquad, DerFlix, DogHouseDiaries, FonFlatter,
   FullFrontalNerdity, GeeksNextDoor, KickInTheHead, OrnerBoy, Ruthe.
   Closes: GH bug #15, #19
 

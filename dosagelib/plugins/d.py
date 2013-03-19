@@ -79,6 +79,23 @@ class DeepFried(_BasicScraper):
     help = 'Index format: non'
 
 
+class DemolitionSquad(_BasicScraper):
+    url = 'http://www.demolitionsquad.de/'
+    starter = indirectStarter(url,
+        compile(tagre("a", "href", r'(no_cache/comicstrips/einzelansicht/archive/[^"]+)')))
+    stripUrl = url + 'comicstrips/einzelansicht/article/%s/'
+    firstStripUrl = stripUrl % 'videospiele-hentai-master'
+    imageSearch = compile(tagre("img", "src", r'(uploads/pics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(comicstrips/einzelansicht/article/[^"]+)') +
+        tagre("img", "src", r'fileadmin/templates/images/button_back.gif'))
+    help = 'Index format: stripname'
+    lang = 'de'
+
+    def prevUrlModifier(self, url):
+        # remove CGI params
+        return url.split('?')[0]
+
+
 class DerFlix(_BasicScraper):
     url = 'http://derflix.de/'
     stripUrl = url + 'index.php?preselect=%s'
