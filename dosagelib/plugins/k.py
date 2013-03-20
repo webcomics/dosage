@@ -6,6 +6,16 @@ from re import compile, IGNORECASE
 from ..scraper import _BasicScraper
 from ..util import tagre
 
+class Katzenfuttergeleespritzer(_BasicScraper):
+    url = 'http://www.katzenfuttergeleespritzer.de/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'dont-drink-and-drive'
+    imageSearch = compile(tagre("img", "src", r'(http://www.katzenfuttergeleespritzer.de/wp-content/uploads/\d+/\d+/\d+-\d+-\d+[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www.katzenfuttergeleespritzer.de/comic/[^"]+)', after="navi-prev"))
+    help = 'Index format: stripname'
+    lang = 'de'
+
+
 class KevinAndKell(_BasicScraper):
     url = 'http://www.kevinandkell.com/'
     stripUrl = url + '%s/kk%s%s.html'

@@ -4,8 +4,8 @@ Features:
 - comics: Added KeenSpot comic strips and enable ComicGenesis
   comic strips
 - comics: Added CucumberQuest, DemolitionSquad, DerFlix, DogHouseDiaries,
-  FonFlatter, FullFrontalNerdity, GeeksNextDoor, KickInTheHead, OrnerBoy,
-  Ruthe, SandraAndWooGerman.
+  FonFlatter, FullFrontalNerdity, GeeksNextDoor, Katzenfuttergeleespritzer,
+  KickInTheHead, OrnerBoy, ParallelUniversum, Ruthe, SandraAndWooGerman.
   Closes: GH bug #15, #19
 
 Changes:
