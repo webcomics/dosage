@@ -105,6 +105,18 @@ class Misfile(_BasicScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
+class MyCartoons(_BasicScraper):
+   url = 'http://mycartoons.de/'
+   stripUrl = url + 'page/%s'
+   imageSearch = (
+       compile(tagre("img", "src", r'(http://mycartoons\.de/wp-content/cartoons/(?:[^"]+/)?\d+-\d+-\d+[^"]+)')),
+       compile(tagre("img", "src", r'(http://mycartoons\.de/cartoons/[^"]+/\d+-\d+-\d+[^"]+)'))
+   )
+   prevSearch = compile(tagre("a", "href", r'(http://mycartoons\.de/page/[^"]+)') + "&laquo;")
+   help = 'Index format: number'
+   lang = 'de'
+
+
 class MysteriesOfTheArcana(_BasicScraper):
     url = 'http://mysteriesofthearcana.com/'
     stripUrl = url + 'index.php?action=comics&cid=%s'

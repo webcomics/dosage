@@ -5,7 +5,7 @@ Features:
   comic strips
 - comics: Added CucumberQuest, DemolitionSquad, DerFlix, DogHouseDiaries,
   FonFlatter, FullFrontalNerdity, GeeksNextDoor, Katzenfuttergeleespritzer,
-  KickInTheHead, OrnerBoy, ParallelUniversum, Ruthe, SandraAndWooGerman.
+  KickInTheHead, MyCartoons, OrnerBoy, ParallelUniversum, Ruthe, SandraAndWooGerman.
   Closes: GH bug #15, #19
 
 Changes:
