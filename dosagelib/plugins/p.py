@@ -30,7 +30,7 @@ class ParallelUniversum(_BasicScraper):
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '001-der-comic-ist-tot'
     imageSearch = compile(tagre("img", "src", r'(http://www\.paralleluniversum\.net/comics/\d+-\d+-\d+[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.paralleluniversum\.net/[^"]+/)') + 
+    prevSearch = compile(tagre("a", "href", r'(http://www\.paralleluniversum\.net/[^"]+/)') +
         tagre("span", "class", "prev"))
     help = 'Index format: number-stripname'
     lang = 'de'

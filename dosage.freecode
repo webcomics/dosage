@@ -1,5 +1,5 @@
 Project: dosage
-Version: 1.13
+Version: 1.14
 Release-Focus: Minor feature enhancements
 Hide: N
 Website-URL: http://wummel.github.com/dosage/
@@ -8,9 +8,9 @@ Tar/GZ-URL: http://github.com/downloads/wummel/dosage/dosage-${version}.tar.gz
 GIT-Tree-URL: https://github.com/wummel/dosage.git
 Windows-installer-URL: http://github.com/downloads/wummel/dosage/dosage-${version}.exe
 
-The following comic strips have been added: AhoiPolloi, AxeCop, Bearmageddon, DeadWinter,
-HarkAVagrant, IAmArg, LoadingArtist, Nnewts, PHDComics, PokeyThePenguin,
-SnowFlame, WorldOfMrToast and Zwarwald.
-The HTML output embeds the comic images now and the --output option
-can be specified multiple times.
-Several bugs have also been fixed.
+The following comic strips have been added: CucumberQuest,
+DasLebenIstKeinPonyHof, DemolitionSquad, DerFlix, DerTodUndDasMaedchen,
+DogHouseDiaries, FonFlatter, FullFrontalNerdity, GeeksNextDoor, Hipsters,
+KatzenfutterGeleespritzer, KickInTheHead, MyCartoons, OrnerBoy,
+ParallelUniversum, Ruthe, SandraAndWooGerman, WormWorldSaga.
+Several bugs have been fixed.

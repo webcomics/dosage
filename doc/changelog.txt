@@ -1,4 +1,4 @@
-Dosage 1.14 (released xx.xx.2013)
+Dosage 1.14 (released 21.03.2013)
 
 Features:
 - comics: Added KeenSpot comic strips and enable ComicGenesis
