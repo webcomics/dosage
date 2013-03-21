@@ -33,6 +33,15 @@ class HijinksEnsue(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/name'
 
 
+class Hipsters(_BasicScraper):
+    url = 'http://www.hipsters-comic.com/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2010/08/hip01'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.hipsters-comic\.com/comics/\d+-\d+-\d+[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.hipsters-comic\.com/\d+/\d+/[^"]+)', after="prev"))
+    help = 'Index format: yyyy/dd/stripname'
+
+
 class HorribleVille(_BasicScraper):
     url = 'http://horribleville.com/'
     stripUrl = url + 'd/%s.html'

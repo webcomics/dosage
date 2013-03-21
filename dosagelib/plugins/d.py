@@ -54,6 +54,16 @@ class DarkWings(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/page-nn-mm'
 
 
+class DasLebenIstKeinPonyhof(_BasicScraper):
+    url = 'http://sarahburrini.com/wordpress/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'mein-erster-webcomic'
+    imageSearch = compile(tagre("img", "src", r'(http://sarahburrini\.com/wordpress/wp-content/uploads/\d+/\d+/\d+-\d+-\d+[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://sarahburrini\.com/wordpress/comic/[^"]+)', after="navi-prev"))
+    help = 'Index format: stripname'
+    lang = 'de'
+
+
 class DeadWinter(_BasicScraper):
     url = 'http://deadwinter.cc/'
     stripUrl = url + 'page/%s'
@@ -105,6 +115,16 @@ class DerFlix(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(index\.php\?preselect=\d+)') +
         tagre("img", "src", r'autocartoons/rahmen_zurueck\.jpg'))
     help = 'Index format: number'
+
+
+class DerTodUndDasMaedchen(_BasicScraper):
+    url = 'http://www.cartoontomb.de/deutsch/tod2.php'
+    stripUrl = url + '?bild=%s.jpg'
+    firstStripUrl = stripUrl % '00_01_01'
+    imageSearch = compile(tagre("img", "src", r"(\.\./images/tod/teil2/[^']+)", quote="'"))
+    prevSearch = compile(tagre("a", "href", r"(/deutsch/tod2\.php\?bild=[^']+)", quote="'") + "zur&uuml;ck")
+    help = 'Index format: nn_nn_nn'
+    lang = 'de'
 
 
 class DieselSweeties(_BasicScraper):

@@ -107,6 +107,42 @@ class WorldOfMrToast(_BasicScraper):
             return None
 
 
+class WormWorldSaga(_BasicScraper):
+    url = 'http://www.wormworldsaga.com/'
+    stripUrl = url + 'chapters/%s/index.php'
+    firstStripUrl = stripUrl % 'chapter01/EN'
+    imageSearch = (
+        compile(tagre("img", "src", r'(images/CH\d+_\d+\.[^"]+)')),
+        compile(tagre("img", "src", r'(panels/CH\d+_[^"]+)')),
+    )
+    latestChapter = 4
+    multipleImagesPerStrip = True
+
+    def starter(cls):
+        return '%schapters/chapter%02d/%s/index.php' % (
+            cls.url, cls.latestChapter, cls.lang.upper())
+
+    def getPrevUrl(self, url, data, baseUrl):
+        """Find previous URL."""
+        if 'chapter04' in url:
+            return url.replace('chapter04', 'chapter03')
+        if 'chapter03' in url:
+            return url.replace('chapter03', 'chapter02')
+        if 'chapter02' in url:
+            return url.replace('chapter02', 'chapter01')
+        return None
+
+
+class WormWorldSagaGerman(WormWorldSaga):
+    lang = 'de'
+
+class WormWorldSagaSpanish(WormWorldSaga):
+    lang = 'es'
+
+class WormWorldSagaFrench(WormWorldSaga):
+    lang = 'fr'
+
+
 class WotNow(_BasicScraper):
     url = 'http://shadowburn.binmode.com/wotnow/'
     stripUrl = url + 'comic.php?comic_id=%s'

@@ -6,7 +6,7 @@ from re import compile, IGNORECASE
 from ..scraper import _BasicScraper
 from ..util import tagre
 
-class Katzenfuttergeleespritzer(_BasicScraper):
+class KatzenfutterGeleespritzer(_BasicScraper):
     url = 'http://www.katzenfuttergeleespritzer.de/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'dont-drink-and-drive'

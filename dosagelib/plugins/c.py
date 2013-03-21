@@ -329,9 +329,9 @@ class CraftedFables(_BasicScraper):
 
 class CucumberQuest(_BasicScraper):
     url = 'http://cucumber.gigidigi.com/'
-    stripUrl = url + 'archive/page-%s/'
+    stripUrl = url + 'archive/%s/'
     starter = indirectStarter(url + 'recent.html',
         compile(r'window\.location="(/archive/page-\d+/)"'))
-    imageSearch = compile(tagre("img", "src", r'(http://cucumber\.gigidigi\.com/wp-content/webcomic/cq/\d+[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://cucumber\.gigidigi\.com/archive/page-\d+/)', after="previous"))
-    help = 'Index format: number'
+    imageSearch = compile(tagre("img", "src", r'(http://cucumber\.gigidigi\.com/wp-content/webcomic/cq/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://cucumber\.gigidigi\.com/archive/[^"]+/)', after="previous"))
+    help = 'Index format: stripname'
