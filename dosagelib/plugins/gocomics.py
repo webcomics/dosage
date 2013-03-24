@@ -7,7 +7,7 @@ from ..scraper import make_scraper
 from ..util import tagre
 from ..helpers import bounceStarter
 
-_imageSearch = compile(tagre("img", "src", r'(http://assets\.amuniversal\.com/[0-9a-f]+)'))
+_imageSearch = compile(tagre("img", "src", r'(http://assets\.amuniversal\.com/[0-9a-f]+\?width[^"]+)'))
 _prevSearch = compile(tagre("a", "href", r'(/[^"]+/\d+/\d+/\d+)', after="prev"))
 _nextSearch = compile(tagre("a", "href", r'(/[^"]+/\d+/\d+/\d+)', after="next"))
 
