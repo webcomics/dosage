@@ -120,7 +120,7 @@ def saveComicStrip(strip, basepath):
             if saved:
                 allskipped = False
         except Exception as msg:
-            out.error('Could not save image at %s to %s: %s' % (image.referrer, image.filename, msg))
+            out.exception('Could not save image at %s to %s: %s' % (image.referrer, image.filename, msg))
             errors += 1
     return errors, allskipped
 
@@ -131,7 +131,7 @@ def displayHelp(comics):
         for scraperobj in getScrapers(comics):
             displayComicHelp(scraperobj)
     except ValueError as msg:
-        out.error(msg)
+        out.exception(msg)
         return 1
     return 0
 
@@ -155,14 +155,14 @@ def getComics(options):
     """Retrieve comics."""
     errors = 0
     if options.handler:
-        for name in options.handler:
+        for name in set(options.handler):
             events.addHandler(name, options.basepath, options.baseurl)
     events.getHandler().start()
     try:
         for scraperobj in getScrapers(options.comic, options.basepath, options.adult, options.multimatch):
             errors += getStrips(scraperobj, options)
     except ValueError as msg:
-        out.error(msg)
+        out.exception(msg)
         errors += 1
     finally:
         events.getHandler().end()
@@ -189,7 +189,7 @@ def getStrips(scraperobj, options):
                 out.info("Stop retrieval because image file already exists")
                 break
     except Exception as msg:
-        out.error(msg)
+        out.exception(msg)
         errors += 1
     finally:
         out.context = ''

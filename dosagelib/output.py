@@ -5,6 +5,7 @@ import time
 import sys
 import os
 import threading
+import traceback
 from .ansicolor import Colorizer
 
 lock = threading.Lock()
@@ -35,9 +36,19 @@ class Output(object):
         """Write a warning message."""
         self.write("WARN: %s" % s, color='bold;yellow')
 
-    def error(self, s):
+    def error(self, s, tb=None):
         """Write an error message."""
         self.write("ERROR: %s" % s, color='light;red')
+        #if tb is not None:
+        #    self.write('Traceback (most recent call last):', 1)
+
+    def exception(self, s):
+        """Write error message with traceback info."""
+        self.error(s)
+        type, value, tb = sys.exc_info()
+        self.writelines(traceback.format_stack(), 1)
+        self.writelines(traceback.format_tb(tb)[1:], 1)
+        self.writelines(traceback.format_exception_only(type, value), 1)
 
     def write(self, s, level=0, color=None):
         """Write message with indentation, context and optional timestamp."""
