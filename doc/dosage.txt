@@ -3,7 +3,7 @@ DOSAGE(1)                                                    DOSAGE(1)
 
 
 NAME
-       dosage - a commandline comic downloader and archiver
+       dosage - a comic strip downloader and archiver
 
 SYNOPSIS
        dosage [options] module...

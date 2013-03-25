@@ -1,6 +1,6 @@
 .TH DOSAGE 1
 .SH NAME
-dosage \- a commandline comic downloader and archiver
+dosage \- a comic strip downloader and archiver
 .SH SYNOPSIS
 \fBdosage\fP [\fIoptions\fP] \fImodule\fP...
 .SH DESCRIPTION
@@ -60,6 +60,12 @@ current run, named by date (ala dailystrips). The files can be found in the
 .BR "rss " \-
 Writes out an RSS feed detailing what strips were downloaded in the last 24
 hours. The feed can be found in \fBComics/dailydose.xml\fP.
+.RE
+.PP
+.RS
+.BR "json " \-
+Write a JSON file with all download infos (URLs, images). Can be used with
+other scripts, eg. order-symlinks.py to add symbolic links.
 .RE
 This option can be given multiple times.
 .TP

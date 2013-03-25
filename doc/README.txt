@@ -1,7 +1,7 @@
 Dosage
 =======
 
-Dosage is a commandline comic downloader and archiver.
+Dosage is a comic strip downloader and archiver.
 
 Introduction
 -------------
@@ -31,17 +31,11 @@ User-agent: dosage
 Allow: *
 ```
 
-Adult content
---------------
-Some comics contain adult content and require age confirmation.
-These comics can only be downloaded by using the --adult option,
-which confirms that you are old enough to view them.
-
 Usage
 ------
 List available comics (ca. 3000 at the moment):
 
-`$ dosage -l`
+`$ dosage --list`
 
 Get the latest comic of for example CalvinAndHobbes and save it in the "Comics"
 directory:
@@ -49,17 +43,23 @@ directory:
 `$ dosage CalvinAndHobbes`
 
 If you already have downloaded several comics and want to get the latest
-strip of all of them:
+strips of all of them:
 
-`$ dosage @`
+`$ dosage --continue @`
 
 On Unix, ``xargs`` can download several comic strips in parallel,
 for example using up to 4 processes:
 
-`$ cd Comics && find . -type d | xargs -n1 -P4 dosage -b . -v`
+`$ cd Comics && find . -type d | xargs -n1 -P4 dosage --basedir . --verbose`
 
-For advanced options and features execute `dosage -h` or look at the dosage
+For advanced options and features execute `dosage --help` or look at the dosage
 manual page.
+
+Adult content
+--------------
+Some comics contain adult content and require age confirmation.
+These comics can only be downloaded by using the --adult option,
+which confirms that you are old enough to view them.
 
 Installation
 -------------

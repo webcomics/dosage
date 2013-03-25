@@ -403,7 +403,7 @@ class MyRegister (register, object):
 args = dict(
     name = AppName,
     version = AppVersion,
-    description = 'a commandline comic downloader and archiver',
+    description = 'a comic strip downloader and archiver',
     keywords = 'comic,webcomic,downloader,archiver',
     author = 'Tristan Seligmann, Jonathan Jacobs, Bastian Kleineidam',
     author_email = 'bastian.kleineidam@web.de',
