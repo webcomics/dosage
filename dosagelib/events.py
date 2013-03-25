@@ -198,6 +198,7 @@ class JSONEventHandler(EventHandler):
         return fn
 
     def getComicData(self, comic):
+        """Return dictionary with comic info."""
         if comic not in self.data:
             if os.path.exists(self.jsonFn(comic)):
                 with codecs.open(self.jsonFn(comic), 'r', 'utf-8') as f:
@@ -207,6 +208,7 @@ class JSONEventHandler(EventHandler):
         return self.data[comic]
 
     def getPageInfo(self, comic, url):
+        """Return dictionary with comic page info."""
         comicData = self.getComicData(comic)
         if url not in comicData['pages']:
             comicData['pages'][url] = {'images':{}}
@@ -260,12 +262,12 @@ class MultiHandler(object):
     """Encapsulate a list of handlers."""
 
     def start(self):
-        """Emit a start event. Should be overridden in subclass."""
+        """Emit start events for handlers."""
         for handler in _handlers:
             handler.start()
 
     def comicDownloaded(self, comic, filename):
-        """Emit a comic downloaded event. Should be overridden in subclass."""
+        """Emit comic downloaded events for handlers."""
         for handler in _handlers:
             handler.comicDownloaded(comic, filename)
 
@@ -275,7 +277,7 @@ class MultiHandler(object):
             handler.comicPageLink(comic, url, prevUrl)
 
     def end(self):
-        """Emit an end event. Should be overridden in subclass."""
+        """Emit end events for handlers."""
         for handler in _handlers:
             handler.end()
 

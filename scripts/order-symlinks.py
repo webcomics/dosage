@@ -12,14 +12,16 @@ import codecs
 import json
 
 def jsonFn(d):
+    """Get JSON filename."""
     return os.path.join(d, 'dosage.json')
 
 def loadJson(d):
+    """Return JSON data."""
     with codecs.open(jsonFn(d), 'r', 'utf-8') as f:
-        data = json.load(f)
-    return data
+        return json.load(f)
 
 def prepare_output(d):
+    """Clean pre-existing links in output directory."""
     outDir = os.path.join(d, 'inorder')
     if not os.path.exists(outDir):
         os.mkdir(outDir)
@@ -30,6 +32,7 @@ def prepare_output(d):
     return outDir
 
 def create_symlinks(d):
+    """Create new symbolic links in output directory."""
     data = loadJson(d)
     outDir = prepare_output(d)
 
