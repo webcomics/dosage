@@ -108,7 +108,10 @@ def getPageContent(url, session, max_content_bytes=MaxContentBytes):
     """Get text content of given URL."""
     check_robotstxt(url, session)
     # read page data
-    page = urlopen(url, session, max_content_bytes=max_content_bytes, stream=False)
+    try:
+        page = urlopen(url, session, max_content_bytes=max_content_bytes, stream=False)
+    except IOError:
+        page = urlopen(url, session, max_content_bytes=max_content_bytes, stream=False)
     data = page.text
     tries = MaxRetries
     while not isValidPageContent(data) and tries > 0:
@@ -147,6 +150,9 @@ def fetchUrls(url, data, baseUrl, urlSearch):
                 raise ValueError("Pattern %s matched empty URL at %s." % (search.pattern, url))
             out.debug('matched URL %r with pattern %s' % (searchUrl, search.pattern))
             searchUrls.append(normaliseURL(urlparse.urljoin(baseUrl, searchUrl)))
+        if searchUrls:
+            # do not search other links if one pattern matched
+            break
     if not searchUrls:
         patterns = [x.pattern for x in searches]
         raise ValueError("Patterns %s not found at URL %s." % (patterns, url))
