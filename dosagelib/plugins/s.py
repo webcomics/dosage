@@ -85,6 +85,16 @@ class SchoolBites(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
+class Schuelert(_BasicScraper):
+    url = 'http://www.schuelert.de/'
+    stripUrl = None
+    imageSearch = compile(tagre("img", "src", r"(http://www.schuelert.de/wp-content/[^']+)", quote="'"))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.schuelert\.de/index\.php\?paged=\d+)') + "&laquo;")
+    multipleImagesPerStrip = True
+    help = 'Index format: none'
+    lang = 'de'
+
+
 class SequentialArt(_BasicScraper):
     url = 'http://www.collectedcurios.com/sequentialart.php'
     stripUrl = url + '?s=%s'
