@@ -233,6 +233,15 @@ class DresdenCodak(_BasicScraper):
     starter = indirectStarter('http://dresdencodak.com/', compile(r'<div id="preview"><a href="http://dresdencodak.com/(\d+/\d+/\d+/.*?)">'))
 
 
+class DrMcNinja(_BasicScraper):
+    url = 'http://drmcninja.com/'
+    stripUrl = url + 'archives/comic/%s/'
+    firstStripUrl = stripUrl % '0p1'
+    imageSearch = compile(tagre("img", "src", r'(http://drmcninja\.com/comics/\d+-\d+-\d+[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://drmcninja\.com/archives/comic/[^"]+)', after="prev"))
+    help = 'Index format: episode number and page'
+
+
 class Drowtales(_BasicScraper):
     url = 'http://www.drowtales.com/mainarchive.php'
     stripUrl = url + '?sid=%s'
