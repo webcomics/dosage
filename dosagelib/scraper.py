@@ -131,7 +131,7 @@ class _BasicScraper(object):
                     yield self.getComicStrip(url, data, baseUrl)
                 except ValueError as msg:
                     # image not found
-                    out.error(msg)
+                    out.exception(msg)
             if self.firstStripUrl == url:
                 out.debug("Stop at first URL %s" % url)
                 self.hitFirstStripUrl = True
