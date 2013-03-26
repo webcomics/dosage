@@ -93,9 +93,9 @@ do most of the grunt work.
 
 For each comic Dosage has a plugin module, found in the "plugins"
 subdirectory of the dosagelib directory. Each module is a subclass of
-the _BasicComic class and specifies where to download its comic images.
+the _BasicScraper class and specifies where to download its comic images.
 Some comic syndicates (GoComics for example) have a standard layout for all
-comics. For such cases a generator function creates all _BasicComic class
+comics. For such cases a generator function creates all _BasicScraper class
 instances from a given list of comic strips.
 
 Extending Dosage
