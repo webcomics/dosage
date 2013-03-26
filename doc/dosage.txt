@@ -61,6 +61,10 @@ OPTIONS
               rss - Writes out an RSS feed detailing what strips  were
               downloaded  in  the last 24 hours. The feed can be found
               in Comics/dailydose.xml.
+
+              json - Write a JSON file with all download infos  (URLs,
+              images).  Can be used with other scripts, eg. order-sym‐
+              links.py to add symbolic links.
        This option can be given multiple times.
 
        -t, --timestamps
@@ -126,13 +130,13 @@ EXAMPLES
 
 ENVIRONMENT
        HTTP_PROXY
-              mainline will use the specified HTTP  proxy  when  down‐
-              loading URL contents.
+              dosage will use the specified HTTP proxy when  download‐
+              ing URL contents.
 
 NOTES
-       Should  retrieval fail on any given strip mainline will attempt
-       to retry. However the retry information is  only  outputted  in
-       the second and successive output levels.
+       Should retrieval fail on any given strip dosage will attempt to
+       retry. However the retry information is only outputted  in  the
+       second and successive output levels.
 
        At  the time of writing, a complete Dosage collection weighs in
        at around 3.0GB.
@@ -153,9 +157,8 @@ BUGS
        at https://github.com/wummel/dosage/issues
 
 AUTHORS
-       Jonathan Jacobs <korpse@slipgate.za.net>
-       Tristan Seligmann <mithrandi@slipgate.za.net>
-       Bastian Kleineidam <bastian.kleineidam@web.de>
+       Jonathan  Jacobs,  Tristan  Seligmann, Bastian Kleineidam <bas‐
+       tian.kleineidam@web.de>
 
 COPYRIGHT
        Copyright © 2004-2005 Tristan Seligmann and Jonathan Jacobs

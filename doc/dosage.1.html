@@ -77,6 +77,15 @@ Writes out an RSS feed detailing what strips were downloaded in the last 24
 hours. The feed can be found in <B>Comics/dailydose.xml</B>.
 </DL>
 
+<P>
+
+<DL COMPACT><DT><DD>
+<B>json </B>-
+
+Write a JSON file with all download infos (URLs, images). Can be used with
+other scripts, eg. order-symlinks.py to add symbolic links.
+</DL>
+
 This option can be given multiple times.
 <DL COMPACT>
 <DT><B>-t</B>, <B>--timestamps</B><DD>
@@ -181,7 +190,7 @@ the beginning.
 
 <P>
 
-On Unix, <B><A HREF="../man1/xargs.1.html">xargs</A>(1)</B> can download several comic strips in parallel,
+On Unix, <B>xargs(1)</B> can download several comic strips in parallel,
 for example using up to 4 processes:
 <DL COMPACT><DT><DD>
 <B>cd Comics &amp;&amp; find . -type d | xargs -n1 -P4 dosage -b . -v</B>
@@ -193,7 +202,7 @@ for example using up to 4 processes:
 
 <DL COMPACT>
 <DT>HTTP_PROXY<DD>
-<B>mainline</B>
+<B>dosage</B>
 
 will use the specified HTTP proxy when downloading URL contents.
 </DL>
@@ -201,7 +210,7 @@ will use the specified HTTP proxy when downloading URL contents.
 <H2>NOTES</H2>
 
 Should retrieval fail on any given strip
-<B>mainline</B>
+<B>dosage</B>
 
 will attempt to retry. However the retry information is only outputted
 in the
@@ -238,13 +247,7 @@ Users can report or view bugs, patches or feature suggestions at
 <A NAME="lbAM">&nbsp;</A>
 <H2>AUTHORS</H2>
 
-Jonathan Jacobs &lt;<A HREF="mailto:korpse@slipgate.za.net">korpse@slipgate.za.net</A>&gt;
-<BR>
-
-Tristan Seligmann &lt;<A HREF="mailto:mithrandi@slipgate.za.net">mithrandi@slipgate.za.net</A>&gt;
-<BR>
-
-Bastian Kleineidam &lt;<A HREF="mailto:bastian.kleineidam@web.de">bastian.kleineidam@web.de</A>&gt;
+Jonathan Jacobs, Tristan Seligmann, Bastian Kleineidam &lt;<A HREF="mailto:bastian.kleineidam@web.de">bastian.kleineidam@web.de</A>&gt;
 <A NAME="lbAN">&nbsp;</A>
 <H2>COPYRIGHT</H2>
 
