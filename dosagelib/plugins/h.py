@@ -11,7 +11,7 @@ class HagarTheHorrible(_BasicScraper):
     stripUrl = 'http://www.hagardunor.net/comicstrips_us.php?serietype=9&colortype=1&serieno=%s'
     firstStripUrl = stripUrl % '1'
     multipleImagesPerStrip = True
-    imageSearch = compile(tagre("img", "src", r'(stripus\d+/Hagar_The_Horrible_?\d+[^ >]+)', quote=""))
+    imageSearch = compile(tagre("img", "src", r'(stripus\d+/(?:Hagar_The_Horrible_?|h)\d+[^ >]+)', quote=""))
     prevUrl = r'(comicstrips_us\.php\?serietype\=9\&colortype\=1\&serieno\=\d+)'
     prevSearch = compile(tagre("a", "href", prevUrl, after="Previous"))
     help = 'Index format: number'
