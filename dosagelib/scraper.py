@@ -51,7 +51,7 @@ class _BasicScraper(object):
     lang = 'en'
 
     # list of genres for this comic strip
-    genres = (Genre.other)
+    genres = (Genre.other,)
 
     # compiled regular expression that will locate the URL for the previous strip in a page
     # this can also be a list or tuple of compiled regular expressions
