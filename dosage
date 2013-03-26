@@ -14,7 +14,6 @@ import sys
 import os
 import argparse
 import pydoc
-from collections import OrderedDict
 from cStringIO import StringIO
 
 from dosagelib import events, scraper
@@ -302,13 +301,13 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False):
             yield scraperclass()
     else:
         # get only selected comic scrapers
-        # store them in an ordered set to eliminate duplicates
-        scrapers = OrderedDict()
+        # store them in a set to eliminate duplicates
+        scrapers = set()
         for comic in comics:
             if basepath and comic.startswith(basepath):
                 # make the following command work:
                 # find Comics -type d | xargs -n1 -P10 dosage -b Comics
-                comic = comic[len(basepath):].lstrip("/")
+                comic = comic[len(basepath):].lstrip(os.sep)
             if ':' in comic:
                 name, index = comic.split(':', 1)
                 indexes = index.split(',')
@@ -322,9 +321,8 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False):
                     continue
                 scraperobj = scraperclass(indexes=indexes)
                 if scraperobj not in scrapers:
-                    scrapers[scraperobj] = True
-        for scraperobj in scrapers:
-            yield scraperobj
+                    scrapers.add(scraperobj)
+                    yield scraperobj
 
 
 def warn_adult(scraperclass):
