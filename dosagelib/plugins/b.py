@@ -159,16 +159,13 @@ class BookOfBiff(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/stripnum-strip-name'
 
 
-### With BratHalla there is no 'previous' link at comic 360
-### You will need to use
-### mainline -c BratHalla:360-backup-dad-unstable-plans/
-### to get earlier comics
 class BratHalla(_BasicScraper):
     url = 'http://brat-halla.com/'
-    stripUrl = url + 'comic/%s'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % '1-balder-dash'
     imageSearch = compile(r"(/comics/.+?)' target='_blank")
     prevSearch = compile(r'headernav2".+?"(http.+?)"')
-    help = 'Index format: non'
+    help = 'Index format: number-stripname'
 
 
 class BrentalFloss(_BasicScraper):
@@ -177,6 +174,11 @@ class BrentalFloss(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'([^"]*/img/comic/[^"]*)'))
     prevSearch = compile(tagre("a", "href", r'([^"]*)') + "Prev")
     help = 'Index format: n'
+
+    @classmethod
+    def prevUrlModifier(cls, prevUrl):
+        if prevUrl:
+            return prevUrl.replace("www.", "")
 
 
 class BrentalFlossFit(BrentalFloss):
