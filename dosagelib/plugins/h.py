@@ -2,8 +2,29 @@
 
 from re import compile
 from ..scraper import _BasicScraper
-from ..util import tagre
+from ..util import tagre, getPageContent, fetchUrls
 from ..helpers import bounceStarter
+
+
+class HagarTheHorrible(_BasicScraper):
+    url = 'http://www.hagarthehorrible.net/'
+    stripUrl = 'http://www.hagardunor.net/comicstrips_us.php?serietype=9&colortype=1&serieno=%s'
+    firstStripUrl = stripUrl % '1'
+    multipleImagesPerStrip = True
+    imageSearch = compile(tagre("img", "src", r'(stripus\d+/Hagar_The_Horrible_\d+[^ >]+)', quote=""))
+    prevUrl = r'(comicstrips_us\.php\?serietype\=9\&colortype\=1\&serieno\=\d+)'
+    prevSearch = compile(tagre("a", "href", prevUrl, after="Previous"))
+    help = 'Index format: number'
+
+    @classmethod
+    def starter(cls):
+        """Return last gallery link."""
+        url = 'http://www.hagardunor.net/comics.php'
+        content = getPageContent(url, cls.session)[0]
+        pattern = compile(tagre("a", "href", cls.prevUrl))
+        for starturl in fetchUrls(url, content, url, pattern):
+            pass
+        return starturl
 
 
 class HarkAVagrant(_BasicScraper):
