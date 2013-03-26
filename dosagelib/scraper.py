@@ -10,6 +10,19 @@ from .output import out
 from .events import getHandler
 
 
+class Genre:
+    """Genre of a comic strip."""
+    adventure = u"Adventure"
+    crazy = u"Crazy"
+    drama = u"Drama"
+    fantasy = u"Fantasy"
+    gaming = u"Gaming"
+    humor = u"Humor"
+    reallife = u"Real life"
+    scifi = u"Sci-fi"
+    other = u"Other"
+
+
 class _BasicScraper(object):
     '''Base class with scrape functions for comics.'''
 
@@ -36,6 +49,9 @@ class _BasicScraper(object):
 
     # langauge of the comic (two-letter ISO 639-1 code)
     lang = 'en'
+
+    # list of genres for this comic strip
+    genres = (Genre.other)
 
     # compiled regular expression that will locate the URL for the previous strip in a page
     # this can also be a list or tuple of compiled regular expressions
