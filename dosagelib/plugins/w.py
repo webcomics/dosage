@@ -118,6 +118,7 @@ class WormWorldSaga(_BasicScraper):
     latestChapter = 4
     multipleImagesPerStrip = True
 
+    @classmethod
     def starter(cls):
         return '%schapters/chapter%02d/%s/index.php' % (
             cls.url, cls.latestChapter, cls.lang.upper())
