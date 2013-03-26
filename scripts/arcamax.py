@@ -68,7 +68,7 @@ def has_comic(name):
     ]
     for scraperclass in get_scraperclasses():
         lname = scraperclass.getName().lower()
-        if lname in names:
+        if lname in names or lname == name.lower():
             return True
     return False
 
