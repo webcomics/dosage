@@ -38,7 +38,7 @@ class LittleGamers(_BasicScraper):
     url = 'http://www.little-gamers.com/'
     stripUrl = url + '%s/'
     imageSearch = compile(tagre("img", "src", r'(http://little-gamers\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.little-gamers.com/[^"]+)', before="comic-nav-prev-link"))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.little-gamers\.com/[^"]+)', before="comic-nav-prev-link"))
     help = 'Index format: yyyy/mm/dd/name'
 
 
