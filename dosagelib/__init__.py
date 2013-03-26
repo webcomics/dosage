@@ -9,11 +9,8 @@ downloaded strips may violate copyright, and is not advisable unless you
 have communicated with all of the relevant copyright holders, described
 your intentions, and received permission to distribute.
 
-The primary dosage interface is currently the 'mainline' script, which
-is just a thin wrapper that invokes L{dosage.mainline}. Comic modules
-for each comic are located in L{dosage.modules}; most of these make
-use of the helper base classes and mixins in L{dosage.modules.helpers},
-thus making their individual implementations trivial.
+The primary interface is the 'dosage' commandline script.
+Comic modules for each comic are located in L{dosagelib.plugins}.
 """
 import sys
 if not (hasattr(sys, 'version_info') or
