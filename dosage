@@ -287,11 +287,11 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False):
         if len(comics) > 1:
             out.warn("using '@' as comic name ignores all other specified comics.")
         for scraperclass in scraper.get_scraperclasses():
-            if not adult and scraperclass.adult:
-                warn_adult(scraperclass)
-                continue
             dirname = getDirname(scraperclass.getName())
             if os.path.isdir(os.path.join(basepath, dirname)):
+                if not adult and scraperclass.adult:
+                    warn_adult(scraperclass)
+                    continue
                 yield scraperclass()
     elif '@@' in comics:
         # all scrapers
