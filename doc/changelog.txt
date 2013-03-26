@@ -5,10 +5,13 @@ Features:
 - output: Added a new JSON output logger.
 
 Changes:
+- comics: Add better source for HagarTheHorrible
+  Closes: GH bug #21
 - output: Display error traceback information in verbose mode.
 
 Fixes:
-- comics: Download zoomed images from GoComics.
+- comics: Fixed GoComics by downloading zoomed images,
+  fixed WorlWorldSaga* and Eriadan, and removed DerFlix.
 
 
 Dosage 1.14 (released 21.03.2013)
