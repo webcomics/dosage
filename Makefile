@@ -13,7 +13,6 @@ HOMEPAGE:=$(HOME)/public_html/$(LAPPNAME)-webpage.git
 DEBUILDDIR:=$(HOME)/projects/debian/official
 DEBORIGFILE:=$(DEBUILDDIR)/$(LAPPNAME)_$(VERSION).orig.tar.gz
 DEBPACKAGEDIR:=$(DEBUILDDIR)/$(LAPPNAME)-$(VERSION)
-PY2APPOPTS ?=
 # Default pytest options
 # Note that using -n silently swallows test creation exceptions like
 # import errors.
@@ -128,6 +127,9 @@ localbuild:
 
 test:	localbuild
 	env LANG=en_US.utf-8 http_proxy="" $(PYTHON) -m pytest $(PYTESTOPTS) $(TESTOPTS) $(TESTS)
+
+testall:	localbuild
+	env LANG=en_UR.utf-8 http_proxy="" TESTALL=1 $(PYTHON) -m pytest $(PYTESTOPTS) $(TESTOPTS) $(TESTS)
 
 deb:
 # Build an official .deb package; only useful for Debian maintainers.
