@@ -84,7 +84,7 @@ def handle_url(url, session, res):
 
 
 def get_description(url, session):
-    """Get comic stirp description."""
+    """Get comic strip description."""
     try:
         data, baseUrl = getPageContent(url, session)
     except IOError as msg:

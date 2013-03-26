@@ -23,64 +23,29 @@ activity_matcher = re.compile(r'<b>Activity status:</b> <span class="comicinfo">
 
 # names of comics to exclude
 exclude_comics = [
-    "6tsc", # unsuitable navigation
-    "Archininja", # unsuitable navigation
-    "BoozerandStoner", # unsuitable navigation
-    "Fuzzylittleninjas", # unsuitable navigation
-    "Kaze", # unsuitable navigation
-    "Sweetcheeriosandorangejuice", # unsuitable navigation
-    "Coolstorybro", # unsuitable navigation
-    "BUXY", # unsuitable navigation
-    "Icannotdraw", # unsuitable navigation
-    "ProjectX", # unsuitable navigation
-    "Insectia", # unsuitable navigation
-    "Oeight", # unsuitable navigation
-    "ReadershipofOne", # unsuitable navigation
-    "Haywire", # unsuitable navigation
-    "Immortalfool", # unsuitable navigation
-    "BlockTales", # unsuitable navigation
-    "Goldrush", # unsuitable navigation
-    "Theredeemers", # unsuitable navigation
-    "Lovekillsslowly", # unsuitable navigation
-    "Dotcomic", # unsuitable navigation
-    "Democomix", # unsuitable navigation
-    "Crepusculars", # unsuitable navigation
-    "Xenozone", # unsuitable navigation
-    "Rocr", # unsuitable navigation
-    "Mytvisevil", # unsuitable navigation
-    "Ofpf", # unsuitable navigation
-    "GRIND", # unsuitable navigation
-    "Tezzleandzeek", # unsuitable navigation
-    "Kmlssticks", # unsuitable navigation
-    "Bidoof", # unsuitable navigation
-    "Nemution", # unsuitable navigation
-    "Colorforce", # unsuitable navigation
-    "CtrlZ", # unsuitable navigation
-    "Monobow", # unsuitable navigation
-    "Mars", # unsuitable navigation
-    "ThornsInOurSide", # unsuitable navigation
-    "Longandexcitingjourney", # unsuitable navigation
-    "Unichat", # unsuitable navigation
-    "Lately", # unsuitable navigation
-    "Thestickmen", # unsuitable navigation
-    "Horizongakuen", # unsuitable navigation
     "12yearsofmissj", # unsuitable navigation
     "3DGlasses", # unsuitable navigation
+    "6tsc", # unsuitable navigation
     "Abyss", # unsuitable navigation
     "Actdr", # unsuitable navigation
     "Aerosol", # unsuitable navigation
     "Alienirony", # unsuitable navigation
     "AngelguardianEspanol", # unsuitable navigation
     "Angryalien", # unsuitable navigation
+    "Archininja", # unsuitable navigation
     "Arveytoonz", # unsuitable navigation
     "AttackoftheRobofemoids", # unsuitable navigation
     "Bedlam", # unsuitable navigation
+    "Bidoof", # unsuitable navigation
+    "BlockTales", # unsuitable navigation
     "Bobcomix", # unsuitable navigation
     "Bonejangles", # unsuitable navigation
+    "BoozerandStoner", # unsuitable navigation
     "Boyaurus", # unsuitable navigation
     "Brainfood", # unsuitable navigation
     "Bromosworld", # unsuitable navigation
     "BulletMythology", # unsuitable navigation
+    "BUXY", # unsuitable navigation
     "CafeGruesome", # unsuitable navigation
     "Chanpuru", # unsuitable navigation
     "Christmaswithmaddog", # unsuitable navigation
@@ -90,9 +55,16 @@ exclude_comics = [
     "ConsequencesOfChoice", # unsuitable navigation
     "CoolYuleComics", # unsuitable navigation
     "Crossworldsnexus", # unsuitable navigation
+    "Colorforce", # unsuitable navigation
+    "Coolstorybro", # unsuitable navigation
+    "Crepusculars", # unsuitable navigation
+    "CtrlZ", # unsuitable navigation
     "DeadNight", # unsuitable navigation
+    "Democomix", # unsuitable navigation
     "Dinosaurkingdom", # unsuitable navigation
+    "Dotcomic", # unsuitable navigation
     "Droned", # unsuitable navigation
+    "Effingukookoo", # unsuitable navigation
     "ErraticBeat", # unsuitable navigation
     "Evilbear", # unsuitable navigation
     "Ewmic", # unsuitable navigation
@@ -104,6 +76,7 @@ exclude_comics = [
     "Frigginrandom", # unsuitable navigation
     "Frostfire", # unsuitable navigation
     "Furnerdy", # unsuitable navigation
+    "Fuzzylittleninjas", # unsuitable navigation
     "Garfieldminusjon", # unsuitable navigation
     "Gatito", # unsuitable navigation
     "Gbksayonara", # unsuitable navigation
@@ -111,6 +84,9 @@ exclude_comics = [
     "Gratz", # unsuitable navigation
     "Greygaroutopheavyartwork", # unsuitable navigation
     "GrimReaperSchool", # unsuitable navigation
+    "Goldrush", # unsuitable navigation
+    "GRIND", # unsuitable navigation
+    "Haywire", # unsuitable navigation
     "Hallodri", # unsuitable navigation
     "Harrysorehead", # unsuitable navigation
     "HazSci", # unsuitable navigation
@@ -118,9 +94,13 @@ exclude_comics = [
     "Herecomesskeeter", # unsuitable navigation
     "Holycowcomics", # unsuitable navigation
     "Houseescapeold", # unsuitable navigation
+    "Horizongakuen", # unsuitable navigation
+    "Icannotdraw", # unsuitable navigation
     "Ign", # unsuitable navigation
     "Illusionoftime", # unsuitable navigation
     "InsideOuT", # unsuitable navigation
+    "Immortalfool", # unsuitable navigation
+    "Insectia", # unsuitable navigation
     "Jackitandfriends", # unsuitable navigation
     "Jenffersshow5", # unsuitable navigation
     "Johnsonsuperior", # unsuitable navigation
@@ -128,14 +108,20 @@ exclude_comics = [
     "Journ", # unsuitable navigation
     "JourneyToRaifina", # unsuitable navigation
     "Junk", # unsuitable navigation
+    "Kaze", # unsuitable navigation
+    "Kmlssticks", # unsuitable navigation
     "KiLAiLO", # unsuitable navigation
     "Kingdomprettycure", # unsuitable navigation
     "Kmfe", # unsuitable navigation
+    "Lately", # unsuitable navigation
     "Legendoftheredphantom", # unsuitable navigation
     "Littlephoenix", # unsuitable navigation
     "Llwhoelterran", # unsuitable navigation
     "Lomeathandhuilii", # unsuitable navigation
+    "Longandexcitingjourney", # unsuitable navigation
+    "Lovekillsslowly", # unsuitable navigation
     "Mannack", # unsuitable navigation
+    "Mars", # unsuitable navigation
     "MaskoftheAryans", # unsuitable navigation
     "Megamaiden", # unsuitable navigation
     "Minecraft2b2t", # unsuitable navigation
@@ -145,11 +131,16 @@ exclude_comics = [
     "MoonlightValley", # unsuitable navigation
     "MurghComics", # unsuitable navigation
     "MVPL", # unsuitable navigation
+    "Monobow", # unsuitable navigation
+    "Mytvisevil", # unsuitable navigation
     "Natao", # unsuitable navigation
+    "Nemution", # unsuitable navigation
     "NMG", # unsuitable navigation
     "Noche", # unsuitable navigation
     "Noprrkele", # unsuitable navigation
     "Nothingfitsartblog", # unsuitable navigation
+    "Oeight", # unsuitable navigation
+    "Ofpf", # unsuitable navigation
     "Old2g", # unsuitable navigation
     "Outtolunch", # unsuitable navigation
     "Parisel313", # unsuitable navigation
@@ -158,6 +149,8 @@ exclude_comics = [
     "Pi5a", # unsuitable navigation
     "Pokemonwarpers", # unsuitable navigation
     "Princess", # unsuitable navigation
+    "ProjectX", # unsuitable navigation
+    "ReadershipofOne", # unsuitable navigation
     "Queenie", # unsuitable navigation
     "Rain", # unsuitable navigation
     "Ratantia", # unsuitable navigation
@@ -167,6 +160,7 @@ exclude_comics = [
     "Requiem", # unsuitable navigation
     "Retrofiyora", # unsuitable navigation
     "Rexfordavenue", # unsuitable navigation
+    "Rocr", # unsuitable navigation
     "S", # unsuitable navigation
     "Sandgate", # unsuitable navigation
     "Shadowstories", # unsuitable navigation
@@ -180,6 +174,7 @@ exclude_comics = [
     "StrangerThanFiction", # unsuitable navigation
     "SundaySmash", # unsuitable navigation
     "Superproultimatewrestling", # unsuitable navigation
+    "Sweetcheeriosandorangejuice", # unsuitable navigation
     "Synapticisms", # unsuitable navigation
     "Talesofspoons", # unsuitable navigation
     "Terwilligers", # unsuitable navigation
@@ -192,6 +187,12 @@ exclude_comics = [
     "TOGM", # unsuitable navigation
     "Townburgcity", # unsuitable navigation
     "Tuhinaloota", # unsuitable navigation
+    "Tezzleandzeek", # unsuitable navigation
+    "Theredeemers", # unsuitable navigation
+    "Thestickmen", # unsuitable navigation
+    "Thingsthatannoyme", # unsuitable navigation
+    "ThornsInOurSide", # unsuitable navigation
+    "Unichat", # unsuitable navigation
     "UFPA", # unsuitable navigation
     "V4", # unsuitable navigation
     "Verboten", # unsuitable navigation
@@ -203,6 +204,7 @@ exclude_comics = [
     "WindRiders", # unsuitable navigation
     "WitchesTeaParty", # unsuitable navigation
     "Woohooligan", # unsuitable navigation
+    "Xenozone", # unsuitable navigation
     "XWingAlliance", # unsuitable navigation
     "Yppcomic", # unsuitable navigation
     "Zeroeffort", # unsuitable navigation

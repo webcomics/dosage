@@ -34,6 +34,7 @@ exclude_comics = [
     "GART", # does not follow standard layout
     "GBAsCrib", # timeout
     "HEARD", # missing images
+    "Indigo", # broken domain name
     "IwillbenapoSpamDump", # missing images
     "JennyHaniver", # does not follow standard layout
     "KiLAiLO", # does not follow standard layout

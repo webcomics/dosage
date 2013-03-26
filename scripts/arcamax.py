@@ -19,6 +19,7 @@ url_matcher = re.compile(r'<li><b><a href="(/thefunnies/[^"]+)">([^<]+)</a>')
 
 # names of comics to exclude
 exclude_comics = [
+    "HagartheHorrible", # better source available
 ]
 
 
