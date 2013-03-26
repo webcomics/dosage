@@ -106,17 +106,6 @@ class DemolitionSquad(_BasicScraper):
         return url.split('?')[0]
 
 
-class DerFlix(_BasicScraper):
-    url = 'http://derflix.de/'
-    stripUrl = url + 'index.php?preselect=%s'
-    firstStripUrl = stripUrl % '1'
-    lang = 'de'
-    imageSearch = compile(tagre("img", "src", r'(autocartoons/\d+\.[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(index\.php\?preselect=\d+)') +
-        tagre("img", "src", r'autocartoons/rahmen_zurueck\.jpg'))
-    help = 'Index format: number'
-
-
 class DerTodUndDasMaedchen(_BasicScraper):
     url = 'http://www.cartoontomb.de/deutsch/tod2.php'
     stripUrl = url + '?bild=%s.jpg'
