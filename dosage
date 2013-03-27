@@ -62,7 +62,7 @@ def setupOptions():
     @rtype argparse.ArgumentParser
     """
     kwargs = dict(
-        description = "A commandline comic downloader and archiver.",
+        description = "A comic downloader and archiver.",
         epilog = Examples,
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
