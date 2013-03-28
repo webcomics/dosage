@@ -112,3 +112,11 @@ https://github.com/wummel/dosage/issues
 Dosage currently supports a large number of comics and that number grows on
 a regular basis. If you feel that there are comics that Dosage does not
 currently support but should support, please feel free to request them.
+
+Test suite status
+------------------
+Dosage has extensive unit tests to ensure the code quality.
+[Travis CI](https://travis-ci.org/) is used for continuous build
+and test integration.
+
+[![Build Status](https://travis-ci.org/wummel/dosage.png)](https://travis-ci.org/wummel/dosage)
