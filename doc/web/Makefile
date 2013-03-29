@@ -4,13 +4,16 @@ WOK:=$(HOME)/projects/wok.git/wok
 all:
 
 comics:	../../testresults.txt
-# copy some static files
-	cp ../dosage.1.html ../icon/favicon.ico $(HOMEPAGE)
 # regenerate comic pages
 	rm -f content/comics/*.md
 	env PYTHONPATH=../.. ./mkcomics.py $< content
 
-gen:
+media/favicon.ico:	../icon/favicon.ico
+	cp $< $@
+
+gen:	media/favicon.ico
+# copy some static files
+	cp ../dosage.1.html $(HOMEPAGE)
 	$(WOK) -v
 
 serve:
