@@ -17,7 +17,7 @@ import unittest
 import sys
 import shutil
 import tempfile
-from . import dosage_cmd, mainline_cmd, run_checked, needs_os
+from . import dosage_cmd, mainline_cmd, run_checked
 
 
 def run_with_options(options, cmd=dosage_cmd):
@@ -39,7 +39,6 @@ class TestDosage (unittest.TestCase):
         for option in ("-l", "--list", "--singlelist"):
             run_with_options([option])
 
-    @needs_os('posix')
     def test_list_comics_mainline(self):
         for option in ("-l", "--list", "--singlelist"):
             run_with_options([option], cmd=mainline_cmd)
@@ -47,7 +46,6 @@ class TestDosage (unittest.TestCase):
     def test_version(self):
         run_with_options(["--version"])
 
-    @needs_os('posix')
     def test_version_mainline(self):
         run_with_options(["--version"], cmd=mainline_cmd)
 
@@ -57,7 +55,6 @@ class TestDosage (unittest.TestCase):
         # module help
         run_with_options(["-m", "calvinandhobbes"])
 
-    @needs_os('posix')
     def test_help_mainline(self):
         for option in ("-h", "--help"):
             run_with_options([option], cmd=mainline_cmd)
@@ -69,7 +66,6 @@ class TestDosage (unittest.TestCase):
         self.assertRaises(OSError, run_with_options, ['--imadoofus'])
         self.assertRaises(OSError, run_with_options, ['Garfield'])
 
-    @needs_os('posix')
     def test_error_mainline(self):
         self.assertRaises(OSError, run_with_options, [], mainline_cmd)
         self.assertRaises(OSError, run_with_options, ['--imadoofus'], mainline_cmd)
@@ -78,20 +74,17 @@ class TestDosage (unittest.TestCase):
     def test_fetch_html(self):
         run_with_options(["-n", "2", "-b", self.tmpdir, "-o", "html", "-o", "rss", "calvinandhobbes"])
 
-    @needs_os('posix')
     def test_fetch_html_mainline(self):
         run_with_options(["-n", "2", "-b", self.tmpdir, "-o", "html", "-o", "rss", "calvinandhobbes"], cmd=mainline_cmd)
 
     def test_fetch_rss(self):
         run_with_options(["--numstrips", "2", "--baseurl", "bla", "--basepath", self.tmpdir, "--output", "rss", "--output", "html", "--adult", "sexyloser"])
 
-    @needs_os('posix')
     def test_fetch_rss_mainline(self):
         run_with_options(["--numstrips", "2", "--baseurl", "bla", "--basepath", self.tmpdir, "--output", "rss", "--output", "html", "--adult", "sexyloser"], cmd=mainline_cmd)
 
     def test_fetch_indexed(self):
         run_with_options(["-n", "2", "-b", self.tmpdir, "calvinandhobbes:2012/02/02"])
 
-    @needs_os('posix')
     def test_fetch_indexed_mainline(self):
         run_with_options(["-n", "2", "-b", self.tmpdir, "calvinandhobbes:2012/02/02"], cmd=mainline_cmd)
