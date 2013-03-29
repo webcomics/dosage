@@ -1,0 +1,37 @@
+title: Dosage comic SmackJeeves/Area9
+url: "/comics/SmackJeeves_Area9.html"
+---
+Dosage comic SmackJeeves/Area9
+-----------------------------------------
+
+<table class="comicinfo">
+<tr>
+<th>Description</th><td>Taishi Iwaska had once dreamed of working in Area 9, a research facility surrounded by a huge wall that finds cures for dangerous viruses. Feeling useless, he has recently given up on his dream, but in a strange turn of events he finds himself trapped in Area 9 as a hostage with a crazy bomber called 'Bomb', who claims to be a terrorist that will blow up Area 9 if they don't give him what he wants. Is there anything Taishi can do before it's too late? Just who is Bomb, and why does he want to destroy Area 9? Taishi will have to overcome his feelings of helplessness if he's going to do anything about it, as well as make a few shocking discoveries along the way. This is a one-shot that has turned into an unusually long one-shot. There will be 3 parts with around 70 pages each. &lt;&lt;Reads from right to left&lt;&lt; Updates on Saturdays.</td>
+</tr>
+<tr>
+<th>Website</th><td><a href="http://area-9.smackjeeves.com/comics/">http://area-9.smackjeeves.com/comics/</a></td>
+</tr>
+<tr>
+<th>Genre</th><td>Other</td>
+</tr>
+<tr>
+<th>Language</th><td>English</td>
+</tr>
+<tr>
+<th>Adult content</th><td>no</td>
+</tr>
+<tr>
+<th>Status</th><td>error on 27.03.2013</td>
+</tr>
+<tr>
+<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
+ data-href="http://area-9.smackjeeves.com/comics/"></div></td>
+</tr>
+</table>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>

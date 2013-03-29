@@ -9,8 +9,7 @@ ARCHIVE_SOURCE:=$(LAPPNAME)-$(VERSION).tar.gz
 ARCHIVE_WIN32:=$(LAPPNAME)-$(VERSION).exe
 GITUSER:=wummel
 GITREPO:=$(LAPPNAME)
-HOMEPAGE:=$(HOME)/public_html/$(LAPPNAME)-webpage
-HOMEPAGE_META:=$(HOMEPAGE)/app.yaml
+WEB_META:=doc/web/app.yaml
 DEBUILDDIR:=$(HOME)/projects/debian/official
 DEBORIGFILE:=$(DEBUILDDIR)/$(LAPPNAME)_$(VERSION).orig.tar.gz
 DEBPACKAGEDIR:=$(DEBUILDDIR)/$(LAPPNAME)-$(VERSION)
@@ -46,15 +45,14 @@ upload:
 
 homepage:
 # update metadata
-	@echo "version: \"$(VERSION)\"" > $(HOMEPAGE_META)
-	@echo "name: \"$(APPNAME)\"" >> $(HOMEPAGE_META)
-	@echo "lname: \"$(LAPPNAME)\"" >> $(HOMEPAGE_META)
-	@echo "maintainer: \"$(MAINTAINER)\"" >> $(HOMEPAGE_META)
-	@echo "author: \"$(AUTHOR)\"" >> $(HOMEPAGE_META)
-# generate static files
+	@echo "version: \"$(VERSION)\"" > $(WEB_META)
+	@echo "name: \"$(APPNAME)\"" >> $(WEB_META)
+	@echo "lname: \"$(LAPPNAME)\"" >> $(WEB_META)
+	@echo "maintainer: \"$(MAINTAINER)\"" >> $(WEB_META)
+	@echo "author: \"$(AUTHOR)\"" >> $(WEB_META)
+# update documentation and release website
 	$(MAKE) -C doc
-	cp doc/$(LAPPNAME).1.html $(HOMEPAGE).git
-	make -C $(HOMEPAGE) gen upload
+	$(MAKE) -C doc/web release
 
 release: distclean releasecheck
 	$(MAKE) dist sign upload homepage tag register deb
@@ -109,7 +107,7 @@ doccheck:
 	  *.py
 
 pyflakes:
-	pyflakes dosage dosagelib scripts tests
+	pyflakes dosage dosagelib scripts tests doc/web
 
 count:
 	@sloccount dosage dosagelib/*.py
@@ -158,4 +156,5 @@ changelog:
 	github-changelog $(DRYRUN) $(GITUSER) $(GITREPO) doc/changelog.txt
 
 .PHONY: update-copyright deb test clean distclean count pyflakes changelog
-.PHONY: doccheck check releasecheck release dist chmod localbuild sign register tag
+.PHONY: doccheck check releasecheck release dist chmod localbuild sign
+.PHONY: register tag homepage

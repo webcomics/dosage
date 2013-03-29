@@ -1,0 +1,37 @@
+title: Dosage comic SmackJeeves/ZosKias
+url: "/comics/SmackJeeves_ZosKias.html"
+---
+Dosage comic SmackJeeves/ZosKias
+-----------------------------------------
+
+<table class="comicinfo">
+<tr>
+<th>Description</th><td>Being a part of the gatekeeper's sepcial clean-up crew is never easy! From vampires to new magick users, there is never any time for breaks! But, the fighting is the easiest part about it... Mizuno Umishin has been a member for a couple years, but he has yet to do any real fieldwork as he's lacking a partner. When he goes to find his...it's not what he bargained for! But now, the real question isn't whethe Light is up to the task...it's whether Umishin and Light can ever get along and become true partners!</td>
+</tr>
+<tr>
+<th>Website</th><td><a href="http://zoskias.smackjeeves.com/comics/">http://zoskias.smackjeeves.com/comics/</a></td>
+</tr>
+<tr>
+<th>Genre</th><td>Other</td>
+</tr>
+<tr>
+<th>Language</th><td>English</td>
+</tr>
+<tr>
+<th>Adult content</th><td>no</td>
+</tr>
+<tr>
+<th>Status</th><td>ok on 27.03.2013</td>
+</tr>
+<tr>
+<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
+ data-href="http://zoskias.smackjeeves.com/comics/"></div></td>
+</tr>
+</table>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>

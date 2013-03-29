@@ -1,0 +1,37 @@
+title: Dosage comic SmackJeeves/NormalcyisforWimps
+url: "/comics/SmackJeeves_NormalcyisforWimps.html"
+---
+Dosage comic SmackJeeves/NormalcyisforWimps
+-----------------------------------------
+
+<table class="comicinfo">
+<tr>
+<th>Description</th><td>Sonic and Tails have gotten bored of living away from civilazation and have decided to move to Onette, at least that's what Sonic decided. Warning: Contains Demonic landlords, magic, insanity, and something else I can't think of right now.</td>
+</tr>
+<tr>
+<th>Website</th><td><a href="http://normalcyisforwimps.smackjeeves.com/comics/">http://normalcyisforwimps.smackjeeves.com/comics/</a></td>
+</tr>
+<tr>
+<th>Genre</th><td>Other</td>
+</tr>
+<tr>
+<th>Language</th><td>English</td>
+</tr>
+<tr>
+<th>Adult content</th><td>no</td>
+</tr>
+<tr>
+<th>Status</th><td>ok on 27.03.2013</td>
+</tr>
+<tr>
+<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
+ data-href="http://normalcyisforwimps.smackjeeves.com/comics/"></div></td>
+</tr>
+</table>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>

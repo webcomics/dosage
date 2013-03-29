@@ -1,0 +1,5 @@
+version: "1.14"
+name: "Dosage"
+lname: "dosage"
+maintainer: "Bastian Kleineidam"
+author: "Tristan Seligmann, Jonathan Jacobs, Bastian Kleineidam"

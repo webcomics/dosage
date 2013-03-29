@@ -1,0 +1,37 @@
+title: Dosage comic SmackJeeves/1000
+url: "/comics/SmackJeeves_1000.html"
+---
+Dosage comic SmackJeeves/1000
+-----------------------------------------
+
+<table class="comicinfo">
+<tr>
+<th>Description</th><td>See 1000 and more of my stuff at http://www.l80comics.com ! 1000 is a non-fiction, autobiographical comic made by me, Jacob Leighty. Unlike many other autobiographical comics, every comic took place in real life exactly as it appears here (save for #18). While this comic focuses on the humorous things in my life, you will also read about drama and action in it, as well. Although the initial goal for this comic is to get to 1000 comics, It will likely go past that number should I ever get there. DISCLAIMER: Unless expressly stated by my in-comic chractacter, none of the opinions expressed in this comic are my own, and there is no malicious intent.</td>
+</tr>
+<tr>
+<th>Website</th><td><a href="http://1000.smackjeeves.com/comics/">http://1000.smackjeeves.com/comics/</a></td>
+</tr>
+<tr>
+<th>Genre</th><td>Other</td>
+</tr>
+<tr>
+<th>Language</th><td>English</td>
+</tr>
+<tr>
+<th>Adult content</th><td>no</td>
+</tr>
+<tr>
+<th>Status</th><td>ok on 27.03.2013</td>
+</tr>
+<tr>
+<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
+ data-href="http://1000.smackjeeves.com/comics/"></div></td>
+</tr>
+</table>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>

@@ -1,0 +1,37 @@
+title: Dosage comic ComicFury/Cannonadeofhogwash
+url: "/comics/ComicFury_Cannonadeofhogwash.html"
+---
+Dosage comic ComicFury/Cannonadeofhogwash
+-----------------------------------------
+
+<table class="comicinfo">
+<tr>
+<th>Description</th><td>As the title suggests, this is a cannonade of hogwash. Updated almost daily.</td>
+</tr>
+<tr>
+<th>Website</th><td><a href="http://cannonadeofhogwash.thecomicseries.com/">http://cannonadeofhogwash.thecomicseries.com/</a></td>
+</tr>
+<tr>
+<th>Genre</th><td>Other</td>
+</tr>
+<tr>
+<th>Language</th><td>English</td>
+</tr>
+<tr>
+<th>Adult content</th><td>no</td>
+</tr>
+<tr>
+<th>Status</th><td>ok on 27.03.2013</td>
+</tr>
+<tr>
+<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
+ data-href="http://cannonadeofhogwash.thecomicseries.com/"></div></td>
+</tr>
+</table>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>

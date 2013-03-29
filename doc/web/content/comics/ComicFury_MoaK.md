@@ -1,0 +1,37 @@
+title: Dosage comic ComicFury/MoaK
+url: "/comics/ComicFury_MoaK.html"
+---
+Dosage comic ComicFury/MoaK
+-----------------------------------------
+
+<table class="comicinfo">
+<tr>
+<th>Description</th><td>Morgan was not having a good day. Her singer flounced; her basist, and brother, got a better offer; her drummer was blown up by a dragon-- Wait, what's a dragon doing in Chicago? And what's with the orcs with guns? Updates Tuesdays and Fridays, 3pm Chicago time (Currently a mirror from Drunk Duck. You can read it here, about a chapter behind, but with no delays for Writer's block and computer issues, or there for the current story, but with the occasional filler page/missed updates.)</td>
+</tr>
+<tr>
+<th>Website</th><td><a href="http://MoaK.thecomicseries.com/">http://MoaK.thecomicseries.com/</a></td>
+</tr>
+<tr>
+<th>Genre</th><td>Other</td>
+</tr>
+<tr>
+<th>Language</th><td>English</td>
+</tr>
+<tr>
+<th>Adult content</th><td>no</td>
+</tr>
+<tr>
+<th>Status</th><td>ok on 27.03.2013</td>
+</tr>
+<tr>
+<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
+ data-href="http://MoaK.thecomicseries.com/"></div></td>
+</tr>
+</table>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
