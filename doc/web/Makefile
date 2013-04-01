@@ -23,6 +23,6 @@ serve:
 upload:
 	cd $(HOMEPAGE) && git add . && git commit -m "Updated" && git push
 
-release: comics gen upload
+release: gen upload
 
 .PHONY: all comics gen serve upload release
