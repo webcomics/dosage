@@ -428,7 +428,7 @@ args = dict(
     options = {
         "py2exe": py2exe_options,
     },
-    classifiers = [
+    classifiers = (
         'Environment :: Console',
         'Intended Audience :: End Users/Desktop',
         'Topic :: Multimedia :: Graphics',
@@ -437,7 +437,7 @@ args = dict(
         'License :: OSI Approved :: GNU General Public License (GPL)',
         'Programming Language :: Python',
         'Operating System :: OS Independent',
-    ],
+    ),
 )
 
 if __name__ == '__main__':
