@@ -91,7 +91,7 @@ python setup.py install --home=$HOME
 Another option is to use pip:
 
 ```shell
-pip install dosage
+pip install requests dosage
 ```
 
 
