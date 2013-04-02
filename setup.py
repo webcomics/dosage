@@ -438,6 +438,9 @@ args = dict(
         'Programming Language :: Python',
         'Operating System :: OS Independent',
     ),
+    install_requires = (
+        'requests',
+    )
 )
 
 if __name__ == '__main__':
