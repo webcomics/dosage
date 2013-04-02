@@ -1,5 +1,8 @@
 Dosage 2.0 (released xx.xx.2013)
 
+Changes:
+- cmdline: Remove deprecated mainline script.
+
 
 Dosage 1.15 (released 1.4.2013)
 

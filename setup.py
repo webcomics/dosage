@@ -418,7 +418,6 @@ args = dict(
     data_files = data_files,
     scripts = (
         'dosage',
-        'mainline',
     ),
     distclass = MyDistribution,
     cmdclass = {
