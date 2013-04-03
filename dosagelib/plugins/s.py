@@ -334,6 +334,41 @@ class Stubble(_BasicScraper):
     help = 'Index format: number'
 
 
+class StuffNoOneToldMe(_BasicScraper):
+    url = 'http://www.snotm.com/'
+    stripUrl = url + '%s.html'
+    firstStripUrl = stripUrl % '2010/05/01'
+    olderHref = r"(http://www\.snotm\.com/\d+/\d+/[^']+\.html)"
+    starter = indirectStarter(url,
+        compile(tagre("a", "href", olderHref, quote="'")))
+    imageSearch = (
+        compile(tagre("img", "src", r'(http://i\.imgur\.com/[^"]+)') + r"(?:</a>|<br />)"),
+        compile(tagre("img", "src", r'(http://\d+\.bp\.blogspot\.com/[^"]+)') + r"(?:(?:&nbsp;)?</a>|<span |<br />)"),
+        compile(tagre("img", "src", r'(https://lh\d+\.googleusercontent\.com/[^"]+)') + r"</a>"),
+    )
+    prevSearch = compile(tagre("a", "href", olderHref, quote="'", before="older-link"))
+    multipleImagesPerStrip = True
+    help = 'Index format: yyyy/mm/stripname'
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        """Use page URL to construct meaningful image name."""
+        parts, year, month, stripname = pageUrl.rsplit('/', 3)
+        stripname = stripname.rsplit('.', 1)[0]
+        parts, imagename = imageUrl.rsplit('/', 1)
+        return '%s-%s-%s-%s' % (year, month, stripname, imagename)
+
+    def shouldSkipUrl(self, url):
+        """Skip pages without images."""
+        return url in (
+            self.stripUrl % '2012/08/self-rant', # no comic
+            self.stripUrl % '2012/06/if-you-wonder-where-ive-been', # video
+            self.stripUrl % '2011/10/i-didnt-make-this-nor-have-anything-to', # video
+            self.stripUrl % '2010/12/first-snotm-fans-in-sao-paulo', # no comic
+            self.stripUrl % '2010/11/ear-infection', # no comic
+        )
+
+
 class StrawberryDeathCake(_BasicScraper):
     url = 'http://strawberrydeathcake.com/'
     stripUrl = url + 'archive/%s/'
