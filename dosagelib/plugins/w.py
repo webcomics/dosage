@@ -6,6 +6,7 @@ from re import compile, IGNORECASE
 
 from ..scraper import _BasicScraper
 from ..util import tagre
+from ..helpers import indirectStarter
 
 
 class WapsiSquare(_BasicScraper):
@@ -13,7 +14,7 @@ class WapsiSquare(_BasicScraper):
     stripUrl = url + 'comic/%s'
     imageSearch = compile(r'<img src="(http://wapsisquare.com/comics/.+?)"')
     prevSearch = compile(r'<a href="(.+?)"[^>]+?>Previous</a>')
-    help = 'Index format: strip-name'
+    help = 'Index format: stripname'
 
 
 class WastedTalent(_BasicScraper):
@@ -30,6 +31,34 @@ class WayfarersMoon(_BasicScraper):
     imageSearch = compile(r'<img src="(/admin.+?)"')
     prevSearch = compile(r'<a href="(.+?)".+?btn_back.gif')
     help = 'Index format: nn'
+
+
+class WebDesignerCOTW(_BasicScraper):
+    url = 'http://www.webdesignerdepot.com/'
+    starter = indirectStarter(url,
+        compile(tagre("a", "href", r'(http://www\.webdesignerdepot\.com/\d+/\d+/comics-of-the-week-\d+/)')))
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2009/11/comics-of-the-week-1'
+    imageSearch = (
+        compile(tagre("img", "src", r'(http://netdna\.webdesignerdepot\.com/uploads/\d+/\d+/\d+s?\.[^"]+)')),
+        compile(tagre("img", "src", r'(http://netdna\.webdesignerdepot\.com/uploads/\d+/\d+/Christmas\d+\.[^"]+)')),
+        compile(tagre("img", "src", r'(http://netdna\.webdesignerdepot\.com/uploads/comics\d+[a-z0-9]*/\d+a?\.[^"]+)')),
+        compile(tagre("img", "src", r'(http://netdna\.webdesignerdepot\.com/uploads/comics/\d+\.[^"]+)')),
+    )
+    multipleImagesPerStrip = True
+    prevSearch = compile(tagre("link", "href", r"(http://www\.webdesignerdepot\.com/\d+/\d+/[^']+)", before='prev', quote="'"))
+    help = 'Index format: yyyy/mm/stripname'
+    description = "The content revolves around web design, blogging and funny situations that we encounter in our daily lives as designers and this week we focus on Christmas. These great cartoons are created by Jerry King, an award-winning cartoonist who’s one of the most published, prolific and versatile cartoonists in the world today."
+
+    def shouldSkipUrl(self, url):
+        """Skip non-comic URLs."""
+        return 'comics-of-the-week' not in url
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        imagename = imageUrl.rsplit('/', 1)[1]
+        week = compile(r'week-(\d+)').search(pageUrl).group(1)
+        return "%s-%s" % (week, imagename)
 
 
 class WeCanSleepTomorrow(_BasicScraper):
