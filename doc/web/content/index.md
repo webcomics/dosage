@@ -65,11 +65,9 @@ Note that the old commandline program `maintool` has been renamed to
 
 Dependencies
 -------------
-Python version 2.7 or higher, which can be downloaded
-from http://www.python.org/
+[Python version 2.7](http://www.python.org/) or higher
 
-Also the python-requests module must be installed, which can be downloaded
-from http://docs.python-requests.org/en/latest/
+Also the [python-requests module](http://docs.python-requests.org/en/latest/) must be installed
 
 Installation
 -------------
@@ -115,8 +113,8 @@ Look at the existing module classes for examples.
 
 Reporting Bugs
 ---------------
-You can report bugs, patches or requests at the Github issue tracker at
-https://github.com/wummel/dosage/issues
+You can report bugs, patches or requests at the
+[Github issue tracker](https://github.com/wummel/dosage/issues)
 
 Dosage currently supports a large number of comics and that number
 grows on a regular basis. If you feel that there are comics that
