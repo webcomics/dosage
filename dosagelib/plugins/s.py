@@ -196,6 +196,44 @@ class SMBC(_BasicScraper):
     help = 'Index format: nnnn'
 
 
+class SnowFlakes(_BasicScraper):
+    url = 'http://www.snowflakescomic.com/'
+    stripUrl = url + '?id=%s&sl=%s'
+    firstStripUrl = stripUrl % ('103', '1')
+    imageSearch = (
+        compile(tagre("img", "src", r'(comics/[^"]+)')),
+        compile(tagre("img", "src", r'(http://www.snowflakescomic.com/comics/[^"]+)')),
+    )
+    prevSearch = compile(tagre("a", "href", r'(/\?id=\d+\&sl=\d)', quote="") +
+        tagre("img", "src", r'images/nav_prior-ON\.gif'))
+    help = 'Index format: number'
+
+    @classmethod
+    def starter(cls):
+        return cls.stripUrl % ('530', '5')
+
+    def getStripIndexUrl(self, index):
+        return self.stripUrl % (index, index[0])
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        """Use strip index number for image name."""
+        index = int(compile(r'id=(\d+)').search(pageUrl).group(1))
+        ext = imageUrl.rsplit('.', 1)[1]
+        return "SnowFlakes-%d.%s" % (index, ext)
+
+    def shouldSkipUrl(self, url):
+        """Skip pages without images."""
+        return url in (
+            self.stripUrl % ('279', '2'), # no comic
+            self.stripUrl % ('278', '2'), # no comic
+            self.stripUrl % ('277', '2'), # no comic
+            self.stripUrl % ('276', '2'), # no comic
+            self.stripUrl % ('275', '2'), # no comic
+            self.stripUrl % ('214', '2'), # no comic
+        )
+
+
 class SnowFlame(_BasicScraper):
     url = 'http://www.snowflamecomic.com/'
     stripUrl = url + '?comic=snowflame-%s-%s'
