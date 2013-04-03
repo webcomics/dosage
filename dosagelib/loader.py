@@ -7,6 +7,7 @@ import os
 import sys
 import zipfile
 import importlib
+from .output import out
 
 
 def is_frozen ():
@@ -36,7 +37,7 @@ def get_modules(folder='plugins'):
             name ="..%s.%s" % (folder, modname)
             yield importlib.import_module(name, __name__)
         except ImportError as msg:
-            print "ERROR: could not load module %s: %s" % (modname, msg)
+            out.error("could not load module %s: %s" % (modname, msg))
 
 
 def get_importable_modules(folder):
