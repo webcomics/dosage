@@ -1,2 +1,4 @@
+# required:
 requests
-# optional: argcomplete
+# optional:
+argcomplete

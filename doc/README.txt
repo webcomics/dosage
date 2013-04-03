@@ -63,10 +63,9 @@ which confirms that you are old enough to view them.
 
 Installation
 -------------
-The most convenient method is to use pip, which installs all dependencies
-automatically:
+The most convenient method is to use pip:
 
-`pip install dosage`
+`pip install requests dosage`
 
 If you install Dosage from source, the `dosage` script can be run directly with
 `./dosage`. Alternatively, you can install Dosage using python distutils by invoking
