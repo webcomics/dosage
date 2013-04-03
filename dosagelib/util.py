@@ -136,20 +136,25 @@ def getImageObject(url, referrer, session, max_content_bytes=MaxImageBytes):
     return urlopen(url, session, referrer=referrer, max_content_bytes=max_content_bytes)
 
 
+def makeList(item):
+    """If tiem is already a list or tuple, return it.
+    Else return a list with item as single element."""
+    if isinstance(item, (list, tuple)):
+        return item
+    return [item]
+
+
 def fetchUrls(url, data, baseUrl, urlSearch):
     """Search all entries for given URL pattern(s) in a HTML page."""
     searchUrls = []
-    if isinstance(urlSearch, (types.ListType, types.TupleType)):
-        searches = urlSearch
-    else:
-        searches = [urlSearch]
+    searches = makeList(urlSearch)
     for search in searches:
         for match in search.finditer(data):
             searchUrl = match.group(1)
             if not searchUrl:
                 raise ValueError("Pattern %s matched empty URL at %s." % (search.pattern, url))
             out.debug('matched URL %r with pattern %s' % (searchUrl, search.pattern))
-            searchUrls.append(normaliseURL(urlparse.urljoin(baseUrl, searchUrl)))
+            searchUrls.append(normaliseURL(urljoin(baseUrl, searchUrl)))
         if searchUrls:
             # do not search other links if one pattern matched
             break

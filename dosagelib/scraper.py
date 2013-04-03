@@ -4,7 +4,7 @@
 import requests
 import time
 from . import loader
-from .util import fetchUrl, fetchUrls, getPageContent
+from .util import fetchUrl, fetchUrls, getPageContent, makeList
 from .comic import ComicStrip
 from .output import out
 from .events import getHandler
@@ -104,9 +104,11 @@ class _BasicScraper(object):
         imageUrls = fetchUrls(url, data, baseUrl, self.imageSearch)
         imageUrls = set(map(self.imageUrlModifier, imageUrls))
         if len(imageUrls) > 1 and not self.multipleImagesPerStrip:
-            out.warn("found %d images instead of 1 at %s with %s" % (len(imageUrls), url, self.imageSearch.pattern))
+            patterns = [x.pattern for x in makeList(self.imageSearch)]
+            out.warn("found %d images instead of 1 at %s with patterns %s" % (len(imageUrls), url, patterns))
         elif not imageUrls:
-            out.warn("found no images at %s with %s" % (url, self.imageSearch.pattern))
+            patterns = [x.pattern for x in makeList(self.imageSearch)]
+            out.warn("found no images at %s with patterns %s" % (url, patterns))
         return ComicStrip(self.getName(), url, imageUrls, self.namer, self.session)
 
     def getStrips(self, maxstrips=None):
