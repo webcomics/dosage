@@ -2,7 +2,10 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 import os
 import time
-import urllib
+try:
+    import urllib.parse.quote as url_quote
+except ImportError:
+    from urllib import quote as url_quote
 import codecs
 import json
 from . import rss, util, configuration
@@ -22,13 +25,13 @@ class EventHandler(object):
         This is used as a halfway sane default when the base URL is not
         provided; not perfect, but should work in most cases.'''
         components = util.splitpath(os.path.abspath(self.basepath))
-        url = '/'.join([urllib.quote(component, '') for component in components])
+        url = '/'.join([url_quote(component, '') for component in components])
         return 'file:///' + url + '/'
 
     def getUrlFromFilename(self, filename):
         """Construct URL from filename."""
         components = util.splitpath(util.getRelativePath(self.basepath, filename))
-        url = '/'.join([urllib.quote(component, '') for component in components])
+        url = '/'.join([url_quote(component, '') for component in components])
         return self.baseurl + url
 
     def start(self):

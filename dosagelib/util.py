@@ -2,9 +2,18 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2013 Bastian Kleineidam
 from __future__ import division, print_function
-
-import urllib, urlparse
-import robotparser
+try:
+    from urllib.parse import quote as url_quote, unquote as url_unquote
+except ImportError:
+    from urllib import quote as url_quote, unquote as url_unquote
+try:
+    from urllib.parse import urlparse, urlunparse, urljoin, urlsplit
+except ImportError:
+    from urlparse import urlparse, urlunparse, urljoin, urlsplit
+try:
+    from urllib import robotparser
+except ImportError:
+    import robotparser
 import requests
 import sys
 import os
@@ -12,9 +21,10 @@ import cgi
 import re
 import traceback
 import time
-import types
-from htmlentitydefs import name2codepoint
-
+try:
+    from html.entities import name2codepoint
+except ImportError:
+    from htmlentitydefs import name2codepoint
 from .decorators import memoized
 from .output import out
 from .configuration import UserAgent, AppName, App, SupportUrl
@@ -205,7 +215,7 @@ def normaliseURL(url):
     # XXX: brutal hack
     url = unescape(url)
 
-    pu = list(urlparse.urlparse(url))
+    pu = list(urlparse(url))
     segments = pu[2].split('/')
     while segments and segments[0] in ('', '..'):
         del segments[0]
@@ -215,13 +225,13 @@ def normaliseURL(url):
         pu[4] = pu[4][1:]
     # remove anchor
     pu[5] = ""
-    return urlparse.urlunparse(pu)
+    return urlunparse(pu)
 
 
 def get_roboturl(url):
     """Get robots.txt URL from given URL."""
-    pu = urlparse.urlparse(url)
-    return urlparse.urlunparse((pu[0], pu[1], "/robots.txt", "", "", ""))
+    pu = urlparse(url)
+    return urlunparse((pu[0], pu[1], "/robots.txt", "", "", ""))
 
 
 def check_robotstxt(url, session):
@@ -323,7 +333,7 @@ def getRelativePath(basepath, path):
 
 def getQueryParams(url):
     """Get URL query parameters."""
-    query = urlparse.urlsplit(url)[3]
+    query = urlsplit(url)[3]
     out.debug('Extracting query parameters from %r (%r)...' % (url, query))
     return cgi.parse_qs(query)
 
@@ -413,7 +423,7 @@ def asciify(name):
 def unquote(text):
     """Replace all percent-encoded entities in text."""
     while '%' in text:
-        newtext = urllib.unquote(text)
+        newtext = url_unquote(text)
         if newtext == text:
             break
         text = newtext
@@ -422,7 +432,7 @@ def unquote(text):
 
 def quote(text, safechars='/'):
     """Percent-encode given text."""
-    return urllib.quote(text, safechars)
+    return url_quote(text, safechars)
 
 
 def strsize (b):
