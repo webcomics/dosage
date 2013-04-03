@@ -10,5 +10,5 @@ script=test.sh
 rm -f "$script"
 echo "#!/bin/sh" > "$script"
 echo "set -e" >> "$script"
-egrep "^F " testresults.txt | cut -b "3-" | sort | awk '{ print "make test PYTESTOPTS=--tb=short TESTS=" $0; }' >> "$script"
+egrep "^F " testresults.txt | cut -b "3-" | sort | awk '{ print "make testall PYTESTOPTS=--tb=short TESTS=" $0; }' >> "$script"
 chmod 755 "$script"
