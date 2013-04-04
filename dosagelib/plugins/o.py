@@ -5,7 +5,7 @@
 from re import compile
 from ..scraper import _BasicScraper
 from ..helpers import indirectStarter
-from ..util import tagre
+from ..util import tagre, urlopen
 
 
 class OctopusPie(_BasicScraper):
@@ -30,9 +30,17 @@ class OddFish(_BasicScraper):
 class Oglaf(_BasicScraper):
     url = 'http://oglaf.com/'
     stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(/media-haha/comic/[^"]+)', before="strip"))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)') + tagre("div", "id", "pvs"))
+    imageSearch = compile(tagre("img", "src", r'(http://media\.oglaf\.com/comic/[^"]+)', before="strip"))
+    prevSearch = compile(tagre("a", "href", r'(/[^"]+)') + tagre("div", "id", "pvs?"))
     help = 'Index format: stripname/nn'
+    adult = True
+
+    @classmethod
+    def starter(cls):
+        # click the "I am 18" button
+        data = {"over18": "&nbsp;"}
+        urlopen(cls.url, cls.session, data=data, stream=False, referrer=cls.url)
+        return cls.url
 
 
 class OkCancel(_BasicScraper):
