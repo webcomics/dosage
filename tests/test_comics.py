@@ -62,8 +62,9 @@ class _ComicTester(TestCase):
             self._test_comic(scraperobj)
 
     def _test_comic(self, scraperobj):
-        num = 0
+        num_strips = 0
         max_strips = 5
+        strip = None
         for strip in scraperobj.getStrips(max_strips):
             images = []
             for image in strip.getImages():
@@ -72,23 +73,26 @@ class _ComicTester(TestCase):
             self.check(images, 'failed to find images at %s' % strip.stripUrl)
             if not self.scraperclass.multipleImagesPerStrip:
                 self.check(len(images) == 1, 'found more than 1 image at %s: %s' % (strip.stripUrl, images))
-            if num > 0 and self.scraperclass.prevUrlMatchesStripUrl:
+            if num_strips > 0 and self.scraperclass.prevUrlMatchesStripUrl:
                 self.check_stripurl(strip)
-            num += 1
-        if self.scraperclass.prevSearch:
-            self.check(num > 0, 'no strips found')
-            if not scraperobj.hitFirstStripUrl:
-                self.check_scraperesult(max_strips, num, strip, scraperobj)
+            num_strips += 1
+        if self.scraperclass.prevSearch and not scraperobj.hitFirstStripUrl:
+            # check strips
+            num_strips_expected = max_strips - len(scraperobj.skippedUrls)
+            msg = 'Traversed %d strips instead of %d.' % (num_strips, num_strips_expected)
+            if strip:
+                msg += " Check the prevSearch pattern at %s" % strip.stripUrl
+            self.check(num_strips == num_strips_expected, msg)
+            # check images
+            if strip:
+                self.check_scraperesult(num_strips_expected, strip, scraperobj)
 
-    def check_scraperesult(self, max_strips, num, strip, scraperobj):
-        self.check(num >= 4, 'traversal failed after %d strips, check the prevSearch pattern at %s.' % (num, strip.stripUrl))
-        # Check that exactly or for multiple pages at least 5 images are saved.
-        # This is different than the image number check above since it checks saved files,
-        # ie. it detects duplicate filenames.
+    def check_scraperesult(self, num_images_expected, strip, scraperobj):
+        # Check that exactly or for multiple pages at least num_strips images are saved.
+        # This checks saved files, ie. it detects duplicate filenames.
         saved_images = self.get_saved_images()
         num_images = len(saved_images)
         # subtract the number of skipped URLs with no image from the expected image number
-        num_images_expected = max_strips - len(scraperobj.skippedUrls)
         attrs = (num_images, saved_images, num_images_expected, self.tmpdir)
         if self.scraperclass.multipleImagesPerStrip:
             self.check(num_images >= num_images_expected, 'saved %d %s instead of at least %d images in %s' % attrs)
