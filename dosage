@@ -14,7 +14,7 @@ import sys
 import os
 import argparse
 import pydoc
-from cStringIO import StringIO
+from io import StringIO
 
 from dosagelib import events, scraper
 from dosagelib.output import out
