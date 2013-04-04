@@ -35,21 +35,6 @@ class CaseyAndAndy(_BasicScraper):
     help = 'Index format: number'
 
 
-class CaribbeanBlue(_BasicScraper):
-    url = 'http://cblue.katbox.net/'
-    stripUrl = url + 'comic/%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://cblue\.katbox\.net/wp-content/uploads/sites/\d+/\d+/\d+/cb[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://cblue\.katbox\.net/comic/[^"]+)', after="previous"))
-    help = 'Index format: nnn-stripname'
-
-    def shouldSkipUrl(self, url):
-        """Skip pages without images."""
-        return url in (
-            self.stripUrl % "filler-stall-them",
-            self.stripUrl % "filler-kimi-figurine-now-available",
-        )
-
-
 class Catalyst(_BasicScraper):
     baseUrl = "http://catalyst.spiderforest.com/"
     url = baseUrl + "comic.php?comic_id=415"
