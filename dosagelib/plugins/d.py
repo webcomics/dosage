@@ -59,6 +59,7 @@ class DasLebenIstKeinPonyhof(_BasicScraper):
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'mein-erster-webcomic'
     imageSearch = compile(tagre("img", "src", r'(http://sarahburrini\.com/wordpress/wp-content/uploads/\d+/\d+/\d+-\d+-\d+[^"]+)'))
+    multipleImagesPerStrip = True
     prevSearch = compile(tagre("a", "href", r'(http://sarahburrini\.com/wordpress/comic/[^"]+)', after="navi-prev"))
     help = 'Index format: stripname'
     lang = 'de'
