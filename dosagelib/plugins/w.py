@@ -36,7 +36,7 @@ class WayfarersMoon(_BasicScraper):
 class WebDesignerCOTW(_BasicScraper):
     url = 'http://www.webdesignerdepot.com/'
     starter = indirectStarter(url,
-        compile(tagre("a", "href", r'(http://www\.webdesignerdepot\.com/\d+/\d+/comics-of-the-week-\d+/)')))
+        compile(tagre("a", "href", r'(http://www\.webdesignerdepot\.com/\d+/\d+/[^"]+/)')))
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2009/11/comics-of-the-week-1'
     imageSearch = (
