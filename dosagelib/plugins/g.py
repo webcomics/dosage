@@ -98,14 +98,6 @@ class GoneWithTheBlastwave(_BasicScraper):
         return '%02d' % int(compile(r'nro=(\d+)').search(pageUrl).group(1))
 
 
-class GreystoneInn(_BasicScraper):
-    url = 'http://www.greystoneinn.net/'
-    stripUrl = url + 'd/%s.html'
-    imageSearch=compile(tagre("img", "src", r'(/comic[s|/][^"]+)'))
-    prevSearch=compile(tagre("a", "href", r'[^"]*(/d/\d+\.s?html)')+r"[^>]+/images/(?:nav_02|previous_day)\.gif")
-    help='Index format: yyyymmdd'
-
-
 class GrrlPower(_BasicScraper):
     url = 'http://www.grrlpowercomic.com/'
     stripUrl = url + 'archives/%s'
