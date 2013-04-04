@@ -21,7 +21,7 @@ Dosage comic DrunkDuck/Led_by_a_Mad_Man
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 27.03.2013</td>
+<th>Status</th><td>ok on 04.04.2013</td>
 </tr>
 <tr>
 <th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"

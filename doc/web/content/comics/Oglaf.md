@@ -18,10 +18,10 @@ Dosage comic Oglaf
 <th>Language</th><td>English</td>
 </tr>
 <tr>
-<th>Adult content</th><td>no</td>
+<th>Adult content</th><td>yes</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 27.03.2013</td>
+<th>Status</th><td>ok on 04.04.2013</td>
 </tr>
 <tr>
 <th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"

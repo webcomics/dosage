@@ -6,7 +6,7 @@ Dosage comic ComicFury/Mischeif
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>//&gt;LOADING INTERFACE;;;STOP RIGHT THERE READERS! You are about to enter a world of complete randomness and lack of plot! I have warned you before hand. Some of these events are real but if anything I'd be pulling your leg if I said I met a caveman who hunts ducks with spears.///END Tl;dr- This is the world of Mischeif. Welcome to random. And beware a random 1337 plz, I do have a life. Sorta. Oh! And don't forget to check out my facebook page! For heads up on Mischeif and other crazy things I get myself into. https://www.facebook.com/pages/Mischeif/267542906656329?fref=ts</td>
+<th>Description</th><td>//&gt;LOADING INTERFACE;;;STOP RIGHT THERE READERS! Enter the semi auto-biography of my life drawn out for your entertainment! Enter Zeon the comic version of the me who is the same yet different, at the same time. (See what I did there?) Unemployed, lazy gaming, comic artist who finds entertainment in the little things. https://www.facebook.com/pages/Mischeif/267542906656329?fref=ts</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://Mischeif.thecomicseries.com/">http://Mischeif.thecomicseries.com/</a></td>
@@ -21,7 +21,7 @@ Dosage comic ComicFury/Mischeif
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 27.03.2013</td>
+<th>Status</th><td>ok on 04.04.2013</td>
 </tr>
 <tr>
 <th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"

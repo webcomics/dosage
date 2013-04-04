@@ -6,7 +6,7 @@ Dosage comic SmackJeeves/MUTE
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>We fight for what we believe in and for those we care about. With terms and beliefs like these, who is to decide what is right and what is wrong? It is our emotions that fuel our actions, but is allowing them to take over really the right course of action in drastic situations...? Updates on days I feel like updating.</td>
+<th>Description</th><td>We fight for what we believe in and for those we care about. With terms and beliefs like these, who is to decide what is right and what is wrong? It is our emotions that fuel our actions, but is allowing them to take over really the right course of action in drastic situations...? Updates weekdays.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://muterobot.smackjeeves.com/comics/">http://muterobot.smackjeeves.com/comics/</a></td>
@@ -21,7 +21,7 @@ Dosage comic SmackJeeves/MUTE
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 27.03.2013</td>
+<th>Status</th><td>ok on 04.04.2013</td>
 </tr>
 <tr>
 <th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"

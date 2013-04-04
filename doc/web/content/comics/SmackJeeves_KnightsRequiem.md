@@ -6,7 +6,7 @@ Dosage comic SmackJeeves/KnightsRequiem
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>With weaponry called Emblems, the knights of NYX had always protected humanity from monsters of the night, the vampires. This is a story of a few new knights discovering just what it is like to become a knight of the night.</td>
+<th>Description</th><td>With weaponry called Emblems, the knights of NYX had always protected humanity from monsters of the night, the vampires. This is a story of a few new knights discovering just what it is like to become slayers</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://knightsrequiem.smackjeeves.com/comics/">http://knightsrequiem.smackjeeves.com/comics/</a></td>
@@ -21,7 +21,7 @@ Dosage comic SmackJeeves/KnightsRequiem
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 27.03.2013</td>
+<th>Status</th><td>ok on 04.04.2013</td>
 </tr>
 <tr>
 <th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"

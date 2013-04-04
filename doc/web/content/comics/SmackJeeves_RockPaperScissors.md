@@ -6,7 +6,7 @@ Dosage comic SmackJeeves/RockPaperScissors
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>In a near-future society, 18 year old Reilly Fay's life is spared ...but on one condition, she must work for the psychopathic killer infamously known as Mr. Friday. However things are not as they seem... Contains: Blood/Cursing/Crappy Backgrounds + Action Scenes/Lame Humor/Fast-paced Plot.</td>
+<th>Description</th><td>RPS is no longer updating. Please read the revamp of it here: http://www.smackjeeves.com/comicprofile.php?id=132515</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://rps.smackjeeves.com/comics/">http://rps.smackjeeves.com/comics/</a></td>
@@ -21,7 +21,7 @@ Dosage comic SmackJeeves/RockPaperScissors
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 27.03.2013</td>
+<th>Status</th><td>ok on 04.04.2013</td>
 </tr>
 <tr>
 <th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"

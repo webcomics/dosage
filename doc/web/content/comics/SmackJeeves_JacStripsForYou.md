@@ -6,7 +6,7 @@ Dosage comic SmackJeeves/JacStripsForYou
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>ART COMMISSION SLOTS OPEN AT $25! This webcomic started out as random comic strips based on real life. Then it spun off to creating actual characters. It may also include random comics out of continuity (there's a continuity?).</td>
+<th>Description</th><td>ART COMMISSION SLOTS OPEN AT $25! Comic updates Mondays.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://jacstrips.smackjeeves.com/comics/">http://jacstrips.smackjeeves.com/comics/</a></td>
@@ -21,7 +21,7 @@ Dosage comic SmackJeeves/JacStripsForYou
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 27.03.2013</td>
+<th>Status</th><td>ok on 04.04.2013</td>
 </tr>
 <tr>
 <th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"

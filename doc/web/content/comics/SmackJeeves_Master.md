@@ -1,0 +1,37 @@
+title: Dosage comic SmackJeeves/Master
+url: "/comics/SmackJeeves_Master.html"
+---
+Dosage comic SmackJeeves/Master
+-----------------------------------------
+
+<table class="comicinfo">
+<tr>
+<th>Description</th><td>Shimazu Sho, a Japanese medicine student currently living in London, has an interesting secret: he is the owner of a zoomorphic creature, a boy with dog like features called Kin. How could this happen? In a world where magic is not fantasy, anything is possible. Magic, wizards, sexy villains, handsome guardians and mysterious creatures abound as Sho and Kin step into the adventure of their lives. Follow the official manga website here: http://yokoshima.com.mx/manga</td>
+</tr>
+<tr>
+<th>Website</th><td><a href="http://master-larayokoshima.smackjeeves.com/comics/">http://master-larayokoshima.smackjeeves.com/comics/</a></td>
+</tr>
+<tr>
+<th>Genre</th><td>Other</td>
+</tr>
+<tr>
+<th>Language</th><td>English</td>
+</tr>
+<tr>
+<th>Adult content</th><td>yes</td>
+</tr>
+<tr>
+<th>Status</th><td>ok on 04.04.2013</td>
+</tr>
+<tr>
+<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
+ data-href="http://master-larayokoshima.smackjeeves.com/comics/"></div></td>
+</tr>
+</table>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
