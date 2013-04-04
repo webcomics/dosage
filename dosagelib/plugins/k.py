@@ -10,7 +10,10 @@ class KatzenfutterGeleespritzer(_BasicScraper):
     url = 'http://www.katzenfuttergeleespritzer.de/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'dont-drink-and-drive'
-    imageSearch = compile(tagre("img", "src", r'(http://www.katzenfuttergeleespritzer.de/wp-content/uploads/\d+/\d+/\d+-\d+-\d+[^"]+)'))
+    imageSearch = (
+        compile(tagre("img", "src", r'(http://www\.katzenfuttergeleespritzer\.de/wp-content/uploads/\d+/\d+/\d+-\d+-\d+[^"]+)')),
+        compile(tagre("img", "src", r'(http://www\.katzenfuttergeleespritzer\.de/wp-content/uploads/\d+/\d+/mmai_404[^"]+)')),
+    )
     prevSearch = compile(tagre("a", "href", r'(http://www.katzenfuttergeleespritzer.de/comic/[^"]+)', after="navi-prev"))
     help = 'Index format: stripname'
     lang = 'de'
