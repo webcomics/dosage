@@ -44,14 +44,6 @@ class SandraAndWooGerman(_BasicScraper):
     lang = 'de'
 
 
-class SarahZero(_BasicScraper):
-    url = 'http://www.sarahzero.com/'
-    stripUrl = url + 'sz_%s.html'
-    imageSearch = compile(tagre("img", "src", r'(z_(?:spreads|decoy)/sz_[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(sz_\d+\.html)') + tagre("img", "src", r'z_site/sz_05_nav\.gif'))
-    help = 'Index format: nnnn'
-
-
 class ScaryGoRound(_BasicScraper):
     url = 'http://www.scarygoround.com/'
     stripUrl = url + '?date=%s'
