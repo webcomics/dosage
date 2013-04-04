@@ -149,14 +149,14 @@ class ExploitationNow(_BasicScraper):
 class ExtraLife(_BasicScraper):
     url = 'http://www.myextralife.com/'
     stripUrl = url + 'comic/%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.myextralife\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)', after="prev"))
+    imageSearch = compile(tagre("img", "src", r'(http://www\.myextralife\.com/wp-content/uploads/[^"]+)', before="comic"))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)', before="prev_comic"))
     help = 'Index format: stripname'
 
 
 class EyeOfRamalach(_BasicScraper):
     url = 'http://theeye.katbox.net/'
     stripUrl = url + 'comic/%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://theeye\.katbox\.net/wp-content/uploads/[^"]+final[^"]+)'))
+    imageSearch = compile(tagre("img", "src", r'(http://theeye\.katbox\.net/wp-content/uploads/[^"]+)', after="data-webcomic-parent"))
     prevSearch = compile(tagre("a", "href", r'(http://theeye\.katbox\.net/comic/[^"]+)', after="previous"))
     help = 'Index format: stripname'
