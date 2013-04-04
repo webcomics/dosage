@@ -19,6 +19,7 @@ import re
 import glob
 import shutil
 import subprocess
+import warnings
 try:
     # py2exe monkey-patches the distutils.core.Distribution class
     # So we need to import it before importing the Distribution class
@@ -50,6 +51,8 @@ py2exe_options = dict(
     compressed=1,
     optimize=2,
 )
+
+warnings.filterwarnings("ignore", r"Unknown distribution option")
 
 def normpath (path):
     """Norm a path name to platform specific notation."""
