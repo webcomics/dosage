@@ -131,6 +131,7 @@ def getPageContent(url, session, max_content_bytes=MaxContentBytes):
         tries -= 1
     if not isValidPageContent(data):
         raise ValueError("Got invalid page content from %s: %r" % (url, data))
+    out.debug("Got page content %r" % data, level=3)
     # determine base URL
     baseUrl = None
     match = baseSearch.search(data)
@@ -265,13 +266,14 @@ def get_robotstxt_parser(url, session=None):
 
 def urlopen(url, session, referrer=None, max_content_bytes=None,
             timeout=ConnectionTimeoutSecs, raise_for_status=True,
-            stream=True):
+            stream=True, data=None):
     """Open an URL and return the response object."""
     out.debug('Open URL %s' % url)
     headers = {'User-Agent': UserAgent}
     if referrer:
         headers['Referer'] = referrer
     out.debug('Sending headers %s' % headers, level=3)
+    out.debug('Sending cookies %s' % session.cookies)
     kwargs = {
         "headers": headers,
         "timeout": timeout,
@@ -283,8 +285,15 @@ def urlopen(url, session, referrer=None, max_content_bytes=None,
         # requests << 1.0
         kwargs["prefetch"] = not stream
         kwargs["config"] = {"max_retries": MaxRetries}
+    if data:
+        kwargs['data'] = data
+        func = session.post
+        out.debug('Sending POST data %s' % data, level=3)
+    else:
+        func = session.get
     try:
-        req = session.get(url, **kwargs)
+        req = func(url, **kwargs)
+        out.debug('Response cookies: %s' % req.cookies)
         check_content_size(url, req.headers, max_content_bytes)
         if raise_for_status:
             req.raise_for_status()
