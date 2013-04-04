@@ -12,6 +12,7 @@ class LasLindas(_BasicScraper):
     url = 'http://laslindas.katbox.net/'
     stripUrl = url + 'comic/%s/'
     imageSearch = compile(tagre("img", "src", r'(http://laslindas\.katbox\.net/wp-content/uploads/[^"]+)', after="attachment-full"))
+    multipleImagesPerStrip = True
     prevSearch = compile(tagre("a", "href", r'(http://laslindas\.katbox\.net/comic/[^"]+)', after="previous"))
     help = 'Index format: stripname'
 
