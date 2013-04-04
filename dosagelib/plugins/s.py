@@ -230,7 +230,7 @@ class SnowFlame(_BasicScraper):
     url = 'http://www.snowflamecomic.com/'
     stripUrl = url + '?comic=snowflame-%s-%s'
     firstStripUrl = stripUrl % ('01', '01')
-    imageSearch = compile(tagre("img", "src", r'(http://www\.snowflamecomic\.com/wp-content/uploads/\d+/\d+/[^"]+)'))
+    imageSearch = compile(tagre("img", "src", r'(http://www\.snowflamecomic\.com/wp-content/uploads/\d+/\d+/[^"]+)', after="Snow[Ff]lame the fan made"))
     prevSearch = compile(tagre("span", "class", "mininav-prev") +
         tagre("a", "href", r'(http://www\.snowflamecomic\.com/\?comic=snowflame[^"]+)'))
     starter = bounceStarter(url,
