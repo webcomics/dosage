@@ -36,6 +36,7 @@ exclude_comics = [
     "Arveytoonz", # unsuitable navigation
     "AttackoftheRobofemoids", # unsuitable navigation
     "Bedlam", # unsuitable navigation
+    "BITCHSquad", # missing images
     "Bidoof", # unsuitable navigation
     "BlockTales", # unsuitable navigation
     "Bobcomix", # unsuitable navigation

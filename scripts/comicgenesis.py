@@ -285,6 +285,7 @@ exclude_comics = [
     "TheAvatar", # page does not follow standard layout
     "TheBessEffectGerman", # page moved
     "TheBestandtheBrightest", # page moved
+    "TheCrossoverlord", # missing images
     "TheDevilsPanties", # page moved
     "TheDoctorPepperShow", # page has 403 forbidden
     "TheGodsPack", # page has 403 forbidden

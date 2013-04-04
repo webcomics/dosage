@@ -19,8 +19,10 @@ json_file = __file__.replace(".py", ".json")
 # names of comics to exclude
 exclude_comics = [
     "ADifferentPerspective", # does not follow standard layout
+    "AFairlyTwistedRealitySuper", # does not follow standard layout
     "Ahoge", # does not follow standard layout
     "AngelJunkPileFelix", # images are 403 forbidden
+    "AreyougayJohnny", # does not follow standard layout
     "Authorbattlesthevideogame", # missing images
     "BambooArmonicKnightsGuild", # missing previous link
     "ClubLove", # does not follow standard layout
