@@ -9,6 +9,9 @@ Changes:
 Fixes:
 - install: Add install_requires to setup.py to fix pip install.
   Closes: GH bug #22
+- comics: Fixed Curvy, DasLebenIstKeinPonyhof, ExtraLife, EyeOfRamalach,
+  KatzenfutterGeleespritzer, Oglaf, Precocious, SnowFlame.
+- comics: Removed CaribbeanBlue, GreystoneInn, SarahZero.
 
 
 Dosage 1.15 (released 1.4.2013)
