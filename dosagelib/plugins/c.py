@@ -182,8 +182,18 @@ class Curvy(_BasicScraper):
     url = 'http://www.c.urvy.org/'
     stripUrl = url + '?date=%s'
     imageSearch = compile(tagre("img", "src", r'(/c/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/\?date=\d+)') + tagre("img", "src", "/nav/prev\.png"))
+    prevSearch = compile(tagre("a", "href", r'(/\?date=\d+)') +
+        tagre("img", "src", "/nav/prev\.png"))
     help = 'Index format: yyyymmdd'
+    starter = bounceStarter(url,
+        compile(tagre("a", "href", r'(/\?date=\d+)') +
+            tagre("img", "src", "/nav/next\.png")))
+
+    def shouldSkipUrl(self, url):
+        """Skip pages without images."""
+        return url in (
+            self.stripUrl % '20130402',
+        )
 
 
 class CatAndGirl(_BasicScraper):
