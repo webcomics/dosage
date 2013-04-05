@@ -54,10 +54,10 @@ class TestDosage (unittest.TestCase):
         self.assertRaises(OSError, run_with_options, ['Garfield'])
 
     def test_fetch_html(self):
-        run_with_options(["-n", "2", "-b", self.tmpdir, "-o", "html", "-o", "rss", "calvinandhobbes"])
+        run_with_options(["-n", "2", "-v", "-b", self.tmpdir, "-o", "html", "-o", "rss", "calvinandhobbes"])
 
     def test_fetch_rss(self):
         run_with_options(["--numstrips", "2", "--baseurl", "bla", "--basepath", self.tmpdir, "--output", "rss", "--output", "html", "--adult", "sexyloser"])
 
     def test_fetch_indexed(self):
-        run_with_options(["-n", "2", "-b", self.tmpdir, "calvinandhobbes:2012/02/02"])
+        run_with_options(["-n", "2", "-v", "-b", self.tmpdir, "calvinandhobbes:2012/02/02"])
