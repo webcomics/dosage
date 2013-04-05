@@ -160,7 +160,7 @@ class SinFest(_BasicScraper):
 class _SketcheSnatched(_BasicScraper):
     url = 'http://sketchesnatched.blogspot.com/'
     stripUrl = url + 'search?updated-max=%s%%2B01:00&max-results=1'
-    #firstStripUrl = stripUrl % '2012-12-23T18:15:00'
+    firstStripUrl = stripUrl % '2011-01-27T08:32:00'
     imageSearch = compile(tagre("meta", "content", r"(http://\d+\.bp\.blogspot\.com/[^']+)",
         after=r'image_url', quote="'"))
     prevSearch = compile(tagre("a", "href", r"(http://sketchesnatched\.blogspot\.[a-z]+/search[^']+)",
