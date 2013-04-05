@@ -285,12 +285,12 @@ def urlopen(url, session, referrer=None, max_content_bytes=None,
         # requests << 1.0
         kwargs["prefetch"] = not stream
         kwargs["config"] = {"max_retries": MaxRetries}
-    if data:
+    if data is None:
+        func = session.get
+    else:
         kwargs['data'] = data
         func = session.post
         out.debug('Sending POST data %s' % data, level=3)
-    else:
-        func = session.get
     try:
         req = func(url, **kwargs)
         out.debug('Response cookies: %s' % req.cookies)
