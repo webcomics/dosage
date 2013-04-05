@@ -13,9 +13,9 @@ class URLTest(TestCase):
     """
     def test_unescape(self):
         # Test HTML replacement.
-        self.assertEqual(unescape('foo&amp;bar'), 'foo&bar')
-        self.assertEqual(unescape('foo&#160;bar'), u'foo\xa0bar')
-        self.assertEqual(unescape('&quot;foo&quot;'), '"foo"')
+        self.assertEqual(unescape(u'foo&amp;bar'), u'foo&bar')
+        self.assertEqual(unescape(u'foo&#160;bar'), u'foo\xa0bar')
+        self.assertEqual(unescape(u'&quot;foo&quot;'), u'"foo"')
 
     def test_normalisation(self):
         # Test URL normalisation.

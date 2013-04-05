@@ -22,9 +22,9 @@ import re
 import traceback
 import time
 try:
-    from html.entities import name2codepoint
+    from HTMLParser import HTMLParser
 except ImportError:
-    from htmlentitydefs import name2codepoint
+    from html.parser import HTMLParser
 from .decorators import memoized
 from .output import out
 from .configuration import UserAgent, AppName, App, SupportUrl
@@ -180,28 +180,10 @@ def fetchUrl(url, data, baseUrl, urlSearch):
     return fetchUrls(url, data, baseUrl, urlSearch)[0]
 
 
+_htmlparser = HTMLParser()
 def unescape(text):
     """Replace HTML entities and character references."""
-    def _fixup(m):
-        """Replace HTML entities."""
-        text = m.group(0)
-        if text[:2] == "&#":
-            # character reference
-            try:
-                if text[:3] == "&#x":
-                    text = unichr(int(text[3:-1], 16))
-                else:
-                    text = unichr(int(text[2:-1]))
-            except ValueError:
-                pass
-        else:
-            # named entity
-            try:
-                text = unichr(name2codepoint[text[1:-1]])
-            except KeyError:
-                pass
-        return text
-    return re.sub(r"&#?\w+;", _fixup, text)
+    return _htmlparser.unescape(text)
 
 
 _nopathquote_chars = "-;/=,~*+()@!"
