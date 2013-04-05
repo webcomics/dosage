@@ -156,6 +156,19 @@ class SinFest(_BasicScraper):
     help = 'Index format: n (unpadded)'
 
 
+# XXX disallowed by robots.txt
+class _SketcheSnatched(_BasicScraper):
+    url = 'http://sketchesnatched.blogspot.com/'
+    stripUrl = url + 'search?updated-max=%s%%2B01:00&max-results=1'
+    #firstStripUrl = stripUrl % '2012-12-23T18:15:00'
+    imageSearch = compile(tagre("meta", "content", r"(http://\d+\.bp\.blogspot\.com/[^']+)",
+        after=r'image_url', quote="'"))
+    prevSearch = compile(tagre("a", "href", r"(http://sketchesnatched\.blogspot\.[a-z]+/search[^']+)",
+        before=r"blog-pager-older-link", quote="'"))
+    help = 'Index format: yyyy-mm-ddThh:mm:ss'
+    description = u"Artwork by Massimo Carnevale"
+
+
 class SkinDeep(_BasicScraper):
     url = 'http://www.skindeepcomic.com/'
     stripUrl = url + 'archive/%s/'
