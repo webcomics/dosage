@@ -157,7 +157,7 @@ class SinFest(_BasicScraper):
 
 
 # XXX disallowed by robots.txt
-class _SketcheSnatched(_BasicScraper):
+class _Sketchesnatched(_BasicScraper):
     url = 'http://sketchesnatched.blogspot.com/'
     stripUrl = url + 'search?updated-max=%s%%2B01:00&max-results=1'
     firstStripUrl = stripUrl % '2011-01-27T08:32:00'
