@@ -147,18 +147,18 @@ def getImageObject(url, referrer, session, max_content_bytes=MaxImageBytes):
     return urlopen(url, session, referrer=referrer, max_content_bytes=max_content_bytes)
 
 
-def makeList(item):
-    """If tiem is already a list or tuple, return it.
-    Else return a list with item as single element."""
+def makeSequence(item):
+    """If item is already a list or tuple, return it.
+    Else return a tuple with item as single element."""
     if isinstance(item, (list, tuple)):
         return item
-    return [item]
+    return (item,)
 
 
 def fetchUrls(url, data, baseUrl, urlSearch):
     """Search all entries for given URL pattern(s) in a HTML page."""
     searchUrls = []
-    searches = makeList(urlSearch)
+    searches = makeSequence(urlSearch)
     for search in searches:
         for match in search.finditer(data):
             searchUrl = match.group(1)
