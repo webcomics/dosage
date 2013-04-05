@@ -3,7 +3,7 @@
 import os
 import time
 try:
-    import urllib.parse.quote as url_quote
+    from urllib.parse import quote as url_quote
 except ImportError:
     from urllib import quote as url_quote
 import codecs
