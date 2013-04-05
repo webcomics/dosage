@@ -9,7 +9,7 @@
 # /___,' \___/|___/\__,_|\__, |\___|
 #                        |___/
 
-from __future__ import print_function
+from __future__ import division, print_function
 import sys
 import os
 import argparse
@@ -246,11 +246,11 @@ def doColumnList(scrapers):
     """Get list of scraper names with multiple names per line."""
     screenWidth = get_columns(sys.stdout)
     # limit name length so at least two columns are there
-    limit = (screenWidth / 2) - 8
+    limit = (screenWidth // 2) - 8
     names = [getScraperName(scraperobj, limit=limit) for scraperobj in scrapers]
     num = len(names)
     maxlen = max(len(name) for name in names)
-    namesPerLine = max(int(screenWidth / (maxlen + 1)), 1)
+    namesPerLine = max(screenWidth // (maxlen + 1), 1)
     while names:
         out.info(''.join(name.ljust(maxlen) for name in names[:namesPerLine]))
         del names[:namesPerLine]
