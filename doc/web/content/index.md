@@ -1,4 +1,4 @@
-title: Dosage by Bastian Kleineidam
+title: Dosage - a comic strip downloader and archiver
 description: a comic strip downloader and archiver
 ---
 Introduction
