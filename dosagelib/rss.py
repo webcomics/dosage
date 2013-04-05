@@ -50,7 +50,7 @@ class Feed(object):
 
     def write(self, path):
         """Write RSS content to file."""
-        with open(path, 'w') as f:
+        with open(path, 'wb') as f:
             f.write(self.getXML())
 
     def getXML(self):
