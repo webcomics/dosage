@@ -59,6 +59,17 @@ if hasattr(requests, 'adapters'):
     requests.adapters.DEFAULT_RETRIES = MaxRetries
 
 
+def unicode_safe(text, encoding=UrlEncoding, errors='ignore'):
+    """Decode text to Unicode if not already done."""
+    try:
+        text_type = unicode
+    except NameError:
+        text_type = str
+    if isinstance(text, text_type):
+        return text
+    return text.decode(encoding, errors)
+
+
 def tagre(tag, attribute, value, quote='"', before="", after=""):
     """Return a regular expression matching the given HTML tag, attribute
     and value. It matches the tag and attribute names case insensitive,
@@ -192,9 +203,7 @@ def normaliseURL(url):
     """Removes any leading empty segments to avoid breaking urllib2; also replaces
     HTML entities and character references.
     """
-    # XXX does not work for python3
-    if isinstance(url, unicode):
-        url = url.encode(UrlEncoding, 'ignore')
+    url = unicode_safe(url)
     # XXX: brutal hack
     url = unescape(url)
 
