@@ -251,7 +251,7 @@ def get_robotstxt_parser(url, session=None):
         elif req.status_code >= 400:
             rp.allow_all = True
         elif req.status_code == 200:
-            rp.parse(req.content.splitlines())
+            rp.parse(req.text.splitlines())
     return rp
 
 
