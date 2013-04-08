@@ -16,11 +16,10 @@ import argparse
 import pydoc
 from io import StringIO
 
-from dosagelib import events, scraper
+from dosagelib import events, scraper, configuration
 from dosagelib.output import out
 from dosagelib.util import internal_error, getDirname, strlimit, getLangName
 from dosagelib.ansicolor import get_columns
-from dosagelib.configuration import App, Freeware, Copyright, SupportUrl
 
 
 class ArgumentParser(argparse.ArgumentParser):
@@ -80,6 +79,7 @@ def setupOptions():
     parser.add_argument('-t', '--timestamps', action='store_true', help='print timestamps for all output at any info level')
     parser.add_argument('-o', '--output', action='append', dest='handler', choices=events.getHandlerNames(), help='sets output handlers for downloaded comics')
     parser.add_argument('--adult', action='store_true', help='confirms that you are old enough to view adult content')
+    # multimatch is only used for development, eg. testing if all comics of a scripted plugin are working
     parser.add_argument('--multimatch', action='store_true', help=argparse.SUPPRESS)
     parser.add_argument('comic', nargs='*', help='comic module name (including case insensitive substrings)')
     try:
@@ -90,12 +90,37 @@ def setupOptions():
     return parser
 
 
-def displayVersion():
+def displayVersion(verbose):
     """Display application name, version, copyright and license."""
-    print(App)
-    print(Copyright)
-    print(Freeware)
-    print("For support see", SupportUrl)
+    print(configuration.App)
+    print(configuration.Copyright)
+    print(configuration.Freeware)
+    print("For support see", configuration.SupportUrl)
+    if verbose:
+        # search for updates
+        from dosagelib.updater import check_update
+        result, value = check_update()
+        if result:
+            if value:
+                version, url = value
+                if url is None:
+                    # current version is newer than online version
+                    text = ('Detected local or development version %(currentversion)s. '
+                            'Available version of %(app)s is %(version)s.')
+                else:
+                    # display update link
+                    text = ('A new version %(version)s of %(app)s is '
+                            'available at %(url)s.')
+                attrs = dict(version=version, app=configuration.AppName,
+                             url=url, currentversion=configuration.Version)
+                print(text % attrs)
+        else:
+            if value is None:
+                value = 'invalid update file syntax'
+            text = ('An error occured while checking for an '
+                    'update of %(app)s: %(error)s.')
+            attrs = dict(error=value, app=configuration.AppName)
+            print(text % attrs)
     return 0
 
 
@@ -196,7 +221,7 @@ def run(options):
     """Execute comic commands."""
     setOutputInfo(options)
     if options.version:
-        return displayVersion()
+        return displayVersion(options.verbose)
     if options.list:
         return doList()
     if options.singlelist:

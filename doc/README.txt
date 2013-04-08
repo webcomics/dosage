@@ -79,7 +79,7 @@ or if you do not have root permissions:
 
 Dependencies
 -------------
-Python version 2.7 or higher, which can be downloaded
+Python version 2.7.x or Python 3.3 or higher. Both can be downloaded
 from http://www.python.org/
 
 Also the python-requests module is used, which can be downloaded

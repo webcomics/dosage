@@ -4,7 +4,7 @@ Release-Focus: Minor feature enhancements
 Hide: N
 Website-URL: http://wummel.github.com/dosage/
 Changelog-URL: https://github.com/wummel/dosage/blob/master/doc/changelog.txt
-Tar/GZ-URL: http://github.com/downloads/wummel/dosage/dosage-${version}.tar.gz
+Source-Package-URL: http://github.com/downloads/wummel/dosage/dosage-${version}.tar.gz
 GIT-Tree-URL: https://github.com/wummel/dosage.git
 Windows-installer-URL: http://github.com/downloads/wummel/dosage/dosage-${version}.exe
 
