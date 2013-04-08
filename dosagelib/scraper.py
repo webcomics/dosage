@@ -224,6 +224,10 @@ class _BasicScraper(object):
         """Get starter URL from where to scrape comic strips."""
         return self.starter()
 
+    def vote(self):
+        """Cast a public vote for this comic."""
+        pass # XXX
+
 
 def find_scraperclasses(comic, multiple_allowed=False):
     """Get a list comic scraper classes. Can return more than one entries if

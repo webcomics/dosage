@@ -75,6 +75,7 @@ def setupOptions():
     parser.add_argument('-l', '--list', action='store_true', help='list available comic modules')
     parser.add_argument('--singlelist', action='store_true', help='list available comic modules in a single list')
     parser.add_argument('--version', action='store_true', help='display the version number')
+    parser.add_argument('--vote', action='store_true', help='vote for the selected comics')
     parser.add_argument('-m', '--modulehelp', action='store_true', help='display help for comic modules')
     parser.add_argument('-t', '--timestamps', action='store_true', help='print timestamps for all output at any info level')
     parser.add_argument('-o', '--output', action='append', dest='handler', choices=events.getHandlerNames(), help='sets output handlers for downloaded comics')
@@ -174,13 +175,15 @@ def displayComicHelp(scraperobj):
 
 def getComics(options):
     """Retrieve comics."""
-    errors = 0
     if options.handler:
         for name in set(options.handler):
             events.addHandler(name, options.basepath, options.baseurl)
     events.getHandler().start()
+    errors = 0
     try:
         for scraperobj in getScrapers(options.comic, options.basepath, options.adult, options.multimatch):
+            if options.vote:
+                scraper.vote()
             errors += getStrips(scraperobj, options)
     except ValueError as msg:
         out.exception(msg)
