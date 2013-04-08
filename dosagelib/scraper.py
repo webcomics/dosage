@@ -3,8 +3,9 @@
 # Copyright (C) 2012-2013 Bastian Kleineidam
 import requests
 import time
-from . import loader
-from .util import fetchUrl, fetchUrls, getPageContent, makeSequence
+from . import loader, configuration
+from .util import (fetchUrl, fetchUrls, getPageContent, makeSequence,
+  get_system_uid, urlopen)
 from .comic import ComicStrip
 from .output import out
 from .events import getHandler
@@ -226,7 +227,13 @@ class _BasicScraper(object):
 
     def vote(self):
         """Cast a public vote for this comic."""
-        pass # XXX
+        url = configuration.VoteUrl
+        uid = get_system_uid()
+        data = {"comic": self.getName(), "uid": uid}
+        page = urlopen(url, self.session, data=data, stream=False)
+        answer = page.text
+        if "voted" not in answer:
+            raise ValueError("vote error %r" % answer)
 
 
 def find_scraperclasses(comic, multiple_allowed=False):

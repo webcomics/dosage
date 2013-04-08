@@ -21,6 +21,7 @@ import cgi
 import re
 import traceback
 import time
+import subprocess
 try:
     from HTMLParser import HTMLParser
 except ImportError:
@@ -59,6 +60,62 @@ if hasattr(requests, 'adapters'):
     requests.adapters.DEFAULT_RETRIES = MaxRetries
 
 
+def get_system_uid():
+    """Get a (probably) unique ID to identify a system.
+    Used to differentiate votes.
+    """
+    try:
+        if os.name == 'nt':
+            return get_nt_system_uid()
+        if sys.platform == 'darwin':
+            return get_osx_system_uid()
+    except Exception:
+        return get_mac_uid()
+    else:
+        return get_mac_uid()
+
+
+def get_nt_system_uid():
+    """Get the MachineGuid from
+    HKEY_LOCAL_MACHINE\Software\Microsoft\Cryptography\MachineGuid
+    """
+    try:
+        import _winreg as winreg
+    except ImportError:
+        import winreg
+    lm = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
+    try:
+        key = winreg.OpenKey(lm, r"Software\Microsoft\Cryptography")
+        try:
+            return winreg.QueryValueEx(key, "MachineGuid")[0]
+        finally:
+            key.Close()
+    finally:
+        lm.Close()
+
+
+def get_osx_system_uid():
+    """Get the OSX system ID.
+    $ system_profiler |grep "r (system)"
+    Serial Number (system): C24E1322XXXX
+    """
+    res = backtick(["system_profile"]).splitlines()
+    for line in res:
+        if "r (system)" in line:
+            return line.split(':', 1)[1].strip()
+    raise ValueError("Could not find system number in %r" % res)
+
+
+def get_mac_uid():
+    """Get the MAC address of the system."""
+    import uuid
+    return uuid.getnode()
+
+
+def backtick (cmd, encoding='utf-8'):
+    """Return decoded output from command."""
+    data = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
+    return data.decode(encoding)
 def unicode_safe(text, encoding=UrlEncoding, errors='ignore'):
     """Decode text to Unicode if not already done."""
     try:

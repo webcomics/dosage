@@ -4,7 +4,7 @@
 import re
 from unittest import TestCase
 
-from dosagelib.util import normaliseURL, unescape, tagre
+from dosagelib.util import normaliseURL, unescape, tagre, get_system_uid
 
 
 class URLTest(TestCase):
@@ -50,3 +50,12 @@ class RegexTest(TestCase):
             self.assertEqual(match.group(1), value)
         else:
             self.assertFalse(match, "%s should not match %s" % (matcher.pattern, text))
+
+
+class UidTest(TestCase):
+    """
+    Tests for unique system IDs.
+    """
+
+    def test_system_uid(self):
+        self.assertTrue(get_system_uid())
