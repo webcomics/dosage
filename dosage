@@ -204,11 +204,11 @@ def vote(scraperobj):
         out.debug('Vote answer %r' % answer)
         if answer == 'counted':
             url = configuration.Url + 'comics/%s.html' % name.replace('/', '_')
-            out.info('Vote submitted. Votes are updated daily at %s.' % url)
+            out.info('Vote submitted. Votes are updated regularly at %s.' % url)
         elif answer == 'no':
             out.info('Vote not submitted - your vote has already been submitted before.')
         elif answer == 'noname':
-            out.warn('The comic %s cannot be voted anymore.' % name)
+            out.warn('The comic %s cannot be voted.' % name)
         else:
             out.warn('Error submitting vote parameters: %r' % answer)
     except Exception as msg:
