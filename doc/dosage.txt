@@ -74,26 +74,31 @@ OPTIONS
               Increase the output level by one with each occurence.
 
        -V, --version
-              Display the version number.  module At least  one  valid
-              module must be specified. A list of valid modules can be
-              found by passing the -l option.  Multiple  module  argu‐
-              ments  can  be  specified  on  the command line.  Module
-              names are case insensitive,  and  it  is  sufficient  to
-              specify a unique substring of the module name.
+              Display the version number.
+
+       --vote Vote for the selected comics to  tell  others  that  you
+              like  them.   The  sum  of all votes for a comic will be
+              displayed  at  the  comic  index  pages  at  http://wum‐
+              mel.github.io/dosage/comic-index.html  module  At  least
+              one valid module must be specified. A list of valid mod‐
+              ules  can  be  found  by passing the -l option. Multiple
+              module arguments can be specified on the  command  line.
+              Module  names are case insensitive, and it is sufficient
+              to specify a unique substring of the module name.
 
 INDEX SYNTAX
-       Instead  of  starting  at the latest comic strip, an index lets
-       dosage start at a certain strip. The index can be specified  by
+       Instead of starting at the latest comic strip,  an  index  lets
+       dosage  start at a certain strip. The index can be specified by
        appending a colon : and the index name after the module. Multi‐
        ple comma-spearated indices can also be specified.
 
-       The index name itself usually is the part of  the  comic  strip
-       URL  that  identifiess  a  strip,  eg.  a number or a date. The
-       expected format  is  documented  when  using  the  --modulehelp
+       The  index  name  itself usually is the part of the comic strip
+       URL that identifiess a strip, eg.  a  number  or  a  date.  The
+       expected  format  is  documented  when  using  the --modulehelp
        option.
 
 SPECIAL SYNTAX
-       @      This  expands  to  mean all the comics currently in your
+       @      This expands to mean all the comics  currently  in  your
               Comics directory. All other specified comic module names
               will be ignored.
 
@@ -108,40 +113,40 @@ EXAMPLES
        Retrieve the current comic of Cyanide and Happiness:
               dosage cyanideandhappiness
 
-       Retrieve  the current strip of all comics in your Comics direc‐
+       Retrieve the current strip of all comics in your Comics  direc‐
        tory:
               dosage @
 
        Vote for the comics in your Comics directory:
               dosage --vote @
 
-       Retrieve the current strip of every comic that there is a  mod‐
+       Retrieve  the current strip of every comic that there is a mod‐
        ule for:
               dosage @@
 
        Retrieve the Penny Arcade strip for a given index:
               dosage pennyarcade:2004-07-22
 
-       Retrieve  Calvin  and  Hobbes  strips  from a given index going
+       Retrieve Calvin and Hobbes strips  from  a  given  index  going
        backwards to the beginning.
               dosage -a calvinandhobbes:2012/07/22
 
-       On Unix, xargs(1) can download several comic strips  in  paral‐
+       On  Unix,  xargs(1) can download several comic strips in paral‐
        lel, for example using up to 4 processes:
-              cd  Comics && find . -type d | xargs -n1 -P4 dosage -b .
+              cd Comics && find . -type d | xargs -n1 -P4 dosage -b  .
               -v
 
 ENVIRONMENT
        HTTP_PROXY
-              dosage will use the specified HTTP proxy when  download‐
+              dosage  will use the specified HTTP proxy when download‐
               ing URL contents.
 
 NOTES
        Should retrieval fail on any given strip dosage will attempt to
-       retry. However the retry information is only outputted  in  the
+       retry.  However  the retry information is only outputted in the
        second and successive output levels.
 
-       At  the time of writing, a complete Dosage collection weighs in
+       At the time of writing, a complete Dosage collection weighs  in
        at around 3.0GB.
 
 RETURN VALUE
@@ -156,11 +161,11 @@ RETURN VALUE
        Else the return value is zero.
 
 BUGS
-       Users can report or view bugs, patches or  feature  suggestions
+       Users  can  report or view bugs, patches or feature suggestions
        at https://github.com/wummel/dosage/issues
 
 AUTHORS
-       Jonathan  Jacobs,  Tristan  Seligmann, Bastian Kleineidam <bas‐
+       Jonathan Jacobs, Tristan Seligmann,  Bastian  Kleineidam  <bas‐
        tian.kleineidam@web.de>
 
 COPYRIGHT
