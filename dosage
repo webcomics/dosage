@@ -208,9 +208,9 @@ def vote(scraperobj):
         elif answer == 'no':
             out.info('Vote not submitted - your vote has already been submitted before.')
         elif answer == 'noname':
-            out.warning('The comic %s cannot be voted anymore.' % name)
+            out.warn('The comic %s cannot be voted anymore.' % name)
         else:
-            out.warning('Error submitting vote parameters: %r' % answer)
+            out.warn('Error submitting vote parameters: %r' % answer)
     except Exception as msg:
         out.exception(msg)
         errors += 1
