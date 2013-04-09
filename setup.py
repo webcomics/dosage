@@ -413,7 +413,7 @@ args = dict(
     maintainer = 'Bastian Kleineidam',
     maintainer_email = 'bastian.kleineidam@web.de',
     license = 'MIT',
-    url = 'http://wummel.github.com/dosage/',
+    url = 'http://wummel.github.io/dosage/',
     packages = (
         'dosagelib',
         'dosagelib.plugins',

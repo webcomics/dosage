@@ -2,7 +2,7 @@ Project: dosage
 Version: 1.15
 Release-Focus: Minor feature enhancements
 Hide: N
-Website-URL: http://wummel.github.com/dosage/
+Website-URL: http://wummel.github.io/dosage/
 Changelog-URL: https://github.com/wummel/dosage/blob/master/doc/changelog.txt
 Source-Package-URL: http://github.com/downloads/wummel/dosage/dosage-${version}.tar.gz
 GIT-Tree-URL: https://github.com/wummel/dosage.git
