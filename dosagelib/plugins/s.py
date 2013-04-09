@@ -87,6 +87,16 @@ class Schuelert(_BasicScraper):
     lang = 'de'
 
 
+class Science(_BasicScraper):
+    url = 'http://sci-ence.org/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % 'periodic-table-element-ass'
+    prevSearch = compile(tagre("a", "href", r'(http://sci-ence\.org/[^"]+/)', after="prev"))
+    imageSearch = compile(tagre("img", "src", r'(http://sci-ence\.org/comics/\d+-\d+-\d+[^"]+)'))
+    help = 'Index format: stripname'
+    description = u'A comic about science, technology, skepticism, geekery, video games, atheism, and more.'
+
+
 class SequentialArt(_BasicScraper):
     url = 'http://www.collectedcurios.com/sequentialart.php'
     stripUrl = url + '?s=%s'
