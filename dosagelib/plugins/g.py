@@ -84,6 +84,15 @@ class Goats(_BasicScraper):
     help = 'Index format: yymmdd'
 
 
+class GoblinsComic(_BasicScraper):
+    url = 'http://www.goblinscomic.com/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '06252005'
+    prevSearch = compile(tagre("a", "href", r'(http://www\.goblinscomic\.com/\d+/)', after="prev"))
+    imageSearch = compile(tagre("img", "src", r'(http://www\.goblinscomic\.com/comics/\d+\.[^"]+)'))
+    help = 'Index format: ddmmyyyy'
+
+
 class GoneWithTheBlastwave(_BasicScraper):
     url = 'http://www.blastwave-comic.com/index.php?p=comic&nro=1'
     starter = indirectStarter(url,

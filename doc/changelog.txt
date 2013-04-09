@@ -1,7 +1,7 @@
 Dosage 2.0 (released xx.xx.2013)
 
 Features:
-- comics: Added ExtraOrdinary, SnowFlakes,
+- comics: Added ExtraOrdinary, GoblinsComic, SnowFlakes,
   StuffNoOneToldMe and WebDesignerCOTW.
 - comics: Added the --vote option to vote for popular comics.
 
