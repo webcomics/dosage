@@ -24,6 +24,15 @@ class RealLife(_BasicScraper):
     help = 'Index format: yymmdd)'
 
 
+class RealmOfAtland(_BasicScraper):
+    url = 'http://www.realmofatland.com/'
+    stripUrl = url + '?p=%s'
+    firstStripUrl = stripUrl % '1'
+    prevSearch = compile(tagre("a", "href", r'(\?p=\d+)', after="cg_back"))
+    imageSearch = compile(tagre("img", "src", r'(images/strips/atland\d+.[^"]+)'))
+    help = 'Index format: nnn'
+
+
 class RedMeat(_BasicScraper):
     url = 'http://www.redmeat.com/redmeat/current/index.html'
     starter = bounceStarter(url, compile(r'<a href="(\.\./\d{4}-\d{2}-\d{2}/index\.html)">next</a>'))
