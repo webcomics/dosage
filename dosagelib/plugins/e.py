@@ -154,6 +154,15 @@ class ExtraLife(_BasicScraper):
     help = 'Index format: stripname'
 
 
+class ExtraOrdinary(_BasicScraper):
+    url = 'http://exocomics.com/'
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '01'
+    prevSearch = compile(tagre("a", "href", r'(http://www\.exocomics\.com/\d+)', before="prev"))
+    imageSearch = compile(tagre("img", "src", r'(http://www\.exocomics\.com/comics/comics/\d+\.[^"]+)'))
+    help = 'Index format: number'
+
+
 class EyeOfRamalach(_BasicScraper):
     url = 'http://theeye.katbox.net/'
     stripUrl = url + 'comic/%s/'
