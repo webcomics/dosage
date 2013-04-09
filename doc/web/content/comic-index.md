@@ -1,4 +1,4 @@
-title: Dosage comic list
+title: comic list
 description: a list of comic strips supported by Dosage
 type: comic
 ---

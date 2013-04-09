@@ -8,6 +8,9 @@ comics:	../../testresults.txt
 	rm -f content/comics/*.md
 	env PYTHONPATH=../.. ./mkcomics.py $< content
 
+votes:
+	env PYTHONPATH=../.. ./mkvotes.py
+
 media/favicon.ico:	../icon/favicon.ico
 	cp $< $@
 
@@ -25,4 +28,4 @@ upload:
 
 release: gen upload
 
-.PHONY: all comics gen serve upload release
+.PHONY: all comics gen serve upload release votes

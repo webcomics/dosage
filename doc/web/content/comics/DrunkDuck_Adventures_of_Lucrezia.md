@@ -1,4 +1,4 @@
-title: Dosage comic DrunkDuck/Adventures_of_Lucrezia
+title: DrunkDuck/Adventures_of_Lucrezia
 url: "/comics/DrunkDuck_Adventures_of_Lucrezia.html"
 ---
 Dosage comic DrunkDuck/Adventures_of_Lucrezia
@@ -21,17 +21,9 @@ Dosage comic DrunkDuck/Adventures_of_Lucrezia
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.04.2013</td>
+<th>Status</th><td>ok on 09.04.2013</td>
 </tr>
 <tr>
-<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
- data-href="http://www.drunkduck.com/Adventures_of_Lucrezia/"></div></td>
+<th>Votes</th><td>0</div></td>
 </tr>
 </table>
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>

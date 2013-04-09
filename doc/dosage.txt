@@ -112,6 +112,9 @@ EXAMPLES
        tory:
               dosage @
 
+       Vote for the comics in your Comics directory:
+              dosage --vote @
+
        Retrieve the current strip of every comic that there is a  mod‐
        ule for:
               dosage @@

@@ -1,4 +1,4 @@
-title: Dosage comic SmackJeeves/WhatAboutLove
+title: SmackJeeves/WhatAboutLove
 url: "/comics/SmackJeeves_WhatAboutLove.html"
 ---
 Dosage comic SmackJeeves/WhatAboutLove
@@ -21,17 +21,9 @@ Dosage comic SmackJeeves/WhatAboutLove
 <th>Adult content</th><td>yes</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.04.2013</td>
+<th>Status</th><td>ok on 09.04.2013</td>
 </tr>
 <tr>
-<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
- data-href="http://whataboutlove.smackjeeves.com/comics/"></div></td>
+<th>Votes</th><td>0</div></td>
 </tr>
 </table>
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>

@@ -1,4 +1,4 @@
-title: Dosage comic DrunkDuck/Livin_On_The_Edge
+title: DrunkDuck/Livin_On_The_Edge
 url: "/comics/DrunkDuck_Livin_On_The_Edge.html"
 ---
 Dosage comic DrunkDuck/Livin_On_The_Edge
@@ -21,17 +21,9 @@ Dosage comic DrunkDuck/Livin_On_The_Edge
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.04.2013</td>
+<th>Status</th><td>ok on 09.04.2013</td>
 </tr>
 <tr>
-<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
- data-href="http://www.drunkduck.com/Livin_On_The_Edge/"></div></td>
+<th>Votes</th><td>0</div></td>
 </tr>
 </table>
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>

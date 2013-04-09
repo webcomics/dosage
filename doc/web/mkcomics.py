@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: iso-8859-1 -*-
 # Copyright (C) 2012-2013 Bastian Kleineidam
 from __future__ import print_function
 import sys
@@ -6,6 +7,7 @@ import os
 import time
 import cgi
 import codecs
+import json
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dosagelib.scraper import get_scraperclasses
 from dosagelib.util import getLangName
@@ -28,14 +30,15 @@ $(document).ready(function() {
       { "sTitle": "Name" },
       { "sTitle": "Genre" },
       { "sTitle": "Language" },
-      { "sTitle": "Status" }
+      { "sTitle": "Status" },
+      { "sTitle": "Votes" }
     ]
   } );
 } );
 """
 
 comic_template = u"""\
-title: Dosage comic %(name)s
+title: %(name)s
 url: "%(pageurl)s"
 ---
 Dosage comic %(name)s
@@ -61,17 +64,9 @@ Dosage comic %(name)s
 <th>Status</th><td>%(status)s on %(date)s</td>
 </tr>
 <tr>
-<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
- data-href="%(url)s"></div></td>
+<th>Votes</th><td>%(vote)s</div></td>
 </tr>
 </table>
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>
 """
 
 
@@ -137,7 +132,7 @@ def get_testentry(line):
     name = scraper.getName()
     if len(name) > 40:
         name = name[:37] + u"..."
-    genres = u",".join(scraper.genres)
+    genres = u",".join(sorted(scraper.genres))
     if isinstance(scraper.description, unicode):
         desc = scraper.description
     else:
@@ -151,6 +146,7 @@ def get_testentry(line):
         "language": getLangName(scraper.lang),
         "error": None,
         "adult": scraper.adult,
+        "vote": get_vote(name),
     }
     return key, entry
 
@@ -158,6 +154,17 @@ def get_testentry(line):
 def update_testentry(key, entry, testinfo):
     """Update one entry with testinfo information."""
     testinfo[key] = entry
+
+
+_votes = None
+def get_vote(name):
+    global _votes
+    if _votes is None:
+        fname = os.path.join('data', 'votes.json')
+        with open(fname, 'rb') as f:
+            _votes = json.load(f)
+    key = name.replace('/', '_')
+    return _votes.get(key, 0)
 
 
 def get_comicdata(testinfo):
@@ -172,8 +179,9 @@ def get_comicdata(testinfo):
             "name": quote(entry["name"]),
             "language": quote(entry["language"]),
             "genre": quote(entry["genre"]),
+            "vote": entry["vote"],
         }
-        row = u'["<a href=\\"%(url)s\\">%(name)s</a>", "%(genre)s", "%(language)s", "%(status)s"]' % args
+        row = u'["<a href=\\"%(url)s\\">%(name)s</a>", "%(genre)s", "%(language)s", "%(status)s", "%(vote)d"]' % args
         rows.append(row)
     return u",\n".join(rows)
 
@@ -205,6 +213,7 @@ def write_html_comic(key, entry, outputdir, date):
         "description": quote(entry["description"]),
         "status": quote(entry["status"]),
         "date": quote(date),
+        "vote": entry["vote"],
     }
     fname = os.path.join(outputdir, key+".md")
     with codecs.open(fname, 'w', 'utf-8') as fp:

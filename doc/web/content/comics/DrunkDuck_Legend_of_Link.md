@@ -1,4 +1,4 @@
-title: Dosage comic DrunkDuck/Legend_of_Link
+title: DrunkDuck/Legend_of_Link
 url: "/comics/DrunkDuck_Legend_of_Link.html"
 ---
 Dosage comic DrunkDuck/Legend_of_Link
@@ -21,17 +21,9 @@ Dosage comic DrunkDuck/Legend_of_Link
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.04.2013</td>
+<th>Status</th><td>ok on 09.04.2013</td>
 </tr>
 <tr>
-<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
- data-href="http://www.drunkduck.com/Legend_of_Link/"></div></td>
+<th>Votes</th><td>0</div></td>
 </tr>
 </table>
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>

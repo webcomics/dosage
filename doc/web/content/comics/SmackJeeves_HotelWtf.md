@@ -1,4 +1,4 @@
-title: Dosage comic SmackJeeves/HotelWtf
+title: SmackJeeves/HotelWtf
 url: "/comics/SmackJeeves_HotelWtf.html"
 ---
 Dosage comic SmackJeeves/HotelWtf
@@ -21,17 +21,9 @@ Dosage comic SmackJeeves/HotelWtf
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.04.2013</td>
+<th>Status</th><td>ok on 09.04.2013</td>
 </tr>
 <tr>
-<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
- data-href="http://crazyhotel.smackjeeves.com/comics/"></div></td>
+<th>Votes</th><td>0</div></td>
 </tr>
 </table>
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>

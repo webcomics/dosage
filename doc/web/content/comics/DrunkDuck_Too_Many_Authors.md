@@ -1,4 +1,4 @@
-title: Dosage comic DrunkDuck/Too_Many_Authors
+title: DrunkDuck/Too_Many_Authors
 url: "/comics/DrunkDuck_Too_Many_Authors.html"
 ---
 Dosage comic DrunkDuck/Too_Many_Authors
@@ -21,17 +21,9 @@ Dosage comic DrunkDuck/Too_Many_Authors
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.04.2013</td>
+<th>Status</th><td>ok on 09.04.2013</td>
 </tr>
 <tr>
-<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
- data-href="http://www.drunkduck.com/Too_Many_Authors/"></div></td>
+<th>Votes</th><td>0</div></td>
 </tr>
 </table>
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>

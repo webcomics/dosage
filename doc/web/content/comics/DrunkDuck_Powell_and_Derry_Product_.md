@@ -1,4 +1,4 @@
-title: Dosage comic DrunkDuck/Powell_and_Derry_Product_
+title: DrunkDuck/Powell_and_Derry_Product_
 url: "/comics/DrunkDuck_Powell_and_Derry_Product_.html"
 ---
 Dosage comic DrunkDuck/Powell_and_Derry_Product_
@@ -21,17 +21,9 @@ Dosage comic DrunkDuck/Powell_and_Derry_Product_
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.04.2013</td>
+<th>Status</th><td>ok on 09.04.2013</td>
 </tr>
 <tr>
-<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
- data-href="http://www.drunkduck.com/Powell_and_Derry_Product_/"></div></td>
+<th>Votes</th><td>0</div></td>
 </tr>
 </table>
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>

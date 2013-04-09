@@ -1,4 +1,4 @@
-title: Dosage comic DrunkDuck/RIDDICK_Q_LOSS_TALES
+title: DrunkDuck/RIDDICK_Q_LOSS_TALES
 url: "/comics/DrunkDuck_RIDDICK_Q_LOSS_TALES.html"
 ---
 Dosage comic DrunkDuck/RIDDICK_Q_LOSS_TALES
@@ -21,17 +21,9 @@ Dosage comic DrunkDuck/RIDDICK_Q_LOSS_TALES
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.04.2013</td>
+<th>Status</th><td>ok on 09.04.2013</td>
 </tr>
 <tr>
-<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
- data-href="http://www.drunkduck.com/RIDDICK_Q_LOSS_TALES/"></div></td>
+<th>Votes</th><td>0</div></td>
 </tr>
 </table>
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>

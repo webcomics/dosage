@@ -1,4 +1,4 @@
-title: Dosage comic GoComics/LifeafterDeath
+title: GoComics/LifeafterDeath
 url: "/comics/GoComics_LifeafterDeath.html"
 ---
 Dosage comic GoComics/LifeafterDeath
@@ -21,17 +21,9 @@ Dosage comic GoComics/LifeafterDeath
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.04.2013</td>
+<th>Status</th><td>ok on 09.04.2013</td>
 </tr>
 <tr>
-<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
- data-href="http://www.gocomics.com/life-after-death"></div></td>
+<th>Votes</th><td>0</div></td>
 </tr>
 </table>
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>

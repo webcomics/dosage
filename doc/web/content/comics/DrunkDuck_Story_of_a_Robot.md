@@ -1,4 +1,4 @@
-title: Dosage comic DrunkDuck/Story_of_a_Robot
+title: DrunkDuck/Story_of_a_Robot
 url: "/comics/DrunkDuck_Story_of_a_Robot.html"
 ---
 Dosage comic DrunkDuck/Story_of_a_Robot
@@ -21,17 +21,9 @@ Dosage comic DrunkDuck/Story_of_a_Robot
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.04.2013</td>
+<th>Status</th><td>ok on 09.04.2013</td>
 </tr>
 <tr>
-<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
- data-href="http://www.drunkduck.com/Story_of_a_Robot/"></div></td>
+<th>Votes</th><td>0</div></td>
 </tr>
 </table>
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>

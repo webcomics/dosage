@@ -1,4 +1,4 @@
-title: Dosage comic DrunkDuck/Miss_Grey
+title: DrunkDuck/Miss_Grey
 url: "/comics/DrunkDuck_Miss_Grey.html"
 ---
 Dosage comic DrunkDuck/Miss_Grey
@@ -21,17 +21,9 @@ Dosage comic DrunkDuck/Miss_Grey
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.04.2013</td>
+<th>Status</th><td>ok on 09.04.2013</td>
 </tr>
 <tr>
-<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
- data-href="http://www.drunkduck.com/Miss_Grey/"></div></td>
+<th>Votes</th><td>0</div></td>
 </tr>
 </table>
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>

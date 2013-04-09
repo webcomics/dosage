@@ -1,4 +1,4 @@
-title: Dosage comic DrunkDuck/Bitter_Sweet_Melancholy
+title: DrunkDuck/Bitter_Sweet_Melancholy
 url: "/comics/DrunkDuck_Bitter_Sweet_Melancholy.html"
 ---
 Dosage comic DrunkDuck/Bitter_Sweet_Melancholy
@@ -21,17 +21,9 @@ Dosage comic DrunkDuck/Bitter_Sweet_Melancholy
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.04.2013</td>
+<th>Status</th><td>ok on 09.04.2013</td>
 </tr>
 <tr>
-<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
- data-href="http://www.drunkduck.com/Bitter_Sweet_Melancholy/"></div></td>
+<th>Votes</th><td>0</div></td>
 </tr>
 </table>
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>

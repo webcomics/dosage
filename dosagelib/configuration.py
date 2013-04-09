@@ -24,4 +24,4 @@ Freeware = AppName+u""" comes with ABSOLUTELY NO WARRANTY!
 This is free software, and you are welcome to redistribute it
 under certain conditions. Look at the file `COPYING' within this
 distribution."""
-VoteUrl = "XXX"
+VoteUrl = "http://gaecounter.appspot.com/"

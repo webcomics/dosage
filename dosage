@@ -183,13 +183,39 @@ def getComics(options):
     try:
         for scraperobj in getScrapers(options.comic, options.basepath, options.adult, options.multimatch):
             if options.vote:
-                scraper.vote()
-            errors += getStrips(scraperobj, options)
+                errors += vote(scraperobj)
+            else:
+                errors += getStrips(scraperobj, options)
     except ValueError as msg:
         out.exception(msg)
         errors += 1
     finally:
         events.getHandler().end()
+    return errors
+
+
+def vote(scraperobj):
+    """Vote for given comic scraper."""
+    errors = 0
+    name = scraperobj.getName()
+    out.context = name
+    try:
+        answer = scraperobj.vote()
+        out.debug('Vote answer %r' % answer)
+        if answer == 'counted':
+            url = configuration.Url + 'comics/%s.html' % name.replace('/', '_')
+            out.info('Vote submitted. Votes are updated daily at %s.' % url)
+        elif answer == 'no':
+            out.info('Vote not submitted - your vote has already been submitted before.')
+        elif answer == 'noname':
+            out.warning('The comic %s cannot be voted anymore.' % name)
+        else:
+            out.warning('Error submitting vote parameters: %r' % answer)
+    except Exception as msg:
+        out.exception(msg)
+        errors += 1
+    finally:
+        out.context = ''
     return errors
 
 
@@ -203,8 +229,8 @@ def getStrips(scraperobj, options):
     else:
         # get current strip
         numstrips = 1
+    out.context = scraperobj.getName()
     try:
-        out.context = scraperobj.getName()
         for strip in scraperobj.getStrips(numstrips):
             _errors, skipped = saveComicStrip(strip, options.basepath)
             errors += _errors

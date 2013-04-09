@@ -1,4 +1,4 @@
-title: Dosage comic DrunkDuck/A_Step_Out_of_Phase
+title: DrunkDuck/A_Step_Out_of_Phase
 url: "/comics/DrunkDuck_A_Step_Out_of_Phase.html"
 ---
 Dosage comic DrunkDuck/A_Step_Out_of_Phase
@@ -21,17 +21,9 @@ Dosage comic DrunkDuck/A_Step_Out_of_Phase
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.04.2013</td>
+<th>Status</th><td>ok on 09.04.2013</td>
 </tr>
 <tr>
-<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
- data-href="http://www.drunkduck.com/A_Step_Out_of_Phase/"></div></td>
+<th>Votes</th><td>0</div></td>
 </tr>
 </table>
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>

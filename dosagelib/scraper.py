@@ -225,15 +225,14 @@ class _BasicScraper(object):
         """Get starter URL from where to scrape comic strips."""
         return self.starter()
 
-    def vote(self):
+    @classmethod
+    def vote(cls):
         """Cast a public vote for this comic."""
-        url = configuration.VoteUrl
+        url = configuration.VoteUrl + 'count/'
         uid = get_system_uid()
-        data = {"comic": self.getName(), "uid": uid}
-        page = urlopen(url, self.session, data=data, stream=False)
-        answer = page.text
-        if "voted" not in answer:
-            raise ValueError("vote error %r" % answer)
+        data = {"name": cls.getName().replace('/', '_'), "uid": uid}
+        page = urlopen(url, cls.session, data=data, stream=False)
+        return page.text
 
 
 def find_scraperclasses(comic, multiple_allowed=False):

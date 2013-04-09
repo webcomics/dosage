@@ -1,4 +1,4 @@
-title: Dosage comic DrunkDuck/Nectar_of_the_Gods
+title: DrunkDuck/Nectar_of_the_Gods
 url: "/comics/DrunkDuck_Nectar_of_the_Gods.html"
 ---
 Dosage comic DrunkDuck/Nectar_of_the_Gods
@@ -21,17 +21,9 @@ Dosage comic DrunkDuck/Nectar_of_the_Gods
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.04.2013</td>
+<th>Status</th><td>ok on 09.04.2013</td>
 </tr>
 <tr>
-<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
- data-href="http://www.drunkduck.com/Nectar_of_the_Gods/"></div></td>
+<th>Votes</th><td>0</div></td>
 </tr>
 </table>
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>

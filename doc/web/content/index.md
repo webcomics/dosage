@@ -1,4 +1,4 @@
-title: Dosage - a comic strip downloader and archiver
+title: a comic strip downloader and archiver
 description: a comic strip downloader and archiver
 ---
 Introduction
@@ -37,7 +37,7 @@ which confirms that you are old enough to view them.</p>
 
 Usage
 ------
-List available comics (ca. 3000 at the moment):
+List [available comics](comics-index.html) (ca. 3000 at the moment):
 
 ```bash
 $ dosage --list
@@ -55,6 +55,13 @@ strip of all of them:
 
 ```bash
 $ dosage @
+```
+
+To help others find good [comics](comics-index.html), you can vote for your
+favourite ones:
+
+```bash
+$ dosage --vote @
 ```
 
 For advanced options and features execute `dosage --help` or look at the
@@ -89,7 +96,7 @@ python setup.py install --home=$HOME
 Another option is to use pip:
 
 ```shell
-pip install requests dosage
+pip install dosage
 ```
 
 
@@ -100,10 +107,10 @@ do most of the grunt work.
 
 For each webcomic Dosage has a plugin module, found in the
 `dosagelib/plugins` subdirectory. Each module is a subclass of
-the `_BasicComic` class and specifies where to download its comic images.
+the `_BasicScraper` class and specifies where to download its comic images.
 Some comic syndicates (ucomics for example) have a standard layout for all
 comics. For such cases there are general base classes derived from
-`_BasicComic` which help define the plugins for all comics of this syndicate.
+`_BasicScraper` which help define the plugins for all comics of this syndicate.
 
 Extending Dosage
 -----------------
@@ -120,3 +127,12 @@ Dosage currently supports a large number of comics and that number
 grows on a regular basis. If you feel that there are comics that
 Dosage does not currently support but should support, please
 feel free to request them.
+
+Test suite status
+------------------
+Dosage has extensive unit tests to ensure the code quality.
+[Travis CI](https://travis-ci.org/) is used for continuous build
+and test integration.
+
+[![Build Status](https://travis-ci.org/wummel/dosage.png)](https://travis-ci.org/wummel/dosage)
+

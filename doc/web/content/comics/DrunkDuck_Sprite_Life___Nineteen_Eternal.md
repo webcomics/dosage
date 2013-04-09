@@ -1,4 +1,4 @@
-title: Dosage comic DrunkDuck/Sprite_Life___Nineteen_Eternal
+title: DrunkDuck/Sprite_Life___Nineteen_Eternal
 url: "/comics/DrunkDuck_Sprite_Life___Nineteen_Eternal.html"
 ---
 Dosage comic DrunkDuck/Sprite_Life___Nineteen_Eternal
@@ -21,17 +21,9 @@ Dosage comic DrunkDuck/Sprite_Life___Nineteen_Eternal
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.04.2013</td>
+<th>Status</th><td>ok on 09.04.2013</td>
 </tr>
 <tr>
-<th>Rating</th><td><div class="g-plusone" data-size="standard" data-annotation="bubble"
- data-href="http://www.drunkduck.com/Sprite_Life___Nineteen_Eternal/"></div></td>
+<th>Votes</th><td>0</div></td>
 </tr>
 </table>
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>

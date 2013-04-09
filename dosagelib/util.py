@@ -97,7 +97,7 @@ def get_nt_system_uid():
 def get_osx_system_uid():
     """Get the OSX system ID.
     $ system_profiler |grep "r (system)"
-    Serial Number (system): C24E1322XXXX
+    Serial Number (system): C24E1322XYZ
     """
     res = backtick(["system_profile"]).splitlines()
     for line in res:
@@ -109,7 +109,7 @@ def get_osx_system_uid():
 def get_mac_uid():
     """Get the MAC address of the system."""
     import uuid
-    return uuid.getnode()
+    return "%d" % uuid.getnode()
 
 
 def backtick (cmd, encoding='utf-8'):
