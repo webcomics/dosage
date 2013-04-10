@@ -2,7 +2,7 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2013 Bastian Kleineidam
 
-from re import compile, IGNORECASE
+from re import compile, escape, IGNORECASE
 
 from ..helpers import indirectStarter
 from ..scraper import _BasicScraper
@@ -76,9 +76,10 @@ class ElGoonishShiveNP(_BasicScraper):
 
 class Ellerbisms(_BasicScraper):
     url = 'http://www.ellerbisms.com/'
+    rurl = escape(url)
     stripUrl = url + '?p=%s'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.ellerbisms\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.ellerbisms\.com/[^"]+)', after="prev"))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
     help = 'Index format: nnn'
 
 
@@ -132,17 +133,19 @@ class EvilInc(_BasicScraper):
 
 class Exiern(_BasicScraper):
     url = 'http://www.exiern.com/'
+    rurl = escape(url)
     stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.exiern\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.exiern\.com/[^"]+)', after="prev"))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
 class ExploitationNow(_BasicScraper):
     url = 'http://www.exploitationnow.com/'
+    rurl = escape(url)
     stripUrl = url + '%s'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.exploitationnow\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.exploitationnow\.com/[^"]+)', after="navi-prev"))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="navi-prev"))
     help = 'Index format: yyyy-mm-dd/num'
 
 
@@ -156,16 +159,18 @@ class ExtraLife(_BasicScraper):
 
 class ExtraOrdinary(_BasicScraper):
     url = 'http://exocomics.com/'
+    rurl = escape(url)
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '01'
-    prevSearch = compile(tagre("a", "href", r'(http://www\.exocomics\.com/\d+)', before="prev"))
-    imageSearch = compile(tagre("img", "src", r'(http://www\.exocomics\.com/comics/comics/\d+\.[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(%s\d+)' % rurl, before="prev"))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/comics/\d+\.[^"]+)' % rurl))
     help = 'Index format: number'
 
 
 class EyeOfRamalach(_BasicScraper):
     url = 'http://theeye.katbox.net/'
+    rurl = escape(url)
     stripUrl = url + 'comic/%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://theeye\.katbox\.net/wp-content/uploads/[^"]+)', after="data-webcomic-parent"))
-    prevSearch = compile(tagre("a", "href", r'(http://theeye\.katbox\.net/comic/[^"]+)', after="previous"))
+    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/[^"]+)' % rurl, after="data-webcomic-parent"))
+    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl, after="previous"))
     help = 'Index format: stripname'

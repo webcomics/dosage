@@ -1,6 +1,6 @@
 # Copyright (C) 2012-2013 Bastian Kleineidam
 
-from re import compile
+from re import compile, escape
 from ..scraper import _BasicScraper
 from ..util import tagre, getPageContent, fetchUrls
 from ..helpers import bounceStarter
@@ -29,13 +29,14 @@ class HagarTheHorrible(_BasicScraper):
 
 class HarkAVagrant(_BasicScraper):
     url = 'http://www.harkavagrant.com/'
+    rurl = escape(url)
     starter = bounceStarter(url,
-        compile(tagre("a", "href", r'(http://www\.harkavagrant\.com/index\.php\?id=\d+)') +
+        compile(tagre("a", "href", r'(%sindex\.php\?id=\d+)' % rurl) +
         tagre("img", "src", "buttonnext.png")))
     stripUrl = url + 'index.php?id=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(http://www.harkavagrant.com/[^"]+)', after='BORDER'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.harkavagrant\.com/index\.php\?id=\d+)') +
+    imageSearch = compile(tagre("img", "src", r'(%s[^"]+)' % rurl, after='BORDER'))
+    prevSearch = compile(tagre("a", "href", r'(%sindex\.php\?id=\d+)' % rurl) +
         tagre("img", "src", "buttonprevious.png"))
     help = 'Index format: number'
 
@@ -48,18 +49,20 @@ class HarkAVagrant(_BasicScraper):
 
 class HijinksEnsue(_BasicScraper):
     url = 'http://hijinksensue.com/'
+    rurl = escape(url)
     stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://hijinksensue\.com/comics/\d+-\d+-\d+[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://hijinksensue\.com/\d+/\d+/\d+/[^"]+)', after="navi-prev"))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl, after="navi-prev"))
     help = 'Index format: yyyy/mm/dd/name'
 
 
 class Hipsters(_BasicScraper):
     url = 'http://www.hipsters-comic.com/'
+    rurl = escape(url)
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2010/08/hip01'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.hipsters-comic\.com/comics/\d+-\d+-\d+[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.hipsters-comic\.com/\d+/\d+/[^"]+)', after="prev"))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/dd/stripname'
 
 

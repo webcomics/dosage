@@ -2,7 +2,7 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2013 Bastian Kleineidam
 
-from re import compile
+from re import compile, escape
 from ..scraper import _BasicScraper
 from ..util import tagre
 from ..helpers import bounceStarter
@@ -10,9 +10,10 @@ from ..helpers import bounceStarter
 
 class ZapComic(_BasicScraper):
     url = 'http://www.zapcomic.com/'
+    rurl = escape(url)
     stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.zapcomic\.com\?comic_object=\d+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.zapcomic\.com/[^"]+)', after="previous-comic-link"))
+    imageSearch = compile(tagre("img", "src", r'(%s\?comic_object=\d+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="previous-comic-link"))
     help = 'Index format: yyyy/mm/nnn-stripname'
 
 
@@ -41,9 +42,10 @@ class ZebraGirl(_BasicScraper):
 
 class ZenPencils(_BasicScraper):
     url = 'http://zenpencils.com/'
+    rurl = escape(url)
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '1-ralph-waldo-emerson-make-them-cry'
-    prevSearch = compile(tagre("a", "href", r'(http://zenpencils\.com/comic/[^"]+/)', after="navi-prev"))
+    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+/)' % rurl, after="navi-prev"))
     imageSearch = compile(tagre("img", "src", r'(http://maxcdn\.zenpencils\.com/comics/\d+-\d+-\d+[^"]+)'))
     help = 'Index format: num-stripname'
     description = u'Inspirational quotes from famous people adapted into cartoons.'
@@ -59,13 +61,14 @@ class ZombieHunters(_BasicScraper):
 
 class Zwarwald(_BasicScraper):
     url = "http://www.zwarwald.de/"
+    rurl = escape(url)
     stripUrl = url + 'index.php/page/%s/'
     # anything before page 495 seems to be flash
     firstStripUrl = stripUrl % '495'
     lang = 'de'
     imageSearch = compile(tagre("img", "src", r'(http://(?:www\.zwarwald\.de|wp1163540.wp190.webpack.hosteurope.de/wordpress)/images/\d+/\d+/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.zwarwald\.de/index\.php/page/\d+/)') +
-        tagre("img", "src", r'http://zwarwald\.de/images/prev\.jpg', quote="'"))
+    prevSearch = compile(tagre("a", "href", r'(%sindex\.php/page/\d+/)' % rurl) +
+        tagre("img", "src", r'%simages/prev\.jpg' % rurl, quote="'"))
     help = 'Index format: number'
     waitSeconds = 1
 

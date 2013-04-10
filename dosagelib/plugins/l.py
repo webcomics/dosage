@@ -2,7 +2,7 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2013 Bastian Kleineidam
 
-from re import compile
+from re import compile, escape
 from ..scraper import _BasicScraper
 from ..helpers import indirectStarter
 from ..util import tagre
@@ -10,27 +10,30 @@ from ..util import tagre
 
 class LasLindas(_BasicScraper):
     url = 'http://laslindas.katbox.net/'
+    rurl = escape(url)
     stripUrl = url + 'comic/%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://laslindas\.katbox\.net/wp-content/uploads/[^"]+)', after="attachment-full"))
+    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/[^"]+)' % rurl, after="attachment-full"))
     multipleImagesPerStrip = True
-    prevSearch = compile(tagre("a", "href", r'(http://laslindas\.katbox\.net/comic/[^"]+)', after="previous"))
+    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl, after="previous"))
     help = 'Index format: stripname'
 
 
 class LeastICouldDo(_BasicScraper):
     url = 'http://www.leasticoulddo.com/'
+    rurl = escape(url)
     stripUrl = url + 'comic/%s'
     imageSearch = compile(tagre("img", "src", r'(http://cdn\.leasticoulddo\.com/wp-content/uploads/\d+/\d+/\d{8}\.\w{1,4})'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.leasticoulddo\.com/comic/\d+/)', after="Previous"))
+    prevSearch = compile(tagre("a", "href", r'(%scomic/\d+/)' % rurl, after="Previous"))
     starter = indirectStarter(url,
-      compile(tagre("a", "href", r'(http://www\.leasticoulddo\.com/comic/\d+/)', after="feature-comic")))
+      compile(tagre("a", "href", r'(%scomic/\d+/)' % rurl, after="feature-comic")))
     help = 'Index format: yyyymmdd'
 
 
 class Lint(_BasicScraper):
     url = 'http://www.purnicellin.com/lint/'
+    rurl = escape(url)
     stripUrl = url + '%s'
-    imageSearch = compile(r'<img src="(http://www.purnicellin.com/lint/comics/.+?)"')
+    imageSearch = compile(r'<img src="(%scomics/.+?)"' % rurl)
     prevSearch = compile(r'\| <a href="([^"]+)" rel="prev">')
     help = 'Index format: yyyy/mm/dd/num-name'
 
@@ -45,18 +48,20 @@ class LittleGamers(_BasicScraper):
 
 class LoadingArtist(_BasicScraper):
     url = 'http://www.loadingartist.com/'
+    rurl = escape(url)
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2011/01/04/born'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.loadingartist\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.loadingartist\.com/\d+/\d+/\d+/[^"]+/)', after="prev"))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+/)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
 class LookingForGroup(_BasicScraper):
     url = 'http://www.lfgcomic.com/'
+    rurl = escape(url)
     stripUrl = url + 'page/%s/'
     imageSearch = compile(tagre("img", "src", r'(http://cdn\.lfgcomic\.com/wp-content/uploads/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.lfgcomic\.com/page/\d+/)', after="navtop-prev"))
-    starter = indirectStarter(url, compile(tagre("a", "href", r'(http://www\.lfgcomic\.com/page/\d+/)', after="feature-previous")))
+    prevSearch = compile(tagre("a", "href", r'(%spage/\d+/)' % rurl, after="navtop-prev"))
+    starter = indirectStarter(url, compile(tagre("a", "href", r'(%spage/\d+/)' % rurl, after="feature-previous")))
     nameSearch = compile(r'/page/(\d+)/')
     help = 'Index format: nnn'

@@ -2,25 +2,27 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2013 Bastian Kleineidam
 
-from re import compile
+from re import compile, escape
 from ..scraper import _BasicScraper
 from ..util import tagre
 
 
 class IAmArg(_BasicScraper):
     url = 'http://iamarg.com/'
+    rurl = escape(url)
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2011/05/08/05082011'
-    imageSearch = compile(tagre("img", "src", r'(http://iamarg\.com/comics/\d+-\d+-\d+[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://iamarg\.com/\d+/\d+/\d+/[^"]+)', after="prev"))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
 class IanJay(_BasicScraper):
     url = 'http://ianjay.net/'
+    rurl = escape(url)
     stripUrl = url + '?p=%s'
-    imageSearch = compile(tagre("img", "src", r'(http://ianjay\.net/comics/\d+[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://ianjay\.net/\?p=\d+)', after="Previous"))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl, after="Previous"))
     help = 'Index foramt: nnn'
 
 

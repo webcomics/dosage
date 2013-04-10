@@ -2,16 +2,17 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2013 Bastian Kleineidam
 
-from re import compile
+from re import compile, escape
 from ..scraper import _BasicScraper
 from ..util import tagre
 
 
 class JackCannon(_BasicScraper):
     url = 'http://fancyadventures.com/'
+    rurl = escape(url)
     stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://fancyadventures\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://fancyadventures\.com/[^"]+)', after="prev"))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/page-nnn'
 
 
@@ -41,8 +42,9 @@ class JohnnyWander(_BasicScraper):
 
 class JustAnotherEscape(_BasicScraper):
     url = 'http://www.justanotherescape.com/'
+    rurl = escape(url)
     stripUrl = url + 'index.cgi?date=%s'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.justanotherescape\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.justanotherescape\.com//index\.cgi\?date=\d+)')
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%sindex\.cgi\?date=\d+)' % rurl)
      + tagre("img", "alt", "Previous Comic"))
     help = 'Index format: yyyymmdd'

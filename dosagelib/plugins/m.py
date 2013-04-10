@@ -2,7 +2,7 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2013 Bastian Kleineidam
 
-from re import compile, IGNORECASE
+from re import compile, escape, IGNORECASE
 
 from ..scraper import _BasicScraper
 from ..util import tagre
@@ -26,9 +26,10 @@ class MagickChicks(_BasicScraper):
 
 class ManlyGuysDoingManlyThings(_BasicScraper):
     url = 'http://thepunchlineismachismo.com/'
+    rurl = escape(url)
     stripUrl = url + 'archives/comic/%s'
-    imageSearch = compile(tagre("img", "src", r'(http://thepunchlineismachismo\.com/wp-content/uploads/\d+/\d+/\d+-\d+-\d+[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://thepunchlineismachismo\.com/archives/comic/[^"]+)', after="previous"))
+    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/\d+-\d+-\d+[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%sarchives/comic/[^"]+)' % rurl, after="previous"))
     help = 'Index format: ddmmyyyy'
 
 
@@ -66,9 +67,10 @@ class MegaTokyo(_BasicScraper):
 
 class Meiosis(_BasicScraper):
     url = 'http://meiosiswebcomic.com/'
+    rurl = escape(url)
     stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://meiosiswebcomic\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://meiosiswebcomic\.com/[^"]+)', after="navi-prev"))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="navi-prev"))
     help = 'Index format: yyyy/mm/ddmmyyyy'
 
 
@@ -91,9 +93,10 @@ class MenageA3(_BasicScraper):
 
 class Melonpool(_BasicScraper):
     url = 'http://www.melonpool.com/'
+    rurl = escape(url)
     stripUrl = url + '?p=%s'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.melonpool\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.melonpool\.com/\?p=\d+)', after="prev"))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl, after="prev"))
     help = 'Index format: n'
 
 
@@ -106,15 +109,16 @@ class Misfile(_BasicScraper):
 
 
 class MyCartoons(_BasicScraper):
-   url = 'http://mycartoons.de/'
-   stripUrl = url + 'page/%s'
-   imageSearch = (
-       compile(tagre("img", "src", r'(http://mycartoons\.de/wp-content/cartoons/(?:[^"]+/)?\d+-\d+-\d+[^"]+)')),
-       compile(tagre("img", "src", r'(http://mycartoons\.de/cartoons/[^"]+/\d+-\d+-\d+[^"]+)'))
-   )
-   prevSearch = compile(tagre("a", "href", r'(http://mycartoons\.de/page/[^"]+)') + "&laquo;")
-   help = 'Index format: number'
-   lang = 'de'
+    url = 'http://mycartoons.de/'
+    rurl = escape(url)
+    stripUrl = url + 'page/%s'
+    imageSearch = (
+        compile(tagre("img", "src", r'(%swp-content/cartoons/(?:[^"]+/)?\d+-\d+-\d+[^"]+)' % rurl)),
+        compile(tagre("img", "src", r'(%scartoons/[^"]+/\d+-\d+-\d+[^"]+)' % rurl)),
+    )
+    prevSearch = compile(tagre("a", "href", r'(%spage/[^"]+)' % rurl) + "&laquo;")
+    help = 'Index format: number'
+    lang = 'de'
 
 
 class MysteriesOfTheArcana(_BasicScraper):

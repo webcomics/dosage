@@ -2,19 +2,20 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2013 Bastian Kleineidam
 
-from re import compile, IGNORECASE
+from re import compile, escape, IGNORECASE
 from ..scraper import _BasicScraper
 from ..util import tagre
 
 class KatzenfutterGeleespritzer(_BasicScraper):
     url = 'http://www.katzenfuttergeleespritzer.de/'
+    rurl = escape(url)
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'dont-drink-and-drive'
     imageSearch = (
-        compile(tagre("img", "src", r'(http://www\.katzenfuttergeleespritzer\.de/wp-content/uploads/\d+/\d+/\d+-\d+-\d+[^"]+)')),
-        compile(tagre("img", "src", r'(http://www\.katzenfuttergeleespritzer\.de/wp-content/uploads/\d+/\d+/mmai_404[^"]+)')),
+        compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/\d+-\d+-\d+[^"]+)' % rurl)),
+        compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/mmai_404[^"]+)' % rurl)),
     )
-    prevSearch = compile(tagre("a", "href", r'(http://www.katzenfuttergeleespritzer.de/comic/[^"]+)', after="navi-prev"))
+    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl, after="navi-prev"))
     help = 'Index format: stripname'
     lang = 'de'
 
@@ -32,8 +33,9 @@ class KevinAndKell(_BasicScraper):
 
 
 class Key(_BasicScraper):
-    url = 'http://key.shadilyn.com/latestpage.html'
-    stripUrl = 'http://key.shadilyn.com/pages/%s.html'
+    baseurl = 'http://key.shadilyn.com/'
+    url = baseurl + 'latestpage.html'
+    stripUrl = baseurl + 'pages/%s.html'
     imageSearch = compile(r'"((?:images/.+?)|(?:pages/images/.+?))"')
     prevSearch = compile(r'</a><a href="(.+?html)".+?prev')
     help = 'Index format: nnn'
@@ -41,16 +43,18 @@ class Key(_BasicScraper):
 
 class KickInTheHead(_BasicScraper):
     url = 'http://www.kickinthehead.org/'
+    rurl = escape(url)
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2003/03/20/ipod-envy'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.kickinthehead\.org/kickinthehead3/comics/\d+-\d+-\d+[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.kickinthehead\.org/\d+/\d+/\d+/[^"]+)', after="navi-prev"))
+    imageSearch = compile(tagre("img", "src", r'(%skickinthehead3/comics/\d+-\d+-\d+[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl, after="navi-prev"))
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
 class KillerKomics(_BasicScraper):
-    url = 'http://www.killerkomics.com/web-comics/index_ang.cfm'
-    stripUrl = 'http://www.killerkomics.com/web-comics/%s.cfm'
+    baseurl = 'http://www.killerkomics.com/web-comics/'
+    url = baseurl + 'index_ang.cfm'
+    stripUrl = baseurl + '%s.cfm'
     imageSearch = compile(r'<img src="(http://www.killerkomics.com/FichiersUpload/Comics/.+?)"')
     prevSearch = compile(r'<div id="precedent"><a href="(.+?)"')
     help = 'Index format: strip-name'
@@ -75,16 +79,18 @@ class Krakow(_BasicScraper):
 
 
 class Kukuburi(_BasicScraper):
-    url = 'http://www.kukuburi.com/current/'
-    stripUrl = 'http://www.kukuburi.com/v2/%s/'
+    baseurl = 'http://www.kukuburi.com/'
+    url = baseurl + 'current/'
+    stripUrl = baseurl + 'v2/%s/'
     imageSearch = compile(tagre("img", "src", r'(http://www\.kukuburi\.com/v2/comics/[^"]+)', after='alt="[^"]'))
     prevSearch = compile(r'nav-previous.+?"(http.+?)"')
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
 class KuroShouri(_BasicScraper):
-   url = 'http://kuroshouri.com/'
-   stripUrl = url + '?webcomic_post=%s'
-   imageSearch = compile(tagre("img", "src", r"(http://kuroshouri\.com/wp-content/webcomic/kuroshouri/[^'\"]+)", quote="['\"]"))
-   prevSearch = compile(tagre("a", "href", r'(http://kuroshouri\.com/\?webcomic_post=[^"]+)', after="previous"))
-   help = 'Index format: chapter-n-page-m'
+    url = 'http://kuroshouri.com/'
+    rurl = escape(url)
+    stripUrl = url + '?webcomic_post=%s'
+    imageSearch = compile(tagre("img", "src", r"(%swp-content/webcomic/kuroshouri/[^'\"]+)" % rurl, quote="['\"]"))
+    prevSearch = compile(tagre("a", "href", r'(%s\?webcomic_post=[^"]+)' % rurl, after="previous"))
+    help = 'Index format: chapter-n-page-m'

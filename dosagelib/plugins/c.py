@@ -2,7 +2,7 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2013 Bastian Kleineidam
 
-from re import compile
+from re import compile, escape
 
 from ..scraper import _BasicScraper
 from ..helpers import bounceStarter, indirectStarter
@@ -11,17 +11,20 @@ from ..util import tagre
 
 class Caggage(_BasicScraper):
     url = 'http://caggagecomic.com/'
+    rurl = escape(url)
     stripUrl = url + 'archives/%s'
-    imageSearch = compile(tagre("img", "src", r'(http://caggagecomic\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://caggagecomic\.com/archives/\d+)', after="prev"))
+    firstStripUrl = stripUrl % '77'
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%sarchives/\d+)' % rurl, after="prev"))
     help = 'Index format: number'
 
 
 class CaptainSNES(_BasicScraper):
     url = 'http://www.captainsnes.com/'
+    rurl = escape(url)
     stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r"(http://www\.captainsnes\.com/comics/[^']+)", quote="'"))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.captainsnes\.com/[^"]+)') + tagre("span", "class", "prev"))
+    imageSearch = compile(tagre("img", "src", r"(%scomics/[^']+)" % rurl, quote="'"))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl) + tagre("span", "class", "prev"))
     multipleImagesPerStrip = True
     help = 'Index format: yyyy/mm/dd/nnn-stripname'
 
@@ -29,6 +32,7 @@ class CaptainSNES(_BasicScraper):
 class CaseyAndAndy(_BasicScraper):
     url = 'http://www.galactanet.com/comic/'
     stripUrl = url + 'view.php?strip=%s'
+    firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(Strip\d+\.gif)'))
     prevSearch = compile(tagre("a", "href", r'(view\.php\?strip=\d+)')
      + tagre("img", "src", r'previous\.gif'))
@@ -37,10 +41,12 @@ class CaseyAndAndy(_BasicScraper):
 
 class Catalyst(_BasicScraper):
     baseUrl = "http://catalyst.spiderforest.com/"
+    rurl = escape(baseUrl)
     url = baseUrl + "comic.php?comic_id=415"
     stripUrl = baseUrl + "comic.php?comic_id=%s"
-    imageSearch = compile(tagre("img", "src", r'((?:http://catalyst\.spiderforest\.com/)?comics/[^"]+)'))
-    prevSearch = compile("<center>" + tagre("a", "href", r'(http://catalyst\.spiderforest\.com/comic\.php\?comic_id=\d+)'))
+    firstStripUrl = stripUrl % '1'
+    imageSearch = compile(tagre("img", "src", r'((?:%s)?comics/[^"]+)' % rurl))
+    prevSearch = compile("<center>" + tagre("a", "href", r'(%scomic\.php\?comic_id=\d+)' % rurl))
     help = 'Index format: number'
 
 
@@ -54,17 +60,19 @@ class Catena(_BasicScraper):
 
 class ChainsawSuit(_BasicScraper):
     url = 'http://chainsawsuit.com/'
+    rurl = escape(url)
     stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://chainsawsuit\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://chainsawsuit\.com/\d+/\d+/\d+/[^"]+)', after="prev"))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
 class ChannelAte(_BasicScraper):
     url = 'http://www.channelate.com/'
+    rurl = escape(url)
     stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.channelate\.com/comics/\d+-\d+-\d+[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.channelate\.com/\d+/\d+/\d+/[^"]+)', after="prev"))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)', after="prev"))
     help = 'Index format: yyyy/mm/dd/name'
 
 
@@ -126,25 +134,28 @@ class Comedity(_BasicScraper):
 
 class Commissioned(_BasicScraper):
     url = 'http://www.commissionedcomic.com/'
+    rurl = escape(url)
     stripUrl = url + '?p=%s'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.commissionedcomic\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.commissionedcomic\.com/\?p=\d+)', after="prev"))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl, after="prev"))
     help = 'Index format: n'
 
 
 class Concession(_BasicScraper):
     url = 'http://concessioncomic.com/'
+    rurl = escape(url)
     stripUrl = url + 'index.php?pid=%s'
-    imageSearch = compile(tagre("img", "src", r'(http://concessioncomic\.com/comics/[^"]+)', after="Comic"))
-    prevSearch = compile(tagre("a", "href", r'(http://concessioncomic\.com/index\.php\?pid=\d+)', after="nav-prev"))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl, after="Comic"))
+    prevSearch = compile(tagre("a", "href", r'(%sindex\.php\?pid=\d+)' % rurl, after="nav-prev"))
     help = 'Index format: number'
 
 
 class CoolCatStudio(_BasicScraper):
     url = 'http://www.coolcatstudio.com/'
+    rurl = escape(url)
     stripUrl = url + 'strips-cat/ccs%s'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.coolcatstudio\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.coolcatstudio\.com/strips-cat/[^"]+)', before="prev"))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%sstrips-cat/[^"]+)' % rurl, before="prev"))
     help = 'Index format: yyyymmdd'
 
 
@@ -233,23 +244,27 @@ class CrimsonDark(_BasicScraper):
 
 class CatsAndCameras(_BasicScraper):
     url = 'http://catsncameras.com/cnc/'
+    rurl = escape(url)
     stripUrl = url + '?p=%s'
-    imageSearch = compile(r'<img src="(http://catsncameras.com/cnc/comics/.+?)"')
-    prevSearch = compile(r'<div class="nav-previous"><a href="(http://catsncameras.com/cnc/.+?)">')
+    imageSearch = compile(tagre("img", "src", r'(%scnc/comics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("div", "class", r'nav-previous') +
+        tagre("a", "href", r'(%scnc/[^"]+)' % rurl))
     help = 'Index format: nnn'
 
 
 class CowboyJedi(_BasicScraper):
     url = 'http://www.cowboyjedi.com/'
+    rurl = escape(url)
     stripUrl = url + '%s'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.cowboyjedi.\com/comics/[^"]+)'))
-    prevSearch = compile(r'<a href="(http://www.cowboyjedi.com/.+?)" class="navi navi-prev"')
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="navi-prev"))
     help = 'Index format: yyyy/mm/dd/strip-name'
 
 
 class CasuallyKayla(_BasicScraper):
     url = 'http://casuallykayla.com/'
     stripUrl = url + '?p=%s'
+    firstStripUrl = stripUrl % '89'
     imageSearch = compile(tagre("img", "src", r'(http://casuallykayla\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("div", "class", r'nav-previous') + tagre("a", "href", r'([^"]+)'))
     help = 'Index format: nnn'
@@ -257,9 +272,10 @@ class CasuallyKayla(_BasicScraper):
 
 class Collar6(_BasicScraper):
     url = 'http://collar6.com/'
+    rurl = escape(url)
     stripUrl = url + 'archive/%s'
-    imageSearch = compile(tagre("img", "src", r'(http://collar6\.com/wp-content/webcomic/collar6/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://collar6\.com/archive/[^"]+)', after="previous"))
+    imageSearch = compile(tagre("img", "src", r'(%swp-content/webcomic/collar6/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%sarchive/[^"]+)' % rurl, after="previous"))
     help = 'Index format: <name>'
 
 
@@ -272,11 +288,13 @@ class Chester5000XYV(_BasicScraper):
 
 
 class Champ2010(_BasicScraper):
+    baseurl = 'http://jedcollins.com/champ2010/'
+    rurl = escape(baseurl)
     # the latest URL is hard coded since the comic is discontinued
-    url = 'http://jedcollins.com/champ2010/champ-12-30-10.html'
-    stripUrl = 'http://jedcollins.com/champ2010/%s.html'
-    imageSearch = compile(tagre("img", "src", r'(http://jedcollins\.com/champ2010/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://jedcollins\.com/champ2010/[^"]+)', after="Previous"))
+    url = baseurl + 'champ-12-30-10.html'
+    stripUrl = baseurl + '%s.html'
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="Previous"))
     help = 'Index format: yy-dd-mm'
 
 
@@ -294,9 +312,11 @@ class Chucklebrain(_BasicScraper):
 
 class CompanyY(_BasicScraper):
     url = 'http://company-y.com/'
+    rurl = escape(url)
     stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://company-y\.com/comics/[^"]+)'))
-    prevSearch = compile(r'<div class="nav-previous"><a href="(http://company-y.com/.+?)"')
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("div", "class", r"nav-previous") +
+        tagre("a", "href", r'(%s[^"]+)' % rurl))
     help = 'Index format: yyyy/mm/dd/strip-name'
 
 
@@ -324,10 +344,11 @@ class CraftedFables(_BasicScraper):
 
 class CucumberQuest(_BasicScraper):
     url = 'http://cucumber.gigidigi.com/'
+    rurl = escape(url)
     stripUrl = url + 'archive/%s/'
     firstStripUrl = stripUrl % 'page-1'
     starter = indirectStarter(url + 'recent.html',
         compile(r'window\.location="(/archive/[^"]+/)"'))
-    imageSearch = compile(tagre("img", "src", r'(http://cucumber\.gigidigi\.com/wp-content/webcomic/cq/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://cucumber\.gigidigi\.com/archive/[^"]+/)', after="previous"))
+    imageSearch = compile(tagre("img", "src", r'(%swp-content/webcomic/cq/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%sarchive/[^"]+/)' % rurl, after="previous"))
     help = 'Index format: stripname'

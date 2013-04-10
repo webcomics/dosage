@@ -2,7 +2,7 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2013 Bastian Kleineidam
 
-from re import compile, IGNORECASE, MULTILINE
+from re import compile, escape, IGNORECASE, MULTILINE
 
 from ..util import tagre
 from ..scraper import _BasicScraper
@@ -18,13 +18,14 @@ class FalconTwin(_BasicScraper):
 
 
 class Fallen(_BasicScraper):
-    url = 'http://www.fallencomic.com/fal-page.htm'
-    stripUrl = 'http://www.fallencomic.com/pages/part%s/%s-p%s.htm'
+    baseurl = 'http://www.fallencomic.com/'
+    url = baseurl + 'fal-page.htm'
+    stripUrl = baseurl + 'pages/part%s/%s-p%s.htm'
     imageSearch = compile(r'<IMG SRC="(page/.+?)"', IGNORECASE)
     prevSearch = compile(r'<A HREF="(.+?)"><FONT FACE="Courier">Back', IGNORECASE)
     help = 'Index format: nn-m (comicNumber-partNumber)'
     starter = indirectStarter(url,
-                              compile(r'\(NEW \d{2}/\d{2}/\d{2}\)\s*\n*\s*<a href="(pages/part\d+/\d+-p\d+\.htm)">\d+</a>', MULTILINE))
+        compile(r'\(NEW \d{2}/\d{2}/\d{2}\)\s*\n*\s*<a href="(pages/part\d+/\d+-p\d+\.htm)">\d+</a>', MULTILINE))
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
@@ -44,7 +45,7 @@ class FantasyRealms(_BasicScraper):
     prevSearch = compile(r'<a href="(.+?)"><img src="../images/nav-back.gif"', IGNORECASE)
     help = 'Index format: nnn'
     starter = indirectStarter(url,
-                              compile(r'<a href="(manga/.+?)"><img src="preview.jpg"', IGNORECASE))
+        compile(r'<a href="(manga/.+?)"><img src="preview.jpg"', IGNORECASE))
 
 
 class FauxPas(_BasicScraper):
@@ -56,8 +57,9 @@ class FauxPas(_BasicScraper):
 
 
 class FeyWinds(_BasicScraper):
-    url = 'http://kitsune.rydia.net/index.html'
-    stripUrl = 'http://kitsune.rydia.net/comic/page.php?id=%s'
+    baseurl = 'http://kitsune.rydia.net/'
+    url = baseurl + 'index.html'
+    stripUrl = baseurl + 'comic/page.php?id=%s'
     imageSearch = compile(r"(../comic/pages//.+?)'")
     prevSearch = compile(r"(page.php\?id=.+?)'.+?navprevious.png")
     help = 'Index format: n (unpadded)'
@@ -66,9 +68,10 @@ class FeyWinds(_BasicScraper):
 
 class FilibusterCartoons(_BasicScraper):
     url = 'http://www.filibustercartoons.com/'
+    rurl = escape(url)
     stripUrl = url + 'index.php/%s'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.filibustercartoons\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.filibustercartoons\.com/[^"]+)', after="prev"))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/name'
 
 
@@ -83,8 +86,9 @@ class FirstWorldProblems(_BasicScraper):
 
 
 class FlakyPastry(_BasicScraper):
-    url = 'http://flakypastry.runningwithpencils.com/index.php'
-    stripUrl = 'http://flakypastry.runningwithpencils.com/comic.php?strip_id=%s'
+    baseurl = 'http://flakypastry.runningwithpencils.com/'
+    url = baseurl + 'index.php'
+    stripUrl = baseurl + 'comic.php?strip_id=%s'
     imageSearch = compile(r'<img src="(comics/.+?)"')
     prevSearch = compile(r'<a href="(.+?)".+?btn_back')
     help = 'Index format: nnnn'
@@ -101,27 +105,29 @@ class Flemcomics(_BasicScraper):
 
 class Flipside(_BasicScraper):
     url = 'http://flipside.keenspot.com/comic.php'
+    rurl = escape(url)
     stripUrl = url + '?i=%s'
     imageSearch = compile(tagre("img", "src", r'(http://cdn\.flipside\.keenspot\.com/comic/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://flipside\.keenspot\.com/comic\.php\?i=\d+)', after="prev"))
+    prevSearch = compile(tagre("a", "href", r'(%s\?i=\d+)' % rurl, after="prev"))
     help = 'Index format: nnnn'
 
 
 class FonFlatter(_BasicScraper):
     url = 'http://www.fonflatter.de/'
+    rurl = escape(url)
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2005/09/20/01-begegnung-mit-batman'
     lang = 'de'
-    imageSearch = compile(r'src="(http://www\.fonflatter\.de/\d+/fred_\d+-\d+-\d+[^"]+)')
-    prevSearch = compile(tagre("a", "href", r'(http://www\.fonflatter\.de/[^"]+)', after="prev"))
+    imageSearch = compile(r'src="(%s\d+/fred_\d+-\d+-\d+[^"]+)' % rurl)
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/number-stripname'
 
     def shouldSkipUrl(self, url):
         return url in (
-            "http://www.fonflatter.de/2006/11/30/adventskalender/",
-            "http://www.fonflatter.de/2006/09/21/danke/",
-            "http://www.fonflatter.de/2006/08/23/zgf-zuweilen-gestellte-fragen/",
-            "http://www.fonflatter.de/2005/10/19/naq-never-asked-questions/",
+            self.stripUrl % "2006/11/30/adventskalender",
+            self.stripUrl % "2006/09/21/danke",
+            self.stripUrl % "2006/08/23/zgf-zuweilen-gestellte-fragen",
+            self.stripUrl % "2005/10/19/naq-never-asked-questions",
        )
 
 
@@ -154,10 +160,11 @@ class FredoAndPidjin(_BasicScraper):
 
 class FullFrontalNerdity(_BasicScraper):
     url = 'http://ffn.nodwick.com/'
+    rurl = escape(url)
     stripUrl = url + '?p=%s'
     firstStripUrl = stripUrl % '6'
-    imageSearch = compile(tagre("img", "src", r'(http://ffn\.nodwick\.com/ffnstrips/\d+-\d+-\d+\.[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://ffn\.nodwick\.com/\?p=\d+)', after="prev"))
+    imageSearch = compile(tagre("img", "src", r'(%sffnstrips/\d+-\d+-\d+\.[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl, after="prev"))
     help = 'Index format: number'
 
 

@@ -2,7 +2,7 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2013 Bastian Kleineidam
 
-from re import compile
+from re import compile, escape
 from ..scraper import _BasicScraper
 from ..helpers import indirectStarter
 from ..util import tagre, urlopen
@@ -10,20 +10,22 @@ from ..util import tagre, urlopen
 
 class OctopusPie(_BasicScraper):
     url = 'http://www.octopuspie.com/'
+    rurl = escape(url)
     starter = indirectStarter(url,
-        compile(tagre("a", "href", r'(http://www\.octopuspie\.com/[^"]+)') +
-                tagre("img", "src", r'http://www\.octopuspie\.com/junk/latest\.png')))
+        compile(tagre("a", "href", r'(%s[^"]+)' % rurl) +
+                tagre("img", "src", r'%sjunk/latest\.png' % rurl)))
     stripUrl = url + '%s'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.octopuspie\.com/strippy/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.octopuspie\.com/[^"]+)', after="prev"))
+    imageSearch = compile(tagre("img", "src", r'(%sstrippy/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy-mm-dd/nnn-strip-name'
 
 
 class OddFish(_BasicScraper):
     url = 'http://www.odd-fish.net/'
+    rurl = escape(url)
     stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.odd-fish\.net/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.odd-fish\.net/[^"]+)', after="navi-prev"))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="navi-prev"))
     help = 'Index format: stripname'
 
 
@@ -45,27 +47,30 @@ class Oglaf(_BasicScraper):
 
 class OkCancel(_BasicScraper):
     url = 'http://okcancel.com/'
+    rurl = escape(url)
     stripUrl = url + 'comic/%s.html'
-    imageSearch = compile(tagre("img", "src", r'(http://okcancel\.com/strips/okcancel\d{8}\.gif)'))
-    prevSearch = compile(tagre("div", "class", "previous") + tagre("a", "href", r'(http://okcancel\.com/comic/\d{1,4}\.html)'))
+    imageSearch = compile(tagre("img", "src", r'(%sstrips/okcancel\d{8}\.gif)' % rurl))
+    prevSearch = compile(tagre("div", "class", "previous") + tagre("a", "href", r'(%scomic/\d{1,4}\.html)' % rurl))
     starter = indirectStarter(url, prevSearch)
     help = 'Index format: yyyymmdd'
 
 
 class OmakeTheater(_BasicScraper):
     url = 'http://omaketheater.com/'
+    rurl = escape(url)
     stripUrl = url + 'comic/%s'
     imageSearch = compile(tagre("img", "src", r'(http://media\.omaketheater\.com/4koma/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://omaketheater\.com/comic/\d+/)', after="prev"))
+    prevSearch = compile(tagre("a", "href", r'(%scomic/\d+/)' % rurl, after="prev"))
     starter = indirectStarter(url,
-        compile(tagre("a", "href", r'(http://omaketheater\.com/comic/\d+/)')))
+        compile(tagre("a", "href", r'(%scomic/\d+/)' % rurl)))
     help = 'Index format: number (unpadded)'
 
 
 class OnTheEdge(_BasicScraper):
     url = 'http://ontheedgecomics.com/'
-    stripUrl = 'http://ontheedgecomics.com/comic/%s'
-    imageSearch = compile(r'<img src="(http://ontheedgecomics.com/comics/.+?)"')
+    rurl = escape(url)
+    stripUrl = url + 'comic/%s'
+    imageSearch = compile(r'<img src="(%scomics/.+?)"' % rurl)
     prevSearch = compile(r'<a href="([^"]+)" rel="prev">')
     help = 'Index format: nnn (unpadded)'
 
@@ -80,10 +85,11 @@ class OneQuestion(_BasicScraper):
 
 class OrnerBoy(_BasicScraper):
     url = 'http://www.orneryboy.com/'
+    rurl = escape(url)
     stripUrl = url + 'index.php?comicID=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(comics/\d+\.[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.orneryboy\.com/index\.php\?comicID=\d+)') +
+    prevSearch = compile(tagre("a", "href", r'(%sindex\.php\?comicID=\d+)' % rurl) +
         tagre("img", "src", r'images/prev_a\.gif'))
     help = 'Index format: number'
 

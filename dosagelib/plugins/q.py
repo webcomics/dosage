@@ -2,7 +2,7 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2013 Bastian Kleineidam
 
-from re import compile
+from re import compile, escape
 from ..scraper import _BasicScraper
 from ..util import tagre
 
@@ -16,8 +16,10 @@ class QuestionableContent(_BasicScraper):
 
 
 class Qwantz(_BasicScraper):
-    url = 'http://www.qwantz.com/index.php'
+    baseurl = 'http://www.qwantz.com/'
+    url = baseurl + 'index.php'
+    rurl = escape(baseurl)
     stripUrl = url + '?comic=%s'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.qwantz\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.qwantz\.com/index\.php\?comic=\d+)', before="prev"))
+    imageSearch = compile(tagre("img", "src", r'(%s/comics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%sindex\.php\?comic=\d+)' % rurl, before="prev"))
     help = 'Index format: n'
