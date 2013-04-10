@@ -24,6 +24,6 @@ Dosage comic FonFlatter
 <th>Status</th><td>ok on 09.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>1</div></td>
 </tr>
 </table>

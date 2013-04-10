@@ -1,15 +1,15 @@
-title: DrunkDuck/Twisted_Mind_of_Stranger
-url: "/comics/DrunkDuck_Twisted_Mind_of_Stranger.html"
+title: ZenPencils
+url: "/comics/ZenPencils.html"
 ---
-Dosage comic DrunkDuck/Twisted_Mind_of_Stranger
+Dosage comic ZenPencils
 -----------------------------------------
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Inspirational quotes from famous people adapted into cartoons.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/Twisted_Mind_of_Stranger/">http://www.drunkduck.com/Twisted_Mind_of_Stranger/</a></td>
+<th>Website</th><td><a href="http://zenpencils.com/">http://zenpencils.com/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

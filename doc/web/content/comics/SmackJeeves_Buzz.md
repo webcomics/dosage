@@ -21,7 +21,7 @@ Dosage comic SmackJeeves/Buzz
 <th>Adult content</th><td>yes</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 09.04.2013</td>
+<th>Status</th><td>error on 09.04.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</div></td>

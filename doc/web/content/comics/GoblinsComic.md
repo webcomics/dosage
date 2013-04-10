@@ -1,7 +1,7 @@
-title: PensAndTales/Evilish
-url: "/comics/PensAndTales_Evilish.html"
+title: GoblinsComic
+url: "/comics/GoblinsComic.html"
 ---
-Dosage comic PensAndTales/Evilish
+Dosage comic GoblinsComic
 -----------------------------------------
 
 <table class="comicinfo">
@@ -9,7 +9,7 @@ Dosage comic PensAndTales/Evilish
 <th>Description</th><td></td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://evilish.pensandtales.com/">http://evilish.pensandtales.com/</a></td>
+<th>Website</th><td><a href="http://www.goblinscomic.com/">http://www.goblinscomic.com/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

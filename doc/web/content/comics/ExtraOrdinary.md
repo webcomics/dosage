@@ -1,7 +1,7 @@
-title: DrunkDuck/Captain_Communism
-url: "/comics/DrunkDuck_Captain_Communism.html"
+title: ExtraOrdinary
+url: "/comics/ExtraOrdinary.html"
 ---
-Dosage comic DrunkDuck/Captain_Communism
+Dosage comic ExtraOrdinary
 -----------------------------------------
 
 <table class="comicinfo">
@@ -9,7 +9,7 @@ Dosage comic DrunkDuck/Captain_Communism
 <th>Description</th><td></td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/Captain_Communism/">http://www.drunkduck.com/Captain_Communism/</a></td>
+<th>Website</th><td><a href="http://exocomics.com/">http://exocomics.com/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -21,7 +21,7 @@ Dosage comic DrunkDuck/Captain_Communism
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 09.04.2013</td>
+<th>Status</th><td>error on 09.04.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</div></td>

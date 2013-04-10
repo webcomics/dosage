@@ -1,7 +1,7 @@
-title: WeCanSleepTomorrow
-url: "/comics/WeCanSleepTomorrow.html"
+title: RealmOfAtland
+url: "/comics/RealmOfAtland.html"
 ---
-Dosage comic WeCanSleepTomorrow
+Dosage comic RealmOfAtland
 -----------------------------------------
 
 <table class="comicinfo">
@@ -9,7 +9,7 @@ Dosage comic WeCanSleepTomorrow
 <th>Description</th><td></td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://wecansleeptomorrow.com/">http://wecansleeptomorrow.com/</a></td>
+<th>Website</th><td><a href="http://www.realmofatland.com/">http://www.realmofatland.com/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

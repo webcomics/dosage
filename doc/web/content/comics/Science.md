@@ -1,15 +1,15 @@
-title: GoComics/KingMe
-url: "/comics/GoComics_KingMe.html"
+title: Science
+url: "/comics/Science.html"
 ---
-Dosage comic GoComics/KingMe
+Dosage comic Science
 -----------------------------------------
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>A comic about science, technology, skepticism, geekery, video games, atheism, and more.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.gocomics.com/king-me">http://www.gocomics.com/king-me</a></td>
+<th>Website</th><td><a href="http://sci-ence.org/">http://sci-ence.org/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
