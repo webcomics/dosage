@@ -139,6 +139,17 @@ class Footloose(_BasicScraper):
     help = 'Index format: n (unpadded)'
 
 
+class ForLackOfABetterComic(_BasicScraper):
+    url = 'http://forlackofabettercomic.com/'
+    rurl = escape(url)
+    stripUrl = url + '?id=%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = compile(tagre("img", "src", r'(%simg/comic/\d+[^"]+)' % rurl, after="comicimg"))
+    prevSearch = compile(tagre("a", "href", r'(%s\?id\=\d+)' % rurl) + r'Prev')
+    help = 'Index format: number'
+    description = 'A hand drawn comic about everyday life situations.'
+
+
 class Freefall(_BasicScraper):
     url = 'http://freefall.purrsia.com/default.htm'
     stripUrl = 'http://freefall.purrsia.com/ff%s/fc%s.htm'
