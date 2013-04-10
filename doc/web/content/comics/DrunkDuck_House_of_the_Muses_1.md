@@ -21,7 +21,7 @@ Dosage comic DrunkDuck/House_of_the_Muses_1
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 09.04.2013</td>
+<th>Status</th><td>ok on 10.04.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</div></td>

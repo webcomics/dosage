@@ -9,7 +9,7 @@ Dosage comic TheFallenAngel/HMHigh
 <th>Description</th><td></td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.thefallenangel.co.uk/hmhigh/">http://www.thefallenangel.co.uk/hmhigh/</a></td>
+<th>Website</th><td><a href="http://www.thefallenagel.co.uk/hmhigh/">http://www.thefallenagel.co.uk/hmhigh/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -21,7 +21,7 @@ Dosage comic TheFallenAngel/HMHigh
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 09.04.2013</td>
+<th>Status</th><td>error on 10.04.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</div></td>
