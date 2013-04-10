@@ -19,6 +19,28 @@ class DailyDose(_BasicScraper):
     help = 'Index format: stripname'
 
 
+class DamnLol(_BasicScraper):
+    url = 'http://www.damnlol.com/'
+    rurl = escape(url)
+    stripUrl = url + '%s.html'
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
+    imageSearch = (
+        compile(tagre("img", "src", r'(%si/[^"]+)' % rurl)),
+        compile(tagre("img", "src", r'(%spics/[^"]+)' % rurl)),
+    )
+    help = 'Index format: stripname-number'
+    description = 'Funny pictures from the internet. Thousands of them.'
+    starter = bounceStarter(url,
+        compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="next")))
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        ext = imageUrl.rsplit('.', 1)[1]
+        path = pageUrl.rsplit('/', 1)[1][:-5]
+        stripname, number = path.rsplit('-', 1)
+        return '%s-%s.%s' % (number, stripname, ext)
+
+
 class Damonk(_BasicScraper):
     url = 'http://www.damonk.com/'
     stripUrl = url + 'd/%s.html'
