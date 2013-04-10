@@ -66,9 +66,12 @@ class Zwarwald(_BasicScraper):
     # anything before page 495 seems to be flash
     firstStripUrl = stripUrl % '495'
     lang = 'de'
-    imageSearch = compile(tagre("img", "src", r'(http://(?:www\.zwarwald\.de|wp1163540.wp190.webpack.hosteurope.de/wordpress)/images/\d+/\d+/[^"]+)'))
+    imageSearch = (
+        compile(tagre("img", "src", r'(%simages/\d+/\d+/[^"]+)' % rurl)),
+        compile(tagre("img", "src", r'(http://wp1163540\.wp190\.webpack\.hosteurope\.de/wordpress/images/\d+/\d+/[^"]+)')),
+    )
     prevSearch = compile(tagre("a", "href", r'(%sindex\.php/page/\d+/)' % rurl) +
-        tagre("img", "src", r'%simages/prev\.jpg' % rurl, quote="'"))
+        tagre("img", "src", r'http://zwarwald\.de/images/prev\.jpg', quote="'"))
     help = 'Index format: number'
     waitSeconds = 1
 
