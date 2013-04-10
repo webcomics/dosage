@@ -80,6 +80,7 @@ def setupOptions():
     parser.add_argument('-t', '--timestamps', action='store_true', help='print timestamps for all output at any info level')
     parser.add_argument('-o', '--output', action='append', dest='handler', choices=events.getHandlerNames(), help='sets output handlers for downloaded comics')
     parser.add_argument('--adult', action='store_true', help='confirms that you are old enough to view adult content')
+    parser.add_argument('--dry-run', action='store_true', help=argparse.SUPPRESS)
     # multimatch is only used for development, eg. testing if all comics of a scripted plugin are working
     parser.add_argument('--multimatch', action='store_true', help=argparse.SUPPRESS)
     parser.add_argument('comic', nargs='*', help='comic module name (including case insensitive substrings)')
@@ -132,13 +133,16 @@ def setOutputInfo(options):
     out.timestamps = options.timestamps
 
 
-def saveComicStrip(strip, basepath):
+def saveComicStrip(strip, basepath, dryrun):
     """Save a comic strip which can consist of multiple images."""
     errors = 0
     allskipped = True
     for image in strip.getImages():
         try:
-            filename, saved = image.save(basepath)
+            if dryrun:
+                filename, saved = "", False
+            else:
+                filename, saved = image.save(basepath)
             if saved:
                 allskipped = False
         except Exception as msg:
@@ -232,7 +236,7 @@ def getStrips(scraperobj, options):
     out.context = scraperobj.getName()
     try:
         for strip in scraperobj.getStrips(numstrips):
-            _errors, skipped = saveComicStrip(strip, options.basepath)
+            _errors, skipped = saveComicStrip(strip, options.basepath, options.dry_run)
             errors += _errors
             if skipped and options.cont:
                 # stop when retrieval skipped an image for one comic strip
