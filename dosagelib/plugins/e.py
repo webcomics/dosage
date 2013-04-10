@@ -116,6 +116,17 @@ class EverybodyLovesEricRaymond(_BasicScraper):
     help = 'Index format: name-of-old-comic'
 
 
+class EverydayBlues(_BasicScraper):
+    url = 'http://everydayblues.everydayblues.net/'
+    rurl = escape(url)
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2010/02/11/sometimes'
+    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+/)' % rurl, after="navi-prev"))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+-[^"]+)' % rurl))
+    help = 'Index format: yyyy/mm/dd/stripname'
+    description = 'A daily webcomic about the ups and downs of love, relationships and singledom.'
+
+
 class EvilDiva(_BasicScraper):
     url = 'http://www.evildivacomics.com/'
     stripUrl = url + '?p=%s'
