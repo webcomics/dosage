@@ -21,6 +21,7 @@ class IanJay(_BasicScraper):
     url = 'http://ianjay.net/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'
+    firstStripUrl = stripUrl % '210'
     imageSearch = compile(tagre("img", "src", r'(%scomics/\d+[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl, after="Previous"))
     help = 'Index foramt: nnn'
@@ -29,6 +30,7 @@ class IanJay(_BasicScraper):
 class IDreamOfAJeanieBottle(_BasicScraper):
     url = 'http://jeaniebottle.com/'
     stripUrl = url + '?p=%s'
+    firstStripUrl = stripUrl % '15'
     imageSearch = compile(r'(/comics/.+?)"')
     prevSearch = compile(tagre("a", "href", r'(http://jeaniebottle\.com/\?p=\d+)', after="prev"))
     help = 'Index format: n (unpadded)'
@@ -37,6 +39,7 @@ class IDreamOfAJeanieBottle(_BasicScraper):
 class InsideOut(_BasicScraper):
     url = 'http://www.insideoutcomic.com/'
     stripUrl = url + 'html/%s.html'
+    firstStripUrl = stripUrl % '1_snake_suicide'
     imageSearch = compile(r'Picture12LYR.+?C="(.+?/assets/images/.+?)"')
     prevSearch = compile(r'Picture7LYR.+?F="(.+?/html/.+?)"')
     help = 'Index format: n_comic_name'
@@ -45,6 +48,7 @@ class InsideOut(_BasicScraper):
 class IrregularWebcomic(_BasicScraper):
     url = 'http://www.irregularwebcomic.net/'
     stripUrl = url + '%s.html'
+    firstStripUrl = stripUrl % '1'
     imageSearch = compile(r'<img .*src="(.*comics/.*(png|jpg|gif))".*>')
     prevSearch = compile(r'<a href="(/\d+\.html|/cgi-bin/comic\.pl\?comic=\d+)">Previous ')
     help = 'Index format: nnn'
@@ -53,6 +57,7 @@ class IrregularWebcomic(_BasicScraper):
 class ItsWalky(_BasicScraper):
     url = 'http://www.itswalky.com/'
     stripUrl = url + 'd/%s.html'
+    firstStripUrl = stripUrl % '19970908'
     imageSearch = compile(tagre("img", "src", r'(/comic[s|/][^"]+)'))
     prevSearch = compile(tagre("a", "href", r'[^"]*(/d/\d+\.s?html)')+r"[^>]+/images/(?:nav_02|previous_day)\.gif")
     help = 'Index format: yyyymmdd'

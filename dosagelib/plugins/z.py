@@ -22,6 +22,7 @@ class Zapiro(_BasicScraper):
     starter = bounceStarter(url,
       compile(tagre("a", "href", r'(http://mg\.co\.za/cartoon/[^"]+)')+"Newer"))
     stripUrl = 'http://mg.co.za/cartoon/%s'
+    firstStripUrl = stripUrl % 'zapiro_681'
     imageSearch = compile(tagre("img", "src", r'(http://cdn\.mg\.co\.za/crop/content/cartoons/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://mg\.co\.za/cartoon/[^"]+)')+"Older")
     help = 'Index format: yyyy-mm-dd-stripname'
@@ -35,6 +36,7 @@ class Zapiro(_BasicScraper):
 class ZebraGirl(_BasicScraper):
     url = 'http://www.zebragirl.net/'
     stripUrl = url + '?date=%s'
+    firstStripUrl = stripUrl % '2000-05-06'
     imageSearch = compile(tagre("img", "src", r"(comics/[^']+)", quote="'"))
     prevSearch = compile(tagre("link", "href", r"(/\?date=[^']+)", quote="'", before='Previous'))
     help = 'Index format: yyyy-mm-dd'
@@ -54,6 +56,7 @@ class ZenPencils(_BasicScraper):
 class ZombieHunters(_BasicScraper):
     url = 'http://www.thezombiehunters.com/'
     stripUrl = url + '?strip_id=%s'
+    firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(/istrip_files/strips/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(\?strip_id=\d+)') + tagre("img", "id", "prevcomic"))
     help = 'Index format: n(unpadded)'

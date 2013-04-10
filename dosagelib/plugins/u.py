@@ -20,8 +20,10 @@ class Undertow(_BasicScraper):
 
 
 class UnicornJelly(_BasicScraper):
-    url = 'http://unicornjelly.com/uni666.html'
-    stripUrl = 'http://unicornjelly.com/uni%s.html'
+    baseurl = 'http://unicornjelly.com/'
+    url = baseurl + 'uni666.html'
+    stripUrl = baseurl + 'uni%s.html'
+    firstStripUrl = stripUrl % '001'
     imageSearch = compile(r'</TABLE>(?:<FONT COLOR="BLACK">)?<IMG SRC="(images/[^"]+)" WIDTH=')
     prevSearch = compile(r'<A HREF="(uni\d{3}[bcs]?\.html)">(<FONT COLOR="BLACK">)?<IMG SRC="images/back00\.gif"')
     help = 'Index format: nnn'

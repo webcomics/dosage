@@ -12,7 +12,8 @@ from ..helpers import indirectStarter
 class WapsiSquare(_BasicScraper):
     url = 'http://wapsisquare.com/'
     rurl = escape(url)
-    stripUrl = url + 'comic/%s'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % '09092001'
     imageSearch = compile(r'<img src="(%scomics/.+?)"' % rurl)
     prevSearch = compile(r'<a href="(.+?)"[^>]+?>Previous</a>')
     help = 'Index format: stripname'
@@ -21,6 +22,7 @@ class WapsiSquare(_BasicScraper):
 class WastedTalent(_BasicScraper):
     url = 'http://www.wastedtalent.ca/'
     stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'anime-crack'
     imageSearch = compile(tagre("img", "src", r'(http://www\.wastedtalent\.ca/sites/default/files/imagecache/comic_full/comics/\d+/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/comic/[^"]+)', after="comic_prev"))
     help = 'Index format: stripname'
@@ -29,6 +31,7 @@ class WastedTalent(_BasicScraper):
 class WayfarersMoon(_BasicScraper):
     url = 'http://www.wayfarersmoon.com/'
     stripUrl = url + 'index.php?page=%s'
+    firstStripUrl = stripUrl % '0'
     imageSearch = compile(r'<img src="(/admin.+?)"')
     prevSearch = compile(r'<a href="(.+?)".+?btn_back.gif')
     help = 'Index format: nn'
@@ -84,6 +87,7 @@ class WhiteNoise(_BasicScraper):
     baseurl = 'http://www.wncomic.com/'
     url = baseurl + 'archive.php'
     stripUrl = baseurl + 'archive_comments.php?strip_id=%s'
+    firstStripUrl = stripUrl % '1'
     imageSearch = compile(r'(istrip_files/strips/.+?)"')
     prevSearch = compile(r'</a><a href="(.+?)"><img src="images/top_back.jpg" ')
     help = 'Index format: n'
@@ -94,6 +98,7 @@ class WhyTheLongFace(_BasicScraper):
     rurl = escape(baseurl)
     url = baseurl + 'wtlf200709.html'
     stripUrl = baseurl + 'wtlf%s.html'
+    firstStripUrl = stripUrl % '200306'
     imageSearch = compile(r'<img src="(%swtlf.+?|lf\d+.\w{1,4})"' % rurl, IGNORECASE)
     multipleImagesPerStrip = True
     prevSearch = compile(r'HREF="(.+?)"><IMG SRC="nprev.gif" ')
@@ -103,6 +108,7 @@ class WhyTheLongFace(_BasicScraper):
 class Wigu(_BasicScraper):
     url = 'http://wigucomics.com/'
     stripUrl = url + 'adventures/index.php?comic=%s'
+    firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(/adventures/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/adventures/index\.php\?comic=\d+)', after="go back"))
     help = 'Index format: n'
@@ -112,6 +118,7 @@ class Wonderella(_BasicScraper):
     url = 'http://nonadventures.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2006/09/09/the-torment-of-a-thousand-yesterdays'
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/name'
@@ -120,6 +127,7 @@ class Wonderella(_BasicScraper):
 class Wondermark(_BasicScraper):
     url = 'http://wondermark.com/'
     stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '001'
     imageSearch = compile(r'<img src="(http://wondermark.com/c/.+?)"')
     prevSearch = compile(r'<a href="(.+?)" rel="prev">')
     help = 'Index format: nnn'
@@ -199,6 +207,7 @@ class WormWorldSagaFrench(WormWorldSaga):
 class WotNow(_BasicScraper):
     url = 'http://shadowburn.binmode.com/wotnow/'
     stripUrl = url + 'comic.php?comic_id=%s'
+    firstStripUrl = stripUrl % '1'
     imageSearch = compile(r'<IMG SRC="(comics/.+?)"')
     prevSearch = compile(r'<A HREF="(.+?)"><IMG SRC="images/b_prev.gif" ')
     help = 'Index format: n (unpadded)'

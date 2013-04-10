@@ -74,9 +74,12 @@ class AetheriaEpics(_BasicScraper):
 
 
 class AfterStrife(_BasicScraper):
-    url = 'http://afterstrife.com/?p=262'
-    stripUrl = 'http://afterstrife.com/?p=%s'
-    imageSearch = compile(r'<img src="(http://afterstrife.com/strips/.+?)"')
+    baseurl = 'http://afterstrife.com/'
+    rurl = escape(baseurl)
+    stripUrl = baseurl + '?p=%s'
+    url = stripUrl % '262'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = compile(r'<img src="(%sstrips/.+?)"' % rurl)
     prevSearch = compile(r'<a href="(.+?)" class="navi navi-prev"')
     help = 'Index format: nnn'
 
@@ -145,18 +148,21 @@ class AlienLovesPredator(_BasicScraper):
 
 
 class AlienShores(_BasicScraper):
-    url = 'http://alienshores.com/alienshores_band/'
+    baseurl = 'http://alienshores.com/'
+    rurl = escape(baseurl)
+    url = baseurl + 'alienshores_band/'
     stripUrl = url + '%s'
-    imageSearch = compile(tagre("img", "src", r'(http://alienshores\.com/alienshores_band/wp-content/uploads/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://alienshores\.com/[^"]+)', after="prev"))
+    imageSearch = compile(tagre("img", "src", r'(%salienshores_band/wp-content/uploads/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/p<nn>/'
 
 
 class ALLCAPS(_BasicScraper):
     url = 'http://www.allcapscomix.com/'
+    rurl = escape(url)
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2008/08/welcome-to-all-caps'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.allcapscomix\.com/comics/[^"]+)'))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'([^"]+)')+r"[^<]+Previous</a>")
     help = 'Index format: yyyy/mm/strip-name'
 
@@ -199,16 +205,17 @@ class AlsoBagels(_BasicScraper):
 
 class Altermeta(_BasicScraper):
     url = 'http://altermeta.net/'
+    rurl = escape(url)
     stripUrl = url + 'archive.php?comic=%s'
     firstStripUrl = stripUrl % '0'
     imageSearch = compile(r'<img src="(comics/[^"]+)" />')
-    prevSearch = compile(r'<a href="([^"]+)"><img src="http://altermeta\.net/template/default/images/sasha/back\.png')
+    prevSearch = compile(r'<a href="([^"]+)"><img src="%stemplate/default/images/sasha/back\.png' % rurl)
     help = 'Index format: n (unpadded)'
 
 
 class AltermetaOld(Altermeta):
-    url = 'http://altermeta.net/oldarchive/index.php'
-    stripUrl = 'http://altermeta.net/oldarchive/archive.php?comic=%s'
+    url = Altermeta.url + 'oldarchive/index.php'
+    stripUrl = Altermeta.url + 'oldarchive/archive.php?comic=%s'
     firstStripUrl = stripUrl % '0'
     prevSearch = compile(r'<a href="([^"]+)">Back')
 
@@ -227,6 +234,7 @@ class Amya(_BasicScraper):
     url = 'http://www.amyachronicles.com/'
     rurl = escape(url)
     stripUrl = url + 'archives/%s'
+    firstStripUrl = stripUrl % '117'
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%sarchives/\d+)' % rurl, after="Previous"))
     help = 'Index format: n'
@@ -250,10 +258,12 @@ class Angels2200(_BasicScraper):
 
 
 class Annyseed(_BasicScraper):
-    url = 'http://www.colourofivy.com/annyseed_webcomic_latest.htm'
-    stripUrl = 'http://www.colourofivy.com/annyseed_webcomic%s.htm'
+    baseurl = 'http://www.colourofivy.com/'
+    rurl = escape(baseurl)
+    url = baseurl + 'annyseed_webcomic_latest.htm'
+    stripUrl = baseurl + 'annyseed_webcomic%s.htm'
     imageSearch = compile(tagre("img", "src", r'(Annyseed[^"]+)'))
-    prevSearch = compile(r'<a href="(http://www\.colourofivy\.com/[^"]+)"><img src="Last.gif"')
+    prevSearch = compile(r'<a href="(%s[^"]+)"><img src="Last.gif"' % rurl)
     help = 'Index format: nnn'
 
 

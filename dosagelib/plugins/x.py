@@ -13,6 +13,7 @@ class xkcd(_BasicScraper):
     url = 'http://xkcd.com/'
     starter = bounceStarter(url, compile(tagre("a", "href", r'(/\d+/)', before="next")))
     stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(http://imgs\.xkcd\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/\d+/)', before="prev"))
     help = 'Index format: n (unpadded)'

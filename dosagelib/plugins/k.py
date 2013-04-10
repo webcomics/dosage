@@ -73,6 +73,7 @@ class _Kofightclub(_BasicScraper):
 class Krakow(_BasicScraper):
     url = 'http://www.krakow.krakowstudios.com/'
     stripUrl = url + 'archive.php?date=%s'
+    firstStripUrl = stripUrl % '20081111'
     imageSearch = compile(r'<img src="(comics/.+?)"')
     prevSearch = compile(r'<a href="(archive\.php\?date=.+?)"><img border=0 name=previous_day')
     help = 'Index format: yyyymmdd'
@@ -82,6 +83,7 @@ class Kukuburi(_BasicScraper):
     baseurl = 'http://www.kukuburi.com/'
     url = baseurl + 'current/'
     stripUrl = baseurl + 'v2/%s/'
+    firstStripUrl = stripUrl % '2007/08/09/one'
     imageSearch = compile(tagre("img", "src", r'(http://www\.kukuburi\.com/v2/comics/[^"]+)', after='alt="[^"]'))
     prevSearch = compile(r'nav-previous.+?"(http.+?)"')
     help = 'Index format: yyyy/mm/dd/stripname'

@@ -10,7 +10,8 @@ from ..util import tagre
 
 class Namesake(_BasicScraper):
     url = 'http://namesakecomic.com/'
-    stripUrl = url + 'comic/%s'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'prologue-cover-3'
     imageSearch = compile(tagre("img", "src", r'([^"]*/wp-content/uploads/[^"]+)', after='title='))
     prevSearch = compile(tagre("a", "href", r'([^"]*/comic/[^"]+)', after='navi-prev'))
     help = 'Index format: name'
@@ -25,6 +26,7 @@ class NamirDeiter(_BasicScraper):
     url = 'http://www.namirdeiter.com/'
     rurl = escape(url)
     stripUrl = url + 'comics/index.php?date=%s'
+    firstStripUrl = stripUrl % '19991128'
     imageSearch = compile(tagre("img", "src", r"'?(%scomics/\d+\.jpg)'?" % rurl, quote=""))
     prevSearch = compile(tagre("a", "href", r'(%scomics/index\.php\?date=\d+)' % rurl, quote="'")+"Previous")
     help = 'Index format: yyyymmdd'
@@ -34,6 +36,7 @@ class Nedroid(_BasicScraper):
     url = 'http://nedroid.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2005/09/2210-whee'
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/name'
@@ -42,6 +45,7 @@ class Nedroid(_BasicScraper):
 class NeoEarth(_BasicScraper):
     url = 'http://www.neo-earth.com/NE/'
     stripUrl = url + 'index.php?date=%s'
+    firstStripUrl = stripUrl % '2007-03-23'
     imageSearch = compile(r'<img src="(strips/.+?)"')
     prevSearch = compile(r'<a href="(.+?)">Previous</a>')
     help = 'Index format: yyyy-mm-dd'
@@ -56,7 +60,8 @@ class NewAdventuresOfBobbin(_BasicScraper):
 
 class NewWorld(_BasicScraper):
     url = 'http://www.tfsnewworld.com/'
-    stripUrl = url + '%s'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2007/08/30/63'
     imageSearch = compile(r'<img src="(http://www.tfsnewworld.com/comics/.+?)"')
     prevSearch = compile(r'<div class="nav-previous"><a href="([^"]+)" rel="prev">')
     help = 'Index format: yyyy/mm/dd/stripn'
@@ -66,6 +71,7 @@ class Nicky510(_BasicScraper):
     url = 'http://www.nickyitis.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % 'close-enough'
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl, after="Previous"))
     help = 'Index format: stripname'
@@ -74,6 +80,7 @@ class Nicky510(_BasicScraper):
 class NekkoAndJoruba(_BasicScraper):
     url = 'http://www.nekkoandjoruba.com/'
     stripUrl = url + '?p=%s'
+    firstStripUrl = stripUrl % '7'
     imageSearch = compile(r'<img src="(http://www\.nekkoandjoruba\.com/comics/.+?)"')
     prevSearch = compile(r'<a href="(.+?)">&lsaquo;</a>')
     help = 'Index format: nnn'
@@ -83,6 +90,7 @@ class NekoTheKitty(_BasicScraper):
     url = 'http://www.nekothekitty.net/'
     rurl = escape(url)
     stripUrl = url + 'comics/%s'
+    firstStripUrl = stripUrl % '936393/001-video-games'
     starter = bounceStarter(url, compile(tagre("a", "href", r'(%scomics/[^"]+)' % rurl) +
       tagre("img", "src", r'%sfiles/smallnext\.png' % rurl)))
     imageSearch = compile(tagre("img", "src", r'(http://(?:img\d+|www)\.smackjeeves\.com/images/uploaded/comics/[^"]+)'))
@@ -125,6 +133,7 @@ class NobodyScores(_BasicScraper):
     url = 'http://nobodyscores.loosenutstudio.com/'
     rurl = escape(url)
     stripUrl = url + 'index.php?id=%s'
+    firstStripUrl = stripUrl % '4'
     imageSearch = compile(tagre("img", "src", r'(%scomix/[^"]+)' % rurl))
     multipleImagesPerStrip = True
     prevSearch = compile(r'<a href="(%sindex.php.+?)">the one before </a>' % rurl)
@@ -144,6 +153,7 @@ class NoNeedForBushido(_BasicScraper):
 class Nukees(_BasicScraper):
     url = 'http://www.nukees.com/'
     stripUrl = url + 'd/%s'
+    firstStripUrl = stripUrl % '19970121'
     imageSearch = compile(r'"comic".+?"(/comics/.+?)"')
     prevSearch = compile(r'"(/d/.+?)".+?previous')
     help = 'Index format: yyyymmdd.html'

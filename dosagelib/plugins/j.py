@@ -11,6 +11,7 @@ class JackCannon(_BasicScraper):
     url = 'http://fancyadventures.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2008/07/07/2008-07-08'
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/page-nnn'
@@ -19,6 +20,7 @@ class JackCannon(_BasicScraper):
 class JerkCity(_BasicScraper):
     url = 'http://www.jerkcity.com/'
     stripUrl = url + '_jerkcity%s.html'
+    firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(/jerkcity[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/_jerkcity[^"]+)') + r'&lt;&lt;Previous')
     help = 'Index format: n'
@@ -35,6 +37,7 @@ class JoeAndMonkey(_BasicScraper):
 class JohnnyWander(_BasicScraper):
     url = 'http://www.johnnywander.com/'
     stripUrl = url + 'comics/%s'
+    firstStripUrl = stripUrl % '423'
     imageSearch = compile(tagre("img", "src", r'(http://www\.johnnywander\.com/files/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/comics/\d+)') + r'prev')
     help = 'Index format: nnn'

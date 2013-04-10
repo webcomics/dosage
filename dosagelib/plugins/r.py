@@ -19,6 +19,7 @@ class RadioactivePanda(_BasicScraper):
 class RealLife(_BasicScraper):
     url = 'http://www.reallifecomics.com/'
     stripUrl = url + 'archive/%s.html'
+    firstStripUrl = stripUrl % '991115'
     imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/archive/\d+.html)') + tagre("img", "src", r'/images/nav_prev\.png'))
     help = 'Index format: yymmdd)'
@@ -38,6 +39,7 @@ class RedMeat(_BasicScraper):
     url = baseurl + 'current/index.html'
     starter = bounceStarter(url, compile(r'<a href="(\.\./\d{4}-\d{2}-\d{2}/index\.html)">next</a>'))
     stripUrl = baseurl + '%s/index.html'
+    firstStripUrl = stripUrl % '1996-06-10'
     imageSearch = compile(r'<img src="(index-1\.gif)" width="\d+" height="\d+" [^>]*>')
     prevSearch = compile(r'<a href="(\.\./\d{4}-\d{2}-\d{2}/index\.html)">previous</a>')
     help = 'Index format: yyyy-mm-dd'
@@ -50,6 +52,7 @@ class RedMeat(_BasicScraper):
 class RedString(_BasicScraper):
     url = 'http://www.redstring.strawberrycomics.com/'
     stripUrl = url + 'index.php?id=%s'
+    firstStripUrl = stripUrl % '434'
     imageSearch = compile(tagre("img", "src", r'(comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/index\.php\?id=\d+)', after="prev"))
     help = 'Index format: nnn'
@@ -58,6 +61,7 @@ class RedString(_BasicScraper):
 class Roza(_BasicScraper):
     url = 'http://www.junglestudio.com/roza/index.php'
     stripUrl = url + '?date=%s'
+    firstStripUrl = stripUrl % '2007-05-01'
     imageSearch = compile(r'<img src="(pages/.+?)"')
     prevSearch = compile(r'<a href="(index.php\?date=.+?)">[^>].+?navtable_01.gif')
     help = 'Index format: yyyy-mm-dd'

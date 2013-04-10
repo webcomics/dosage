@@ -22,6 +22,7 @@ class LeastICouldDo(_BasicScraper):
     url = 'http://www.leasticoulddo.com/'
     rurl = escape(url)
     stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % '20130109'
     imageSearch = compile(tagre("img", "src", r'(http://cdn\.leasticoulddo\.com/wp-content/uploads/\d+/\d+/\d{8}\.\w{1,4})'))
     prevSearch = compile(tagre("a", "href", r'(%scomic/\d+/)' % rurl, after="Previous"))
     starter = indirectStarter(url,
@@ -32,7 +33,8 @@ class LeastICouldDo(_BasicScraper):
 class Lint(_BasicScraper):
     url = 'http://www.purnicellin.com/lint/'
     rurl = escape(url)
-    stripUrl = url + '%s'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2004/01/10/01102004'
     imageSearch = compile(r'<img src="(%scomics/.+?)"' % rurl)
     prevSearch = compile(r'\| <a href="([^"]+)" rel="prev">')
     help = 'Index format: yyyy/mm/dd/num-name'
@@ -41,6 +43,7 @@ class Lint(_BasicScraper):
 class LittleGamers(_BasicScraper):
     url = 'http://www.little-gamers.com/'
     stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2000/12/01/99'
     imageSearch = compile(tagre("img", "src", r'(http://little-gamers\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.little-gamers\.com/[^"]+)', before="comic-nav-prev-link"))
     help = 'Index format: yyyy/mm/dd/name'
@@ -60,8 +63,10 @@ class LookingForGroup(_BasicScraper):
     url = 'http://www.lfgcomic.com/'
     rurl = escape(url)
     stripUrl = url + 'page/%s/'
+    firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(http://cdn\.lfgcomic\.com/wp-content/uploads/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(%spage/\d+/)' % rurl, after="navtop-prev"))
-    starter = indirectStarter(url, compile(tagre("a", "href", r'(%spage/\d+/)' % rurl, after="feature-previous")))
-    nameSearch = compile(r'/page/(\d+)/')
+    prevSearch = compile(tagre("a", "href", r'(%spage/[-0-9]+/)' % rurl, after="navtop-prev"))
+    starter = indirectStarter(url,
+        compile(tagre("a", "href", r'(%spage/[-0-9]+/)' % rurl, after="feature-previous")))
+    nameSearch = compile(r'/page/([-0-9]+)/')
     help = 'Index format: nnn'

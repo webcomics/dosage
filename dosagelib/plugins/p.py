@@ -12,6 +12,7 @@ class PandyLand(_BasicScraper):
     url = 'http://pandyland.net/'
     rurl = escape(url)
     stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch =  compile(tagre("a", "href", r'(%s\d+/)' % rurl, after="prev"))
     help = 'Index format: number'
@@ -42,6 +43,7 @@ class PartiallyClips(_BasicScraper):
     url = 'http://partiallyclips.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2001/10/28/screaming-woman'
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/stripname'
@@ -51,6 +53,7 @@ class PastelDefender(_BasicScraper):
     baseurl = 'http://www.pasteldefender.com/'
     url = baseurl + 'coverbackcover.html'
     stripUrl = baseurl + '%s.html'
+    firstStripUrl = stripUrl % 'cover'
     imageSearch = compile(r'<IMG SRC="(images/.+?)" WIDTH="742"')
     prevSearch = compile(r'<A HREF="([^"]+)"><IMG SRC="images/back\.gif"')
     help = 'Index format: nnn'
@@ -82,6 +85,7 @@ class PennyArcade(_BasicScraper):
        compile(tagre("a", "href", r'(%s[^"]+)' % rurl, before="btnNext"))
     )
     stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '1998/11/18'
     imageSearch = compile(tagre("img", "src", r'(http://art\.penny-arcade\.com/photos/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, before="btnPrev"))
     help = 'Index format: yyyy/mm/dd'
@@ -96,6 +100,7 @@ class PeppermintSaga(_BasicScraper):
     url = 'http://www.pepsaga.com/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'
+    firstStripUrl = stripUrl % '3'
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl, after="prev"))
     help = 'Index format: number'
@@ -116,6 +121,7 @@ class PicPakDog(_BasicScraper):
     url = 'http://www.picpak.net/'
     rurl = escape(url)
     stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'dogs-cant-spell'
     imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/\d+-\d+-\d+-[^"]+\.png)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl, after="navi-prev"))
     help = 'Index format: stripname'
@@ -124,9 +130,10 @@ class PicPakDog(_BasicScraper):
 class Pixel(_BasicScraper):
     url = 'http://pixelcomic.net/'
     rurl = escape(url)
-    stripUrl = url + '%s.php'
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '000.shtml'
     imageSearch = compile(tagre("img", "src", r'(\d+\.png)'))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+\.php)' % rurl, before="prev"))
+    prevSearch = compile(tagre("a", "href", r'(%s\d+\.(?:php|shtml))' % rurl, before="prev"))
     help = 'Index format: nnn'
 
 
@@ -134,6 +141,7 @@ class PiledHigherAndDeeper(_BasicScraper):
     url = 'http://www.phdcomics.com/comics/archive.php'
     starter = bounceStarter(url, compile(r'<a href=(archive\.php\?comicid=\d+)><img height=52 width=49 src=images/next_button\.gif border=0 align=middle>'))
     stripUrl = url + '?comicid=%s'
+    firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(http://www\.phdcomics\.com/comics/archive/phd\d+s?\.gif)', quote=""))
     prevSearch = compile(r'<a href=(archive\.php\?comicid=\d+)><img height=52 width=49 src=images/prev_button\.gif border=0 align=middle>')
     help = 'Index format: n (unpadded)'
@@ -143,6 +151,7 @@ class PiledHigherAndDeeper(_BasicScraper):
 class Pimpette(_BasicScraper):
     url = 'http://pimpette.ca/'
     stripUrl = url + 'index.php?date=%s'
+    firstStripUrl = stripUrl % '20030905'
     imageSearch = compile(tagre("img", "src", r'(strips/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(index\.php\?date=\d+)') + "Previous")
     help = 'Index format: yyyymmdd'
@@ -189,6 +198,7 @@ class Precocious(_BasicScraper):
 class ProperBarn(_BasicScraper):
     url = 'http://www.nitrocosm.com/go/gag/'
     stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(http://content\.nitrocosm\.com/gag/\d+\.[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.nitrocosm\.com/go/gag/\d+/)', after="nav_btn_previous"))
     help = 'Index format: nnn'
@@ -198,6 +208,7 @@ class PunksAndNerds(_BasicScraper):
     url = 'http://www.punksandnerds.com/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'
+    firstStripUrl = stripUrl % '15'
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl, after="navi-prev"))
     help = 'Index format: nnn'

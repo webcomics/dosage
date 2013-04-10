@@ -51,9 +51,10 @@ class HijinksEnsue(_BasicScraper):
     url = 'http://hijinksensue.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2007/05/11/a-soul-as-black-as-eyeliner'
     imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl, after="navi-prev"))
-    help = 'Index format: yyyy/mm/dd/name'
+    help = 'Index format: yyyy/mm/dd/stripname'
 
 
 class Hipsters(_BasicScraper):
@@ -69,6 +70,7 @@ class Hipsters(_BasicScraper):
 class HorribleVille(_BasicScraper):
     url = 'http://horribleville.com/'
     stripUrl = url + 'd/%s.html'
+    firstStripUrl = stripUrl % '20051220'
     imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/d/[^"]+)') + tagre("img", "src", r'/images/previous\.png'))
     help = 'Index format: yyyymmdd'

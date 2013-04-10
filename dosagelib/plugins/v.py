@@ -11,6 +11,7 @@ from ..util import tagre
 class VampireCheerleaders(_BasicScraper):
     url = 'http://www.vampirecheerleaders.net/'
     stripUrl = url + 'strips-vc/%s'
+    firstStripUrl = stripUrl % 'fang_service'
     imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.vampirecheerleaders\.net/strips-vc/[^"]+)', before="cndprev"))
     help = 'Index format: name'
@@ -28,6 +29,7 @@ class Vendetta(_BasicScraper):
 class VGCats(_BasicScraper):
     url = 'http://www.vgcats.com/comics/'
     stripUrl = url + '?strip_id=%s'
+    firstStripUrl = stripUrl % '0'
     imageSearch = compile(tagre("img", "src", r'(images/\d{6}\.[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(\?strip_id=\d+)') +
       tagre("img", "src", r"back\.gif"))
@@ -49,6 +51,7 @@ class VGCatsAdventure(VGCats):
 class VictimsOfTheSystem(_BasicScraper):
     url = 'http://www.votscomic.com/'
     stripUrl = url + '?id=%s.jpg'
+    firstStripUrl = stripUrl % '070103-002452'
     imageSearch = compile(tagre("img", "src", r'(comicpro/strips/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(\?id=\d+-\d+\.jpg)') + "Previous")
     help = 'Index format: nnn-nnn'

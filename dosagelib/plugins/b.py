@@ -155,6 +155,7 @@ class BloodBound(_BasicScraper):
 class BlueCrashKit(_BasicScraper):
     url = 'http://robhamm.com/bluecrashkit/'
     stripUrl = url + 'comics/blue-crash-kit/%s'
+    firstStripUrl = stripUrl % '2005-01-03'
     imageSearch = compile(tagre("img", "src", r'(http://robhamm\.com/bluecrashkit/sites/default/files/comics/[^"]+)'))
     prevSearch = compile(r'<li class="previous"><a href="([^"]+)">')
     help = 'Index format: yyyy-mm-dd'
@@ -181,10 +182,11 @@ class BobWhite(_BasicScraper):
 
 class BookOfBiff(_BasicScraper):
     url = 'http://www.thebookofbiff.com/'
-    stripUrl = url + '%s'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2006/01/02/4'
     imageSearch = compile(tagre("img", "src", r'([^"]+/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)', after="Previous"))
-    help = 'Index format: yyyy/mm/dd/stripnum-strip-name'
+    help = 'Index format: yyyy/mm/dd/stripnum-stripname'
 
 
 class BoredAndEvil(_BasicScraper):
@@ -287,6 +289,7 @@ class Brink(_BasicScraper):
     url = 'http://paperfangs.com/brink/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'
+    firstStripUrl = stripUrl % '5'
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
     help = 'Index format: number'
