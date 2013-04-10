@@ -13,6 +13,7 @@ Fixes:
   Closes: GH bug #22
 - comics: Fixed Curvy, DasLebenIstKeinPonyhof, ExtraLife, EyeOfRamalach,
   KatzenfutterGeleespritzer, Oglaf, Precocious, SnowFlame.
+  Closes: GH bug #23
 - comics: Removed CaribbeanBlue, GreystoneInn, SarahZero.
 
 
