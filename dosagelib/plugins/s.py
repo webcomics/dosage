@@ -313,6 +313,16 @@ class SpaceTrawler(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
+class Spamusement(_BasicScraper):
+    url = 'http://spamusement.com/'
+    rurl = escape(url)
+    stripUrl = url + 'index.php/comics/view/%s'
+    imageSearch = compile(r'<img src="(%sgfx/\d+\..+?)"' % rurl, IGNORECASE)
+    prevSearch = compile(r'<a href="(%sindex.php/comics/view/.+?)">' % rurl, IGNORECASE)
+    help = 'Index format: n (unpadded)'
+    starter = indirectStarter(url, prevSearch)
+
+
 class SpareParts(_BasicScraper):
     baseUrl = 'http://www.sparepartscomics.com/'
     url = baseUrl + 'comics/?date=20080328'
@@ -447,16 +457,6 @@ class StarCrossdDestiny(_BasicScraper):
         directory, filename = imageUrl.split('/')[-2:]
         filename, extension = splitext(filename)
         return directory + '-' + filename
-
-
-class Spamusement(_BasicScraper):
-    url = 'http://spamusement.com/'
-    rurl = escape(url)
-    stripUrl = url + 'index.php/comics/view/%s'
-    imageSearch = compile(r'<img src="(%sgfx/\d+\..+?)"' % rurl, IGNORECASE)
-    prevSearch = compile(r'<a href="(%sindex.php/comics/view/.+?)">' % rurl, IGNORECASE)
-    help = 'Index format: n (unpadded)'
-    starter = indirectStarter(url, prevSearch)
 
 
 # XXX disallowed by robots.txt

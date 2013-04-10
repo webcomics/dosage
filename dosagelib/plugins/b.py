@@ -169,12 +169,60 @@ class BMovieComic(_BasicScraper):
     help = 'Index format: n'
 
 
+class BobWhite(_BasicScraper):
+    url = 'http://www.bobwhitecomics.com/'
+    rurl = escape(url)
+    stripUrl = url + '?webcomic_post=%s'
+    firstStripUrl = stripUrl % '20110504'
+    imageSearch = compile(tagre("img", "src", r"(%swp/wp-content/webcomic/untitled/\d+.jpg)" % rurl))
+    prevSearch = compile(tagre("a", "href", "(%s\?webcomic_post=\d+)" % rurl)+r'[^"]+Previous')
+    help = 'Index format: yyyymmdd'
+
+
 class BookOfBiff(_BasicScraper):
     url = 'http://www.thebookofbiff.com/'
     stripUrl = url + '%s'
     imageSearch = compile(tagre("img", "src", r'([^"]+/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)', after="Previous"))
     help = 'Index format: yyyy/mm/dd/stripnum-strip-name'
+
+
+class BoredAndEvil(_BasicScraper):
+    url = 'http://www.boredandevil.com/'
+    stripUrl = url + '?date=%s'
+    firstStripUrl = stripUrl % '2004-06-07'
+    imageSearch = compile(tagre("img", "src", r'(strips/[^"]+)'))
+    prevSearch = compile(r'First Comic.+<a href="(.+?)".+previous-on.gif')
+    starter = indirectStarter(url, prevSearch)
+    help = 'Index format: yyyy-mm-dd'
+
+
+class BoxerHockey(_BasicScraper):
+    url = 'http://boxerhockey.fireball20xl.com/'
+    stripUrl = url + '?id=%s'
+    firstStripUrl = stripUrl % '56'
+    imageSearch = compile(tagre("img", "src", r'(img/comic/[^"]+)', after="comicimg"))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.boxerhockey\.com/\?id=\d+)') +
+        r'[^>]+Previous')
+    help = 'Index format: n (unpadded)'
+
+    @classmethod
+    def prevUrlModifier(cls, prevUrl):
+        if prevUrl:
+            return prevUrl.replace("www.boxerhockey.com", "boxerhockey.fireball20xl.com")
+
+
+class BoyOnAStickAndSlither(_BasicScraper):
+    url = 'http://www.boasas.com/'
+    stripUrl = url + 'page/%s'
+    firstStripUrl = stripUrl % '2'
+    imageSearch = compile(tagre("img", "src", r'(http://\d+\.media\.tumblr\.com/[^"]+_1280\.png)'))
+    prevSearch = compile(tagre("a", "href", r'(/page/\d+)') + "<span>Next page")
+    help = 'Index format: n (unpadded)'
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        return pageUrl.rsplit('/')[-1]
 
 
 class BratHalla(_BasicScraper):
@@ -242,54 +290,6 @@ class Brink(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
     help = 'Index format: number'
-
-
-class BobWhite(_BasicScraper):
-    url = 'http://www.bobwhitecomics.com/'
-    rurl = escape(url)
-    stripUrl = url + '?webcomic_post=%s'
-    firstStripUrl = stripUrl % '20110504'
-    imageSearch = compile(tagre("img", "src", r"(%swp/wp-content/webcomic/untitled/\d+.jpg)" % rurl))
-    prevSearch = compile(tagre("a", "href", "(%s\?webcomic_post=\d+)" % rurl)+r'[^"]+Previous')
-    help = 'Index format: yyyymmdd'
-
-
-class BoredAndEvil(_BasicScraper):
-    url = 'http://www.boredandevil.com/'
-    stripUrl = url + '?date=%s'
-    firstStripUrl = stripUrl % '2004-06-07'
-    imageSearch = compile(tagre("img", "src", r'(strips/[^"]+)'))
-    prevSearch = compile(r'First Comic.+<a href="(.+?)".+previous-on.gif')
-    starter = indirectStarter(url, prevSearch)
-    help = 'Index format: yyyy-mm-dd'
-
-
-class BoxerHockey(_BasicScraper):
-    url = 'http://boxerhockey.fireball20xl.com/'
-    stripUrl = url + '?id=%s'
-    firstStripUrl = stripUrl % '56'
-    imageSearch = compile(tagre("img", "src", r'(img/comic/[^"]+)', after="comicimg"))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.boxerhockey\.com/\?id=\d+)') +
-        r'[^>]+Previous')
-    help = 'Index format: n (unpadded)'
-
-    @classmethod
-    def prevUrlModifier(cls, prevUrl):
-        if prevUrl:
-            return prevUrl.replace("www.boxerhockey.com", "boxerhockey.fireball20xl.com")
-
-
-class BoyOnAStickAndSlither(_BasicScraper):
-    url = 'http://www.boasas.com/'
-    stripUrl = url + 'page/%s'
-    firstStripUrl = stripUrl % '2'
-    imageSearch = compile(tagre("img", "src", r'(http://\d+\.media\.tumblr\.com/[^"]+_1280\.png)'))
-    prevSearch = compile(tagre("a", "href", r'(/page/\d+)') + "<span>Next page")
-    help = 'Index format: n (unpadded)'
-
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        return pageUrl.rsplit('/')[-1]
 
 
 class BrightlyWound(_BasicScraper):

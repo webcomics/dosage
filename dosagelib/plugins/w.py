@@ -80,6 +80,15 @@ class WhiteNinja(_BasicScraper):
     help = 'Index format: s (comic name)'
 
 
+class WhiteNoise(_BasicScraper):
+    baseurl = 'http://www.wncomic.com/'
+    url = baseurl + 'archive.php'
+    stripUrl = baseurl + 'archive_comments.php?strip_id=%s'
+    imageSearch = compile(r'(istrip_files/strips/.+?)"')
+    prevSearch = compile(r'</a><a href="(.+?)"><img src="images/top_back.jpg" ')
+    help = 'Index format: n'
+
+
 class WhyTheLongFace(_BasicScraper):
     baseurl = 'http://www.absurdnotions.org/'
     rurl = escape(baseurl)
@@ -106,6 +115,14 @@ class Wonderella(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/name'
+
+
+class Wondermark(_BasicScraper):
+    url = 'http://wondermark.com/'
+    stripUrl = url + '%s/'
+    imageSearch = compile(r'<img src="(http://wondermark.com/c/.+?)"')
+    prevSearch = compile(r'<a href="(.+?)" rel="prev">')
+    help = 'Index format: nnn'
 
 
 class WorldOfMrToast(_BasicScraper):
@@ -201,20 +218,3 @@ class Wulffmorgenthaler(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(/img/strip/[^/"]+)'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)') + "<span>Previous")
     help = 'Index format: yyyy/mm/dd'
-
-
-class WhiteNoise(_BasicScraper):
-    baseurl = 'http://www.wncomic.com/'
-    url = baseurl + 'archive.php'
-    stripUrl = baseurl + 'archive_comments.php?strip_id=%s'
-    imageSearch = compile(r'(istrip_files/strips/.+?)"')
-    prevSearch = compile(r'</a><a href="(.+?)"><img src="images/top_back.jpg" ')
-    help = 'Index format: n'
-
-
-class Wondermark(_BasicScraper):
-    url = 'http://wondermark.com/'
-    stripUrl = url + '%s/'
-    imageSearch = compile(r'<img src="(http://wondermark.com/c/.+?)"')
-    prevSearch = compile(r'<a href="(.+?)" rel="prev">')
-    help = 'Index format: nnn'

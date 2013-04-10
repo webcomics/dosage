@@ -186,14 +186,6 @@ class Precocious(_BasicScraper):
     help = 'Index format: yyyy/mm/dd'
 
 
-class PvPonline(_BasicScraper):
-    url = 'http://pvponline.com/comic'
-    stripUrl = url + '%s'
-    imageSearch = compile(tagre("img", "src", r'(http://s3[^"]+\.amazonaws\.com/pvponlinenew/img/comic/\d+/\d+/pvp[^"]+\.jpg)'))
-    prevSearch = compile(tagre("a", "href", r'(/comic/[^"]+)', after="Previous"))
-    help = 'Index format: yyyy/mm/dd/stripname'
-
-
 class ProperBarn(_BasicScraper):
     url = 'http://www.nitrocosm.com/go/gag/'
     stripUrl = url + '%s/'
@@ -217,3 +209,11 @@ class PunksAndNerdsOld(_BasicScraper):
     imageSearch = compile(r' src="(/comics/.+?)"')
     prevSearch = compile(r'><strong><a href="(.+?)"[^>]+?><img[^>]+?src="/previouscomic.gif">')
     help = 'Index format: yyyymmdd'
+
+
+class PvPonline(_BasicScraper):
+    url = 'http://pvponline.com/comic'
+    stripUrl = url + '%s'
+    imageSearch = compile(tagre("img", "src", r'(http://s3[^"]+\.amazonaws\.com/pvponlinenew/img/comic/\d+/\d+/pvp[^"]+\.jpg)'))
+    prevSearch = compile(tagre("a", "href", r'(/comic/[^"]+)', after="Previous"))
+    help = 'Index format: yyyy/mm/dd/stripname'
