@@ -55,7 +55,7 @@ homepage:
 	$(MAKE) -C doc/web release
 
 release: distclean releasecheck
-	$(MAKE) dist sign upload homepage tag register deb
+	$(MAKE) dist sign upload homepage tag register changelog deb
 
 tag:
 	git tag upstream/$(VERSION)
