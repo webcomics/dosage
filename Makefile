@@ -50,6 +50,8 @@ homepage:
 	@echo "lname: \"$(LAPPNAME)\"" >> $(WEB_META)
 	@echo "maintainer: \"$(MAINTAINER)\"" >> $(WEB_META)
 	@echo "author: \"$(AUTHOR)\"" >> $(WEB_META)
+	git add doc/web/app.yaml
+	git commit -m "Updated webpage meta info"
 # update documentation and release website
 	$(MAKE) -C doc
 	$(MAKE) -C doc/web release
