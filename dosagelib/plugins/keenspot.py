@@ -11,7 +11,8 @@ _imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]+)'))
 _stripPattern = r'([^"]*/d/\d{8}\.html)'
 _prevSearch = (
     compile(tagre("link", "href", _stripPattern, before="prev")),
-    compile(tagre("a", "href", _stripPattern, after="prev"))
+    compile(tagre("a", "href", _stripPattern, after="prev")),
+    compile(tagre("a", "href", _stripPattern) + tagre("img", "id", r"previous_day1")),
 )
 
 def add(name, url, description):

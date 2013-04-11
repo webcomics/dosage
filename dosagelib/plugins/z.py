@@ -10,10 +10,10 @@ from ..helpers import bounceStarter
 
 class ZapComic(_BasicScraper):
     url = 'http://www.zapcomic.com/'
-    rurl = escape(url)
+    rurl = escape(url[:-1]) # without trailing slash
     stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(%s\?comic_object=\d+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="previous-comic-link"))
+    imageSearch = compile(tagre("img", "src", r'(%s\?comic_object\=\d+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s/[^"]+)' % rurl, after="previous-comic-link"))
     help = 'Index format: yyyy/mm/nnn-stripname'
 
 

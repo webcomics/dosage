@@ -68,7 +68,7 @@ class GirlsWithSlingshots(_BasicScraper):
         compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl)),
         compile(tagre("img", "src", r'(http://cdn\.girlswithslingshots\.com/comics/[^"]+)')),
     )
-    prevSearch = compile(tagre("a", "href", r'(%s/comic/[^"]+)' % rurl, after="prev"))
+    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl, after="prev"))
     help = 'Index format: nnn'
 
 

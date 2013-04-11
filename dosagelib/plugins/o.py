@@ -43,7 +43,7 @@ class Oglaf(_BasicScraper):
     def starter(cls):
         # click the "I am 18" button
         data = {"over18": "&nbsp;"}
-        urlopen(cls.url, cls.session, data=data, stream=False, referrer=cls.url)
+        urlopen(cls.url, cls.session, data=data, referrer=cls.url)
         return cls.url
 
 
@@ -84,7 +84,7 @@ class OneQuestion(_BasicScraper):
     url = 'http://onequestioncomic.com/'
     stripUrl = url + 'comic.php?strip_id=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'((?:\.\./)?istrip_files/strips/\d+\.jpg)'))
+    imageSearch = compile(tagre("img", "src", r'((?:\.\./)?istrip_files/strips/\d+\.\w{3,4})'))
     prevSearch = compile(tagre("a", "href", r'(comic\.php\?strip_id=\d+)') + tagre("img", "src", r'img/arrow_prev\.jpg'))
     help = 'Index format: n (unpadded)'
 

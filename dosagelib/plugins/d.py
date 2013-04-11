@@ -251,7 +251,7 @@ class DresdenCodak(_BasicScraper):
     firstStripUrl = url + '2007/02/08/pom/'
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl) +
-        tagre("img", "src", r"%sm_prev2?\.png" % rurl))
+        tagre("img", "src", r"%sm_prev2?\.png" % rurl, quote=""))
     starter = indirectStarter(url, compile(tagre("div", "id", "preview") +
         tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl)))
 
@@ -278,10 +278,15 @@ class DrMcNinja(_BasicScraper):
 
 
 class Drowtales(_BasicScraper):
-    url = 'http://www.drowtales.com/mainarchive.php'
+    baseurl = 'http://www.drowtales.com/'
+    rurl = escape(baseurl)
+    url = baseurl + 'mainarchive.php'
     stripUrl = url + '?sid=%s'
     firstStripUrl = stripUrl % '4192'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.drowtales\.com/mainarchive/[^"]+)'))
+    imageSearch = (
+        compile(tagre("img", "src", r'(%smainarchive/[^"]+)' % rurl)),
+        compile(r'background-image:url\((mainarchive/[^\)]+center\.jpg)'),
+    )
     prevSearch = compile(tagre("a", "href", r'(\?sid=\d+)', before="link_prev_top"))
     help = 'Index format: number'
 

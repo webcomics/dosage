@@ -5,6 +5,8 @@
 from re import compile, escape, IGNORECASE
 from ..scraper import _BasicScraper
 from ..util import tagre
+from ..helpers import indirectStarter
+
 
 class KatzenfutterGeleespritzer(_BasicScraper):
     url = 'http://www.katzenfuttergeleespritzer.de/'
@@ -94,5 +96,6 @@ class KuroShouri(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + '?webcomic_post=%s'
     imageSearch = compile(tagre("img", "src", r"(%swp-content/webcomic/kuroshouri/[^'\"]+)" % rurl, quote="['\"]"))
-    prevSearch = compile(tagre("a", "href", r'(%s\?webcomic_post=[^"]+)' % rurl, after="previous"))
+    prevSearch = compile(tagre("a", "href", r'(%s\?webcomic_post\=[^"]+)' % rurl, after="previous"))
     help = 'Index format: chapter-n-page-m'
+    starter = indirectStarter(url, prevSearch)

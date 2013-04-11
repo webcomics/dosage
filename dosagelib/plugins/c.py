@@ -84,9 +84,9 @@ class CatsAndCameras(_BasicScraper):
     url = 'http://catsncameras.com/cnc/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'
-    imageSearch = compile(tagre("img", "src", r'(%scnc/comics/[^"]+)' % rurl))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch = compile(tagre("div", "class", r'nav-previous') +
-        tagre("a", "href", r'(%scnc/[^"]+)' % rurl))
+        tagre("a", "href", r'(%s[^"]+)' % rurl))
     help = 'Index format: nnn'
 
 
@@ -116,8 +116,8 @@ class ChannelAte(_BasicScraper):
     url = 'http://www.channelate.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)', after="prev"))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/name'
 
 

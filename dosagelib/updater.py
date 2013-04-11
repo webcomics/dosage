@@ -42,7 +42,7 @@ def check_update ():
 def get_online_version ():
     """Download update info and parse it."""
     session = requests.session()
-    page = urlopen(UPDATE_URL, session, stream=False)
+    page = urlopen(UPDATE_URL, session)
     version, url = None, None
     for line in page.text.splitlines():
         if line.startswith(VERSION_TAG):

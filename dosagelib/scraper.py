@@ -107,6 +107,9 @@ class _BasicScraper(object):
         if len(imageUrls) > 1 and not self.multipleImagesPerStrip:
             patterns = [x.pattern for x in makeSequence(self.imageSearch)]
             out.warn("found %d images instead of 1 at %s with patterns %s" % (len(imageUrls), url, patterns))
+            image = sorted(imageUrls)[0]
+            out.warn("choosing image %s" % image)
+            imageUrls = (image,)
         elif not imageUrls:
             patterns = [x.pattern for x in makeSequence(self.imageSearch)]
             out.warn("found no images at %s with patterns %s" % (url, patterns))
@@ -231,7 +234,7 @@ class _BasicScraper(object):
         url = configuration.VoteUrl + 'count/'
         uid = get_system_uid()
         data = {"name": cls.getName().replace('/', '_'), "uid": uid}
-        page = urlopen(url, cls.session, data=data, stream=False)
+        page = urlopen(url, cls.session, data=data)
         return page.text
 
 

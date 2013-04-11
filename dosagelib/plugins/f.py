@@ -169,7 +169,7 @@ class FredoAndPidjin(_BasicScraper):
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2006/02/19/goofy-monday'
     help = 'Index format: yyyy/mm/dd/name'
-    imageSearch = compile(tagre('img', 'src', '(http://cdn\.pidjin\.net/wp-content/uploads/\d+/\d+/[^"]+\.png)'))
+    imageSearch = compile(tagre('img', 'src', '(http://cdn\.pidjin\.net/wp-content/uploads/\d+/\d+/[^"]+\.[a-z]+)'))
     multipleImagesPerStrip = True
     prevSearch = compile(tagre('a', 'href', '([^"]+)')+"Prev</a>")
     starter = indirectStarter(url,

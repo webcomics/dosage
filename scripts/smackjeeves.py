@@ -18,6 +18,7 @@ json_file = __file__.replace(".py", ".json")
 
 # names of comics to exclude
 exclude_comics = [
+    "9Lives", # missing images
     "ADifferentPerspective", # does not follow standard layout
     "AFairlyTwistedRealitySuper", # does not follow standard layout
     "Ahoge", # does not follow standard layout
@@ -25,6 +26,9 @@ exclude_comics = [
     "AreyougayJohnny", # does not follow standard layout
     "Authorbattlesthevideogame", # missing images
     "BambooArmonicKnightsGuild", # missing previous link
+    "BreIshurnasspritesandstuff", # comic moved
+    "CatboyattheCon", # missing images
+    "ContraandtheSpamDump", # missing images
     "ClubLove", # does not follow standard layout
     "Darkkyosshorts", # missing images
     "DeSTRESS", # does not follow standard layout
@@ -43,6 +47,8 @@ exclude_comics = [
     "KirbysoftheAlternateDimension", # missing images
     "LoudEra", # does not follow standard layout
     "LunarHill", # does not follow standard layout
+    "Mafiagame", # does not follow standard layout
+    "MegaManSpriteExpo", # missing images
     "MyLifewithFelENESPANOL", # does not follow standard layout
     "MylifewithFel", # does not follow standard layout
     "NegativeZen", # does not follow standard layout
@@ -53,18 +59,24 @@ exclude_comics = [
     "OmnisSpriteShowcase", # missing images
     "OpticalDisarray", # does not follow standard layout
     "PicturesofYou", # does not follow standard layout
+    "PiecesofBrokenGlass", # broken images
     "PlatonicManagementDilemma", # missing images
     "Pornjunkiesstrip", # does not follow standard layout
     "PrettyUgly", # does not follow standard layout
     "Project217", # does not follow standard layout
+    "RemmyzRandomz", # does not follow standard layout
     "Ribon", # does not follow standard layout
+    "RubysWorld", # does not follow standard layout
     "SecretSanta2011", # missing images
     "ShinkaTheLastEevee", # does not follow standard layout
     "SimplePixel", # does not follow standard layout
     "SJArtCollab", # missing images
+    "SladesMansionofawesomeness", # does not follow standard layout
     "SlightlyDifferent", # missing images
     "SpaceSchool", # does not follow standard layout
+    "SushiGummy", # does not follow standard layout
     "TheAfterSubtract", # does not follow standard layout
+    "ThePokemonArtBox", # does not follow standard layout
     "THEVOIDWEBCOMIC", # does not follow standard layout
     "ThreadCrashers", # has no previous comic link
     "TotallyKotor", # missing images

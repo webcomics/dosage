@@ -187,14 +187,14 @@ def getPageContent(url, session, max_content_bytes=MaxContentBytes):
     check_robotstxt(url, session)
     # read page data
     try:
-        page = urlopen(url, session, max_content_bytes=max_content_bytes, stream=False)
+        page = urlopen(url, session, max_content_bytes=max_content_bytes)
     except IOError:
-        page = urlopen(url, session, max_content_bytes=max_content_bytes, stream=False)
+        page = urlopen(url, session, max_content_bytes=max_content_bytes)
     data = page.text
     tries = MaxRetries
     while not isValidPageContent(data) and tries > 0:
         time.sleep(RetryPauseSeconds)
-        page = urlopen(url, session, max_content_bytes=max_content_bytes, stream=False)
+        page = urlopen(url, session, max_content_bytes=max_content_bytes)
         data = page.text
         tries -= 1
     if not isValidPageContent(data):
@@ -212,7 +212,7 @@ def getPageContent(url, session, max_content_bytes=MaxContentBytes):
 
 def getImageObject(url, referrer, session, max_content_bytes=MaxImageBytes):
     """Get response object for given image URL."""
-    return urlopen(url, session, referrer=referrer, max_content_bytes=max_content_bytes)
+    return urlopen(url, session, referrer=referrer, max_content_bytes=max_content_bytes, stream=True)
 
 
 def makeSequence(item):
@@ -314,7 +314,7 @@ def get_robotstxt_parser(url, session=None):
 
 def urlopen(url, session, referrer=None, max_content_bytes=None,
             timeout=ConnectionTimeoutSecs, raise_for_status=True,
-            stream=True, data=None):
+            stream=False, data=None):
     """Open an URL and return the response object."""
     out.debug('Open URL %s' % url)
     headers = {'User-Agent': UserAgent}

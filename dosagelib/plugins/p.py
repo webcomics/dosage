@@ -68,11 +68,11 @@ class PebbleVersion(_BasicScraper):
 
 
 class PennyAndAggie(_BasicScraper):
-    url = 'http://www.pennyandaggie.com/'
+    url = 'http://pennyandaggie.com/'
     rurl = escape(url)
     stripUrl = url + 'index.php?p=%s'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r"(index\.php\?p=\d+)", quote="'") +
+    imageSearch = compile(tagre("img", "src", r'(http://www\.pennyandaggie\.com/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r"(index\.php\?p\=\d+)", quote="'") +
                          tagre("img", "src", r'%simages/previous_day\.gif' % rurl, quote=""))
     starter = indirectStarter(url, prevSearch)
     help = 'Index format: n (unpadded)'

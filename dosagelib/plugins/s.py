@@ -453,7 +453,10 @@ class SuburbanTribe(_BasicScraper):
 class SomethingPositive(_BasicScraper):
     url = 'http://www.somethingpositive.net/'
     stripUrl = url + 'sp%s.shtml'
-    imageSearch = compile(tagre("img", "src", r'(sp\d+\.png)'))
+    imageSearch = (
+        compile(tagre("img", "src", r'(sp\d+\.png)')),
+        compile(tagre("img", "src", r'(twither\.gif)')),
+    )
     prevSearch = compile(tagre("a", "href", r'(sp\d+\.shtml)') +
       "(?:" + tagre("img", "src", r'images/previous\.gif') + "|Previous)")
     help = 'Index format: mmddyyyy'

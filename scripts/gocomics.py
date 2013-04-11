@@ -37,6 +37,7 @@ exclude_comics = [
     "GOODAndEVIL", # too few comics
     "InkeeDoodles", # comic unavailable
     "KALEECHIKORNERS", # too few comics
+    "LoveIs", # missing images
     "MaggiesComics", # too few comics
     "OfMiceandMud", # too few comics
     "OysterWar", # too few comics

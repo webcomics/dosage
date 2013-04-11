@@ -121,11 +121,11 @@ class BizarreUprising(_BasicScraper):
 
 class BlankIt(_BasicScraper):
     url = 'http://blankitcomics.com/'
-    stripUrl = url + 'blankit-%s'
+    stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '0001'
     imageSearch = compile(tagre("img", "src", r'(http://blankitcomics\.com/bicomics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)', after='rel="prev"'))
-    help = 'Index format: number'
+    help = 'Index format: stripname'
 
 
 class Blip(_BasicScraper):

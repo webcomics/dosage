@@ -42,11 +42,17 @@ class EerieCuties(_BasicScraper):
 
 class Eriadan(_BasicScraper):
     url = 'http://www.shockdom.com/webcomics/eriadan/'
-    stripUrl = url + '%s'
+    rurl = escape(url)
+    stripUrl = url + '%s/'
     multipleImagesPerStrip = True
-    imageSearch = compile(tagre("img", "src", r'(http://www\.shockdom\.com/webcomics/eriadan/files/[^"]+)', after='width="[68]00"'))
+    imageSearch = compile(tagre("img", "src", r'(%sfiles/[^"]+)' % rurl, after='width="[68]00"'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)', after="prev"))
     help = 'Index format: yyyy/mm/dd/nnn (unpadded)'
+
+    def shouldSkipUrl(self, url):
+        return url in (
+             self.stripUrl % "2013/04/02/istruzioni-per-il-non-uso", # video
+        )
 
 
 class ElfOnlyInn(_BasicScraper):
@@ -172,7 +178,7 @@ class ExtraLife(_BasicScraper):
 
 
 class ExtraOrdinary(_BasicScraper):
-    url = 'http://exocomics.com/'
+    url = 'http://www.exocomics.com/'
     rurl = escape(url)
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '01'

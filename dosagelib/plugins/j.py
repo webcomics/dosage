@@ -48,6 +48,6 @@ class JustAnotherEscape(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + 'index.cgi?date=%s'
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%sindex\.cgi\?date=\d+)' % rurl)
+    prevSearch = compile(tagre("a", "href", r'(%s/index\.cgi\?date=\d+)' % rurl)
      + tagre("img", "alt", "Previous Comic"))
     help = 'Index format: yyyymmdd'

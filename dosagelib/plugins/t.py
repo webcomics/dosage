@@ -78,7 +78,7 @@ class ThisIsIndexed(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/card[^"]+)' % rurl))
     multipleImagesPerStrip = True
     prevSearch = compile(tagre("div", "class", "nav-previous") +
-                         tagre("a", "href", r'(%spage/\d+/)' % rurl))
+                         tagre("a", "href", r'(%spage/\d+/)[^"]*' % rurl))
     help = 'Index format: number'
 
 
@@ -86,8 +86,8 @@ class ThunderAndLightning(_BasicScraper):
     url = 'http://www.talcomic.com/wp/'
     rurl = escape(url)
     stripUrl = url + '%s/'
-    prevSearch = compile(tagre("a", "href", r'(%swp/[^"]+)' % rurl, after="prev"))
-    imageSearch = compile(tagre("img", "src", r'(%swp/comics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     help = 'Index format: yyyy/mm/dd/page-nn'
 
     @classmethod
@@ -147,7 +147,7 @@ class TheWhiteboard(_BasicScraper):
 
 class HMHigh(_BasicScraper):
     name = 'TheFallenAngel/HMHigh'
-    baseurl = 'http://www.thefallenagel.co.uk/'
+    baseurl = 'http://www.thefallenangel.co.uk/'
     url = baseurl + 'hmhigh/'
     rurl = escape(baseurl)
     stripUrl = url + '?id=%s'

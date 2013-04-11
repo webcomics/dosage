@@ -16,11 +16,6 @@ json_file = __file__.replace(".py", ".json")
 
 # names of comics to exclude
 exclude_comics = [
-    "Monster_Lover", # start page is broken
-    "Legacy_of_Blaze", # broken images
-    "Dead_Strangers", # broken images
-    "Crack", # broken images
-    "Iron_Wolf", # broken images
     "A_Call_to_Destiny__NC_17", # start page requires login
     "A_Call_to_Destiny_Reloaded", # start page requires login
     "A_Day_in_the_Life_for_Erik", # broken images
@@ -33,16 +28,21 @@ exclude_comics = [
     "Art_dump", # broken images
     "Atxs", # broken images
     "A_Word_Of_Wisdom", # broken images
-    "Brathalla", # broken images
+    "Bhaddland", # start page requires login
     "Binary_Souls_Other_Dimensions", # broken images
     "BK_Shattered_Hate", # broken images
+    "Bouncing_Orbs_of_Beauty", # start page requires login
+    "Brathalla", # broken images
+    "Busty_Solar", # start page requires login
     "Caggage", # page moved
     "Chomp", # broken images
     "Chu_and_Kenny", # broken images
     "Coga_Suro_2", # broken images
+    "Crack", # broken images
     "Creepy_Girl_and_Her_Zombie_Dog", # broken images
     "CuoreVoodoo", # broken images
     "Dairyaire", # broken images
+    "Dead_Strangers", # broken images
     "DIS", # broken images
     "Dot_TXT", # broken images
     "Dreadnought_Invasion_Six", # broken images
@@ -57,29 +57,30 @@ exclude_comics = [
     "Greys_journey", # broken images
     "Head_over_Heart", # broken images
     "Hurrocks_Fardel", # broken images
-    "Bhaddland", # start page requires login
-    "Bouncing_Orbs_of_Beauty", # start page requires login
-    "Busty_Solar", # start page requires login
     "Illusional_Beauty", # broken images
     "Indigo_Bunting__Vampire", # start page requires login
     "Irrumator", # start page requires login
     "Its_A_Boy_Thing", # start page requires login
-    "Kokuahiru_comics", # start page requires login
     "Inside_OuT", # broken images
+    "Iron_Wolf", # broken images
     "Journey_to_Raifina", # broken images
     "KALA_dan", # broken images
+    "Kokuahiru_comics", # start page requires login
     "Kuro_Shouri", # page moved
+    "Legacy_of_Blaze", # broken images
     "Live_to_tell", # start page requires login
     "Locoma", # broken images
     "London_Underworld", # broken images
     "Louder_Than_Bombs", # broken images
     "Lucky_Dawg", # broken images
+    "Lugnor_Riders", # missing
     "Mario_in_Johto", # broken images
     "Mary_Sue_Academy", # borken images
     "Master", # start page requires login
     "Mastermind_BTRN", # broken images
     "MAYA_____The_legend_of_Wolf", # broken images
     "Megaman_Zero", # broken images
+    "Monster_Lover", # start page is broken
     "Monster_Lover_Destinys_Path", # start page requires login
     "M_Organ_Art", # start page requires login
     "Morning_Squirtz", # start page requires login
@@ -125,9 +126,9 @@ exclude_comics = [
     "Sonic_and_tails_corner", # broken images
     "Sonic_Unreal", # broken images
     "Space_Farmer", # start page requires login
-    "Tales_of_Schlock", # start page requires login
     "Splices_of_Life", # broken images
     "STARSEARCHERS", # broken images
+    "Tales_of_Schlock", # start page requires login
     "Ted_The_Terrible_Superhero", # broken images
     "Terra_online_comic", # broken images
     "The_Auragon_Base", # broken images
@@ -142,6 +143,8 @@ exclude_comics = [
     "The_SSA", # broken images
     "Tony_The_Hedgehog", # broken images
     "Trapped_in_a_Comic", # start page requires login
+    "Twonks_and_Plonkers", # broken images, no real content
+    "U_Chuu_No_Hoshi_Hotoshi_Tsuko", # broken images
     "Unsound_of_Mind", # broken images
     "Vampire_Chronicles__Dark_Lust", # start page requires login
     "WarMage", # start page requires login
@@ -155,8 +158,6 @@ exclude_comics = [
     "XTIN__The_Dragons_Dream_World", # start page requires login
     "X_UP", # start page requires login
     "Zandars_Saga", # start page requires login
-    "Twonks_and_Plonkers", # broken images, no real content
-    "U_Chuu_No_Hoshi_Hotoshi_Tsuko", # broken images
 ]
 
 

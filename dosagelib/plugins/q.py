@@ -22,6 +22,6 @@ class Qwantz(_BasicScraper):
     rurl = escape(baseurl)
     stripUrl = url + '?comic=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(%s/comics/[^"]+)' % rurl))
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%sindex\.php\?comic=\d+)' % rurl, before="prev"))
     help = 'Index format: n'
