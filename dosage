@@ -131,6 +131,9 @@ def setOutputInfo(options):
     out.level = 0
     out.level += options.verbose
     out.timestamps = options.timestamps
+    # debug urllib3
+    #from requests.packages.urllib3 import add_stderr_logger
+    #add_stderr_logger()
 
 
 def saveComicStrip(strip, basepath, dryrun):
