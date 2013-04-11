@@ -106,6 +106,7 @@ class HtmlEventHandler(EventHandler):
     """Output in HTML format."""
 
     name = 'html'
+    encoding = 'utf-8'
 
     def fnFromDate(self, date):
         """Get filename from date."""
@@ -134,18 +135,18 @@ class HtmlEventHandler(EventHandler):
         yesterdayUrl = self.getUrlFromFilename(self.fnFromDate(yesterday))
         tomorrowUrl = self.getUrlFromFilename(self.fnFromDate(tomorrow))
 
-        self.html = codecs.open(fn, 'w', 'utf-8')
+        self.html = codecs.open(fn, 'w', self.encoding)
         self.html.write(u'''<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=%s"/>
 <meta name="generator" content="%s"/>
 <title>Comics for %s</title>
 </head>
 <body>
 <a href="%s">Previous Day</a> | <a href="%s">Next Day</a>
 <ul>
-''' % (configuration.App, time.strftime('%Y/%m/%d', today),
+''' % (self.encoding, configuration.App, time.strftime('%Y/%m/%d', today),
        yesterdayUrl, tomorrowUrl))
         # last comic name (eg. CalvinAndHobbes)
         self.lastComic = None
@@ -189,6 +190,7 @@ class JSONEventHandler(EventHandler):
     """Output metadata for comics in JSON format."""
 
     name = 'json'
+    encoding = 'utf-8'
 
     def start(self):
         """Start with empty data."""
@@ -204,7 +206,7 @@ class JSONEventHandler(EventHandler):
         """Return dictionary with comic info."""
         if comic not in self.data:
             if os.path.exists(self.jsonFn(comic)):
-                with codecs.open(self.jsonFn(comic), 'r', 'utf-8') as f:
+                with codecs.open(self.jsonFn(comic), 'r', self.encoding) as f:
                     self.data[comic] = json.load(f)
             else:
                 self.data[comic] = {'pages':{}}
@@ -230,7 +232,7 @@ class JSONEventHandler(EventHandler):
     def end(self):
         """Write all JSON data to files."""
         for comic in self.data:
-            with codecs.open(self.jsonFn(comic), 'w', 'utf-8') as f:
+            with codecs.open(self.jsonFn(comic), 'w', self.encoding) as f:
                 json.dump(self.data[comic], f, indent=2, separators=(',', ': '), sort_keys=True)
 
 
@@ -255,7 +257,7 @@ def getHandlerNames():
 _handlers = []
 
 def addHandler(name, basepath=None, baseurl=None):
-    """Install a global handler with given name."""
+    """Add an event handler with given name."""
     if basepath is None:
         basepath = '.'
     _handlers.append(_handler_classes[name](basepath, baseurl))
