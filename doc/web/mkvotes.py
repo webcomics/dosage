@@ -12,7 +12,7 @@ from dosagelib.configuration import VoteUrl
 def write_votes(filename):
     session = requests.session()
     url = VoteUrl + 'counters/'
-    req = urlopen(url, session, stream=False)
+    req = urlopen(url, session)
     with open(filename, 'wb') as f:
         f.write(req.content)
 
