@@ -118,7 +118,7 @@ clean:
 	rm -rf build dist
 
 distclean: clean
-	rm -rf build dist $(APPNAME).egg-info $(LAPPNAME).prof test.sh
+	rm -rf $(APPNAME).egg-info $(LAPPNAME).prof test.sh Comics
 	rm -f _$(APPNAME)_configdata.py MANIFEST
 
 localbuild:
