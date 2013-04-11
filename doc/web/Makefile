@@ -17,7 +17,7 @@ media/favicon.ico:	../icon/favicon.ico
 gen:	media/favicon.ico
 # copy some static files
 	cp ../dosage.1.html $(HOMEPAGE)
-	$(WOK) -v
+	env PYTHONPATH=$(HOME)/src $(WOK) -v
 
 serve:
 	xdg-open http://localhost:8080
