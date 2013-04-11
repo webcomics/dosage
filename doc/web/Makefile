@@ -3,7 +3,7 @@ WOK:=$(HOME)/projects/wok.git/wok
 
 all:
 
-comics:	../../testresults.txt
+comics:	data/testresults.txt
 # regenerate comic pages
 	rm -f content/comics/*.md
 	env PYTHONPATH=../.. ./mkcomics.py $< content
