@@ -37,7 +37,7 @@ which confirms that you are old enough to view them.</p>
 
 Usage
 ------
-List [available comics](comics-index.html) (ca. 3000 at the moment):
+List [available comics](comic-index.html) (ca. 3000 at the moment):
 
 ```bash
 $ dosage --list
@@ -57,7 +57,7 @@ strip of all of them:
 $ dosage @
 ```
 
-To help others find good [comics](comics-index.html), you can vote for your
+To help others find good [comics](comic-index.html), you can vote for your
 favourite ones:
 
 ```bash
