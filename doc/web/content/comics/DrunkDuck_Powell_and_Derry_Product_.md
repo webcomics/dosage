@@ -21,7 +21,7 @@ Dosage comic DrunkDuck/Powell_and_Derry_Product_
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 10.04.2013</td>
+<th>Status</th><td>ok on 11.04.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</div></td>
