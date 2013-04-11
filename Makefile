@@ -128,8 +128,7 @@ test:	localbuild
 	env LANG=en_US.utf-8 http_proxy="" $(PYTHON) -m pytest $(PYTESTOPTS) $(TESTOPTS) $(TESTS)
 
 testall:	localbuild
-	-env LANG=en_UR.utf-8 http_proxy="" TESTALL=1 $(PYTHON) -m pytest $(PYTESTOPTS) $(TESTOPTS) $(TESTS)
-	cp testresults.txt doc/web/data
+	env LANG=en_UR.utf-8 http_proxy="" TESTALL=1 $(PYTHON) -m pytest $(PYTESTOPTS) $(TESTOPTS) $(TESTS)
 
 deb:
 # Build an official .deb package; only useful for Debian maintainers.
