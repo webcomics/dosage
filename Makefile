@@ -69,8 +69,11 @@ register:
 	@echo "Submit to freecode..."
 	freecode-submit < $(LAPPNAME).freecode
 
-releasecheck: check
+releasecheck:
 	git checkout master
+	$(MAKE) check test
+# test console output (behaves differently than redirected output)
+	$(MAKE) test PYTESTOPTS="-s" TESTS=tests/test_dosage.py
 	@if egrep -i "xx\.|xxxx|\.xx" doc/changelog.txt > /dev/null; then \
 	  echo "Could not release: edit doc/changelog.txt release date"; false; \
 	fi
