@@ -49,8 +49,11 @@ class TestDosage (unittest.TestCase):
         run_with_options(["-m", "calvinandhobbes"])
 
     def test_error(self):
+        # no comics specified
         self.assertRaises(OSError, run_with_options, [])
+        # unknown option
         self.assertRaises(OSError, run_with_options, ['--imadoofus'])
+        # multiple comics match
         self.assertRaises(OSError, run_with_options, ['Garfield'])
 
     def test_fetch_html(self):
