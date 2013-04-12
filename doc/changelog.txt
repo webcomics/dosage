@@ -1,3 +1,10 @@
+Dosage 2.1 (released xx.4.2013)
+
+Fixes:
+- cmdline: Fix output encoding errors on comic listing.
+  Closes: GH bug #24
+
+
 Dosage 2.0 (released 11.4.2013)
 
 Features:
