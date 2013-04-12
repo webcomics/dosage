@@ -15,7 +15,7 @@ class Output(object):
 
     def __init__(self, stream=sys.stdout):
         """Initialize context and indentation."""
-        self.context = ''
+        self.context = u''
         self.level = 0
         self.timestamps = False
         self.setStream(stream)
@@ -34,11 +34,11 @@ class Output(object):
 
     def warn(self, s):
         """Write a warning message."""
-        self.write("WARN: %s" % s, color='bold;yellow')
+        self.write(u"WARN: %s" % s, color='bold;yellow')
 
     def error(self, s, tb=None):
         """Write an error message."""
-        self.write("ERROR: %s" % s, color='light;red')
+        self.write(u"ERROR: %s" % s, color='light;red')
         #if tb is not None:
         #    self.write('Traceback (most recent call last):', 1)
 
@@ -55,20 +55,24 @@ class Output(object):
         if level > self.level:
             return
         if self.level > 1 or self.timestamps:
-            timestamp = time.strftime('%H:%M:%S ')
+            timestamp = time.strftime(u'%H:%M:%S ')
         else:
-            timestamp = ''
+            timestamp = u''
         with lock:
             if self.context or timestamp:
-                self.stream.write('%s%s> ' % (timestamp, self.context))
-            self.stream.write('%s' % s, color=color)
-            self.stream.write(os.linesep)
+                self.stream.write(u'%s%s> ' % (timestamp, self.context))
+            self.stream.write(u'%s' % s, color=color)
+            try:
+                text_type = unicode
+            except NameError:
+                text_type = str
+            self.stream.write(text_type(os.linesep))
             self.stream.flush()
 
     def writelines(self, lines, level=0):
         """Write multiple messages."""
         for line in lines:
-            for line in line.rstrip('\n').split('\n'):
-                self.write(line.rstrip('\n'), level=level)
+            for line in line.rstrip(u'\n').split(u'\n'):
+                self.write(line.rstrip(u'\n'), level=level)
 
 out = Output()
