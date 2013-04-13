@@ -141,10 +141,10 @@ class NobodyScores(_BasicScraper):
 
 
 class NoNeedForBushido(_BasicScraper):
-    baseurl = 'http://noneedforbushido.com/'
-    rurl = escape(baseurl)
-    url = baseurl + 'latest/'
-    stripUrl = baseurl + '%s/'
+    baseUrl = 'http://noneedforbushido.com/'
+    rurl = escape(baseUrl)
+    url = baseUrl + 'latest/'
+    stripUrl = baseUrl + '%s/'
     imageSearch = compile(tagre("img", "src", r'(%scomics/comic/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="previous-comic-link"))
     help = 'Index format: yyyy/comic/nnn'

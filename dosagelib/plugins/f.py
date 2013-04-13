@@ -19,9 +19,9 @@ class FalconTwin(_BasicScraper):
 
 
 class Fallen(_BasicScraper):
-    baseurl = 'http://www.fallencomic.com/'
-    url = baseurl + 'fal-page.htm'
-    stripUrl = baseurl + 'pages/part%s/%s-p%s.htm'
+    baseUrl = 'http://www.fallencomic.com/'
+    url = baseUrl + 'fal-page.htm'
+    stripUrl = baseUrl + 'pages/part%s/%s-p%s.htm'
     imageSearch = compile(r'<IMG SRC="(page/.+?)"', IGNORECASE)
     prevSearch = compile(r'<A HREF="(.+?)"><FONT FACE="Courier">Back', IGNORECASE)
     help = 'Index format: nn-m (comicNumber-partNumber)'
@@ -59,9 +59,9 @@ class FauxPas(_BasicScraper):
 
 
 class FeyWinds(_BasicScraper):
-    baseurl = 'http://kitsune.rydia.net/'
-    url = baseurl + 'index.html'
-    stripUrl = baseurl + 'comic/page.php?id=%s'
+    baseUrl = 'http://kitsune.rydia.net/'
+    url = baseUrl + 'index.html'
+    stripUrl = baseUrl + 'comic/page.php?id=%s'
     imageSearch = compile(r"(../comic/pages//.+?)'")
     prevSearch = compile(r"(page.php\?id=.+?)'.+?navprevious.png")
     help = 'Index format: n (unpadded)'
@@ -89,9 +89,9 @@ class FirstWorldProblems(_BasicScraper):
 
 
 class FlakyPastry(_BasicScraper):
-    baseurl = 'http://flakypastry.runningwithpencils.com/'
-    url = baseurl + 'index.php'
-    stripUrl = baseurl + 'comic.php?strip_id=%s'
+    baseUrl = 'http://flakypastry.runningwithpencils.com/'
+    url = baseUrl + 'index.php'
+    stripUrl = baseUrl + 'comic.php?strip_id=%s'
     firstStripUrl = stripUrl % '0'
     imageSearch = compile(r'<img src="(comics/.+?)"')
     prevSearch = compile(r'<a href="(.+?)".+?btn_back')

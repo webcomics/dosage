@@ -20,12 +20,12 @@ class Galaxion(_BasicScraper):
 
 
 class Garanos(_BasicScraper):
-    baseurl = 'http://garanos.alexheberling.com/'
-    rurl = escape(baseurl)
-    url = baseurl + 'pages/page-1/'
+    baseUrl = 'http://garanos.alexheberling.com/'
+    rurl = escape(baseUrl)
+    url = baseUrl + 'pages/page-1/'
     starter = indirectStarter(url,
        compile(tagre("a", "href", r'(%spages/[^"]+)' % rurl, after="navi-last")))
-    stripUrl = baseurl + 'pages/page-%s'
+    stripUrl = baseUrl + 'pages/page-%s'
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%spages/[^"]+)' % rurl, after="prev"))
     help = 'Index format: n (unpadded)'

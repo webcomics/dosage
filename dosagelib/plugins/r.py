@@ -35,10 +35,10 @@ class RealmOfAtland(_BasicScraper):
 
 
 class RedMeat(_BasicScraper):
-    baseurl = 'http://www.redmeat.com/redmeat/'
-    url = baseurl + 'current/index.html'
+    baseUrl = 'http://www.redmeat.com/redmeat/'
+    url = baseUrl + 'current/index.html'
     starter = bounceStarter(url, compile(r'<a href="(\.\./\d{4}-\d{2}-\d{2}/index\.html)">next</a>'))
-    stripUrl = baseurl + '%s/index.html'
+    stripUrl = baseUrl + '%s/index.html'
     firstStripUrl = stripUrl % '1996-06-10'
     imageSearch = compile(r'<img src="(index-1\.gif)" width="\d+" height="\d+" [^>]*>')
     prevSearch = compile(r'<a href="(\.\./\d{4}-\d{2}-\d{2}/index\.html)">previous</a>')

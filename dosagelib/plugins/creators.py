@@ -9,12 +9,12 @@ from ..util import tagre
 _imageSearch = compile(tagre("a", "href", r'(/comics/\d+/[^"]+)'))
 
 def add(name, path):
-    baseurl = 'http://www.creators.com'
+    baseUrl = 'http://www.creators.com'
     classname = 'Creators_%s' % name
     globals()[classname] = make_scraper(classname,
         name = 'Creators/' + name,
-        url = baseurl + path + '.html',
-        stripUrl = baseurl + path + '/%s.html',
+        url = baseUrl + path + '.html',
+        stripUrl = baseUrl + path + '/%s.html',
         lang = 'es' if name.lower().endswith('spanish') else 'en',
         imageSearch = _imageSearch,
         prevSearch = compile(tagre("a", "href", r'(%s/\d+\.html)' % path) +

@@ -17,9 +17,9 @@ class QuestionableContent(_BasicScraper):
 
 
 class Qwantz(_BasicScraper):
-    baseurl = 'http://www.qwantz.com/'
-    url = baseurl + 'index.php'
-    rurl = escape(baseurl)
+    baseUrl = 'http://www.qwantz.com/'
+    url = baseUrl + 'index.php'
+    rurl = escape(baseUrl)
     stripUrl = url + '?comic=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))

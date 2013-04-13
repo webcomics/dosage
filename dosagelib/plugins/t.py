@@ -37,14 +37,14 @@ class TheNoob(_BasicScraper):
 
 
 class TheOrderOfTheStick(_BasicScraper):
-    baseurl = 'http://www.giantitp.com/'
-    url = baseurl + 'comics/oots0863.html'
-    stripUrl = baseurl + 'comics/oots%s.html'
+    baseUrl = 'http://www.giantitp.com/'
+    url = baseUrl + 'comics/oots0863.html'
+    stripUrl = baseUrl + 'comics/oots%s.html'
     firstStripUrl = stripUrl % '0001'
     imageSearch = compile(r'<IMG src="(/comics/images/[^"]+)">')
     prevSearch = compile(r'<A href="(/comics/oots\d{4}\.html)"><IMG src="/Images/redesign/ComicNav_Back.gif"')
     help = 'Index format: n (unpadded)'
-    starter = indirectStarter(baseurl, compile(r'<A href="(/comics/oots\d{4}\.html)"'))
+    starter = indirectStarter(baseUrl, compile(r'<A href="(/comics/oots\d{4}\.html)"'))
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
@@ -52,9 +52,9 @@ class TheOrderOfTheStick(_BasicScraper):
 
 
 class TheParkingLotIsFull(_BasicScraper):
-    baseurl = 'http://plif.courageunfettered.com/'
-    url = baseurl + 'archive/arch2002.htm'
-    stripUrl = baseurl + 'archive/arch%s.htm'
+    baseUrl = 'http://plif.courageunfettered.com/'
+    url = baseUrl + 'archive/arch2002.htm'
+    stripUrl = baseUrl + 'archive/arch%s.htm'
     firstStripUrl = stripUrl % '1998'
     imageSearch = compile(r'<td align="center"><A TARGET=_parent HREF="(wc\d+\..+?)">')
     multipleImagesPerStrip = True
@@ -147,9 +147,9 @@ class TheWhiteboard(_BasicScraper):
 
 class HMHigh(_BasicScraper):
     name = 'TheFallenAngel/HMHigh'
-    baseurl = 'http://www.thefallenangel.co.uk/'
-    url = baseurl + 'hmhigh/'
-    rurl = escape(baseurl)
+    baseUrl = 'http://www.thefallenangel.co.uk/'
+    url = baseUrl + 'hmhigh/'
+    rurl = escape(baseUrl)
     stripUrl = url + '?id=%s'
     imageSearch = compile(r'<img src="(%shmhigh/img/comic/.+?)"' % rurl)
     prevSearch = compile(r' <a href="(%s.+?)" title=".+?">Prev</a>' % rurl)

@@ -35,9 +35,9 @@ class KevinAndKell(_BasicScraper):
 
 
 class Key(_BasicScraper):
-    baseurl = 'http://key.shadilyn.com/'
-    url = baseurl + 'latestpage.html'
-    stripUrl = baseurl + 'pages/%s.html'
+    baseUrl = 'http://key.shadilyn.com/'
+    url = baseUrl + 'latestpage.html'
+    stripUrl = baseUrl + 'pages/%s.html'
     imageSearch = compile(r'"((?:images/.+?)|(?:pages/images/.+?))"')
     prevSearch = compile(r'</a><a href="(.+?html)".+?prev')
     help = 'Index format: nnn'
@@ -54,9 +54,9 @@ class KickInTheHead(_BasicScraper):
 
 
 class KillerKomics(_BasicScraper):
-    baseurl = 'http://www.killerkomics.com/web-comics/'
-    url = baseurl + 'index_ang.cfm'
-    stripUrl = baseurl + '%s.cfm'
+    baseUrl = 'http://www.killerkomics.com/web-comics/'
+    url = baseUrl + 'index_ang.cfm'
+    stripUrl = baseUrl + '%s.cfm'
     imageSearch = compile(r'<img src="(http://www.killerkomics.com/FichiersUpload/Comics/.+?)"')
     prevSearch = compile(r'<div id="precedent"><a href="(.+?)"')
     help = 'Index format: strip-name'
@@ -82,9 +82,9 @@ class Krakow(_BasicScraper):
 
 
 class Kukuburi(_BasicScraper):
-    baseurl = 'http://www.kukuburi.com/'
-    url = baseurl + 'current/'
-    stripUrl = baseurl + 'v2/%s/'
+    baseUrl = 'http://www.kukuburi.com/'
+    url = baseUrl + 'current/'
+    stripUrl = baseUrl + 'v2/%s/'
     firstStripUrl = stripUrl % '2007/08/09/one'
     imageSearch = compile(tagre("img", "src", r'(http://www\.kukuburi\.com/v2/comics/[^"]+)', after='alt="[^"]'))
     prevSearch = compile(r'nav-previous.+?"(http.+?)"')

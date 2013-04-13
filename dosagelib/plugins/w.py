@@ -75,18 +75,18 @@ class WeCanSleepTomorrow(_BasicScraper):
 
 
 class WhiteNinja(_BasicScraper):
-    baseurl = 'http://www.whiteninjacomics.com/'
-    url = baseurl + 'comics.shtml'
-    stripUrl = baseurl + 'comics/%s.shtml'
+    baseUrl = 'http://www.whiteninjacomics.com/'
+    url = baseUrl + 'comics.shtml'
+    stripUrl = baseUrl + 'comics/%s.shtml'
     imageSearch = compile(r'<img src=(/images/comics/(?!t-).+?\.gif) border=0')
     prevSearch = compile(r'(/comics/.+?shtml).+?previous')
     help = 'Index format: s (comic name)'
 
 
 class WhiteNoise(_BasicScraper):
-    baseurl = 'http://www.wncomic.com/'
-    url = baseurl + 'archive.php'
-    stripUrl = baseurl + 'archive_comments.php?strip_id=%s'
+    baseUrl = 'http://www.wncomic.com/'
+    url = baseUrl + 'archive.php'
+    stripUrl = baseUrl + 'archive_comments.php?strip_id=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(r'(istrip_files/strips/.+?)"')
     prevSearch = compile(r'</a><a href="(.+?)"><img src="images/top_back.jpg" ')
@@ -94,10 +94,10 @@ class WhiteNoise(_BasicScraper):
 
 
 class WhyTheLongFace(_BasicScraper):
-    baseurl = 'http://www.absurdnotions.org/'
-    rurl = escape(baseurl)
-    url = baseurl + 'wtlf200709.html'
-    stripUrl = baseurl + 'wtlf%s.html'
+    baseUrl = 'http://www.absurdnotions.org/'
+    rurl = escape(baseUrl)
+    url = baseUrl + 'wtlf200709.html'
+    stripUrl = baseUrl + 'wtlf%s.html'
     firstStripUrl = stripUrl % '200306'
     imageSearch = compile(r'<img src="(%swtlf.+?|lf\d+.\w{1,4})"' % rurl, IGNORECASE)
     multipleImagesPerStrip = True
@@ -134,26 +134,26 @@ class Wondermark(_BasicScraper):
 
 
 class WorldOfMrToast(_BasicScraper):
-    baseurl = 'http://www.theimaginaryworld.com/'
-    url = baseurl + 'mrTcomicA.html'
-    stripUrl = baseurl + '%s.html'
+    baseUrl = 'http://www.theimaginaryworld.com/'
+    url = baseUrl + 'mrTcomicA.html'
+    stripUrl = baseUrl + '%s.html'
     imageSearch = compile(tagre("img", "src", r'(comic[^"]+)'))
     # list the archive links since there is no prev/next navigation
     prevurls = (
         url,
-        baseurl + 'mrTcomicW02.html',
-        baseurl + 'mrTcomicW01.html',
-        baseurl + 'mrGcomic03.html',
-        baseurl + 'mrGcomic02.html',
-        baseurl + 'mrGcomic01.html',
-        baseurl + 'mrTcomicT05.html',
-        baseurl + 'mrTcomicT04.html',
-        baseurl + 'mrTcomicT03.html',
-        baseurl + 'mrTcomicT02.html',
-        baseurl + 'mrTcomicT01.html',
-        baseurl + 'mrTcomicIW3.html',
-        baseurl + 'mrTcomicIW2.html',
-        baseurl + 'mrTcomicIW1.html',
+        baseUrl + 'mrTcomicW02.html',
+        baseUrl + 'mrTcomicW01.html',
+        baseUrl + 'mrGcomic03.html',
+        baseUrl + 'mrGcomic02.html',
+        baseUrl + 'mrGcomic01.html',
+        baseUrl + 'mrTcomicT05.html',
+        baseUrl + 'mrTcomicT04.html',
+        baseUrl + 'mrTcomicT03.html',
+        baseUrl + 'mrTcomicT02.html',
+        baseUrl + 'mrTcomicT01.html',
+        baseUrl + 'mrTcomicIW3.html',
+        baseUrl + 'mrTcomicIW2.html',
+        baseUrl + 'mrTcomicIW1.html',
     )
     firstStripUrl = prevurls[-1]
     multipleImagesPerStrip = True

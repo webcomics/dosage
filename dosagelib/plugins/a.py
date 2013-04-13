@@ -18,9 +18,9 @@ class AbleAndBaker(_BasicScraper):
 
 
 class AbsurdNotions(_BasicScraper):
-    baseurl = 'http://www.absurdnotions.org/'
-    url = baseurl + 'page129.html'
-    stripUrl = baseurl + 'page%s.html'
+    baseUrl = 'http://www.absurdnotions.org/'
+    url = baseUrl + 'page129.html'
+    stripUrl = baseUrl + 'page%s.html'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre('img', 'src', r'(an[^"]+)'))
     multipleImagesPerStrip = True
@@ -74,9 +74,9 @@ class AetheriaEpics(_BasicScraper):
 
 
 class AfterStrife(_BasicScraper):
-    baseurl = 'http://afterstrife.com/'
-    rurl = escape(baseurl)
-    stripUrl = baseurl + '?p=%s'
+    baseUrl = 'http://afterstrife.com/'
+    rurl = escape(baseUrl)
+    stripUrl = baseUrl + '?p=%s'
     url = stripUrl % '262'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(r'<img src="(%sstrips/.+?)"' % rurl)
@@ -148,9 +148,9 @@ class AlienLovesPredator(_BasicScraper):
 
 
 class AlienShores(_BasicScraper):
-    baseurl = 'http://alienshores.com/'
-    rurl = escape(baseurl)
-    url = baseurl + 'alienshores_band/'
+    baseUrl = 'http://alienshores.com/'
+    rurl = escape(baseUrl)
+    url = baseUrl + 'alienshores_band/'
     stripUrl = url + '%s'
     imageSearch = compile(tagre("img", "src", r'(%salienshores_band/wp-content/uploads/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
@@ -258,10 +258,10 @@ class Angels2200(_BasicScraper):
 
 
 class Annyseed(_BasicScraper):
-    baseurl = 'http://www.colourofivy.com/'
-    rurl = escape(baseurl)
-    url = baseurl + 'annyseed_webcomic_latest.htm'
-    stripUrl = baseurl + 'annyseed_webcomic%s.htm'
+    baseUrl = 'http://www.colourofivy.com/'
+    rurl = escape(baseUrl)
+    url = baseUrl + 'annyseed_webcomic_latest.htm'
+    stripUrl = baseUrl + 'annyseed_webcomic%s.htm'
     imageSearch = compile(tagre("img", "src", r'(Annyseed[^"]+)'))
     prevSearch = compile(r'<a href="(%s[^"]+)"><img src="Last.gif"' % rurl)
     help = 'Index format: nnn'
@@ -297,11 +297,11 @@ class ASofterWorld(_BasicScraper):
 
 
 class AstronomyPOTD(_BasicScraper):
-    baseurl = 'http://antwrp.gsfc.nasa.gov/apod/'
-    url = baseurl + 'astropix.html'
+    baseUrl = 'http://antwrp.gsfc.nasa.gov/apod/'
+    url = baseUrl + 'astropix.html'
     starter = bounceStarter(url,
         compile(tagre("a", "href", r'(ap\d{6}\.html)') + "&gt;</a>"))
-    stripUrl = baseurl + 'ap%s.html'
+    stripUrl = baseUrl + 'ap%s.html'
     firstStripUrl = stripUrl % '061012'
     imageSearch = compile(tagre("a", "href", r'(image/\d{4}/[^"]+)'))
     multipleImagesPerStrip = True

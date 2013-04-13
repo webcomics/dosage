@@ -50,9 +50,9 @@ class PartiallyClips(_BasicScraper):
 
 
 class PastelDefender(_BasicScraper):
-    baseurl = 'http://www.pasteldefender.com/'
-    url = baseurl + 'coverbackcover.html'
-    stripUrl = baseurl + '%s.html'
+    baseUrl = 'http://www.pasteldefender.com/'
+    url = baseUrl + 'coverbackcover.html'
+    stripUrl = baseUrl + '%s.html'
     firstStripUrl = stripUrl % 'cover'
     imageSearch = compile(r'<IMG SRC="(images/.+?)" WIDTH="742"')
     prevSearch = compile(r'<A HREF="([^"]+)"><IMG SRC="images/back\.gif"')
@@ -107,9 +107,9 @@ class PeppermintSaga(_BasicScraper):
 
 
 class PHDComics(_BasicScraper):
-    baseurl = 'http://phdcomics.com/'
-    url = baseurl + 'comics.php'
-    stripUrl = baseurl + 'comics/archive.php?comicid=%s'
+    baseUrl = 'http://phdcomics.com/'
+    url = baseUrl + 'comics.php'
+    stripUrl = baseUrl + 'comics/archive.php?comicid=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(http://www\.phdcomics\.com/comics/archive/phd[^ ]+)', quote=""))
     prevSearch = compile(tagre("a", "href", r'((?:comics/)?archive\.php\?comicid=\d+)', quote="") +
@@ -167,9 +167,9 @@ class _PlanescapeSurvival(_BasicScraper):
 
 
 class PokeyThePenguin(_BasicScraper):
-    baseurl = 'http://www.yellow5.com/pokey/archive/'
-    url = baseurl + 'index558.html'
-    stripUrl = baseurl + 'index%s.html'
+    baseUrl = 'http://www.yellow5.com/pokey/archive/'
+    url = baseUrl + 'index558.html'
+    stripUrl = baseUrl + 'index%s.html'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(pokey\d+[^"]+)'))
     prevSearch = True

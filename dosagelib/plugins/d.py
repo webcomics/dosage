@@ -258,9 +258,9 @@ class DresdenCodak(_BasicScraper):
 
 
 class DrFun(_BasicScraper):
-    baseurl = 'http://www.ibiblio.org/Dave/'
-    url = baseurl + 'ar00502.htm'
-    stripUrl = baseurl + 'ar%s.htm'
+    baseUrl = 'http://www.ibiblio.org/Dave/'
+    url = baseUrl + 'ar00502.htm'
+    stripUrl = baseUrl + 'ar%s.htm'
     firstStripUrl = stripUrl % '00001'
     imageSearch = compile(tagre("a", "href", r'(Dr-Fun/df\d+/df[^"]+)'))
     multipleImagesPerStrip = True
@@ -280,9 +280,9 @@ class DrMcNinja(_BasicScraper):
 
 
 class Drowtales(_BasicScraper):
-    baseurl = 'http://www.drowtales.com/'
-    rurl = escape(baseurl)
-    url = baseurl + 'mainarchive.php'
+    baseUrl = 'http://www.drowtales.com/'
+    rurl = escape(baseUrl)
+    url = baseUrl + 'mainarchive.php'
     stripUrl = url + '?sid=%s'
     firstStripUrl = stripUrl % '4192'
     imageSearch = (

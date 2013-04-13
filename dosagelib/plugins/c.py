@@ -101,11 +101,11 @@ class ChainsawSuit(_BasicScraper):
 
 
 class Champ2010(_BasicScraper):
-    baseurl = 'http://jedcollins.com/champ2010/'
-    rurl = escape(baseurl)
+    baseUrl = 'http://jedcollins.com/champ2010/'
+    rurl = escape(baseUrl)
     # the latest URL is hard coded since the comic is discontinued
-    url = baseurl + 'champ-12-30-10.html'
-    stripUrl = baseurl + '%s.html'
+    url = baseUrl + 'champ-12-30-10.html'
+    stripUrl = baseUrl + '%s.html'
     firstStripUrl = stripUrl % 'champ1-1-10-fuck'
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="Previous"))
@@ -323,9 +323,9 @@ class CrimsonDark(_BasicScraper):
 
 class CraftedFables(_BasicScraper):
     url = 'http://www.craftedfables.com/'
-    baseurl = 'http://www.caf-fiends.net/'
-    rurl = escape(baseurl)
-    stripUrl = baseurl + 'craftedfables/?p=%s'
+    baseUrl = 'http://www.caf-fiends.net/'
+    rurl = escape(baseUrl)
+    stripUrl = baseUrl + 'craftedfables/?p=%s'
     imageSearch = compile(tagre("img", "src", r'(%scraftedfables/comics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%scraftedfables/[^"]+)' % rurl) +
         tagre("span", "class", r"prev"))

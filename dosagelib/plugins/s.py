@@ -316,9 +316,9 @@ class SodiumEyes(_BasicScraper):
 
 class Sorcery101(_BasicScraper):
     description = u'Welcome to the site of Kel McDonald, professional comic illustrator and writer.'
-    baseurl = 'http://www.sorcery101.net/'
-    url = baseurl + 'sorcery-101/'
-    rurl = escape(baseurl)
+    baseUrl = 'http://www.sorcery101.net/'
+    url = baseUrl + 'sorcery-101/'
+    rurl = escape(baseUrl)
     stripUrl = url + '%s/'
     imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%ssorcery-101/[^"]+)' % rurl, after="previous-"))
@@ -475,10 +475,10 @@ class SomethingPositive(_BasicScraper):
 
 class StarCrossdDestiny(_BasicScraper):
     description = u'Furturistic fantasy. A group of outcasts fight to survive in a world that shuns them as freaks.'
-    baseurl = 'http://www.starcrossd.net/'
-    rurl = escape(baseurl)
-    url = baseurl + 'comic.html'
-    stripUrl = baseurl + 'archives/%s.html'
+    baseUrl = 'http://www.starcrossd.net/'
+    rurl = escape(baseUrl)
+    url = baseUrl + 'comic.html'
+    stripUrl = baseUrl + 'archives/%s.html'
     firstStripUrl = stripUrl % '00000001'
     imageSearch = compile(tagre("img", "src", r'(%s(?:ch1|strips|book2)/[^"]+)' % rurl))
     prevSearch = compile(r'<a href="(%s(?:ch1/)?archives/\d+\.html)"[^>]*"[^"]*"[^>]*>prev' % rurl, IGNORECASE)
