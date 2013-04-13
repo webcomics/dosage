@@ -116,6 +116,8 @@ def backtick (cmd, encoding='utf-8'):
     """Return decoded output from command."""
     data = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
     return data.decode(encoding)
+
+
 def unicode_safe(text, encoding=UrlEncoding, errors='ignore'):
     """Decode text to Unicode if not already done."""
     try:
