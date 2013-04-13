@@ -6,7 +6,7 @@ Dosage comic GastroPhobia
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Regularly updated comic about a single mom barbarian in Ancient Greece.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.gastrophobia.com/">http://www.gastrophobia.com/</a></td>

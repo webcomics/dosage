@@ -32,6 +32,7 @@ class Garanos(_BasicScraper):
 
 
 class GastroPhobia(_BasicScraper):
+    description = u'Regularly updated comic about a single mom barbarian in Ancient Greece.'
     url = 'http://www.gastrophobia.com/'
     stripUrl = url + 'index.php?date=%s'
     firstStripUrl = stripUrl % '2008-07-30'
@@ -136,6 +137,7 @@ class GrrlPower(_BasicScraper):
 
 
 class GunnerkrigCourt(_BasicScraper):
+    description = u'Gunnerkrigg Court is a science-fantasy webcomic created by Tom Siddell. It is updated online three days a week.'
     url = 'http://www.gunnerkrigg.com/'
     stripUrl = url + '?p=%s'
     imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
@@ -144,6 +146,7 @@ class GunnerkrigCourt(_BasicScraper):
 
 
 class Gunshow(_BasicScraper):
+    description = u"Ah there we go! Color! BUT ALSO I WANTED TO SHOW YOU: GUNSHOW VOLUME 4 IS OUT! IT'S HERE! Get a copy today!"
     url = 'http://gunshowcomic.com/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1'
@@ -154,6 +157,7 @@ class Gunshow(_BasicScraper):
 
 
 class GUComics(_BasicScraper):
+    description = u'From a gaming news perspective, I detest April Fools Day. No "legitimate" source of news should ever post fake news without a disclaimer.'
     url = 'http://www.gucomics.com/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '20000710'

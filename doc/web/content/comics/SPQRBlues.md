@@ -6,7 +6,7 @@ Dosage comic SPQRBlues
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>You can skip the next comic if you'd like to pass over the rest of this (very mildly) mature theme. I've tried to clarify the legalities as pointed out in the comments.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://spqrblues.com/IV/">http://spqrblues.com/IV/</a></td>

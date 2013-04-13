@@ -6,7 +6,7 @@ Dosage comic SnowFlakes
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Snowflakes - A comic by James Ashby, Chris Jones and Zach Weiner.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.snowflakescomic.com/">http://www.snowflakescomic.com/</a></td>

@@ -6,7 +6,7 @@ Dosage comic SchlockMercenary
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>2 days ago ... Travel the galaxy. Meet new and fascinating life-forms.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.schlockmercenary.com/">http://www.schlockmercenary.com/</a></td>

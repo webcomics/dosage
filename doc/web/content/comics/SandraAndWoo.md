@@ -6,7 +6,7 @@ Dosage comic SandraAndWoo
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Sandra and Woo: a webcomic about friendship, life and the art of (not) eating squirrels, featuring the girl Sandra and her pet raccoon Woo.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.sandraandwoo.com/">http://www.sandraandwoo.com/</a></td>

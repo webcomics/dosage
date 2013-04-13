@@ -6,7 +6,7 @@ Dosage comic GunnerkrigCourt
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Gunnerkrigg Court is a science-fantasy webcomic created by Tom Siddell. It is updated online three days a week.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.gunnerkrigg.com/">http://www.gunnerkrigg.com/</a></td>

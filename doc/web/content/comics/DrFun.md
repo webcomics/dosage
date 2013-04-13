@@ -6,7 +6,7 @@ Dosage comic DrFun
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>A series of bizarre one-panel gags. Topics range from the mundane to the obscure.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.ibiblio.org/Dave/ar00502.htm">http://www.ibiblio.org/Dave/ar00502.htm</a></td>

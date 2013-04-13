@@ -6,7 +6,7 @@ Dosage comic xkcd
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>A webcomic of romance, sarcasm, math, and language.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://xkcd.com/">http://xkcd.com/</a></td>

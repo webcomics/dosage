@@ -6,7 +6,7 @@ Dosage comic SamAndFuzzy
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Serial about a cab driver and his bear-like friend by Sam Logan. Offers a reader's guide, forum, and frequently asked questions.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.samandfuzzy.com/">http://www.samandfuzzy.com/</a></td>

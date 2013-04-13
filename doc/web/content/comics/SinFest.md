@@ -6,7 +6,7 @@ Dosage comic KeenSpot/SinFest
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Strip dealing with contemporary issues and religion. Created by Tatsuya Ishida.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.sinfest.net/">http://www.sinfest.net/</a></td>

@@ -6,7 +6,7 @@ Dosage comic StarCrossdDestiny
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Furturistic fantasy. A group of outcasts fight to survive in a world that shuns them as freaks.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.starcrossd.net/comic.html">http://www.starcrossd.net/comic.html</a></td>

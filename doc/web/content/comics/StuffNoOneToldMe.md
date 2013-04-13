@@ -6,7 +6,7 @@ Dosage comic StuffNoOneToldMe
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Everyday's life advices in the shape of witty and humorous cartoons.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.snotm.com/">http://www.snotm.com/</a></td>

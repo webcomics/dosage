@@ -6,7 +6,7 @@ Dosage comic Sheldon
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>The story of a software company tycoon billionaire ten-year-old, his grampa, his duck, his pug and a lizard.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.sheldoncomics.com/">http://www.sheldoncomics.com/</a></td>

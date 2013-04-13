@@ -6,7 +6,7 @@ Dosage comic Dilbert
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>A comic featuring satirical office humor about a white-collar, micromanaged office featuring the engineer Dilbert as the title character.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://dilbert.com/">http://dilbert.com/</a></td>

@@ -6,7 +6,7 @@ Dosage comic Gunshow
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Ah there we go! Color! BUT ALSO I WANTED TO SHOW YOU: GUNSHOW VOLUME 4 IS OUT! IT'S HERE! Get a copy today!</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://gunshowcomic.com/">http://gunshowcomic.com/</a></td>

@@ -6,7 +6,7 @@ Dosage comic Sorcery101
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Welcome to the site of Kel McDonald, professional comic illustrator and writer.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.sorcery101.net/sorcery-101/">http://www.sorcery101.net/sorcery-101/</a></td>

@@ -6,7 +6,7 @@ Dosage comic ScenesFromAMultiverse
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>SFAM Guest Month wraps up today with a contribution by Meredith Gran of Octopus Pie that is sure to tickle and delight even the grumpiest of codgers.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://amultiverse.com/">http://amultiverse.com/</a></td>

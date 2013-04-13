@@ -6,7 +6,7 @@ Dosage comic GUComics
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>From a gaming news perspective, I detest April Fools Day. No &quot;legitimate&quot; source of news should ever post fake news without a disclaimer.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.gucomics.com/">http://www.gucomics.com/</a></td>

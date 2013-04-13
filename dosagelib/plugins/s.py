@@ -21,6 +21,7 @@ class SailorsunOrg(_BasicScraper):
 
 
 class SamAndFuzzy(_BasicScraper):
+    description = u"Serial about a cab driver and his bear-like friend by Sam Logan. Offers a reader's guide, forum, and frequently asked questions."
     url = 'http://www.samandfuzzy.com/'
     stripUrl = 'http://samandfuzzy.com/%s'
     firstStripUrl = stripUrl % '1'
@@ -30,6 +31,7 @@ class SamAndFuzzy(_BasicScraper):
 
 
 class SandraAndWoo(_BasicScraper):
+    description = u'Sandra and Woo: a webcomic about friendship, life and the art of (not) eating squirrels, featuring the girl Sandra and her pet raccoon Woo.'
     url = 'http://www.sandraandwoo.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -60,6 +62,7 @@ class ScaryGoRound(_BasicScraper):
 
 
 class ScenesFromAMultiverse(_BasicScraper):
+    description = u'SFAM Guest Month wraps up today with a contribution by Meredith Gran of Octopus Pie that is sure to tickle and delight even the grumpiest of codgers.'
     url = 'http://amultiverse.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -70,6 +73,7 @@ class ScenesFromAMultiverse(_BasicScraper):
 
 
 class SchlockMercenary(_BasicScraper):
+    description = u'2 days ago ... Travel the galaxy. Meet new and fascinating life-forms.'
     url = 'http://www.schlockmercenary.com/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '2000-06-12'
@@ -148,6 +152,7 @@ class ShadowGirls(_BasicScraper):
 
 
 class Sheldon(_BasicScraper):
+    description = u'The story of a software company tycoon billionaire ten-year-old, his grampa, his duck, his pug and a lizard.'
     url = 'http://www.sheldoncomics.com/'
     stripUrl = url + 'archive/%s.html'
     firstStripUrl = stripUrl % '011130'
@@ -177,6 +182,7 @@ class _Shortpacked(_BasicScraper):
 
 
 class SinFest(_BasicScraper):
+    description = u'Strip dealing with contemporary issues and religion. Created by Tatsuya Ishida.'
     name = 'KeenSpot/SinFest'
     url = 'http://www.sinfest.net/'
     stripUrl = url + 'archive_page.php?comicID=%s'
@@ -234,6 +240,7 @@ class SMBC(_BasicScraper):
 
 
 class SnowFlakes(_BasicScraper):
+    description = u'Snowflakes - A comic by James Ashby, Chris Jones and Zach Weiner.'
     url = 'http://www.snowflakescomic.com/'
     stripUrl = url + '?id=%s&sl=%s'
     firstStripUrl = stripUrl % ('103', '1')
@@ -308,6 +315,7 @@ class SodiumEyes(_BasicScraper):
 
 
 class Sorcery101(_BasicScraper):
+    description = u'Welcome to the site of Kel McDonald, professional comic illustrator and writer.'
     baseurl = 'http://www.sorcery101.net/'
     url = baseurl + 'sorcery-101/'
     rurl = escape(baseurl)
@@ -358,6 +366,7 @@ class Spinnerette(_BasicScraper):
 
 
 class SPQRBlues(_BasicScraper):
+    description = u"You can skip the next comic if you'd like to pass over the rest of this (very mildly) mature theme. I've tried to clarify the legalities as pointed out in the comments."
     url = 'http://spqrblues.com/IV/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'
@@ -398,6 +407,7 @@ class Stubble(_BasicScraper):
 
 
 class StuffNoOneToldMe(_BasicScraper):
+    description = u"Everyday's life advices in the shape of witty and humorous cartoons."
     url = 'http://www.snotm.com/'
     stripUrl = url + '%s.html'
     firstStripUrl = stripUrl % '2010/05/01'
@@ -433,6 +443,7 @@ class StuffNoOneToldMe(_BasicScraper):
 
 
 class StrawberryDeathCake(_BasicScraper):
+    description = u"Update2 I'm alive and still working on the comic, but progress has been slow. I'm inching my way through sketches. Update-A little break from the comic."
     url = 'http://strawberrydeathcake.com/'
     rurl = escape(url)
     stripUrl = url + 'archive/%s/'
@@ -463,6 +474,7 @@ class SomethingPositive(_BasicScraper):
 
 
 class StarCrossdDestiny(_BasicScraper):
+    description = u'Furturistic fantasy. A group of outcasts fight to survive in a world that shuns them as freaks.'
     baseurl = 'http://www.starcrossd.net/'
     rurl = escape(baseurl)
     url = baseurl + 'comic.html'
