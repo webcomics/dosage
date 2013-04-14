@@ -18,6 +18,7 @@ class BackwaterPlanet(_BasicScraper):
 
 
 class BadassMuthas(_BasicScraper):
+    description = u'Nobody wants to work for a living. Get yourself some super-powers and come ill with us. Full color update every Friday.'
     url = 'http://badassmuthas.com/pages/comic.php'
     stripUrl = url + '?%s'
     firstStripUrl = stripUrl % '1'
@@ -36,6 +37,7 @@ class BadMachinery(_BasicScraper):
 
 
 class Bardsworth(_BasicScraper):
+    description = u'Bardsworth - Magic, Mischief, and Cookies'
     url = 'http://www.bardsworth.com/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'
@@ -84,6 +86,7 @@ class BetweenFailures(_BasicScraper):
 
 
 class BigFatWhale(_BasicScraper):
+    description = u'A weekly comic strip for those who are not dumb.'
     url = 'http://www.bigfatwhale.com/'
     stripUrl = url + 'archives/bfw_%s.htm'
     imageSearch = compile(tagre("img", "src", r'(archives/bfw_[^"]+|bfw_[^"]+)'))
@@ -101,6 +104,7 @@ class BiggerThanCheeses(_BasicScraper):
 
 
 class BillyTheDunce(_BasicScraper):
+    description = u"Billy the Dunce: A webcomic about some genius kids, some supernatural creatures, and one dumb kid who's stuck with them. Like Goonies, but with more Lovecraft."
     url = 'http://www.duncepress.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -111,6 +115,7 @@ class BillyTheDunce(_BasicScraper):
 
 
 class BizarreUprising(_BasicScraper):
+    description = u"Bizarre Uprising - Manga that's not just good, it's good for you!"
     url = 'http://www.bizarreuprising.com/'
     stripUrl = url + 'view/%s'
     firstStripUrl = stripUrl % '1/awakening-splash'
@@ -120,6 +125,7 @@ class BizarreUprising(_BasicScraper):
 
 
 class BlankIt(_BasicScraper):
+    description = u'An absurd, insane, and delightful webcomic from Aric McKeown and Lem Pew.'
     url = 'http://blankitcomics.com/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '0001'
@@ -143,6 +149,7 @@ class Blip(_BasicScraper):
 
 
 class BloodBound(_BasicScraper):
+    description = u'Demonic Vampire Hotness'
     url = 'http://bloodboundcomic.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -162,6 +169,7 @@ class BlueCrashKit(_BasicScraper):
 
 
 class BMovieComic(_BasicScraper):
+    description = u"A group of unlikely heroes tackles monsters, mutants and aliens from Hollywood's past and present. See what happens. Or they'll say you haven't seen it."
     url = 'http://www.bmoviecomic.com/'
     stripUrl = url + '?cid=%s'
     firstStripUrl = stripUrl % '8'
@@ -215,6 +223,7 @@ class BoxerHockey(_BasicScraper):
 
 
 class BoyOnAStickAndSlither(_BasicScraper):
+    description = u'A comic about killer bees, time travel, ethics and despair.'
     url = 'http://www.boasas.com/'
     stripUrl = url + 'page/%s'
     firstStripUrl = stripUrl % '2'
@@ -228,6 +237,7 @@ class BoyOnAStickAndSlither(_BasicScraper):
 
 
 class BratHalla(_BasicScraper):
+    description = u'Norse mythology webcomic where young Thor, Loki, Balder, Hod and more face off against grade school and make an old man out of their immortal dad Odin'
     url = 'http://brat-halla.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '1-balder-dash'
@@ -237,6 +247,7 @@ class BratHalla(_BasicScraper):
 
 
 class BrentalFloss(_BasicScraper):
+    description = u'brentalfloss the comic :: Off To The Races'
     url = 'http://brentalflossthecomic.com/'
     stripUrl = url + '?id=%s'
     fristStripUrl = stripUrl % '1'
@@ -286,6 +297,7 @@ class _BringBackRoomies(_BasicScraper):
 
 
 class Brink(_BasicScraper):
+    description = u"BRINK - You're not as crazy as you think you are"
     url = 'http://paperfangs.com/brink/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'
@@ -296,6 +308,7 @@ class Brink(_BasicScraper):
 
 
 class BrightlyWound(_BasicScraper):
+    description = u'A webcomic of physics, astronomy, math, and grammar.'
     baseUrl = 'http://www.brightlywound.com/'
     url = baseUrl + '?comic=137'
     stripUrl = baseUrl + '?comic=%s'
@@ -306,6 +319,7 @@ class BrightlyWound(_BasicScraper):
 
 
 class BroodHollow(_BasicScraper):
+    description = u'Broodhollow - A MWF cosmic horror adventure comic by Kris Straub'
     url = 'http://broodhollow.chainsawsuit.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'

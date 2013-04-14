@@ -50,6 +50,7 @@ class RedMeat(_BasicScraper):
 
 
 class RedString(_BasicScraper):
+    description = u'A web comics about love and growing up. Art by Gina Biggs.'
     url = 'http://www.redstring.strawberrycomics.com/'
     stripUrl = url + 'index.php?id=%s'
     firstStripUrl = stripUrl % '434'

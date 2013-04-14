@@ -8,6 +8,7 @@ from ..util import tagre
 
 
 class JackCannon(_BasicScraper):
+    description = u'The Fancy Adventures of Jack Cannon \u2013 A Webcomic -'
     url = 'http://fancyadventures.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'

@@ -42,6 +42,7 @@ class SandraAndWoo(_BasicScraper):
 
 
 class SandraAndWooGerman(_BasicScraper):
+    description = u'Sandra und Woo: ein Webcomic \xfcber Freundschaft, das Leben und die Kunst (keine) Eichh\xf6rnchen zu essen; mit dem M\xe4dchen Sandra und ihrem Waschb\xe4ren Woo in den Hauptrollen'
     url = 'http://www.sandraandwoo.com/woode/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -142,6 +143,7 @@ class SexyLosers(_BasicScraper):
 
 
 class ShadowGirls(_BasicScraper):
+    description = u"It's like H.P. Lovecraft meets the Gilmore Girls!"
     url = 'http://www.shadowgirlscomic.com/'
     stripUrl = url + 'comics/%s'
     firstStripUrl = stripUrl % 'book-1/chapter-1-broken-dreams/welcome'
@@ -279,6 +281,7 @@ class SnowFlakes(_BasicScraper):
 
 
 class SnowFlame(_BasicScraper):
+    description = u'The fan-comic series featuring "The Man Powered by Cocaine"'
     url = 'http://www.snowflamecomic.com/'
     rurl = escape(url)
     stripUrl = url + '?comic=snowflame-%s-%s'
@@ -336,6 +339,7 @@ class SpaceTrawler(_BasicScraper):
 
 
 class Spamusement(_BasicScraper):
+    description = u'Spamusement! Poorly-drawn cartoons inspired by actual spam subject lines!'
     url = 'http://spamusement.com/'
     rurl = escape(url)
     stripUrl = url + 'index.php/comics/view/%s'
@@ -346,6 +350,7 @@ class Spamusement(_BasicScraper):
 
 
 class SpareParts(_BasicScraper):
+    description = u'Spare Parts by Terrence and Isabel Marks!'
     baseUrl = 'http://www.sparepartscomics.com/'
     url = baseUrl + 'comics/?date=20080328'
     stripUrl = baseUrl + 'comics/index.php?date=%s'
@@ -506,6 +511,7 @@ class _StrangeCandy(_BasicScraper):
 
 
 class SupernormalStep(_BasicScraper):
+    description = u'Supernormal Step - Magic, Face Punching, and a Robot or Two'
     url = 'http://supernormalstep.com/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'

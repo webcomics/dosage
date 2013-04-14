@@ -66,6 +66,7 @@ class ElfOnlyInn(_BasicScraper):
 
 
 class ElGoonishShive(_BasicScraper):
+    description = u'Fantasy sci-fi comic about a group of teenagers and the bizarre, strange and supernatural circumstances of their lives.'
     name = 'KeenSpot/ElGoonishShive'
     url = 'http://www.egscomics.com/'
     stripUrl = url + '?date=%s'
@@ -84,6 +85,7 @@ class ElGoonishShiveNP(_BasicScraper):
 
 
 class Ellerbisms(_BasicScraper):
+    description = u'Ellerbisms - A diary comic by Marc Ellerby'
     url = 'http://www.ellerbisms.com/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'
@@ -141,6 +143,7 @@ class EvilDiva(_BasicScraper):
 
 
 class EvilInc(_BasicScraper):
+    description = u'Evil Inc. by Brad Guigar - Daily Super-Villain Webcomic and Comics Blog'
     url = 'http://www.evil-comic.com/'
     stripUrl = url + 'archive/%s.html'
     firstStripUrl = stripUrl % '20050530'
@@ -150,6 +153,7 @@ class EvilInc(_BasicScraper):
 
 
 class Exiern(_BasicScraper):
+    description = u'Barbarian Typhan-Knee defeated the wizard...and became Tiffany!'
     url = 'http://www.exiern.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -160,6 +164,7 @@ class Exiern(_BasicScraper):
 
 
 class ExploitationNow(_BasicScraper):
+    description = u'Exploitation Now - That somewhat naughty webcomic classic by Michael Poe'
     url = 'http://www.exploitationnow.com/'
     rurl = escape(url)
     stripUrl = url + '%s'

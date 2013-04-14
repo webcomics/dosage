@@ -110,6 +110,7 @@ class OurHomePlanet(_BasicScraper):
 
 
 class OverCompensating(_BasicScraper):
+    description = u'OVERCOMPENSATING: The Journal Comic With a Seething Disdain for Reality.'
     url = 'http://www.overcompensating.com/'
     stripUrl = url + 'posts/%s.html'
     firstStripUrl = stripUrl % '20040929'

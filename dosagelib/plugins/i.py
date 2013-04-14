@@ -8,6 +8,7 @@ from ..util import tagre
 
 
 class IAmArg(_BasicScraper):
+    description = u'An Internet comic of non sequitur Geekiness. Updates Monday, Wednesday and Friday'
     url = 'http://iamarg.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -37,6 +38,7 @@ class IDreamOfAJeanieBottle(_BasicScraper):
 
 
 class InsideOut(_BasicScraper):
+    description = u'Inside Out Comic - A new kind of Weird'
     url = 'http://www.insideoutcomic.com/'
     stripUrl = url + 'html/%s.html'
     firstStripUrl = stripUrl % '1_snake_suicide'

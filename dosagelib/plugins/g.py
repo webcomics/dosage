@@ -10,6 +10,7 @@ from ..util import tagre
 
 
 class Galaxion(_BasicScraper):
+    description = u'Galaxion - Life. Love. Hyperspace.'
     url = 'http://galaxioncomics.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -20,6 +21,7 @@ class Galaxion(_BasicScraper):
 
 
 class Garanos(_BasicScraper):
+    description = u'Garanos - A dramatic fantasy webcomic with a dash of adventure, gothic horror, and romance for flavor.'
     baseUrl = 'http://garanos.alexheberling.com/'
     rurl = escape(baseUrl)
     url = baseUrl + 'pages/page-1/'
@@ -42,6 +44,7 @@ class GastroPhobia(_BasicScraper):
 
 
 class Geeks(_BasicScraper):
+    description = u'Geeks Trying To Be Funny'
     url = 'http://sevenfloorsdown.com/geeks/'
     stripUrl = url + 'archives/%s'
     firstStripUrl = stripUrl % '10'
@@ -74,6 +77,7 @@ class GirlsWithSlingshots(_BasicScraper):
 
 
 class GlassHalfEmpty(_BasicScraper):
+    description = u'A Glass Half Empty cartoon by Dan Markowitz'
     url = 'http://www.defectivity.com/ghe/index.php'
     stripUrl = url + '?strip_id=%s'
     firstStripUrl = stripUrl % '0'
@@ -83,6 +87,7 @@ class GlassHalfEmpty(_BasicScraper):
 
 
 class GleefulNihilism(_BasicScraper):
+    description = u'pointless comics with a sideways grin'
     url = 'http://gleefulnihilism.com/'
     rurl = escape(url)
     stripUrl = url + 'comics/%s/'
@@ -127,6 +132,7 @@ class GoneWithTheBlastwave(_BasicScraper):
 
 
 class GrrlPower(_BasicScraper):
+    description = u'Grrl Power - A webcomic about superheroines.'
     url = 'http://www.grrlpowercomic.com/'
     rurl = escape(url)
     stripUrl = url + 'archives/%s'

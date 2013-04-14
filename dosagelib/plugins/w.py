@@ -66,6 +66,7 @@ class WebDesignerCOTW(_BasicScraper):
 
 
 class WeCanSleepTomorrow(_BasicScraper):
+    description = u'We Can Sleep Tomorrow - Life does not take bathroom breaks. A webcomic that updates Mondays and Fridays'
     url = 'http://wecansleeptomorrow.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -106,6 +107,7 @@ class WhyTheLongFace(_BasicScraper):
 
 
 class Wigu(_BasicScraper):
+    description = u'WIGU: A COMIC ON INTERNET'
     url = 'http://wigucomics.com/'
     stripUrl = url + 'adventures/index.php?comic=%s'
     firstStripUrl = stripUrl % '1'
@@ -168,6 +170,7 @@ class WorldOfMrToast(_BasicScraper):
 
 
 class WormWorldSaga(_BasicScraper):
+    description = u'The Wormworld Saga Online Graphic Novel by Daniel Lieske - An Epic Fantasy Adventure for all Ages'
     url = 'http://www.wormworldsaga.com/'
     stripUrl = url + 'chapters/%s/index.php'
     firstStripUrl = stripUrl % 'chapter01/EN'
@@ -222,6 +225,7 @@ class _WorldOfWarcraftEh(_BasicScraper):
 
 
 class Wulffmorgenthaler(_BasicScraper):
+    description = u"Entertainment - Since 2002. Wulff & Morgenthaler's Personal humoristic social commentary on life, nostalgia and the World in general. Nothing is taboo: They deal with Politics, News, Entertainment, Technology, Culture, and Weirdo Beavers"
     url = 'http://wumocomicstrip.com/'
     stripUrl = url + '%s/'
     imageSearch = compile(tagre("img", "src", r'(/img/strip/[^/"]+)'))

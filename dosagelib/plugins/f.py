@@ -69,6 +69,7 @@ class FeyWinds(_BasicScraper):
 
 
 class FilibusterCartoons(_BasicScraper):
+    description = u'Political cartoons from Canada!'
     url = 'http://www.filibustercartoons.com/'
     rurl = escape(url)
     stripUrl = url + 'index.php/%s'
@@ -99,6 +100,7 @@ class FlakyPastry(_BasicScraper):
 
 
 class Flemcomics(_BasicScraper):
+    description = u'FLEM Comics - More fun than a sack of dead kittens.'
     url = 'http://www.flemcomics.com/'
     stripUrl = url + 'd/%s.html'
     imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
@@ -118,6 +120,7 @@ class Flipside(_BasicScraper):
 
 
 class FonFlatter(_BasicScraper):
+    description = u'Fred, eine stets zuversichtliche, einfallsreiche, zumeist aber alberne und etwas naive Fledermaus, flattert bereits seit 2005 t\xe4glich durch das weltweite Netz'
     url = 'http://www.fonflatter.de/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -137,6 +140,7 @@ class FonFlatter(_BasicScraper):
 
 
 class Footloose(_BasicScraper):
+    description = u'Footloose, a Webcomic By alice Nuttall and Emily Brady'
     url = 'http://footloosecomic.com/footloose/today.php'
     stripUrl = 'http://footloosecomic.com/footloose/pages.php?page=%s'
     firstStripUrl = stripUrl % '1'
@@ -177,6 +181,7 @@ class FredoAndPidjin(_BasicScraper):
 
 
 class FullFrontalNerdity(_BasicScraper):
+    description = u'Full Frontal Nerdity by Aaron Williams - Comics about liking all things gaming, technological, mythological, and internetological.'
     url = 'http://ffn.nodwick.com/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'

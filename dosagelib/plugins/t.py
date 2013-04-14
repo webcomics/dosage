@@ -9,6 +9,7 @@ from ..util import tagre
 
 
 class TheBrads(_BasicScraper):
+    description = u'ArchiveFirst World Problems Comic - By Brad Colbow'
     url = 'http://bradcolbow.com/archive/C4/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % 'P125'
@@ -19,6 +20,7 @@ class TheBrads(_BasicScraper):
 
 
 class TheDevilsPanties(_BasicScraper):
+    description = u"It's not Satanic Porn"
     url = 'http://thedevilspanties.com/'
     stripUrl = url + 'archives/%s'
     firstStripUrl = stripUrl % '300'
@@ -128,6 +130,7 @@ class _TwoLumps(_BasicScraper):
 
 
 class TwoTwoOneFour(_BasicScraper):
+    description = u'Artwork, comics, graphic novels, music, articles, and various silliness by Troy McQuinn'
     url = 'http://www.nitrocosm.com/go/2214_classic/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -138,6 +141,7 @@ class TwoTwoOneFour(_BasicScraper):
 
 
 class TheWhiteboard(_BasicScraper):
+    description = u'The Whiteboard, a somewhat paintball-related webcomic by "Doc" Nickel'
     url = 'http://www.the-whiteboard.com/'
     stripUrl = url + 'auto%s.html'
     imageSearch = compile(r'<img SRC="(autotwb\d{1,4}.+?|autowb\d{1,4}.+?)">', IGNORECASE)
@@ -146,6 +150,7 @@ class TheWhiteboard(_BasicScraper):
 
 
 class HMHigh(_BasicScraper):
+    description = u'Welcome to the website of professional artist and illustrator, Angel Smith and of Fallen Angel Media Ltd; An independent art, design & publishing house and event management company based in Bristol, England'
     name = 'TheFallenAngel/HMHigh'
     baseUrl = 'http://www.thefallenangel.co.uk/'
     url = baseUrl + 'hmhigh/'

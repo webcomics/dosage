@@ -23,6 +23,7 @@ class Namesake(_BasicScraper):
 
 
 class NamirDeiter(_BasicScraper):
+    description = u'Namir Deiter, by Isabel Marks'
     url = 'http://www.namirdeiter.com/'
     rurl = escape(url)
     stripUrl = url + 'comics/index.php?date=%s'
@@ -43,6 +44,7 @@ class Nedroid(_BasicScraper):
 
 
 class NeoEarth(_BasicScraper):
+    description = u'Neo-Earth - Web comic by Bryan King - Updated Every Monday'
     url = 'http://www.neo-earth.com/NE/'
     stripUrl = url + 'index.php?date=%s'
     firstStripUrl = stripUrl % '2007-03-23'
@@ -121,6 +123,7 @@ class Nnewts(_BasicScraper):
 
 
 class Nodwick(_BasicScraper):
+    description = u'Welcome to Nodwick.com - A fantasy farce for the whole party!'
     url = 'http://comic.nodwick.com/'
     rurl = escape(url)
     stripUrl = url + "?p=%s"
@@ -130,6 +133,7 @@ class Nodwick(_BasicScraper):
 
 
 class NobodyScores(_BasicScraper):
+    description = u'Nobody Scores! A little comic about inevitable disaster'
     url = 'http://nobodyscores.loosenutstudio.com/'
     rurl = escape(url)
     stripUrl = url + 'index.php?id=%s'
@@ -151,6 +155,7 @@ class NoNeedForBushido(_BasicScraper):
 
 
 class Nukees(_BasicScraper):
+    description = u'Nukees, The Atomic Comic Strip'
     url = 'http://www.nukees.com/'
     stripUrl = url + 'd/%s'
     firstStripUrl = stripUrl % '19970121'

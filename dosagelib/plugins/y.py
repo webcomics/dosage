@@ -8,6 +8,7 @@ from ..util import tagre
 
 
 class YAFGC(_BasicScraper):
+    description = u'Yet Another Fantasy Gamer Comic'
     url = 'http://yafgc.net/'
     stripUrl = url + '?id=%s'
     firstStripUrl = stripUrl % '1'

@@ -20,6 +20,7 @@ class Undertow(_BasicScraper):
 
 
 class UnicornJelly(_BasicScraper):
+    description = u'UNICORN JELLY anime manga comic strip by Jennifer Diane Reitz'
     baseUrl = 'http://unicornjelly.com/'
     url = baseUrl + 'uni666.html'
     stripUrl = baseUrl + 'uni%s.html'

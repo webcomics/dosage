@@ -35,6 +35,7 @@ class MagickChicks(_BasicScraper):
 
 
 class ManlyGuysDoingManlyThings(_BasicScraper):
+    description = u'Manly Guys Doing Manly Things \xbb Updated Mondays or whenever I feel like it'
     url = 'http://thepunchlineismachismo.com/'
     rurl = escape(url)
     stripUrl = url + 'archives/comic/%s'
@@ -54,6 +55,7 @@ class Marilith(_BasicScraper):
 
 
 class MarryMe(_BasicScraper):
+    description = u'MARRY ME: an online graphic novel by Bobby Crosby and Remy "Eisu" Mokhtar'
     url = 'http://marryme.keenspot.com/'
     stripUrl = url + 'd/%s.html'
     imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
@@ -99,6 +101,7 @@ class MenageA3(_BasicScraper):
 
 
 class Melonpool(_BasicScraper):
+    description = u"Star Trek Meets Gilligan's Island"
     url = 'http://www.melonpool.com/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'

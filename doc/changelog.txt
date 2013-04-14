@@ -1,5 +1,9 @@
 Dosage 2.1 (released xx.4.2013)
 
+Features:
+- comics: Add description from webpages. Descriptions are displayed
+  with dosage -m.
+
 Fixes:
 - cmdline: Fix output encoding errors on comic listing.
   Closes: GH bug #24

@@ -41,6 +41,7 @@ class CaseyAndAndy(_BasicScraper):
 
 
 class CasuallyKayla(_BasicScraper):
+    description = u'Casually Kayla: Keeping it as Casual as possible'
     url = 'http://casuallykayla.com/'
     stripUrl = url + '?p=%s'
     firstStripUrl = stripUrl % '89'
@@ -81,6 +82,7 @@ class Catena(_BasicScraper):
 
 
 class CatsAndCameras(_BasicScraper):
+    description = u'Just when you thought it was safe to go to the photographer'
     url = 'http://catsncameras.com/cnc/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'
@@ -91,6 +93,7 @@ class CatsAndCameras(_BasicScraper):
 
 
 class ChainsawSuit(_BasicScraper):
+    description = u'internet humor, fresh-cut'
     url = 'http://chainsawsuit.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -101,6 +104,7 @@ class ChainsawSuit(_BasicScraper):
 
 
 class Champ2010(_BasicScraper):
+    description = u'Champ2010 - an almost daily journal comic from jed collins who is not drinking this year. webcomic'
     baseUrl = 'http://jedcollins.com/champ2010/'
     rurl = escape(baseUrl)
     # the latest URL is hard coded since the comic is discontinued
@@ -113,6 +117,7 @@ class Champ2010(_BasicScraper):
 
 
 class ChannelAte(_BasicScraper):
+    description = u'Comics and Cartoons by Ryan Hudson'
     url = 'http://www.channelate.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -122,6 +127,7 @@ class ChannelAte(_BasicScraper):
 
 
 class ChasingTheSunset(_BasicScraper):
+    description = u'Chasing the Sunset | Fantasy Webcomic | Elves, Pixies and a blue dragon with orange stripes.'
     url = 'http://www.fantasycomic.com/'
     stripUrl = url + 'index.php?p=c%s'
     firstStripUrl = stripUrl % '1'
@@ -131,6 +137,7 @@ class ChasingTheSunset(_BasicScraper):
 
 
 class CheckerboardNightmare(_BasicScraper):
+    description = u'Checkerboard Nightmare by Kristofer Straub - A Webcomics Institution'
     url = 'http://www.checkerboardnightmare.com/'
     stripUrl = url + 'd/%s.shtml'
     firstStripUrl = stripUrl % '20001110'
@@ -257,6 +264,7 @@ class CoolCatStudio(_BasicScraper):
 
 
 class CorydonCafe(_BasicScraper):
+    description = u'Corydon Cafe humorous online comic archive of abstruse awesomeness created by a starving artist'
     url = 'http://corydoncafe.com/'
     starter = indirectStarter(url,
         compile(tagre("a", "href", r'(\./\d+/[^"]+)')))
@@ -271,6 +279,7 @@ class CorydonCafe(_BasicScraper):
 
 
 class CourtingDisaster(_BasicScraper):
+    description = u'Courting Disaster by Brad Guigar - A Daily Webcomic'
     url = 'http://www.courting-disaster.com/'
     stripUrl = url + 'archive/%s.html'
     firstStripUrl = stripUrl % '20050112'
@@ -280,6 +289,7 @@ class CourtingDisaster(_BasicScraper):
 
 
 class CowboyJedi(_BasicScraper):
+    description = u'A Long Time Ago In A Webcomic Updated Weekly...'
     url = 'http://www.cowboyjedi.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -290,6 +300,7 @@ class CowboyJedi(_BasicScraper):
 
 
 class CrapIDrewOnMyLunchBreak(_BasicScraper):
+    description = u'A semi-biographical web comic about the struggles and occasional humour of daily life, pets, friends, and more. Currently completing the missing archive comics with your help.'
     url = 'http://crap.jinwicked.com/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2003/07/30/jin-and-josh-decide-to-move'
@@ -313,6 +324,7 @@ class CtrlAltDelSillies(CtrlAltDel):
 
 
 class CrimsonDark(_BasicScraper):
+    description = u'A Sci-Fi webcomic set in space in the distant future.'
     url = 'http://www.davidcsimon.com/crimsondark/'
     stripUrl = url + 'index.php?view=comic&strip_id=%s'
     firstStripUrl = stripUrl % '1'
@@ -345,6 +357,7 @@ class CucumberQuest(_BasicScraper):
 
 
 class Curvy(_BasicScraper):
+    description = u'An erotic sci-fi adventure comic for adults.'
     url = 'http://www.c.urvy.org/'
     stripUrl = url + '?date=%s'
     firstStripUrl = stripUrl % '20080329'

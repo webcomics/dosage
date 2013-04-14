@@ -71,6 +71,7 @@ class DangerouslyChloe(_BasicScraper):
 
 
 class DarkWings(_BasicScraper):
+    description = u"Dark Wings - You Can't Reach Heaven on Broken Wings"
     url = 'http://www.flowerlarkstudios.com/dark-wings/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -121,6 +122,7 @@ class DeepFried(_BasicScraper):
 
 
 class DemolitionSquad(_BasicScraper):
+    description = u'Demolitionsquad.de ist die erste deutsche Videospiel-Webcomic-Seite nach amerikanischen Vorbild und noch viel mehr als das. Auf Demolitionsquad.de findet der wissbegierige, spielebegeisterte Nutzer Comicstrips zu aktuellen Videospielen die ihm die Wartezeit auf den kommenden Top-Titel weiter ves\xfcssen.'
     url = 'http://www.demolitionsquad.de/'
     starter = indirectStarter(url,
         compile(tagre("a", "href", r'(no_cache/comicstrips/einzelansicht/archive/[^"]+)')))
@@ -219,6 +221,7 @@ class DominicDeegan(_BasicScraper):
 
 
 class DorkTower(_BasicScraper):
+    description = u'The Place for All Things Dork'
     url = 'http://www.dorktower.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
