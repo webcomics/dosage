@@ -1,8 +1,7 @@
-Dosage 2.1 (released xx.4.2013)
+Dosage 2.1 (released 14.4.2013)
 
 Features:
-- comics: Add description from webpages. Descriptions are displayed
-  with dosage -m.
+- comics: Add some comic descriptions from their webpages.
 
 Fixes:
 - cmdline: Fix output encoding errors on comic listing.
