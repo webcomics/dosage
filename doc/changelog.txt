@@ -1,3 +1,6 @@
+Dosage 2.2 (released xx.xx.2013)
+
+
 Dosage 2.1 (released 14.4.2013)
 
 Features:
