@@ -1,6 +1,6 @@
 Project: dosage
-Version: 2.0
-Release-Focus: Major feature enhancements
+Version: 2.1
+Release-Focus: Minor bugfixes
 Hide: N
 Website-URL: http://wummel.github.io/dosage/
 Changelog-URL: https://github.com/wummel/dosage/blob/master/doc/changelog.txt
@@ -8,8 +8,4 @@ Source-Package-URL: http://github.com/downloads/wummel/dosage/dosage-${version}.
 GIT-Tree-URL: https://github.com/wummel/dosage.git
 Windows-installer-URL: http://github.com/downloads/wummel/dosage/dosage-${version}.exe
 
-You can vote now for your favourite comic strip. The votes are registered
-at the homepage of Dosage.
-The following comic strips have been added: DamnLol, EverydayBlues, ExtraOrdinary,
-ForLackOfABetterComic, GoblinsComic, RealmOfAtland, Science,
-SnowFlakes, StuffNoOneToldMe, WebDesignerCOTW and ZenPencils.
+An encoding error listing comics has been fixed.
