@@ -98,6 +98,7 @@ releasecheck:
 # So for other developers there is no need to execute this target.
 check:
 	check-copyright
+	check-py-encoding patoolib tests
 	check-pofiles -v
 	py-tabdaddy
 	py-unittest2-compat tests/
