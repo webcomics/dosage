@@ -6,7 +6,7 @@ Dosage comic CowboyJedi
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>A Long Time Ago In A Webcomic Updated Weekly...</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.cowboyjedi.com/">http://www.cowboyjedi.com/</a></td>

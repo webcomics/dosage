@@ -6,7 +6,7 @@ Dosage comic KuroShouri
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>a webcomic by Kikirini and DJ-Anarchy</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://kuroshouri.com/">http://kuroshouri.com/</a></td>

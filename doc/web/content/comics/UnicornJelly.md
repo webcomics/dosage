@@ -6,7 +6,7 @@ Dosage comic UnicornJelly
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>UNICORN JELLY anime manga comic strip by Jennifer Diane Reitz</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://unicornjelly.com/uni666.html">http://unicornjelly.com/uni666.html</a></td>

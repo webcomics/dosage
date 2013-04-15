@@ -6,7 +6,7 @@ Dosage comic AstronomyPOTD
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>A different astronomy and space science related image is featured each day, along with a brief explanation.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://antwrp.gsfc.nasa.gov/apod/astropix.html">http://antwrp.gsfc.nasa.gov/apod/astropix.html</a></td>

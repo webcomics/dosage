@@ -6,7 +6,7 @@ Dosage comic FullFrontalNerdity
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Full Frontal Nerdity by Aaron Williams - Comics about liking all things gaming, technological, mythological, and internetological.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://ffn.nodwick.com/">http://ffn.nodwick.com/</a></td>

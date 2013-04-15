@@ -6,7 +6,7 @@ Dosage comic Wigu
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>WIGU: A COMIC ON INTERNET</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://wigucomics.com/">http://wigucomics.com/</a></td>

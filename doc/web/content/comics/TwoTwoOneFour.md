@@ -6,7 +6,7 @@ Dosage comic TwoTwoOneFour
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Artwork, comics, graphic novels, music, articles, and various silliness by Troy McQuinn</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.nitrocosm.com/go/2214_classic/">http://www.nitrocosm.com/go/2214_classic/</a></td>

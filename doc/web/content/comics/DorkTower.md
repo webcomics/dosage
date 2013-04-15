@@ -6,7 +6,7 @@ Dosage comic DorkTower
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>The Place for All Things Dork</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.dorktower.com/">http://www.dorktower.com/</a></td>

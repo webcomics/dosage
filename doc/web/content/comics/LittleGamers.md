@@ -6,7 +6,7 @@ Dosage comic LittleGamers
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>The comic everyone knows, but no one reads</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.little-gamers.com/">http://www.little-gamers.com/</a></td>

@@ -6,7 +6,7 @@ Dosage comic CrapIDrewOnMyLunchBreak
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>A semi-biographical web comic about the struggles and occasional humour of daily life, pets, friends, and more. Currently completing the missing archive comics with your help.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://crap.jinwicked.com/">http://crap.jinwicked.com/</a></td>

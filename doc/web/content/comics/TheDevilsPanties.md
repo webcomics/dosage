@@ -6,7 +6,7 @@ Dosage comic TheDevilsPanties
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>It's not Satanic Porn</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://thedevilspanties.com/">http://thedevilspanties.com/</a></td>

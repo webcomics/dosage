@@ -6,7 +6,7 @@ Dosage comic CatsAndCameras
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Just when you thought it was safe to go to the photographer</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://catsncameras.com/cnc/">http://catsncameras.com/cnc/</a></td>

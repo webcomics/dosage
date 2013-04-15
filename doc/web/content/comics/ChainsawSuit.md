@@ -6,7 +6,7 @@ Dosage comic ChainsawSuit
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>internet humor, fresh-cut</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://chainsawsuit.com/">http://chainsawsuit.com/</a></td>

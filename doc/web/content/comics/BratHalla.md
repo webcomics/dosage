@@ -6,7 +6,7 @@ Dosage comic BratHalla
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Norse mythology webcomic where young Thor, Loki, Balder, Hod and more face off against grade school and make an old man out of their immortal dad Odin</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://brat-halla.com/">http://brat-halla.com/</a></td>

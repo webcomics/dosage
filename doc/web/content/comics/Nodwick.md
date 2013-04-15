@@ -6,7 +6,7 @@ Dosage comic Nodwick
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Welcome to Nodwick.com - A fantasy farce for the whole party!</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://comic.nodwick.com/">http://comic.nodwick.com/</a></td>

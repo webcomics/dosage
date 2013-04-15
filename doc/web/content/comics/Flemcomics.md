@@ -6,7 +6,7 @@ Dosage comic Flemcomics
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>FLEM Comics - More fun than a sack of dead kittens.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.flemcomics.com/">http://www.flemcomics.com/</a></td>

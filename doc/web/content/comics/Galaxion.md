@@ -6,7 +6,7 @@ Dosage comic Galaxion
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Galaxion - Life. Love. Hyperspace.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://galaxioncomics.com/">http://galaxioncomics.com/</a></td>

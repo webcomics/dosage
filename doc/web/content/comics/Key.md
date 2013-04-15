@@ -6,7 +6,7 @@ Dosage comic Key
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Key - Fantasy Adventure Webcomic</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://key.shadilyn.com/latestpage.html">http://key.shadilyn.com/latestpage.html</a></td>

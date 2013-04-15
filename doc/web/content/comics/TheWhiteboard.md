@@ -6,7 +6,7 @@ Dosage comic TheWhiteboard
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>The Whiteboard, a somewhat paintball-related webcomic by &quot;Doc&quot; Nickel</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.the-whiteboard.com/">http://www.the-whiteboard.com/</a></td>

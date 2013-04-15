@@ -6,7 +6,7 @@ Dosage comic Nukees
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Nukees, The Atomic Comic Strip</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.nukees.com/">http://www.nukees.com/</a></td>

@@ -6,7 +6,7 @@ Dosage comic Angband
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Angband - Tales From The Pit</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://angband.calamarain.net/">http://angband.calamarain.net/</a></td>

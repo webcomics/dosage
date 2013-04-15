@@ -6,7 +6,7 @@ Dosage comic BrentalFloss/GuestComics
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>brentalfloss the comic :: Off To The Races</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://brentalflossthecomic.com/guestcomics/">http://brentalflossthecomic.com/guestcomics/</a></td>

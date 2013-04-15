@@ -6,7 +6,7 @@ Dosage comic MarryMe
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>MARRY ME: an online graphic novel by Bobby Crosby and Remy &quot;Eisu&quot; Mokhtar</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://marryme.keenspot.com/">http://marryme.keenspot.com/</a></td>

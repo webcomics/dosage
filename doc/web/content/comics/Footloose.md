@@ -6,7 +6,7 @@ Dosage comic Footloose
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Footloose, a Webcomic By alice Nuttall and Emily Brady</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://footloosecomic.com/footloose/today.php">http://footloosecomic.com/footloose/today.php</a></td>

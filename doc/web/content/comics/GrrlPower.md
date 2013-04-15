@@ -6,7 +6,7 @@ Dosage comic GrrlPower
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Grrl Power - A webcomic about superheroines.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.grrlpowercomic.com/">http://www.grrlpowercomic.com/</a></td>

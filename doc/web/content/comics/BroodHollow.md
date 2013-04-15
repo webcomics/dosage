@@ -6,7 +6,7 @@ Dosage comic BroodHollow
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Broodhollow - A MWF cosmic horror adventure comic by Kris Straub</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://broodhollow.chainsawsuit.com/">http://broodhollow.chainsawsuit.com/</a></td>

@@ -6,7 +6,7 @@ Dosage comic WeCanSleepTomorrow
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>We Can Sleep Tomorrow - Life does not take bathroom breaks. A webcomic that updates Mondays and Fridays</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://wecansleeptomorrow.com/">http://wecansleeptomorrow.com/</a></td>

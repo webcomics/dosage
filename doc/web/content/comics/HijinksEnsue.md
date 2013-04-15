@@ -6,7 +6,7 @@ Dosage comic HijinksEnsue
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>HijiNKS ENSUE is a geek pop culture webcomic that makes fun of the latest news in tv, movies, Sci-Fi, technology and the Internet</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://hijinksensue.com/">http://hijinksensue.com/</a></td>

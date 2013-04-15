@@ -6,7 +6,7 @@ Dosage comic CheckerboardNightmare
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Checkerboard Nightmare by Kristofer Straub - A Webcomics Institution</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.checkerboardnightmare.com/">http://www.checkerboardnightmare.com/</a></td>

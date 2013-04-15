@@ -6,7 +6,7 @@ Dosage comic BigFatWhale
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>A weekly comic strip for those who are not dumb.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.bigfatwhale.com/">http://www.bigfatwhale.com/</a></td>

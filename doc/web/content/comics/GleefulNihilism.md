@@ -6,7 +6,7 @@ Dosage comic GleefulNihilism
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>pointless comics with a sideways grin</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://gleefulnihilism.com/">http://gleefulnihilism.com/</a></td>

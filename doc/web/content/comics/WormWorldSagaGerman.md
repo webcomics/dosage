@@ -6,7 +6,7 @@ Dosage comic WormWorldSagaGerman
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>The Wormworld Saga Online Graphic Novel by Daniel Lieske - An Epic Fantasy Adventure for all Ages</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.wormworldsaga.com/">http://www.wormworldsaga.com/</a></td>

@@ -6,7 +6,7 @@ Dosage comic BoyOnAStickAndSlither
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>A comic about killer bees, time travel, ethics and despair.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.boasas.com/">http://www.boasas.com/</a></td>

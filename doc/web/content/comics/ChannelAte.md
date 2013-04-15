@@ -6,7 +6,7 @@ Dosage comic ChannelAte
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Comics and Cartoons by Ryan Hudson</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.channelate.com/">http://www.channelate.com/</a></td>

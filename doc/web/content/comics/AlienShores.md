@@ -6,7 +6,7 @@ Dosage comic AlienShores
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>A webcomic about four guys forming a band. They find that being a band is more than just playing the music.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://alienshores.com/alienshores_band/">http://alienshores.com/alienshores_band/</a></td>

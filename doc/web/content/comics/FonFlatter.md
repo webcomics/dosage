@@ -6,7 +6,7 @@ Dosage comic FonFlatter
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Fred, eine stets zuversichtliche, einfallsreiche, zumeist aber alberne und etwas naive Fledermaus, flattert bereits seit 2005 täglich durch das weltweite Netz</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.fonflatter.de/">http://www.fonflatter.de/</a></td>

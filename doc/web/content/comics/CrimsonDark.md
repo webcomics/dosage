@@ -6,7 +6,7 @@ Dosage comic CrimsonDark
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>A Sci-Fi webcomic set in space in the distant future.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.davidcsimon.com/crimsondark/">http://www.davidcsimon.com/crimsondark/</a></td>

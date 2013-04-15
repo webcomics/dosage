@@ -6,7 +6,7 @@ Dosage comic Champ2010
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Champ2010 - an almost daily journal comic from jed collins who is not drinking this year. webcomic</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://jedcollins.com/champ2010/champ-12-30-10.html">http://jedcollins.com/champ2010/champ-12-30-10.html</a></td>

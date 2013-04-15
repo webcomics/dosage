@@ -6,7 +6,7 @@ Dosage comic OverCompensating
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>OVERCOMPENSATING: The Journal Comic With a Seething Disdain for Reality.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.overcompensating.com/">http://www.overcompensating.com/</a></td>

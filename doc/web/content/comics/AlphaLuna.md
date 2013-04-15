@@ -6,7 +6,7 @@ Dosage comic AlphaLuna
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Luna, a young girl discovers what lies in her soul: a werewolf beast and a destiny. An adventure manga story for werecreatures fans.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.alphaluna.net/">http://www.alphaluna.net/</a></td>

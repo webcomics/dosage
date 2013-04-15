@@ -6,7 +6,7 @@ Dosage comic PicPakDog
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>A comic by Kim Belding</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.picpak.net/">http://www.picpak.net/</a></td>

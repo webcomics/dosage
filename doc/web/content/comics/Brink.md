@@ -6,7 +6,7 @@ Dosage comic Brink
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>BRINK - You're not as crazy as you think you are</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://paperfangs.com/brink/">http://paperfangs.com/brink/</a></td>

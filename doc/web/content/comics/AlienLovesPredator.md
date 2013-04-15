@@ -6,7 +6,7 @@ Dosage comic AlienLovesPredator
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Abe (the Alien) and Preston (the Predator) represent in NYC</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://alienlovespredator.com/">http://alienlovespredator.com/</a></td>

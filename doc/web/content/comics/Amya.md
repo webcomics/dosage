@@ -6,7 +6,7 @@ Dosage comic Amya
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>A Graphic Novel</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.amyachronicles.com/">http://www.amyachronicles.com/</a></td>

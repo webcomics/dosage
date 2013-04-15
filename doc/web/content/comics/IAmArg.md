@@ -6,7 +6,7 @@ Dosage comic IAmArg
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>An Internet comic of non sequitur Geekiness. Updates Monday, Wednesday and Friday</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://iamarg.com/">http://iamarg.com/</a></td>

@@ -6,7 +6,7 @@ Dosage comic Melonpool
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Star Trek Meets Gilligan's Island</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.melonpool.com/">http://www.melonpool.com/</a></td>

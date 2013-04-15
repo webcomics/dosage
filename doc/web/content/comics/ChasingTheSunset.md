@@ -6,7 +6,7 @@ Dosage comic ChasingTheSunset
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Chasing the Sunset | Fantasy Webcomic | Elves, Pixies and a blue dragon with orange stripes.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.fantasycomic.com/">http://www.fantasycomic.com/</a></td>

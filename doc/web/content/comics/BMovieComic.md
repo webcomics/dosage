@@ -6,7 +6,7 @@ Dosage comic BMovieComic
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>A group of unlikely heroes tackles monsters, mutants and aliens from Hollywood's past and present. See what happens. Or they'll say you haven't seen it.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.bmoviecomic.com/">http://www.bmoviecomic.com/</a></td>

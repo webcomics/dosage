@@ -6,7 +6,7 @@ Dosage comic Spamusement
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Spamusement! Poorly-drawn cartoons inspired by actual spam subject lines!</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://spamusement.com/">http://spamusement.com/</a></td>

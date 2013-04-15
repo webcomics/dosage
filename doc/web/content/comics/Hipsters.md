@@ -6,7 +6,7 @@ Dosage comic Hipsters
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>a weekly webcomic series by Adrian vom Baur - Hipsters vs. Vampires - Hipsters vs. Dinosaurs - Hipsters vs. Robots</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.hipsters-comic.com/">http://www.hipsters-comic.com/</a></td>

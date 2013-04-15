@@ -6,7 +6,7 @@ Dosage comic NamirDeiter
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Namir Deiter, by Isabel Marks</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.namirdeiter.com/">http://www.namirdeiter.com/</a></td>

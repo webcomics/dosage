@@ -6,7 +6,7 @@ Dosage comic KillerKomics
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Web comic - Lorsque tu repasses une chemise, fait attention pour ne pas oublier un endroit... - Web comic drole avec bonhommes allumettes, webcomic avec beaucoup de sang et violence. Pour ceux qui veulent rire à la violence.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.killerkomics.com/web-comics/index_ang.cfm">http://www.killerkomics.com/web-comics/index_ang.cfm</a></td>

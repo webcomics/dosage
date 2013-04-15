@@ -6,7 +6,7 @@ Dosage comic Exiern
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Barbarian Typhan-Knee defeated the wizard...and became Tiffany!</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.exiern.com/">http://www.exiern.com/</a></td>

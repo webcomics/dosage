@@ -6,7 +6,7 @@ Dosage comic KevinAndKell
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Kevin &amp; Kell by Bill Holbrook</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.kevinandkell.com/">http://www.kevinandkell.com/</a></td>

@@ -6,7 +6,7 @@ Dosage comic BizarreUprising
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Bizarre Uprising - Manga that's not just good, it's good for you!</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.bizarreuprising.com/">http://www.bizarreuprising.com/</a></td>

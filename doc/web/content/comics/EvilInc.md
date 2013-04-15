@@ -6,7 +6,7 @@ Dosage comic EvilInc
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Evil Inc. by Brad Guigar - Daily Super-Villain Webcomic and Comics Blog</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.evil-comic.com/">http://www.evil-comic.com/</a></td>

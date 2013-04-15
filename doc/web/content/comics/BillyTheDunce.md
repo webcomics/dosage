@@ -6,7 +6,7 @@ Dosage comic BillyTheDunce
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Billy the Dunce: A webcomic about some genius kids, some supernatural creatures, and one dumb kid who's stuck with them. Like Goonies, but with more Lovecraft.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.duncepress.com/">http://www.duncepress.com/</a></td>

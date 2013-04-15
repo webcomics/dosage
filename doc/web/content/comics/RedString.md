@@ -6,7 +6,7 @@ Dosage comic RedString
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>A web comics about love and growing up. Art by Gina Biggs.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.redstring.strawberrycomics.com/">http://www.redstring.strawberrycomics.com/</a></td>

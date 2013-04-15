@@ -6,7 +6,7 @@ Dosage comic InsideOut
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Inside Out Comic - A new kind of Weird</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.insideoutcomic.com/">http://www.insideoutcomic.com/</a></td>

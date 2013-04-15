@@ -6,7 +6,7 @@ Dosage comic LeastICouldDo
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>A daily webcomic series about the life of Rayne Summers. Created by Ryan Sohmer and Lar deSouza.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.leasticoulddo.com/">http://www.leasticoulddo.com/</a></td>

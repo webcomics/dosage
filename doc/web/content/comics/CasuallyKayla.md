@@ -6,7 +6,7 @@ Dosage comic CasuallyKayla
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Casually Kayla: Keeping it as Casual as possible</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://casuallykayla.com/">http://casuallykayla.com/</a></td>

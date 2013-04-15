@@ -6,7 +6,7 @@ Dosage comic BloodBound
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Demonic Vampire Hotness</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://bloodboundcomic.com/">http://bloodboundcomic.com/</a></td>

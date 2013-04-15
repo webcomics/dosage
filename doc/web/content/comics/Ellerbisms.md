@@ -6,7 +6,7 @@ Dosage comic Ellerbisms
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Ellerbisms - A diary comic by Marc Ellerby</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.ellerbisms.com/">http://www.ellerbisms.com/</a></td>

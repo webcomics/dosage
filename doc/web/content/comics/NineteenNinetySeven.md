@@ -6,7 +6,7 @@ Dosage comic 1997
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>1977 the Comic - Sex, Drugs and Rock and Roll Just Not in That Order</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.1977thecomic.com/">http://www.1977thecomic.com/</a></td>

@@ -6,7 +6,7 @@ Dosage comic Alice
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>The little webcomic with the BIG imagination</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://alice.alicecomics.com/">http://alice.alicecomics.com/</a></td>

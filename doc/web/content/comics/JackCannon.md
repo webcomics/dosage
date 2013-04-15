@@ -6,7 +6,7 @@ Dosage comic JackCannon
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>The Fancy Adventures of Jack Cannon – A Webcomic -</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://fancyadventures.com/">http://fancyadventures.com/</a></td>

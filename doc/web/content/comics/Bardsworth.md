@@ -6,7 +6,7 @@ Dosage comic Bardsworth
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Bardsworth - Magic, Mischief, and Cookies</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.bardsworth.com/">http://www.bardsworth.com/</a></td>

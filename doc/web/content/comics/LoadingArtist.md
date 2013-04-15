@@ -6,7 +6,7 @@ Dosage comic LoadingArtist
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>A webcomic by Gregor Czaykowski</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.loadingartist.com/">http://www.loadingartist.com/</a></td>

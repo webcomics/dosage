@@ -6,7 +6,7 @@ Dosage comic ShadowGirls
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>It's like H.P. Lovecraft meets the Gilmore Girls!</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.shadowgirlscomic.com/">http://www.shadowgirlscomic.com/</a></td>

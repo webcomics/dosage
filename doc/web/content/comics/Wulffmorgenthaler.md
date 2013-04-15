@@ -6,7 +6,7 @@ Dosage comic Wulffmorgenthaler
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Entertainment - Since 2002. Wulff &amp; Morgenthaler's Personal humoristic social commentary on life, nostalgia and the World in general. Nothing is taboo: They deal with Politics, News, Entertainment, Technology, Culture, and Weirdo Beavers</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://wumocomicstrip.com/">http://wumocomicstrip.com/</a></td>

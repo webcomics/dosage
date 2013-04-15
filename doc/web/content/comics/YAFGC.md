@@ -6,7 +6,7 @@ Dosage comic YAFGC
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Yet Another Fantasy Gamer Comic</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://yafgc.net/">http://yafgc.net/</a></td>

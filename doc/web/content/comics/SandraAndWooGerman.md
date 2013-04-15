@@ -6,7 +6,7 @@ Dosage comic SandraAndWooGerman
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Sandra und Woo: ein Webcomic über Freundschaft, das Leben und die Kunst (keine) Eichhörnchen zu essen; mit dem Mädchen Sandra und ihrem Waschbären Woo in den Hauptrollen</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.sandraandwoo.com/woode/">http://www.sandraandwoo.com/woode/</a></td>

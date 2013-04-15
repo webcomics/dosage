@@ -6,7 +6,7 @@ Dosage comic GlassHalfEmpty
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>A Glass Half Empty cartoon by Dan Markowitz</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.defectivity.com/ghe/index.php">http://www.defectivity.com/ghe/index.php</a></td>

@@ -6,7 +6,7 @@ Dosage comic AbleAndBaker
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Able and Baker: Hatin' and Dictatin'</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.jimburgessdesign.com/comics/index.php">http://www.jimburgessdesign.com/comics/index.php</a></td>

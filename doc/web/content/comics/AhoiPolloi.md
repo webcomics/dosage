@@ -6,7 +6,7 @@ Dosage comic AhoiPolloi
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>ahoi polloi - ein füllhorn voller fühlhörner</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://ahoipolloi.blogger.de/">http://ahoipolloi.blogger.de/</a></td>

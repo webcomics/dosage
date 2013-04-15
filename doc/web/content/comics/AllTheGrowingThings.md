@@ -6,7 +6,7 @@ Dosage comic AllTheGrowingThings
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>All The Growing Things - A Tale of Gardens, monsters, and old ladies</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://growingthings.typodmary.com/">http://growingthings.typodmary.com/</a></td>

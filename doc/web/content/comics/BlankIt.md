@@ -6,7 +6,7 @@ Dosage comic BlankIt
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>An absurd, insane, and delightful webcomic from Aric McKeown and Lem Pew.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://blankitcomics.com/">http://blankitcomics.com/</a></td>

@@ -6,7 +6,7 @@ Dosage comic SpareParts
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Spare Parts by Terrence and Isabel Marks!</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.sparepartscomics.com/comics/?date=20080328">http://www.sparepartscomics.com/comics/?date=20080328</a></td>

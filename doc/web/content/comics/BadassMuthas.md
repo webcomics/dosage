@@ -6,7 +6,7 @@ Dosage comic BadassMuthas
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Nobody wants to work for a living. Get yourself some super-powers and come ill with us. Full color update every Friday.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://badassmuthas.com/pages/comic.php">http://badassmuthas.com/pages/comic.php</a></td>

@@ -6,7 +6,7 @@ Dosage comic NeoEarth
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Neo-Earth - Web comic by Bryan King - Updated Every Monday</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.neo-earth.com/NE/">http://www.neo-earth.com/NE/</a></td>

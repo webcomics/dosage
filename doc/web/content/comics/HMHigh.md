@@ -6,7 +6,7 @@ Dosage comic TheFallenAngel/HMHigh
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Welcome to the website of professional artist and illustrator, Angel Smith and of Fallen Angel Media Ltd; An independent art, design &amp; publishing house and event management company based in Bristol, England</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.thefallenangel.co.uk/hmhigh/">http://www.thefallenangel.co.uk/hmhigh/</a></td>

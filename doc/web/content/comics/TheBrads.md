@@ -6,7 +6,7 @@ Dosage comic TheBrads
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>ArchiveFirst World Problems Comic - By Brad Colbow</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://bradcolbow.com/archive/C4/">http://bradcolbow.com/archive/C4/</a></td>

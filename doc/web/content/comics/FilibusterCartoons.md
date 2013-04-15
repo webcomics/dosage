@@ -6,7 +6,7 @@ Dosage comic FilibusterCartoons
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Political cartoons from Canada!</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.filibustercartoons.com/">http://www.filibustercartoons.com/</a></td>

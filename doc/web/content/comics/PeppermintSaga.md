@@ -6,7 +6,7 @@ Dosage comic PeppermintSaga
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Sexy Fucking Fantasy Adventure Webcomic - NSFW</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.pepsaga.com/">http://www.pepsaga.com/</a></td>
@@ -18,7 +18,7 @@ Dosage comic PeppermintSaga
 <th>Language</th><td>English</td>
 </tr>
 <tr>
-<th>Adult content</th><td>no</td>
+<th>Adult content</th><td>yes</td>
 </tr>
 <tr>
 <th>Status</th><td>ok on 11.04.2013</td>

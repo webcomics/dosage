@@ -6,7 +6,7 @@ Dosage comic CorydonCafe
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Corydon Cafe humorous online comic archive of abstruse awesomeness created by a starving artist</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://corydoncafe.com/">http://corydoncafe.com/</a></td>

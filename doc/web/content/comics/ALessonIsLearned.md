@@ -6,7 +6,7 @@ Dosage comic ALessonIsLearned
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>A Lesson Is Learned But The Damage Is Irreversible</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.alessonislearned.com/">http://www.alessonislearned.com/</a></td>

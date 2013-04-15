@@ -6,7 +6,7 @@ Dosage comic KatzenfutterGeleespritzer
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Webcomic mit Geschichten aus dem Alltag eines geeky Cartoonisten und Comiczeichners</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.katzenfuttergeleespritzer.de/">http://www.katzenfuttergeleespritzer.de/</a></td>

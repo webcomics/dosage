@@ -6,7 +6,7 @@ Dosage comic Geeks
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Geeks Trying To Be Funny</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://sevenfloorsdown.com/geeks/">http://sevenfloorsdown.com/geeks/</a></td>

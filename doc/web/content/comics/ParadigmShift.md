@@ -6,7 +6,7 @@ Dosage comic ParadigmShift
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>A Paranormal Graphic Novel by Dirk I. Tiede</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.paradigmshiftmanga.com/">http://www.paradigmshiftmanga.com/</a></td>

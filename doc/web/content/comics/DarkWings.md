@@ -6,7 +6,7 @@ Dosage comic DarkWings
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Dark Wings - You Can't Reach Heaven on Broken Wings</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.flowerlarkstudios.com/dark-wings/">http://www.flowerlarkstudios.com/dark-wings/</a></td>

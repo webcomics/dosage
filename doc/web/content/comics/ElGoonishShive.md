@@ -6,7 +6,7 @@ Dosage comic KeenSpot/ElGoonishShive
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Fantasy sci-fi comic about a group of teenagers and the bizarre, strange and supernatural circumstances of their lives.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.egscomics.com/">http://www.egscomics.com/</a></td>

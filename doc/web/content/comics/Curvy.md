@@ -6,7 +6,7 @@ Dosage comic Curvy
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>An erotic sci-fi adventure comic for adults.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.c.urvy.org/">http://www.c.urvy.org/</a></td>

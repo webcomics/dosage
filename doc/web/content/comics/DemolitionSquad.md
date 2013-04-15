@@ -6,7 +6,7 @@ Dosage comic DemolitionSquad
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Demolitionsquad.de ist die erste deutsche Videospiel-Webcomic-Seite nach amerikanischen Vorbild und noch viel mehr als das. Auf Demolitionsquad.de findet der wissbegierige, spielebegeisterte Nutzer Comicstrips zu aktuellen Videospielen die ihm die Wartezeit auf den kommenden Top-Titel weiter vesüssen.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.demolitionsquad.de/">http://www.demolitionsquad.de/</a></td>

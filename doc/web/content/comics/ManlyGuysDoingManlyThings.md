@@ -6,7 +6,7 @@ Dosage comic ManlyGuysDoingManlyThings
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Manly Guys Doing Manly Things » Updated Mondays or whenever I feel like it</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://thepunchlineismachismo.com/">http://thepunchlineismachismo.com/</a></td>

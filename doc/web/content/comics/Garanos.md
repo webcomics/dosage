@@ -6,7 +6,7 @@ Dosage comic Garanos
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Garanos - A dramatic fantasy webcomic with a dash of adventure, gothic horror, and romance for flavor.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://garanos.alexheberling.com/pages/page-1/">http://garanos.alexheberling.com/pages/page-1/</a></td>

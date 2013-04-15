@@ -6,7 +6,7 @@ Dosage comic AlsoBagels
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Also, Bagels - A Comic of Inept Redundancy</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://alsobagels.com/">http://alsobagels.com/</a></td>

@@ -6,7 +6,7 @@ Dosage comic PartiallyClips
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>PartiallyClips - The true stories behind your favorite clip art.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://partiallyclips.com/">http://partiallyclips.com/</a></td>

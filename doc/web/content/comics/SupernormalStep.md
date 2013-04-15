@@ -6,7 +6,7 @@ Dosage comic SupernormalStep
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Supernormal Step - Magic, Face Punching, and a Robot or Two</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://supernormalstep.com/">http://supernormalstep.com/</a></td>

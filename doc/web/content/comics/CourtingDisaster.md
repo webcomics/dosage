@@ -6,7 +6,7 @@ Dosage comic CourtingDisaster
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Courting Disaster by Brad Guigar - A Daily Webcomic</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.courting-disaster.com/">http://www.courting-disaster.com/</a></td>
