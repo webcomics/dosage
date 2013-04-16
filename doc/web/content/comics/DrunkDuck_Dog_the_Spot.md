@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Dog_the_Spot
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/RIDDICK_Q_LOSS_TALES
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

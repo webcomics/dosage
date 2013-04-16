@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/The_Temple_of_a_Thousand_Tears
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

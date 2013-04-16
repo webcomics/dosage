@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Lost_Tribe_of_Pen_GUin
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

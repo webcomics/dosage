@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Darkling_Visions_of_a_Madma...
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

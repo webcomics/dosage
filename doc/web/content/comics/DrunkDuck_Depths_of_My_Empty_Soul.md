@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Depths_of_My_Empty_Soul
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

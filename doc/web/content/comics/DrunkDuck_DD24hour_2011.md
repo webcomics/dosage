@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/DD24hour_2011
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

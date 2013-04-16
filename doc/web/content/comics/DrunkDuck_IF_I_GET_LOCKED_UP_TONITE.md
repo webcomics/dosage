@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/IF_I_GET_LOCKED_UP_TONITE
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

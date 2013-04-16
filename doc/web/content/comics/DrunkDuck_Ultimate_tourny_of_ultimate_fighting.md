@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Ultimate_tourny_of_ultimate...
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

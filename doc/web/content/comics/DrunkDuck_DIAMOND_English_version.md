@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/DIAMOND_English_version
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

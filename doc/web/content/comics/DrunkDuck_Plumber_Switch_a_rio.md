@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Plumber_Switch_a_rio
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Much_the_Millers_Son
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

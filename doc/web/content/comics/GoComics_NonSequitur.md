@@ -27,3 +27,5 @@ Dosage comic GoComics/NonSequitur
 <th>Votes</th><td>1</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

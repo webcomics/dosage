@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Lil_Hero_Artists_Manga_Edition
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

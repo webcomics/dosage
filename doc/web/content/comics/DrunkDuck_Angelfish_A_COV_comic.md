@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Angelfish_A_COV_comic
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

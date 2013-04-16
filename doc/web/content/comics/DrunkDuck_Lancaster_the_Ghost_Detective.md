@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Lancaster_the_Ghost_Detective
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

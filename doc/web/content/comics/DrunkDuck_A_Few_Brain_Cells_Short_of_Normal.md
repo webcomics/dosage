@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/A_Few_Brain_Cells_Short_of_...
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

@@ -67,6 +67,8 @@ Dosage comic %(name)s
 <th>Votes</th><td>%(vote)s</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).
 """
 
 

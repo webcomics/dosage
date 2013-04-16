@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Distant_Embrace
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/So_Fantastic_Pork_Show_9oCLOCK
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

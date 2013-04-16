@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Dont_Eat_the_Bread
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/My_Parents_are_Nobodies
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

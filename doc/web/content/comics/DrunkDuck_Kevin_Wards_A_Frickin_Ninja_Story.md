@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Kevin_Wards_A_Frickin_Ninja...
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Here_Comes_the_Chavalry_and...
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

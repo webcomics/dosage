@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/MAYA_la_leyenda_del_lobo
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

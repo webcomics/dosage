@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Sonic_the_Hedgehog_in_the_C...
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

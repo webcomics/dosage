@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Ruby_And_Pipers_World_Of_Ma...
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

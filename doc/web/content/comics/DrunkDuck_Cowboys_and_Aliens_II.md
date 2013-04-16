@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Cowboys_and_Aliens_II
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

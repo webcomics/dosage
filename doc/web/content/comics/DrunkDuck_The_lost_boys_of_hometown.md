@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/The_lost_boys_of_hometown
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

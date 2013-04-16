@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/1337_Joe_and_Fellow_Seth
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

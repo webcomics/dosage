@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Legend_of_Setar
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

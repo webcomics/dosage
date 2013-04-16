@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Extra_stuff_of_the_other_co...
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

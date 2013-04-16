@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Billy_Learns_To_Rock
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

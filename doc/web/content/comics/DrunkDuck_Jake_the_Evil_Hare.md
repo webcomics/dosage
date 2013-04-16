@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Jake_the_Evil_Hare
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Rules_of_Make_Believe
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

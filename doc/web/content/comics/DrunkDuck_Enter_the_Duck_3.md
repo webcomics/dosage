@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Enter_the_Duck_3
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

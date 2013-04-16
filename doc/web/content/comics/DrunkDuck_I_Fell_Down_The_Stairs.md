@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/I_Fell_Down_The_Stairs
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

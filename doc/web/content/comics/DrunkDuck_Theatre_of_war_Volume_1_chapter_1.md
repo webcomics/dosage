@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Theatre_of_war_Volume_1_cha...
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

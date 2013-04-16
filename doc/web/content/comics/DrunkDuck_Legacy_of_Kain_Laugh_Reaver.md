@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Legacy_of_Kain_Laugh_Reaver
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

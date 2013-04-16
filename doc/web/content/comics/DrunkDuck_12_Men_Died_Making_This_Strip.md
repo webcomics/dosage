@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/12_Men_Died_Making_This_Strip
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

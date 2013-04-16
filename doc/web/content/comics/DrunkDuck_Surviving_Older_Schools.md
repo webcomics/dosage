@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Surviving_Older_Schools
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

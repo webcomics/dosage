@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Trinity_Legends_of_Zevera
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

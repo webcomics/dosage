@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Memories_from_Requiem
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/This_Is_What_I_Do
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

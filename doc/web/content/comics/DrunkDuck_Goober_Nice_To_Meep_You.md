@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Goober_Nice_To_Meep_You
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

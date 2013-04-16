@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/BLADE_OF_THE_FREAK
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

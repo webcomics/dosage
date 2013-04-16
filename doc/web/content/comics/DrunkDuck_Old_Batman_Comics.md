@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Old_Batman_Comics
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).

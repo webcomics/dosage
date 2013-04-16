@@ -27,3 +27,5 @@ Dosage comic DrunkDuck/Essay_Bee_Comics_Presents_F...
 <th>Votes</th><td>0</div></td>
 </tr>
 </table>
+
+Back to the [comic list](../comic-index.html).
