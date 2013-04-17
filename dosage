@@ -169,6 +169,7 @@ def displayComicHelp(scraperobj):
     """Print description and help for a comic."""
     out.context = getScraperName(scraperobj)
     try:
+        out.info("URL: " + scraperobj.url)
         if scraperobj.description:
             out.info("Description: " + scraperobj.description)
         if scraperobj.lang:
