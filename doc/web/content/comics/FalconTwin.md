@@ -6,7 +6,7 @@ Dosage comic FalconTwin
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Falcon Twin</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.falcontwin.com/">http://www.falcontwin.com/</a></td>

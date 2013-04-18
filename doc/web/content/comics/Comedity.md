@@ -6,7 +6,7 @@ Dosage comic Comedity
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Comedity 2.0</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.comedity.com/">http://www.comedity.com/</a></td>

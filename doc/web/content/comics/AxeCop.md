@@ -6,7 +6,7 @@ Dosage comic AxeCop
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Axe Cop</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://axecop.com/">http://axecop.com/</a></td>

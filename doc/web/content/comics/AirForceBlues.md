@@ -6,7 +6,7 @@ Dosage comic AirForceBlues
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Air Force Blues | By A. May -</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.afblues.com/">http://www.afblues.com/</a></td>

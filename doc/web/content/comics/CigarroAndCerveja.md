@@ -6,7 +6,7 @@ Dosage comic CigarroAndCerveja
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Cigarro &amp; Cerveja</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.cigarro.ca/">http://www.cigarro.ca/</a></td>

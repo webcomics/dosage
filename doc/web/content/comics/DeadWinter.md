@@ -6,7 +6,7 @@ Dosage comic DeadWinter
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>d e a d . w i n t e r</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://deadwinter.cc/">http://deadwinter.cc/</a></td>

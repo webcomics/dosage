@@ -6,7 +6,7 @@ Dosage comic EarthsongSaga
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Earthsong - An Online Graphic Novel by Crystal Yates</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.earthsongsaga.com/">http://www.earthsongsaga.com/</a></td>

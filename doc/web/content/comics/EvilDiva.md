@@ -6,7 +6,7 @@ Dosage comic EvilDiva
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Evil Diva</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.evildivacomics.com/">http://www.evildivacomics.com/</a></td>

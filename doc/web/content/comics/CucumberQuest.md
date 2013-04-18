@@ -6,7 +6,7 @@ Dosage comic CucumberQuest
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Cucumber Quest</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://cucumber.gigidigi.com/">http://cucumber.gigidigi.com/</a></td>

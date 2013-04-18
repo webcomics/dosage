@@ -6,7 +6,7 @@ Dosage comic FredoAndPidjin
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Fredo and Pidjin. The Webcomic</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.pidjin.net/">http://www.pidjin.net/</a></td>

@@ -6,7 +6,7 @@ Dosage comic GoneWithTheBlastwave
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Gone with the Blastwave - Type E webcomic.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.blastwave-comic.com/index.php?p=comic&amp;nro=1">http://www.blastwave-comic.com/index.php?p=comic&amp;nro=1</a></td>

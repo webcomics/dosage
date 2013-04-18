@@ -6,7 +6,7 @@ Dosage comic FantasyRealms
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Fantasy Realms</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.fantasyrealmsonline.com/">http://www.fantasyrealmsonline.com/</a></td>

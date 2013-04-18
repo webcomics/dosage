@@ -72,12 +72,18 @@ Note that the old commandline program `maintool` has been renamed to
 
 Dependencies
 -------------
-[Python version 2.7](http://www.python.org/) or higher
+[Python](http://www.python.org/): for Python 2.x at least 2.7.0, for Python 3.x at least Python 3.3.
 
 Also the [python-requests module](http://docs.python-requests.org/en/latest/) must be installed
 
 Installation
 -------------
+The easy way with pip:
+
+```shell
+pip install dosage
+```
+
 You can invoke Dosage directly from the source code as 
 `./dosage`. Alternatively,
 you can install Dosage using python distutils by invoking
@@ -92,13 +98,6 @@ or if you do not have root permissions:
 ```shell
 python setup.py install --home=$HOME
 ```
-
-Another option is to use pip:
-
-```shell
-pip install dosage
-```
-
 
 Technical Description
 ----------------------

@@ -6,7 +6,7 @@ Dosage comic AcademyVale
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Academy Vale</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.imagerie.com/vale/">http://www.imagerie.com/vale/</a></td>

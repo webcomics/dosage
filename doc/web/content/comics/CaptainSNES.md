@@ -6,7 +6,7 @@ Dosage comic CaptainSNES
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Captain SNES</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.captainsnes.com/">http://www.captainsnes.com/</a></td>

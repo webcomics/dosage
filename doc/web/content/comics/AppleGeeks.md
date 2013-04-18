@@ -6,7 +6,7 @@ Dosage comic AppleGeeks
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>AppleGeeks 3.0</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.applegeeks.com/">http://www.applegeeks.com/</a></td>

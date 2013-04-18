@@ -6,7 +6,7 @@ Dosage comic BoxerHockey
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Boxer Hockey</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://boxerhockey.fireball20xl.com/">http://boxerhockey.fireball20xl.com/</a></td>

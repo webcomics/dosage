@@ -6,7 +6,7 @@ Dosage comic EdibleDirt
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Edible Dirt, by Matt Rosemier</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://eddirt.frozenreality.co.uk/">http://eddirt.frozenreality.co.uk/</a></td>

@@ -6,7 +6,7 @@ Dosage comic Goats
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>goats: the comic strip | by jonathan rosenberg | new comics every mon-wed-fri</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.goats.com/">http://www.goats.com/</a></td>

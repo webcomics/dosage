@@ -6,7 +6,7 @@ Dosage comic CatAndGirl
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Cat and Girl</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://catandgirl.com/">http://catandgirl.com/</a></td>

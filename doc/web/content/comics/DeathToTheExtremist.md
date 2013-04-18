@@ -6,7 +6,7 @@ Dosage comic DeathToTheExtremist
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Death To The Extremist</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.dtecomic.com/">http://www.dtecomic.com/</a></td>

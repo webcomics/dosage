@@ -6,7 +6,7 @@ Dosage comic BookOfBiff
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>The Book of Biff - new adventures every monday through friday</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.thebookofbiff.com/">http://www.thebookofbiff.com/</a></td>

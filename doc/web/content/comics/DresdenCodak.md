@@ -6,7 +6,7 @@ Dosage comic DresdenCodak
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Dresden Codak</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://dresdencodak.com/">http://dresdencodak.com/</a></td>

@@ -6,7 +6,7 @@ Dosage comic CraftedFables
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Caf-Fiends</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.craftedfables.com/">http://www.craftedfables.com/</a></td>

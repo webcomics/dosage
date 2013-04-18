@@ -6,7 +6,7 @@ Dosage comic GeeksNextDoor
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Geeks Next Door</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.geeksnextcomic.com/">http://www.geeksnextcomic.com/</a></td>

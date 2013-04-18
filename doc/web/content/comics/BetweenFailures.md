@@ -6,7 +6,7 @@ Dosage comic BetweenFailures
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Between Failures</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://betweenfailures.com/">http://betweenfailures.com/</a></td>

@@ -6,7 +6,7 @@ Dosage comic Angels2200
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Angels 2200</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.janahoffmann.com/angels/">http://www.janahoffmann.com/angels/</a></td>

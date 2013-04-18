@@ -6,7 +6,7 @@ Dosage comic BetterDays
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Better Days</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://jaynaylor.com/betterdays/">http://jaynaylor.com/betterdays/</a></td>

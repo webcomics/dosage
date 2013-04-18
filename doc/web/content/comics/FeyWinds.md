@@ -6,7 +6,7 @@ Dosage comic FeyWinds
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Fey Winds - Fantasy webcomic</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://kitsune.rydia.net/index.html">http://kitsune.rydia.net/index.html</a></td>

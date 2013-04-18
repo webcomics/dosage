@@ -6,7 +6,7 @@ Dosage comic Collar6
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Collar 6</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://collar6.com/">http://collar6.com/</a></td>

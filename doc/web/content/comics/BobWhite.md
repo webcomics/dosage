@@ -6,7 +6,7 @@ Dosage comic BobWhite
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Bobwhite by Magnolia Porter</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.bobwhitecomics.com/">http://www.bobwhitecomics.com/</a></td>

@@ -6,7 +6,7 @@ Dosage comic CompanyY
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Company-Y</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://company-y.com/">http://company-y.com/</a></td>

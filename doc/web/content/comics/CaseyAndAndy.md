@@ -6,7 +6,7 @@ Dosage comic CaseyAndAndy
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Casey and Andy</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.galactanet.com/comic/">http://www.galactanet.com/comic/</a></td>

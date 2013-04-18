@@ -6,7 +6,7 @@ Dosage comic GoblinsComic
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Goblins</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.goblinscomic.com/">http://www.goblinscomic.com/</a></td>

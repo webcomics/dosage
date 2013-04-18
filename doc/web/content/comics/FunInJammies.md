@@ -6,7 +6,7 @@ Dosage comic FunInJammies
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Fun in Jammies</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.funinjammies.com/">http://www.funinjammies.com/</a></td>

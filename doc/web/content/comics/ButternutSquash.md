@@ -6,7 +6,7 @@ Dosage comic ButternutSquash
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>ButterNutSquash - by Pérez &amp; Coughler</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.butternutsquash.net/">http://www.butternutsquash.net/</a></td>

@@ -6,7 +6,7 @@ Dosage comic BiggerThanCheeses
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Bigger Than Cheeses - My webcomic will knife fight your webcomic</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.biggercheese.com/">http://www.biggercheese.com/</a></td>

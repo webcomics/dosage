@@ -6,7 +6,7 @@ Dosage comic AGirlAndHerFed
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>A Girl and Her Fed</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.agirlandherfed.com/">http://www.agirlandherfed.com/</a></td>

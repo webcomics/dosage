@@ -6,7 +6,7 @@ Dosage comic DeepFried
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>Deep Fried-The home of Weapon Brown, Clarissa and Beepo</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.whatisdeepfried.com/">http://www.whatisdeepfried.com/</a></td>

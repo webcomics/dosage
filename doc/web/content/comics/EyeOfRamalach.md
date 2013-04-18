@@ -6,7 +6,7 @@ Dosage comic EyeOfRamalach
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>The Eye of Ramalach</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://theeye.katbox.net/">http://theeye.katbox.net/</a></td>

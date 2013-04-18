@@ -6,7 +6,7 @@ Dosage comic DrMcNinja
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>The Adventures of Dr. McNinja</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://drmcninja.com/">http://drmcninja.com/</a></td>

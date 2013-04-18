@@ -6,7 +6,7 @@ Dosage comic DieselSweeties
 
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>diesel sweeties : robot webcomic &amp; geeky music t-shirts</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.dieselsweeties.com/">http://www.dieselsweeties.com/</a></td>
