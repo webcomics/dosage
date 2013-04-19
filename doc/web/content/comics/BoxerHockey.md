@@ -24,7 +24,7 @@ Dosage comic BoxerHockey
 <th>Status</th><td>ok on 11.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>1</div></td>
+<th>Votes</th><td>2</div></td>
 </tr>
 </table>
 
