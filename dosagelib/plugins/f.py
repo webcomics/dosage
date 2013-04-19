@@ -10,6 +10,7 @@ from ..helpers import indirectStarter
 
 
 class FalconTwin(_BasicScraper):
+    description = u'Falcon Twin'
     url = 'http://www.falcontwin.com/'
     stripUrl = url + 'index.html?strip=%s'
     firstStripUrl = stripUrl % '0'
@@ -40,6 +41,7 @@ class Fallen(_BasicScraper):
 
 
 class FantasyRealms(_BasicScraper):
+    description = u'Fantasy Realms'
     url = 'http://www.fantasyrealmsonline.com/'
     stripUrl = url + 'manga/%s.php'
     imageSearch = compile(r'<img src="(\d{1,4}.\w{3,4})" width="540"', IGNORECASE)
@@ -59,6 +61,7 @@ class FauxPas(_BasicScraper):
 
 
 class FeyWinds(_BasicScraper):
+    description = u'Fey Winds - Fantasy webcomic'
     baseUrl = 'http://kitsune.rydia.net/'
     url = baseUrl + 'index.html'
     stripUrl = baseUrl + 'comic/page.php?id=%s'
@@ -80,6 +83,7 @@ class FilibusterCartoons(_BasicScraper):
 
 
 class FirstWorldProblems(_BasicScraper):
+    description = u'ArchiveFirst World Problems Comic - By Brad Colbow'
     url = 'http://bradcolbow.com/archive/C5/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % 'P10'
@@ -169,6 +173,7 @@ class Freefall(_BasicScraper):
 
 
 class FredoAndPidjin(_BasicScraper):
+    description = u'Fredo and Pidjin. The Webcomic'
     url = 'http://www.pidjin.net/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2006/02/19/goofy-monday'
@@ -192,6 +197,7 @@ class FullFrontalNerdity(_BasicScraper):
 
 
 class FunInJammies(_BasicScraper):
+    description = u'Fun in Jammies'
     url = 'http://www.funinjammies.com/'
     stripUrl = url + 'comic.php?issue=%s'
     firstStripUrl = stripUrl % '1'

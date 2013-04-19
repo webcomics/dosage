@@ -47,6 +47,7 @@ class AbstruseGoose(_BasicScraper):
 
 
 class AcademyVale(_BasicScraper):
+    description = u'Academy Vale'
     url = 'http://www.imagerie.com/vale/'
     stripUrl = url + 'avarch.cgi?%s'
     firstStripUrl = stripUrl % '001'
@@ -86,6 +87,7 @@ class AfterStrife(_BasicScraper):
 
 
 class AGirlAndHerFed(_BasicScraper):
+    description = u'A Girl and Her Fed'
     url = 'http://www.agirlandherfed.com/'
     starter = bounceStarter(url,
       compile(r'<a href="([^"]+)">[^>]+Back'))
@@ -113,6 +115,7 @@ class AhoiPolloi(_BasicScraper):
 
 
 class AirForceBlues(_BasicScraper):
+    description = u'Air Force Blues | By A. May -'
     url = 'http://www.afblues.com/'
     stripUrl = url + 'wordpress/%s/'
     firstStripUrl = stripUrl % '1997/09/07/need-a-clue-do-ya'
@@ -261,6 +264,7 @@ class Angband(_BasicScraper):
 
 
 class Angels2200(_BasicScraper):
+    description = u'Angels 2200'
     url = 'http://www.janahoffmann.com/angels/'
     stripUrl = url + '%s'
     imageSearch = compile(tagre("img", "src", r"(http://www\.janahoffmann\.com/angels/comics/[^']+)", quote="'"))
@@ -289,6 +293,7 @@ class Antics(_BasicScraper):
 
 
 class AppleGeeks(_BasicScraper):
+    description = u'AppleGeeks 3.0'
     url = 'http://www.applegeeks.com/'
     stripUrl = url + 'comics/viewcomic.php?issue=%s'
     firstStripUrl = stripUrl % '1'
@@ -344,6 +349,7 @@ class ASkeweredParadise(_BasicScraper):
 
 
 class AxeCop(_BasicScraper):
+    description = u'Axe Cop'
     url = 'http://axecop.com/'
     rurl = escape(url)
     starter = indirectStarter(url,

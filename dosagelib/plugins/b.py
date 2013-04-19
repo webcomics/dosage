@@ -68,6 +68,7 @@ class Bearmageddon(_BasicScraper):
 
 
 class BetterDays(_BasicScraper):
+    description = u'Better Days'
     url = 'http://jaynaylor.com/betterdays/'
     stripUrl = url + 'archives/%s.html'
     firstStripUrl = stripUrl % '2003/04/post-2'
@@ -77,6 +78,7 @@ class BetterDays(_BasicScraper):
 
 
 class BetweenFailures(_BasicScraper):
+    description = u'Between Failures'
     url = 'http://betweenfailures.com/'
     rurl = escape(url)
     stripUrl = url + 'archives/archive/%s'
@@ -95,6 +97,7 @@ class BigFatWhale(_BasicScraper):
 
 
 class BiggerThanCheeses(_BasicScraper):
+    description = u'Bigger Than Cheeses - My webcomic will knife fight your webcomic'
     url = 'http://www.biggercheese.com/'
     stripUrl = url + 'index.php?comic=%s'
     firstStripUrl = stripUrl % '1'
@@ -179,6 +182,7 @@ class BMovieComic(_BasicScraper):
 
 
 class BobWhite(_BasicScraper):
+    description = u'Bobwhite by Magnolia Porter'
     url = 'http://www.bobwhitecomics.com/'
     rurl = escape(url)
     stripUrl = url + '?webcomic_post=%s'
@@ -189,6 +193,7 @@ class BobWhite(_BasicScraper):
 
 
 class BookOfBiff(_BasicScraper):
+    description = u'The Book of Biff - new adventures every monday through friday'
     url = 'http://www.thebookofbiff.com/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2006/01/02/4'
@@ -208,6 +213,7 @@ class BoredAndEvil(_BasicScraper):
 
 
 class BoxerHockey(_BasicScraper):
+    description = u'Boxer Hockey'
     url = 'http://boxerhockey.fireball20xl.com/'
     stripUrl = url + '?id=%s'
     firstStripUrl = stripUrl % '56'
@@ -349,6 +355,7 @@ class ButterSafe(_BasicScraper):
 
 
 class ButternutSquash(_BasicScraper):
+    description = u'ButterNutSquash - by P\xe9rez & Coughler'
     url = 'http://www.butternutsquash.net/'
     rurl = escape(url)
     stripUrl = url + '%s/'

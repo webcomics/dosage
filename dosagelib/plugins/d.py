@@ -94,6 +94,7 @@ class DasLebenIstKeinPonyhof(_BasicScraper):
 
 
 class DeadWinter(_BasicScraper):
+    description = u'd e a d . w i n t e r'
     url = 'http://deadwinter.cc/'
     stripUrl = url + 'page/%s'
     firstStripUrl = stripUrl % '1'
@@ -103,6 +104,7 @@ class DeadWinter(_BasicScraper):
 
 
 class DeathToTheExtremist(_BasicScraper):
+    description = u'Death To The Extremist'
     url = 'http://www.dtecomic.com/'
     stripUrl = url + '?n=%s'
     firstStripUrl = stripUrl % '1'
@@ -112,6 +114,7 @@ class DeathToTheExtremist(_BasicScraper):
 
 
 class DeepFried(_BasicScraper):
+    description = u'Deep Fried-The home of Weapon Brown, Clarissa and Beepo'
     url = 'http://www.whatisdeepfried.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -150,6 +153,7 @@ class DerTodUndDasMaedchen(_BasicScraper):
 
 
 class DieselSweeties(_BasicScraper):
+    description = u'diesel sweeties : robot webcomic & geeky music t-shirts'
     url = 'http://www.dieselsweeties.com/'
     stripUrl = url + 'archive/%s'
     firstStripUrl = stripUrl % '1'
@@ -249,6 +253,7 @@ class DreamKeepersPrelude(_BasicScraper):
 
 
 class DresdenCodak(_BasicScraper):
+    description = u'Dresden Codak'
     url = 'http://dresdencodak.com/'
     rurl = escape(url)
     stripUrl = None
@@ -273,6 +278,7 @@ class DrFun(_BasicScraper):
 
 
 class DrMcNinja(_BasicScraper):
+    description = u'The Adventures of Dr. McNinja'
     url = 'http://drmcninja.com/'
     rurl = escape(url)
     stripUrl = url + 'archives/comic/%s/'

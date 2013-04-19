@@ -10,6 +10,7 @@ from ..util import tagre
 
 
 class EarthsongSaga(_BasicScraper):
+    description = u'Earthsong - An Online Graphic Novel by Crystal Yates'
     url = 'http://www.earthsongsaga.com/'
     starter = indirectStarter(url, compile(tagre("a", "href", r'([^"]+)') + tagre("img", "src", r'[^"]+current\.jpg')))
     stripUrl = None
@@ -24,6 +25,7 @@ class EarthsongSaga(_BasicScraper):
 
 
 class EdibleDirt(_BasicScraper):
+    description = u'Edible Dirt, by Matt Rosemier'
     url = 'http://eddirt.frozenreality.co.uk/'
     stripUrl = url + 'index.php?id=%s'
     firstStripUrl = stripUrl % '0'
@@ -134,6 +136,7 @@ class EverydayBlues(_BasicScraper):
 
 
 class EvilDiva(_BasicScraper):
+    description = u'Evil Diva'
     url = 'http://www.evildivacomics.com/'
     stripUrl = url + '?p=%s'
     firstStripUrl = stripUrl % '145'
@@ -193,6 +196,7 @@ class ExtraOrdinary(_BasicScraper):
 
 
 class EyeOfRamalach(_BasicScraper):
+    description = u'The Eye of Ramalach'
     url = 'http://theeye.katbox.net/'
     rurl = escape(url)
     stripUrl = url + 'comic/%s/'

@@ -20,6 +20,7 @@ class Caggage(_BasicScraper):
 
 
 class CaptainSNES(_BasicScraper):
+    description = u'Captain SNES'
     url = 'http://www.captainsnes.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -31,6 +32,7 @@ class CaptainSNES(_BasicScraper):
 
 
 class CaseyAndAndy(_BasicScraper):
+    description = u'Casey and Andy'
     url = 'http://www.galactanet.com/comic/'
     stripUrl = url + 'view.php?strip=%s'
     firstStripUrl = stripUrl % '1'
@@ -62,6 +64,7 @@ class Catalyst(_BasicScraper):
 
 
 class CatAndGirl(_BasicScraper):
+    description = u'Cat and Girl'
     url = 'http://catandgirl.com/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'
@@ -196,6 +199,7 @@ class ChugworthAcademyArchive(_BasicScraper):
 
 
 class CigarroAndCerveja(_BasicScraper):
+    description = u'Cigarro & Cerveja'
     url = 'http://www.cigarro.ca/'
     stripUrl = url + '?p=%s'
     imageSearch = compile(r"(/comics/.+?)'")
@@ -204,6 +208,7 @@ class CigarroAndCerveja(_BasicScraper):
 
 
 class Collar6(_BasicScraper):
+    description = u'Collar 6'
     url = 'http://collar6.com/'
     rurl = escape(url)
     stripUrl = url + 'archive/%s'
@@ -214,6 +219,7 @@ class Collar6(_BasicScraper):
 
 
 class Comedity(_BasicScraper):
+    description = u'Comedity 2.0'
     url = 'http://www.comedity.com/'
     stripUrl = url + 'index.php?strip_id=%s'
     firstStripUrl = stripUrl % '1'
@@ -233,6 +239,7 @@ class Commissioned(_BasicScraper):
 
 
 class CompanyY(_BasicScraper):
+    description = u'Company-Y'
     url = 'http://company-y.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -334,6 +341,7 @@ class CrimsonDark(_BasicScraper):
 
 
 class CraftedFables(_BasicScraper):
+    description = u'Caf-Fiends'
     url = 'http://www.craftedfables.com/'
     baseUrl = 'http://www.caf-fiends.net/'
     rurl = escape(baseUrl)
@@ -345,6 +353,7 @@ class CraftedFables(_BasicScraper):
 
 
 class CucumberQuest(_BasicScraper):
+    description = u'Cucumber Quest'
     url = 'http://cucumber.gigidigi.com/'
     rurl = escape(url)
     stripUrl = url + 'archive/%s/'

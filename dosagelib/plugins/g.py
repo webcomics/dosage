@@ -54,6 +54,7 @@ class Geeks(_BasicScraper):
 
 
 class GeeksNextDoor(_BasicScraper):
+    description = u'Geeks Next Door'
     url = 'http://www.geeksnextcomic.com/'
     stripUrl = url + '%s.html'
     firstStripUrl = stripUrl % '2010-10-04'
@@ -98,6 +99,7 @@ class GleefulNihilism(_BasicScraper):
 
 
 class Goats(_BasicScraper):
+    description = u'goats: the comic strip | by jonathan rosenberg | new comics every mon-wed-fri'
     url = 'http://www.goats.com/'
     stripUrl = url + 'archive/%s.html'
     firstStripUrl = stripUrl % '970401'
@@ -107,6 +109,7 @@ class Goats(_BasicScraper):
 
 
 class GoblinsComic(_BasicScraper):
+    description = u'Goblins'
     url = 'http://www.goblinscomic.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -117,6 +120,7 @@ class GoblinsComic(_BasicScraper):
 
 
 class GoneWithTheBlastwave(_BasicScraper):
+    description = u'Gone with the Blastwave - Type E webcomic.'
     url = 'http://www.blastwave-comic.com/index.php?p=comic&nro=1'
     starter = indirectStarter(url,
                               compile(r'href="(index.php\?p=comic&amp;nro=\d+)"><img src="images/page/default/latest'))
