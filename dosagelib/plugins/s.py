@@ -54,10 +54,10 @@ class SandraAndWooGerman(_BasicScraper):
 
 class SandraOnTheRocks(_BasicScraper):
     url = 'http://www.sandraontherocks.com/'
-    stripUrl = url + 'strips-sotra/%s'
+    stripUrl = url + 'strips-sotr/%s'
     firstStripUrl = stripUrl % 'start_by_running'
     imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]*/strips-sotra/[^"]+)', before="cn[id]prev"))
+    prevSearch = compile(tagre("a", "href", r'([^"]*/strips-sotr/[^"]+)', before="cn[id]prev"))
     help = 'Index format: name'
 
 class ScaryGoRound(_BasicScraper):
