@@ -243,7 +243,7 @@ class SMBC(_BasicScraper):
     url = 'http://www.smbc-comics.com/'
     stripUrl = url + 'index.php?db=comics&id=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(r'<img src=\'(.+?\d{8}.\w{1,4})\'>')
+    imageSearch = compile(r'<img src=\'(.+?\d{8}[-\w]?\d?.\w{1,4})\'>')
     prevSearch = compile(r'131,13,216,84"\n\s+href="(.+?)#comic"\n>', MULTILINE)
     help = 'Index format: nnnn'
 
