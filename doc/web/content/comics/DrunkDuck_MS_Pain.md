@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/MS_Pain
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_MS_Pain_edit.html) or go back to the [comic list](../comic-index.html).

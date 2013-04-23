@@ -28,4 +28,4 @@ Dosage comic NuklearPower/8BitTheater
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/NuklearPower_8BitTheater_edit.html) or go back to the [comic list](../comic-index.html).

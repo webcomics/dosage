@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/The_Continentals
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_The_Continentals_edit.html) or go back to the [comic list](../comic-index.html).

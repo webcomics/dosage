@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Poharex_issues_1_to_11
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Poharex_issues_1_to_11_edit.html) or go back to the [comic list](../comic-index.html).

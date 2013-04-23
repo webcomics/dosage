@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Voodoo_Walrus
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Voodoo_Walrus_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic ComicGenesis/TheMisadventuresofOkk
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicGenesis_TheMisadventuresofOkk_edit.html) or go back to the [comic list](../comic-index.html).

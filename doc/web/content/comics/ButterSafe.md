@@ -28,4 +28,4 @@ Dosage comic ButterSafe
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ButterSafe_edit.html) or go back to the [comic list](../comic-index.html).

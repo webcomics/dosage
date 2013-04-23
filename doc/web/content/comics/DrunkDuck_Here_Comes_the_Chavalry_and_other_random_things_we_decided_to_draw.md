@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Here_Comes_the_Chavalry_and...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Here_Comes_the_Chavalry_and_other_random_things_we_decided_to_draw_edit.html) or go back to the [comic list](../comic-index.html).

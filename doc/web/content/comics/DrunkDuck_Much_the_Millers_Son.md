@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Much_the_Millers_Son
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Much_the_Millers_Son_edit.html) or go back to the [comic list](../comic-index.html).

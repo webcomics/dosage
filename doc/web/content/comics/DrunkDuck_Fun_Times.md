@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Fun_Times
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Fun_Times_edit.html) or go back to the [comic list](../comic-index.html).

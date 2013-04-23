@@ -28,4 +28,4 @@ Dosage comic ComicFury/12yearslater
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicFury_12yearslater_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic ComicFury/Spf1337
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicFury_Spf1337_edit.html) or go back to the [comic list](../comic-index.html).

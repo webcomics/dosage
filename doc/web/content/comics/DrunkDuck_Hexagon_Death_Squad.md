@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Hexagon_Death_Squad
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Hexagon_Death_Squad_edit.html) or go back to the [comic list](../comic-index.html).

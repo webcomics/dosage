@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Duck_and_Quail
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Duck_and_Quail_edit.html) or go back to the [comic list](../comic-index.html).

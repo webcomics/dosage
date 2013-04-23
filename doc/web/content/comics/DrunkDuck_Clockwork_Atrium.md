@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Clockwork_Atrium
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Clockwork_Atrium_edit.html) or go back to the [comic list](../comic-index.html).

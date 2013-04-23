@@ -28,4 +28,4 @@ Dosage comic ComicFury/TheUnthinkableHybrid
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicFury_TheUnthinkableHybrid_edit.html) or go back to the [comic list](../comic-index.html).

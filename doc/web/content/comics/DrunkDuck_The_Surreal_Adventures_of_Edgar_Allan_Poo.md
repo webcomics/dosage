@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/The_Surreal_Adventures_of_E...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_The_Surreal_Adventures_of_Edgar_Allan_Poo_edit.html) or go back to the [comic list](../comic-index.html).

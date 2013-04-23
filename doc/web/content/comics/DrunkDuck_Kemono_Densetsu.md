@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Kemono_Densetsu
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Kemono_Densetsu_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Billy_Learns_To_Rock
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Billy_Learns_To_Rock_edit.html) or go back to the [comic list](../comic-index.html).

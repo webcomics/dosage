@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Super_Mario_super_comic
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Super_Mario_super_comic_edit.html) or go back to the [comic list](../comic-index.html).

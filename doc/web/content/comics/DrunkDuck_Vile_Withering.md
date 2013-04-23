@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Vile_Withering
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Vile_Withering_edit.html) or go back to the [comic list](../comic-index.html).

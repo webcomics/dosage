@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/LA_ESPADA_DEL_ANORMAL
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_LA_ESPADA_DEL_ANORMAL_edit.html) or go back to the [comic list](../comic-index.html).

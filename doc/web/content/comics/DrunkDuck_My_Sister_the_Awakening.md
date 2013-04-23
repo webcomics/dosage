@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/My_Sister_the_Awakening
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_My_Sister_the_Awakening_edit.html) or go back to the [comic list](../comic-index.html).

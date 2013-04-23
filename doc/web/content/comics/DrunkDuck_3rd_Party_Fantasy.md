@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/3rd_Party_Fantasy
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_3rd_Party_Fantasy_edit.html) or go back to the [comic list](../comic-index.html).

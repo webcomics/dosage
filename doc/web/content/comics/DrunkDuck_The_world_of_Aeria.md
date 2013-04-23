@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/The_world_of_Aeria
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_The_world_of_Aeria_edit.html) or go back to the [comic list](../comic-index.html).

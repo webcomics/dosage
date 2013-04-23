@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Random_Street_Theater
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Random_Street_Theater_edit.html) or go back to the [comic list](../comic-index.html).

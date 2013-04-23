@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/A_Dim_View
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_A_Dim_View_edit.html) or go back to the [comic list](../comic-index.html).

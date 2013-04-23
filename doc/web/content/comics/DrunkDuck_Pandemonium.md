@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Pandemonium
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Pandemonium_edit.html) or go back to the [comic list](../comic-index.html).

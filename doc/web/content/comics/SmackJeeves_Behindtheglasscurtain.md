@@ -28,4 +28,4 @@ Dosage comic SmackJeeves/Behindtheglasscurtain
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/SmackJeeves_Behindtheglasscurtain_edit.html) or go back to the [comic list](../comic-index.html).

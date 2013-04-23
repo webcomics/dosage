@@ -28,4 +28,4 @@ Dosage comic ComicFury/RecklessComix
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicFury_RecklessComix_edit.html) or go back to the [comic list](../comic-index.html).

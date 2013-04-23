@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Legends_of_Idiocy
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Legends_of_Idiocy_edit.html) or go back to the [comic list](../comic-index.html).

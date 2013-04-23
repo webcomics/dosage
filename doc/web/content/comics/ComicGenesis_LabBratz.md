@@ -28,4 +28,4 @@ Dosage comic ComicGenesis/LabBratz
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicGenesis_LabBratz_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic GoComics/MotleyClassics
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/GoComics_MotleyClassics_edit.html) or go back to the [comic list](../comic-index.html).

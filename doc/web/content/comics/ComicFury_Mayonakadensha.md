@@ -28,4 +28,4 @@ Dosage comic ComicFury/Mayonakadensha
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicFury_Mayonakadensha_edit.html) or go back to the [comic list](../comic-index.html).

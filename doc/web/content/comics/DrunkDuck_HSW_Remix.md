@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/HSW_Remix
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_HSW_Remix_edit.html) or go back to the [comic list](../comic-index.html).

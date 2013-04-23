@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Total_Immersion
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Total_Immersion_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Blade_of_Toshubi
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Blade_of_Toshubi_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Acting_Out
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Acting_Out_edit.html) or go back to the [comic list](../comic-index.html).

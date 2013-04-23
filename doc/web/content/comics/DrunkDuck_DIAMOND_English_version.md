@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/DIAMOND_English_version
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_DIAMOND_English_version_edit.html) or go back to the [comic list](../comic-index.html).

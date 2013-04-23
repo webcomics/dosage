@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Doctor_Death_vs_The_Zombie_
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Doctor_Death_vs_The_Zombie__edit.html) or go back to the [comic list](../comic-index.html).

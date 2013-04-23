@@ -28,4 +28,4 @@ Dosage comic GoComics/CowTown
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/GoComics_CowTown_edit.html) or go back to the [comic list](../comic-index.html).

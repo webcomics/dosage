@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Depths_of_My_Empty_Soul
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Depths_of_My_Empty_Soul_edit.html) or go back to the [comic list](../comic-index.html).

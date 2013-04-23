@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Ducks_of_Doom
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Ducks_of_Doom_edit.html) or go back to the [comic list](../comic-index.html).

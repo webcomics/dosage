@@ -28,4 +28,4 @@ Dosage comic VGCats/Super
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/VGCatsSuper_edit.html) or go back to the [comic list](../comic-index.html).

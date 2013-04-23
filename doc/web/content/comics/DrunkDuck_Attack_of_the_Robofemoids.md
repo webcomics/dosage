@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Attack_of_the_Robofemoids
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Attack_of_the_Robofemoids_edit.html) or go back to the [comic list](../comic-index.html).

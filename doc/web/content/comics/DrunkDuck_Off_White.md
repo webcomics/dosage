@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Off_White
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Off_White_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic GoComics/SpottheFrog
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/GoComics_SpottheFrog_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Blue_Strawberry
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Blue_Strawberry_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/A_Tale_of_Two_Sprites
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_A_Tale_of_Two_Sprites_edit.html) or go back to the [comic list](../comic-index.html).

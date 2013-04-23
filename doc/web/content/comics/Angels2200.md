@@ -28,4 +28,4 @@ Dosage comic Angels2200
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/Angels2200_edit.html) or go back to the [comic list](../comic-index.html).

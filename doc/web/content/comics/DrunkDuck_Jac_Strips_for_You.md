@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Jac_Strips_for_You
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Jac_Strips_for_You_edit.html) or go back to the [comic list](../comic-index.html).

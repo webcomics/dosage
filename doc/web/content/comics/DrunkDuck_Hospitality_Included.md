@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Hospitality_Included
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Hospitality_Included_edit.html) or go back to the [comic list](../comic-index.html).

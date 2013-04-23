@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Camera_Obscura
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Camera_Obscura_edit.html) or go back to the [comic list](../comic-index.html).

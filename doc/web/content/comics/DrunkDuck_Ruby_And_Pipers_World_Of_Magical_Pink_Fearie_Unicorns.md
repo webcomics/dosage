@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Ruby_And_Pipers_World_Of_Ma...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Ruby_And_Pipers_World_Of_Magical_Pink_Fearie_Unicorns_edit.html) or go back to the [comic list](../comic-index.html).

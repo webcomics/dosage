@@ -28,4 +28,4 @@ Dosage comic NobodyScores
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/NobodyScores_edit.html) or go back to the [comic list](../comic-index.html).

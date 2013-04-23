@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Light_within_shadow
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Light_within_shadow_edit.html) or go back to the [comic list](../comic-index.html).

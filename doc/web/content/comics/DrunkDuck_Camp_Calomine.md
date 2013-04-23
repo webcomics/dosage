@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Camp_Calomine
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Camp_Calomine_edit.html) or go back to the [comic list](../comic-index.html).

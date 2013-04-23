@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Stellar_Arcana_Spanish
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Stellar_Arcana_Spanish_edit.html) or go back to the [comic list](../comic-index.html).

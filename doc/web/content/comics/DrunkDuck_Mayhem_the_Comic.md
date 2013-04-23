@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Mayhem_the_Comic
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Mayhem_the_Comic_edit.html) or go back to the [comic list](../comic-index.html).

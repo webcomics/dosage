@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/WTF_Renewed
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_WTF_Renewed_edit.html) or go back to the [comic list](../comic-index.html).

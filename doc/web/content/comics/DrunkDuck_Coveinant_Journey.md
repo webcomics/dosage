@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Coveinant_Journey
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Coveinant_Journey_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic GoComics/ThrompTM
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/GoComics_ThrompTM_edit.html) or go back to the [comic list](../comic-index.html).

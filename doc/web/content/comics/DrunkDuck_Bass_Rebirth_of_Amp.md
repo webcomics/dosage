@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Bass_Rebirth_of_Amp
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Bass_Rebirth_of_Amp_edit.html) or go back to the [comic list](../comic-index.html).

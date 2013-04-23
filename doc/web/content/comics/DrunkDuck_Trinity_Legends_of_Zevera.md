@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Trinity_Legends_of_Zevera
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Trinity_Legends_of_Zevera_edit.html) or go back to the [comic list](../comic-index.html).

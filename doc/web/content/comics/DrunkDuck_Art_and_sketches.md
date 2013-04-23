@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Art_and_sketches
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Art_and_sketches_edit.html) or go back to the [comic list](../comic-index.html).

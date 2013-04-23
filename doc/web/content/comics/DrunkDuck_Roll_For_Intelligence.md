@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Roll_For_Intelligence
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Roll_For_Intelligence_edit.html) or go back to the [comic list](../comic-index.html).

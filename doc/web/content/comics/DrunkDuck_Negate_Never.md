@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Negate_Never
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Negate_Never_edit.html) or go back to the [comic list](../comic-index.html).

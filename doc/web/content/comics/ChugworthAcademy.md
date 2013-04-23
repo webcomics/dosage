@@ -28,4 +28,4 @@ Dosage comic ChugworthAcademy
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ChugworthAcademy_edit.html) or go back to the [comic list](../comic-index.html).

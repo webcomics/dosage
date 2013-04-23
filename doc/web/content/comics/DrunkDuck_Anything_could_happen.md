@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Anything_could_happen
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Anything_could_happen_edit.html) or go back to the [comic list](../comic-index.html).

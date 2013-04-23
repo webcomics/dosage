@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/MMM_BooGrrs
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_MMM_BooGrrs_edit.html) or go back to the [comic list](../comic-index.html).

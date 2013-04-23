@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/The_Repository_of_Dangerous...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_The_Repository_of_Dangerous_Things_edit.html) or go back to the [comic list](../comic-index.html).

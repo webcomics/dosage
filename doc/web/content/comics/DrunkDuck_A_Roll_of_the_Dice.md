@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/A_Roll_of_the_Dice
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_A_Roll_of_the_Dice_edit.html) or go back to the [comic list](../comic-index.html).

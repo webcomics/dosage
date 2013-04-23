@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Flying_Under_the_Influence
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Flying_Under_the_Influence_edit.html) or go back to the [comic list](../comic-index.html).

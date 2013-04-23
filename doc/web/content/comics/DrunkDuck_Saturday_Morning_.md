@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Saturday_Morning_
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Saturday_Morning__edit.html) or go back to the [comic list](../comic-index.html).

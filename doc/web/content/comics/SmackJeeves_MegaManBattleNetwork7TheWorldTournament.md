@@ -28,4 +28,4 @@ Dosage comic SmackJeeves/MegaManBattleNetwork7TheW...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/SmackJeeves_MegaManBattleNetwork7TheWorldTournament_edit.html) or go back to the [comic list](../comic-index.html).

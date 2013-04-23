@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Floyd_and_Mike
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Floyd_and_Mike_edit.html) or go back to the [comic list](../comic-index.html).

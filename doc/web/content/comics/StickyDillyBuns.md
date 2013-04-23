@@ -28,4 +28,4 @@ Dosage comic StickyDillyBuns
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/StickyDillyBuns_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Magicians_Quest
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Magicians_Quest_edit.html) or go back to the [comic list](../comic-index.html).

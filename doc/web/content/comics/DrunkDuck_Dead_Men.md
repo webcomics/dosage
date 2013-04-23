@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Dead_Men
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Dead_Men_edit.html) or go back to the [comic list](../comic-index.html).

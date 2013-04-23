@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Chaos_Reigns
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Chaos_Reigns_edit.html) or go back to the [comic list](../comic-index.html).

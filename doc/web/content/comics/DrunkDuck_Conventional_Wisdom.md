@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Conventional_Wisdom
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Conventional_Wisdom_edit.html) or go back to the [comic list](../comic-index.html).

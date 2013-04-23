@@ -28,4 +28,4 @@ Dosage comic GoComics/MollyandtheBear
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/GoComics_MollyandtheBear_edit.html) or go back to the [comic list](../comic-index.html).

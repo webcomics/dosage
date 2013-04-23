@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Operation_blakck_sun
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Operation_blakck_sun_edit.html) or go back to the [comic list](../comic-index.html).

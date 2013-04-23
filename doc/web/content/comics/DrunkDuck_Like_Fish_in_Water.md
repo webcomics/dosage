@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Like_Fish_in_Water
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Like_Fish_in_Water_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Hikari_The_Demon_Swordsman
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Hikari_The_Demon_Swordsman_edit.html) or go back to the [comic list](../comic-index.html).

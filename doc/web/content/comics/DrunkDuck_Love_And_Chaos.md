@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Love_And_Chaos
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Love_And_Chaos_edit.html) or go back to the [comic list](../comic-index.html).

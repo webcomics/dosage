@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Coalition_of_the_Reluctant
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Coalition_of_the_Reluctant_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Laurentinas_Improv_Studio_T...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Laurentinas_Improv_Studio_The_Comic_Art_edit.html) or go back to the [comic list](../comic-index.html).

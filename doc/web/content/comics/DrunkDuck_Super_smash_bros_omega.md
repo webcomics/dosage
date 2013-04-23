@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Super_smash_bros_omega
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Super_smash_bros_omega_edit.html) or go back to the [comic list](../comic-index.html).

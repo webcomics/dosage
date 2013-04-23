@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Liquid_Lunch
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Liquid_Lunch_edit.html) or go back to the [comic list](../comic-index.html).

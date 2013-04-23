@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Knock_on_Wood
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Knock_on_Wood_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Off_Hours
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Off_Hours_edit.html) or go back to the [comic list](../comic-index.html).

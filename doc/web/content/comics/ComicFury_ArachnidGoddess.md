@@ -28,4 +28,4 @@ Dosage comic ComicFury/ArachnidGoddess
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicFury_ArachnidGoddess_edit.html) or go back to the [comic list](../comic-index.html).

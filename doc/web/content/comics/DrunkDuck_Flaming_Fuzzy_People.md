@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Flaming_Fuzzy_People
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Flaming_Fuzzy_People_edit.html) or go back to the [comic list](../comic-index.html).

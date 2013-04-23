@@ -28,4 +28,4 @@ Dosage comic Arcamax/BeetleBailey
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/Arcamax_BeetleBailey_edit.html) or go back to the [comic list](../comic-index.html).

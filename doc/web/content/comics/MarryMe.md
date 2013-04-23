@@ -28,4 +28,4 @@ Dosage comic MarryMe
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/MarryMe_edit.html) or go back to the [comic list](../comic-index.html).

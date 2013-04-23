@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/The_Adventure_of_the_Goat_C...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_The_Adventure_of_the_Goat_Chin_Pirates_edit.html) or go back to the [comic list](../comic-index.html).

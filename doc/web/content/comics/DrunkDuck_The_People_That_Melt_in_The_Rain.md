@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/The_People_That_Melt_in_The...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_The_People_That_Melt_in_The_Rain_edit.html) or go back to the [comic list](../comic-index.html).

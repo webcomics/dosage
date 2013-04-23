@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Paranormal_Activity
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Paranormal_Activity_edit.html) or go back to the [comic list](../comic-index.html).

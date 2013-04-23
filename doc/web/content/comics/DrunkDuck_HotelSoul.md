@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/HotelSoul
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_HotelSoul_edit.html) or go back to the [comic list](../comic-index.html).

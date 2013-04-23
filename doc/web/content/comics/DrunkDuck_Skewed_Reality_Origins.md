@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Skewed_Reality_Origins
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Skewed_Reality_Origins_edit.html) or go back to the [comic list](../comic-index.html).

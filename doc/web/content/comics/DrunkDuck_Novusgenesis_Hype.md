@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Novusgenesis_Hype
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Novusgenesis_Hype_edit.html) or go back to the [comic list](../comic-index.html).

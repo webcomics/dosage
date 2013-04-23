@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/How_I_Killed_The_Gods
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_How_I_Killed_The_Gods_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Such_Is_Life
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Such_Is_Life_edit.html) or go back to the [comic list](../comic-index.html).

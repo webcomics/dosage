@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Stranger_Things_have_Happened
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Stranger_Things_have_Happened_edit.html) or go back to the [comic list](../comic-index.html).

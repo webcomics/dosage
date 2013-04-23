@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Paint_Heroes
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Paint_Heroes_edit.html) or go back to the [comic list](../comic-index.html).

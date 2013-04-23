@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/A_PoKeMoN_comic_that_everyo...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_A_PoKeMoN_comic_that_everyone_will_ignore_even_though_the_author_puts_way_more_work_into_it_than_som_edit.html) or go back to the [comic list](../comic-index.html).

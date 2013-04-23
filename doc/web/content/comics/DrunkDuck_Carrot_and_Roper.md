@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Carrot_and_Roper
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Carrot_and_Roper_edit.html) or go back to the [comic list](../comic-index.html).

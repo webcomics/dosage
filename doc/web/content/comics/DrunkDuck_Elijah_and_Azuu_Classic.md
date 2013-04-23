@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Elijah_and_Azuu_Classic
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Elijah_and_Azuu_Classic_edit.html) or go back to the [comic list](../comic-index.html).

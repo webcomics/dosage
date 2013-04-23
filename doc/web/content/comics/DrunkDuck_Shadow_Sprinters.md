@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Shadow_Sprinters
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Shadow_Sprinters_edit.html) or go back to the [comic list](../comic-index.html).

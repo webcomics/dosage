@@ -28,4 +28,4 @@ Dosage comic ComicFury/SimplySarah
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicFury_SimplySarah_edit.html) or go back to the [comic list](../comic-index.html).

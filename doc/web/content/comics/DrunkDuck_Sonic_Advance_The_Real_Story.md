@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Sonic_Advance_The_Real_Story
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Sonic_Advance_The_Real_Story_edit.html) or go back to the [comic list](../comic-index.html).

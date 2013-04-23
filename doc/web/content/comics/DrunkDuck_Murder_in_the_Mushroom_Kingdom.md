@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Murder_in_the_Mushroom_Kingdom
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Murder_in_the_Mushroom_Kingdom_edit.html) or go back to the [comic list](../comic-index.html).

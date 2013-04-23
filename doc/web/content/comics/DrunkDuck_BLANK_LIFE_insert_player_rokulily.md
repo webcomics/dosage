@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/BLANK_LIFE_insert_player_ro...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_BLANK_LIFE_insert_player_rokulily_edit.html) or go back to the [comic list](../comic-index.html).

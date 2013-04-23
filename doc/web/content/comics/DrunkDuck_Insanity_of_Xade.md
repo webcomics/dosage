@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Insanity_of_Xade
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Insanity_of_Xade_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Songs_of_An_Angel
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Songs_of_An_Angel_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic GoComics/JanesWorld
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/GoComics_JanesWorld_edit.html) or go back to the [comic list](../comic-index.html).

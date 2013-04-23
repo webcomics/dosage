@@ -28,4 +28,4 @@ Dosage comic ComicFury/Adventuresofjonas
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicFury_Adventuresofjonas_edit.html) or go back to the [comic list](../comic-index.html).

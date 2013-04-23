@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Master_the_Tiger
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Master_the_Tiger_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic SmackJeeves/Debtsettlement
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/SmackJeeves_Debtsettlement_edit.html) or go back to the [comic list](../comic-index.html).

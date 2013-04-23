@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Blood_Bound
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Blood_Bound_edit.html) or go back to the [comic list](../comic-index.html).

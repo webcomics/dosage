@@ -28,4 +28,4 @@ Dosage comic AmazingSuperPowers
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/AmazingSuperPowers_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Flame_of_Earth
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Flame_of_Earth_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic ComicFury/TheFaithful
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicFury_TheFaithful_edit.html) or go back to the [comic list](../comic-index.html).

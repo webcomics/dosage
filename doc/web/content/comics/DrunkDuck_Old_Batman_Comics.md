@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Old_Batman_Comics
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Old_Batman_Comics_edit.html) or go back to the [comic list](../comic-index.html).

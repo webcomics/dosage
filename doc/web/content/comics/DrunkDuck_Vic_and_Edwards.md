@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Vic_and_Edwards
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Vic_and_Edwards_edit.html) or go back to the [comic list](../comic-index.html).

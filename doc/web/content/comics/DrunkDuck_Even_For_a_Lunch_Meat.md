@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Even_For_a_Lunch_Meat
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Even_For_a_Lunch_Meat_edit.html) or go back to the [comic list](../comic-index.html).

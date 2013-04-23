@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Intergalactic_Continental_D...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Intergalactic_Continental_Dimension_Travelers_edit.html) or go back to the [comic list](../comic-index.html).

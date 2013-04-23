@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Insanity_Untamed
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Insanity_Untamed_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Rileys_notebook
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Rileys_notebook_edit.html) or go back to the [comic list](../comic-index.html).

@@ -33,7 +33,7 @@ Adult content
 --------------
 Some comics contain adult content and require age confirmation.
 These comics can only be downloaded by using the --adult option,
-which confirms that you are old enough to view them.</p>
+which confirms that you are old enough to view them.
 
 Usage
 ------
@@ -99,6 +99,16 @@ or if you do not have root permissions:
 python setup.py install --home=$HOME
 ```
 
+Reporting Bugs
+---------------
+You can report bugs, patches or requests at the
+[Github issue tracker](https://github.com/wummel/dosage/issues)
+
+Dosage currently supports a large number of comics and that number
+grows on a regular basis. If you feel that there are comics that
+Dosage does not currently support but should support, please
+feel free to request them.
+
 Technical Description
 ----------------------
 Dosage is written in Python and relies on regular expressions to
@@ -116,16 +126,6 @@ Extending Dosage
 In order to add a new webcomic, a new module class has to be created in
 one of the *.py files in the `dosagelib/plugins` subdirectory.
 Look at the existing module classes for examples.
-
-Reporting Bugs
----------------
-You can report bugs, patches or requests at the
-[Github issue tracker](https://github.com/wummel/dosage/issues)
-
-Dosage currently supports a large number of comics and that number
-grows on a regular basis. If you feel that there are comics that
-Dosage does not currently support but should support, please
-feel free to request them.
 
 Test suite status
 ------------------

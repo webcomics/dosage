@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Viera_Dimension
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Viera_Dimension_edit.html) or go back to the [comic list](../comic-index.html).

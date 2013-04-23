@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Catboy_at_th_Con
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Catboy_at_th_Con_edit.html) or go back to the [comic list](../comic-index.html).

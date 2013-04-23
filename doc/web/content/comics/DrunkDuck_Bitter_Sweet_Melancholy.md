@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Bitter_Sweet_Melancholy
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Bitter_Sweet_Melancholy_edit.html) or go back to the [comic list](../comic-index.html).

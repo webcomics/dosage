@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Wanted_Dead_or_dead
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Wanted_Dead_or_dead_edit.html) or go back to the [comic list](../comic-index.html).

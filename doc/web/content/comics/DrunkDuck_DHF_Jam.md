@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/DHF_Jam
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_DHF_Jam_edit.html) or go back to the [comic list](../comic-index.html).

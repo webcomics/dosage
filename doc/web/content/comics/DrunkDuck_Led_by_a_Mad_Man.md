@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Led_by_a_Mad_Man
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Led_by_a_Mad_Man_edit.html) or go back to the [comic list](../comic-index.html).

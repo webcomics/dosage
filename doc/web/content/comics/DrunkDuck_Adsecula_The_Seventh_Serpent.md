@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Adsecula_The_Seventh_Serpent
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Adsecula_The_Seventh_Serpent_edit.html) or go back to the [comic list](../comic-index.html).

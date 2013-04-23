@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/The_Demonic_Adventures_of_A...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_The_Demonic_Adventures_of_Angel_Witch_Pita_edit.html) or go back to the [comic list](../comic-index.html).

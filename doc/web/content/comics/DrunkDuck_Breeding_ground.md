@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Breeding_ground
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Breeding_ground_edit.html) or go back to the [comic list](../comic-index.html).

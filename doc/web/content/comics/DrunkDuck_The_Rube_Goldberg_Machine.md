@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/The_Rube_Goldberg_Machine
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_The_Rube_Goldberg_Machine_edit.html) or go back to the [comic list](../comic-index.html).

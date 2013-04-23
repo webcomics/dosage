@@ -28,4 +28,4 @@ Dosage comic KeenSpot/Adventurers
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/KeenSpot_Adventurers_edit.html) or go back to the [comic list](../comic-index.html).

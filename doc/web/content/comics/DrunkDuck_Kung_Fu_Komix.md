@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Kung_Fu_Komix
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Kung_Fu_Komix_edit.html) or go back to the [comic list](../comic-index.html).

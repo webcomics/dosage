@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Joe_Bivins_Man_Genius
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Joe_Bivins_Man_Genius_edit.html) or go back to the [comic list](../comic-index.html).

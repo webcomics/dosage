@@ -28,4 +28,4 @@ Dosage comic GoComics/Zootopia
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/GoComics_Zootopia_edit.html) or go back to the [comic list](../comic-index.html).

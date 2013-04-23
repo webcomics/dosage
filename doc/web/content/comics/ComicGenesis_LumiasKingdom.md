@@ -28,4 +28,4 @@ Dosage comic ComicGenesis/LumiasKingdom
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicGenesis_LumiasKingdom_edit.html) or go back to the [comic list](../comic-index.html).

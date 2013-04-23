@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/The_random_archives_of_TJ
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_The_random_archives_of_TJ_edit.html) or go back to the [comic list](../comic-index.html).

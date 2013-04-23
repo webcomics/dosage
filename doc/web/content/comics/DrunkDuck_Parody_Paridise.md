@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Parody_Paridise
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Parody_Paridise_edit.html) or go back to the [comic list](../comic-index.html).

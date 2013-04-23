@@ -68,7 +68,42 @@ Dosage comic %(name)s
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](%(editurl)s) or go back to the [comic list](../comic-index.html).
+"""
+
+comic_edit_template = u"""\
+title: Edit %(name)s
+url: "%(editurl)s"
+---
+Edit info for comic %(name)s
+
+<form name="comic" action="http://gaepostmail.appengine.com/comic" name="post">
+<table class="comicinfo">
+<tr>
+<th>Description</th><td><textarea name="description">%(description)s</textarea></td>
+</tr>
+<tr>
+<th>Website</th><td><input type="text" name="url" value="%(url)s"/></td>
+</tr>
+<tr>
+<th>Genre</th><td><input type="text" name="genre" value="%(genre)s"/></td>
+</tr>
+<tr>
+<th>Language</th><td><input type="text" name="language" value="%(language)s"/></td>
+</tr>
+<tr>
+<th>Adult content</th><td><input type="checkbox" name="adult" value="adult" %(adultchecked)s/></td>
+</tr>
+<tr>
+<th>Status</th><td>%(status)s on %(date)s</td>
+</tr>
+<tr>
+<th>Votes</th><td>%(vote)s</div></td>
+</tr>
+</table>
+</form>
+
+Back to the [comic](%(pageurl)s).
 """
 
 
@@ -208,8 +243,10 @@ def write_html_comic(key, entry, outputdir, date):
     args = {
         "url": quote(entry["url"]),
         "pageurl": quote("/comics/%s.html" % key),
+        "editurl": quote("/comics/%s_edit.html" % key),
         "name": quote(entry["name"]),
         "adult": quote(u"yes" if entry["adult"] else u"no"),
+        "adultchecked": 'checked="checked"' if entry["adult"] else '',
         "genre": quote(entry["genre"]),
         "language": quote(entry["language"]),
         "description": quote(entry["description"]),
@@ -220,6 +257,9 @@ def write_html_comic(key, entry, outputdir, date):
     fname = os.path.join(outputdir, key+".md")
     with codecs.open(fname, 'w', 'utf-8') as fp:
         fp.write(comic_template % args)
+    fname = os.path.join(outputdir, key+"_edit.md")
+    with codecs.open(fname, 'w', 'utf-8') as fp:
+        fp.write(comic_edit_template % args)
 
 
 def quote(arg):

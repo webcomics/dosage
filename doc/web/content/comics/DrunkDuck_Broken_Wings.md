@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Broken_Wings
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Broken_Wings_edit.html) or go back to the [comic list](../comic-index.html).

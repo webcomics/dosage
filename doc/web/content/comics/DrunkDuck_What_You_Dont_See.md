@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/What_You_Dont_See
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_What_You_Dont_See_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Mario_and_Luigi_Misadventures
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Mario_and_Luigi_Misadventures_edit.html) or go back to the [comic list](../comic-index.html).

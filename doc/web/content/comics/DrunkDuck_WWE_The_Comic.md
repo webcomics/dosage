@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/WWE_The_Comic
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_WWE_The_Comic_edit.html) or go back to the [comic list](../comic-index.html).

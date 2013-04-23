@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Children_at_Play
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Children_at_Play_edit.html) or go back to the [comic list](../comic-index.html).

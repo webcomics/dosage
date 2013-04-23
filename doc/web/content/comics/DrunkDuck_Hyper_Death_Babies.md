@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Hyper_Death_Babies
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Hyper_Death_Babies_edit.html) or go back to the [comic list](../comic-index.html).

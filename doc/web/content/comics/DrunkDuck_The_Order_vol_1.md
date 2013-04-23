@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/The_Order_vol_1
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_The_Order_vol_1_edit.html) or go back to the [comic list](../comic-index.html).

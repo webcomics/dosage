@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Elf_N_Hood
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Elf_N_Hood_edit.html) or go back to the [comic list](../comic-index.html).

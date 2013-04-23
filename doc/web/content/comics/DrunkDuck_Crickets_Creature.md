@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Crickets_Creature
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Crickets_Creature_edit.html) or go back to the [comic list](../comic-index.html).

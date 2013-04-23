@@ -28,4 +28,4 @@ Dosage comic PetiteSymphony/Sangria
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/PetiteSymphony_Sangria_edit.html) or go back to the [comic list](../comic-index.html).

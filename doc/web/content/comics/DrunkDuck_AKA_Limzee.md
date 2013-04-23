@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/AKA_Limzee
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_AKA_Limzee_edit.html) or go back to the [comic list](../comic-index.html).

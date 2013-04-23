@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Syndicate
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Syndicate_edit.html) or go back to the [comic list](../comic-index.html).

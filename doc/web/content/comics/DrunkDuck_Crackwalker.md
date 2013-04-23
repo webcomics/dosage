@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Crackwalker
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Crackwalker_edit.html) or go back to the [comic list](../comic-index.html).

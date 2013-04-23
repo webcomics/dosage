@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Team_Kim_Possible
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Team_Kim_Possible_edit.html) or go back to the [comic list](../comic-index.html).

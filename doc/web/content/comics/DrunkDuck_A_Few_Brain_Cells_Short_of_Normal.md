@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/A_Few_Brain_Cells_Short_of_...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_A_Few_Brain_Cells_Short_of_Normal_edit.html) or go back to the [comic list](../comic-index.html).

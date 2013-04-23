@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Angelfish_A_COV_comic
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Angelfish_A_COV_comic_edit.html) or go back to the [comic list](../comic-index.html).

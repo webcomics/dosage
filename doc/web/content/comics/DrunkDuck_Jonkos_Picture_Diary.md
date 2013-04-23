@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Jonkos_Picture_Diary
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Jonkos_Picture_Diary_edit.html) or go back to the [comic list](../comic-index.html).

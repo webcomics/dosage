@@ -28,4 +28,4 @@ Dosage comic ComicFury/Jump2
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicFury_Jump2_edit.html) or go back to the [comic list](../comic-index.html).

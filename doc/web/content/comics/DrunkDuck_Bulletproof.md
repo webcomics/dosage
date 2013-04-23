@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Bulletproof
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Bulletproof_edit.html) or go back to the [comic list](../comic-index.html).

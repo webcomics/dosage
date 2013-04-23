@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/The_Onett_Suite
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_The_Onett_Suite_edit.html) or go back to the [comic list](../comic-index.html).

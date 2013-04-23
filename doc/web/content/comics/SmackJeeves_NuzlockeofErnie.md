@@ -28,4 +28,4 @@ Dosage comic SmackJeeves/NuzlockeofErnie
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/SmackJeeves_NuzlockeofErnie_edit.html) or go back to the [comic list](../comic-index.html).

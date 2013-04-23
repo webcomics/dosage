@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Little_Digital_People
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Little_Digital_People_edit.html) or go back to the [comic list](../comic-index.html).

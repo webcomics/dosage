@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/KAKA_PENCIL_magical_pen
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_KAKA_PENCIL_magical_pen_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/I_got_it_in_my_mouth
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_I_got_it_in_my_mouth_edit.html) or go back to the [comic list](../comic-index.html).

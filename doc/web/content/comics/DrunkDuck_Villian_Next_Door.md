@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Villian_Next_Door
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Villian_Next_Door_edit.html) or go back to the [comic list](../comic-index.html).

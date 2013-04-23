@@ -28,4 +28,4 @@ Dosage comic SmackJeeves/MarioandLuigiMisadventures
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/SmackJeeves_MarioandLuigiMisadventures_edit.html) or go back to the [comic list](../comic-index.html).

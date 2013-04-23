@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Panda_panda
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Panda_panda_edit.html) or go back to the [comic list](../comic-index.html).

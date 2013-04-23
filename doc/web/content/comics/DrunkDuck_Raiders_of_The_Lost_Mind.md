@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Raiders_of_The_Lost_Mind
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Raiders_of_The_Lost_Mind_edit.html) or go back to the [comic list](../comic-index.html).

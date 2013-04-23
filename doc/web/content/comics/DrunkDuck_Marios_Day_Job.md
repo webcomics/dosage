@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Marios_Day_Job
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Marios_Day_Job_edit.html) or go back to the [comic list](../comic-index.html).

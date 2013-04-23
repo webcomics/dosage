@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/DD24hour_2011
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_DD24hour_2011_edit.html) or go back to the [comic list](../comic-index.html).

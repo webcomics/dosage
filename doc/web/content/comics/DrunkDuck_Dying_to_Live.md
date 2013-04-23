@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Dying_to_Live
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Dying_to_Live_edit.html) or go back to the [comic list](../comic-index.html).

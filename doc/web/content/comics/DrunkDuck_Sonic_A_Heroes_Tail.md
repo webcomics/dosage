@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Sonic_A_Heroes_Tail
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Sonic_A_Heroes_Tail_edit.html) or go back to the [comic list](../comic-index.html).

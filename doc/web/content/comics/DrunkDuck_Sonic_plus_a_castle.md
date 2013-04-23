@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Sonic_plus_a_castle
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Sonic_plus_a_castle_edit.html) or go back to the [comic list](../comic-index.html).

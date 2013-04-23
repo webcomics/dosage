@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Version_2_Fantasy
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Version_2_Fantasy_edit.html) or go back to the [comic list](../comic-index.html).

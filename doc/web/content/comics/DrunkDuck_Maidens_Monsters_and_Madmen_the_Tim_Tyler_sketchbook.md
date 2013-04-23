@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Maidens_Monsters_and_Madmen...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Maidens_Monsters_and_Madmen_the_Tim_Tyler_sketchbook_edit.html) or go back to the [comic list](../comic-index.html).

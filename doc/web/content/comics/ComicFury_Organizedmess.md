@@ -28,4 +28,4 @@ Dosage comic ComicFury/Organizedmess
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicFury_Organizedmess_edit.html) or go back to the [comic list](../comic-index.html).

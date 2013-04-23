@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/The_Planet_Closest_To_Heaven
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_The_Planet_Closest_To_Heaven_edit.html) or go back to the [comic list](../comic-index.html).

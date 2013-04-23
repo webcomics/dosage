@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Decimated_Eden
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Decimated_Eden_edit.html) or go back to the [comic list](../comic-index.html).

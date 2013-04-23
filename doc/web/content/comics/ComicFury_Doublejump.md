@@ -28,4 +28,4 @@ Dosage comic ComicFury/Doublejump
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicFury_Doublejump_edit.html) or go back to the [comic list](../comic-index.html).

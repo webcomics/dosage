@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Shades_of_Gray
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Shades_of_Gray_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Something_Like_Life
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Something_Like_Life_edit.html) or go back to the [comic list](../comic-index.html).

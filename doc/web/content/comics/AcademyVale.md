@@ -28,4 +28,4 @@ Dosage comic AcademyVale
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/AcademyVale_edit.html) or go back to the [comic list](../comic-index.html).

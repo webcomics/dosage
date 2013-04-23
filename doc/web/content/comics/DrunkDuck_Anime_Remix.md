@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Anime_Remix
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Anime_Remix_edit.html) or go back to the [comic list](../comic-index.html).

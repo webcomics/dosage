@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Anarchy_2090
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Anarchy_2090_edit.html) or go back to the [comic list](../comic-index.html).

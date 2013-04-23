@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Final_Blasphemy
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Final_Blasphemy_edit.html) or go back to the [comic list](../comic-index.html).

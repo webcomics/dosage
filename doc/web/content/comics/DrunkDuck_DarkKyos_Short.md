@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/DarkKyos_Short
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_DarkKyos_Short_edit.html) or go back to the [comic list](../comic-index.html).

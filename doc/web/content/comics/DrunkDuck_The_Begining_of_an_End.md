@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/The_Begining_of_an_End
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_The_Begining_of_an_End_edit.html) or go back to the [comic list](../comic-index.html).

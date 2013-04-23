@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/School_of__Rumble
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_School_of__Rumble_edit.html) or go back to the [comic list](../comic-index.html).

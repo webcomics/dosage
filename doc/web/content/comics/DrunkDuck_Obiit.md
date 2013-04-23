@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Obiit
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Obiit_edit.html) or go back to the [comic list](../comic-index.html).

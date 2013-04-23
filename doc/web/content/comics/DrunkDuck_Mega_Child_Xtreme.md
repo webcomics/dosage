@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Mega_Child_Xtreme
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Mega_Child_Xtreme_edit.html) or go back to the [comic list](../comic-index.html).

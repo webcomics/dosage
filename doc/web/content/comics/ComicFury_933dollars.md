@@ -28,4 +28,4 @@ Dosage comic ComicFury/933dollars
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicFury_933dollars_edit.html) or go back to the [comic list](../comic-index.html).

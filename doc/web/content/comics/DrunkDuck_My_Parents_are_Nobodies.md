@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/My_Parents_are_Nobodies
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_My_Parents_are_Nobodies_edit.html) or go back to the [comic list](../comic-index.html).

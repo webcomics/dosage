@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Carbon_and_Space
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Carbon_and_Space_edit.html) or go back to the [comic list](../comic-index.html).

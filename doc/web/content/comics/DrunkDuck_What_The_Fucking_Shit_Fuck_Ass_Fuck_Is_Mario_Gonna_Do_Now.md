@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/What_The_Fucking_Shit_Fuck_...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_What_The_Fucking_Shit_Fuck_Ass_Fuck_Is_Mario_Gonna_Do_Now_edit.html) or go back to the [comic list](../comic-index.html).

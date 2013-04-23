@@ -28,4 +28,4 @@ Dosage comic SnafuComics/FT
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/SnafuComics_FT_edit.html) or go back to the [comic list](../comic-index.html).

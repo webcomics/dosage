@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Paranoia_and_Denial
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Paranoia_and_Denial_edit.html) or go back to the [comic list](../comic-index.html).

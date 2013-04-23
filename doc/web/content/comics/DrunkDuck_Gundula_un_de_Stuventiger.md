@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Gundula_un_de_Stuventiger
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Gundula_un_de_Stuventiger_edit.html) or go back to the [comic list](../comic-index.html).

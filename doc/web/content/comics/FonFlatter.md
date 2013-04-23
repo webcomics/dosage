@@ -28,4 +28,4 @@ Dosage comic FonFlatter
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/FonFlatter_edit.html) or go back to the [comic list](../comic-index.html).

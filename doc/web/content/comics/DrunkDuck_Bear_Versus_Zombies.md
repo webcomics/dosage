@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Bear_Versus_Zombies
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Bear_Versus_Zombies_edit.html) or go back to the [comic list](../comic-index.html).

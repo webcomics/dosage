@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Rule_of_Three
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Rule_of_Three_edit.html) or go back to the [comic list](../comic-index.html).

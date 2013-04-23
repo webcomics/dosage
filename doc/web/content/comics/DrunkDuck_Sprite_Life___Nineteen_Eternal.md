@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Sprite_Life___Nineteen_Eternal
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Sprite_Life___Nineteen_Eternal_edit.html) or go back to the [comic list](../comic-index.html).

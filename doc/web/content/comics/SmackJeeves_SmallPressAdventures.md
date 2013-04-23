@@ -28,4 +28,4 @@ Dosage comic SmackJeeves/SmallPressAdventures
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/SmackJeeves_SmallPressAdventures_edit.html) or go back to the [comic list](../comic-index.html).

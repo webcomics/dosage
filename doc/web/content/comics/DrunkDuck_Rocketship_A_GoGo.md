@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Rocketship_A_GoGo
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Rocketship_A_GoGo_edit.html) or go back to the [comic list](../comic-index.html).

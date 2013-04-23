@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Outlawed
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Outlawed_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Imaginary_Daughter_Bonus
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Imaginary_Daughter_Bonus_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/An_Act_of_Aggression
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_An_Act_of_Aggression_edit.html) or go back to the [comic list](../comic-index.html).

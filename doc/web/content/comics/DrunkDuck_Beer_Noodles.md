@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Beer_Noodles
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Beer_Noodles_edit.html) or go back to the [comic list](../comic-index.html).

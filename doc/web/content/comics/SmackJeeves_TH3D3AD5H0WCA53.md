@@ -28,4 +28,4 @@ Dosage comic SmackJeeves/TH3D3AD5H0WCA53
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/SmackJeeves_TH3D3AD5H0WCA53_edit.html) or go back to the [comic list](../comic-index.html).

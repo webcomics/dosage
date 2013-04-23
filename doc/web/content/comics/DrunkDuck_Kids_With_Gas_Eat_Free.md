@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Kids_With_Gas_Eat_Free
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Kids_With_Gas_Eat_Free_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Old_Pond
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Old_Pond_edit.html) or go back to the [comic list](../comic-index.html).

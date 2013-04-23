@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/The_Black_Dragons_Chronicles
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_The_Black_Dragons_Chronicles_edit.html) or go back to the [comic list](../comic-index.html).

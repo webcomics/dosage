@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/A_Loonatics_Tale
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_A_Loonatics_Tale_edit.html) or go back to the [comic list](../comic-index.html).

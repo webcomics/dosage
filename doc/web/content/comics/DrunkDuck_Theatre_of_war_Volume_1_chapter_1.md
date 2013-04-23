@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Theatre_of_war_Volume_1_cha...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Theatre_of_war_Volume_1_chapter_1_edit.html) or go back to the [comic list](../comic-index.html).

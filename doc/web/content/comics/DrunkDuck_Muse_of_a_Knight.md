@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Muse_of_a_Knight
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Muse_of_a_Knight_edit.html) or go back to the [comic list](../comic-index.html).

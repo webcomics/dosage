@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/This_Ego_of_Mine
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_This_Ego_of_Mine_edit.html) or go back to the [comic list](../comic-index.html).

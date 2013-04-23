@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Electronic_Revolutions_The_...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Electronic_Revolutions_The_Burnhams_edit.html) or go back to the [comic list](../comic-index.html).

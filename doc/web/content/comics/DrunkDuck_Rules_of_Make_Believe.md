@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Rules_of_Make_Believe
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Rules_of_Make_Believe_edit.html) or go back to the [comic list](../comic-index.html).

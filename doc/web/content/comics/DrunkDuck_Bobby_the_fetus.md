@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Bobby_the_fetus
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Bobby_the_fetus_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Tera_Forming
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Tera_Forming_edit.html) or go back to the [comic list](../comic-index.html).

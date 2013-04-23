@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Unsung_Heroes_Of_Subtlety
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Unsung_Heroes_Of_Subtlety_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Peregrination_of_the_Deliverer
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Peregrination_of_the_Deliverer_edit.html) or go back to the [comic list](../comic-index.html).

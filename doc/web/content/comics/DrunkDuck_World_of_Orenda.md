@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/World_of_Orenda
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_World_of_Orenda_edit.html) or go back to the [comic list](../comic-index.html).

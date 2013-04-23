@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Betting_On_Love
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Betting_On_Love_edit.html) or go back to the [comic list](../comic-index.html).

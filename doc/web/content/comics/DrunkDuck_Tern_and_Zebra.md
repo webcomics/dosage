@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Tern_and_Zebra
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Tern_and_Zebra_edit.html) or go back to the [comic list](../comic-index.html).

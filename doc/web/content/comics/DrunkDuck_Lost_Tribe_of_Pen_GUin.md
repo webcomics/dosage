@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Lost_Tribe_of_Pen_GUin
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Lost_Tribe_of_Pen_GUin_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic GoComics/Enlightoons
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/GoComics_Enlightoons_edit.html) or go back to the [comic list](../comic-index.html).

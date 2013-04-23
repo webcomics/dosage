@@ -28,4 +28,4 @@ Dosage comic ComicFury/Thisisnormal
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicFury_Thisisnormal_edit.html) or go back to the [comic list](../comic-index.html).

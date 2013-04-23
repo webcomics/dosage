@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Ryosaki_Uzumaki_1
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Ryosaki_Uzumaki_1_edit.html) or go back to the [comic list](../comic-index.html).

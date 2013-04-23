@@ -28,4 +28,4 @@ Dosage comic ComicGenesis/FancyThat
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicGenesis_FancyThat_edit.html) or go back to the [comic list](../comic-index.html).

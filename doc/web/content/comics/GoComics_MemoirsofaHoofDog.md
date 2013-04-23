@@ -28,4 +28,4 @@ Dosage comic GoComics/MemoirsofaHoofDog
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/GoComics_MemoirsofaHoofDog_edit.html) or go back to the [comic list](../comic-index.html).

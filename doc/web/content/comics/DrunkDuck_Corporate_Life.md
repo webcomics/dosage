@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Corporate_Life
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Corporate_Life_edit.html) or go back to the [comic list](../comic-index.html).

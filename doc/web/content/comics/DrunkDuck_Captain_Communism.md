@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Captain_Communism
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Captain_Communism_edit.html) or go back to the [comic list](../comic-index.html).

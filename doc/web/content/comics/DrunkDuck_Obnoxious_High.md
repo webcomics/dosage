@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Obnoxious_High
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Obnoxious_High_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Tears_will_Shatter_Steel
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Tears_will_Shatter_Steel_edit.html) or go back to the [comic list](../comic-index.html).

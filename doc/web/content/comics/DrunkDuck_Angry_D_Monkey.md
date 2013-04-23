@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Angry_D_Monkey
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Angry_D_Monkey_edit.html) or go back to the [comic list](../comic-index.html).

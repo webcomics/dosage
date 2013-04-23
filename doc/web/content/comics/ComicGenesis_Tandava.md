@@ -28,4 +28,4 @@ Dosage comic ComicGenesis/Tandava
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicGenesis_Tandava_edit.html) or go back to the [comic list](../comic-index.html).

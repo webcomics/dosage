@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Last_Chance_The_Beast_Hunter
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Last_Chance_The_Beast_Hunter_edit.html) or go back to the [comic list](../comic-index.html).

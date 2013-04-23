@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/True_North
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_True_North_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Outer_Space_Alien_Nazis_Fro...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Outer_Space_Alien_Nazis_From_Outer_Space_edit.html) or go back to the [comic list](../comic-index.html).

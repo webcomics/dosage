@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Life_and_Maybe_Death_of_Ed
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Life_and_Maybe_Death_of_Ed_edit.html) or go back to the [comic list](../comic-index.html).

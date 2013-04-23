@@ -28,4 +28,4 @@ Dosage comic GoComics/Shortcuts
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/GoComics_Shortcuts_edit.html) or go back to the [comic list](../comic-index.html).

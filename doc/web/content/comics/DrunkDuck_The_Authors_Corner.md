@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/The_Authors_Corner
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_The_Authors_Corner_edit.html) or go back to the [comic list](../comic-index.html).

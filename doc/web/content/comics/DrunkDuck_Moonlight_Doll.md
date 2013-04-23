@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Moonlight_Doll
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Moonlight_Doll_edit.html) or go back to the [comic list](../comic-index.html).

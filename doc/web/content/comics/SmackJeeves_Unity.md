@@ -28,4 +28,4 @@ Dosage comic SmackJeeves/Unity
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/SmackJeeves_Unity_edit.html) or go back to the [comic list](../comic-index.html).

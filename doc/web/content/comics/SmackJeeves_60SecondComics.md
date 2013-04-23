@@ -28,4 +28,4 @@ Dosage comic SmackJeeves/60SecondComics
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/SmackJeeves_60SecondComics_edit.html) or go back to the [comic list](../comic-index.html).

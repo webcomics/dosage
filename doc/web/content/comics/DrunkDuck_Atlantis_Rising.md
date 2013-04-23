@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Atlantis_Rising
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Atlantis_Rising_edit.html) or go back to the [comic list](../comic-index.html).

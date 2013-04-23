@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Unlife_is_Unfair
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Unlife_is_Unfair_edit.html) or go back to the [comic list](../comic-index.html).

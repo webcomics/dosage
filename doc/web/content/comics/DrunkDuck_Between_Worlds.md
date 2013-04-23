@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Between_Worlds
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Between_Worlds_edit.html) or go back to the [comic list](../comic-index.html).

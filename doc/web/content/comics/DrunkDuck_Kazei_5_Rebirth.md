@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Kazei_5_Rebirth
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Kazei_5_Rebirth_edit.html) or go back to the [comic list](../comic-index.html).

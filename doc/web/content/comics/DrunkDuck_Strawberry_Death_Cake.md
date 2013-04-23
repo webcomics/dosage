@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Strawberry_Death_Cake
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Strawberry_Death_Cake_edit.html) or go back to the [comic list](../comic-index.html).

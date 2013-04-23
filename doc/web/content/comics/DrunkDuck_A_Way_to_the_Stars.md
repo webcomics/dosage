@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/A_Way_to_the_Stars
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_A_Way_to_the_Stars_edit.html) or go back to the [comic list](../comic-index.html).

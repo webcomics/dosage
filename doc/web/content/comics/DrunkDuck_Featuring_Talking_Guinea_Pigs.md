@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Featuring_Talking_Guinea_Pigs
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Featuring_Talking_Guinea_Pigs_edit.html) or go back to the [comic list](../comic-index.html).

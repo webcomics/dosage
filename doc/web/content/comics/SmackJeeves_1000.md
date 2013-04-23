@@ -28,4 +28,4 @@ Dosage comic SmackJeeves/1000
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/SmackJeeves_1000_edit.html) or go back to the [comic list](../comic-index.html).

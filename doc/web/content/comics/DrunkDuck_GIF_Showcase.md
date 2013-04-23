@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/GIF_Showcase
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_GIF_Showcase_edit.html) or go back to the [comic list](../comic-index.html).

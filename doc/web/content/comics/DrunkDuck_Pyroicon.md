@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Pyroicon
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Pyroicon_edit.html) or go back to the [comic list](../comic-index.html).

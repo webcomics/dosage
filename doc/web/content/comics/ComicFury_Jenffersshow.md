@@ -28,4 +28,4 @@ Dosage comic ComicFury/Jenffersshow
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicFury_Jenffersshow_edit.html) or go back to the [comic list](../comic-index.html).

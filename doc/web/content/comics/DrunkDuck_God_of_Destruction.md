@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/God_of_Destruction
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_God_of_Destruction_edit.html) or go back to the [comic list](../comic-index.html).

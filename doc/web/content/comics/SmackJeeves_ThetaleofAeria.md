@@ -28,4 +28,4 @@ Dosage comic SmackJeeves/ThetaleofAeria
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/SmackJeeves_ThetaleofAeria_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/WarriorBorn
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_WarriorBorn_edit.html) or go back to the [comic list](../comic-index.html).

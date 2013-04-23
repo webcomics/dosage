@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/George_the_Dragon
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_George_the_Dragon_edit.html) or go back to the [comic list](../comic-index.html).

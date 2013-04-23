@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Strangers_and_Friends
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Strangers_and_Friends_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Myo_Min_Myo
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Myo_Min_Myo_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Anomic_v2
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Anomic_v2_edit.html) or go back to the [comic list](../comic-index.html).

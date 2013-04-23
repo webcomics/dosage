@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Fred_Peterson_The_Mighty_Wa...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Fred_Peterson_The_Mighty_Warlord_Book_1_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Frame_by_Frame
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Frame_by_Frame_edit.html) or go back to the [comic list](../comic-index.html).

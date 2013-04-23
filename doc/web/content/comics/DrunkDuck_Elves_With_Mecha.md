@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Elves_With_Mecha
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Elves_With_Mecha_edit.html) or go back to the [comic list](../comic-index.html).

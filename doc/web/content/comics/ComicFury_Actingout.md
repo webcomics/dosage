@@ -28,4 +28,4 @@ Dosage comic ComicFury/Actingout
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicFury_Actingout_edit.html) or go back to the [comic list](../comic-index.html).

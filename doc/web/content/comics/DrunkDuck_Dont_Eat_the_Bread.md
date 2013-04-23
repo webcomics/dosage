@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Dont_Eat_the_Bread
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Dont_Eat_the_Bread_edit.html) or go back to the [comic list](../comic-index.html).

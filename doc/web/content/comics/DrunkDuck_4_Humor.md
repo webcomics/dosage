@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/4_Humor
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_4_Humor_edit.html) or go back to the [comic list](../comic-index.html).

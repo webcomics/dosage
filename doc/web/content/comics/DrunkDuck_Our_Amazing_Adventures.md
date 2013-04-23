@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Our_Amazing_Adventures
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Our_Amazing_Adventures_edit.html) or go back to the [comic list](../comic-index.html).

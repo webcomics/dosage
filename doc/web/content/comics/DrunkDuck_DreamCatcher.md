@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/DreamCatcher
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_DreamCatcher_edit.html) or go back to the [comic list](../comic-index.html).

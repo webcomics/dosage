@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/RIDDICK_Q_LOSS_TALES
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_RIDDICK_Q_LOSS_TALES_edit.html) or go back to the [comic list](../comic-index.html).

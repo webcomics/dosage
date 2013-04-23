@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/HASBEN_AND_HASH
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_HASBEN_AND_HASH_edit.html) or go back to the [comic list](../comic-index.html).

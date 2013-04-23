@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/For_Your_Eyes_Only
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_For_Your_Eyes_Only_edit.html) or go back to the [comic list](../comic-index.html).

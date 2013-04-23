@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Ultimate_tourny_of_ultimate...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Ultimate_tourny_of_ultimate_fighting_edit.html) or go back to the [comic list](../comic-index.html).

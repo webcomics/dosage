@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Give_Me_The_Sky
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Give_Me_The_Sky_edit.html) or go back to the [comic list](../comic-index.html).

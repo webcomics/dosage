@@ -28,4 +28,4 @@ Dosage comic ComicFury/Serengetti
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicFury_Serengetti_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Marital_Bliss
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Marital_Bliss_edit.html) or go back to the [comic list](../comic-index.html).

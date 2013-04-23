@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/House_of_the_Muses_1
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_House_of_the_Muses_1_edit.html) or go back to the [comic list](../comic-index.html).

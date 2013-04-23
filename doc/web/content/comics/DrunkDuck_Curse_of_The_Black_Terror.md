@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Curse_of_The_Black_Terror
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Curse_of_The_Black_Terror_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Crimson_Dark
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Crimson_Dark_edit.html) or go back to the [comic list](../comic-index.html).

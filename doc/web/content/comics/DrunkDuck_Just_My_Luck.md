@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Just_My_Luck
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Just_My_Luck_edit.html) or go back to the [comic list](../comic-index.html).

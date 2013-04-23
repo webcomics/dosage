@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Ar_Oh_Ef_El
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Ar_Oh_Ef_El_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/I_Fell_Down_The_Stairs
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_I_Fell_Down_The_Stairs_edit.html) or go back to the [comic list](../comic-index.html).

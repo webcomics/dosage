@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/JRs_Minutemen
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_JRs_Minutemen_edit.html) or go back to the [comic list](../comic-index.html).

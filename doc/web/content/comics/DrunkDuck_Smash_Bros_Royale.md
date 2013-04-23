@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Smash_Bros_Royale
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Smash_Bros_Royale_edit.html) or go back to the [comic list](../comic-index.html).

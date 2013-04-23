@@ -28,4 +28,4 @@ Dosage comic GoComics/BenjaminBreadman
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/GoComics_BenjaminBreadman_edit.html) or go back to the [comic list](../comic-index.html).

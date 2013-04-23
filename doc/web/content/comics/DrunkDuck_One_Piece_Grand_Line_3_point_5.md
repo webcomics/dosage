@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/One_Piece_Grand_Line_3_point_5
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_One_Piece_Grand_Line_3_point_5_edit.html) or go back to the [comic list](../comic-index.html).

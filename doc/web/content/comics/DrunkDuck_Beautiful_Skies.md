@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Beautiful_Skies
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Beautiful_Skies_edit.html) or go back to the [comic list](../comic-index.html).

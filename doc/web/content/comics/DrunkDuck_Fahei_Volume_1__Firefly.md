@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Fahei_Volume_1__Firefly
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Fahei_Volume_1__Firefly_edit.html) or go back to the [comic list](../comic-index.html).

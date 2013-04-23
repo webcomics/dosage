@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Frank_and_Vinny
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Frank_and_Vinny_edit.html) or go back to the [comic list](../comic-index.html).

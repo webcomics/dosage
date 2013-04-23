@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Case_1048_Blind_and_Blue
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Case_1048_Blind_and_Blue_edit.html) or go back to the [comic list](../comic-index.html).

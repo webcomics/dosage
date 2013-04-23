@@ -28,4 +28,4 @@ Dosage comic AlienShores
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/AlienShores_edit.html) or go back to the [comic list](../comic-index.html).

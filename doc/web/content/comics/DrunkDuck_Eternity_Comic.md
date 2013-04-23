@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Eternity_Comic
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Eternity_Comic_edit.html) or go back to the [comic list](../comic-index.html).

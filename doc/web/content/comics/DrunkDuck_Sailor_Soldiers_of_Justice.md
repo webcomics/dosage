@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Sailor_Soldiers_of_Justice
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Sailor_Soldiers_of_Justice_edit.html) or go back to the [comic list](../comic-index.html).

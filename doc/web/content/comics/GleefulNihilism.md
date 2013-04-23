@@ -28,4 +28,4 @@ Dosage comic GleefulNihilism
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/GleefulNihilism_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Step_It_Up
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Step_It_Up_edit.html) or go back to the [comic list](../comic-index.html).

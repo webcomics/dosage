@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Koji_Takahashi_Stops_the_World
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Koji_Takahashi_Stops_the_World_edit.html) or go back to the [comic list](../comic-index.html).

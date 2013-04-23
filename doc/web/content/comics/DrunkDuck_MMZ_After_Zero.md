@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/MMZ_After_Zero
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_MMZ_After_Zero_edit.html) or go back to the [comic list](../comic-index.html).

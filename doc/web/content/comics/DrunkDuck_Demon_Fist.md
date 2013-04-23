@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Demon_Fist
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Demon_Fist_edit.html) or go back to the [comic list](../comic-index.html).

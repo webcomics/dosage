@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Gods_Playing_Poker
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Gods_Playing_Poker_edit.html) or go back to the [comic list](../comic-index.html).

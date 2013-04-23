@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Nintendo_Super_Squad
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Nintendo_Super_Squad_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Mega_Maiden_and_the_Chop_Ch...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Mega_Maiden_and_the_Chop_Chop_Princess_edit.html) or go back to the [comic list](../comic-index.html).

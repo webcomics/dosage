@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Livin_On_The_Edge
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Livin_On_The_Edge_edit.html) or go back to the [comic list](../comic-index.html).

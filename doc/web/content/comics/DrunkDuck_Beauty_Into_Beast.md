@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Beauty_Into_Beast
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Beauty_Into_Beast_edit.html) or go back to the [comic list](../comic-index.html).

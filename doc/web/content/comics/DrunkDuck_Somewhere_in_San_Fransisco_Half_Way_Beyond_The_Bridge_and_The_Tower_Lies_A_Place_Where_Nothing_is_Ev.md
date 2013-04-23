@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Somewhere_in_San_Fransisco_...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Somewhere_in_San_Fransisco_Half_Way_Beyond_The_Bridge_and_The_Tower_Lies_A_Place_Where_Nothing_is_Ev_edit.html) or go back to the [comic list](../comic-index.html).

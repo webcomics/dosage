@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Super_Smash_Bros_Grand_Tour
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Super_Smash_Bros_Grand_Tour_edit.html) or go back to the [comic list](../comic-index.html).

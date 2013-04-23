@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Day_in_the_Life_of_a_Cosplayer
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Day_in_the_Life_of_a_Cosplayer_edit.html) or go back to the [comic list](../comic-index.html).

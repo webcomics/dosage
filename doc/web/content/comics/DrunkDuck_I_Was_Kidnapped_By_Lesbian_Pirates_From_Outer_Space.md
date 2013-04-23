@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/I_Was_Kidnapped_By_Lesbian_...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_I_Was_Kidnapped_By_Lesbian_Pirates_From_Outer_Space_edit.html) or go back to the [comic list](../comic-index.html).

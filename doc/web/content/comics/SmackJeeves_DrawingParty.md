@@ -28,4 +28,4 @@ Dosage comic SmackJeeves/DrawingParty
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/SmackJeeves_DrawingParty_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Mask_of_the_Aryans
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Mask_of_the_Aryans_edit.html) or go back to the [comic list](../comic-index.html).

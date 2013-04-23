@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Edge_of_December
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Edge_of_December_edit.html) or go back to the [comic list](../comic-index.html).

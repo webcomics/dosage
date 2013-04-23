@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Royal_Icing
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Royal_Icing_edit.html) or go back to the [comic list](../comic-index.html).

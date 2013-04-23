@@ -28,4 +28,4 @@ Dosage comic SmackJeeves/3DSComic
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/SmackJeeves_3DSComic_edit.html) or go back to the [comic list](../comic-index.html).

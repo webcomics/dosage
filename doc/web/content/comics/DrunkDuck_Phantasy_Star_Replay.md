@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Phantasy_Star_Replay
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Phantasy_Star_Replay_edit.html) or go back to the [comic list](../comic-index.html).

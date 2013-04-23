@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Life_as_an_8bit
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Life_as_an_8bit_edit.html) or go back to the [comic list](../comic-index.html).

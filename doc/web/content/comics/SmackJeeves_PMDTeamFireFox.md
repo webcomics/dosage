@@ -28,4 +28,4 @@ Dosage comic SmackJeeves/PMDTeamFireFox
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/SmackJeeves_PMDTeamFireFox_edit.html) or go back to the [comic list](../comic-index.html).

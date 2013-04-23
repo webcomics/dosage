@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Deviant_Prophets
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Deviant_Prophets_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic ComicFury/Housepets1x
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicFury_Housepets1x_edit.html) or go back to the [comic list](../comic-index.html).

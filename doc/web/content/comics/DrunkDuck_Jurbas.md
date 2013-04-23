@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Jurbas
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Jurbas_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Modern_Day_Witchdoctor
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Modern_Day_Witchdoctor_edit.html) or go back to the [comic list](../comic-index.html).

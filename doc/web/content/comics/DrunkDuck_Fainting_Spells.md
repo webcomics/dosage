@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Fainting_Spells
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Fainting_Spells_edit.html) or go back to the [comic list](../comic-index.html).

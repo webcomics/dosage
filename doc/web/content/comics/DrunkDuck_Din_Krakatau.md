@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Din_Krakatau
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Din_Krakatau_edit.html) or go back to the [comic list](../comic-index.html).

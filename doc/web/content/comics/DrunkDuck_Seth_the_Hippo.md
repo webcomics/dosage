@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Seth_the_Hippo
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Seth_the_Hippo_edit.html) or go back to the [comic list](../comic-index.html).

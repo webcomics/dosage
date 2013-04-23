@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Nintendos_Untold_Legends
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Nintendos_Untold_Legends_edit.html) or go back to the [comic list](../comic-index.html).

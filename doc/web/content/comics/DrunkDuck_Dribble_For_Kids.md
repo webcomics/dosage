@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Dribble_For_Kids
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Dribble_For_Kids_edit.html) or go back to the [comic list](../comic-index.html).

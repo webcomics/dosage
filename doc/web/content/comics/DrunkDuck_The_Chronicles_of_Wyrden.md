@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/The_Chronicles_of_Wyrden
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_The_Chronicles_of_Wyrden_edit.html) or go back to the [comic list](../comic-index.html).

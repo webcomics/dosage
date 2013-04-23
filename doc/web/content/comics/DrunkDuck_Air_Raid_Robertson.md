@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Air_Raid_Robertson
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Air_Raid_Robertson_edit.html) or go back to the [comic list](../comic-index.html).

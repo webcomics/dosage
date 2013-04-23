@@ -1,0 +1,32 @@
+title: Edit SmackJeeves/ChimiMouryou
+url: "/comics/SmackJeeves_ChimiMouryou_edit.html"
+---
+Edit info for comic SmackJeeves/ChimiMouryou
+
+<form name="comic" action="http://gaepostmail.appengine.com/comic" name="post">
+<table class="comicinfo">
+<tr>
+<th>Description</th><td><textarea name="description">Near the top of one of Japan's many mountains away from all the human villages, there is a forest inhabited by youkai who are constantly learning how to deal with each other. Basically, &quot;The Daily Lives of Crazy Youkai&quot; This comic is a bunch of random short stories and not one continuous one. Everything is acted out in pantomime AKA there are no written words. Chimi mouryou can be roughly translated as &quot;evil monsters in the mountains and rivers&quot;. The legend of it keeps the forest safe from humans. I am still researching more about the Edo period and youkai, so I apologize for unintentional inaccuracies. For now, the updates for this comic are random. I apologize!</textarea></td>
+</tr>
+<tr>
+<th>Website</th><td><input type="text" name="url" value="http://cmmr.thewebcomic.com/comics/"/></td>
+</tr>
+<tr>
+<th>Genre</th><td><input type="text" name="genre" value="Other"/></td>
+</tr>
+<tr>
+<th>Language</th><td><input type="text" name="language" value="English"/></td>
+</tr>
+<tr>
+<th>Adult content</th><td><input type="checkbox" name="adult" value="adult" /></td>
+</tr>
+<tr>
+<th>Status</th><td>ok on 11.04.2013</td>
+</tr>
+<tr>
+<th>Votes</th><td>0</div></td>
+</tr>
+</table>
+</form>
+
+Back to the [comic](/comics/SmackJeeves_ChimiMouryou.html).

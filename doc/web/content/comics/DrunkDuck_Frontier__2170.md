@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Frontier__2170
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Frontier__2170_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Dread_Sisterhood_of_Randomn...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Dread_Sisterhood_of_Randomnessossity_edit.html) or go back to the [comic list](../comic-index.html).

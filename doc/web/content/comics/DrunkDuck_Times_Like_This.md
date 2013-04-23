@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Times_Like_This
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Times_Like_This_edit.html) or go back to the [comic list](../comic-index.html).

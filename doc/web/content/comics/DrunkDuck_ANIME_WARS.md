@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/ANIME_WARS
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_ANIME_WARS_edit.html) or go back to the [comic list](../comic-index.html).

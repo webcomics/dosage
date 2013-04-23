@@ -28,4 +28,4 @@ Dosage comic SlightlyDamned
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/SlightlyDamned_edit.html) or go back to the [comic list](../comic-index.html).

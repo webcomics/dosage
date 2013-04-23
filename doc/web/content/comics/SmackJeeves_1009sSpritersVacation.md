@@ -28,4 +28,4 @@ Dosage comic SmackJeeves/1009sSpritersVacation
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/SmackJeeves_1009sSpritersVacation_edit.html) or go back to the [comic list](../comic-index.html).

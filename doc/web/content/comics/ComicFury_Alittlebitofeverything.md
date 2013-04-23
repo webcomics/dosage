@@ -28,4 +28,4 @@ Dosage comic ComicFury/Alittlebitofeverything
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicFury_Alittlebitofeverything_edit.html) or go back to the [comic list](../comic-index.html).

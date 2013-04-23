@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Rangetsu
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Rangetsu_edit.html) or go back to the [comic list](../comic-index.html).

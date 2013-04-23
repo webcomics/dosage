@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Magenta_the_Witchgirl
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Magenta_the_Witchgirl_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/I_Come_From_Mars
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_I_Come_From_Mars_edit.html) or go back to the [comic list](../comic-index.html).

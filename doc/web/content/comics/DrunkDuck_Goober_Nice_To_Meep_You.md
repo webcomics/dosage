@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Goober_Nice_To_Meep_You
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Goober_Nice_To_Meep_You_edit.html) or go back to the [comic list](../comic-index.html).

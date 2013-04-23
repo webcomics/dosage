@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/City_of_Dream
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_City_of_Dream_edit.html) or go back to the [comic list](../comic-index.html).

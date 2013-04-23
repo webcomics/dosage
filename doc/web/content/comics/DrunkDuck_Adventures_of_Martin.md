@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Adventures_of_Martin
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Adventures_of_Martin_edit.html) or go back to the [comic list](../comic-index.html).

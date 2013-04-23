@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Story_of_My_Life
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Story_of_My_Life_edit.html) or go back to the [comic list](../comic-index.html).

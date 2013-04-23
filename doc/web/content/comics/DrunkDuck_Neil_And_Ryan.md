@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Neil_And_Ryan
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Neil_And_Ryan_edit.html) or go back to the [comic list](../comic-index.html).

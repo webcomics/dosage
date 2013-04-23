@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/The_Crossroads
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_The_Crossroads_edit.html) or go back to the [comic list](../comic-index.html).

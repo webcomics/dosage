@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Twisted_Mind_of_Stranger
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Twisted_Mind_of_Stranger_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Grin_n_spirit
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Grin_n_spirit_edit.html) or go back to the [comic list](../comic-index.html).

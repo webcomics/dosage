@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/The_Fabled_Travelers
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_The_Fabled_Travelers_edit.html) or go back to the [comic list](../comic-index.html).

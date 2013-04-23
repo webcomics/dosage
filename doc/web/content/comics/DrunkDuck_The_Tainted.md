@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/The_Tainted
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_The_Tainted_edit.html) or go back to the [comic list](../comic-index.html).

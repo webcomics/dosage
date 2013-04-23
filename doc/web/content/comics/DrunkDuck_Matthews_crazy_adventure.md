@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Matthews_crazy_adventure
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Matthews_crazy_adventure_edit.html) or go back to the [comic list](../comic-index.html).

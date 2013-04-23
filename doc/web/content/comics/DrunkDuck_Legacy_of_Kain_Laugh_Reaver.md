@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Legacy_of_Kain_Laugh_Reaver
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Legacy_of_Kain_Laugh_Reaver_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Starving_Artists
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Starving_Artists_edit.html) or go back to the [comic list](../comic-index.html).

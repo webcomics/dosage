@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Memories_from_Requiem
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Memories_from_Requiem_edit.html) or go back to the [comic list](../comic-index.html).

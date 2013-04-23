@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Darkling_Visions_of_a_Madma...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Darkling_Visions_of_a_Madmans_Soul_edit.html) or go back to the [comic list](../comic-index.html).

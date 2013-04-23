@@ -28,4 +28,4 @@ Dosage comic PandyLand
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/PandyLand_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/They_Are_Night_Zombies_They...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_They_Are_Night_Zombies_They_Are_Neighbors_They_Have_Come_Back_From_The_Dead_Ahhhhh_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/12_Men_Died_Making_This_Strip
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_12_Men_Died_Making_This_Strip_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/MAYA_la_leyenda_del_lobo
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_MAYA_la_leyenda_del_lobo_edit.html) or go back to the [comic list](../comic-index.html).

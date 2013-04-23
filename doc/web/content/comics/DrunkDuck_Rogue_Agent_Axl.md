@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Rogue_Agent_Axl
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Rogue_Agent_Axl_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Mystery_World
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Mystery_World_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Max_Zing
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Max_Zing_edit.html) or go back to the [comic list](../comic-index.html).

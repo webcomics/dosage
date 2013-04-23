@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Fightsplosion_Legends
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Fightsplosion_Legends_edit.html) or go back to the [comic list](../comic-index.html).

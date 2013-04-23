@@ -28,4 +28,4 @@ Dosage comic GoComics/LucasLuminous
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/GoComics_LucasLuminous_edit.html) or go back to the [comic list](../comic-index.html).

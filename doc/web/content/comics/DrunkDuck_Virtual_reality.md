@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Virtual_reality
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Virtual_reality_edit.html) or go back to the [comic list](../comic-index.html).

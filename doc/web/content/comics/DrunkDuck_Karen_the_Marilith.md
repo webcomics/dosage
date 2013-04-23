@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Karen_the_Marilith
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Karen_the_Marilith_edit.html) or go back to the [comic list](../comic-index.html).

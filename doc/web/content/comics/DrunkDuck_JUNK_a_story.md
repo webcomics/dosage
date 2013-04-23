@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/JUNK_a_story
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_JUNK_a_story_edit.html) or go back to the [comic list](../comic-index.html).

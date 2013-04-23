@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/God_Complex
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_God_Complex_edit.html) or go back to the [comic list](../comic-index.html).

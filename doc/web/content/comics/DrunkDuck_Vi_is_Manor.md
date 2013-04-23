@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Vi_is_Manor
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Vi_is_Manor_edit.html) or go back to the [comic list](../comic-index.html).

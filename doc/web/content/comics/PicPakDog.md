@@ -28,4 +28,4 @@ Dosage comic PicPakDog
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/PicPakDog_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Planet_Chaser
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Planet_Chaser_edit.html) or go back to the [comic list](../comic-index.html).

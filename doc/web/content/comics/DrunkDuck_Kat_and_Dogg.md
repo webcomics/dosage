@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Kat_and_Dogg
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Kat_and_Dogg_edit.html) or go back to the [comic list](../comic-index.html).

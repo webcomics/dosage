@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Raidou_Kuzunoha_the_19th
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Raidou_Kuzunoha_the_19th_edit.html) or go back to the [comic list](../comic-index.html).

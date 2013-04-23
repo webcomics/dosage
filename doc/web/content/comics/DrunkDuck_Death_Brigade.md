@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Death_Brigade
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Death_Brigade_edit.html) or go back to the [comic list](../comic-index.html).

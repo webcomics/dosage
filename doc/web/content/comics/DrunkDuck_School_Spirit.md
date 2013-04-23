@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/School_Spirit
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_School_Spirit_edit.html) or go back to the [comic list](../comic-index.html).

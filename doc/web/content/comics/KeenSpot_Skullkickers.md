@@ -28,4 +28,4 @@ Dosage comic KeenSpot/Skullkickers
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/KeenSpot_Skullkickers_edit.html) or go back to the [comic list](../comic-index.html).

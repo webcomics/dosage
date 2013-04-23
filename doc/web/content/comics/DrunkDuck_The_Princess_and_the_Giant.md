@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/The_Princess_and_the_Giant
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_The_Princess_and_the_Giant_edit.html) or go back to the [comic list](../comic-index.html).

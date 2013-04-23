@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Pixel_Plumbers
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Pixel_Plumbers_edit.html) or go back to the [comic list](../comic-index.html).

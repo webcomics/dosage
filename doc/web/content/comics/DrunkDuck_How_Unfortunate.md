@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/How_Unfortunate
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_How_Unfortunate_edit.html) or go back to the [comic list](../comic-index.html).

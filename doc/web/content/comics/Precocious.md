@@ -28,4 +28,4 @@ Dosage comic Precocious
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/Precocious_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Puppets_and_Strings
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Puppets_and_Strings_edit.html) or go back to the [comic list](../comic-index.html).

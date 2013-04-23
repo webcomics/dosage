@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Sun_Fish_Moon_Fish
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Sun_Fish_Moon_Fish_edit.html) or go back to the [comic list](../comic-index.html).

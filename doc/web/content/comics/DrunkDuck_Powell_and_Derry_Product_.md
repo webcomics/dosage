@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Powell_and_Derry_Product_
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Powell_and_Derry_Product__edit.html) or go back to the [comic list](../comic-index.html).

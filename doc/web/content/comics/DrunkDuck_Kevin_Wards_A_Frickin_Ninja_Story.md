@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Kevin_Wards_A_Frickin_Ninja...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Kevin_Wards_A_Frickin_Ninja_Story_edit.html) or go back to the [comic list](../comic-index.html).

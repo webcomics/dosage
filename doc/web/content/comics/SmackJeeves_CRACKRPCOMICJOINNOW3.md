@@ -28,4 +28,4 @@ Dosage comic SmackJeeves/CRACKRPCOMICJOINNOW3
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/SmackJeeves_CRACKRPCOMICJOINNOW3_edit.html) or go back to the [comic list](../comic-index.html).

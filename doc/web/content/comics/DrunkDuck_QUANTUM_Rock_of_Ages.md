@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/QUANTUM_Rock_of_Ages
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_QUANTUM_Rock_of_Ages_edit.html) or go back to the [comic list](../comic-index.html).

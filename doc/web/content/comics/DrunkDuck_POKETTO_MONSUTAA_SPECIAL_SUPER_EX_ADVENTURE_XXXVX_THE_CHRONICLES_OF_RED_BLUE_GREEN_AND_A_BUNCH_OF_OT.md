@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/POKETTO_MONSUTAA_SPECIAL_SU...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_POKETTO_MONSUTAA_SPECIAL_SUPER_EX_ADVENTURE_XXXVX_THE_CHRONICLES_OF_RED_BLUE_GREEN_AND_A_BUNCH_OF_OT_edit.html) or go back to the [comic list](../comic-index.html).

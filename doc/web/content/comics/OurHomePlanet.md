@@ -28,4 +28,4 @@ Dosage comic OurHomePlanet
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/OurHomePlanet_edit.html) or go back to the [comic list](../comic-index.html).

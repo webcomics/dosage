@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Dragonaur_Mini
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Dragonaur_Mini_edit.html) or go back to the [comic list](../comic-index.html).

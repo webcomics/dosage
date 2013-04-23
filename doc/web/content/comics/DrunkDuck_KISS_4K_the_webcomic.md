@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/KISS_4K_the_webcomic
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_KISS_4K_the_webcomic_edit.html) or go back to the [comic list](../comic-index.html).

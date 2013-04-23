@@ -28,4 +28,4 @@ Dosage comic KeenSpot/BanzaiGirl
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/KeenSpot_BanzaiGirl_edit.html) or go back to the [comic list](../comic-index.html).

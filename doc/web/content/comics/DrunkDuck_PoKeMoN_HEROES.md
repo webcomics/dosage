@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/PoKeMoN_HEROES
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_PoKeMoN_HEROES_edit.html) or go back to the [comic list](../comic-index.html).

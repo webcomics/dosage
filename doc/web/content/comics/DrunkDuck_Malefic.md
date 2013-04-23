@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Malefic
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Malefic_edit.html) or go back to the [comic list](../comic-index.html).

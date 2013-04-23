@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Good_Sir_Cat
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Good_Sir_Cat_edit.html) or go back to the [comic list](../comic-index.html).

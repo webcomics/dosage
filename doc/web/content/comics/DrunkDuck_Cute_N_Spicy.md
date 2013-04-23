@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Cute_N_Spicy
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Cute_N_Spicy_edit.html) or go back to the [comic list](../comic-index.html).

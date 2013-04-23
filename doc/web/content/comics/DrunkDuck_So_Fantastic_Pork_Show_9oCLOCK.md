@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/So_Fantastic_Pork_Show_9oCLOCK
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_So_Fantastic_Pork_Show_9oCLOCK_edit.html) or go back to the [comic list](../comic-index.html).

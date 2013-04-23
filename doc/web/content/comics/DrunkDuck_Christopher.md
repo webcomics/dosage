@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Christopher
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Christopher_edit.html) or go back to the [comic list](../comic-index.html).

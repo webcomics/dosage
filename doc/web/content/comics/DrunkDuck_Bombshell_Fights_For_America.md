@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Bombshell_Fights_For_America
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Bombshell_Fights_For_America_edit.html) or go back to the [comic list](../comic-index.html).

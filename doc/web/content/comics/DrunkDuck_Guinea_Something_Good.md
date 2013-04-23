@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Guinea_Something_Good
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Guinea_Something_Good_edit.html) or go back to the [comic list](../comic-index.html).

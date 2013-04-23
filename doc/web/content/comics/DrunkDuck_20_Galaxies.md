@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/20_Galaxies
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_20_Galaxies_edit.html) or go back to the [comic list](../comic-index.html).

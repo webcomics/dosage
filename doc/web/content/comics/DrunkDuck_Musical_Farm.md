@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Musical_Farm
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Musical_Farm_edit.html) or go back to the [comic list](../comic-index.html).

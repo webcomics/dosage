@@ -28,4 +28,4 @@ Dosage comic CloneManga/Kanami
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/CloneManga_Kanami_edit.html) or go back to the [comic list](../comic-index.html).

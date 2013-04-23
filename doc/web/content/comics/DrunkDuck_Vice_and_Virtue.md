@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Vice_and_Virtue
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Vice_and_Virtue_edit.html) or go back to the [comic list](../comic-index.html).

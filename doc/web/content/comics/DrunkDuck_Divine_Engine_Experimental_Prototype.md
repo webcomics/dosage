@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Divine_Engine_Experimental_...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Divine_Engine_Experimental_Prototype_edit.html) or go back to the [comic list](../comic-index.html).

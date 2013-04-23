@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Boogey_Dancing
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Boogey_Dancing_edit.html) or go back to the [comic list](../comic-index.html).

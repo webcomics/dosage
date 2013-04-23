@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Pokemon_Mystery_Dungeon_Str...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Pokemon_Mystery_Dungeon_Strikedown_Chronicles_edit.html) or go back to the [comic list](../comic-index.html).

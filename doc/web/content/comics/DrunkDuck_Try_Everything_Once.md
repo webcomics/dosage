@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Try_Everything_Once
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Try_Everything_Once_edit.html) or go back to the [comic list](../comic-index.html).

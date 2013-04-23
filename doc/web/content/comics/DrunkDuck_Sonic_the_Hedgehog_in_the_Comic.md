@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Sonic_the_Hedgehog_in_the_C...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Sonic_the_Hedgehog_in_the_Comic_edit.html) or go back to the [comic list](../comic-index.html).

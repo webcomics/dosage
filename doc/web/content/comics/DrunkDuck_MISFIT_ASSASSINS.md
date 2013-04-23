@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/MISFIT_ASSASSINS
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_MISFIT_ASSASSINS_edit.html) or go back to the [comic list](../comic-index.html).

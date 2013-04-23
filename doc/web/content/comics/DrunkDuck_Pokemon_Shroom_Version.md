@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Pokemon_Shroom_Version
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Pokemon_Shroom_Version_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Assassin_Assassin
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Assassin_Assassin_edit.html) or go back to the [comic list](../comic-index.html).

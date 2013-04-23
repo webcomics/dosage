@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Coga_Suro
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Coga_Suro_edit.html) or go back to the [comic list](../comic-index.html).

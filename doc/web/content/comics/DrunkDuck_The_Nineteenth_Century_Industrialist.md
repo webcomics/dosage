@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/The_Nineteenth_Century_Indu...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_The_Nineteenth_Century_Industrialist_edit.html) or go back to the [comic list](../comic-index.html).

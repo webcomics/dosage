@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/CROSS_WORLDS_NEXXUS
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_CROSS_WORLDS_NEXXUS_edit.html) or go back to the [comic list](../comic-index.html).

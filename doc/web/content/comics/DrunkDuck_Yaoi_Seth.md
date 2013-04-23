@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Yaoi_Seth
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Yaoi_Seth_edit.html) or go back to the [comic list](../comic-index.html).

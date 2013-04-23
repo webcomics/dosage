@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/A_Deviant_Mind
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_A_Deviant_Mind_edit.html) or go back to the [comic list](../comic-index.html).

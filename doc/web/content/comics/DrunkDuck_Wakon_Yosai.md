@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Wakon_Yosai
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Wakon_Yosai_edit.html) or go back to the [comic list](../comic-index.html).

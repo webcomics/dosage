@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/2_Bitter_4_Words
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_2_Bitter_4_Words_edit.html) or go back to the [comic list](../comic-index.html).

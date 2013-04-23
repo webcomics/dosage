@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Razor_Candy
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Razor_Candy_edit.html) or go back to the [comic list](../comic-index.html).

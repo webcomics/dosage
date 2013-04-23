@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Pokemon_Edge_2009
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Pokemon_Edge_2009_edit.html) or go back to the [comic list](../comic-index.html).

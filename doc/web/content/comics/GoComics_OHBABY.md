@@ -28,4 +28,4 @@ Dosage comic GoComics/OHBABY
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/GoComics_OHBABY_edit.html) or go back to the [comic list](../comic-index.html).

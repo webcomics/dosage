@@ -28,4 +28,4 @@ Dosage comic ComicGenesis/BackwaterPlanet
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicGenesis_BackwaterPlanet_edit.html) or go back to the [comic list](../comic-index.html).

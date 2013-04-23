@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/A_Step_Out_of_Phase
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_A_Step_Out_of_Phase_edit.html) or go back to the [comic list](../comic-index.html).

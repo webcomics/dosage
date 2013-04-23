@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/This_is_a_random_comic
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_This_is_a_random_comic_edit.html) or go back to the [comic list](../comic-index.html).

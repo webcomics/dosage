@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Chester_and_Ferdie
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Chester_and_Ferdie_edit.html) or go back to the [comic list](../comic-index.html).

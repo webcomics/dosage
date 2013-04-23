@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Lavender_Legend
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Lavender_Legend_edit.html) or go back to the [comic list](../comic-index.html).

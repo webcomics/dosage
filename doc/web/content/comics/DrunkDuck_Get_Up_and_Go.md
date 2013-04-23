@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Get_Up_and_Go
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Get_Up_and_Go_edit.html) or go back to the [comic list](../comic-index.html).

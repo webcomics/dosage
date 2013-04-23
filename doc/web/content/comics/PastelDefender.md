@@ -28,4 +28,4 @@ Dosage comic PastelDefender
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/PastelDefender_edit.html) or go back to the [comic list](../comic-index.html).

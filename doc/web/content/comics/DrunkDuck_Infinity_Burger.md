@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Infinity_Burger
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Infinity_Burger_edit.html) or go back to the [comic list](../comic-index.html).

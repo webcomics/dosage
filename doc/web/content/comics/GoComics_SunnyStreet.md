@@ -28,4 +28,4 @@ Dosage comic GoComics/SunnyStreet
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/GoComics_SunnyStreet_edit.html) or go back to the [comic list](../comic-index.html).

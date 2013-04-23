@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Explorers_Of_the_Unknown
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Explorers_Of_the_Unknown_edit.html) or go back to the [comic list](../comic-index.html).

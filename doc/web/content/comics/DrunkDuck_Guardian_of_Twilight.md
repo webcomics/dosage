@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Guardian_of_Twilight
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Guardian_of_Twilight_edit.html) or go back to the [comic list](../comic-index.html).

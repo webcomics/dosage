@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/The_Rose_Killer
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_The_Rose_Killer_edit.html) or go back to the [comic list](../comic-index.html).

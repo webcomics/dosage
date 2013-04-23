@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Project_GTH
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Project_GTH_edit.html) or go back to the [comic list](../comic-index.html).

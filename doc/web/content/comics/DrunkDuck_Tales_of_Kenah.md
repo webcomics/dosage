@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Tales_of_Kenah
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Tales_of_Kenah_edit.html) or go back to the [comic list](../comic-index.html).

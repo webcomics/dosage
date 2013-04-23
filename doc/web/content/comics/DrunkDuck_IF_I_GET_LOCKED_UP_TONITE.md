@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/IF_I_GET_LOCKED_UP_TONITE
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_IF_I_GET_LOCKED_UP_TONITE_edit.html) or go back to the [comic list](../comic-index.html).

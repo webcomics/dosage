@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Sword_of_Heaven
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Sword_of_Heaven_edit.html) or go back to the [comic list](../comic-index.html).

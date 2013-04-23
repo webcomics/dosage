@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Pulse_Comics
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Pulse_Comics_edit.html) or go back to the [comic list](../comic-index.html).

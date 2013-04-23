@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/The_Dragon_Fists_of_Smorty_...
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_The_Dragon_Fists_of_Smorty_Smythe_edit.html) or go back to the [comic list](../comic-index.html).

@@ -28,4 +28,4 @@ Dosage comic GoComics/Starslip
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/GoComics_Starslip_edit.html) or go back to the [comic list](../comic-index.html).

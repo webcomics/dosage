@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Hit_and_Miss
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Hit_and_Miss_edit.html) or go back to the [comic list](../comic-index.html).

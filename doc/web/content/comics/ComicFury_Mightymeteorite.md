@@ -28,4 +28,4 @@ Dosage comic ComicFury/Mightymeteorite
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/ComicFury_Mightymeteorite_edit.html) or go back to the [comic list](../comic-index.html).

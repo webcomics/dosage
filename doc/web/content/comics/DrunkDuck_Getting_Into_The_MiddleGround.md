@@ -28,4 +28,4 @@ Dosage comic DrunkDuck/Getting_Into_The_MiddleGround
 </tr>
 </table>
 
-Back to the [comic list](../comic-index.html).
+[Edit this info](/comics/DrunkDuck_Getting_Into_The_MiddleGround_edit.html) or go back to the [comic list](../comic-index.html).
