@@ -21,7 +21,7 @@ Edit info for comic DrunkDuck/Sonic_the_Hedgehog_in_the_C...
 <th>Adult content</th><td><input type="checkbox" name="adult" value="adult" /></td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 11.04.2013</td>
+<th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</div></td>

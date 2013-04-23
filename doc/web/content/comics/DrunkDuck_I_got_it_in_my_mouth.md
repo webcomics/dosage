@@ -21,7 +21,7 @@ Dosage comic DrunkDuck/I_got_it_in_my_mouth
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 11.04.2013</td>
+<th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</div></td>
