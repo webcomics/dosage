@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_SonicClub.html"
 Dosage comic SmackJeeves/SonicClub
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>****RETIRED/DEAD/COMPLETED**** The Characters: Sonic Shadow Amy Tails Knuckles Rouge Capuchino(me) Nikomy(Capuchino's girlfriend) Lola(Capuchino's little sister) Lanz(Capuchino's older brother) Andry(I made him up... he's just a Shadow android) Xavier (Xevious) Degreenfreak Miles-XD(Just Miles) Stochi The Vampire Chao Crackuchino The Hedgehog Crazy China Crappuchino Ghost the Echidna(inlove with Knuckles.. XD) Green Darkness Flame the demon hedgehog Glandor the hedgehog and his brother cendar the fox</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/SonicClub
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_SonicClub_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_SonicClub_edit.html) or go back to the [comic list](../comic-index.html).

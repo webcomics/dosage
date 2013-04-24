@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Helix.html"
 Dosage comic SmackJeeves/Helix
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A street rat is given a second chance when he is dragged from the gutter and into a new life. Will he accept his position at the side of royalty, or fight every step of the way? *Rated M for sex (both hetero and homo), violence, nudity, language and dark themes.* If you can handle these subjects, I hope you'll enjoy the comic. :) Thanks for reading! ~Join Helix on tumblr at http://helix-comic.tumblr.com ! ~</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Helix
 <th>Status</th><td>error on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Helix_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Helix_edit.html) or go back to the [comic list](../comic-index.html).

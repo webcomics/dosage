@@ -4,6 +4,14 @@ url: "/comics/ComicFury_DRouggs.html"
 Dosage comic ComicFury/DRouggs
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Dark and wierd comic, but sometimes quite funny. [No storyline]</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/DRouggs
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_DRouggs_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_DRouggs_edit.html) or go back to the [comic list](../comic-index.html).

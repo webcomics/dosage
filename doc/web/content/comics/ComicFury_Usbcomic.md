@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Usbcomic.html"
 Dosage comic ComicFury/Usbcomic
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Warning: Not a pokemon sprite comic!!! Set in the year 2100 where the latest trend is artefially intelligent USB memory sticks. These can be used to help around the house, solve problems or even face off against each-other in (usually friendly) challenges. Our story follows the adventure of 16 year old Josh young; a teenager from edge-tech city, in the southwest of the UK (built in 2050, about 10 miles from Bristol).</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Usbcomic
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Usbcomic_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Usbcomic_edit.html) or go back to the [comic list](../comic-index.html).

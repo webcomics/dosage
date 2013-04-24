@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_HeltonShelton.html"
 Dosage comic SmackJeeves/HeltonShelton
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>This is a goofy sketch at a party that grew into a two-book saga about a multi-generational battle against the darkness inside us. Shelton1 and Shelton2 set out to fight the Final Boss, but victory carries a cost for Shelton1. A party of heroes begin a quest of vengeance, but can they overcome their rivalries before facing their ultimate foe? A spellcasting musician learns to deal with death, but can she deal with life?</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/HeltonShelton
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_HeltonShelton_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_HeltonShelton_edit.html) or go back to the [comic list](../comic-index.html).

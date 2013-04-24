@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Gillimurphy.html"
 Dosage comic ComicFury/Gillimurphy
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Gillimurphy Stories - A turn-of-the-century multi-storied apartment building, nestled in the city of Lockdale. Revel in its charm, discover its secrets, and meet its unwittingly affable occupants. (If you're enjoying this strip, take a gander at the original GS series which predates the current edition, found here: http://gillimurphy-orig.thecomicseries.com/)</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Gillimurphy
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Gillimurphy_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Gillimurphy_edit.html) or go back to the [comic list](../comic-index.html).

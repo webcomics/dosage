@@ -4,6 +4,14 @@ url: "/comics/KeenSpot_SomethingHappens.html"
 Dosage comic KeenSpot/SomethingHappens
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>&quot;Something Happens&quot; is a weekly comic emphasizing surreal sketch humor, as if 'The Far Side' were filtered through 'Monty Python.' The only guarantee made is that the comic will live up to the title, especially if you squint.</td>
@@ -24,8 +32,8 @@ Dosage comic KeenSpot/SomethingHappens
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/KeenSpot_SomethingHappens_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](KeenSpot_SomethingHappens_edit.html) or go back to the [comic list](../comic-index.html).

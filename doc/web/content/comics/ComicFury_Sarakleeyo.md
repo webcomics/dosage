@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Sarakleeyo.html"
 Dosage comic ComicFury/Sarakleeyo
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A World of Warcraft themed web comic starring the Argent Crusade's unusual misfits. The crusade allowed heroes of the Alliance and Horde to become partners. Sara &amp; Kleeyo set the example...provided they can survive their friendship. Updated weekly on Saturdays.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Sarakleeyo
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Sarakleeyo_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Sarakleeyo_edit.html) or go back to the [comic list](../comic-index.html).

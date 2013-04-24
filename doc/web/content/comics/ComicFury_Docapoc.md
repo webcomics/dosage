@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Docapoc.html"
 Dosage comic ComicFury/Docapoc
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A useful* resource for surviving** and thriving during*** the end of life as we know it at the &quot;hands&quot;**** of zombies, aliens, robots, boredom, plague, asteroids, the weather, ninjas, clowns, [redacted by National Security], war, global warming, giant creatures from the deep or vampire enslavement. *No &quot;actual&quot; usefulness, either real or implied, is guaranteed. **No &quot;actual&quot; survival, either real or implied, is guaranteed. ***No &quot;actual&quot; thriving, either real or implied, is guaranteed. ****Many forms of apocalyptic doom do not have hands.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Docapoc
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Docapoc_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Docapoc_edit.html) or go back to the [comic list](../comic-index.html).

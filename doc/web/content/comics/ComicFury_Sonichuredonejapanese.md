@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Sonichuredonejapanese.html"
 Dosage comic ComicFury/Sonichuredonejapanese
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Japanese version Sonichu の世界へようこそ ！この変更のパロディ CWC の薄弱漫画のお楽しみください。(すべての翻訳はビンビン翻訳によって行われています)更新プログラム、およびランダムな記事のためのブログを確認してください。 更新プログラム: スペル ミス発生します。</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Sonichuredonejapanese
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Sonichuredonejapanese_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Sonichuredonejapanese_edit.html) or go back to the [comic list](../comic-index.html).

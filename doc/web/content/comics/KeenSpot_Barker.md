@@ -4,6 +4,14 @@ url: "/comics/KeenSpot_Barker.html"
 Dosage comic KeenSpot/Barker
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>The story of a boy and his dog.</td>
@@ -24,8 +32,8 @@ Dosage comic KeenSpot/Barker
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/KeenSpot_Barker_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](KeenSpot_Barker_edit.html) or go back to the [comic list](../comic-index.html).

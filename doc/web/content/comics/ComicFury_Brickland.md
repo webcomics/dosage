@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Brickland.html"
 Dosage comic ComicFury/Brickland
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Tales of Brickland centers around four groups of people: Kristy and Drew (adventurers who traveled to another continent for, well, adventures), Gina (a ninja), Captain Slade and his pirate crew, and Queen Toshiko, returned from the dead and bent on world domination. Again. A silly fantasy comic told with minifigs and bricks that updates every Monday, Wednesday, and Friday.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Brickland
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Brickland_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Brickland_edit.html) or go back to the [comic list](../comic-index.html).

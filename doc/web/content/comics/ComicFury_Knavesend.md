@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Knavesend.html"
 Dosage comic ComicFury/Knavesend
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Knave's End is a port town in a fantasy world, peopled by humans, orcs, elves, dwarves, halflings, and some odd types of goblins. It's a center of political and criminal intrigue where the criminals are nasty and some of the guards are even worse.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Knavesend
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Knavesend_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Knavesend_edit.html) or go back to the [comic list](../comic-index.html).

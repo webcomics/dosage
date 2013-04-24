@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Replica.html"
 Dosage comic SmackJeeves/Replica
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Edelric Helgard, a young Marquis, returns to the house of his childhood in order to save his family’s lands from an epidemic. During his research, he encounters a foreign slave who looks disturbingly like his first love, his late half-brother. Thus begins a game of replicas mingling memories and reality. -Read from Left to Right -Boys Love -R-18 from chapter 2 onwards -Updates on Fridays</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Replica
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Replica_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Replica_edit.html) or go back to the [comic list](../comic-index.html).

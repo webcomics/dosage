@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_GuardianGhost.html"
 Dosage comic SmackJeeves/GuardianGhost
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>After being hit by a car a few months ago, things have been very strange for Max. Not only can he see ghosts, but one in particular claims to have saved him from death! But there are reasons why ghosts are not allowed to save humans. Updates Tuesdays, Thursdays, AND NOW SUNDAYS! (and the quality starts looking better as the chapters go on so, don't judge it by the first page)</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/GuardianGhost
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_GuardianGhost_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_GuardianGhost_edit.html) or go back to the [comic list](../comic-index.html).

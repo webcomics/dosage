@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_DigimonTamersMiraiProject.html"
 Dosage comic SmackJeeves/DigimonTamersMiraiProject
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Its been 6 years after d-reaper accident. a stable battling system is created by the goverments for digimons and tamers to direct their fighting instinct, and so that the accident didnt happen again. but is it their only purpose? the tamers knew something was wrong, and they want to find out what. thus digging deep into goverments dark secrets... ------------------------------------------------------ A revamp ver. of my doujin at Digimanga.deviantart.com. But as for now they'll all still conceptual... A project for local doujin publishing (hopefully =w=u) but in the meantime, hope you guys can comment on what can be comment on (story, paneling, angle, pacing...)</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/DigimonTamersMiraiProject
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_DigimonTamersMiraiProject_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_DigimonTamersMiraiProject_edit.html) or go back to the [comic list](../comic-index.html).

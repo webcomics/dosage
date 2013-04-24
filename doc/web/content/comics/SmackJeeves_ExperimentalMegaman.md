@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_ExperimentalMegaman.html"
 Dosage comic SmackJeeves/ExperimentalMegaman
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Distant in the future, a weapon of mass destruction is created to destroy all Megamen- A maverick more powerful than any of them. As the ninth prototype is created, it's creators take it for a test run. Aparently though, there are a few bugs in his system... .:Updates on Mondays and Friday:.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/ExperimentalMegaman
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_ExperimentalMegaman_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_ExperimentalMegaman_edit.html) or go back to the [comic list](../comic-index.html).

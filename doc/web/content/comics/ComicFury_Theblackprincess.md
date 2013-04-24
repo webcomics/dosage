@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Theblackprincess.html"
 Dosage comic ComicFury/Theblackprincess
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>While Wright as Rayne centers around Alex Rayne after his mind is put into the body of a teenage girl, The Black Princess follows the lives of two of the women responsible, Sareena Black and Misty Smid. The two are best friends as well as co-workers in Eighth Sin's Paranormal Division, their primary job being to study and at times stop unusual magic.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Theblackprincess
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Theblackprincess_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Theblackprincess_edit.html) or go back to the [comic list](../comic-index.html).

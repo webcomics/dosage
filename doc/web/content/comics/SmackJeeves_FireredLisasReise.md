@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_FireredLisasReise.html"
 Dosage comic SmackJeeves/FireredLisasReise
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>This comic is a Firered Nuzlocke run. Lisa, a young girl from kanto starts her journey to become the Pokémon master. Updates Sundays! Also visit my tumblr account and ask Leaf questions! http://lisa-leaf.tumblr.com/ Laufente has helped me with the coloring until page 63, but I figured I should learn how to do backgrounds and attacks myself so I will do it alone from now on. Laufente has her own Nuzlocke as well so please look at Road to Glory as well :D</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/FireredLisasReise
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_FireredLisasReise_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_FireredLisasReise_edit.html) or go back to the [comic list](../comic-index.html).

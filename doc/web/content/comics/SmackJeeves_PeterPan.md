@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_PeterPan.html"
 Dosage comic SmackJeeves/PeterPan
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A manga adaptation of the classic children's story Peter Pan. Closely following J.M. Barrie's original story, come follow the adventures of Peter and the Darling children in Neverland! If you've never read the book, here's your chance to experience the real story! If you have, and enjoyed it, then this is the comic for you! If you like the comic, and have Facebook, pop on over to Tria Elf9's Neverland, the FB page for the comic! It updates with the current pages on deviantart. Hope to see you there! https://www.facebook.com/TriaElf9sNeverland Peter Pan is also posted to Deviant art: http://triaelf9.deviantart.com/gallery/32562528 And on Manga Magazine: http://www.mangamagazine.net/manga-and-comics/Peter-Pan/detail-page/798?lang=en</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/PeterPan
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_PeterPan_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_PeterPan_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_TheMegaManandSonicSpriteShowcase.html"
 Dosage comic SmackJeeves/TheMegaManandSonicSpriteS...
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Credit to all the authors listed for the sprites. We do 8 bit, 16, bit and 32 bit sprites (mostly 8 bit) and Sonic sprites. WE TAKE REQUESTS. no trolling, flaming, cussing (some allowed) and ABSOLUTELY NO STEALING SPRITES AND DON'T CLAIM ANY AS YOUR OWN, unless you actually made them and your part of this showcase. *One new rule: I would like to address the fact that THIS IS NO LONGER A SHOWCASE WHERE WE POST RESOURCE SPRITES OR SPRITES WE DIDN'T MAKE! I'm gonna remove the sheets that aren't ours soon. any body else that posts anything that isn't theirs will be punished, if caught, with the following: 1st offense: a warning. 2nd offense: comment privilege taken away. 3rd offense: uploading privilege taken away Anything past the third offense will result in removal from this comic.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/TheMegaManandSonicSpriteS...
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_TheMegaManandSonicSpriteShowcase_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_TheMegaManandSonicSpriteShowcase_edit.html) or go back to the [comic list](../comic-index.html).

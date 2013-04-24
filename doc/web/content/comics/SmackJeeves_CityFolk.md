@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_CityFolk.html"
 Dosage comic SmackJeeves/CityFolk
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Tired of a dull life in the wilderness of British Columbia, a beaver and a moose make the trip of a lifetime; into the heart of the city. This is their story. City Folk will not be updating for a while. My computer has finally given up on life and I have no way of scanning/editing/uploading. Life sucks until I can get a new tower.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/CityFolk
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_CityFolk_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_CityFolk_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Tussenkatersenspraakwater.html"
 Dosage comic ComicFury/Tussenkatersenspraakwater
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Ontmoet Kevin, Dave en Dalton in hun dagelijkse strijd van het bestaan van een twintiger. Het is een verhaal van lekker bezig zijn, tot de grond gaan, katers wegdrinken en fietssloten doorzagen. Het is echter geen succesverhaal, niet eens een love story. Wat overblijft is een beetje politiek incorrect, een beetje disfunctioneel, maar heeft uiteindelijk het hart op de juiste plek.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Tussenkatersenspraakwater
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Tussenkatersenspraakwater_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Tussenkatersenspraakwater_edit.html) or go back to the [comic list](../comic-index.html).

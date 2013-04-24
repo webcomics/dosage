@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Adventuresofjonas.html"
 Dosage comic ComicFury/Adventuresofjonas
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>These short, scribbely orange comics are excerpts from my life through my own slanted viewpoint .. they are totally out of context. Its mostly disjointed vignettes, relationships, inside jokes, a couple nifty thoughts and dumb adventures sprinkled on over that. somewhere between a soapdrama and a gag strip and a traffic accident. Life. whatever. if you prefer to read it in spanish, check out 'las Aventuras de JONAS!' at http://jonas.subcultura.es/</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Adventuresofjonas
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Adventuresofjonas_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Adventuresofjonas_edit.html) or go back to the [comic list](../comic-index.html).

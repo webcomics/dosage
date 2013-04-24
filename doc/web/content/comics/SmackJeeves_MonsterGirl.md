@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_MonsterGirl.html"
 Dosage comic SmackJeeves/MonsterGirl
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>An off and on comic first conceived during my elementary school years. The whole thing was pretty much a giant experiment for practice, though it's over now.Hope you like it if you're brave enough to read it! WARNING: This comic is EXTREMELY experimental, so try to ignore the ever changing artwork. Also it's pretty dramatized... Summary: A group of high school students have the ability to transform into animals, but what's the story behind their mysterious powers? Find out on their dangerous search for the answer.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/MonsterGirl
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_MonsterGirl_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_MonsterGirl_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_HatShop.html"
 Dosage comic SmackJeeves/HatShop
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>You may be thinking this is a comic about hats. It's not. A strange comedy about a boy who is fired in the first panel and accidentally sells his soul to an eccentric hat maker. Shenanigans ensue. Note to new readers: The art gets better. Note on the format: I originally drew it vertically because I did it by hand and that's how it would fit on the page (It just seemed like a good idea at the time). Three years later, it's stuck. It sometimes changes to full pages if the story needs it, but the vertical format is the default and I'm not planning on changing it. Updates every three days unless otherwise specified. Note: This is a &quot;whatever the author feels like&quot; comic. You have been warned.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/HatShop
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_HatShop_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_HatShop_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_NuzlockeofErnie.html"
 Dosage comic SmackJeeves/NuzlockeofErnie
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Yes, yet another Nuzlocke run-based Pokemon comic! A vast majority of this series will be an experiment, but I hope I can at least be entertaining in the meantime. Anyway, this is the story of the rookie Pokemon trainer Ernie, as he yearns to be the very best, like noone ever was.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/NuzlockeofErnie
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_NuzlockeofErnie_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_NuzlockeofErnie_edit.html) or go back to the [comic list](../comic-index.html).

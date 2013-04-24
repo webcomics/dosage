@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Unreliable.html"
 Dosage comic ComicFury/Unreliable
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Non-sequitur autobiographical comic-type things that will hopefully help me with my discipline.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Unreliable
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Unreliable_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Unreliable_edit.html) or go back to the [comic list](../comic-index.html).

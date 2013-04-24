@@ -4,6 +4,14 @@ url: "/comics/ComicFury_AccidentallyonPurpose.html"
 Dosage comic ComicFury/AccidentallyonPurpose
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A Warlock, a Guitarist, and a Host for a demon live under the same roof and are in a three way relationship. As things go upside down and right side up again, there seems to be quite a few issues in their lives, even though the three of them seem to still make it through okay, minus the huge bills they have to pay to their landlord...</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/AccidentallyonPurpose
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_AccidentallyonPurpose_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_AccidentallyonPurpose_edit.html) or go back to the [comic list](../comic-index.html).

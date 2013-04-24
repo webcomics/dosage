@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_KojiX5.html"
 Dosage comic SmackJeeves/KojiX5
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>¿Que de qué va? Pues a grandes rasgos, es la historia de Hideyuki Hori, un chico muy tímido y torpe, que en el día de su graduación se encuentra con un mago que le da un libro con un conjuro mágico que se supone que le ayudará a enfrentarse a sus problemas diarios. Pero no todo es tan sencillo, pues parece que el libro le causa más líos de los que resuelve. Bueno, pues este es bastante antiguo, lo ideé en el 2003, y esta es la versión que dibujé durante 2006 y 2007. Es tan antiguo, tan antiguo, que no sabía ni para qué servía una regla. La dibujé a una super velocidad mientras estaba en clase. Es una historia que sigo desarrollando actualmente. Básicamente, esta es una idea &quot;deshechada&quot; (vamos, que sólo queda de ella algunos personajes) pero hay algunas cosas que me gustan todavía. Ah, sí, se lee de izquierda a derecha. Te gustará si: -Sabes español -No odias el shonen-ai -Te gusta ver al protagonista pasar vergüenza</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/KojiX5
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_KojiX5_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_KojiX5_edit.html) or go back to the [comic list](../comic-index.html).

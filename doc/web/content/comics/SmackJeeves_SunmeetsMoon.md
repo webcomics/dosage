@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_SunmeetsMoon.html"
 Dosage comic SmackJeeves/SunmeetsMoon
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>This is a story about a boy and a girl who met in the summer and fell in love. But the end of the summer parted them for a long time. The meeting again wasn't as happy as they expected... Between them stand a lot of differences.She being a loner, attracted by witchcraft and some serious supernatural stuff. He being a sociable fellow with a childish behaviour. But most of all he having a new girlfriend ;) The story has four parts, each one made in a different year: 1. The Riddle ('07) 2. Marg's revenge ('06) 3. Who's that girl? ('07/'08) 4. Passing by Midnight ('08/'09)</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/SunmeetsMoon
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_SunmeetsMoon_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_SunmeetsMoon_edit.html) or go back to the [comic list](../comic-index.html).

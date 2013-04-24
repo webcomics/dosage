@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Wootlabs.html"
 Dosage comic SmackJeeves/Wootlabs
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>&quot;Square Woot is the worst supervillain I ever fought. She held her death ray backwards and vaporized half of her robot army.&quot; - Riot Girl, superhero &quot;An uplifting story for anyone that loves cute things in hats.&quot; - Penguin Parade Weekly &quot;THIS IS THE STORY OF CATBOT 9000. EVERYONE ELSE IN IT IS STUPID AND NOT CATBOT 9000.&quot; - Catbot 9000 Square Woot is a genius with robots, weapons, and that funky little thing called science. Joined by her penguin sidekick and her family of creations, all she wants to do is rule the world. At least, that's all she used to want. A chance encounter has the group thinking that it might be more fun to be heroes from now on. Is the city ready to be saved through mad science?</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Wootlabs
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Wootlabs_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Wootlabs_edit.html) or go back to the [comic list](../comic-index.html).

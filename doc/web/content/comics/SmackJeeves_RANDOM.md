@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_RANDOM.html"
 Dosage comic SmackJeeves/RANDOM
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Is logic at the door? Well tell it to beat it! You won't need it for this series. RANDOM is about one thing, complete nonsense. Join Joe B. Gamble, Smart T. Guy, Iam 2. Cute, I-I and Speedo. Every comic teaches you a new idiom to use for yourself, except you will learn it in a very unorthodox way. With a cast that gets in your face and glues itself to it too, RANDOM is what it wants and when it wants. No plot, story or sense, just a lot of laughs and idioms; that is RANDOM.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/RANDOM
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_RANDOM_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_RANDOM_edit.html) or go back to the [comic list](../comic-index.html).

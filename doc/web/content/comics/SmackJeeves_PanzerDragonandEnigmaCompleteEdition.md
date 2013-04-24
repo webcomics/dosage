@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_PanzerDragonandEnigmaCompleteEdition.html"
 Dosage comic SmackJeeves/PanzerDragonandEnigmaComp...
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>As a world reaches its peak of prosperity, instability begins to reveal itself as Dragonenix falls into a period of darkness. Three warriors will rise to the challenge to solve the mystery of their world's instability and set things right. The Complete Edition of Panzer Dragon and Enigma contains the full unabridged story of the entire First Arc series, including the first season of the PDE(+) Saga: Twilight Dawn. The last major update was November 16, 2011, with Twilight Dawn added to the archives as of March 20, 2012.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/PanzerDragonandEnigmaComp...
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_PanzerDragonandEnigmaCompleteEdition_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_PanzerDragonandEnigmaCompleteEdition_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Namcowars.html"
 Dosage comic ComicFury/Namcowars
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A battle of non-epic proportions! Andore has assembled five classic Namco armies to fight in a competition to prove which is the most powerful! Updates Tue/Thu/Sat.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Namcowars
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Namcowars_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Namcowars_edit.html) or go back to the [comic list](../comic-index.html).

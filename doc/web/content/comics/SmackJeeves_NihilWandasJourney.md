@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_NihilWandasJourney.html"
 Dosage comic SmackJeeves/NihilWandasJourney
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>I did this comic in coorperation with a friend of mine. Drawings, idea, characters and translation [The originalversion is in German] are all my fault. Wanda strongly believes she is a princess and wants to prove it, since most people just do not want to pay tribute to her. Together with Avis, a wood imp who accompanies her out of pity, Wanda embarks on a journey to the Garucian Mountains to see the mighty wizard Hon-ar, whom she expects to trace her [as she believes] lost, royal parents. Unfortunately it turns out that the world has other plans for the young woman.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/NihilWandasJourney
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_NihilWandasJourney_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_NihilWandasJourney_edit.html) or go back to the [comic list](../comic-index.html).

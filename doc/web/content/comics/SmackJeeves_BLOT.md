@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_BLOT.html"
 Dosage comic SmackJeeves/BLOT
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>In the near future, robots fueled by human blood have begun their uprising - thankfully there's a few folks who won't take that sitting down.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/BLOT
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_BLOT_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_BLOT_edit.html) or go back to the [comic list](../comic-index.html).

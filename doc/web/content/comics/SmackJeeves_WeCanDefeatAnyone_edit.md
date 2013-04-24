@@ -3,30 +3,30 @@ url: "/comics/SmackJeeves_WeCanDefeatAnyone_edit.html"
 ---
 Edit info for comic SmackJeeves/WeCanDefeatAnyone
 
-<form name="comic" action="http://gaepostmail.appengine.com/comic" name="post">
+<form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description">A journey to beat all the Megaman games.... Perhaps. Formerly called: - I Can't Defeat Anyone - I Can Defeat Anyone Updates at odd-numbered dates.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">A journey to beat all the Megaman games.... Perhaps. Formerly called: - I Can't Defeat Anyone - I Can Defeat Anyone Updates at odd-numbered dates.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://candefeatanyone.smackjeeves.com/comics/"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://candefeatanyone.smackjeeves.com/comics/" size="40"/></td>
 </tr>
 <tr>
-<th>Genre</th><td><input type="text" name="genre" value="Other"/></td>
+<th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>
 </tr>
 <tr>
-<th>Language</th><td><input type="text" name="language" value="English"/></td>
+<th>Language</th><td><input type="text" name="language" value="English" size="40"/></td>
 </tr>
 <tr>
 <th>Adult content</th><td><input type="checkbox" name="adult" value="adult" /></td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 23.04.2013</td>
-</tr>
-<tr>
-<th>Votes</th><td>0</div></td>
+<th></th><td>
+<input type="hidden" name="comic" value="SmackJeeves_WeCanDefeatAnyone" />
+<input type="submit" name="submit" value="Submit" />
+</td>
 </tr>
 </table>
 </form>
 
-Back to the [comic](/comics/SmackJeeves_WeCanDefeatAnyone.html).
+Back to the [comic](SmackJeeves_WeCanDefeatAnyone.html).

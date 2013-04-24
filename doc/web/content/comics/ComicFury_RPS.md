@@ -4,6 +4,14 @@ url: "/comics/ComicFury_RPS.html"
 Dosage comic ComicFury/RPS
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>RPS follows the near asylum-level misadventures of the Role-Play Saturday LARP game. Updates Wednesdays!</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/RPS
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_RPS_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_RPS_edit.html) or go back to the [comic list](../comic-index.html).

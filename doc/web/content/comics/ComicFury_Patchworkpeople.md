@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Patchworkpeople.html"
 Dosage comic ComicFury/Patchworkpeople
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>The fungus changes people, and it makes them change themselves. Lets. Yes, it lets them change themselves. Lets. I know, I just said. Oh. do you mean with an apostrophe? Let's? Sure, whatever. Let's change things. Things are Changing.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Patchworkpeople
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Patchworkpeople_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Patchworkpeople_edit.html) or go back to the [comic list](../comic-index.html).

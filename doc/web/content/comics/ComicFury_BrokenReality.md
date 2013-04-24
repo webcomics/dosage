@@ -4,6 +4,14 @@ url: "/comics/ComicFury_BrokenReality.html"
 Dosage comic ComicFury/BrokenReality
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>This story revolves around two teenage boys who suddenly find themselves living in japan for no apparent reason. Joined by twin Japanese girls, The four of them now seem to be living their lives in a world where the rules of reality are constantly being broken in one way or another.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/BrokenReality
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_BrokenReality_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_BrokenReality_edit.html) or go back to the [comic list](../comic-index.html).

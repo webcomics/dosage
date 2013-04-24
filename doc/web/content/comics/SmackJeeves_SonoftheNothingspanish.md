@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_SonoftheNothingspanish.html"
 Dosage comic SmackJeeves/SonoftheNothingspanish
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Son of the Nothing es la epica aventura de Seth Rothida, un joven soldado que muy pronto se vera inmerso en el devastador mundo de la guerra, sin embargo Seth confia en sus ideales, valores y amigos que lo apoyaran en la busqueda de su hermana Beth que ha desaparecido. Subo lunes y viernes por la noche.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/SonoftheNothingspanish
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_SonoftheNothingspanish_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_SonoftheNothingspanish_edit.html) or go back to the [comic list](../comic-index.html).

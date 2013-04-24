@@ -4,6 +4,14 @@ url: "/comics/StrawberryDeathCake.html"
 Dosage comic StrawberryDeathCake
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Update2 I'm alive and still working on the comic, but progress has been slow. I'm inching my way through sketches. Update-A little break from the comic.</td>
@@ -24,8 +32,8 @@ Dosage comic StrawberryDeathCake
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/StrawberryDeathCake_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](StrawberryDeathCake_edit.html) or go back to the [comic list](../comic-index.html).

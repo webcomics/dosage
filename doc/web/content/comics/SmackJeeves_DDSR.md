@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_DDSR.html"
 Dosage comic SmackJeeves/DDSR
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A sprite comic that has no Sonic sprites! Seriously, all customly done. Join two friends and there crazy adventures involving demons, robots, explosions and shiny things.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/DDSR
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_DDSR_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_DDSR_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Zodiac.html"
 Dosage comic SmackJeeves/Zodiac
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A curse has fallen on the ten students along with their two teachers, and they must work together to find the source and break it, so they can spent their lives like it was before. The story will be, most of the time, stupid. You've been warned :D Updates: !!! When a page is out/Very possibly Sunday and maybe friday too, i'm a lazy butt</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Zodiac
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Zodiac_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Zodiac_edit.html) or go back to the [comic list](../comic-index.html).

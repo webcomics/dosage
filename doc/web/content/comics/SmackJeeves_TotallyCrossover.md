@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_TotallyCrossover.html"
 Dosage comic SmackJeeves/TotallyCrossover
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>There are a lot of typical generic gaming webcomics out there. This one, however, is not one of them. Where most comics are fully happy to parody the gaming world one game at a time, Totally Crossover will parody them all. At the same time. The gaming stars of 2010 unite to face an unknown enemy which could destroy all of time and space itself. This should be fun.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/TotallyCrossover
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_TotallyCrossover_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_TotallyCrossover_edit.html) or go back to the [comic list](../comic-index.html).

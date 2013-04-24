@@ -39,11 +39,19 @@ $(document).ready(function() {
 
 comic_template = u"""\
 title: %(name)s
-url: "%(pageurl)s"
+url: "/comics/%(pageurl)s"
 ---
 Dosage comic %(name)s
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>%(description)s</td>
@@ -64,7 +72,7 @@ Dosage comic %(name)s
 <th>Status</th><td>%(status)s on %(date)s</td>
 </tr>
 <tr>
-<th>Votes</th><td>%(vote)s</div></td>
+<th>Votes</th><td>%(vote)s</td>
 </tr>
 </table>
 
@@ -73,32 +81,32 @@ Dosage comic %(name)s
 
 comic_edit_template = u"""\
 title: Edit %(name)s
-url: "%(editurl)s"
+url: "/comics/%(editurl)s"
 ---
 Edit info for comic %(name)s
 
-<form name="comic" action="http://gaepostmail.appengine.com/comic" name="post">
+<form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description">%(description)s</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">%(description)s</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="%(url)s"/></td>
+<th>Website</th><td><input type="text" name="url" value="%(url)s" size="40"/></td>
 </tr>
 <tr>
-<th>Genre</th><td><input type="text" name="genre" value="%(genre)s"/></td>
+<th>Genre</th><td><input type="text" name="genre" value="%(genre)s" size="40"/></td>
 </tr>
 <tr>
-<th>Language</th><td><input type="text" name="language" value="%(language)s"/></td>
+<th>Language</th><td><input type="text" name="language" value="%(language)s" size="40"/></td>
 </tr>
 <tr>
 <th>Adult content</th><td><input type="checkbox" name="adult" value="adult" %(adultchecked)s/></td>
 </tr>
 <tr>
-<th>Status</th><td>%(status)s on %(date)s</td>
-</tr>
-<tr>
-<th>Votes</th><td>%(vote)s</div></td>
+<th></th><td>
+<input type="hidden" name="comic" value="%(comic)s" />
+<input type="submit" name="submit" value="Submit" />
+</td>
 </tr>
 </table>
 </form>
@@ -242,9 +250,10 @@ def write_html_comic(key, entry, outputdir, date):
     """Write a comic page."""
     args = {
         "url": quote(entry["url"]),
-        "pageurl": quote("/comics/%s.html" % key),
-        "editurl": quote("/comics/%s_edit.html" % key),
+        "pageurl": quote("%s.html" % key),
+        "editurl": quote("%s_edit.html" % key),
         "name": quote(entry["name"]),
+        "comic": quote(key),
         "adult": quote(u"yes" if entry["adult"] else u"no"),
         "adultchecked": 'checked="checked"' if entry["adult"] else '',
         "genre": quote(entry["genre"]),

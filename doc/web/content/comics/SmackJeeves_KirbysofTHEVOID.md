@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_KirbysofTHEVOID.html"
 Dosage comic SmackJeeves/KirbysofTHEVOID
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>In the year 2032, Professor Wima Deerp created a vast expanse of space. A few random kirbies, and dees, were selected and transported into the new, infinitely diverse world. Later, a huge incident happened (it involved bunnies) one of the vict- I mean volunteers accidentally created his evil clone. When this clone threatens to destroy the world only a group of oddities can save it.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/KirbysofTHEVOID
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_KirbysofTHEVOID_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_KirbysofTHEVOID_edit.html) or go back to the [comic list](../comic-index.html).

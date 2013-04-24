@@ -4,6 +4,14 @@ url: "/comics/Angels2200.html"
 Dosage comic Angels2200
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Angels 2200</td>
@@ -24,8 +32,8 @@ Dosage comic Angels2200
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/Angels2200_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](Angels2200_edit.html) or go back to the [comic list](../comic-index.html).

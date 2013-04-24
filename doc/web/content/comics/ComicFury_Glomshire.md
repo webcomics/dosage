@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Glomshire.html"
 Dosage comic ComicFury/Glomshire
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>The misadventures of the inhabitants of Glomshire, a medieval(ish)land of undetermined origin. LEGO® is a trademark of the LEGO Group, which does not sponsor, authorize or endorse this comic (and we don't blame them!)</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Glomshire
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Glomshire_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Glomshire_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Applepine.html"
 Dosage comic ComicFury/Applepine
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Follow Applepine as he experiences life one problem at a time, with help from his friends of course! Each with their own way of solving the enigma of life, they help Applepine find his way through trouble, girls, and adventure in this ongoing series.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Applepine
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Applepine_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Applepine_edit.html) or go back to the [comic list](../comic-index.html).

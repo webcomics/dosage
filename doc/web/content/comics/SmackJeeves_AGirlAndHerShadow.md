@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_AGirlAndHerShadow.html"
 Dosage comic SmackJeeves/AGirlAndHerShadow
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>There's something under the little girl's bed. It likes to play hide-and-seek and it's always hungry. It's also her best friend.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/AGirlAndHerShadow
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_AGirlAndHerShadow_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_AGirlAndHerShadow_edit.html) or go back to the [comic list](../comic-index.html).

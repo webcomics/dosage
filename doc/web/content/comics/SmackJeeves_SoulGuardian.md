@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_SoulGuardian.html"
 Dosage comic SmackJeeves/SoulGuardian
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>How far would you go...to get home alive? Ren has been kidnapped, and sent to the future. Upon her arrival, a strange cloaked young man finds her. On hearing her circumstances...he offers to help her, for a price. READ: Right to left UPDATES: Wednesday</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/SoulGuardian
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_SoulGuardian_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_SoulGuardian_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_FireWire.html"
 Dosage comic SmackJeeves/FireWire
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>When Kennedy H'naka's cell phone becomes the new home of the dragon FireWire Balisk, she finds herself sucked into a world of battles, secrets, and shadowy organizations. What's a girl to do when she has to save the world and still pass the tenth grade? Updates: Thursdays Reads: left to right. Comments greatly appreciated ^^ Please check out the new FireWire group on dA: http://firewire-connection.deviantart.com/</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/FireWire
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_FireWire_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_FireWire_edit.html) or go back to the [comic list](../comic-index.html).

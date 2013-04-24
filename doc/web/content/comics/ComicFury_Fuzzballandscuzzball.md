@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Fuzzballandscuzzball.html"
 Dosage comic ComicFury/Fuzzballandscuzzball
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Fuzzball and Scuzzball are brothers who live in the gritty urban hell that is Happy City, New Jersey. In theory, they are private investigators. These are their wacky misadventures.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Fuzzballandscuzzball
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Fuzzballandscuzzball_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Fuzzballandscuzzball_edit.html) or go back to the [comic list](../comic-index.html).

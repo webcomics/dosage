@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Booksdontworkhere.html"
 Dosage comic ComicFury/Booksdontworkhere
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A meta flavored webcomic with no 4th wall and a plot about a webcomic actress and the challenges she has to face. You know imaginary scripts, unreliable narrators, plot holes, meta walls, wacky physics, mad science, and budget cuts. Updates Monday, Wednesday, and Friday.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Booksdontworkhere
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Booksdontworkhere_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Booksdontworkhere_edit.html) or go back to the [comic list](../comic-index.html).

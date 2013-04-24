@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_KirbyFunfestTheOriginals.html"
 Dosage comic SmackJeeves/KirbyFunfestTheOriginals
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Kirby and his best friend Dee are minding their own business, when Dedede challenges Kirby to a duel! Since then, Kirby and Dee have to save the world from seemingly unstoppable forces of nature, and all the while they still have time to be funny... NOTE: I am restarting this comic, see it at http://kirbyfunfest.smackjeeves.com/</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/KirbyFunfestTheOriginals
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_KirbyFunfestTheOriginals_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_KirbyFunfestTheOriginals_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/DrunkDuck_They_Are_Night_Zombies_They_Are_Neighbors_They_Have_Come
 Dosage comic DrunkDuck/They_Are_Night_Zombies_They...
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td></td>
@@ -24,8 +32,8 @@ Dosage comic DrunkDuck/They_Are_Night_Zombies_They...
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/DrunkDuck_They_Are_Night_Zombies_They_Are_Neighbors_They_Have_Come_Back_From_The_Dead_Ahhhhh_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](DrunkDuck_They_Are_Night_Zombies_They_Are_Neighbors_They_Have_Come_Back_From_The_Dead_Ahhhhh_edit.html) or go back to the [comic list](../comic-index.html).

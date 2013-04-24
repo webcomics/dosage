@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_WelcometoFreakshow.html"
 Dosage comic SmackJeeves/WelcometoFreakshow
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>The audience roars, the acrobats and performers provide them with a spectacle unrivaled in all of Europe. The lights die, and the audience is now the entertainment for the apathetic circus. As blood and bone rush to the surface, one man leads the troupe downward to the darkest ring of all. Welcome to the Freakshow. //Updates Every Friday//</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/WelcometoFreakshow
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_WelcometoFreakshow_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_WelcometoFreakshow_edit.html) or go back to the [comic list](../comic-index.html).

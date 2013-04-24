@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Yamase.html"
 Dosage comic SmackJeeves/Yamase
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Yamase is the story of a nonchalant young girl who randomly gets super powers. Problem is, these super powers were created with tons of secrets behind them, and now everyone in the world wants her dead. Niiiiicce. Updates on Thursdays.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Yamase
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Yamase_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Yamase_edit.html) or go back to the [comic list](../comic-index.html).

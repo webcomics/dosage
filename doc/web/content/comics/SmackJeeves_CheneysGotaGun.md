@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_CheneysGotaGun.html"
 Dosage comic SmackJeeves/CheneysGotaGun
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Cheney's back! Ever wonder what Dick Cheney is doing in his secure undisclosed location? The Hunting �accident� was only the beginning. Dick Cheney has now found his true calling. Tag along as the vice president cleans out his guns, and dusts off the ammo boxes as he fights his way through a world of terrorists from Cidy Sheehan to Osama Bin Laden. This is a graphic novel I did a few years ago and have decided to give it a rerun.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/CheneysGotaGun
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_CheneysGotaGun_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_CheneysGotaGun_edit.html) or go back to the [comic list](../comic-index.html).

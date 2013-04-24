@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_AChronicleofQuests.html"
 Dosage comic SmackJeeves/AChronicleofQuests
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A Chronicle Of Quests is the story of a warrior. Heroic Guy may not be the best, or even close to good. But his destiny is un-escapeable. It is after all what he was made for.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/AChronicleofQuests
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_AChronicleofQuests_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_AChronicleofQuests_edit.html) or go back to the [comic list](../comic-index.html).

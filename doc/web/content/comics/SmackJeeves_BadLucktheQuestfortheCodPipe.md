@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_BadLucktheQuestfortheCodPipe.html"
 Dosage comic SmackJeeves/BadLucktheQuestfortheCodPipe
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>This is the story about Rade, your everyday average guy. he goes to school, plays sports, the only thing weird about him is his best friend Crimp. Things in his average life take a turn for the bizarre, when a young man with a cat show up at his door. Now all of a sudden Rade is caught up in a quest for a magical pipe that can grant a wish to anyone who asks. Not to mention the demon mercenary's following them. the closer they get to the Pipe, the darker and more entangled things become. what starts as a grand adventure, only seems to lead to Bad Luck. Updates Saturday</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/BadLucktheQuestfortheCodPipe
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_BadLucktheQuestfortheCodPipe_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_BadLucktheQuestfortheCodPipe_edit.html) or go back to the [comic list](../comic-index.html).

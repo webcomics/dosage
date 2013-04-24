@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_AKirbyKomic.html"
 Dosage comic SmackJeeves/AKirbyKomic
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Join Kirby, Meta, and friends as they travel throughout the Kirby video game series and attempt to stop evil who are trying to destroy this series. It's a daily 4-panel adventure filled with science fiction, humor, and randomness.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/AKirbyKomic
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_AKirbyKomic_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_AKirbyKomic_edit.html) or go back to the [comic list](../comic-index.html).

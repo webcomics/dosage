@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_MrFactory.html"
 Dosage comic SmackJeeves/MrFactory
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Dee Bananahead is the coolest gangstah in da hood. Burglarizing 50 banks in 1 night? NO PROBLEM. But when she makes an outrageous promise to blow up the factory that everyone in the city hates, things start getting complicated. Updates, like, everyday. Unless it doesn't. But it typically does.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/MrFactory
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_MrFactory_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_MrFactory_edit.html) or go back to the [comic list](../comic-index.html).

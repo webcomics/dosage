@@ -3,30 +3,30 @@ url: "/comics/SmackJeeves_ForgettheDistance_edit.html"
 ---
 Edit info for comic SmackJeeves/ForgettheDistance
 
-<form name="comic" action="http://gaepostmail.appengine.com/comic" name="post">
+<form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description">(There's a little smidgen of nudity at the beginning but then it's smooth fluff sailing from there until...chapter 4? yeah, i think so.) Includes THEMES of BL/Yaoi/BoyXBoy: Logan's mother hasn't had a good eye for good men since his father went missing so when Brian comes along, he is automatically disliked. Any man who his mother brings home receives the same treatment: sarcasm,pranks and vile language. But unlike the others, Brian doesn't give up. He doesn't leave. Doing so earns him some respect from the teen and even though they begin to get along,the competition continues. They both love her dearly and neither will give up the game. Brian won't lose to a child such as Logan, and Logan won't lose to a man such as Brian. In the end are they really competing for his mother's love or for each others? Who will lose? Joint with my sister: Juli(AUTHOR/CO-ARTIST), Somi(ARTIST) UPDATES: We've gotten it down to about one every week...normally....if not within two. We're back on schedule cause we're free and hopefully drawing more.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">(There's a little smidgen of nudity at the beginning but then it's smooth fluff sailing from there until...chapter 4? yeah, i think so.) Includes THEMES of BL/Yaoi/BoyXBoy: Logan's mother hasn't had a good eye for good men since his father went missing so when Brian comes along, he is automatically disliked. Any man who his mother brings home receives the same treatment: sarcasm,pranks and vile language. But unlike the others, Brian doesn't give up. He doesn't leave. Doing so earns him some respect from the teen and even though they begin to get along,the competition continues. They both love her dearly and neither will give up the game. Brian won't lose to a child such as Logan, and Logan won't lose to a man such as Brian. In the end are they really competing for his mother's love or for each others? Who will lose? Joint with my sister: Juli(AUTHOR/CO-ARTIST), Somi(ARTIST) UPDATES: We've gotten it down to about one every week...normally....if not within two. We're back on schedule cause we're free and hopefully drawing more.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://forgetthedistance.smackjeeves.com/comics/"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://forgetthedistance.smackjeeves.com/comics/" size="40"/></td>
 </tr>
 <tr>
-<th>Genre</th><td><input type="text" name="genre" value="Other"/></td>
+<th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>
 </tr>
 <tr>
-<th>Language</th><td><input type="text" name="language" value="English"/></td>
+<th>Language</th><td><input type="text" name="language" value="English" size="40"/></td>
 </tr>
 <tr>
 <th>Adult content</th><td><input type="checkbox" name="adult" value="adult" checked="checked"/></td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 23.04.2013</td>
-</tr>
-<tr>
-<th>Votes</th><td>0</div></td>
+<th></th><td>
+<input type="hidden" name="comic" value="SmackJeeves_ForgettheDistance" />
+<input type="submit" name="submit" value="Submit" />
+</td>
 </tr>
 </table>
 </form>
 
-Back to the [comic](/comics/SmackJeeves_ForgettheDistance.html).
+Back to the [comic](SmackJeeves_ForgettheDistance.html).

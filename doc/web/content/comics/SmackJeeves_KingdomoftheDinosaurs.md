@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_KingdomoftheDinosaurs.html"
 Dosage comic SmackJeeves/KingdomoftheDinosaurs
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Kingdom of the Dinosaurs is a theme park ride through the magical world of video game and pop-culture parody. If there's a bright center in the webcomic universe, you're on the comic that's farthest from. Updates sporadically.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/KingdomoftheDinosaurs
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_KingdomoftheDinosaurs_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_KingdomoftheDinosaurs_edit.html) or go back to the [comic list](../comic-index.html).

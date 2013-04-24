@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Animangitis.html"
 Dosage comic ComicFury/Animangitis
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A parody of parodies, a gag of gags, a crossover that utterly abuses the term. This comic series and all its mini-plots points out those things that you just do not think about. Originally designed to be a crossover of different anime/manga characters and stereotypical situations, however now encompasses other subjects such as college life, snap shot scenes, math jokes, etc. It is very random...and you never know what (or who) is going to show up. Drawn in Vertical Manhwa style with varying detail/color. Usually updated Every Wednesday, Friday (temporarily on hold), and Sunday.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Animangitis
 <th>Status</th><td>error on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Animangitis_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Animangitis_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_WithACherryOnTop.html"
 Dosage comic SmackJeeves/WithACherryOnTop
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Started in 2006, currently in Issue 6 Kira Morishita is just your everyday high school student: average grades, many friends and plays on Sakio Highs Boys soccer team. His secret? Hes actually a she! After finding out that Sakio High no longer has a girls team, Kira disguises herself as a boy to play. As the saying goes, Whatever can go wrong, will. Her new best friend fell in love with her at first sight, she likes the boy that sits next to her in class, but he hates her, and on top of that shes a benchwarmer until further notice: is this what she traded her skirt in for? Will Kira be able to become a star on the boys soccer team, and keep the others from finding out she's a girl? ~READS RIGHT to LEFT~ ^_^ Should update regularly, but we don't really know :/</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/WithACherryOnTop
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_WithACherryOnTop_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_WithACherryOnTop_edit.html) or go back to the [comic list](../comic-index.html).

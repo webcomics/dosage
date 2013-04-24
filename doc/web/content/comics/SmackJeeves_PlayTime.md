@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_PlayTime.html"
 Dosage comic SmackJeeves/PlayTime
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Megumi was just a timid high school girl trying to cope with life until the day a magic ribbon came into her life and a new hero was born!</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/PlayTime
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_PlayTime_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_PlayTime_edit.html) or go back to the [comic list](../comic-index.html).

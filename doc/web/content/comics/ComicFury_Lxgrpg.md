@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Lxgrpg.html"
 Dosage comic ComicFury/Lxgrpg
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A screen-capture comic taking the film 'The League of Extraordinary Gentlemen' into a tabletop roleplaying game. Note: I don't actually play tabletop RPG's, so most of what comes up in the strips are things I learned from other similar webcomics and certain RPG video games.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Lxgrpg
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Lxgrpg_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Lxgrpg_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_MaverickDaze.html"
 Dosage comic SmackJeeves/MaverickDaze
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A Mega Man X based sprite comic. Set in the year 22XX as the Hunters must face their most challenging threat yet!</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/MaverickDaze
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_MaverickDaze_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_MaverickDaze_edit.html) or go back to the [comic list](../comic-index.html).

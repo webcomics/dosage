@@ -4,6 +4,14 @@ url: "/comics/KatzenfutterGeleespritzer.html"
 Dosage comic KatzenfutterGeleespritzer
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Webcomic mit Geschichten aus dem Alltag eines geeky Cartoonisten und Comiczeichners</td>
@@ -24,8 +32,8 @@ Dosage comic KatzenfutterGeleespritzer
 <th>Status</th><td>error on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>1</div></td>
+<th>Votes</th><td>1</td>
 </tr>
 </table>
 
-[Edit this info](/comics/KatzenfutterGeleespritzer_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](KatzenfutterGeleespritzer_edit.html) or go back to the [comic list](../comic-index.html).

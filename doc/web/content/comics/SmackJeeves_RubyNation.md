@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_RubyNation.html"
 Dosage comic SmackJeeves/RubyNation
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>This is the story of Ruby Harrison, former middle-upper-class American high schooler turned nine-foot-tall post-human person of mass destruction. Dragged into a worldwide conspiracy that treats human beings as mere test subjects, Ruby's goal is to create a safe haven for her fellow post-human victims. But their powers are too valuable for the world to let be, and Ruby and her comrades will have to make hard decisions to preserve her new home.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/RubyNation
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_RubyNation_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_RubyNation_edit.html) or go back to the [comic list](../comic-index.html).

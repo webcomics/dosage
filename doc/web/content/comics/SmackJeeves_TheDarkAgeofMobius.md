@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_TheDarkAgeofMobius.html"
 Dosage comic SmackJeeves/TheDarkAgeofMobius
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>It was 20 years ago that the Emerald war began. Many died. Sonic, and Eggman are but a few. There were, however, survivers. A mysterious overlord has taken over much of the world. There are those who oppose him. This is the story of one.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/TheDarkAgeofMobius
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_TheDarkAgeofMobius_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_TheDarkAgeofMobius_edit.html) or go back to the [comic list](../comic-index.html).

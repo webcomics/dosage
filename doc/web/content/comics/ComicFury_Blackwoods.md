@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Blackwoods.html"
 Dosage comic ComicFury/Blackwoods
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>The Blackwoods is a comic about a teenage girl, Sadie, who ends up having to move in with her aunt. Her aunt works as a maid for a peculiar family in a gigantic mansion from the 1800s. Sadie discovers that the family who lives in the mansion, along with the servants, act as though they are still living in the 1800s. They never leave the mansion, and strange incidents occur which cause Sadie to unravel a dark and terrible secret that the Blackwoods have been hiding for centuries.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Blackwoods
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Blackwoods_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Blackwoods_edit.html) or go back to the [comic list](../comic-index.html).

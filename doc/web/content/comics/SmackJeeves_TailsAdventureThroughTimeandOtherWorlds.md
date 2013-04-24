@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_TailsAdventureThroughTimeandOtherWorlds.html"
 Dosage comic SmackJeeves/TailsAdventureThroughTime...
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Tails unexpectedly goes on an adventure through different worlds and even through different times! It all started from falling through a purple portal. How will his adventures go? Credit goes to those who ripped/edited the sprites used for this. None of the characters used belong to me except for my own.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/TailsAdventureThroughTime...
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_TailsAdventureThroughTimeandOtherWorlds_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_TailsAdventureThroughTimeandOtherWorlds_edit.html) or go back to the [comic list](../comic-index.html).

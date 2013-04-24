@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_DreamAboutMe.html"
 Dosage comic SmackJeeves/DreamAboutMe
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>One year. That is how long Popuri will be staying at Green Ranch while her parents are away. And in that one short year, her life will change forever! Based on the game Harvest Moon 64</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/DreamAboutMe
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_DreamAboutMe_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_DreamAboutMe_edit.html) or go back to the [comic list](../comic-index.html).

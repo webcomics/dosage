@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_ThisistheWorstIdeaYouveEverHad.html"
 Dosage comic SmackJeeves/ThisistheWorstIdeaYouveEv...
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>TWIYEH! is a an urban fantasy comic about idiots with magic powers and also there are monsters and stuff. Updates every Wednesday and Friday. This is a mirror of the main site located at http://worstidea.skyscrapersoup.com The comic updates there a couple days earlier than I post it here.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/ThisistheWorstIdeaYouveEv...
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_ThisistheWorstIdeaYouveEverHad_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_ThisistheWorstIdeaYouveEverHad_edit.html) or go back to the [comic list](../comic-index.html).

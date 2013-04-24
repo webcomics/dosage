@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_MagicalRenegades.html"
 Dosage comic SmackJeeves/MagicalRenegades
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>In The State of Confusion, worlds, time periods, and magical girl wannabe heroes collide and cause a revolution after a megalomaniac's time travel scheme leaves everyone stuck in the past! The 'heroes' must fight against the rival magical girl faction over rewriting the turning point of Confusionite history, and to prevent another collapse of the space-time continuum! Genres: Comedy+Drama (mostly comedy, I'm aiming towards 90% comedy 10% drama, and 120% WTF-is-this-I'm-reading?!), Magical Girl/Mahou Shoujo, Metafiction, Steampunk (starting in chapter 3)</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/MagicalRenegades
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_MagicalRenegades_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_MagicalRenegades_edit.html) or go back to the [comic list](../comic-index.html).

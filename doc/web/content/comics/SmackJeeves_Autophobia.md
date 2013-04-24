@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Autophobia.html"
 Dosage comic SmackJeeves/Autophobia
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>The story of a dude named Louis who tries to accept himself for who he is and to learn to not let others step all over him. It follows him through the course of his life and the relationships he builds with others, particularly with his classmate Daniel. [Updates every other Sunday] --- Warning: gay ppl, straight ppl, a plethora of dialogue, profanity, sexual themes/content, and an absurd amount of fluff. /Mature content is on for some of the future themes explored, but there's nothing explicit./</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Autophobia
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Autophobia_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Autophobia_edit.html) or go back to the [comic list](../comic-index.html).

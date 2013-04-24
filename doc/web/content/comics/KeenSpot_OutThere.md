@@ -4,6 +4,14 @@ url: "/comics/KeenSpot_OutThere.html"
 Dosage comic KeenSpot/OutThere
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A neurotic barmaid encounters a mysterious drifter on the road. The intrepid duo finds they have absolutely nothing in common. So, naturally, they become traveling partners. You know, just like in real life.</td>
@@ -24,8 +32,8 @@ Dosage comic KeenSpot/OutThere
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/KeenSpot_OutThere_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](KeenSpot_OutThere_edit.html) or go back to the [comic list](../comic-index.html).

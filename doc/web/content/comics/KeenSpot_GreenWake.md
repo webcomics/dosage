@@ -4,6 +4,14 @@ url: "/comics/KeenSpot_GreenWake.html"
 Dosage comic KeenSpot/GreenWake
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>In the forgotten town of Green Wake, a string of grisly mutilations leads Morley Mack on the trail of a young woman named Ariel, who is the prime suspect. But when a stranger with startling connections to Ariel arrives under mysterious circumstances, Morley unravels a dark plot...</td>
@@ -24,8 +32,8 @@ Dosage comic KeenSpot/GreenWake
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/KeenSpot_GreenWake_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](KeenSpot_GreenWake_edit.html) or go back to the [comic list](../comic-index.html).

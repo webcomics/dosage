@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_WelcomeBackToTheLandOfForgottenMemories.html"
 Dosage comic SmackJeeves/WelcomeBackToTheLandOfFor...
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A surreal comic that takes place in New York city and the dream world of CommonFictura, a world created by a boy named Jacob White.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/WelcomeBackToTheLandOfFor...
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_WelcomeBackToTheLandOfForgottenMemories_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_WelcomeBackToTheLandOfForgottenMemories_edit.html) or go back to the [comic list](../comic-index.html).

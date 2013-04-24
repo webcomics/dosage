@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Renai.html"
 Dosage comic SmackJeeves/Renai
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Kawana Ori is a ordinary teenage girl, that is until she meets the new boy at Fujiwara high, he calls himself Ren-kun an he says he likes &quot;pure&quot; girls. But what Kawana doesnt know is that Ren is a 1000 year old vampire who can only drink the blood of &quot;pure&quot; girls.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Renai
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Renai_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Renai_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_TheColony.html"
 Dosage comic SmackJeeves/TheColony
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>In the secluded hills of upstate New York, there is a place known only to few. It is a haven for all things macabre; werewolves, vampires, zombies. If you fear it, chances are it resides there. Every 300 years, a new regent is crowned, and this time you're invited to the ceremony. The Colony is updated every Tuesday, so come on back!</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/TheColony
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_TheColony_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_TheColony_edit.html) or go back to the [comic list](../comic-index.html).

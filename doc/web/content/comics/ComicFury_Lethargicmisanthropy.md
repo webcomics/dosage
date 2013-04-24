@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Lethargicmisanthropy.html"
 Dosage comic ComicFury/Lethargicmisanthropy
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Please, do not get depressed after reading this comic. That is my job.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Lethargicmisanthropy
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Lethargicmisanthropy_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Lethargicmisanthropy_edit.html) or go back to the [comic list](../comic-index.html).

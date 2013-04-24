@@ -4,6 +4,14 @@ url: "/comics/ComicFury_President.html"
 Dosage comic ComicFury/President
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Wiola is a vampire, but not the classic one. Indeed, she is &quot;Ethical Vampire&quot;: those vampires that resists to blood's thirst reliance and live their un-life as outcasts. With Wiola come her protégé, a young vampire who has not yet passed the stage of reliance to blood. To complicate things the young vampire can resist the addiction to blood only by being surrounded by potential victims, and this is why Wiola choose to bring him in the capital of Riaveé. Riaveé is a nation destroyed by the last war, a place of lost memories of a mighty, now fallen, kingdom and ancient secrets never dug up. Riaveé is the perfect place for ethical vampires like, silent creatures with no identity.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/President
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_President_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_President_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Organizedmess.html"
 Dosage comic ComicFury/Organizedmess
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Organized Mess documents the everyday lives of 4 oddly familiar characters. Sometime's it's humorous...most of the time it's not.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Organizedmess
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Organizedmess_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Organizedmess_edit.html) or go back to the [comic list](../comic-index.html).

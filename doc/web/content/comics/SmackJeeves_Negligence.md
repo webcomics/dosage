@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Negligence.html"
 Dosage comic SmackJeeves/Negligence
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Two kids, a bottle of mouthwash, and an almost non-existent parental figure. What could possibly go wrong, besides cult families, twisted public television shows, a baby's death, and a pseudo-incestuous relationship? Welcome to Negligence, a crazy journey.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Negligence
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Negligence_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Negligence_edit.html) or go back to the [comic list](../comic-index.html).

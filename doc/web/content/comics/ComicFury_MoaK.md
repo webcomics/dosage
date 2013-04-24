@@ -4,6 +4,14 @@ url: "/comics/ComicFury_MoaK.html"
 Dosage comic ComicFury/MoaK
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Morgan was not having a good day. Her singer flounced; her basist, and brother, got a better offer; her drummer was blown up by a dragon-- Wait, what's a dragon doing in Chicago? And what's with the orcs with guns? Updates Tuesdays and Fridays, 3pm Chicago time (Currently a mirror from Drunk Duck. You can read it here, about a chapter behind, but with no delays for Writer's block and computer issues, or there for the current story, but with the occasional filler page/missed updates.)</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/MoaK
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_MoaK_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_MoaK_edit.html) or go back to the [comic list](../comic-index.html).

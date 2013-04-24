@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_SuperDimensionAfterTheHero.html"
 Dosage comic SmackJeeves/SuperDimensionAfterTheHero
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Updates once every weekend. (Mondays count as weekend.) Super-Dimension comics are just the name I give all my superhero comics. This has no relation to any other Super-Dimension comics. Dennis Lockham was Paladin. A guardian superhero of L.A. But now his powers are gone. He's just a man. And that is the one thing he can't take on. Rated 12+ for *&amp;%$'ed cussing, and violence. Neither of much, though.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/SuperDimensionAfterTheHero
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_SuperDimensionAfterTheHero_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_SuperDimensionAfterTheHero_edit.html) or go back to the [comic list](../comic-index.html).

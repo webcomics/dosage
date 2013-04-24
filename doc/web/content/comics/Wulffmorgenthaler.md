@@ -4,6 +4,14 @@ url: "/comics/Wulffmorgenthaler.html"
 Dosage comic Wulffmorgenthaler
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Entertainment - Since 2002. Wulff &amp; Morgenthaler's Personal humoristic social commentary on life, nostalgia and the World in general. Nothing is taboo: They deal with Politics, News, Entertainment, Technology, Culture, and Weirdo Beavers</td>
@@ -24,8 +32,8 @@ Dosage comic Wulffmorgenthaler
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/Wulffmorgenthaler_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](Wulffmorgenthaler_edit.html) or go back to the [comic list](../comic-index.html).

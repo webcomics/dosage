@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Blackdemon.html"
 Dosage comic SmackJeeves/Blackdemon
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>everyone has a demon inside them, even the nicest people in the world has a demon. what happens if the demon inside takes total control of you? it could effect your life style, personality, and for artist's; imagination. that's what this comic is about. a girl with poor social skills and a large imagination, how will she fix both problems? (WARNING:some chapters in this comic are based on real events that occurred in the author's life) comic updates:Monday's, Wednesday's, and Friday's(if not updated, that means i got a LOT of HW or my laptop is damaged)</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Blackdemon
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Blackdemon_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Blackdemon_edit.html) or go back to the [comic list](../comic-index.html).

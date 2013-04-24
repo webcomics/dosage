@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Toneout.html"
 Dosage comic ComicFury/Toneout
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Tone Out is a web comic about a bad musician in love with his neighbor. It's updated sporadically. It follows a storyline, so it's best to start from the first strip.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Toneout
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Toneout_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Toneout_edit.html) or go back to the [comic list](../comic-index.html).

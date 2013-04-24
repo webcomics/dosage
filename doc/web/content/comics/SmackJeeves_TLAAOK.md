@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_TLAAOK.html"
 Dosage comic SmackJeeves/TLAAOK
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Percival Livingston may not entirely look the part, but he is one of the world's leading experts when it comes to authenticating rare artifacts. Thus, he is invited by a private collector to take a look at a rather strange find. However, before Percy is able to get a good look at the object, it is stolen by a thief! Oh hell no! Percy chases the man down, but is sucked into another world when he collides with said thief as he happens to be opening an inter dimensional gate! Now Percy has to deal with the thief, get the artifact, and find a way back home! Of course, knowing Percy, he may just want to do a little exploring in between... Warnings: -It's bl. SilverHyena may have an addiction problem... hmmm... -It's rated mature, because I plan on being a bit... tasteless. Yeeees. -It's on crack. Don't expect anything too serious. XP</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/TLAAOK
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_TLAAOK_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_TLAAOK_edit.html) or go back to the [comic list](../comic-index.html).

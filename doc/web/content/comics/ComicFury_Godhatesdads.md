@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Godhatesdads.html"
 Dosage comic ComicFury/Godhatesdads
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>my journal comic or something. showing the good times and the bad times of being a weirdo in my mid 20s.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Godhatesdads
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Godhatesdads_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Godhatesdads_edit.html) or go back to the [comic list](../comic-index.html).

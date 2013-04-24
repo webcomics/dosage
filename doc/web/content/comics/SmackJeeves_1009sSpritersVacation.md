@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_1009sSpritersVacation.html"
 Dosage comic SmackJeeves/1009sSpritersVacation
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Okay, so I have updated the site completely, other than the custom pages which I'll get to later at some later point in time. For now, it has no effect on the continuation of the comic, only thing affecting continuation is Sike who has not yet made a sprite sheet for a certain character that's needed for a future part in the plot. But anyway, comment, fav, and rate! That'd really be appreciated~ NOW ACCEPTING CAMEOS!</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/1009sSpritersVacation
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_1009sSpritersVacation_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_1009sSpritersVacation_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Tenwaysbendystrawssavedmylife.html"
 Dosage comic SmackJeeves/Tenwaysbendystrawssavedmy...
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>an informal window into the way i saw/see life as a teenager and young adult told though the adventures of two rather ordinary kids</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Tenwaysbendystrawssavedmy...
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Tenwaysbendystrawssavedmylife_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Tenwaysbendystrawssavedmylife_edit.html) or go back to the [comic list](../comic-index.html).

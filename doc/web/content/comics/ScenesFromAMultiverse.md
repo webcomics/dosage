@@ -4,6 +4,14 @@ url: "/comics/ScenesFromAMultiverse.html"
 Dosage comic ScenesFromAMultiverse
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>SFAM Guest Month wraps up today with a contribution by Meredith Gran of Octopus Pie that is sure to tickle and delight even the grumpiest of codgers.</td>
@@ -24,8 +32,8 @@ Dosage comic ScenesFromAMultiverse
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>1</div></td>
+<th>Votes</th><td>1</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ScenesFromAMultiverse_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ScenesFromAMultiverse_edit.html) or go back to the [comic list](../comic-index.html).

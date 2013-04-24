@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_HighSchoolHeroes.html"
 Dosage comic SmackJeeves/HighSchoolHeroes
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A group of teenagers desperately want to become superheroes, but high school keeps getting in the way.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/HighSchoolHeroes
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_HighSchoolHeroes_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_HighSchoolHeroes_edit.html) or go back to the [comic list](../comic-index.html).

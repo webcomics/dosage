@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_4Ply.html"
 Dosage comic SmackJeeves/4Ply
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Four teens who have been friends since grade school enter their first year of High School. Will their friendship survive and if so, what about their sanity? Kamal: As strong as toilet paper we are. Carmen: Oh would you please just shut up! Kamal: XD</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/4Ply
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_4Ply_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_4Ply_edit.html) or go back to the [comic list](../comic-index.html).

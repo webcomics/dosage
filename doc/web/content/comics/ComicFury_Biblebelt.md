@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Biblebelt.html"
 Dosage comic ComicFury/Biblebelt
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>I'm balancing a 3 1/2 year old on my head as I type this. Truly one of God's miracles. (The simultaneous balancing and typing, not my ability to reproduce.) Feel free to point out my spelling and grammar mistakes. Amen.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Biblebelt
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Biblebelt_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Biblebelt_edit.html) or go back to the [comic list](../comic-index.html).

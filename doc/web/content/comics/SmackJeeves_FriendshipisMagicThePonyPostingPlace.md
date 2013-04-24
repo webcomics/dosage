@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_FriendshipisMagicThePonyPostingPlace.html"
 Dosage comic SmackJeeves/FriendshipisMagicThePonyP...
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Welcome, one and all to the Pony Posting Place! Here, bronies and pony lovers can all get together to share their art and talk about the show and other pony stuff! We accept all mediums of art, from spriting to drawing to sculpting. We're ALWAYS happy to see new faces, too! If you'd like to join, see our rules and application stuff bellow!</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/FriendshipisMagicThePonyP...
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_FriendshipisMagicThePonyPostingPlace_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_FriendshipisMagicThePonyPostingPlace_edit.html) or go back to the [comic list](../comic-index.html).

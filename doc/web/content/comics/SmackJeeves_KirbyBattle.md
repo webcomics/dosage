@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_KirbyBattle.html"
 Dosage comic SmackJeeves/KirbyBattle
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Dark Matter once again attacks his worst enemy's homeland, Popstar. Kirby and his friends are going to try to stop this evil from happening. Will Dark Matter finally be successful in conquering the Universe? Updates most Sundays and Wednesdays, the keyword being &quot;most&quot;.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/KirbyBattle
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_KirbyBattle_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_KirbyBattle_edit.html) or go back to the [comic list](../comic-index.html).

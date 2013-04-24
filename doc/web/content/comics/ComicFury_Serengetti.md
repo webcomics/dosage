@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Serengetti.html"
 Dosage comic ComicFury/Serengetti
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Serengetti Dreams, as you may have inferred from the title, is a webcomic by Shane Itram. It updates daily, Monday through Friday. First time here? Kind of lost? Check out Dr. Bolton's welcome to new readers!</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Serengetti
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Serengetti_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Serengetti_edit.html) or go back to the [comic list](../comic-index.html).

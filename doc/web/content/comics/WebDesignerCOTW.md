@@ -4,6 +4,14 @@ url: "/comics/WebDesignerCOTW.html"
 Dosage comic WebDesignerCOTW
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>The content revolves around web design, blogging and funny situations that we encounter in our daily lives as designers and this week we focus on Christmas. These great cartoons are created by Jerry King, an award-winning cartoonist who’s one of the most published, prolific and versatile cartoonists in the world today.</td>
@@ -24,8 +32,8 @@ Dosage comic WebDesignerCOTW
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>1</div></td>
+<th>Votes</th><td>1</td>
 </tr>
 </table>
 
-[Edit this info](/comics/WebDesignerCOTW_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](WebDesignerCOTW_edit.html) or go back to the [comic list](../comic-index.html).

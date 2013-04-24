@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Randomthoughts.html"
 Dosage comic ComicFury/Randomthoughts
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Yeah so this really is random thoughts. I woke up one morning thinking about a duck-sausage and I figured I might as well start doing a webcomic about things. Yes..Things. Stuff and junk and stuff that happens to me. And things. It's mostly sort of an online diary, except also not. It's just random thoughts. I apologize for dry humor, bad puns and possible injuries you suffer from facepalming. However, I hope you enjoy :D</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Randomthoughts
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Randomthoughts_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Randomthoughts_edit.html) or go back to the [comic list](../comic-index.html).

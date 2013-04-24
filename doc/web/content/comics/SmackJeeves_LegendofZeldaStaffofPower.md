@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_LegendofZeldaStaffofPower.html"
 Dosage comic SmackJeeves/LegendofZeldaStaffofPower
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>An ancient weapon created for harmony brought civil war. Shattering it brought tentative peace, until the leader of the Gerudo attempts to slaughter an entire race of people, then turning his hatred upon the monarchy of Hyrule. Defeated by the Hero of Time and the Princess of Destiny, he was sealed away in the Sacred Realm. Years later, he has gained more power, and has broken free. Now it will take the very weapon he seeks to destroy him, and an unlikely wielder to complete the task. Who will win?</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/LegendofZeldaStaffofPower
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_LegendofZeldaStaffofPower_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_LegendofZeldaStaffofPower_edit.html) or go back to the [comic list](../comic-index.html).

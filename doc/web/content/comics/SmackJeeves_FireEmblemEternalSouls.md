@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_FireEmblemEternalSouls.html"
 Dosage comic SmackJeeves/FireEmblemEternalSouls
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>FIRE EMBLEM COLLABORATION! This is a Fire Emblem Collaboration by the people on FE-DA (www.fe-da.com/forum) about an alternate world of Fire Emblem, which we create OCs to conquer the darkness and save their precious homeland of Thalassa. SPOTS ARE CLOSED! I hope you will enjoy our creation! &lt;Vikki&gt;</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/FireEmblemEternalSouls
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_FireEmblemEternalSouls_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_FireEmblemEternalSouls_edit.html) or go back to the [comic list](../comic-index.html).

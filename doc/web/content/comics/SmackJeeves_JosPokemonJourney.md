@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_JosPokemonJourney.html"
 Dosage comic SmackJeeves/JosPokemonJourney
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Just about a 17 year old twin with an afro who's going on a journey with a few surprises, friends, and foes. :D Updates when it can. :3</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/JosPokemonJourney
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_JosPokemonJourney_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_JosPokemonJourney_edit.html) or go back to the [comic list](../comic-index.html).

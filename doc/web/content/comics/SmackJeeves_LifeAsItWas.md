@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_LifeAsItWas.html"
 Dosage comic SmackJeeves/LifeAsItWas
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>It's a web comic, I make it and you read it. Updated daily. Follow LAIW on twitter @LifeAsItWas to get updates on there, as well as bonus content, if you're into that sort of jazz as well. Go ahead, I won't judge you.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/LifeAsItWas
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_LifeAsItWas_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_LifeAsItWas_edit.html) or go back to the [comic list](../comic-index.html).

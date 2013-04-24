@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Dragoncity.html"
 Dosage comic ComicFury/Dragoncity
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Millions of years ago, a comet wiped out the dinosaurs, but the dragons who were living along side them went underground and stayed there. And now we see the civilization that has come about from those refuges in a current day story.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Dragoncity
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Dragoncity_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Dragoncity_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_CupidsaMoron.html"
 Dosage comic SmackJeeves/CupidsaMoron
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>As the legends say, people's lives have always been handled with care by the Greek Gods and Goddnesses. Ever since, Cupid has been in charge of the mortals' Love. But can a 18-years-old-looking boy really deal with other's destiny ? And what will happen when he will have to help Seth, a 23-years-old loser, find his true Love ? Huge problems ahead... Beware. Following this comic would force you to face a twisted and apocalyptic mix of BL, butchered Mythology, crappy humor, cheesy moments, less-cheesy moments, crazy scenes, general weirdness, and unhealthy amounts of cakes. Authors will not be held responsible of any harm caused to you or any thing or person surrounding. Pursue at your own risk. Irregular updates, we'll try twice a week (read right to left &lt;--) Story &amp; Characters - by M-iikado Art - by Sybia French version can be found here : http://cupidsamoron.webcomics.fr/</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/CupidsaMoron
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_CupidsaMoron_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_CupidsaMoron_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/ComicFury_GodsAlmighty.html"
 Dosage comic ComicFury/GodsAlmighty
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A comic that chronicles the strange events and imaginary happenings surrounding Bethany. Accompanying her in her day-to-day life and occasional flights of fantasy are the two Norse Gods, Freyr and Loki. If you like rainbows, sparkly things, the occasional narwhal, cookies, cakes and sexual innuendo (inYOURendo) Then by Odin, this is the comic for you. GOD DAMN I LOVE CHICKEN.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/GodsAlmighty
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_GodsAlmighty_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_GodsAlmighty_edit.html) or go back to the [comic list](../comic-index.html).

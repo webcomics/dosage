@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_BlackandBlue.html"
 Dosage comic SmackJeeves/BlackandBlue
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A sci-fi fairytale. A boys nightmare. So, this is about an Evil Empire soldier with a few problems... not the least of which is a slight gender issue and a weird entanglement with an astronaut. Awkwardness ensues. D: I thought &quot;The Crying Game&quot; was a comedy, you've been warned. Ha! e_e Also I started this about 200 years ago and the art is pretty rough I'M SO SORRY! ;_; FORGIVE ME!</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/BlackandBlue
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_BlackandBlue_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_BlackandBlue_edit.html) or go back to the [comic list](../comic-index.html).

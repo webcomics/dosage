@@ -4,6 +4,14 @@ url: "/comics/HijinksEnsue.html"
 Dosage comic HijinksEnsue
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>HijiNKS ENSUE is a geek pop culture webcomic that makes fun of the latest news in tv, movies, Sci-Fi, technology and the Internet</td>
@@ -24,8 +32,8 @@ Dosage comic HijinksEnsue
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>1</div></td>
+<th>Votes</th><td>1</td>
 </tr>
 </table>
 
-[Edit this info](/comics/HijinksEnsue_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](HijinksEnsue_edit.html) or go back to the [comic list](../comic-index.html).

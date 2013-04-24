@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_HedgehogPieceANewEra.html"
 Dosage comic SmackJeeves/HedgehogPieceANewEra
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>~This is a revival of the original Hedgehog Piece~ Take an adventure throughout a new world of One Piece, in a new Era of Pirates, following 5 major pirate crews of different species and personalities. We also accept cameos in the same format below (also include brief personality and background). PM to ReiKainaric.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/HedgehogPieceANewEra
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_HedgehogPieceANewEra_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_HedgehogPieceANewEra_edit.html) or go back to the [comic list](../comic-index.html).

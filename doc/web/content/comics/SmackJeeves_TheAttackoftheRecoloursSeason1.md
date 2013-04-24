@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_TheAttackoftheRecoloursSeason1.html"
 Dosage comic SmackJeeves/TheAttackoftheRecoloursSe...
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>The Recolours are attacking all of Mobius and the edits will have to eliminate them. Flash, Leeroy and Kedar500 are creating the recolors and sending them out to fight but Sonic, Josephk and the others are preventing them from succeeding. Will they save the world from whatever Flash and Kedar500 are planning. Then read the Seasons and find out. Warning: Mild Language may be used Updates on Saturdays and Wednesdays; During School days I will update randomly on the weekends.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/TheAttackoftheRecoloursSe...
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_TheAttackoftheRecoloursSeason1_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_TheAttackoftheRecoloursSeason1_edit.html) or go back to the [comic list](../comic-index.html).

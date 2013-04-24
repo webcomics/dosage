@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_BeastHunt.html"
 Dosage comic SmackJeeves/BeastHunt
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Once Astir found mysterious sword, he decided to become &quot; the best warrior&quot; in the whole world~ Task seemingly easy but with his overflowing lazyness and not much talent might become a bother. Psychopathic necromancer on his back and &quot;girly&quot; samurai as his training partner definately wont make it easier..</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/BeastHunt
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_BeastHunt_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_BeastHunt_edit.html) or go back to the [comic list](../comic-index.html).

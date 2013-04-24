@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Vacan7.html"
 Dosage comic SmackJeeves/Vacan7
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Django is living with his younger brother in the heart of the big city named Los Perdidos. He's been stuck in a limbo between being a policeman and being a detective for a while now, and he finds himself falling for his new trainer and partner. On top of that Django starts to see and hear things others can't, and hopes his odd behaviour won't get him in trouble. Six voices seek the seventh, Django. Are they here to help or harm him? Updates Thursdays. Contains m/m. Mature: Occasional swearing and half naked dudes.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Vacan7
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Vacan7_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Vacan7_edit.html) or go back to the [comic list](../comic-index.html).

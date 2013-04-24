@@ -4,6 +4,14 @@ url: "/comics/KeenSpot_GeneCatlow.html"
 Dosage comic KeenSpot/GeneCatlow
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A comic that centers on a world populated by both anthropomorphic animals and humans, who have (1) gotten along none too well through the history of their world, and (2) recently had it shown to them in no uncertain terms that they share a common ancestor, responsible for all intellgent life.</td>
@@ -24,8 +32,8 @@ Dosage comic KeenSpot/GeneCatlow
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/KeenSpot_GeneCatlow_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](KeenSpot_GeneCatlow_edit.html) or go back to the [comic list](../comic-index.html).

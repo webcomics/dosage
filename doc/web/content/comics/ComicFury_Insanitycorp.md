@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Insanitycorp.html"
 Dosage comic ComicFury/Insanitycorp
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>The new and improved--yet still not corporate--Insanity Corp is back with more panels and fewer sticks! :D [Reality not included, offer not available in the Neptunian quadrant, see inside for details.]</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Insanitycorp
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Insanitycorp_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Insanitycorp_edit.html) or go back to the [comic list](../comic-index.html).

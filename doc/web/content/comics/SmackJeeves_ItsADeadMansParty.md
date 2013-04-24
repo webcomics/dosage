@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_ItsADeadMansParty.html"
 Dosage comic SmackJeeves/ItsADeadMansParty
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>People live, die, and go somewhere else. A compilation of stories about purgatory and its inhabitants.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/ItsADeadMansParty
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_ItsADeadMansParty_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_ItsADeadMansParty_edit.html) or go back to the [comic list](../comic-index.html).

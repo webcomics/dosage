@@ -4,6 +4,14 @@ url: "/comics/DrunkDuck_Terror_Of_The_Undead.html"
 Dosage comic DrunkDuck/Terror_Of_The_Undead
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td></td>
@@ -24,8 +32,8 @@ Dosage comic DrunkDuck/Terror_Of_The_Undead
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/DrunkDuck_Terror_Of_The_Undead_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](DrunkDuck_Terror_Of_The_Undead_edit.html) or go back to the [comic list](../comic-index.html).

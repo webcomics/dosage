@@ -4,6 +4,14 @@ url: "/comics/ComicFury_CatHero.html"
 Dosage comic ComicFury/CatHero
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Cat Hero's epic Catventures as an Hero, starring Cat Hero as Cat Hero, by Cat Hero; is a graphical representation of the (mis)adventures of a cat-person named Cat Hero, whose arch-nemesis is CatoreH, a life-sized cardboard cutout of a (very) badly drawn cat-person. Half a quick comic, half an experiment to see if single-panel gag-a-day style can actually convey a story, and be good doing it.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/CatHero
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_CatHero_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_CatHero_edit.html) or go back to the [comic list](../comic-index.html).

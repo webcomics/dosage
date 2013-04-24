@@ -4,6 +4,14 @@ url: "/comics/ComicFury_TruFax.html"
 Dosage comic ComicFury/TruFax
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Mostly true, but really just practice. This comic is bits of my life worth sharing with others. It's also serving as a platform for determining on what parts of sequential art I need some improvement, or vast improvement. Please feel free to leave constructive criticism, this is a learning experience.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/TruFax
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_TruFax_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_TruFax_edit.html) or go back to the [comic list](../comic-index.html).

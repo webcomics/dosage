@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_20TimesKirby.html"
 Dosage comic SmackJeeves/20TimesKirby
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>20 kirbies, considered different from all the others by Kirby, go on a journey to find out their past... At least that's what Kirby wants, since he can't stand the fact of knowing nothing about them all. The answers come slowly, the suspense builds, and the question is, are they going to find out everything? Or are they just going to have random adventures, and never know all of it? Updates Mondays, Thursdays and Saturdays.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/20TimesKirby
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_20TimesKirby_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_20TimesKirby_edit.html) or go back to the [comic list](../comic-index.html).

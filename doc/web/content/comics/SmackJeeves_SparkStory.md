@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_SparkStory.html"
 Dosage comic SmackJeeves/SparkStory
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>You must have Kirby sprites to join. Don't swear or use mature content. INSPIRED BY ABBIMAYS RANDOMNESS! Characters w/ quotes: Sniveh: Spark, WHY DID YOU DRAG ME FROM THE FOREST ALL THE WAY OUT HERE?! Skybyte: SNIVIES FOR DA WIN! Magolor: Oh come on, I just fixed that mast! Thunderbolt: Not again... Grace: U-um, hi? Brokor: DON'T YOU DARE PRESS THE PURPLE BUTT-*explodes* Dameon: *messing with doofus' radio* Doofus: If you don't stop trying to change the radio station on my tank, I swear to Black Mesa I will come over there with an army of pies! Sky: PIANO! -Crushed by a piano- Korazar: WHOSE IDEA WAS THIS!? Deuce:MAH MASTER SWORD ITS DA BEST! Plazy: Ok now who's ready for SCIENCE! .... anyone</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/SparkStory
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_SparkStory_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_SparkStory_edit.html) or go back to the [comic list](../comic-index.html).

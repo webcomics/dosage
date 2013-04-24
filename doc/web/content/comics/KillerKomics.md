@@ -4,6 +4,14 @@ url: "/comics/KillerKomics.html"
 Dosage comic KillerKomics
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Web comic - Lorsque tu repasses une chemise, fait attention pour ne pas oublier un endroit... - Web comic drole avec bonhommes allumettes, webcomic avec beaucoup de sang et violence. Pour ceux qui veulent rire à la violence.</td>
@@ -24,8 +32,8 @@ Dosage comic KillerKomics
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/KillerKomics_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](KillerKomics_edit.html) or go back to the [comic list](../comic-index.html).

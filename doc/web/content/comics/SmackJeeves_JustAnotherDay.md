@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_JustAnotherDay.html"
 Dosage comic SmackJeeves/JustAnotherDay
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Shanku has left her home behind to explore the wide world around her. Out of her small forest home she finds more of her own kind and new friends. Love, loss, and adventure await her as she discovers the secrets her clan struggled to hide. But at what cost?</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/JustAnotherDay
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_JustAnotherDay_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_JustAnotherDay_edit.html) or go back to the [comic list](../comic-index.html).

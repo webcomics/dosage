@@ -4,6 +4,14 @@ url: "/comics/KeenSpot_FallOutToyWorks.html"
 Dosage comic KeenSpot/FallOutToyWorks
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>The newly-produced android named Tiffany becomes the greatest passion and potential destruction of a brilliant robot-maker. Inspired by the ideas and lyrics of FALL OUT BOY.</td>
@@ -24,8 +32,8 @@ Dosage comic KeenSpot/FallOutToyWorks
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/KeenSpot_FallOutToyWorks_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](KeenSpot_FallOutToyWorks_edit.html) or go back to the [comic list](../comic-index.html).

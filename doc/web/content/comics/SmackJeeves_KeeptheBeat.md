@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_KeeptheBeat.html"
 Dosage comic SmackJeeves/KeeptheBeat
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Dr. Light always named his robots after musical terms. Why? Obviously, he wanted to start a band! But he can't do it on his own. He'll be enlisting the aid of his top students. Starting a band was never so...not normal. Currently Updates... Whenever I can</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/KeeptheBeat
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_KeeptheBeat_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_KeeptheBeat_edit.html) or go back to the [comic list](../comic-index.html).

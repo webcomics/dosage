@@ -4,6 +4,14 @@ url: "/comics/Sheldon.html"
 Dosage comic Sheldon
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>The story of a software company tycoon billionaire ten-year-old, his grampa, his duck, his pug and a lizard.</td>
@@ -24,8 +32,8 @@ Dosage comic Sheldon
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/Sheldon_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](Sheldon_edit.html) or go back to the [comic list](../comic-index.html).

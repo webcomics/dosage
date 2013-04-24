@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Theatrics.html"
 Dosage comic SmackJeeves/Theatrics
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A weekly movie review comic, starring two ruthless critics who will bash a different cinematic release, both new blockbusters and obscure classics, every week. By Itamar Katz</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Theatrics
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Theatrics_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Theatrics_edit.html) or go back to the [comic list](../comic-index.html).

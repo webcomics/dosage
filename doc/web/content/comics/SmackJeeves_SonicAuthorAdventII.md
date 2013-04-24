@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_SonicAuthorAdventII.html"
 Dosage comic SmackJeeves/SonicAuthorAdventII
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>TEH CHAT IS BACK. Dont forget to space between your sentences.- Mr. Jack If you've come to SAAII thinking &quot;Oh my god- another author comic!&quot;- Never fear. this one is the ORIGINAL AND FIRST author comic. Well, it's prequel, SAA, run by mostly the the same people, was.-Rikco the Robot Random post of death and doom. ~ Ryan We demand cookies! ~ Shin Guess who's back and fluffier than ever! ~ Shard Oh Praise the mightly Lords of the Laziness ~Jayh TEAM JINJO PWNZ YOUR SOULS! AND IM BACK! -2021 Run around for all I care! I have me my flying ceiling! HA! ~Slash Beware the newness! ~3000</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/SonicAuthorAdventII
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_SonicAuthorAdventII_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_SonicAuthorAdventII_edit.html) or go back to the [comic list](../comic-index.html).

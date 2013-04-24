@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_TheClass.html"
 Dosage comic SmackJeeves/TheClass
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>The Class is a story about high school students learning to deal with growing up while being confronted with the ability to use powers and fight a growing evil. Written by Jaysen Headley and Illustrated by Jessi Jordan. For more news and info, check out our blog at www.theclasscomic.com</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/TheClass
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_TheClass_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_TheClass_edit.html) or go back to the [comic list](../comic-index.html).

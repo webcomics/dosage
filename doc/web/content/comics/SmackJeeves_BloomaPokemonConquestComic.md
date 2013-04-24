@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_BloomaPokemonConquestComic.html"
 Dosage comic SmackJeeves/BloomaPokemonConquestComic
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>According to the Legend of the Ransei region, if all 17 kingdoms of the region are united, the legendary Pokemon that formed the region would appear. Young Saku, along with her stubborn Axew, set off on the road of conquest. However, the warlord Nobunaga is only one kingdom away from uniting the region. Can Saku conquer Ransei before he does? ______________ There is a bit of violence later on, but hey, Pokemon has a certain lack of violence that they need to make up for. Nothing too bad. Also, I am constantly improving, so please ignore the bad art at the beginning. &gt;.&lt; Pokemon (c) Nintendo Updates Wednesdays and Saturdays.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/BloomaPokemonConquestComic
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_BloomaPokemonConquestComic_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_BloomaPokemonConquestComic_edit.html) or go back to the [comic list](../comic-index.html).

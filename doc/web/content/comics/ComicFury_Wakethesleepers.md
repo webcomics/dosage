@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Wakethesleepers.html"
 Dosage comic ComicFury/Wakethesleepers
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>An ancient, deadly curse has inflicted Locke Rinannis. He now must race against time as he struggles to find a cure before his life is consumed by it. Along the way, he makes allies, confronts powerful enemies, and unearths the mystery of a lore long forgotten... (Updates every Friday)</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Wakethesleepers
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Wakethesleepers_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Wakethesleepers_edit.html) or go back to the [comic list](../comic-index.html).

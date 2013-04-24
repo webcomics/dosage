@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_SaintsCalling.html"
 Dosage comic SmackJeeves/SaintsCalling
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>*Please go to the &quot;About&quot; page for a full description. Thanks :)* An ill-tempered girl gets her life flipped up-side-down when her best friend abducts her in an attempt to straighten her out a bit. Little does she know...her friend is an alien king from another planet?! A Scifi Shoujo! (Rated T for Teen. Read from left-to-right.)</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/SaintsCalling
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_SaintsCalling_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_SaintsCalling_edit.html) or go back to the [comic list](../comic-index.html).

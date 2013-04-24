@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_MUTE.html"
 Dosage comic SmackJeeves/MUTE
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>We fight for what we believe in and for those we care about. With terms and beliefs like these, who is to decide what is right and what is wrong? It is our emotions that fuel our actions, but is allowing them to take over really the right course of action in drastic situations...? Updates weekdays.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/MUTE
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_MUTE_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_MUTE_edit.html) or go back to the [comic list](../comic-index.html).

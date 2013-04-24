@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_GoldenSunGenerationsColossoVolume6.html"
 Dosage comic SmackJeeves/GoldenSunGenerationsColos...
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>- BEFORE THE STORM: EPISODE III - A fantasy RPG story based from the underrated RPG game series Golden Sun. The main focus is on the character Ethan who has grown up the last two years in terms of height and skill, seeks to win the heart of the werewolf girl Tasha by competing in a tough fighting Tournament. The first round is over and now the festivities truly begin! Part 3 of a 4 Year Webcomic Series BEFORE THE STORM, a Golden Sun Fancomic. - Rated Web +14 for gutter humor, mild language, romantic situations (BxG love) and fantasy violence COMPLETE - SECOND HALF OF COLOSSO BEGINS FEBRUARY 2011: http://gsgcolossov7.smackjeeves.com/</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/GoldenSunGenerationsColos...
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_GoldenSunGenerationsColossoVolume6_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_GoldenSunGenerationsColossoVolume6_edit.html) or go back to the [comic list](../comic-index.html).

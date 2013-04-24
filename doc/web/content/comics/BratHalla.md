@@ -4,6 +4,14 @@ url: "/comics/BratHalla.html"
 Dosage comic BratHalla
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Norse mythology webcomic where young Thor, Loki, Balder, Hod and more face off against grade school and make an old man out of their immortal dad Odin</td>
@@ -24,8 +32,8 @@ Dosage comic BratHalla
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/BratHalla_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](BratHalla_edit.html) or go back to the [comic list](../comic-index.html).

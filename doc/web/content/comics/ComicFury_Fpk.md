@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Fpk.html"
 Dosage comic ComicFury/Fpk
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Imagine those badly-photocopied zines that were left on the tables at your local coffee shop got a shave and a haircut, finished their fine arts degrees, and turned out to have really odd Monty Python-esque senses of humor. Then they got married and had a kid. That kid is FPK.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Fpk
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Fpk_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Fpk_edit.html) or go back to the [comic list](../comic-index.html).

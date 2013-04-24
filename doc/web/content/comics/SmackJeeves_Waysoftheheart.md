@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Waysoftheheart.html"
 Dosage comic SmackJeeves/Waysoftheheart
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>&quot;Fate is destined for one fennec when he bumps into a raccoon one morning. Theyd fall in love, and eventually become mates. But shes not the only one fighting for the young fennecs heart.&quot;</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Waysoftheheart
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Waysoftheheart_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Waysoftheheart_edit.html) or go back to the [comic list](../comic-index.html).

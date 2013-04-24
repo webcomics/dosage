@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Tardaasa.html"
 Dosage comic SmackJeeves/Tardaasa
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Tardaasa is about the small things in life. It is about the feeling you get when you watch someone whipe of a bogger on the side of their bed and you happily think: &quot; I do that too.&quot; And then you think it is gross...</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Tardaasa
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Tardaasa_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Tardaasa_edit.html) or go back to the [comic list](../comic-index.html).

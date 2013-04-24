@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Beepolice.html"
 Dosage comic ComicFury/Beepolice
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Bee Police is a comic about government conspiracies, mutant bees, mountain gods, ancient aliens, random monsters, and some aggies living in an out of the way town named Podunk.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Beepolice
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Beepolice_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Beepolice_edit.html) or go back to the [comic list](../comic-index.html).

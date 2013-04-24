@@ -4,6 +4,14 @@ url: "/comics/DrunkDuck_Here_Comes_the_Chavalry_and_other_random_things_we_decid
 Dosage comic DrunkDuck/Here_Comes_the_Chavalry_and...
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td></td>
@@ -24,8 +32,8 @@ Dosage comic DrunkDuck/Here_Comes_the_Chavalry_and...
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/DrunkDuck_Here_Comes_the_Chavalry_and_other_random_things_we_decided_to_draw_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](DrunkDuck_Here_Comes_the_Chavalry_and_other_random_things_we_decided_to_draw_edit.html) or go back to the [comic list](../comic-index.html).

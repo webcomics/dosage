@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_TheLastELement.html"
 Dosage comic SmackJeeves/TheLastELement
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Gaelic, a shape shifting guardian with the ability to become a wolf faces long forgotten trouble. Betrayed and wounded, hes cast to earth with his friends Hakune and Odina. With the support of a young earth woman, Maysume and a omega wolf, Abba, Gaelic finds the strength to move on and fight for the sake of his people and his beloved friends</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/TheLastELement
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_TheLastELement_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_TheLastELement_edit.html) or go back to the [comic list](../comic-index.html).

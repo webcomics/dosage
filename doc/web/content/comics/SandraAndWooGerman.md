@@ -4,6 +4,14 @@ url: "/comics/SandraAndWooGerman.html"
 Dosage comic SandraAndWooGerman
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Sandra und Woo: ein Webcomic über Freundschaft, das Leben und die Kunst (keine) Eichhörnchen zu essen; mit dem Mädchen Sandra und ihrem Waschbären Woo in den Hauptrollen</td>
@@ -24,8 +32,8 @@ Dosage comic SandraAndWooGerman
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>1</div></td>
+<th>Votes</th><td>1</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SandraAndWooGerman_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SandraAndWooGerman_edit.html) or go back to the [comic list](../comic-index.html).

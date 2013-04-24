@@ -4,6 +4,14 @@ url: "/comics/KeenSpot_MakeshiftMiracle.html"
 Dosage comic KeenSpot/MakeshiftMiracle
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Colby Reynolds searches for meaning in the world around him and discovers a place where dreams can come true, if hes willing to pay the price.</td>
@@ -24,8 +32,8 @@ Dosage comic KeenSpot/MakeshiftMiracle
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/KeenSpot_MakeshiftMiracle_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](KeenSpot_MakeshiftMiracle_edit.html) or go back to the [comic list](../comic-index.html).

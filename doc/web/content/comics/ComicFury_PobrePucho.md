@@ -4,6 +4,14 @@ url: "/comics/ComicFury_PobrePucho.html"
 Dosage comic ComicFury/PobrePucho
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>There is a place far underground you have no idea it exists, with Lycanthropes, giant bugs, weird politics and NINJA BUNNIES. And poor Pucho just has to suck it up and join the party as the new Lycan in Paws Den!</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/PobrePucho
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_PobrePucho_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_PobrePucho_edit.html) or go back to the [comic list](../comic-index.html).

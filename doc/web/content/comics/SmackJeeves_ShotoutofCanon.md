@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_ShotoutofCanon.html"
 Dosage comic SmackJeeves/ShotoutofCanon
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Shot out of Canon is the new direction for the former Fallout Shelter Comics. Like the Fallout Shelter Comics, it'll be about the forums (and sometimes comics) I go to. Unlike the former Fallout Shelter Comics, this will deal with things besides there. And unlike that, it won't be Canon with my Main Comics. Formerly: My Fallout Shelter Comics I do for the Fallout Shelter: http://z1.invisionfree.com/forums/The_Fallout_Shelter/index.php?act=idx</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/ShotoutofCanon
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_ShotoutofCanon_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_ShotoutofCanon_edit.html) or go back to the [comic list](../comic-index.html).

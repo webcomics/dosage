@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Spf1337.html"
 Dosage comic ComicFury/Spf1337
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A webcomic about the little things in life that let you get through the hard times. With groan-inducing puns and hilarious antics, SPF is here to entertain you. Or is it the other way around...?</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Spf1337
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Spf1337_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Spf1337_edit.html) or go back to the [comic list](../comic-index.html).

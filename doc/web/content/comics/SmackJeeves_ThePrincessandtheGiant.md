@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_ThePrincessandtheGiant.html"
 Dosage comic SmackJeeves/ThePrincessandtheGiant
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A silent fairytale about a young princess and another, rather larger individual. Updates Sundays.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/ThePrincessandtheGiant
 <th>Status</th><td>error on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_ThePrincessandtheGiant_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_ThePrincessandtheGiant_edit.html) or go back to the [comic list](../comic-index.html).

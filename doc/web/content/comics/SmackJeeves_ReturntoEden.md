@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_ReturntoEden.html"
 Dosage comic SmackJeeves/ReturntoEden
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>When you're the last angel remaining, being mistaken for Satan's lunch is *not* going to make things easier.... (may contain fun stuff like angels, demons, complete disregard for the bible, crazy people and bare butts, sometimes bare-butted crazy people. Add a hint of BL, and you've been warned)</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/ReturntoEden
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_ReturntoEden_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_ReturntoEden_edit.html) or go back to the [comic list](../comic-index.html).

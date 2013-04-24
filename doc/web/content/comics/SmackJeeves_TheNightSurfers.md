@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_TheNightSurfers.html"
 Dosage comic SmackJeeves/TheNightSurfers
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>When the coastal city of Costa Nueva is threatened by sand creatures sent by a mysterious evil, four teenagers rise from tragedy to become heroes. They are The Night Surfers. Read it here at Smack Jeeves, or get even more content and the most recent updates at thenightsurfers.com!</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/TheNightSurfers
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_TheNightSurfers_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_TheNightSurfers_edit.html) or go back to the [comic list](../comic-index.html).

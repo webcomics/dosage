@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Skate.html"
 Dosage comic SmackJeeves/Skate
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>'You think you can do anything... how about your rival is better? Outstanding skills, cheatting or maybe something else? Go find out in the confrontation of two strong personalities. Remember: curiosity is the first step to hell...' --- Manga: real life, school life, humor, action</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Skate
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Skate_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Skate_edit.html) or go back to the [comic list](../comic-index.html).

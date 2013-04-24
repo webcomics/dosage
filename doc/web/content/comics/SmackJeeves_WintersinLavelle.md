@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_WintersinLavelle.html"
 Dosage comic SmackJeeves/WintersinLavelle
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Winters in Lavelle follows siblings Kari and Aiden as they discover an old family heirloom is more than it seems. Lost in a strange world, they must find a way to stay together and alive amid strange cloaked men, human/deer hybrids, dragon kings, and magic amber that will change the course of their lives.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/WintersinLavelle
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_WintersinLavelle_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_WintersinLavelle_edit.html) or go back to the [comic list](../comic-index.html).

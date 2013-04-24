@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_MementoMori.html"
 Dosage comic SmackJeeves/MementoMori
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Agus &amp; Karina are a lovely couple of college students enjoying their everyday life, until the day Agus receives a shocking new that will change his life forever. This is a pilot comic I did for publishing in my country, but since local publications aren't successful in here, it got scrapped.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/MementoMori
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_MementoMori_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_MementoMori_edit.html) or go back to the [comic list](../comic-index.html).

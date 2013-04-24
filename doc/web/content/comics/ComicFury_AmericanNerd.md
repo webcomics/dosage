@@ -4,6 +4,14 @@ url: "/comics/ComicFury_AmericanNerd.html"
 Dosage comic ComicFury/AmericanNerd
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>The adventures of the epynonymous nerd in Japan, going through the usual JRPG motions alongside a blonde amnesiac protagonist, a nature spirit, a Digital monster, a Sonic the Hedgehog cosplayer, and a few characters I haven't gotten around to yet. Whacky shennanigans ensue.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/AmericanNerd
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_AmericanNerd_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_AmericanNerd_edit.html) or go back to the [comic list](../comic-index.html).

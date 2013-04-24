@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Secondcrimeanwar.html"
 Dosage comic ComicFury/Secondcrimeanwar
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Set in Ukraine after the fall of the Soviet Union, in an alternate 1995, this is a story of civil war, terrorism, revolution, missing nuclear weapons, and some of the most disgusting sausages on the planet. Hang on tight and enjoy the ride! Updates every three days, on average, real life permitting.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Secondcrimeanwar
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Secondcrimeanwar_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Secondcrimeanwar_edit.html) or go back to the [comic list](../comic-index.html).

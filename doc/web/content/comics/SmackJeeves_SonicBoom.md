@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_SonicBoom.html"
 Dosage comic SmackJeeves/SonicBoom
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Rules: 1. No random images that have nothing to do with the comic. 2. No content over PG-13. 3. Excessive trolling is prohibited. Some minor jokes are fine, but don't take it too far please. 4. If you're gonna give criticism, be constructive! No blatant insults! 5. Homophobia is also undesired.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/SonicBoom
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_SonicBoom_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_SonicBoom_edit.html) or go back to the [comic list](../comic-index.html).

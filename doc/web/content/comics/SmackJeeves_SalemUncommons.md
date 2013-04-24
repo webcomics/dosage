@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_SalemUncommons.html"
 Dosage comic SmackJeeves/SalemUncommons
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>In a hidden corner of Salem MA stands the Salem Uncommon boarding house...It was purchased years ago by Karl (formerly Dr. Frankenstein's nameless monster), and has since attracted every manner of ghoul, ghost, goblin, and monster (as well as a few odd humans)...If you like your humor a little dark but good natured, like the Addams and Munsters of old, stop by. Salem always has room for more Uncommons...</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/SalemUncommons
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_SalemUncommons_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_SalemUncommons_edit.html) or go back to the [comic list](../comic-index.html).

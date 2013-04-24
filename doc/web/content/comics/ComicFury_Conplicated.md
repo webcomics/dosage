@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Conplicated.html"
 Dosage comic ComicFury/Conplicated
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>When sarcastic but charitable Amber Pennicastle follows a handsome panhandler to his secret hideaway, her life turns upside-down in this action/romantic comedy. (Revised and color version of Geode Corner).</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Conplicated
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Conplicated_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Conplicated_edit.html) or go back to the [comic list](../comic-index.html).

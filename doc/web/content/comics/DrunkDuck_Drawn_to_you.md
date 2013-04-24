@@ -4,6 +4,14 @@ url: "/comics/DrunkDuck_Drawn_to_you.html"
 Dosage comic DrunkDuck/Drawn_to_you
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td></td>
@@ -24,8 +32,8 @@ Dosage comic DrunkDuck/Drawn_to_you
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/DrunkDuck_Drawn_to_you_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](DrunkDuck_Drawn_to_you_edit.html) or go back to the [comic list](../comic-index.html).

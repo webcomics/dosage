@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_AVampiresMelody.html"
 Dosage comic SmackJeeves/AVampiresMelody
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A Vampire's Melody is a yaoi manga about a young boy who stumbles upon one of the eldest vampire known to man. He then gets sucked into the world of the night and becomes every vampires dream meal. Why are the vampires so attracted to this boy's blood and what is his connection to the dark realm? Can love bloom in such an unlikely place?</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/AVampiresMelody
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_AVampiresMelody_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_AVampiresMelody_edit.html) or go back to the [comic list](../comic-index.html).

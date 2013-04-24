@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Mightymeteorite.html"
 Dosage comic ComicFury/Mightymeteorite
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>What would you do if you had superpowers? Would you use them to fight crime? Live your life normally? Michael Matthews is going to try to do both.... but it's not as easy as you think it will be</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Mightymeteorite
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Mightymeteorite_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Mightymeteorite_edit.html) or go back to the [comic list](../comic-index.html).

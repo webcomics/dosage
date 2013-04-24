@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Thewomenidraw.html"
 Dosage comic ComicFury/Thewomenidraw
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>This is a place for all the women I drew over many years. Some you might recognize from my strips, others you'll see here for the first time, and the rest are women I drew from other comics on ComicFury.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Thewomenidraw
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Thewomenidraw_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Thewomenidraw_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/Goats.html"
 Dosage comic Goats
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>goats: the comic strip | by jonathan rosenberg | new comics every mon-wed-fri</td>
@@ -24,8 +32,8 @@ Dosage comic Goats
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/Goats_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](Goats_edit.html) or go back to the [comic list](../comic-index.html).

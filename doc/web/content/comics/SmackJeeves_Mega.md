@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Mega.html"
 Dosage comic SmackJeeves/Mega
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Dr. Wily has betrayed Dr. Light. He stole Dr. Lights robos and findings to make his own robots to destroy him and the city he lives in. However, Dr. Light has his own aces up his sleeve. Follow the adventures of DAVE and Megaman, and find out if Wily can be beaten. No longer accepting Cameos.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Mega
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Mega_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Mega_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_PokemonMysteryDungeonTales.html"
 Dosage comic SmackJeeves/PokemonMysteryDungeonTales
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Vexx and Mack of the Super Ranked Team, GreenFire, set out on a mission of their own, to explore the world outside their Island! However, things do not go according to plan when enemies of old appear with plans of their own. Along with their new team-mates, friends and allies, Vexx and Mack set a course to continue helping the Pokémon of the world while exploring the new world around them. This is their Tale... Based on the popular Pokémon Mystery Dungeon © series. Pokémon is copyrighted © to Nintendo/GameFreak Updates once a week, or whenever possible</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/PokemonMysteryDungeonTales
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_PokemonMysteryDungeonTales_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_PokemonMysteryDungeonTales_edit.html) or go back to the [comic list](../comic-index.html).

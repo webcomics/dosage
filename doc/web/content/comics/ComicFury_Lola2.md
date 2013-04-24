@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Lola2.html"
 Dosage comic ComicFury/Lola2
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Lola is the story of a sad, sad 13 (now 14) year old girl, who lives with her eccentric grandmother. After just entering junior high school, Lola begins to make new friends and go about life like every other normal kid...of course &quot;normal&quot; is relative.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Lola2
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Lola2_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Lola2_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_APPLESTRENGTH.html"
 Dosage comic SmackJeeves/APPLESTRENGTH
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Sentenced to death, Naori Ketsueki doesn't expect miracle or redemption. Sure to close his eyes for the very last time, he wakes up yet into a strange world full of apples, where he will have to face his fate again, and the consequences of his actions. But what is the curse of Snow White ? And where will it lead him to ?</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/APPLESTRENGTH
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_APPLESTRENGTH_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_APPLESTRENGTH_edit.html) or go back to the [comic list](../comic-index.html).

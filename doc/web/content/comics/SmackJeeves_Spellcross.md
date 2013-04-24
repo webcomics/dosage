@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Spellcross.html"
 Dosage comic SmackJeeves/Spellcross
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Spellcross takes place in a land of high fantasy, re-imagined through the scope of a classic RPG. It's a world where things such as quests, dungeons, and bosses are commonplace, and magic is abundant! Follow Caldwell the Alchemist as he strives to raise himself up the ranks of adventurers, to gather a party of friends, and to overcome his fears. Updates three times a week on Monday, Wednesday, and Friday!</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Spellcross
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Spellcross_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Spellcross_edit.html) or go back to the [comic list](../comic-index.html).

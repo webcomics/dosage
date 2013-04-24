@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_CRACKRPCOMICJOINNOW3.html"
 Dosage comic SmackJeeves/CRACKRPCOMICJOINNOW3
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Crack RP comic that takes place in a Hotel... Pretty much anyone can join/co author!:D Read the description on Page 1 to learn more! JOIN before all positions are taken, and there is only a few left. :D Please be creative when making your characters and have fun!&lt;3 C: Message me with any questions, ~Skittymitty</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/CRACKRPCOMICJOINNOW3
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_CRACKRPCOMICJOINNOW3_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_CRACKRPCOMICJOINNOW3_edit.html) or go back to the [comic list](../comic-index.html).

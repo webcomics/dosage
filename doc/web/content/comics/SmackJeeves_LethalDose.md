@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_LethalDose.html"
 Dosage comic SmackJeeves/LethalDose
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>WARNING: This comic contains heterosexual AND homosexual relationship, Drug abuse, sexual themes and violence. READ RIGHT TO LEFT - JAPANESE FORMAT Updates every Sun &amp; Wed. ________________________________ Bobby and Raine were wannabe child hood sweet hearts that, due to unfortunate circumstance, had to be torn apart. Now, five years later Raine returns to find a Bobby very unlike the one she once new. Lonely and stuck with an undesirable life, he has turned to drugs and alcohol to mull the days away with. But after a strange encounter in an alleyway one night, Bobby finds himself trapped in a much more 'hardcore' underground world of drugs and abuse; one that's secrets are so dark it's not too easy to leave behind.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/LethalDose
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_LethalDose_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_LethalDose_edit.html) or go back to the [comic list](../comic-index.html).

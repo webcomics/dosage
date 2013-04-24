@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Flashback.html"
 Dosage comic SmackJeeves/Flashback
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Following the life of some unknown dutch dude in this journal comic. Through the true tales, the less true tales and the made up stories that simply don't make sense. UPDATED 5 DAYS A WEEK Welcome, to FLASHBACK.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Flashback
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Flashback_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Flashback_edit.html) or go back to the [comic list](../comic-index.html).

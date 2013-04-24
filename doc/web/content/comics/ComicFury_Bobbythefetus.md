@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Bobbythefetus.html"
 Dosage comic ComicFury/Bobbythefetus
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A fetal adventures of a fetus (which is not an e!). It features a Svalbardian/Swedish fetus(which might be a fetus, but isn't) named Bobby located somewhere in Iceland, adjustment disordered narrator who hates being seen, Roberta the fetus (who is not an e!) who is Bobby's girlfriend, the author himself, a sock puppet and a minor deity destined to ruin the world... This is a mirror of the DrunkDuck comic with the same name and author...</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Bobbythefetus
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Bobbythefetus_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Bobbythefetus_edit.html) or go back to the [comic list](../comic-index.html).

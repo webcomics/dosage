@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_LondonUnderworld.html"
 Dosage comic SmackJeeves/LondonUnderworld
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Miss Ameliea Worton is sick of the rich, upper class, boring world she has been brought up in. She seeks entertainment from London's dark under belly, making friends with crooks and con artists and playing their games against the aristocracy she has grown bitter of. But, when Ameliea decides to join forces with the king of the London Underworld, she discovers how naive she has been, and how dangerous London can really be.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/LondonUnderworld
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_LondonUnderworld_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_LondonUnderworld_edit.html) or go back to the [comic list](../comic-index.html).

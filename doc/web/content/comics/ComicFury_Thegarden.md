@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Thegarden.html"
 Dosage comic ComicFury/Thegarden
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>An evil angel, a silent demon, and an insanely happy girl who are forced to work together to complete a mission that none of them wanted.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Thegarden
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Thegarden_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Thegarden_edit.html) or go back to the [comic list](../comic-index.html).

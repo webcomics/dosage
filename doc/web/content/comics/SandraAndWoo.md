@@ -4,6 +4,14 @@ url: "/comics/SandraAndWoo.html"
 Dosage comic SandraAndWoo
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Sandra and Woo: a webcomic about friendship, life and the art of (not) eating squirrels, featuring the girl Sandra and her pet raccoon Woo.</td>
@@ -24,8 +32,8 @@ Dosage comic SandraAndWoo
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SandraAndWoo_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SandraAndWoo_edit.html) or go back to the [comic list](../comic-index.html).

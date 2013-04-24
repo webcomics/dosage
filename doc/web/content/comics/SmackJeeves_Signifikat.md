@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Signifikat.html"
 Dosage comic SmackJeeves/Signifikat
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Life's but a walking shadow, a poor player That struts and frets his hour upon the stage And then is heard no more: it is a tale Told by an idiot, full of sound and fury, Signifying nothing.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Signifikat
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Signifikat_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Signifikat_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Tennisballman.html"
 Dosage comic ComicFury/Tennisballman
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>He's a man of severe delusion. She's a girl with anger problems. He has a skull minion and a giant dirt-breathing fish. She has enemies waiting to be killed with gorey passion. Updated every Tuesday and Friday.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Tennisballman
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Tennisballman_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Tennisballman_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Cybertech.html"
 Dosage comic SmackJeeves/Cybertech
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>An epic scale space opera. War, politics and human drama take center stage in an ever expanding story. The culmination leads humanity and its allies to the Andromeda galaxy to end the tyranny of Emperor Dalzhi of the Warcon Empire and his countless millions of warships. official site: www.superwebcomics.com ---Currently this comic is not displaying properly because I changed registrars, see this comic at www.drunkduck.com/cybertech/, or www.superwebcomics.com---</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Cybertech
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Cybertech_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Cybertech_edit.html) or go back to the [comic list](../comic-index.html).

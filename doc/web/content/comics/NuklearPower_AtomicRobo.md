@@ -4,6 +4,14 @@ url: "/comics/NuklearPower_AtomicRobo.html"
 Dosage comic NuklearPower/AtomicRobo
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td></td>
@@ -24,8 +32,8 @@ Dosage comic NuklearPower/AtomicRobo
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/NuklearPower_AtomicRobo_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](NuklearPower_AtomicRobo_edit.html) or go back to the [comic list](../comic-index.html).

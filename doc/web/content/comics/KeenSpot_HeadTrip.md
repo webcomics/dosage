@@ -4,6 +4,14 @@ url: "/comics/KeenSpot_HeadTrip.html"
 Dosage comic KeenSpot/HeadTrip
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>We're the good kind of crazy, we swear.</td>
@@ -24,8 +32,8 @@ Dosage comic KeenSpot/HeadTrip
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/KeenSpot_HeadTrip_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](KeenSpot_HeadTrip_edit.html) or go back to the [comic list](../comic-index.html).

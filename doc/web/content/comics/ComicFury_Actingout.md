@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Actingout.html"
 Dosage comic ComicFury/Actingout
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>When a bunch of kids with very different personalities come together in their school's drama club, a lot more goes on in the auditorium than you may think! Follow the dramatic lives of Clinton, Ollie, Tasha, and the rest of the gang as they set the scene and put on a heck of a performance, both on and off the stage! Updates are on Sundays and Thursdays!</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Actingout
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Actingout_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Actingout_edit.html) or go back to the [comic list](../comic-index.html).

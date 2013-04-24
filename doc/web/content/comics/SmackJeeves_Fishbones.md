@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Fishbones.html"
 Dosage comic SmackJeeves/Fishbones
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Fishbones starts in the year 1999 in the fictional, east coast city of Southport. The story is about growing up, friendship, and sometimes the mob.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Fishbones
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Fishbones_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Fishbones_edit.html) or go back to the [comic list](../comic-index.html).

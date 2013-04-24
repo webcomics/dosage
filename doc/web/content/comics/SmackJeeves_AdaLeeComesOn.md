@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_AdaLeeComesOn.html"
 Dosage comic SmackJeeves/AdaLeeComesOn
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>&gt;&gt; A Faustian tale, or the story of a crazy woman. ___(Warning: this comic contains smoking, drinking, profanity, nudity, and sexual themes. Reader discretion is advised.)</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/AdaLeeComesOn
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_AdaLeeComesOn_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_AdaLeeComesOn_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Amtheatre.html"
 Dosage comic ComicFury/Amtheatre
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Do you like mid-low fantasy? Do you like comedy? Are you not offended by characters who are missing important appendages? Maybe you should read this. Or maybe not. Is this another DnD comic? No. But is it filled with cheap pop culture references? Hell no. Why is the main character a girl with no legs or right arm? Because I'm a sick human being, okay???</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Amtheatre
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Amtheatre_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Amtheatre_edit.html) or go back to the [comic list](../comic-index.html).

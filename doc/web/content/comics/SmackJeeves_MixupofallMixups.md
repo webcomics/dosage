@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_MixupofallMixups.html"
 Dosage comic SmackJeeves/MixupofallMixups
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>If you're looking for a good comic with a plot, I suggest not reading this. If you like randomness, Kirby, Tails and author involvement, then this is the place. Arcs are bound to happen, so watch for those. Accepts cameos. All characters and backgrounds used in this belong to their rightful owners, and credit goes to the people who ripped, edited and/or recoloured the sprites used.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/MixupofallMixups
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_MixupofallMixups_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_MixupofallMixups_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/DrunkDuck_Air_Raid_Robertson.html"
 Dosage comic DrunkDuck/Air_Raid_Robertson
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td></td>
@@ -24,8 +32,8 @@ Dosage comic DrunkDuck/Air_Raid_Robertson
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/DrunkDuck_Air_Raid_Robertson_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](DrunkDuck_Air_Raid_Robertson_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Entreeuxdeux.html"
 Dosage comic SmackJeeves/Entreeuxdeux
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>&quot;Entre eux deux&quot; est une bande-dessinée amateur qui sent bon la poudre, les fusillades et la mafia, mais qui en fait se préoccupe plus des deux destins qui y ont difficilement trouvée leur place. Deux êtres que tout sépare, mais finalement pas tant que ça... Je poste les pages par quatre (quand j'y arrive) tous les 15 jour, le dimanche. Merci à tous ceux qui passent par ici. &gt;w&lt;</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Entreeuxdeux
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Entreeuxdeux_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Entreeuxdeux_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_LiliBleu.html"
 Dosage comic SmackJeeves/LiliBleu
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Webcomic en español La humanidad ha quedado al borde de la extinción por causa de un virus que los muta en superhumanos poderosos, dotados de una gran belleza y poder que han tomado control del planeta. De entre el nuevo orden se alza la última esperanza de la humanidad: Espartaco García, armado sólo con una de las mentes más brillantes del mundo en contra de seres que pueden derribar montañas con su mirada. Sólo hay un problema: Quiere salvar el mundo... para gobernarlo él.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/LiliBleu
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_LiliBleu_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_LiliBleu_edit.html) or go back to the [comic list](../comic-index.html).

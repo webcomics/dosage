@@ -4,6 +4,14 @@ url: "/comics/ComicFury_JustPeachy.html"
 Dosage comic ComicFury/JustPeachy
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>&quot;Just Peachy&quot; is a cheeky serial comic strip featuring a small college town's generation of college alums who aren't giving up and growing old without a fight. Kids: don't let your parents fool you, this is exactly how they behave when they think you're not looking. Parents: don't try to act all dignified and deny it. Liar, liar, pants on fire. In fact, you're probably worse than this.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/JustPeachy
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_JustPeachy_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_JustPeachy_edit.html) or go back to the [comic list](../comic-index.html).

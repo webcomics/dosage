@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_HiddenStrengthAWhiteNuzlocke.html"
 Dosage comic SmackJeeves/HiddenStrengthAWhiteNuzlocke
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Clover, Cheren, and Belle graduate from trainer school, looking forward to finally being able to go on a pokemon journey of their own. Things start out like any other adventure, however soon the trio becomes entangled in the mess that is Team Plasma, finding out secrets that have been hiding in plain sight all their lives. How will their adventure unfold? This is a Nuzlocke story comic. [THIS COMIC IS FINISHED]</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/HiddenStrengthAWhiteNuzlocke
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_HiddenStrengthAWhiteNuzlocke_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_HiddenStrengthAWhiteNuzlocke_edit.html) or go back to the [comic list](../comic-index.html).

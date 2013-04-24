@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Paradox.html"
 Dosage comic SmackJeeves/Paradox
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Taken as prisoners of war, Dake and Tommy are sold as slaves, one to a wealthy but kind woman, the other to a man of unknown species who has a very bad habit of eating people. Forced to endure the horrors of war, racism, homophobia, and the occasional molestation, can these two opposites somehow attract? Contains sexual situations, violence, drug use and probably many other bad things.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Paradox
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Paradox_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Paradox_edit.html) or go back to the [comic list](../comic-index.html).

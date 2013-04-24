@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_ADayOut.html"
 Dosage comic SmackJeeves/ADayOut
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Lizzy is an average soccer playing teen with issues. After distancing from a childhood friend, she must find out what kind of a person she really is, and along the way, discover true potential as a soccer Champion!</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/ADayOut
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_ADayOut_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_ADayOut_edit.html) or go back to the [comic list](../comic-index.html).

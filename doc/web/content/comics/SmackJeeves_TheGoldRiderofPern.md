@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_TheGoldRiderofPern.html"
 Dosage comic SmackJeeves/TheGoldRiderofPern
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>I started this comic a little over a year ago, and it's been going strong ever since. Taking place in the 3rd pass of Pernese history, K'mlar, a young genius Masterweaver was placed at Ista Weyr as his first appointment after being given the station of Master. There he impresses a young Gold hatchling, an event completely unheard of in Pernese history. Despite being aggressively anti-social, he manages to make a place for himself at the Weyr that he never would have dreamed possible.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/TheGoldRiderofPern
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_TheGoldRiderofPern_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_TheGoldRiderofPern_edit.html) or go back to the [comic list](../comic-index.html).

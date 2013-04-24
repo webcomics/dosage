@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Wildflowers.html"
 Dosage comic SmackJeeves/Wildflowers
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A web comic about love, life, and trying to comes to terms with being transgendered. Sometimes dark, sometimes light, and always an attempt at a honest look at transexual life. Updating weekdays!</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Wildflowers
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Wildflowers_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Wildflowers_edit.html) or go back to the [comic list](../comic-index.html).

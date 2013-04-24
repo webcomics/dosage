@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_MegaMaidenandTheChopChopPrincess.html"
 Dosage comic SmackJeeves/MegaMaidenandTheChopChopP...
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Two girls who love punching crims become superheroes. Mega maiden is intended for OLDER Teens and adults for crude humor, language &amp; adult situations.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/MegaMaidenandTheChopChopP...
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_MegaMaidenandTheChopChopPrincess_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_MegaMaidenandTheChopChopPrincess_edit.html) or go back to the [comic list](../comic-index.html).

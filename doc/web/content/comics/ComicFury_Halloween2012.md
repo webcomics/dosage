@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Halloween2012.html"
 Dosage comic ComicFury/Halloween2012
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>This is the Webcomic Hub for the multi-webcomic event known as The Halloween Cameo Caper 2012. The strips will be posted here as they appear on the main sites by the various authors participating in the event, however, here a sense of continuity will hopefully appear as the strips are being rearranged along the way.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Halloween2012
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Halloween2012_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Halloween2012_edit.html) or go back to the [comic list](../comic-index.html).

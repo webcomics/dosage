@@ -4,6 +4,14 @@ url: "/comics/ComicFury_JaysInternetFightClub.html"
 Dosage comic ComicFury/JaysInternetFightClub
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A Bus Driver starts a female fight club in his basement, with his wife, and his wife's girl pals. They broadcast the fights over the internet, and sell the dvds of the matches.The cast goes through adventures outside of the club as well.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/JaysInternetFightClub
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_JaysInternetFightClub_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_JaysInternetFightClub_edit.html) or go back to the [comic list](../comic-index.html).

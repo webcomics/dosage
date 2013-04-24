@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_KaitoShuno.html"
 Dosage comic SmackJeeves/KaitoShuno
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>a man named Kaito goes to commit suicide after living a boring, loveless, cubicle job. He meets a strange guy named Shuno...and Shuno immediatly takes a liking to him...almost too fast to be real XD Kaito quickly makes it clear that he isnt gay...but will Shuno's actions toward him make him alittle...'confused'? lol Kaito's been in such a need for love that maybe Shuno's affection doesnt look THAT bad...or does it?:P YAOI!!</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/KaitoShuno
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_KaitoShuno_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_KaitoShuno_edit.html) or go back to the [comic list](../comic-index.html).

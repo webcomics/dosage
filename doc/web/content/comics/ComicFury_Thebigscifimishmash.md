@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Thebigscifimishmash.html"
 Dosage comic ComicFury/Thebigscifimishmash
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>this comic is a sci-fi comic which mixes several differnt sci-fi things into one. for instance, it starts off kind of like the hitch hiker's guide to the galaxy but quickly moves on to parodies of star trek, star wars and many more.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Thebigscifimishmash
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Thebigscifimishmash_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Thebigscifimishmash_edit.html) or go back to the [comic list](../comic-index.html).

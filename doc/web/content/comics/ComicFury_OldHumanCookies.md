@@ -4,6 +4,14 @@ url: "/comics/ComicFury_OldHumanCookies.html"
 Dosage comic ComicFury/OldHumanCookies
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>These are the older comics in my Human Cookies series. I've been asked by a few people to upload them, so here they are (well once they're all up anyway) I know some of them look bad, the focuses are terrible, the lighting is...well...yuck, but this is where I started, so they bring back some smiley memories for me, so enjoy the tackiness!</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/OldHumanCookies
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_OldHumanCookies_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_OldHumanCookies_edit.html) or go back to the [comic list](../comic-index.html).

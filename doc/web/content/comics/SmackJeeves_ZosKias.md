@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_ZosKias.html"
 Dosage comic SmackJeeves/ZosKias
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Being a part of the gatekeeper's sepcial clean-up crew is never easy! From vampires to new magick users, there is never any time for breaks! But, the fighting is the easiest part about it... Mizuno Umishin has been a member for a couple years, but he has yet to do any real fieldwork as he's lacking a partner. When he goes to find his...it's not what he bargained for! But now, the real question isn't whethe Light is up to the task...it's whether Umishin and Light can ever get along and become true partners!</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/ZosKias
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_ZosKias_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_ZosKias_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/ComicFury_Moths.html"
 Dosage comic ComicFury/Moths
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>In an alternate American past, Aram and his family must cope with the tightening grip of cynical political forces, while trying to understand the threat of the mysterious giant moths.</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/Moths
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_Moths_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_Moths_edit.html) or go back to the [comic list](../comic-index.html).

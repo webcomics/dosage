@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_SFCForestofDreams.html"
 Dosage comic SmackJeeves/SFCForestofDreams
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A strict, megalomaniacal lioness. A egocentric, muscular vampire. A sarcastic, antisocial eraser. A surprisingly sane blob. A small, mute pikmin. An optimistic, friendly green thing. A stubborn, determined mouse. A curious woman from the future. A meek, brilliant scientist. A calm, fatherly fighter. A serious, taciturn war veteran. A crazy, hyper girl. A confident, eager architect. A savvy, sly chimpanzee. A frustrated, busty teenager. A sad, lonely emo. A fangirlish, lovestruck fairy. A dominant, genius octopus. A loud, grumpy senior citizen. And a sadistic, creepy alien. Who will win the $1,000,000 grand prize?</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/SFCForestofDreams
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_SFCForestofDreams_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_SFCForestofDreams_edit.html) or go back to the [comic list](../comic-index.html).

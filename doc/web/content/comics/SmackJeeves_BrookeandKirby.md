@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_BrookeandKirby.html"
 Dosage comic SmackJeeves/BrookeandKirby
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>A comic about my fan character Brooke and Kirby. This is the first webcomic I ever posted here, so expect some mistakes. And don't expect updates daily. I can sometimes get Author's block.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/BrookeandKirby
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_BrookeandKirby_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_BrookeandKirby_edit.html) or go back to the [comic list](../comic-index.html).

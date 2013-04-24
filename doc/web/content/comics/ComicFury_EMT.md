@@ -4,6 +4,14 @@ url: "/comics/ComicFury_EMT.html"
 Dosage comic ComicFury/EMT
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>an experiment in Mental Theatre, externalized in comic form. Now updating 3 times weekly, every M-W-F. [i]It doesn't serve the 3 fetish as well every 3rd day on dates divisible by 3 did, but you get more story for your money - with 3 more strips every month![/i]</td>
@@ -24,8 +32,8 @@ Dosage comic ComicFury/EMT
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/ComicFury_EMT_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](ComicFury_EMT_edit.html) or go back to the [comic list](../comic-index.html).

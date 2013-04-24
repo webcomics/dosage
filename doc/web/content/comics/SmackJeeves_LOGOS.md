@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_LOGOS.html"
 Dosage comic SmackJeeves/LOGOS
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>In the far future, on a distant planet, a man made of plastics discovers what it truly means to be human.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/LOGOS
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_LOGOS_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_LOGOS_edit.html) or go back to the [comic list](../comic-index.html).

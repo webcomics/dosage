@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_EmptyWorld.html"
 Dosage comic SmackJeeves/EmptyWorld
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>&lt;enter synopsis here&gt; **This manga... -reads from right to left -is released by chapters, not pages -will decrease in quality due to laziness -art will change a lot as chapters go by since im still trying to improve</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/EmptyWorld
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_EmptyWorld_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_EmptyWorld_edit.html) or go back to the [comic list](../comic-index.html).

@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_FierceConflict.html"
 Dosage comic SmackJeeves/FierceConflict
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>For years, a war devastated the planet called Sapton. The conflict began with a group of rebels who were dissatisfied with the laws of this world attempted a world wide coup d'etat. They slowly gained power and eventually overwhelmed the majority of the opposition and are slowly but surely taking control of the world. Out of this group of rebels 5 have taken full authority and are now attempting to lead the world down the path of darkness.We follow the story of a koopa named Zuke who lost his family and homeland in the war. He travels the world in hopes of finding a way to bring peace. All sprites belong to their respective owners.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/FierceConflict
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_FierceConflict_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_FierceConflict_edit.html) or go back to the [comic list](../comic-index.html).

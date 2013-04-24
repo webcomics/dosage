@@ -4,6 +4,14 @@ url: "/comics/HMHigh.html"
 Dosage comic TheFallenAngel/HMHigh
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Welcome to the website of professional artist and illustrator, Angel Smith and of Fallen Angel Media Ltd; An independent art, design &amp; publishing house and event management company based in Bristol, England</td>
@@ -24,8 +32,8 @@ Dosage comic TheFallenAngel/HMHigh
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/HMHigh_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](HMHigh_edit.html) or go back to the [comic list](../comic-index.html).

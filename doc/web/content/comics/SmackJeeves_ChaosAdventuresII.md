@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_ChaosAdventuresII.html"
 Dosage comic SmackJeeves/ChaosAdventuresII
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Creds to: Characters Chaos/Halo - Master Rezz - Nebula Ki - Megablueblastaa Tails - Hypero Sarah  Foxx Etch  No Details Blur - Cylent Nite Thorn/Young Thorn - Cylent Nite Omega - Hypero (customised by me!) The demons - Gardow Styxs - Sakura Courage Solo Backdrops- Wacky Workbench Zone - Shadowbot Green Hill Zone - kinny-man Chemical Plant Zone - Domenico Sky Canyon - kinny-man Emerald Alter - Apocalypse the Hedgehog Angel Island Zone - SkyLights Other Tails plane - Rogultgot</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/ChaosAdventuresII
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_ChaosAdventuresII_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_ChaosAdventuresII_edit.html) or go back to the [comic list](../comic-index.html).

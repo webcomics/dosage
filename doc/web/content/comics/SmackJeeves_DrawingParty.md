@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_DrawingParty.html"
 Dosage comic SmackJeeves/DrawingParty
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>** Congrats to our first prize winner of our Mascot contest, GunboyComics! In the banner is our new mascot, Sketchy! ** Are you stuck on ideas for things to draw? Are you just starting out and need practice and want to show the world? Well, no need to look any further! Comic artists gathered together to help eachother battle comic-artist's block! Every month there will be a new theme listed, you can either post a drawing or a comic strip based off of the theme. Since this is my first time putting a group together, the rules may be changed or added if things become out of control or to improve the group so that everyone has fun! :D * REQUIREMENTS * -- Some type of drawing instrument or any computer software! -- No experience necessary! :D * RULES * -- Must be drawn by hand or computer. -- Follow the theme topic for the month. -- The comic can be for anyone at any skill level! Which means any style, manga, american, realism, and anything in between! -- Be supportive! -- Be creative and have fun!</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/DrawingParty
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_DrawingParty_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_DrawingParty_edit.html) or go back to the [comic list](../comic-index.html).

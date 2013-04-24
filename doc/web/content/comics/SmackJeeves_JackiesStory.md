@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_JackiesStory.html"
 Dosage comic SmackJeeves/JackiesStory
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Jackie's Story is an online flash webcomic adventure story about an alien named Jack (Better known as Jackie) who gets talked into participating in something that she hopes will bring back her dead brother. For the animated version: http://jackiestory.weebly.com/index.html</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/JackiesStory
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_JackiesStory_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_JackiesStory_edit.html) or go back to the [comic list](../comic-index.html).

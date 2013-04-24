@@ -4,6 +4,14 @@ url: "/comics/KeenSpot_Sharky.html"
 Dosage comic KeenSpot/Sharky
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>For '90s kid Patrick Sharky, there's no comic book superhero cooler than the one that shares his last name: SHARKY, the ultimate tough guy. They say you should never meet your heroes... but Patrick may not have a choice in the matter!</td>
@@ -24,8 +32,8 @@ Dosage comic KeenSpot/Sharky
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/KeenSpot_Sharky_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](KeenSpot_Sharky_edit.html) or go back to the [comic list](../comic-index.html).

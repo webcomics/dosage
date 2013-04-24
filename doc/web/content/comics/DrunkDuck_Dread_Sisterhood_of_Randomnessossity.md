@@ -4,6 +4,14 @@ url: "/comics/DrunkDuck_Dread_Sisterhood_of_Randomnessossity.html"
 Dosage comic DrunkDuck/Dread_Sisterhood_of_Randomn...
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td></td>
@@ -24,8 +32,8 @@ Dosage comic DrunkDuck/Dread_Sisterhood_of_Randomn...
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/DrunkDuck_Dread_Sisterhood_of_Randomnessossity_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](DrunkDuck_Dread_Sisterhood_of_Randomnessossity_edit.html) or go back to the [comic list](../comic-index.html).

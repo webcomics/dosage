@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_FiveHouses.html"
 Dosage comic SmackJeeves/FiveHouses
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>The Houses of the Alliance, led by the Angels of Rosenheim, produce interesting people with even more interesting abilities. When the crown is in a predicament that their heir cannot hope to tackle on his own, it's time to call in the cavalry from the Houses to get the job done. Yet these men are all at odds with each other. Will they be able to find harmony? Will they be successful in aiding the Prince? More than that, will they be able to find love? Rated NC/18 for violence, gore, nudity, sexual situations, baaad Catholic jokes WARNING: Male/Male, Female/Male, Female/Female, People/People relationships are a common theme in Repsychus's comics. If you cannot handle any of these, please go elsewhere. Thank you. Updates: start October 2012, 1/week (Friday or Monday) Art and Story (c) Repsychus Special thanks to blankd and eishiya &lt;3 Check out the ASK/UPDATE blog: http://fhask.tumblr.com/</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/FiveHouses
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_FiveHouses_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_FiveHouses_edit.html) or go back to the [comic list](../comic-index.html).

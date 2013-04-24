@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_BeCarefreeWithMeSoon.html"
 Dosage comic SmackJeeves/BeCarefreeWithMeSoon
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Or What Family Does (To) For Each Other. After two years, Eva Wilis returns to her hometown to find her father in dire straits and her 18-year-old sister, Cindy, on the verge of eloping with her boyfriend, Nico, brother of Terrene Corp's CEO, Miles St. Claire. To keep this from happening as well as to appease her father, Eva agrees to see Miles and talk to her about a more acceptable arrangement between their two families. But Miles has - other - plans in mind. WARNING/S: contains shojou-ai / yuri or girls love UPDATES: Saturdays and Sundays NOTE: This used to be known as &quot;Eve's Apple&quot; but I've decided to change the title to &quot;Be Carefree With Me Soon&quot; to avoid confusion with another yuri-themed webcomic with the same title.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/BeCarefreeWithMeSoon
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_BeCarefreeWithMeSoon_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_BeCarefreeWithMeSoon_edit.html) or go back to the [comic list](../comic-index.html).

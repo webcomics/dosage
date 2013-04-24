@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Republicanattackmachine.html"
 Dosage comic SmackJeeves/Republicanattackmachine
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Life is about many things. But at this site it is mostly about discussion and observation. Here you can have a discussion with a Republican. Not the National Republican Party, nor a Republican office holder, staffer, or aide. Here you will see what one Republican thinks. An individual. And you will discover, hopefully, that we like to laugh as much as anyone. If its your first time talking to a Republican, welcome.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Republicanattackmachine
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Republicanattackmachine_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Republicanattackmachine_edit.html) or go back to the [comic list](../comic-index.html).

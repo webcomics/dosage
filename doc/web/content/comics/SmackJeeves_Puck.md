@@ -4,6 +4,14 @@ url: "/comics/SmackJeeves_Puck.html"
 Dosage comic SmackJeeves/Puck
 -----------------------------------------
 
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
 <table class="comicinfo">
 <tr>
 <th>Description</th><td>Puck is a weekly webcomic that, in the words of one fan, is &quot;mostly irreverent humor concerning a pretty girl with freckles and a hot she-devil who wears fan-service costumes.&quot; That's about right. Surreal fantasy slice-of-life crazy-type stuff about the world's funniest redhead! Updates Tuesday.</td>
@@ -24,8 +32,8 @@ Dosage comic SmackJeeves/Puck
 <th>Status</th><td>ok on 23.04.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</div></td>
+<th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](/comics/SmackJeeves_Puck_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](SmackJeeves_Puck_edit.html) or go back to the [comic list](../comic-index.html).
