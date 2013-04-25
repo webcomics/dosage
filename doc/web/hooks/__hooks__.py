@@ -1,17 +1,27 @@
 # -*- coding: iso-8859-1 -*-
+# Hook routines for the wok static site generator.
+# Note that mediacompress is a local module.
 import os
 
 
 def compress_javascript(config, output_path):
     """Minify JS files."""
-    from mediacompress import compress_js_files
-    compress_js_files(output_path, excludes=("*.min.js",))
+    try:
+        from mediacompress import compress_js_files
+    except ImportError:
+        pass
+    else:
+        compress_js_files(output_path, excludes=("*.min.js",))
 
 
 def compress_css(config, output_path):
     """Minify CSS files."""
-    from mediacompress import compress_css_files
-    compress_css_files(output_path)
+    try:
+        from mediacompress import compress_css_files
+    except ImportError:
+        pass
+    else:
+        compress_css_files(output_path)
 
 
 def chmod(config):
