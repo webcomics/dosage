@@ -31,6 +31,23 @@ class CaptainSNES(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/nnn-stripname'
 
 
+class Carciphona(_BasicScraper):
+    description = u'Fantasy webcomic by Shilin'
+    url = 'http://carciphona.com/'
+    stripUrl = url + 'view.php?page=%s&chapter=%s'
+    imageSearch = compile(tagre("div", "style", r'background-image:url\((_pages[^)]*)\)'))
+    prevSearch = compile(tagre("a", "href", r'(view.php?[^"]*)', after="prevarea"))
+    latestSearch = compile(tagre("a", "href", r'(view.php?[^"]*)') +
+      tagre("div", "class", "linkslast"))
+    help = 'Index format: None'
+    starter = indirectStarter(url, latestSearch)
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        ip = imageUrl.split('/')
+        return "volume_%s_page_%s" % (ip[-2], ip[-1])
+
+
 class CaseyAndAndy(_BasicScraper):
     description = u'Casey and Andy'
     url = 'http://www.galactanet.com/comic/'

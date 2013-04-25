@@ -1,7 +1,7 @@
 Dosage 2.2 (released xx.xx.2013)
 
 Features:
-- comic: Added ARedTailsDream.
+- comic: Added ARedTailsDream, Carciphona.
   Patch by Dirk Reiners
 
 Changes:
