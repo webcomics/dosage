@@ -32,12 +32,12 @@ class CaptainSNES(_BasicScraper):
 
 
 class Carciphona(_BasicScraper):
-    description = u'Fantasy webcomic by Shilin'
+    description = u'Fantasy webcomic by Shilin. In an era where magic is forbidden, a sorceress struggles to restore her once peaceful life.'
     url = 'http://carciphona.com/'
     stripUrl = url + 'view.php?page=%s&chapter=%s'
     imageSearch = compile(tagre("div", "style", r'background-image:url\((_pages[^)]*)\)'))
-    prevSearch = compile(tagre("a", "href", r'(view.php?[^"]*)', after="prevarea"))
-    latestSearch = compile(tagre("a", "href", r'(view.php?[^"]*)') +
+    prevSearch = compile(tagre("a", "href", r'(view\.php?[^"]*)', after="prevarea"))
+    latestSearch = compile(tagre("a", "href", r'(view\.php?[^"]*)') +
       tagre("div", "class", "linkslast"))
     help = 'Index format: None'
     starter = indirectStarter(url, latestSearch)
