@@ -64,6 +64,25 @@ class GeeksNextDoor(_BasicScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
+# disallowed by robots.txt
+class _GeneralProtectionFault(_BasicScraper):
+    description = u'General Protection Fault'
+    url = 'http://www.gpf-comics.com/'
+    rurl = escape(url)
+    stripUrl = url + 'archive/%s'
+    firstStripUrl = stripUrl % '1998/11/02'
+    imageSearch = compile(tagre("img", "src", r'(/comics/[^"]*)'))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl) +
+        tagre("img", "alt", "Previous Comic"))
+    help = 'Index format: yyyy/mm/dd'
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        """Remove random stuff from filename."""
+        imageName = imageUrl.split('/')[-1]
+        return imageName[:11] + imageName[-4:]
+
+
 class GirlsWithSlingshots(_BasicScraper):
     url = 'http://www.girlswithslingshots.com/'
     rurl = escape(url)
