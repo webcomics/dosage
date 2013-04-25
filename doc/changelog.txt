@@ -4,6 +4,7 @@ Features:
 - comic: Added ARedTailsDream, Carciphona, Curtailed, GirlGenius,
   Lackadaisy, SabrinaOnline, TheDreamlandChronicles, TwoGuysAndGuy
   and Unsound. Patch by Dirk Reiners.
+  Closes: GH bug #29
 
 Changes:
 - cmdline: Ignore trailing '/' at end of comic names. Useful
