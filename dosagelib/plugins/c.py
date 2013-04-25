@@ -323,6 +323,14 @@ class CtrlAltDel(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'([^"]+)', after="nav-back"))
     help = 'Index format: yyyymmdd'
 
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        """Remove random junk from image names."""
+        imgname = imageUrl.split('/')[-1]
+        imgbase = imgname.rsplit('-', 1)[0]
+        imgext = imgname.rsplit('.', 1)[1]
+        return '%s.%s' % (imgbase, imgext)
+
 
 class CtrlAltDelSillies(CtrlAltDel):
     name = 'CtrlAltDel/Sillies'
