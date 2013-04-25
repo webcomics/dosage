@@ -3,8 +3,10 @@ Dosage 2.2 (released xx.xx.2013)
 Features:
 - comic: Added ARedTailsDream, Carciphona, Curtailed, GirlGenius,
   Lackadaisy, SabrinaOnline, TheDreamlandChronicles, TwoGuysAndGuy
-  and Unsound. Patch by Dirk Reiners.
+  and Unsound. Patches by Dirk Reiners.
   Closes: GH bug #29
+- comic: Comics which are not updated anymore can now be marked.
+  Closes: GH bug #30
 
 Changes:
 - cmdline: Ignore trailing '/' at end of comic names. Useful
@@ -12,7 +14,8 @@ Changes:
 
 Fixes:
 - comics: Fix DorkTower, MadamAndEve and Saturday Morning Breakfast
-  Cereal, and improve image filenames of CtrlAltDel. Patch by Dirk Reiners.
+  Cereal, and improve image filenames of CtrlAltDel.
+  Patches by Dirk Reiners.
 
 
 Dosage 2.1 (released 14.4.2013)

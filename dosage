@@ -240,6 +240,9 @@ def getStrips(scraperobj, options):
         numstrips = 1
     out.context = scraperobj.getName()
     try:
+        if scraperobj.isComplete(options.basepath):
+            out.info("All comics are already downloaded.")
+            return 0
         for strip in scraperobj.getStrips(numstrips):
             _errors, skipped = saveComicStrip(strip, options.basepath, options.dry_run)
             errors += _errors
@@ -247,6 +250,9 @@ def getStrips(scraperobj, options):
                 # stop when retrieval skipped an image for one comic strip
                 out.info("Stop retrieval because image file already exists")
                 break
+        if options.all and not (errors or options.dry_run or
+                                options.cont or scraperobj.indexes):
+            scraperobj.setComplete(options.basepath)
     except Exception as msg:
         out.exception(msg)
         errors += 1

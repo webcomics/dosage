@@ -3,9 +3,10 @@
 # Copyright (C) 2012-2013 Bastian Kleineidam
 import requests
 import time
+import os
 from . import loader, configuration
 from .util import (fetchUrl, fetchUrls, getPageContent, makeSequence,
-  get_system_uid, urlopen)
+  get_system_uid, urlopen, getDirname)
 from .comic import ComicStrip
 from .output import out
 from .events import getHandler
@@ -44,6 +45,9 @@ class _BasicScraper(object):
 
     # set to True if this comic contains adult content
     adult = False
+
+    # set to True if this comic will not get updated anymore
+    endOfLife = False
 
     # a description of the comic contents
     description = ''
@@ -236,6 +240,23 @@ class _BasicScraper(object):
         data = {"name": cls.getName().replace('/', '_'), "uid": uid}
         page = urlopen(url, cls.session, data=data)
         return page.text
+
+    def getCompleteFile(self, basepath):
+        """Get filename indicating all comics are downloaded."""
+        dirname = getDirname(self.getName())
+        return os.path.join(basepath, dirname, "complete.txt")
+
+    def isComplete(self, basepath):
+        """Check if all comics are downloaded."""
+        return os.path.isfile(self.getCompleteFile(basepath))
+
+    def setComplete(self, basepath):
+        """Set complete flag for this comic, ie. all comics are downloaded."""
+        if self.endOfLife:
+            filename = self.getCompleteFile(basepath)
+            if not os.path.exists(filename):
+                with open(filename, 'w') as f:
+                    f.write('All comics should be downloaded here.')
 
 
 def find_scraperclasses(comic, multiple_allowed=False):
