@@ -209,3 +209,15 @@ class TracyAndTristan(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(%simages/comics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(/comics/\d+)', after="prev"))
     help = 'Index format: number'
+
+
+class TwoGuysAndGuy(_BasicScraper):
+    description = u"Two Guys and Guy"
+    url = 'http://www.twogag.com/'
+    rurl = escape(url)
+    stripUrl = url + 'archives/%s'
+    firstStripUrl = stripUrl % '4'
+    imageSearch = compile(tagre('img', 'src', r'(%scomics/\d{4}-\d{2}-\d{2}[^"]*)' % rurl))
+    prevSearch = compile(tagre('a', 'href', r'(%sarchives/\d+)' % rurl, after='title="Previous"'))
+    help = 'Index format: number'
+    adult = True
