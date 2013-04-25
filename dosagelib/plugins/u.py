@@ -2,7 +2,7 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2013 Bastian Kleineidam
 
-from re import compile
+from re import compile, escape
 
 from ..scraper import _BasicScraper
 from ..helpers import bounceStarter, indirectStarter
@@ -28,6 +28,26 @@ class UnicornJelly(_BasicScraper):
     imageSearch = compile(r'</TABLE>(?:<FONT COLOR="BLACK">)?<IMG SRC="(images/[^"]+)" WIDTH=')
     prevSearch = compile(r'<A HREF="(uni\d{3}[bcs]?\.html)">(<FONT COLOR="BLACK">)?<IMG SRC="images/back00\.gif"')
     help = 'Index format: nnn'
+
+
+class Unsounded(_BasicScraper):
+    description = u'Some dead men tell tales, and some little girls have tails...'
+    url = 'http://www.casualvillain.com/Unsounded/'
+    stripUrl = url + 'comic/ch%s/ch%s_%s.html'
+    firstStripUrl = stripUrl % ('01', '01', '01')
+    rurl = escape(url)
+    imageSearch = compile(tagre("div", "id", r'comic') +
+        tagre("img", "src", r'(pageart/[^"]*)') )
+    prevSearch = compile(tagre("a", "href", r'([^"]*)', after='class="back'))
+    starter = indirectStarter(url,
+       compile(tagre("a", "href", r'(%scomic/[^"]*)' % rurl) +
+           tagre("img", "src", r"%simages/chibi02\.png" % rurl)))
+    help = 'Index format: chapter-number'
+
+    def getIndexStripUrl(self, index):
+        """Get comic strip URL from index."""
+        chapter, num = index.split('-')
+        return self.stripUrl % (chapter, chapter, num)
 
 
 # XXX disallowed by robots.txt
