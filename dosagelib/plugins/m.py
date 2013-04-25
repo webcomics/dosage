@@ -18,11 +18,12 @@ class MacHall(_BasicScraper):
 
 
 # broken links - disable for now
-class _MadamAndEve(_BasicScraper):
+class MadamAndEve(_BasicScraper):
     url = 'http://www.madamandeve.co.za/week_of_cartns.php'
     stripUrl = None
     imageSearch = compile(r'<IMG BORDER="0" SRC="(cartoons/me\d{6}\.(gif|jpg))">')
     prevSearch = compile(r'<a href="(weekend_cartoon.php)"')
+    multipleImagesPerStrip = True
 
 
 class MagickChicks(_BasicScraper):

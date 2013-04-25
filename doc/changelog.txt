@@ -11,8 +11,8 @@ Changes:
   Patch by Dirk Reiners.
 
 Fixes:
-- comics: Fix DorkTower and Saturday Morning Breakfast Cereal,
-  and improve image filenames of CtrlAltDel.
+- comics: Fix DorkTower, MadamAndEve and Saturday Morning Breakfast
+  Cereal, and improve image filenames of CtrlAltDel.
   Patch by Dirk Reiners.
 
 
