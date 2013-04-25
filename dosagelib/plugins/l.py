@@ -4,8 +4,28 @@
 
 from re import compile, escape
 from ..scraper import _BasicScraper
-from ..helpers import indirectStarter
+from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
+
+
+class Lackadaisy(_BasicScraper):
+    description = u'Alcohol-running cats in prohibition St. Louis'
+    baseUrl = 'http://lackadaisy.foxprints.com/'
+    url = baseUrl + 'comic.php'
+    stripUrl = baseUrl + 'comic.php?comicid=%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.lackadaisycats\.com/comic/[^"]*)'))
+    prevSearch = compile(tagre("a", "href", r"(/comic\.php\?comicid=[0-9]+)") + "&lt; Previous")
+    help = 'Index format: n'
+    starter = bounceStarter(url,
+        compile(tagre("a", "href", r"(/comic.php\?comicid=[0-9]+)") + "Next"))
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        """Use comic id for filename."""
+        num = pageUrl.rsplit('=', 1)[-1]
+        ext = imageUrl.rsplit('.', 1)[-1]
+        return 'lackadaisy_%s.%s' % (num, ext)
 
 
 class LasLindas(_BasicScraper):
