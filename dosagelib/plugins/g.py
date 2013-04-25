@@ -64,7 +64,7 @@ class GeeksNextDoor(_BasicScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
-# disallowed by robots.txt
+# 403 error when getting image files, disable for now
 class _GeneralProtectionFault(_BasicScraper):
     description = u'General Protection Fault'
     url = 'http://www.gpf-comics.com/'
