@@ -15,6 +15,7 @@ It includes the following features:
 from __future__ import print_function
 import os
 import sys
+import codecs
 import re
 import glob
 import shutil
@@ -402,12 +403,24 @@ class MyRegister (register, object):
         return data
 
 
+def get_authors():
+    """Read list of authors from a text file, filtering comments."""
+    authors = []
+    authorfile = os.path.join('doc', 'authors.txt')
+    with codecs.open(authorfile, 'r', 'utf-8') as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith(u'#'):
+                authors.append(line)
+    return u", ".join(authors)
+
+
 args = dict(
     name = AppName,
     version = AppVersion,
     description = 'a comic strip downloader and archiver',
     keywords = 'comic,webcomic,downloader,archiver',
-    author = 'Tristan Seligmann, Jonathan Jacobs, Bastian Kleineidam, Tobias Gruetzmacher',
+    author = get_authors(),
     maintainer = 'Bastian Kleineidam',
     maintainer_email = 'bastian.kleineidam@web.de',
     license = 'MIT',
