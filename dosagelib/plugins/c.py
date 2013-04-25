@@ -390,6 +390,17 @@ class CucumberQuest(_BasicScraper):
     help = 'Index format: stripname'
 
 
+class Curtailed(_BasicScraper):
+    description = u''
+    url = 'http://curtailedcomic.com/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2012/04/08/sneeze'
+    rurl = escape(url)
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]*)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\d{4}/[^"]*)' % rurl, after="navi-prev"))
+    help = 'Index format: yyyy/mm/dd/stripname'
+
+
 class Curvy(_BasicScraper):
     description = u'An erotic sci-fi adventure comic for adults.'
     url = 'http://www.c.urvy.org/'
