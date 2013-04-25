@@ -80,6 +80,7 @@ def setupOptions():
     parser.add_argument('-t', '--timestamps', action='store_true', help='print timestamps for all output at any info level')
     parser.add_argument('-o', '--output', action='append', dest='handler', choices=events.getHandlerNames(), help='sets output handlers for downloaded comics')
     parser.add_argument('--adult', action='store_true', help='confirms that you are old enough to view adult content')
+    # used for development testing prev/next matching
     parser.add_argument('--dry-run', action='store_true', help=argparse.SUPPRESS)
     # multimatch is only used for development, eg. testing if all comics of a scripted plugin are working
     parser.add_argument('--multimatch', action='store_true', help=argparse.SUPPRESS)
@@ -363,6 +364,8 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False):
         # store them in a set to eliminate duplicates
         scrapers = set()
         for comic in comics:
+            # Helpful when using shell completion to pick comics to get
+            comic.rstrip(os.path.sep)
             if basepath and comic.startswith(basepath):
                 # make the following command work:
                 # find Comics -type d | xargs -n1 -P10 dosage -b Comics
