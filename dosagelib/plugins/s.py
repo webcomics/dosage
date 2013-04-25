@@ -6,7 +6,27 @@ from re import compile, escape, MULTILINE, IGNORECASE, sub
 from os.path import splitext
 from ..scraper import _BasicScraper
 from ..helpers import indirectStarter, bounceStarter
-from ..util import tagre
+from ..util import tagre, getPageContent
+
+
+class SabrinaOnline(_BasicScraper):
+    description = u'Skunks, computers and porn'
+    baseUrl = 'http://sabrina-online.com/'
+    imageSearch = compile(tagre("a", "href", r'(strips/[^"]*)'))
+    prevSearch = compile(tagre("a", "href", r"(\d\d\d\d-\d\d.html)") +
+        tagre("img", "src", "b_back.gif"))
+    help = 'Index format: n (unpadded)'
+    adult = True
+    multipleImagesPerStrip = True
+
+    @classmethod
+    def starter(cls):
+        """Pick last one in a list of archive pages."""
+        url = cls.baseUrl + 'archive.html'
+        data, baseUrl = getPageContent(url, cls.session)
+        search = compile(tagre("a", "href", r"(\d\d\d\d-\d\d.html)"))
+        archivepages = search.findall(data)
+        return cls.baseUrl + archivepages[-1]
 
 
 class SailorsunOrg(_BasicScraper):
