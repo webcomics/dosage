@@ -83,6 +83,19 @@ class _GeneralProtectionFault(_BasicScraper):
         return imageName[:11] + imageName[-4:]
 
 
+class GirlGenius(_BasicScraper):
+    description = u'Adventure, Romance, Mad Science!'
+    baseUrl = 'http://www.girlgeniusonline.com/'
+    rurl = escape(baseUrl)
+    url = baseUrl + 'comic.php'
+    stripUrl = url + 'comic.php?date=%s'
+    firstStripUrl = stripUrl % '20021104'
+    imageSearch = compile(tagre("img", "src", r"(%sggmain/strips/[^']*)" % rurl, quote="'"))
+    prevSearch = compile(tagre("a", "href", r"(%s[^']+)" % rurl, quote="'") +
+        tagre("img", "alt", "The Previous Comic", quote="'"))
+    help = 'Index format: yyyymmdd'
+
+
 class GirlsWithSlingshots(_BasicScraper):
     url = 'http://www.girlswithslingshots.com/'
     rurl = escape(url)
