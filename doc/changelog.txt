@@ -1,5 +1,15 @@
 Dosage 2.2 (released xx.xx.2013)
 
+Features:
+- cmdline: Ignore trailing '/' at end of comic names. Useful
+  when using shell completion to pick comics.
+  Patch by Dirk Reiners.
+
+Fixes:
+- comics: Fix DorkTower and Saturday Morning Breakfast Cereal,
+  and improve image filenames of CtrlAltDel.
+  Patch by Dirk Reiners.
+
 
 Dosage 2.1 (released 14.4.2013)
 
