@@ -1,6 +1,10 @@
 Dosage 2.2 (released xx.xx.2013)
 
 Features:
+- comic: Added ARedTailsDream.
+  Patch by Dirk Reiners
+
+Changes:
 - cmdline: Ignore trailing '/' at end of comic names. Useful
   when using shell completion to pick comics.
   Patch by Dirk Reiners.

@@ -302,6 +302,18 @@ class AppleGeeks(_BasicScraper):
     help = 'Index format: n (unpadded)'
 
 
+class ARedTailsDream(_BasicScraper):
+    description = u"Finnish mythology meets teen boy and his dog"
+    baseUrl = 'http://www.minnasundberg.fi/'
+    stripUrl = baseUrl + 'comic/page%s.php'
+    firstStripUrl = stripUrl % '00'
+    url = baseUrl + 'comic/recent.php'
+    imageSearch = compile(tagre('img', 'src', r'(chapter.+?/eng[^"]*)'))
+    prevSearch = compile(tagre('a', 'href', r'(page\d+\.php)') +
+      tagre("img", "src", r'.*?aprev.*?'))
+    help = 'Index format: nn'
+
+
 class ASofterWorld(_BasicScraper):
     url = 'http://www.asofterworld.com/'
     stripUrl = url + 'index.php?id=%s'
