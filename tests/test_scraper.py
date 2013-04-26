@@ -9,8 +9,10 @@ class ScraperTester(TestCase):
 
     def test_get_scraperclasses(self):
         for scraperclass in scraper.get_scraperclasses():
-            scraperclass()
-            scraperclass(indexes=["bla"])
+            scraperobj = scraperclass()
+            scraperobj = scraperclass(indexes=["bla"])
+            self.assertTrue(scraperobj.url,
+                "missing url in %s" % scraperobj.getName())
 
     def test_find_scraperclasses_single(self):
         result = scraper.find_scraperclasses("CalvinAndHobbes")
