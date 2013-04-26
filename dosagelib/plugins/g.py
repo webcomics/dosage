@@ -88,7 +88,7 @@ class GirlGenius(_BasicScraper):
     baseUrl = 'http://www.girlgeniusonline.com/'
     rurl = escape(baseUrl)
     url = baseUrl + 'comic.php'
-    stripUrl = url + 'comic.php?date=%s'
+    stripUrl = url + '?date=%s'
     firstStripUrl = stripUrl % '20021104'
     imageSearch = compile(tagre("img", "src", r"(%sggmain/strips/[^']*)" % rurl, quote="'"))
     prevSearch = compile(tagre("a", "href", r"(%s[^']+)" % rurl, quote="'") +
