@@ -1,0 +1,39 @@
+title: SmackJeeves/TheLegendofMushroomKingdom
+url: "/comics/SmackJeeves_TheLegendofMushroomKingdom.html"
+---
+Dosage comic SmackJeeves/TheLegendofMushroomKingdom
+-----------------------------------------
+
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
+<table class="comicinfo">
+<tr>
+<th>Description</th><td>To put it simply, this is a crossover fan-fictional graphic novel featuring the Super Mario Brothers and Legend of Zelda franchise. Mario and Zelda are the two of the most well-known franchises in Nintendo, not to mention my two favorite video game franchises. It's pretty long, so get the popcorn and drinks ready :D Characters in this story are properties of (c) Nintendo</td>
+</tr>
+<tr>
+<th>Website</th><td><a href="http://lomk.smackjeeves.com/comics/">http://lomk.smackjeeves.com/comics/</a></td>
+</tr>
+<tr>
+<th>Genre</th><td>Other</td>
+</tr>
+<tr>
+<th>Language</th><td>English</td>
+</tr>
+<tr>
+<th>Adult content</th><td>no</td>
+</tr>
+<tr>
+<th>Status</th><td>ok on 27.04.2013</td>
+</tr>
+<tr>
+<th>Votes</th><td>0</td>
+</tr>
+</table>
+
+[Edit this info](SmackJeeves_TheLegendofMushroomKingdom_edit.html) or go back to the [comic list](../comic-index.html).

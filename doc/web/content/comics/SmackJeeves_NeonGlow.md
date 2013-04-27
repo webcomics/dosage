@@ -1,0 +1,39 @@
+title: SmackJeeves/NeonGlow
+url: "/comics/SmackJeeves_NeonGlow.html"
+---
+Dosage comic SmackJeeves/NeonGlow
+-----------------------------------------
+
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.className = 'ok';
+}
+</script>
+<table class="comicinfo">
+<tr>
+<th>Description</th><td>Animals exposed to a special nuclear radiation and die become what is called a Neons. Neons are a phantom/zombie creatures that can be dangerous. Its up to Zedof and Jake to hunt them down to keep them from harming the public. May have some light boy love, but it is not the main focus of the comic.</td>
+</tr>
+<tr>
+<th>Website</th><td><a href="http://neonglow.smackjeeves.com/comics/">http://neonglow.smackjeeves.com/comics/</a></td>
+</tr>
+<tr>
+<th>Genre</th><td>Other</td>
+</tr>
+<tr>
+<th>Language</th><td>English</td>
+</tr>
+<tr>
+<th>Adult content</th><td>no</td>
+</tr>
+<tr>
+<th>Status</th><td>ok on 27.04.2013</td>
+</tr>
+<tr>
+<th>Votes</th><td>0</td>
+</tr>
+</table>
+
+[Edit this info](SmackJeeves_NeonGlow_edit.html) or go back to the [comic list](../comic-index.html).
