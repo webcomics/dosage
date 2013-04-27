@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Puck is a weekly webcomic that, in the words of one fan, is &quot;mostly irreverent humor concerning a pretty girl with freckles and a hot she-devil who wears fan-service costumes.&quot; That's about right. Surreal fantasy slice-of-life crazy-type stuff about the world's funniest redhead! Updates Tuesday.</td>
+<th>Description</th><td>This site is the Smackjeeves mirror site for Puck where older comics are posted. The actual Puck website contains the latest content at... WWW.PUCKCOMICS.COM</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://puck.smackjeeves.com/comics/">http://puck.smackjeeves.com/comics/</a></td>

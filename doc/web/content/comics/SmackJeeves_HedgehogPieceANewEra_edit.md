@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/HedgehogPieceANewEra
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">~This is a revival of the original Hedgehog Piece~ Take an adventure throughout a new world of One Piece, in a new Era of Pirates, following 5 major pirate crews of different species and personalities. We also accept cameos in the same format below (also include brief personality and background). PM to ReiKainaric.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">~This is a revival of the original Hedgehog Piece~ Take an adventure throughout a new world of One Piece, in a new Era of Pirates, following 5 major pirate crews of different species and personalities. We also accept cameos in the same format below (also include brief personality and background). PM to ReiKainaric. For ANY problems, PM to sonicmaster05.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://hedgehogpiece.smackjeeves.com/comics/" size="40"/></td>

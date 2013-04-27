@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/FuneralOfHearts
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">STATUS: ongoing (Up Wed/Sun W-Europe time) A Pokemon (gijinka) doujinshi. READ RIGHT TO LEFT (Pokemon (c) Nintendo)</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">STATUS: ongoing (1 up per week) A Pokemon (gijinka) doujinshi. READ RIGHT TO LEFT (Pokemon (c) Nintendo)</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://funeralofhearts.smackjeeves.com/comics/" size="40"/></td>

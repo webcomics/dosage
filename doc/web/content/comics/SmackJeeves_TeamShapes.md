@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>There's a team of MS paint creatures that do random events that include fighting Paint.net, running from a guy who they owe $500 to, doing missions, and simply fooling around. Current chapter: Roup wants to build a time machine, but it gains consious and reverses the comic order of this chaptor, eventually time itself will stop. They must defeat it.</td>
+<th>Description</th><td>There's a team of MS paint creatures that do random events that include fighting Paint.net, running from a guy who they owe $500 to, doing missions, and simply fooling around. Current chapter: When Roup was building a time machine, it accidently gained consious. It's mission: Stop time.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://teamshapes.smackjeeves.com/comics/">http://teamshapes.smackjeeves.com/comics/</a></td>

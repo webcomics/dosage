@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>This is a comic about shipping your characters. You can do as you please with your shippings, but please try to keep them to a T rating and below. Shipping: To support a relationship between two characters, be it canon or not. You will get a chapter here. All shipping of your design are to be posted in your own chapter. The point is to post pictures of shippings. (Sprites, Drawn, pixel art, etc.) These can be in the form of comics, author comments, etc. Your shippings can be gay, straight, lesbian and bi. So homophobes beware. You may post shipping of other authors. If you have any questions, contact 'aqua the hedgie' for more information. Author count because reasons: 34</td>
+<th>Description</th><td>This is a comic about shipping your characters. You can do as you please with your shippings, but please try to keep them to a T rating and below. Shipping: To support a relationship between two characters, be it canon or not. You will get a chapter here. All shipping of your design are to be posted in your own chapter. The point is to post pictures of shippings. (Sprites, Drawn, pixel art, etc.) These can be in the form of comics, author comments, etc. Your shippings can be gay, straight, lesbian and bi. So homophobes beware. You may post shipping of other authors. If you have any questions, contact 'aqua the hedgie' for more information. Author count because reasons: 34 ------ Don't ship real people. At least poke holes in the box.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://shipcentral.smackjeeves.com/comics/">http://shipcentral.smackjeeves.com/comics/</a></td>

@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>We fight for what we believe in and for those we care about. With terms and beliefs like these, who is to decide what is right and what is wrong? It is our emotions that fuel our actions, but is allowing them to take over really the right course of action in drastic situations...? Updates weekdays.</td>
+<th>Description</th><td>We fight for what we believe in and for those we care about. With terms and beliefs like these, who is to decide what is right and what is wrong? It is our emotions that fuel our actions, but is allowing them to take over really the right course of action in drastic situations...? Comic completed.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://muterobot.smackjeeves.com/comics/">http://muterobot.smackjeeves.com/comics/</a></td>

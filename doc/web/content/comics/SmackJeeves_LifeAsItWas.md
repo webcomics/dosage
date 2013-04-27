@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>It's a web comic, I make it and you read it. Updated daily. Follow LAIW on twitter @LifeAsItWas to get updates on there, as well as bonus content, if you're into that sort of jazz as well. Go ahead, I won't judge you.</td>
+<th>Description</th><td>It's a web comic, I make it and you read it. Updated daily.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://lifeasitwas.smackjeeves.com/comics/">http://lifeasitwas.smackjeeves.com/comics/</a></td>

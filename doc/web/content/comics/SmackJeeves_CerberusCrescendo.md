@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>there are a lot of supervillains who need to be a lot of dead</td>
+<th>Description</th><td>a lot of supervillains who need to be a lot of dead</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://elica.smackjeeves.com/comics/">http://elica.smackjeeves.com/comics/</a></td>

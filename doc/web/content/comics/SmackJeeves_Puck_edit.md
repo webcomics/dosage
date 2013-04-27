@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/Puck
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Puck is a weekly webcomic that, in the words of one fan, is &quot;mostly irreverent humor concerning a pretty girl with freckles and a hot she-devil who wears fan-service costumes.&quot; That's about right. Surreal fantasy slice-of-life crazy-type stuff about the world's funniest redhead! Updates Tuesday.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">This site is the Smackjeeves mirror site for Puck where older comics are posted. The actual Puck website contains the latest content at... WWW.PUCKCOMICS.COM</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://puck.smackjeeves.com/comics/" size="40"/></td>

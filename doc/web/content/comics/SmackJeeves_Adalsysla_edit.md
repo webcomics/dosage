@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/Adalsysla
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">there's a freckly guy who misses his girlfriend a lot and a blue girl who wants to find her brothers. on their way to wherever they're faced with a lot of trouble! drawn and written by piim, also known as Katarina Skott. mostly updates weekends!!</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">there's a freckly guy who misses his girlfriend a lot and a blue girl who wants to find her brothers. on their way to wherever they're faced with a lot of trouble! drawn and written by piim, also known as Katarina Skott. updates wednesdays and saturdays!!</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://adalsysla.smackjeeves.com/comics/" size="40"/></td>

@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/CerberusCrescendo
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">there are a lot of supervillains who need to be a lot of dead</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">a lot of supervillains who need to be a lot of dead</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://elica.smackjeeves.com/comics/" size="40"/></td>

@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/June
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">SORRY! NO DOGS ALLOWED (A 100% true autobiographic horror story. @tumblr: http://junecomic.tumblr.com)</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">SORRY! NO DOGS ALLOWED (A 100% true autobiographic horror story. @tumblr: http://junecomic.tumblr.com) (@ MangaMagazine: http://www.mangamagazine.net/manga-and-comics/JUNE/detail-page/403?lang=en)</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://june.smackjeeves.com/comics/" size="40"/></td>

@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/Kurokenshin
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Started in December 2005, so the first Volume's art is a bit rough. Volume 5 was finished in Spring 2011. After finding a book on the legendary ronin Kokushiryu, Kentaro finds himself on the adventure he's always dreamed of. He joins Rika, a mysterious red-haired demon, who is searching for Kokushiryu's sword - Kurokenshin. However, she isn't the only one pursuing Kokushiryu's legend for the book; a cruel demon from the past is desperate to attain the sword, and he will go through any means to do so. ~READS FROM RIGHT TO LEFT~ UPDATES DAILY!!</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Started in December 2005, so the first Volume's art is a bit rough. Volume 5 was finished in Spring 2011. The remaining two volumes will be available on my website: http://ko-mangaseries.com/kurokenshin.html After finding a book on the legendary ronin Kokushiryu, Kentaro finds himself on the adventure he's always dreamed of. He joins Rika, a mysterious red-haired demon, who is searching for Kokushiryu's sword - Kurokenshin. However, she isn't the only one pursuing Kokushiryu's legend for the book; a cruel demon from the past is desperate to attain the sword, and he will go through any means to do so. ~READS FROM RIGHT TO LEFT~</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://kurokenshin.smackjeeves.com/comics/" size="40"/></td>

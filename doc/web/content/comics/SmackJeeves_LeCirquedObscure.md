@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>A dark circus collaboration roleplay comic- open to everyone!</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://cirquedobscure.smackjeeves.com/comics/">http://cirquedobscure.smackjeeves.com/comics/</a></td>

@@ -6,7 +6,7 @@ Edit info for comic ComicFury/Acryden
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">We've just launched The Acryden printing drive at Indiegogo! With everyone's help we can print our comic, we've also whipped up some pretty cool rewards for lending a hand! http://www.indiegogo.com/theacryden?a=1639090 In order to stop an intergalactic catastrophe, a team of unlikely heroes must travel across the universe and track down a dangerous magical item that has once again come into existence. Visit the main site at www.acryden.com</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Hey everyone we're back on track with the pages. It was a mess up on my part with the dates. Of course our main site always updates first and has the latest information. Feel free to visit us at Acryden.com</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://acryden.thecomicseries.com/" size="40"/></td>

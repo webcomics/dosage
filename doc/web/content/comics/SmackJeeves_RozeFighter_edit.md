@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/RozeFighter
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">In the year 2310AD a young man, Apollo (Mitsu) Kurosu, makes a life change decision that could possible change his entire life. Now he has to find nine magical crystals and defend himself from all sorts of baddies- All while fighting along side his best friend's little bratty sister! Join us on Wednesdays and Saturdays! Follow us on tumblr: http://roze-fighter.tumblr.com/ Find us on Facebook: https://www.facebook.com/RozeFighter?ref=hl</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">The year's 2310A.D and mutants have taken over the planet. One of the surviving humans, Aurora Lockluster ( Bara for short) teams up with Apollo &quot;Mitsu&quot; Kurosu (a lovable Casanova) to collect 9 magical crystals and incredible powers that come with them! Join us on Wednesdays and Saturdays! Warning: Strong language and booty! Follow us on tumblr: http://roze-fighter.tumblr.com/ Find us on Facebook: https://www.facebook.com/RozeFighter?ref=hl</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://rozefighter.smackjeeves.com/comics/" size="40"/></td>

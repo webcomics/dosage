@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>STATUS: ongoing (Up Wed/Sun W-Europe time) A Pokemon (gijinka) doujinshi. READ RIGHT TO LEFT (Pokemon (c) Nintendo)</td>
+<th>Description</th><td>STATUS: ongoing (1 up per week) A Pokemon (gijinka) doujinshi. READ RIGHT TO LEFT (Pokemon (c) Nintendo)</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://funeralofhearts.smackjeeves.com/comics/">http://funeralofhearts.smackjeeves.com/comics/</a></td>

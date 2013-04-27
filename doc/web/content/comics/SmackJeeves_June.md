@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>SORRY! NO DOGS ALLOWED (A 100% true autobiographic horror story. @tumblr: http://junecomic.tumblr.com)</td>
+<th>Description</th><td>SORRY! NO DOGS ALLOWED (A 100% true autobiographic horror story. @tumblr: http://junecomic.tumblr.com) (@ MangaMagazine: http://www.mangamagazine.net/manga-and-comics/JUNE/detail-page/403?lang=en)</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://june.smackjeeves.com/comics/">http://june.smackjeeves.com/comics/</a></td>

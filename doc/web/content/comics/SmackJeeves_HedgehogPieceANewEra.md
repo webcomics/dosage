@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>~This is a revival of the original Hedgehog Piece~ Take an adventure throughout a new world of One Piece, in a new Era of Pirates, following 5 major pirate crews of different species and personalities. We also accept cameos in the same format below (also include brief personality and background). PM to ReiKainaric.</td>
+<th>Description</th><td>~This is a revival of the original Hedgehog Piece~ Take an adventure throughout a new world of One Piece, in a new Era of Pirates, following 5 major pirate crews of different species and personalities. We also accept cameos in the same format below (also include brief personality and background). PM to ReiKainaric. For ANY problems, PM to sonicmaster05.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://hedgehogpiece.smackjeeves.com/comics/">http://hedgehogpiece.smackjeeves.com/comics/</a></td>

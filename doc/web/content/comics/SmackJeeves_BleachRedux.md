@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Myself and others were extremely disappointed with Ulquiorra's death in the official Bleach manga, so I've taken it upon myself to draw out what could've possibly happened had Orihime pulled her head out of her ass and saved him. WARNING: UlquiHime. Any negative comments (or futile attempts at validating other ships that make even less sense (ie: IchiHime)) will be deleted. CURRENT: 3/21 Ch28 is online. Ch29 in progress. ETA 04/30. NOTE: READ RIGHT TO LEFT LIKE JAPANESE MANGA.</td>
+<th>Description</th><td>Myself and others were extremely disappointed with Ulquiorra's death in the official Bleach manga, so I've taken it upon myself to draw out what could've possibly happened had Orihime pulled her head out of her ass and saved him. WARNING: UlquiHime. Any negative comments (or futile attempts at validating other ships that make even less sense (ie: IchiHime)) will be deleted. CURRENT: 4/21 Ch29 is online. Ch30 is on hold. ETA 6/01 while I go on hiatus to write this thing lol NOTE: READ RIGHT TO LEFT LIKE JAPANESE MANGA.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://bleachredux.smackjeeves.com/comics/">http://bleachredux.smackjeeves.com/comics/</a></td>

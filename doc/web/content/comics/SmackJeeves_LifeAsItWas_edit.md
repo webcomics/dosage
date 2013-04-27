@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/LifeAsItWas
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">It's a web comic, I make it and you read it. Updated daily. Follow LAIW on twitter @LifeAsItWas to get updates on there, as well as bonus content, if you're into that sort of jazz as well. Go ahead, I won't judge you.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">It's a web comic, I make it and you read it. Updated daily.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://lifeasitwas.smackjeeves.com/comics/" size="40"/></td>
