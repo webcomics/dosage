@@ -68,4 +68,5 @@ add('SoreThumbs', 'http://sorethumbs.keenspot.com/', "After a beautiful TV horro
 add('Striptease', 'http://striptease.keenspot.com/', "It's not just a clever name for a webcomic.... okay, it is. Sex, betrayal, humor, adventure, and comic book pencilling!")
 add('Superosity', 'http://superosity.keenspot.com/', "A lovably insane man-child in a cape. A super-intelligent board-shaped creature. An angry teenager yearning for fame. A century-old turtle who is America's hottest non-white movie star. What do you get when you put them all together? SUPEROSITY! Or hilarity, possibly. One of those.")
 add('TheFirstDaughter', 'http://thefirstdaughter.keenspot.com/', "Tasha Tasker has discovered that her dad isn't the only member of the First Family with presidential powers.")
+add('TheLounge', 'http://thelounge.keenspot.com/', 'Follow the antics of Italy Ishida and her friends as they run the comics, anime, video games, and coffee store known as The Lounge!')
 add('WICKEDPOWERED', 'http://wickedpowered.keenspot.com/', 'Three beautiful girls from the laser-obsessed future rescue loser Wiley Schlub from his boring life!')
