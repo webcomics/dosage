@@ -1,11 +1,11 @@
 Dosage 2.2 (released xx.xx.2013)
 
 Features:
-- comic: Added ARedTailsDream, Carciphona, Curtailed, GirlGenius,
+- comics: Added ARedTailsDream, Carciphona, Curtailed, GirlGenius,
   Lackadaisy, SabrinaOnline, TheDreamlandChronicles, TwoGuysAndGuy
   and Unsound. Patches by Dirk Reiners.
   Closes: GH bug #29
-- comic: Comics which are not updated anymore can now be marked.
+- comics: Comics which are not updated anymore can now be marked.
   Closes: GH bug #30
 
 Changes:
