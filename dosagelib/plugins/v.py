@@ -17,15 +17,6 @@ class VampireCheerleaders(_BasicScraper):
     help = 'Index format: name'
 
 
-class Vendetta(_BasicScraper):
-    url = 'http://www.vendettacomic.com/'
-    stripUrl = url + 'archive.php?date=%s.jpg'
-    imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(archive\.php\?date=\d+\.jpg)') +
-      tagre("img", "src", r"/images/prev\.jpg"))
-    help = 'Index format: yyyymmdd'
-
-
 class VGCats(_BasicScraper):
     url = 'http://www.vgcats.com/comics/'
     stripUrl = url + '?strip_id=%s'

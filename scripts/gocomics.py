@@ -19,6 +19,7 @@ url_matcher = re.compile(tagre("a", "href", r'(/[^"]+)', after="alpha_list") + r
 
 # names of comics to exclude
 exclude_comics = [
+    "Adagio", # too few comics
     "AgentGates", # too few comics
     "Apocalypseharry", # too few comics
     "BatkidandBatrat", # too few comics
@@ -26,6 +27,7 @@ exclude_comics = [
     "Bonner", # missing page
     "Buster", # comic unavailabe
     "CarteBlanche", # missing images
+    "CountyLine", # too few comics
     "DALTONDOG", # comic unavailable
     "DellAndSteve", # too few comics
     "Dilbert", # redirect
@@ -34,12 +36,14 @@ exclude_comics = [
     "FlexandTone", # too few comics
     "FrikkFrakkAndFrank", # too few comics
     "GOODAndEVIL", # too few comics
+    "GoodwithCoffee", # too few comics
     "InkeeDoodles", # comic unavailable
     "KALEECHIKORNERS", # too few comics
     "LoveIs", # missing images
     "MaggiesComics", # too few comics
     "OfMiceandMud", # too few comics
     "OysterWar", # too few comics
+    "Penguins", # too few comics
     "PIGTIMES", # comic unavailable
     "PS", # comic unavailable
     "Radiowave", # too few comics
@@ -51,6 +55,7 @@ exclude_comics = [
     "SparComics", # comic unavailable
     "SurvivingSingle", # comic unavailable
     "TheDeadlys", # too few comics
+    "Tomversation", # too few comics
     "VoicesInTheDark", # too few comics
     "WhatTheFrak", # too few comics
     "ZeekyZebraandCompany", # too few comics

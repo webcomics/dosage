@@ -23,6 +23,7 @@ exclude_comics = [
     "AFairlyTwistedRealitySuper", # does not follow standard layout
     "Ahoge", # does not follow standard layout
     "AngelJunkPileFelix", # images are 403 forbidden
+    "AntavioussGenLab", # images are 403 forbidden
     "AreyougayJohnny", # does not follow standard layout
     "Authorbattlesthevideogame", # missing images
     "BambooArmonicKnightsGuild", # missing previous link
@@ -35,6 +36,7 @@ exclude_comics = [
     "DollarStoreCaviar", # broken images
     "DreamCatcher", # does not follow standard layout
     "EdgeofDecember", # missing images
+    "FroakieShocaiz", # unsuitable navigation
     "Fumiko", # does not follow standard layout
     "FurryExperience", # timeout
     "GART", # does not follow standard layout
@@ -45,6 +47,7 @@ exclude_comics = [
     "JennyHaniver", # does not follow standard layout
     "KiLAiLO", # does not follow standard layout
     "KirbysoftheAlternateDimension", # missing images
+    "Letsreviewshallwe", # missing images
     "LoudEra", # does not follow standard layout
     "LunarHill", # does not follow standard layout
     "Mafiagame", # does not follow standard layout

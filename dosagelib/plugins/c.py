@@ -381,12 +381,16 @@ class CucumberQuest(_BasicScraper):
     description = u'Cucumber Quest'
     url = 'http://cucumber.gigidigi.com/'
     rurl = escape(url)
-    stripUrl = url + 'archive/%s/'
+    stripUrl = url + 'cq/%s/'
     firstStripUrl = stripUrl % 'page-1'
     starter = indirectStarter(url + 'recent.html',
-        compile(r'window\.location="(/archive/[^"]+/)"'))
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/webcomic/cq/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%sarchive/[^"]+/)' % rurl, after="previous"))
+        compile(r'window\.location="(/cq/[^"]+/)"'))
+    imageSearch = (
+        compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/\d+[^"]+)' % rurl)),
+        compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/ch\d+[^"]+)' % rurl)),
+        compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/bonus[^"]+)' % rurl)),
+    )
+    prevSearch = compile(tagre("a", "href", r'(%scq/[^"]+/)' % rurl, after="previous"))
     help = 'Index format: stripname'
 
 

@@ -25,6 +25,7 @@ activity_matcher = re.compile(r'<b>Activity status:</b> <span class="comicinfo">
 exclude_comics = [
     "12yearsofmissj", # unsuitable navigation
     "3DGlasses", # unsuitable navigation
+    "30Days", # unsuitable navigation
     "6tsc", # unsuitable navigation
     "Abyss", # unsuitable navigation
     "Actdr", # unsuitable navigation
@@ -32,8 +33,10 @@ exclude_comics = [
     "Alienirony", # unsuitable navigation
     "AngelguardianEspanol", # unsuitable navigation
     "Angryalien", # unsuitable navigation
+    "Animangitis", # unsuitable navigation
     "Archininja", # unsuitable navigation
     "Arveytoonz", # unsuitable navigation
+    "AsperitasAstraalia", # unsuitable navigation
     "AttackoftheRobofemoids", # unsuitable navigation
     "Bedlam", # unsuitable navigation
     "BITCHSquad", # missing images
@@ -50,6 +53,7 @@ exclude_comics = [
     "CafeGruesome", # unsuitable navigation
     "Chanpuru", # unsuitable navigation
     "Christmaswithmaddog", # unsuitable navigation
+    "ChroniclesOfLillian", # unsuitable navigation
     "Comicshortsmain", # unsuitable navigation
     "Conrads", # unsuitable navigation
     "ConradTheCaterpillar", # unsuitable navigation
@@ -100,6 +104,7 @@ exclude_comics = [
     "Ign", # unsuitable navigation
     "Illusionoftime", # unsuitable navigation
     "InsideOuT", # unsuitable navigation
+    "Introvert", # unsuitable navigation
     "Immortalfool", # unsuitable navigation
     "Insectia", # unsuitable navigation
     "Jackitandfriends", # unsuitable navigation

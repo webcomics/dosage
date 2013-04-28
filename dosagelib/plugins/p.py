@@ -147,7 +147,7 @@ class PiledHigherAndDeeper(_BasicScraper):
     starter = bounceStarter(url, compile(r'<a href=(archive\.php\?comicid=\d+)><img height=52 width=49 src=images/next_button\.gif border=0 align=middle>'))
     stripUrl = url + '?comicid=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.phdcomics\.com/comics/archive/phd\d+s?\.gif)', quote=""))
+    imageSearch = compile(tagre("img", "src", r'(http://www\.phdcomics\.com/comics/archive/phd\d+s?\.\w{3,4})', quote=""))
     prevSearch = compile(r'<a href=(archive\.php\?comicid=\d+)><img height=52 width=49 src=images/prev_button\.gif border=0 align=middle>')
     help = 'Index format: n (unpadded)'
     namer = queryNamer('comicid', usePageUrl=True)

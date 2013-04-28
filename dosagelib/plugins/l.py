@@ -44,7 +44,7 @@ class LeastICouldDo(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % '20130109'
-    imageSearch = compile(tagre("img", "src", r'(http://cdn\.leasticoulddo\.com/wp-content/uploads/\d+/\d+/\d{8,9}\.\w{1,4})'))
+    imageSearch = compile(tagre("img", "src", r'(http://(?:cdn\.)?leasticoulddo\.com/wp-content/uploads/\d+/\d+/\d{8,9}\.\w{1,4})'))
     prevSearch = compile(tagre("a", "href", r'(%scomic/\d+/)' % rurl, after="Previous"))
     starter = indirectStarter(url,
       compile(tagre("a", "href", r'(%scomic/\d+/)' % rurl, after="feature-comic")))

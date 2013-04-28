@@ -55,15 +55,6 @@ class Marilith(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
-class MarryMe(_BasicScraper):
-    description = u'MARRY ME: an online graphic novel by Bobby Crosby and Remy "Eisu" Mokhtar'
-    url = 'http://marryme.keenspot.com/'
-    stripUrl = url + 'd/%s.html'
-    imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
-    prevSearch = compile(tagre("link", "href", r'(/d/[^"]+)', before="prev"))
-    help = 'Index format: yyyymmdd'
-
-
 class Meek(_BasicScraper):
     url = 'http://www.meekcomic.com/'
     stripUrl = url + '%s'

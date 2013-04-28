@@ -81,10 +81,10 @@ class BetweenFailures(_BasicScraper):
     description = u'Between Failures'
     url = 'http://betweenfailures.com/'
     rurl = escape(url)
-    stripUrl = url + 'archives/archive/%s'
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/webcomic/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%sarchives/archive/[^"]+)' % rurl, after="previous"))
-    help = 'Index format: stripnum-strip-name'
+    stripUrl = url + 'comics1/%s'
+    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/\d+-\d+-\d+[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%scomics1/[^"]+)' % rurl, after="previous"))
+    help = 'Index format: stripname'
 
 
 class BigFatWhale(_BasicScraper):

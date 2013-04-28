@@ -166,16 +166,6 @@ class AlienShores(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/p<nn>/'
 
 
-class ALLCAPS(_BasicScraper):
-    url = 'http://www.allcapscomix.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2008/08/welcome-to-all-caps'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)')+r"[^<]+Previous</a>")
-    help = 'Index format: yyyy/mm/strip-name'
-
-
 class AllTheGrowingThings(_BasicScraper):
     description = u'All The Growing Things - A Tale of Gardens, monsters, and old ladies'
     url = 'http://growingthings.typodmary.com/'
@@ -343,6 +333,7 @@ class AstronomyPOTD(_BasicScraper):
             self.stripUrl % '130217', # video
             self.stripUrl % '130218', # video
             self.stripUrl % '130226', # video
+            self.stripUrl % '130424', # video
         )
 
     @classmethod

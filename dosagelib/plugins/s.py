@@ -169,7 +169,8 @@ class SexyLosers(_BasicScraper):
         return index + '-' + title
 
 
-class ShadowGirls(_BasicScraper):
+# XXX site has been hacked
+class _ShadowGirls(_BasicScraper):
     description = u"It's like H.P. Lovecraft meets the Gilmore Girls!"
     url = 'http://www.shadowgirlscomic.com/'
     stripUrl = url + 'comics/%s'
