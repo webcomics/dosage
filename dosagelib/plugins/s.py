@@ -289,6 +289,7 @@ class SnowFlakes(_BasicScraper):
     url = 'http://www.snowflakescomic.com/'
     stripUrl = url + '?id=%s&sl=%s'
     firstStripUrl = stripUrl % ('103', '1')
+    endOfLife = True
     imageSearch = (
         compile(tagre("img", "src", r'(comics/[^"]+)')),
         compile(tagre("img", "src", r'(http://www.snowflakescomic.com/comics/[^"]+)')),
