@@ -22,7 +22,7 @@ url_matcher = re.compile(
   r"(?:<b>)?([^<]+)(?:</b>)?</a>"
 )
 descurl_matcher = re.compile(r"(desc/[^']+\.html)")
-desc_matcher = re.compile(r'</font><br>(.+)(?:</b>)?</td></tr>', re.DOTALL)
+desc_matcher = re.compile(ur'</font><br>(.+)(?:</b>)?</td></tr>', re.DOTALL)
 
 # names of comics to exclude
 exclude_comics = [
@@ -89,10 +89,10 @@ def get_description(url, session):
         data, baseUrl = getPageContent(url, session)
     except IOError as msg:
         print("ERROR:", msg, file=sys.stderr)
-        return ""
+        return u""
     mo = desc_matcher.search(data)
     if not mo:
-        print(data)
+        print("ERROR:", repr(data))
     return format_description(mo.group(1))
 
 

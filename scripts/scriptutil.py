@@ -14,7 +14,7 @@ def contains_case_insensitive(adict, akey):
 _tagre = re.compile(r"<.+?>")
 def remove_html_tags(text):
     """Remove all HTML tags from text."""
-    return _tagre.sub("", text)
+    return _tagre.sub(u"", text)
 
 
 def capfirst(text):
@@ -24,12 +24,12 @@ def capfirst(text):
     return text[0].upper() + text[1:]
 
 
-_ws = re.compile(r"\s+")
+_ws = re.compile(ur"\s+")
 def compact_whitespace(text):
     """Compact all subsequent whitespace to a single space."""
     if not text:
         return text
-    return _ws.sub(" ", text)
+    return _ws.sub(u" ", text)
 
 
 def save_result(res, json_file):
@@ -52,7 +52,7 @@ def truncate_name(text):
 def format_name(text):
     """Format a comic name."""
     name = unescape(text)
-    name = asciify(name.replace('&', 'And').replace('@', 'At'))
+    name = asciify(name.replace(u'&', u'And').replace(u'@', u'At'))
     name = capfirst(name)
     return name
 
