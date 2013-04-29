@@ -8,7 +8,7 @@ Dosage comic SmackJeeves/TH3D3AD5H0WCA53
 <script type="text/javascript">
 if (window.location.search === '?edit_info_mail=sent_ok') {
   var elem = document.getElementById("msg");
-  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.innerHTML = 'Edited information sucessfully sent for review, which is usually done daily. Thanks!';
   elem.className = 'ok';
 }
 </script>

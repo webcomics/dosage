@@ -8,7 +8,7 @@ Dosage comic DrunkDuck/POKETTO_MONSUTAA_SPECIAL_SU...
 <script type="text/javascript">
 if (window.location.search === '?edit_info_mail=sent_ok') {
   var elem = document.getElementById("msg");
-  elem.innerHTML = 'Edited information sucessfully sent.';
+  elem.innerHTML = 'Edited information sucessfully sent for review, which is usually done daily. Thanks!';
   elem.className = 'ok';
 }
 </script>
