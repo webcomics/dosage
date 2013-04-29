@@ -155,15 +155,16 @@ def saveComicStrip(strip, basepath, dryrun):
     return errors, allskipped
 
 
-def displayHelp(comics):
+def displayHelp(options):
     """Print help for comic strips."""
+    errors = 0
     try:
-        for scraperobj in getScrapers(comics):
-            displayComicHelp(scraperobj)
+        for scraperobj in getScrapers(options.comic, options.basepath):
+            errors += displayComicHelp(scraperobj)
     except ValueError as msg:
         out.exception(msg)
-        return 1
-    return 0
+        return 2
+    return errors
 
 
 def displayComicHelp(scraperobj):
@@ -178,6 +179,10 @@ def displayComicHelp(scraperobj):
         if scraperobj.help:
             for line in scraperobj.help.splitlines():
                 out.info(line)
+        return 0
+    except ValueError as msg:
+        out.exception(msg)
+        return 1
     finally:
         out.context = ''
 
@@ -275,7 +280,7 @@ def run(options):
         out.warn('No comics specified, bailing out!')
         return 1
     if options.modulehelp:
-        return displayHelp(options.comic)
+        return displayHelp(options)
     return getComics(options)
 
 
