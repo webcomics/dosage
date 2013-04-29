@@ -275,6 +275,7 @@ class DrFun(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'([^"]+)') + 'Previous Week,')
     help = 'Index format: nnnnn'
     description = u'A series of bizarre one-panel gags. Topics range from the mundane to the obscure.'
+    endOfLife = True
 
 
 class DrMcNinja(_BasicScraper):
