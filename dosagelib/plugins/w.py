@@ -52,7 +52,7 @@ class WebDesignerCOTW(_BasicScraper):
     multipleImagesPerStrip = True
     prevSearch = compile(tagre("link", "href", r"(%s\d+/\d+/[^']+)" % rurl, before='prev', quote="'"))
     help = 'Index format: yyyy/mm/stripname'
-    description = "The content revolves around web design, blogging and funny situations that we encounter in our daily lives as designers and this week we focus on Christmas. These great cartoons are created by Jerry King, an award-winning cartoonist who’s one of the most published, prolific and versatile cartoonists in the world today."
+    description = u"The content revolves around web design, blogging and funny situations that we encounter in our daily lives as designers and this week we focus on Christmas. These great cartoons are created by Jerry King, an award-winning cartoonist who’s one of the most published, prolific and versatile cartoonists in the world today."
 
     def shouldSkipUrl(self, url):
         """Skip non-comic URLs."""
