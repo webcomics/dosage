@@ -6,6 +6,7 @@ import sys
 import os
 import threading
 import traceback
+import codecs
 from .ansicolor import Colorizer
 
 lock = threading.Lock()
@@ -13,15 +14,23 @@ lock = threading.Lock()
 class Output(object):
     """Print output with context, indentation and optional timestamps."""
 
-    def __init__(self, stream=sys.stdout):
+    def __init__(self, stream=sys.stdout, encoding=None):
         """Initialize context and indentation."""
         self.context = u''
         self.level = 0
         self.timestamps = False
+        if encoding is None:
+            if hasattr(stream, "encoding") and stream.encoding:
+                self.encoding = stream.encoding
+            else:
+                self.encoding = 'utf-8'
+        else:
+            self.encoding = encoding
         self.setStream(stream)
 
     def setStream(self, stream):
         """Initialize context and indentation."""
+        stream = codecs.getwriter(self.encoding)(stream)
         self.stream = Colorizer(stream)
 
     def info(self, s, level=0):
