@@ -171,11 +171,11 @@ def displayComicHelp(scraperobj):
     """Print description and help for a comic."""
     out.context = getScraperName(scraperobj)
     try:
-        out.info("URL: " + scraperobj.url)
+        out.info(u"URL: " + scraperobj.url)
         if scraperobj.description:
-            out.info("Description: " + scraperobj.description)
+            out.info(u"Description: " + scraperobj.description)
         if scraperobj.lang:
-            out.info("Language: " + getLangName(scraperobj.lang))
+            out.info(u"Language: " + getLangName(scraperobj.lang))
         if scraperobj.help:
             for line in scraperobj.help.splitlines():
                 out.info(line)
@@ -184,7 +184,7 @@ def displayComicHelp(scraperobj):
         out.exception(msg)
         return 1
     finally:
-        out.context = ''
+        out.context = u''
 
 
 def getComics(options):
@@ -229,7 +229,7 @@ def vote(scraperobj):
         out.exception(msg)
         errors += 1
     finally:
-        out.context = ''
+        out.context = u''
     return errors
 
 
@@ -262,7 +262,7 @@ def getStrips(scraperobj, options):
         out.exception(msg)
         errors += 1
     finally:
-        out.context = ''
+        out.context = u''
     return errors
 
 
