@@ -29,7 +29,7 @@ class DamnLol(_BasicScraper):
         compile(tagre("img", "src", r'(%spics/[^"]+)' % rurl)),
     )
     help = 'Index format: stripname-number'
-    description = 'Funny pictures from the internet. Thousands of them.'
+    description = u'Funny pictures from the internet. Thousands of them.'
     starter = bounceStarter(url,
         compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="next")))
 
@@ -177,7 +177,7 @@ class Dilbert(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(/\d+-\d+-\d+/)', after="STR_Prev"))
     imageSearch = compile(tagre("img", "src", r'(/dyn/str_strip/[^"]+\.strip\.zoom\.gif)'))
     help = 'Index format: yyyy-mm-dd'
-    description = 'A comic featuring satirical office humor about a white-collar, micromanaged office featuring the engineer Dilbert as the title character.'
+    description = u'A comic featuring satirical office humor about a white-collar, micromanaged office featuring the engineer Dilbert as the title character.'
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
@@ -274,7 +274,7 @@ class DrFun(_BasicScraper):
     multipleImagesPerStrip = True
     prevSearch = compile(tagre("a", "href", r'([^"]+)') + 'Previous Week,')
     help = 'Index format: nnnnn'
-    description = 'A series of bizarre one-panel gags. Topics range from the mundane to the obscure.'
+    description = u'A series of bizarre one-panel gags. Topics range from the mundane to the obscure.'
 
 
 class DrMcNinja(_BasicScraper):

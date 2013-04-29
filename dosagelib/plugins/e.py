@@ -132,7 +132,7 @@ class EverydayBlues(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+/)' % rurl, after="navi-prev"))
     imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+-[^"]+)' % rurl))
     help = 'Index format: yyyy/mm/dd/stripname'
-    description = 'A daily webcomic about the ups and downs of love, relationships and singledom.'
+    description = u'A daily webcomic about the ups and downs of love, relationships and singledom.'
 
 
 class EvilDiva(_BasicScraper):

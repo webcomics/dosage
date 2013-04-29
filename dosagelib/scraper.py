@@ -50,7 +50,7 @@ class _BasicScraper(object):
     endOfLife = False
 
     # a description of the comic contents
-    description = ''
+    description = u''
 
     # langauge of the comic (two-letter ISO 639-1 code)
     lang = 'en'

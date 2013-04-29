@@ -161,7 +161,7 @@ class ForLackOfABetterComic(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(%simg/comic/\d+[^"]+)' % rurl, after="comicimg"))
     prevSearch = compile(tagre("a", "href", r'(%s\?id\=\d+)' % rurl) + r'Prev')
     help = 'Index format: number'
-    description = 'A hand drawn comic about everyday life situations.'
+    description = u'A hand drawn comic about everyday life situations.'
 
 
 class Freefall(_BasicScraper):
