@@ -18,6 +18,7 @@ class xkcd(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(/\d+/)', before="prev"))
     help = 'Index format: n (unpadded)'
     description = u'A webcomic of romance, sarcasm, math, and language.'
+    adult = True
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
