@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>The content revolves around web design, blogging and funny situations that we encounter in our daily lives as designers and this week we focus on Christmas. These great cartoons are created by Jerry King, an award-winning cartoonist who’s one of the most published, prolific and versatile cartoonists in the world today.</td>
+<th>Description</th><td>The content revolves around web design, blogging and funny situations that we encounter in our daily lives as designers and this week we focus on Christmas. These great cartoons are created by Jerry King, an award-winning cartoonist whoâs one of the most published, prolific and versatile cartoonists in the world today.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.webdesignerdepot.com/">http://www.webdesignerdepot.com/</a></td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 27.04.2013</td>
+<th>Status</th><td>ok on 29.04.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>1</td>

@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Colby Reynolds searches for meaning in the world around him and discovers a place where dreams can come true, if hes willing to pay the price.</td>
+<th>Description</th><td>Colby Reynolds searches for meaning in the world around him and discovers a place where dreams can come true, if heÂs willing to pay the price.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://makeshiftmiracle.keenspot.com/">http://makeshiftmiracle.keenspot.com/</a></td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 27.04.2013</td>
+<th>Status</th><td>ok on 29.04.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>
