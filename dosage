@@ -218,13 +218,13 @@ def vote(scraperobj):
         out.debug('Vote answer %r' % answer)
         if answer == 'counted':
             url = configuration.Url + 'comics/%s.html' % name.replace('/', '_')
-            out.info('Vote submitted. Votes are updated regularly at %s.' % url)
+            out.info(u'Vote submitted. Votes are updated regularly at %s.' % url)
         elif answer == 'no':
-            out.info('Vote not submitted - your vote has already been submitted before.')
+            out.info(u'Vote not submitted - your vote has already been submitted before.')
         elif answer == 'noname':
-            out.warn('The comic %s cannot be voted.' % name)
+            out.warn(u'The comic %s cannot be voted.' % name)
         else:
-            out.warn('Error submitting vote parameters: %r' % answer)
+            out.warn(u'Error submitting vote parameters: %r' % answer)
     except Exception as msg:
         out.exception(msg)
         errors += 1
@@ -246,14 +246,14 @@ def getStrips(scraperobj, options):
     out.context = scraperobj.getName()
     try:
         if scraperobj.isComplete(options.basepath):
-            out.info("All comics are already downloaded.")
+            out.info(u"All comics are already downloaded.")
             return 0
         for strip in scraperobj.getStrips(numstrips):
             _errors, skipped = saveComicStrip(strip, options.basepath, options.dry_run)
             errors += _errors
             if skipped and options.cont:
                 # stop when retrieval skipped an image for one comic strip
-                out.info("Stop retrieval because image file already exists")
+                out.info(u"Stop retrieval because image file already exists")
                 break
         if options.all and not (errors or options.dry_run or
                                 options.cont or scraperobj.indexes):
@@ -292,15 +292,15 @@ def doList(columnList=True, verbose=False):
     else:
         fd = sys.stdout
     out.setStream(fd)
-    out.info('Available comic scrapers:')
-    out.info('Comics tagged with [%s] require age confirmation with the --adult option.' % TAG_ADULT)
-    out.info('Non-english comics are tagged with [%s].' % TAG_LANG)
+    out.info(u'Available comic scrapers:')
+    out.info(u'Comics tagged with [%s] require age confirmation with the --adult option.' % TAG_ADULT)
+    out.info(u'Non-english comics are tagged with [%s].' % TAG_LANG)
     scrapers = sorted(getScrapers(['@@']), key=lambda s: s.getName())
     if columnList:
         num = doColumnList(scrapers)
     else:
         num = doSingleList(scrapers, verbose=verbose)
-    out.info('%d supported comics.' % num)
+    out.info(u'%d supported comics.' % num)
     if page:
         pydoc.pager(fd.getvalue())
     return 0
@@ -326,7 +326,7 @@ def doColumnList(scrapers):
     maxlen = max(len(name) for name in names)
     namesPerLine = max(screenWidth // (maxlen + 1), 1)
     while names:
-        out.info(''.join(name.ljust(maxlen) for name in names[:namesPerLine]))
+        out.info(u''.join(name.ljust(maxlen) for name in names[:namesPerLine]))
         del names[:namesPerLine]
     return num
 

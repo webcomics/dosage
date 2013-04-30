@@ -201,7 +201,7 @@ def getPageContent(url, session, max_content_bytes=MaxContentBytes):
         tries -= 1
     if not isValidPageContent(data):
         raise ValueError("Got invalid page content from %s: %r" % (url, data))
-    out.debug("Got page content %r" % data, level=3)
+    out.debug(u"Got page content %r" % data, level=3)
     # determine base URL
     baseUrl = None
     match = baseSearch.search(data)
@@ -234,7 +234,7 @@ def fetchUrls(url, data, baseUrl, urlSearch):
             searchUrl = match.group(1)
             if not searchUrl:
                 raise ValueError("Pattern %s matched empty URL at %s." % (search.pattern, url))
-            out.debug('matched URL %r with pattern %s' % (searchUrl, search.pattern))
+            out.debug(u'matched URL %r with pattern %s' % (searchUrl, search.pattern))
             searchUrls.append(normaliseURL(urljoin(baseUrl, searchUrl)))
         if searchUrls:
             # do not search other links if one pattern matched
@@ -318,12 +318,12 @@ def urlopen(url, session, referrer=None, max_content_bytes=None,
             timeout=ConnectionTimeoutSecs, raise_for_status=True,
             stream=False, data=None):
     """Open an URL and return the response object."""
-    out.debug('Open URL %s' % url)
+    out.debug(u'Open URL %s' % url)
     headers = {'User-Agent': UserAgent}
     if referrer:
         headers['Referer'] = referrer
-    out.debug('Sending headers %s' % headers, level=3)
-    out.debug('Sending cookies %s' % session.cookies)
+    out.debug(u'Sending headers %s' % headers, level=3)
+    out.debug(u'Sending cookies %s' % session.cookies)
     kwargs = {
         "headers": headers,
         "timeout": timeout,
@@ -340,10 +340,10 @@ def urlopen(url, session, referrer=None, max_content_bytes=None,
     else:
         kwargs['data'] = data
         func = session.post
-        out.debug('Sending POST data %s' % data, level=3)
+        out.debug(u'Sending POST data %s' % data, level=3)
     try:
         req = func(url, **kwargs)
-        out.debug('Response cookies: %s' % req.cookies)
+        out.debug(u'Response cookies: %s' % req.cookies)
         check_content_size(url, req.headers, max_content_bytes)
         if raise_for_status:
             req.raise_for_status()
@@ -393,7 +393,7 @@ def getRelativePath(basepath, path):
 def getQueryParams(url):
     """Get URL query parameters."""
     query = urlsplit(url)[3]
-    out.debug('Extracting query parameters from %r (%r)...' % (url, query))
+    out.debug(u'Extracting query parameters from %r (%r)...' % (url, query))
     return cgi.parse_qs(query)
 
 

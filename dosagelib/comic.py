@@ -63,11 +63,11 @@ class ComicImage(object):
         if maintype == 'image':
             self.ext = '.' + subtype.replace('jpeg', 'jpg')
         self.contentLength = int(self.urlobj.headers.get('content-length', 0))
-        out.debug('... filename = %r, ext = %r, contentLength = %d' % (self.filename, self.ext, self.contentLength))
+        out.debug(u'... filename = %r, ext = %r, contentLength = %d' % (self.filename, self.ext, self.contentLength))
 
     def save(self, basepath):
         """Save comic URL to filename on disk."""
-        out.info("Get image URL %s" % self.url, level=1)
+        out.info(u"Get image URL %s" % self.url, level=1)
         self.connect()
         filename = "%s%s" % (self.filename, self.ext)
         comicDir = os.path.join(basepath, self.dirname)
@@ -76,15 +76,15 @@ class ComicImage(object):
         fn = os.path.join(comicDir, filename)
         # compare with >= since content length could be the compressed size
         if os.path.isfile(fn) and os.path.getsize(fn) >= self.contentLength:
-            out.info('Skipping existing file "%s".' % fn)
+            out.info(u'Skipping existing file "%s".' % fn)
             return fn, False
         content = self.urlobj.content
         if not content:
-            out.warn("Empty content from %s, try again..." % self.url)
+            out.warn(u"Empty content from %s, try again..." % self.url)
             self.connect()
             content = self.urlobj.content
         try:
-            out.debug('Writing comic to file %s...' % fn)
+            out.debug(u'Writing comic to file %s...' % fn)
             with open(fn, 'wb') as comicOut:
                 comicOut.write(content)
                 comicOut.flush()
@@ -97,6 +97,6 @@ class ComicImage(object):
                 os.remove(fn)
             raise
         else:
-            out.info("Saved %s (%s)." % (fn, strsize(size)))
+            out.info(u"Saved %s (%s)." % (fn, strsize(size)))
             getHandler().comicDownloaded(self, fn)
         return fn, True

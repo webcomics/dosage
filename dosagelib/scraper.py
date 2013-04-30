@@ -110,32 +110,32 @@ class _BasicScraper(object):
         imageUrls = set(map(self.imageUrlModifier, imageUrls))
         if len(imageUrls) > 1 and not self.multipleImagesPerStrip:
             patterns = [x.pattern for x in makeSequence(self.imageSearch)]
-            out.warn("found %d images instead of 1 at %s with patterns %s" % (len(imageUrls), url, patterns))
+            out.warn(u"found %d images instead of 1 at %s with patterns %s" % (len(imageUrls), url, patterns))
             image = sorted(imageUrls)[0]
-            out.warn("choosing image %s" % image)
+            out.warn(u"choosing image %s" % image)
             imageUrls = (image,)
         elif not imageUrls:
             patterns = [x.pattern for x in makeSequence(self.imageSearch)]
-            out.warn("found no images at %s with patterns %s" % (url, patterns))
+            out.warn(u"found no images at %s with patterns %s" % (url, patterns))
         return ComicStrip(self.getName(), url, imageUrls, self.namer, self.session)
 
     def getStrips(self, maxstrips=None):
         """Get comic strips."""
         if maxstrips:
-            word = "strip" if maxstrips == 1 else "strips"
-            msg = 'Retrieving %d %s' % (maxstrips, word)
+            word = u"strip" if maxstrips == 1 else "strips"
+            msg = u'Retrieving %d %s' % (maxstrips, word)
         else:
-            msg = 'Retrieving all strips'
+            msg = u'Retrieving all strips'
         if self.indexes:
             if len(self.indexes) == 1:
-                msg += " for index %s" % self.indexes[0]
+                msg += u" for index %s" % self.indexes[0]
             else:
-                msg += " for indexes %s" % self.indexes
+                msg += u" for indexes %s" % self.indexes
             urls = [self.getIndexStripUrl(index) for index in self.indexes]
         else:
             urls = [self.getLatestUrl()]
         if self.adult:
-            msg += " (including adult content)"
+            msg += u" (including adult content)"
         out.info(msg)
         for url in urls:
             for strip in self.getStripsFor(url, maxstrips):
@@ -147,10 +147,10 @@ class _BasicScraper(object):
         self.hitFirstStripUrl = False
         seen_urls = set()
         while url:
-            out.info('Get strip URL %s' % url, level=1)
+            out.info(u'Get strip URL %s' % url, level=1)
             data, baseUrl = getPageContent(url, self.session)
             if self.shouldSkipUrl(url):
-                out.info('Skipping URL %s' % url)
+                out.info(u'Skipping URL %s' % url)
                 self.skippedUrls.add(url)
             else:
                 try:
@@ -159,7 +159,7 @@ class _BasicScraper(object):
                     # image not found
                     out.exception(msg)
             if self.firstStripUrl == url:
-                out.debug("Stop at first URL %s" % url)
+                out.debug(u"Stop at first URL %s" % url)
                 self.hitFirstStripUrl = True
                 break
             if maxstrips is not None:
@@ -170,7 +170,7 @@ class _BasicScraper(object):
             seen_urls.add(url)
             if prevUrl in seen_urls:
                 # avoid recursive URL loops
-                out.warn("Already seen previous URL %r" % prevUrl)
+                out.warn(u"Already seen previous URL %r" % prevUrl)
                 break
             url = prevUrl
             if url and self.waitSeconds:
@@ -184,10 +184,10 @@ class _BasicScraper(object):
                 prevUrl = fetchUrl(url, data, baseUrl, self.prevSearch)
             except ValueError as msg:
                 # assume there is no previous URL, but print a warning
-                out.warn("%s Assuming no previous comic strips exist." % msg)
+                out.warn(u"%s Assuming no previous comic strips exist." % msg)
             else:
                 prevUrl = self.prevUrlModifier(prevUrl)
-                out.debug("Matched previous URL %s" % prevUrl)
+                out.debug(u"Matched previous URL %s" % prevUrl)
                 getHandler().comicPageLink(self.getName(), url, prevUrl)
         return prevUrl
 
@@ -294,12 +294,12 @@ def get_scraperclasses():
     """
     global _scraperclasses
     if _scraperclasses is None:
-        out.debug("Loading comic modules...")
+        out.debug(u"Loading comic modules...")
         modules = loader.get_modules()
         plugins = loader.get_plugins(modules, _BasicScraper)
         _scraperclasses = list(plugins)
         check_scrapers()
-        out.debug("... %d modules loaded." % len(_scraperclasses))
+        out.debug(u"... %d modules loaded." % len(_scraperclasses))
     return _scraperclasses
 
 
