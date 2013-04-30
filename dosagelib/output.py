@@ -14,19 +14,21 @@ lock = threading.Lock()
 class Output(object):
     """Print output with context, indentation and optional timestamps."""
 
-    def __init__(self, stream=sys.stdout, encoding=None):
+    def __init__(self, stream=None):
         """Initialize context and indentation."""
         self.context = u''
         self.level = 0
         self.timestamps = False
-        if encoding is None:
-            if hasattr(stream, "encoding") and stream.encoding:
-                self.encoding = stream.encoding
+        if stream is None:
+            if hasattr(sys.stdout, "encoding") and sys.stdout.encoding:
+                self.encoding = sys.stdout.encoding
             else:
                 self.encoding = 'utf-8'
-        else:
-            self.encoding = encoding
-        stream = codecs.getwriter(self.encoding)(stream)
+            if sys.version_info[0] >= 3:
+                stream = sys.stdout.buffer
+            else:
+                stream = sys.stdout
+            stream = codecs.getwriter(self.encoding)(stream, 'replace')
         self.setStream(stream)
 
     def setStream(self, stream):
