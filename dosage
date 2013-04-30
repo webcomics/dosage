@@ -215,7 +215,7 @@ def vote(scraperobj):
     out.context = name
     try:
         answer = scraperobj.vote()
-        out.debug('Vote answer %r' % answer)
+        out.debug(u'Vote answer %r' % answer)
         if answer == 'counted':
             url = configuration.Url + 'comics/%s.html' % name.replace('/', '_')
             out.info(u'Vote submitted. Votes are updated regularly at %s.' % url)
@@ -277,7 +277,7 @@ def run(options):
         return doList(columnList=False, verbose=options.verbose)
     # after this a list of comic strips is needed
     if not options.comic:
-        out.warn('No comics specified, bailing out!')
+        out.warn(u'No comics specified, bailing out!')
         return 1
     if options.modulehelp:
         return displayHelp(options)
@@ -353,7 +353,7 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False):
     if '@' in comics:
         # only scrapers whose directory already exists
         if len(comics) > 1:
-            out.warn("using '@' as comic name ignores all other specified comics.")
+            out.warn(u"using '@' as comic name ignores all other specified comics.")
         for scraperclass in scraper.get_scraperclasses():
             dirname = getDirname(scraperclass.getName())
             if os.path.isdir(os.path.join(basepath, dirname)):
@@ -398,7 +398,7 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False):
 
 def warn_adult(scraperclass):
     """Print warning about adult content."""
-    out.warn("skipping adult comic %s; use the --adult option to confirm your age" % scraperclass.getName())
+    out.warn(u"skipping adult comic %s; use the --adult option to confirm your age" % scraperclass.getName())
 
 
 def main():
