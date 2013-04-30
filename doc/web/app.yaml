@@ -1,5 +1,5 @@
-version: "2.1"
+version: "2.2"
 name: "Dosage"
 lname: "dosage"
 maintainer: "Bastian Kleineidam"
-author: "Tristan Seligmann, Jonathan Jacobs, Bastian Kleineidam"
+author: "Tristan Seligmann, Jonathan Jacobs, Bastian Kleineidam, Tobias Gruetzmacher, Dirk Reiners"
