@@ -178,7 +178,7 @@ class WormWorldSaga(_BasicScraper):
         compile(tagre("img", "src", r'(images/CH\d+_\d+\.[^"]+)')),
         compile(tagre("img", "src", r'(panels/CH\d+_[^"]+)')),
     )
-    latestChapter = 4
+    latestChapter = 5
     multipleImagesPerStrip = True
 
     @classmethod
