@@ -1,5 +1,5 @@
 # -*- coding: iso-8859-1 -*-
-# Copyright (C) 2000-2012 Bastian Kleineidam
+# Copyright (C) 2000-2013 Bastian Kleineidam
 """
 ANSI Color definitions and functions. For Windows systems, the colorama module
 uses ctypes and Windows DLLs to generate colored output.

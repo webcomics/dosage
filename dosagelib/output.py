@@ -26,11 +26,11 @@ class Output(object):
                 self.encoding = 'utf-8'
         else:
             self.encoding = encoding
+        stream = codecs.getwriter(self.encoding)(stream)
         self.setStream(stream)
 
     def setStream(self, stream):
         """Initialize context and indentation."""
-        stream = codecs.getwriter(self.encoding)(stream)
         self.stream = Colorizer(stream)
 
     def info(self, s, level=0):

@@ -288,10 +288,8 @@ def doList(columnList=True, verbose=False):
     """List available comics."""
     page = hasattr(sys.stdout, "isatty") and sys.stdout.isatty()
     if page:
-        fd = StringIO()
-    else:
-        fd = sys.stdout
-    out.setStream(fd)
+        fd = StringIO(u'')
+        out.setStream(fd)
     out.info(u'Available comic scrapers:')
     out.info(u'Comics tagged with [%s] require age confirmation with the --adult option.' % TAG_ADULT)
     out.info(u'Non-english comics are tagged with [%s].' % TAG_LANG)
