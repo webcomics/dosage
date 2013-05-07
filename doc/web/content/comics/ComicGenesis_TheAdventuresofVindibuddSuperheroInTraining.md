@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>-</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://vindibudd.comicgenesis.com/d/20070720.html">http://vindibudd.comicgenesis.com/d/20070720.html</a></td>

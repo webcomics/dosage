@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>-</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.drunkduck.com/Super_Smash_Bros_Grand_Tour/">http://www.drunkduck.com/Super_Smash_Bros_Grand_Tour/</a></td>

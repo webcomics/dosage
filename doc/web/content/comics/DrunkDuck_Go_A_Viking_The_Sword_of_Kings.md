@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>-</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.drunkduck.com/Go_A_Viking_The_Sword_of_Kings/">http://www.drunkduck.com/Go_A_Viking_The_Sword_of_Kings/</a></td>

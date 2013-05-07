@@ -6,7 +6,7 @@ Edit info for comic DrunkDuck/POKETTO_MONSUTAA_SPECIAL_SU...
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3"></textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">-</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://www.drunkduck.com/POKETTO_MONSUTAA_SPECIAL_SUPER_EX_ADVENTURE_XXXVX_THE_CHRONICLES_OF_RED_BLUE_GREEN_AND_A_BUNCH_OF_OTHER_KIDS_WITH_COLORS_FOR_NAMES/" size="40"/></td>

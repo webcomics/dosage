@@ -6,7 +6,7 @@ Edit info for comic DrunkDuck/Poharex_issues_1_to_11
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3"></textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">-</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://www.drunkduck.com/Poharex_issues_1_to_11/" size="40"/></td>

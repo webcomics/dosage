@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>-</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.drunkduck.com/They_Are_Night_Zombies_They_Are_Neighbors_They_Have_Come_Back_From_The_Dead_Ahhhhh/">http://www.drunkduck.com/They_Are_Night_Zombies_They_Are_Neighbors_They_Have_Come_Back_From_The_Dead_Ahhhhh/</a></td>

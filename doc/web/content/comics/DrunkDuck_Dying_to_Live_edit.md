@@ -6,7 +6,7 @@ Edit info for comic DrunkDuck/Dying_to_Live
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3"></textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">-</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://www.drunkduck.com/Dying_to_Live/" size="40"/></td>

@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>-</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.drunkduck.com/nicola_and_belmondo/">http://www.drunkduck.com/nicola_and_belmondo/</a></td>

@@ -6,7 +6,7 @@ Edit info for comic DrunkDuck/Fred_Peterson_The_Mighty_Wa...
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3"></textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">-</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://www.drunkduck.com/Fred_Peterson_The_Mighty_Warlord_Book_1/" size="40"/></td>

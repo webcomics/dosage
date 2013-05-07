@@ -6,7 +6,7 @@ Edit info for comic DrunkDuck/Here_Comes_the_Chavalry_and...
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3"></textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">-</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://www.drunkduck.com/Here_Comes_the_Chavalry_and_other_random_things_we_decided_to_draw/" size="40"/></td>

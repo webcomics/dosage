@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>-</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.drunkduck.com/The_Demonic_Adventures_of_Angel_Witch_Pita/">http://www.drunkduck.com/The_Demonic_Adventures_of_Angel_Witch_Pita/</a></td>

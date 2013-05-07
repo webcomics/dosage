@@ -6,7 +6,7 @@ Edit info for comic DrunkDuck/I_Was_Kidnapped_By_Lesbian_...
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3"></textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">-</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://www.drunkduck.com/I_Was_Kidnapped_By_Lesbian_Pirates_From_Outer_Space/" size="40"/></td>

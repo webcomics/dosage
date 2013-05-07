@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>-</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.drunkduck.com/Legend_of_Zelda__Ocarina_of_Tim/">http://www.drunkduck.com/Legend_of_Zelda__Ocarina_of_Tim/</a></td>

@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>-</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.drunkduck.com/Outer_Space_Alien_Nazis_From_Outer_Space/">http://www.drunkduck.com/Outer_Space_Alien_Nazis_From_Outer_Space/</a></td>

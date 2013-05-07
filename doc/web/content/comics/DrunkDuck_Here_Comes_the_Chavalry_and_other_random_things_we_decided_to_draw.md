@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td></td>
+<th>Description</th><td>-</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.drunkduck.com/Here_Comes_the_Chavalry_and_other_random_things_we_decided_to_draw/">http://www.drunkduck.com/Here_Comes_the_Chavalry_and_other_random_things_we_decided_to_draw/</a></td>
