@@ -182,6 +182,8 @@ def get_testentry(line):
         desc = scraper.description
     else:
         desc = scraper.description.decode("utf-8", "ignore")
+    if not desc:
+        desc = u'-'
     entry = {
         "status": Status.ok if line.startswith(u". ") else Status.error,
         "name": name,
