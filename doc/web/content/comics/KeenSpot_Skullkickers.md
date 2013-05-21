@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Two hard-headed mercenaries kill monsters and cause havoc in their search for money, fame and adventure. Along the way, theyÂll gore goblins, smash skeletons, punch plant people and whomp werewolves.</td>
+<th>Description</th><td>Two hard-headed mercenaries kill monsters and cause havoc in their search for money, fame and adventure. Along the way, theyll gore goblins, smash skeletons, punch plant people and whomp werewolves.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://skullkickers.keenspot.com/">http://skullkickers.keenspot.com/</a></td>

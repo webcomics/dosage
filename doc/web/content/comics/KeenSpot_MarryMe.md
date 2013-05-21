@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A romantic comedy graphic novel about a pop star, frustrated with her love life, who marries a random fan holding a ÂMARRY MEÂ sign at one of her concerts.</td>
+<th>Description</th><td>A romantic comedy graphic novel about a pop star, frustrated with her love life, who marries a random fan holding a MARRY ME sign at one of her concerts.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://marryme.keenspot.com/">http://marryme.keenspot.com/</a></td>

@@ -6,7 +6,7 @@ Edit info for comic KeenSpot/MarryMe
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">A romantic comedy graphic novel about a pop star, frustrated with her love life, who marries a random fan holding a ÂMARRY MEÂ sign at one of her concerts.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">A romantic comedy graphic novel about a pop star, frustrated with her love life, who marries a random fan holding a MARRY ME sign at one of her concerts.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://marryme.keenspot.com/" size="40"/></td>

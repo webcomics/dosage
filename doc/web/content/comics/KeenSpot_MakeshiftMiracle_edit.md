@@ -6,7 +6,7 @@ Edit info for comic KeenSpot/MakeshiftMiracle
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Colby Reynolds searches for meaning in the world around him and discovers a place where dreams can come true, if heÂs willing to pay the price.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Colby Reynolds searches for meaning in the world around him and discovers a place where dreams can come true, if hes willing to pay the price.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://makeshiftmiracle.keenspot.com/" size="40"/></td>

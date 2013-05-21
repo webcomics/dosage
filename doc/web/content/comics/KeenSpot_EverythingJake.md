@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Everything Jake is not just a pun, itÂs the story of Jake Bruno, college freshman. ItÂs chock full of assorted funniness about life, the universe, and everything.</td>
+<th>Description</th><td>Everything Jake is not just a pun, its the story of Jake Bruno, college freshman. Its chock full of assorted funniness about life, the universe, and everything.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://everythingjake.keenspot.com/">http://everythingjake.keenspot.com/</a></td>
