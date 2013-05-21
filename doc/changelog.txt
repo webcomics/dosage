@@ -4,6 +4,10 @@ Features:
 - scripts: Added script to create a CBZ archive for a given comic
   directory.
 
+Fixes:
+- comics: Fix LookingForGroup.
+  Closes: GH bug #31
+
 
 Dosage 2.2 (released 30.4.2013)
 
