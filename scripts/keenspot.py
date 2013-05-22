@@ -5,6 +5,7 @@ Script to get a list of KeenSpot comics and save the info in a
 JSON file for further processing.
 """
 from __future__ import print_function
+import codecs
 import re
 import sys
 import os
@@ -122,18 +123,20 @@ def has_comic(name):
 
 def print_results(args):
     """Print all comics."""
-    for name, entry in sorted(load_result(json_file).items()):
-        if name in exclude_comics:
-            continue
-        url, desc = entry
-        if has_comic(name):
-            prefix = '#'
-        else:
-            prefix = ''
-        name = truncate_name(name).encode('utf-8')
-        url = url.encode('utf-8')
-        desc = desc.encode('utf-8')
-        print("%sadd(%r, %r, %r)" % (prefix, name, url, desc))
+    min_comics, filename = args
+    with codecs.open(filename, 'a', 'utf-8') as fp:
+        for name, entry in sorted(load_result(json_file).items()):
+            if name in exclude_comics:
+                continue
+            url, desc = entry
+            if has_comic(name):
+                prefix = u'#'
+            else:
+                prefix = u''
+            name = truncate_name(name)
+            fp.write(u"%sadd(%r, %r, %r)\n" % (
+              prefix, str(name), str(url), desc)
+            )
 
 
 if __name__ == '__main__':

@@ -5,6 +5,7 @@ Script to get a list of creators.com comics and save the info in a JSON file for
 """
 from __future__ import print_function
 import re
+import codecs
 import sys
 import os
 import requests
@@ -64,14 +65,18 @@ def has_gocomics_comic(name):
 
 def print_results(args):
     """Print comics."""
-    for name, url in sorted(load_result(json_file).items()):
-        if name in exclude_comics:
-            continue
-        if has_gocomics_comic(name):
-            prefix = '# duplicate of gocomics '
-        else:
-            prefix = ''
-        print("%sadd(%r, %r)" % (prefix, str(truncate_name(name)), str(url)))
+    min_comics, filename = args
+    with codecs.open(filename, 'a', 'utf-8') as fp:
+        for name, url in sorted(load_result(json_file).items()):
+            if name in exclude_comics:
+                continue
+            if has_gocomics_comic(name):
+                prefix = u'# duplicate of gocomics '
+            else:
+                prefix = u''
+            fp.write(u"%sadd(%r, %r)\n" % (
+              prefix, str(truncate_name(name)), str(url))
+            )
 
 
 if __name__ == '__main__':

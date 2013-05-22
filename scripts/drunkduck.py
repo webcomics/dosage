@@ -4,6 +4,7 @@
 Script to get a list of drunkduck comics and save the info in a JSON file for further processing.
 """
 from __future__ import print_function
+import codecs
 import re
 import sys
 import os
@@ -205,18 +206,22 @@ def get_results():
     save_result(res, json_file)
 
 
-def print_results(min_strips):
+def print_results(args):
     """Print all comics that have at least the given number of minimum comic strips."""
-    for name, entry in sorted(load_result(json_file).items()):
-        if name in exclude_comics:
-            continue
-        path, num = entry
-        if num >= min_strips:
-            print("add(%r, %r)" % (str(truncate_name(name)), str(path)))
+    min_comics, filename = args
+    min_comics = int(min_comics)
+    with codecs.open(filename, 'a', 'utf-8') as fp:
+        for name, entry in sorted(load_result(json_file).items()):
+            if name in exclude_comics:
+                continue
+            path, num = entry
+            if num >= min_comics:
+                fp.write(u"add(%r, %r)\n" % (
+                  str(truncate_name(name)), str(path)))
 
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
-        print_results(int(sys.argv[1]))
+        print_results(sys.argv[1:])
     else:
         get_results()

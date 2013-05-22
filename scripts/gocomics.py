@@ -4,6 +4,7 @@
 Script to get a list of gocomics and save the info in a JSON file for further processing.
 """
 from __future__ import print_function
+import codecs
 import re
 import sys
 import os
@@ -97,10 +98,14 @@ def get_results():
 
 def print_results(args):
     """Print all comics that have at least the given number of minimum comic strips."""
-    for name, shortname in sorted(load_result(json_file).items()):
-        if name in exclude_comics:
-            continue
-        print("add(%r, %r)" % (str(truncate_name(name)), str(shortname)))
+    min_comics, filename = args
+    with codecs.open(filename, 'a', 'utf-8') as fp:
+        for name, shortname in sorted(load_result(json_file).items()):
+            if name in exclude_comics:
+                continue
+            fp.write(u"add(%r, %r)\n" % (
+              str(truncate_name(name)), str(shortname))
+            )
 
 
 if __name__ == '__main__':

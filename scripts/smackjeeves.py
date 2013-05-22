@@ -4,6 +4,7 @@
 Script to get a list of smackjeeves.com comics and save the info in a JSON file for further processing.
 """
 from __future__ import print_function
+import codecs
 import re
 import sys
 import os
@@ -317,20 +318,22 @@ def has_comic(name):
 
 def print_results(args):
     """Print all comics that have at least the given number of minimum comic strips."""
-    min_comics = int(args[0])
-    for name, entry in sorted(load_result(json_file).items()):
-        if name in exclude_comics:
-            continue
-        url, num, desc, adult, bounce = entry
-        if num < min_comics:
-            continue
-        if has_comic(name):
-            prefix = '#'
-        else:
-            prefix = ''
-        print("%sadd(%r, %r, %r, %s, %s)" % (
-          prefix, str(truncate_name(name)), str(url), desc, adult, bounce
-        ))
+    min_comics, filename = args
+    min_comics = int(min_comics)
+    with codecs.open(filename, 'a', 'utf-8') as fp:
+        for name, entry in sorted(load_result(json_file).items()):
+            if name in exclude_comics:
+                continue
+            url, num, desc, adult, bounce = entry
+            if num < min_comics:
+                continue
+            if has_comic(name):
+                prefix = u'#'
+            else:
+                prefix = u''
+            fp.write(u"%sadd(%r, %r, %r, %s, %s)\n" % (
+              prefix, str(truncate_name(name)), str(url), desc, adult, bounce
+            ))
 
 
 if __name__ == '__main__':
