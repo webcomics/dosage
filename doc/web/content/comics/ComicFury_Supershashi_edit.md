@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Supershashi
 <th>Description</th><td><textarea name="description" cols="40" rows="3">-</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://supershashi.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://supershashi.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

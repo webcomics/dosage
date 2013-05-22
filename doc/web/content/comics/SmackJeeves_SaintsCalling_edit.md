@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/SaintsCalling
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">*Please go to the &quot;About&quot; page for a full description. Thanks :)* An ill-tempered girl gets her life flipped up-side-down when her best friend abducts her in an attempt to straighten her out a bit. Little does she know...her friend is an alien king from another planet?! A Scifi Shoujo! (Rated T for Teen. Read from left-to-right.)</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">*Please go to the &quot;About&quot; page for a full description. Thanks :)* An ill-tempered girl gets her life flipped up-side-down when her best friend abducts her in an attempt to straighten her out a bit. Little does she know...her friend is an alien king from another planet?! A Scifi Shoujo! (Rated T for Teen. Read from left-to-right. Currently in sketch comic mode until further notice)</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://saintscalling.smackjeeves.com/comics/" size="40"/></td>

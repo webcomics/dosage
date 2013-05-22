@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Datachasers
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Data Chasers is set in the distant future, in a world still recovering from an apocalypse. In it, humans and androids live side-by-side and face the hazards of their dangerous environment. Though set far into our future, it reflects our past and our present, dealing with the politics and cultures of different people, along with touching on the very fundamentals of humanity. ( Updates Monday though Friday ) ( discription by Ranger_Brian_New! )</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://Datachasers.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://Datachasers.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

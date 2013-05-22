@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Judgedred
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A Modern Day Re-Imaging of A Syndicated Comic Strip You've Likely never heard of before. All Original artwork by Alex Graham/Michael Martin.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://judgedred.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://judgedred.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

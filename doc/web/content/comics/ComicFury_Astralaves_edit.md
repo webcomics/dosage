@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Astralaves
 <th>Description</th><td><textarea name="description" cols="40" rows="3">a comic I am working on. Sort of a fantasy thing.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://astralaves.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://astralaves.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

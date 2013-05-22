@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>One day when Arianna wakes up, something´s different... The entire world is gone, she sets out on an exciting adventure to find out what´s going on.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://Alone.thecomicseries.com/">http://Alone.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://Alone.webcomic.ws/">http://Alone.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

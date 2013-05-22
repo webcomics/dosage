@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Theepicepic
 <th>Description</th><td><textarea name="description" cols="40" rows="3">The Epic Epic is an epic tale told with the Lego brick that updates on a Monday-Wednesday-Friday schedule.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://theepicepic.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://theepicepic.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

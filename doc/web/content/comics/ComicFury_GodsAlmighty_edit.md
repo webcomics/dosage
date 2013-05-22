@@ -9,7 +9,7 @@ Edit info for comic ComicFury/GodsAlmighty
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A comic that chronicles the strange events and imaginary happenings surrounding Bethany. Accompanying her in her day-to-day life and occasional flights of fantasy are the two Norse Gods, Freyr and Loki. If you like rainbows, sparkly things, the occasional narwhal, cookies, cakes and sexual innuendo (inYOURendo) Then by Odin, this is the comic for you. GOD DAMN I LOVE CHICKEN.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://GodsAlmighty.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://GodsAlmighty.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

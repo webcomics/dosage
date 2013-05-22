@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>These are various unrelated comics I have worked on. Everything's tagged just in case. They're mostly short stories I've done for different anthologies (Copyright also for &quot;Various&quot; because some of these I worked on with someone else as well). Updates whenever.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://elektroanthology.thecomicseries.com/">http://elektroanthology.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://elektroanthology.webcomic.ws/">http://elektroanthology.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

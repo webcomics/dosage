@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>This comic follows the amazing adventures of Pushy and his cute family of candy colored chipmunks.join the adventure!anything can happen-and it will!sometimes it gets a little crazy,sometimes you won 't understand it-but you don't have to!it's all part of the adventure.Pushy combines my favorite shows into one! all characters are original! Pushy-Always Ridiculous/Always Amazing.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://pushy.thecomicseries.com/">http://pushy.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://pushy.webcomic.ws/">http://pushy.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

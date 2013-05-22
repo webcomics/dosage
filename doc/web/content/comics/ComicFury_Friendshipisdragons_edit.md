@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Friendshipisdragons
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A screencap comic of My Little Pony: Friendship is Magic. Equestria is a custom campaign setting for Dungeons and Dragons, and the mane six are Player Characters. How will a party of six roleplayers fare in a world where the usual hack-'n'-slash high fantasy has been replaced by pastel-colored ponies?</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://friendshipisdragons.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://friendshipisdragons.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

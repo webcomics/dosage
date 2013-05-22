@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>An alien is en route to Earth with a mission so mysterious that not even he is sure of what it is... except he does now and he's either about to die or be stuck on a planet until he figures out a way off of it.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://subjectm.thecomicseries.com/">http://subjectm.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://subjectm.webcomic.ws/">http://subjectm.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

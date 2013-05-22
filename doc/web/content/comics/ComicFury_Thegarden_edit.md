@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Thegarden
 <th>Description</th><td><textarea name="description" cols="40" rows="3">An evil angel, a silent demon, and an insanely happy girl who are forced to work together to complete a mission that none of them wanted.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://thegarden.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://thegarden.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

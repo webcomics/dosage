@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Crawlers
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Their fate is determined by dice and a set of laws they have become the masters of manipulating. Updated every Tuesday and Thursday at 10AM central time (except during campaign season because I'm running for the Missouri House of Representatives).</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://crawlers.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://crawlers.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

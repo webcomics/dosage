@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Lastcallcomic
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Last Call, a Slice-of-life and Humor webcomic, focuses on a woman in her thirties, the antics of her husband and friends, and her conversations with her best friend at a local bar, who happens to be an alcoholic succubus.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://lastcallcomic.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://lastcallcomic.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

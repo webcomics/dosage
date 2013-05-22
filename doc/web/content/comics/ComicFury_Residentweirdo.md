@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Some games, some life, some randomness. Whenever updates</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://residentweirdo.thecomicseries.com/">http://residentweirdo.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://residentweirdo.webcomic.ws/">http://residentweirdo.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>error on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

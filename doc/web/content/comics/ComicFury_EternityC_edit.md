@@ -9,7 +9,7 @@ Edit info for comic ComicFury/EternityC
 <th>Description</th><td><textarea name="description" cols="40" rows="3">When a compulsion is so strong that it runs your life, you have a complex. When that complex centers around Eternity, you have an adventure. Join Fae as she searches for Eternity and all that it might bring her.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://EternityC.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://EternityC.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

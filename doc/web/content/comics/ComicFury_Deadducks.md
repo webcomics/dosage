@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Danny duck and his two brothers just moved in with their uncle in a small town full of ghost monsters and serial killers</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://deadducks.thecomicseries.com/">http://deadducks.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://deadducks.webcomic.ws/">http://deadducks.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

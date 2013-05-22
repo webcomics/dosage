@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Hodgemosh
 <th>Description</th><td><textarea name="description" cols="40" rows="3">It's just kind of stuff. And then there's other stuff, and that's pretty much how it goes.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://hodgemosh.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://hodgemosh.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

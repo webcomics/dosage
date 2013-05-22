@@ -9,7 +9,7 @@ Edit info for comic ComicFury/DRouggs
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Dark and wierd comic, but sometimes quite funny. [No storyline]</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://dRouggs.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://dRouggs.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

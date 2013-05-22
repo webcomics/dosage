@@ -9,7 +9,7 @@ Edit info for comic ComicFury/RPS
 <th>Description</th><td><textarea name="description" cols="40" rows="3">RPS follows the near asylum-level misadventures of the Role-Play Saturday LARP game. Updates Wednesdays!</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://RPS.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://RPS.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

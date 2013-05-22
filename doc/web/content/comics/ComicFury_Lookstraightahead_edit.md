@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Lookstraightahead
 <th>Description</th><td><textarea name="description" cols="40" rows="3">One teen boy's journey through depression and mental illness.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://lookstraightahead.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://lookstraightahead.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

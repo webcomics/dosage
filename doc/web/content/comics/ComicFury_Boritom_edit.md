@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Boritom
 <th>Description</th><td><textarea name="description" cols="40" rows="3">The scintillating adventures of an alien, a redneck and a floating orb of death in the bucolic setting of fictional &quot;Utopia Dell, Arizona.&quot; The strips currently running are all of the &quot;classic Boritom&quot; adventures from the strip's original run from 2000 to 2006. In all, there were about 325 strips, so I am currently updating 5 days a week in order to get people caught up. As we get closer to the &quot;Big Day,&quot; where brand new strips start coming up, there will be lots of information and ballyhoo letting everyone know what to expect... to an extent. Spoilers, Doctor... Spoilers... Once new strips start coming out, however, the updates will probably scale back to once or twice a week.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://boritom.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://boritom.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

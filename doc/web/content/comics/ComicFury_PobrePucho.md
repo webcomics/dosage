@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>There is a place far underground you have no idea it exists, with Lycanthropes, giant bugs, weird politics and NINJA BUNNIES. And poor Pucho just has to suck it up and join the party as the new Lycan in Paws Den!</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://PobrePucho.thecomicseries.com/">http://PobrePucho.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://PobrePucho.webcomic.ws/">http://PobrePucho.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

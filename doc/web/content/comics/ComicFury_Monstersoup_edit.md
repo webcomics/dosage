@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Monstersoup
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A group of misfit monsters are sentenced to live under the same roof--a castle belonging to mad scientist, who is serving his own sentence for unethical experiments. The real question is, can a hodgepodge group of monsters live under the same roof? (Some comedy, horror, and a little bit of everything else.)</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://monstersoup.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://monstersoup.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

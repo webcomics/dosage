@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Gillimurphy
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Gillimurphy Stories - A turn-of-the-century multi-storied apartment building, nestled in the city of Lockdale. Revel in its charm, discover its secrets, and meet its unwittingly affable occupants. (If you're enjoying this strip, take a gander at the original GS series which predates the current edition, found here: http://gillimurphy-orig.thecomicseries.com/)</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://gillimurphy.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://gillimurphy.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

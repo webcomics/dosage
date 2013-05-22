@@ -9,7 +9,7 @@ Edit info for comic ComicFury/ChristianHumberReloaded
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Once upon a time, an unpopular kid in a boarding school had his anime taken away and he turned to writing. He created what is simultaneously the worst and the best story ever created. This is that story's comic-book interpretation. You have been warned. Christian Humber Reloaded rips off/steals from every video game and anime ever made. Yes, even that one. It also has Bionicles. And Hitler. And it's supposed to be serious.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://ChristianHumberReloaded.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://ChristianHumberReloaded.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

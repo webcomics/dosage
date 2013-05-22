@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Outletting
 <th>Description</th><td><textarea name="description" cols="40" rows="3">OutLetting is the first webcomic of Feeny, a professional writing student at York University. starting out as random peeks into Feeny's mind and everyday life as she percieves it, the webcomic has much potential. Names have been changed for the protection of prudey and privacy-loving friends.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://outletting.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://outletting.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

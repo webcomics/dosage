@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>I'm balancing a 3 1/2 year old on my head as I type this. Truly one of God's miracles. (The simultaneous balancing and typing, not my ability to reproduce.) Feel free to point out my spelling and grammar mistakes. Amen.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://biblebelt.thecomicseries.com/">http://biblebelt.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://biblebelt.webcomic.ws/">http://biblebelt.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

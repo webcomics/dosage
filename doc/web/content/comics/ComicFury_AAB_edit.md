@@ -9,7 +9,7 @@ Edit info for comic ComicFury/AAB
 <th>Description</th><td><textarea name="description" cols="40" rows="3">This is where I plan on sticking all my non-cannon Frostbound, and miscellaneous art for your enjoyment. Any fan art that get's draw for Frostbound will also end up here.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://AAB.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://AAB.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

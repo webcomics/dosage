@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Dark modern fantasy! Born of a severe stroke of individuality &amp; nihilism, 'Ahab' relates more to vermin &amp; outcasts. Join the narrative as she abandons her humanity &amp; finds herself in the gloom. Features peril, BDSM, &amp; disturbing scenes.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://ArachnidGoddess.thecomicseries.com/">http://ArachnidGoddess.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://ArachnidGoddess.webcomic.ws/">http://ArachnidGoddess.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

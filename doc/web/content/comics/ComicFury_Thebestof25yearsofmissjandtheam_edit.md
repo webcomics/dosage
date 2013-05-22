@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Thebestof25yearsofmissjandt...
 <th>Description</th><td><textarea name="description" cols="40" rows="3">The best from 25 years of &quot;Miss J and the AM.&quot; This was my strip before I started doing &quot;Jenffer's Show.&quot; It's all about 'Miss J and the AM,' a rock band in a place called the Yukon.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://thebestof25yearsofmissjandtheam.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://thebestof25yearsofmissjandtheam.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

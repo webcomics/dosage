@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>You must have Kirby sprites to join. Don't swear or use mature content. INSPIRED BY ABBIMAYS RANDOMNESS! Characters w/ quotes: Sniveh: Spark, WHY DID YOU DRAG ME FROM THE FOREST ALL THE WAY OUT HERE?! Grace: U-um, hi? Brokor: DON'T YOU DARE PRESS THE PURPLE BUTT-*explodes* Dameon: *messing with doofus' radio* Doofus: If you don't stop trying to change the radio station on my tank, I swear to Black Mesa I will come over there with an army of pies! Plazy: Ok now who's ready for SCIENCE! .... anyone Dave: I heard Science. Dub: Dave, get out. You haven't made an appearance yet. T_T Galacta: Galacta is my name, teleporting is my game!</td>
+<th>Description</th><td>INSPIRED BY ABBIMAYS RANDOMNESS! Characters w/ quotes: Sniveh: Spark, WHY DID YOU DRAG ME FROM THE FOREST ALL THE WAY OUT HERE?! Brokor: DON'T YOU DARE PRESS THE PURPLE BUTT-*explodes* Dameon: *messing with doofus' radio* Doofus: If you don't stop trying to change the radio station on my tank, I swear to Black Mesa I will come over there with an army of pies! Dameon: *Does a faceplant on the side of the Lor Starcutter* Magolor: SERIOUSLY?! Plazy: Ok now who's ready for SCIENCE! .... anyone Dave: I heard Science. Dub: Dave, get out. You haven't made an appearance yet. T_T Galacta: Galacta is my name, teleporting is my game! Thunderbolt: I met someone named Galacta KNIGHT but never galacta...</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://sparkstory.smackjeeves.com/comics/">http://sparkstory.smackjeeves.com/comics/</a></td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

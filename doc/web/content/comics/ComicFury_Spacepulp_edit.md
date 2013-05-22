@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Spacepulp
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Looks like I'm doin' a SPAAAACE PUUULLLP comic. Mostly for colorin' practice.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://spacepulp.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://spacepulp.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

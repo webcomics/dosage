@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Purehavoc
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Aaron Kidway is a 20 year old pizza delivery boy who hasn't had much luck in life...But Aaron's luck changes when Aaron meets a mysterious girl during a delivery!</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://pure-havoc.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://pure-havoc.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

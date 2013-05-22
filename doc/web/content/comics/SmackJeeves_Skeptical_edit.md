@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/Skeptical
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">A regular slice of life/death romantic comedy about an unusual family and their relations to a group of creatures that call themselves &quot;skull people&quot;. Said human family is not mine. The Clark family(and half the comic itself) was created by and belongs to TyrannicalShipper. Just a warning- there's an abundance of foul language, and occasional bloodshed. Constructive critiques are always appreciated! (Updates sporadically due to the fact that we are both now in college)</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">A regular slice of life/death romantic comedy about an unusual family and their relations to a group of creatures that call themselves &quot;skull people&quot;. Said human family(and half the comic itself) was created by and belongs to TyrannicalShipper! Warning- there's an abundance of foul language, and blood. Lots of blood, including the first page. Also, constructive critiques are always appreciated! (Updates sporadically due to the fact that we are both now in college)</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://skeptical.smackjeeves.com/comics/" size="40"/></td>

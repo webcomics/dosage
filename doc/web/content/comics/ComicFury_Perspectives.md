@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>The dark twin of humor. A webcomic all about points of view. I write this in my spare time at work to stay sane, and wanted to share it with the world. I update every Monday, Wednesday, and Friday.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://perspectives.thecomicseries.com/">http://perspectives.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://perspectives.webcomic.ws/">http://perspectives.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

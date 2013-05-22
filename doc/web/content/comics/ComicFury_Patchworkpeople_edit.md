@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Patchworkpeople
 <th>Description</th><td><textarea name="description" cols="40" rows="3">The fungus changes people, and it makes them change themselves. Lets. Yes, it lets them change themselves. Lets. I know, I just said. Oh. do you mean with an apostrophe? Let's? Sure, whatever. Let's change things. Things are Changing.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://patchworkpeople.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://patchworkpeople.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

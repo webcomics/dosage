@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Bee Police is a comic about government conspiracies, mutant bees, mountain gods, ancient aliens, random monsters, and some aggies living in an out of the way town named Podunk.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://beepolice.thecomicseries.com/">http://beepolice.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://beepolice.webcomic.ws/">http://beepolice.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

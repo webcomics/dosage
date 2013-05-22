@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Four young women and their friends embark on a summer of rambunctious (and occasionally ridiculous) adventures. Warning: May contain Pirates, Ninjas, Mimes, Clowns, Nerdy Jokes and one very annoying jester. Read with caution.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://tinytown.thecomicseries.com/">http://tinytown.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://tinytown.webcomic.ws/">http://tinytown.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

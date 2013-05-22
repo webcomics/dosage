@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Their fate is determined by dice and a set of laws they have become the masters of manipulating. Updated every Tuesday and Thursday at 10AM central time (except during campaign season because I'm running for the Missouri House of Representatives).</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://crawlers.thecomicseries.com/">http://crawlers.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://crawlers.webcomic.ws/">http://crawlers.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

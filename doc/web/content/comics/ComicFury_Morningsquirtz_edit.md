@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Morningsquirtz
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A filthy Taffy swirl of gooey pun drenched fun.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://Morningsquirtz.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://Morningsquirtz.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

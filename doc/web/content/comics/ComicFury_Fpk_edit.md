@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Fpk
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Imagine those badly-photocopied zines that were left on the tables at your local coffee shop got a shave and a haircut, finished their fine arts degrees, and turned out to have really odd Monty Python-esque senses of humor. Then they got married and had a kid. That kid is FPK.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://fpk.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://fpk.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

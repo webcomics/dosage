@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Biblebelt
 <th>Description</th><td><textarea name="description" cols="40" rows="3">I'm balancing a 3 1/2 year old on my head as I type this. Truly one of God's miracles. (The simultaneous balancing and typing, not my ability to reproduce.) Feel free to point out my spelling and grammar mistakes. Amen.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://biblebelt.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://biblebelt.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

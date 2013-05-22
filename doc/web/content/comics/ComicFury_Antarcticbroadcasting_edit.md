@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Antarcticbroadcasting
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Stickmen and their shenanigans-- inspired by life and other disasters.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://antarcticbroadcasting.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://antarcticbroadcasting.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

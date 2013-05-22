@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Themightyknight
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A poorly-drawn knight who's kicking ass and taking names in some kind of messed up cartoon fantasyland.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://themightyknight.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://themightyknight.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

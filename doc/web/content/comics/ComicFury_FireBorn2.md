@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>The King of the Dead, The Lord of the Shadows, and the Devourer of Souls are amassing their armies to take revenge against the world and the gods that have shunned them. Men and women from different walks of life will join forces to fight them.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://FireBorn2.thecomicseries.com/">http://FireBorn2.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://FireBorn2.webcomic.ws/">http://FireBorn2.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Felicity
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Set in a futuristic New York City, a division of extreme motor-sport known as Mort-Racing gives prisoners a chance to fight for their freedom.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://felicity.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://felicity.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

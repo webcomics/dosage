@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/BleachRedux
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Myself and others were extremely disappointed with Ulquiorra's death in the official Bleach manga, so I've taken it upon myself to draw out what could've possibly happened had Orihime pulled her head out of her ass and saved him. WARNING: UlquiHime. Any negative comments (or futile attempts at validating other ships that make even less sense (ie: IchiHime)) will be deleted. CURRENT: 4/21 Ch29 is online. Ch30 is on hold. ETA 6/01 while I go on hiatus to write this thing lol NOTE: READ RIGHT TO LEFT LIKE JAPANESE MANGA.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Myself and others were extremely disappointed with Ulquiorra's death in the official Bleach manga, so I've taken it upon myself to draw out what could've possibly happened had Orihime pulled her head out of her ass and saved him. WARNING: UlquiHime. Any negative comments (or futile attempts at validating other ships that make even less sense (ie: IchiHime)) will be deleted. CURRENT: 4/21 Ch29 is online. Ch30 is starting up on 5/18. ETA 6/08. NOTE: READ RIGHT TO LEFT LIKE JAPANESE MANGA.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://bleachredux.smackjeeves.com/comics/" size="40"/></td>

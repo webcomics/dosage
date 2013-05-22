@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Tangledmess
 <th>Description</th><td><textarea name="description" cols="40" rows="3">The journal comic of a young artist, who has no idea what she's doing in life, and that's okay by her.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://tangledmess.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://tangledmess.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

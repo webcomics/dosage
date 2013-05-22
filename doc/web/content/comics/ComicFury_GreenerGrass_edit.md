@@ -9,7 +9,7 @@ Edit info for comic ComicFury/GreenerGrass
 <th>Description</th><td><textarea name="description" cols="40" rows="3">This is the story of three strangers (and their pets), who for unknown reasons get dragged into a different dimension, named by them as the Grass-Green-Land. Whatever will await them there? Warning: This comic involves a lot of swearing. Updates whenever I have the time for it.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://GreenerGrass.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://GreenerGrass.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

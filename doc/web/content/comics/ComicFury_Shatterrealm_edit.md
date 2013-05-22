@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Shatterrealm
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Iconoclasts clash as wanderers from parallel worlds fight for survival, meaning, and a way to get home. Through tehcnological or supernatural means, a random few have managed to move back and forth between worlds. Some are lost. Some are searching. Some are hunters and exterminators. An exploration of the human heart.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://shatterrealm.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://shatterrealm.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

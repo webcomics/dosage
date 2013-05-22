@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Schizmatic is a webcomic based on blueprint schematics applied to actual life. It puts the cosmos under a microscope, and reality under analysis.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://schizmatic.thecomicseries.com/">http://schizmatic.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://schizmatic.webcomic.ws/">http://schizmatic.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>error on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

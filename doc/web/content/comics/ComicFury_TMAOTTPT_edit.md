@@ -9,7 +9,7 @@ Edit info for comic ComicFury/TMAOTTPT
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Once upon a time, in a trailer park far, far away.. 3 misfit friends embark on a journey of semi-epic proportion that could change the course of their history!--and it's all told through Legos! *Updates every Monday, Wednesday, and Friday!*</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://TMAOTTPT.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://TMAOTTPT.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

@@ -9,7 +9,7 @@ Edit info for comic ComicFury/FireBorn2
 <th>Description</th><td><textarea name="description" cols="40" rows="3">The King of the Dead, The Lord of the Shadows, and the Devourer of Souls are amassing their armies to take revenge against the world and the gods that have shunned them. Men and women from different walks of life will join forces to fight them.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://FireBorn2.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://FireBorn2.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

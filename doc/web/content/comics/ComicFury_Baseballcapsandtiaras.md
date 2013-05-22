@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>A tomboy, 16 year old Paige, and a girly girl, 8 year old Katie, discover a portal to a magical world in their house. The magical world is fraught with political dangers.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://Baseballcapsandtiaras.thecomicseries.com/">http://Baseballcapsandtiaras.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://Baseballcapsandtiaras.webcomic.ws/">http://Baseballcapsandtiaras.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

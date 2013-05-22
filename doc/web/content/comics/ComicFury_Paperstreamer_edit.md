@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Paperstreamer
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A science fiction web comic loosely based on ongoing research and speculation regarding space elevators and alternative space launch methods. The story and images are composed in pulp fiction and noir styles, with some use of 3D models, but with informative sections regarding the related technologies and concepts. The author and artist is an active reader of related technical research papers and hopes to entertain the audience while learning about the space elevator and its related physics concepts.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://paperstreamer.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://paperstreamer.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

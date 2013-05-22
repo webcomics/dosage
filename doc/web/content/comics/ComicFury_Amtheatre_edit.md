@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Amtheatre
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Do you like mid-low fantasy? Do you like comedy? Are you not offended by characters who are missing important appendages? Maybe you should read this. Or maybe not. Is this another DnD comic? No. But is it filled with cheap pop culture references? Hell no. Why is the main character a girl with no legs or right arm? Because I'm a sick human being, okay???</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://amtheatre.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://amtheatre.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

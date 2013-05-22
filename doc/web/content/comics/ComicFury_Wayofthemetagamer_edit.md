@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Wayofthemetagamer
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Bob buys the Dungeons and Dragons book off eBay. Hilarity ensues. Plot follows. Also tropes. Lots and lots of tropes. Also no fourth wall. Actually, it's mostly about the lack of fourth wall. We probably should have mentioned that bit right at the top. Actually, yeah, move that to the top- you're writing this LIVE?</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://wayofthemetagamer.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://wayofthemetagamer.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

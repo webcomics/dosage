@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Baseballcapsandtiaras
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A tomboy, 16 year old Paige, and a girly girl, 8 year old Katie, discover a portal to a magical world in their house. The magical world is fraught with political dangers.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://Baseballcapsandtiaras.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://Baseballcapsandtiaras.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

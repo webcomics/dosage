@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Hai. Hai. Hai. Hai. Hai. Hai. Hai. Hai. Hai. Hai. Hai. Hai. Hai. Hai. Hai. Hai. Hai. Hai. Hai.</td>
+<th>Description</th><td>Hai. This is basicly a dump for my sprites, comics, game ideas, charectors, and basic everyday stuff.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://hai.smackjeeves.com/comics/">http://hai.smackjeeves.com/comics/</a></td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

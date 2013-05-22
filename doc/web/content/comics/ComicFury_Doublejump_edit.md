@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Doublejump
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Every day, I have a free half hour, and what better way to spend it than to sketch up some Videogame Comics super-quick for you guys?</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://doublejump.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://doublejump.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

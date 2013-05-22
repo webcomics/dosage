@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Spooncomic
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A evil wizard turned Charles' whole town turned into a kitchen (that's right). Cursed with the body of a SPOON, he has embarked on a journey to find the wizard and along the way, he will meet other &quot;cursed&quot; ones.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://spooncomic.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://spooncomic.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>If you're looking for a good comic with a plot, I suggest not reading this. If you like randomness, Kirby, Tails and author involvement, then this is the place. Arcs are bound to happen, so watch for those. Accepts cameos. All characters and backgrounds used in this belong to their rightful owners, and credit goes to the people who ripped, edited and/or recoloured the sprites used.</td>
+<th>Description</th><td>Arcs sometimes happen here. Oh, and crossovers too but character wise. All characters and backgrounds used in this belong to their rightful owners, and credit goes to the people who ripped, edited and/or recoloured the sprites used.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://mixupofmixups.smackjeeves.com/comics/">http://mixupofmixups.smackjeeves.com/comics/</a></td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

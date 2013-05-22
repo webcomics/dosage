@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Sarakleeyo
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A World of Warcraft themed web comic starring the Argent Crusade's unusual misfits. The crusade allowed heroes of the Alliance and Horde to become partners. Sara &amp; Kleeyo set the example...provided they can survive their friendship. Updated weekly on Saturdays.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://sarakleeyo.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://sarakleeyo.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

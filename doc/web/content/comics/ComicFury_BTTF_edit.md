@@ -9,7 +9,7 @@ Edit info for comic ComicFury/BTTF
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A man is residing in his home when he discovers that his fridge has vanished under mysterious circumstances. Updating Mondays, Wednesdays and Fridays.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://BTTF.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://BTTF.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

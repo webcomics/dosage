@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/HavingDifficulty
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Robby is starting high school. In his mind, he's having difficulty fitting in. He barely knows anyone. Will the next four years change his attitude? Updates once a day. Noon.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Robby is starting high school. In his mind, he's having difficulty fitting in. He barely knows anyone. Will the next four years change his attitude? Updates once a day.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://having-difficulty.smackjeeves.com/comics/" size="40"/></td>

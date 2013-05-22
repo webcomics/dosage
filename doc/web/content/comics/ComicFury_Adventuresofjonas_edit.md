@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Adventuresofjonas
 <th>Description</th><td><textarea name="description" cols="40" rows="3">These short, scribbely orange comics are excerpts from my life through my own slanted viewpoint .. they are totally out of context. Its mostly disjointed vignettes, relationships, inside jokes, a couple nifty thoughts and dumb adventures sprinkled on over that. somewhere between a soapdrama and a gag strip and a traffic accident. Life. whatever. if you prefer to read it in spanish, check out 'las Aventuras de JONAS!' at http://jonas.subcultura.es/</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://adventuresofjonas.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://adventuresofjonas.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

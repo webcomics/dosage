@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Tolva
 <th>Description</th><td><textarea name="description" cols="40" rows="3">In an Hostile environment a woman must find the key to her past. Little does she know that the key to her past could also be the answer to the mystery of the Tolva.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://tolva.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://tolva.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

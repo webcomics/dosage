@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Fuzzballandscuzzball
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Fuzzball and Scuzzball are brothers who live in the gritty urban hell that is Happy City, New Jersey. In theory, they are private investigators. These are their wacky misadventures.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://fuzzballandscuzzball.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://fuzzballandscuzzball.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

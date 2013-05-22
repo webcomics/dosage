@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Welcome to Pandora City where monsters, demons, and mechanical menaces roam. Who can stand before this onslaught? Are the citizens doomed? Will heroes like the Killer Bee, Arcane, and the Wildborn be enough to prevent the forces of evil from finally gaining control of the city and its secrets?</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://atomicmonkey.thecomicseries.com/">http://atomicmonkey.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://atomicmonkey.webcomic.ws/">http://atomicmonkey.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

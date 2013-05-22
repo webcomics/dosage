@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/HitandMiss
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">It's a autobiographic comic about, well, me and my daily life! Doesn't it sound like fun? WARNING: Comic may contain a lot of the following; misspelling, weird situations, nerdiness, gaming, horrible puns, cats, and occasionally lovey dovey stuff http://www.drunkduck.com/Hit_and_Miss/ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ The link to DrunkDuck Hit and Miss!</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">It's a autobiographic comic about, well, me and my daily life! Doesn't that sound interesting? WARNING: This comic may contain the following; misspelling, weird situations, gaming, horrible puns, cats, depression, and the occasionally lovey dovey stuff. http://www.drunkduck.com/Hit_and_Miss/ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ The link to DrunkDuck Hit and Miss!</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://hitandmiss.smackjeeves.com/comics/" size="40"/></td>

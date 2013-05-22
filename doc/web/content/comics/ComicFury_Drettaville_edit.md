@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Drettaville
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Rook's life is thrown into chaos when he's suddenly put in charge of raising a seven-year-old daughter he never knew he had. A daily family-friendly comic strip!</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://drettaville.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://drettaville.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

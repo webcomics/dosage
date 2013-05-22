@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Cubecows
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Cube Cows for everyone! Merely shout something out and I, your ever faithful servant, shall warp and twist it into a cube cow. Be it a character, idea, game, object, or even yourself, once put into the cube-cowifier, it shall be done! All suggestions are put on a list, and then selected randomly off of that list. If you or one of your characters are used, you have equal rights, and may use the drawing for personal purposes (eg. Avatar, displaying in webcomic...)</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://cubecows.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://cubecows.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

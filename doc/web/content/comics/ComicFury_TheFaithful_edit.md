@@ -9,7 +9,7 @@ Edit info for comic ComicFury/TheFaithful
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Follow your favorite New England sports teams with Soxy: a Boston Red Sox Puppet worn by a crazy, anonymous fan of the Red Sox, Patriots, Bruins, and Celtics.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://TheFaithful.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://TheFaithful.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

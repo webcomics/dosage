@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Tomorrowsgirls
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Gabriel Lassiter heads up a group of mega-corporations offering almost magical technology, and amazing consumer products. But Lassiter is hiding a frightening secret that only Whitney, his personal assistant, and Steve Chin, the head of the Tomorrow Girl Agency know. And they aren't telling.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://tomorrowsgirls.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://tomorrowsgirls.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Subjectm
 <th>Description</th><td><textarea name="description" cols="40" rows="3">An alien is en route to Earth with a mission so mysterious that not even he is sure of what it is... except he does now and he's either about to die or be stuck on a planet until he figures out a way off of it.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://subjectm.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://subjectm.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

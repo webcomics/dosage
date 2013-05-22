@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Actingout
 <th>Description</th><td><textarea name="description" cols="40" rows="3">When a bunch of kids with very different personalities come together in their school's drama club, a lot more goes on in the auditorium than you may think! Follow the dramatic lives of Clinton, Ollie, Tasha, and the rest of the gang as they set the scene and put on a heck of a performance, both on and off the stage! Updates are on Sundays and Thursdays!</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://actingout.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://actingout.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

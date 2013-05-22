@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Tba
 <th>Description</th><td><textarea name="description" cols="40" rows="3">follows the daily life of four sisters and their friends in Tepes Broadview Apartments in Millwood, Iowa</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://tba.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://tba.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

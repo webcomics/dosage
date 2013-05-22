@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Rebels
 <th>Description</th><td><textarea name="description" cols="40" rows="3">In a dystopian future, Humankind is embattled with a seemingly superior foe - with a weakness to Geurilla warfare. National armies (and the nations they once protected) have dissolved into anarchy or destruction (or both), and the story follows two former special operatives turned Geurillas, fighting back any way that they can.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://Rebels.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://Rebels.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Applepine
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Follow Applepine as he experiences life one problem at a time, with help from his friends of course! Each with their own way of solving the enigma of life, they help Applepine find his way through trouble, girls, and adventure in this ongoing series.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://Applepine.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://Applepine.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

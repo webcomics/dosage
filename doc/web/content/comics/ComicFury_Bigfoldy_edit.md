@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Bigfoldy
 <th>Description</th><td><textarea name="description" cols="40" rows="3">The Big Foldy: A tale of friendship, robots, earth, lasers, space, action, comedy, sneezing, delicious food such as hot dogs and ice cream, laughter, incessant beeping, invasion, and the relationship between cultures?</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://bigfoldy.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://bigfoldy.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

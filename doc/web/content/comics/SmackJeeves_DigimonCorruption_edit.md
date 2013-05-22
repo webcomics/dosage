@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/DigimonCorruption
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Flamemon is dead and the Digivice has been destroyed. Without any more resistance, BlackWarGreymon and Omnimon continue to watch the Digital World collapse around them as Baihumon and Ebonwumon remain imprisoned. Meanwhile, the Daemon Corps is gathering more and more Fractal Code from innocent Digimon as they go about their search for the Code Crowns. Whatever goals these two groups have, no one is left to stop them. Reign has failed as the DigiDestined.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">The world is in chaos. BlackWarGreymon and Omnimon continue to watch the Digital World collapse around them as Baihumon and Ebonwumon remain imprisoned. Meanwhile, the Daemon Corps is gathering more and more Fractal Code from innocent Digimon as they go about their search for the Code Crowns. But the DigiDestined is back to set things right.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://digimoncorruption.smackjeeves.com/comics/" size="40"/></td>

@@ -6,10 +6,10 @@ Edit info for comic ComicFury/Insanitycorp
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">The new and improved--yet still not corporate--Insanity Corp is back with more panels and fewer sticks! :D [Reality not included, offer not available in the Neptunian quadrant, see inside for details.]</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">[[ ENDED ]] The new and improved--yet still not corporate--Insanity Corp is back with more panels and fewer sticks! :D [Reality not included, offer not available in the Neptunian quadrant, see inside for details.]</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://insanitycorp.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://insanitycorp.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

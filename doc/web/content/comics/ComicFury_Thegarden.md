@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>An evil angel, a silent demon, and an insanely happy girl who are forced to work together to complete a mission that none of them wanted.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://thegarden.thecomicseries.com/">http://thegarden.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://thegarden.webcomic.ws/">http://thegarden.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

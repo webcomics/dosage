@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Secondcrimeanwar
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Set in Ukraine after the fall of the Soviet Union, in an alternate 1995, this is a story of civil war, terrorism, revolution, missing nuclear weapons, and some of the most disgusting sausages on the planet. Hang on tight and enjoy the ride! Updates every three days, on average, real life permitting.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://secondcrimeanwar.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://secondcrimeanwar.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

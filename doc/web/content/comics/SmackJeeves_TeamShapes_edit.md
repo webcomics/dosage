@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/TeamShapes
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">There's a team of MS paint creatures that do random events that include fighting Paint.net, running from a guy who they owe $500 to, doing missions, and simply fooling around. Current chapter: When Roup was building a time machine, it accidently gained consious. It's mission: Stop time.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">There's a team of MS paint creatures that do random events that include fighting Paint.net, running from a guy who they owe $500 to, doing missions, and simply fooling around. Current chapter: When Roup was building a time machine, it accidently gained consious as an evil overlord. As it went along, time has been reverced. It's mission: Stop time altogethor.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://teamshapes.smackjeeves.com/comics/" size="40"/></td>

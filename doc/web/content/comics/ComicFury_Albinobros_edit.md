@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Albinobros
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Two guys at work shoot the breeze and do their best to not break the fourth wall.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://albinobros.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://albinobros.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

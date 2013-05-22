@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Toneout
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Tone Out is a web comic about a bad musician in love with his neighbor. It's updated sporadically. It follows a storyline, so it's best to start from the first strip.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://toneout.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://toneout.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

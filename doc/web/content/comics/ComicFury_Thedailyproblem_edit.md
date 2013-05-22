@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Thedailyproblem
 <th>Description</th><td><textarea name="description" cols="40" rows="3">In November 2009 I started copying a bunch of people online who drew a comic about their lives every day. All of the stuff in these comics is true, all of the people are real, and some of it is even kind of interesting.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://thedailyproblem.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://thedailyproblem.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

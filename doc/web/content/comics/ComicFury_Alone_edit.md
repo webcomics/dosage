@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Alone
 <th>Description</th><td><textarea name="description" cols="40" rows="3">One day when Arianna wakes up, something´s different... The entire world is gone, she sets out on an exciting adventure to find out what´s going on.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://Alone.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://Alone.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

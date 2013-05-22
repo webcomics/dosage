@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>This is a place for all the women I drew over many years. Some you might recognize from my strips, others you'll see here for the first time, and the rest are women I drew from other comics on ComicFury.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://the-women-i-draw.thecomicseries.com/">http://the-women-i-draw.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://the-women-i-draw.webcomic.ws/">http://the-women-i-draw.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

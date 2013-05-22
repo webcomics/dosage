@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Poussiere
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Un monde où les créatures fantastiques existent ne peut qu'être un peu compliqué. Si vous voulez le visiter, commencez donc par les villes, c'est plein d'humains et de confort moderne, tant que ça ne vous dérange pas d'avoir un lutin pour voisin ou un troll pour chauffeur. Mais vous n'êtes pas racistes, n'est-ce pas?</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://poussiere.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://poussiere.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

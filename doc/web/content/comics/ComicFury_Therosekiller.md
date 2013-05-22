@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Someone has been killing members of the mob and those connected to them, then leaving a fresh rose behind at the scenes. The Big Apple becomes abuzz with talk about the &quot;Rose Killer&quot; as the NYPD work to crack the case and find the murderer.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://therosekiller.thecomicseries.com/">http://therosekiller.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://therosekiller.webcomic.ws/">http://therosekiller.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

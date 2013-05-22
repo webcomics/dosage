@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Drifting
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A story of a Young &quot;Drifter&quot; named Venture and the mysteries of Auncen and Novossa.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://Drifting.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://Drifting.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

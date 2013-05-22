@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Therosekiller
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Someone has been killing members of the mob and those connected to them, then leaving a fresh rose behind at the scenes. The Big Apple becomes abuzz with talk about the &quot;Rose Killer&quot; as the NYPD work to crack the case and find the murderer.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://therosekiller.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://therosekiller.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

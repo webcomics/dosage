@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Thebigscifimishmash
 <th>Description</th><td><textarea name="description" cols="40" rows="3">this comic is a sci-fi comic which mixes several differnt sci-fi things into one. for instance, it starts off kind of like the hitch hiker's guide to the galaxy but quickly moves on to parodies of star trek, star wars and many more.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://thebigsci-fimish-mash.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://thebigsci-fimish-mash.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

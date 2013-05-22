@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Mad Dog and Spot are just a couple of cool cats, even though they're dogs. When ever they get together fate always serves them a side dish of adventure with a cup of heart and just a pinch of high fives! Follow along as they encounter mad scientists, alternate dimensions, evil sandwiches and who knows what else! Mad Dog! Every Saturday at 8 o'clock - 7 central! (Or whenever you feel like reading it)</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://maddog.thecomicseries.com/">http://maddog.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://maddog.webcomic.ws/">http://maddog.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

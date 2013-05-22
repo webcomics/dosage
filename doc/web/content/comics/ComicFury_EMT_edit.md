@@ -6,10 +6,10 @@ Edit info for comic ComicFury/EMT
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">an experiment in Mental Theatre, externalized in comic form. Now updating 3 times weekly, every M-W-F. [i]It doesn't serve the 3 fetish as well every 3rd day on dates divisible by 3 did, but you get more story for your money - with 3 more strips every month![/i]</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">an experiment in Mental Theatre, externalized in comic form. Now updating 3 times weekly, every M-W-F. [i]It doesn't serve the 3 fetish as well as every 3rd day on dates divisible by 3 did, but you get more story for your money - with 3 more strips every month![/i]</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://eMT.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://eMT.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

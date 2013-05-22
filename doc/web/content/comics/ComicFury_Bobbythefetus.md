@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>A fetal adventures of a fetus (which is not an e!). It features a Svalbardian/Swedish fetus(which might be a fetus, but isn't) named Bobby located somewhere in Iceland, adjustment disordered narrator who hates being seen, Roberta the fetus (who is not an e!) who is Bobby's girlfriend, the author himself, a sock puppet and a minor deity destined to ruin the world... This is a mirror of the DrunkDuck comic with the same name and author...</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://bobbythefetus.thecomicseries.com/">http://bobbythefetus.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://bobbythefetus.webcomic.ws/">http://bobbythefetus.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Toy
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Tripping Over You is a love story that addresses the awkwardness that comes from having feelings for someone you shouldn't - especially in the odd mix of drama and humor that is secondary boarding school. This story contains LGBT interactions - if that's not your cup of tea, this comic may not be for you.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://toy.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://toy.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

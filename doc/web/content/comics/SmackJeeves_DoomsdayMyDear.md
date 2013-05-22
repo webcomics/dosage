@@ -1,0 +1,39 @@
+title: SmackJeeves/DoomsdayMyDear
+url: "/comics/SmackJeeves_DoomsdayMyDear.html"
+---
+Dosage comic SmackJeeves/DoomsdayMyDear
+-----------------------------------------
+
+<p id="msg"></p>
+<script type="text/javascript">
+if (window.location.search === '?edit_info_mail=sent_ok') {
+  var elem = document.getElementById("msg");
+  elem.innerHTML = 'Edited information sucessfully sent for review, which is usually done daily. Thanks!';
+  elem.className = 'ok';
+}
+</script>
+<table class="comicinfo">
+<tr>
+<th>Description</th><td>A turn-of-the-20th century webcomic drama about a modern day plague, the political turmoil that follows in its wake, and the lives of the people it touches.</td>
+</tr>
+<tr>
+<th>Website</th><td><a href="http://www.doomsdaymydear.com/comics/">http://www.doomsdaymydear.com/comics/</a></td>
+</tr>
+<tr>
+<th>Genre</th><td>Other</td>
+</tr>
+<tr>
+<th>Language</th><td>English</td>
+</tr>
+<tr>
+<th>Adult content</th><td>no</td>
+</tr>
+<tr>
+<th>Status</th><td>ok on 22.05.2013</td>
+</tr>
+<tr>
+<th>Votes</th><td>0</td>
+</tr>
+</table>
+
+[Edit this info](SmackJeeves_DoomsdayMyDear_edit.html) or go back to the [comic list](../comic-index.html).

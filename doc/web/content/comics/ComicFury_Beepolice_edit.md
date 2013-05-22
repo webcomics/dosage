@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Beepolice
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Bee Police is a comic about government conspiracies, mutant bees, mountain gods, ancient aliens, random monsters, and some aggies living in an out of the way town named Podunk.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://beepolice.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://beepolice.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

@@ -9,7 +9,7 @@ Edit info for comic ComicFury/ParaFrenic
 <th>Description</th><td><textarea name="description" cols="40" rows="3">ParaFrenic is an 18 year old half-man/half monster who holds down a daytime job as a video comic actor and spends the rest of his days trying to survive the tough avenues of Vagrant Street.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://ParaFrenic.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://ParaFrenic.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

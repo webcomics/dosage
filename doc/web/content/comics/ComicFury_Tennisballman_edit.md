@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Tennisballman
 <th>Description</th><td><textarea name="description" cols="40" rows="3">He's a man of severe delusion. She's a girl with anger problems. He has a skull minion and a giant dirt-breathing fish. She has enemies waiting to be killed with gorey passion. Updated every Tuesday and Friday.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://tennisballman.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://tennisballman.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

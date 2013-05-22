@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>A screencap comic of My Little Pony: Friendship is Magic. Equestria is a custom campaign setting for Dungeons and Dragons, and the mane six are Player Characters. How will a party of six roleplayers fare in a world where the usual hack-'n'-slash high fantasy has been replaced by pastel-colored ponies?</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://friendshipisdragons.thecomicseries.com/">http://friendshipisdragons.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://friendshipisdragons.webcomic.ws/">http://friendshipisdragons.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

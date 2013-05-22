@@ -9,7 +9,7 @@ Edit info for comic ComicFury/TomboftheKing
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Epic fantasy tale with a spin of sci-fi action. Similar to Lord of the Rings, Indiana Jones and Stargate all thrown together. Greed and corruption are the motivating factor behind the quest to unlock the secrets of an ancient map written in a language unknown to the current inhabitants of the land....only one man has been able to decipher the symbols, Lexus Doctramius.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://TomboftheKing.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://TomboftheKing.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

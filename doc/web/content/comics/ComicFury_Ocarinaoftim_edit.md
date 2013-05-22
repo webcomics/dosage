@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Ocarinaoftim
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Welcome to our world! It's strange, but a lot of fun! This reads right to left, in traditional manga style. We should warn you: if you are looking for a serious adventure..you may want to pick something else to read. Also...there is a bit of language. Not a lot of harsh language, but it is there.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://ocarinaoftim.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://ocarinaoftim.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

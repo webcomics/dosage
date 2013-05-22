@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Perspectives
 <th>Description</th><td><textarea name="description" cols="40" rows="3">The dark twin of humor. A webcomic all about points of view. I write this in my spare time at work to stay sane, and wanted to share it with the world. I update every Monday, Wednesday, and Friday.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://perspectives.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://perspectives.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

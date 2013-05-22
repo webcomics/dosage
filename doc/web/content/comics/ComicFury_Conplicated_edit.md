@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Conplicated
 <th>Description</th><td><textarea name="description" cols="40" rows="3">When sarcastic but charitable Amber Pennicastle follows a handsome panhandler to his secret hideaway, her life turns upside-down in this action/romantic comedy. (Revised and color version of Geode Corner).</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://Conplicated.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://Conplicated.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

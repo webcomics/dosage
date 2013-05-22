@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Docapoc
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A useful* resource for surviving** and thriving during*** the end of life as we know it at the &quot;hands&quot;**** of zombies, aliens, robots, boredom, plague, asteroids, the weather, ninjas, clowns, [redacted by National Security], war, global warming, giant creatures from the deep or vampire enslavement. *No &quot;actual&quot; usefulness, either real or implied, is guaranteed. **No &quot;actual&quot; survival, either real or implied, is guaranteed. ***No &quot;actual&quot; thriving, either real or implied, is guaranteed. ****Many forms of apocalyptic doom do not have hands.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://docapoc.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://docapoc.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

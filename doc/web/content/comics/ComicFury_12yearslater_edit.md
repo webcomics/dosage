@@ -9,7 +9,7 @@ Edit info for comic ComicFury/12yearslater
 <th>Description</th><td><textarea name="description" cols="40" rows="3">This is a strip comic about two different moments. One of them happens a certain number of years after the other- I bet you can guess how many.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://12yearslater.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://12yearslater.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

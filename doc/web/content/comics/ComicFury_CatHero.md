@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Cat Hero's epic Catventures as an Hero, starring Cat Hero as Cat Hero, by Cat Hero; is a graphical representation of the (mis)adventures of a cat-person named Cat Hero, whose arch-nemesis is CatoreH, a life-sized cardboard cutout of a (very) badly drawn cat-person. Half a quick comic, half an experiment to see if single-panel gag-a-day style can actually convey a story, and be good doing it.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://CatHero.thecomicseries.com/">http://CatHero.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://CatHero.webcomic.ws/">http://CatHero.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

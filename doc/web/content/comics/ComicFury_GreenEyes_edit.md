@@ -9,7 +9,7 @@ Edit info for comic ComicFury/GreenEyes
 <th>Description</th><td><textarea name="description" cols="40" rows="3">One page comics on the simple things in life.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://GreenEyes.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://GreenEyes.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

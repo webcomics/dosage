@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Namcowars
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A battle of non-epic proportions! Andore has assembled five classic Namco armies to fight in a competition to prove which is the most powerful! Updates Tue/Thu/Sat.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://namcowars.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://namcowars.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

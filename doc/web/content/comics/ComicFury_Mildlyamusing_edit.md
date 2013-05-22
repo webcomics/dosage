@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Mildlyamusing
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A comic about life, happiness, and flights of fantasy.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://mildlyamusing.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://mildlyamusing.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

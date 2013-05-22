@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Schizmatic
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Schizmatic is a webcomic based on blueprint schematics applied to actual life. It puts the cosmos under a microscope, and reality under analysis.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://schizmatic.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://schizmatic.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

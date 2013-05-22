@@ -9,7 +9,7 @@ Edit info for comic ComicFury/AccidentallyonPurpose
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A Warlock, a Guitarist, and a Host for a demon live under the same roof and are in a three way relationship. As things go upside down and right side up again, there seems to be quite a few issues in their lives, even though the three of them seem to still make it through okay, minus the huge bills they have to pay to their landlord...</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://Accidentally-on-Purpose.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://Accidentally-on-Purpose.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

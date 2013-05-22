@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>The fungus changes people, and it makes them change themselves. Lets. Yes, it lets them change themselves. Lets. I know, I just said. Oh. do you mean with an apostrophe? Let's? Sure, whatever. Let's change things. Things are Changing.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://patchworkpeople.thecomicseries.com/">http://patchworkpeople.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://patchworkpeople.webcomic.ws/">http://patchworkpeople.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

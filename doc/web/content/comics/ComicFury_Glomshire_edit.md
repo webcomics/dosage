@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Glomshire
 <th>Description</th><td><textarea name="description" cols="40" rows="3">The misadventures of the inhabitants of Glomshire, a medieval(ish)land of undetermined origin. LEGO® is a trademark of the LEGO Group, which does not sponsor, authorize or endorse this comic (and we don't blame them!)</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://Glomshire.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://Glomshire.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

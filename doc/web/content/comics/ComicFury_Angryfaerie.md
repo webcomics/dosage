@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Not all faeries are happy, cheerful little forest creatures. One, in fact, is downright ornery. She's mean-spirited, violent.. and ANGRY. Welcome to the twisted world of Angry Faerie.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://angryfaerie.thecomicseries.com/">http://angryfaerie.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://angryfaerie.webcomic.ws/">http://angryfaerie.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

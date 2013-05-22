@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Kayandp
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Kay is a college student who's passions are music and the arts, which probably makes her wacky enough... but also there is her best friend - a skeleton no one else can see, named P.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://kayandp.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://kayandp.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Dragoncity
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Millions of years ago, a comet wiped out the dinosaurs, but the dragons who were living along side them went underground and stayed there. And now we see the civilization that has come about from those refuges in a current day story.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://dragoncity.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://dragoncity.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

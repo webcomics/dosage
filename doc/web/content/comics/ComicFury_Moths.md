@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>In an alternate American past, Aram and his family must cope with the tightening grip of cynical political forces, while trying to understand the threat of the mysterious giant moths.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://moths.thecomicseries.com/">http://moths.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://moths.webcomic.ws/">http://moths.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

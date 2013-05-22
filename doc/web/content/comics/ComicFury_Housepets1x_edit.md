@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Housepets1x
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A new weird family approach! Primo is a talented actor, Spike is an avenger. Together they form the most caotic and crazy squad ever! Updates on Monday, Wednesday and Friday</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://housepets1x.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://housepets1x.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

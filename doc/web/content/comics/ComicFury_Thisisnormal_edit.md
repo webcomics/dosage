@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Thisisnormal
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A view of life, the universe, and pretty much everything, as told from the perspective of me, a normal-by-my-own-personal-definition-of-the-word teenager, living in the UK today. All of my comics are true. Sure, some of them may never have happened in real life, but that doesn't make them any less true.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://thisisnormal.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://thisisnormal.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

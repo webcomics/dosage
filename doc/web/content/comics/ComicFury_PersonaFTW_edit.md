@@ -9,7 +9,7 @@ Edit info for comic ComicFury/PersonaFTW
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Finally, all of the Persona for the Win series in one convenient location. Containing the works of Persona Won, Persona 2 Win, Persona 3 FTW, and Persona 4TW. Now obviously as parody comics, all of the works do contain spoilers of their respective games. Read at your own risk.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://PersonaFTW.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://PersonaFTW.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Atomicmonkey
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Welcome to Pandora City where monsters, demons, and mechanical menaces roam. Who can stand before this onslaught? Are the citizens doomed? Will heroes like the Killer Bee, Arcane, and the Wildborn be enough to prevent the forces of evil from finally gaining control of the city and its secrets?</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://atomicmonkey.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://atomicmonkey.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

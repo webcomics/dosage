@@ -9,7 +9,7 @@ Edit info for comic ComicFury/AmericanNerd
 <th>Description</th><td><textarea name="description" cols="40" rows="3">The adventures of the epynonymous nerd in Japan, going through the usual JRPG motions alongside a blonde amnesiac protagonist, a nature spirit, a Digital monster, a Sonic the Hedgehog cosplayer, and a few characters I haven't gotten around to yet. Whacky shennanigans ensue.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://AmericanNerd.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://AmericanNerd.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Acryden
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Hey everyone we're back on track with the pages. It was a mess up on my part with the dates. Of course our main site always updates first and has the latest information. Feel free to visit us at Acryden.com</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://acryden.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://acryden.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

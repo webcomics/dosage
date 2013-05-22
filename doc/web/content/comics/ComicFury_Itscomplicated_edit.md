@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Itscomplicated
 <th>Description</th><td><textarea name="description" cols="40" rows="3">The exploits of a city girl as she gets through her late teenage years</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://itscomplicated.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://itscomplicated.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

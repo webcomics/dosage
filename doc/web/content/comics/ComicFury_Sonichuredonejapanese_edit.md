@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Sonichuredonejapanese
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Japanese version Sonichu の世界へようこそ ！この変更のパロディ CWC の薄弱漫画のお楽しみください。(すべての翻訳はビンビン翻訳によって行われています)更新プログラム、およびランダムな記事のためのブログを確認してください。 更新プログラム: スペル ミス発生します。</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://sonichuredonejapanese.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://sonichuredonejapanese.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

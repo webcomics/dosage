@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Angryfaerie
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Not all faeries are happy, cheerful little forest creatures. One, in fact, is downright ornery. She's mean-spirited, violent.. and ANGRY. Welcome to the twisted world of Angry Faerie.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://angryfaerie.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://angryfaerie.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

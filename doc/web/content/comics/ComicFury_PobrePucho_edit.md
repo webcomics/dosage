@@ -9,7 +9,7 @@ Edit info for comic ComicFury/PobrePucho
 <th>Description</th><td><textarea name="description" cols="40" rows="3">There is a place far underground you have no idea it exists, with Lycanthropes, giant bugs, weird politics and NINJA BUNNIES. And poor Pucho just has to suck it up and join the party as the new Lycan in Paws Den!</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://PobrePucho.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://PobrePucho.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

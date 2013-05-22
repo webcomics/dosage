@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Pulse
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Annie &quot;Pulse&quot; Chang, and Tabitha &quot;Bolt&quot; Greene, two female human batteries become armored super-heroines.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://pulse.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://pulse.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

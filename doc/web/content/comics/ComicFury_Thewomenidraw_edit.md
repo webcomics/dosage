@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Thewomenidraw
 <th>Description</th><td><textarea name="description" cols="40" rows="3">This is a place for all the women I drew over many years. Some you might recognize from my strips, others you'll see here for the first time, and the rest are women I drew from other comics on ComicFury.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://the-women-i-draw.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://the-women-i-draw.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Do you like mid-low fantasy? Do you like comedy? Are you not offended by characters who are missing important appendages? Maybe you should read this. Or maybe not. Is this another DnD comic? No. But is it filled with cheap pop culture references? Hell no. Why is the main character a girl with no legs or right arm? Because I'm a sick human being, okay???</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://amtheatre.thecomicseries.com/">http://amtheatre.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://amtheatre.webcomic.ws/">http://amtheatre.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

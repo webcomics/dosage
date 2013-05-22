@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>A mixed up family where at times, the pets have a better grasp of a situation than the humans.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://smalltownvalues.thecomicseries.com/">http://smalltownvalues.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://smalltownvalues.webcomic.ws/">http://smalltownvalues.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

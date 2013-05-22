@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Rook's life is thrown into chaos when he's suddenly put in charge of raising a seven-year-old daughter he never knew he had. A daily family-friendly comic strip!</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://drettaville.thecomicseries.com/">http://drettaville.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://drettaville.webcomic.ws/">http://drettaville.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

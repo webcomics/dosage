@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Damnhipsters
 <th>Description</th><td><textarea name="description" cols="40" rows="3">There's some in every generation... those that are so obsessed with being cool they'll do anything to keep ahead of the mainstream no matter how stupid it makes them look. These are their stories.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://damnhipsters.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://damnhipsters.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

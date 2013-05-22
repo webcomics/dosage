@@ -9,7 +9,7 @@ Edit info for comic ComicFury/SimplySarah
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Follow Sarah through her life as she deals with her own personal relationship issues and those of the people around her. Lesbian themed with one trans character and lots of other varied relationship issues.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://SimplySarah.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://SimplySarah.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

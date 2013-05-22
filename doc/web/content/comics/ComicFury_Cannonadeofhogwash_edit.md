@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Cannonadeofhogwash
 <th>Description</th><td><textarea name="description" cols="40" rows="3">As the title suggests, this is a cannonade of hogwash. Updated almost daily.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://cannonadeofhogwash.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://cannonadeofhogwash.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

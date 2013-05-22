@@ -9,7 +9,7 @@ Edit info for comic ComicFury/ProjectGTH
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A story about a genetically engineered girl made to be a killing machine. Who now tries to live a normal life after escaping her creators, but is still haunted by her past</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://ProjectGTH.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://ProjectGTH.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

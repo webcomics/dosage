@@ -9,7 +9,7 @@ Edit info for comic ComicFury/BlueBloodHeroes
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Six children possess a genetic irregularity that grants them super-human powers and turns their blood blue. As criminals and injustice begin to rise in their hometown, they decide to form a superhero team.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://BlueBloodHeroes.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://BlueBloodHeroes.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

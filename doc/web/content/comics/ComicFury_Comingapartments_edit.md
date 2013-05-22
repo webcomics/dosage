@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Comingapartments
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Apartment life is never an adventures. But J.B. and Diri are sure as hell gonna try to make it one.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://comingapartments.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://comingapartments.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

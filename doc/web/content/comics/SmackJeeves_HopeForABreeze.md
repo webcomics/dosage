@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Dedicated to all of the losers and the failures, the freaks and the social outcasts in society; don't give up. This is a story of a girl named Sophia and her journeys through life</td>
+<th>Description</th><td>This is a story of a girl named Sophia and her journeys through life. webcomic, web comic, school life, slice of life, school, drama, anime, autobiography, memoirs, manga, cartoon, comic</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://h4ab.smackjeeves.com/comics/">http://h4ab.smackjeeves.com/comics/</a></td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

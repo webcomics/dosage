@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Jump2
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A demon possessed killer gets a glimpse of what life could be like free from his Master...but freedom, like all things in life, is difficult to attain and even more difficult to maintain. (This is the remake of the original.)</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://Jump2.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://Jump2.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

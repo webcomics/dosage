@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Littleblackdress
 <th>Description</th><td><textarea name="description" cols="40" rows="3">They say a &quot;little black dress&quot; will get you anywhere. Dress it up' dress it down. This one is very special. It will do a lot for you, even if it's not always exactly what you wanted.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://little-black-dress.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://little-black-dress.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

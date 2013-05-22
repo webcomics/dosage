@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Bunnysher
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Lapin was meant to be featured in the official clip for the song Lucky Animals by The Devin Townsend Project. Sadly, his dance was rejected and the crushing pain made him endorse his favorite cosplay for good.. or bad.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://Bunnysher.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://Bunnysher.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

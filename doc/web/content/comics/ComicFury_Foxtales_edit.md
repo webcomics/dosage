@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Foxtales
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A manga based on faerie folklore. After encountering a man who can change into a fox, a girl finds herself mixed up in a world of faeries and mythical creatures.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://Foxtales.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://Foxtales.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

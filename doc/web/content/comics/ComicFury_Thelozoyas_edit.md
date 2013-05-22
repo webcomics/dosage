@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Thelozoyas
 <th>Description</th><td><textarea name="description" cols="40" rows="3">It's 1997, Jack Lozoya is 21 and finally on his own when his mother dumps his 7-year old little half-brother, Max, on his doorstep without even confronting him. He later finds out their mother cannot afford to take care of Max since his father died, leaving her nothing to live off of. Now Jack is stuck with the responsibility of a single father, so soon after moving into his own place no less!</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://thelozoyas.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://thelozoyas.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

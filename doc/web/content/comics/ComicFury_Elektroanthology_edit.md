@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Elektroanthology
 <th>Description</th><td><textarea name="description" cols="40" rows="3">These are various unrelated comics I have worked on. Everything's tagged just in case. They're mostly short stories I've done for different anthologies (Copyright also for &quot;Various&quot; because some of these I worked on with someone else as well). Updates whenever.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://elektroanthology.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://elektroanthology.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

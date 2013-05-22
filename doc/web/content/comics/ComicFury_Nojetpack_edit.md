@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Nojetpack
 <th>Description</th><td><textarea name="description" cols="40" rows="3">My Life Without A Jetpack is a biographical webcomic about MaGnUs' life, written by him, with art by Taibox (and sometimes colored by Mindy Lopkin). Published weekly in English and Spanish.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://nojetpack.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://nojetpack.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

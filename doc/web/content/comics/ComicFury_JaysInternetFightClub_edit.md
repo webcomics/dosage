@@ -9,7 +9,7 @@ Edit info for comic ComicFury/JaysInternetFightClub
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A Bus Driver starts a female fight club in his basement, with his wife, and his wife's girl pals. They broadcast the fights over the internet, and sell the dvds of the matches.The cast goes through adventures outside of the club as well.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://JaysInternetFightClub.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://JaysInternetFightClub.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

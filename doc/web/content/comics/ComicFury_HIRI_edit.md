@@ -9,7 +9,7 @@ Edit info for comic ComicFury/HIRI
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Autobiographical comic that's at least 80% true</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://HIRI.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://HIRI.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

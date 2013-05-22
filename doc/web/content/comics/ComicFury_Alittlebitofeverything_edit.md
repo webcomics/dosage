@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Alittlebitofeverything
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Gag-a-day comic featuring the adventures of Lucky, Swifty, their friends &amp; family. Expect laughs, classic muscle cars, and stuff blowing up... but hopefully not the muscle cars. We don't have the budget to replace them.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://alittlebitofeverything.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://alittlebitofeverything.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

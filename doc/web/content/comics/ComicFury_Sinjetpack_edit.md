@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Sinjetpack
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Mi Vida Sin Un Jetpack es un comic autobiográfico sobre la vida de MaGnUs, escrito por él, con arte de Taibox (ocasionalmente coloreado por Mindy Lopkin). Publicado semanalmente en inglés y español.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://sinjetpack.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://sinjetpack.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Mushroomgo
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Go is a Toad that wakes up in a desert, and is picked up by sand pirates. Describing the rest of the plot would take too long. Basically, a drawn Super Mario comic with original characters, disconnected from any particular game.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://mushroomgo.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://mushroomgo.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

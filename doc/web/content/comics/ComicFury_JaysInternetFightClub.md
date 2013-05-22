@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>A Bus Driver starts a female fight club in his basement, with his wife, and his wife's girl pals. They broadcast the fights over the internet, and sell the dvds of the matches.The cast goes through adventures outside of the club as well.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://JaysInternetFightClub.thecomicseries.com/">http://JaysInternetFightClub.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://JaysInternetFightClub.webcomic.ws/">http://JaysInternetFightClub.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

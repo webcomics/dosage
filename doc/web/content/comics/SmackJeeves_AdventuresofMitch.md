@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>The adventures of a fairly normal teenage boy and his host of crazy companions in a world that gives new meaning to the term &quot;modern fantasy&quot;. Updates Fridays.</td>
+<th>Description</th><td>The adventures of a fairly normal teenage boy and his host of crazy companions in a world that gives new meaning to the term &quot;modern fantasy&quot;. Updates Tuesdays and Fridays; going on hiatus in August for 18 months.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://adventuresofmitch.smackjeeves.com/comics/">http://adventuresofmitch.smackjeeves.com/comics/</a></td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

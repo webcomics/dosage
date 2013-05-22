@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Toontowncomics
 <th>Description</th><td><textarea name="description" cols="40" rows="3">I started this comic one feb. 8, 2010. These are the true events of my life.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://toontowncomics.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://toontowncomics.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

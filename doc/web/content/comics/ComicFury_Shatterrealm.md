@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Iconoclasts clash as wanderers from parallel worlds fight for survival, meaning, and a way to get home. Through tehcnological or supernatural means, a random few have managed to move back and forth between worlds. Some are lost. Some are searching. Some are hunters and exterminators. An exploration of the human heart.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://shatterrealm.thecomicseries.com/">http://shatterrealm.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://shatterrealm.webcomic.ws/">http://shatterrealm.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

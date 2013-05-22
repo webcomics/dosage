@@ -9,7 +9,7 @@ Edit info for comic ComicFury/RumfAdventures
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Hello! It is my pleasure to welcome you to the site of my beloved comic strip Rumf Adventures! In the event that you have not become acquainted with my tiny strip,allow me to give you a quick rundown.This is an action-packed adventure strip with a dash of humor.It features a cast of thousands, starring the mighty adventurer Rumfus! That's it.I don't want to spoil the rest for you,just start reading! Onward to Adventures!</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://RumfAdventures.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://RumfAdventures.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

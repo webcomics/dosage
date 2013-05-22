@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Deadducks
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Danny duck and his two brothers just moved in with their uncle in a small town full of ghost monsters and serial killers</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://deadducks.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://deadducks.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

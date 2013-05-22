@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Outferasmoke
 <th>Description</th><td><textarea name="description" cols="40" rows="3">The long and rambling story of Joss, a snarky young woman, her confused and abused buddy Lee and their perky housemate, Carrie. Contains drug use, sex, mild violence, profanity and, occasionally, boobies. Updates Sundays and Thursdays.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://outferasmoke.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://outferasmoke.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

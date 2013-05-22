@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A collection of random comics about random things :D</td>
+<th>Description</th><td>A collection of comics and cartoons about anything and nothing.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.anythingcomic.com/comics/">http://www.anythingcomic.com/comics/</a></td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

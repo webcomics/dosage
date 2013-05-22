@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Sawbladersblacknuzlocke
 <th>Description</th><td><textarea name="description" cols="40" rows="3">*SADLY, THIS COMIC HAS BEEN ABANDONED. NO FURTHER UPDATES ARE BEING MADE TO THIS RUN.* A hand-drawn Nuzlocke comic detailing one crazy adventure in Pokemon: Black Version! Trust me, the art gets better as it goes along! Original Thread on the Offical Nuzlocke Forums: http://s7.zetaboards.com/Nuzlocke_Forum/topic/8520848/</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://sawbladersblacknuzlocke.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://sawbladersblacknuzlocke.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Keepingthepeace
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Four universes are combined into one. Three exist as a fictional franchise in another universe far away. Mortals from there are hired to reincarnate into the four worlds to use their knowledge, acquired power, and training undergone to keep the peace between these three worlds they knew of in their first life. Now a new recruit has been hired to manage all three of them and she's not sure if she can handle it. And what about that fourth world?</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://keepingthepeace.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://keepingthepeace.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

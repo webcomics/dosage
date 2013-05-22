@@ -9,7 +9,7 @@ Edit info for comic ComicFury/BrokenReality
 <th>Description</th><td><textarea name="description" cols="40" rows="3">This story revolves around two teenage boys who suddenly find themselves living in japan for no apparent reason. Joined by twin Japanese girls, The four of them now seem to be living their lives in a world where the rules of reality are constantly being broken in one way or another.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://BrokenReality.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://BrokenReality.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

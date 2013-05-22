@@ -9,7 +9,7 @@ Edit info for comic ComicFury/StrangeAttractors
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Strange Attractors is a humorous post-modern retro-science fiction comic. Sophie, the curator of the vast Museum of Lost Things, becomes embroiled in an epoch spanning war between magic and science, in which the comics she loves are actually coded histories, and she’s become a magnet for all sorts of cosmic weirdness.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://StrangeAttractors.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://StrangeAttractors.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

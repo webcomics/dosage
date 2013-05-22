@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Atowncalledalandale
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Leonard Smith is your average everyday loser, but during the full - moon becomes a hulking werewolf. Along with a Witch named Noa, and his perverted best friend Ron. Len must navigate everyday life and try to be as normal as possible. But that's easier said than done as he's living in the strangest town in the world. And in the town called Alandale, anything is possible.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://atowncalledalandale.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://atowncalledalandale.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

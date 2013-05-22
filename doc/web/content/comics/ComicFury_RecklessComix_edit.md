@@ -9,7 +9,7 @@ Edit info for comic ComicFury/RecklessComix
 <th>Description</th><td><textarea name="description" cols="40" rows="3">We are a couple of guys (or a few sometimes) With a camera and too much free time at work... Enjoy us</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://RecklessComix.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://RecklessComix.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

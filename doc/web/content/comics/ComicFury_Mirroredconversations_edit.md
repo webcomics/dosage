@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Mirroredconversations
 <th>Description</th><td><textarea name="description" cols="40" rows="3">There are things in life that often don't make sense. This comic highlights them.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://mirroredconversations.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://mirroredconversations.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

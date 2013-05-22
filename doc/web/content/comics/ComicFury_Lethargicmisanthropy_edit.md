@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Lethargicmisanthropy
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Please, do not get depressed after reading this comic. That is my job.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://lethargicmisanthropy.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://lethargicmisanthropy.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

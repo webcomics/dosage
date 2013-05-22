@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Andrew Cross was going nowhere fast. It seemed that he couldn't stick to anything that he tried. However after several deaths in the family, Cross realized just how short life truly is. Determined to leave his mark on the world before he dies, Cross and his friends enter the Mayhem Unloaded tournament. A brutal combat simulator, where there can only be one victor.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://PlasticBulletsMayhemUnloaded.thecomicseries.com/">http://PlasticBulletsMayhemUnloaded.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://PlasticBulletsMayhemUnloaded.webcomic.ws/">http://PlasticBulletsMayhemUnloaded.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

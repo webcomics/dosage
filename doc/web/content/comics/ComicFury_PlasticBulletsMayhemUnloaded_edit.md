@@ -9,7 +9,7 @@ Edit info for comic ComicFury/PlasticBulletsMayhemUnloaded
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Andrew Cross was going nowhere fast. It seemed that he couldn't stick to anything that he tried. However after several deaths in the family, Cross realized just how short life truly is. Determined to leave his mark on the world before he dies, Cross and his friends enter the Mayhem Unloaded tournament. A brutal combat simulator, where there can only be one victor.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://PlasticBulletsMayhemUnloaded.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://PlasticBulletsMayhemUnloaded.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

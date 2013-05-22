@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>A world where fantasy creatures are real ought to feel a little complicated. Should you want to visit it, start with the cities, they're full of humans and modern comfort, if you don't mind having a leprechaun for neighbour or a troll driver. But you're not a racist, right?</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://fairydust.thecomicseries.com/">http://fairydust.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://fairydust.webcomic.ws/">http://fairydust.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>error on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Spacepirates
 <th>Description</th><td><textarea name="description" cols="40" rows="3">In the near future, human colonies on Jupiter's moons are attacked by mysterious space pirates whose advanced ships can outrun other vessels. A mismatched handful of smugglers takes the pirates on, using near-obsolete hardware, and help from an unexpected source.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://spacepirates.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://spacepirates.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

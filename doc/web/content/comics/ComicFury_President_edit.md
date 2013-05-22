@@ -9,7 +9,7 @@ Edit info for comic ComicFury/President
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Wiola is a vampire, but not the classic one. Indeed, she is &quot;Ethical Vampire&quot;: those vampires that resists to blood's thirst reliance and live their un-life as outcasts. With Wiola come her protégé, a young vampire who has not yet passed the stage of reliance to blood. To complicate things the young vampire can resist the addiction to blood only by being surrounded by potential victims, and this is why Wiola choose to bring him in the capital of Riaveé. Riaveé is a nation destroyed by the last war, a place of lost memories of a mighty, now fallen, kingdom and ancient secrets never dug up. Riaveé is the perfect place for ethical vampires like, silent creatures with no identity.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://president.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://president.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

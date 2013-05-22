@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Trollgirl
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Amelia has the unique ability to say the most inappropriate things at the most inappropriate times. Unfortunately, that kind of skill is not appreciated when your job is to keep people from killing themselves...</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://trollgirl.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://trollgirl.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

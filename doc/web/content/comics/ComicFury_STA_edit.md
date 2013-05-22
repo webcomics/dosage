@@ -9,7 +9,7 @@ Edit info for comic ComicFury/STA
 <th>Description</th><td><textarea name="description" cols="40" rows="3">When two worlds are threaten and all hope seems lost, one hero will stand. Sadly, that's the best They're going to get.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://STA.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://STA.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

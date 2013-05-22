@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Follow Sarah through her life as she deals with her own personal relationship issues and those of the people around her. Lesbian themed with one trans character and lots of other varied relationship issues.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://SimplySarah.thecomicseries.com/">http://SimplySarah.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://SimplySarah.webcomic.ws/">http://SimplySarah.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

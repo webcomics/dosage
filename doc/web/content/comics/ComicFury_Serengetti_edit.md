@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Serengetti
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Serengetti Dreams, as you may have inferred from the title, is a webcomic by Shane Itram. It updates daily, Monday through Friday. First time here? Kind of lost? Check out Dr. Bolton's welcome to new readers!</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://serengetti.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://serengetti.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Thisisdouglas
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Somewhere off the M59 Motorway lies the sleepy little town of Douglas... This is Douglas. Want a hi-tech and pretty strip? Don't look here. We do however endeavour to be Interesting.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://thisisdouglas.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://thisisdouglas.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

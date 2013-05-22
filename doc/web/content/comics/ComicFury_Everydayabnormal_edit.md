@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Everydayabnormal
 <th>Description</th><td><textarea name="description" cols="40" rows="3">When supernatural, technological, or mythic threats endanger human lives, only the Agency of the Unnatural can rise up to stop them -- but it's the ordinary people who are caught in the crossfire. Jon Grasseschi's ongoing saga explores how people react, live, and just survive when the unexplainable, the impossible, and the just plain weird intrude on their lives.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://everydayabnormal.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://everydayabnormal.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Donutsforsharks
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Donuts for Sharks is a bi-weekly comic about a vertically challenged Grim Reaper as well as the darkly absurd and quirky world going on around him. Comics Tuesday and Friday.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://Donutsforsharks.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://Donutsforsharks.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

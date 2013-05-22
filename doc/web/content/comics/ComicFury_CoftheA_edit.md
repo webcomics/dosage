@@ -9,7 +9,7 @@ Edit info for comic ComicFury/CoftheA
 <th>Description</th><td><textarea name="description" cols="40" rows="3">It is a fantasy comic that is loosely about philosophy. It features real pictures and a disturbing amount of software effects to create a drawn feel. Sadly I think it would be less work to just draw it. The main character, Jim Towers&quot; is played by me and represents some sort of mental condition as the majority of the humour in the comic is the character played by me, calling out snarky remarks to me... the author/narrator. Hope you enjoy. Updates are every Friday for now.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://CoftheA.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://CoftheA.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Lifeexplained
 <th>Description</th><td><textarea name="description" cols="40" rows="3">What started as a humorous attempt to participate in &quot;Everyone Draw Mohammed&quot; day resulted in a weekly comic in which things are observed.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://lifeexplained.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://lifeexplained.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Honeyvenom
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Honey Venom, the sweetest poison, the daughter of darkness. Honey is an adventurer with an obscure past. She is an assassin and a witch. This comic is about her adventures in mysterious lands, about her loves and her fights against revenants, vampires, evil priests, corrupted zealots, depraved ogres and other revolting villains. Feel you free to contact me at my email address: I like to talk about my comics and to make friends with those who read my works, as well with other comic makers.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://honeyvenom.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://honeyvenom.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

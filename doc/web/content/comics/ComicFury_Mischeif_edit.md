@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Mischeif
 <th>Description</th><td><textarea name="description" cols="40" rows="3">//&gt;LOADING INTERFACE;;;STOP RIGHT THERE READERS! Enter the semi auto-biography of my life drawn out for your entertainment! Enter Zeon the comic version of the me who is the same yet different, at the same time. (See what I did there?) Unemployed, lazy gaming, comic artist who finds entertainment in the little things. https://www.facebook.com/pages/Mischeif/267542906656329?fref=ts</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://Mischeif.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://Mischeif.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

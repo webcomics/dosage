@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Once upon a time, an unpopular kid in a boarding school had his anime taken away and he turned to writing. He created what is simultaneously the worst and the best story ever created. This is that story's comic-book interpretation. You have been warned. Christian Humber Reloaded rips off/steals from every video game and anime ever made. Yes, even that one. It also has Bionicles. And Hitler. And it's supposed to be serious.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://ChristianHumberReloaded.thecomicseries.com/">http://ChristianHumberReloaded.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://ChristianHumberReloaded.webcomic.ws/">http://ChristianHumberReloaded.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

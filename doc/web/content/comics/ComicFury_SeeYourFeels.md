@@ -14,10 +14,10 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>I have a thought or a feeling (or someone makes a clever comment) and I translate it into a single frame comic. This comic is not a continued story, so you can jump in anytime. Update Schedule: Every business day (Monday through Friday, excluding holidays) www.facebook.com/ICanSeeYourFeels</td>
+<th>Description</th><td>Comic is storyline-less, jump in anytime and hit the &quot;random&quot; button! Update Schedule: Every business day (Monday through Friday, excluding holidays) www.facebook.com/ICanSeeYourFeels</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://SeeYourFeels.thecomicseries.com/">http://SeeYourFeels.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://SeeYourFeels.webcomic.ws/">http://SeeYourFeels.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

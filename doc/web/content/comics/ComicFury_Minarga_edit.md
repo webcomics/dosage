@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Minarga
 <th>Description</th><td><textarea name="description" cols="40" rows="3">My longer-than-ever-anticipated Mass Effect fancomic, originally posted on deviantART, also available here. At the present time, I'm still working on the script, and will be posting first drafts of every chapter as I sketch them out. Finished pages will come when I've written the entire script and have layouts/rough drafts of all the pages. Again, just to cover all my bases, I do not own the Mass Effect universe; it's the creation of Bioware, and they own all the rights. I don't own a damn thing. More of my art is viewable at http://amethystsadachbia.deviantart.com/</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://minarga.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://minarga.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

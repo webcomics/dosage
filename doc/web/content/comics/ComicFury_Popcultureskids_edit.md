@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Popcultureskids
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A small group of kids, including a relative newcomer to the town, create a club for their mutual love of TV, music, movies, etc. My influences include Krazy Kat, Pogo, Bloom County and Calvin &amp; Hobbes.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://pop-cultures-kids.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://pop-cultures-kids.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

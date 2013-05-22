@@ -9,7 +9,7 @@ Edit info for comic ComicFury/ArachnidGoddess
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Dark modern fantasy! Born of a severe stroke of individuality &amp; nihilism, 'Ahab' relates more to vermin &amp; outcasts. Join the narrative as she abandons her humanity &amp; finds herself in the gloom. Features peril, BDSM, &amp; disturbing scenes.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://ArachnidGoddess.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://ArachnidGoddess.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

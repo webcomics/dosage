@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Dictatorship
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Meet mr. President and his wacky lackeys who rule the Republic of Syrania with an iron fist.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://dictatorship.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://dictatorship.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

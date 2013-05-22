@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Knavesend
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Knave's End is a port town in a fantasy world, peopled by humans, orcs, elves, dwarves, halflings, and some odd types of goblins. It's a center of political and criminal intrigue where the criminals are nasty and some of the guards are even worse.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://knavesend.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://knavesend.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

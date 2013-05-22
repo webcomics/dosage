@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Lola2
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Lola is the story of a sad, sad 13 (now 14) year old girl, who lives with her eccentric grandmother. After just entering junior high school, Lola begins to make new friends and go about life like every other normal kid...of course &quot;normal&quot; is relative.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://Lola2.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://Lola2.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

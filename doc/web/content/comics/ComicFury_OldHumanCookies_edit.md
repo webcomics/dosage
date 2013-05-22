@@ -9,7 +9,7 @@ Edit info for comic ComicFury/OldHumanCookies
 <th>Description</th><td><textarea name="description" cols="40" rows="3">These are the older comics in my Human Cookies series. I've been asked by a few people to upload them, so here they are (well once they're all up anyway) I know some of them look bad, the focuses are terrible, the lighting is...well...yuck, but this is where I started, so they bring back some smiley memories for me, so enjoy the tackiness!</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://OldHumanCookies.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://OldHumanCookies.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

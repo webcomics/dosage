@@ -9,7 +9,7 @@ Edit info for comic ComicFury/SoFunnyIForgotToLaugh
 <th>Description</th><td><textarea name="description" cols="40" rows="3">One day, a neurotic artist decided to create a stick figure comic. Then God said, LET THERE BE CHARACTERS; then appeared Suds, a cynical drinking smartass, Perry, a shy guy lost in his thoughts, and Avital, the dumb creator herself. Together, they will overcome horrifying obstacles. Like CVS.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://SoFunnyIForgotToLaugh.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://SoFunnyIForgotToLaugh.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

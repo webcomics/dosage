@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Randomthoughts
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Yeah so this really is random thoughts. I woke up one morning thinking about a duck-sausage and I figured I might as well start doing a webcomic about things. Yes..Things. Stuff and junk and stuff that happens to me. And things. It's mostly sort of an online diary, except also not. It's just random thoughts. I apologize for dry humor, bad puns and possible injuries you suffer from facepalming. However, I hope you enjoy :D</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://randomthoughts.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://randomthoughts.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

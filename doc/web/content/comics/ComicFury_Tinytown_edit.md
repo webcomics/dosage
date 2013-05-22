@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Tinytown
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Four young women and their friends embark on a summer of rambunctious (and occasionally ridiculous) adventures. Warning: May contain Pirates, Ninjas, Mimes, Clowns, Nerdy Jokes and one very annoying jester. Read with caution.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://tinytown.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://tinytown.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

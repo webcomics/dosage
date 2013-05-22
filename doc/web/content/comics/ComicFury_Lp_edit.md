@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Lp
 <th>Description</th><td><textarea name="description" cols="40" rows="3">It's a manga about a college student gets drafted into the Spiritual War for souls as a Prophetess of God. She battles demons, devils,and still manages to make it to class on time. Has action, adventure, and shoujo humor with a Christian theme.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://lp.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://lp.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

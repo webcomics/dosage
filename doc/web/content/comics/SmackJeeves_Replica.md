@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Edelric Helgard, a young Marquis, returns to the house of his childhood in order to save his family’s lands from an epidemic. During his research, he encounters a foreign slave who looks disturbingly like his first love, his late half-brother. Thus begins a game of replicas mingling memories and reality. -Read from Left to Right -Boys Love -R-18 from chapter 2 onwards -Updates on Fridays</td>
+<th>Description</th><td>Edelric Helgard, a young Marquis, returns to the house of his childhood in order to save his family’s lands from an epidemic. During his research, he encounters a foreign slave who looks disturbingly like his first love, his late half-brother. Thus begins a game of replicas mingling memories and reality. -Read from Left to Right -Boys Love -R-18 from chapter 2 onwards -Updates on Fridays [On Hiatus until end of July]</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://replica.smackjeeves.com/comics/">http://replica.smackjeeves.com/comics/</a></td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>yes</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

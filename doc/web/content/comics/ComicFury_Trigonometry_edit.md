@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Trigonometry
 <th>Description</th><td><textarea name="description" cols="40" rows="3">The adventures of a gnome death knight and her friends as she struggles to find her place in the world. Set in the World of Warcraft.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://Trigonometry.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://Trigonometry.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

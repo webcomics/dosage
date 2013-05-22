@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Once upon a time, in a trailer park far, far away.. 3 misfit friends embark on a journey of semi-epic proportion that could change the course of their history!--and it's all told through Legos! *Updates every Monday, Wednesday, and Friday!*</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://TMAOTTPT.thecomicseries.com/">http://TMAOTTPT.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://TMAOTTPT.webcomic.ws/">http://TMAOTTPT.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

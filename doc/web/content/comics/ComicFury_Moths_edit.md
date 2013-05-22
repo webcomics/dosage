@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Moths
 <th>Description</th><td><textarea name="description" cols="40" rows="3">In an alternate American past, Aram and his family must cope with the tightening grip of cynical political forces, while trying to understand the threat of the mysterious giant moths.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://moths.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://moths.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

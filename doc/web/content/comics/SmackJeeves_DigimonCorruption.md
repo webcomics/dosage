@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Flamemon is dead and the Digivice has been destroyed. Without any more resistance, BlackWarGreymon and Omnimon continue to watch the Digital World collapse around them as Baihumon and Ebonwumon remain imprisoned. Meanwhile, the Daemon Corps is gathering more and more Fractal Code from innocent Digimon as they go about their search for the Code Crowns. Whatever goals these two groups have, no one is left to stop them. Reign has failed as the DigiDestined.</td>
+<th>Description</th><td>The world is in chaos. BlackWarGreymon and Omnimon continue to watch the Digital World collapse around them as Baihumon and Ebonwumon remain imprisoned. Meanwhile, the Daemon Corps is gathering more and more Fractal Code from innocent Digimon as they go about their search for the Code Crowns. But the DigiDestined is back to set things right.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://digimoncorruption.smackjeeves.com/comics/">http://digimoncorruption.smackjeeves.com/comics/</a></td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>There's a team of MS paint creatures that do random events that include fighting Paint.net, running from a guy who they owe $500 to, doing missions, and simply fooling around. Current chapter: When Roup was building a time machine, it accidently gained consious. It's mission: Stop time.</td>
+<th>Description</th><td>There's a team of MS paint creatures that do random events that include fighting Paint.net, running from a guy who they owe $500 to, doing missions, and simply fooling around. Current chapter: When Roup was building a time machine, it accidently gained consious as an evil overlord. As it went along, time has been reverced. It's mission: Stop time altogethor.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://teamshapes.smackjeeves.com/comics/">http://teamshapes.smackjeeves.com/comics/</a></td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

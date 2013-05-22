@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Legendoflink
 <th>Description</th><td><textarea name="description" cols="40" rows="3">What happens when lightning hits the TV in the middle of Nintendo's classic Zelda game? Probably not this. Updates Tue/Thu/Sat.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://legendoflink.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://legendoflink.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

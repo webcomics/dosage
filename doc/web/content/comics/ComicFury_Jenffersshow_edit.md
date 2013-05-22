@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Jenffersshow
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Welcome to New Wolf Creek in Yukon Canada. The new home of &quot;Miss J and the AM.&quot; This strip is about Miss J and her rock band called &quot;Miss J and the AM&quot; and their life in New Wolf Creek. See, Miss J is a lesbian and just married Jenffer Jay, her friend . And that's only the start. Please note: There is some frontal nudity now</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://jenffersshow.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://jenffersshow.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

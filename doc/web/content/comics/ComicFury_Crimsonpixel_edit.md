@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Crimsonpixel
 <th>Description</th><td><textarea name="description" cols="40" rows="3">this is just going to be a series of comics pertaining to things in video games my daily life that i find funny. i'll be updating often (at least once a week), so please enjoy, comment, and share! |m|&gt;.&lt;|m|</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://crimsonpixel.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://crimsonpixel.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

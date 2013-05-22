@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Dandk
 <th>Description</th><td><textarea name="description" cols="40" rows="3">The adventures of a group of friends as they try to live the sex, drugs and rock and roll lifestyle. Nobody said it was going to be easy. Updates every Monday and Wednesday</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://d-and-k.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://d-and-k.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

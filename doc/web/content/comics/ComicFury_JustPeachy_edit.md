@@ -9,7 +9,7 @@ Edit info for comic ComicFury/JustPeachy
 <th>Description</th><td><textarea name="description" cols="40" rows="3">&quot;Just Peachy&quot; is a cheeky serial comic strip featuring a small college town's generation of college alums who aren't giving up and growing old without a fight. Kids: don't let your parents fool you, this is exactly how they behave when they think you're not looking. Parents: don't try to act all dignified and deny it. Liar, liar, pants on fire. In fact, you're probably worse than this.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://JustPeachy.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://JustPeachy.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

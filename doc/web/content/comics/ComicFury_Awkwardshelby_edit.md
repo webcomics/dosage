@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Awkwardshelby
 <th>Description</th><td><textarea name="description" cols="40" rows="3">This comic is a journal of my everyday life, an autobiography of sorts, that records my daily encounters and how I awkwardly react to them.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://awkwardshelby.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://awkwardshelby.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

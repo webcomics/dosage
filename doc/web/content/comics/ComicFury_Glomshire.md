@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>The misadventures of the inhabitants of Glomshire, a medieval(ish)land of undetermined origin. LEGO® is a trademark of the LEGO Group, which does not sponsor, authorize or endorse this comic (and we don't blame them!)</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://Glomshire.thecomicseries.com/">http://Glomshire.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://Glomshire.webcomic.ws/">http://Glomshire.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

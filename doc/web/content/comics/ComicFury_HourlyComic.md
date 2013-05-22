@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>A journal comic done once an hour and posted at a 24 hour delay. The updating schedule is in a constant state of flux. There will be maybe a hundred updates a week for one week, and then none for a long time. This comic not meant to be followed, but read. It should be noted that John Campbell is the pioneer of this idea.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://HourlyComic.thecomicseries.com/">http://HourlyComic.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://HourlyComic.webcomic.ws/">http://HourlyComic.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

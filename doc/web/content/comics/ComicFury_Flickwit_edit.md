@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Flickwit
 <th>Description</th><td><textarea name="description" cols="40" rows="3">What's to know? A ragtag bunch of adventurers are embroiled in an Illithid's nefarious plot, and have to fight their way through hordes of monsters, escape the dungeon and save the local peasantry before the lot of them get vaporised in a dimensional cataclysm. You know-- the usual fare. Thrills, spills and fun for the whole family! Warning: Art quality varies wildly.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://flickwit.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://flickwit.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

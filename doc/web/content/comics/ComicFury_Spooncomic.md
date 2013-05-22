@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>A evil wizard turned Charles' whole town turned into a kitchen (that's right). Cursed with the body of a SPOON, he has embarked on a journey to find the wizard and along the way, he will meet other &quot;cursed&quot; ones.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://spooncomic.thecomicseries.com/">http://spooncomic.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://spooncomic.webcomic.ws/">http://spooncomic.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

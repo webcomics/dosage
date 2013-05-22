@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/GuardianGhost
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">After being hit by a car a few months ago, things have been very strange for Max. Not only can he see ghosts, but one in particular claims to have saved him from death! But there are reasons why ghosts are not allowed to save humans. Updates Tuesdays, Thursdays, and Saturdays! (and the quality starts looking better as the chapters go on so, don't judge it by the first page)</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">After being hit by a car a few months ago, things have been very strange for Max. Not only can he see ghosts, but one in particular claims to have saved him from death! But there are reasons why ghosts are not allowed to save humans. Updates Tuesdays and Thursdays (and Saturdays if there's time) (and the quality starts looking better as the chapters go on so, don't judge it by the first page)</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://guardianghost.smackjeeves.com/comics/" size="40"/></td>

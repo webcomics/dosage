@@ -9,7 +9,7 @@ Edit info for comic ComicFury/TheUnthinkableHybrid
 <th>Description</th><td><textarea name="description" cols="40" rows="3">It's 1956... Betty Jo Carlson and her little brother, Johnny, have discovered an atomic monster prowling the lonely, desert canyon outside their small, California town. Along with their friends, Skip Walters, and the curmudgeonly Professor Willoughby, Jo and Johnny try to keep the monster out of trouble while weathering the suspicions and prejudices of Cold War America.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://TheUnthinkableHybrid.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://TheUnthinkableHybrid.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

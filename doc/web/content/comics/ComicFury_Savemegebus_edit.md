@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Savemegebus
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Gebus considers himself the True Saviour of Humanity, though he rarely does anything about that. The comic revolves around him and his adventures which are often written as multiple-strip fabricated stories in order to explain changes in Gebus' appearance. As a comic straight out of the minds of the authors with little or no forethought, what plot or general continuity there is exists largely as an excuse for the authors to keep making comic strips. The fourth wall is broken regularly, and characters are taken directly from the authors' real life, though the storylines are not. The comic's style is taken from the comic it was spun from, Pixel-Sapiens, which features blocky characters with little to no curves or movement, and simple or absent backgrounds.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://savemegebus.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://savemegebus.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

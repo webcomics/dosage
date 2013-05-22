@@ -9,7 +9,7 @@ Edit info for comic ComicFury/Halloween2012
 <th>Description</th><td><textarea name="description" cols="40" rows="3">This is the Webcomic Hub for the multi-webcomic event known as The Halloween Cameo Caper 2012. The strips will be posted here as they appear on the main sites by the various authors participating in the event, however, here a sense of continuity will hopefully appear as the strips are being rearranged along the way.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://halloween2012.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://halloween2012.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

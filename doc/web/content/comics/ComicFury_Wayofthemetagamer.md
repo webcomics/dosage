@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Bob buys the Dungeons and Dragons book off eBay. Hilarity ensues. Plot follows. Also tropes. Lots and lots of tropes. Also no fourth wall. Actually, it's mostly about the lack of fourth wall. We probably should have mentioned that bit right at the top. Actually, yeah, move that to the top- you're writing this LIVE?</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://wayofthemetagamer.thecomicseries.com/">http://wayofthemetagamer.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://wayofthemetagamer.webcomic.ws/">http://wayofthemetagamer.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

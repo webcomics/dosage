@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Un monde où les créatures fantastiques existent ne peut qu'être un peu compliqué. Si vous voulez le visiter, commencez donc par les villes, c'est plein d'humains et de confort moderne, tant que ça ne vous dérange pas d'avoir un lutin pour voisin ou un troll pour chauffeur. Mais vous n'êtes pas racistes, n'est-ce pas?</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://poussiere.thecomicseries.com/">http://poussiere.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://poussiere.webcomic.ws/">http://poussiere.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>ok on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

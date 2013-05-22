@@ -9,7 +9,7 @@ Edit info for comic ComicFury/RPT
 <th>Description</th><td><textarea name="description" cols="40" rows="3">This webcomic has no amount of roleplaying (as of now or in the near future), and does NOT occur in a roleplaying-game universe with roleplaying-game rules. This webccomic DOES contain the story of a bunch of people living together or whatever, and there's supposed to be guns and explosions too. Centered around a main cast of characters, everyone with their perks and peculiarities, who just want to live a &quot;normal&quot; life, even when the destiny (script) pits them into battles where they might fight for more than their lives. And this webcomic also contains a (maybe not so) lenghty description describing in detail things that may or may not be true, depending on how do you interpret &quot;normal&quot;.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://RPT.thecomicseries.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://RPT.webcomic.ws/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Gebus considers himself the True Saviour of Humanity, though he rarely does anything about that. The comic revolves around him and his adventures which are often written as multiple-strip fabricated stories in order to explain changes in Gebus' appearance. As a comic straight out of the minds of the authors with little or no forethought, what plot or general continuity there is exists largely as an excuse for the authors to keep making comic strips. The fourth wall is broken regularly, and characters are taken directly from the authors' real life, though the storylines are not. The comic's style is taken from the comic it was spun from, Pixel-Sapiens, which features blocky characters with little to no curves or movement, and simple or absent backgrounds.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://savemegebus.thecomicseries.com/">http://savemegebus.thecomicseries.com/</a></td>
+<th>Website</th><td><a href="http://savemegebus.webcomic.ws/">http://savemegebus.webcomic.ws/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 04.05.2013</td>
+<th>Status</th><td>error on 22.05.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>
