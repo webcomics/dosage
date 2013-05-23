@@ -505,7 +505,6 @@ $(document).ready(function() {
 ["<a href=\"comics/DominicDeegan.html\">DominicDeegan</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/DorkTower.html\">DorkTower</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/DrFun.html\">DrFun</a>", "Other", "English", "ok", "1"],
-["<a href=\"comics/DrMcNinja.html\">DrMcNinja</a>", "Other", "English", "error", "0"],
 ["<a href=\"comics/Dracula.html\">Dracula</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/DreamKeepersPrelude.html\">DreamKeepersPrelude</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/DresdenCodak.html\">DresdenCodak</a>", "Other", "English", "ok", "0"],
