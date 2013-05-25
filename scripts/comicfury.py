@@ -24,6 +24,7 @@ activity_matcher = re.compile(r'<b>Activity status:</b> <span class="comicinfo">
 
 # names of comics to exclude
 exclude_comics = [
+    "1000", # unsuitable navigation
     "12yearsofmissj", # unsuitable navigation
     "3DGlasses", # unsuitable navigation
     "30Days", # unsuitable navigation
@@ -131,6 +132,7 @@ exclude_comics = [
     "Mars", # unsuitable navigation
     "MaskoftheAryans", # unsuitable navigation
     "Megamaiden", # unsuitable navigation
+    "Minebreakers", # unsuitable navigation
     "Minecraft2b2t", # unsuitable navigation
     "Mitadakesaga", # unsuitable navigation
     "Mlpfib", # unsuitable navigation
@@ -145,6 +147,7 @@ exclude_comics = [
     "NMG", # unsuitable navigation
     "Noche", # unsuitable navigation
     "Noprrkele", # unsuitable navigation
+    "Nothingfits", # unsuitable navigation
     "Nothingfitsartblog", # unsuitable navigation
     "Oeight", # unsuitable navigation
     "Ofpf", # unsuitable navigation
@@ -195,6 +198,7 @@ exclude_comics = [
     "Townburgcity", # unsuitable navigation
     "Tuhinaloota", # unsuitable navigation
     "Tezzleandzeek", # unsuitable navigation
+    "TheDragonFistsofSmortySmythe", # unsuitable navigation
     "Theredeemers", # unsuitable navigation
     "Thestickmen", # unsuitable navigation
     "Thingsthatannoyme", # unsuitable navigation

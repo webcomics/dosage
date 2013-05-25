@@ -19,6 +19,7 @@ json_file = __file__.replace(".py", ".json")
 
 # names of comics to exclude
 exclude_comics = [
+    "4plyKamalsHead", # does not follow standard layout
     "9Lives", # missing images
     "ADifferentPerspective", # does not follow standard layout
     "AFairlyTwistedRealitySuper", # does not follow standard layout
@@ -28,6 +29,7 @@ exclude_comics = [
     "AreyougayJohnny", # does not follow standard layout
     "Authorbattlesthevideogame", # missing images
     "BambooArmonicKnightsGuild", # missing previous link
+    "BassLegends", # does not follow standard layout
     "BreIshurnasspritesandstuff", # comic moved
     "CatboyattheCon", # missing images
     "ContraandtheSpamDump", # missing images
@@ -41,10 +43,12 @@ exclude_comics = [
     "Fumiko", # does not follow standard layout
     "FurryExperience", # timeout
     "GART", # does not follow standard layout
+    "GarytheAlchemist", # does not follow standard layout
     "GBAsCrib", # timeout
     "HEARD", # missing images
     "Indigo", # broken domain name
     "IwillbenapoSpamDump", # missing images
+    "ItoshiisCrazyNuzlockeAdventures", # does not follow standard layout
     "JennyHaniver", # does not follow standard layout
     "KiLAiLO", # does not follow standard layout
     "KirbysoftheAlternateDimension", # missing images
@@ -82,7 +86,9 @@ exclude_comics = [
     "TheAfterSubtract", # does not follow standard layout
     "ThePokemonArtBox", # does not follow standard layout
     "THEVOIDWEBCOMIC", # does not follow standard layout
+    "TC2KsPokemobians", # does not follow standard layout
     "ThreadCrashers", # has no previous comic link
+    "ToDefeatThemAll", # does not follow standard layout
     "TotallyKotor", # missing images
     "Vbcomics", # does not follow standard layout
     "WerewolfRichard", # does not follow standard layout

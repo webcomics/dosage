@@ -41,7 +41,7 @@ class Unsounded(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'([^"]*)', after='class="back'))
     starter = indirectStarter(url,
        compile(tagre("a", "href", r'(%scomic/[^"]*)' % rurl) +
-           tagre("img", "src", r"%simages/chibi02\.png" % rurl)))
+           tagre("img", "src", r"%simages/newpages\.png" % rurl)))
     help = 'Index format: chapter-number'
 
     def getIndexStripUrl(self, index):

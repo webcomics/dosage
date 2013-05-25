@@ -13,6 +13,7 @@ _prevSearch = (
     compile(tagre("link", "href", _stripPattern, before="prev")),
     compile(tagre("a", "href", _stripPattern, after="prev")),
     compile(tagre("a", "href", _stripPattern) + tagre("img", "id", r"previous_day1")),
+    compile(tagre("a", "href", _stripPattern) + tagre("img", "id", r"katc7")),
 )
 
 def add(name, url, description):

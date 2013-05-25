@@ -227,7 +227,7 @@ class _WorldOfWarcraftEh(_BasicScraper):
 class Wulffmorgenthaler(_BasicScraper):
     description = u"Entertainment - Since 2002. Wulff & Morgenthaler's Personal humoristic social commentary on life, nostalgia and the World in general. Nothing is taboo: They deal with Politics, News, Entertainment, Technology, Culture, and Weirdo Beavers"
     url = 'http://wumocomicstrip.com/'
-    stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(/img/strip/[^/"]+)'))
+    stripUrl = url + '%s'
+    imageSearch = compile(tagre("img", "src", r'(/img/strip/\d+/\d+/[^/"]+)'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)') + "<span>Previous")
     help = 'Index format: yyyy/mm/dd'

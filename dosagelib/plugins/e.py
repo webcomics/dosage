@@ -15,13 +15,23 @@ class EarthsongSaga(_BasicScraper):
     starter = indirectStarter(url, compile(tagre("a", "href", r'([^"]+)') + tagre("img", "src", r'[^"]+current\.jpg')))
     stripUrl = None
     firstStripUrl = url + 'vol1/vol1cover.html'
-    imageSearch = compile(tagre("img", "src", r'((?:\.\./)?images/vol\d+/ch\d+/\d+\.\w+)'))
+    imageSearch = (
+      compile(tagre("img", "src", r'((?:\.\./)?images/vol\d+/ch\d+/\d+\.\w+)')),
+      compile(tagre("img", "src", r'((?:\.\./)?images/vol\d+/ch\d+/ch\d+cover\.\w+)')),
+    )
     prevSearch = compile(tagre("a", "href", r'([^"]+)', after="Previous"))
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
         imgmatch = compile(r'images/vol(\d+)/ch(\d+)/(\d+)\.\w+$', IGNORECASE).search(imageUrl)
-        return 'vol%02d_ch%02d_%02d' % (int(imgmatch.group(1)), int(imgmatch.group(2)), int(imgmatch.group(3)))
+        if not imgmatch:
+            imgmatch = compile(r'images/vol(\d+)/ch(\d+)/ch(\d+)cover\.\w+$', IGNORECASE).search(imageUrl)
+            suffix = "cover"
+        else:
+            suffix = ""
+        return 'vol%02d_ch%02d_%02d%s' % (
+          int(imgmatch.group(1)), int(imgmatch.group(2)),
+          int(imgmatch.group(3)), suffix)
 
 
 class EdibleDirt(_BasicScraper):

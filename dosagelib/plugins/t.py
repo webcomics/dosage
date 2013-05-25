@@ -35,7 +35,7 @@ class TheDreamlandChronicles(_BasicScraper):
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'page-1'
     rurl = escape(url)
-    imageSearch = compile(tagre("img", "src", r'(http://cdn\.thedreamlandchronicles\.com/wp-content/uploads/\d+/\d+/\d+-\d+-\d+[^"]*)'))
+    imageSearch = compile(tagre("img", "src", r'(http://www\.thedreamlandchronicles\.com/wp-content/uploads/\d+/\d+/\d+-\d+-\d+[^"]*)'))
     prevSearch = compile(tagre("a", "href", r'(%s[^"]*)' % rurl, after='navi-prev"'))
     help = 'Index format: page-n or chapter-n'
 

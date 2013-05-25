@@ -278,7 +278,8 @@ class DrFun(_BasicScraper):
     endOfLife = True
 
 
-class DrMcNinja(_BasicScraper):
+# XXX navigation works only with JavaScript
+class _DrMcNinja(_BasicScraper):
     description = u'The Adventures of Dr. McNinja'
     url = 'http://drmcninja.com/'
     rurl = escape(url)

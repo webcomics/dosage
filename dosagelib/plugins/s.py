@@ -529,7 +529,7 @@ class StarCrossdDestiny(_BasicScraper):
     url = baseUrl + 'comic.html'
     stripUrl = baseUrl + 'archives/%s.html'
     firstStripUrl = stripUrl % '00000001'
-    imageSearch = compile(tagre("img", "src", r'(%s(?:ch1|strips|book2)/[^"]+)' % rurl))
+    imageSearch = compile(tagre("img", "src", r'(http://(?:www\.)?starcrossd\.net/(?:ch1|strips|book2)/[^"]+)'))
     prevSearch = compile(r'<a href="(%s(?:ch1/)?archives/\d+\.html)"[^>]*"[^"]*"[^>]*>prev' % rurl, IGNORECASE)
     help = 'Index format: nnnnnnnn'
 

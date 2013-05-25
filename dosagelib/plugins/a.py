@@ -231,6 +231,13 @@ class AmazingSuperPowers(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/name'
 
+    def shouldSkipUrl(self, url):
+        """Skip pages without images."""
+        return url in (
+            # video
+            self.stripUrl % '2013/05/orbital-deathray-kickstarter',
+        )
+
 
 class Amya(_BasicScraper):
     description = u'A Graphic Novel'

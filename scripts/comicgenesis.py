@@ -289,6 +289,7 @@ exclude_comics = [
     "TheCrossoverlord", # missing images
     "TheDevilsPanties", # page moved
     "TheDoctorPepperShow", # page has 403 forbidden
+    "TheFantasticalBestiary", # page has 403 forbidden
     "TheGodsPack", # page has 403 forbidden
     "TheMadBrothers", # page does not follow standard layout
     "TheMediocres", # missing images

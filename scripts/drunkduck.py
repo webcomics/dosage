@@ -115,6 +115,7 @@ exclude_comics = [
     "GRIND", # start page requires login
     "HUSS", # start page requires login
     "Red_Dog_Venue", # start page is broken
+    "Richas_Erotic_Adventures", # start page requires login
     "Rubber_girls", # start page requires login
     "Robomeks", # broken images
     "Robot_Friday", # broken images

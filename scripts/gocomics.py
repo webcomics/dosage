@@ -56,6 +56,7 @@ exclude_comics = [
     "SparComics", # comic unavailable
     "SurvivingSingle", # comic unavailable
     "TheDeadlys", # too few comics
+    "TheNursesLockerRoom", # too few comics
     "Tomversation", # too few comics
     "VoicesInTheDark", # too few comics
     "WhatTheFrak", # too few comics

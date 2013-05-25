@@ -128,7 +128,7 @@ class PicPakDog(_BasicScraper):
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'dogs-cant-spell'
     imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/\d+-\d+-\d+-[^"]+\.png)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl, after="navi-prev"))
+    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl, after="nav-prev"))
     help = 'Index format: stripname'
 
 
