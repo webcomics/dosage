@@ -1,11 +1,11 @@
-Dosage 2.3 (released xx.xx.2013)
+Dosage 2.3 (released 26.5.2013)
 
 Features:
 - scripts: Added script to create a CBZ archive for a given comic
   directory.
 
 Fixes:
-- comics: Fix LookingForGroup.
+- comics: Fix LookingForGroup and other comics.
   Closes: GH bug #31
 
 

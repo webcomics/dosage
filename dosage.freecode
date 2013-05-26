@@ -1,5 +1,5 @@
 Project: dosage
-Version: 2.2
+Version: 2.3
 Hide: N
 Website-URL: http://wummel.github.io/dosage/
 Changelog-URL: https://github.com/wummel/dosage/blob/master/doc/changelog.txt
@@ -7,7 +7,5 @@ Source-Package-URL: http://github.com/downloads/wummel/dosage/dosage-${version}.
 GIT-Tree-URL: https://github.com/wummel/dosage.git
 Windows-installer-URL: http://github.com/downloads/wummel/dosage/dosage-${version}.exe
 
-The comics ARedTailsDream, Carciphona, Curtailed, GirlGenius,
-Lackadaisy, SabrinaOnline, TheDreamlandChronicles, TwoGuysAndGuy
-and Unsound have been added. Comics which are not updated anymore
-can now be marked and excluded from further update checks.
+Some comics have been fixed and a script to generate CBZ archives has
+been added.
