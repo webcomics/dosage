@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A neurotic barmaid encounters a mysterious drifter on the road. The intrepid duo finds they have absolutely nothing in common. So, naturally, they become traveling partners. You know, just like in real life.</td>
+<th>Description</th><td>A narcissistic barmaids two-steps-forward, one-or-two-steps-backward journey to enlightenment. Not always a pretty sight. The journey, that is. She always looks fabulous.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://outthere.keenspot.com/">http://outthere.keenspot.com/</a></td>

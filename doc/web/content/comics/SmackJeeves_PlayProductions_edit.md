@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/PlayProductions
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">A curse consumes a whole school. To break the curse a group of unlikely friends set out together to go against the crazy school staff.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">A curse consumes a whole school. To break the curse a group of unlikely friends set out together to go against the crazy school staff. This comic was rebooted with a whole different story and setting found here: http://prophetofficial.smackjeeves.com/comics/1743932/volume-1/</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://playpros.smackjeeves.com/comics/" size="40"/></td>

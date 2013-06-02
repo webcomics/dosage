@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A Chronicle Of Quests is the story of a warrior. Heroic Guy may not be the best, or even close to good. But his destiny is un-escapeable. It is after all what he was made for.</td>
+<th>Description</th><td>Created for the soul purpose of fighting in a tournament for the gods, Heroic Guy has it pretty rough. In addition to being the champion of the three weakest gods in the world he seems to be on the top of every other mortal champions hit-list. Can he level grind enough to emerge victorious? Probably not. But hey, it could be amusing anyways.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://achronicleofquests.smackjeeves.com/comics/">http://achronicleofquests.smackjeeves.com/comics/</a></td>

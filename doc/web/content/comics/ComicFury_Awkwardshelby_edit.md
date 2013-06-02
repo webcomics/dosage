@@ -6,7 +6,7 @@ Edit info for comic ComicFury/Awkwardshelby
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">This comic is a journal of my everyday life, an autobiography of sorts, that records my daily encounters and how I awkwardly react to them.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">This comic is a journal of my everyday life, an autobiography of sorts, that records my daily encounters and how I awkwardly react to them. Visit the online store: http://skreened.com/awkwardshelby</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://awkwardshelby.webcomic.ws/" size="40"/></td>
