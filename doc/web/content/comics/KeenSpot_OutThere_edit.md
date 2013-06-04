@@ -6,7 +6,7 @@ Edit info for comic KeenSpot/OutThere
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">A narcissistic barmaids two-steps-forward, one-or-two-steps-backward journey to enlightenment. Not always a pretty sight. The journey, that is. She always looks fabulous.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">A neurotic barmaid encounters a mysterious drifter on the road. The intrepid duo finds they have absolutely nothing in common. So, naturally, they become traveling partners. You know, just like in real life.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://outthere.keenspot.com/" size="40"/></td>

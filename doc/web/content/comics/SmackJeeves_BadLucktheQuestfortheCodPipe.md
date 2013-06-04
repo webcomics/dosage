@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>This is the story about Rade, your everyday average guy. He goes to school, plays sports, the only thing weird about him is his best friend Crimp. Things in his average life take a turn for the bizarre, when a young man with a cat show up at his door. Now all of a sudden Rade is caught up in a quest for a magical pipe that can grant a wish to anyone who asks. Not to mention the demon mercenaries following them. The closer they get to the Pipe, the darker and more entangled things become. What starts as a grand adventure, only seems to lead to Bad Luck. Updates Saturday</td>
+<th>Description</th><td>This is the story about Rade, your everyday average guy. he goes to school, plays sports, the only thing weird about him is his best friend Crimp. Things in his average life take a turn for the bizarre, when a young man with a cat show up at his door. Now all of a sudden Rade is caught up in a quest for a magical pipe that can grant a wish to anyone who asks. Not to mention the demon mercenary's following them. the closer they get to the Pipe, the darker and more entangled things become. what starts as a grand adventure, only seems to lead to Bad Luck. Updates Saturday</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://badluckthequest.smackjeeves.com/comics/">http://badluckthequest.smackjeeves.com/comics/</a></td>

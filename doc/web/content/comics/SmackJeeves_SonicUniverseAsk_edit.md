@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/SonicUniverseAsk
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">HI THERE! Do you read Sonic: Universe, or Sonic Universe- Sides?... No? WELL! Would you like to learn about it? n...no?... AH WELL! Here you can ask the characters anything you wish! And they will answer as they please! Probable Spoilers for the Main Comic</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">HI THERE! Do you read Sonic: Universe, or Sonic Universe- Sides?... No? WELL! Would you like to learn about it? n...no?... AH WELL! Here you can ask the characters anything you wish! And they will answer as they please! I'll try keep spoilers to a minimum buuuuuuut no promises ;3 You have been warned. Sonic: Universe: http://www.smackjeeves.com/comicprofile.php?id=50028 Sonic Universe- Sides: http://www.smackjeeves.com/comicprofile.php?id=129411</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://sonicuniverseask.smackjeeves.com/comics/" size="40"/></td>

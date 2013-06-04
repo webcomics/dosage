@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/FoxpuffsSpriteandSpamStuff
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Mostly random things go here. Sprite sheets aren't posted here, but any changes to any of my characters or new ones will still be posted.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Here's where I post random stuff, like sprites and other things. Because I'm getting better with sprite making, I might do sprite requests, too. I'm getting even better now so I'll be able to do more complicated requests, but only with foxes currently. I can't do hair yet, so don't bother asking for that. Also, when requesting for sprites you have to be specific or I'll get confused. Also, any plots that only involves my characters go here until further notice.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://spriteandspam.smackjeeves.com/comics/" size="40"/></td>

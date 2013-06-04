@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>an experiment in Mental Theatre, externalized in comic form. Currently Featuring: MAD SCIENCE! with Dr. Nick - steampunk fantasy adventure into the strange! Now updating 3 times weekly, every M-W-F. [i]It doesn't serve the 3 fetish as well as every 3rd day on dates divisible by 3 did, but you get more story for your money - with 3 more strips every month![/i]</td>
+<th>Description</th><td>an experiment in Mental Theatre, externalized in comic form. Now updating 3 times weekly, every M-W-F. [i]It doesn't serve the 3 fetish as well as every 3rd day on dates divisible by 3 did, but you get more story for your money - with 3 more strips every month![/i]</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://eMT.webcomic.ws/">http://eMT.webcomic.ws/</a></td>

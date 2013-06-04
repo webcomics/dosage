@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Here you can read strips about random things in my life or thoughts that may occur in this messed-up head. This is what the quiet, weird kid draws whenever he gets a chance. Updates at random times. [Contains a lot of cursing]</td>
+<th>Description</th><td>Here you can read strips about random things in my life or thoughts that may occur in this messed-up head. This is what the quiet, weird kid draws whenever he gets a chance. Updates at random times.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://gaybacon.smackjeeves.com/comics/">http://gaybacon.smackjeeves.com/comics/</a></td>

@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A Tokyo Mew Mew spinoff about a genetically engineered mew and her fight for freedom against the aliens hired for the sole purpose of her capture. However, an accident robbed her of her memories and she must relearn her forgotten powers in order to survive. The comic is for practice, so please ignore the bad art! (Especially in the first two chapters.) Also, you do not need to be familiar with the series Tokyo Mew Mew whatsoever to read! Read from right to left! Updates about every 4 or 5 days (usually hopefully)!</td>
+<th>Description</th><td>A Tokyo Mew Mew spinoff about a genetically engineered mew and her fight for freedom against the aliens hired for the sole purpose of her capture. The catch? An accident robbed her of her memories and she must relearn her forgotten powers in order to survive. The comic is for practice, so please ignore the bad art! (Especially in the first two chapters.) Read from right to left! Updates about every 4 days!</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://themewexperiment.smackjeeves.com/comics/">http://themewexperiment.smackjeeves.com/comics/</a></td>

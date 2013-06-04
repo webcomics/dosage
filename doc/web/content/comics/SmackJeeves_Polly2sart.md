@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Yeah ♥ This is where MY stuff goes &lt;333 ♥</td>
+<th>Description</th><td>my art and things and i take request just give me a picture or sprite on how she/he looks like.&lt;] o and if you say any thing like THIS SUCKS,THIS IS MENT FOR PHOTO BUCKET,well i dont give a shit say it to some one else comic any bad comments will be deleted engoy</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://myart.smackjeeves.com/comics/">http://myart.smackjeeves.com/comics/</a></td>

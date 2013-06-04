@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>This comic is a journal of my everyday life, an autobiography of sorts, that records my daily encounters and how I awkwardly react to them. Visit the online store: http://skreened.com/awkwardshelby</td>
+<th>Description</th><td>This comic is a journal of my everyday life, an autobiography of sorts, that records my daily encounters and how I awkwardly react to them.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://awkwardshelby.webcomic.ws/">http://awkwardshelby.webcomic.ws/</a></td>
