@@ -32,7 +32,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Status</th><td>ok on 26.05.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>2</td>
+<th>Votes</th><td>3</td>
 </tr>
 </table>
 
