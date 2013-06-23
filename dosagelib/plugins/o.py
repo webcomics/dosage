@@ -117,3 +117,12 @@ class OverCompensating(_BasicScraper):
     imageSearch = compile(r'<img src="(/comics/.+?)"')
     prevSearch = compile(r'"><a href="(.+?)"[^>]+?>&nbsp;\<\- &nbsp;</a>')
     help = 'Index format: yyyymmdd'
+
+class OnTheFasttrack(_BasicScraper):
+    description = u"On The Fastrack"
+    url = 'http://www.onthefastrack.com/'
+    stripUrl = url + '/?webcomic1=%s'
+    firstStripUrl = stripUrl % '2010-08-09'
+    imageSearch = compile(r'<img width="\d+" height="\d+" src="(http://www.onthefastrack.com/wp-content/uploads/.+?)" class=')
+    prevSearch = compile(r'rel=\'prev\' title=\'[0-9-]+\' <a href=\'http://www.onthefastrack.com/\?webcomic1=.+?\'')
+    description = u'On The Fasttrack by Bill Holbrook'
