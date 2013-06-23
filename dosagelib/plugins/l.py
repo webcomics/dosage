@@ -93,3 +93,12 @@ class LookingForGroup(_BasicScraper):
         compile(tagre("a", "href", r'(%spage/[-0-9]+/)' % rurl, after="feature-previous")))
     nameSearch = compile(r'/page/([-0-9]+)/')
     help = 'Index format: nnn'
+
+class LinuxComFridayFunnies(_BasicScraper):
+    description = u"Linux.com: Friday Funnies"
+    url = 'https://www.linux.com/news/friday-funnies/'
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % 'the-road-to-japan'
+    imageSearch = compile(r'<img src="(/news/friday-funnies/episode/.+?\?format=image)')
+    prevSearch = compile(r'<a href="(/news/friday-funnies/.+?)">Previous')
+    description = u'Friday Funnies on Linux.com'
