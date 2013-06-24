@@ -1,3 +1,9 @@
+Dosage 2.4 (released xx.xx.2013)
+
+Features:
+- comics: Added OnTheFasttrack.
+
+
 Dosage 2.3 (released 26.5.2013)
 
 Features:
