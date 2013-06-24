@@ -80,6 +80,17 @@ class OnTheEdge(_BasicScraper):
     help = 'Index format: nnn (unpadded)'
 
 
+class OnTheFasttrack(_BasicScraper):
+    url = 'http://www.onthefastrack.com/'
+    rurl = escape(url)
+    stripUrl = url + '/?webcomic1=%s'
+    firstStripUrl = stripUrl % '2010-08-09'
+    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+-\d+-\d+\.[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\?webcomic1=[^"]+)' % rurl, after="prev"))
+    description = u'On The Fasttrack by Bill Holbrook'
+    help = 'Index format: yyyy-mm-dd'
+
+
 class OneQuestion(_BasicScraper):
     url = 'http://onequestioncomic.com/'
     stripUrl = url + 'comic.php?strip_id=%s'
@@ -117,12 +128,3 @@ class OverCompensating(_BasicScraper):
     imageSearch = compile(r'<img src="(/comics/.+?)"')
     prevSearch = compile(r'"><a href="(.+?)"[^>]+?>&nbsp;\<\- &nbsp;</a>')
     help = 'Index format: yyyymmdd'
-
-class OnTheFasttrack(_BasicScraper):
-    description = u"On The Fastrack"
-    url = 'http://www.onthefastrack.com/'
-    stripUrl = url + '/?webcomic1=%s'
-    firstStripUrl = stripUrl % '2010-08-09'
-    imageSearch = compile(r'<img width="\d+" height="\d+" src="(http://www.onthefastrack.com/wp-content/uploads/.+?)" class=')
-    prevSearch = compile(r'rel=\'prev\' title=\'[0-9-]+\' <a href=\'http://www.onthefastrack.com/\?webcomic1=.+?\'')
-    description = u'On The Fasttrack by Bill Holbrook'
