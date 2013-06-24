@@ -565,13 +565,12 @@ class SupernormalStep(_BasicScraper):
     help = 'Index format: number'
 
 class ShermansLagoon(_BasicScraper):
-    description = u"Sherman's Lagoon"
+    description = u"Sherman's Lagoon by Jim Toomey"
     url = 'http://shermanslagoon.com/'
     stripUrl = url + 'comics/%s'
     firstStripUrl = stripUrl % '/december-29-2003/'
     imageSearch = compile(r'<img src="(http://safr.kingfeatures.com/idn/etv/zone/xml/content.php\?file=.+?)" />')
     prevSearch = compile(r'<a href="(http://shermanslagoon.com/comics/.+?/)" rel="prev"')
-    description = u'by Jim Toomey'
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
