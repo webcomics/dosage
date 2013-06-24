@@ -1,7 +1,7 @@
 Dosage 2.4 (released xx.xx.2013)
 
 Features:
-- comics: Added OnTheFasttrack.
+- comics: Added LinuxComFridayFunnies and OnTheFasttrack.
 
 
 Dosage 2.3 (released 26.5.2013)
