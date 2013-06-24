@@ -236,7 +236,7 @@ def vote(scraperobj):
 def getStrips(scraperobj, options):
     """Get all strips from a scraper."""
     errors = 0
-    if options.all:
+    if options.all or options.cont:
         numstrips = None
     elif options.numstrips:
         numstrips = options.numstrips
