@@ -39,9 +39,12 @@ class _ComicTester(TestCase):
             self.url = self.scraperclass.starter()
             # create a temporary directory for images
             self.tmpdir = tempfile.mkdtemp()
+        else:
+            self.tmpdir = None
 
     def tearDown(self):
-        shutil.rmtree(self.tmpdir)
+        if self.tmpdir is not None:
+            shutil.rmtree(self.tmpdir)
 
     def get_saved_images(self):
         """Get saved images."""
