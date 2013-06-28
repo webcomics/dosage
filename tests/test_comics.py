@@ -34,10 +34,11 @@ class _ComicTester(TestCase):
     scraperclass=None
 
     def setUp(self):
-        self.name = self.scraperclass.getName()
-        self.url = self.scraperclass.starter()
-        # create a temporary directory for images
-        self.tmpdir = tempfile.mkdtemp()
+        if self.scraperclass is not None:
+            self.name = self.scraperclass.getName()
+            self.url = self.scraperclass.starter()
+            # create a temporary directory for images
+            self.tmpdir = tempfile.mkdtemp()
 
     def tearDown(self):
         shutil.rmtree(self.tmpdir)
@@ -48,6 +49,10 @@ class _ComicTester(TestCase):
         return os.listdir(os.path.join(self.tmpdir, *dirs))
 
     def test_comic(self):
+        if self.scraperclass is None:
+            # only run subclasses
+            import pytest
+            pytest.skip("base class")
         # Test a scraper. It must be able to traverse backward for
         # at least 5 strips from the start, and find strip images
         # on at least 4 pages.
