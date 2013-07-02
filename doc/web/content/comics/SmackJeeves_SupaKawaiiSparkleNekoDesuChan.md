@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>wtefever maannn</td>
+<th>Description</th><td>I-it's not like I want to show you my sprites or anything... B-baka...</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://nekodesuchan.smackjeeves.com/comics/">http://nekodesuchan.smackjeeves.com/comics/</a></td>

@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Welcome to HoloCrash, the adventures of Commander Teelianna Santo (&quot;Teela&quot;) and her Genetically Enhanced Nanotech Android trainer (&quot;G.E.N.A&quot;). Teela, a brilliant science officer and an exceptional athlete, volunteers for a year round trip aboard the cargo freighter Argenta-619 so that she, along with her trainer G.E.N.A, can train for the upcoming Pan System games in heavy gravity conditions. Soon, what seems like a normal freight run to the Cordas System, turns into an adventure like no other! ******************************************* For information on how the comic is put together visit http://www.holocrash.com *******************************************</td>
+<th>Description</th><td>Welcome to HoloCrash, the adventures of Commander Teelianna Santo (&quot;Teela&quot;) and her Genetically Enhanced Nanotech Android trainer (&quot;G.E.N.A&quot;). Teela, a brilliant science officer and an exceptional athlete, volunteers for a year round trip aboard the cargo freighter Argenta-619 so that she, along with her trainer G.E.N.A, can train for the upcoming Pan System games in heavy gravity conditions. Soon, what seems like a normal freight run to the Cordas System, turns into an adventure like no other!</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://holocrash.smackjeeves.com/comics/">http://holocrash.smackjeeves.com/comics/</a></td>

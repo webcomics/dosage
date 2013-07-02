@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Okay, so I have updated the site completely, other than the custom pages which I'll get to later at some later point in time. For now, it has no effect on the continuation of the comic, only thing affecting continuation is Sike who has not yet made a sprite sheet for a certain character that's needed for a future part in the plot. But anyway, comment, fav, and rate! That'd really be appreciated~ NOW ACCEPTING CAMEOS!</td>
+<th>Description</th><td>Okay, so I have updated the site completely, other than the custom pages which I'll get to later at some later point in time. For now, it has no effect on the continuation of the comic, only thing affecting continuation is Sike who has not yet made a sprite sheet for a certain character that's needed for a future part in the plot. But anyway, comment, fav, and rate! That'd really be appreciated~ NOW ACCEPTING CAMEOS! supersonic1009 will update every Wednesday at about 2:00</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://1009sspritersvacation.smackjeeves.com/comics/">http://1009sspritersvacation.smackjeeves.com/comics/</a></td>

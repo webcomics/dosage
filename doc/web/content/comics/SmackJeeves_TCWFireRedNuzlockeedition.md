@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Mewtwo completly destroyed the hidden village of the angels in Kanto. One angel surived the disaster. A girl, Sarachan (or sara). Mewtwo let her alive and challenge her to battle him at Cerulean Cave. But first of doing that, Sara should challenge the Gym and the Elite 4. She accepted, but will she make it until the end?</td>
+<th>Description</th><td>Mewtwo completly destroyed the hidden village of the angels in Kanto. One angel survived the disaster. A girl, Sarachan (or sara). Mewtwo let her alive and challenge her to battle him at Cerulean Cave. But first of doing that, Sara should challenge the Gym and the Elite 4. She accepted, but will she make it until the end?</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://tcwfirered.smackjeeves.com/comics/">http://tcwfirered.smackjeeves.com/comics/</a></td>

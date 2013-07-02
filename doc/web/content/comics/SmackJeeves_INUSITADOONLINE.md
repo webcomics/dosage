@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Uma simples comedia romantica ;D</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.inusitadoonline.com/comics/">http://www.inusitadoonline.com/comics/</a></td>
+<th>Website</th><td><a href="http://inusitado.smackjeeves.com/comics/">http://inusitado.smackjeeves.com/comics/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

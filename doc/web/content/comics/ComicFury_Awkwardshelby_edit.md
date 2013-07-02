@@ -6,7 +6,7 @@ Edit info for comic ComicFury/Awkwardshelby
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">This comic is a journal of my everyday life, an autobiography of sorts, that records my daily encounters and how I awkwardly react to them.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Awkward Shelby is a slice-of-life comic that focuses on everyday awkward situations, staring off into space, cats, and more. It's not only a record of its author's life but it can be transcribed into each one of our own lives. Updates at least once a week, usually weekdays at 10am Visit the online store: http://skreened.com/awkwardshelby</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://awkwardshelby.webcomic.ws/" size="40"/></td>

@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A curse consumes a whole school. To break the curse a group of unlikely friends set out together to go against the crazy school staff.</td>
+<th>Description</th><td>A curse consumes a whole school. To break the curse a group of unlikely friends set out together to go against the crazy school staff. This comic was rebooted with a whole different story and setting found here: http://prophetofficial.smackjeeves.com/comics/1743932/volume-1/</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://playpros.smackjeeves.com/comics/">http://playpros.smackjeeves.com/comics/</a></td>

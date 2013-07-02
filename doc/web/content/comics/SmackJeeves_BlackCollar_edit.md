@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/BlackCollar
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">-Read from left to right- This is a comic for all you fantasy action lovers out there. Nobody asks for it, nobody in that messed up world. And yet they are all part of it... the game. Hunted, What does the word really mean? How can someone just be thrown into a place like this? And yet there are so many just like him. Unaware of what's really going on? There's a good amount of violence and blood in this. So be aware before reading. (There are no sexual themes) _NOTE_ The comic was started a while ago, so You will see a huge improvement in both the art spelling, and story by around chapter 2.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">-Read from left to right- This is a comic for all you fantasy action lovers out there. Nobody asks for it, nobody in that messed up world. And yet they are all part of it... the game. Hunted, What does the word really mean? How can someone just be thrown into a place like this? And yet there are so many just like him. Unaware of what's really going on? There's a good amount of violence and blood in this. So be aware before reading. (There are no sexual themes) *NOTE*: The comic was started a while ago, so you will see a huge improvement in both the art spelling, and story by around chapter 2.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://huntedblackcollar.smackjeeves.com/comics/" size="40"/></td>

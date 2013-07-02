@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/GayBacon
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Here you can read strips about random things in my life or thoughts that may occur in this messed-up head. This is what the quiet, weird kid draws whenever he gets a chance. Updates at random times.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Here you can read strips about random things in my life or thoughts that may occur in this messed-up head. This is what the quiet, weird kid draws whenever he gets a chance. Updates at random times. [Contains a lot of cursing]</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://gaybacon.smackjeeves.com/comics/" size="40"/></td>

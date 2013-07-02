@@ -9,7 +9,7 @@ Edit info for comic SmackJeeves/9ChancesforLove
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Finding the right person to love is quite a challenge. Approaching the person you love is an even bigger challenge. But the biggest challenge of them all is to keep that person by your side. When two strangers meet, they can decide to become friends, leave the other to be or become enemies, but what if they happen to share something, something they cannot control and not even really are aware of? (My English is not so good, if you find mistakes it would be great if you could point them out. :) Thank you!) (WARNING: 13/15+ BL)</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://9chances.thewebcomic.com/comics/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://9chances.smackjeeves.com/comics/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

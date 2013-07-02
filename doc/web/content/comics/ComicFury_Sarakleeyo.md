@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A World of Warcraft themed web comic starring the Argent Crusade's unusual misfits. The crusade allowed heroes of the Alliance and Horde to become partners. Sara &amp; Kleeyo set the example...provided they can survive their friendship. Updated weekly on Saturdays.</td>
+<th>Description</th><td>A World of Warcraft themed web comic starring the Argent Crusade's unusual misfits. The crusade allowed heroes of the Alliance and Horde to become partners. Sara &amp; Kleeyo set the example...provided they can survive their friendship. Updated Mondays.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://sarakleeyo.webcomic.ws/">http://sarakleeyo.webcomic.ws/</a></td>

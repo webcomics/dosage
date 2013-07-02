@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Sometimes the most interesting stories come from the strangest places. Victory Fire starts off as most Mystery Dungeon comics do, a human comes to the pokemon world. But THAT'S where the similarities end.... New pages are posted on Tuesdays and Fridays, please check back :)</td>
+<th>Description</th><td>Sometimes the most interesting stories come from the strangest places. Victory Fire starts off as most Mystery Dungeon comics do, a human comes to the pokemon world. But THAT'S where the similarities end.... New pages are posted on Tuesdays and Fridays, please check back :) **Broken images? SmackJeeves servers playing up? VF is mirrored on sulfurbunny.deviantart.com **</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://victoryfire.smackjeeves.com/comics/">http://victoryfire.smackjeeves.com/comics/</a></td>

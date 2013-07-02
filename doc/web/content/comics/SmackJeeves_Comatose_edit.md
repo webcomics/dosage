@@ -9,7 +9,7 @@ Edit info for comic SmackJeeves/Comatose
 <th>Description</th><td><textarea name="description" cols="40" rows="3">In this drama fantasy webcomic, paranoid teenager Jack Phoenix gets entangled with forces far beyond human imagination. Comatose deals with several themes such as coming-of-age issues, love, lost, hopes and dreams, drugs and violence and realization of one's purpose in life. ***Updates once a week.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://comatosecomic.smackjeeves.com/comics/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://www.comatosecomic.net/comics/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

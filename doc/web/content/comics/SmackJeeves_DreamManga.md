@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A monthly (mainly) shoujo online manga magazine featuring self-made original manga from non-professional artists all over the world. This site also serves as an online reader to our site at http://www.dream-manga.co.nr Current active mangas: ODD MONTHS * Contradiction (Ki Hiwatari) * Mascara (Arcadia) * WACOT (KO_Okami) EVEN MONTHS * 2Kingdoms (SaiReba) * Dreamcatchers (Ayumi) * FireWire (SaiReba) * Kurokenshin (KO_Okami) * Saints' Calling (GuineaPiggy) MONTHLY * The World Stops (Marshmellow Muffin) * We Will Draw Near (Vervain) * Machinataisen *Lwando Lawrence Moshani) To learn more about us or join us, visit our forum at http://dreammanga.freeforums.org</td>
+<th>Description</th><td>A monthly (mainly) shoujo online manga magazine featuring self-made original manga from non-professional artists all over the world. This site also serves as an online reader to our site at http://www.dream-manga.co.nr Current active mangas: ODD MONTHS * Contradiction (Ki Hiwatari) * Mascara (Arcadia) * WACOT (KO_Okami) * Machinataisen (Lwando) EVEN MONTHS * 2Kingdoms (SaiReba) * Dreamcatchers (Ayumi) * FireWire (SaiReba) * Kurokenshin (KO_Okami) * Saints' Calling (GuineaPiggy) MONTHLY * The World Stops (Marshmellow Muffin) * We Will Draw Near (Vervain) * Machinataisen *Lwando Lawrence Moshani) To learn more about us or join us, visit our forum at http://dreammanga.freeforums.org</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://dreammanga.smackjeeves.com/comics/">http://dreammanga.smackjeeves.com/comics/</a></td>

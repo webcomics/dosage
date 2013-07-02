@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Here's where I post random stuff, like sprites and other things. Because I'm getting better with sprite making, I might do sprite requests, too. I'm getting even better now so I'll be able to do more complicated requests, but only with foxes currently. I can't do hair yet, so don't bother asking for that. Also, when requesting for sprites you have to be specific or I'll get confused. Also, any plots that only involves my characters go here until further notice.</td>
+<th>Description</th><td>Mostly random things go here. Sprite sheets aren't posted here, but any changes to any of my characters or new ones will still be posted.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://spriteandspam.smackjeeves.com/comics/">http://spriteandspam.smackjeeves.com/comics/</a></td>

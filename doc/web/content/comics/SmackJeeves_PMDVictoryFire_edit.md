@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/PMDVictoryFire
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Sometimes the most interesting stories come from the strangest places. Victory Fire starts off as most Mystery Dungeon comics do, a human comes to the pokemon world. But THAT'S where the similarities end.... New pages are posted on Tuesdays and Fridays, please check back :)</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Sometimes the most interesting stories come from the strangest places. Victory Fire starts off as most Mystery Dungeon comics do, a human comes to the pokemon world. But THAT'S where the similarities end.... New pages are posted on Tuesdays and Fridays, please check back :) **Broken images? SmackJeeves servers playing up? VF is mirrored on sulfurbunny.deviantart.com **</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://victoryfire.smackjeeves.com/comics/" size="40"/></td>

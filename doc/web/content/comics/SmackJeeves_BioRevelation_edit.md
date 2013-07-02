@@ -18,7 +18,7 @@ Edit info for comic SmackJeeves/BioRevelation
 <th>Language</th><td><input type="text" name="language" value="English" size="40"/></td>
 </tr>
 <tr>
-<th>Adult content</th><td><input type="checkbox" name="adult" value="adult" /></td>
+<th>Adult content</th><td><input type="checkbox" name="adult" value="adult" checked="checked"/></td>
 </tr>
 <tr>
 <th></th><td>

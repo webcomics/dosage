@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Queer Queen is a comedy shounen ai manga centred around Helium, a transvestite male student attending a boys' school, who falls in love with his own form-teacher. For this love is unrequited, he decides to ask out a fellow student to make his teacher jealous. Updated every Thursday.</td>
+<th>Description</th><td>Queer Queen is a comedy shounen ai manga centred around Helium, a transvestite male student attending a boys' school, who falls in love with his own form-teacher. For this love is unrequited, he decides to ask out a fellow student to make his teacher jealous. Updated every Thursday, should be read from right to left.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://queerqueen.smackjeeves.com/comics/">http://queerqueen.smackjeeves.com/comics/</a></td>

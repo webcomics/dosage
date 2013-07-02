@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>This comic is a journal of my everyday life, an autobiography of sorts, that records my daily encounters and how I awkwardly react to them.</td>
+<th>Description</th><td>Awkward Shelby is a slice-of-life comic that focuses on everyday awkward situations, staring off into space, cats, and more. It's not only a record of its author's life but it can be transcribed into each one of our own lives. Updates at least once a week, usually weekdays at 10am Visit the online store: http://skreened.com/awkwardshelby</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://awkwardshelby.webcomic.ws/">http://awkwardshelby.webcomic.ws/</a></td>

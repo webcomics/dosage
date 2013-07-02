@@ -6,7 +6,7 @@ Edit info for comic ComicFury/Theblackprincess
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">While Wright as Rayne centers around Alex Rayne after his mind is put into the body of a teenage girl, The Black Princess follows the lives of two of the women responsible, Sareena Black and Misty Smid. The two are best friends as well as co-workers in Eighth Sin's Paranormal Division, their primary job being to study and at times stop unusual magic.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Sareena Black and Misty Smid are best friends, and co-workers in Eighth Sin's Paranormal Division. While Misty begins to be introduced into the operations of Sareena's family of witches and warlocks, the two find themselves faced with a quickly growing number of magically-inclined threats and dangerous individuals, all while they begin to suspect that things aren't what they seem at their job.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://theblackprincess.webcomic.ws/" size="40"/></td>

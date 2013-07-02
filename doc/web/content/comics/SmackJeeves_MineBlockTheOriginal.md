@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>It's like Minecraft, but it's two dimensional and the sprites are blocky! A story of hero go on their own adventure! Team work, boss battle, Pvp round and much more... NEW: Bridge Battle have open! challenge your friend and try to slain on the bridge! Story by: EpicGames20</td>
+<th>Description</th><td>It's like Minecraft, but it's two dimensional and the sprites are blocky! A story of hero go on their own adventure! Team work, boss battle, Pvp round and much more... NEW: Bridge Battle have open! challenge your friend and try to slay others on the bridge! Original creator/owner: BlueZero12/ EpicGames20 (I found him!) Co-Owner: Stone_Merten</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://mineblock-comic.smackjeeves.com/comics/">http://mineblock-comic.smackjeeves.com/comics/</a></td>

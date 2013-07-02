@@ -9,7 +9,7 @@ Edit info for comic SmackJeeves/INUSITADOONLINE
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Uma simples comedia romantica ;D</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://www.inusitadoonline.com/comics/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://inusitado.smackjeeves.com/comics/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

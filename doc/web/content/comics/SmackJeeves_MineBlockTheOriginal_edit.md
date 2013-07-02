@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/MineBlockTheOriginal
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">It's like Minecraft, but it's two dimensional and the sprites are blocky! A story of hero go on their own adventure! Team work, boss battle, Pvp round and much more... NEW: Bridge Battle have open! challenge your friend and try to slain on the bridge! Story by: EpicGames20</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">It's like Minecraft, but it's two dimensional and the sprites are blocky! A story of hero go on their own adventure! Team work, boss battle, Pvp round and much more... NEW: Bridge Battle have open! challenge your friend and try to slay others on the bridge! Original creator/owner: BlueZero12/ EpicGames20 (I found him!) Co-Owner: Stone_Merten</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://mineblock-comic.smackjeeves.com/comics/" size="40"/></td>

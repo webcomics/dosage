@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/TCWFireRedNuzlockeedition
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Mewtwo completly destroyed the hidden village of the angels in Kanto. One angel surived the disaster. A girl, Sarachan (or sara). Mewtwo let her alive and challenge her to battle him at Cerulean Cave. But first of doing that, Sara should challenge the Gym and the Elite 4. She accepted, but will she make it until the end?</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Mewtwo completly destroyed the hidden village of the angels in Kanto. One angel survived the disaster. A girl, Sarachan (or sara). Mewtwo let her alive and challenge her to battle him at Cerulean Cave. But first of doing that, Sara should challenge the Gym and the Elite 4. She accepted, but will she make it until the end?</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://tcwfirered.smackjeeves.com/comics/" size="40"/></td>
