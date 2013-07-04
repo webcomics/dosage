@@ -191,6 +191,25 @@ class Sheldon(_BasicScraper):
     help = 'Index format: yymmdd'
 
 
+class ShermansLagoon(_BasicScraper):
+    description = u"Sherman's Lagoon by Jim Toomey"
+    url = 'http://shermanslagoon.com/'
+    rurl = escape(url)
+    stripUrl = url + 'comics/%s'
+    firstStripUrl = stripUrl % '/december-29-2003/'
+    imageSearch = compile(tagre("img", "src", r'(http://safr\.kingfeatures\.com/idn/etv/zone/xml/content.php\?file=[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(%scomics/[^"]+/)' % rurl) + '&laquo; previous')
+    starter = bounceStarter(url,
+        compile(tagre("a", "href", r'(%scomics/[^"]+/)' % rurl, after="next")))
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        name = pageUrl.split('/')[-2]
+        # name is monthname-day-year
+        month, day, year = name.split('-')
+        return "%s-%s-%s" % (year, month, day)
+
+
 class Shivae(_BasicScraper):
     url = 'http://shivae.net/'
     rurl = escape(url)
@@ -563,18 +582,3 @@ class SupernormalStep(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl, after="prev"))
     help = 'Index format: number'
-
-class ShermansLagoon(_BasicScraper):
-    description = u"Sherman's Lagoon by Jim Toomey"
-    url = 'http://shermanslagoon.com/'
-    stripUrl = url + 'comics/%s'
-    firstStripUrl = stripUrl % '/december-29-2003/'
-    imageSearch = compile(r'<img src="(http://safr.kingfeatures.com/idn/etv/zone/xml/content.php\?file=.+?)" />')
-    prevSearch = compile(r'<a href="(http://shermanslagoon.com/comics/.+?/)" rel="prev"')
-
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        import datetime
-        mylist = []
-        mylist.append(datetime.date.today())
-        return "%s" % mylist[0]
