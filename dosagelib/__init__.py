@@ -18,4 +18,4 @@ if not (hasattr(sys, 'version_info') or
     raise SystemExit("This program requires Python 2.7 or later.")
 
 # PEP 396
-from .conf import Version as __version__
+from .configuration import Version as __version__
