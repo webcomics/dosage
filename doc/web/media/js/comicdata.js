@@ -52,7 +52,6 @@ $(document).ready(function() {
 ["<a href=\"comics/BlankIt.html\">BlankIt</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/Blip.html\">Blip</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/BloodBound.html\">BloodBound</a>", "Other", "English", "ok", "0"],
-["<a href=\"comics/BlueCrashKit.html\">BlueCrashKit</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/BobWhite.html\">BobWhite</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/BookOfBiff.html\">BookOfBiff</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/BoredAndEvil.html\">BoredAndEvil</a>", "Other", "English", "ok", "0"],
