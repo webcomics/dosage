@@ -151,6 +151,16 @@ class GoblinsComic(_BasicScraper):
     help = 'Index format: ddmmyyyy'
 
 
+class GoGetARoomie(_BasicScraper):
+    description = u"Go Get a Roomie!"
+    url = 'http://www.gogetaroomie.com/index.php'
+    stripUrl = url + '?id=%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = compile(tagre('img', 'src', r'(comics/[^"]+)'))
+    prevSearch = compile(tagre('a', 'href', r'([^"]+)', after='rel="prev"'))
+    help = 'Index format: nnn'
+
+
 class GoneWithTheBlastwave(_BasicScraper):
     description = u'Gone with the Blastwave - Type E webcomic.'
     url = 'http://www.blastwave-comic.com/index.php?p=comic&nro=1'
