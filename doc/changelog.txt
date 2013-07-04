@@ -1,3 +1,9 @@
+Dosage 2.5 (released xx.7.2013)
+
+Features:
+- comics: Added ICanBarelyDraw.
+
+
 Dosage 2.4 (released 24.6.2013)
 
 Features:

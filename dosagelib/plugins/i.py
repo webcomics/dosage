@@ -28,6 +28,17 @@ class IanJay(_BasicScraper):
     help = 'Index foramt: nnn'
 
 
+class ICanBarelyDraw(_BasicScraper):
+    url = 'http://www.icanbarelydraw.com/comic/'
+    rurl = escape(url)
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '39'
+    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+-[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\d+)' % rurl))
+    help = 'Index format: number'
+    description = u'Webcomic featuring technology, romance, and odd behavior'
+
+
 class IDreamOfAJeanieBottle(_BasicScraper):
     url = 'http://jeaniebottle.com/'
     stripUrl = url + '?p=%s'
