@@ -34,6 +34,7 @@ exclude_comics = [
     "Exposure", # non-standard navigation
     "Flipside", # non-standard navigation
     "HerobyNight", # non-standard navigation
+    "JadeWarriors", # non-standard navigation
     "LastBlood", # non-standard navigation
     "MysticRevolution", # non-standard navigation
     "NoRoomForMagic", # non-standard navigation

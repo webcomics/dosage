@@ -32,6 +32,7 @@ exclude_comics = [
     "Bhaddland", # start page requires login
     "Binary_Souls_Other_Dimensions", # broken images
     "BK_Shattered_Hate", # broken images
+    "Blonde_Marvel", # broken images
     "Bouncing_Orbs_of_Beauty", # start page requires login
     "Brathalla", # broken images
     "Busty_Solar", # start page requires login

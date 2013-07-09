@@ -40,6 +40,7 @@ exclude_comics = [
     "Arveytoonz", # unsuitable navigation
     "AsperitasAstraalia", # unsuitable navigation
     "AttackoftheRobofemoids", # unsuitable navigation
+    "Auriga", # unsuitable navigation
     "Bedlam", # unsuitable navigation
     "BITCHSquad", # missing images
     "Bidoof", # unsuitable navigation
@@ -53,6 +54,7 @@ exclude_comics = [
     "BulletMythology", # unsuitable navigation
     "BUXY", # unsuitable navigation
     "CafeGruesome", # unsuitable navigation
+    "Castofmadness", # unsuitable navigation
     "Chanpuru", # unsuitable navigation
     "Christmaswithmaddog", # unsuitable navigation
     "ChroniclesOfLillian", # unsuitable navigation
@@ -69,8 +71,10 @@ exclude_comics = [
     "DeadNight", # unsuitable navigation
     "Democomix", # unsuitable navigation
     "Dinosaurkingdom", # unsuitable navigation
+    "Donutsforsharks", # unsuitable navigation
     "Dotcomic", # unsuitable navigation
     "Droned", # unsuitable navigation
+    "Druids", # unsuitable navigation
     "Effingukookoo", # unsuitable navigation
     "ErraticBeat", # unsuitable navigation
     "Evilbear", # unsuitable navigation
@@ -100,6 +104,7 @@ exclude_comics = [
     "Hellboundarchive", # unsuitable navigation
     "Herecomesskeeter", # unsuitable navigation
     "Holycowcomics", # unsuitable navigation
+    "Hourlykelly", # unsuitable navigation
     "Houseescapeold", # unsuitable navigation
     "Horizongakuen", # unsuitable navigation
     "Icannotdraw", # unsuitable navigation
@@ -175,9 +180,11 @@ exclude_comics = [
     "Sandgate", # unsuitable navigation
     "Shadowstories", # unsuitable navigation
     "Sigh", # unsuitable navigation
+    "Sleazyspacesage", # unsuitable navigation
     "Slightlyeccentric", # unsuitable navigation
     "Smbhax", # unsuitable navigation
     "SpiritSquire1", # unsuitable navigation
+    "Stampedegirl", # unsuitable navigation
     "Stardustthecat", # unsuitable navigation
     "Sticklife", # unsuitable navigation
     "StickMisadventures", # unsuitable navigation

@@ -32,6 +32,7 @@ exclude_comics = [
     "BassLegends", # does not follow standard layout
     "BreIshurnasspritesandstuff", # comic moved
     "CatboyattheCon", # missing images
+    "Comatose", # does not follow standard layout
     "ContraandtheSpamDump", # missing images
     "ClubLove", # does not follow standard layout
     "Darkkyosshorts", # missing images
@@ -45,6 +46,7 @@ exclude_comics = [
     "GART", # does not follow standard layout
     "GarytheAlchemist", # does not follow standard layout
     "GBAsCrib", # timeout
+    "HAndJ", # missing images
     "HEARD", # missing images
     "Indigo", # broken domain name
     "IwillbenapoSpamDump", # missing images
@@ -90,6 +92,7 @@ exclude_comics = [
     "ThreadCrashers", # has no previous comic link
     "ToDefeatThemAll", # does not follow standard layout
     "TotallyKotor", # missing images
+    "TwoKeys", # does not follow standard layout
     "Vbcomics", # does not follow standard layout
     "WerewolfRichard", # does not follow standard layout
     "WinterMelody", # missing images

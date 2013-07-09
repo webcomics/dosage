@@ -314,6 +314,7 @@ exclude_comics = [
     "TwoLumps", # page moved
     "TwoSidesWide", # page moved
     "Untitled", # page does not follow standard layout
+    "UBERGEEKSpriteWorld", # page is gone
     "Vendetta", # page moved
     "VictimsoftheSystem", # page moved
     "Victor", # page moved

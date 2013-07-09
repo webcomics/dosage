@@ -29,6 +29,7 @@ exclude_comics = [
     "Buster", # comic unavailabe
     "CarteBlanche", # missing images
     "CountyLine", # too few comics
+    "Crawdiddy", # comic unavailable
     "DALTONDOG", # comic unavailable
     "DellAndSteve", # too few comics
     "Dilbert", # redirect
@@ -42,6 +43,8 @@ exclude_comics = [
     "KALEECHIKORNERS", # too few comics
     "LoveIs", # missing images
     "MaggiesComics", # too few comics
+    "MagicCoffeeHair", # too few comics
+    "NickGalifianakis", # too few comics
     "OfMiceandMud", # too few comics
     "OysterWar", # too few comics
     "Penguins", # too few comics
@@ -50,6 +53,7 @@ exclude_comics = [
     "Radiowave", # too few comics
     "RatchetAndSpin", # too few comics
     "RichardsPoorAlmanac", # missing images
+    "SatchelandDuff", # too few comics
     "SherpaAid", # comic unavailable
     "Slowpoke", # comic moved
     "SpaghettiSandwich", # too few comics
