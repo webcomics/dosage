@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Goblins</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.goblinscomic.com/">http://www.goblinscomic.com/</a></td>
+<th>Website</th><td><a href="http://www.goblinscomic.org/">http://www.goblinscomic.org/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
