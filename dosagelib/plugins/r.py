@@ -21,7 +21,7 @@ class RealLife(_BasicScraper):
     stripUrl = url + 'archive/%s.html'
     firstStripUrl = stripUrl % '991115'
     imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/archive/\d+.html)') + tagre("img", "src", r'/images/nav_prev\.png'))
+    prevSearch = compile(tagre("a", "href", r'(/comic\.php\?[^"]+)', after="nav-previous"))
     help = 'Index format: yymmdd)'
 
 

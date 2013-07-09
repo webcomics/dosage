@@ -29,7 +29,7 @@ class KevinAndKell(_BasicScraper):
     url = 'http://www.kevinandkell.com/'
     stripUrl = url + '%s/kk%s%s.html'
     firstStripUrl = stripUrl % ('1995', '09', '03')
-    imageSearch = compile(r'<img.+?src="(/?(\d+/)?strips/kk\d+.gif)"', IGNORECASE)
+    imageSearch = compile(r'<img.+?src="(/?(\d+/)?strips/kk\d+.(gif|jpg))"', IGNORECASE)
     prevSearch = compile(r'<a.+?href="(/?(\.\./)?\d+/kk\d+\.html)"[^>]*><span>Previous Strip', IGNORECASE)
     help = 'Index format: yyyy-mm-dd'
 

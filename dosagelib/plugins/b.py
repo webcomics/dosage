@@ -162,15 +162,6 @@ class BloodBound(_BasicScraper):
     help = 'Index format: yyyy/mm/name'
 
 
-class BlueCrashKit(_BasicScraper):
-    url = 'http://robhamm.com/bluecrashkit/'
-    stripUrl = url + 'comics/blue-crash-kit/%s'
-    firstStripUrl = stripUrl % '2005-01-03'
-    imageSearch = compile(tagre("img", "src", r'(http://robhamm\.com/bluecrashkit/sites/default/files/comics/[^"]+)'))
-    prevSearch = compile(r'<li class="previous"><a href="([^"]+)">')
-    help = 'Index format: yyyy-mm-dd'
-
-
 class BMovieComic(_BasicScraper):
     description = u"A group of unlikely heroes tackles monsters, mutants and aliens from Hollywood's past and present. See what happens. Or they'll say you haven't seen it."
     url = 'http://www.bmoviecomic.com/'

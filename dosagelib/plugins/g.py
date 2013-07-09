@@ -130,19 +130,9 @@ class GleefulNihilism(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
-class Goats(_BasicScraper):
-    description = u'goats: the comic strip | by jonathan rosenberg | new comics every mon-wed-fri'
-    url = 'http://www.goats.com/'
-    stripUrl = url + 'archive/%s.html'
-    firstStripUrl = stripUrl % '970401'
-    imageSearch = compile(r'<img.+?src="(/comix/.+?)"')
-    prevSearch = compile(r'<a href="(/archive/\d{6}.html)" class="button" title="go back">')
-    help = 'Index format: yymmdd'
-
-
 class GoblinsComic(_BasicScraper):
     description = u'Goblins'
-    url = 'http://www.goblinscomic.com/'
+    url = 'http://www.goblinscomic.org/'
     rurl = escape(url)
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '06252005'

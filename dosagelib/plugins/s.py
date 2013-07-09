@@ -184,10 +184,11 @@ class _ShadowGirls(_BasicScraper):
 class Sheldon(_BasicScraper):
     description = u'The story of a software company tycoon billionaire ten-year-old, his grampa, his duck, his pug and a lizard.'
     url = 'http://www.sheldoncomics.com/'
+    rurl = escape(url)
     stripUrl = url + 'archive/%s.html'
     firstStripUrl = stripUrl % '011130'
-    imageSearch = compile(tagre("img", "src", r'(/strips/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/archive/\d+\.html)', after="sidenav-prev"))
+    imageSearch = compile(tagre("img", "src", r'(http://cdn\.sheldoncomics\.com/strips/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(%sarchive/\d+\.html)' % rurl, after="sidenav-prev"))
     help = 'Index format: yymmdd'
 
 
