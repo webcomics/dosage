@@ -103,7 +103,6 @@ check:
 	py-tabdaddy
 	py-unittest2-compat tests/
 	$(MAKE) doccheck
-	$(MAKE) pyflakes
 
 doccheck:
 	py-check-docstrings --force \
@@ -155,6 +154,12 @@ update-copyright:
 # update-copyright is a local tool which updates the copyright year for each
 # modified file.
 	update-copyright --holder="$(MAINTAINER)"
+
+update-comics:
+# update all scripted comic plugins (takes ca. one hour on my computer)
+	scripts/generate_json.sh
+	scripts/update_plugins.sh
+
 
 changelog:
 # github-changelog is a local tool which parses the changelog and automatically
