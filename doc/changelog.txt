@@ -1,7 +1,11 @@
-Dosage 2.5 (released xx.7.2013)
+Dosage 2.5 (released xx.xx.2013)
 
 Features:
-- comics: Added ICanBarelyDraw.
+- comics: Added ICanBarelyDraw, MarriedToTheSea, NatalieDee.
+  Closes: GH bug #37
+
+Fixes:
+- comics: Fixed GoblinsComic, KevinAndKell and other comics.
 
 
 Dosage 2.4 (released 24.6.2013)

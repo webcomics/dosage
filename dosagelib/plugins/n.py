@@ -33,6 +33,22 @@ class NamirDeiter(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
+class NatalieDee(_BasicScraper):
+    description = u"America's Favorite Cracker"
+    url = 'http://www.nataliedee.com/'
+    rurl = escape(url)
+    stripUrl = url + 'index.php?date=%s'
+    firstStripUrl = stripUrl % '022806'
+    imageSearch = compile(tagre("img", "src", r'(%s\d+/[^"]+)' % rurl, before="overflow"))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)') + "&lt;&lt; Yesterday")
+    help = 'Index format: mmddyy'
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        unused, date, filename = imageUrl.rsplit('/', 2)
+        return '%s-%s' % (date, filename)
+
+
 class Nedroid(_BasicScraper):
     url = 'http://nedroid.com/'
     rurl = escape(url)

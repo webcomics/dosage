@@ -55,6 +55,22 @@ class Marilith(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
+class MarriedToTheSea(_BasicScraper):
+    description = u'comics by Drew & Natalie Dee - Updates daily at midnight'
+    url = 'http://www.marriedtothesea.com/'
+    rurl = escape(url)
+    stripUrl = url + 'index.php?date=%s'
+    firstStripUrl = stripUrl % '022806'
+    imageSearch = compile(tagre("img", "src", r'(%s\d+/[^"]+)' % rurl, before="overflow"))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)') + "&lt;&lt; Yesterday")
+    help = 'Index format: mmddyy'
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        unused, date, filename = imageUrl.rsplit('/', 2)
+        return '%s-%s' % (date, filename)
+
+
 class Meek(_BasicScraper):
     url = 'http://www.meekcomic.com/'
     stripUrl = url + '%s'
