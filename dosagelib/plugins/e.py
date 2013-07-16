@@ -34,6 +34,19 @@ class EarthsongSaga(_BasicScraper):
           int(imgmatch.group(3)), suffix)
 
 
+
+class EatLiver(_BasicScraper):
+    description = u'Crazy funny pictures of insane internet'
+    url = 'http://www.eatliver.com/'
+    rurl = escape(url)
+    starter = indirectStarter(url, compile(tagre("a", "href", r'(i\.php\?n=\d+)') +
+        tagre("img", "src", r'img/small/[^"]+') + r"</a>\s*<br"))
+    stripUrl = url + "i.php?n=%s"
+    firstStripUrl = stripUrl % '1'
+    imageSearch = compile(tagre("link", "href", r'(%simg/\d+/[^"]+)' % rurl, before="image_src"))
+    prevSearch = compile(tagre("a", "href", r'(i\.php\?n=\d+)') + "&#060;&#060; Previous")
+
+
 class EdibleDirt(_BasicScraper):
     description = u'Edible Dirt, by Matt Rosemier'
     url = 'http://eddirt.frozenreality.co.uk/'
