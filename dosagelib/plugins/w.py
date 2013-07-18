@@ -109,10 +109,10 @@ class WhyTheLongFace(_BasicScraper):
 class Wigu(_BasicScraper):
     description = u'WIGU: A COMIC ON INTERNET'
     url = 'http://wigucomics.com/'
-    stripUrl = url + 'adventures/index.php?comic=%s'
+    stripUrl = url + 'mais/index.php?comic=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(/adventures/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/adventures/index\.php\?comic=\d+)', after="go back"))
+    imageSearch = compile(tagre("img", "src", r'(/mais/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(/mais/index\.php\?comic=\d+)', after="go back"))
     help = 'Index format: n'
 
 

@@ -52,6 +52,7 @@ exclude_comics = [
     "Brainfood", # unsuitable navigation
     "Bromosworld", # unsuitable navigation
     "BulletMythology", # unsuitable navigation
+    "Bunnysher", # page moved
     "BUXY", # unsuitable navigation
     "CafeGruesome", # unsuitable navigation
     "Castofmadness", # unsuitable navigation
@@ -84,6 +85,7 @@ exclude_comics = [
     "Fishbowl", # unsuitable navigation
     "Foe", # unsuitable navigation
     "Foreignterritory", # unsuitable navigation
+    "Freakingawfulpuns", # page is gone
     "Frigginrandom", # unsuitable navigation
     "Frostfire", # unsuitable navigation
     "Furnerdy", # unsuitable navigation
@@ -139,6 +141,7 @@ exclude_comics = [
     "Megamaiden", # unsuitable navigation
     "Minebreakers", # unsuitable navigation
     "Minecraft2b2t", # unsuitable navigation
+    "Mischeif", # unsuitable navigation
     "Mitadakesaga", # unsuitable navigation
     "Mlpfib", # unsuitable navigation
     "Monsterloverdp", # unsuitable navigation

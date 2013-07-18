@@ -136,7 +136,7 @@ class GoblinsComic(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '06252005'
-    prevSearch = compile(tagre("a", "href", r'(%s\d+/)' % rurl, after="prev"))
+    prevSearch = compile(tagre("a", "href", r'(%s[-\d]+/)' % rurl, after="prev"))
     imageSearch = compile(tagre("img", "src", r'(%scomics/\d+\.[^"]+)' % rurl))
     help = 'Index format: ddmmyyyy'
 

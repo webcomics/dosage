@@ -284,10 +284,10 @@ class SMBC(_BasicScraper):
     description = u"Saturday Morning Breakfast Cereal"
     url = 'http://www.smbc-comics.com/'
     rurl = escape(url)
-    stripUrl = url + 'index.php?db=comics&id=%s'
+    stripUrl = url + '?id=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r"(%scomics/\d{8}(?:\w2?|-\d)?\.\w{3})\s*" % rurl, quote="'"))
-    prevSearch = compile(r'131,13,216,84"\n\s+href="(.+?)#comic"\n>', MULTILINE)
+    prevSearch = compile(tagre("a", "href", r'([^"]+)#comic', after="backRollover"))
     help = 'Index format: nnnn'
 
     def shouldSkipUrl(self, url):

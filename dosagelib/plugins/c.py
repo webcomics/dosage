@@ -119,7 +119,8 @@ class ChainsawSuit(_BasicScraper):
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2008/03/12/strip-338'
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl, after="prev"))
+    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl) +
+        tagre("img", "alt", r'previous'))
     help = 'Index format: yyyy/mm/dd/stripname'
 
 

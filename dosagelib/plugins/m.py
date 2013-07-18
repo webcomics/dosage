@@ -59,7 +59,7 @@ class MarriedToTheSea(_BasicScraper):
     description = u'comics by Drew & Natalie Dee - Updates daily at midnight'
     url = 'http://www.marriedtothesea.com/'
     rurl = escape(url)
-    stripUrl = url + 'index.php?date=%s'
+    stripUrl = url + '%s'
     firstStripUrl = stripUrl % '022806'
     imageSearch = compile(tagre("img", "src", r'(%s\d+/[^"]+)' % rurl, before="overflow"))
     prevSearch = compile(tagre("a", "href", r'([^"]+)') + "&lt;&lt; Yesterday")

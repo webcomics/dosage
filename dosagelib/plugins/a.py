@@ -362,11 +362,18 @@ class AxeCop(_BasicScraper):
     description = u'Axe Cop'
     url = 'http://axecop.com/'
     rurl = escape(url)
-    starter = indirectStarter(url,
-        compile(tagre("a", "href", r'(%sindex\.php/acepisodes/read/episode_\d+/)' % rurl)))
-    stripUrl = url + 'index.php/acepisodes/read/%s/'
-    firstStripUrl = stripUrl % 'episode_0'
-    imageSearch = compile(tagre("img", "src", r'(%simages/uploads/(?:axecop|AXE-COP|acmarried|nightmonster)[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%sindex\.php/acepisodes/read/[^"]+)' % rurl) +
-        tagre("img", "src", r'http://axecop\.com/acimages/buttons/page_left\.png'))
-    help = 'Index format: stripname'
+    starter = bounceStarter(url,
+        compile(tagre("a", "href", r'(%scomic/episode-\d+/)' % rurl, after="navi-next")))
+    stripUrl = url + 'comic/episode-%s/'
+    firstStripUrl = stripUrl % '0'
+    imageSearch = compile(tagre("img", "src", r'(http://mainsite\.axecop\.wpengine\.com/wp-content/uploads/sites/\d+/\d+/\d+/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(%scomic/episode-\d+/)' % rurl, after="navi-prev"))
+    help = 'Index format: number'
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        extension = imageUrl.rsplit('.', 1)[1]
+        episode = pageUrl.rsplit('-', 1)[1]
+        episode = episode.strip('/')
+        return 'AxeCop-%s.%s' % (episode, extension)
+

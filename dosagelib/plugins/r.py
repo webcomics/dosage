@@ -2,7 +2,7 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2013 Bastian Kleineidam
 
-from re import compile
+from re import compile, escape
 from ..scraper import _BasicScraper
 from ..helpers import bounceStarter
 from ..util import tagre
@@ -17,12 +17,13 @@ class RadioactivePanda(_BasicScraper):
 
 
 class RealLife(_BasicScraper):
-    url = 'http://www.reallifecomics.com/'
-    stripUrl = url + 'archive/%s.html'
+    url = 'http://reallifecomics.com/'
+    rurl = escape(url)
+    stripUrl = url + 'comic.php?comic=%s'
     firstStripUrl = stripUrl % '991115'
-    imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/comic\.php\?[^"]+)', after="nav-previous"))
-    help = 'Index format: yymmdd)'
+    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'((?:%s)?comic\.php\?comic=[^"]+)' % rurl, after="nav-previous"))
+    help = 'Index format: monthname-dd-yyyy)'
 
 
 class RealmOfAtland(_BasicScraper):

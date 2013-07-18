@@ -36,8 +36,7 @@ class Unsounded(_BasicScraper):
     stripUrl = url + 'comic/ch%s/ch%s_%s.html'
     firstStripUrl = stripUrl % ('01', '01', '01')
     rurl = escape(url)
-    imageSearch = compile(tagre("div", "id", r'comic') +
-        tagre("img", "src", r'(pageart/[^"]*)') )
+    imageSearch = compile(tagre("img", "src", r'(pageart/[^"]*)'))
     prevSearch = compile(tagre("a", "href", r'([^"]*)', after='class="back'))
     starter = indirectStarter(url,
        compile(tagre("a", "href", r'(%scomic/[^"]*)' % rurl) +

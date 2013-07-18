@@ -20,11 +20,13 @@ class ZapComic(_BasicScraper):
 class Zapiro(_BasicScraper):
     url = 'http://www.mg.co.za/zapiro/'
     starter = bounceStarter(url,
-      compile(tagre("a", "href", r'(http://mg\.co\.za/cartoon/[^"]+)')+"Newer"))
+      compile(tagre("li", "class", r'nav_older') +
+              tagre("a", "href", r'(http://mg\.co\.za/cartoon/[^"]+)')))
     stripUrl = 'http://mg.co.za/cartoon/%s'
     firstStripUrl = stripUrl % 'zapiro_681'
     imageSearch = compile(tagre("img", "src", r'(http://cdn\.mg\.co\.za/crop/content/cartoons/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://mg\.co\.za/cartoon/[^"]+)')+"Older")
+    prevSearch = compile(tagre("li", "class", r'nav_older') +
+        tagre("a", "href", r'(http://mg\.co\.za/cartoon/[^"]+)'))
     help = 'Index format: yyyy-mm-dd-stripname'
 
     @classmethod
