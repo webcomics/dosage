@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://onequestioncomic.com/">http://onequestioncomic.com/</a></td>
+<th>Website</th><td><a href="http://www.onequestioncomic.com/">http://www.onequestioncomic.com/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 10.07.2013</td>
+<th>Status</th><td>ok on 18.07.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>

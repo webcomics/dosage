@@ -1,7 +1,7 @@
-title: Edit Arcamax/Archie
-url: "/comics/Arcamax_Archie_edit.html"
+title: Edit Creators/GirlsAndSports
+url: "/comics/Creators_GirlsAndSports_edit.html"
 ---
-Edit info for comic Arcamax/Archie
+Edit info for comic Creators/GirlsAndSports
 
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
@@ -9,7 +9,7 @@ Edit info for comic Arcamax/Archie
 <th>Description</th><td><textarea name="description" cols="40" rows="3">-</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://www.arcamax.com/thefunnies/archie/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://www.creators.com/comics/girls-and-sports.html" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>
@@ -22,11 +22,11 @@ Edit info for comic Arcamax/Archie
 </tr>
 <tr>
 <th></th><td>
-<input type="hidden" name="comic" value="Arcamax_Archie" />
+<input type="hidden" name="comic" value="Creators_GirlsAndSports" />
 <input type="submit" name="submit" value="Submit" />
 </td>
 </tr>
 </table>
 </form>
 
-Back to the [comic](Arcamax_Archie.html).
+Back to the [comic](Creators_GirlsAndSports.html).

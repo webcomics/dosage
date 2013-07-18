@@ -1,7 +1,7 @@
-title: Arcamax/Rugrats
-url: "/comics/Arcamax_Rugrats.html"
+title: Creators/Recess
+url: "/comics/Creators_Recess.html"
 ---
-Dosage comic Arcamax/Rugrats
+Dosage comic Creators/Recess
 -----------------------------------------
 
 <p id="msg"></p>
@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.arcamax.com/thefunnies/rugrats/">http://www.arcamax.com/thefunnies/rugrats/</a></td>
+<th>Website</th><td><a href="http://www.creators.com/comics/recess.html">http://www.creators.com/comics/recess.html</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,11 +29,11 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 10.07.2013</td>
+<th>Status</th><td>ok on 18.07.2013</td>
 </tr>
 <tr>
 <th>Votes</th><td>0</td>
 </tr>
 </table>
 
-[Edit this info](Arcamax_Rugrats_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](Creators_Recess_edit.html) or go back to the [comic list](../comic-index.html).
