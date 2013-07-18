@@ -1,5 +1,5 @@
 Project: dosage
-Version: 2.4
+Version: 2.5
 Hide: N
 Website-URL: http://wummel.github.io/dosage/
 Changelog-URL: https://github.com/wummel/dosage/blob/master/doc/changelog.txt
@@ -7,5 +7,5 @@ Source-Package-URL: http://github.com/downloads/wummel/dosage/dosage-${version}.
 GIT-Tree-URL: https://github.com/wummel/dosage.git
 Windows-installer-URL: http://github.com/downloads/wummel/dosage/dosage-${version}.exe
 
-The --continue option has been fixed. The comics LinuxComFridayFunnies and
-OnTheFasttrack have been added.
+The comics EatLiver, ICanBarelyDraw, JimBenton, MarriedToTheSea
+and NatalieDee have been added. Several comics have been fixed.
