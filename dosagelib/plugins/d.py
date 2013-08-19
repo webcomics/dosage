@@ -81,6 +81,15 @@ class DarkWings(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/page-nn-mm'
 
 
+class DarthsAndDroids(_BasicScraper):
+    url = 'http://www.darthsanddroids.net/'
+    stripUrl = url + 'episodes/%s.html'
+    firstStripUrl = stripUrl % '0001'
+    description = u'Darths & Droids is an "RPG screencap comic".'
+    prevSearch = compile(tagre("a", "href", r'(/episodes/\d\d\d\d.html)') + '&lt;PREVIOUS' )
+    imageSearch = compile(tagre("img", "src", r'(/comics/darths\d\d\d\d\.jpg)'))
+
+
 class DasLebenIstKeinPonyhof(_BasicScraper):
     url = 'http://sarahburrini.com/wordpress/'
     rurl = escape(url)
