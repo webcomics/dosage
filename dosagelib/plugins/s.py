@@ -35,7 +35,6 @@ class SailorsunOrg(_BasicScraper):
     stripUrl = url + '?p=%s'
     firstStripUrl = stripUrl % '21'
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    rurl = escape(url)
     prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl, after="prev"))
     help = 'Index format: n (unpadded)'
 
