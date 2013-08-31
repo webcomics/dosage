@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A story about personages in turmoil, and the coincidences that follow. Taking steps forward, one (en), two (tu), three (thrie), is the way to reach to a conclusion. or, kitty-eared girls and gay librarians ride together with giant insects to chase a sadomasochistic lesbian pirate, the comic.</td>
+<th>Description</th><td>A story about personages in turmoil, and the coincidences that follow. Taking steps forward, one (en), two (tu), three (thrie), is the way to reach to a conclusion.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://entuthrie.smackjeeves.com/comics/">http://entuthrie.smackjeeves.com/comics/</a></td>

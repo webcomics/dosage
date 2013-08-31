@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Welcome to &quot;Chat-up lines&quot;! A South Park Doujinshi from CraigTucker and me. Pairing: Craig x Stan Story: Stan hates Craig and his friends are fags! They haven't time for him.. Bad friends.. But in a chatroom.. he meet a guy.. and he is cool. ..and they will be friends...</td>
+<th>Description</th><td>Welcome to &quot;Chat-up lines&quot;! A South Park Doujinshi from CraigTucker and me. Pairing: Craig x Stan Story: Stan hates Craig and his friends are fags! They haven't time for him.. Bad friends.. But in a chatroom.. he meet a guy.. and he is cool. ..and they will be friends... !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! PART 2 !!!! http://www.smackjeeves.com/comicprofile.php?id=121933 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WE LOVE YOU!</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://chatuplines.smackjeeves.com/comics/">http://chatuplines.smackjeeves.com/comics/</a></td>

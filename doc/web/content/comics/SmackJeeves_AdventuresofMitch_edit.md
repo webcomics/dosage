@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/AdventuresofMitch
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">The adventures of a fairly normal teenage boy and his host of crazy companions in a world that gives new meaning to the term &quot;modern fantasy&quot;. Updates Tuesdays and Fridays; going on hiatus in August for 18 months.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">The adventures of a fairly normal teenage boy and his host of crazy companions in a world that gives new meaning to the term &quot;modern fantasy&quot;. On hiatus until early 2015.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://adventuresofmitch.smackjeeves.com/comics/" size="40"/></td>

@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/1cek1dsmuseumofreallycraz...
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Hai. This is basicly a dump for my sprites, comics, game ideas, charectors, and basic everyday stuff. Except nothing is what YOU call everyday.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Hai. This is basicly a dump for my sprites, comics, game ideas, charectors, and basic everyday stuff. Expect nothing that YOU'D call everyday.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://hai.smackjeeves.com/comics/" size="40"/></td>

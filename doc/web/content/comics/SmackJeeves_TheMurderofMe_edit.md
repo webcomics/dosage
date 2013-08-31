@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/TheMurderofMe
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Every new beginning, Must have an end. Sonic the hedgehog is a hero who never gives in, Shadow the Hedgehog is a creature with a dark past, and Silver the hedgehog is a kid who just wants justice. Together, these three characters will have to play the most dangerous game of all: The Survial game.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">UPDATED SUMMARY: Sonic, after disappearing for five years, returns to his home, friends, and mother. However, he not only finds that his friends have fallen apart, but his mother is being targeted by an evil, supernatural entity with evil intentions.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://themurderofme.smackjeeves.com/comics/" size="40"/></td>

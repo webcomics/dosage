@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>You don't exist after you've fallen into the Somewhere-Other.</td>
+<th>Description</th><td>Who would have thought fitting into such a weird world would be so hard.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://somewhere-other.smackjeeves.com/comics/">http://somewhere-other.smackjeeves.com/comics/</a></td>

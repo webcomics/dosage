@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/ShowcasimusMaximus
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">KURONA, FLUTTER AND LYLA SPAM TIME, FOXPUFF SPRITE AND SPAM, LE SPRITE DUMP, PROBLEM WITH STARLO, DUB'S STUFF BIN, AQUA'S SPRITE HOSTING PLACE...THINGY, ZERO'S SPRITE TEST GROUND, THE REALM OF PUNCHY, AND TTLY NOT A RIPOFF MERGE TO FORM SHOWCASIMUS MAXIMUSSSSSSSSSSSS Scar's here too say hi scar yeah this is basically reidy's for lower tiers WHY. ARE. THERE. CHAPTERS. FOR. US. THEN. wut</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">KURONA, FLUTTER AND LYLA SPAM TIME, FOXPUFF SPRITE AND SPAM, LE SPRITE DUMP, PROBLEM WITH STARLO, DUB'S STUFF BIN, AQUA'S SPRITE HOSTING PLACE...THINGY, ZERO'S SPRITE TEST GROUND, THE REALM OF PUNCHY, AND TTLY NOT A RIPOFF MERGE TO FORM SHOWCASIMUS MAXIMUSSSSSSSSSSSS Scar's here too say hi scar yeah this is basically reidy's for lower tiers WHY. ARE. THERE. CHAPTERS. FOR. US. THEN. Because Cheese. wut The devil loves me this I know, Because the voices told me so!</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://allaboardthesteamtrain.smackjeeves.com/comics/" size="40"/></td>

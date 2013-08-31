@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/DevilsCake
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">When Kea finds that her bad luck with boys isn't a 'what' but a 'who', will her sanity survive the IN-sanity that ensues? PG-13 Currently Updates Tuesdays and Fridays</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">When Kea finds that her bad luck with boys isn't a 'what' but a 'who', will her sanity survive the IN-sanity that ensues? PG-13 Currently Updates Mondays</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://devilscake.smackjeeves.com/comics/" size="40"/></td>

@@ -9,7 +9,7 @@ Edit info for comic SmackJeeves/Nightmira
 <th>Description</th><td><textarea name="description" cols="40" rows="3">In a city where status rules everything, people will do anything to get to the top. It is Nightmira's job to protect the ones who are caught in the chaos. If the chaos doesn't catch her first.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://nightmira.smackjeeves.com/comics/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://nightmira.thewebcomic.com/comics/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

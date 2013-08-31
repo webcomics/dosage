@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/Chatuplines
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Welcome to &quot;Chat-up lines&quot;! A South Park Doujinshi from CraigTucker and me. Pairing: Craig x Stan Story: Stan hates Craig and his friends are fags! They haven't time for him.. Bad friends.. But in a chatroom.. he meet a guy.. and he is cool. ..and they will be friends...</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Welcome to &quot;Chat-up lines&quot;! A South Park Doujinshi from CraigTucker and me. Pairing: Craig x Stan Story: Stan hates Craig and his friends are fags! They haven't time for him.. Bad friends.. But in a chatroom.. he meet a guy.. and he is cool. ..and they will be friends... !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! PART 2 !!!! http://www.smackjeeves.com/comicprofile.php?id=121933 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WE LOVE YOU!</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://chatuplines.smackjeeves.com/comics/" size="40"/></td>

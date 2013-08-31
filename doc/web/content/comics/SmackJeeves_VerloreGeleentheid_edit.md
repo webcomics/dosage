@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/VerloreGeleentheid
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">&quot;Verlore Geleentheid&quot; is 'n wetenskapfiksie strokiesprent wat hom deur van die ouer wetenskapfiksie soos &quot;All the Way Back&quot; (Michael Shaara) en &quot;Die Oorlewendes&quot; en &quot;Ruimteskip Celeste&quot; (albei deur Johan Bredell) laat inspireer. &quot;Lost Opportunity&quot; is a sci-fi webcomic which is inspired by older SF like &quot;All the Way Back&quot; (Michael Shaara) and &quot;The Survivors&quot; and &quot;Spaceship Celeste&quot; (both by Johan Bredell). It is in Afrikaans. At the moment no English version is planned, although a translation will be provided on the website.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">&quot;Verlore Geleentheid&quot; is 'n wetenskapfiksie strokiesprent wat hom deur van die ouer wetenskapfiksie soos &quot;All the Way Back&quot; (Michael Shaara) en &quot;Die Oorlewendes&quot; en &quot;Ruimteskip Celeste&quot; (albei deur Johan Bredell) laat inspireer. &quot;Lost Opportunity&quot; is a sci-fi webcomic which is inspired by older SF like &quot;All the Way Back&quot; (Michael Shaara) and &quot;The Survivors&quot; and &quot;Spaceship Celeste&quot; (both by Johan Bredell). It is in Afrikaans. The English version is here: http://lost-opportunity.thewebcomic.com/</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://verlore.thewebcomic.com/comics/" size="40"/></td>

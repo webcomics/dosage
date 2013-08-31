@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/Intoxicated
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">This is the story of Robert, who tries to manage his relationships in his life of drug abuse, break up's and strong emotions. Contains drugs, sex and profanity. Approximately rated: 15</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">This is the story of Robert, who tries to manage his relationships in his life of drug abuse, break up's and strong emotions. The comic is finished, but being redrawn, so quality might change between newer and older chapters. Contains drugs, sex and profanity. Approximately rated: 15</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://intoxicated.smackjeeves.com/comics/" size="40"/></td>

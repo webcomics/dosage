@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/IslandsofEzdora
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Help Tara and friends adventure through the mystical Islands of Ezdora! Feel free to suggest! Updates daily.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Help Tara and friends adventure through the mystical Islands of Ezdora! Feel free to suggest!(Don't be scared of the page count, it reads fast!) Updates daily.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://ezdora.smackjeeves.com/comics/" size="40"/></td>

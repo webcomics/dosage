@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/NotyoursamI
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Lyle harbors unrequited love for his twin sister's boyfriend, Kaden, ever since they were young. Years of suppressed feelings has made him very vulnerable and desperate that he'll grab any opportunity to be closer to him...even if it means losing his own identity? But is it really enough? &quot;Not Yours, Am I?&quot; is an original Yaoi / BL practice comic by Cinnamon Rub/Scottwm. It was first published online in September 2009. --READ FROM RIGHT TO LEFT--</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Lyle harbors unrequited love for his twin sister's boyfriend, Kaden, ever since they were young. Years of suppressed feelings has made him very vulnerable and desperate that he'll grab any opportunity to be closer to him...even if it means losing his own identity? But is it really enough? &quot;Not Yours, Am I?&quot; is an original Yaoi / BL practice comic by Cinnamon Rub/Scottwm. It was first published online in September 2009. -READ FROM RIGHT TO LEFT-</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://notyoursami.smackjeeves.com/comics/" size="40"/></td>

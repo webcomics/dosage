@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/BattleSequence
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Trainer Rayne is working hard to train her pokemon to be the best they can be. Is she tough enough to take on all of these new challenges? Follow along with her on her journey to be the very best! UPDATES: Every four days.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Trainer Rayne is working hard to train her pokemon to be the best they can be. Is she tough enough to take on all of these new challenges? Follow along with her on her journey to be the very best! UPDATES: About once a week.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://battlesequence.smackjeeves.com/comics/" size="40"/></td>

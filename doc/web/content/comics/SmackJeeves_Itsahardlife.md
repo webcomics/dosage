@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Robin is ten years old and travels through Kanto with her pokémon to find a place to call home. This is a story about struggle, survival and friendship in a cruel world. -------------------------- This is a Nuzlocke comic. Contains some swearing and occasionally some gore. -------------------------- Updates are sadly quite irregular but I have no plans on giving up on it anytime soon!</td>
+<th>Description</th><td>Robin is ten years old and travels through Kanto with her pokémon to find a place to call home. This is a story about struggle, survival and friendship in a cruel world. -------------------------- This is a Nuzlocke comic. Contains swearing and occasionally some gore. -------------------------- Updates are sadly quite irregular but I have no plans on giving up on it anytime soon! -------------------------- Extra art and fan art at hardlifeat.tumblr.com/</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://itsahardlife.smackjeeves.com/comics/">http://itsahardlife.smackjeeves.com/comics/</a></td>

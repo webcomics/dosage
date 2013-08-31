@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Hai. This is basicly a dump for my sprites, comics, game ideas, charectors, and basic everyday stuff. Except nothing is what YOU call everyday.</td>
+<th>Description</th><td>Hai. This is basicly a dump for my sprites, comics, game ideas, charectors, and basic everyday stuff. Expect nothing that YOU'D call everyday.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://hai.smackjeeves.com/comics/">http://hai.smackjeeves.com/comics/</a></td>

@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>This comic follows the lives of my toys (mostly Transformers) as they try to get through the day...there's usually no big events, but can't promise!</td>
+<th>Description</th><td>My toys get bored when I leave the room, so they come to life and make these comics. Sometimes they do things that cause worldwide issues, sometimes they burn the toast, it's all just a roll of the dice with them! Watch this cast of now just over a 1000 characters do their stuff!</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://HumanCookies.webcomic.ws/">http://HumanCookies.webcomic.ws/</a></td>

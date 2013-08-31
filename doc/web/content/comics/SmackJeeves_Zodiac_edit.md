@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/Zodiac
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">A curse has fallen on the ten students along with their two teachers, and they must work together to find the source and break it, so they can spent their lives like it was before. The story will be, most of the time, stupid. You've been warned :D Updates: !!! When a page is out/I'll try to update at least twice/three times a week c:</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">A curse has fallen on the ten students along with their two teachers, and they must work together to find the source and break it, so they can spent their lives like it was before. The story will be, most of the time, stupid. You've been warned :D Updates: !!! When a page is out/I'll try to update once in weekend maybe once with one page or three pages if i'm lucky</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://zodiac.smackjeeves.com/comics/" size="40"/></td>

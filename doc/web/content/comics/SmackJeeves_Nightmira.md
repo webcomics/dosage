@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>In a city where status rules everything, people will do anything to get to the top. It is Nightmira's job to protect the ones who are caught in the chaos. If the chaos doesn't catch her first.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://nightmira.smackjeeves.com/comics/">http://nightmira.smackjeeves.com/comics/</a></td>
+<th>Website</th><td><a href="http://nightmira.thewebcomic.com/comics/">http://nightmira.thewebcomic.com/comics/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

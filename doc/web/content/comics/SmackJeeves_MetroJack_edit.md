@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/MetroJack
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">A gay ex-lumberjack and a straight metro-sexual room together while attending Boston College. Humorous shounen-ai hijinks and confused sexual orientations abound. BL/Yaoi UPDATES EVERY SUNDAY! Also I just started a Tumblr Blog for the comic, so I can spam you guys on tumblr with sketches and fanart that my friends have done for me, as well as progress reports on the latest updates so you'll know about when to expect the next page! Feel free to check it out here: http://metro-jack.tumblr.com/</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">A gay ex-lumberjack and a straight metro-sexual room together while attending Boston College. Humorous shounen-ai hijinks and confused sexual orientations abound. BL/Yaoi UPDATES EVERY SUNDAY! Follow Metro-Jack on Tumblr!: http://metro-jack.tumblr.com/</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://metro-jack.smackjeeves.com/comics/" size="40"/></td>

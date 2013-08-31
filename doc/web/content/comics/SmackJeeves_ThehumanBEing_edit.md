@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/ThehumanBEing
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">&quot;A story about friends and enemies; love and hate; forgiving and forgetting; holding on and letting go. A story about being human, and being MORE...&quot; Follow the story of ten friends as they survive college, friendship, love, and life in general. No matter who we are, what we know, or what we believe, we are all HUMAN. Updates: Fridays (sometimes Saturdays) Reads left to right</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">&quot;A story about friends and enemies; love and hate; forgiving and forgetting; holding on and letting go. A story about being human, and being MORE...&quot; Follow the story of ten friends as they survive college, friendship, love, and life in general. No matter who we are, what we know, or what we believe, we are all HUMAN. Updates: Tuesdays Reads left to right</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://thehumanbeing.smackjeeves.com/comics/" size="40"/></td>

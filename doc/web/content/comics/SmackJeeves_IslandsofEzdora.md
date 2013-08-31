@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Help Tara and friends adventure through the mystical Islands of Ezdora! Feel free to suggest! Updates daily.</td>
+<th>Description</th><td>Help Tara and friends adventure through the mystical Islands of Ezdora! Feel free to suggest!(Don't be scared of the page count, it reads fast!) Updates daily.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://ezdora.smackjeeves.com/comics/">http://ezdora.smackjeeves.com/comics/</a></td>

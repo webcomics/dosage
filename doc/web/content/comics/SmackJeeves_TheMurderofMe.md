@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Every new beginning, Must have an end. Sonic the hedgehog is a hero who never gives in, Shadow the Hedgehog is a creature with a dark past, and Silver the hedgehog is a kid who just wants justice. Together, these three characters will have to play the most dangerous game of all: The Survial game.</td>
+<th>Description</th><td>UPDATED SUMMARY: Sonic, after disappearing for five years, returns to his home, friends, and mother. However, he not only finds that his friends have fallen apart, but his mother is being targeted by an evil, supernatural entity with evil intentions.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://themurderofme.smackjeeves.com/comics/">http://themurderofme.smackjeeves.com/comics/</a></td>

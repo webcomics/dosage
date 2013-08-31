@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>After being hit by a car a few months ago, things have been very strange for Max. Not only can he see ghosts, but one in particular claims to have saved him from death! But there are reasons why ghosts are not allowed to save humans. Updates Tuesdays and Thursdays (and Saturdays if there's time)with a massive quality shift from chapter to chapter</td>
+<th>Description</th><td>After being hit by a car a few months ago, things have been very strange for Max. Not only can he see ghosts, but one in particular claims to have saved him from death! But there are reasons why ghosts are not allowed to save humans. Updates Tuesdays and Thursdays (and Saturdays if there's time)with a massive quality shift from chapter to chapter (and pages before CH5 are slowly getting text fixups)</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://guardianghost.smackjeeves.com/comics/">http://guardianghost.smackjeeves.com/comics/</a></td>

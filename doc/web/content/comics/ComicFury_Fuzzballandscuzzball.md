@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Fuzzball and Scuzzball are brothers who live in the gritty urban hell that is Happy City, New Jersey. In theory, they are private investigators. These are their wacky misadventures.</td>
+<th>Description</th><td>Fuzzball and Scuzzball are brothers who live in the gritty urban hell that is Happy City, New Jersey. In theory, they are private investigators. They have wacky misadventures.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://fuzzballandscuzzball.webcomic.ws/">http://fuzzballandscuzzball.webcomic.ws/</a></td>

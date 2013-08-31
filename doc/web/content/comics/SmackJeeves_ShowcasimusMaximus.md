@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>KURONA, FLUTTER AND LYLA SPAM TIME, FOXPUFF SPRITE AND SPAM, LE SPRITE DUMP, PROBLEM WITH STARLO, DUB'S STUFF BIN, AQUA'S SPRITE HOSTING PLACE...THINGY, ZERO'S SPRITE TEST GROUND, THE REALM OF PUNCHY, AND TTLY NOT A RIPOFF MERGE TO FORM SHOWCASIMUS MAXIMUSSSSSSSSSSSS Scar's here too say hi scar yeah this is basically reidy's for lower tiers WHY. ARE. THERE. CHAPTERS. FOR. US. THEN. wut</td>
+<th>Description</th><td>KURONA, FLUTTER AND LYLA SPAM TIME, FOXPUFF SPRITE AND SPAM, LE SPRITE DUMP, PROBLEM WITH STARLO, DUB'S STUFF BIN, AQUA'S SPRITE HOSTING PLACE...THINGY, ZERO'S SPRITE TEST GROUND, THE REALM OF PUNCHY, AND TTLY NOT A RIPOFF MERGE TO FORM SHOWCASIMUS MAXIMUSSSSSSSSSSSS Scar's here too say hi scar yeah this is basically reidy's for lower tiers WHY. ARE. THERE. CHAPTERS. FOR. US. THEN. Because Cheese. wut The devil loves me this I know, Because the voices told me so!</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://allaboardthesteamtrain.smackjeeves.com/comics/">http://allaboardthesteamtrain.smackjeeves.com/comics/</a></td>

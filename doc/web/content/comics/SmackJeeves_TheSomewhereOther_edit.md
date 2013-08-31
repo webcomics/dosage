@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/TheSomewhereOther
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">You don't exist after you've fallen into the Somewhere-Other.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Who would have thought fitting into such a weird world would be so hard.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://somewhere-other.smackjeeves.com/comics/" size="40"/></td>

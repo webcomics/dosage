@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>&quot;A story about friends and enemies; love and hate; forgiving and forgetting; holding on and letting go. A story about being human, and being MORE...&quot; Follow the story of ten friends as they survive college, friendship, love, and life in general. No matter who we are, what we know, or what we believe, we are all HUMAN. Updates: Fridays (sometimes Saturdays) Reads left to right</td>
+<th>Description</th><td>&quot;A story about friends and enemies; love and hate; forgiving and forgetting; holding on and letting go. A story about being human, and being MORE...&quot; Follow the story of ten friends as they survive college, friendship, love, and life in general. No matter who we are, what we know, or what we believe, we are all HUMAN. Updates: Tuesdays Reads left to right</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://thehumanbeing.smackjeeves.com/comics/">http://thehumanbeing.smackjeeves.com/comics/</a></td>

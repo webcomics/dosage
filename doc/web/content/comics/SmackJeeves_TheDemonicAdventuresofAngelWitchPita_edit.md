@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/TheDemonicAdventuresofAng...
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Reading a book is innocent enough, right? Except when you're Pita, and reading the book releases hundreds of demons and their leader, and all of them are craving for a bit of...action. Enter a (pig) cherub-in-training named Buhi, who then puts Pita in a contract to take care of each and every one of the demons, add a little bit of Magical Girl bibbity boo, and now you have the start of the story.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">The story of Angel Witch Pita is about a classically average, unspectacular young woman who comes across a book that, upon reading an incantation inside of it, releases dozens of monsters and incubi and succubi that had been sealed within it over a century ago. She is then contracted by a winged pig named Buhi, who claims that he is a cherub in training, to find those she's released and stop them from harming mankind. He empowers her with his halo, giving her an angelic appearance and the power to call upon an angel form. As her adventures progress, she collects an Incubus in child form named Jinx (who is really the leader of all of those from the book) and a Succubus named Beliel. She initially believes herself to be a type of magical girl, but the truth is far darker, and far deeper than she could ever imagine.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://angelwitchpita.smackjeeves.com/comics/" size="40"/></td>

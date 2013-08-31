@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>This is the story of Robert, who tries to manage his relationships in his life of drug abuse, break up's and strong emotions. Contains drugs, sex and profanity. Approximately rated: 15</td>
+<th>Description</th><td>This is the story of Robert, who tries to manage his relationships in his life of drug abuse, break up's and strong emotions. The comic is finished, but being redrawn, so quality might change between newer and older chapters. Contains drugs, sex and profanity. Approximately rated: 15</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://intoxicated.smackjeeves.com/comics/">http://intoxicated.smackjeeves.com/comics/</a></td>

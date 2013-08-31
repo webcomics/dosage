@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>there's a freckly guy who misses his girlfriend a lot and a blue girl who wants to find her brothers. on their way to wherever they're faced with a lot of trouble! drawn and written by piim, also known as Katarina Skott. updates wednesdays and saturdays!!</td>
+<th>Description</th><td>there's a freckly guy who misses his girlfriend a lot and a blue girl who wants to find her brothers. on their way to wherever they're faced with a lot of trouble! but also a lot of friends.drawn and written by piim, also known as Katarina Skott. updates wednesdays and saturdays!</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://adalsysla.smackjeeves.com/comics/">http://adalsysla.smackjeeves.com/comics/</a></td>

@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/Itsahardlife
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Robin is ten years old and travels through Kanto with her pokémon to find a place to call home. This is a story about struggle, survival and friendship in a cruel world. -------------------------- This is a Nuzlocke comic. Contains some swearing and occasionally some gore. -------------------------- Updates are sadly quite irregular but I have no plans on giving up on it anytime soon!</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Robin is ten years old and travels through Kanto with her pokémon to find a place to call home. This is a story about struggle, survival and friendship in a cruel world. -------------------------- This is a Nuzlocke comic. Contains swearing and occasionally some gore. -------------------------- Updates are sadly quite irregular but I have no plans on giving up on it anytime soon! -------------------------- Extra art and fan art at hardlifeat.tumblr.com/</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://itsahardlife.smackjeeves.com/comics/" size="40"/></td>

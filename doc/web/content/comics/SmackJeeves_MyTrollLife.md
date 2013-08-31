@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>This is a webcomic with rage comics surrounding real events in my life. NOTE: these comics are for jokes and laughs and should not be juged (but if you wanna still bitch then why are you here in the first place, you knew what you were gonna expect in the tittle's picture) UPDATES: *Summer Schedule: 1-2 A Week*</td>
+<th>Description</th><td>This is a webcomic with rage comics surrounding real events in my life. NOTE: these comics are for jokes and laughs and should not be juged (but if you wanna still bitch then why are you here in the first place, you knew what you were gonna expect in the tittle's picture) UPDATES: *Normal Schedule: Once A Week* (Normal Schedule begins September 3, 2013)</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://mytrolllife.smackjeeves.com/comics/">http://mytrolllife.smackjeeves.com/comics/</a></td>

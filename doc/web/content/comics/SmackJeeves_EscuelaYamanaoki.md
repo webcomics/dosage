@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Kouhei es un chico un poco rebelde y por esto ha sido cambiado constantemente de escuelas, entonces su padre decidio mandarlo a la escuela del Monte Naoki mas conocida como Yamanaoki, al parecer es una escuela normal... pero... si fuese asi... no habria nada que contar xDD muchos sucesos extraños haran que Kouhei vea la realidad con otros ojos... o una realidad completamente desconocida... chan chan chaaan English version: http://yamanaokihs.smackjeeves.com/ (paused) sitio en facebook: http://www.facebook.com/pages/Yamanaoki/167250876624086</td>
+<th>Description</th><td>Kouhei es un chico un chico rebelde y por esto ha sido cambiado constantemente de escuelas, hasta que un dia su padre decidio mandarlo a la escuela del Monte Naoki mas conocida como Yamanaoki. Al parecer es una escuela normal... pero... si fuese asi... no habria nada que contar xDD muchos sucesos extraños haran que Kouhei vea la realidad con otros ojos... o una realidad completamente desconocida... chan chan chaaan English version: http://yamanaokihs.smackjeeves.com sitio en facebook: http://www.facebook.com/pages/Yamanaoki/167250876624086</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://yamanaoki.smackjeeves.com/comics/">http://yamanaoki.smackjeeves.com/comics/</a></td>

@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/Entuthrie
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">A story about personages in turmoil, and the coincidences that follow. Taking steps forward, one (en), two (tu), three (thrie), is the way to reach to a conclusion. or, kitty-eared girls and gay librarians ride together with giant insects to chase a sadomasochistic lesbian pirate, the comic.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">A story about personages in turmoil, and the coincidences that follow. Taking steps forward, one (en), two (tu), three (thrie), is the way to reach to a conclusion.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://entuthrie.smackjeeves.com/comics/" size="40"/></td>
