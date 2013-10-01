@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/SwitchMechanism
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">There once was a boy who was not a boy. Who carried stones in his heart. And an astronaut who tried to carry the boy and the stones both. Switch Mechanism- A genetic or environmental trigger which decides which of several possible forms an individual of a species may take. This is a stand-alone sequel to Black and Blue.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">A story about a boy struggling with his demons, mainly the one in the vinyl catsuit.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://switchmechanism.smackjeeves.com/comics/" size="40"/></td>

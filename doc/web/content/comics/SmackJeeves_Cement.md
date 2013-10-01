@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>We are a legion of awesomeness, bro! &gt;:C -------------------------------- Welcome to Cement! A boredom webcomic to discuss/review ideas, movies, fanfiction, and other stuff/shit. We also have: - A sprite showcase, - Some tutorials, - Dreams that make sense, - Debates that make no sense, - Lotsa shitty shit bullshit, - Crack, - Heli-kun~ :3 - Anus - Hentai - Steak - Swagga - What Pumpkin - Overall Trash And much more... Feel free to apply as author if you'd like! (no wait, don't) Gooby plz. I'm touching the description! Hurrdurr! :B Thank you for still reading. Now.. have a nice day and go HoNk yourself. I touched it again - silentdusk c: Heil Helitler. Calm down Stalin' *shoots helitler in da face* :D Now go back to the top and re-read the description. HoNk hOnK :o) Trying to make a Homestuck reference in the description? You know nothing, Jon Snow. gun in your face big disgrace, kicking your ass all over my place.~ Royle McCulloch Play with the description they said. It will be fun they said. And it was. Posers. I was messing with the description before it became cool! &gt;:I</td>
+<th>Description</th><td>We are a legion of awesomeness, bro! &gt;:C -------------------------------- Welcome to Cement! A boredom webcomic to discuss/review ideas, movies, fanfiction, and other stuff/shit. We also have: - A sprite showcase, - Some tutorials, - Dreams that make sense, - Debates that make no sense, - Lotsa shitty shit bullshit, - Crack, - Heli-kun~ :3 - Anus - Hentai - Steak - Swagga - What Pumpkin - Overall Trash And much more... Feel free to apply as author if you'd like! (no wait, don't) Gooby plz. I'm touching the description! Hurrdurr! :B Heil Helitler. Calm down Stalin' *shoots helitler in da face* :D Now go back to the top and re-read the description. HoNk hOnK :o) Trying to make a Homestuck reference in the description? You know nothing, Jon Snow. Play with the description they said. It will be fun they said. And it was. Posers. I was messing with the description before it became cool! &gt;:I So there was this Dj who was like kicking off. I dont know what he was doing. But it was sick man. Hands in the air. Like penis out. There were people dancing I think Or maybe they were cops I think they might have been cops</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://blocksofsherst.smackjeeves.com/comics/">http://blocksofsherst.smackjeeves.com/comics/</a></td>
@@ -26,7 +26,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Language</th><td>English</td>
 </tr>
 <tr>
-<th>Adult content</th><td>no</td>
+<th>Adult content</th><td>yes</td>
 </tr>
 <tr>
 <th>Status</th><td>ok on 18.07.2013</td>

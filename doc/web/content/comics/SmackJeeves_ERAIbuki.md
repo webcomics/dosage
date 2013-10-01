@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A short story about a girl with a kind heart who is faced against a world that's just too strong for her to fight. But it doesn't stop her from trying. Updates DAILY This comic is now a Premium Comic on Manga Magazine! :) If it isn't too much trouble, please give the comic one click over there too! :)</td>
+<th>Description</th><td>Kickstarter!! http://tinyurl.com/ibukicomic A short story about a girl with a kind heart who is faced against a world that's just too strong for her to fight. But it doesn't stop her from trying. Updates DAILY This comic is now a Premium Comic on Manga Magazine! :) If it isn't too much trouble, please give the comic one click over there too! :)</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://eraibuki.smackjeeves.com/comics/">http://eraibuki.smackjeeves.com/comics/</a></td>

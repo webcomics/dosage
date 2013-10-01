@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A web comic about love, life, and trying to comes to terms with being transgendered. Sometimes dark, sometimes light, and always an attempt at a honest look at transexual life. Updating every day, including weekends!</td>
+<th>Description</th><td>A web comic about love, life, and trying to comes to terms with being transgender. Sometimes dark, sometimes light, and always an attempt at a honest look at transexual life. Updating every day, including weekends!</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://wildflowers.smackjeeves.com/comics/">http://wildflowers.smackjeeves.com/comics/</a></td>

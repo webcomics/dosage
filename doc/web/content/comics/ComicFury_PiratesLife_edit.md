@@ -6,7 +6,7 @@ Edit info for comic ComicFury/PiratesLife
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">-</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">A story about a Merchant and his crew who find themselves travelling all around the LEGO world.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://PiratesLife.webcomic.ws/" size="40"/></td>

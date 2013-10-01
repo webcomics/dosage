@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/TheBucket
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">An art/comic journal as well as a collection of memes, scraps, and deep artwork and stuff. Also includes a psychological side story, &quot;ENS Special&quot;. Updates daily (if not, extra updates).</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">An art/comic journal including a psychological side story, &quot;ENS Special&quot;.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://thebucket.smackjeeves.com/comics/" size="40"/></td>

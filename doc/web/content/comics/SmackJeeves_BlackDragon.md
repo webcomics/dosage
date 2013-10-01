@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Since mankind has subjugated dragons, men struggle for power by using dragons. Sora also wants to become a dragonrider and so he climbs the Dragon-Mountains to catch a dragon This is a manga. Read from the right to the left! If you can't wait, you can get the complete Manga on Amazon: http://www.amazon.com/dp/B007NZGBZ8 http://www.amazon.com/dp/B009MOQLLM http://www.amazon.com/dp/B00BRJHPTW Actually I'm working on this manga for about one and a half years and made about 21 chapters. So I'm gonna upload many pages in a short time until we reach the chapter I'm currently working on</td>
+<th>Description</th><td>Since mankind has subjugated dragons, men struggle for power by using dragons. Sora also wants to become a dragonrider and so he climbs the Dragon-Mountains to catch a dragon This is a manga. Read from the right to the left! If you can't wait, you can get the complete Manga on Amazon: http://www.amazon.com/dp/B007NZGBZ8 http://www.amazon.com/dp/B009MOQLLM http://www.amazon.com/dp/B00BRJHPTW http://www.amazon.com/dp/B00EMHWJVK Update: one chapter per month</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://blackdragon.smackjeeves.com/comics/">http://blackdragon.smackjeeves.com/comics/</a></td>

@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>An art/comic journal as well as a collection of memes, scraps, and deep artwork and stuff. Also includes a psychological side story, &quot;ENS Special&quot;. Updates daily (if not, extra updates).</td>
+<th>Description</th><td>An art/comic journal including a psychological side story, &quot;ENS Special&quot;.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://thebucket.smackjeeves.com/comics/">http://thebucket.smackjeeves.com/comics/</a></td>

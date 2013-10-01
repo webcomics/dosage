@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Quotes ------------------------------------------------------- Alexini: GAAAH! SPARK! Y U TOOK MAH BUCKET?!?!?!?! :C \_/ Burey: By the name of Daucaus, I shall EAT those cookies! Carbon: I'M THE ALMIGHTY (and uber smexy) EATIRALATOR! I am the scroll Dry: Death by MONKEYS! Firekitty: Meow. *coughs up burning hairball onto something flammable* Gigi: You've gotta tell me when you turn on the mic, ok? Wait, it's already on?! HOW COUL- Jason: cavestorycavestorycavestorycavestorycavestorycaoeocirvgiarbvrsvoefssr Lucas: gotta speed keed Spark: *gets burning hairball coughed onto hair* AAAAAAAAAAAAAAAAAAAHHHH *grabs Alexini's bucket and pours it on self* Tater: Unfunny umbrella.</td>
+<th>Description</th><td>Quotes ------------------------------------------------------- Alexini: GAAAH! SPARK! Y U TOOK MAH BUCKET?!?!?!?! :C \_/ Burey: By the name of Daucaus, I shall EAT those cookies! Carbon: I'M THE ALMIGHTY (and uber smexy) EATIRALATOR! I am the scroll Dry: Death by MONKEYS! Firekitty: Meow. *coughs up burning hairball onto something flammable* Gigi: You've gotta tell me when you turn on the mic, ok? Wait, it's already on?! HOW COUL- Jason: cavestorycavestorycavestorycavestorycavestorycaoeocirvgiarbvrsvoefssr Lucas: (oo) Spark: *gets burning hairball coughed onto hair* AAAAAAAAAAAAAAAAAAAHHHH *grabs Alexini's bucket and pours it on self* Tater: crossing of the animals: fresh foliage</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://voidmisadventures.smackjeeves.com/comics/">http://voidmisadventures.smackjeeves.com/comics/</a></td>

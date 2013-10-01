@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>What happens when you turn into a pokemon, forget everything, and lay unconsciously on the beach? Go save the world from time freezing, obviously! Well that's just what Team FireFox is going to do! It's a gijinka comics :3 Oh yeah, art gradually gets better. Grammar? Not so much.</td>
+<th>Description</th><td>What happens when you turn into a pokemon, forget everything, and lay unconsciously on the beach? Go save the world from time freezing, obviously! Well that's just what Team FireFox is going to do! It's a pokemon mystery dungeon sky gijinka comics :3 Oh yeah, art gradually gets better. Grammar? Not so much.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://pmdteamfirefox.smackjeeves.com/comics/">http://pmdteamfirefox.smackjeeves.com/comics/</a></td>

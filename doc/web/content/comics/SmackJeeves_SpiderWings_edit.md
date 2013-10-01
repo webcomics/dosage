@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/SpiderWings
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">This is a story about a girl named Momo, who has a brush with death and is thrown into the world of Limbo...Now she must find away back home but that is easier said than done. Updated: Thursdays Rated-pg-13 Now updating chapter 5</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">This is a story about a girl named Momo, who has a brush with death and is thrown into the world of Limbo...Now she must find away back home but that is easier said than done. Updated: once a month Rated-pg-13 Now updating chapter 6</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://spiderwings.smackjeeves.com/comics/" size="40"/></td>

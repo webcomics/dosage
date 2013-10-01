@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Would you give your soul for a chance to search for a missing loved one? That is the price sixteen year old Yoru paid to the forest demon sending her on a journey to the sunless world of Oscurare. In an unfamiliar world does Yoru have what it takes to find her brother and stay alive? Updates Tuesdays and Fridays Rated-pg 13 now updating: chapter 4</td>
+<th>Description</th><td>Would you give your soul for a chance to search for a missing loved one? That is the price sixteen year old Yoru paid to the forest demon sending her on a journey to the sunless world of Oscurare. In an unfamiliar world does Yoru have what it takes to find her brother and stay alive? Updates once a month Rated-pg 13 now updating: chapter 5</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://oscurare-comic.smackjeeves.com/comics/">http://oscurare-comic.smackjeeves.com/comics/</a></td>

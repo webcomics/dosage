@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>a man named Kaito goes to commit suicide after living a boring, loveless, cubicle job. He meets a strange guy named Shuno...and Shuno immediatly takes a liking to him...almost too fast to be real XD Kaito quickly makes it clear that he isnt gay...but will Shuno's actions toward him make him alittle...'confused'? lol Kaito's been in such a need for love that maybe Shuno's affection doesnt look THAT bad...or does it?:P YAOI!!</td>
+<th>Description</th><td>a man named Kaito goes to commit suicide after living a boring, loveless, cubicle job. He meets a strange guy named Shuno...and Shuno immediatly takes a liking to him...almost too fast to be real XD Kaito quickly makes it clear that he isnt gay...but will Shuno's actions toward him make him alittle...'confused'? lol Kaito's been in such a need for love that maybe Shuno's affection doesnt look THAT bad...or does it?:P YAOI!! RSS FEED: http://kaitoshuno.smackjeeves.com/rss/</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://kaitoshuno.smackjeeves.com/comics/">http://kaitoshuno.smackjeeves.com/comics/</a></td>

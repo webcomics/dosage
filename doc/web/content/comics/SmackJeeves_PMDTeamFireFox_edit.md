@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/PMDTeamFireFox
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">What happens when you turn into a pokemon, forget everything, and lay unconsciously on the beach? Go save the world from time freezing, obviously! Well that's just what Team FireFox is going to do! It's a gijinka comics :3 Oh yeah, art gradually gets better. Grammar? Not so much.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">What happens when you turn into a pokemon, forget everything, and lay unconsciously on the beach? Go save the world from time freezing, obviously! Well that's just what Team FireFox is going to do! It's a pokemon mystery dungeon sky gijinka comics :3 Oh yeah, art gradually gets better. Grammar? Not so much.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://pmdteamfirefox.smackjeeves.com/comics/" size="40"/></td>

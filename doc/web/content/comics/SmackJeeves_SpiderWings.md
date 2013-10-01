@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>This is a story about a girl named Momo, who has a brush with death and is thrown into the world of Limbo...Now she must find away back home but that is easier said than done. Updated: Thursdays Rated-pg-13 Now updating chapter 5</td>
+<th>Description</th><td>This is a story about a girl named Momo, who has a brush with death and is thrown into the world of Limbo...Now she must find away back home but that is easier said than done. Updated: once a month Rated-pg-13 Now updating chapter 6</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://spiderwings.smackjeeves.com/comics/">http://spiderwings.smackjeeves.com/comics/</a></td>

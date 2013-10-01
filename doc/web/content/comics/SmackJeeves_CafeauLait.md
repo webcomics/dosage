@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>The comic strip with cat boy flavor! (updates saturdays) Illustrations of Milk, Coffee and the others are here: http://nadykun.deviantart.com/gallery/40865689</td>
+<th>Description</th><td>The four-panel comic with cat boy flavor! (updates saturdays) Illustrations of Milk, Coffee and the others are here: http://nadykun.deviantart.com/gallery/40865689</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://cafeaulait.smackjeeves.com/comics/">http://cafeaulait.smackjeeves.com/comics/</a></td>

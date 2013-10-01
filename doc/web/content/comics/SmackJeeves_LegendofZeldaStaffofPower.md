@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>An ancient weapon created for harmony brought civil war. Shattering it brought tentative peace, until the leader of the Gerudo attempts to slaughter an entire race of people, then turning his hatred upon the monarchy of Hyrule. Defeated by the Hero of Time and the Princess of Destiny, he was sealed away in the Sacred Realm. Years later, he has gained more power, and has broken free. Now it will take the very weapon he seeks to destroy him, and an unlikely wielder to complete the task. Who will win?</td>
+<th>Description</th><td>An ancient weapon created for harmony brought civil war. Shattering it brought tentative peace, until the leader of the Gerudo attempts to slaughter an entire race of people, then turning his hatred upon the monarchy of Hyrule. Defeated by the Hero of Time and the Princess of Destiny, he was sealed away in the Sacred Realm. Years later, he has gained more power, and has broken free. Now it will take the very weapon he seeks to destroy him, and an unlikely wielder to complete the task. Who will win? ~Like the comic? Want to support the author? Click the image at the bottom of the page to do so!~</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://loz-sop.smackjeeves.com/comics/">http://loz-sop.smackjeeves.com/comics/</a></td>

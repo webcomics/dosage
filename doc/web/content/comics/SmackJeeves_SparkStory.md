@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>&quot;INSPIRED BY ABBIMAYS RANDOMNESS (now Void Misadventures, go there while you're on the internet)! Swearing and mature content are STRICTLY PROHIBITED. ...y u still here read the freaking comic already.&quot; -MELODY, MANAGER OF THIS FINE ESTABLISHMENT. Melody Y U take away our quotes ;n; -Doofus I concur, they show the personality of each and every author -Plazem Plazem, Doofus, and everyone else in existance... pls. -Ryjora Ryry pls. -Jolleh</td>
+<th>Description</th><td>&quot;INSPIRED BY ABBIMAYS RANDOMNESS (now Void Misadventures, go there while you're on the internet)! AUTHOR RULES: 1. AUTHORS MUST UPDATE AT LEAST ONCE EVERY SIX WEEKS. If you won't be able to update, please make a news post saying why, and you'll be pardoned from posting. 2. SWEARING IS WRONG. It's okay if you censor it, but this is a rule that I expect to be followed in comics, comments, and chat. 3. TREAT OTHERS WITH RESPECT. I don't care who you are or what you said, BE NICE. If you were joking around, I'll understand. Any violation of these rules will result in a warning. Three warnings, no matter what the combination, and you will be kicked with an explanation why. You will have one oppourtunity to rejoin, but that will be it. Otherwise, that's it. Be safe and have fun. ~Melody-Pika, manager</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://sparkstory.smackjeeves.com/comics/">http://sparkstory.smackjeeves.com/comics/</a></td>

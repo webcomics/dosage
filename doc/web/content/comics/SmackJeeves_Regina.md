@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>'Regina' is a sketch comic. It's a daily sketch challenge comic designed to get me to draw one comic page a day so I can stay in practice everyday. Also to practice page layouts and conversational writing. Regina is drawn using only a black ball-point pen and totally free-hand. The story of Regina is a slice of life about a girl named Regina and her random group of friends,where what ever happens, happens and I try to make it as interesting as possible. Updates: Daily</td>
+<th>Description</th><td>'Regina' is a sketch comic. It's a daily sketch challenge comic designed to get me to draw one comic page a day so I can stay in practice everyday. Also to practice page layouts and conversational writing. Regina was drawn using only with a black ball-point pen but now has tones, for a new look. The story of Regina is a slice of life about a girl named Regina and her random group of friends,where what ever happens, happens and I try to make it as interesting as possible. Updates: Daily</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://regina.smackjeeves.com/comics/">http://regina.smackjeeves.com/comics/</a></td>

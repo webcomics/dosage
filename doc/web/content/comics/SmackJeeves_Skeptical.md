@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A regular slice of life/death romantic comedy about an unusual family and their relations to a group of creatures that call themselves &quot;skull people&quot;. Said human family(and half the comic itself) was created by and belongs to TyrannicalShipper! Warning- there's an abundance of foul language, and blood. Lots of blood, including the first page. Also, constructive critiques are always appreciated! (Updates sporadically due to the fact that we are both now in college)</td>
+<th>Description</th><td>A regular slice of life/death romantic comedy about an unusual family and their relations to a group of creatures that call themselves &quot;skull people&quot;. Said human family(and half the comic itself) was created by and belongs to TyrannicalShipper! Warning- there's an abundance of foul language, and blood. Lots of blood, including the first page. Also, constructive critiques are always appreciated! Currently updates every four days.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://skeptical.smackjeeves.com/comics/">http://skeptical.smackjeeves.com/comics/</a></td>

@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>This a a showcase in which any spriter can join. Here you can post: Sprites Pixel art Character bios Cool effects Short comics Memes Ads And More! Rules: No flaming, trolling or any of the sort No Porn So Join!!!! And be sure to post often! (If you do not post in like a month or something without reason, you will be taken off) And now, for some quotes from the authors: Smash: sprite! Pocket_Ninja : ......WHO ARE YOU PEOPLE?!?!?!?!?! Luxbot: EFFECTS IS A NECESSITY FOR ME. :&lt; CamTro: No effects for me to sprite and speak as in same time! ~à² _à² ~ Sspeedo th: I try to sprite but effects and comics work betta under the microscope. Drago: Spritin epic style. A-A-A-A-A-A-AAAAA- *shot*</td>
+<th>Description</th><td>This a a showcase in which any spriter can join. Here you can post: Sprites Pixel art Character bios Cool effects Short comics Memes Ads And More! So Join TODAY!! And now, for some quotes from the authors: Smash: sprite! Pocket_Ninja : ......WHO ARE YOU PEOPLE?!?!?!?!?! Luxbot: EFFECTS IS A NECESSITY FOR ME. :&lt; CamTro: No effects for me to sprite and speak as in same time! ~à² _à² ~ Sspeedo th: I try to sprite but effects and comics work betta under the microscope. Drago: Spritin epic style. A-A-A-A-A-A-AAAAA- *shot*</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://smashshowcase.smackjeeves.com/comics/">http://smashshowcase.smackjeeves.com/comics/</a></td>

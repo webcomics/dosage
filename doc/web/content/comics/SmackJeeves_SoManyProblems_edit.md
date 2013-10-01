@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/SoManyProblems
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">'If Toothpaste For Dinner was less funny' Single panel comics about life, booze, love and... swans(?). Updates 5 times a week.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">'If the XKCD guy was retarded' Single panel comics about life, love, alcoholism and dick jokes. Updates Mon/Wed/Fri</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://somanyproblems.thewebcomic.com/comics/" size="40"/></td>

@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>'If Toothpaste For Dinner was less funny' Single panel comics about life, booze, love and... swans(?). Updates 5 times a week.</td>
+<th>Description</th><td>'If the XKCD guy was retarded' Single panel comics about life, love, alcoholism and dick jokes. Updates Mon/Wed/Fri</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://somanyproblems.thewebcomic.com/comics/">http://somanyproblems.thewebcomic.com/comics/</a></td>
