@@ -131,6 +131,9 @@ class _BasicScraper(object):
                 msg += u" for index %s" % self.indexes[0]
             else:
                 msg += u" for indexes %s" % self.indexes
+            # Always call starter() since it might initialize cookies.
+            # See for example Oglaf comic.
+            self.starter()
             urls = [self.getIndexStripUrl(index) for index in self.indexes]
         else:
             urls = [self.getLatestUrl()]
