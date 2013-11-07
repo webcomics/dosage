@@ -193,7 +193,7 @@ def handle_url(url, session, url_matcher, num_matcher, res):
 
 def get_results():
     """Parse all search result pages."""
-    base = "http://www.drunkduck.com/search/?page=%d&search=&type=0&type=1&last_update="
+    base = "http://www.theduckwebcomics.com/search/?page=%d&search=&type=0&type=1&last_update="
     href = re.compile(tagre("a", "href", r'(/[^"]+/)', before="size24 yanone blue"))
     num = re.compile(r'(\d+) pages?</span>')
     # store info in a dictionary {name -> number of comics}

@@ -80,7 +80,7 @@ def handle_url(url, session, res):
             else:
                 check_robotstxt(comicurl, session)
         except IOError:
-            print("INFO: robots.txt denied for", repr(name))
+            print("INFO: robots.txt denied for keenspot", repr(name))
             continue
         res[name] = (comicurl, desc)
 

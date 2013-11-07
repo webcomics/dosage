@@ -400,7 +400,7 @@ def handle_url(url, session, res):
             else:
                 check_robotstxt(url, session)
         except IOError:
-            print("INFO: robots.txt denied for", repr(name))
+            print("INFO: robots.txt denied for comicgenesis", repr(name))
             continue
         else:
             res[name] = (url, num)
