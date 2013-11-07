@@ -35,8 +35,13 @@ class Oglaf(_BasicScraper):
     url = 'http://oglaf.com/'
     stripUrl = url + '%s/'
     imageSearch = compile(tagre("img", "src", r'(http://media\.oglaf\.com/comic/[^"]+)', before="strip"))
-    prevSearch = compile(tagre("a", "href", r'(/[^"]+)') + tagre("div", "id", "pvs?"))
-    help = 'Index format: stripname/nn'
+    prevSearch = (
+      # first search for "next page" URLs
+      compile(tagre("a", "href", r'(/[^"]+/\d+/)') + tagre("div", "id", "nx")),
+      # then for "prev story"
+      compile(tagre("a", "href", r'(/[^"]+)') + tagre("div", "id", "pvs?")),
+    )
+    help = 'Index format: stripname'
     adult = True
 
     @classmethod
