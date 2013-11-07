@@ -66,15 +66,6 @@ class Achewood(_BasicScraper):
     namer = regexNamer(compile(r'date=(\d+)'))
 
 
-class AetheriaEpics(_BasicScraper):
-    url = 'http://aetheria-epics.schala.net/'
-    stripUrl = url + '%s.html'
-    firstStripUrl = stripUrl % '00001'
-    imageSearch = compile(tagre("img", "src", r'(\d{5}\.jpg)'))
-    prevSearch = compile(tagre("a", "href", r'(\d{5}\.html)') + "Previous")
-    help = 'Index format: nnn'
-
-
 class AfterStrife(_BasicScraper):
     baseUrl = 'http://afterstrife.com/'
     rurl = escape(baseUrl)

@@ -6,7 +6,7 @@ Features:
   Closes: GH bug #39
 
 Fixes:
-- comics: Fixed Oglaf
+- comics: Fixed Oglaf, removed AetheriaEpics
   Closes: GH bug #41
 
 
