@@ -6,7 +6,10 @@ import shutil
 import re
 import os
 import multiprocessing
-import urlparse
+try:
+    from urllib.parse import urlsplit
+except ImportError:
+    from urlparse import urlsplit
 from itertools import islice
 from unittest import TestCase
 from dosagelib import scraper
@@ -14,7 +17,7 @@ from dosagelib import scraper
 
 def get_host(url):
     """Get host part of URL."""
-    return urlparse.urlsplit(url)[1].lower()
+    return urlsplit(url)[1].lower()
 
 
 # Dictionary with per-host locks.
