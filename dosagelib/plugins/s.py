@@ -2,7 +2,7 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2013 Bastian Kleineidam
 
-from re import compile, escape, MULTILINE, IGNORECASE, sub
+from re import compile, escape, IGNORECASE, sub
 from os.path import splitext
 from ..scraper import _BasicScraper
 from ..helpers import indirectStarter, bounceStarter
