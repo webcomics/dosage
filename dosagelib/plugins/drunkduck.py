@@ -7,7 +7,7 @@ from ..scraper import make_scraper
 from ..util import tagre, fetchUrl, getPageContent
 
 # note: adding the compile() functions inside add() is a major performance hog
-_imageSearch =  compile(tagre("img", "src", r'(http://media\.drunkduck\.com\.s3\.amazonaws\.com:80/[^"]+)', before="page-image"))
+_imageSearch =  compile(tagre("img", "src", r'(https://s3\.amazonaws\.com/media\.drunkduck\.com/[^"]+)', before="page-image"))
 _linkSearch = tagre("a", "href", r'(/[^"]+/\d+/)')
 _prevSearch = compile(_linkSearch + tagre("img", "class", "arrow_prev"))
 _nextSearch = compile(_linkSearch + tagre("img", "class", "arrow_next"))
@@ -15,7 +15,7 @@ _lastSearch = compile(_linkSearch + tagre("img", "class", "arrow_last"))
 
 def add(name, path):
     classname = 'DrunkDuck_%s' % name
-    _url = 'http://www.drunkduck.com/%s/' % path
+    _url = 'http://www.theduckwebcomics.com/%s/' % path
 
     @classmethod
     def _namer(cls, imageUrl, pageUrl):
