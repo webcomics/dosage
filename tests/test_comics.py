@@ -10,7 +10,6 @@ try:
     from urllib.parse import urlsplit
 except ImportError:
     from urlparse import urlsplit
-from itertools import islice
 from unittest import TestCase
 from dosagelib import scraper
 
@@ -140,12 +139,17 @@ def make_comic_tester(name, **kwargs):
 def generate_comic_testers():
     """For each comic scraper, create a test class."""
     g = globals()
-    if "TESTALL" not in os.environ:
-        # Get limited number of scraper tests on Travis builds.
-        max_scrapers = 1
-        scraperclasses = islice(scraper.get_scraperclasses(), 0, max_scrapers)
-    else:
+    if "TESTALL" in os.environ:
+        # test all comics (this will take some time)
         scraperclasses = scraper.get_scraperclasses()
+    else:
+        # Get limited number of scraper tests on Travis builds to make
+        # it faster
+        testscrapernames = ['GoComics/CalvinandHobbes']
+        scraperclasses = [
+            scraperclass for scraperclass in scraper.get_scraperclasses()
+            if scraperclass.getName() in testscrapernames
+        ]
     for scraperclass in scraperclasses:
         name = 'Test'+scraperclass.__name__
         g[name] = make_comic_tester(name, scraperclass=scraperclass)
