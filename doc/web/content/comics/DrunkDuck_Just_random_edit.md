@@ -9,7 +9,7 @@ Edit info for comic DrunkDuck/Just_random
 <th>Description</th><td><textarea name="description" cols="40" rows="3">-</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://www.drunkduck.com/just_random/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://www.theduckwebcomics.com/just_random/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

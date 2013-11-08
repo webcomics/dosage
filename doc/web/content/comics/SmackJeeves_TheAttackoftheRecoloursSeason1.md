@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>The Recolours are attacking and the edits will have to eliminate them. Flash, Leeroy and Kedar500 are creating the recolors and sending them out to fight but Sonic, Josephk and others who are preventing them from succeeding. Will they save the world from whatever Flash and Kedar500 are planning? Read the Seasons and find out! Warning: Mild Language may be used *Completed*</td>
+<th>Description</th><td>The Recolours are attacking and the edits will have to eliminate them. Flash, Leeroy and Kedar500 are creating the recolors and sending them out to fight but Sonic, Josephk and others who are preventing them from succeeding. Will they save the world from whatever Flash and Kedar500 are planning? Read the Seasons and find out! Comic came 13th Place in the 2013 Smackie Awards (Sprite). Oh well... Warning: Mild Language may be used *Completed*</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://mysticalvalley.smackjeeves.com/comics/">http://mysticalvalley.smackjeeves.com/comics/</a></td>

@@ -9,7 +9,7 @@ Edit info for comic DrunkDuck/So_Fantastic_Pork_Show_9oCLOCK
 <th>Description</th><td><textarea name="description" cols="40" rows="3">-</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://www.drunkduck.com/So_Fantastic_Pork_Show_9oCLOCK/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://www.theduckwebcomics.com/So_Fantastic_Pork_Show_9oCLOCK/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/Legend_of_Zelda__Ocarina_of_Tim/">http://www.drunkduck.com/Legend_of_Zelda__Ocarina_of_Tim/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/Legend_of_Zelda__Ocarina_of_Tim/">http://www.theduckwebcomics.com/Legend_of_Zelda__Ocarina_of_Tim/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

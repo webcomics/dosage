@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/Bombshell_Fights_For_America/">http://www.drunkduck.com/Bombshell_Fights_For_America/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/Bombshell_Fights_For_America/">http://www.theduckwebcomics.com/Bombshell_Fights_For_America/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

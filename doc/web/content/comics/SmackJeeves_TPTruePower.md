@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A fun comic about friendship, aliens, and flashlights! Updates: Saturdays</td>
+<th>Description</th><td>A fun comic about friendship, aliens, and flashlights! Updates: Saturdays Visit us on Facebook: https://www.facebook.com/truepowercomic</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://truepower.smackjeeves.com/comics/">http://truepower.smackjeeves.com/comics/</a></td>

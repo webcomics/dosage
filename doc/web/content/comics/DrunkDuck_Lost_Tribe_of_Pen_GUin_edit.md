@@ -9,7 +9,7 @@ Edit info for comic DrunkDuck/Lost_Tribe_of_Pen_GUin
 <th>Description</th><td><textarea name="description" cols="40" rows="3">-</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://www.drunkduck.com/Lost_Tribe_of_Pen_GUin/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://www.theduckwebcomics.com/Lost_Tribe_of_Pen_GUin/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

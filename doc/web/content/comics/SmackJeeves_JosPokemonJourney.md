@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Just about a 17 year old twin with an afro who's going on a journey with a few surprises, friends, and foes. :D Updates when it can. :3</td>
+<th>Description</th><td>Just about a 18 year old twin with an afro who's going on a journey with a few surprises, friends, and foes. :D Updates when it can. :3</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://jpj.smackjeeves.com/comics/">http://jpj.smackjeeves.com/comics/</a></td>

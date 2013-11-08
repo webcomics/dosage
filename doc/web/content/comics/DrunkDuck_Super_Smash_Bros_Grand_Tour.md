@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/Super_Smash_Bros_Grand_Tour/">http://www.drunkduck.com/Super_Smash_Bros_Grand_Tour/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/Super_Smash_Bros_Grand_Tour/">http://www.theduckwebcomics.com/Super_Smash_Bros_Grand_Tour/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

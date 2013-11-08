@@ -9,7 +9,7 @@ Edit info for comic DrunkDuck/Life_with_Dragons
 <th>Description</th><td><textarea name="description" cols="40" rows="3">-</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://www.drunkduck.com/Life_with_Dragons/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://www.theduckwebcomics.com/Life_with_Dragons/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

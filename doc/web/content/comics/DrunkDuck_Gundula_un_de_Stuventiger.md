@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/Gundula_un_de_Stuventiger/">http://www.drunkduck.com/Gundula_un_de_Stuventiger/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/Gundula_un_de_Stuventiger/">http://www.theduckwebcomics.com/Gundula_un_de_Stuventiger/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

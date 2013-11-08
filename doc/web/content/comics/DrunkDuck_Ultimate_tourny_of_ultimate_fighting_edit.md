@@ -9,7 +9,7 @@ Edit info for comic DrunkDuck/Ultimate_tourny_of_ultimate...
 <th>Description</th><td><textarea name="description" cols="40" rows="3">-</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://www.drunkduck.com/Ultimate_tourny_of_ultimate_fighting/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://www.theduckwebcomics.com/Ultimate_tourny_of_ultimate_fighting/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

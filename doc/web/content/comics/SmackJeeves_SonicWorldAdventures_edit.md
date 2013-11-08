@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/SonicWorldAdventures
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Sequel/Spin-Off to Metroid Prime: Altina Through a series of unforunate events, Sonic the Hedgehog has found himself in the past with diminished intelligence and memory, and must complete all his previous adventures to create a Synch Nexus, and fix a space-time rip threatening to destroy... STUFF. Previously called: Sonic World Adventure Created by S of Team Dark Nexus! PG Content!! Daily updates!!!</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Sequel/Spin-Off to Metroid Prime: Altina Through a series of unforunate events, Sonic the Hedgehog has found himself in the past with diminished intelligence and memory, and must complete all his previous adventures to create a Synch Nexus, and fix a space-time rip threatening to destroy... STUFF. Previously called: Sonic World Adventure Created by S of Team Dark Nexus! PG Content!! Daily updates!!! (Hyoxjnn and I are currently in Year 12 so we will be missing updates from time to time, but we will catch up within a few days)</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://sonicworldadventures.smackjeeves.com/comics/" size="40"/></td>

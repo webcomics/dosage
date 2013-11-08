@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Robby is starting high school. In his mind, he's having difficulty fitting in. He barely knows anyone. Will the next four years change his attitude? Updates twice a week.</td>
+<th>Description</th><td>Robby is starting high school. In his mind, he's having difficulty fitting in. He barely knows anyone. Will the next four years change his attitude? Updates twice a week, Mondays and Fridays.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://having-difficulty.smackjeeves.com/comics/">http://having-difficulty.smackjeeves.com/comics/</a></td>

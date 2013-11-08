@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/BassComicAdventures
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">A sprite comic that follows the (mis)-adventures of the Capcom characters of Bass, Mega Man, and the rest of the group. Featuring original storylines, new characters, a re-imagining of some classic games, and possible hilarity. Updates on Mondays, Wednesdays, and Fridays</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">A sprite comic that follows the (mis)-adventures of the Capcom characters of Bass, Mega Man, and the rest of the group. Featuring original storylines, new characters, a fresh take on the classic games, and some potential amusement. Updates on Mondays, Wednesdays, and Fridays</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://basscomicadventures.smackjeeves.com/comics/" size="40"/></td>

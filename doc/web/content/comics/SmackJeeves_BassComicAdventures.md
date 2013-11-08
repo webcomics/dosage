@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A sprite comic that follows the (mis)-adventures of the Capcom characters of Bass, Mega Man, and the rest of the group. Featuring original storylines, new characters, a re-imagining of some classic games, and possible hilarity. Updates on Mondays, Wednesdays, and Fridays</td>
+<th>Description</th><td>A sprite comic that follows the (mis)-adventures of the Capcom characters of Bass, Mega Man, and the rest of the group. Featuring original storylines, new characters, a fresh take on the classic games, and some potential amusement. Updates on Mondays, Wednesdays, and Fridays</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://basscomicadventures.smackjeeves.com/comics/">http://basscomicadventures.smackjeeves.com/comics/</a></td>

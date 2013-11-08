@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/Feeling_Rushed/">http://www.drunkduck.com/Feeling_Rushed/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/Feeling_Rushed/">http://www.theduckwebcomics.com/Feeling_Rushed/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

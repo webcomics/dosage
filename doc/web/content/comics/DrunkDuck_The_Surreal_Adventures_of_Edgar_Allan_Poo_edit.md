@@ -9,7 +9,7 @@ Edit info for comic DrunkDuck/The_Surreal_Adventures_of_E...
 <th>Description</th><td><textarea name="description" cols="40" rows="3">-</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://www.drunkduck.com/The_Surreal_Adventures_of_Edgar_Allan_Poo/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://www.theduckwebcomics.com/The_Surreal_Adventures_of_Edgar_Allan_Poo/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

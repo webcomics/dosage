@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>The least funny system on the Internet.</td>
+<th>Description</th><td>The worst best worst comic about gaming life and coexistence ever made in the Internet, for the Internet users. (WARNING: CONTAINS STRONG AND SEXUAL LANGUAGE)</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://marxistem.smackjeeves.com/comics/">http://marxistem.smackjeeves.com/comics/</a></td>

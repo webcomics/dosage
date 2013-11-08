@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/Raiders_of_The_Lost_Mind/">http://www.drunkduck.com/Raiders_of_The_Lost_Mind/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/Raiders_of_The_Lost_Mind/">http://www.theduckwebcomics.com/Raiders_of_The_Lost_Mind/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

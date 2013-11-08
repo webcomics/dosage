@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/JosPokemonJourney
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Just about a 17 year old twin with an afro who's going on a journey with a few surprises, friends, and foes. :D Updates when it can. :3</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Just about a 18 year old twin with an afro who's going on a journey with a few surprises, friends, and foes. :D Updates when it can. :3</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://jpj.smackjeeves.com/comics/" size="40"/></td>

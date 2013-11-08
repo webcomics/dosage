@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/CROSS_WORLDS_NEXXUS/">http://www.drunkduck.com/CROSS_WORLDS_NEXXUS/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/CROSS_WORLDS_NEXXUS/">http://www.theduckwebcomics.com/CROSS_WORLDS_NEXXUS/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

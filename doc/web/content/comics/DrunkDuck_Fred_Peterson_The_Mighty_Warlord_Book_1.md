@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/Fred_Peterson_The_Mighty_Warlord_Book_1/">http://www.drunkduck.com/Fred_Peterson_The_Mighty_Warlord_Book_1/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/Fred_Peterson_The_Mighty_Warlord_Book_1/">http://www.theduckwebcomics.com/Fred_Peterson_The_Mighty_Warlord_Book_1/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

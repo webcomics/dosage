@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/Stellar_Arcana_Spanish/">http://www.drunkduck.com/Stellar_Arcana_Spanish/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/Stellar_Arcana_Spanish/">http://www.theduckwebcomics.com/Stellar_Arcana_Spanish/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/Gello_Apocalypse/">http://www.drunkduck.com/Gello_Apocalypse/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/Gello_Apocalypse/">http://www.theduckwebcomics.com/Gello_Apocalypse/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

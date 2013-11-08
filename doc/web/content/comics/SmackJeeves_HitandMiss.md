@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>It's a autobiographic comic about, well, me and my daily life! Doesn't that sound interesting? WARNING: This comic may contain the following; misspelling, weird situations, gaming, horrible puns, cats, depression, and the occasionally lovey dovey stuff. http://www.drunkduck.com/Hit_and_Miss/ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ The link to DrunkDuck Hit and Miss!</td>
+<th>Description</th><td>It's a autobiographic comic about, well, me and my daily life! Doesn't that sound interesting? WARNING: This comic may contain the following; misspelling, weird situations, gaming, horrible puns, cats, depression, and the occasionally lovey dovey stuff. http://www.theduckwebcomics.com/Hit_and_Miss/ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ The link to DrunkDuck Hit and Miss!</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://hitandmiss.smackjeeves.com/comics/">http://hitandmiss.smackjeeves.com/comics/</a></td>

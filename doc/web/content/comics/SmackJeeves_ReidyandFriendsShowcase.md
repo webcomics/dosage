@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A general showcase where pretty much anyone can post anything they want, barring porn. Maybe. Probably. We also try to be civil whenever possible, so don't go out of your way to piss people off. Other than that just sit back, relax, and enjoy the showcase. Anyways, you should have at least SOME experience spriting before applying to join, should you want to. We don't accept recolors and are very much against sprite thieves. Send all applications to Reidy. Hah, no. He's dead. Just hit the apply button.</td>
+<th>Description</th><td>A general showcase where pretty much anyone can post anything they want, barring porn. Maybe. Probably. We also try to be civil whenever possible, so don't go out of your way to piss people off. Other than that just sit back, relax, and enjoy the showcase. Anyways, you should have at least SOME experience spriting before applying to join, should you want to. We don't accept recolors and are very much against sprite thieves.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://reidynfriends.smackjeeves.com/comics/">http://reidynfriends.smackjeeves.com/comics/</a></td>

@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/The_Demonic_Adventures_of_Angel_Witch_Pita/">http://www.drunkduck.com/The_Demonic_Adventures_of_Angel_Witch_Pita/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/The_Demonic_Adventures_of_Angel_Witch_Pita/">http://www.theduckwebcomics.com/The_Demonic_Adventures_of_Angel_Witch_Pita/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

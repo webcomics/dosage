@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/Misadventures_of_Classic_MegaMan/">http://www.drunkduck.com/Misadventures_of_Classic_MegaMan/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/Misadventures_of_Classic_MegaMan/">http://www.theduckwebcomics.com/Misadventures_of_Classic_MegaMan/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

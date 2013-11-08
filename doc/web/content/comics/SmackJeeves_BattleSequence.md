@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Trainer Rayne is working hard to train her pokemon to be the best they can be. Is she tough enough to take on all of these new challenges? Follow along with her on her journey to be the very best! UPDATES: About once a week.</td>
+<th>Description</th><td>Trainer Rayne is working hard to train her pokemon to be the best they can be. Is she tough enough to take on all of these new challenges? Follow along with her on her journey to be the very best! UPDATES: Every friday.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://battlesequence.smackjeeves.com/comics/">http://battlesequence.smackjeeves.com/comics/</a></td>

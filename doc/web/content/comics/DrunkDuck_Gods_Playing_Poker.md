@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/Gods_Playing_Poker/">http://www.drunkduck.com/Gods_Playing_Poker/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/Gods_Playing_Poker/">http://www.theduckwebcomics.com/Gods_Playing_Poker/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

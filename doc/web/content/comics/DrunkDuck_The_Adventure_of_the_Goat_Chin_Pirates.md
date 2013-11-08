@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/The_Adventure_of_the_Goat_Chin_Pirates/">http://www.drunkduck.com/The_Adventure_of_the_Goat_Chin_Pirates/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/The_Adventure_of_the_Goat_Chin_Pirates/">http://www.theduckwebcomics.com/The_Adventure_of_the_Goat_Chin_Pirates/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

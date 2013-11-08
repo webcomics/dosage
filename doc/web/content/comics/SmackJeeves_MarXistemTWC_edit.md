@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/MarXistemTWC
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">The least funny system on the Internet.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">The worst best worst comic about gaming life and coexistence ever made in the Internet, for the Internet users. (WARNING: CONTAINS STRONG AND SEXUAL LANGUAGE)</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://marxistem.smackjeeves.com/comics/" size="40"/></td>

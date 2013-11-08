@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Authors ([24/25]); Slash Segary Shard kitsune fire The Magnificent Z BreakerLOLZ Snurple-the-Hedgehog Imperial Ultimate the Hedgehog AnXjak aqua the hedgie Royle McCulloch Scar M.Dailey DelSoul 55dubdub Nick Cypher The Flames EclipseTC Punchy GrovyleGoodbye128 Kaizuto Agent Transpire Azure_Kite Light-Called-Hope Zonethehedgehog -----PLACES OPEN UP EVERY SUNDAY AT 7PM EST IF ANYONE LEAVES/A PLACE IS MADE AVAILABLE----- THERE ARE CURRENTLY: 1 SLOT(S) AVAILABLE. IF YOU WISH TO APPLY FOR A SPOT, PLEASE SEND IN AN APPLICATION, EITHER VIA THE APP SYSTEM OR VIA PM TO Z OR SHARD. YOUR APP MUST INCLUDE YOUR REASON FOR WANTING TO JOIN AS WELL AS AN EXAMPLE OF (COMIC) WORK YOU'VE DONE IN THE PAST. REMEMBER, WE WORK ON A 'FIRST COME FIRST SERVED' BASIS, SO IF YOU DON'T MAKE IT THIS TIME, FEEL FREE TO TRY AGAIN IN FUTURE!</td>
+<th>Description</th><td>Authors ([22/25]); Slash Segary Shard kitsune fire The Magnificent Z Snurple-the-Hedgehog Imperial Ultimate the Hedgehog AnXjak aqua the hedgie Royle McCulloch ClareSilver47 M.Dailey DelSoul 55dubdub Nick Cypher The Flames EclipseTC Punchy GrovyleGoodbye128 Kaizuto Agent Transpire Legoalex-625 Azure_Kite Zonethehedgehog -----PLACES OPEN UP EVERY SUNDAY AT 7PM EST IF ANYONE LEAVES/A PLACE IS MADE AVAILABLE-----</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://aqoc.smackjeeves.com/comics/">http://aqoc.smackjeeves.com/comics/</a></td>

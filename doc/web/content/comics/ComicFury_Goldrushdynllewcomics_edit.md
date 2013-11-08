@@ -6,7 +6,7 @@ Edit info for comic ComicFury/Goldrushdynllewcomics
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Short weekly strips about the adventures of Alistair and Sam as they try to get rich quick from War-time relics buried around the Forest of Dean. There's gunna be blood, sweat and a bit of sex. Just for the mature factor! No requests on story but input is appreciated. Written and artwork by Alex 'Dyn Llew' Thomas.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Short weekly strips about the adventures of Alistair and Sam as they try to get rich quick from War-time relics buried around the Forest of Dean. There's gunna be blood, sweat and a bit of sex. Just for the mature factor! Requests on story will now be accepted! Written and artwork by Alex 'Dyn Llew' Thomas.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://goldrush-dynllewcomics.webcomic.ws/" size="40"/></td>

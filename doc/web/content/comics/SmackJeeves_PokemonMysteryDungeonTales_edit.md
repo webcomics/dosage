@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/PokemonMysteryDungeonTales
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Vexx and Mack of the Super Ranked Team, GreenFire, set out on a mission of their own, to explore the world outside their Island! However, things do not go according to plan when enemies of old appear with plans of their own. Along with their new team-mates, friends and allies, Vexx and Mack set a course to continue helping the Pokémon of the world while exploring the new world around them. This is their Tale... Based on the popular Pokémon Mystery Dungeon © series. Pokémon is copyrighted © to Nintendo/GameFreak Updates once a week, or whenever possible</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Vexx and Mack of the Super Ranked Team, GreenFire, set out on a mission of their own, to explore the world outside their Island! However, things do not go according to plan when enemies of old appear with plans of their own. Along with their new team-mates, friends and allies, Vexx and Mack set a course to continue helping the Pokemon of the world while exploring the new world around them. This is their Tale... Based on the popular Pokemon Mystery Dungeon © series. Pokemon is copyrighted © to Nintendo/GameFreak Updates once a week, or whenever possible (Due excuse some long pauses if I'm sick, suffering from Crohn's problems)</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://pmdt.smackjeeves.com/comics/" size="40"/></td>

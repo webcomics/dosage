@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>There's a team of MS paint creatures that do random events that include fighting Paint.net, rescuing a monster, getting eaten by it, running from a guy who they owe $500 to, doing missions, stopping a time stopping machine, and simply fooling around. Current chapter: Pizzanonoalofisicadoimmahatanio has created something and is probably trying to get his money back.</td>
+<th>Description</th><td>There's a team of MS paint creatures that do random events that include fighting Paint.net, rescuing a monster, getting eaten by it, running from a guy who they owe $500 to, doing missions, stopping a time stopping machine, and simply fooling around. Current chapter: Pizzanonoalofisicadoimmahatanio has created something and is probably trying to get his money back. Roup has become some kind of mutant with multiple fonts and Bulk has to do something without Roups guidance.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://teamshapes.smackjeeves.com/comics/">http://teamshapes.smackjeeves.com/comics/</a></td>

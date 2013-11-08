@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/Tears_will_Shatter_Steel/">http://www.drunkduck.com/Tears_will_Shatter_Steel/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/Tears_will_Shatter_Steel/">http://www.theduckwebcomics.com/Tears_will_Shatter_Steel/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

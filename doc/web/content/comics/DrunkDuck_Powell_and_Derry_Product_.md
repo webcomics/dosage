@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/Powell_and_Derry_Product_/">http://www.drunkduck.com/Powell_and_Derry_Product_/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/Powell_and_Derry_Product_/">http://www.theduckwebcomics.com/Powell_and_Derry_Product_/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

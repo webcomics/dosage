@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/Pokemon_Mystery_Dungeon_Strikedown_Chronicles/">http://www.drunkduck.com/Pokemon_Mystery_Dungeon_Strikedown_Chronicles/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/Pokemon_Mystery_Dungeon_Strikedown_Chronicles/">http://www.theduckwebcomics.com/Pokemon_Mystery_Dungeon_Strikedown_Chronicles/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

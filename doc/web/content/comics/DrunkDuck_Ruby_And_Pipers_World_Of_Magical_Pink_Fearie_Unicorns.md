@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/Ruby_And_Pipers_World_Of_Magical_Pink_Fearie_Unicorns/">http://www.drunkduck.com/Ruby_And_Pipers_World_Of_Magical_Pink_Fearie_Unicorns/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/Ruby_And_Pipers_World_Of_Magical_Pink_Fearie_Unicorns/">http://www.theduckwebcomics.com/Ruby_And_Pipers_World_Of_Magical_Pink_Fearie_Unicorns/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

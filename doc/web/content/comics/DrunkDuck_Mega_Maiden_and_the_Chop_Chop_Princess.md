@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/Mega_Maiden_and_the_Chop_Chop_Princess/">http://www.drunkduck.com/Mega_Maiden_and_the_Chop_Chop_Princess/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/Mega_Maiden_and_the_Chop_Chop_Princess/">http://www.theduckwebcomics.com/Mega_Maiden_and_the_Chop_Chop_Princess/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

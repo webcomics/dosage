@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Every episode is completed within 60 seconds... and it even updates sometimes! http://www.vivianvideo.com</td>
+<th>Description</th><td>Every episode /was/ completed in 60 Second Comics... now I'm not so strict about it, but I do try to do them rather quickly. Still, the title's not innacurate! You can still read them in under 60 Seconds! This comic does update, really! http://www.vivianvideo.com</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://6tsc.smackjeeves.com/comics/">http://6tsc.smackjeeves.com/comics/</a></td>

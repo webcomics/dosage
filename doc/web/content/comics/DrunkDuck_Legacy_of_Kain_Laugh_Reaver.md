@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/Legacy_of_Kain_Laugh_Reaver/">http://www.drunkduck.com/Legacy_of_Kain_Laugh_Reaver/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/Legacy_of_Kain_Laugh_Reaver/">http://www.theduckwebcomics.com/Legacy_of_Kain_Laugh_Reaver/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>[On Hiatus for remaking. Thank you for your patience.] The age-old fantasy story of a boy and a princess, yet a tale unlike any other... ********************************************* Set in the fictonal world of Chrona, &quot;Wings Over Ethereal&quot; is a twisting tale of Love and Hate... Two Kingdoms, inches away from erupting in war... A Knight who's inner demon seeks to destroy what he holds dear... A sibling rivalry the likes of which the world has never seen... Yet they are all blind to the true darkness that awaits them all... The fate of these two Kingdoms rests in the forbidden Love between a Human... And an Angel... *********************************************</td>
+<th>Description</th><td>The age-old fantasy story of a boy and a princess, yet a tale unlike any other... ********************************************* Set in the fictional world of Chrona, &quot;Wings Over Ethereal&quot; is a twisting tale of love and hate set in two Kingdoms living with the tension of an ever-present threat of war. While the beings of these kingdoms go on with their lives either fearing war or welcoming it, they remain blind to the true darkness that seeks to change the course of their world forever. The fate of these two Kingdoms, and perhaps the entire world, rests in the Love between a Human... And an Angel... *********************************************</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://wings-over-ethereal.smackjeeves.com/comics/">http://wings-over-ethereal.smackjeeves.com/comics/</a></td>

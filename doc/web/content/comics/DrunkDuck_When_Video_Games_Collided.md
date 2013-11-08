@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/When_Video_Games_Collided/">http://www.drunkduck.com/When_Video_Games_Collided/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/When_Video_Games_Collided/">http://www.theduckwebcomics.com/When_Video_Games_Collided/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

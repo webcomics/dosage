@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/POKETTO_MONSUTAA_SPECIAL_SUPER_EX_ADVENTURE_XXXVX_THE_CHRONICLES_OF_RED_BLUE_GREEN_AND_A_BUNCH_OF_OTHER_KIDS_WITH_COLORS_FOR_NAMES/">http://www.drunkduck.com/POKETTO_MONSUTAA_SPECIAL_SUPER_EX_ADVENTURE_XXXVX_THE_CHRONICLES_OF_RED_BLUE_GREEN_AND_A_BUNCH_OF_OTHER_KIDS_WITH_COLORS_FOR_NAMES/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/POKETTO_MONSUTAA_SPECIAL_SUPER_EX_ADVENTURE_XXXVX_THE_CHRONICLES_OF_RED_BLUE_GREEN_AND_A_BUNCH_OF_OTHER_KIDS_WITH_COLORS_FOR_NAMES/">http://www.theduckwebcomics.com/POKETTO_MONSUTAA_SPECIAL_SUPER_EX_ADVENTURE_XXXVX_THE_CHRONICLES_OF_RED_BLUE_GREEN_AND_A_BUNCH_OF_OTHER_KIDS_WITH_COLORS_FOR_NAMES/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

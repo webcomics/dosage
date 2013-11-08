@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/CafeauLait
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">The four-panel comic with cat boy flavor! (updates saturdays) Illustrations of Milk, Coffee and the others are here: http://nadykun.deviantart.com/gallery/40865689</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">**NOTE: Updates are currently sketchy - get it?** The four-panel comic with cat boy flavor! (updates saturdays) Illustrations of Milk, Coffee and the others are here: http://nadykun.deviantart.com/gallery/40865689</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://cafeaulait.smackjeeves.com/comics/" size="40"/></td>

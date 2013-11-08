@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/Metroid_Vengeance/">http://www.drunkduck.com/Metroid_Vengeance/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/Metroid_Vengeance/">http://www.theduckwebcomics.com/Metroid_Vengeance/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

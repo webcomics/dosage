@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/The_Temple_of_a_Thousand_Tears/">http://www.drunkduck.com/The_Temple_of_a_Thousand_Tears/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/The_Temple_of_a_Thousand_Tears/">http://www.theduckwebcomics.com/The_Temple_of_a_Thousand_Tears/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

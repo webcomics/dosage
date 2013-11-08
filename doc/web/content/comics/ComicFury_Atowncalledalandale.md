@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Leonard Smith is your average everyday loser, but during the full - moon becomes a hulking werewolf. Along with a Witch named Noa, and his perverted best friend Ron. Len must navigate everyday life and try to be as normal as possible. But that's easier said than done as he's living in the strangest town in the world. And in the town called Alandale, anything is possible.</td>
+<th>Description</th><td>Welcome to the town of Alandale. Join the adventures of three friends as they try to live their lives as normal as possible, in the strangest town on earth where anything can happen.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://atowncalledalandale.webcomic.ws/">http://atowncalledalandale.webcomic.ws/</a></td>

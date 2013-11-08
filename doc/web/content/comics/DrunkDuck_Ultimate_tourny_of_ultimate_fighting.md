@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/Ultimate_tourny_of_ultimate_fighting/">http://www.drunkduck.com/Ultimate_tourny_of_ultimate_fighting/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/Ultimate_tourny_of_ultimate_fighting/">http://www.theduckwebcomics.com/Ultimate_tourny_of_ultimate_fighting/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Youth crime is on the rise in England as the gap between social classes increases. Resulting in an increase in street &quot;gangs.&quot; To tackle this problem the government made a plan to reform these unruly teenagers by giving these youths an incentive. Which was providing them with their own housing and &quot;pocket&quot; money but only if they study a course of the government's choice, stay out of trouble and attend classes as often as necessary. A quick fix to a very complicated problem. Stampede:~ Jessica's story is about a troubled angry girl stuck under one of the government's incentives and her empathetic classmate named Ryam who befriends her. But as Jessica slowly falls back into street gang culture, Ryam also finds himself falling in with her as he tries to help her to stop. Deep into a downward spiral of fight clubs, hatred and gang rivalry. Will both of them get out of it alive or will it end tragically? Is there any hope for a hurt and struggling youth? Has some mature themes and swearing. Based 100% on real life, in my hometown in South London. Its an urban street comic. Updates: Depends. 3-4 pages every week/couple/few weeks max.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://stampedegirl.thewebcomic.com/comics/">http://stampedegirl.thewebcomic.com/comics/</a></td>
+<th>Website</th><td><a href="http://www.stampedethewebcomic.com/comics/">http://www.stampedethewebcomic.com/comics/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

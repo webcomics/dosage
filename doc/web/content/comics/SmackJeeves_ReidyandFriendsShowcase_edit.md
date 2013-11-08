@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/ReidyandFriendsShowcase
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">A general showcase where pretty much anyone can post anything they want, barring porn. Maybe. Probably. We also try to be civil whenever possible, so don't go out of your way to piss people off. Other than that just sit back, relax, and enjoy the showcase. Anyways, you should have at least SOME experience spriting before applying to join, should you want to. We don't accept recolors and are very much against sprite thieves. Send all applications to Reidy. Hah, no. He's dead. Just hit the apply button.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">A general showcase where pretty much anyone can post anything they want, barring porn. Maybe. Probably. We also try to be civil whenever possible, so don't go out of your way to piss people off. Other than that just sit back, relax, and enjoy the showcase. Anyways, you should have at least SOME experience spriting before applying to join, should you want to. We don't accept recolors and are very much against sprite thieves.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://reidynfriends.smackjeeves.com/comics/" size="40"/></td>

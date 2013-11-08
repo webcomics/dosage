@@ -6,7 +6,7 @@ Edit info for comic ComicFury/Atowncalledalandale
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Leonard Smith is your average everyday loser, but during the full - moon becomes a hulking werewolf. Along with a Witch named Noa, and his perverted best friend Ron. Len must navigate everyday life and try to be as normal as possible. But that's easier said than done as he's living in the strangest town in the world. And in the town called Alandale, anything is possible.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Welcome to the town of Alandale. Join the adventures of three friends as they try to live their lives as normal as possible, in the strangest town on earth where anything can happen.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://atowncalledalandale.webcomic.ws/" size="40"/></td>

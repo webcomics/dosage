@@ -9,7 +9,7 @@ Edit info for comic DrunkDuck/Ruby_And_Pipers_World_Of_Ma...
 <th>Description</th><td><textarea name="description" cols="40" rows="3">-</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://www.drunkduck.com/Ruby_And_Pipers_World_Of_Magical_Pink_Fearie_Unicorns/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://www.theduckwebcomics.com/Ruby_And_Pipers_World_Of_Magical_Pink_Fearie_Unicorns/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

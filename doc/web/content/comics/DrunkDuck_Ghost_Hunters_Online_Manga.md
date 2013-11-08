@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.drunkduck.com/Ghost_Hunters_Online_Manga/">http://www.drunkduck.com/Ghost_Hunters_Online_Manga/</a></td>
+<th>Website</th><td><a href="http://www.theduckwebcomics.com/Ghost_Hunters_Online_Manga/">http://www.theduckwebcomics.com/Ghost_Hunters_Online_Manga/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

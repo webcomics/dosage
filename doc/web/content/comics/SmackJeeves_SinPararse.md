@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>This is a mirror of http://sinpararse.skyscrapersoup.com It updates every friday. This site is updated in a batch every few weeks. Sin Pararse is a prequel to my other comic, but you can read either of them independently. It follows Gabry and Liam, two popular side characters and details how they met and got together. The comic updates every Monday.</td>
+<th>Description</th><td>This is a mirror of http://sinpararse.skyscrapersoup.com It updates every friday. This site is updated in a batch every few weeks. Sin Pararse is a prequel to my other comic, but you can read either of them independently. It follows Gabry and Liam, two popular side characters and details how they met and got together.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://sinpararse.smackjeeves.com/comics/">http://sinpararse.smackjeeves.com/comics/</a></td>

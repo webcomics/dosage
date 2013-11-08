@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/SinPararse
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">This is a mirror of http://sinpararse.skyscrapersoup.com It updates every friday. This site is updated in a batch every few weeks. Sin Pararse is a prequel to my other comic, but you can read either of them independently. It follows Gabry and Liam, two popular side characters and details how they met and got together. The comic updates every Monday.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">This is a mirror of http://sinpararse.skyscrapersoup.com It updates every friday. This site is updated in a batch every few weeks. Sin Pararse is a prequel to my other comic, but you can read either of them independently. It follows Gabry and Liam, two popular side characters and details how they met and got together.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://sinpararse.smackjeeves.com/comics/" size="40"/></td>

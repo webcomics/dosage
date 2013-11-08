@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>KURONA, FLUTTER AND LYLA SPAM TIME, FOXPUFF SPRITE AND SPAM, LE SPRITE DUMP, PROBLEM WITH STARLO, DUB'S STUFF BIN, AQUA'S SPRITE HOSTING PLACE...THINGY, ZERO'S SPRITE TEST GROUND, THE REALM OF PUNCHY, AND TTLY NOT A RIPOFF MERGE TO FORM SHOWCASIMUS MAXIMUSSSSSSSSSSSS Scar's here too say hi scar To put in simple terms, this showcase is basically Reidy's for lower-tier spriters. There's chapters for us because there can be and Kurona loved organization. This description is my bitch now. Kitsu is going too sing for you now. YALYALLYALDJFASLKNKADNNDNADSKHANKAC *Applause*</td>
+<th>Description</th><td>KURONA, FLUTTER AND LYLA SPAM TIME, FOXPUFF SPRITE AND SPAM, LE SPRITE DUMP, PROBLEM WITH STARLO, DUB'S STUFF BIN, AQUA'S SPRITE HOSTING PLACE...THINGY, ZERO'S SPRITE TEST GROUND, THE REALM OF PUNCHY, AND TTLY NOT A RIPOFF MERGE TO FORM SHOWCASIMUS MAXIMUSSSSSSSSSSSS Scar's here too say hi scar To put in simple terms, this showcase is basically Reidy's for lower-tier spriters. There's chapters for us because there can be and Kurona loved organization. This description is my bitch now. Kitsu is going too sing for you now. YALYALLYALDJFASLKNKADNNDNADSKHANKAC *Applause* No shipping though. That's for Love Harbor, also sponsored by us! *SHAMELESS PLUG* -Syogren. Don't forget the cheese. Nor the muffins! :3</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://allaboardthesteamtrain.smackjeeves.com/comics/">http://allaboardthesteamtrain.smackjeeves.com/comics/</a></td>
