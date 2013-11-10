@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>The Book of Biff - new adventures every monday through friday</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.thebookofbiff.com/">http://www.thebookofbiff.com/</a></td>
+<th>Website</th><td><a href="http://thebookofbiff.com/">http://thebookofbiff.com/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

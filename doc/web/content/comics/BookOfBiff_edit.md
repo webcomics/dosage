@@ -9,7 +9,7 @@ Edit info for comic BookOfBiff
 <th>Description</th><td><textarea name="description" cols="40" rows="3">The Book of Biff - new adventures every monday through friday</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://www.thebookofbiff.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://thebookofbiff.com/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

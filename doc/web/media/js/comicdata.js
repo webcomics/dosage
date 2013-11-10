@@ -109,7 +109,6 @@ $(document).ready(function() {
 ["<a href=\"comics/CheckerboardNightmare.html\">CheckerboardNightmare</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/Chester5000XYV.html\">Chester5000XYV</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/Chisuji.html\">Chisuji</a>", "Other", "English", "ok", "0"],
-["<a href=\"comics/Chucklebrain.html\">Chucklebrain</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/ChugworthAcademy.html\">ChugworthAcademy</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/ChugworthAcademyArchive.html\">ChugworthAcademyArchive</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/CigarroAndCerveja.html\">CigarroAndCerveja</a>", "Other", "English", "ok", "0"],
