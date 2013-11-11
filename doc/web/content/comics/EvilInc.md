@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Evil Inc. by Brad Guigar - Daily Super-Villain Webcomic and Comics Blog</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.evil-comic.com/">http://www.evil-comic.com/</a></td>
+<th>Website</th><td><a href="http://evil-inc.com/">http://evil-inc.com/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

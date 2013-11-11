@@ -9,7 +9,7 @@ Edit info for comic EvilInc
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Evil Inc. by Brad Guigar - Daily Super-Villain Webcomic and Comics Blog</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://www.evil-comic.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://evil-inc.com/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>
