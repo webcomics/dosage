@@ -9,7 +9,7 @@ Edit info for comic Wulffmorgenthaler
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Entertainment - Since 2002. Wulff &amp; Morgenthaler's Personal humoristic social commentary on life, nostalgia and the World in general. Nothing is taboo: They deal with Politics, News, Entertainment, Technology, Culture, and Weirdo Beavers</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://wumocomicstrip.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://kindofnormal.com/wumo/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>
