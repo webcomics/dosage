@@ -153,6 +153,7 @@ class Blip(_BasicScraper):
 
 class BloodBound(_BasicScraper):
     description = u'Demonic Vampire Hotness'
+    adult = True
     url = 'http://bloodboundcomic.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'

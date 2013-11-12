@@ -3,7 +3,7 @@
 # Copyright (C) 2012-2013 Bastian Kleineidam
 
 from re import compile
-from ..scraper import make_scraper
+from ..scraper import make_scraper, Genre
 from ..util import tagre, fetchUrl, getPageContent
 
 # note: adding the compile() functions inside add() is a major performance hog
@@ -36,7 +36,7 @@ def add(name, path):
             data, baseUrl = getPageContent(url, cls.session)
             return fetchUrl(url, data, baseUrl, _nextSearch)
 
-    globals()[classname] = make_scraper(classname,
+    attrs = dict(
         name = 'DrunkDuck/' + name,
         url = _url,
         starter = _starter,
@@ -47,6 +47,20 @@ def add(name, path):
         help = 'Index format: n (unpadded)',
         namer = _namer,
     )
+    attrs.update(Overrides.get(name, dict()))
+    globals()[classname] = make_scraper(classname, **attrs)
+
+# manually set attributes
+Overrides = {
+    'The_Devon_Legacy_Prologue': dict(
+        description = u'Earth\'s fate is in the hands of 2 alien races!' \
+        ' Luckily 1 of them isn\'t so bad. Attempting to stop a vicious' \
+        ' horde can 2 specially gifted humans (Fenny & Sally) actually ' \
+        ' turn the tables of balance on this war? Year 2132',
+        genres = (Genre.scifi,),
+    )
+}
+
 
 # do not edit anything below since these entries are generated from scripts/update.sh
 # DO NOT REMOVE
