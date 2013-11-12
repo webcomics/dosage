@@ -26,7 +26,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Language</th><td>English</td>
 </tr>
 <tr>
-<th>Adult content</th><td>no</td>
+<th>Adult content</th><td>yes</td>
 </tr>
 <tr>
 <th>Status</th><td>ok on 12.11.2013</td>

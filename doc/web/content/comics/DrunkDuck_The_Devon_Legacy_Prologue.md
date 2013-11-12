@@ -14,13 +14,13 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>-</td>
+<th>Description</th><td>Earth's fate is in the hands of 2 alien races! Luckily 1 of them isn't so bad. Attempting to stop a vicious horde can 2 specially gifted humans (Fenny &amp; Sally) actually  turn the tables of balance on this war? Year 2132</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.theduckwebcomics.com/The_Devon_Legacy_Prologue/">http://www.theduckwebcomics.com/The_Devon_Legacy_Prologue/</a></td>
 </tr>
 <tr>
-<th>Genre</th><td>Other</td>
+<th>Genre</th><td>Sci-fi</td>
 </tr>
 <tr>
 <th>Language</th><td>English</td>
