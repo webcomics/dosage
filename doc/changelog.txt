@@ -17,6 +17,9 @@ Fixes:
 - comics: Removed broken AetheriaEpics, ChuckBrain, Fallen, HMHigh,
   IanJay, InsideOut, Nodwick, WebcomicsNation_ClownSamurai
 
+Changes:
+- cmdline: Display genres in module help (dosage -m).
+
 
 Dosage 2.5 (released 18.7.2013)
 

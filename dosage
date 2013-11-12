@@ -176,6 +176,8 @@ def displayComicHelp(scraperobj):
             out.info(u"Description: " + scraperobj.description)
         if scraperobj.lang:
             out.info(u"Language: " + getLangName(scraperobj.lang))
+        if scraperobj.genres:
+            out.info(u"Genres: " + ", ".join(scraperobj.genres))
         if scraperobj.help:
             for line in scraperobj.help.splitlines():
                 out.info(line)
