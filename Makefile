@@ -52,7 +52,7 @@ homepage:
 	@echo "maintainer: \"$(MAINTAINER)\"" >> $(WEBMETA)
 	@echo "author: \"$(AUTHOR)\"" >> $(WEBMETA)
 	git add doc/web/app.yaml
-	git commit -m "Updated webpage meta info"
+	-git commit -m "Updated webpage meta info"
 # update documentation and release website
 	$(MAKE) -C doc
 	$(MAKE) -C doc/web release
