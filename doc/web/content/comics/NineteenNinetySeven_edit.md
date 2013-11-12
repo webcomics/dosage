@@ -9,7 +9,7 @@ Edit info for comic 1997
 <th>Description</th><td><textarea name="description" cols="40" rows="3">1977 the Comic - Sex, Drugs and Rock and Roll Just Not in That Order</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://www.1977thecomic.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://1977thecomic.com/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

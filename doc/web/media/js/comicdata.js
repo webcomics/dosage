@@ -2346,7 +2346,6 @@ $(document).ready(function() {
 ["<a href=\"comics/Nnewts.html\">Nnewts</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/NoNeedForBushido.html\">NoNeedForBushido</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/NobodyScores.html\">NobodyScores</a>", "Other", "English", "ok", "0"],
-["<a href=\"comics/Nodwick.html\">Nodwick</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/Nukees.html\">Nukees</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/NuklearPower_8BitTheater.html\">NuklearPower/8BitTheater</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/NuklearPower_AtomicRobo.html\">NuklearPower/AtomicRobo</a>", "Other", "English", "ok", "0"],
