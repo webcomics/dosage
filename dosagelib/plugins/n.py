@@ -138,16 +138,6 @@ class Nnewts(_BasicScraper):
     help = 'Index format: page-number'
 
 
-class Nodwick(_BasicScraper):
-    description = u'Welcome to Nodwick.com - A fantasy farce for the whole party!'
-    url = 'http://comic.nodwick.com/'
-    rurl = escape(url)
-    stripUrl = url + "?p=%s"
-    imageSearch = compile(tagre("img", "src", r'(%snodwickstrips/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl, after="prev"))
-    help = 'Index format: stripnumber'
-
-
 class NobodyScores(_BasicScraper):
     description = u'Nobody Scores! A little comic about inevitable disaster'
     url = 'http://nobodyscores.loosenutstudio.com/'
@@ -161,13 +151,17 @@ class NobodyScores(_BasicScraper):
 
 
 class NoNeedForBushido(_BasicScraper):
-    baseUrl = 'http://noneedforbushido.com/'
-    rurl = escape(baseUrl)
-    url = baseUrl + 'latest/'
-    stripUrl = baseUrl + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/comic/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="previous-comic-link"))
-    help = 'Index format: yyyy/comic/nnn'
+    url = 'http://nn4b.com/'
+    rurl = escape(url)
+    stripUrl = url + '?webcomic1=%s'
+    imageSearch = compile(
+      tagre("a", "rel", "next") +
+      tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl,
+      after="attachment-full"))
+    prevSearch = compile(tagre("a", "href", r'(%s\?webcomic1=[^"]+)' % rurl, after="previous-webcomic"))
+    help = 'Index format: nnn'
+    starter = indirectStarter(url,
+       compile(tagre("a", "href", r'(%s\?webcomic1=[^"]+)' % rurl, after="last-webcomic")))
 
 
 class Nukees(_BasicScraper):

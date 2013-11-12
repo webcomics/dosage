@@ -26,9 +26,9 @@ class Garanos(_BasicScraper):
     rurl = escape(baseUrl)
     url = baseUrl + 'pages/page-1/'
     starter = indirectStarter(url,
-       compile(tagre("a", "href", r'(%spages/[^"]+)' % rurl, after="navi-last")))
+       compile(tagre("a", "href", r'(%spages/[^"]+)' % rurl, after="nav-last")))
     stripUrl = baseUrl + 'pages/page-%s'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/sites/\d+/\d+/\d+/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%spages/[^"]+)' % rurl, after="prev"))
     help = 'Index format: n (unpadded)'
 
@@ -123,11 +123,11 @@ class GleefulNihilism(_BasicScraper):
     description = u'pointless comics with a sideways grin'
     url = 'http://gleefulnihilism.com/'
     rurl = escape(url)
-    stripUrl = url + 'comics/%s/'
-    firstStripUrl = stripUrl % '2008/10/20/amoeba'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%scomics/[^"]+)' % rurl) + 'Previous')
-    help = 'Index format: yyyy/mm/dd/stripname'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'amoeba'
+    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl) + '&lsaquo;')
+    help = 'Index format: stripname'
 
 
 class GoblinsComic(_BasicScraper):

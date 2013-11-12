@@ -185,7 +185,7 @@ class BobWhite(_BasicScraper):
 
 class BookOfBiff(_BasicScraper):
     description = u'The Book of Biff - new adventures every monday through friday'
-    url = 'http://www.thebookofbiff.com/'
+    url = 'http://thebookofbiff.com/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2006/01/02/4'
     imageSearch = compile(tagre("img", "src", r'([^"]+/comics/[^"]+)'))
@@ -319,10 +319,10 @@ class BroodHollow(_BasicScraper):
     description = u'Broodhollow - A MWF cosmic horror adventure comic by Kris Straub'
     url = 'http://broodhollow.chainsawsuit.com/'
     rurl = escape(url)
-    stripUrl = url + '%s/'
+    stripUrl = url + 'page/%s/'
     firstStripUrl = stripUrl % '2012/10/08/broodhollow'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl, after="prev"))
+    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%spage/\d+/\d+/\d+/[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/stripname'
 
 

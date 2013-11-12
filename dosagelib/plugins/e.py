@@ -94,19 +94,19 @@ class ElGoonishShive(_BasicScraper):
     description = u'Fantasy sci-fi comic about a group of teenagers and the bizarre, strange and supernatural circumstances of their lives.'
     name = 'KeenSpot/ElGoonishShive'
     url = 'http://www.egscomics.com/'
-    stripUrl = url + '?date=%s'
-    imageSearch = compile(r"'(comics/.+?)'")
-    prevSearch = compile(r"<a href='(/\?date=.+?)'.+?arrow_prev.gif")
-    help = 'Index format: yyyy-mm-dd'
+    stripUrl = url + 'index.php?id=%s'
+    imageSearch = compile(tagre("img", "src", r'(comics/[^"]+)', after="comic"))
+    prevSearch = compile(tagre("a", "href", r'(/index\.php\?id=\d+)', after="prev"))
+    help = 'Index format: number'
 
 
 class ElGoonishShiveNP(_BasicScraper):
     name = 'KeenSpot/ElGoonishShiveNP'
-    url = 'http://www.egscomics.com/egsnp/'
-    stripUrl = url + '?date=%s'
-    imageSearch = compile(r'<div class=\'comic2\'><img src=\'(comics/\d{4}/\d{2}.+?)\'')
-    prevSearch = compile(r'<a href=\'(.+?)\'[^>]+?onmouseover=\'\$\("navimg(6|2)"\)')
-    help = 'Index format: yyyy-mm-dd'
+    url = 'http://www.egscomics.com/egsnp.php'
+    stripUrl = url + '?id=%s'
+    imageSearch = compile(tagre("img", "src", r'(comics/[^"]+)', after="comic"))
+    prevSearch = compile(tagre("a", "href", r'(/egsnp\.php\?id=\d+)', after="prev"))
+    help = 'Index format: number'
 
 
 class Ellerbisms(_BasicScraper):
@@ -170,12 +170,13 @@ class EvilDiva(_BasicScraper):
 
 class EvilInc(_BasicScraper):
     description = u'Evil Inc. by Brad Guigar - Daily Super-Villain Webcomic and Comics Blog'
-    url = 'http://www.evil-comic.com/'
-    stripUrl = url + 'archive/%s.html'
-    firstStripUrl = stripUrl % '20050530'
-    imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)') + tagre("img", "src", r'/images/previous\.gif'))
-    help = 'Index format: yyyymmdd'
+    url = 'http://evil-inc.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'monday-3'
+    imageSearch = compile(tagre("img", "src", r'(http://i\d\.wp\.com/evil-inc\.com/wp-content/uploads/[^"]+)'))
+    prevSearch = compile(tagre("span", "class", "mininav-prev") +
+      tagre("a", "href", r'([^"]+)'))
+    help = 'Index format: stripname'
 
 
 class Exiern(_BasicScraper):

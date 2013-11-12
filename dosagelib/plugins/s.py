@@ -94,8 +94,13 @@ class ScenesFromAMultiverse(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2010/06/14/parenthood'
-    imageSearch = compile(tagre("img", "src", r'(%sfiles/comics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+\d+/\d+/\d+/[^"]+)' % rurl, after="prev"))
+    imageSearch = (
+      compile(tagre("div", "id", "comic") + r"\s*" +
+        tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl)),
+      compile(tagre("div", "id", "comic") + r"\s*" + tagre("a", "href", r'[^"]*') +
+        tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl)),
+    )
+    prevSearch = compile(tagre("a", "href", r'(%scomic/\d+\d+/\d+/\d+/[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
@@ -215,8 +220,8 @@ class Shivae(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + 'blog/%s/'
     firstStripUrl = stripUrl % '2007/09/21/09212007'
-    imageSearch = compile(tagre("img", "src", r'(%sfiles/comics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%sblog/[^"]+)' % rurl, after="Previous"))
+    imageSearch = compile(tagre("img", "src", r'(%swp-content/blogs\.dir/\d+/files/\d+/\d+/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%sblog/[^"]+)' % rurl, after="navi-prev"))
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
@@ -349,7 +354,7 @@ class SnowFlame(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + '?comic=snowflame-%s-%s'
     firstStripUrl = stripUrl % ('01', '01')
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl, after="Snow[Ff]lame the fan made"))
+    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl, after="Snow[Ff]lame "))
     prevSearch = compile(tagre("span", "class", "mininav-prev") +
         tagre("a", "href", r'(%s\?comic=snowflame[^"]+)' % rurl))
     starter = bounceStarter(url,
@@ -426,10 +431,10 @@ class SpareParts(_BasicScraper):
 class Spinnerette(_BasicScraper):
     url = 'http://www.spinnyverse.com/'
     rurl = escape(url)
-    stripUrl = url + '%s/'
+    stripUrl = url + 'index.php?id=%s'
     firstStripUrl = stripUrl % '2010/02/09/02092010'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, before="Previous Comic"))
+    imageSearch = compile(tagre("img", "src", r'(comics/[^"]+)', after="comic"))
+    prevSearch = compile(tagre("a", "href", r'(/index\.php\?id=[^"]+)', after="prev"))
     help = 'Index format: number'
 
 

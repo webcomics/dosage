@@ -97,7 +97,7 @@ class OnTheFasttrack(_BasicScraper):
 
 
 class OneQuestion(_BasicScraper):
-    url = 'http://www.onequestioncomic.com/'
+    url = 'http://onequestioncomic.com/'
     stripUrl = url + 'comic.php?strip_id=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'((?:\.\./)?istrip_files/strips/\d+\.\w{3,4})'))
@@ -128,8 +128,9 @@ class OurHomePlanet(_BasicScraper):
 class OverCompensating(_BasicScraper):
     description = u'OVERCOMPENSATING: The Journal Comic With a Seething Disdain for Reality.'
     url = 'http://www.overcompensating.com/'
-    stripUrl = url + 'overcompensating/index.php?comic=%s'
+    stripUrl = url + 'oc/index.php?comic=%s'
     firstStripUrl = stripUrl % '0'
-    imageSearch = compile(tagre("img", "src", r'(/overcompensating/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/overcompensating/index\.php\?comic=\d+)', after="go back"))
+    imageSearch = compile(tagre("img", "src", r'(/oc/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href",
+      r'(/oc/index\.php\?comic=\d+)', after="go back"))
     help = 'Index format: number'

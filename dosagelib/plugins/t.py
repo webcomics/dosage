@@ -170,18 +170,6 @@ class TheWhiteboard(_BasicScraper):
     help = 'Index format: twb or wb + n wg. twb1000'
 
 
-class HMHigh(_BasicScraper):
-    description = u'Welcome to the website of professional artist and illustrator, Angel Smith and of Fallen Angel Media Ltd; An independent art, design & publishing house and event management company based in Bristol, England'
-    name = 'TheFallenAngel/HMHigh'
-    baseUrl = 'http://www.thefallenangel.co.uk/'
-    url = baseUrl + 'hmhigh/'
-    rurl = escape(baseUrl)
-    stripUrl = url + '?id=%s'
-    imageSearch = compile(r'<img src="(%shmhigh/img/comic/.+?)"' % rurl)
-    prevSearch = compile(r' <a href="(%s.+?)" title=".+?">Prev</a>' % rurl)
-    help = 'Index format: nnn'
-
-
 class TheOuterQuarter(_BasicScraper):
     url = 'http://theouterquarter.com/'
     rurl = escape(url)

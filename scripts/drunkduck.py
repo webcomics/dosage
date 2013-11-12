@@ -59,6 +59,7 @@ exclude_comics = [
     "Greys_journey", # broken images
     "Head_over_Heart", # broken images
     "Hurrocks_Fardel", # broken images
+    "I_Fell_in_Love_With_a_Vampire_Catgirl_Part_2_Lovers_at_the_End_of_the_World", # start page requires login
     "Illusional_Beauty", # broken images
     "Indigo_Bunting__Vampire", # start page requires login
     "Irrumator", # start page requires login
@@ -144,6 +145,7 @@ exclude_comics = [
     "The_Misadventures_of_Everyone", # start page requires login
     "The_NEW_Life_Of_TimmY", # broken images
     "The_SSA", # broken images
+    "Tinas_Story", # start page requires login
     "Tony_The_Hedgehog", # broken images
     "Trapped_in_a_Comic", # start page requires login
     "Twonks_and_Plonkers", # broken images, no real content

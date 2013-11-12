@@ -18,16 +18,6 @@ class IAmArg(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
-class IanJay(_BasicScraper):
-    url = 'http://ianjay.net/'
-    rurl = escape(url)
-    stripUrl = url + '?p=%s'
-    firstStripUrl = stripUrl % '210'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl, after="Previous"))
-    help = 'Index foramt: nnn'
-
-
 class ICanBarelyDraw(_BasicScraper):
     url = 'http://www.icanbarelydraw.com/comic/'
     rurl = escape(url)

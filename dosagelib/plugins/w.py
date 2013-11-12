@@ -109,10 +109,10 @@ class WhyTheLongFace(_BasicScraper):
 class Wigu(_BasicScraper):
     description = u'WIGU: A COMIC ON INTERNET'
     url = 'http://wigucomics.com/'
-    stripUrl = url + 'mais/index.php?comic=%s'
+    stripUrl = url + 'oc/index.php?comic=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(/mais/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/mais/index\.php\?comic=\d+)', after="go back"))
+    imageSearch = compile(tagre("img", "src", r'(/oc/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(/oc/index\.php\?comic=\d+)', after="go back"))
     help = 'Index format: n'
 
 
@@ -121,7 +121,8 @@ class Wonderella(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2006/09/09/the-torment-of-a-thousand-yesterdays'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    imageSearch = compile(tagre("div", "id", r"comic", quote=r'["\']') + r"\s*" +
+        tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/name'
 
@@ -226,8 +227,11 @@ class _WorldOfWarcraftEh(_BasicScraper):
 
 class Wulffmorgenthaler(_BasicScraper):
     description = u"Entertainment - Since 2002. Wulff & Morgenthaler's Personal humoristic social commentary on life, nostalgia and the World in general. Nothing is taboo: They deal with Politics, News, Entertainment, Technology, Culture, and Weirdo Beavers"
-    url = 'http://wumocomicstrip.com/'
+    url = 'http://kindofnormal.com/wumo/'
+    rurl = escape(url)
     stripUrl = url + '%s'
-    imageSearch = compile(tagre("img", "src", r'(/img/strip/\d+/\d+/[^/"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)') + "<span>Previous")
+    imageSearch = compile(tagre("div", "class", r'box-content') + r"\s*" +
+        tagre("a", "href", r'[^"]+') + r"\s*" +
+        tagre("img", "src", r'(http://kindofnormal\.com/img/wumo/\d+/\d+/[^/"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl) + tagre("i", "class", r'icon-chevron-left'))
     help = 'Index format: yyyy/mm/dd'

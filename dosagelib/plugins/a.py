@@ -163,7 +163,7 @@ class AllTheGrowingThings(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2009/04/21/all-the-growing-things'
-    imageSearch = compile(tagre("img", "src", r'(%sfiles/comics/[^"]+)' % rurl))
+    imageSearch = compile(tagre("img", "src", r'(%sfiles/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/strip-name'
 
@@ -354,17 +354,13 @@ class AxeCop(_BasicScraper):
     url = 'http://axecop.com/'
     rurl = escape(url)
     starter = bounceStarter(url,
-        compile(tagre("a", "href", r'(%scomic/episode-\d+/)' % rurl, after="navi-next")))
-    stripUrl = url + 'comic/episode-%s/'
+        (
+          compile(tagre("a", "href", r'(%scomic/page-\d+-[^"]+/)' % rurl, after="navi-next")),
+          compile(tagre("a", "href", r'(%scomic/[^"]+/)' % rurl, after="navi-next")),
+        )
+    )
+    stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '0'
     imageSearch = compile(tagre("img", "src", r'(http://mainsite\.axecop\.wpengine\.com/wp-content/uploads/sites/\d+/\d+/\d+/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(%scomic/episode-\d+/)' % rurl, after="navi-prev"))
-    help = 'Index format: number'
-
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        extension = imageUrl.rsplit('.', 1)[1]
-        episode = pageUrl.rsplit('-', 1)[1]
-        episode = episode.strip('/')
-        return 'AxeCop-%s.%s' % (episode, extension)
-
+    prevSearch = compile(tagre("a", "href", r'(%scomic/page-\d+-[^"]+/)' % rurl, after="navi-prev"))
+    help = 'Index format: usually page-number-stripname'

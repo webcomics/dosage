@@ -28,4 +28,5 @@ def add(name, subpath):
 add('AgnesQuill', 'daveroman/agnes/')
 add('MyMuse', 'gc/muse/')
 add('NekkoAndJoruba', 'nekkoandjoruba/nekkoandjoruba/')
-add('ClownSamurai', 'qsamurai/clownsamurai/')
+# custom navigation
+#add('ClownSamurai', 'qsamurai/clownsamurai/')

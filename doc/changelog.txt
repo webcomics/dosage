@@ -6,8 +6,16 @@ Features:
   Closes: GH bug #39
 
 Fixes:
-- comics: Fixed Oglaf, removed AetheriaEpics
+- comics: Fixed all DrunkDuckk comics since the domain has moved.
+- comics: Fixed AllTheGrowingThings, AxeCop, BookOfBiff, BroodHollow,
+  Carciphona, CatAndGirl, CatsAndCameras, ChainsawSuit, ElGoonishShive,
+  EvilInc, Garanos, GleefulNihilism, LeastICouldDo, MysteriesOfTheArcana,
+  NineteenNinetySeven, NoNeedForBushido, Oglaf, OneQuestion,
+  OverCompensating, ScenesFromAMultiverse, Shivae, Spinnerette,
+  Wigu, Wonderella, Wulffmorgenthaler
   Closes: GH bug #41
+- comics: Removed broken AetheriaEpics, ChuckBrain, Fallen, HMHigh,
+  IanJay, InsideOut, Nodwick, WebcomicsNation_ClownSamurai
 
 
 Dosage 2.5 (released 18.7.2013)

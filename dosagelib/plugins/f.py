@@ -2,7 +2,7 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2013 Bastian Kleineidam
 
-from re import compile, escape, IGNORECASE, MULTILINE
+from re import compile, escape, IGNORECASE
 
 from ..util import tagre
 from ..scraper import _BasicScraper
@@ -17,27 +17,6 @@ class FalconTwin(_BasicScraper):
     imageSearch = compile(r'"(strips/.+?)"')
     prevSearch = compile(r'"prev"><a href="(index.+?)"')
     help = 'Index format: nnn'
-
-
-class Fallen(_BasicScraper):
-    baseUrl = 'http://www.fallencomic.com/'
-    url = baseUrl + 'fal-page.htm'
-    stripUrl = baseUrl + 'pages/part%s/%s-p%s.htm'
-    imageSearch = compile(r'<IMG SRC="(page/.+?)"', IGNORECASE)
-    prevSearch = compile(r'<A HREF="(.+?)"><FONT FACE="Courier">Back', IGNORECASE)
-    help = 'Index format: nn-m (comicNumber-partNumber)'
-    starter = indirectStarter(url,
-        compile(r'\(NEW \d{2}/\d{2}/\d{2}\)\s*\n*\s*<a href="(pages/part\d+/\d+-p\d+\.htm)">\d+</a>', MULTILINE))
-
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        num = pageUrl.split('/')[-1].split('-')[0]
-        part = pageUrl.split('-')[-1].split('.')[0]
-        return '%s-%s' % (part, num)
-
-    def getIndexStripUrl(self, index):
-        index, part = index.split('-')
-        return self.stripUrl % (part, index, part)
 
 
 class FantasyRealms(_BasicScraper):

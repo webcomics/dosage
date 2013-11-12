@@ -30,9 +30,14 @@ exclude_comics = [
     "30Days", # unsuitable navigation
     "6tsc", # unsuitable navigation
     "Abyss", # unsuitable navigation
+    "Acelestialstory", # unsuitable navigation
     "Actdr", # unsuitable navigation
     "Aerosol", # unsuitable navigation
+    "Ahtiventures", # unsuitable navigation
     "Alienirony", # unsuitable navigation
+    "Aloonaticstale", # unsuitable navigation
+    "Amity", # unsuitable navigation
+    "Angelguardian", # unsuitable navigation
     "AngelguardianEspanol", # unsuitable navigation
     "Angryalien", # unsuitable navigation
     "Animangitis", # unsuitable navigation
@@ -44,9 +49,11 @@ exclude_comics = [
     "Bedlam", # unsuitable navigation
     "BITCHSquad", # missing images
     "Bidoof", # unsuitable navigation
+    "Blobworld", # unsuitable navigation
     "BlockTales", # unsuitable navigation
     "Bobcomix", # unsuitable navigation
     "Bonejangles", # unsuitable navigation
+    "BookOfLiesComic", # unsuitable navigation
     "BoozerandStoner", # unsuitable navigation
     "Boyaurus", # unsuitable navigation
     "Brainfood", # unsuitable navigation
@@ -77,7 +84,10 @@ exclude_comics = [
     "Droned", # unsuitable navigation
     "Druids", # unsuitable navigation
     "Effingukookoo", # unsuitable navigation
+    "Elijahandazuuclassic", # unsuitable navigation
     "ErraticBeat", # unsuitable navigation
+    "ErraticE", # unsuitable navigation
+    "EternalKnights", # unsuitable navigation
     "Evilbear", # unsuitable navigation
     "Ewmic", # unsuitable navigation
     "Fannicklas", # unsuitable navigation
@@ -105,6 +115,7 @@ exclude_comics = [
     "HazSci", # unsuitable navigation
     "Hellboundarchive", # unsuitable navigation
     "Herecomesskeeter", # unsuitable navigation
+    "Highlyexperimental", # unsuitable navigation
     "Holycowcomics", # unsuitable navigation
     "Hourlykelly", # unsuitable navigation
     "Houseescapeold", # unsuitable navigation
@@ -130,6 +141,7 @@ exclude_comics = [
     "Kmfe", # unsuitable navigation
     "Lately", # unsuitable navigation
     "Legendoftheredphantom", # unsuitable navigation
+    "LiteBites", # unsuitable navigation
     "Littlephoenix", # unsuitable navigation
     "Llwhoelterran", # unsuitable navigation
     "Lomeathandhuilii", # unsuitable navigation
@@ -157,18 +169,22 @@ exclude_comics = [
     "Noprrkele", # unsuitable navigation
     "Nothingfits", # unsuitable navigation
     "Nothingfitsartblog", # unsuitable navigation
+    "NotYoursAmI", # unsuitable navigation
     "Oeight", # unsuitable navigation
     "Ofpf", # unsuitable navigation
     "Old2g", # unsuitable navigation
     "Outtolunch", # unsuitable navigation
     "Parisel313", # unsuitable navigation
+    "Patchworkpeople", # unsuitable navigation
     "Pewfell", # unsuitable navigation
     "Phoenix", # unsuitable navigation
     "Pi5a", # unsuitable navigation
     "Pokemonwarpers", # unsuitable navigation
+    "Princeofcats", # unsuitable navigation
     "Princess", # unsuitable navigation
     "ProjectX", # unsuitable navigation
     "ReadershipofOne", # unsuitable navigation
+    "Rebuildofgenericmanga", # unsuitable navigation
     "Queenie", # unsuitable navigation
     "Rain", # unsuitable navigation
     "Ratantia", # unsuitable navigation
@@ -185,12 +201,14 @@ exclude_comics = [
     "Sigh", # unsuitable navigation
     "Sleazyspacesage", # unsuitable navigation
     "Slightlyeccentric", # unsuitable navigation
+    "Slightlyeccentricorigins", # unsuitable navigation
     "Smbhax", # unsuitable navigation
     "SpiritSquire1", # unsuitable navigation
     "Stampedegirl", # unsuitable navigation
     "Stardustthecat", # unsuitable navigation
     "Sticklife", # unsuitable navigation
     "StickMisadventures", # unsuitable navigation
+    "Stinkoman", # unsuitable navigation
     "StrangerThanFiction", # unsuitable navigation
     "SundaySmash", # unsuitable navigation
     "Superproultimatewrestling", # unsuitable navigation

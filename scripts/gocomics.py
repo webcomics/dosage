@@ -28,6 +28,7 @@ exclude_comics = [
     "Bonner", # missing page
     "Buster", # comic unavailabe
     "CarteBlanche", # missing images
+    "Critterdoodles", # missing images
     "CountyLine", # too few comics
     "Crawdiddy", # comic unavailable
     "DALTONDOG", # comic unavailable
@@ -40,6 +41,7 @@ exclude_comics = [
     "GOODAndEVIL", # too few comics
     "GoodwithCoffee", # too few comics
     "InkeeDoodles", # comic unavailable
+    "JoesBar", # missing images
     "KALEECHIKORNERS", # too few comics
     "LoveIs", # missing images
     "MaggiesComics", # too few comics
@@ -59,6 +61,8 @@ exclude_comics = [
     "SpaghettiSandwich", # too few comics
     "SparComics", # comic unavailable
     "SurvivingSingle", # comic unavailable
+    "TheBluckwells", # missing images
+    "TheConjurers", # too few comics
     "TheDeadlys", # too few comics
     "TheNursesLockerRoom", # too few comics
     "Tomversation", # too few comics

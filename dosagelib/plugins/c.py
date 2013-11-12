@@ -36,9 +36,9 @@ class Carciphona(_BasicScraper):
     url = 'http://carciphona.com/'
     stripUrl = url + 'view.php?page=%s&chapter=%s'
     imageSearch = compile(tagre("div", "style", r'background-image:url\((_pages[^)]*)\)'))
-    prevSearch = compile(tagre("a", "href", r'(view\.php?[^"]*)', after="prevarea"))
-    latestSearch = compile(tagre("a", "href", r'(view\.php?[^"]*)') +
-      tagre("div", "class", "linkslast"))
+    prevSearch = compile(tagre("a", "href", r'(view\.php\?[^"]*)', after="prevarea"))
+    latestSearch = compile(tagre("a", "href", r'(view\.php\?[^"]*)') +
+      tagre("span", "class", "linkslast"))
     help = 'Index format: None'
     starter = indirectStarter(url, latestSearch)
 
@@ -90,6 +90,12 @@ class CatAndGirl(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'([^"]+)')+r"[^<]+Previous</a>")
     help = 'Index format: n (unpadded)'
 
+    def shouldSkipUrl(self, url):
+        """Skip pages without images."""
+        return url in (
+            self.stripUrl % '4299',
+        )
+
 
 class Catena(_BasicScraper):
     url = 'http://catenamanor.com/'
@@ -105,11 +111,11 @@ class CatsAndCameras(_BasicScraper):
     description = u'Just when you thought it was safe to go to the photographer'
     url = 'http://catsncameras.com/cnc/'
     rurl = escape(url)
-    stripUrl = url + '?p=%s'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("div", "class", r'nav-previous') +
+    stripUrl = url + '?comic=%s'
+    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
+    prevSearch = compile(tagre("span", "class", r'mininav-prev') +
         tagre("a", "href", r'(%s[^"]+)' % rurl))
-    help = 'Index format: nnn'
+    help = 'Index format: stripname'
 
 
 class ChainsawSuit(_BasicScraper):
@@ -118,8 +124,8 @@ class ChainsawSuit(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2008/03/12/strip-338'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl) +
+    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%scomic/\d+/\d+/\d+/[^"]+)' % rurl) +
         tagre("img", "alt", r'previous'))
     help = 'Index format: yyyy/mm/dd/stripname'
 
@@ -183,19 +189,6 @@ class Chisuji(_BasicScraper):
     imageSearch = compile(r'<img src="(http://www.chisuji.com/comics/.+?)"')
     prevSearch = compile(r'<div class="nav-previous"><a href="(http://www.chisuji.com/.+?)">')
     help = 'Index format: yyyy/mm/dd/strip-name'
-
-
-class Chucklebrain(_BasicScraper):
-    url = 'http://www.chucklebrain.com/main.php'
-    starter = indirectStarter(url,
-      compile(tagre("a", "href", r'(/main\.php\?img\=\d+)', quote="'") +
-              tagre("img", "src", r'/images/last\.jpg', quote="'")))
-    stripUrl = url + '?img=%s'
-    firstStripUrl = stripUrl % '19'
-    imageSearch = compile(tagre("img", "src", r'(/images/strip[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/main\.php\?img\=\d+)', quote="'") +
-              tagre("img", "src", r'/images/previous\.jpg', quote="'"))
-    help = 'Index format: nnn'
 
 
 class ChugworthAcademy(_BasicScraper):
@@ -437,7 +430,10 @@ class CyanideAndHappiness(_BasicScraper):
 
     def shouldSkipUrl(self, url):
         """Skip pages without images."""
-        return url in (self.stripUrl % "3082",)
+        return url in (
+            self.stripUrl % "3082",
+            self.stripUrl % "3360", # video
+        )
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
