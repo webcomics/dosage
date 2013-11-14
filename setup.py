@@ -35,7 +35,7 @@ from distutils.command.register import register
 from distutils import util
 from distutils.file_util import write_file
 
-AppVersion = '2.6'
+AppVersion = '2.7'
 AppName = 'Dosage'
 
 py_excludes = ['doctest', 'unittest', 'Tkinter', 'pdb',
