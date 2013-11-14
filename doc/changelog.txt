@@ -1,3 +1,9 @@
+Dosage 2.7 (released xx.xx.xxxx)
+
+Fixes:
+- comics: Fixed GoComic image URL matcher.
+
+
 Dosage 2.6 (released 12.11.2013)
 
 Features:
