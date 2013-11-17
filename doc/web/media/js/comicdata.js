@@ -352,7 +352,6 @@ $(document).ready(function() {
 ["<a href=\"comics/ComicFury_Remedy.html\">ComicFury/Remedy</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/ComicFury_Requiemsgate.html\">ComicFury/Requiemsgate</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/ComicFury_Residentweirdo.html\">ComicFury/Residentweirdo</a>", "Other", "English", "ok", "0"],
-["<a href=\"comics/ComicFury_Rosie.html\">ComicFury/Rosie</a>", "Other", "English", "error", "0"],
 ["<a href=\"comics/ComicFury_RumfAdventures.html\">ComicFury/RumfAdventures</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/ComicFury_STA.html\">ComicFury/STA</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/ComicFury_Sarakleeyo.html\">ComicFury/Sarakleeyo</a>", "Other", "English", "ok", "0"],
