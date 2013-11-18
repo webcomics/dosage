@@ -38,16 +38,6 @@ class IDreamOfAJeanieBottle(_BasicScraper):
     help = 'Index format: n (unpadded)'
 
 
-class InsideOut(_BasicScraper):
-    description = u'Inside Out Comic - A new kind of Weird'
-    url = 'http://www.insideoutcomic.com/'
-    stripUrl = url + 'html/%s.html'
-    firstStripUrl = stripUrl % '1_snake_suicide'
-    imageSearch = compile(r'Picture12LYR.+?C="(.+?/assets/images/.+?)"')
-    prevSearch = compile(r'Picture7LYR.+?F="(.+?/html/.+?)"')
-    help = 'Index format: n_comic_name'
-
-
 class IrregularWebcomic(_BasicScraper):
     url = 'http://www.irregularwebcomic.net/'
     stripUrl = url + '%s.html'

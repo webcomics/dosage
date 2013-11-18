@@ -5,13 +5,12 @@ from re import compile
 from ..scraper import make_scraper
 from ..util import tagre
 
-_imageSearch = compile(tagre("img", "src", r'([^"]*comics/[^"]+)'))
+_imageSearch = compile(tagre("img", "src", r'([^"]*wp-content/uploads/[^"]+)'))
 
 def add(name, baseUrl, param="date"):
     classname = 'PensAndTales_%s' % name
-    _prevSearch = compile(tagre("a", "href", r'([^"]*\?%s=\d+)' % param) +
-       '(?:' + tagre("img", "alt", r'Previous Comic') + '|' +
-       '[^<]+Previous' + ')')
+    _prevSearch = compile(tagre("span", "class", "mininav-prev") +
+    tagre("a", "href", r'([^"]*\?%s=[-\d]+)' % param))
     globals()[classname] = make_scraper(classname,
         name='PensAndTales/' + name,
         url = baseUrl,
@@ -22,9 +21,9 @@ def add(name, baseUrl, param="date"):
     )
 
 
-# Most of the comics linked an pensandtales are broken and
+# Most of the comics linked at pensandtales are broken and
 # the rest does not have a common layout. It seems they allow
 # almost arbitrary HTML layout.
 
-add('FireflyCross', 'http://www.fireflycross.pensandtales.com/', param="p")
+add('FireflyCross', 'http://www.fireflycross.pensandtales.com/', param="comic")
 add('Evilish', 'http://evilish.pensandtales.com/')

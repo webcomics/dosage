@@ -195,6 +195,7 @@ exclude_comics = [
     "Retrofiyora", # unsuitable navigation
     "Rexfordavenue", # unsuitable navigation
     "Rocr", # unsuitable navigation
+    "Rosie", # unsuitable navigation
     "S", # unsuitable navigation
     "Sandgate", # unsuitable navigation
     "Shadowstories", # unsuitable navigation
@@ -231,6 +232,7 @@ exclude_comics = [
     "Thestickmen", # unsuitable navigation
     "Thingsthatannoyme", # unsuitable navigation
     "ThornsInOurSide", # unsuitable navigation
+    "Two_Rooks", # unsuitable navigation
     "Unichat", # unsuitable navigation
     "UFPA", # unsuitable navigation
     "V4", # unsuitable navigation

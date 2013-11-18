@@ -433,6 +433,7 @@ class CyanideAndHappiness(_BasicScraper):
         return url in (
             self.stripUrl % "3082",
             self.stripUrl % "3360", # video
+            self.stripUrl % "3367", # video
         )
 
     @classmethod

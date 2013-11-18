@@ -355,12 +355,12 @@ class AxeCop(_BasicScraper):
     rurl = escape(url)
     starter = bounceStarter(url,
         (
-          compile(tagre("a", "href", r'(%scomic/page-\d+-[^"]+/)' % rurl, after="navi-next")),
-          compile(tagre("a", "href", r'(%scomic/[^"]+/)' % rurl, after="navi-next")),
+          compile(tagre("a", "href", r'(%scomic/page-\d+-[^"]+/)' % rurl, after="nav-next")),
+          compile(tagre("a", "href", r'(%scomic/[^"]+/)' % rurl, after="nav-next")),
         )
     )
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '0'
     imageSearch = compile(tagre("img", "src", r'(http://mainsite\.axecop\.wpengine\.com/wp-content/uploads/sites/\d+/\d+/\d+/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(%scomic/page-\d+-[^"]+/)' % rurl, after="navi-prev"))
-    help = 'Index format: usually page-number-stripname'
+    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+/)' % rurl, after="nav-prev"))
+    help = 'Index format: usually stripname'
