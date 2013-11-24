@@ -1,4 +1,4 @@
-Dosage 2.7 (released xx.xx.xxxx)
+Dosage 2.7 (released 24.11.2013)
 
 Fixes:
 - comics: Fixed GoComic image URL matcher.
