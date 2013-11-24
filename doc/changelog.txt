@@ -3,7 +3,8 @@ Dosage 2.7 (released xx.xx.xxxx)
 Fixes:
 - comics: Fixed GoComic image URL matcher.
 - comics: Fixed AxeCop, PensAndTales_FireflyCross.
-- comics: Remove broken ComidFury_Rosie, InsideOut, SodiumEyes.
+- comics: Remove broken ComicFury_Rosie, InsideOut, SodiumEyes.
+
 
 Dosage 2.6 (released 12.11.2013)
 
