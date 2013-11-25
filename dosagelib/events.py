@@ -83,7 +83,7 @@ class RSSEventHandler(EventHandler):
         imageUrl = self.getUrlFromFilename(filename)
         title = '%s - %s' % (comic.name, os.path.basename(filename))
         pageUrl = comic.referrer
-        description = '<img src="%s"/><br/><a href="%s">View Comic</a>' % (imageUrl, pageUrl)
+        description = '<img src="%s"/><br/><a href="%s">View Comic Online</a>' % (imageUrl, pageUrl)
         args = (
             title,
             imageUrl,
