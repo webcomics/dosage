@@ -1,3 +1,8 @@
+Dosage 2.8 (released 25.11.2013)
+
+Fixes:
+
+
 Dosage 2.7 (released 24.11.2013)
 
 Fixes:
