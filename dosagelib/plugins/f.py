@@ -134,7 +134,7 @@ class Footloose(_BasicScraper):
 
 class ForLackOfABetterComic(_BasicScraper):
     url = 'http://forlackofabettercomic.com/'
-    rurl = escape(url)
+    rurl = r'http://(?:www\.)?forlackofabettercomic\.com/'
     stripUrl = url + '?id=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(%simg/comic/\d+[^"]+)' % rurl, after="comicimg"))

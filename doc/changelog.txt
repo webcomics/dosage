@@ -1,6 +1,7 @@
-Dosage 2.8 (released 25.11.2013)
+Dosage 2.8 (released xx.xx.2013)
 
 Fixes:
+- comics: Fixed ForLackOfABetterComic.
 
 
 Dosage 2.7 (released 24.11.2013)
