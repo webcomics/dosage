@@ -101,7 +101,7 @@ class ComicImage(object):
             raise
         else:
             out.info(u"Saved %s (%s)." % (fn, strsize(size)))
-            getHandler().comicDownloaded(self, fn)
+            getHandler().comicDownloaded(self, fn, text=self.text)
         if self.text:
             fntext = os.path.join(comicDir, "%s.txt" % self.filename)
             out.debug(u'Writing comic text to file %s...' % fntext)

@@ -38,7 +38,7 @@ class EventHandler(object):
         """Emit a start event. Should be overridden in subclass."""
         pass
 
-    def comicDownloaded(self, comic, filename):
+    def comicDownloaded(self, comic, filename, text=None):
         """Emit a comic downloaded event. Should be overridden in subclass."""
         pass
 
@@ -78,12 +78,15 @@ class RSSEventHandler(EventHandler):
             self.newfile = True
             self.rss = rss.Feed('Daily Dosage', link, 'Comics for %s' % time.strftime('%Y/%m/%d', today))
 
-    def comicDownloaded(self, comic, filename):
+    def comicDownloaded(self, comic, filename, text=None):
         """Write RSS entry for downloaded comic."""
         imageUrl = self.getUrlFromFilename(filename)
         title = '%s - %s' % (comic.name, os.path.basename(filename))
         pageUrl = comic.referrer
-        description = '<img src="%s"/><br/><a href="%s">View Comic Online</a>' % (imageUrl, pageUrl)
+        description = '<img src="%s"/>' % imageUrl
+        if text:
+            description += '<br/>%s' % text
+        description += '<br/><a href="%s">View Comic Online</a>' % pageUrl
         args = (
             title,
             imageUrl,
@@ -153,7 +156,7 @@ class HtmlEventHandler(EventHandler):
         # last comic strip URL (eg. http://example.com/page42)
         self.lastUrl = None
 
-    def comicDownloaded(self, comic, filename):
+    def comicDownloaded(self, comic, filename, text=None):
         """Write HTML entry for downloaded comic."""
         if self.lastComic != comic.name:
             self.newComic(comic)
@@ -162,6 +165,8 @@ class HtmlEventHandler(EventHandler):
         if pageUrl != self.lastUrl:
             self.html.write(u'<li><a href="%s">%s</a>\n' % (pageUrl, pageUrl))
         self.html.write(u'<br/><img src="%s"/>\n' % imageUrl)
+        if text:
+            self.html.write(u'<br/>%s\n' % text)
         self.lastComic = comic.name
         self.lastUrl = pageUrl
 
@@ -219,7 +224,7 @@ class JSONEventHandler(EventHandler):
             comicData['pages'][url] = {'images':{}}
         return comicData['pages'][url]
 
-    def comicDownloaded(self, comic, filename):
+    def comicDownloaded(self, comic, filename, text=None):
         """Add URL-to-filename mapping into JSON."""
         pageInfo = self.getPageInfo(comic.name, comic.referrer)
         pageInfo['images'][comic.url] = os.path.basename(filename)
@@ -271,10 +276,10 @@ class MultiHandler(object):
         for handler in _handlers:
             handler.start()
 
-    def comicDownloaded(self, comic, filename):
+    def comicDownloaded(self, comic, filename, text=None):
         """Emit comic downloaded events for handlers."""
         for handler in _handlers:
-            handler.comicDownloaded(comic, filename)
+            handler.comicDownloaded(comic, filename, text=text)
 
     def comicPageLink(self, comic, url, prevUrl):
         """Emit an event to inform the handler about links between comic pages. Should be overridden in subclass."""
