@@ -5,8 +5,8 @@ import requests
 import time
 import os
 from . import loader, configuration
-from .util import (fetchUrl, fetchUrls, getPageContent, makeSequence,
-  get_system_uid, urlopen, getDirname)
+from .util import (fetchUrl, fetchUrls, fetchText, getPageContent,
+  makeSequence, get_system_uid, urlopen, getDirname, unescape)
 from .comic import ComicStrip
 from .output import out
 from .events import getHandler
@@ -66,6 +66,10 @@ class _BasicScraper(object):
     # this can also be a list or tuple of compiled regular expressions
     imageSearch = None
 
+    # compiled regular expression to store a text together with the image
+    # sometimes comic strips have additional text info for each comic
+    textSearch = None
+
     # usually the index format help
     help = ''
 
@@ -117,7 +121,13 @@ class _BasicScraper(object):
         elif not imageUrls:
             patterns = [x.pattern for x in makeSequence(self.imageSearch)]
             out.warn(u"found no images at %s with patterns %s" % (url, patterns))
-        return ComicStrip(self.getName(), url, imageUrls, self.namer, self.session)
+        if self.textSearch:
+            text = fetchText(url, data, self.textSearch)
+            if text:
+                text = unescape(text)
+        else:
+            text = None
+        return ComicStrip(self.getName(), url, imageUrls, self.namer, self.session, text=text)
 
     def getStrips(self, maxstrips=None):
         """Get comic strips."""

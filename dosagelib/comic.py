@@ -2,6 +2,7 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2013 Bastian Kleineidam
 import os
+import codecs
 
 from .output import out
 from .util import getImageObject, normaliseURL, unquote, strsize, getDirname, getFilename
@@ -10,13 +11,14 @@ from .events import getHandler
 class ComicStrip(object):
     """A list of comic image URLs."""
 
-    def __init__(self, name, stripUrl, imageUrls, namer, session):
+    def __init__(self, name, stripUrl, imageUrls, namer, session, text=None):
         """Store the image URL list."""
         self.name = name
         self.stripUrl = stripUrl
         self.imageUrls = imageUrls
         self.namer = namer
         self.session = session
+        self.text = text
 
     def getImages(self):
         """Get a list of image downloaders."""
@@ -29,7 +31,7 @@ class ComicStrip(object):
         if filename is None:
             filename = url.rsplit('/', 1)[1]
         dirname = getDirname(self.name)
-        return ComicImage(self.name, url, self.stripUrl, dirname, filename, self.session)
+        return ComicImage(self.name, url, self.stripUrl, dirname, filename, self.session, text=self.text)
 
 
 class ComicImage(object):
@@ -37,7 +39,7 @@ class ComicImage(object):
 
     ChunkBytes = 1024 * 100 # 100KB
 
-    def __init__(self, name, url, referrer, dirname, filename, session):
+    def __init__(self, name, url, referrer, dirname, filename, session, text=None):
         """Set URL and filename."""
         self.name = name
         self.referrer = referrer
@@ -46,6 +48,7 @@ class ComicImage(object):
         filename = getFilename(filename)
         self.filename, self.ext = os.path.splitext(filename)
         self.session = session
+        self.text = text
 
     def connect(self):
         """Connect to host and get meta information."""
@@ -99,4 +102,9 @@ class ComicImage(object):
         else:
             out.info(u"Saved %s (%s)." % (fn, strsize(size)))
             getHandler().comicDownloaded(self, fn)
+        if self.text:
+            fntext = os.path.join(comicDir, "%s.txt" % self.filename)
+            out.debug(u'Writing comic text to file %s...' % fntext)
+            with codecs.open(fntext, 'w', 'utf-8') as textOut:
+                textOut.write(self.text)
         return fn, True
