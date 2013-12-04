@@ -7,6 +7,8 @@ Features:
 
 Fixes:
 - comics: Fixed ForLackOfABetterComic.
+- comics: Store large xkcd images if available.
+  Closes: GH bug #43
 
 
 Dosage 2.7 (released 24.11.2013)
