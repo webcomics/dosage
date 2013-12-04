@@ -38,6 +38,7 @@ class AbstruseGoose(_BasicScraper):
     imageSearch = compile(tagre('img', 'src', r'(%sstrips/[^<>"]+)' % rurl))
     prevSearch = compile(tagre('a', 'href', r'(%s\d+)' % rurl) + r'&laquo; Previous</a>')
     help = 'Index format: n (unpadded)'
+    textSearch = compile(tagre("img", "title", r'([^"]+)'))
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
