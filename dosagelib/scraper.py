@@ -127,7 +127,7 @@ class _BasicScraper(object):
         if self.textSearch:
             text = fetchText(url, data, self.textSearch)
             if text:
-                text = unescape(text)
+                text = unescape(text).strip()
         else:
             text = None
         return ComicStrip(self.getName(), url, imageUrls, self.namer, self.session, text=text)
