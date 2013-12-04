@@ -271,7 +271,7 @@ class BrentalFlossFit(BrentalFloss):
             return prevUrl.replace("\n", "")
 
     @classmethod
-    def imageUrlModifier(cls, url):
+    def imageUrlModifier(cls, url, data):
         if url:
             return url.replace("\n", "")
 

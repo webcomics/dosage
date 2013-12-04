@@ -111,7 +111,10 @@ class _BasicScraper(object):
     def getComicStrip(self, url, data, baseUrl):
         """Get comic strip downloader for given URL and data."""
         imageUrls = fetchUrls(url, data, baseUrl, self.imageSearch)
-        imageUrls = set(map(self.imageUrlModifier, imageUrls))
+        # map modifier function on image URLs
+        imageUrls = [self.imageUrlModifier(x, data) for x in imageUrls]
+        # remove duplicate URLs
+        imageUrls = set(imageUrls)
         if len(imageUrls) > 1 and not self.multipleImagesPerStrip:
             patterns = [x.pattern for x in makeSequence(self.imageSearch)]
             out.warn(u"found %d images instead of 1 at %s with patterns %s" % (len(imageUrls), url, patterns))
@@ -234,10 +237,10 @@ class _BasicScraper(object):
         return prevUrl
 
     @classmethod
-    def imageUrlModifier(cls, imageUrl):
+    def imageUrlModifier(cls, imageUrl, data):
         """Optional modification of parsed image URLs. Useful if the URL
         needs to be fixed before usage. The default implementation does
-        not modify the URL.
+        not modify the URL. The given data is the URL page data.
         """
         return imageUrl
 
