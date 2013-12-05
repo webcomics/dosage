@@ -72,9 +72,19 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Status</th><td>%(status)s on %(date)s</td>
 </tr>
 <tr>
-<th>Votes</th><td>%(vote)s</td>
+<th>Votes</th><td>%(vote)s
+<form action="http://gaecounter.appspot.com/count/" method="POST">
+<input name="name" type="hidden" value="%(votename)s"/>
+<input name="uid" type="hidden" id="voteuid" value=""/>
+<input type="submit" value="Vote"/>
+</form>
+</td>
 </tr>
 </table>
+<script type="text/javascript">
+var ua = navigator.userAgent;
+document.getElementById("voteuid").value = ua.replace(/[^a-zA-Z0-9\._:]/g , "_");;
+</script>
 
 [Edit this info](%(editurl)s) or go back to the [comic list](../comic-index.html).
 """
@@ -264,6 +274,7 @@ def write_html_comic(key, entry, outputdir, date):
         "status": quote(entry["status"]),
         "date": quote(date),
         "vote": entry["vote"],
+        "votename": key,
     }
     fname = os.path.join(outputdir, key+".md")
     with codecs.open(fname, 'w', 'utf-8') as fp:

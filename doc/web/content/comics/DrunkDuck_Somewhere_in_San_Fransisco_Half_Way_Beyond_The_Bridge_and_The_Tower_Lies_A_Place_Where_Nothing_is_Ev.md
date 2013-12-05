@@ -32,8 +32,18 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Status</th><td>ok on 24.11.2013</td>
 </tr>
 <tr>
-<th>Votes</th><td>0</td>
+<th>Votes</th><td>0
+<form action="http://gaecounter.appspot.com/count/" method="POST">
+<input name="name" type="hidden" value="DrunkDuck_Somewhere_in_San_Fransisco_Half_Way_Beyond_The_Bridge_and_The_Tower_Lies_A_Place_Where_Nothing_is_Ev"/>
+<input name="uid" type="hidden" id="voteuid" value=""/>
+<input type="submit" value="Vote"/>
+</form>
+</td>
 </tr>
 </table>
+<script type="text/javascript">
+var ua = navigator.userAgent;
+document.getElementById("voteuid").value = ua.replace(/[^a-zA-Z0-9\._:]/g , "_");;
+</script>
 
 [Edit this info](DrunkDuck_Somewhere_in_San_Fransisco_Half_Way_Beyond_The_Bridge_and_The_Tower_Lies_A_Place_Where_Nothing_is_Ev_edit.html) or go back to the [comic list](../comic-index.html).
