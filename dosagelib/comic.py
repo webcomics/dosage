@@ -2,10 +2,9 @@
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2013 Bastian Kleineidam
 import os
-import codecs
 
 from .output import out
-from .util import getImageObject, normaliseURL, unquote, strsize, getDirname, getFilename
+from .util import getImageObject, normaliseURL, unquote, getDirname, getFilename, writeFile
 from .events import getHandler
 
 class ComicStrip(object):
@@ -86,25 +85,11 @@ class ComicImage(object):
             out.warn(u"Empty content from %s, try again..." % self.url)
             self.connect()
             content = self.urlobj.content
-        try:
-            out.debug(u'Writing comic to file %s...' % fn)
-            with open(fn, 'wb') as comicOut:
-                comicOut.write(content)
-                comicOut.flush()
-                os.fsync(comicOut.fileno())
-            size = os.path.getsize(fn)
-            if size == 0:
-                raise OSError("empty file %s" % fn)
-        except Exception:
-            if os.path.isfile(fn):
-                os.remove(fn)
-            raise
-        else:
-            out.info(u"Saved %s (%s)." % (fn, strsize(size)))
-            getHandler().comicDownloaded(self, fn, text=self.text)
+        out.debug(u'Writing comic to file %s...' % fn)
+        writeFile(fn, content)
         if self.text:
             fntext = os.path.join(comicDir, "%s.txt" % self.filename)
             out.debug(u'Writing comic text to file %s...' % fntext)
-            with codecs.open(fntext, 'w', 'utf-8') as textOut:
-                textOut.write(self.text)
+            writeFile(fntext, self.text, encoding='utf-8')
+        getHandler().comicDownloaded(self, fn, text=self.text)
         return fn, True

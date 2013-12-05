@@ -19,6 +19,7 @@ import sys
 import os
 import cgi
 import re
+import codecs
 import traceback
 import time
 import subprocess
@@ -565,3 +566,30 @@ def strlimit (s, length=72):
 def getLangName(code):
     """Get name of language specified by ISO 693-1 code."""
     return Iso2Language[code]
+
+
+def writeFile(filename, content, encoding=None):
+    """Write content to given filename. Checks for zero-sized files.
+    If encoding is given writes to a codec.open() file."""
+    if not content:
+        raise OSError("empty content for file %s" % filename)
+
+    def getfp(filename, encoding):
+        if encoding:
+            return codecs.open(filename, 'w', encoding)
+        return open(filename, 'wb')
+
+    try:
+        with getfp(filename, encoding) as fp:
+            fp.write(content)
+            fp.flush()
+            os.fsync(fp.fileno())
+            size = os.path.getsize(filename)
+            if size == 0:
+                raise OSError("empty file %s" % filename)
+    except Exception:
+        if os.path.isfile(filename):
+            os.remove(filename)
+        raise
+    else:
+        out.info(u"Saved %s (%s)." % (filename, strsize(size)))
