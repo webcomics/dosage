@@ -48,10 +48,13 @@ class _ComicTester(TestCase):
         if self.tmpdir is not None:
             shutil.rmtree(self.tmpdir)
 
-    def get_saved_images(self):
+    def get_saved_images(self, filtertxt=False):
         """Get saved images."""
         dirs = tuple(self.name.split('/'))
-        return os.listdir(os.path.join(self.tmpdir, *dirs))
+        files = os.listdir(os.path.join(self.tmpdir, *dirs))
+        if filtertxt:
+            files = [x for x in files if not x.endswith(".txt")]
+        return files
 
     def test_comic(self):
         if self.scraperclass is None:
@@ -100,7 +103,7 @@ class _ComicTester(TestCase):
     def check_scraperesult(self, num_images_expected, strip, scraperobj):
         # Check that exactly or for multiple pages at least num_strips images are saved.
         # This checks saved files, ie. it detects duplicate filenames.
-        saved_images = self.get_saved_images()
+        saved_images = self.get_saved_images(filtertxt=bool(scraperobj.textSearch))
         num_images = len(saved_images)
         # subtract the number of skipped URLs with no image from the expected image number
         attrs = (num_images, saved_images, num_images_expected, self.tmpdir)
