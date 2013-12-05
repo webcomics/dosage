@@ -2445,7 +2445,7 @@ $(document).ready(function() {
 ["<a href=\"comics/NuklearPower_Warbot.html\">NuklearPower/Warbot</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/OctopusPie.html\">OctopusPie</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/OddFish.html\">OddFish</a>", "Other", "English", "ok", "0"],
-["<a href=\"comics/Oglaf.html\">Oglaf</a>", "Other", "English", "ok", "1"],
+["<a href=\"comics/Oglaf.html\">Oglaf</a>", "Other", "English", "ok", "2"],
 ["<a href=\"comics/OkCancel.html\">OkCancel</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/OmakeTheater.html\">OmakeTheater</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/OnTheEdge.html\">OnTheEdge</a>", "Other", "English", "ok", "0"],
@@ -3285,7 +3285,7 @@ $(document).ready(function() {
 ["<a href=\"comics/ZenPencils.html\">ZenPencils</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/ZombieHunters.html\">ZombieHunters</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/Zwarwald.html\">Zwarwald</a>", "Other", "German", "ok", "1"],
-["<a href=\"comics/xkcd.html\">xkcd</a>", "Other", "English", "ok", "3"]
+["<a href=\"comics/xkcd.html\">xkcd</a>", "Other", "English", "ok", "4"]
     ],
     "aoColumns": [
       { "sTitle": "Name" },
