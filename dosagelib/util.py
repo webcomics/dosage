@@ -575,6 +575,7 @@ def writeFile(filename, content, encoding=None):
         raise OSError("empty content for file %s" % filename)
 
     def getfp(filename, encoding):
+        """Get open file object."""
         if encoding:
             return codecs.open(filename, 'w', encoding)
         return open(filename, 'wb')
