@@ -1,5 +1,5 @@
 Project: dosage
-Version: 2.7
+Version: 2.8
 Hide: N
 Website-URL: http://wummel.github.io/dosage/
 Changelog-URL: https://github.com/wummel/dosage/blob/master/doc/changelog.txt
@@ -7,4 +7,4 @@ Source-Package-URL: http://wummel.github.io/dosage/dist/dosage-${version}.tar.gz
 GIT-Tree-URL: https://github.com/wummel/dosage.git
 Windows-installer-URL: http://wummel.github.io/dosage/dist/dosage-${version}.exe
 
-Several comics have been fixed.
+Add the ability to store text information with comic images.
