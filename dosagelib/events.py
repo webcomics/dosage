@@ -10,6 +10,11 @@ import codecs
 import json
 from . import rss, util, configuration
 
+# Maximum width or height to display an image in exported pages.
+# Note that only the displayed size is adjusted, not the image itself.
+MaxImageSize = (800, 800)
+
+
 class EventHandler(object):
     """Base class for writing events to files. The currently defined events are
     start(), comicDownloaded() and end()."""
@@ -81,9 +86,13 @@ class RSSEventHandler(EventHandler):
     def comicDownloaded(self, comic, filename, text=None):
         """Write RSS entry for downloaded comic."""
         imageUrl = self.getUrlFromFilename(filename)
+        size = getDimensionForImage(filename, MaxImageSize)
         title = '%s - %s' % (comic.name, os.path.basename(filename))
         pageUrl = comic.referrer
-        description = '<img src="%s"/>' % imageUrl
+        description = '<img src="%s"' % imageUrl
+        if size:
+            description += ' width="%d" height="%d"' % size
+        description += '/>'
         if text:
             description += '<br/>%s' % text
         description += '<br/><a href="%s">View Comic Online</a>' % pageUrl
@@ -103,6 +112,19 @@ class RSSEventHandler(EventHandler):
     def end(self):
         """Write RSS data to file."""
         self.rss.write(self.rssfn)
+
+
+def getDimensionForImage(filename, maxsize):
+    """Return scaled image size in (width, height) format.
+    The scaling preserves the aspect ratio.
+    If PIL is not found returns None."""
+    try:
+        from PIL import Image
+    except ImportError:
+        return None
+    img = Image.open(filename)
+    img.thumbnail(maxsize)
+    return img.size
 
 
 class HtmlEventHandler(EventHandler):
