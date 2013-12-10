@@ -182,11 +182,15 @@ class HtmlEventHandler(EventHandler):
         """Write HTML entry for downloaded comic."""
         if self.lastComic != comic.name:
             self.newComic(comic)
+        size = getDimensionForImage(filename, MaxImageSize)
         imageUrl = self.getUrlFromFilename(filename)
         pageUrl = comic.referrer
         if pageUrl != self.lastUrl:
             self.html.write(u'<li><a href="%s">%s</a>\n' % (pageUrl, pageUrl))
-        self.html.write(u'<br/><img src="%s"/>\n' % imageUrl)
+        self.html.write(u'<br/><img src="%s"' % imageUrl)
+        if size:
+            self.html.write(' width="%d" height="%d"' % size)
+        self.html.write('/>\n')
         if text:
             self.html.write(u'<br/>%s\n' % text)
         self.lastComic = comic.name
