@@ -56,6 +56,15 @@ class EdibleDirt(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r"(index\.php\?id=\d+)")+"Previous")
     help = 'Index format: number'
 
+class EdmundFinney(_BasicScraper):
+    description = u"Edmund Finney's Quest to Find the Meaning of Life"
+    url = 'http://eqcomics.com/'
+    rurl = escape(url)
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2009/03/08/sunday-aliens'
+    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+-[^"/]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"/]+/)' % rurl, after="navi navi-prev"))
+    help = 'Index format: yyyy/mm/dd/stripname'
 
 class EerieCuties(_BasicScraper):
     url = 'http://www.eeriecuties.com/'
