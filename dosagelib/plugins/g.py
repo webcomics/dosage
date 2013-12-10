@@ -8,6 +8,15 @@ from ..scraper import _BasicScraper
 from ..helpers import indirectStarter
 from ..util import tagre
 
+class Gaia(_BasicScraper):
+    description = u'Gaia, a story about the nature of reality, and the answer to Lilith?s simple, meek, world-shattering question: ?Will you come along??'
+    url = 'http://www.sandraandwoo.com/gaia/'
+    rurl = escape(url)
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2000/01/01/welcome-to-gaia/'
+    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+-[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+/)' % rurl, after="prev"))
+    help = 'Index format: yyyy/mm/dd/number-stripname'
 
 class Galaxion(_BasicScraper):
     description = u'Galaxion - Life. Love. Hyperspace.'
