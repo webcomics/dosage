@@ -49,6 +49,15 @@ class TheDreamlandChronicles(_BasicScraper):
             bp[2] = bp[2][:-1]
         return "%s-%s-%s.%s" % (bp[0], bp[1], bp[2], ext)
 
+class TheGamerCat(_BasicScraper):
+    description = u"The Gamer Cat"
+    url = 'http://www.thegamercat.com/'
+    rurl = escape(url)
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2011/06/06102011'
+    imageSearch = compile(tagre("img", "src", r'(%swordpress/comics/[^"/]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/[^"/]+/)' % rurl , after="navi navi-prev"))
+    help = 'Index format: yyyy/mm/mmddyyyy'
 
 class TheNoob(_BasicScraper):
     url = 'http://www.thenoobcomic.com/index.php'
