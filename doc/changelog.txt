@@ -6,7 +6,7 @@ Features:
   NotInventedHere, RedsPlanet, RomanticallyApocalyptic,
   ScandinaviaAndTheWorld, TheGamerCat, Weregeek.
   Thanks to Null000 for the patches.
-  Closes: GH bug #
+  Closes: GH bug #48
 
 
 Dosage 2.8 (released 8.12.2013)
