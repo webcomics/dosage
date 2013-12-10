@@ -68,6 +68,15 @@ class RedString(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(/index\.php\?id=\d+)', after="prev"))
     help = 'Index format: nnn'
 
+class RomanticallyApocalyptic(_BasicScraper):
+    description = u'Romantically Apocalyptic'
+    url = 'http://romanticallyapocalyptic.com/'
+    rurl = escape(url)
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = compile(tagre("img", "src", r'(%sart/\d+[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\d+[^"]+)' % rurl)+"\s*"+tagre('span', 'class', 'spritePrevious'))
+    help = 'Index format: n'
 
 class Roza(_BasicScraper):
     url = 'http://www.junglestudio.com/roza/index.php'
