@@ -18,6 +18,17 @@ class Gaia(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+/)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/number-stripname'
 
+class GaiaGerman(_BasicScraper):
+    description = u'Gaia, eine Geschichte über das Wesen der Wirklichkeit und die Antwort auf Liliths einfache, bescheidene, welterschütternde Frage: ?Kommt ihr mit??'
+    url = 'http://www.sandraandwoo.com/gaiade/'
+    rurl = escape(url)
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2000/01/01/welcome-to-gaia/'
+    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+-[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+/)' % rurl, after="prev"))
+    help = 'Index format: yyyy/mm/dd/number-stripname'
+    lang = 'de'
+
 class Galaxion(_BasicScraper):
     description = u'Galaxion - Life. Love. Hyperspace.'
     url = 'http://galaxioncomics.com/'
