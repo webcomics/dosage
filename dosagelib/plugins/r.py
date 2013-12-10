@@ -49,6 +49,16 @@ class RedMeat(_BasicScraper):
     def namer(cls, imageUrl, pageUrl):
         return imageUrl.split('/')[-2]
 
+class RedsPlanet(_BasicScraper):
+    description = u"Red's Planet"
+    url = 'http://www.redsplanet.com/comic/'
+    rurl = escape(url)
+    stripUrl = url + 'rp/%s/'
+    firstStripUrl = stripUrl % 'pro/prologue-01'
+    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+_[^"/]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%srp/[^"/]+/[^"/]+/)' % rurl))
+    help = 'Index format: chapter/stripname'
+
 
 class RedString(_BasicScraper):
     description = u'A web comics about love and growing up. Art by Gina Biggs.'
@@ -58,6 +68,18 @@ class RedString(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/index\.php\?id=\d+)', after="prev"))
     help = 'Index format: nnn'
+
+
+class RomanticallyApocalyptic(_BasicScraper):
+    description = u'Romantically Apocalyptic'
+    url = 'http://romanticallyapocalyptic.com/'
+    rurl = escape(url)
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = compile(tagre("img", "src", r'(%sart/\d+[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\d+[^"]+)' % rurl)+"\s*"+tagre('span', 'class', 'spritePrevious'))
+    help = 'Index format: n'
+    adult = True
 
 
 class Roza(_BasicScraper):

@@ -38,6 +38,17 @@ class IDreamOfAJeanieBottle(_BasicScraper):
     help = 'Index format: n (unpadded)'
 
 
+class InternetWebcomic(_BasicScraper):
+    description = u"Internet Webcomic"
+    url = 'http://www.internet-webcomic.com/'
+    rurl = escape(url)
+    stripUrl = url + '?p=%s'
+    firstStripUrl = stripUrl % '30'
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"/]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl, after="navi navi-prev"))
+    help = 'Index format: n'
+
+
 class IrregularWebcomic(_BasicScraper):
     url = 'http://www.irregularwebcomic.net/'
     stripUrl = url + '%s.html'

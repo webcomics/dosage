@@ -75,6 +75,17 @@ class WeCanSleepTomorrow(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
+class Weregeek(_BasicScraper):
+    description = u'Weregeek'
+    url = 'http://www.weregeek.com/'
+    rurl = escape(url)
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2006/11/27/'
+    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'((%s)?(/)?\d+/\d+/\d+/)'% rurl)+'\s*'+ tagre('img', 'src', '[^"]*previous_day.gif'))
+    help = 'Index format: yyyy/mm/dd'
+
+
 class WhiteNinja(_BasicScraper):
     baseUrl = 'http://www.whiteninjacomics.com/'
     url = baseUrl + 'comics.shtml'

@@ -2,6 +2,11 @@ Dosage 2.9 (released xx.xx.2013)
 
 Features:
 - events: Ensure maximum aspect ratio on displayed RSS images.
+- comics: Added EdmundFinney, Gaia, GaiaGerman, InternetWebcomic,
+  NotInventedHere, RedsPlanet, RomanticallyApocalyptic,
+  ScandinaviaAndTheWorld, TheGamerCat, Weregeek.
+  Thanks to Null000 for the patches.
+  Closes: GH bug #
 
 
 Dosage 2.8 (released 8.12.2013)
