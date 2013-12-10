@@ -2,4 +2,3 @@
 requests
 # optional:
 argcomplete
-PIL
