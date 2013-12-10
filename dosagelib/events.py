@@ -123,7 +123,9 @@ def getDimensionForImage(filename, maxsize):
     except ImportError:
         return None
     img = Image.open(filename)
-    img.thumbnail(maxsize)
+    width, height = img.size
+    if width > maxsize and height > maxsize:
+        img.thumbnail(maxsize)
     return img.size
 
 
