@@ -79,6 +79,16 @@ class SandraOnTheRocks(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'([^"]*/strips-sotr/[^"]+)', before="cn[id]prev"))
     help = 'Index format: name'
 
+class ScandinaviaAndTheWorld(_BasicScraper):
+    description = u'Scandinavia and the World'
+    url = 'http://satwcomic.com/'
+    rurl = escape(url)
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % 'sweden-denmark-and-norway'
+    imageSearch = compile(tagre("img", "src", r'(%sart/[^"/]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"/]+)' % rurl)+"\s*"+tagre('span', 'class', 'spritePrevious'))
+    help = 'Index format: stripname'
+
 class ScaryGoRound(_BasicScraper):
     url = 'http://www.scarygoround.com/'
     stripUrl = url + '?date=%s'
