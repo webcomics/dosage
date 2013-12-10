@@ -163,6 +163,15 @@ class NoNeedForBushido(_BasicScraper):
     starter = indirectStarter(url,
        compile(tagre("a", "href", r'(%s\?webcomic1=[^"]+)' % rurl, after="last-webcomic")))
 
+class NotInventedHere(_BasicScraper):
+    description = u'Not Invented Here'
+    url = 'http://notinventedhe.re/'
+    rurl = escape(url)
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % 'on/2009-9-21'
+    imageSearch = compile(tagre("img", "src", r'(http://thiswas.notinventedhe.re/on/\d+-\d+-\d+)'))
+    prevSearch = compile(tagre("a", "href", r'(/on/\d+-\d+-\d+)')+'\s*Previous')
+    help = 'Index format: yyyy-mm-dd'
 
 class Nukees(_BasicScraper):
     description = u'Nukees, The Atomic Comic Strip'
