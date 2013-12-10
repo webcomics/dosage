@@ -49,6 +49,15 @@ class RedMeat(_BasicScraper):
     def namer(cls, imageUrl, pageUrl):
         return imageUrl.split('/')[-2]
 
+class RedsPlanet(_BasicScraper):
+    description = u"Red's Planet"
+    url = 'http://www.redsplanet.com/comic/'
+    rurl = escape(url)
+    stripUrl = url + 'rp/%s/'
+    firstStripUrl = stripUrl % 'pro/prologue-01'
+    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+_[^"/]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%srp/[^"/]+/[^"/]+/)' % rurl))
+    help = 'Index format: chapter/stripname'
 
 class RedString(_BasicScraper):
     description = u'A web comics about love and growing up. Art by Gina Biggs.'
