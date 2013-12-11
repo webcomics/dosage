@@ -311,7 +311,7 @@ def get_scraperclasses():
     global _scraperclasses
     if _scraperclasses is None:
         out.debug(u"Loading comic modules...")
-        modules = loader.get_modules()
+        modules = loader.get_modules('plugins')
         plugins = loader.get_plugins(modules, _BasicScraper)
         _scraperclasses = list(plugins)
         check_scrapers()

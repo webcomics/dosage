@@ -2,6 +2,10 @@
 # Copyright (C) 2012-2013 Bastian Kleineidam
 """
 Functions to load plugin modules.
+
+Example usage:
+    modules = loader.get_modules('plugins')
+    plugins = loader.get_plugins(modules, PluginClass)
 """
 import os
 import sys
@@ -15,9 +19,10 @@ def is_frozen ():
     return hasattr(sys, "frozen")
 
 
-def get_modules(folder='plugins'):
-    """Find all valid modules in the plugins subdirectory. A valid module
-    must have a .py extension, and is importable.
+def get_modules(folder):
+    """Find all valid modules in the given folder which must be in
+    in the same directory as this loader.py module. A valid module
+    has a .py extension, and is importable.
     @return: all loaded valid modules
     @rtype: iterator of module
     """
@@ -25,7 +30,8 @@ def get_modules(folder='plugins'):
         # find modules in library.zip filename
         zipname = os.path.dirname(os.path.dirname(__file__))
         with zipfile.ZipFile(zipname, 'r') as f:
-            prefix = "dosagelib/%s/" % folder
+            parentmodule = __loader__.fullname.split('.', 1)[0]
+            prefix = "%s/%s/" % (parentmodule, folder)
             modnames = [os.path.splitext(n[len(prefix):])[0]
               for n in f.namelist()
               if n.startswith(prefix) and "__init__" not in n]
@@ -52,10 +58,10 @@ def get_importable_modules(folder):
 
 
 def get_plugins(modules, classobj):
-    """Find all scrapers in all modules.
+    """Find all class objects in all modules.
     @param modules: the modules to search
     @ptype modules: iterator of modules
-    @return: found scrapers
+    @return: found classes
     @rytpe: iterator of class objects
     """
     for module in modules:
@@ -64,7 +70,7 @@ def get_plugins(modules, classobj):
 
 
 def get_module_plugins(module, classobj):
-    """Return all subclasses of _BasicScraper in the module.
+    """Return all subclasses of a class in the module.
     If the module defines __all__, only those entries will be searched,
     otherwise all objects not starting with '_' will be searched.
     """
