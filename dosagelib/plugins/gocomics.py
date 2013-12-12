@@ -8,7 +8,7 @@ from ..util import tagre
 from ..helpers import bounceStarter
 
 _imageSearch = (
-    compile(tagre("img", "src", r'(http://assets\.amuniversal\.com/[0-9a-f]+\?width=\d+)')),
+    compile(tagre("img", "src", r'(http://assets\.amuniversal\.com/[0-9a-f]+\?width=900)')),
     compile(tagre("meta", "content", r'(http://assets\.amuniversal\.com/[0-9a-f]+)', before="og:image")),
 )
 _prevSearch = compile(tagre("a", "href", r'(/[^"]+/\d+/\d+/\d+)', after="prev"))
