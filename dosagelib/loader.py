@@ -15,7 +15,8 @@ from .output import out
 
 
 def is_frozen ():
-    """Return True if running inside a py2exe-generated executable."""
+    """Return True if running inside a py2exe- or py2app-generated
+    executable."""
     return hasattr(sys, "frozen")
 
 
@@ -29,8 +30,8 @@ def get_modules(folder):
     if is_frozen():
         # find modules in library.zip filename
         zipname = os.path.dirname(os.path.dirname(__file__))
+        parentmodule = os.path.basename(os.path.dirname(__file__))
         with zipfile.ZipFile(zipname, 'r') as f:
-            parentmodule = __loader__.fullname.split('.', 1)[0]
             prefix = "%s/%s/" % (parentmodule, folder)
             modnames = [os.path.splitext(n[len(prefix):])[0]
               for n in f.namelist()
