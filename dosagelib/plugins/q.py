@@ -11,7 +11,7 @@ class QuestionableContent(_BasicScraper):
     url = 'http://www.questionablecontent.net/'
     stripUrl = url + 'view.php?comic=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'([^"]+/comics/[^"]+)', before="strip"))
+    imageSearch = compile(tagre("img", "src", r'([^"]+/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(view\.php\?comic=\d+)') + 'Previous')
     help = 'Index format: n (unpadded)'
 

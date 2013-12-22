@@ -30,12 +30,12 @@ class AbsurdNotions(_BasicScraper):
 
 
 class AbstruseGoose(_BasicScraper):
-    url = 'http://abstrusegoose.com/'
+    url = 'http://www.abstrusegoose.com/'
     rurl = escape(url)
     starter = bounceStarter(url, compile(tagre('a', 'href', r'(%s\d+)' % rurl)+"Next &raquo;"))
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre('img', 'src', r'(%sstrips/[^<>"]+)' % rurl))
+    imageSearch = compile(tagre('img', 'src', r'(http://abstrusegoose\.com/strips/[^<>"]+)'))
     prevSearch = compile(tagre('a', 'href', r'(%s\d+)' % rurl) + r'&laquo; Previous</a>')
     help = 'Index format: n (unpadded)'
     textSearch = compile(tagre("img", "title", r'([^"]+)'))

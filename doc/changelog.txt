@@ -10,6 +10,8 @@ Features:
 
 Fixes:
 - comics: Get larger images from GoComics.
+- comics: Fix AbstruseGoose and QuestionabelContent.
+  Closes: GH bug #50
 
 
 Dosage 2.8 (released 8.12.2013)
