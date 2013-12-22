@@ -9,6 +9,7 @@ except ImportError:
 import codecs
 import json
 from . import rss, util, configuration
+from .output import out
 
 # Maximum width or height to display an image in exported pages.
 # Note that only the displayed size is adjusted, not the image itself.
@@ -124,8 +125,9 @@ def getDimensionForImage(filename, maxsize):
         return None
     img = Image.open(filename)
     width, height = img.size
-    if width > maxsize and height > maxsize:
+    if width > maxsize:
         img.thumbnail(maxsize)
+        out.info("Downscaled display size from %s to %s" % ((width, height), img.size))
     return img.size
 
 
