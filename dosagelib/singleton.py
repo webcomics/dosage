@@ -32,7 +32,7 @@ class SingleInstance(object):
         """Create an exclusive lockfile or exit with an error and the given
         exit code."""
         self.initialized = False
-        scriptname = os.path.splitext(os.path.abspath(sys.argv[0]))[0]
+        scriptname = os.path.splitext(os.path.realpath(sys.argv[0]))[0]
         lockname = scriptname.replace("/", "-").replace(":", "").replace("\\", "-")
         if flavor_id:
             lockname += "-%s" % flavor_id
