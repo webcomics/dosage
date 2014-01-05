@@ -3,6 +3,7 @@
 # Copyright (C) 2012-2013 Bastian Kleineidam
 import requests
 import time
+import random
 import os
 from . import loader, configuration
 from .util import (fetchUrl, fetchUrls, fetchText, getPageContent,
@@ -72,9 +73,6 @@ class _BasicScraper(object):
 
     # usually the index format help
     help = ''
-
-    # wait time between downloading comic strips
-    waitSeconds = 0
 
     # HTTP session storing cookies
     session = requests.session()
@@ -189,8 +187,9 @@ class _BasicScraper(object):
                 out.warn(u"Already seen previous URL %r" % prevUrl)
                 break
             url = prevUrl
-            if url and self.waitSeconds:
-                time.sleep(self.waitSeconds)
+            if url:
+                # wait up to 1 second for next URL
+                time.sleep(random.random())
 
     def getPrevUrl(self, url, data, baseUrl):
         """Find previous URL."""
