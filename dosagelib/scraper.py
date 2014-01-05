@@ -188,8 +188,8 @@ class _BasicScraper(object):
                 break
             url = prevUrl
             if url:
-                # wait up to 1 second for next URL
-                time.sleep(random.random())
+                # wait up to 2 seconds for next URL
+                time.sleep(1.0 + random.random())
 
     def getPrevUrl(self, url, data, baseUrl):
         """Find previous URL."""
