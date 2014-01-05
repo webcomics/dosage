@@ -40,7 +40,6 @@ class SingleInstance(object):
         tempdir = tempfile.gettempdir()
         self.lockfile = os.path.normpath(os.path.join(tempdir, lockname))
         out.debug("SingleInstance lockfile: " + self.lockfile)
-        print(self.lockfile)
         if sys.platform == 'win32':
             try:
                 # file already exists, try to remove it in case the previous
