@@ -21,7 +21,7 @@ class Output(object):
 
     def __init__(self, stream=None):
         """Initialize context and indentation."""
-        self.context = u''
+        self.context = None
         self.level = 0
         self.timestamps = False
         if stream is None:
@@ -77,7 +77,7 @@ class Output(object):
         with lock:
             if self.context:
                 self.stream.write(u'%s%s> ' % (timestamp, self.context))
-            else:
+            elif self.context is None:
                 self.stream.write(u'%s%s> ' % (timestamp, get_threadname()))
             self.stream.write(u'%s' % s, color=color)
             try:
