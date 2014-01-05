@@ -14,7 +14,16 @@ import sys
 import os
 import argparse
 import pydoc
+import threading
 from io import StringIO
+try:
+    from Queue import Queue, Empty
+except ImportError:
+    from queue import Queue, Empty
+try:
+    from urllib.parse import urlparse
+except ImportError:
+    from urlparse import urlparse
 
 from dosagelib import events, scraper, configuration, singleton
 from dosagelib.output import out
@@ -189,6 +198,50 @@ def displayComicHelp(scraperobj):
         out.context = u''
 
 
+# the comic scraper job queue
+jobs = Queue()
+# ensure threads download only from one host at a time
+host_locks = {}
+
+
+def get_hostname(url):
+    """Get hostname from URL."""
+    return list(urlparse(url))[1].lower()
+
+
+lock = threading.Lock()
+def get_host_lock(url):
+    hostname = get_hostname(url)
+    return host_locks.setdefault(hostname, threading.Lock())
+
+comic_errors = 0
+
+
+class ComicGetter(threading.Thread):
+    """Get all strips of a comic in a thread."""
+
+    def __init__(self, options):
+        """Store options."""
+        super(ComicGetter, self).__init__()
+        self.options = options
+
+    def run(self):
+        """Process from queue until it is empty."""
+        global comic_errors
+        while True:
+            try:
+                scraperobj = jobs.get(False)
+                with lock:
+                    host_lock = get_host_lock(scraperobj.url)
+                with host_lock:
+                    errors = getStrips(scraperobj, self.options)
+                with lock:
+                    comic_errors += errors
+                jobs.task_done()
+            except Empty:
+                break
+
+
 def getComics(options):
     """Retrieve comics."""
     if options.handler:
@@ -198,19 +251,34 @@ def getComics(options):
     errors = 0
     try:
         for scraperobj in getScrapers(options.comic, options.basepath, options.adult, options.multimatch):
-            if options.vote:
-                errors += vote(scraperobj)
-            else:
-                errors += getStrips(scraperobj, options)
+            jobs.put(scraperobj)
+        # start threads
+        num_threads = max(1, min(10, jobs.qsize()))
+        for i in range(num_threads):
+            ComicGetter(options).start()
+        # wait for threads to finish
+        jobs.join()
     except ValueError as msg:
         out.exception(msg)
         errors += 1
     finally:
         events.getHandler().end()
+    return errors + comic_errors
+
+
+def voteComics(options):
+    """Vote for comics."""
+    errors = 0
+    try:
+        for scraperobj in getScrapers(options.comic, options.basepath, options.adult, options.multimatch):
+            errors += voteComic(scraperobj)
+    except ValueError as msg:
+        out.exception(msg)
+        errors += 1
     return errors
 
 
-def vote(scraperobj):
+def voteComic(scraperobj):
     """Vote for given comic scraper."""
     errors = 0
     name = scraperobj.getName()
@@ -285,6 +353,8 @@ def run(options):
         return 1
     if options.modulehelp:
         return displayHelp(options)
+    if options.vote:
+        return voteComics(options)
     return getComics(options)
 
 
