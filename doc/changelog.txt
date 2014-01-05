@@ -1,4 +1,4 @@
-Dosage 2.10 (released xx.xx.2014)
+Dosage 2.10 (released 5.1.2014)
 
 Features:
 - comics: Comic strips are downloaded in parallel. To prevent overload
