@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Copyright (C) 2013 Bastian Kleineidam
+# Copyright (C) 2013-2014 Bastian Kleineidam
 """
 Script to get arcamax comics and save the info in a JSON file for further processing.
 """

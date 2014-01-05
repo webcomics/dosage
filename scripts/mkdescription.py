@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
-# Copyright (C) 2013 Bastian Kleineidam
+# Copyright (C) 2013-2014 Bastian Kleineidam
 from __future__ import print_function
 import sys
 import os

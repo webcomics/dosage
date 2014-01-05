@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2013 Bastian Kleineidam
+# Copyright (C) 2012-2014 Bastian Kleineidam
 import re
 import json
 from dosagelib.util import unescape, unquote, asciify
