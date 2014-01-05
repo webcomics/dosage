@@ -125,7 +125,11 @@ Extending Dosage
 -----------------
 In order to add a new webcomic, a new module class has to be created in
 one of the *.py files in the `dosagelib/plugins` subdirectory.
-Look at the existing module classes for examples.
+Look at the
+[documentation for adding modules](https://github.com/wummel/dosage/blob/master/doc/adding_new_comics.md)
+and at
+[existing module classes](https://github.com/wummel/dosage/tree/master/dosagelib/plugins)
+for examples.
 
 Test suite status
 ------------------

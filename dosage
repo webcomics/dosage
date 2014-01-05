@@ -57,10 +57,6 @@ directory:
 If you already have downloaded several comics and want to get the latest
 strips of all of them:
   dosage --continue @
-
-On Unix, xargs(1) can download several comic strips in parallel,
-for example using up to 4 processes:
-  cd Comics && find . -type d | xargs -n1 -P4 dosage -b . -v
 """
 
 
