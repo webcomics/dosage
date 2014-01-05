@@ -435,10 +435,13 @@ class CyanideAndHappiness(_BasicScraper):
             self.stripUrl % "3360", # video
             self.stripUrl % "3367", # video
             self.stripUrl % "3382", # video
+            self.stripUrl % "3421", # video
         )
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
         imgname = imageUrl.split('/')[-1]
+        # only get the first 100 chars for the image name
+        imgname = imgname[:100]
         imgnum = pageUrl.split('/')[-2]
         return '%s_%s' % (imgnum, imgname)
