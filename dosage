@@ -16,7 +16,7 @@ import argparse
 import pydoc
 from io import StringIO
 
-from dosagelib import events, scraper, configuration
+from dosagelib import events, scraper, configuration, singleton
 from dosagelib.output import out
 from dosagelib.util import internal_error, getDirname, strlimit, getLangName
 from dosagelib.ansicolor import get_columns
@@ -271,6 +271,8 @@ def getStrips(scraperobj, options):
 def run(options):
     """Execute comic commands."""
     setOutputInfo(options)
+    # ensure only one instance of dosage is running
+    me = singleton.SingleInstance()
     if options.version:
         return displayVersion(options.verbose)
     if options.list:

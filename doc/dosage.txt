@@ -131,11 +131,6 @@ EXAMPLES
        backwards to the beginning.
               dosage -a calvinandhobbes:2012/07/22
 
-       On  Unix,  xargs(1) can download several comic strips in paral‐
-       lel, for example using up to 4 processes:
-              cd Comics && find . -type d | xargs -n1 -P4 dosage -b  .
-              -v
-
 ENVIRONMENT
        HTTP_PROXY
               dosage  will use the specified HTTP proxy when download‐

@@ -9,15 +9,6 @@
  
  <A NAME="lbAB">&nbsp;</A>
  <H2>NAME</H2>
-@@ -190,7 +190,7 @@
- 
- <P>
- 
--On Unix, <B><A HREF="../man1/xargs.1.html">xargs</A>(1)</B> can download several comic strips in parallel,
-+On Unix, <B>xargs(1)</B> can download several comic strips in parallel,
- for example using up to 4 processes:
- <DL COMPACT><DT><DD>
- <B>cd Comics &amp;&amp; find . -type d | xargs -n1 -P4 dosage -b . -v</B>
 @@ -282,7 +282,7 @@
  </DL>
  <HR>

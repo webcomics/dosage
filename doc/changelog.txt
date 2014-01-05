@@ -1,3 +1,10 @@
+Dosage 2.10 (released xx.xx.2014)
+
+Changes:
+- cmdline: Ensure only one instance of dosage is running to prevent
+  accidental DoS when fetching multiple comics of one site.
+
+
 Dosage 2.9 (released 22.12.2013)
 
 Features:
