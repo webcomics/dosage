@@ -224,6 +224,7 @@ class ComicGetter(threading.Thread):
         """Store options."""
         super(ComicGetter, self).__init__()
         self.options = options
+        self.origname = self.getName()
 
     def run(self):
         """Process from queue until it is empty."""
@@ -231,6 +232,7 @@ class ComicGetter(threading.Thread):
         while True:
             try:
                 scraperobj = jobs.get(False)
+                self.setName(scraperobj.getName())
                 with lock:
                     host_lock = get_host_lock(scraperobj.url)
                 with host_lock:
@@ -238,6 +240,7 @@ class ComicGetter(threading.Thread):
                 with lock:
                     comic_errors += errors
                 jobs.task_done()
+                self.setName(self.origname)
             except Empty:
                 break
 
@@ -281,9 +284,9 @@ def voteComics(options):
 def voteComic(scraperobj):
     """Vote for given comic scraper."""
     errors = 0
-    name = scraperobj.getName()
-    out.context = name
+    out.context = getScraperName(scraperobj)
     try:
+        name = scraperobj.getName()
         answer = scraperobj.vote()
         out.debug(u'Vote answer %r' % answer)
         if answer == 'counted':
@@ -313,7 +316,6 @@ def getStrips(scraperobj, options):
     else:
         # get current strip
         numstrips = 1
-    out.context = scraperobj.getName()
     try:
         if scraperobj.isComplete(options.basepath):
             out.info(u"All comics are already downloaded.")
@@ -331,8 +333,6 @@ def getStrips(scraperobj, options):
     except Exception as msg:
         out.exception(msg)
         errors += 1
-    finally:
-        out.context = u''
     return errors
 
 

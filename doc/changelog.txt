@@ -1,5 +1,8 @@
 Dosage 2.10 (released xx.xx.2014)
 
+Features:
+- comics: Comic strips are downloaded in parallel.
+
 Changes:
 - cmdline: Ensure only one instance of dosage is running to prevent
   accidental DoS when fetching multiple comics of one site.

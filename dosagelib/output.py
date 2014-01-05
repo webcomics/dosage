@@ -11,6 +11,11 @@ from .ansicolor import Colorizer
 
 lock = threading.Lock()
 
+def get_threadname():
+    """Return name of current thread."""
+    return threading.current_thread().getName()
+
+
 class Output(object):
     """Print output with context, indentation and optional timestamps."""
 
@@ -65,13 +70,15 @@ class Output(object):
         """Write message with indentation, context and optional timestamp."""
         if level > self.level:
             return
-        if self.level > 1 or self.timestamps:
+        if self.timestamps:
             timestamp = time.strftime(u'%H:%M:%S ')
         else:
             timestamp = u''
         with lock:
-            if self.context or timestamp:
+            if self.context:
                 self.stream.write(u'%s%s> ' % (timestamp, self.context))
+            else:
+                self.stream.write(u'%s%s> ' % (timestamp, get_threadname()))
             self.stream.write(u'%s' % s, color=color)
             try:
                 text_type = unicode
