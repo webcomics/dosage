@@ -14,7 +14,8 @@ _nextSearch = compile(_linkSearch + tagre("img", "class", "arrow_next"))
 _lastSearch = compile(_linkSearch + tagre("img", "class", "arrow_last"))
 
 def add(name, path):
-    classname = 'DrunkDuck_%s' % name
+    # XXX disallowed by robots.txt
+    classname = '_DrunkDuck_%s' % name
     _url = 'http://www.theduckwebcomics.com/%s/' % path
 
     @classmethod
