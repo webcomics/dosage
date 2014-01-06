@@ -18,6 +18,15 @@ class Caggage(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(%sarchives/\d+)' % rurl, after="prev"))
     help = 'Index format: number'
 
+class CampComic(_BasicScraper):
+    url = 'http://campcomic.com/comic/'
+    rurl = escape(url)
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '6'
+    imageSearch = compile(tagre("img", "src", r'(http://hw1\.pa-cdn\.com/camp/assets/img/katie/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, before="btn btnPrev"))
+    help = 'Index Format: number'
+    description = 'Camp Weedonwantcha is a place where kids get dropped off for the summer and are never picked up again.'
 
 class CaptainSNES(_BasicScraper):
     description = u'Captain SNES'
