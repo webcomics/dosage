@@ -120,6 +120,12 @@ class PHDComics(_BasicScraper):
         tagre("img", "src", r'(?:comics/)?images/prev_button\.gif', quote=""))
     help = 'Index format: number'
 
+    def shouldSkipUrl(self, url):
+        """Skip pages without images."""
+        return url in (
+            self.stripUrl % '1669', # video
+        )
+
 
 class PicPakDog(_BasicScraper):
     description = u'A comic by Kim Belding'
