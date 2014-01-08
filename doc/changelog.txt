@@ -1,7 +1,7 @@
 Dosage 2.11 (released xx.xx.2014)
 
 Features:
-- comics: Added CampComic and FoulLanguage comics.
+- comics: Added CampComic, FoulLanguage and StandStillStaySilent.
 
 
 Dosage 2.10 (released 5.1.2014)
