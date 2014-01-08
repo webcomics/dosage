@@ -459,6 +459,17 @@ class SPQRBlues(_BasicScraper):
     help = 'Index format: number'
 
 
+class StandStillStaySilent(_BasicScraper):
+    url = 'http://www.sssscomic.com/comic.php'
+    rurl = escape(url)
+    stripUrl = url + '?page=%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = compile(tagre("img", "src", r"(comicpages/[^']+)", before="comicnormal", quote="'"))
+    prevSearch = compile(tagre("a", "href", r"([^']+)", quote="'") + tagre("div", "id", r'navprev', quote="'"))
+    help = 'Index Format: number'
+    description = u'"Stand Still. Stay Silent" is a post-apocalyptic adventure story with a rather light tone and careless pace.'
+
+
 # XXX disallowed by robots.txt
 class _StationV3(_BasicScraper):
     url = 'http://www.stationv3.com/'
