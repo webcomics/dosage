@@ -8,7 +8,7 @@ Dosage 2.10 (released 5.1.2014)
 
 Features:
 - comics: Comic strips are downloaded in parallel. To prevent overload
-  of comic sites, no more than on download thread per host is allowed.
+  of comic sites, no more than one download thread per host is allowed.
 
 Changes:
 - cmdline: Ensure only one instance of dosage is running to prevent

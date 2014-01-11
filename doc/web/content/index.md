@@ -10,6 +10,9 @@ a webcomic, or catch-up to the last strip downloaded, or download a
 strip for a particular date/index (if the webcomic's site layout
 allows this).
 
+Multiple webcomics can be downloaded in parallel, making a daily
+more efficient.
+
 Notice
 -------
 This software is in no way intended to publically "broadcast" comic strips,
@@ -20,6 +23,10 @@ you may be infringing upon various copyrights.
 Additionally, Dosage respects the robots.txt exclusion protocol.
 This makes sure no content is accessed in an automatic way without consent
 by the publishers.
+
+In any case you should support the authors of the comics you are
+downloading, either by purchasing some of their products or even donating
+some money since they provide the comics you like and read.
 
 If you are a publisher of comics and want Dosage to access your files,
 add the following entry to your robotst.txt file:
@@ -37,7 +44,7 @@ which confirms that you are old enough to view them.
 
 Usage
 ------
-List [available comics](comic-index.html) (ca. 3000 at the moment):
+List [available comics](comic-index.html) (ca. 2000 at the moment):
 
 ```bash
 $ dosage --list
