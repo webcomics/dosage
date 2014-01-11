@@ -195,6 +195,17 @@ class PokeyThePenguin(_BasicScraper):
         return "%s/index%d.html" % (prefix, num)
 
 
+class PoorlyDrawnLines(_BasicScraper):
+    url = 'http://poorlydrawnlines.com/comic/'
+    rurl = escape(url)
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % 'campus-characters/'
+    imageSearch = compile(tagre("img", "src", r'(http://poorlydrawnlines\.com/wp-content/uploads/\d+/\d+/[^"]+)'))
+    prevSearch = compile(tagre("li", "class", r'previous') + tagre("a", "href", r'(%s[^"]+)' % rurl))
+    help = 'Index Format: name'
+    description = u'A thrice-weekly webcomic written and illustrated by Reza Farazmand. New comics every Monday, Wednesday, and Friday.'
+
+
 class Precocious(_BasicScraper):
     url = 'http://www.precociouscomic.com/'
     starter = indirectStarter(url,
