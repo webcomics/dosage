@@ -59,8 +59,8 @@ where NNN is the increasing comic number.
 ```firstStripUrl = stripUrl % '1'```
 
 This tells Dosage what the earliest comic strip URL looks like. Dosage
-stops searching for more comics when it is encounted. In our example
-comic numbering starts with ``1``, so the first comic URL is
+stops searching for more comics when it is encounterd. In our example
+comic numbering starts with ``1``, so the oldest comic URL is
 ``http://superdupercomic.com/comics/1``
 
 ```imageSearch = compile(tagre("img", "src", r'(%simg/[^"]+)' % rurl))```
