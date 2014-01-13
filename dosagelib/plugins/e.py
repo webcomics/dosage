@@ -47,6 +47,17 @@ class EatLiver(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(i\.php\?n=\d+)') + "&#060;&#060; Previous")
 
 
+class EatThatToast(_BasicScraper):
+    url = 'http://eatthattoast.com/'
+    rurl = escape(url)
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'thewizard/'
+    imageSearch =  compile(tagre("div", "id", r'comic') + "\s*.*\s*" + tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after='comic-nav-base comic-nav-previous'))
+    textSearch = compile(tagre("div", "id", r'comic') + "\s*.*\s*" + tagre("img", "alt", r'([^"]+)'))
+    help = 'Index Format: name'
+
+
 class EdibleDirt(_BasicScraper):
     description = u'Edible Dirt, by Matt Rosemier'
     url = 'http://eddirt.frozenreality.co.uk/'
