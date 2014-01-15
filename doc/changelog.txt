@@ -1,4 +1,4 @@
-Dosage 2.11 (released xx.xx.2014)
+Dosage 2.11 (released 15.1.2014)
 
 Features:
 - comics: Added CampComic, EatThatToast, FoulLanguage,
