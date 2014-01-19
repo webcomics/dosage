@@ -1,3 +1,10 @@
+Dosage 2.12 (released xx.xx.2014)
+
+Changes:
+- cmdline: The --basepath option now replaces "~" or "~user" with the
+  users home directory.
+
+
 Dosage 2.11 (released 15.1.2014)
 
 Features:

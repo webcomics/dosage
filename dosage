@@ -482,8 +482,9 @@ def warn_adult(scraperclass):
 def main():
     """Parse options and execute commands."""
     try:
-        parser = setupOptions()
-        res = run(parser.parse_args())
+        options = setupOptions().parse_args()
+        options.basepath = os.path.expanduser(options.basepath)
+        res = run(options)
     except KeyboardInterrupt:
         print("Aborted.")
         res = 1
