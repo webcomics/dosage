@@ -13,9 +13,9 @@ HtmlAuthor = Author.replace(u' ', u'&nbsp;')
 Maintainer = configdata.maintainer
 HtmlMaintainer = Maintainer.replace(u' ', u'&nbsp;')
 Copyright = u"Copyright (C) 2004-2008 " + \
-  (u",".join(Author.split(",")[:2]))+u"  (C) 2012-2013 "+Maintainer
+  (u",".join(Author.split(",")[:2]))+u"  (C) 2012-2014 "+Maintainer
 HtmlCopyright = u"Copyright &copy; 2004-2008 " + \
-  (u",".join(HtmlAuthor.split(",")[:2]))+u" &copy; 2012-2013 "+HtmlMaintainer
+  (u",".join(HtmlAuthor.split(",")[:2]))+u" &copy; 2012-2014 "+HtmlMaintainer
 Url = configdata.url
 SupportUrl = Url + u"issues"
 Email = configdata.maintainer_email
