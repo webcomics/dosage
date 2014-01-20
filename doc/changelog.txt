@@ -4,6 +4,9 @@ Changes:
 - cmdline: The --basepath option now replaces "~" or "~user" with the
   users home directory.
 
+Fixes:
+- comics: Fix DemolitionSquad.
+
 
 Dosage 2.11 (released 15.1.2014)
 

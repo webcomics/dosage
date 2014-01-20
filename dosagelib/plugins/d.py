@@ -136,19 +136,13 @@ class DeepFried(_BasicScraper):
 class DemolitionSquad(_BasicScraper):
     description = u'Demolitionsquad.de ist die erste deutsche Videospiel-Webcomic-Seite nach amerikanischen Vorbild und noch viel mehr als das. Auf Demolitionsquad.de findet der wissbegierige, spielebegeisterte Nutzer Comicstrips zu aktuellen Videospielen die ihm die Wartezeit auf den kommenden Top-Titel weiter ves\xfcssen.'
     url = 'http://www.demolitionsquad.de/'
-    starter = indirectStarter(url,
-        compile(tagre("a", "href", r'(no_cache/comicstrips/einzelansicht/archive/[^"]+)')))
-    stripUrl = url + 'comicstrips/einzelansicht/article/%s/'
-    firstStripUrl = stripUrl % 'videospiele-hentai-master'
+    stripUrl = url + '?comicbeitrag=%s'
+    firstStripUrl = stripUrl % '181'
     imageSearch = compile(tagre("img", "src", r'(uploads/pics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(comicstrips/einzelansicht/article/[^"]+)') +
-        tagre("img", "src", r'fileadmin/templates/images/button_back.gif'))
-    help = 'Index format: stripname'
+    prevSearch = compile(tagre("a", "href", r'(\?comicbeitrag=[^"]+)') +
+        tagre("img", "src", r'grafik/system/blaettern_zuruck_n\.gif'))
+    help = 'Index format: number'
     lang = 'de'
-
-    def prevUrlModifier(self, url):
-        # remove CGI params
-        return url.split('?')[0]
 
 
 class DerTodUndDasMaedchen(_BasicScraper):
