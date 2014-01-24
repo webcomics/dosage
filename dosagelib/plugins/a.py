@@ -30,7 +30,7 @@ class AbsurdNotions(_BasicScraper):
 
 
 class AbstruseGoose(_BasicScraper):
-    url = 'http://www.abstrusegoose.com/'
+    url = 'http://abstrusegoose.com/'
     rurl = escape(url)
     starter = bounceStarter(url, compile(tagre('a', 'href', r'(%s\d+)' % rurl)+"Next &raquo;"))
     stripUrl = url + '%s'
@@ -356,12 +356,12 @@ class AxeCop(_BasicScraper):
     rurl = escape(url)
     starter = bounceStarter(url,
         (
-          compile(tagre("a", "href", r'(%scomic/page-\d+-[^"]+/)' % rurl, after="nav-next")),
-          compile(tagre("a", "href", r'(%scomic/[^"]+/)' % rurl, after="nav-next")),
+          compile(tagre("a", "href", r'(%scomic/page-\d+-[^"]+/)' % rurl, after="navi-next")),
+          compile(tagre("a", "href", r'(%scomic/[^"]+/)' % rurl, after="navi-next")),
         )
     )
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '0'
     imageSearch = compile(tagre("img", "src", r'(http://mainsite\.axecop\.wpengine\.com/wp-content/uploads/sites/\d+/\d+/\d+/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+/)' % rurl, after="nav-prev"))
+    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+/)' % rurl, after="navi-prev"))
     help = 'Index format: usually stripname'

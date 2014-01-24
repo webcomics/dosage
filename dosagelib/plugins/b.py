@@ -40,11 +40,11 @@ class Bardsworth(_BasicScraper):
     description = u'Bardsworth - Magic, Mischief, and Cookies'
     url = 'http://www.bardsworth.com/'
     rurl = escape(url)
-    stripUrl = url + '?p=%s'
+    stripUrl = url + '?comic=%s'
     firstStripUrl = stripUrl % '750'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
-    help = 'Index format: nnn'
+    help = 'Index format: stripname'
 
 
 class Baroquen(_BasicScraper):

@@ -6,7 +6,8 @@ Changes:
 - documentation: Added install instructions at doc/install.txt
 
 Fixes:
-- comics: Fix DemolitionSquad.
+- comics: Fix AbstruseGoose, AxeCop, BardsWorth, DemolitionSquad.
+- comics: Remove broken ChugWorth.
 
 
 Dosage 2.11 (released 15.1.2014)

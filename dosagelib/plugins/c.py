@@ -200,24 +200,6 @@ class Chisuji(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/strip-name'
 
 
-class ChugworthAcademy(_BasicScraper):
-    url = 'http://chugworth.com/'
-    stripUrl = url + '?p=%s'
-    firstStripUrl = stripUrl % '12'
-    imageSearch = compile(r'<img src="(.+?)" alt="Comic')
-    prevSearch = compile(r'<a href="(http://chugworth.com/\?p=\d{1,4})"[^>]+?title="Previous">')
-    help = 'Index format: n (unpadded)'
-
-
-class ChugworthAcademyArchive(_BasicScraper):
-    url = 'http://chugworth.com/archive/?strip_id=422'
-    stripUrl = 'http://chugworth.com/archive/?strip_id=%s'
-    firstStripUrl = stripUrl % '0'
-    imageSearch = compile(r'<img src=(comics/\d+.+?.\w{1,4})')
-    prevSearch = compile(r'<a href=\'(.+?)\'><img src=\'images/previous.gif')
-    help = 'Index format: nnn'
-
-
 class CigarroAndCerveja(_BasicScraper):
     description = u'Cigarro & Cerveja'
     url = 'http://www.cigarro.ca/'
