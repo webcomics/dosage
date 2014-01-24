@@ -1,4 +1,4 @@
-Dosage 2.12 (released xx.xx.2014)
+Dosage 2.12 (released 24.1.2014)
 
 Changes:
 - cmdline: The --basepath option now replaces "~" or "~user" with the

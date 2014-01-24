@@ -1,5 +1,5 @@
 Project: dosage
-Version: 2.11
+Version: 2.12
 Hide: N
 Website-URL: http://wummel.github.io/dosage/
 Changelog-URL: https://github.com/wummel/dosage/blob/master/doc/changelog.txt
@@ -7,5 +7,4 @@ Source-Package-URL: http://wummel.github.io/dosage/dist/dosage-${version}.tar.gz
 GIT-Tree-URL: https://github.com/wummel/dosage.git
 Windows-installer-URL: http://wummel.github.io/dosage/dist/dosage-${version}.exe
 
-The comics CampComic, EatThatToast, FoulLanguage,
-PoorlyDrawnLines and StandStillStaySilent have been added.
+Some comics have been fixed.
