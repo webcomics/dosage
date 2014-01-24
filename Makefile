@@ -1,4 +1,5 @@
 # This Makefile is only used by developers.
+# See doc/install.txt on how to install dosage
 PYTHON:=python
 VERSION:=$(shell $(PYTHON) setup.py --version)
 MAINTAINER:=$(shell $(PYTHON) setup.py --maintainer)

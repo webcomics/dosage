@@ -1,0 +1,23 @@
+Installation
+-------------
+The easy way with pip:
+
+```shell
+pip install dosage
+```
+
+You can invoke Dosage directly from the source code as
+`./dosage`. Alternatively,
+you can install Dosage using python distutils by invoking
+setup.py in the root of the distribution. For example:
+
+```shell
+python setup.py install
+```
+
+or if you do not have root permissions:
+
+```shell
+python setup.py install --home=$HOME
+```
+

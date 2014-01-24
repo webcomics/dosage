@@ -3,6 +3,7 @@ Dosage 2.12 (released xx.xx.2014)
 Changes:
 - cmdline: The --basepath option now replaces "~" or "~user" with the
   users home directory.
+- documentation: Added install instructions at doc/install.txt
 
 Fixes:
 - comics: Fix DemolitionSquad.
