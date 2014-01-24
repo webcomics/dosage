@@ -128,6 +128,22 @@ class Misfile(_BasicScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
+class MrLovenstein(_BasicScraper):
+    url = 'http://www.mrlovenstein.com/'
+    rurl = escape(url)
+    stripUrl = url + 'comic/%s#comic'
+    firstStripUrl = stripUrl % '1'
+    imageSearch =  (
+        #captures rollover comic
+        compile(tagre("div", "class", r'comic_image') + "\s*.*\s*" + tagre("div", "style", r'display: none;') + "\s*.*\s*" + tagre("img", "src", r'(/images/comics/[^"]+)')),
+        #captures standard comic
+        compile(tagre("img", "src", r'(/images/comics/[^"]+)', before="comic_main_image")),
+    )
+    prevSearch = compile(tagre("a", "href", r'([^"]+)') + tagre("img", "src", "/images/nav_left.png"))
+    textSearch = compile(r'<meta name="description" content="(.+?)" />')
+    help = 'Index Format: n'
+
+
 class MyCartoons(_BasicScraper):
     url = 'http://mycartoons.de/'
     rurl = escape(url)
