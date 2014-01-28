@@ -291,6 +291,7 @@ class SluggyFreelance(_BasicScraper):
     stripUrl = url + 'comics/archives/daily/%s'
     imageSearch = compile(r'<img src="(/images/comics/.+?)"')
     prevSearch = compile(r'<a href="(.+?)"[^>]+?><span class="ui-icon ui-icon-seek-prev">')
+    multipleImagesPerStrip = True
     help = 'Index format: yymmdd'
 
 
