@@ -59,6 +59,18 @@ class TheGamerCat(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/[^"/]+/)' % rurl , after="navi navi-prev"))
     help = 'Index format: yyyy/mm/mmddyyyy'
 
+
+class TheGentlemansArmchair(_BasicScraper):
+    url = 'http://thegentlemansarmchair.com/'
+    rurl = escape(url)
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'dora-the-explorer/'
+    imageSearch =  compile(tagre("div", "id", r'comic') + "\s*.*\s*" + tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after='navi-prev'))
+    textSearch = compile(r'<h3 class="comic-post-widget-title">(.+)</h3>')
+    help = 'Index Format: name'
+
+
 class TheNoob(_BasicScraper):
     url = 'http://www.thenoobcomic.com/index.php'
     stripUrl = url + '?pos=%s'
