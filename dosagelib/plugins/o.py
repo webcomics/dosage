@@ -52,6 +52,18 @@ class Oglaf(_BasicScraper):
         return cls.url
 
 
+class OhJoySexToy(_BasicScraper):
+    url = 'http://www.ohjoysextoy.com/'
+    rurl = escape(url)
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % 'introduction'
+    imageSearch =  compile(tagre("div", "class", r'comicpane') + "\s*.*\s*" + tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after='navi navi-prev'))
+    textSearch = compile(tagre("div", "class", r'comicpane') + "\s*.*\s*" + tagre("img", "alt", r'([^"]+)'))
+    help = 'Index Format: name'
+    adult = True
+
+
 class OkCancel(_BasicScraper):
     url = 'http://okcancel.com/'
     rurl = escape(url)
