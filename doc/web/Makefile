@@ -9,7 +9,7 @@ comics:	data/testresults.txt
 	env PYTHONPATH=../.. ./mkcomics.py $< content
 
 votes:
-	env PYTHONPATH=../.. ./mkvotes.py
+	env PYTHONPATH=../..:$(HOME)/lib/python ./mkvotes.py
 
 media/favicon.ico:	../icon/favicon.ico
 	cp $< $@
