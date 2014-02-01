@@ -6,7 +6,7 @@ all:
 comics:	data/testresults.txt
 # regenerate comic pages
 	rm -f content/comics/*.md
-	env PYTHONPATH=../.. ./mkcomics.py $< content
+	env PYTHONPATH=../..:$(HOME)/lib/python ./mkcomics.py $< content
 
 votes:
 	env PYTHONPATH=../..:$(HOME)/lib/python ./mkvotes.py
@@ -17,7 +17,7 @@ media/favicon.ico:	../icon/favicon.ico
 gen:	media/favicon.ico
 # copy some static files
 	cp ../dosage.1.html $(HOMEPAGE)
-	env PYTHONPATH=$(HOME)/src $(WOK) -v
+	env PYTHONPATH=$(HOME)/src:$(HOME)/lib/python $(WOK) -v
 
 serve:
 	xdg-open http://localhost:8080

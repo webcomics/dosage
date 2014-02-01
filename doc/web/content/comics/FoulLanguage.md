@@ -1,7 +1,7 @@
-title: ChugworthAcademyArchive
-url: "/comics/ChugworthAcademyArchive.html"
+title: FoulLanguage
+url: "/comics/FoulLanguage.html"
 ---
-Dosage comic ChugworthAcademyArchive
+Dosage comic FoulLanguage
 -----------------------------------------
 
 <p id="msg"></p>
@@ -14,10 +14,10 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>-</td>
+<th>Description</th><td>Weekly cartoons about a geeky, neurotic, duck trying to survive in a stupid, stupid world.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://chugworth.com/archive/?strip_id=422">http://chugworth.com/archive/?strip_id=422</a></td>
+<th>Website</th><td><a href="http://www.fowllanguagecomics.com/">http://www.fowllanguagecomics.com/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,12 +29,12 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 23.12.2013</td>
+<th>Status</th><td>error on 22.01.2014</td>
 </tr>
 <tr>
 <th>Votes</th><td>0
 <form action="http://gaecounter.appspot.com/count/" method="POST">
-<input name="name" type="hidden" value="ChugworthAcademyArchive"/>
+<input name="name" type="hidden" value="FoulLanguage"/>
 <input name="uid" type="hidden" id="voteuid" value=""/>
 <input type="submit" value="Vote"/>
 </form>
@@ -46,4 +46,4 @@ var ua = navigator.userAgent;
 document.getElementById("voteuid").value = ua.replace(/[^a-zA-Z0-9\._:]/g , "_");;
 </script>
 
-[Edit this info](ChugworthAcademyArchive_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](FoulLanguage_edit.html) or go back to the [comic list](../comic-index.html).

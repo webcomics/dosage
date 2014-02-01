@@ -29,7 +29,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 23.12.2013</td>
+<th>Status</th><td>ok on 22.01.2014</td>
 </tr>
 <tr>
 <th>Votes</th><td>0

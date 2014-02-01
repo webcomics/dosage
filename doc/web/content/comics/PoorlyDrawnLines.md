@@ -1,7 +1,7 @@
-title: ChugworthAcademy
-url: "/comics/ChugworthAcademy.html"
+title: PoorlyDrawnLines
+url: "/comics/PoorlyDrawnLines.html"
 ---
-Dosage comic ChugworthAcademy
+Dosage comic PoorlyDrawnLines
 -----------------------------------------
 
 <p id="msg"></p>
@@ -14,10 +14,10 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>-</td>
+<th>Description</th><td>A thrice-weekly webcomic written and illustrated by Reza Farazmand. New comics every Monday, Wednesday, and Friday.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://chugworth.com/">http://chugworth.com/</a></td>
+<th>Website</th><td><a href="http://poorlydrawnlines.com/comic/">http://poorlydrawnlines.com/comic/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>
@@ -29,12 +29,12 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Adult content</th><td>no</td>
 </tr>
 <tr>
-<th>Status</th><td>ok on 23.12.2013</td>
+<th>Status</th><td>ok on 22.01.2014</td>
 </tr>
 <tr>
 <th>Votes</th><td>0
 <form action="http://gaecounter.appspot.com/count/" method="POST">
-<input name="name" type="hidden" value="ChugworthAcademy"/>
+<input name="name" type="hidden" value="PoorlyDrawnLines"/>
 <input name="uid" type="hidden" id="voteuid" value=""/>
 <input type="submit" value="Vote"/>
 </form>
@@ -46,4 +46,4 @@ var ua = navigator.userAgent;
 document.getElementById("voteuid").value = ua.replace(/[^a-zA-Z0-9\._:]/g , "_");;
 </script>
 
-[Edit this info](ChugworthAcademy_edit.html) or go back to the [comic list](../comic-index.html).
+[Edit this info](PoorlyDrawnLines_edit.html) or go back to the [comic list](../comic-index.html).

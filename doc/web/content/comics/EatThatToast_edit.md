@@ -1,7 +1,7 @@
-title: Edit ChugworthAcademy
-url: "/comics/ChugworthAcademy_edit.html"
+title: Edit EatThatToast
+url: "/comics/EatThatToast_edit.html"
 ---
-Edit info for comic ChugworthAcademy
+Edit info for comic EatThatToast
 
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
@@ -9,7 +9,7 @@ Edit info for comic ChugworthAcademy
 <th>Description</th><td><textarea name="description" cols="40" rows="3">-</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://chugworth.com/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://eatthattoast.com/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>
@@ -22,11 +22,11 @@ Edit info for comic ChugworthAcademy
 </tr>
 <tr>
 <th></th><td>
-<input type="hidden" name="comic" value="ChugworthAcademy" />
+<input type="hidden" name="comic" value="EatThatToast" />
 <input type="submit" name="submit" value="Submit" />
 </td>
 </tr>
 </table>
 </form>
 
-Back to the [comic](ChugworthAcademy.html).
+Back to the [comic](EatThatToast.html).
