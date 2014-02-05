@@ -10,8 +10,8 @@ a webcomic, or catch-up to the last strip downloaded, or download a
 strip for a particular date/index (if the webcomic's site layout
 allows this).
 
-Multiple webcomics can be downloaded in parallel, making a daily
-more efficient.
+Multiple webcomics can be downloaded in parallel, making the update
+of comic strips faster.
 
 Notice
 -------
@@ -25,8 +25,8 @@ This makes sure no content is accessed in an automatic way without consent
 by the publishers.
 
 In any case you should support the authors of the comics you are
-downloading, either by purchasing some of their products or even donating
-some money since they provide the comics you like and read.
+downloading, either by buying some of their products or even donating
+them some money since they provide the comics you like and read.
 
 If you are a publisher of comics and want Dosage to access your files,
 add the following entry to your robotst.txt file:
