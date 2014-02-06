@@ -3,6 +3,9 @@ Dosage 2.13 (released xx.xx.2014)
 Features:
 - comics: Added OhJoySexToy, TheGentlemansArmchair.
 
+Fixes:
+- comics: Fixed FredoAndPidjin.
+
 
 Dosage 2.12 (released 24.1.2014)
 
