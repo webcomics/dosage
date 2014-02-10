@@ -9,6 +9,7 @@ branches:
 # install libjpeg-dev for PIL to handle JPEGs
 before_install:
   - sudo apt-get update -q -y
+  - sudo apt-get upgrade -q -y
   - sudo apt-get install -q -y libjpeg-dev
   - sudo ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib
   - sudo ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib
