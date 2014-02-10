@@ -99,7 +99,7 @@ class CatAndGirl(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'([^"]+)')+r"[^<]+Previous</a>")
     help = 'Index format: n (unpadded)'
 
-    def shouldSkipUrl(self, url):
+    def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
         return url in (
             self.stripUrl % '4299',
@@ -403,7 +403,7 @@ class Curvy(_BasicScraper):
         compile(tagre("a", "href", r'(/\?date=\d+)') +
             tagre("img", "src", "/nav/next\.png")))
 
-    def shouldSkipUrl(self, url):
+    def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
         return url in (
             self.stripUrl % '20130402',
@@ -419,15 +419,9 @@ class CyanideAndHappiness(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(/comics/\d+/)', before="prev"))
     help = 'Index format: n (unpadded)'
 
-    def shouldSkipUrl(self, url):
+    def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
-        return url in (
-            self.stripUrl % "3082",
-            self.stripUrl % "3360", # video
-            self.stripUrl % "3367", # video
-            self.stripUrl % "3382", # video
-            self.stripUrl % "3421", # video
-        )
+        return "/comics/play-button.png" in data
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
