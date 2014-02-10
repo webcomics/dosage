@@ -305,7 +305,7 @@ class SMBC(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'([^"]+)#comic', after="backRollover"))
     help = 'Index format: nnnn'
 
-    def shouldSkipUrl(self, url):
+    def shouldSkipUrl(self, url, data):
         """Skip promo or missing update pages."""
         return url in (
             self.stripUrl % '2865',
@@ -347,7 +347,7 @@ class SnowFlakes(_BasicScraper):
         ext = imageUrl.rsplit('.', 1)[1]
         return "SnowFlakes-%d.%s" % (index, ext)
 
-    def shouldSkipUrl(self, url):
+    def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
         return url in (
             self.stripUrl % ('279', '2'), # no comic
@@ -526,7 +526,7 @@ class StuffNoOneToldMe(_BasicScraper):
         parts, imagename = imageUrl.rsplit('/', 1)
         return '%s-%s-%s-%s' % (year, month, stripname, imagename)
 
-    def shouldSkipUrl(self, url):
+    def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
         return url in (
             self.stripUrl % '2012/08/self-rant', # no comic

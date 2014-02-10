@@ -158,7 +158,7 @@ class ToonHole(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/stripname'
 
-    def shouldSkipUrl(self, url):
+    def shouldSkipUrl(self, url, data):
         return url in (self.stripUrl % "2013/03/if-game-of-thrones-was-animated",)
 
 

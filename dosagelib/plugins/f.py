@@ -113,7 +113,7 @@ class FonFlatter(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/number-stripname'
 
-    def shouldSkipUrl(self, url):
+    def shouldSkipUrl(self, url, data):
         return url in (
             self.stripUrl % "2006/11/30/adventskalender",
             self.stripUrl % "2006/09/21/danke",

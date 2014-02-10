@@ -223,7 +223,7 @@ class AmazingSuperPowers(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/name'
 
-    def shouldSkipUrl(self, url):
+    def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
         return url in (
             # video
@@ -326,7 +326,7 @@ class AstronomyPOTD(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(ap\d{6}\.html)') + "&lt;</a>")
     help = 'Index format: yymmdd'
 
-    def shouldSkipUrl(self, url):
+    def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
         return url in (
             self.stripUrl % '130217', # video

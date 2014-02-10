@@ -120,7 +120,7 @@ class PHDComics(_BasicScraper):
         tagre("img", "src", r'(?:comics/)?images/prev_button\.gif', quote=""))
     help = 'Index format: number'
 
-    def shouldSkipUrl(self, url):
+    def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
         return url in (
             self.stripUrl % '1669', # video

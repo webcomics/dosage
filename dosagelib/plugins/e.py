@@ -94,7 +94,7 @@ class Eriadan(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'([^"]+)', after="prev"))
     help = 'Index format: yyyy/mm/dd/nnn (unpadded)'
 
-    def shouldSkipUrl(self, url):
+    def shouldSkipUrl(self, url, data):
         return url in (
              self.stripUrl % "2013/04/02/istruzioni-per-il-non-uso", # video
         )

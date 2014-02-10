@@ -102,7 +102,7 @@ class _BasicScraper(object):
         """Get hash value from name and index list."""
         return hash((self.getName(), self.indexes))
 
-    def shouldSkipUrl(self, url):
+    def shouldSkipUrl(self, url, data):
         """Determine if search for images in given URL should be skipped."""
         return False
 
@@ -163,7 +163,7 @@ class _BasicScraper(object):
         while url:
             out.info(u'Get strip URL %s' % url, level=1)
             data, baseUrl = getPageContent(url, self.session)
-            if self.shouldSkipUrl(url):
+            if self.shouldSkipUrl(url, data):
                 out.info(u'Skipping URL %s' % url)
                 self.skippedUrls.add(url)
             else:

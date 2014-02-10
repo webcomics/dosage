@@ -80,7 +80,7 @@ class Zwarwald(_BasicScraper):
     help = 'Index format: number'
     waitSeconds = 1
 
-    def shouldSkipUrl(self, url):
+    def shouldSkipUrl(self, url, data):
         """Some pages have flash content."""
         return url in (
             self.stripUrl % "112",

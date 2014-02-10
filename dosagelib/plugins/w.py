@@ -54,7 +54,7 @@ class WebDesignerCOTW(_BasicScraper):
     help = 'Index format: yyyy/mm/stripname'
     description = u"The content revolves around web design, blogging and funny situations that we encounter in our daily lives as designers and this week we focus on Christmas. These great cartoons are created by Jerry King, an award-winning cartoonist who’s one of the most published, prolific and versatile cartoonists in the world today."
 
-    def shouldSkipUrl(self, url):
+    def shouldSkipUrl(self, url, data):
         """Skip non-comic URLs."""
         return 'comics-of-the-week' not in url
 
