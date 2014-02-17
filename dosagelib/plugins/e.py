@@ -193,7 +193,9 @@ class EvilInc(_BasicScraper):
     url = 'http://evil-inc.com/'
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % 'monday-3'
-    imageSearch = compile(tagre("img", "src", r'(http://i\d\.wp\.com/evil-inc\.com/wp-content/uploads/[^"]+)'))
+    imageSearch = compile(tagre("div", "id", "comic") +
+        r'\s*.*\s*' + #filter out the variant href tag
+        tagre("img", "src", r'(http://i\d\.wp\.com/evil-inc\.com/wp-content/uploads/[^"]+)'))
     prevSearch = compile(tagre("span", "class", "mininav-prev") +
       tagre("a", "href", r'([^"]+)'))
     help = 'Index format: stripname'
