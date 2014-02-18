@@ -155,6 +155,16 @@ class DerTodUndDasMaedchen(_BasicScraper):
     lang = 'de'
 
 
+class DieFruehreifen(_BasicScraper):
+    url = 'http://www.die-fruehreifen.de/index.php'
+    stripUrl = url + '?id=%s&order=DESC'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = compile(tagre("img", "src", r"(strips/[F,f]rueh[_]?[S,s]trip_\d+.jpg)"))
+    prevSearch = compile(tagre("a", "href", r"(index\.php\?id=\d+&order=DESC)") + tagre("img","id",r"naechster"))
+    help = 'Index format: n (unpadded)'
+    lang = 'de'
+
+
 class DieselSweeties(_BasicScraper):
     description = u'diesel sweeties : robot webcomic & geeky music t-shirts'
     url = 'http://www.dieselsweeties.com/'
