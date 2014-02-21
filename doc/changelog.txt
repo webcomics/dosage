@@ -4,7 +4,7 @@ Features:
 - comics: Added OhJoySexToy, TheGentlemansArmchair.
 
 Fixes:
-- comics: Fixed FredoAndPidjin.
+- comics: Fixed EvilInc, FredoAndPidjin.
 
 
 Dosage 2.12 (released 24.1.2014)
