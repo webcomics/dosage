@@ -71,6 +71,15 @@ class TheGentlemansArmchair(_BasicScraper):
     help = 'Index Format: name'
 
 
+class TheLandscaper(_BasicScraper):
+    url = 'http://landscaper.visual-assault.net/comic/latest'
+    rurl = escape(url)
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = compile(tagre("img", "src", r'(/comics/comic/comic_page/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(/comic/[^"]+)')+'&lsaquo; Previous')
+    help = 'Index format: name'
+
 class TheNoob(_BasicScraper):
     url = 'http://www.thenoobcomic.com/index.php'
     stripUrl = url + '?pos=%s'

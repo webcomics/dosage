@@ -19,6 +19,7 @@ def add(name, host):
         stripUrl = baseUrl + '?comic_id=%s',
         imageSearch = _imageSearch,
         prevSearch = _prevSearch,
+		waitSeconds = 1,
         help = 'Index format: n (unpadded)',
     )
 
@@ -36,3 +37,4 @@ add('Soul', 'soul')
 add('FT', 'ft')
 add('Bunnywith', 'bunnywith')
 add('Braindead', 'braindead')
+add('GrimTalesFromDownBelow', 'grim')
