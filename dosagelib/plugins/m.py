@@ -133,6 +133,7 @@ class MonsieurLeChien(_BasicScraper):
     url = 'http://www.monsieur-le-chien.fr/'
     stripUrl = url + 'index.php?planche=%s'
     firstStripUrl = stripUrl % '2'
+    lang = 'fr'
     imageSearch = compile(tagre("img", "src", r'(i/planches/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)') + tagre("img", "src", "i/precedent.gif"))
     help = 'Index format: n'
