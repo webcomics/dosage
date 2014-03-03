@@ -128,6 +128,17 @@ class Misfile(_BasicScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
+class MonsieurLeChien(_BasicScraper):
+    description = u'Le blog de Monsieur le Chien, réflexions vaines et assertions sans fondements d\'un contribuable moyen.'
+    url = 'http://www.monsieur-le-chien.fr/'
+    stripUrl = url + 'index.php?planche=%s'
+    firstStripUrl = stripUrl % '2'
+    lang = 'fr'
+    imageSearch = compile(tagre("img", "src", r'(i/planches/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)') + tagre("img", "src", "i/precedent.gif"))
+    help = 'Index format: n'
+
+
 class MrLovenstein(_BasicScraper):
     url = 'http://www.mrlovenstein.com/'
     rurl = escape(url)

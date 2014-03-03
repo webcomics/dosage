@@ -8,6 +8,15 @@ from ..scraper import _BasicScraper
 from ..helpers import bounceStarter, indirectStarter
 from ..util import getQueryParams, tagre
 
+class Underling(_BasicScraper):
+    url = 'http://underlingcomic.com/'
+    stripUrl = url 
+    rurl = escape(url)
+    firstStripUrl = stripUrl + 'page-one/'
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]*)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)', after = r'class="[^"]*navi-prev'))
+    help = 'Index format: nnn'
+
 
 class Undertow(_BasicScraper):
     url = 'http://undertow.dreamshards.org/'
