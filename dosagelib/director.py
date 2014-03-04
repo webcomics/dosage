@@ -142,6 +142,7 @@ class ComicGetter(threading.Thread):
         return allskipped
 
     def stop(self):
+        """Mark this thread as stopped."""
         self.stopped = True
 
 
@@ -180,6 +181,7 @@ def getComics(options):
 
 
 def finish():
+    """Print warning about interrupt and empty the job queue."""
     out.warn("Interrupted!")
     for t in threads:
         t.stop()

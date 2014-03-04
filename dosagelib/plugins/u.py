@@ -10,7 +10,7 @@ from ..util import getQueryParams, tagre
 
 class Underling(_BasicScraper):
     url = 'http://underlingcomic.com/'
-    stripUrl = url 
+    stripUrl = url
     rurl = escape(url)
     firstStripUrl = stripUrl + 'page-one/'
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]*)' % rurl))
