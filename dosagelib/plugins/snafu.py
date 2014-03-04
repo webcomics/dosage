@@ -19,7 +19,6 @@ def add(name, host):
         stripUrl = baseUrl + '?comic_id=%s',
         imageSearch = _imageSearch,
         prevSearch = _prevSearch,
-        waitSeconds = 1,
         help = 'Index format: n (unpadded)',
     )
 

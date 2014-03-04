@@ -78,7 +78,6 @@ class Zwarwald(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(%sindex\.php/page/\d+/)' % rurl) +
         tagre("img", "src", r'http://zwarwald\.de/images/prev\.jpg', quote="'"))
     help = 'Index format: number'
-    waitSeconds = 1
 
     def shouldSkipUrl(self, url, data):
         """Some pages have flash content."""
