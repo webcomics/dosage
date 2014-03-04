@@ -1,4 +1,4 @@
-Dosage 2.13 (released xx.xx.2014)
+Dosage 2.13 (released 3.3.2014)
 
 Features:
 - comics: Added OhJoySexToy, TheGentlemansArmchair, Underling, DongeonsAndDenizens,
