@@ -14,20 +14,10 @@ import sys
 import os
 import argparse
 import pydoc
-import threading
 from io import StringIO
-try:
-    from Queue import Queue, Empty
-except ImportError:
-    from queue import Queue, Empty
-try:
-    from urllib.parse import urlparse
-except ImportError:
-    from urlparse import urlparse
-
-from dosagelib import events, scraper, configuration, singleton
+from dosagelib import events, configuration, singleton, director
 from dosagelib.output import out
-from dosagelib.util import internal_error, getDirname, strlimit, getLangName
+from dosagelib.util import internal_error, strlimit, getLangName
 from dosagelib.ansicolor import get_columns
 
 
@@ -142,29 +132,11 @@ def setOutputInfo(options):
     #add_stderr_logger()
 
 
-def saveComicStrip(strip, basepath, dryrun):
-    """Save a comic strip which can consist of multiple images."""
-    errors = 0
-    allskipped = True
-    for image in strip.getImages():
-        try:
-            if dryrun:
-                filename, saved = "", False
-            else:
-                filename, saved = image.save(basepath)
-            if saved:
-                allskipped = False
-        except Exception as msg:
-            out.exception('Could not save image at %s to %s: %r' % (image.referrer, image.filename, msg))
-            errors += 1
-    return errors, allskipped
-
-
 def displayHelp(options):
     """Print help for comic strips."""
     errors = 0
     try:
-        for scraperobj in getScrapers(options.comic, options.basepath):
+        for scraperobj in director.getScrapers(options.comic, options.basepath):
             errors += displayComicHelp(scraperobj)
     except ValueError as msg:
         out.exception(msg)
@@ -195,83 +167,11 @@ def displayComicHelp(scraperobj):
         out.context = orig_context
 
 
-# the comic scraper job queue
-jobs = Queue()
-# ensure threads download only from one host at a time
-host_locks = {}
-
-
-def get_hostname(url):
-    """Get hostname from URL."""
-    return list(urlparse(url))[1].lower()
-
-
-lock = threading.Lock()
-def get_host_lock(url):
-    """Get lock object for given URL host."""
-    hostname = get_hostname(url)
-    return host_locks.setdefault(hostname, threading.Lock())
-
-comic_errors = 0
-
-
-class ComicGetter(threading.Thread):
-    """Get all strips of a comic in a thread."""
-
-    def __init__(self, options):
-        """Store options."""
-        super(ComicGetter, self).__init__()
-        self.options = options
-        self.origname = self.getName()
-
-    def run(self):
-        """Process from queue until it is empty."""
-        global comic_errors
-        while True:
-            try:
-                scraperobj = jobs.get(False)
-                self.setName(scraperobj.getName())
-                with lock:
-                    host_lock = get_host_lock(scraperobj.url)
-                with host_lock:
-                    errors = getStrips(scraperobj, self.options)
-                with lock:
-                    comic_errors += errors
-                jobs.task_done()
-                self.setName(self.origname)
-            except Empty:
-                break
-
-
-def getComics(options):
-    """Retrieve comics."""
-    if options.handler:
-        for name in set(options.handler):
-            events.addHandler(name, options.basepath, options.baseurl)
-    events.getHandler().start()
-    errors = 0
-    try:
-        for scraperobj in getScrapers(options.comic, options.basepath, options.adult, options.multimatch):
-            jobs.put(scraperobj)
-        # start threads
-        num_threads = max(1, min(10, jobs.qsize()))
-        for i in range(num_threads):
-            ComicGetter(options).start()
-        # wait for threads to finish
-        jobs.join()
-    except ValueError as msg:
-        out.exception(msg)
-        errors += 1
-    finally:
-        events.getHandler().end()
-    return errors + comic_errors
-
-
 def voteComics(options):
     """Vote for comics."""
     errors = 0
     try:
-        for scraperobj in getScrapers(options.comic, options.basepath, options.adult, options.multimatch):
+        for scraperobj in director.getScrapers(options.comic, options.basepath, options.adult, options.multimatch):
             errors += voteComic(scraperobj)
     except ValueError as msg:
         out.exception(msg)
@@ -305,36 +205,6 @@ def voteComic(scraperobj):
     return errors
 
 
-def getStrips(scraperobj, options):
-    """Get all strips from a scraper."""
-    errors = 0
-    if options.all or options.cont:
-        numstrips = None
-    elif options.numstrips:
-        numstrips = options.numstrips
-    else:
-        # get current strip
-        numstrips = 1
-    try:
-        if scraperobj.isComplete(options.basepath):
-            out.info(u"All comics are already downloaded.")
-            return 0
-        for strip in scraperobj.getStrips(numstrips):
-            _errors, skipped = saveComicStrip(strip, options.basepath, options.dry_run)
-            errors += _errors
-            if skipped and options.cont:
-                # stop when retrieval skipped an image for one comic strip
-                out.info(u"Stop retrieval because image file already exists")
-                break
-        if options.all and not (errors or options.dry_run or
-                                options.cont or scraperobj.indexes):
-            scraperobj.setComplete(options.basepath)
-    except Exception as msg:
-        out.exception(msg)
-        errors += 1
-    return errors
-
-
 def run(options):
     """Execute comic commands."""
     setOutputInfo(options)
@@ -354,7 +224,7 @@ def run(options):
         return displayHelp(options)
     if options.vote:
         return voteComics(options)
-    return getComics(options)
+    return director.getComics(options)
 
 
 def doList(columnList=True, verbose=False):
@@ -369,7 +239,7 @@ def doList(columnList=True, verbose=False):
         out.info(u'Available comic scrapers:')
         out.info(u'Comics tagged with [%s] require age confirmation with the --adult option.' % TAG_ADULT)
         out.info(u'Non-english comics are tagged with [%s].' % TAG_LANG)
-        scrapers = sorted(getScrapers(['@@']), key=lambda s: s.getName())
+        scrapers = sorted(director.getAllScrapers(), key=lambda s: s.getName())
         if columnList:
             num = doColumnList(scrapers)
         else:
@@ -424,59 +294,6 @@ def getScraperName(scraperobj, limit=None):
     if limit is not None:
         name = strlimit(name, limit)
     return name + suffix
-
-
-def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False):
-    """Get scraper objects for the given comics."""
-    if '@' in comics:
-        # only scrapers whose directory already exists
-        if len(comics) > 1:
-            out.warn(u"using '@' as comic name ignores all other specified comics.")
-        for scraperclass in scraper.get_scraperclasses():
-            dirname = getDirname(scraperclass.getName())
-            if os.path.isdir(os.path.join(basepath, dirname)):
-                if not adult and scraperclass.adult:
-                    warn_adult(scraperclass)
-                    continue
-                yield scraperclass()
-    elif '@@' in comics:
-        # all scrapers
-        for scraperclass in scraper.get_scraperclasses():
-            if not adult and scraperclass.adult:
-                warn_adult(scraperclass)
-                continue
-            yield scraperclass()
-    else:
-        # get only selected comic scrapers
-        # store them in a set to eliminate duplicates
-        scrapers = set()
-        for comic in comics:
-            # Helpful when using shell completion to pick comics to get
-            comic.rstrip(os.path.sep)
-            if basepath and comic.startswith(basepath):
-                # make the following command work:
-                # find Comics -type d | xargs -n1 -P10 dosage -b Comics
-                comic = comic[len(basepath):].lstrip(os.sep)
-            if ':' in comic:
-                name, index = comic.split(':', 1)
-                indexes = index.split(',')
-            else:
-                name = comic
-                indexes = None
-            scraperclasses = scraper.find_scraperclasses(name, multiple_allowed=multiple_allowed)
-            for scraperclass in scraperclasses:
-                if not adult and scraperclass.adult:
-                    warn_adult(scraperclass)
-                    continue
-                scraperobj = scraperclass(indexes=indexes)
-                if scraperobj not in scrapers:
-                    scrapers.add(scraperobj)
-                    yield scraperobj
-
-
-def warn_adult(scraperclass):
-    """Print warning about adult content."""
-    out.warn(u"skipping adult comic %s; use the --adult option to confirm your age" % scraperclass.getName())
 
 
 def main():

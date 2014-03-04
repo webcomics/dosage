@@ -1,10 +1,12 @@
 Dosage 2.13 (released xx.xx.2014)
 
 Features:
-- comics: Added OhJoySexToy, TheGentlemansArmchair.
+- comics: Added OhJoySexToy, TheGentlemansArmchair, Underling, DongeonsAndDenizens,
+  GrimTalesFromDownBelow, TheLandscaper, DieFruehreifen, MonsieurLeChien.
 
 Fixes:
 - comics: Fixed EvilInc, FredoAndPidjin.
+- cmdline: Make download threads interruptable with Ctrl-C
 
 
 Dosage 2.12 (released 24.1.2014)
