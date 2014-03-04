@@ -1,8 +1,11 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2014 Bastian Kleineidam
-import threading
-import thread
 import os
+import threading
+try:
+    import _thread as thread
+except ImportError:
+    import thread
 try:
     from Queue import Queue, Empty
 except ImportError:
