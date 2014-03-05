@@ -44,12 +44,6 @@ class Oglaf(_BasicScraper):
     help = 'Index format: stripname'
     adult = True
 
-    @classmethod
-    def starter(cls):
-        # click the "I am 18" button
-        data = {"over18": "&nbsp;"}
-        urlopen(cls.url, cls.session, data=data, referrer=cls.url)
-        return cls.url
 
 
 class OhJoySexToy(_BasicScraper):
