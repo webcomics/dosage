@@ -52,7 +52,7 @@ homepage:
 	@echo "lname: \"$(LAPPNAME)\"" >> $(WEBMETA)
 	@echo "maintainer: \"$(MAINTAINER)\"" >> $(WEBMETA)
 	@echo "author: \"$(AUTHOR)\"" >> $(WEBMETA)
-	git add doc/web/app.yaml
+	git add $(WEBMETA)
 	-git commit -m "Updated webpage meta info"
 # update documentation and release website
 	$(MAKE) -C doc
