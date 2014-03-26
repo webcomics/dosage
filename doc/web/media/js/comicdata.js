@@ -501,7 +501,7 @@ $(document).ready(function() {
 ["<a href=\"comics/Creators_TheQuigmans.html\">Creators/TheQuigmans</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/Creators_TheWizardofIdinSpanish.html\">Creators/TheWizardofIdinSpanish</a>", "Other", "Spanish; Castilian", "ok", "0"],
 ["<a href=\"comics/CrimsonDark.html\">CrimsonDark</a>", "Other", "English", "ok", "0"],
-["<a href=\"comics/CtrlAltDel.html\">CtrlAltDel</a>", "Other", "English", "ok", "1"],
+["<a href=\"comics/CtrlAltDel.html\">CtrlAltDel</a>", "Other", "English", "ok", "2"],
 ["<a href=\"comics/CtrlAltDelSillies.html\">CtrlAltDel/Sillies</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/CucumberQuest.html\">CucumberQuest</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/Curtailed.html\">Curtailed</a>", "Other", "English", "ok", "0"],
