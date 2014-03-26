@@ -1,7 +1,7 @@
 Dosage 2.14 (released xx.xx.2014)
 
 Fixes:
-- comics: Fixed PennyArcade
+- comics: Fixed LoadingArtist, PennyArcade
   Closes: GH bug #62
 
 

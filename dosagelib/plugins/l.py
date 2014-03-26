@@ -87,7 +87,7 @@ class LoadingArtist(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2011/01/04/born'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+/)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/stripname'
 
