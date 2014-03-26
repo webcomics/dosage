@@ -5,7 +5,7 @@
 from re import compile, escape
 from ..scraper import _BasicScraper
 from ..helpers import indirectStarter
-from ..util import tagre, urlopen
+from ..util import tagre
 
 
 class OctopusPie(_BasicScraper):
