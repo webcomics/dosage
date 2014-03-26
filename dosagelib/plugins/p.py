@@ -5,7 +5,7 @@
 from re import compile, escape
 from ..scraper import _BasicScraper
 from ..helpers import bounceStarter, queryNamer, indirectStarter
-from ..util import tagre
+from ..util import tagre, fetchUrl, getPageContent
 
 
 class PandyLand(_BasicScraper):
@@ -83,14 +83,32 @@ class PennyAndAggie(_BasicScraper):
 class PennyArcade(_BasicScraper):
     url = 'http://penny-arcade.com/comic/'
     rurl = escape(url)
-    starter = bounceStarter(url,
-       compile(tagre("a", "href", r'(%s[^"]+)' % rurl, before="btnNext"))
-    )
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1998/11/18'
     imageSearch = compile(tagre("img", "src", r'(http://art\.penny-arcade\.com/photos/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, before="btnPrev"))
-    help = 'Index format: yyyy/mm/dd'
+    nextSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, before="btnNext"))
+    help = 'Index format: yyyy/mm/dd/'
+
+    @classmethod
+    def prevUrlModifier(cls, prevUrl):
+        if prevUrl:
+            dummy, yyyy, mm, dd = prevUrl.rsplit('/', 3)
+            try:
+                int(dd)
+            except ValueError:
+                # URL has form yyyy/mm/dd/stripname
+                prevUrl = "%s/%s/%s" % (dummy, yyyy, mm)
+            return prevUrl
+
+    @classmethod
+    def starter(cls):
+        """Get bounced start URL."""
+        data, baseUrl = getPageContent(cls.url, cls.session)
+        url1 = fetchUrl(cls.url, data, baseUrl, cls.prevSearch)
+        data, baseUrl = getPageContent(url1, cls.session)
+        url2 = fetchUrl(url1, data, baseUrl, cls.nextSearch)
+        return cls.prevUrlModifier(url2)
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):

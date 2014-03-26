@@ -1,3 +1,10 @@
+Dosage 2.14 (released xx.xx.2014)
+
+Fixes:
+- comics: Fixed PennyArcade
+  Closes: GH bug #62
+
+
 Dosage 2.13 (released 3.3.2014)
 
 Features:
