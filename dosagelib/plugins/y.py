@@ -17,6 +17,7 @@ class YAFGC(_BasicScraper):
       tagre("img", "src", r'/img/navbar/go_to_previous\.gif'))
     help = 'Index format: number'
 
+    @classmethod
     def prevUrlModifier(cls, prevUrl):
         if prevUrl:
             return prevUrl.replace("www.yafgc.net", "yafgc.net")
