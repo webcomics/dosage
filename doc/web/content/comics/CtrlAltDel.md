@@ -32,7 +32,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Status</th><td>ok on 22.01.2014</td>
 </tr>
 <tr>
-<th>Votes</th><td>2
+<th>Votes</th><td>3
 <form action="http://gaecounter.appspot.com/count/" method="POST">
 <input name="name" type="hidden" value="CtrlAltDel"/>
 <input name="uid" type="hidden" id="voteuid" value=""/>
