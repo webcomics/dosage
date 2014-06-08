@@ -1,4 +1,7 @@
-Dosage 2.14 (released xx.xx.2014)
+Dosage 2.14 (released 8.6.2014)
+
+Changes:
+- installation: Source releases are now available from PyPi.
 
 Fixes:
 - comics: Fixed LoadingArtist, PennyArcade, ZenPencils.
