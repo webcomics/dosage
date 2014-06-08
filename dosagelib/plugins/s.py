@@ -465,8 +465,8 @@ class StandStillStaySilent(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + '?page=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r"(comicpages/[^']+)", before="comicnormal", quote="'"))
-    prevSearch = compile(tagre("a", "href", r"([^']+)", quote="'") + tagre("div", "id", r'navprev', quote="'"))
+    imageSearch = compile(tagre("img", "src", r'(comicpages/[^"]+)', before="comicnormal"))
+    prevSearch = compile(tagre("a", "href", r"([^']+)", quote="'") + tagre("div", "id", r'navprev'))
     help = 'Index Format: number'
     description = u'"Stand Still. Stay Silent" is a post-apocalyptic adventure story with a rather light tone and careless pace.'
 

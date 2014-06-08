@@ -42,7 +42,7 @@ class ComicImage(object):
         """Set URL and filename."""
         self.name = name
         self.referrer = referrer
-        self.url = url
+        self.url = url.strip()
         self.dirname = dirname
         filename = getFilename(filename)
         self.filename, self.ext = os.path.splitext(filename)
