@@ -270,10 +270,12 @@ def unescape(text):
 _nopathquote_chars = "-;/=,~*+()@!"
 
 def normaliseURL(url):
-    """Removes any leading empty segments to avoid breaking urllib2; also replaces
-    HTML entities and character references.
+    """Normalising
+    - strips and leading or trailing whitespace,
+    - replaces HTML entities and character references,
+    - removes any leading empty segments to avoid breaking urllib2.
     """
-    url = unicode_safe(url)
+    url = unicode_safe(url).strip()
     # XXX: brutal hack
     url = unescape(url)
 
