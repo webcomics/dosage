@@ -91,7 +91,7 @@ releasecheck:
 	@if ! grep "Version: $(VERSION)" $(APPNAME).freecode > /dev/null; then \
 	  echo "Could not release: edit $(APPNAME).freecode version"; false; \
 	fi
-	$(PYTHON) setup.py check --restructuredtext
+#	$(PYTHON) setup.py check --restructuredtext
 	git checkout debian
 	@if ! head -1 debian/changelog | grep "$(VERSION)" > /dev/null; then \
 	  echo "Could not release: update debian/changelog version"; false; \
