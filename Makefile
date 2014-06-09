@@ -33,7 +33,8 @@ chmod:
 
 dist:
 	[ -d dist ] || mkdir dist
-	git archive --format=tar --prefix=$(LAPPNAME)-$(VERSION)/ HEAD | gzip -9 > dist/$(ARCHIVE_SOURCE)
+	$(PYTHON) setup.py sdist --formats=tar
+	gzip --best dist/$(LAPPNAME)-$(VERSION).tar
 	[ ! -f ../$(ARCHIVE_WIN32) ] || cp ../$(ARCHIVE_WIN32) dist
 
 sign:
