@@ -34,7 +34,8 @@ chmod:
 dist:
 	[ -d dist ] || mkdir dist
 	$(PYTHON) setup.py sdist --formats=tar
-	gzip --best dist/$(LAPPNAME)-$(VERSION).tar
+	gzip --best dist/$(APPNAME)-$(VERSION).tar
+	mv dist/$(APPNAME)-$(VERSION).tar.gz dist/$(ARCHIVE_SOURCE)
 	[ ! -f ../$(ARCHIVE_WIN32) ] || cp ../$(ARCHIVE_WIN32) dist
 
 sign:
