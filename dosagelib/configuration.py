@@ -2,7 +2,7 @@
 """
 Define basic configuration data like version or application name.
 """
-import _Dosage_configdata as configdata
+import _dosage_configdata as configdata
 
 Version = configdata.version
 ReleaseDate = configdata.release_date

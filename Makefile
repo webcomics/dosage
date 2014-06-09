@@ -5,16 +5,15 @@ VERSION:=$(shell $(PYTHON) setup.py --version)
 MAINTAINER:=$(shell $(PYTHON) setup.py --maintainer)
 AUTHOR:=$(shell $(PYTHON) setup.py --author)
 APPNAME:=$(shell $(PYTHON) setup.py --name)
-LAPPNAME:=$(shell echo $(APPNAME)|tr "[A-Z]" "[a-z]")
-ARCHIVE_SOURCE:=$(LAPPNAME)-$(VERSION).tar.gz
-ARCHIVE_WIN32:=$(LAPPNAME)-$(VERSION).exe
+ARCHIVE_SOURCE:=$(APPNAME)-$(VERSION).tar.gz
+ARCHIVE_WIN32:=$(APPNAME)-$(VERSION).exe
 GITUSER:=wummel
-GITREPO:=$(LAPPNAME)
+GITREPO:=$(APPNAME)
 HOMEPAGE:=$(HOME)/public_html/dosage-webpage.git
 WEBMETA:=doc/web/app.yaml
 DEBUILDDIR:=$(HOME)/projects/debian/official
-DEBORIGFILE:=$(DEBUILDDIR)/$(LAPPNAME)_$(VERSION).orig.tar.gz
-DEBPACKAGEDIR:=$(DEBUILDDIR)/$(LAPPNAME)-$(VERSION)
+DEBORIGFILE:=$(DEBUILDDIR)/$(APPNAME)_$(VERSION).orig.tar.gz
+DEBPACKAGEDIR:=$(DEBUILDDIR)/$(APPNAME)-$(VERSION)
 # Default pytest options
 # Note that using -n silently swallows test creation exceptions like
 # import errors.
@@ -51,15 +50,16 @@ upload_binary:
 	cp dist/$(ARCHIVE_WIN32) dist/$(ARCHIVE_WIN32).asc \
 	  $(HOMEPAGE)/dist
 
-homepage:
+update_webmeta:
 # update metadata
 	@echo "version: \"$(VERSION)\"" > $(WEBMETA)
 	@echo "name: \"$(APPNAME)\"" >> $(WEBMETA)
-	@echo "lname: \"$(LAPPNAME)\"" >> $(WEBMETA)
 	@echo "maintainer: \"$(MAINTAINER)\"" >> $(WEBMETA)
 	@echo "author: \"$(AUTHOR)\"" >> $(WEBMETA)
 	git add $(WEBMETA)
 	-git commit -m "Updated webpage meta info"
+
+homepage: update_webmeta
 # update documentation and release website
 	$(MAKE) -C doc
 	$(MAKE) -C doc/web release
@@ -75,7 +75,7 @@ register:
 	@echo "Register at Python Package Index..."
 	$(PYTHON) setup.py register
 	@echo "Submit to freecode..."
-	freecode-submit < $(LAPPNAME).freecode
+	freecode-submit < $(APPNAME).freecode
 
 releasecheck:
 	git checkout master
@@ -89,8 +89,8 @@ releasecheck:
 	  echo "Missing WIN32 distribution archive at ../$(ARCHIVE_WIN32)"; \
 	  false; \
 	fi
-	@if ! grep "Version: $(VERSION)" $(LAPPNAME).freecode > /dev/null; then \
-	  echo "Could not release: edit $(LAPPNAME).freecode version"; false; \
+	@if ! grep "Version: $(VERSION)" $(APPNAME).freecode > /dev/null; then \
+	  echo "Could not release: edit $(APPNAME).freecode version"; false; \
 	fi
 	$(PYTHON) setup.py check --restructuredtext
 	git checkout debian
@@ -131,7 +131,7 @@ clean:
 	rm -rf build dist
 
 distclean: clean
-	rm -rf $(APPNAME).egg-info $(LAPPNAME).prof test.sh Comics
+	rm -rf $(APPNAME).egg-info $(APPNAME).prof test.sh Comics
 	rm -f _$(APPNAME)_configdata.py MANIFEST
 
 localbuild:
@@ -148,7 +148,7 @@ deb:
 # To build a local .deb package, use:
 # $ sudo apt-get build-dep dosage; apt-get source dosage; cd dosage-*; debuild binary
 	[ -f $(DEBORIGFILE) ] || cp dist/$(ARCHIVE_SOURCE) $(DEBORIGFILE)
-	sed -i -e 's/VERSION_$(LAPPNAME):=.*/VERSION_$(LAPPNAME):=$(VERSION)/' $(DEBUILDDIR)/$(LAPPNAME).mak
+	sed -i -e 's/VERSION_$(APPNAME):=.*/VERSION_$(APPNAME):=$(VERSION)/' $(DEBUILDDIR)/$(APPNAME).mak
 	[ -d $(DEBPACKAGEDIR) ] || (cd $(DEBUILDDIR); \
 	  patool extract $(DEBORIGFILE); \
 	  cd $(CURDIR); \
@@ -156,7 +156,7 @@ deb:
 	  cp -r debian $(DEBPACKAGEDIR); \
 	  rm -f $(DEBPACKAGEDIR)/debian/.gitignore; \
 	  git checkout master)
-	$(MAKE) -C $(DEBUILDDIR) $(LAPPNAME)_clean $(LAPPNAME)
+	$(MAKE) -C $(DEBUILDDIR) $(APPNAME)_clean $(APPNAME)
 
 update-copyright:
 # update-copyright is a local tool which updates the copyright year for each

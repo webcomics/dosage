@@ -36,7 +36,7 @@ from distutils import util
 from distutils.file_util import write_file
 
 AppVersion = '2.14'
-AppName = 'Dosage'
+AppName = 'dosage'
 
 py_excludes = ['doctest', 'unittest', 'Tkinter', 'pdb',
   'email', 'ftplib', 'pickle',
