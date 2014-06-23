@@ -73,8 +73,6 @@ tag:
 register:
 	@echo "Register at Python Package Index..."
 	$(PYTHON) setup.py register
-	@echo "Submit to freecode..."
-	freecode-submit < $(APPNAME).freecode
 
 releasecheck:
 	git checkout master
@@ -87,9 +85,6 @@ releasecheck:
 	@if [ ! -f ../$(ARCHIVE_WIN32) ]; then \
 	  echo "Missing WIN32 distribution archive at ../$(ARCHIVE_WIN32)"; \
 	  false; \
-	fi
-	@if ! grep "Version: $(VERSION)" $(APPNAME).freecode > /dev/null; then \
-	  echo "Could not release: edit $(APPNAME).freecode version"; false; \
 	fi
 #	$(PYTHON) setup.py check --restructuredtext
 	git checkout debian
