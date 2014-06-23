@@ -28,6 +28,15 @@ class SabrinaOnline(_BasicScraper):
         archivepages = search.findall(data)
         return cls.url + archivepages[-1]
 
+class SafelyEndangered(_BasicScraper):
+    description = u''
+    url = 'http://www.safelyendangered.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl =  stripUrl % 'ignored'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.safelyendangered\.com/wp-content/uploads/\d+/\d+/[^"]+\.[a-z]+).*'))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)', after="navi navi-prev"))
+    textSearch = compile(tagre("img", "title", r'([^"]+)', before=r'http://www\.safelyendangered\.com/wp-content/uploads'))
+    help = 'Index format: yyyy/mm/stripname'
 
 class SailorsunOrg(_BasicScraper):
     url = 'http://sailorsun.org/'
