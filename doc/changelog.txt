@@ -1,3 +1,14 @@
+Dosage 2.15 (released xx.xx.2014)
+
+Features:
+- comics: Added Whomp.
+  Closes: GH bug #64
+
+Fixes:
+- comics: Fixed GirlGenius
+  Closes: GH bug #63
+
+
 Dosage 2.14 (released 8.6.2014)
 
 Changes:

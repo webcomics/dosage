@@ -105,6 +105,16 @@ class WhiteNoise(_BasicScraper):
     help = 'Index format: n'
 
 
+class Whomp(_BasicScraper):
+    url = 'http://www.whompcomic.com/'
+    rurl = escape(url)
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2010/06/14/06142010'
+    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl, after="navi-prev"))
+    help = 'Index format: yyyy/mm/dd/stripname'
+
+
 class WhyTheLongFace(_BasicScraper):
     baseUrl = 'http://www.absurdnotions.org/'
     rurl = escape(baseUrl)
