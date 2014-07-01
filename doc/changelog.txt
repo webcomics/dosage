@@ -5,8 +5,8 @@ Features:
   Closes: GH bug #64
 
 Fixes:
-- comics: Fixed GirlGenius
-  Closes: GH bug #63
+- comics: Fixed GirlGenius, LookingForGroup
+  Closes: GH bug #63, #66
 
 
 Dosage 2.14 (released 8.6.2014)

@@ -97,9 +97,10 @@ class LookingForGroup(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + 'page/%s/'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(http://(?:www|cdn)\.lfgcomic\.com/wp-content/uploads/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(%spage/[-0-9]+/)' % rurl, after="navtop-prev"))
+    imageSearch = compile(tagre("img", "src", r'(http://(?:www|cdn)\.lfgcomic\.com/wp-content/uploads/\d+/\d+/lfg[^"]+)'))
+    #http://www.lfgcomic.com/wp-content/uploads/2014/06/lfg2827-787-jun30-14.gif
+    prevSearch = compile(tagre("a", "href", r'(%spage/[-0-9]+/)' % rurl, after="comic-nav-prev"))
     starter = indirectStarter(url,
-        compile(tagre("a", "href", r'(%spage/[-0-9]+/)' % rurl, after="feature-previous")))
+        compile(tagre("a", "href", r'(%spage/[-0-9]+/)' % rurl, after="feature-item-link")))
     nameSearch = compile(r'/page/([-0-9]+)/')
     help = 'Index format: nnn'
