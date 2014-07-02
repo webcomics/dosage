@@ -213,7 +213,6 @@ class TheOuterQuarter(_BasicScraper):
 class TheThinHLine(_BasicScraper):
     description = u'the thin H line. Proudly mediocre. NSFW.'
     url = 'http://thinhline.tumblr.com/'
-    rurl = escape(url)
     stripUrl = url + 'post/%s'
     firstStripUrl = stripUrl % '3517345105'
     imageSearch = compile(tagre('a', 'href', '%simage[^"]+' % url) + tagre('img', 'src', '([^"]+media.tumblr.com/[^"]+)'))
