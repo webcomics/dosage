@@ -92,7 +92,7 @@ class ScandinaviaAndTheWorld(_BasicScraper):
     description = u'Scandinavia and the World'
     url = 'http://satwcomic.com/'
     rurl = escape(url)
-    stripUrl = url + '%s/'
+    stripUrl = url + '%s'
     firstStripUrl = stripUrl % 'sweden-denmark-and-norway'
     imageSearch = compile(tagre("img", "src", r'(%sart/[^"/]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s[^"/]+)' % rurl)+"\s*"+tagre('span', 'class', 'spritePrevious'))

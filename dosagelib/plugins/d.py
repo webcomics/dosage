@@ -328,7 +328,7 @@ class _DumbingOfAge(_BasicScraper):
 
 class DungeonsAndDenizens(_BasicScraper):
     url = 'http://dungeond.com/'
-    stripUrl = url + '\d/\d/\d/%s/'
+    stripUrl = url + r'\d+/\d+/\d+/%s/'
     firstStripUrl = stripUrl % '08232005'
     imageSearch = compile(tagre("img", "src", r'(%sfiles//comics/[^"]+)' % url))
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % url) + "Previous")

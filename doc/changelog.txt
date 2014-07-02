@@ -5,7 +5,8 @@ Features:
   Closes: GH bug #64
 
 Fixes:
-- comics: Fixed GirlGenius, LookingForGroup
+- comics: Fixed DungeonsAndDenizens, GirlGenius, GirlsWithSlingshots,
+  LookingForGroup, ScandinaviaAndTheWorld.
   Closes: GH bug #63, #66
 
 

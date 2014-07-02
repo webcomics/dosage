@@ -119,14 +119,14 @@ class GirlGenius(_BasicScraper):
 class GirlsWithSlingshots(_BasicScraper):
     url = 'http://www.girlswithslingshots.com/'
     rurl = escape(url)
-    stripUrl = url + 'comic/gws%s/'
-    firstStripUrl = stripUrl % '1'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'gws1'
     imageSearch = (
         compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl)),
         compile(tagre("img", "src", r'(http://cdn\.girlswithslingshots\.com/comics/[^"]+)')),
     )
     prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl, after="prev"))
-    help = 'Index format: nnn'
+    help = 'Index format: stripname'
 
 
 class GlassHalfEmpty(_BasicScraper):
