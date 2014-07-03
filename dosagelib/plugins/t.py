@@ -231,7 +231,7 @@ class TheThinHLine(_BasicScraper):
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
-        """Remove trailing digit from day number."""
+        """Use page URL sequence which is apparently increasing."""
         num = pageUrl.split('/')[-1]
         ext = imageUrl.rsplit('.', 1)[1]
         return "thethinhline-%s.%s" % (num, ext)
