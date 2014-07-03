@@ -210,6 +210,17 @@ class TheOuterQuarter(_BasicScraper):
     help = 'Index format: nnn'
 
 
+class TheThinHLine(_BasicScraper):
+    description = u'the thin H line. Proudly mediocre. NSFW.'
+    url = 'http://thinhline.tumblr.com/'
+    stripUrl = url + 'post/%s'
+    firstStripUrl = stripUrl % '3517345105'
+    imageSearch = compile(tagre('a', 'href', '%simage[^"]+' % url) + tagre('img', 'src', '([^"]+media.tumblr.com/[^"]+)'))
+    prevSearch = compile(r'<a href="([^"]+)">&gt;</a>')
+    starter = indirectStarter(url, compile(r'<a href="([^"]+)" class="timestamp"'))
+    adult = True
+
+
 class ThreePanelSoul(_BasicScraper):
     url = 'http://threepanelsoul.com/'
     rurl = escape(url)
