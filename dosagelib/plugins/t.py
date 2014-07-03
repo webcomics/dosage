@@ -5,7 +5,7 @@
 from re import compile, escape, IGNORECASE
 from ..scraper import _BasicScraper
 from ..helpers import indirectStarter
-from ..util import tagre
+from ..util import tagre, fetchUrl, getPageContent
 
 
 class TheBrads(_BasicScraper):
@@ -213,12 +213,28 @@ class TheOuterQuarter(_BasicScraper):
 class TheThinHLine(_BasicScraper):
     description = u'the thin H line. Proudly mediocre. NSFW.'
     url = 'http://thinhline.tumblr.com/'
+    rurl = escape(url)
     stripUrl = url + 'post/%s'
     firstStripUrl = stripUrl % '3517345105'
-    imageSearch = compile(tagre('a', 'href', '%simage[^"]+' % url) + tagre('img', 'src', '([^"]+media.tumblr.com/[^"]+)'))
-    prevSearch = compile(r'<a href="([^"]+)">&gt;</a>')
-    starter = indirectStarter(url, compile(r'<a href="([^"]+)" class="timestamp"'))
+    imageSearch = compile(tagre('img', 'data-src', r'([^"]+media.tumblr.com/[^"]+)', before='content-image'))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)') + '&gt;</a>')
+    starter = indirectStarter(url, compile(tagre("a", "href", r'([^"]+)', after='class="timestamp"')))
     adult = True
+
+    indirectImageSearch = compile(tagre('a', 'href', r'(%simage/\d+)' % rurl))
+
+    def getComicStrip(self, url, data, baseUrl):
+        """The comic strip image is in a separate page."""
+        pageUrl = fetchUrl(url, data, baseUrl, self.indirectImageSearch)
+        pageData, pageBaseUrl = getPageContent(pageUrl, self.session)
+        return super(TheThinHLine, self).getComicStrip(pageUrl, pageData, pageBaseUrl)
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        """Remove trailing digit from day number."""
+        num = pageUrl.split('/')[-1]
+        ext = imageUrl.rsplit('.', 1)[1]
+        return "thethinhline-%s.%s" % (num, ext)
 
 
 class ThreePanelSoul(_BasicScraper):

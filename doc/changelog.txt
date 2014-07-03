@@ -1,8 +1,8 @@
 Dosage 2.15 (released xx.xx.2014)
 
 Features:
-- comics: Added Whomp.
-  Closes: GH bug #64
+- comics: Added TheThinHLine, Whomp.
+  Closes: GH bug #64, #67
 
 Fixes:
 - comics: Fixed DungeonsAndDenizens, GirlGenius, GirlsWithSlingshots,
