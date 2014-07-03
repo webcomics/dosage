@@ -1,4 +1,4 @@
-Dosage 2.15 (released xx.xx.2014)
+Dosage 2.15 (released 3.7.2014)
 
 Features:
 - comics: Added TheThinHLine, Whomp.
