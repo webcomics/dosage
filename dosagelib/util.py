@@ -305,7 +305,7 @@ def check_robotstxt(url, session):
     roboturl = get_roboturl(url)
     rp = get_robotstxt_parser(roboturl, session=session)
     if not rp.can_fetch(UserAgent, str(url)):
-        raise IOError("%s is disallowed by robots.txt" % url)
+        raise IOError("%s is disallowed by %s" % (url, roboturl))
 
 
 @memoized
@@ -329,10 +329,10 @@ def get_robotstxt_parser(url, session=None):
 
 def urlopen(url, session, referrer=None, max_content_bytes=None,
             timeout=ConnectionTimeoutSecs, raise_for_status=True,
-            stream=False, data=None):
+            stream=False, data=None, useragent=UserAgent):
     """Open an URL and return the response object."""
     out.debug(u'Open URL %s' % url)
-    headers = {'User-Agent': UserAgent}
+    headers = {'User-Agent': useragent}
     if referrer:
         headers['Referer'] = referrer
     out.debug(u'Sending headers %s' % headers, level=3)
