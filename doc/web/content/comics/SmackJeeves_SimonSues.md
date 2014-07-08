@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Simon, once brilliant law student at the prestigious Haversford Campus, now finds himself council for those in need of representation against the occult. It's the age old Faustian tale, but this time, Faust has a killer lawyer. ************************************************* WARNING! -Main Comic (Not BL) contains horror and graphic violence. -Bonus Comics contain sexual content/BL. Updates Monday, Wednesday, and Friday! ************************************************* *Check out my tumblr to see process pages and random sketches! http://simonsues.tumblr.com/ You can now read Simon Sues on MangaMagazine.net (http://www.mangamagazine.net/manga-and-comics/Simon-Sues/detail-page/221) and on Manga Fox! (http://mangafox.me/manga/simon_sues/)</td>
+<th>Description</th><td>Simon, once brilliant law student at the prestigious Haversford Campus, now finds himself council for those in need of representation against the occult. It's the age old Faustian tale, but this time, Faust has a killer lawyer. Updates(religiously!) Monday, Wednesday, and Friday! ************************************************* WARNING! -Main Comic (Not BL) contains horror and graphic violence. -Bonus Comics contain sexual content/BL. ************************************************* Please support Simon Sues on Ink Blazers http://simonsues.inkblazers.com The more fans and hits I get, the more money goes toward the comic! *Check out my tumblr to see process pages and random sketches! http://simonsues.tumblr.com/</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://simonsues.smackjeeves.com/comics/">http://simonsues.smackjeeves.com/comics/</a></td>

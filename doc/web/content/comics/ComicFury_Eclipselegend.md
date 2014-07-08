@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A story of war, legends, aliens, explosions and more. A tale of superheroes and villains; of space battles, mad scientists, shadowy plots and dark pasts. This is Eclipse Legend.</td>
+<th>Description</th><td>In 1948 the course of history was changed when the war with the Celerans began. In order to survive mankind had to evolve and adapt. This quantum leap in human potential takes the form of artificially-created superhumans known as “alpha-humans.” Created by EON Industries, the Alpha-human Project holds the keys to once again, change mankind's fate.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://eclipselegend.webcomic.ws/">http://eclipselegend.webcomic.ws/</a></td>

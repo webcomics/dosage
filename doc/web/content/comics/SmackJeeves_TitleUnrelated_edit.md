@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/TitleUnrelated
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">The Newest Iteration.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Title Unrelated is a story of family, love, friendship, and identity. An odd family travels to another world in search of their missing sister, but things are not as simple as they hope... Updates Mondays and alternate Fridays.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://www.titleunrelated.com/comics/" size="40"/></td>

@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/KirbysDreamAdventure
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">What's better than one Kirby? A whole mess of them, that's what! Follow them around their little adventures and daily lives, from the early randomness to the more story-built latter parts. It's a Kirby adventure worth watching, even if the main pink puffball doesn't get as much direct screen time as he should!</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">What's better than one Kirby? A whole mess of them, that's what! Follow them around their little adventures and daily lives, from the early randomness to the more story-built latter parts. It's a Kirby adventure worth watching, even if the main pink puffball doesn't get as much direct screen time as he should! ~+~New pages come out daily, old pages get redone during the weekend.~+~</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://kirbyda.smackjeeves.com/comics/" size="40"/></td>

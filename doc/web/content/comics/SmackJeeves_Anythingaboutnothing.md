@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A collection of comics and cartoons about anything and nothing.</td>
+<th>Description</th><td>A collection of comics and cartoons about anything and nothing. Updates on Saturdays and Tuesdays :) Read one week ahead - http://tapastic.com/series/anything</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.anythingcomic.com/comics/">http://www.anythingcomic.com/comics/</a></td>

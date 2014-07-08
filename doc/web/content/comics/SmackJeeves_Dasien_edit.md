@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/Dasien
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Superhero girly goodness! Action series featuring Dasien the Blonde Bombshell, her best friend Parker Lynn Bailey, and an evil superhero extermination squad, The Crimson Gestalt! Humor and suspense. Some adult themes.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Leotards rule! Dasien is a superhero in the classic sense. Fun costume. Cool powers. Tons of action. Throw in some relationship drama and kinky humor, and you have Dasien! Superhero girly goodness!</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://dasien.smackjeeves.com/comics/" size="40"/></td>

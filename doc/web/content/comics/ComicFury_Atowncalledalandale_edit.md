@@ -6,7 +6,7 @@ Edit info for comic ComicFury/Atowncalledalandale
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Welcome to the town of Alandale. Join the adventures of three friends as they try to live their lives as normal as possible, in the strangest town on earth where anything can happen.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Welcome to the town called Alandale. Home to the supernatural and the bizarre. Follow the misadventures of a group of young people as they navigate everyday life and deal with their own strange and unique problems.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://atowncalledalandale.webcomic.ws/" size="40"/></td>

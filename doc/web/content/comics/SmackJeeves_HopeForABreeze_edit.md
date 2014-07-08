@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/HopeForABreeze
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">This is a story of a girl named Sophia and her journeys through life. webcomic, web comic, school life, slice of life, school, drama, anime, autobiography, memoirs, manga, cartoon, comic</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Hope For A Breeze - This is a story of a girl named Sophia and her journeys through life. webcomic, web comic, school life, slice of life, school, drama, anime, autobiography, memoirs, manga, cartoon, comic</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://h4ab.smackjeeves.com/comics/" size="40"/></td>

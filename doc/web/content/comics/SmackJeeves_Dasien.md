@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Superhero girly goodness! Action series featuring Dasien the Blonde Bombshell, her best friend Parker Lynn Bailey, and an evil superhero extermination squad, The Crimson Gestalt! Humor and suspense. Some adult themes.</td>
+<th>Description</th><td>Leotards rule! Dasien is a superhero in the classic sense. Fun costume. Cool powers. Tons of action. Throw in some relationship drama and kinky humor, and you have Dasien! Superhero girly goodness!</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://dasien.smackjeeves.com/comics/">http://dasien.smackjeeves.com/comics/</a></td>

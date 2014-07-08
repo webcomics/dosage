@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Two women of different birth search for the lost Compass Isle of Nova. One for glory, one for truth. And in the process they will find themselves and each other. Updates Every Week.</td>
+<th>Description</th><td>Two women of different birth search for the lost Compass Isle of Nova. One for glory, one for truth. And in the process they will find themselves and each other.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://lostnova.smackjeeves.com/comics/">http://lostnova.smackjeeves.com/comics/</a></td>

@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Elpis, immortal vagrant at ten years old, is taken in by a dysfunctional family. Two of the siblings hate each other, the father's dreadfully nervous, the mother has super strength... Yet the oddest thing is, save Elpis herself, they're all dead. And what's this about the prince of the dead going AWOL? And who's that immortal boy with the mask, running around stealing food? Add some mischievous spiritual healers, extended family complications, violence, and liaisons, and Elpis sometimes wonders if she should just up and leave again! Then, things become further complicated when she receives an ominous, glowing book...</td>
+<th>Description</th><td>A weird comic about a weirder family in the afterlife. =UPDATES WITH MULTIPLE PAGES EVERY MONDAY AT 10:00AM EST=</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://deadtoday.smackjeeves.com/comics/">http://deadtoday.smackjeeves.com/comics/</a></td>

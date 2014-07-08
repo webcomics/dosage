@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/ChannelDDDNews
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Ah, the loyal Reporter Dees, risking life and limb to get a story on air. This comic is a tie-in with Kirby's Dream Adventure, so expect to see the same characters bouncing back and forth! [[Updates Tuesdays, Fridays and Sundays]]</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Ah, the loyal Reporter Dees, risking life and limb to get a story on air. This comic is a tie-in with Kirby's Dream Adventure, so expect to see the same characters bouncing back and forth! [[Updates Monday through Friday]]</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://dddnews.smackjeeves.com/comics/" size="40"/></td>

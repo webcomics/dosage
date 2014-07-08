@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Sovereign is the most amazing story ever told about an extremely boring boy, who is fortunately kidnapped by sky pirates. Updates Tuesday and Thursday! Please give our website a second to redirect you.</td>
+<th>Description</th><td>Sovereign is the most amazing story ever told about an extremely boring boy, who is fortunately kidnapped by sky pirates. Updates Tuesday and Thursday! http://www.mostamazingcomicever.com/</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://mostamazingcomicever.smackjeeves.com/comics/">http://mostamazingcomicever.smackjeeves.com/comics/</a></td>

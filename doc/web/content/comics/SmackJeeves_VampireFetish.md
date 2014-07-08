@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A crossdressing vampire hunter takes on OCD vampires in modern London, all the while trying to break into the writing business using the name of the girl he was accused of murdering years ago. YA Graphic Novel: Urban Fantasy (Other Genres: Action, Comedy, Drama, Fantasy, Horror, Supernatural) ----------------------- Read full chapters online monthly @ Manga Magazine Online! http://www.mangamagazine.net loomcomics.com</td>
+<th>Description</th><td>A crossdressing vampire hunter takes on compulsive vampires in modern London, all the while trying to break into the writing business using the name of the girl he was accused of murdering. Join Jude Hawthorne -- amateur writer, professional vampire hunter! COMEDY - HORROR - ACTION - MYSTERY YA Graphic Novel: Urban Fantasy ----------------------- Read full chapters online monthly @ Manga Magazine Online! http://www.mangamagazine.net loomcomics.com</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://vampire-fetish.smackjeeves.com/comics/">http://vampire-fetish.smackjeeves.com/comics/</a></td>

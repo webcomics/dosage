@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/NeonGlow
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Animals exposed to a special nuclear radiation and die become what is called a Neons. Neons are a phantom/zombie creatures that can be dangerous. Its up to Zedof and Jake to hunt them down to keep them from harming the public. May have some light boy love, but it is not the main focus of the comic.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Animals that are exposed to a special nuclear radiation and die become what is called a neon. Neons are a phantom/zombie creatures that can be dangerous. It's up to Zedof and Jake to hunt them down to keep them from harming the public. May have some light boy love, but it is not the main focus of the comic.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://neonglow.smackjeeves.com/comics/" size="40"/></td>

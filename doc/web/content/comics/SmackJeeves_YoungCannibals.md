@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>The story of one girl's battle NOT to kill her friends. Updates every Monday &amp; Friday.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://youngcannibals.smackjeeves.com/comics/">http://youngcannibals.smackjeeves.com/comics/</a></td>
+<th>Website</th><td><a href="http://www.youngcannibals.net/comics/">http://www.youngcannibals.net/comics/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

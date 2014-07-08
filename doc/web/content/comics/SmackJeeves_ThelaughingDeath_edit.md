@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/ThelaughingDeath
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">When Leyr was a little boy, he was taken from the head of the business organisation &quot;Ligth&quot; - River, who forms him for purposes of the organization to a perfect assassin. But for many reasons, with the passing years, members of the organization get more and more terrified of Leyr. In the end, they decide to kill him ... &quot;Please read from right to left! ^^&quot;</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">When Leyr was a little boy, he was taken from the head of the business organisation &quot;Light&quot; - River, who forms him for purposes of the organization to a perfect assassin. But for many reasons, with the passing years, members of the organization get more and more terrified of Leyr. In the end, they decide to kill him ... &quot;Please read from right to left! ^^&quot;</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://thelaughingdeath.smackjeeves.com/comics/" size="40"/></td>

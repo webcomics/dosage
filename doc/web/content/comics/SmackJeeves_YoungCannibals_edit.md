@@ -9,7 +9,7 @@ Edit info for comic SmackJeeves/YoungCannibals
 <th>Description</th><td><textarea name="description" cols="40" rows="3">The story of one girl's battle NOT to kill her friends. Updates every Monday &amp; Friday.</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://youngcannibals.smackjeeves.com/comics/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://www.youngcannibals.net/comics/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

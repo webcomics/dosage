@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A young king and his rock n' roll queen must give up their party-animal ways and beg the gods for help when their newborn son falls ill. However, this is only the first of many problems facing the kingdom and the gods who watch over it.</td>
+<th>Description</th><td>A young king and his rock n' roll queen must give up their party-animal ways and beg the gods for help when their newborn son falls ill. However, this is only the first of many problems facing the kingdom and the gods who watch over it. Updates Mon-Fri</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://plastickings.smackjeeves.com/comics/">http://plastickings.smackjeeves.com/comics/</a></td>

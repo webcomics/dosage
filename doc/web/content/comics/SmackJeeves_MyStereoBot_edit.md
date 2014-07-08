@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/MyStereoBot
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">In the city of Voxen Tin, Infinity, an odd looking stereohead, tries to live his life as best as he can, along with his partner, Cloudburn,and his cousin, Ohm</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">In the city of Voxen Tin, Infinity, an odd looking stereohead, tries to live his life as best as he can, along with his partner, Cloudburn,and his cousin, Ohm Follow up on more MSB Goodies on mystereobot.tumblr.com</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://mystereobot.smackjeeves.com/comics/" size="40"/></td>
@@ -18,7 +18,7 @@ Edit info for comic SmackJeeves/MyStereoBot
 <th>Language</th><td><input type="text" name="language" value="English" size="40"/></td>
 </tr>
 <tr>
-<th>Adult content</th><td><input type="checkbox" name="adult" value="adult" checked="checked"/></td>
+<th>Adult content</th><td><input type="checkbox" name="adult" value="adult" /></td>
 </tr>
 <tr>
 <th></th><td>

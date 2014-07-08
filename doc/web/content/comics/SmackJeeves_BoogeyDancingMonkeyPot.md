@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Prince Jean-Patrick finds young Sarah's bedroom to frighten her. But Sarah isn't an eight year old girl running around in her socks. She's a young adult now and it certainly shows! Together, the Boogey man and human girl journey through their lives. One to become king of his kind and the other to find her place. Two roads cross and destiny determined to keep them together. Monsters do not solely exist in the darkness. rated mature for violence, language, partial nudity and some sexual tension</td>
+<th>Description</th><td>A story about a race of dark creatures known as Boogey men. Their world is falling apart by war and horrors untold. With a King falling down a path of no return, an hero trying to save the people, and a human girl thrown into the mix its a dramatic and action packed story. The characters learn many hardships and struggle to over come their own dark desires.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://monkeypot.smackjeeves.com/comics/">http://monkeypot.smackjeeves.com/comics/</a></td>

@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/Pause
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">&quot;Pause&quot; is a light story about a boy, Yoshiro Koizumi, who can freeze time whenever he wants to. When he suddenly meets a girl who is unaffected by his time-freezing powers, his peaceful high school life is thrown into chaos as she discovers his dark secrets which Yoshiro only shows when time is frozen. -Updates daily... most of the time :|</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">&quot;Pause&quot; is a light story about a boy, Yoshiro Koizumi, who can freeze time whenever he wants to. When he suddenly meets a girl who is unaffected by his time-freezing powers, his peaceful high school life is thrown into chaos as she discovers his dark secrets which Yoshiro only shows when time is frozen. -Updates every 3-4 days.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://pause.smackjeeves.com/comics/" size="40"/></td>

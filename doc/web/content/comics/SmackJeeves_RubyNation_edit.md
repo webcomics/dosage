@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/RubyNation
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">This is the story of Ruby Harrison, former middle-upper-class American high schooler turned nine-foot-tall post-human person of mass destruction. Dragged into a worldwide conspiracy that treats human beings as mere test subjects, Ruby's goal is to create a safe haven for her fellow post-human victims. But their powers are too valuable for the world to let be, and Ruby and her comrades will have to make hard decisions to preserve her new home.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">This is the story of Ruby Harrison, former middle-upper-class American high schooler turned nine-foot-tall post-human giantess with powers of mass destruction. Dragged into a worldwide conspiracy that treats human beings as mere test subjects, Ruby's goal is to create a safe haven for her fellow post-human victims. But their powers are too valuable for the world to let be, and Ruby and her comrades will have to make hard decisions to preserve her new home.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://www.therubynation.com/comics/" size="40"/></td>

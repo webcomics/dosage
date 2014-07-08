@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/SovereignTheMostAmazingCo...
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Sovereign is the most amazing story ever told about an extremely boring boy, who is fortunately kidnapped by sky pirates. Updates Tuesday and Thursday! Please give our website a second to redirect you.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Sovereign is the most amazing story ever told about an extremely boring boy, who is fortunately kidnapped by sky pirates. Updates Tuesday and Thursday! http://www.mostamazingcomicever.com/</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://mostamazingcomicever.smackjeeves.com/comics/" size="40"/></td>

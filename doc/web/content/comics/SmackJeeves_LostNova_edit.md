@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/LostNova
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Two women of different birth search for the lost Compass Isle of Nova. One for glory, one for truth. And in the process they will find themselves and each other. Updates Every Week.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Two women of different birth search for the lost Compass Isle of Nova. One for glory, one for truth. And in the process they will find themselves and each other.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://lostnova.smackjeeves.com/comics/" size="40"/></td>

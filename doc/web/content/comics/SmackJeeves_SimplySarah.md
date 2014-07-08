@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>This is the story of a young lesbian girls pursuit to follow her heart against all the problems that face her.</td>
+<th>Description</th><td>A slice-of-life story about people and their own unique problems as seen through the eyes of one girl as she grows up dealing with her own.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://simplysarah.smackjeeves.com/comics/">http://simplysarah.smackjeeves.com/comics/</a></td>

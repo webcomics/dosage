@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>What's better than one Kirby? A whole mess of them, that's what! Follow them around their little adventures and daily lives, from the early randomness to the more story-built latter parts. It's a Kirby adventure worth watching, even if the main pink puffball doesn't get as much direct screen time as he should!</td>
+<th>Description</th><td>What's better than one Kirby? A whole mess of them, that's what! Follow them around their little adventures and daily lives, from the early randomness to the more story-built latter parts. It's a Kirby adventure worth watching, even if the main pink puffball doesn't get as much direct screen time as he should! ~+~New pages come out daily, old pages get redone during the weekend.~+~</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://kirbyda.smackjeeves.com/comics/">http://kirbyda.smackjeeves.com/comics/</a></td>

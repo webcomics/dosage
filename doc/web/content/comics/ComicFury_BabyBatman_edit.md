@@ -6,7 +6,7 @@ Edit info for comic ComicFury/BabyBatman
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">It's Batman, but as a baby. Well technically he's more of a small child but that doesn't have the same ring to it. Updates Tuesday and Friday!</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">It's Batman, but as a baby. Well technically he's more of a small child but that doesn't have the same ring to it. Updates whenever</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://BabyBatman.webcomic.ws/" size="40"/></td>

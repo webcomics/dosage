@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/CityFolk
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Tired of a dull life in the wilderness of British Columbia, a beaver and a moose make the trip of a lifetime; into the heart of the city. This is their story. City Folk will not be updating for a while. My computer has finally given up on life and I have no way of scanning/editing/uploading. Life sucks until I can get a new tower.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Tired of a dull life in the wilderness of British Columbia, a beaver and a moose make the trip of a lifetime; into the heart of the city. This is their story.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://cityfolk.smackjeeves.com/comics/" size="40"/></td>

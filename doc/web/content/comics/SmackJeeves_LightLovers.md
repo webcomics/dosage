@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>The love between Jay and Nicolas gives them a powerful magic. They will be confronted to all kinds of enemies, but the most dangerous is the Shadow and its Prince. (English is not my native language, I apologize for the faults... :-) )</td>
+<th>Description</th><td>Jay and Nicolas are the Lightlovers. Thanks to their love, they are the most powerful magical beings in the Galaxy of Geland. They will be confronted to all sorts of characters (flying-men, butterfly-men, elves, daemons, vampires, ...). Ten stories have already been written. Drawing them will take a little more time, patience ! You won't be disappointed ! Dear readers, be tolerant with my English, it's not my mother tongue !</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://lightlovers.smackjeeves.com/comics/">http://lightlovers.smackjeeves.com/comics/</a></td>

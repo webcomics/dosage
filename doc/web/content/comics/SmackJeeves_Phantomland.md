@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>UPDATES ON THURSDAYS Santa Luison is a large city that employs it's strange minority of subhumans at a crime fighting organization. Introduce Chie: a fresh little rookie who receives her training from the baddest, meanest veteran officer around. Phantomland started as a self-published print comic back in 2009 and is now getting it's online debut at Smackjeeves. To know more about this comic, visit the homepage at: http://amph.nipponfever.net/phantomland</td>
+<th>Description</th><td>UPDATES ON THURSDAYS Santa Luison is a large city that employs it's strange minority of subhumans at a crime fighting organization. Introduce Chie: a fresh little rookie who receives her training from the baddest, meanest veteran officer around. Phantomland started as a self-published print comic back in 2009 and is now getting it's online debut at Smackjeeves.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://phantomland.smackjeeves.com/comics/">http://phantomland.smackjeeves.com/comics/</a></td>

@@ -14,10 +14,10 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>LET'S DO THIS. I am Sexy~ - Sexy Rule 1: No explicit content. We can't have that, but you know what humans are like. Rule 2: No getting involved in big advertisements. Rule 3: No alternate accounts. That's just cheating. Rule 4: Spam. No spam. Spam is very, very bad. Rule 5: Link news posts. If you want to link to something, post a comic instead. Rule 6: Let Kurona watch Digimon. VERY IMPORTANT! - Kurona Goal:- 206.your face Current: 88</td>
+<th>Description</th><td>We're back, not sure who cares about it or wants it but whatever. Screw the whole trying to be the largest author comic on SJ, let's just go crazy. Rules: 1.Keep it pg-13, odd swear here and there is fine. 2.Respect people and try not to undermine them. 3.No spamming updates. 4.No rapping.</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://breaktehrecord.smackjeeves.com/comics/">http://breaktehrecord.smackjeeves.com/comics/</a></td>
+<th>Website</th><td><a href="http://breaktehmentality.smackjeeves.com/comics/">http://breaktehmentality.smackjeeves.com/comics/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

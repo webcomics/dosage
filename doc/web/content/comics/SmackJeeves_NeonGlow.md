@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Animals exposed to a special nuclear radiation and die become what is called a Neons. Neons are a phantom/zombie creatures that can be dangerous. Its up to Zedof and Jake to hunt them down to keep them from harming the public. May have some light boy love, but it is not the main focus of the comic.</td>
+<th>Description</th><td>Animals that are exposed to a special nuclear radiation and die become what is called a neon. Neons are a phantom/zombie creatures that can be dangerous. It's up to Zedof and Jake to hunt them down to keep them from harming the public. May have some light boy love, but it is not the main focus of the comic.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://neonglow.smackjeeves.com/comics/">http://neonglow.smackjeeves.com/comics/</a></td>

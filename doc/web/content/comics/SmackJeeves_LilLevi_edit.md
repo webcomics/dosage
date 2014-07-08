@@ -9,7 +9,7 @@ Edit info for comic SmackJeeves/LilLevi
 <th>Description</th><td><textarea name="description" cols="40" rows="3">Lil' Levi is 9 years old. His mother is human. His father is The Devil...no really...we're not kidding. His life is going to be one hell of a ride! It's kind of like The Omen...but funnier!</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://www.lillevicomic.com/comics/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://lillevi.smackjeeves.com/comics/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

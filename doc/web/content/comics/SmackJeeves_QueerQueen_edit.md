@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/QueerQueen
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Queer Queen is a comedy shounen ai manga centred around Helium, a transvestite male student attending a boys' school, who falls in love with his own form-teacher. For this love is unrequited, he decides to ask out a fellow student to make his teacher jealous. Updated every Thursday, should be read from right to left.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Queer Queen is a comedy shounen ai manga centred around Helium, a transvestite male student attending a boys' school, who falls in love with his own form-teacher. For this love is unrequited, he decides to ask out a fellow student to make his teacher jealous. Updated at least once a week.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://queerqueen.smackjeeves.com/comics/" size="40"/></td>

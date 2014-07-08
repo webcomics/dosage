@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>The Premise is a story about two policemen that find one of the members of &quot;The Executioner's Sect&quot;, that some time ago begun to murder people that deserved punishment, using brutal force.</td>
+<th>Description</th><td>The Premise is a story about moral contradictions and ethical dilemmas. Conflicts that arise when two policemen discover a criminal gang, commonly known as “The Executioners Sect”, which would be hiding something much bigger: a group that has claimed for itself the power to enforce justice through a horrible method.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://thepremise.smackjeeves.com/comics/">http://thepremise.smackjeeves.com/comics/</a></td>

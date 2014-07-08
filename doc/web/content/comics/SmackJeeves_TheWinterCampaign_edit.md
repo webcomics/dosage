@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/TheWinterCampaign
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Japan, 1919. 16-year-old Akio and his mother move into a new home with the mysterious Kikugawa family: A secretive father, a fragile and reclusive son, and the shadow of a mother whose death years ago may be more than it appears. The lines between truth and fantasy, and friend and enemy begin to blur as winter sets in... Drama/Historical/Coming-Of-Age/Romance? Contains angsty teenagers, Taishou-era geekery on the part of the author, and some BL. Updates once or twice a week.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Japan, 1919. 16-year-old Akio and his mother move into a new home with the mysterious Kikugawa family: A secretive father, a fragile and reclusive son, and the shadow of a mother whose death years ago may be more than it appears. The lines between truth and fantasy, and friend and enemy begin to blur as winter sets in... Drama/Historical/Coming-Of-Age/Romance? Updates once or twice a week.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://winterc.smackjeeves.com/comics/" size="40"/></td>

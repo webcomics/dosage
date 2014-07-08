@@ -6,7 +6,7 @@ Edit info for comic ComicFury/Catwithgoggles
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">-</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Cat with Goggles is a collection of daily musing, interesting stuff, encounters of Elisha and her friends (real and imaginary) in the form of comics.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://catwithgoggles.webcomic.ws/" size="40"/></td>

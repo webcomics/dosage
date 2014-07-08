@@ -6,7 +6,7 @@ Edit info for comic ComicFury/LORDDARKE
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">The adventures of a middle aged black widow spider and her friends. UPDATED MONDAY AND THURSDAY.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">The adventures of a middle aged black widow spider and her friends. Updates Every three days. NEW Q&amp;A Updates three days after that.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://LORDDARKE.webcomic.ws/" size="40"/></td>

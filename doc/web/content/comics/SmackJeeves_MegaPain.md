@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Core and Daniel find an old Mega Man 5 cartridge at a yard sale. As they pop it in, there's more to this game then they realize. A lot more. Updates on Wednesdays and Sundays.</td>
+<th>Description</th><td>Core and Daniel find an old Mega Man 5 cartridge at a yard sale. As they pop it in, there's more to this game then they realize. A lot more. Updates on Sundays and Wednesdays.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://megapain.smackjeeves.com/comics/">http://megapain.smackjeeves.com/comics/</a></td>

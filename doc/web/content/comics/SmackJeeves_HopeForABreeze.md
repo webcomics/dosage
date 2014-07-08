@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>This is a story of a girl named Sophia and her journeys through life. webcomic, web comic, school life, slice of life, school, drama, anime, autobiography, memoirs, manga, cartoon, comic</td>
+<th>Description</th><td>Hope For A Breeze - This is a story of a girl named Sophia and her journeys through life. webcomic, web comic, school life, slice of life, school, drama, anime, autobiography, memoirs, manga, cartoon, comic</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://h4ab.smackjeeves.com/comics/">http://h4ab.smackjeeves.com/comics/</a></td>

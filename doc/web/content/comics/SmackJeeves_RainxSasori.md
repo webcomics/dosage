@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>WARNING. The art is REALLY bad at first but it gets wayyyy better! Promise! :) This is my first comic so I'm trying new things with it. I'm experimenting and practicing all sorts of things like back grounds, shading and neatness. Horrible handwriting, that can't be helped sorry. BL. YAOI Sasori Mahitto, 19. College student from Japan (just moved to New York). Rain Westong, mid 20's. Demon, man whore. Their paths cross and Sasori's naiveness gets him into a lot of trouble with Rain. Somewhere along the lines of Sasori getting into trouble with Rain he ends up becoming his house maid? And is asked to do some. . .unmentionable things?... contains: a little nudity, foul language, alcohol, cigarettes, sex, demons, cute uke boys, and YAOI. :) Enjoy. :) Updates every Saturday at 7 AM. :) (Currently off schedule. Updates when I finish a page :))</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://rxs.smackjeeves.com/comics/">http://rxs.smackjeeves.com/comics/</a></td>
+<th>Website</th><td><a href="http://rainxsasori.smackjeeves.com/comics/">http://rainxsasori.smackjeeves.com/comics/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

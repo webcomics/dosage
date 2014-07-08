@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/Themadman
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">everyday insanity, taking what life throws at you just a notch further to show what could happen^^ updates once a week</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">everyday insanity, taking what life throws at you and lets imagination run wild^^ updates most likely mondays</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://themadman.smackjeeves.com/comics/" size="40"/></td>

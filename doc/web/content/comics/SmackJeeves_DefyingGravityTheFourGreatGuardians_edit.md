@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/DefyingGravityTheFourGrea...
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">It is the year 3015, the sun has begun to fade and the world is cast into shadow. As prophecized, the fate of the world rests on the shoulders of the &quot;Four Great Guardians&quot; who are said to re-ignite the sun and bring an end to the war ravaging the planet. But just who are the four guardians? In mid-apocalyptic Europe, three half-human half-demon citizens are brought together by what can only be called fate. The only question that remains is: Who is the fourth Guardian? Meanwhile, a failed Russian experiment known as the &quot;Dragon&quot; is wreaking havoc upon the already helpless world. ****Updates 3 pages every Sunday****</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">In mid-Apocalyptic Europe, three half human half demons learn that it is their duty to save the world. Only question that remains is: How? ****Updates 3 pages every Sunday****</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://defyinggravitycomic.smackjeeves.com/comics/" size="40"/></td>

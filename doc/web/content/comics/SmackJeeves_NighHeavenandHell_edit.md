@@ -9,7 +9,7 @@ Edit info for comic SmackJeeves/NighHeavenandHell
 <th>Description</th><td><textarea name="description" cols="40" rows="3">A grudge as old as mankind. Three travelers entwined by fate. This road, once travelled, can never be undone. Between damnation &amp; salvation, you find the truth hidden by God, Nigh Heaven &amp; Hell. //Updates Every Friday//</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://newnighheavenandhell.smackjeeves.com/comics/" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://nighheavenandhell.smackjeeves.com/comics/" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

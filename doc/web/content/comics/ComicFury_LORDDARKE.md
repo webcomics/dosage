@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>The adventures of a middle aged black widow spider and her friends. UPDATED MONDAY AND THURSDAY.</td>
+<th>Description</th><td>The adventures of a middle aged black widow spider and her friends. Updates Every three days. NEW Q&amp;A Updates three days after that.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://LORDDARKE.webcomic.ws/">http://LORDDARKE.webcomic.ws/</a></td>

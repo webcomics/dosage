@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Imagine those badly-photocopied zines that were left on the tables at your local coffee shop got a shave and a haircut, finished their fine arts degrees, and turned out to have really odd Monty Python-esque senses of humor. Then they got married and had a kid. That kid is FPK.</td>
+<th>Description</th><td>Formerly Frighteningly Pretentious Komix! FPK! is a bunch of funny stories with strange characters. Or strange stories with funny characters. One of those.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://fpk.webcomic.ws/">http://fpk.webcomic.ws/</a></td>

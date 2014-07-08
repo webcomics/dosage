@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/SaintforRent
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Saint runs an inn for Time Travelers, which leaves him little time to write his trashy romance novels. Unfortunately, he also happens to attract more... supernatural &quot;guests,&quot; too. [Animated .gif webcomic] Redirects to main site --&gt; http://www.saintforrent.com</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Saint runs an inn for time travelers, which leaves him little time to write his trashy romance novels. Always a pit stop in the crisscrossing lives of his out-of-date friends and family, Saint wonders where his place is in a world that's quickly passing him by. Unfortunately, he also attracts the more… supernatural “guests,” too. [Animated .gif webcomic] Updates Tuesdays &amp; Fridays. Time travels I MEAN REDIRECTS to main site --&gt; http://www.saintforrent.com</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://saint-for-rent.smackjeeves.com/comics/" size="40"/></td>

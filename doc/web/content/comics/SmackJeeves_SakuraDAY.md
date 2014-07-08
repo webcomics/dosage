@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>She lived then died and resurrected once more. Join Meija as she meets the strange and mysterious (and oddly interesting) people of LALA dormitory and starts her new adventure in a world strangely familiar but entirely new. P.S. this comic is read in the &quot;manga way&quot;: RIGHT TO LEFT. UPDATES WEEKLY  Saturday || Sunday  Enjoy~</td>
+<th>Description</th><td>She lived then died and resurrected once more. Join Meija as she meets the strange and mysterious (and oddly interesting) people of LALA dormitory and starts her new adventure in a world strangely familiar but entirely new. P.S. this comic is read in the &quot;manga way&quot;: RIGHT TO LEFT. UPDATES WEEKLY  Saturday &amp; Sunday  Enjoy~</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://sakuraday.smackjeeves.com/comics/">http://sakuraday.smackjeeves.com/comics/</a></td>

@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A street rat is given a second chance when he is dragged from the gutter and into a new life. Will he accept his position at the side of royalty, or fight every step of the way? *Rated M for sex (both hetero and homo), violence, nudity, language and dark themes.* If you can handle these subjects, I hope you'll enjoy the comic. :) Thanks for reading! ~Join Helix on tumblr at http://helix-comic.tumblr.com ! ~</td>
+<th>Description</th><td>A street rat is given a second chance when he is dragged from the gutter and into a new life. Will he accept his position at the side of royalty, or fight every step of the way? -Rated M for sex (M/M, consensual), violence, nudity, language and dark themes.- Warnings: -References to child abuse and sexual abuse.- If you can handle these subjects, I hope you'll enjoy the comic. :) Thanks for reading! ~Join Helix on tumblr at http://helix-comic.tumblr.com ! ~</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://helix.smackjeeves.com/comics/">http://helix.smackjeeves.com/comics/</a></td>

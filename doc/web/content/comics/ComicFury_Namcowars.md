@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A battle of non-epic proportions! Andore has assembled five classic Namco armies to fight in a competition to prove which is the most powerful! Updates Tue/Thu/Sat.</td>
+<th>Description</th><td>A battle of non-epic proportions! Andore has assembled five classic Namco armies to fight in a competition to prove which is the most powerful! Updates Tuesdays.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://namcowars.webcomic.ws/">http://namcowars.webcomic.ws/</a></td>

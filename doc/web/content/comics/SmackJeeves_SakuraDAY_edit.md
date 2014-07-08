@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/SakuraDAY
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">She lived then died and resurrected once more. Join Meija as she meets the strange and mysterious (and oddly interesting) people of LALA dormitory and starts her new adventure in a world strangely familiar but entirely new. P.S. this comic is read in the &quot;manga way&quot;: RIGHT TO LEFT. UPDATES WEEKLY  Saturday || Sunday  Enjoy~</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">She lived then died and resurrected once more. Join Meija as she meets the strange and mysterious (and oddly interesting) people of LALA dormitory and starts her new adventure in a world strangely familiar but entirely new. P.S. this comic is read in the &quot;manga way&quot;: RIGHT TO LEFT. UPDATES WEEKLY  Saturday &amp; Sunday  Enjoy~</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://sakuraday.smackjeeves.com/comics/" size="40"/></td>

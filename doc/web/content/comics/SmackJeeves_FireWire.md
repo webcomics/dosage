@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>When Kennedy H'naka's cell phone becomes the new home of the dragon FireWire Balisk, she finds herself sucked into a world of battles, secrets, and shadowy organizations. What's a girl to do when she has to save the world and still pass the tenth grade? Updates: Thursdays Reads: left to right. Comments greatly appreciated ^^</td>
+<th>Description</th><td>When Kennedy H'naka's cell phone becomes the new home of the dragon FireWire Balisk, she finds herself sucked into a world of battles, secrets, and shadowy organizations. What's a girl to do when she has to save the world and still pass the tenth grade? Updates: Fridays Reads: left to right. Comments greatly appreciated ^^</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://firewire.smackjeeves.com/comics/">http://firewire.smackjeeves.com/comics/</a></td>

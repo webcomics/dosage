@@ -6,7 +6,7 @@ Edit info for comic ComicFury/Teenagedragon
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">So! Looking for a comic with spunky dragons? Yeah! Sexy cat-girls? YEAH! Evil empires? YEAH YEAH YEAH! Giant spiders? HELL YEAH! Death dealing assassins? OH YEAH! Annoying film critics? YE-ah, wait, what? Zeke Fahrenheit is, if you couldn't tell from the lame build-up, a film critic. And not just any film critic, a bad one (but that's redundant). Follow his crazy, mixed-up adventures as he tries to woo the princess (unsuccessfully), raise his daughter who happens to be a dragon (or is she raising him?) and just try to keep his sanity in a world where pop culture is not to be embraced but feared.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Meet one Zeke Fahrenheit, film critic extraordinaire, and also father to a dragon. He's (sometimes) better at one of those jobs than the other. Follow along with him as he tries to raise his green, four-armed daughter Snapdragon, woo the exotic cat-girl Princess Acinonyx, avoid his evil ex-girlfriend Dr. Abby Mars, and just try to survive a world where pop culture is not to be embraced but feared.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://teenagedragon.webcomic.ws/" size="40"/></td>

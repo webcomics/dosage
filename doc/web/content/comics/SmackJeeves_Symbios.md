@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Almost every nation in existence has a tale of terrors and hauntings to pass on to their posterity... Xedondria is no different. Their tale was to keep children from doing wrong, and if they behaved, their reward was to sleep with a clear conscience. But if they didn't behave, not only would they suffer the consequences from man, they would also be visited by the Night Horror: a monstrosity only nightmares could bring, only living in one's sleep... Now one must ask: who is it that sleeps, yet suffers the torture of this very real Horror? ***Comic will be marked mature due to any violence or themes, Thank you!***</td>
+<th>Description</th><td>Almost every nation in existence has a tale of terrors and hauntings to pass on to their posterity... Xedondria is no different. Their tale was to keep children from doing wrong, and if they behaved, their reward was to sleep with a clear conscience. But if they didn't behave, not only would they suffer the consequences from man, they would also be visited by the Night Horror: a monstrosity only nightmares could bring, only living in one's sleep... Now one must ask: who is it that sleeps, yet suffers the torture of this very real Horror? ***Comic will be marked mature due to any violence or sexual themes, Thank you!***</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://symbios.smackjeeves.com/comics/">http://symbios.smackjeeves.com/comics/</a></td>

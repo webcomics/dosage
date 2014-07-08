@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/Anythingaboutnothing
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">A collection of comics and cartoons about anything and nothing.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">A collection of comics and cartoons about anything and nothing. Updates on Saturdays and Tuesdays :) Read one week ahead - http://tapastic.com/series/anything</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://www.anythingcomic.com/comics/" size="40"/></td>

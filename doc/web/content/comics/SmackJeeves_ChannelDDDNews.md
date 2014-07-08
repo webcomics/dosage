@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Ah, the loyal Reporter Dees, risking life and limb to get a story on air. This comic is a tie-in with Kirby's Dream Adventure, so expect to see the same characters bouncing back and forth! [[Updates Tuesdays, Fridays and Sundays]]</td>
+<th>Description</th><td>Ah, the loyal Reporter Dees, risking life and limb to get a story on air. This comic is a tie-in with Kirby's Dream Adventure, so expect to see the same characters bouncing back and forth! [[Updates Monday through Friday]]</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://dddnews.smackjeeves.com/comics/">http://dddnews.smackjeeves.com/comics/</a></td>

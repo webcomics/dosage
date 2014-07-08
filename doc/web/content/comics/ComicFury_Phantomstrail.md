@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>The king of Mindon has died. His heir, Princess Jacquilyn, is expected to succeed to the throne, but Duke Medrick makes his own plans to take control of the kingdom. High Councilor Vasquez discovers Medrick's plan to usurp power. He, along with his son and the princess' bodyguard, take the princess away from the kingdom, to protect her. (Please look at the Synopsis page for a detailed description.) This webcomic is currently on hiatus.</td>
+<th>Description</th><td>The king of Mindon has died. His heir, Princess Jacquilyn, is expected to succeed to the throne, but Duke Medrick makes his own plans to take control of the kingdom. High Councilor Vasquez discovers Medrick's plan to usurp power. He, along with his son and the princess' bodyguard, take the princess away from the kingdom, to protect her. (Please look at the Synopsis page for a detailed description.) This webcomic currently updates sporadically on Mondays at noon Central time zone.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://phantomstrail.webcomic.ws/">http://phantomstrail.webcomic.ws/</a></td>

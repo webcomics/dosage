@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A retelling of the many adventures Kirby has had over the years since 1992.</td>
+<th>Description</th><td>A retelling of the many adventures Kirby has had over the years since 1992. Updates Saturdays and sometimes Wednesdays.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://kirbysdreamlandadventures.smackjeeves.com/comics/">http://kirbysdreamlandadventures.smackjeeves.com/comics/</a></td>

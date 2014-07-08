@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/Harfang
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Here my first time on SmackJeeves ! Harfang is my new comic. It's a fantasy story, based on the Jorinde &amp; Joringel Grimm tale. Designs are inspired from asia (Korea/Mongolia/China). I wish to update it one page every monday ! I hope you'll like it. ^____^ ***************************************** Harfang is now a featured comic on MangaMagazine. Thank you so much for your support ! ^____^ You can now read the pages on www.mangamagazine.net or tapastic.com ~ ***************************************** ENGLISH TRANSLATION ***************************************** My english is bad, don't hesitate to correct my grammar. Thank you ! ^__^ *****************************************</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Harfang is a fantasy story, based on the Jorinde &amp; Joringel Grimm tale. Designs are inspired from asia (Korea/Mongolia/China). I update it one page every monday ! I hope you'll like it. ^____^ ***************************************** You can buy the first book in full colors on my shop : www.auroreblackcat.bigcartel.com ***************************************** ENGLISH TRANSLATION ***************************************** My english is bad, don't hesitate to correct my grammar. Thank you ! ^__^ *****************************************</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://harfang.smackjeeves.com/comics/" size="40"/></td>

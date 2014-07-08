@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Awkward Shelby is a slice-of-life comic that focuses on everyday awkward situations, staring off into space, cats, and more. It's not only a record of its author's life but it can be transcribed into each one of our own lives. Updates at least once a week, usually weekdays at 10am Visit the online store: http://skreened.com/awkwardshelby</td>
+<th>Description</th><td>Awkward Shelby is a slice-of-life comic that follows the author closely in the way that she speaks, thinks, and acts in certain situations as well as some journal-like comic strips of real-life occurences. Shelby started her webcomic, Awkward Shelby, in June of 2012 as a means of fulfilling time the summer after she graduated from high school. Since then, she has gained thousands of followers from 12 different countries and has received a 4.91 (148 votes) on Comicfury. The webcomic in its run so far, already has over 200 strips and is currently featured as a weekly comic in The Santa Fe University of Art and Design's oncampus magazine, The Jackalope. *NEW* Awkward Shelby now updates everyday except Sundays at 10AM (unless otherwise stated) Visit the online store: http://skreened.com/awkwardshelby</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://awkwardshelby.webcomic.ws/">http://awkwardshelby.webcomic.ws/</a></td>

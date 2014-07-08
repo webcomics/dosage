@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/VampireFetish
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">A crossdressing vampire hunter takes on OCD vampires in modern London, all the while trying to break into the writing business using the name of the girl he was accused of murdering years ago. YA Graphic Novel: Urban Fantasy (Other Genres: Action, Comedy, Drama, Fantasy, Horror, Supernatural) ----------------------- Read full chapters online monthly @ Manga Magazine Online! http://www.mangamagazine.net loomcomics.com</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">A crossdressing vampire hunter takes on compulsive vampires in modern London, all the while trying to break into the writing business using the name of the girl he was accused of murdering. Join Jude Hawthorne -- amateur writer, professional vampire hunter! COMEDY - HORROR - ACTION - MYSTERY YA Graphic Novel: Urban Fantasy ----------------------- Read full chapters online monthly @ Manga Magazine Online! http://www.mangamagazine.net loomcomics.com</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://vampire-fetish.smackjeeves.com/comics/" size="40"/></td>

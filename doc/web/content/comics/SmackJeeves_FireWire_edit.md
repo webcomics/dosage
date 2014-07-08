@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/FireWire
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">When Kennedy H'naka's cell phone becomes the new home of the dragon FireWire Balisk, she finds herself sucked into a world of battles, secrets, and shadowy organizations. What's a girl to do when she has to save the world and still pass the tenth grade? Updates: Thursdays Reads: left to right. Comments greatly appreciated ^^</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">When Kennedy H'naka's cell phone becomes the new home of the dragon FireWire Balisk, she finds herself sucked into a world of battles, secrets, and shadowy organizations. What's a girl to do when she has to save the world and still pass the tenth grade? Updates: Fridays Reads: left to right. Comments greatly appreciated ^^</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://firewire.smackjeeves.com/comics/" size="40"/></td>

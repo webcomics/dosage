@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Boy meets a vampire. What happens when they get to know each other? This comic will have lotsa boylove stuff in it, so if you have a problem with that, get rid of that problem and then come back here and enjoy the comic. If you don't have a problem with BL then... enjoy the comic anyways!&lt;3 Updates every Sunday.</td>
+<th>Description</th><td>Transfusions is a BL (boylove) webcomic. It's a story about young media student Dylan and vampire Joa, who died in the 80's. Despite the rough start with threatening and snarking their relationship will develop from cute awkwardness to a beautiful romance. For now the comic is SFW, but there will later be some Adult content. When the time comes it will be mentioned beforehand and the pages with adult content will be marked.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://transfusions.smackjeeves.com/comics/">http://transfusions.smackjeeves.com/comics/</a></td>

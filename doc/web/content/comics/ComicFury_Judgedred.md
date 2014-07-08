@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A Modern Day Re-Imaging of A Syndicated Comic Strip You've Likely never heard of before. All Original artwork by Alex Graham/Michael Martin.</td>
+<th>Description</th><td>A Modern Day Re-imaging of a Syndicated Comic Strip You've Likely Never Heard of. All Original Artwork by Alex Graham/Michael Martin.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://judgedred.webcomic.ws/">http://judgedred.webcomic.ws/</a></td>

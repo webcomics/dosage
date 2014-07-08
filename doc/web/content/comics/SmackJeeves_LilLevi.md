@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>Lil' Levi is 9 years old. His mother is human. His father is The Devil...no really...we're not kidding. His life is going to be one hell of a ride! It's kind of like The Omen...but funnier!</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.lillevicomic.com/comics/">http://www.lillevicomic.com/comics/</a></td>
+<th>Website</th><td><a href="http://lillevi.smackjeeves.com/comics/">http://lillevi.smackjeeves.com/comics/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

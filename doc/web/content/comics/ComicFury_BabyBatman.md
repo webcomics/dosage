@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>It's Batman, but as a baby. Well technically he's more of a small child but that doesn't have the same ring to it. Updates Tuesday and Friday!</td>
+<th>Description</th><td>It's Batman, but as a baby. Well technically he's more of a small child but that doesn't have the same ring to it. Updates whenever</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://BabyBatman.webcomic.ws/">http://BabyBatman.webcomic.ws/</a></td>

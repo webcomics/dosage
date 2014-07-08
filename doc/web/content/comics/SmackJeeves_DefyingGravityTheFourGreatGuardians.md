@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>It is the year 3015, the sun has begun to fade and the world is cast into shadow. As prophecized, the fate of the world rests on the shoulders of the &quot;Four Great Guardians&quot; who are said to re-ignite the sun and bring an end to the war ravaging the planet. But just who are the four guardians? In mid-apocalyptic Europe, three half-human half-demon citizens are brought together by what can only be called fate. The only question that remains is: Who is the fourth Guardian? Meanwhile, a failed Russian experiment known as the &quot;Dragon&quot; is wreaking havoc upon the already helpless world. ****Updates 3 pages every Sunday****</td>
+<th>Description</th><td>In mid-Apocalyptic Europe, three half human half demons learn that it is their duty to save the world. Only question that remains is: How? ****Updates 3 pages every Sunday****</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://defyinggravitycomic.smackjeeves.com/comics/">http://defyinggravitycomic.smackjeeves.com/comics/</a></td>

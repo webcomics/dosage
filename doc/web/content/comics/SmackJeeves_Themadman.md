@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>everyday insanity, taking what life throws at you just a notch further to show what could happen^^ updates once a week</td>
+<th>Description</th><td>everyday insanity, taking what life throws at you and lets imagination run wild^^ updates most likely mondays</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://themadman.smackjeeves.com/comics/">http://themadman.smackjeeves.com/comics/</a></td>

@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/Phantomland
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">UPDATES ON THURSDAYS Santa Luison is a large city that employs it's strange minority of subhumans at a crime fighting organization. Introduce Chie: a fresh little rookie who receives her training from the baddest, meanest veteran officer around. Phantomland started as a self-published print comic back in 2009 and is now getting it's online debut at Smackjeeves. To know more about this comic, visit the homepage at: http://amph.nipponfever.net/phantomland</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">UPDATES ON THURSDAYS Santa Luison is a large city that employs it's strange minority of subhumans at a crime fighting organization. Introduce Chie: a fresh little rookie who receives her training from the baddest, meanest veteran officer around. Phantomland started as a self-published print comic back in 2009 and is now getting it's online debut at Smackjeeves.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://phantomland.smackjeeves.com/comics/" size="40"/></td>

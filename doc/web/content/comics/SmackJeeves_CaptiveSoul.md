@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A BL Pirate manga! :P Sai works on the ship &quot;The Liberty&quot;, he was taken in at a young age after his town was burned down and he lost his family. The event was traumatizing and Sai lost his ability to speak. He has sworn to hunt down the pirates that destroyed his home and bring them to justice(however that seems a long ways away) However, recently the captain of the ship, Kuragi, has taken an interest in Sai! Will Kuragi's advances distract Sai from his goal to avenge his family? A stormy relationship ahead! Will update every tuesday :P</td>
+<th>Description</th><td>A BL Pirate manga! :P Sai works on the ship &quot;The Liberty&quot;, he was taken in at a young age after his town was burned down and he lost his family. The event was traumatizing and Sai lost his ability to speak. He has sworn to hunt down the pirates that destroyed his home and bring them to justice(however that seems a long ways away) However, recently the captain of the ship, Kuragi, has taken an interest in Sai! Will Kuragi's advances distract Sai from his goal to avenge his family? A stormy relationship ahead! Will update every Thursdays :D</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://captive-soul.smackjeeves.com/comics/">http://captive-soul.smackjeeves.com/comics/</a></td>

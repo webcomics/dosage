@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>When the coastal city of Costa Nueva is threatened by sand creatures sent by a mysterious evil, four teenagers rise from tragedy to become heroes. They are The Night Surfers. Read it here at Smack Jeeves, or get even more content and the most recent updates at thenightsurfers.com!</td>
+<th>Description</th><td>When the coastal city of Costa Nueva is threatened by sand creatures sent by a mysterious evil, four teenagers rise from tragedy to become heroes. They are The Night Surfers. Read it here at Smack Jeeves, or get even more content and the most recent updates at: http://thenightsurfers.com! If you have a few extra dollars and wanna help out, check out my Patreon profile: http://www.patreon.com/thenightsurfers</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://thenightsurfers.smackjeeves.com/comics/">http://thenightsurfers.smackjeeves.com/comics/</a></td>

@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>&quot;Pause&quot; is a light story about a boy, Yoshiro Koizumi, who can freeze time whenever he wants to. When he suddenly meets a girl who is unaffected by his time-freezing powers, his peaceful high school life is thrown into chaos as she discovers his dark secrets which Yoshiro only shows when time is frozen. -Updates daily... most of the time :|</td>
+<th>Description</th><td>&quot;Pause&quot; is a light story about a boy, Yoshiro Koizumi, who can freeze time whenever he wants to. When he suddenly meets a girl who is unaffected by his time-freezing powers, his peaceful high school life is thrown into chaos as she discovers his dark secrets which Yoshiro only shows when time is frozen. -Updates every 3-4 days.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://pause.smackjeeves.com/comics/">http://pause.smackjeeves.com/comics/</a></td>

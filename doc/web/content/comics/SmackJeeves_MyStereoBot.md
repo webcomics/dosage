@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>In the city of Voxen Tin, Infinity, an odd looking stereohead, tries to live his life as best as he can, along with his partner, Cloudburn,and his cousin, Ohm</td>
+<th>Description</th><td>In the city of Voxen Tin, Infinity, an odd looking stereohead, tries to live his life as best as he can, along with his partner, Cloudburn,and his cousin, Ohm Follow up on more MSB Goodies on mystereobot.tumblr.com</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://mystereobot.smackjeeves.com/comics/">http://mystereobot.smackjeeves.com/comics/</a></td>
@@ -26,7 +26,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Language</th><td>English</td>
 </tr>
 <tr>
-<th>Adult content</th><td>yes</td>
+<th>Adult content</th><td>no</td>
 </tr>
 <tr>
 <th>Status</th><td>ok on 22.01.2014</td>

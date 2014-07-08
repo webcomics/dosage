@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>After years of absence, Link finally returns to Hyrule from his travels abroard. Initially expecting to greet Princess Zelda, he instead finds the kingdom in decline, plagued by all kinds of trouble. Just what is causing these problems, and does it have anything to do with why Link left in the first place? NB: Thanks to its unusual format, this updates every FRIDAY.</td>
+<th>Description</th><td>After years of absence, Link finally returns to Hyrule from his travels abroard. Initially expecting to greet Princess Zelda, he instead finds the kingdom in decline, plagued by all kinds of trouble. Just what is causing these problems, and does it have anything to do with why Link left in the first place? NB: This story is now finished, at 11 chapters and 312 pages! Thanks to everyone who read it. For those who want to know what I'm doing next, please check my DeviantArt account (http://queeniechan.deviantart.com/)</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://legendofzelda.smackjeeves.com/comics/">http://legendofzelda.smackjeeves.com/comics/</a></td>

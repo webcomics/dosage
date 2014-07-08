@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>According to the Legend of the Ransei region, if all 17 kingdoms of the region are united, the legendary Pokemon that formed the region would appear. Young Saku, along with her stubborn Axew, set off on the road of conquest. However, the warlord Nobunaga is only one kingdom away from uniting the region. Can Saku conquer Ransei before he does? ______________ There is a bit of violence later on, but hey, Pokemon has a certain lack of violence that they need to make up for. Nothing too bad. Also, I am constantly improving, so please ignore the bad art at the beginning. &gt;.&lt; Pokemon (c) Nintendo Updates Wednesdays and Saturdays.</td>
+<th>Description</th><td>According to the Legend of the Ransei region, if all 17 kingdoms of the region are united, the legendary Pokemon that formed the region would appear. Young Saku, along with her stubborn Axew, set off on the road of conquest. However, the warlord Nobunaga is only one kingdom away from uniting the region. Can Saku conquer Ransei before he does? ______________ There is a bit of violence later on, but hey, Pokemon has a certain lack of violence that they need to make up for. Nothing too bad. Also, I am constantly improving, so please ignore the bad art at the beginning. &gt;.&lt; Pokemon (c) Nintendo Updates Wednesdays and Saturdays. **Temporarily updating irregularly-see news for more details</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://bloomconquest.smackjeeves.com/comics/">http://bloomconquest.smackjeeves.com/comics/</a></td>

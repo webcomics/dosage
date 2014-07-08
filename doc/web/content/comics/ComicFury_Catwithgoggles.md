@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>-</td>
+<th>Description</th><td>Cat with Goggles is a collection of daily musing, interesting stuff, encounters of Elisha and her friends (real and imaginary) in the form of comics.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://catwithgoggles.webcomic.ws/">http://catwithgoggles.webcomic.ws/</a></td>

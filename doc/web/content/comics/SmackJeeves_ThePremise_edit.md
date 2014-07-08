@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/ThePremise
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">The Premise is a story about two policemen that find one of the members of &quot;The Executioner's Sect&quot;, that some time ago begun to murder people that deserved punishment, using brutal force.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">The Premise is a story about moral contradictions and ethical dilemmas. Conflicts that arise when two policemen discover a criminal gang, commonly known as “The Executioners Sect”, which would be hiding something much bigger: a group that has claimed for itself the power to enforce justice through a horrible method.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://thepremise.smackjeeves.com/comics/" size="40"/></td>

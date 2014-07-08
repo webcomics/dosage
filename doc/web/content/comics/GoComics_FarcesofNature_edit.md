@@ -9,7 +9,7 @@ Edit info for comic GoComics/FarcesofNature
 <th>Description</th><td><textarea name="description" cols="40" rows="3">-</textarea></td>
 </tr>
 <tr>
-<th>Website</th><td><input type="text" name="url" value="http://www.gocomics.com/Farces-of-Nature" size="40"/></td>
+<th>Website</th><td><input type="text" name="url" value="http://www.gocomics.com/farces-of-nature" size="40"/></td>
 </tr>
 <tr>
 <th>Genre</th><td><input type="text" name="genre" value="Other" size="40"/></td>

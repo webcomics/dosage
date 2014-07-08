@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/MyTrollLife
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">This is a webcomic with rage comics surrounding real events in my life. NOTE: these comics are for jokes and laughs and should not be juged (but if you wanna still bitch then why are you here in the first place, you knew what you were gonna expect in the tittle's picture) UPDATES: *Normal Schedule: Once A Week*</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">This is a webcomic with rage comics surrounding real events in my life. NOTE: these comics are for jokes and laughs and should not be judged (but if you wanna still bitch then why are you here in the first place, you knew what you were gonna expect in the tittle's picture) UPDATES: ***Normal Schedule: Once A Week or Once Every Second Week (depending on schedule)***</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://mytrolllife.smackjeeves.com/comics/" size="40"/></td>

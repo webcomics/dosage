@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Lost in the middle of the dangerous seaweed forest of Lebanon, Uegon Prince Apollo is searching for the way home. Joined by his cousin Paris, his faithful pet Pyou, and a pair of Uegon sisters named Diane and Juno, the group must face a deceptive maze of seaweed trees, giant flesh eating monsters, the Unknown Dark Lands of the Herse, and the biggest hurdle of all, a war in the royal house of the High Waters! **UPDATES: Saturdays NEWS&gt;&gt;2Kingdoms now has a group page on dA: http://2kingdoms.deviantart.com/ If you have a dA account, please show your support by joining the group. It has special extras that can only be found on dA :D</td>
+<th>Description</th><td>Lost in the middle of the dangerous seaweed forest of Lebanon, Uegon Prince Apollo is searching for the way home. Joined by his cousin Paris, his faithful pet Pyou, and a pair of Uegon sisters named Diane and Juno, the group must face a deceptive maze of seaweed trees, giant flesh eating monsters, the Unknown Dark Lands of the Herse, and the biggest hurdle of all, a war in the royal house of the High Waters!</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://2kingdoms.smackjeeves.com/comics/">http://2kingdoms.smackjeeves.com/comics/</a></td>

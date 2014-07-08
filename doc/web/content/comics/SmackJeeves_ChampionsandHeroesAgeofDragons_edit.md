@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/ChampionsandHeroesAgeofDr...
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">In a land far away, or possibly in a dimension just next to us, lies the lands of Thedas. The world of Thedas is made up by endless possibilities - a man can be a mage, a rogue, a warrior, even a woman. From the Free Marches to Ferelden we find champions and heroes saving the world... poorly. Updates Mondays. All hail Bioware.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">In a land far away, or possibly in a dimension just next to us, lies the lands of Thedas. The world of Thedas is made up by endless possibilities - a man can be a mage, a rogue, a warrior, even a woman. From the Free Marches to Ferelden we find champions and heroes saving the world... poorly. Updates Mondays. Also available on tumblr http://championsandheroes.tumblr.com/ All hail Bioware.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://championsandheroes.smackjeeves.com/comics/" size="40"/></td>

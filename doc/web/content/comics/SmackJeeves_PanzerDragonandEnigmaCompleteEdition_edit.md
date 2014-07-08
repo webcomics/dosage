@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/PanzerDragonandEnigmaComp...
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">As a world reaches its peak of prosperity, instability begins to reveal itself as Dragonenix falls into a period of darkness. Three warriors will rise to the challenge to solve the mystery of their world's instability and set things right. The Complete Edition of Panzer Dragon and Enigma contains the full unabridged story of the entire First Arc series, including the first season of the PDE(+) Saga: Twilight Dawn. The last major update was November 16, 2011, with Twilight Dawn added to the archives as of March 20, 2012.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Panzer Dragon and Enigma: Complete Edition contains all of the comics from the first incarnation of the Panzer Dragon and Enigma Saga. The archives were fully completed as of March 20, 2012. For the current incarnation of the story, head to the following address: http://pdezwei.smackjeeves.com The current incarnation, Panzer Dragon and Enigma Zwei, updates every Monday, Thursday, and Saturday.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://panzerdragonandenigma.smackjeeves.com/comics/" size="40"/></td>

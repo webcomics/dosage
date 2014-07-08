@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>When Leyr was a little boy, he was taken from the head of the business organisation &quot;Ligth&quot; - River, who forms him for purposes of the organization to a perfect assassin. But for many reasons, with the passing years, members of the organization get more and more terrified of Leyr. In the end, they decide to kill him ... &quot;Please read from right to left! ^^&quot;</td>
+<th>Description</th><td>When Leyr was a little boy, he was taken from the head of the business organisation &quot;Light&quot; - River, who forms him for purposes of the organization to a perfect assassin. But for many reasons, with the passing years, members of the organization get more and more terrified of Leyr. In the end, they decide to kill him ... &quot;Please read from right to left! ^^&quot;</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://thelaughingdeath.smackjeeves.com/comics/">http://thelaughingdeath.smackjeeves.com/comics/</a></td>

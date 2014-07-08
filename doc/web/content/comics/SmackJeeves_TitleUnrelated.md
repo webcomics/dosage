@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>The Newest Iteration.</td>
+<th>Description</th><td>Title Unrelated is a story of family, love, friendship, and identity. An odd family travels to another world in search of their missing sister, but things are not as simple as they hope... Updates Mondays and alternate Fridays.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://www.titleunrelated.com/comics/">http://www.titleunrelated.com/comics/</a></td>

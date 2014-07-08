@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>In a land far away, or possibly in a dimension just next to us, lies the lands of Thedas. The world of Thedas is made up by endless possibilities - a man can be a mage, a rogue, a warrior, even a woman. From the Free Marches to Ferelden we find champions and heroes saving the world... poorly. Updates Mondays. All hail Bioware.</td>
+<th>Description</th><td>In a land far away, or possibly in a dimension just next to us, lies the lands of Thedas. The world of Thedas is made up by endless possibilities - a man can be a mage, a rogue, a warrior, even a woman. From the Free Marches to Ferelden we find champions and heroes saving the world... poorly. Updates Mondays. Also available on tumblr http://championsandheroes.tumblr.com/ All hail Bioware.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://championsandheroes.smackjeeves.com/comics/">http://championsandheroes.smackjeeves.com/comics/</a></td>

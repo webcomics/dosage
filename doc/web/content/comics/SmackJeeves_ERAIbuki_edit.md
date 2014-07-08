@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/ERAIbuki
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">A short story about a girl with a kind heart who is faced against a world that's just too strong for her to fight. But it doesn't stop her from trying. Updates DAILY This comic is now a Premium Comic on Manga Magazine! :) If it isn't too much trouble, please give the comic one click over there too! :)</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Trailer: http://youtu.be/I_UcznZSydo Japanese trailer: http://youtu.be/HJTORFFi6OY A short story about a girl with a kind heart who is faced against a world that's just too strong for her to fight. But it doesn't stop her from trying. Updates DAILY</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://eraibuki.smackjeeves.com/comics/" size="40"/></td>

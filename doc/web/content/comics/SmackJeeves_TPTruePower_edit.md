@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/TPTruePower
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">A fun comic about friendship, aliens, and flashlights! Updates: Saturdays Visit us on Facebook: https://www.facebook.com/truepowercomic</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">A fun comic about friendship, aliens, and flashlights! Updates: Wednesdays (or Thursdays) and Saturdays Visit us on Facebook: https://www.facebook.com/truepowercomic</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://truepower.smackjeeves.com/comics/" size="40"/></td>

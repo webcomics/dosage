@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>A grudge as old as mankind. Three travelers entwined by fate. This road, once travelled, can never be undone. Between damnation &amp; salvation, you find the truth hidden by God, Nigh Heaven &amp; Hell. //Updates Every Friday//</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://newnighheavenandhell.smackjeeves.com/comics/">http://newnighheavenandhell.smackjeeves.com/comics/</a></td>
+<th>Website</th><td><a href="http://nighheavenandhell.smackjeeves.com/comics/">http://nighheavenandhell.smackjeeves.com/comics/</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

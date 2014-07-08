@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/TEN
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Two years ago our two main characters jumped from a cliff to escape from a life of confinement and torture. The life of a human guineapig They jumped into a unknown future, a unknown destiny... and maybe death. But both of them survived and now, two years later, they meet again...</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">What happens when sci-fi meets boyslove? --- Dez is a security officer at a small company in New York. A half blind security officer. Aside from that funny fact he has no past. Or at least he doesn't remember anything from before 2 years ago - when he got fished out of the ocean - and he almost gave up on ever remembering. Until a homeless boy stumbles into his life that seems to know a little too much about him. Intrigued and strangely attracted he tries to pull the boy into his life and gets pulled into his own unsettling past in return...</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://ten.smackjeeves.com/comics/" size="40"/></td>

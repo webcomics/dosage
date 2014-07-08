@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/SimplySarah
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">This is the story of a young lesbian girls pursuit to follow her heart against all the problems that face her.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">A slice-of-life story about people and their own unique problems as seen through the eyes of one girl as she grows up dealing with her own.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://simplysarah.smackjeeves.com/comics/" size="40"/></td>

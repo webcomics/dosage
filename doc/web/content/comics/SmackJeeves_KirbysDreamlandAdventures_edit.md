@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/KirbysDreamlandAdventures
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">A retelling of the many adventures Kirby has had over the years since 1992.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">A retelling of the many adventures Kirby has had over the years since 1992. Updates Saturdays and sometimes Wednesdays.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://kirbysdreamlandadventures.smackjeeves.com/comics/" size="40"/></td>

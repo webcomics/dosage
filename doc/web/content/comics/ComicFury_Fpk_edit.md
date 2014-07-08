@@ -6,7 +6,7 @@ Edit info for comic ComicFury/Fpk
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">Imagine those badly-photocopied zines that were left on the tables at your local coffee shop got a shave and a haircut, finished their fine arts degrees, and turned out to have really odd Monty Python-esque senses of humor. Then they got married and had a kid. That kid is FPK.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">Formerly Frighteningly Pretentious Komix! FPK! is a bunch of funny stories with strange characters. Or strange stories with funny characters. One of those.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://fpk.webcomic.ws/" size="40"/></td>

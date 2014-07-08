@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>20 kirbies, considered different from all the others by Kirby, go on a journey to find out their past... At least that's what Kirby wants, since he can't stand the fact of knowing nothing about them all. The answers come slowly, the suspense builds, and the question is, are they going to find out everything? Or are they just going to have random adventures, and never know all of it? Updates Mondays and Thursdays.</td>
+<th>Description</th><td>20 kirbies, considered different from all the others by Kirby, go on a journey to find out their past... At least that's what Kirby wants, since he can't stand the fact of knowing nothing about them all. The answers come slowly, the suspense builds, and the question is, are they going to find out everything? Or are they just going to have random adventures, and never know all of it? Updates every other day.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://20xkirby.smackjeeves.com/comics/">http://20xkirby.smackjeeves.com/comics/</a></td>

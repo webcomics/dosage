@@ -17,7 +17,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 <th>Description</th><td>-</td>
 </tr>
 <tr>
-<th>Website</th><td><a href="http://www.gocomics.com/--G-I-R-T-H--">http://www.gocomics.com/--G-I-R-T-H--</a></td>
+<th>Website</th><td><a href="http://www.gocomics.com/girth">http://www.gocomics.com/girth</a></td>
 </tr>
 <tr>
 <th>Genre</th><td>Other</td>

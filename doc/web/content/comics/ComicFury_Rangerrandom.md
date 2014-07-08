@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Basically, where I put my unrelated art, or art not important enough to be mentioned.</td>
+<th>Description</th><td>Basically, where I put my unrelated art, or art not important enough to be mentioned. In spite of the nudity tag, is mostly safe for work unless specifically warned otherwise. It's art, so not all art is SFW.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://rangerrandom.webcomic.ws/">http://rangerrandom.webcomic.ws/</a></td>

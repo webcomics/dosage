@@ -6,7 +6,7 @@ Edit info for comic SmackJeeves/AgeoftheGray
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">It seems the rapture has finally come- although it's a little different than expected. Heaven and Hell have come out of hiding and collapsed into the earth- making it one place. With them have come the demons of Hell and the angels of Heaven. If they're here, then who's to say God and the Devil haven't arrived on Earth as well? A race starts to find either one, a race to the end of the world, and caught in the middle of it are a couple of dumb kids. Featuring a cast of familiar names such as Lucifer, Lilith, Metatron, and a lot more. Rated Mature for drug use.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">When the unseen war between heaven and hell finds itself bound to the plane of humans, several kids discover themselves caught in the middle. The almighty angels of heaven and the wicked demons of hell battle for their kingdoms, a revolution that could mean the end of humanity, and when god and the devil decide to take it into their own hands, only chaos can follow. Featuring a cast of familiar names such as Lucifer, Michael, Metatron, Lilith, and many more. Rated Mature for drug use. Updates every Sunday night.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://ageofthegray.smackjeeves.com/comics/" size="40"/></td>

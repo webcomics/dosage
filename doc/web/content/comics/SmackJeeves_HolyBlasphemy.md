@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Making fun of religions since 2010. Better stay clear of this comic if you really cannot stand people making fun of Atheism, Buddhism, Christianity, Creationism, Germanic and Greek Polytheism, Hinduism, Islam or Judaism as well as of Abraham, Agni, Aliens, Angels, the Easter Bunny, Great Ctuluh, Isaac, Jahweh, Jesus, John the Baptist, Joseph, Mary, Mohammed, normal humans, Pascal, robots, Santa Claus, Satan, Tantalus, Thor, Vishnu, well-built catholic girls, Zao Jun or Zeus (more religious belief systems and persons may follow). Updates whenever I find the time (on average every 2.4 days or almost three times a week). Comments and voting highly welcome!</td>
+<th>Description</th><td>Making fun of religions since 2010. Better stay clear of this comic if you really cannot stand people making fun of Atheism, Buddhism, Christianity, Creationism, Germanic and Greek Polytheism, Hinduism, Islam or Judaism as well as of Abraham, Agni, Aliens, Angels, the Easter Bunny, Great Ctuluh, Isaac, Jahweh, Jesus, John the Baptist, Joseph, Mary, Mohammed, normal humans, Pascal, robots, Santa Claus, Satan, Tantalus, Thor, Vishnu, well-built catholic girls, Zao Jun or Zeus (more religious belief systems and persons may follow). Updates whenever I find the time (not that often lately...). Comments and voting highly welcome!</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://holyblasphemy.smackjeeves.com/comics/">http://holyblasphemy.smackjeeves.com/comics/</a></td>

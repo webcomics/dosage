@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Here my first time on SmackJeeves ! Harfang is my new comic. It's a fantasy story, based on the Jorinde &amp; Joringel Grimm tale. Designs are inspired from asia (Korea/Mongolia/China). I wish to update it one page every monday ! I hope you'll like it. ^____^ ***************************************** Harfang is now a featured comic on MangaMagazine. Thank you so much for your support ! ^____^ You can now read the pages on www.mangamagazine.net or tapastic.com ~ ***************************************** ENGLISH TRANSLATION ***************************************** My english is bad, don't hesitate to correct my grammar. Thank you ! ^__^ *****************************************</td>
+<th>Description</th><td>Harfang is a fantasy story, based on the Jorinde &amp; Joringel Grimm tale. Designs are inspired from asia (Korea/Mongolia/China). I update it one page every monday ! I hope you'll like it. ^____^ ***************************************** You can buy the first book in full colors on my shop : www.auroreblackcat.bigcartel.com ***************************************** ENGLISH TRANSLATION ***************************************** My english is bad, don't hesitate to correct my grammar. Thank you ! ^__^ *****************************************</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://harfang.smackjeeves.com/comics/">http://harfang.smackjeeves.com/comics/</a></td>

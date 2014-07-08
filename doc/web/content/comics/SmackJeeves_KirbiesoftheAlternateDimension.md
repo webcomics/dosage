@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>A delightful comic that may contain mild language about the life of the kirbys that live in the other dimension. It is a story about adventure, suspense, and drama, and of course, comedy. (A comic isn't a comic without comedy.) Current Chapter: Kuzer's Arrival, Defeat Daroach! Kuzer has showed up on the Halberd with a special trick up his sleeve. Daroach and his minions battle to the death with Daroach, and Kuzer and his friends fight back!</td>
+<th>Description</th><td>A delightful comic that may contain mild language about the life of the kirbies that live in the other dimension. It is a story about adventure, suspense, and drama, and of course, comedy. (A comic isn't a comic without comedy.) Current Chapter: Epilogue The final pages of this comic, which will lead up to the arrival of the YouTube series of Kirbies of the Alternate Dimension. A dark threat approaches and Team KAD has defeated Daroach an his crew. All things are looking good for everyone, but the masked Kirby and the shadow Kirby have something up their sleeves.</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://kirbyaltdimension.smackjeeves.com/comics/">http://kirbyaltdimension.smackjeeves.com/comics/</a></td>

@@ -14,7 +14,7 @@ if (window.location.search === '?edit_info_mail=sent_ok') {
 </script>
 <table class="comicinfo">
 <tr>
-<th>Description</th><td>Saint runs an inn for Time Travelers, which leaves him little time to write his trashy romance novels. Unfortunately, he also happens to attract more... supernatural &quot;guests,&quot; too. [Animated .gif webcomic] Redirects to main site --&gt; http://www.saintforrent.com</td>
+<th>Description</th><td>Saint runs an inn for time travelers, which leaves him little time to write his trashy romance novels. Always a pit stop in the crisscrossing lives of his out-of-date friends and family, Saint wonders where his place is in a world that's quickly passing him by. Unfortunately, he also attracts the more… supernatural “guests,” too. [Animated .gif webcomic] Updates Tuesdays &amp; Fridays. Time travels I MEAN REDIRECTS to main site --&gt; http://www.saintforrent.com</td>
 </tr>
 <tr>
 <th>Website</th><td><a href="http://saint-for-rent.smackjeeves.com/comics/">http://saint-for-rent.smackjeeves.com/comics/</a></td>

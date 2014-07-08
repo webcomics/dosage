@@ -6,7 +6,7 @@ Edit info for comic ComicFury/Eclipselegend
 <form name="comic" action="http://gaepostmail.appspot.com/comic/" method="post">
 <table class="comicinfo">
 <tr>
-<th>Description</th><td><textarea name="description" cols="40" rows="3">A story of war, legends, aliens, explosions and more. A tale of superheroes and villains; of space battles, mad scientists, shadowy plots and dark pasts. This is Eclipse Legend.</textarea></td>
+<th>Description</th><td><textarea name="description" cols="40" rows="3">In 1948 the course of history was changed when the war with the Celerans began. In order to survive mankind had to evolve and adapt. This quantum leap in human potential takes the form of artificially-created superhumans known as “alpha-humans.” Created by EON Industries, the Alpha-human Project holds the keys to once again, change mankind's fate.</textarea></td>
 </tr>
 <tr>
 <th>Website</th><td><input type="text" name="url" value="http://eclipselegend.webcomic.ws/" size="40"/></td>
