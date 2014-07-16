@@ -1780,7 +1780,7 @@ $(document).ready(function() {
 ["<a href=\"comics/ZenPencils.html\">ZenPencils</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/ZombieHunters.html\">ZombieHunters</a>", "Other", "English", "ok", "0"],
 ["<a href=\"comics/Zwarwald.html\">Zwarwald</a>", "Other", "German", "ok", "1"],
-["<a href=\"comics/xkcd.html\">xkcd</a>", "Other", "English", "ok", "4"]
+["<a href=\"comics/xkcd.html\">xkcd</a>", "Other", "English", "ok", "5"]
     ],
     "aoColumns": [
       { "sTitle": "Name" },
