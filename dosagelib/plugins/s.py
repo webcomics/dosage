@@ -346,7 +346,7 @@ class SnowFlakes(_BasicScraper):
     def starter(cls):
         return cls.stripUrl % ('530', '5')
 
-    def getStripIndexUrl(self, index):
+    def getIndexStripUrl(self, index):
         return self.stripUrl % (index, index[0])
 
     @classmethod
@@ -382,8 +382,9 @@ class SnowFlame(_BasicScraper):
         tagre("a", "href", r'(%s\?comic=snowflame[^"]+)' % rurl)))
     help = 'Index format: chapter-page'
 
-    def getStripIndexUrl(self, index):
-        return self.stripUrl % index.split('-')
+    def getIndexStripUrl(self, index):
+        print(index)
+        return self.stripUrl % tuple(index.split('-'))
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
