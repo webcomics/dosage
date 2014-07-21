@@ -383,7 +383,6 @@ class SnowFlame(_BasicScraper):
     help = 'Index format: chapter-page'
 
     def getIndexStripUrl(self, index):
-        print(index)
         return self.stripUrl % tuple(index.split('-'))
 
     @classmethod
