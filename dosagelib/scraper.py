@@ -119,13 +119,13 @@ class Scraper(object):
         imageUrls = set(imageUrls)
         if len(imageUrls) > 1 and not self.multipleImagesPerStrip:
             patterns = [x.pattern for x in makeSequence(self.imageSearch)]
-            out.warn(u"found %d images instead of 1 at %s with expressions %s" % (len(imageUrls), url, patterns))
+            out.warn(u"Found %d images instead of 1 at %s with expressions %s" % (len(imageUrls), url, patterns))
             image = sorted(imageUrls)[0]
-            out.warn(u"choosing image %s" % image)
+            out.warn(u"Choosing image %s" % image)
             imageUrls = (image,)
         elif not imageUrls:
             patterns = [x.pattern for x in makeSequence(self.imageSearch)]
-            out.warn(u"found no images at %s with expressions %s" % (url, patterns))
+            out.warn(u"Found no images at %s with expressions %s" % (url, patterns))
         if self.textSearch:
             text = self.fetchText(url, data, self.textSearch, optional=self.textOptional)
         else:
