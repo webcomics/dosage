@@ -372,6 +372,85 @@ class _BasicScraper(Scraper):
             return None
 
 
+class _ParserScraper(Scraper):
+    """
+    Scraper base class that uses a HTML parser and XPath expressions.
+
+    All links are resolved before XPath searches are applied, so all URLs are
+    absolute!
+
+    Subclasses of this class should use XPath expressions as values for
+    prevSearch, imageSearch and textSearch. When the XPath directly selects an
+    attribute, it is used as the output.
+
+    All those searches try to do something intelligent when they match a
+    complete HTML Element: prevSearch and imageSearch try to find a "link
+    attribute" and use that as URL. textSearch strips all tags from the content
+    of the HTML element and returns that.
+    """
+
+    @classmethod
+    def xpath(cls, expr):
+        return expr
+
+    @classmethod
+    def css(cls, expr, attr=None):
+        return expr
+
+    @classmethod
+    def getPage(cls, url):
+        try:
+            from lxml import html
+        except ImportError:
+            raise ValueError(u"Skipping comic %s: Needs lxml (python-lxml) installed." % cls.getName())
+        from lxml.html.defs import link_attrs
+        cls.link_attrs = link_attrs
+        cls.html = html
+        tree = html.document_fromstring(getPageContent(url, cls.session, raw_data=True))
+        tree.make_links_absolute(url)
+        return tree
+
+    @classmethod
+    def fetchUrls(cls, url, data, urlSearch):
+        """Search all entries for given XPath in a HTML page."""
+        searchUrls = []
+        searches = makeSequence(urlSearch)
+        for search in searches:
+            for match in data.xpath(search):
+                try:
+                    for attrib in cls.link_attrs:
+                        if attrib in match.attrib:
+                            searchUrls.append(match.get(attrib))
+                except AttributeError:
+                    searchUrls.append(str(match))
+            if searchUrls:
+                # do not search other links if one pattern matched
+                break
+        if not searchUrls:
+            raise ValueError("XPath %s not found at URL %s." % (searches, url))
+        return searchUrls
+
+    @classmethod
+    def fetchText(cls, url, data, textSearch, optional):
+        """Search text entry for given text XPath in a HTML page."""
+        if textSearch:
+            text = ''
+            for match in data.xpath(textSearch):
+                try:
+                    text += ' ' + match.text_content()
+                except AttributeError:
+                    text += ' ' + unicode(match)
+            if text.strip() == '':
+                if optional:
+                    return None
+                else:
+                    raise ValueError("XPath %s did not match anything at URL %s." % (textSearch, url))
+            out.debug(u'Matched text %r with XPath %s' % (text, textSearch))
+            return unescape(text).strip()
+        else:
+            return None
+
+
 def find_scraperclasses(comic, multiple_allowed=False):
     """Get a list comic scraper classes. Can return more than one entries if
     multiple_allowed is True, else it raises a ValueError if multiple

@@ -2,3 +2,4 @@
 requests
 # optional:
 argcomplete
+lxml
