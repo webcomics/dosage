@@ -7,9 +7,9 @@ try:
 except ImportError:
     from urllib import quote as url_quote, unquote as url_unquote
 try:
-    from urllib.parse import urlparse, urlunparse, urljoin, urlsplit
+    from urllib.parse import urlparse, urlunparse, urlsplit
 except ImportError:
-    from urlparse import urlparse, urlunparse, urljoin, urlsplit
+    from urlparse import urlparse, urlunparse, urlsplit
 try:
     from urllib import robotparser
 except ImportError:
@@ -176,8 +176,6 @@ def case_insensitive_re(name):
     return "".join("[%s%s]" % (c.lower(), c.upper()) for c in name)
 
 
-baseSearch = re.compile(tagre("base", "href", '([^"]*)'))
-
 def isValidPageContent(data):
     """Check if page content is empty or has error messages."""
     # The python requests library sometimes returns empty data.
@@ -203,14 +201,7 @@ def getPageContent(url, session, max_content_bytes=MaxContentBytes):
     if not isValidPageContent(data):
         raise ValueError("Got invalid page content from %s: %r" % (url, data))
     out.debug(u"Got page content %r" % data, level=3)
-    # determine base URL
-    baseUrl = None
-    match = baseSearch.search(data)
-    if match:
-        baseUrl = match.group(1)
-    else:
-        baseUrl = url
-    return data, baseUrl
+    return data
 
 
 def getImageObject(url, referrer, session, max_content_bytes=MaxImageBytes):
@@ -224,42 +215,6 @@ def makeSequence(item):
     if isinstance(item, (list, tuple)):
         return item
     return (item,)
-
-
-def fetchUrls(url, data, baseUrl, urlSearch):
-    """Search all entries for given URL pattern(s) in a HTML page."""
-    searchUrls = []
-    searches = makeSequence(urlSearch)
-    for search in searches:
-        for match in search.finditer(data):
-            searchUrl = match.group(1)
-            if not searchUrl:
-                raise ValueError("Pattern %s matched empty URL at %s." % (search.pattern, url))
-            out.debug(u'matched URL %r with pattern %s' % (searchUrl, search.pattern))
-            searchUrls.append(normaliseURL(urljoin(baseUrl, searchUrl)))
-        if searchUrls:
-            # do not search other links if one pattern matched
-            break
-    if not searchUrls:
-        patterns = [x.pattern for x in searches]
-        raise ValueError("Patterns %s not found at URL %s." % (patterns, url))
-    return searchUrls
-
-
-def fetchUrl(url, data, baseUrl, urlSearch):
-    """Search first URL entry for given URL pattern in a HTML page."""
-    return fetchUrls(url, data, baseUrl, urlSearch)[0]
-
-
-def fetchText(url, data, textSearch, optional=False):
-    """Search text entry for given text pattern in a HTML page."""#
-    match = textSearch.search(data)
-    if match:
-        text = match.group(1)
-        out.debug(u'matched text %r with pattern %s' % (text, textSearch.pattern))
-        return text
-    if not optional:
-        raise ValueError("Pattern %s not found at URL %s." % (textSearch.pattern, url))
 
 
 _htmlparser = HTMLParser()

@@ -5,8 +5,14 @@ import requests
 import time
 import random
 import os
+import re
+try:
+    from urllib.parse import urljoin
+except ImportError:
+    from urlparse import urljoin
 from . import loader, configuration, util
-from .util import (makeSequence, get_system_uid, urlopen, getDirname)
+from .util import (getPageContent, makeSequence, get_system_uid, urlopen,
+        getDirname, unescape, tagre, normaliseURL)
 from .comic import ComicStrip
 from .output import out
 from .events import getHandler
@@ -315,20 +321,55 @@ class _BasicScraper(Scraper):
     any).
     """
 
+    BASE_SEARCH = re.compile(tagre("base", "href", '([^"]*)'))
+
     @classmethod
     def getPage(cls, url):
-        content, baseUrl = util.getPageContent(url, cls.session)
+        content = getPageContent(url, cls.session)
+        # determine base URL
+        baseUrl = None
+        match = cls.BASE_SEARCH.search(content)
+        if match:
+            baseUrl = match.group(1)
+        else:
+            baseUrl = url
         return (content, baseUrl)
 
     @classmethod
     def fetchUrls(cls, url, data, urlSearch):
         """Search all entries for given URL pattern(s) in a HTML page."""
-        return util.fetchUrls(url, data[0], data[1], urlSearch)
+        searchUrls = []
+        searches = makeSequence(urlSearch)
+        for search in searches:
+            for match in search.finditer(data[0]):
+                searchUrl = match.group(1)
+                if not searchUrl:
+                    raise ValueError("Pattern %s matched empty URL at %s." % (search.pattern, url))
+                out.debug(u'matched URL %r with pattern %s' % (searchUrl, search.pattern))
+                searchUrls.append(normaliseURL(urljoin(data[1], searchUrl)))
+            if searchUrls:
+                # do not search other links if one pattern matched
+                break
+        if not searchUrls:
+            patterns = [x.pattern for x in searches]
+            raise ValueError("Patterns %s not found at URL %s." % (patterns, url))
+        return searchUrls
 
     @classmethod
     def fetchText(cls, url, data, textSearch, optional):
         """Search text entry for given text pattern in a HTML page."""
-        return util.fetchText(url, data[0], textSearch, optional)
+        if textSearch:
+            match = textSearch.search(data[0])
+            if match:
+                text = match.group(1)
+                out.debug(u'matched text %r with pattern %s' % (text, textSearch.pattern))
+                return unescape(text).strip()
+            if optional:
+                return None
+            else:
+                raise ValueError("Pattern %s not found at URL %s." % (textSearch.pattern, url))
+        else:
+            return None
 
 
 def find_scraperclasses(comic, multiple_allowed=False):
