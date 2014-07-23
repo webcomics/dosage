@@ -5,7 +5,7 @@
 from re import compile, escape
 from ..scraper import _BasicScraper
 from ..helpers import bounceStarter, queryNamer, indirectStarter
-from ..util import tagre, fetchUrl, getPageContent
+from ..util import tagre
 
 
 class PandyLand(_BasicScraper):
@@ -104,10 +104,10 @@ class PennyArcade(_BasicScraper):
     @classmethod
     def starter(cls):
         """Get bounced start URL."""
-        data, baseUrl = getPageContent(cls.url, cls.session)
-        url1 = fetchUrl(cls.url, data, baseUrl, cls.prevSearch)
-        data, baseUrl = getPageContent(url1, cls.session)
-        url2 = fetchUrl(url1, data, baseUrl, cls.nextSearch)
+        data = cls.getPage(cls.url)
+        url1 = cls.fetchUrl(cls.url, data, cls.prevSearch)
+        data = cls.getPage(url1)
+        url2 = cls.fetchUrl(url1, data, cls.nextSearch)
         return cls.prevUrlModifier(url2)
 
     @classmethod

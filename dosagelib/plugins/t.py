@@ -5,7 +5,7 @@
 from re import compile, escape, IGNORECASE
 from ..scraper import _BasicScraper
 from ..helpers import indirectStarter
-from ..util import tagre, fetchUrl, getPageContent
+from ..util import tagre
 
 
 class TheBrads(_BasicScraper):
@@ -223,11 +223,11 @@ class TheThinHLine(_BasicScraper):
 
     indirectImageSearch = compile(tagre('a', 'href', r'(%simage/\d+)' % rurl))
 
-    def getComicStrip(self, url, data, baseUrl):
+    def getComicStrip(self, url, data):
         """The comic strip image is in a separate page."""
-        pageUrl = fetchUrl(url, data, baseUrl, self.indirectImageSearch)
-        pageData, pageBaseUrl = getPageContent(pageUrl, self.session)
-        return super(TheThinHLine, self).getComicStrip(pageUrl, pageData, pageBaseUrl)
+        pageUrl = self.fetchUrl(url, data, self.indirectImageSearch)
+        pageData = self.getPage(pageUrl)
+        return super(TheThinHLine, self).getComicStrip(pageUrl, pageData)
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):

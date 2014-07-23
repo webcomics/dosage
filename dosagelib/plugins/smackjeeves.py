@@ -3,7 +3,7 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 from re import compile
 from ..scraper import make_scraper
-from ..util import tagre, quote, fetchUrl, case_insensitive_re, getPageContent
+from ..util import tagre, quote, case_insensitive_re
 
 # SmackJeeves is a crawlers nightmare - users are allowed to edit HTML directly.
 # That's why there are so much different search patterns.
@@ -45,11 +45,11 @@ def add(name, url, description, adult, bounce):
     def _starter(cls):
         """Get start URL."""
         url1 = modifier(url)
-        data, baseUrl = getPageContent(url1, cls.session)
-        url2 = fetchUrl(url1, data, baseUrl, cls.prevSearch)
+        data = cls.getPage(url1)
+        url2 = cls.fetchUrl(url1, data, cls.prevSearch)
         if bounce:
-            data, baseUrl = getPageContent(url2, cls.session)
-            url3 = fetchUrl(url2, data, baseUrl, _nextSearch)
+            data = cls.getPage(url2)
+            url3 = cls.fetchUrl(url2, data, _nextSearch)
             return modifier(url3)
         return modifier(url2)
 
