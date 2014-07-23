@@ -421,7 +421,7 @@ class CyanideAndHappiness(_BasicScraper):
 
     def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
-        return "/comics/play-button.png" in data
+        return "/comics/play-button.png" in data[0]
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
