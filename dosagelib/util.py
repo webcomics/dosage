@@ -251,14 +251,15 @@ def fetchUrl(url, data, baseUrl, urlSearch):
     return fetchUrls(url, data, baseUrl, urlSearch)[0]
 
 
-def fetchText(url, data, textSearch):
+def fetchText(url, data, textSearch, optional=False):
     """Search text entry for given text pattern in a HTML page."""#
     match = textSearch.search(data)
     if match:
         text = match.group(1)
         out.debug(u'matched text %r with pattern %s' % (text, textSearch.pattern))
         return text
-    raise ValueError("Pattern %s not found at URL %s." % (textSearch.pattern, url))
+    if not optional:
+        raise ValueError("Pattern %s not found at URL %s." % (textSearch.pattern, url))
 
 
 _htmlparser = HTMLParser()

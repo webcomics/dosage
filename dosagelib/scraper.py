@@ -71,6 +71,11 @@ class _BasicScraper(object):
     # sometimes comic strips have additional text info for each comic
     textSearch = None
 
+    # Is the additional text required or optional?  When it is required (the
+    # default), you see an error message whenever a comic page is encountered
+    # that does not have the text
+    textOptional = False
+
     # usually the index format help
     help = ''
 
@@ -123,7 +128,7 @@ class _BasicScraper(object):
             patterns = [x.pattern for x in makeSequence(self.imageSearch)]
             out.warn(u"found no images at %s with patterns %s" % (url, patterns))
         if self.textSearch:
-            text = fetchText(url, data, self.textSearch)
+            text = fetchText(url, data, self.textSearch, optional=self.textOptional)
             if text:
                 text = unescape(text).strip()
         else:
