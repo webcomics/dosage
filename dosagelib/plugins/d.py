@@ -159,7 +159,7 @@ class DieFruehreifen(_BasicScraper):
     url = 'http://www.die-fruehreifen.de/index.php'
     stripUrl = url + '?id=%s&order=DESC'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r"(strips/[F,f]rueh[_]?[S,s]trip_\d+.jpg)"))
+    imageSearch = compile(tagre("img", "src", r'([^"]*/strips/[Ff]rueh_?[Ss]trip_\d+.jpg)'))
     prevSearch = compile(tagre("a", "href", r"(index\.php\?id=\d+&order=DESC)") + tagre("img","id",r"naechster"))
     help = 'Index format: n (unpadded)'
     lang = 'de'
