@@ -4,6 +4,8 @@ Fixes:
 - output: Don't crash when HTML output is run more than once
   per day.
   Closes: GH bug #78
+- comics: Fixed RedMeat
+  Closes: GH bug #77
 
 
 Dosage 2.15 (released 3.7.2014)

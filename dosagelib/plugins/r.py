@@ -38,16 +38,14 @@ class RealmOfAtland(_BasicScraper):
 class RedMeat(_BasicScraper):
     baseUrl = 'http://www.redmeat.com/redmeat/'
     url = baseUrl + 'current/index.html'
-    starter = bounceStarter(url, compile(r'<a href="(\.\./\d{4}-\d{2}-\d{2}/index\.html)">next</a>'))
+    starter = bounceStarter(url,
+        compile(tagre("a", "href", r'(http://www\.redmeat\.com/[^"]*)', after="next")))
     stripUrl = baseUrl + '%s/index.html'
     firstStripUrl = stripUrl % '1996-06-10'
-    imageSearch = compile(r'<img src="(index-1\.gif)" width="\d+" height="\d+" [^>]*>')
-    prevSearch = compile(r'<a href="(\.\./\d{4}-\d{2}-\d{2}/index\.html)">previous</a>')
+    imageSearch = compile(tagre("img", "src", r'(http://www\.redmeat\.com/imager/b/redmeat/[^"]*\.png)'))
+    prevSearch = compile(tagre("a", "href", r'(http://www\.redmeat\.com/[^"]*)', after="prev"))
     help = 'Index format: yyyy-mm-dd'
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        return imageUrl.split('/')[-2]
 
 class RedsPlanet(_BasicScraper):
     description = u"Red's Planet"
