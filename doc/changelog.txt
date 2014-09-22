@@ -1,3 +1,5 @@
+Dosage 2.16 (released xx.xx.xxxx)
+
 Dosage 2.15 (released 3.7.2014)
 
 Features:
