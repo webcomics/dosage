@@ -1,5 +1,11 @@
 Dosage 2.16 (released xx.xx.xxxx)
 
+Fixes:
+- output: Don't crash when HTML output is run more than once
+  per day.
+  Closes: GH bug #78
+
+
 Dosage 2.15 (released 3.7.2014)
 
 Features:

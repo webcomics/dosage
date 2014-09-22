@@ -548,6 +548,37 @@ def getFilename(name):
     return name
 
 
+def getExistingFile(name, max_suffix=1000):
+    """Add filename suffix until file exists
+    @return: filename if file is found
+    @raise: ValueError if maximum suffix number is reached while searching
+    """
+    num = 1
+    stem, ext = os.path.splitext(name)
+    filename = name
+    while not os.path.exists(filename):
+        suffix = "-%d" % num
+        filename = stem + suffix + ext
+        num += 1
+        if num >= max_suffix:
+            raise ValueError("No file %r found" % name)
+    return filename
+
+
+def getNonexistingFile(name):
+    """Add filename suffix until file not exists
+    @return: filename
+    """
+    num = 1
+    stem, ext = os.path.splitext(name)
+    filename = name
+    while os.path.exists(filename):
+        suffix = "-%d" % num
+        filename = stem + suffix + ext
+        num += 1
+    return filename
+
+
 def strlimit (s, length=72):
     """If the length of the string exceeds the given limit, it will be cut
     off and three dots will be appended.

@@ -139,8 +139,8 @@ class HtmlEventHandler(EventHandler):
 
     def fnFromDate(self, date):
         """Get filename from date."""
-        fn = time.strftime('comics-%Y%m%d.html', date)
-        fn = os.path.join(self.basepath, 'html', fn)
+        fn = time.strftime('comics-%Y%m%d', date)
+        fn = os.path.join(self.basepath, 'html', fn + ".html")
         fn = os.path.abspath(fn)
         return fn
 
@@ -155,13 +155,21 @@ class HtmlEventHandler(EventHandler):
 
         fn = self.fnFromDate(today)
         if os.path.exists(fn):
-            raise ValueError('output file %r already exists' % fn)
+            out.warn('HTML output file %r already exists' % fn)
+            out.warn('the page link of previous run will skip this file')
+            out.warn('try to generate HTML output only once per day')
+            fn = util.getNonexistingFile(fn)
 
         d = os.path.dirname(fn)
         if not os.path.isdir(d):
             os.makedirs(d)
 
-        yesterdayUrl = self.getUrlFromFilename(self.fnFromDate(yesterday))
+        try:
+            fn_yesterday = self.fnFromDate(yesterday)
+            fn_yesterday = util.getExistingFile(fn_yesterday)
+            yesterdayUrl = self.getUrlFromFilename(fn_yesterday)
+        except ValueError:
+            yesterdayUrl = None
         tomorrowUrl = self.getUrlFromFilename(self.fnFromDate(tomorrow))
 
         self.html = codecs.open(fn, 'w', self.encoding)
@@ -173,10 +181,10 @@ class HtmlEventHandler(EventHandler):
 <title>Comics for %s</title>
 </head>
 <body>
-<a href="%s">Previous Day</a> | <a href="%s">Next Day</a>
-<ul>
-''' % (self.encoding, configuration.App, time.strftime('%Y/%m/%d', today),
-       yesterdayUrl, tomorrowUrl))
+'''  % (self.encoding, configuration.App, time.strftime('%Y/%m/%d', today)))
+        if yesterdayUrl:
+            self.html.write(u'<a href="%s">Previous Day</a> | ' % yesterdayUrl)
+        self.html.write(u'<a href="%s">Next Day</a><ul>' % tomorrowUrl)
         # last comic name (eg. CalvinAndHobbes)
         self.lastComic = None
         # last comic strip URL (eg. http://example.com/page42)
