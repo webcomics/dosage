@@ -111,6 +111,17 @@ class OneQuestion(_BasicScraper):
     help = 'Index format: n (unpadded)'
 
 
+class Optipess(_BasicScraper):
+    description = u'a word you.d maybe end up with if you combined the two words "optimism" and "pessimism"'
+    url = 'http://www.optipess.com/'
+    stripUrl = url + '%s'
+    firstStripUrl =  url + '2008/12/01/jason-friend-of-the-butterflies/'
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[x|\d]+[^"]+\.[^"]+)' % url))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)', after="navi navi-prev"))
+    textSearch = compile(tagre("img", "alt", r'([^"]+)', before=url))
+    help = 'Index format: yyyy/mm/dd/stripname'
+
+
 class OrnerBoy(_BasicScraper):
     url = 'http://www.orneryboy.com/'
     rurl = escape(url)
