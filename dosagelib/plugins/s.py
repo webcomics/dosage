@@ -261,7 +261,7 @@ class ShotgunShuffle(_BasicScraper):
     firstStripUrl =  stripUrl % 'pilot/'
     imageSearch = compile(tagre("img", "src", r'(http://shotgunshuffle.com/wp-content/uploads/\d+/\d+/\d+-[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)', after="navi navi-prev"))
-    help = 'Index format: yyyy/mm/stripname'
+    help = 'Index format: stripname'
 
 
 class SinFest(_BasicScraper):
