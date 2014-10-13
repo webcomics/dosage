@@ -180,28 +180,28 @@ def isValidPageContent(data):
     """Check if page content is empty or has error messages."""
     # The python requests library sometimes returns empty data.
     # Some webservers have a 200 OK status but have an error message as response.
-    return data and not data.startswith(b"Internal Server Error")
+    return data and not data.startswith("Internal Server Error")
 
 
-def getPageContent(url, session, max_content_bytes=MaxContentBytes, raw_data=False):
-    """Get text content of given URL. If raw_data is False we try hard not to
-    decode the page content before returning (We work on page.content instead
-    of page.text most of the time)."""
+def getPageContent(url, session, max_content_bytes=MaxContentBytes):
+    """Get text content of given URL."""
     check_robotstxt(url, session)
     # read page data
     try:
         page = urlopen(url, session, max_content_bytes=max_content_bytes)
     except IOError:
         page = urlopen(url, session, max_content_bytes=max_content_bytes)
+    data = page.text
     tries = MaxRetries
-    while not isValidPageContent(page.content) and tries > 0:
+    while not isValidPageContent(data) and tries > 0:
         time.sleep(RetryPauseSeconds)
         page = urlopen(url, session, max_content_bytes=max_content_bytes)
+        data = page.text
         tries -= 1
-    if not isValidPageContent(page.content):
-        raise ValueError("Got invalid page content from %s: %r" % (url, page.text))
-    if out.level >= 3: out.debug(u"Got page content %r" % page.text, level=3)
-    return page.content if raw_data else page.text
+    if not isValidPageContent(data):
+        raise ValueError("Got invalid page content from %s: %r" % (url, data))
+    out.debug(u"Got page content %r" % data, level=3)
+    return data
 
 
 def getImageObject(url, referrer, session, max_content_bytes=MaxImageBytes):

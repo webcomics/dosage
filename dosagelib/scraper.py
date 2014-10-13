@@ -406,7 +406,7 @@ class _ParserScraper(Scraper):
         from lxml.html.defs import link_attrs
         cls.link_attrs = link_attrs
         cls.html = html
-        tree = html.document_fromstring(getPageContent(url, cls.session, raw_data=True))
+        tree = html.document_fromstring(getPageContent(url, cls.session))
         tree.make_links_absolute(url)
         return tree
 
