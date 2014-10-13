@@ -203,17 +203,13 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False):
         for scraperclass in scraper.get_scraperclasses():
             dirname = getDirname(scraperclass.getName())
             if os.path.isdir(os.path.join(basepath, dirname)):
-                if not adult and scraperclass.adult:
-                    warn_adult(scraperclass)
-                    continue
-                yield scraperclass()
+                if shouldRunScraper(scraperclass, adult):
+                    yield scraperclass()
     elif '@@' in comics:
         # all scrapers
         for scraperclass in scraper.get_scraperclasses():
-            if not adult and scraperclass.adult:
-                warn_adult(scraperclass)
-                continue
-            yield scraperclass()
+            if shouldRunScraper(scraperclass, adult):
+                yield scraperclass()
     else:
         # get only selected comic scrapers
         # store them in a set to eliminate duplicates
@@ -233,13 +229,18 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False):
                 indexes = None
             scraperclasses = scraper.find_scraperclasses(name, multiple_allowed=multiple_allowed)
             for scraperclass in scraperclasses:
-                if not adult and scraperclass.adult:
-                    warn_adult(scraperclass)
-                    continue
-                scraperobj = scraperclass(indexes=indexes)
-                if scraperobj not in scrapers:
-                    scrapers.add(scraperobj)
-                    yield scraperobj
+                if shouldRunScraper(scraperclass, adult):
+                    scraperobj = scraperclass(indexes=indexes)
+                    if scraperobj not in scrapers:
+                        scrapers.add(scraperobj)
+                        yield scraperobj
+
+
+def shouldRunScraper(scraperclass, adult=True):
+    if not adult and scraperclass.adult:
+        warn_adult(scraperclass)
+        return False
+    return True
 
 
 def warn_adult(scraperclass):
