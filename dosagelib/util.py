@@ -217,6 +217,18 @@ def makeSequence(item):
     return (item,)
 
 
+def prettyMatcherList(things):
+    """Try to construct a nicely-formatted string for a list of matcher
+    objects. Those may be compiled regular expressions or strings..."""
+    norm = []
+    for x in makeSequence(things):
+        if hasattr(x, 'pattern'):
+            norm.append(x.pattern)
+        else:
+            norm.append(x)
+    return "('%s')" % "', '".join(norm)
+
+
 _htmlparser = HTMLParser()
 def unescape(text):
     """Replace HTML entities and character references."""
