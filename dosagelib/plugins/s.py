@@ -4,7 +4,7 @@
 
 from re import compile, escape, IGNORECASE, sub
 from os.path import splitext
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter
 from ..util import tagre, getPageContent
 
@@ -555,6 +555,25 @@ class StrawberryDeathCake(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(%sarchive/[^"]+)' % rurl, after="previous"))
     help = 'Index format: stripname'
 
+
+class StrongFemaleProtagonist(_ParserScraper):
+    url = 'http://strongfemaleprotagonist.com/'
+    stripUrl = url + '%s/'
+    css = True
+    imageSearch = 'article p:first-child img'
+    prevSearch = 'div.nav-previous > a'
+    help = 'Index format: issue-?/page-??'
+
+    def shouldSkipUrl(self, url, data):
+        """Skip hiatus & non-comic pages."""
+        return url in (
+            self.stripUrl % 'guest-art/tuesday',
+            self.stripUrl % 'guest-art/friday',
+            self.stripUrl % 'guest-art/wednesday',
+            self.stripUrl % 'issue-5/newspaper',
+            self.stripUrl % 'issue-5/hiatus-1',
+            self.stripUrl % 'issue-5/hiatus-2',
+        )
 
 class SuburbanTribe(_BasicScraper):
     url = 'http://www.pixelwhip.com/'
