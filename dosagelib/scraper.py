@@ -17,6 +17,11 @@ try:
 except ImportError:
     html = None
 
+try:
+    import cssselect
+except ImportError:
+    cssselect = None
+
 from . import loader, configuration, util
 from .util import (getPageContent, makeSequence, get_system_uid, urlopen,
         getDirname, unescape, tagre, normaliseURL, prettyMatcherList)
@@ -404,6 +409,10 @@ class _ParserScraper(Scraper):
     of the HTML element and returns that.
     """
 
+    # Switch between CSS and XPath selectors for this class. Since CSS needs
+    # another Python module, XPath is the default for now.
+    css = False
+
     @classmethod
     def getPage(cls, url):
         tree = html.document_fromstring(getPageContent(url, cls.session))
@@ -414,9 +423,13 @@ class _ParserScraper(Scraper):
     def fetchUrls(cls, url, data, urlSearch):
         """Search all entries for given XPath in a HTML page."""
         searchUrls = []
+        if cls.css:
+            searchFun = data.cssselect
+        else:
+            searchFun = data.xpath
         searches = makeSequence(urlSearch)
         for search in searches:
-            for match in data.xpath(search):
+            for match in searchFun(search):
                 try:
                     for attrib in html_link_attrs:
                         if attrib in match.attrib:
@@ -453,6 +466,8 @@ class _ParserScraper(Scraper):
     @classmethod
     def getDisabledReasons(cls):
         res = {}
+        if cls.css and cssselect is None:
+            res['css'] = u"This module needs the cssselect (python-cssselect) python module which is not installed."
         if html is None:
             res['lxml'] = u"This module needs the lxml (python-lxml) python module which is not installed."
         return res
