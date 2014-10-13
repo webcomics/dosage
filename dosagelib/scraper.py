@@ -10,6 +10,13 @@ try:
     from urllib.parse import urljoin
 except ImportError:
     from urlparse import urljoin
+
+try:
+    from lxml import html
+    from lxml.html.defs import link_attrs as html_link_attrs
+except ImportError:
+    html = None
+
 from . import loader, configuration, util
 from .util import (getPageContent, makeSequence, get_system_uid, urlopen,
         getDirname, unescape, tagre, normaliseURL)
@@ -308,6 +315,16 @@ class Scraper(object):
     def fetchText(cls, url, data, textSearch, optional):
         raise ValueError("No implementation for fetchText!")
 
+    @classmethod
+    def getDisabledReasons(cls):
+        """
+        Get a dict of reasons why this comic module is disabled. The key is a
+        short (unique) identifier, the value is a string explaining why the
+        module is deactivated. If the module is not disabled, just return an
+        empty dict.
+        """
+        return {}
+
 
 class _BasicScraper(Scraper):
     """
@@ -390,22 +407,7 @@ class _ParserScraper(Scraper):
     """
 
     @classmethod
-    def xpath(cls, expr):
-        return expr
-
-    @classmethod
-    def css(cls, expr, attr=None):
-        return expr
-
-    @classmethod
     def getPage(cls, url):
-        try:
-            from lxml import html
-        except ImportError:
-            raise ValueError(u"Skipping comic %s: Needs lxml (python-lxml) installed." % cls.getName())
-        from lxml.html.defs import link_attrs
-        cls.link_attrs = link_attrs
-        cls.html = html
         tree = html.document_fromstring(getPageContent(url, cls.session))
         tree.make_links_absolute(url)
         return tree
@@ -418,7 +420,7 @@ class _ParserScraper(Scraper):
         for search in searches:
             for match in data.xpath(search):
                 try:
-                    for attrib in cls.link_attrs:
+                    for attrib in html_link_attrs:
                         if attrib in match.attrib:
                             searchUrls.append(match.get(attrib))
                 except AttributeError:
@@ -450,6 +452,12 @@ class _ParserScraper(Scraper):
         else:
             return None
 
+    @classmethod
+    def getDisabledReasons(cls):
+        res = {}
+        if html is None:
+            res['lxml'] = u"This module needs the lxml (python-lxml) python module which is not installed."
+        return res
 
 def find_scraperclasses(comic, multiple_allowed=False):
     """Get a list comic scraper classes. Can return more than one entries if

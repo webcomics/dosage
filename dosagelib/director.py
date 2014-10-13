@@ -189,12 +189,12 @@ def finish():
     out.warn("Waiting for download threads to finish.")
 
 
-def getAllScrapers():
+def getAllScrapers(listing=False):
     """Get all scrapers."""
-    return getScrapers(['@@'])
+    return getScrapers(['@@'], listing=listing)
 
 
-def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False):
+def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False, listing=False):
     """Get scraper objects for the given comics."""
     if '@' in comics:
         # only scrapers whose directory already exists
@@ -203,12 +203,12 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False):
         for scraperclass in scraper.get_scraperclasses():
             dirname = getDirname(scraperclass.getName())
             if os.path.isdir(os.path.join(basepath, dirname)):
-                if shouldRunScraper(scraperclass, adult):
+                if shouldRunScraper(scraperclass, adult, listing):
                     yield scraperclass()
     elif '@@' in comics:
         # all scrapers
         for scraperclass in scraper.get_scraperclasses():
-            if shouldRunScraper(scraperclass, adult):
+            if shouldRunScraper(scraperclass, adult, listing):
                 yield scraperclass()
     else:
         # get only selected comic scrapers
@@ -229,16 +229,22 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False):
                 indexes = None
             scraperclasses = scraper.find_scraperclasses(name, multiple_allowed=multiple_allowed)
             for scraperclass in scraperclasses:
-                if shouldRunScraper(scraperclass, adult):
+                if shouldRunScraper(scraperclass, adult, listing):
                     scraperobj = scraperclass(indexes=indexes)
                     if scraperobj not in scrapers:
                         scrapers.add(scraperobj)
                         yield scraperobj
 
 
-def shouldRunScraper(scraperclass, adult=True):
+def shouldRunScraper(scraperclass, adult=True, listing=False):
+    if listing:
+        return True
     if not adult and scraperclass.adult:
         warn_adult(scraperclass)
+        return False
+    reasons = scraperclass.getDisabledReasons()
+    if reasons:
+        warn_disabled(scraperclass, reasons)
         return False
     return True
 
@@ -246,3 +252,7 @@ def shouldRunScraper(scraperclass, adult=True):
 def warn_adult(scraperclass):
     """Print warning about adult content."""
     out.warn(u"skipping adult comic %s; use the --adult option to confirm your age" % scraperclass.getName())
+
+def warn_disabled(scraperclass, reasons):
+    """Print warning about disabled comic modules."""
+    out.warn(u"Skipping comic %s: %s" % (scraperclass.getName(), ' '.join(reasons.values())))
