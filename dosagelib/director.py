@@ -220,7 +220,7 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False):
         scrapers = set()
         for comic in comics:
             # Helpful when using shell completion to pick comics to get
-            comic.rstrip(os.path.sep)
+            comic = comic.rstrip(os.path.sep)
             if basepath and comic.startswith(basepath):
                 # make the following command work:
                 # find Comics -type d | xargs -n1 -P10 dosage -b Comics
