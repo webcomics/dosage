@@ -36,7 +36,8 @@ class AbstruseGoose(_BasicScraper):
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre('img', 'src', r'(http://abstrusegoose\.com/strips/[^<>"]+)'))
-    prevSearch = compile(tagre('a', 'href', r'(%s\d+)' % rurl) + r'&laquo; Previous</a>')
+    prevSearch = compile(tagre('a', 'href', r'(%s\d+)' % rurl) + r'&laquo; Previous')
+    nextSearch = compile(tagre('a', 'href', r'(%s\d+)' % rurl) + r'Next &raquo;')
     help = 'Index format: n (unpadded)'
     textSearch = compile(tagre("img", "title", r'([^"]+)'))
 

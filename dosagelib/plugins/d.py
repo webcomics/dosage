@@ -243,7 +243,7 @@ class DorkTower(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '1997/01/01/shadis-magazine-strip-1'
-    imageSearch = compile(tagre("img", "src", r'(%sfiles/\d+/\d+/[^"]+\.gif)' % rurl))
+    imageSearch = compile(tagre("div", "class", "entry-content") + "\s*<p>\s*" + tagre("img", "src", r'(%sfiles/[0-9]+/[0-9]+/[^"]*Dork[^"]+\.(?:gif|jpg))' % rurl, after=' alt'))
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl)+"Previous")
     help = 'Index format: yyyy/mm/dd/stripname-dd-mm-yy'
 

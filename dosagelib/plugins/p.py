@@ -112,8 +112,8 @@ class PennyArcade(_BasicScraper):
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
-        dummy, yyyy, mm, dd = pageUrl.rsplit('/', 3)
-        return '%04d%02d%02d' % (int(yyyy), int(mm), int(dd))
+        p = pageUrl.split('/')
+        return '%04d%02d%02d' % (int(p[4]), int(p[5]), int(p[6]))
 
 
 class PeppermintSaga(_BasicScraper):
@@ -266,5 +266,5 @@ class PvPonline(_BasicScraper):
     url = 'http://pvponline.com/comic'
     stripUrl = url + '%s'
     imageSearch = compile(tagre("img", "src", r'(http://s3[^"]+\.amazonaws\.com/pvponlinenew/img/comic/\d+/\d+/pvp[^"]+\.jpg)'))
-    prevSearch = compile(tagre("a", "href", r'(/comic/[^"]+)', after="Previous"))
+    prevSearch = compile(tagre("a", "href", r'(/comic/[^"]+)', after="left divider"))
     help = 'Index format: yyyy/mm/dd/stripname'

@@ -17,12 +17,10 @@ class MacHall(_BasicScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
-# broken links - disable for now
 class MadamAndEve(_BasicScraper):
-    url = 'http://www.madamandeve.co.za/week_of_cartns.php'
+    url = 'http://www.madamandeve.co.za/'
     stripUrl = None
-    imageSearch = compile(r'<IMG BORDER="0" SRC="(cartoons/me\d{6}\.(gif|jpg))">')
-    prevSearch = compile(r'<a href="(weekend_cartoon.php)"')
+    imageSearch = compile(tagre('img', 'src', r'(/cartoons/me\d{6}\.(gif|jpg))'))
     multipleImagesPerStrip = True
 
 

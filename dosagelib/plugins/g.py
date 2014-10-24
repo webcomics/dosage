@@ -189,12 +189,12 @@ class GoneWithTheBlastwave(_BasicScraper):
 
 class GrrlPower(_BasicScraper):
     description = u'Grrl Power - A webcomic about superheroines.'
-    url = 'http://www.grrlpowercomic.com/'
+    url = 'http://grrlpowercomic.com/'
     rurl = escape(url)
     stripUrl = url + 'archives/%s'
     firstStripUrl = stripUrl % '48'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%sarchives/\d+)' % rurl, after="navi-prev"))
+    imageSearch = compile(tagre("img", "src", r'(.*/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(.*/archives/\d+)', after="navi-prev"))
     help = 'Index format: number'
 
 
