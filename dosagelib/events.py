@@ -224,8 +224,9 @@ class HtmlEventHandler(EventHandler):
         if self.lastComic is not None:
             self.html.write(u'</ul>\n')
         self.html.write(u'''</ul>
+<a href="%s">Previous Day</a> | <a href="%s">Next Day</a>
 </body>
-</html>''')
+</html>''') % (yesterdayUrl, tomorrowUrl)
         self.html.close()
 
 
