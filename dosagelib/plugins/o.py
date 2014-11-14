@@ -96,7 +96,7 @@ class OnTheFasttrack(_BasicScraper):
     stripUrl = url + 'comics/%s'
     firstStripUrl = stripUrl % 'november-13-2000'
     imageSearch = compile(tagre("img", "src", r'(http://safr\.kingfeatures\.com/idn/test/zone/xml/content\.php\?file=.+?)'))
-    prevSearch = compile(r'<a href="(http://onthefastrack.com/comics/[a-z0-9-]+/)"(>&lt;Previous| rel="prev)')
+    prevSearch = compile(r'id="previouscomic" class="button white"><a href="(%scomics/[a-z0-9-]+/)"' % url)
     description = u'On The Fasttrack by Bill Holbrook'
     help = 'Index format: monthname-dd-yyyy'
     

@@ -218,17 +218,18 @@ class Sheldon(_BasicScraper):
 class ShermansLagoon(_BasicScraper):
     description = u"Sherman's Lagoon by Jim Toomey"
     url = 'http://shermanslagoon.com/'
-    rurl = escape(url)
     stripUrl = url + 'comics/%s'
     firstStripUrl = stripUrl % '/december-29-2003/'
-    imageSearch = compile(tagre("img", "src", r'(http://safr\.kingfeatures\.com/idn/etv/zone/xml/content.php\?file=[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(%scomics/[^"]+/)' % rurl) + '&laquo; previous')
-    starter = bounceStarter(url,
-        compile(tagre("a", "href", r'(%scomics/[^"]+/)' % rurl, after="next")))
+    imageSearch = compile(tagre("img", "src", r'(http://safr\.kingfeatures\.com/idn/test/zone/xml/content\.php\?file=.+?)'))
+    prevSearch = compile(r'id="previouscomic" class="button white"><a href="(%scomics/[a-z0-9-]+/)"' % url)
+    help = 'Index format: monthname-day-year'
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
-        name = pageUrl.split('/')[-2]
+        name = pageUrl.rsplit('/', 3)[2]
+        if name == "shermanslagoon.com":
+            import datetime
+            name = datetime.date.today().strftime("%B-%d-%Y").lower()
         # name is monthname-day-year
         month, day, year = name.split('-')
         return "%s-%s-%s" % (year, month, day)
