@@ -92,14 +92,23 @@ class OnTheEdge(_BasicScraper):
 
 
 class OnTheFasttrack(_BasicScraper):
-    url = 'http://www.onthefastrack.com/'
-    rurl = escape(url)
-    stripUrl = url + '?webcomic1=%s'
-    firstStripUrl = stripUrl % '2010-08-09'
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+-\d+-\d+\.[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\?webcomic1=[^"]+)' % rurl, after="prev"))
+    url = 'http://onthefastrack.com/'
+    stripUrl = url + 'comics/%s'
+    firstStripUrl = stripUrl % 'november-13-2000'
+    imageSearch = compile(tagre("img", "src", r'(http://safr\.kingfeatures\.com/idn/test/zone/xml/content\.php\?file=.+?)'))
+    prevSearch = compile(r'<a href="(http://onthefastrack.com/comics/[a-z0-9-]+/)"(>&lt;Previous| rel="prev)')
     description = u'On The Fasttrack by Bill Holbrook'
-    help = 'Index format: yyyy-mm-dd'
+    help = 'Index format: monthname-dd-yyyy'
+    
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        name = pageUrl.rsplit('/', 3)[2]
+        if name == "onthefastrack.com":
+                import datetime
+                name = datetime.date.today().strftime("%B-%d-%Y")
+        # name.title ensures that the comics are named the same
+        # as in the previous scraper
+        return "%s.gif" % name.title()
 
 
 class OneQuestion(_BasicScraper):
