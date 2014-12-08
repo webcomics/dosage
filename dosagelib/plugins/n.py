@@ -128,6 +128,17 @@ class NichtLustig(_BasicScraper):
                               compile(tagre("a", "href", r'([^"]*toondb/\d+\.html)')))
 
 
+class Nimona(_BasicScraper):
+    url = 'http://gingerhaze.com/nimona/'
+    rurl = escape(url)
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % "comic/page-1"
+    imageSearch = compile(tagre("img", "src", r'(http://gingerhaze\.com/sites/default/files/nimona-pages/.+?)'))
+    prevSearch = compile(r'<a href="(/nimona/comic/[^"]+)"><img src="http://gingerhaze\.com/sites/default/files/comicdrop/comicdrop_prev_label_file\.png"')
+    help = 'Index format: stripname'
+    endOfLife = True
+
+
 class Nnewts(_BasicScraper):
     url = 'http://nnewts.com/'
     rurl = escape(url)
