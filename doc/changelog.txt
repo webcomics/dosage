@@ -1,11 +1,19 @@
 Dosage 2.16 (released xx.xx.xxxx)
 
+Features:
+- comics: Added Nimona, ShotgunShuffle, Optipess.
+  Closes: GH bug #80, #81, #86
+- comics: image text can be optional (not on every page)
+- output: Next and previous link in HTML output also at the end of the page
+
 Fixes:
 - output: Don't crash when HTML output is run more than once
   per day.
   Closes: GH bug #78
-- comics: Fixed RedMeat
-  Closes: GH bug #77
+- comics: Fixed AbstruseGoose, Carciphona, Curtailed, DieFruehreifen,
+  DorkTower, GrrlPower, MadamAndEve, OnTheFastTrack, PennyArcade, PvPonline,
+  RedMeat, Ruthe, ShermansLagoon, SnowFlakes, SnowFlame.
+  Closes: GH bug #73, #77
 
 
 Dosage 2.15 (released 3.7.2014)
