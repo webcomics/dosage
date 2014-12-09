@@ -255,6 +255,16 @@ class _Shortpacked(_BasicScraper):
     help = 'Index format: yyyy/comic/book-nn/mm-name1/name2'
 
 
+class ShotgunShuffle(_BasicScraper):
+    description = u'adventures of the Seven Buckingham sisters, a fat cat, an irritable roommate, a dirty hippy'
+    url = 'http://shotgunshuffle.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl =  stripUrl % 'pilot/'
+    imageSearch = compile(tagre("img", "src", r'(http://shotgunshuffle.com/wp-content/uploads/\d+/\d+/\d+-[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)', after="navi navi-prev"))
+    help = 'Index format: stripname'
+
+
 class SinFest(_BasicScraper):
     description = u'Strip dealing with contemporary issues and religion. Created by Tatsuya Ishida.'
     name = 'KeenSpot/SinFest'
