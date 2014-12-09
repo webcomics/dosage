@@ -144,6 +144,11 @@ class HtmlEventHandler(EventHandler):
         fn = os.path.abspath(fn)
         return fn
 
+    def addNavLinks(self):
+        if self.yesterdayUrl:
+            self.html.write(u'<a href="%s">Previous Day</a> | ' % self.yesterdayUrl)
+        self.html.write(u'<a href="%s">Next Day</a>\n' % self.tomorrowUrl)
+
     def start(self):
         """Start HTML output."""
         today = time.time()
@@ -167,10 +172,10 @@ class HtmlEventHandler(EventHandler):
         try:
             fn_yesterday = self.fnFromDate(yesterday)
             fn_yesterday = util.getExistingFile(fn_yesterday)
-            yesterdayUrl = self.getUrlFromFilename(fn_yesterday)
+            self.yesterdayUrl = self.getUrlFromFilename(fn_yesterday)
         except ValueError:
-            yesterdayUrl = None
-        tomorrowUrl = self.getUrlFromFilename(self.fnFromDate(tomorrow))
+            self.yesterdayUrl = None
+        self.tomorrowUrl = self.getUrlFromFilename(self.fnFromDate(tomorrow))
 
         self.html = codecs.open(fn, 'w', self.encoding)
         self.html.write(u'''<!DOCTYPE html>
@@ -182,9 +187,8 @@ class HtmlEventHandler(EventHandler):
 </head>
 <body>
 '''  % (self.encoding, configuration.App, time.strftime('%Y/%m/%d', today)))
-        if yesterdayUrl:
-            self.html.write(u'<a href="%s">Previous Day</a> | ' % yesterdayUrl)
-        self.html.write(u'<a href="%s">Next Day</a><ul>' % tomorrowUrl)
+        self.addNavLinks()
+        self.html.write(u'<ul>\n')
         # last comic name (eg. CalvinAndHobbes)
         self.lastComic = None
         # last comic strip URL (eg. http://example.com/page42)
@@ -223,10 +227,8 @@ class HtmlEventHandler(EventHandler):
             self.html.write(u'</li>\n')
         if self.lastComic is not None:
             self.html.write(u'</ul>\n')
-        self.html.write(u'''</ul>
-<a href="%s">Previous Day</a> | <a href="%s">Next Day</a>
-</body>
-</html>''') % (yesterdayUrl, tomorrowUrl)
+        self.html.write(u'</ul>\n')
+        self.addNavLinks()
         self.html.close()
 
 
