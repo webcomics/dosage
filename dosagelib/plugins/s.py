@@ -267,12 +267,12 @@ class ShotgunShuffle(_BasicScraper):
 
 class SinFest(_BasicScraper):
     description = u'Strip dealing with contemporary issues and religion. Created by Tatsuya Ishida.'
-    name = 'KeenSpot/SinFest'
+    name = 'SinFest'
     url = 'http://www.sinfest.net/'
-    stripUrl = url + 'archive_page.php?comicID=%s'
-    imageSearch = compile(r'<img src=".+?(/comikaze/comics/.+?)"')
-    prevSearch = compile(r'(/archive_page.php\?comicID=.+?)".+?prev_a')
-    help = 'Index format: n (unpadded)'
+    stripUrl = url + 'view.php?date=%s'
+    imageSearch = compile(tagre("img","src", r'(btphp/comics/.+)', after="alt"))
+    prevSearch = compile(tagre("a", "href", r'(view\.php\?date=.+)') + '\\s*' + tagre("img", "src", r'\.\./images/prev\.gif'))
+    help = 'Index format: yyyy-mm-dd'
 
 
 # XXX disallowed by robots.txt
