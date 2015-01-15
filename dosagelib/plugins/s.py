@@ -267,7 +267,7 @@ class ShotgunShuffle(_BasicScraper):
 
 class SinFest(_BasicScraper):
     description = u'Strip dealing with contemporary issues and religion. Created by Tatsuya Ishida.'
-    name = 'SinFest'
+    name = 'KeenSpot/SinFest'
     url = 'http://www.sinfest.net/'
     stripUrl = url + 'view.php?date=%s'
     imageSearch = compile(tagre("img","src", r'(btphp/comics/.+)', after="alt"))
