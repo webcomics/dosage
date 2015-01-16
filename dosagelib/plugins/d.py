@@ -183,20 +183,18 @@ class DieselSweeties(_BasicScraper):
 
 class Dilbert(_BasicScraper):
     url = 'http://dilbert.com/'
-    stripUrl = url + '%s/'
+    stripUrl = url + '/strip/%s/'
     firstStripUrl = stripUrl % '1989-04-16'
-    starter = bounceStarter(url,
-        compile(tagre("a", "href", r'(/\d+-\d+-\d+/)', after="STR_Next")))
-    prevSearch = compile(tagre("a", "href", r'(/\d+-\d+-\d+/)', after="STR_Prev"))
-    imageSearch = compile(tagre("img", "src", r'(/dyn/str_strip/[^"]+\.strip\.zoom\.gif)'))
+    starter = indirectStarter(url, compile(tagre("a", "href", r'(http://dilbert.com/strip/[0-9-]*)', after="Click to see")))
+    prevSearch = compile(tagre("a", "href", r'(/strip/\d+-\d+-\d+)', after="Older Strip"))
+    imageSearch = compile(tagre("img", "src", r'(http://assets.amuniversal.com/\w+)'))
     help = 'Index format: yyyy-mm-dd'
     description = u'A comic featuring satirical office humor about a white-collar, micromanaged office featuring the engineer Dilbert as the title character.'
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
-        ext = imageUrl.rsplit(".", 1)[1]
-        name = pageUrl.rsplit("/", 2)[1]
-        return "%s.%s" % (name, ext)
+        name = pageUrl.rsplit("/", 1)[1]
+        return "%s" % name
 
 
 class DMFA(_BasicScraper):
