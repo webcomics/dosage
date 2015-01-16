@@ -411,11 +411,11 @@ class Curvy(_BasicScraper):
 
 class CyanideAndHappiness(_BasicScraper):
     url = 'http://www.explosm.net/comics/'
-    starter = bounceStarter(url, compile(tagre("a", "href", r"(/comics/\d+/)", before="next")))
+    starter = bounceStarter(url, compile(tagre("a", "href", r"(/comics/\d+/)", after="next-comic")))
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '15'
-    imageSearch = compile(tagre("img", "src", r'(http://(?:www\.)?explosm\.net/db/files/[^"]+)', before="a daily webcomic"))
-    prevSearch = compile(tagre("a", "href", r'(/comics/\d+/)', before="prev"))
+    imageSearch = compile(tagre("img", "src", r'(//files.explosm.net/comics/[^"]+)', before="main-comic"))
+    prevSearch = compile(tagre("a", "href", r'(/comics/\d+/)', after="previous-comic"))
     help = 'Index format: n (unpadded)'
 
     def shouldSkipUrl(self, url, data):
