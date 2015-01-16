@@ -50,7 +50,7 @@ class ZenPencils(_BasicScraper):
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '1-ralph-waldo-emerson-make-them-cry'
     prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+/)' % rurl, after="navi-prev"))
-    imageSearch = compile(tagre("img", "src", r'(http://zenpencils\.com/comics/\d+-\d+-\d+[^"]+)'))
+    imageSearch = compile(tagre("img", "src", r'(http://cdn\.zenpencils\.com/wp-content/uploads/\d+[^"]+)'))
     help = 'Index format: num-stripname'
     description = u'Inspirational quotes from famous people adapted into cartoons.'
 
