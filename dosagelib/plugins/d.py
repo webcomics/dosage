@@ -289,6 +289,18 @@ class DrFun(_BasicScraper):
     endOfLife = True
 
 
+class Drive(_BasicScraper):
+    description = u'DRIVE tells the story of a second Spanish empire, a galactic empire, and its looming war with a race called The Continuum of
+Makers. '
+    url = 'http://www.drivecomic.com/'
+    rurl = escape(url)
+    stripUrl = url + 'archive/%s.html'
+    firstStripUrl = stripUrl % '090815'
+    imageSearch = compile(tagre("img", "src", r'(http://cdn\.drivecomic\.com/strips/main/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(%sarchive/\d+\.html)' % rurl) + "Previous")
+    help = 'Index format: yymmdd'
+
+
 # XXX navigation works only with JavaScript
 class _DrMcNinja(_BasicScraper):
     description = u'The Adventures of Dr. McNinja'
