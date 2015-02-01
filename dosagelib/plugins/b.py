@@ -67,6 +67,57 @@ class Bearmageddon(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
+class Beetlebum(_BasicScraper):
+    
+    description = u'JoJos Illustrierter Blog'
+    url = 'http://blog.beetlebum.de/'
+    rurl = escape(url)
+    
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '2006/03/10/quiz-fur-ruskiphile'
+    
+    starter = indirectStarter(
+        url, 
+        compile(
+            tagre(
+                'a', 
+                'href', 
+                r'(%s\d{4}/\d{2}/\d{2}/[^"]+)' % rurl, 
+                after='bookmark'
+            )
+        )
+    )
+    
+    multipleImagesPerStrip = True
+    
+    imageSearch = compile(
+        tagre(
+            'img',
+            'src',
+            r'(http://blog\.beetlebum\.de/wp-content/uploads/[^"]+)'
+        )
+    )
+    
+    prevSearch = compile(
+        tagre(
+            'a', 
+            'href', 
+            r'(%s\d{4}/\d{2}/\d{2}/[^"]*)' % rurl,
+            after='prev'
+        )
+    )
+    
+    help = 'Index format: yyyy/mm/dd/striptitle'
+    lang = 'de'
+    
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        indexes = tuple( pageUrl.rstrip('/').split('/')[-4:] )
+        name = '%s-%s-%s-%s' % indexes
+        name = name + '_' + imageUrl.split( '/' )[-1]
+        return name
+
+
 class BetterDays(_BasicScraper):
     description = u'Better Days'
     url = 'http://jaynaylor.com/betterdays/'
