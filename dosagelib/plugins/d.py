@@ -290,8 +290,7 @@ class DrFun(_BasicScraper):
 
 
 class Drive(_BasicScraper):
-    description = u'DRIVE tells the story of a second Spanish empire, a galactic empire, and its looming war with a race called The Continuum of
-Makers. '
+    description = u'DRIVE tells the story of a second Spanish empire, a galactic empire, and its looming war with a race called The Continuum of Makers.'
     url = 'http://www.drivecomic.com/'
     rurl = escape(url)
     stripUrl = url + 'archive/%s.html'
