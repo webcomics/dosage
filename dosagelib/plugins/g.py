@@ -19,7 +19,7 @@ class Gaia(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/number-stripname'
 
 class GaiaGerman(_BasicScraper):
-    description = u'Gaia, eine Geschichte über das Wesen der Wirklichkeit und die Antwort auf Liliths einfache, bescheidene, welterschütternde Frage: ?Kommt ihr mit??'
+    description = u'Gaia, eine Geschichte Ã¼ber das Wesen der Wirklichkeit und die Antwort auf Liliths einfache, bescheidene, welterschÃ¼tternde Frage: ?Kommt ihr mit??'
     url = 'http://www.sandraandwoo.com/gaiade/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -198,7 +198,7 @@ class GrrlPower(_BasicScraper):
     help = 'Index format: number'
 
 
-class GunnerkrigCourt(_BasicScraper):
+class GunnerkriggCourt(_BasicScraper):
     description = u'Gunnerkrigg Court is a science-fantasy webcomic created by Tom Siddell. It is updated online three days a week.'
     url = 'http://www.gunnerkrigg.com/'
     stripUrl = url + '?p=%s'
