@@ -57,29 +57,6 @@ class SamAndFuzzy(_BasicScraper):
     prevSearch = compile(r'"><a href="(.+?)"><img src="imgint/nav_prev.gif"')
     help = 'Index format: nnnn'
 
-
-class SandraAndWoo(_BasicScraper):
-    description = u'Sandra and Woo: a webcomic about friendship, life and the art of (not) eating squirrels, featuring the girl Sandra and her pet raccoon Woo.'
-    url = 'http://www.sandraandwoo.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2000/01/01/welcome-to-sandra-and-woo'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+-[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+/)' % rurl, after="prev"))
-    help = 'Index format: yyyy/mm/dd/number-stripname'
-
-
-class SandraAndWooGerman(_BasicScraper):
-    description = u'Sandra und Woo: ein Webcomic \xfcber Freundschaft, das Leben und die Kunst (keine) Eichh\xf6rnchen zu essen; mit dem M\xe4dchen Sandra und ihrem Waschb\xe4ren Woo in den Hauptrollen'
-    url = 'http://www.sandraandwoo.com/woode/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2008/10/19/ein-ausgefuchster-waschbar'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+-[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+/)' % rurl, after="prev"))
-    help = 'Index format: yyyy/mm/dd/number-stripname'
-    lang = 'de'
-
 class SandraOnTheRocks(_BasicScraper):
     url = 'http://www.sandraontherocks.com/'
     stripUrl = url + 'strips-sotr/%s'
