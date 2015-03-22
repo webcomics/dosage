@@ -178,7 +178,7 @@ class GrrlPower(_BasicScraper):
     help = 'Index format: number'
 
 
-class GunnerkrigCourt(_BasicScraper):
+class GunnerkriggCourt(_BasicScraper):
     description = u'Gunnerkrigg Court is a science-fantasy webcomic created by Tom Siddell. It is updated online three days a week.'
     url = 'http://www.gunnerkrigg.com/'
     stripUrl = url + '?p=%s'
