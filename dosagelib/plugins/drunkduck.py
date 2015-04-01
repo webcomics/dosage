@@ -4,7 +4,7 @@
 
 from re import compile
 from ..scraper import make_scraper, Genre
-from ..util import tagre, fetchUrl, getPageContent
+from ..util import tagre
 
 # note: adding the compile() functions inside add() is a major performance hog
 _imageSearch =  compile(tagre("img", "src", r'(https://s3\.amazonaws\.com/media\.drunkduck\.com/[^"]+)', before="page-image"))
@@ -27,15 +27,15 @@ def add(name, path):
     @classmethod
     def _starter(cls):
         # first, try hopping to previous and next comic
-        data, baseUrl = getPageContent(_url, cls.session)
+        data = cls.getPage(_url)
         try:
-            url = fetchUrl(_url, data, baseUrl, _prevSearch)
+            url = cls.fetchUrl(_url, data, _prevSearch)
         except ValueError:
             # no previous link found, try hopping to last comic
-            return fetchUrl(_url, data, baseUrl, _lastSearch)
+            return cls.fetchUrl(_url, data, _lastSearch)
         else:
-            data, baseUrl = getPageContent(url, cls.session)
-            return fetchUrl(url, data, baseUrl, _nextSearch)
+            data = cls.getPage(url)
+            return cls.fetchUrl(url, data, _nextSearch)
 
     attrs = dict(
         name = 'DrunkDuck/' + name,

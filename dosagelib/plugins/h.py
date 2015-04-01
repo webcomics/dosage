@@ -3,7 +3,7 @@
 
 from re import compile, escape
 from ..scraper import _BasicScraper
-from ..util import tagre, getPageContent, fetchUrls
+from ..util import tagre
 from ..helpers import bounceStarter
 
 
@@ -21,9 +21,9 @@ class HagarTheHorrible(_BasicScraper):
     def starter(cls):
         """Return last gallery link."""
         url = 'http://www.hagardunor.net/comics.php'
-        content = getPageContent(url, cls.session)[0]
+        data = cls.getPage(url)
         pattern = compile(tagre("a", "href", cls.prevUrl))
-        for starturl in fetchUrls(url, content, url, pattern):
+        for starturl in cls.fetchUrls(url, data, pattern):
             pass
         return starturl
 

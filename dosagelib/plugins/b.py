@@ -5,7 +5,7 @@
 from re import compile, escape
 
 from ..util import tagre
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 
 
@@ -147,6 +147,28 @@ class BizarreUprising(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(view/\d+/[^"]+)') + tagre("img", "src", r'images/b_prev\.gif'))
     help = 'Index format: n/name'
 
+
+class BladeKitten(_ParserScraper):
+    description = u"Blade Kitten aka Kit Ballard, is the hottest and best bounty hunter in the Korunda System and isn't afraid to let people know it!"
+    url = 'http://www.bladekitten.com/'
+    stripUrl = url + 'comics/blade-kitten/%s/page:%s'
+    firstStripUrl = stripUrl % ('1','1')
+    imageSearch = '//img[@class="comic_page_image"]'
+    prevSearch = '//span[@class="comic_nav_prev"]//a'
+    textSearch = '//div[@class="comic_comment_inner"]//p'
+    textOptional = True
+    help = 'Index format: chapter-page'
+    starter = indirectStarter(url, '//h4//a[contains(@href, "/comics/")]')
+
+    def getIndexStripUrl(self, index):
+        return self.stripUrl % tuple(index.split('-'))
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        filename = imageUrl.rsplit('/', 1)[1]
+        _, chapter, page = pageUrl.rsplit('/', 2)
+        page = page.split(':')[1]
+        return "bladekitten-%02i-%02i-%s" % (int(chapter), int(page), filename)
 
 class BlankIt(_BasicScraper):
     description = u'An absurd, insane, and delightful webcomic from Aric McKeown and Lem Pew.'

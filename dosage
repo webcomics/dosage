@@ -136,7 +136,7 @@ def displayHelp(options):
     """Print help for comic strips."""
     errors = 0
     try:
-        for scraperobj in director.getScrapers(options.comic, options.basepath):
+        for scraperobj in director.getScrapers(options.comic, options.basepath, listing=True):
             errors += displayComicHelp(scraperobj)
     except ValueError as msg:
         out.exception(msg)
@@ -239,12 +239,17 @@ def doList(columnList=True, verbose=False):
         out.info(u'Available comic scrapers:')
         out.info(u'Comics tagged with [%s] require age confirmation with the --adult option.' % TAG_ADULT)
         out.info(u'Non-english comics are tagged with [%s].' % TAG_LANG)
-        scrapers = sorted(director.getAllScrapers(), key=lambda s: s.getName())
+        scrapers = sorted(director.getAllScrapers(listing=True), key=lambda s: s.getName())
         if columnList:
-            num = doColumnList(scrapers)
+            num, disabled = doColumnList(scrapers)
         else:
-            num = doSingleList(scrapers, verbose=verbose)
+            num, disabled = doSingleList(scrapers, verbose=verbose)
         out.info(u'%d supported comics.' % num)
+        if disabled:
+            out.info('')
+            out.info(u'Some comics are disabled, they are tagged with [%s:REASON], where REASON is one of:' % TAG_DISABLED)
+            for k in disabled:
+                out.info(u'  %-10s %s' % (k, disabled[k]))
         if page:
             pydoc.pager(fd.getvalue())
         return 0
@@ -254,38 +259,46 @@ def doList(columnList=True, verbose=False):
 
 def doSingleList(scrapers, verbose=False):
     """Get list of scraper names, one per line."""
+    disabled = {}
     for num, scraperobj in enumerate(scrapers):
         if verbose:
             displayComicHelp(scraperobj)
         else:
-            out.info(getScraperName(scraperobj))
-    return num
+            out.info(getScraperName(scraperobj, reasons=disabled))
+    return num, disabled
 
 
 def doColumnList(scrapers):
     """Get list of scraper names with multiple names per line."""
+    disabled = {}
     screenWidth = get_columns(sys.stdout)
     # limit name length so at least two columns are there
     limit = (screenWidth // 2) - 8
-    names = [getScraperName(scraperobj, limit=limit) for scraperobj in scrapers]
+    names = [getScraperName(scraperobj, limit=limit, reasons=disabled) for scraperobj in scrapers]
     num = len(names)
     maxlen = max(len(name) for name in names)
     namesPerLine = max(screenWidth // (maxlen + 1), 1)
     while names:
         out.info(u''.join(name.ljust(maxlen) for name in names[:namesPerLine]))
         del names[:namesPerLine]
-    return num
+    return num, disabled
 
 TAG_ADULT = "adult"
 TAG_LANG = "lang"
+TAG_DISABLED = "dis"
 
-def getScraperName(scraperobj, limit=None):
+def getScraperName(scraperobj, limit=None, reasons=None):
     """Get comic scraper name."""
     tags = []
     if scraperobj.adult:
         tags.append(TAG_ADULT)
     if scraperobj.lang != "en":
         tags.append("%s:%s" % (TAG_LANG, scraperobj.lang))
+    disabled = scraperobj.getDisabledReasons()
+    if disabled:
+        reasons.update(disabled)
+    for reason in disabled:
+        tags.append("%s:%s" % (TAG_DISABLED, reason))
     if tags:
         suffix = " [" + ", ".join(tags) + "]"
     else:
