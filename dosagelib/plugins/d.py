@@ -222,7 +222,7 @@ class DogHouseDiaries(_BasicScraper):
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '34'
     prevSearch = compile(r"<a id='previouslink' href='(http://thedoghousediaries.com/\d+)'")
-    imageSearch = compile(r"<img src='(dhdcomics/\d{4}-\d{2}-\d{2}[^']+)'")
+    imageSearch = compile(r"<img src='(dhdcomics/[^']+)'")
     help = 'Index format: number'
 
 
