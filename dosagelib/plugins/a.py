@@ -4,7 +4,7 @@
 
 from re import compile, escape, MULTILINE
 from ..util import tagre
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import regexNamer, bounceStarter, indirectStarter
 
 
@@ -304,14 +304,14 @@ class ARedTailsDream(_BasicScraper):
     help = 'Index format: nn'
 
 
-class ASofterWorld(_BasicScraper):
+class ASofterWorld(_ParserScraper):
     url = 'http://www.asofterworld.com/'
     stripUrl = url + 'index.php?id=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("p", "id", "thecomic") + r'\s*' +
-      tagre("img", "src", r'(http://www\.asofterworld\.com/clean/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", "(index\.php\?id=\d+)")+'< back')
+    imageSearch = '//div[@id="comicimg"]//img'
+    prevSearch = '//div[@id="previous"]/a'
     help = 'Index format: n (unpadded)'
+
 
 
 class AstronomyPOTD(_BasicScraper):
