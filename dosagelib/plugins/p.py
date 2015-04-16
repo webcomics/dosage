@@ -3,7 +3,7 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 
 from re import compile, escape
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, queryNamer, indirectStarter
 from ..util import tagre
 
@@ -233,6 +233,15 @@ class Precocious(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(/comics/\d+[^"]*\.(?:jpg|gif))'))
     prevSearch = compile(tagre("a", "href", r'(/archive/comic/[^"]+)') + tagre("img", "src", r"/templates/precocious_main/images/back_arrow\.png"))
     help = 'Index format: yyyy/mm/dd'
+
+
+class PS238(_ParserScraper):
+    url = 'http://ps238.nodwick.com/'
+    stripUrl = url + '/comic/%s/'
+    starter = bounceStarter(url, '//a[@class="comic-nav-base comic-nav-next"]')
+    imageSearch = '//div[@id="comic"]//img'
+    prevSearch = '//a[@class="comic-nav-base comic-nav-previous"]'
+    help = 'Index format: yyyy-mm-dd'
 
 
 class ProperBarn(_BasicScraper):
