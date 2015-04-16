@@ -1,10 +1,10 @@
 # Project initiators and past maintainers
 Tristan Seligmann
 Jonathan Jacobs
-
-# Current maintainer
 Bastian Kleineidam
 
-# Patches and other contributions
+# Current maintainer
 Tobias Gruetzmacher
+
+# Patches and other contributions
 Dirk Reiners
