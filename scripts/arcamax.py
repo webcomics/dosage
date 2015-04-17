@@ -16,7 +16,7 @@ from scriptutil import contains_case_insensitive, capfirst, save_result, load_re
 
 json_file = __file__.replace(".py", ".json")
 
-url_matcher = re.compile(r'<li><b><a href="(/thefunnies/[^"]+)">([^<]+)</a>')
+url_matcher = re.compile(r'<li><a href="(/thefunnies/[^"]+)">([^<]+)</a>')
 
 # names of comics to exclude
 exclude_comics = [
@@ -28,7 +28,7 @@ def handle_url(url, session, res):
     """Parse one search result page."""
     print("Parsing", url, file=sys.stderr)
     try:
-        data, baseUrl = getPageContent(url, session)
+        data = getPageContent(url, session)
     except IOError as msg:
         print("ERROR:", msg, file=sys.stderr)
         return
