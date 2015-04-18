@@ -38,7 +38,7 @@ class TestDosage (unittest.TestCase):
         for option in ("-h", "--help"):
             run_with_options([option])
         # module help
-        run_with_options(["-m", "calvinandhobbes"])
+        run_with_options(["-m", "xkcd"])
         # no comics specified
         self.assertRaises(OSError, run_with_options, [])
         # unknown option
@@ -49,7 +49,7 @@ class TestDosage (unittest.TestCase):
         tmpdir = tempfile.mkdtemp()
         try:
             # fetch html and rss
-            run_with_options(["-n", "2", "-v", "-b", tmpdir, "-o", "html", "-o", "rss", "calvinandhobbes"])
+            run_with_options(["-n", "2", "-v", "-b", tmpdir, "-o", "html", "-o", "rss", "xkcd"])
         finally:
             shutil.rmtree(tmpdir)
         # create a temporary directory for images
@@ -63,6 +63,6 @@ class TestDosage (unittest.TestCase):
         tmpdir = tempfile.mkdtemp()
         try:
             # fetch indexed
-            run_with_options(["-n", "2", "-v", "-b", tmpdir, "calvinandhobbes:2012/02/02"])
+            run_with_options(["-n", "2", "-v", "-b", tmpdir, "xkcd:303"])
         finally:
             shutil.rmtree(tmpdir)
