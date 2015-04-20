@@ -57,7 +57,7 @@ def handle_url(url, session, res):
     """Parse one search result page."""
     print("Parsing", url, file=sys.stderr)
     try:
-        data, baseUrl = getPageContent(url, session)
+        data = getPageContent(url, session)
     except IOError as msg:
         print("ERROR:", msg, file=sys.stderr)
         return
@@ -88,7 +88,7 @@ def handle_url(url, session, res):
 def get_description(url, session):
     """Get comic strip description."""
     try:
-        data, baseUrl = getPageContent(url, session)
+        data = getPageContent(url, session)
     except IOError as msg:
         print("ERROR:", msg, file=sys.stderr)
         return u""

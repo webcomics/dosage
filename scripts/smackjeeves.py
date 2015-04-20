@@ -252,7 +252,7 @@ def handle_url(url, session, res):
     """Parse one search result page."""
     print("Parsing", url, file=sys.stderr)
     try:
-        data, baseUrl = getPageContent(url, session)
+        data = getPageContent(url, session)
     except IOError as msg:
         print("ERROR:", msg, file=sys.stderr)
         return
@@ -276,7 +276,7 @@ def handle_url(url, session, res):
         # search for url in extra page
         print("Getting", page_url)
         try:
-            data2, baseUrl2 = getPageContent(page_url, session)
+            data2 = getPageContent(page_url, session)
         except IOError as msg:
             print("ERROR:", msg, file=sys.stderr)
             return
