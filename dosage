@@ -145,17 +145,13 @@ def displayHelp(options):
 
 
 def displayComicHelp(scraperobj):
-    """Print description and help for a comic."""
+    """Print help for a comic."""
     orig_context = out.context
     out.context = getScraperName(scraperobj)
     try:
         out.info(u"URL: " + scraperobj.url)
-        if scraperobj.description:
-            out.info(u"Description: " + scraperobj.description)
         if scraperobj.lang:
             out.info(u"Language: " + getLangName(scraperobj.lang))
-        if scraperobj.genres:
-            out.info(u"Genres: " + ", ".join(scraperobj.genres))
         if scraperobj.help:
             for line in scraperobj.help.splitlines():
                 out.info(line)

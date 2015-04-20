@@ -29,7 +29,6 @@ class DamnLol(_BasicScraper):
         compile(tagre("img", "src", r'(%spics/[^"]+)' % rurl)),
     )
     help = 'Index format: stripname-number'
-    description = u'Funny pictures from the internet. Thousands of them.'
     starter = bounceStarter(url,
         compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="next")))
 
@@ -71,7 +70,6 @@ class DangerouslyChloe(_BasicScraper):
 
 
 class DarkWings(_BasicScraper):
-    description = u"Dark Wings - You Can't Reach Heaven on Broken Wings"
     url = 'http://www.flowerlarkstudios.com/dark-wings/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -85,7 +83,6 @@ class DarthsAndDroids(_BasicScraper):
     url = 'http://www.darthsanddroids.net/'
     stripUrl = url + 'episodes/%s.html'
     firstStripUrl = stripUrl % '0001'
-    description = u'Darths & Droids is an "RPG screencap comic".'
     prevSearch = compile(tagre("a", "href", r'(/episodes/\d\d\d\d.html)') + '&lt;PREVIOUS' )
     imageSearch = compile(tagre("img", "src", r'(/comics/darths\d\d\d\d\.jpg)'))
 
@@ -103,7 +100,6 @@ class DasLebenIstKeinPonyhof(_BasicScraper):
 
 
 class DeadWinter(_BasicScraper):
-    description = u'd e a d . w i n t e r'
     url = 'http://deadwinter.cc/'
     stripUrl = url + 'page/%s'
     firstStripUrl = stripUrl % '1'
@@ -113,7 +109,6 @@ class DeadWinter(_BasicScraper):
 
 
 class DeathToTheExtremist(_BasicScraper):
-    description = u'Death To The Extremist'
     url = 'http://www.dtecomic.com/'
     stripUrl = url + '?n=%s'
     firstStripUrl = stripUrl % '1'
@@ -123,7 +118,6 @@ class DeathToTheExtremist(_BasicScraper):
 
 
 class DeepFried(_BasicScraper):
-    description = u'Deep Fried-The home of Weapon Brown, Clarissa and Beepo'
     url = 'http://www.whatisdeepfried.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -134,7 +128,6 @@ class DeepFried(_BasicScraper):
 
 
 class DemolitionSquad(_BasicScraper):
-    description = u'Demolitionsquad.de ist die erste deutsche Videospiel-Webcomic-Seite nach amerikanischen Vorbild und noch viel mehr als das. Auf Demolitionsquad.de findet der wissbegierige, spielebegeisterte Nutzer Comicstrips zu aktuellen Videospielen die ihm die Wartezeit auf den kommenden Top-Titel weiter ves\xfcssen.'
     url = 'http://www.demolitionsquad.de/'
     stripUrl = url + '?comicbeitrag=%s'
     firstStripUrl = stripUrl % '181'
@@ -166,7 +159,6 @@ class DieFruehreifen(_BasicScraper):
 
 
 class DieselSweeties(_BasicScraper):
-    description = u'diesel sweeties : robot webcomic & geeky music t-shirts'
     url = 'http://www.dieselsweeties.com/'
     stripUrl = url + 'archive/%s'
     firstStripUrl = stripUrl % '1'
@@ -189,7 +181,6 @@ class Dilbert(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(/strip/\d+-\d+-\d+)', after="Older Strip"))
     imageSearch = compile(tagre("img", "src", r'(http://assets.amuniversal.com/\w+)'))
     help = 'Index format: yyyy-mm-dd'
-    description = u'A comic featuring satirical office humor about a white-collar, micromanaged office featuring the engineer Dilbert as the title character.'
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
@@ -236,7 +227,6 @@ class DominicDeegan(_BasicScraper):
 
 
 class DorkTower(_BasicScraper):
-    description = u'The Place for All Things Dork'
     url = 'http://www.dorktower.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -264,7 +254,6 @@ class DreamKeepersPrelude(_BasicScraper):
 
 
 class DresdenCodak(_BasicScraper):
-    description = u'Dresden Codak'
     url = 'http://dresdencodak.com/'
     rurl = escape(url)
     stripUrl = None
@@ -285,12 +274,10 @@ class DrFun(_BasicScraper):
     multipleImagesPerStrip = True
     prevSearch = compile(tagre("a", "href", r'([^"]+)') + 'Previous Week,')
     help = 'Index format: nnnnn'
-    description = u'A series of bizarre one-panel gags. Topics range from the mundane to the obscure.'
     endOfLife = True
 
 
 class Drive(_BasicScraper):
-    description = u'DRIVE tells the story of a second Spanish empire, a galactic empire, and its looming war with a race called The Continuum of Makers.'
     url = 'http://www.drivecomic.com/'
     rurl = escape(url)
     stripUrl = url + 'archive/%s.html'
@@ -302,7 +289,6 @@ class Drive(_BasicScraper):
 
 # XXX navigation works only with JavaScript
 class _DrMcNinja(_BasicScraper):
-    description = u'The Adventures of Dr. McNinja'
     url = 'http://drmcninja.com/'
     rurl = escape(url)
     stripUrl = url + 'archives/comic/%s/'

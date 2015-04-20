@@ -34,7 +34,6 @@ class MagickChicks(_BasicScraper):
 
 
 class ManlyGuysDoingManlyThings(_BasicScraper):
-    description = u'Manly Guys Doing Manly Things \xbb Updated Mondays or whenever I feel like it'
     url = 'http://thepunchlineismachismo.com/'
     rurl = escape(url)
     stripUrl = url + 'archives/comic/%s'
@@ -54,7 +53,6 @@ class Marilith(_BasicScraper):
 
 
 class MarriedToTheSea(_BasicScraper):
-    description = u'comics by Drew & Natalie Dee - Updates daily at midnight'
     url = 'http://www.marriedtothesea.com/'
     rurl = escape(url)
     stripUrl = url + '%s'
@@ -107,7 +105,6 @@ class MenageA3(_BasicScraper):
 
 
 class Melonpool(_BasicScraper):
-    description = u"Star Trek Meets Gilligan's Island"
     url = 'http://www.melonpool.com/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'
@@ -127,7 +124,6 @@ class Misfile(_BasicScraper):
 
 
 class MonsieurLeChien(_BasicScraper):
-    description = u'Le blog de Monsieur le Chien, réflexions vaines et assertions sans fondements d\'un contribuable moyen.'
     url = 'http://www.monsieur-le-chien.fr/'
     stripUrl = url + 'index.php?planche=%s'
     firstStripUrl = stripUrl % '2'

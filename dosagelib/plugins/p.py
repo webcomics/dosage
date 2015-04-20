@@ -19,7 +19,6 @@ class PandyLand(_BasicScraper):
 
 
 class ParadigmShift(_BasicScraper):
-    description = u'A Paranormal Graphic Novel by Dirk I. Tiede'
     url = 'http://www.paradigmshiftmanga.com/'
     starter = indirectStarter(url, compile(tagre("a", "href", r'([^"]+)', after="next-comic-link")))
     stripUrl = url + 'ps/%s.html'
@@ -41,7 +40,6 @@ class ParallelUniversum(_BasicScraper):
 
 
 class PartiallyClips(_BasicScraper):
-    description = u'PartiallyClips - The true stories behind your favorite clip art.'
     url = 'http://partiallyclips.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -117,7 +115,6 @@ class PennyArcade(_BasicScraper):
 
 
 class PeppermintSaga(_BasicScraper):
-    description = u'Sexy Fucking Fantasy Adventure Webcomic - NSFW'
     url = 'http://www.pepsaga.com/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'
@@ -146,7 +143,6 @@ class PHDComics(_BasicScraper):
 
 
 class PicPakDog(_BasicScraper):
-    description = u'A comic by Kim Belding'
     url = 'http://www.picpak.net/'
     rurl = escape(url)
     stripUrl = url + 'comic/%s/'
@@ -221,7 +217,6 @@ class PoorlyDrawnLines(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(http://poorlydrawnlines\.com/wp-content/uploads/\d+/\d+/[^"]+)'))
     prevSearch = compile(tagre("li", "class", r'previous') + tagre("a", "href", r'(%s[^"]+)' % rurl))
     help = 'Index Format: name'
-    description = u'A thrice-weekly webcomic written and illustrated by Reza Farazmand. New comics every Monday, Wednesday, and Friday.'
 
 
 class Precocious(_BasicScraper):

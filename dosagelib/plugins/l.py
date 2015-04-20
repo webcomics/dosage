@@ -9,7 +9,6 @@ from ..util import tagre
 
 
 class Lackadaisy(_BasicScraper):
-    description = u'Alcohol-running cats in prohibition St. Louis'
     baseUrl = 'http://lackadaisy.foxprints.com/'
     url = baseUrl + 'comic.php'
     stripUrl = baseUrl + 'comic.php?comicid=%s'
@@ -39,7 +38,6 @@ class LasLindas(_BasicScraper):
 
 
 class LeastICouldDo(_BasicScraper):
-    description = u'A daily webcomic series about the life of Rayne Summers. Created by Ryan Sohmer and Lar deSouza.'
     url = 'http://www.leasticoulddo.com/'
     rurl = escape(url)
     stripUrl = url + 'comic/%s'
@@ -62,7 +60,6 @@ class Lint(_BasicScraper):
 
 
 class LinuxComFridayFunnies(_BasicScraper):
-    description = u"Linux.com: Friday Funnies"
     url = 'https://www.linux.com/news/friday-funnies/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % 'the-road-to-japan'
@@ -72,7 +69,6 @@ class LinuxComFridayFunnies(_BasicScraper):
 
 
 class LittleGamers(_BasicScraper):
-    description = u'The comic everyone knows, but no one reads'
     url = 'http://www.little-gamers.com/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2000/12/01/99'
@@ -82,7 +78,6 @@ class LittleGamers(_BasicScraper):
 
 
 class LoadingArtist(_BasicScraper):
-    description = u'A webcomic by Gregor Czaykowski'
     url = 'http://www.loadingartist.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'

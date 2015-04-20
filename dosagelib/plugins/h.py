@@ -49,7 +49,6 @@ class HarkAVagrant(_BasicScraper):
 
 
 class HijinksEnsue(_BasicScraper):
-    description = u'HijiNKS ENSUE is a geek pop culture webcomic that makes fun of the latest news in tv, movies, Sci-Fi, technology and the Internet'
     url = 'http://hijinksensue.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -60,7 +59,6 @@ class HijinksEnsue(_BasicScraper):
 
 
 class Hipsters(_BasicScraper):
-    description = u'a weekly webcomic series by Adrian vom Baur - Hipsters vs. Vampires - Hipsters vs. Dinosaurs - Hipsters vs. Robots'
     url = 'http://www.hipsters-comic.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'

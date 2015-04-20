@@ -19,4 +19,3 @@ class TestComicNames(TestCase):
             else:
                 comicname = name
             self.assertEqual(util.asciify(comicname), comicname)
-            self.assertTrue(isinstance(scraperclass.description, text_type), "Invalid description in %s: %r" % (scraperclass, scraperclass.description))

@@ -10,7 +10,6 @@ from ..helpers import indirectStarter
 
 
 class FalconTwin(_BasicScraper):
-    description = u'Falcon Twin'
     url = 'http://www.falcontwin.com/'
     stripUrl = url + 'index.html?strip=%s'
     firstStripUrl = stripUrl % '0'
@@ -20,7 +19,6 @@ class FalconTwin(_BasicScraper):
 
 
 class FantasyRealms(_BasicScraper):
-    description = u'Fantasy Realms'
     url = 'http://www.fantasyrealmsonline.com/'
     stripUrl = url + 'manga/%s.php'
     imageSearch = compile(r'<img src="(\d{1,4}.\w{3,4})" width="540"', IGNORECASE)
@@ -40,7 +38,6 @@ class FauxPas(_BasicScraper):
 
 
 class FeyWinds(_BasicScraper):
-    description = u'Fey Winds - Fantasy webcomic'
     baseUrl = 'http://kitsune.rydia.net/'
     url = baseUrl + 'index.html'
     stripUrl = baseUrl + 'comic/page.php?id=%s'
@@ -51,7 +48,6 @@ class FeyWinds(_BasicScraper):
 
 
 class FilibusterCartoons(_BasicScraper):
-    description = u'Political cartoons from Canada!'
     url = 'http://www.filibustercartoons.com/'
     rurl = escape(url)
     stripUrl = url + 'index.php/%s'
@@ -62,7 +58,6 @@ class FilibusterCartoons(_BasicScraper):
 
 
 class FirstWorldProblems(_BasicScraper):
-    description = u'ArchiveFirst World Problems Comic - By Brad Colbow'
     url = 'http://bradcolbow.com/archive/C5/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % 'P10'
@@ -83,7 +78,6 @@ class FlakyPastry(_BasicScraper):
 
 
 class Flemcomics(_BasicScraper):
-    description = u'FLEM Comics - More fun than a sack of dead kittens.'
     url = 'http://www.flemcomics.com/'
     stripUrl = url + 'd/%s.html'
     imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
@@ -103,7 +97,6 @@ class Flipside(_BasicScraper):
 
 
 class FonFlatter(_BasicScraper):
-    description = u'Fred, eine stets zuversichtliche, einfallsreiche, zumeist aber alberne und etwas naive Fledermaus, flattert bereits seit 2005 t\xe4glich durch das weltweite Netz'
     url = 'http://www.fonflatter.de/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -123,7 +116,6 @@ class FonFlatter(_BasicScraper):
 
 
 class Footloose(_BasicScraper):
-    description = u'Footloose, a Webcomic By alice Nuttall and Emily Brady'
     url = 'http://footloosecomic.com/footloose/today.php'
     stripUrl = 'http://footloosecomic.com/footloose/pages.php?page=%s'
     firstStripUrl = stripUrl % '1'
@@ -140,10 +132,8 @@ class ForLackOfABetterComic(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(%simg/comic/\d+[^"]+)' % rurl, after="comicimg"))
     prevSearch = compile(tagre("a", "href", r'(%s\?id\=\d+)' % rurl) + r'Prev')
     help = 'Index format: number'
-    description = u'A hand drawn comic about everyday life situations.'
 
 class FoulLanguage(_BasicScraper):
-    description = u'Weekly cartoons about a geeky, neurotic, duck trying to survive in a stupid, stupid world.'
     url = 'http://www.fowllanguagecomics.com/'
     stripUrl = url + 'comic/%s'
     firstStripUrl =  stripUrl % 'part-of-the-process'
@@ -160,7 +150,6 @@ class Freefall(_BasicScraper):
 
 
 class FredoAndPidjin(_BasicScraper):
-    description = u'Fredo and Pidjin. The Webcomic'
     url = 'http://www.pidjin.net/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2006/02/19/goofy-monday'
@@ -176,7 +165,6 @@ class FredoAndPidjin(_BasicScraper):
 
 
 class FullFrontalNerdity(_BasicScraper):
-    description = u'Full Frontal Nerdity by Aaron Williams - Comics about liking all things gaming, technological, mythological, and internetological.'
     url = 'http://ffn.nodwick.com/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'
@@ -187,7 +175,6 @@ class FullFrontalNerdity(_BasicScraper):
 
 
 class FunInJammies(_BasicScraper):
-    description = u'Fun in Jammies'
     url = 'http://www.funinjammies.com/'
     stripUrl = url + 'comic.php?issue=%s'
     firstStripUrl = stripUrl % '1'

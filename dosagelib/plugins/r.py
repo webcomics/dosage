@@ -48,7 +48,6 @@ class RedMeat(_BasicScraper):
 
 
 class RedsPlanet(_BasicScraper):
-    description = u"Red's Planet"
     url = 'http://www.redsplanet.com/comic/'
     rurl = escape(url)
     stripUrl = url + 'rp/%s/'
@@ -59,7 +58,6 @@ class RedsPlanet(_BasicScraper):
 
 
 class RedString(_BasicScraper):
-    description = u'A web comics about love and growing up. Art by Gina Biggs.'
     url = 'http://www.redstring.strawberrycomics.com/'
     stripUrl = url + 'index.php?id=%s'
     firstStripUrl = stripUrl % '434'
@@ -69,7 +67,6 @@ class RedString(_BasicScraper):
 
 
 class RomanticallyApocalyptic(_BasicScraper):
-    description = u'Romantically Apocalyptic'
     url = 'http://romanticallyapocalyptic.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'

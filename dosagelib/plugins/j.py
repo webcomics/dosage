@@ -9,7 +9,6 @@ from ..helpers import indirectStarter
 
 
 class JackCannon(_BasicScraper):
-    description = u'The Fancy Adventures of Jack Cannon - A Webcomic'
     url = 'http://fancyadventures.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -29,7 +28,6 @@ class JerkCity(_BasicScraper):
 
 
 class JimBenton(_BasicScraper):
-    description = u'Selected comics by Jim Benton'
     url = 'http://www.jimbenton.com/page14/page14.html'
     stripUrl = 'http://www.jimbenton.com/page14/files/JimBentonComic-%s.html'
     starter = indirectStarter(url, compile(tagre("a", "href", r'(files/JimBentonComic-[^>]+\.html)', quote="")))

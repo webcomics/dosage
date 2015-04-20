@@ -26,10 +26,8 @@ class CampComic(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(http://hw1\.pa-cdn\.com/camp/assets/img/katie/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, before="btn btnPrev"))
     help = 'Index Format: number'
-    description = u'Camp Weedonwantcha is a place where kids get dropped off for the summer and are never picked up again.'
 
 class CaptainSNES(_BasicScraper):
-    description = u'Captain SNES'
     url = 'http://www.captainsnes.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -41,7 +39,6 @@ class CaptainSNES(_BasicScraper):
 
 
 class Carciphona(_BasicScraper):
-    description = u'Fantasy webcomic by Shilin. In an era where magic is forbidden, a sorceress struggles to restore her once peaceful life.'
     url = 'http://carciphona.com/'
     stripUrl = url + 'view.php?page=%s&chapter=%s'
     imageSearch = compile(tagre("div", "style", r'background-image:url\((_pages[^)]*)\)'))
@@ -57,7 +54,6 @@ class Carciphona(_BasicScraper):
 
 
 class CaseyAndAndy(_BasicScraper):
-    description = u'Casey and Andy'
     url = 'http://www.galactanet.com/comic/'
     stripUrl = url + 'view.php?strip=%s'
     firstStripUrl = stripUrl % '1'
@@ -68,7 +64,6 @@ class CaseyAndAndy(_BasicScraper):
 
 
 class CasuallyKayla(_BasicScraper):
-    description = u'Casually Kayla: Keeping it as Casual as possible'
     url = 'http://casuallykayla.com/'
     stripUrl = url + '?p=%s'
     firstStripUrl = stripUrl % '89'
@@ -89,7 +84,6 @@ class Catalyst(_BasicScraper):
 
 
 class CatAndGirl(_BasicScraper):
-    description = u'Cat and Girl'
     url = 'http://catandgirl.com/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'
@@ -116,7 +110,6 @@ class Catena(_BasicScraper):
 
 
 class CatsAndCameras(_BasicScraper):
-    description = u'Just when you thought it was safe to go to the photographer'
     url = 'http://catsncameras.com/cnc/'
     rurl = escape(url)
     stripUrl = url + '?comic=%s'
@@ -127,7 +120,6 @@ class CatsAndCameras(_BasicScraper):
 
 
 class ChainsawSuit(_BasicScraper):
-    description = u'internet humor, fresh-cut'
     url = 'http://chainsawsuit.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -139,7 +131,6 @@ class ChainsawSuit(_BasicScraper):
 
 
 class Champ2010(_BasicScraper):
-    description = u'Champ2010 - an almost daily journal comic from jed collins who is not drinking this year. webcomic'
     baseUrl = 'http://jedcollins.com/champ2010/'
     rurl = escape(baseUrl)
     # the latest URL is hard coded since the comic is discontinued
@@ -152,7 +143,6 @@ class Champ2010(_BasicScraper):
 
 
 class ChannelAte(_BasicScraper):
-    description = u'Comics and Cartoons by Ryan Hudson'
     url = 'http://www.channelate.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -162,7 +152,6 @@ class ChannelAte(_BasicScraper):
 
 
 class ChasingTheSunset(_BasicScraper):
-    description = u'Chasing the Sunset | Fantasy Webcomic | Elves, Pixies and a blue dragon with orange stripes.'
     url = 'http://www.fantasycomic.com/'
     stripUrl = url + 'index.php?p=c%s'
     firstStripUrl = stripUrl % '1'
@@ -172,7 +161,6 @@ class ChasingTheSunset(_BasicScraper):
 
 
 class CheckerboardNightmare(_BasicScraper):
-    description = u'Checkerboard Nightmare by Kristofer Straub - A Webcomics Institution'
     url = 'http://www.checkerboardnightmare.com/'
     stripUrl = url + 'd/%s.shtml'
     firstStripUrl = stripUrl % '20001110'
@@ -200,7 +188,6 @@ class Chisuji(_BasicScraper):
 
 
 class CigarroAndCerveja(_BasicScraper):
-    description = u'Cigarro & Cerveja'
     url = 'http://www.cigarro.ca/'
     stripUrl = url + '?p=%s'
     imageSearch = compile(r"(/comics/.+?)'")
@@ -209,7 +196,6 @@ class CigarroAndCerveja(_BasicScraper):
 
 
 class Collar6(_BasicScraper):
-    description = u'Collar 6'
     url = 'http://collar6.com/'
     rurl = escape(url)
     stripUrl = url + 'archive/%s'
@@ -220,7 +206,6 @@ class Collar6(_BasicScraper):
 
 
 class Comedity(_BasicScraper):
-    description = u'Comedity 2.0'
     url = 'http://www.comedity.com/'
     stripUrl = url + 'index.php?strip_id=%s'
     firstStripUrl = stripUrl % '1'
@@ -240,7 +225,6 @@ class Commissioned(_BasicScraper):
 
 
 class CompanyY(_BasicScraper):
-    description = u'Company-Y'
     url = 'http://company-y.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -272,7 +256,6 @@ class CoolCatStudio(_BasicScraper):
 
 
 class CorydonCafe(_BasicScraper):
-    description = u'Corydon Cafe humorous online comic archive of abstruse awesomeness created by a starving artist'
     url = 'http://corydoncafe.com/'
     starter = indirectStarter(url,
         compile(tagre("a", "href", r'(\./\d+/[^"]+)')))
@@ -287,7 +270,6 @@ class CorydonCafe(_BasicScraper):
 
 
 class CourtingDisaster(_BasicScraper):
-    description = u'Courting Disaster by Brad Guigar - A Daily Webcomic'
     url = 'http://www.courting-disaster.com/'
     stripUrl = url + 'archive/%s.html'
     firstStripUrl = stripUrl % '20050112'
@@ -297,7 +279,6 @@ class CourtingDisaster(_BasicScraper):
 
 
 class CowboyJedi(_BasicScraper):
-    description = u'A Long Time Ago In A Webcomic Updated Weekly...'
     url = 'http://www.cowboyjedi.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -308,7 +289,6 @@ class CowboyJedi(_BasicScraper):
 
 
 class CrapIDrewOnMyLunchBreak(_BasicScraper):
-    description = u'A semi-biographical web comic about the struggles and occasional humour of daily life, pets, friends, and more. Currently completing the missing archive comics with your help.'
     url = 'http://crap.jinwicked.com/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2003/07/30/jin-and-josh-decide-to-move'
@@ -340,7 +320,6 @@ class CtrlAltDelSillies(CtrlAltDel):
 
 
 class CrimsonDark(_BasicScraper):
-    description = u'A Sci-Fi webcomic set in space in the distant future.'
     url = 'http://www.davidcsimon.com/crimsondark/'
     stripUrl = url + 'index.php?view=comic&strip_id=%s'
     firstStripUrl = stripUrl % '1'
@@ -350,7 +329,6 @@ class CrimsonDark(_BasicScraper):
 
 
 class CraftedFables(_BasicScraper):
-    description = u'Caf-Fiends'
     url = 'http://www.craftedfables.com/'
     baseUrl = 'http://www.caf-fiends.net/'
     rurl = escape(baseUrl)
@@ -362,7 +340,6 @@ class CraftedFables(_BasicScraper):
 
 
 class CucumberQuest(_BasicScraper):
-    description = u'Cucumber Quest'
     url = 'http://cucumber.gigidigi.com/'
     rurl = escape(url)
     stripUrl = url + 'cq/%s/'
@@ -379,7 +356,6 @@ class CucumberQuest(_BasicScraper):
 
 
 class Curtailed(_BasicScraper):
-    description = u''
     url = 'http://curtailedcomic.com/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2012/04/08/sneeze'
@@ -390,7 +366,6 @@ class Curtailed(_BasicScraper):
 
 
 class Curvy(_BasicScraper):
-    description = u'An erotic sci-fi adventure comic for adults.'
     url = 'http://www.c.urvy.org/'
     stripUrl = url + '?date=%s'
     firstStripUrl = stripUrl % '20080329'

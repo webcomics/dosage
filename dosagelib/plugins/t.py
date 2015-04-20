@@ -9,7 +9,6 @@ from ..util import tagre
 
 
 class TheBrads(_BasicScraper):
-    description = u'ArchiveFirst World Problems Comic - By Brad Colbow'
     url = 'http://bradcolbow.com/archive/C4/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % 'P125'
@@ -20,7 +19,6 @@ class TheBrads(_BasicScraper):
 
 
 class TheDevilsPanties(_BasicScraper):
-    description = u"It's not Satanic Porn"
     url = 'http://thedevilspanties.com/'
     stripUrl = url + 'archives/%s'
     firstStripUrl = stripUrl % '300'
@@ -30,7 +28,6 @@ class TheDevilsPanties(_BasicScraper):
 
 
 class TheDreamlandChronicles(_BasicScraper):
-    description = u'The Dreamland Chronicles'
     url = 'http://www.thedreamlandchronicles.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'page-1'
@@ -50,7 +47,6 @@ class TheDreamlandChronicles(_BasicScraper):
         return "%s-%s-%s.%s" % (bp[0], bp[1], bp[2], ext)
 
 class TheGamerCat(_BasicScraper):
-    description = u"The Gamer Cat"
     url = 'http://www.thegamercat.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -181,7 +177,6 @@ class _TwoLumps(_BasicScraper):
 
 
 class TwoTwoOneFour(_BasicScraper):
-    description = u'Artwork, comics, graphic novels, music, articles, and various silliness by Troy McQuinn'
     url = 'http://www.nitrocosm.com/go/2214_classic/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -192,7 +187,6 @@ class TwoTwoOneFour(_BasicScraper):
 
 
 class TheWhiteboard(_BasicScraper):
-    description = u'The Whiteboard, a somewhat paintball-related webcomic by "Doc" Nickel'
     url = 'http://www.the-whiteboard.com/'
     stripUrl = url + 'auto%s.html'
     imageSearch = compile(r'<img SRC="(autotwb\d{1,4}.+?|autowb\d{1,4}.+?)">', IGNORECASE)
@@ -211,7 +205,6 @@ class TheOuterQuarter(_BasicScraper):
 
 
 class TheThinHLine(_BasicScraper):
-    description = u'the thin H line. Proudly mediocre. NSFW.'
     url = 'http://thinhline.tumblr.com/'
     rurl = escape(url)
     stripUrl = url + 'post/%s'
@@ -257,7 +250,6 @@ class TracyAndTristan(_BasicScraper):
 
 
 class TwoGuysAndGuy(_BasicScraper):
-    description = u"Two Guys and Guy"
     url = 'http://www.twogag.com/'
     rurl = escape(url)
     stripUrl = url + 'archives/%s'

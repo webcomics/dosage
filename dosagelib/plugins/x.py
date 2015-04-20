@@ -17,7 +17,6 @@ class xkcd(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(//imgs\.xkcd\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/\d+/)', before="prev"))
     help = 'Index format: n (unpadded)'
-    description = u'A webcomic of romance, sarcasm, math, and language.'
     textSearch = compile(tagre("img", "title", r'([^"]+)', before=r'//imgs\.xkcd\.com/comics/'))
 
     @classmethod

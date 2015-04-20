@@ -52,7 +52,6 @@ class ZenPencils(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+/)' % rurl, after="navi-prev"))
     imageSearch = compile(tagre("img", "src", r'(http://cdn\.zenpencils\.com/wp-content/uploads/\d+[^"]+)'))
     help = 'Index format: num-stripname'
-    description = u'Inspirational quotes from famous people adapted into cartoons.'
 
 
 class ZombieHunters(_BasicScraper):
