@@ -15,9 +15,10 @@ import os
 import argparse
 import pydoc
 from io import StringIO
+import pycountry
 from dosagelib import events, configuration, singleton, director
 from dosagelib.output import out
-from dosagelib.util import internal_error, strlimit, getLangName
+from dosagelib.util import internal_error, strlimit
 from dosagelib.ansicolor import get_columns
 
 
@@ -151,7 +152,7 @@ def displayComicHelp(scraperobj):
     try:
         out.info(u"URL: " + scraperobj.url)
         if scraperobj.lang:
-            out.info(u"Language: " + getLangName(scraperobj.lang))
+            out.info(u"Language: " + pycountry.languages.get(alpha2 = scraperobj.lang).name)
         if scraperobj.help:
             for line in scraperobj.help.splitlines():
                 out.info(line)

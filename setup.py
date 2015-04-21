@@ -457,6 +457,7 @@ args = dict(
     ),
     install_requires = (
         'requests',
+        'pycountry',
     )
 )
 
