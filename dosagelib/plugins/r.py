@@ -4,6 +4,7 @@
 
 from re import compile, escape
 from ..scraper import _BasicScraper
+from ..scraper import _ParserScraper
 from ..helpers import bounceStarter
 from ..util import tagre
 
@@ -14,6 +15,14 @@ class RadioactivePanda(_BasicScraper):
     imageSearch = compile(r'<img src="(/Assets/.*?)".+?"comicimg"')
     prevSearch = compile(r'<a href="(/comic/.*?)".+?previous_btn')
     help = 'Index format: n (no padding)'
+
+class RalfTheDestroyer(_ParserScraper):
+    url = 'http://ralfthedestroyer.com/'
+    stripUrl = url + '%s/'
+    css = True
+    imageSearch = '#comic-1 > a:first-child img'
+    prevSearch = 'td.comic_navi_left > a:nth-of-type(2)'
+    help = 'Index format: stripname'
 
 
 class RealLife(_BasicScraper):
