@@ -133,13 +133,15 @@ class ForLackOfABetterComic(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(%s\?id\=\d+)' % rurl) + r'Prev')
     help = 'Index format: number'
 
-class FoulLanguage(_BasicScraper):
+
+class FowlLanguage(_BasicScraper):
     url = 'http://www.fowllanguagecomics.com/'
     stripUrl = url + 'comic/%s'
     firstStripUrl =  stripUrl % 'part-of-the-process'
     imageSearch = compile(tagre("img", "src", r'(http://i\d\.wp\.com/www\.fowllanguagecomics\.com/wp-content/uploads/\d+/\d+/[^"]+\.[a-z]+).*'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)', after="comic-nav-previous"))
     help = 'Index format: yyyy/mm/stripname'
+
 
 class Freefall(_BasicScraper):
     url = 'http://freefall.purrsia.com/default.htm'
