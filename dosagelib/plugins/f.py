@@ -142,7 +142,7 @@ class ForLackOfABetterComic(_BasicScraper):
     help = 'Index format: number'
     description = u'A hand drawn comic about everyday life situations.'
 
-class FoulLanguage(_BasicScraper):
+class FowlLanguage(_BasicScraper):
     description = u'Weekly cartoons about a geeky, neurotic, duck trying to survive in a stupid, stupid world.'
     url = 'http://www.fowllanguagecomics.com/'
     stripUrl = url + 'comic/%s'
