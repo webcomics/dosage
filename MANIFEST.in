@@ -1,6 +1,3 @@
-include MANIFEST.in
-include COPYING Makefile requirements.txt
-include doc/Makefile doc/*.txt doc/*.1 doc/*.html doc/*.md doc/dosage-completion
-include doc/css/*.css doc/js/*.js
-include scripts/*.py scripts/*.sh scripts/*.bat scripts/*.iss
-recursive-include tests *.py
+exclude .git*
+exclude .travis.yml
+recursive-exclude scripts dosage.*
