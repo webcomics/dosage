@@ -4,7 +4,7 @@
 
 from re import compile, escape, IGNORECASE
 
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 
 
@@ -23,7 +23,16 @@ class MadamAndEve(_BasicScraper):
     imageSearch = compile(tagre('img', 'src', r'(/cartoons/me\d{6}\.(gif|jpg))'))
     multipleImagesPerStrip = True
 
+class Magellan(_ParserScraper):
+    description = u'A comic strip about Superheroes and Not-Superheroes'
+    url = 'http://magellanverse.com/'
+    stripUrl = url + '%s/'
+    css = True
+    imageSearch = '#comic-1 > a:first-child img'
+    prevSearch = '.nav-previous > a'
+    help = 'Index format: stripname'
 
+	
 class MagickChicks(_BasicScraper):
     url = 'http://www.magickchicks.com/'
     stripUrl = url + 'strips-mc/%s'
