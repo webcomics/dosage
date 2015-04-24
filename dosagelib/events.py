@@ -125,7 +125,7 @@ def getDimensionForImage(filename, maxsize):
         return None
     img = Image.open(filename)
     width, height = img.size
-    if width > maxsize:
+    if width > maxsize[0] or height > maxsize[1]:
         img.thumbnail(maxsize)
         out.info("Downscaled display size from %s to %s" % ((width, height), img.size))
     return img.size

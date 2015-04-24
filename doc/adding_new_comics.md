@@ -13,7 +13,6 @@ Here is a complete example which is explained in detail below.
 
 ```
 class SuperDuperComic(_BasicScraper):
-    description = u'A super duper comic by Mr Smith!'
     url = 'http://superdupercomic.com/'
     rurl = escape(url)
     stripUrl = url + 'comic/%s'
@@ -32,12 +31,6 @@ The classname (``SuperDuperComic`` in our example) must be unique,
 regardless of upper/lower characters.
 The user finds comics with this classname, so be sure to select
 something descriptive and easy to remember.
-
-```description = u'A super duper comic by Mr Smith!'```
-
-Next, a description should be added to the class in Unicode notation
-(u'...'). It is displayed when a user requests help for one comic with
-``dosage -m superdupercomic``.
 
 ```url = 'http://superdupercomic.com/'```
 

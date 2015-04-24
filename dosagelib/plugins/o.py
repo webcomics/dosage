@@ -45,7 +45,6 @@ class Oglaf(_BasicScraper):
     adult = True
 
 
-
 class OhJoySexToy(_BasicScraper):
     url = 'http://www.ohjoysextoy.com/'
     rurl = escape(url)
@@ -97,7 +96,6 @@ class OnTheFasttrack(_BasicScraper):
     firstStripUrl = stripUrl % 'november-13-2000'
     imageSearch = compile(tagre("img", "src", r'(http://safr\.kingfeatures\.com/idn/test/zone/xml/content\.php\?file=.+?)'))
     prevSearch = compile(r'id="previouscomic" class="button white"><a href="(%scomics/[a-z0-9-]+/)"' % url)
-    description = u'On The Fasttrack by Bill Holbrook'
     help = 'Index format: monthname-dd-yyyy'
     
     @classmethod
@@ -121,7 +119,6 @@ class OneQuestion(_BasicScraper):
 
 
 class Optipess(_BasicScraper):
-    description = u'a word you.d maybe end up with if you combined the two words "optimism" and "pessimism"'
     url = 'http://www.optipess.com/'
     stripUrl = url + '%s'
     firstStripUrl =  url + '2008/12/01/jason-friend-of-the-butterflies/'
@@ -152,7 +149,6 @@ class OurHomePlanet(_BasicScraper):
 
 
 class OverCompensating(_BasicScraper):
-    description = u'OVERCOMPENSATING: The Journal Comic With a Seething Disdain for Reality.'
     url = 'http://www.overcompensating.com/'
     stripUrl = url + 'oc/index.php?comic=%s'
     firstStripUrl = stripUrl % '0'

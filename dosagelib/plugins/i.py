@@ -8,7 +8,6 @@ from ..util import tagre
 
 
 class IAmArg(_BasicScraper):
-    description = u'An Internet comic of non sequitur Geekiness. Updates Monday, Wednesday and Friday'
     url = 'http://iamarg.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -26,7 +25,6 @@ class ICanBarelyDraw(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+-[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s\d+)' % rurl))
     help = 'Index format: number'
-    description = u'Webcomic featuring technology, romance, and odd behavior'
 
 
 class IDreamOfAJeanieBottle(_BasicScraper):
@@ -39,7 +37,6 @@ class IDreamOfAJeanieBottle(_BasicScraper):
 
 
 class InternetWebcomic(_BasicScraper):
-    description = u"Internet Webcomic"
     url = 'http://www.internet-webcomic.com/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'

@@ -2,25 +2,22 @@ language: python
 python:
   - "2.7"
   - "3.3"
-# whitelist
-branches:
-  only:
-    - master
-# install libjpeg-dev for PIL to handle JPEGs
+  - "3.4"
+# install libjpeg-dev for Pillow to handle JPEGs
 before_install:
   - sudo apt-get update -q -y
   - sudo apt-get install -q -y libjpeg-dev
-  - sudo ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib
-  - sudo ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib
-  - sudo ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib
 # disabled upgrade: it gives build errors
 #  - sudo apt-get upgrade -q -y
 # command to install dependencies
 install:
-  - pip install -r requirements.txt --use-mirrors
-  - scripts/install_pil.sh
-  - pip install pytest-xdist --use-mirrors
+  - pip install -r requirements.txt
+  - pip install pytest-xdist
 # command to run tests
 script: make test PYTESTOPTS="--tb=short -n10"
-#notifications:
-#  email: false
+notifications:
+  irc:
+    channels:
+      - "chat.freenode.net#dosage"
+    use_notice: true
+    skip_join: true

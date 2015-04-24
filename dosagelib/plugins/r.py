@@ -4,6 +4,7 @@
 
 from re import compile, escape
 from ..scraper import _BasicScraper
+from ..scraper import _ParserScraper
 from ..helpers import bounceStarter
 from ..util import tagre
 
@@ -14,6 +15,14 @@ class RadioactivePanda(_BasicScraper):
     imageSearch = compile(r'<img src="(/Assets/.*?)".+?"comicimg"')
     prevSearch = compile(r'<a href="(/comic/.*?)".+?previous_btn')
     help = 'Index format: n (no padding)'
+
+class RalfTheDestroyer(_ParserScraper):
+    url = 'http://ralfthedestroyer.com/'
+    stripUrl = url + '%s/'
+    css = True
+    imageSearch = '#comic-1 > a:first-child img'
+    prevSearch = 'td.comic_navi_left > a:nth-of-type(2)'
+    help = 'Index format: stripname'
 
 
 class RealLife(_BasicScraper):
@@ -48,7 +57,6 @@ class RedMeat(_BasicScraper):
 
 
 class RedsPlanet(_BasicScraper):
-    description = u"Red's Planet"
     url = 'http://www.redsplanet.com/comic/'
     rurl = escape(url)
     stripUrl = url + 'rp/%s/'
@@ -59,7 +67,6 @@ class RedsPlanet(_BasicScraper):
 
 
 class RedString(_BasicScraper):
-    description = u'A web comics about love and growing up. Art by Gina Biggs.'
     url = 'http://www.redstring.strawberrycomics.com/'
     stripUrl = url + 'index.php?id=%s'
     firstStripUrl = stripUrl % '434'
@@ -69,7 +76,6 @@ class RedString(_BasicScraper):
 
 
 class RomanticallyApocalyptic(_BasicScraper):
-    description = u'Romantically Apocalyptic'
     url = 'http://romanticallyapocalyptic.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'

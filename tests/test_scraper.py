@@ -1,5 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2013-2014 Bastian Kleineidam
+# Copyright (C) 2015 Tobias Gruetzmacher
 from unittest import TestCase
 from dosagelib import scraper
 
@@ -15,7 +16,7 @@ class ScraperTester(TestCase):
                 "missing url in %s" % scraperobj.getName())
 
     def test_find_scraperclasses_single(self):
-        result = scraper.find_scraperclasses("CalvinAndHobbes")
+        result = scraper.find_scraperclasses("xkcd")
         self.assertEqual(len(result), 1)
 
     def test_find_scraperclasses_multi(self):

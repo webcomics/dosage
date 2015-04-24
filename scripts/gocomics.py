@@ -20,55 +20,17 @@ url_matcher = re.compile(tagre("a", "href", r'(/[^"]+)', after="alpha_list") + r
 
 # names of comics to exclude
 exclude_comics = [
-    "Adagio", # too few comics
-    "AgentGates", # too few comics
-    "Apocalypseharry", # too few comics
-    "BatkidandBatrat", # too few comics
-    "BETWEENTHELINES", # comic unavailable
-    "Bonner", # missing page
-    "Buster", # comic unavailabe
-    "CarteBlanche", # missing images
-    "Critterdoodles", # missing images
-    "CountyLine", # too few comics
-    "Crawdiddy", # comic unavailable
-    "DALTONDOG", # comic unavailable
-    "DellAndSteve", # too few comics
-    "Dilbert", # redirect
-    "DutchnPals", # too few comics
-    "EclecticCartoons", # missing images
-    "FlexandTone", # too few comics
-    "FrikkFrakkAndFrank", # too few comics
-    "GOODAndEVIL", # too few comics
-    "GoodwithCoffee", # too few comics
-    "InkeeDoodles", # comic unavailable
-    "JoesBar", # missing images
-    "KALEECHIKORNERS", # too few comics
-    "LoveIs", # missing images
-    "MaggiesComics", # too few comics
-    "MagicCoffeeHair", # too few comics
-    "NickGalifianakis", # too few comics
-    "OfMiceandMud", # too few comics
-    "OysterWar", # too few comics
-    "Penguins", # too few comics
-    "PIGTIMES", # comic unavailable
-    "PS", # comic unavailable
-    "Radiowave", # too few comics
-    "RatchetAndSpin", # too few comics
-    "RichardsPoorAlmanac", # missing images
-    "SatchelandDuff", # too few comics
-    "SherpaAid", # comic unavailable
-    "Slowpoke", # comic moved
-    "SpaghettiSandwich", # too few comics
-    "SparComics", # comic unavailable
-    "SurvivingSingle", # comic unavailable
-    "TheBluckwells", # missing images
-    "TheConjurers", # too few comics
-    "TheDeadlys", # too few comics
-    "TheNursesLockerRoom", # too few comics
-    "Tomversation", # too few comics
-    "VoicesInTheDark", # too few comics
-    "WhatTheFrak", # too few comics
-    "ZeekyZebraandCompany", # too few comics
+        "Angryprogrammer", # unavailable
+        "Complex", # "coming soon"
+        "Guinness", # "coming soon"
+        "Jabberwoncky", # "coming soon"
+        "KickyBrand", # unavailable
+        "Penmanship", # unavailable
+        "RandysRationale", # "coming soon"
+        "SaturdayMorningBreakfastCereal", # duplicate
+        "SignsOfOurTimes", # "coming soon"
+        "TheGagwriter", # "coming soon"
+        "Yaoyao", # "coming soon"
 ]
 
 
@@ -76,7 +38,7 @@ def handle_url(url, session, res):
     """Parse one search result page."""
     print("Parsing", url, file=sys.stderr)
     try:
-        data, baseUrl = getPageContent(url, session)
+        data = getPageContent(url, session)
     except IOError as msg:
         print("ERROR:", msg, file=sys.stderr)
         return
@@ -100,6 +62,7 @@ def get_results():
     res = {}
     session = requests.Session()
     handle_url('http://www.gocomics.com/features', session, res)
+    handle_url('http://www.gocomics.com/explore/espanol', session, res)
     handle_url('http://www.gocomics.com/explore/editorial_list', session, res)
     handle_url('http://www.gocomics.com/explore/sherpa_list', session, res)
     save_result(res, json_file)
@@ -111,6 +74,7 @@ def print_results(args):
     with codecs.open(filename, 'a', 'utf-8') as fp:
         for name, shortname in sorted(load_result(json_file).items()):
             if name in exclude_comics:
+                print("Excluded " + name)
                 continue
             fp.write(u"add(%r, %r)\n" % (
               str(truncate_name(name)), str(shortname))

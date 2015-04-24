@@ -4,7 +4,7 @@
 
 from re import compile, escape, IGNORECASE
 
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 
 
@@ -23,7 +23,16 @@ class MadamAndEve(_BasicScraper):
     imageSearch = compile(tagre('img', 'src', r'(/cartoons/me\d{6}\.(gif|jpg))'))
     multipleImagesPerStrip = True
 
+class Magellan(_ParserScraper):
+    description = u'A comic strip about Superheroes and Not-Superheroes'
+    url = 'http://magellanverse.com/'
+    stripUrl = url + '%s/'
+    css = True
+    imageSearch = '#comic-1 > a:first-child img'
+    prevSearch = '.nav-previous > a'
+    help = 'Index format: stripname'
 
+	
 class MagickChicks(_BasicScraper):
     url = 'http://www.magickchicks.com/'
     stripUrl = url + 'strips-mc/%s'
@@ -34,7 +43,6 @@ class MagickChicks(_BasicScraper):
 
 
 class ManlyGuysDoingManlyThings(_BasicScraper):
-    description = u'Manly Guys Doing Manly Things \xbb Updated Mondays or whenever I feel like it'
     url = 'http://thepunchlineismachismo.com/'
     rurl = escape(url)
     stripUrl = url + 'archives/comic/%s'
@@ -54,7 +62,6 @@ class Marilith(_BasicScraper):
 
 
 class MarriedToTheSea(_BasicScraper):
-    description = u'comics by Drew & Natalie Dee - Updates daily at midnight'
     url = 'http://www.marriedtothesea.com/'
     rurl = escape(url)
     stripUrl = url + '%s'
@@ -107,7 +114,6 @@ class MenageA3(_BasicScraper):
 
 
 class Melonpool(_BasicScraper):
-    description = u"Star Trek Meets Gilligan's Island"
     url = 'http://www.melonpool.com/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'
@@ -127,7 +133,6 @@ class Misfile(_BasicScraper):
 
 
 class MonsieurLeChien(_BasicScraper):
-    description = u'Le blog de Monsieur le Chien, réflexions vaines et assertions sans fondements d\'un contribuable moyen.'
     url = 'http://www.monsieur-le-chien.fr/'
     stripUrl = url + 'index.php?planche=%s'
     firstStripUrl = stripUrl % '2'

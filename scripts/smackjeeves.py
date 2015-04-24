@@ -13,7 +13,7 @@ import requests
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from dosagelib.util import getPageContent, tagre
 from dosagelib.scraper import get_scraperclasses
-from scriptutil import contains_case_insensitive, save_result, load_result, truncate_name, format_name, format_description
+from scriptutil import contains_case_insensitive, save_result, load_result, truncate_name, format_name
 
 json_file = __file__.replace(".py", ".json")
 
@@ -245,14 +245,13 @@ page_matcher = re.compile(tagre("a", "href", r'(comicprofile\.php\?id=\d+)', aft
   tagre("img", "title", r'([^"]+)'))
 url_matcher = re.compile(tagre("a", "href", r'(http://[^"]+/comics/)') + "Latest Comic")
 num_matcher = re.compile(r'50%">\s+(\d+)\s+')
-desc_matcher = re.compile(r"</div>(.+?)</div>", re.DOTALL)
 adult_matcher = re.compile(tagre("img", "src", r'http://www\.smackjeeves\.com/images/mature_content\.png'))
 
 def handle_url(url, session, res):
     """Parse one search result page."""
     print("Parsing", url, file=sys.stderr)
     try:
-        data, baseUrl = getPageContent(url, session)
+        data = getPageContent(url, session)
     except IOError as msg:
         print("ERROR:", msg, file=sys.stderr)
         return
@@ -276,7 +275,7 @@ def handle_url(url, session, res):
         # search for url in extra page
         print("Getting", page_url)
         try:
-            data2, baseUrl2 = getPageContent(page_url, session)
+            data2 = getPageContent(page_url, session)
         except IOError as msg:
             print("ERROR:", msg, file=sys.stderr)
             return
@@ -285,18 +284,11 @@ def handle_url(url, session, res):
             print("ERROR matching comic URL:", repr(data2[:300]), file=sys.stderr)
             continue
         comic_url = mo.group(1)
-        # search for description
-        end = mo.end()
-        mo = desc_matcher.search(data2[end:])
-        if not mo:
-            print("ERROR matching comic description:", repr(data2[end:end+300]), file=sys.stderr)
-            continue
-        desc = format_description(mo.group(1))
         # search for adult flag
         adult = adult_matcher.search(data2[end:])
         bounce = name not in repeat_comics
         res[name] = [
-          url_overrides.get(name, comic_url), num, desc, bool(adult), bounce
+          url_overrides.get(name, comic_url), num, bool(adult), bounce
         ]
 
 
@@ -304,7 +296,7 @@ def get_results():
     """Parse all search result pages."""
     base = "http://www.smackjeeves.com/search.php?submit=Search+for+Webcomics&search_mode=webcomics&comic_title=&special=all&last_update=3&style_all=on&genre_all=on&format_all=on&sort_by=2&start=%d"
     session = requests.Session()
-    # store info in a dictionary {name -> url, number of comics, description, adult flag}
+    # store info in a dictionary {name -> url, number of comics, adult flag, bounce flag}
     res = {}
     # a search for an empty string returned 286 result pages
     result_pages = 286
@@ -333,15 +325,15 @@ def print_results(args):
         for name, entry in sorted(load_result(json_file).items()):
             if name in exclude_comics:
                 continue
-            url, num, desc, adult, bounce = entry
+            url, num, adult, bounce = entry
             if num < min_comics:
                 continue
             if has_comic(name):
                 prefix = u'#'
             else:
                 prefix = u''
-            fp.write(u"%sadd(%r, %r, %r, %s, %s)\n" % (
-              prefix, str(truncate_name(name)), str(url), desc, adult, bounce
+            fp.write(u"%sadd(%r, %r, %s, %s)\n" % (
+              prefix, str(truncate_name(name)), str(url), adult, bounce
             ))
 
 

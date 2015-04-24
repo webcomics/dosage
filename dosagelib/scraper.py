@@ -30,19 +30,6 @@ from .output import out
 from .events import getHandler
 
 
-class Genre:
-    """Genre of a comic strip."""
-    adventure = u"Adventure"
-    crazy = u"Crazy"
-    drama = u"Drama"
-    fantasy = u"Fantasy"
-    gaming = u"Gaming"
-    humor = u"Humor"
-    reallife = u"Real life"
-    scifi = u"Sci-fi"
-    other = u"Other"
-
-
 class Scraper(object):
     '''Base class for all comic scraper, but without a specific scrape implementation.'''
 
@@ -67,14 +54,8 @@ class Scraper(object):
     # set to True if this comic will not get updated anymore
     endOfLife = False
 
-    # a description of the comic contents
-    description = u''
-
     # langauge of the comic (two-letter ISO 639-1 code)
     lang = 'en'
-
-    # list of genres for this comic strip
-    genres = (Genre.other,)
 
     # an expression that will locate the URL for the previous strip in a page
     # this can also be a list or tuple

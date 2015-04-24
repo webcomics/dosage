@@ -10,7 +10,6 @@ from ..util import tagre
 
 
 class Galaxion(_BasicScraper):
-    description = u'Galaxion - Life. Love. Hyperspace.'
     url = 'http://galaxioncomics.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -21,7 +20,6 @@ class Galaxion(_BasicScraper):
 
 
 class Garanos(_BasicScraper):
-    description = u'Garanos - A dramatic fantasy webcomic with a dash of adventure, gothic horror, and romance for flavor.'
     baseUrl = 'http://garanos.alexheberling.com/'
     rurl = escape(baseUrl)
     url = baseUrl + 'pages/page-1/'
@@ -34,7 +32,6 @@ class Garanos(_BasicScraper):
 
 
 class GastroPhobia(_BasicScraper):
-    description = u'Regularly updated comic about a single mom barbarian in Ancient Greece.'
     url = 'http://www.gastrophobia.com/'
     stripUrl = url + 'index.php?date=%s'
     firstStripUrl = stripUrl % '2008-07-30'
@@ -44,7 +41,6 @@ class GastroPhobia(_BasicScraper):
 
 
 class Geeks(_BasicScraper):
-    description = u'Geeks Trying To Be Funny'
     url = 'http://sevenfloorsdown.com/geeks/'
     stripUrl = url + 'archives/%s'
     firstStripUrl = stripUrl % '10'
@@ -54,7 +50,6 @@ class Geeks(_BasicScraper):
 
 
 class GeeksNextDoor(_BasicScraper):
-    description = u'Geeks Next Door'
     url = 'http://www.geeksnextcomic.com/'
     stripUrl = url + '%s.html'
     firstStripUrl = stripUrl % '2010-10-04'
@@ -66,7 +61,6 @@ class GeeksNextDoor(_BasicScraper):
 
 # 403 error when getting image files, disable for now
 class _GeneralProtectionFault(_BasicScraper):
-    description = u'General Protection Fault'
     url = 'http://www.gpf-comics.com/'
     rurl = escape(url)
     stripUrl = url + 'archive/%s'
@@ -84,7 +78,6 @@ class _GeneralProtectionFault(_BasicScraper):
 
 
 class GirlGenius(_BasicScraper):
-    description = u'Adventure, Romance, Mad Science!'
     baseUrl = 'http://www.girlgeniusonline.com/'
     rurl = escape(baseUrl)
     url = baseUrl + 'comic.php'
@@ -110,7 +103,6 @@ class GirlsWithSlingshots(_BasicScraper):
 
 
 class GlassHalfEmpty(_BasicScraper):
-    description = u'A Glass Half Empty cartoon by Dan Markowitz'
     url = 'http://www.defectivity.com/ghe/index.php'
     stripUrl = url + '?strip_id=%s'
     firstStripUrl = stripUrl % '0'
@@ -120,7 +112,6 @@ class GlassHalfEmpty(_BasicScraper):
 
 
 class GleefulNihilism(_BasicScraper):
-    description = u'pointless comics with a sideways grin'
     url = 'http://gleefulnihilism.com/'
     rurl = escape(url)
     stripUrl = url + 'comic/%s/'
@@ -131,7 +122,6 @@ class GleefulNihilism(_BasicScraper):
 
 
 class GoblinsComic(_BasicScraper):
-    description = u'Goblins'
     url = 'http://www.goblinscomic.org/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -142,7 +132,6 @@ class GoblinsComic(_BasicScraper):
 
 
 class GoGetARoomie(_BasicScraper):
-    description = u"Go Get a Roomie!"
     url = 'http://www.gogetaroomie.com/index.php'
     stripUrl = url + '?id=%s'
     firstStripUrl = stripUrl % '1'
@@ -152,7 +141,6 @@ class GoGetARoomie(_BasicScraper):
 
 
 class GoneWithTheBlastwave(_BasicScraper):
-    description = u'Gone with the Blastwave - Type E webcomic.'
     url = 'http://www.blastwave-comic.com/index.php?p=comic&nro=1'
     starter = indirectStarter(url,
                               compile(r'href="(index.php\?p=comic&amp;nro=\d+)"><img src="images/page/default/latest'))
@@ -168,7 +156,6 @@ class GoneWithTheBlastwave(_BasicScraper):
 
 
 class GrrlPower(_BasicScraper):
-    description = u'Grrl Power - A webcomic about superheroines.'
     url = 'http://grrlpowercomic.com/'
     rurl = escape(url)
     stripUrl = url + 'archives/%s'
@@ -179,7 +166,6 @@ class GrrlPower(_BasicScraper):
 
 
 class GunnerkriggCourt(_BasicScraper):
-    description = u'Gunnerkrigg Court is a science-fantasy webcomic created by Tom Siddell. It is updated online three days a week.'
     url = 'http://www.gunnerkrigg.com/'
     stripUrl = url + '?p=%s'
     imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
@@ -188,7 +174,6 @@ class GunnerkriggCourt(_BasicScraper):
 
 
 class Gunshow(_BasicScraper):
-    description = u"Ah there we go! Color! BUT ALSO I WANTED TO SHOW YOU: GUNSHOW VOLUME 4 IS OUT! IT'S HERE! Get a copy today!"
     url = 'http://gunshowcomic.com/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1'
@@ -199,7 +184,6 @@ class Gunshow(_BasicScraper):
 
 
 class GUComics(_BasicScraper):
-    description = u'From a gaming news perspective, I detest April Fools Day. No "legitimate" source of news should ever post fake news without a disclaimer.'
     url = 'http://www.gucomics.com/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '20000710'

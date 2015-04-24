@@ -3,7 +3,7 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 
 from re import compile
-from ..scraper import make_scraper, Genre
+from ..scraper import make_scraper
 from ..util import tagre
 
 # note: adding the compile() functions inside add() is a major performance hog
@@ -53,13 +53,6 @@ def add(name, path):
 
 # manually set attributes
 Overrides = {
-    'The_Devon_Legacy_Prologue': dict(
-        description = u'Earth\'s fate is in the hands of 2 alien races!' \
-        ' Luckily 1 of them isn\'t so bad. Attempting to stop a vicious' \
-        ' horde can 2 specially gifted humans (Fenny & Sally) actually ' \
-        ' turn the tables of balance on this war? Year 2132',
-        genres = (Genre.scifi,),
-    )
 }
 
 
