@@ -161,7 +161,7 @@ def getComics(options):
         for scraperobj in getScrapers(options.comic, options.basepath, options.adult, options.multimatch):
             jobs.put(scraperobj)
         # start threads
-        num_threads = 1# XXX max(1, min(10, jobs.qsize()))
+        num_threads = max(1, min(options.parallel, jobs.qsize()))
         for i in range(num_threads):
             t = ComicGetter(options)
             threads.append(t)
