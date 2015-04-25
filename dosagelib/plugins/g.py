@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2013 Bastian Kleineidam
+# Copyright (C) 2012-2014 Bastian Kleineidam
 
 from re import compile, escape
 
@@ -30,7 +30,6 @@ class GaiaGerman(_BasicScraper):
     lang = 'de'
 
 class Galaxion(_BasicScraper):
-    description = u'Galaxion - Life. Love. Hyperspace.'
     url = 'http://galaxioncomics.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -41,7 +40,6 @@ class Galaxion(_BasicScraper):
 
 
 class Garanos(_BasicScraper):
-    description = u'Garanos - A dramatic fantasy webcomic with a dash of adventure, gothic horror, and romance for flavor.'
     baseUrl = 'http://garanos.alexheberling.com/'
     rurl = escape(baseUrl)
     url = baseUrl + 'pages/page-1/'
@@ -54,7 +52,6 @@ class Garanos(_BasicScraper):
 
 
 class GastroPhobia(_BasicScraper):
-    description = u'Regularly updated comic about a single mom barbarian in Ancient Greece.'
     url = 'http://www.gastrophobia.com/'
     stripUrl = url + 'index.php?date=%s'
     firstStripUrl = stripUrl % '2008-07-30'
@@ -64,7 +61,6 @@ class GastroPhobia(_BasicScraper):
 
 
 class Geeks(_BasicScraper):
-    description = u'Geeks Trying To Be Funny'
     url = 'http://sevenfloorsdown.com/geeks/'
     stripUrl = url + 'archives/%s'
     firstStripUrl = stripUrl % '10'
@@ -74,7 +70,6 @@ class Geeks(_BasicScraper):
 
 
 class GeeksNextDoor(_BasicScraper):
-    description = u'Geeks Next Door'
     url = 'http://www.geeksnextcomic.com/'
     stripUrl = url + '%s.html'
     firstStripUrl = stripUrl % '2010-10-04'
@@ -86,7 +81,6 @@ class GeeksNextDoor(_BasicScraper):
 
 # 403 error when getting image files, disable for now
 class _GeneralProtectionFault(_BasicScraper):
-    description = u'General Protection Fault'
     url = 'http://www.gpf-comics.com/'
     rurl = escape(url)
     stripUrl = url + 'archive/%s'
@@ -104,33 +98,31 @@ class _GeneralProtectionFault(_BasicScraper):
 
 
 class GirlGenius(_BasicScraper):
-    description = u'Adventure, Romance, Mad Science!'
     baseUrl = 'http://www.girlgeniusonline.com/'
     rurl = escape(baseUrl)
     url = baseUrl + 'comic.php'
     stripUrl = url + '?date=%s'
     firstStripUrl = stripUrl % '20021104'
     imageSearch = compile(tagre("img", "src", r"(%sggmain/strips/[^']*)" % rurl, quote="'"))
-    prevSearch = compile(tagre("a", "href", r"(%s[^']+)" % rurl, quote="'") +
-        tagre("img", "alt", "The Previous Comic", quote="'"))
+    prevSearch = compile(tagre("a", "id", "topprev", quote="\"",
+                            before=r"(%s[^\"']+)" % rurl))
+    multipleImagesPerStrip = True
     help = 'Index format: yyyymmdd'
-
 
 class GirlsWithSlingshots(_BasicScraper):
     url = 'http://www.girlswithslingshots.com/'
     rurl = escape(url)
-    stripUrl = url + 'comic/gws%s/'
-    firstStripUrl = stripUrl % '1'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'gws1'
     imageSearch = (
         compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl)),
         compile(tagre("img", "src", r'(http://cdn\.girlswithslingshots\.com/comics/[^"]+)')),
     )
     prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl, after="prev"))
-    help = 'Index format: nnn'
+    help = 'Index format: stripname'
 
 
 class GlassHalfEmpty(_BasicScraper):
-    description = u'A Glass Half Empty cartoon by Dan Markowitz'
     url = 'http://www.defectivity.com/ghe/index.php'
     stripUrl = url + '?strip_id=%s'
     firstStripUrl = stripUrl % '0'
@@ -140,7 +132,6 @@ class GlassHalfEmpty(_BasicScraper):
 
 
 class GleefulNihilism(_BasicScraper):
-    description = u'pointless comics with a sideways grin'
     url = 'http://gleefulnihilism.com/'
     rurl = escape(url)
     stripUrl = url + 'comic/%s/'
@@ -151,7 +142,6 @@ class GleefulNihilism(_BasicScraper):
 
 
 class GoblinsComic(_BasicScraper):
-    description = u'Goblins'
     url = 'http://www.goblinscomic.org/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -162,7 +152,6 @@ class GoblinsComic(_BasicScraper):
 
 
 class GoGetARoomie(_BasicScraper):
-    description = u"Go Get a Roomie!"
     url = 'http://www.gogetaroomie.com/index.php'
     stripUrl = url + '?id=%s'
     firstStripUrl = stripUrl % '1'
@@ -172,7 +161,6 @@ class GoGetARoomie(_BasicScraper):
 
 
 class GoneWithTheBlastwave(_BasicScraper):
-    description = u'Gone with the Blastwave - Type E webcomic.'
     url = 'http://www.blastwave-comic.com/index.php?p=comic&nro=1'
     starter = indirectStarter(url,
                               compile(r'href="(index.php\?p=comic&amp;nro=\d+)"><img src="images/page/default/latest'))
@@ -188,18 +176,16 @@ class GoneWithTheBlastwave(_BasicScraper):
 
 
 class GrrlPower(_BasicScraper):
-    description = u'Grrl Power - A webcomic about superheroines.'
-    url = 'http://www.grrlpowercomic.com/'
+    url = 'http://grrlpowercomic.com/'
     rurl = escape(url)
     stripUrl = url + 'archives/%s'
     firstStripUrl = stripUrl % '48'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%sarchives/\d+)' % rurl, after="navi-prev"))
+    imageSearch = compile(tagre("img", "src", r'(.*/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(.*/archives/\d+)', after="navi-prev"))
     help = 'Index format: number'
 
 
-class GunnerkrigCourt(_BasicScraper):
-    description = u'Gunnerkrigg Court is a science-fantasy webcomic created by Tom Siddell. It is updated online three days a week.'
+class GunnerkriggCourt(_BasicScraper):
     url = 'http://www.gunnerkrigg.com/'
     stripUrl = url + '?p=%s'
     imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
@@ -208,7 +194,6 @@ class GunnerkrigCourt(_BasicScraper):
 
 
 class Gunshow(_BasicScraper):
-    description = u"Ah there we go! Color! BUT ALSO I WANTED TO SHOW YOU: GUNSHOW VOLUME 4 IS OUT! IT'S HERE! Get a copy today!"
     url = 'http://gunshowcomic.com/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1'
@@ -219,7 +204,6 @@ class Gunshow(_BasicScraper):
 
 
 class GUComics(_BasicScraper):
-    description = u'From a gaming news perspective, I detest April Fools Day. No "legitimate" source of news should ever post fake news without a disclaimer.'
     url = 'http://www.gucomics.com/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '20000710'

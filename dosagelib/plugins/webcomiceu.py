@@ -1,5 +1,5 @@
 # -*- coding: iso-8859-1 -*-
-# Copyright (C) 2012-2013 Bastian Kleineidam
+# Copyright (C) 2012-2014 Bastian Kleineidam
 
 from re import compile
 from ..scraper import make_scraper

@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2013 Bastian Kleineidam
+# Copyright (C) 2012-2014 Bastian Kleineidam
 
 from re import compile, escape
 
@@ -29,7 +29,6 @@ class DamnLol(_BasicScraper):
         compile(tagre("img", "src", r'(%spics/[^"]+)' % rurl)),
     )
     help = 'Index format: stripname-number'
-    description = u'Funny pictures from the internet. Thousands of them.'
     starter = bounceStarter(url,
         compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="next")))
 
@@ -71,7 +70,6 @@ class DangerouslyChloe(_BasicScraper):
 
 
 class DarkWings(_BasicScraper):
-    description = u"Dark Wings - You Can't Reach Heaven on Broken Wings"
     url = 'http://www.flowerlarkstudios.com/dark-wings/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -85,7 +83,6 @@ class DarthsAndDroids(_BasicScraper):
     url = 'http://www.darthsanddroids.net/'
     stripUrl = url + 'episodes/%s.html'
     firstStripUrl = stripUrl % '0001'
-    description = u'Darths & Droids is an "RPG screencap comic".'
     prevSearch = compile(tagre("a", "href", r'(/episodes/\d\d\d\d.html)') + '&lt;PREVIOUS' )
     imageSearch = compile(tagre("img", "src", r'(/comics/darths\d\d\d\d\.jpg)'))
 
@@ -103,7 +100,6 @@ class DasLebenIstKeinPonyhof(_BasicScraper):
 
 
 class DeadWinter(_BasicScraper):
-    description = u'd e a d . w i n t e r'
     url = 'http://deadwinter.cc/'
     stripUrl = url + 'page/%s'
     firstStripUrl = stripUrl % '1'
@@ -113,7 +109,6 @@ class DeadWinter(_BasicScraper):
 
 
 class DeathToTheExtremist(_BasicScraper):
-    description = u'Death To The Extremist'
     url = 'http://www.dtecomic.com/'
     stripUrl = url + '?n=%s'
     firstStripUrl = stripUrl % '1'
@@ -123,7 +118,6 @@ class DeathToTheExtremist(_BasicScraper):
 
 
 class DeepFried(_BasicScraper):
-    description = u'Deep Fried-The home of Weapon Brown, Clarissa and Beepo'
     url = 'http://www.whatisdeepfried.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -134,21 +128,14 @@ class DeepFried(_BasicScraper):
 
 
 class DemolitionSquad(_BasicScraper):
-    description = u'Demolitionsquad.de ist die erste deutsche Videospiel-Webcomic-Seite nach amerikanischen Vorbild und noch viel mehr als das. Auf Demolitionsquad.de findet der wissbegierige, spielebegeisterte Nutzer Comicstrips zu aktuellen Videospielen die ihm die Wartezeit auf den kommenden Top-Titel weiter ves\xfcssen.'
     url = 'http://www.demolitionsquad.de/'
-    starter = indirectStarter(url,
-        compile(tagre("a", "href", r'(no_cache/comicstrips/einzelansicht/archive/[^"]+)')))
-    stripUrl = url + 'comicstrips/einzelansicht/article/%s/'
-    firstStripUrl = stripUrl % 'videospiele-hentai-master'
+    stripUrl = url + '?comicbeitrag=%s'
+    firstStripUrl = stripUrl % '181'
     imageSearch = compile(tagre("img", "src", r'(uploads/pics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(comicstrips/einzelansicht/article/[^"]+)') +
-        tagre("img", "src", r'fileadmin/templates/images/button_back.gif'))
-    help = 'Index format: stripname'
+    prevSearch = compile(tagre("a", "href", r'(\?comicbeitrag=[^"]+)') +
+        tagre("img", "src", r'grafik/system/blaettern_zuruck_n\.gif'))
+    help = 'Index format: number'
     lang = 'de'
-
-    def prevUrlModifier(self, url):
-        # remove CGI params
-        return url.split('?')[0]
 
 
 class DerTodUndDasMaedchen(_BasicScraper):
@@ -161,8 +148,17 @@ class DerTodUndDasMaedchen(_BasicScraper):
     lang = 'de'
 
 
+class DieFruehreifen(_BasicScraper):
+    url = 'http://www.die-fruehreifen.de/index.php'
+    stripUrl = url + '?id=%s&order=DESC'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = compile(tagre("img", "src", r'([^"]*/strips/[Ff]rueh_?[Ss]trip_\d+.jpg)'))
+    prevSearch = compile(tagre("a", "href", r"(index\.php\?id=\d+&order=DESC)") + tagre("img","id",r"naechster"))
+    help = 'Index format: n (unpadded)'
+    lang = 'de'
+
+
 class DieselSweeties(_BasicScraper):
-    description = u'diesel sweeties : robot webcomic & geeky music t-shirts'
     url = 'http://www.dieselsweeties.com/'
     stripUrl = url + 'archive/%s'
     firstStripUrl = stripUrl % '1'
@@ -179,20 +175,17 @@ class DieselSweeties(_BasicScraper):
 
 class Dilbert(_BasicScraper):
     url = 'http://dilbert.com/'
-    stripUrl = url + '%s/'
+    stripUrl = url + '/strip/%s/'
     firstStripUrl = stripUrl % '1989-04-16'
-    starter = bounceStarter(url,
-        compile(tagre("a", "href", r'(/\d+-\d+-\d+/)', after="STR_Next")))
-    prevSearch = compile(tagre("a", "href", r'(/\d+-\d+-\d+/)', after="STR_Prev"))
-    imageSearch = compile(tagre("img", "src", r'(/dyn/str_strip/[^"]+\.strip\.zoom\.gif)'))
+    starter = indirectStarter(url, compile(tagre("a", "href", r'(http://dilbert.com/strip/[0-9-]*)', after="Click to see")))
+    prevSearch = compile(tagre("a", "href", r'(/strip/\d+-\d+-\d+)', after="Older Strip"))
+    imageSearch = compile(tagre("img", "src", r'(http://assets.amuniversal.com/\w+)'))
     help = 'Index format: yyyy-mm-dd'
-    description = u'A comic featuring satirical office humor about a white-collar, micromanaged office featuring the engineer Dilbert as the title character.'
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
-        ext = imageUrl.rsplit(".", 1)[1]
-        name = pageUrl.rsplit("/", 2)[1]
-        return "%s.%s" % (name, ext)
+        name = pageUrl.rsplit("/", 1)[1]
+        return "%s" % name
 
 
 class DMFA(_BasicScraper):
@@ -218,9 +211,9 @@ class DogHouseDiaries(_BasicScraper):
     url = 'http://thedoghousediaries.com/'
     rurl = escape(url)
     stripUrl = url + '%s'
-    firstStripUrl = stripUrl % '4827'
-    prevSearch = compile(tagre("a", "href", r'(%s\d+)' % rurl, after="previous-comic"))
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    firstStripUrl = stripUrl % '34'
+    prevSearch = compile(r"<a id='previouslink' href='(http://thedoghousediaries.com/\d+)'")
+    imageSearch = compile(r"<img src='(dhdcomics/[^']+)'")
     help = 'Index format: number'
 
 
@@ -234,12 +227,11 @@ class DominicDeegan(_BasicScraper):
 
 
 class DorkTower(_BasicScraper):
-    description = u'The Place for All Things Dork'
     url = 'http://www.dorktower.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '1997/01/01/shadis-magazine-strip-1'
-    imageSearch = compile(tagre("img", "src", r'(%sfiles/\d+/\d+/[^"]+\.gif)' % rurl))
+    imageSearch = compile(tagre("div", "class", "entry-content") + "\s*<p>\s*" + tagre("img", "src", r'(%sfiles/[0-9]+/[0-9]+/[^"]*Dork[^"]+\.(?:gif|jpg))' % rurl, after=' alt'))
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl)+"Previous")
     help = 'Index format: yyyy/mm/dd/stripname-dd-mm-yy'
 
@@ -262,7 +254,6 @@ class DreamKeepersPrelude(_BasicScraper):
 
 
 class DresdenCodak(_BasicScraper):
-    description = u'Dresden Codak'
     url = 'http://dresdencodak.com/'
     rurl = escape(url)
     stripUrl = None
@@ -283,13 +274,21 @@ class DrFun(_BasicScraper):
     multipleImagesPerStrip = True
     prevSearch = compile(tagre("a", "href", r'([^"]+)') + 'Previous Week,')
     help = 'Index format: nnnnn'
-    description = u'A series of bizarre one-panel gags. Topics range from the mundane to the obscure.'
     endOfLife = True
+
+
+class Drive(_BasicScraper):
+    url = 'http://www.drivecomic.com/'
+    rurl = escape(url)
+    stripUrl = url + 'archive/%s.html'
+    firstStripUrl = stripUrl % '090815'
+    imageSearch = compile(tagre("img", "src", r'(http://cdn\.drivecomic\.com/strips/main/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(%sarchive/\d+\.html)' % rurl) + "Previous")
+    help = 'Index format: yymmdd'
 
 
 # XXX navigation works only with JavaScript
 class _DrMcNinja(_BasicScraper):
-    description = u'The Adventures of Dr. McNinja'
     url = 'http://drmcninja.com/'
     rurl = escape(url)
     stripUrl = url + 'archives/comic/%s/'
@@ -321,3 +320,11 @@ class _DumbingOfAge(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(%s\d+/[^"]+)' % rurl, after="prev"))
     imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
     help = 'Index format: yyyy/comic/book-num/seriesname/stripname'
+
+class DungeonsAndDenizens(_BasicScraper):
+    url = 'http://dungeond.com/'
+    stripUrl = url + r'\d+/\d+/\d+/%s/'
+    firstStripUrl = stripUrl % '08232005'
+    imageSearch = compile(tagre("img", "src", r'(%sfiles//comics/[^"]+)' % url))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % url) + "Previous")
+    help = 'Index format: ddmmyyyy'

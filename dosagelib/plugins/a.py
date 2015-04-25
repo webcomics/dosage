@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2013 Bastian Kleineidam
+# Copyright (C) 2012-2014 Bastian Kleineidam
 
 from re import compile, escape, MULTILINE
 from ..util import tagre
@@ -9,7 +9,6 @@ from ..helpers import regexNamer, bounceStarter, indirectStarter
 
 
 class AbleAndBaker(_BasicScraper):
-    description = u"Able and Baker: Hatin' and Dictatin'"
     url = 'http://www.jimburgessdesign.com/comics/index.php'
     stripUrl = url + '?comic=%s'
     firstStripUrl = stripUrl % '1'
@@ -35,8 +34,9 @@ class AbstruseGoose(_BasicScraper):
     starter = bounceStarter(url, compile(tagre('a', 'href', r'(%s\d+)' % rurl)+"Next &raquo;"))
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre('img', 'src', r'(%sstrips/[^<>"]+)' % rurl))
-    prevSearch = compile(tagre('a', 'href', r'(%s\d+)' % rurl) + r'&laquo; Previous</a>')
+    imageSearch = compile(tagre('img', 'src', r'(http://abstrusegoose\.com/strips/[^<>"]+)'))
+    prevSearch = compile(tagre('a', 'href', r'(%s\d+)' % rurl) + r'&laquo; Previous')
+    nextSearch = compile(tagre('a', 'href', r'(%s\d+)' % rurl) + r'Next &raquo;')
     help = 'Index format: n (unpadded)'
     textSearch = compile(tagre("img", "title", r'([^"]+)'))
 
@@ -48,7 +48,6 @@ class AbstruseGoose(_BasicScraper):
 
 
 class AcademyVale(_BasicScraper):
-    description = u'Academy Vale'
     url = 'http://www.imagerie.com/vale/'
     stripUrl = url + 'avarch.cgi?%s'
     firstStripUrl = stripUrl % '001'
@@ -79,7 +78,6 @@ class AfterStrife(_BasicScraper):
 
 
 class AGirlAndHerFed(_BasicScraper):
-    description = u'A Girl and Her Fed'
     url = 'http://www.agirlandherfed.com/'
     starter = bounceStarter(url,
       compile(r'<a href="([^"]+)">[^>]+Back'))
@@ -91,7 +89,6 @@ class AGirlAndHerFed(_BasicScraper):
 
 
 class AhoiPolloi(_BasicScraper):
-    description = u'ahoi polloi - ein f\xfcllhorn voller f\xfchlh\xf6rner'
     url = 'http://ahoipolloi.blogger.de/'
     stripUrl = url + '?day=%s'
     firstStripUrl = stripUrl % '20060306'
@@ -107,7 +104,6 @@ class AhoiPolloi(_BasicScraper):
 
 
 class AirForceBlues(_BasicScraper):
-    description = u'Air Force Blues | By A. May -'
     url = 'http://www.afblues.com/'
     stripUrl = url + 'wordpress/%s/'
     firstStripUrl = stripUrl % '1997/09/07/need-a-clue-do-ya'
@@ -117,7 +113,6 @@ class AirForceBlues(_BasicScraper):
 
 
 class ALessonIsLearned(_BasicScraper):
-    description = u'A Lesson Is Learned But The Damage Is Irreversible'
     url = 'http://www.alessonislearned.com/'
     prevSearch = compile(tagre("a", "href", r"(index\.php\?comic=\d+)", quote="'")+r"[^>]+previous")
     starter = indirectStarter(url, prevSearch)
@@ -128,7 +123,6 @@ class ALessonIsLearned(_BasicScraper):
 
 
 class Alice(_BasicScraper):
-    description = u'The little webcomic with the BIG imagination'
     url = 'http://alice.alicecomics.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -138,7 +132,6 @@ class Alice(_BasicScraper):
 
 
 class AlienLovesPredator(_BasicScraper):
-    description = u'Abe (the Alien) and Preston (the Predator) represent in NYC'
     url = 'http://alienlovespredator.com/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2004/10/12/unavoidable-delay'
@@ -148,7 +141,6 @@ class AlienLovesPredator(_BasicScraper):
 
 
 class AlienShores(_BasicScraper):
-    description = u'A webcomic about four guys forming a band. They find that being a band is more than just playing the music.'
     baseUrl = 'http://alienshores.com/'
     rurl = escape(baseUrl)
     url = baseUrl + 'alienshores_band/'
@@ -159,7 +151,6 @@ class AlienShores(_BasicScraper):
 
 
 class AllTheGrowingThings(_BasicScraper):
-    description = u'All The Growing Things - A Tale of Gardens, monsters, and old ladies'
     url = 'http://growingthings.typodmary.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -170,7 +161,6 @@ class AllTheGrowingThings(_BasicScraper):
 
 
 class AlphaLuna(_BasicScraper):
-    description = u'Luna, a young girl discovers what lies in her soul: a werewolf beast and a destiny. An adventure manga story for werecreatures fans.'
     url = 'http://www.alphaluna.net/'
     stripUrl = url + 'issue-%s/'
     firstStripUrl = stripUrl % '1/cover'
@@ -188,7 +178,6 @@ class AlphaLunaSpanish(AlphaLuna):
 
 
 class AlsoBagels(_BasicScraper):
-    description = u'Also, Bagels - A Comic of Inept Redundancy'
     url = 'http://alsobagels.com/'
     rurl = escape(url)
     stripUrl = url + 'index.php/comic/%s/'
@@ -223,7 +212,7 @@ class AmazingSuperPowers(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/name'
 
-    def shouldSkipUrl(self, url):
+    def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
         return url in (
             # video
@@ -232,7 +221,6 @@ class AmazingSuperPowers(_BasicScraper):
 
 
 class Amya(_BasicScraper):
-    description = u'A Graphic Novel'
     url = 'http://www.amyachronicles.com/'
     rurl = escape(url)
     stripUrl = url + 'archives/%s'
@@ -243,7 +231,6 @@ class Amya(_BasicScraper):
 
 
 class Angband(_BasicScraper):
-    description = u'Angband - Tales From The Pit'
     url = 'http://angband.calamarain.net/'
     stripUrl = url + 'view.php?date=%s'
     firstStripUrl = stripUrl % '2005-12-30'
@@ -253,7 +240,6 @@ class Angband(_BasicScraper):
 
 
 class Angels2200(_BasicScraper):
-    description = u'Angels 2200'
     url = 'http://www.janahoffmann.com/angels/'
     stripUrl = url + '%s'
     imageSearch = compile(tagre("img", "src", r"(http://www\.janahoffmann\.com/angels/comics/[^']+)", quote="'"))
@@ -282,7 +268,6 @@ class Antics(_BasicScraper):
 
 
 class AppleGeeks(_BasicScraper):
-    description = u'AppleGeeks 3.0'
     url = 'http://www.applegeeks.com/'
     stripUrl = url + 'comics/viewcomic.php?issue=%s'
     firstStripUrl = stripUrl % '1'
@@ -292,7 +277,6 @@ class AppleGeeks(_BasicScraper):
 
 
 class ARedTailsDream(_BasicScraper):
-    description = u"Finnish mythology meets teen boy and his dog"
     baseUrl = 'http://www.minnasundberg.fi/'
     stripUrl = baseUrl + 'comic/page%s.php'
     firstStripUrl = stripUrl % '00'
@@ -314,7 +298,6 @@ class ASofterWorld(_BasicScraper):
 
 
 class AstronomyPOTD(_BasicScraper):
-    description = u'A different astronomy and space science related image is featured each day, along with a brief explanation.'
     baseUrl = 'http://antwrp.gsfc.nasa.gov/apod/'
     url = baseUrl + 'astropix.html'
     starter = bounceStarter(url,
@@ -326,7 +309,7 @@ class AstronomyPOTD(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(ap\d{6}\.html)') + "&lt;</a>")
     help = 'Index format: yymmdd'
 
-    def shouldSkipUrl(self, url):
+    def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
         return url in (
             self.stripUrl % '130217', # video
@@ -351,17 +334,16 @@ class ASkeweredParadise(_BasicScraper):
 
 
 class AxeCop(_BasicScraper):
-    description = u'Axe Cop'
     url = 'http://axecop.com/'
     rurl = escape(url)
     starter = bounceStarter(url,
         (
-          compile(tagre("a", "href", r'(%scomic/page-\d+-[^"]+/)' % rurl, after="nav-next")),
-          compile(tagre("a", "href", r'(%scomic/[^"]+/)' % rurl, after="nav-next")),
+          compile(tagre("a", "href", r'(%scomic/page-\d+-[^"]+/)' % rurl, after="navi-next")),
+          compile(tagre("a", "href", r'(%scomic/[^"]+/)' % rurl, after="navi-next")),
         )
     )
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '0'
     imageSearch = compile(tagre("img", "src", r'(http://mainsite\.axecop\.wpengine\.com/wp-content/uploads/sites/\d+/\d+/\d+/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+/)' % rurl, after="nav-prev"))
+    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+/)' % rurl, after="navi-prev"))
     help = 'Index format: usually stripname'

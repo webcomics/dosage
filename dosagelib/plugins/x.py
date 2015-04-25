@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2013 Bastian Kleineidam
+# Copyright (C) 2012-2014 Bastian Kleineidam
 
 from re import compile
 
@@ -14,12 +14,10 @@ class xkcd(_BasicScraper):
     starter = bounceStarter(url, compile(tagre("a", "href", r'(/\d+/)', before="next")))
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(http://imgs\.xkcd\.com/comics/[^"]+)'))
+    imageSearch = compile(tagre("img", "src", r'(//imgs\.xkcd\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/\d+/)', before="prev"))
     help = 'Index format: n (unpadded)'
-    description = u'A webcomic of romance, sarcasm, math, and language.'
-    textSearch = compile(tagre("img", "title", r'([^"]+)', before=r'http://imgs\.xkcd\.com/comics/'))
-    adult = True
+    textSearch = compile(tagre("img", "title", r'([^"]+)', before=r'//imgs\.xkcd\.com/comics/'))
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):

@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2013 Bastian Kleineidam
+# Copyright (C) 2012-2014 Bastian Kleineidam
 
 from re import compile, escape
 from ..scraper import _BasicScraper
@@ -8,12 +8,11 @@ from ..util import tagre
 
 
 class IAmArg(_BasicScraper):
-    description = u'An Internet comic of non sequitur Geekiness. Updates Monday, Wednesday and Friday'
     url = 'http://iamarg.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2011/05/08/05082011'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
+    imageSearch = compile(tagre("img", "src", r'(//iamarg.com/comics/\d+-\d+-\d+[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/stripname'
 
@@ -26,7 +25,6 @@ class ICanBarelyDraw(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+-[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s\d+)' % rurl))
     help = 'Index format: number'
-    description = u'Webcomic featuring technology, romance, and odd behavior'
 
 
 class IDreamOfAJeanieBottle(_BasicScraper):
@@ -39,7 +37,6 @@ class IDreamOfAJeanieBottle(_BasicScraper):
 
 
 class InternetWebcomic(_BasicScraper):
-    description = u"Internet Webcomic"
     url = 'http://www.internet-webcomic.com/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'

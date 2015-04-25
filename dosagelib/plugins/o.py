@@ -1,11 +1,11 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2013 Bastian Kleineidam
+# Copyright (C) 2012-2014 Bastian Kleineidam
 
 from re import compile, escape
 from ..scraper import _BasicScraper
 from ..helpers import indirectStarter
-from ..util import tagre, urlopen
+from ..util import tagre
 
 
 class OctopusPie(_BasicScraper):
@@ -44,12 +44,17 @@ class Oglaf(_BasicScraper):
     help = 'Index format: stripname'
     adult = True
 
-    @classmethod
-    def starter(cls):
-        # click the "I am 18" button
-        data = {"over18": "&nbsp;"}
-        urlopen(cls.url, cls.session, data=data, referrer=cls.url)
-        return cls.url
+
+class OhJoySexToy(_BasicScraper):
+    url = 'http://www.ohjoysextoy.com/'
+    rurl = escape(url)
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % 'introduction'
+    imageSearch =  compile(tagre("div", "class", r'comicpane') + "\s*.*\s*" + tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after='navi navi-prev'))
+    textSearch = compile(tagre("div", "class", r'comicpane') + "\s*.*\s*" + tagre("img", "alt", r'([^"]+)'))
+    help = 'Index Format: name'
+    adult = True
 
 
 class OkCancel(_BasicScraper):
@@ -86,14 +91,22 @@ class OnTheEdge(_BasicScraper):
 
 
 class OnTheFasttrack(_BasicScraper):
-    url = 'http://www.onthefastrack.com/'
-    rurl = escape(url)
-    stripUrl = url + '?webcomic1=%s'
-    firstStripUrl = stripUrl % '2010-08-09'
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+-\d+-\d+\.[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\?webcomic1=[^"]+)' % rurl, after="prev"))
-    description = u'On The Fasttrack by Bill Holbrook'
-    help = 'Index format: yyyy-mm-dd'
+    url = 'http://onthefastrack.com/'
+    stripUrl = url + 'comics/%s'
+    firstStripUrl = stripUrl % 'november-13-2000'
+    imageSearch = compile(tagre("img", "src", r'(http://safr\.kingfeatures\.com/idn/test/zone/xml/content\.php\?file=.+?)'))
+    prevSearch = compile(r'id="previouscomic" class="button white"><a href="(%scomics/[a-z0-9-]+/)"' % url)
+    help = 'Index format: monthname-dd-yyyy'
+    
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        name = pageUrl.rsplit('/', 3)[2]
+        if name == "onthefastrack.com":
+                import datetime
+                name = datetime.date.today().strftime("%B-%d-%Y")
+        # name.title ensures that the comics are named the same
+        # as in the previous scraper
+        return "%s.gif" % name.title()
 
 
 class OneQuestion(_BasicScraper):
@@ -103,6 +116,16 @@ class OneQuestion(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'((?:\.\./)?istrip_files/strips/\d+\.\w{3,4})'))
     prevSearch = compile(tagre("a", "href", r'(comic\.php\?strip_id=\d+)') + tagre("img", "src", r'img/arrow_prev\.jpg'))
     help = 'Index format: n (unpadded)'
+
+
+class Optipess(_BasicScraper):
+    url = 'http://www.optipess.com/'
+    stripUrl = url + '%s'
+    firstStripUrl =  url + '2008/12/01/jason-friend-of-the-butterflies/'
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[x|\d]+[^"]+\.[^"]+)' % url))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)', after="navi navi-prev"))
+    textSearch = compile(tagre("img", "alt", r'([^"]+)', before=url))
+    help = 'Index format: yyyy/mm/dd/stripname'
 
 
 class OrnerBoy(_BasicScraper):
@@ -126,7 +149,6 @@ class OurHomePlanet(_BasicScraper):
 
 
 class OverCompensating(_BasicScraper):
-    description = u'OVERCOMPENSATING: The Journal Comic With a Seething Disdain for Reality.'
     url = 'http://www.overcompensating.com/'
     stripUrl = url + 'oc/index.php?comic=%s'
     firstStripUrl = stripUrl % '0'

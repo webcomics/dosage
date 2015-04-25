@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2013 Bastian Kleineidam
+# Copyright (C) 2012-2014 Bastian Kleineidam
 import re
 import json
 from dosagelib.util import unescape, unquote, asciify
@@ -55,12 +55,3 @@ def format_name(text):
     name = asciify(name.replace(u'&', u'And').replace(u'@', u'At'))
     name = capfirst(name)
     return name
-
-
-def format_description(text):
-    """Format a comic description."""
-    desc = remove_html_tags(text)
-    desc = unescape(desc)
-    desc = unquote(desc)
-    desc = compact_whitespace(desc).strip()
-    return desc

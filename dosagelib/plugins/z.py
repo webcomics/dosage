@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2013 Bastian Kleineidam
+# Copyright (C) 2012-2014 Bastian Kleineidam
 
 from re import compile, escape
 from ..scraper import _BasicScraper
@@ -50,9 +50,8 @@ class ZenPencils(_BasicScraper):
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '1-ralph-waldo-emerson-make-them-cry'
     prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+/)' % rurl, after="navi-prev"))
-    imageSearch = compile(tagre("img", "src", r'(http://maxcdn\.zenpencils\.com/comics/\d+-\d+-\d+[^"]+)'))
+    imageSearch = compile(tagre("img", "src", r'(http://cdn\.zenpencils\.com/wp-content/uploads/\d+[^"]+)'))
     help = 'Index format: num-stripname'
-    description = u'Inspirational quotes from famous people adapted into cartoons.'
 
 
 class ZombieHunters(_BasicScraper):
@@ -78,9 +77,8 @@ class Zwarwald(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(%sindex\.php/page/\d+/)' % rurl) +
         tagre("img", "src", r'http://zwarwald\.de/images/prev\.jpg', quote="'"))
     help = 'Index format: number'
-    waitSeconds = 1
 
-    def shouldSkipUrl(self, url):
+    def shouldSkipUrl(self, url, data):
         """Some pages have flash content."""
         return url in (
             self.stripUrl % "112",

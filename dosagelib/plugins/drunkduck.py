@@ -1,10 +1,10 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2013 Bastian Kleineidam
+# Copyright (C) 2012-2014 Bastian Kleineidam
 
 from re import compile
-from ..scraper import make_scraper, Genre
-from ..util import tagre, fetchUrl, getPageContent
+from ..scraper import make_scraper
+from ..util import tagre
 
 # note: adding the compile() functions inside add() is a major performance hog
 _imageSearch =  compile(tagre("img", "src", r'(https://s3\.amazonaws\.com/media\.drunkduck\.com/[^"]+)', before="page-image"))
@@ -14,7 +14,8 @@ _nextSearch = compile(_linkSearch + tagre("img", "class", "arrow_next"))
 _lastSearch = compile(_linkSearch + tagre("img", "class", "arrow_last"))
 
 def add(name, path):
-    classname = 'DrunkDuck_%s' % name
+    # XXX disallowed by the server administrator
+    classname = '_DrunkDuck_%s' % name
     _url = 'http://www.theduckwebcomics.com/%s/' % path
 
     @classmethod
@@ -26,15 +27,15 @@ def add(name, path):
     @classmethod
     def _starter(cls):
         # first, try hopping to previous and next comic
-        data, baseUrl = getPageContent(_url, cls.session)
+        data = cls.getPage(_url)
         try:
-            url = fetchUrl(_url, data, baseUrl, _prevSearch)
+            url = cls.fetchUrl(_url, data, _prevSearch)
         except ValueError:
             # no previous link found, try hopping to last comic
-            return fetchUrl(_url, data, baseUrl, _lastSearch)
+            return cls.fetchUrl(_url, data, _lastSearch)
         else:
-            data, baseUrl = getPageContent(url, cls.session)
-            return fetchUrl(url, data, baseUrl, _nextSearch)
+            data = cls.getPage(url)
+            return cls.fetchUrl(url, data, _nextSearch)
 
     attrs = dict(
         name = 'DrunkDuck/' + name,
@@ -52,13 +53,6 @@ def add(name, path):
 
 # manually set attributes
 Overrides = {
-    'The_Devon_Legacy_Prologue': dict(
-        description = u'Earth\'s fate is in the hands of 2 alien races!' \
-        ' Luckily 1 of them isn\'t so bad. Attempting to stop a vicious' \
-        ' horde can 2 specially gifted humans (Fenny & Sally) actually ' \
-        ' turn the tables of balance on this war? Year 2132',
-        genres = (Genre.scifi,),
-    )
 }
 
 

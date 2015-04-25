@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2013 Bastian Kleineidam
+# Copyright (C) 2012-2014 Bastian Kleineidam
 
 from re import compile, escape
 from ..scraper import _BasicScraper
@@ -23,7 +23,6 @@ class Namesake(_BasicScraper):
 
 
 class NamirDeiter(_BasicScraper):
-    description = u'Namir Deiter, by Isabel Marks'
     url = 'http://www.namirdeiter.com/'
     rurl = escape(url)
     stripUrl = url + 'comics/index.php?date=%s'
@@ -34,7 +33,6 @@ class NamirDeiter(_BasicScraper):
 
 
 class NatalieDee(_BasicScraper):
-    description = u"America's Favorite Cracker"
     url = 'http://www.nataliedee.com/'
     rurl = escape(url)
     stripUrl = url + '%s'
@@ -60,7 +58,6 @@ class Nedroid(_BasicScraper):
 
 
 class NeoEarth(_BasicScraper):
-    description = u'Neo-Earth - Web comic by Bryan King - Updated Every Monday'
     url = 'http://www.neo-earth.com/NE/'
     stripUrl = url + 'index.php?date=%s'
     firstStripUrl = stripUrl % '2007-03-23'
@@ -128,6 +125,17 @@ class NichtLustig(_BasicScraper):
                               compile(tagre("a", "href", r'([^"]*toondb/\d+\.html)')))
 
 
+class Nimona(_BasicScraper):
+    url = 'http://gingerhaze.com/nimona/'
+    rurl = escape(url)
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % "comic/page-1"
+    imageSearch = compile(tagre("img", "src", r'(http://gingerhaze\.com/sites/default/files/nimona-pages/.+?)'))
+    prevSearch = compile(r'<a href="(/nimona/comic/[^"]+)"><img src="http://gingerhaze\.com/sites/default/files/comicdrop/comicdrop_prev_label_file\.png"')
+    help = 'Index format: stripname'
+    endOfLife = True
+
+
 class Nnewts(_BasicScraper):
     url = 'http://nnewts.com/'
     rurl = escape(url)
@@ -139,7 +147,6 @@ class Nnewts(_BasicScraper):
 
 
 class NobodyScores(_BasicScraper):
-    description = u'Nobody Scores! A little comic about inevitable disaster'
     url = 'http://nobodyscores.loosenutstudio.com/'
     rurl = escape(url)
     stripUrl = url + 'index.php?id=%s'
@@ -164,7 +171,6 @@ class NoNeedForBushido(_BasicScraper):
        compile(tagre("a", "href", r'(%s\?webcomic1=[^"]+)' % rurl, after="last-webcomic")))
 
 class NotInventedHere(_BasicScraper):
-    description = u'Not Invented Here'
     url = 'http://notinventedhe.re/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -174,7 +180,6 @@ class NotInventedHere(_BasicScraper):
     help = 'Index format: yyyy-mm-dd'
 
 class Nukees(_BasicScraper):
-    description = u'Nukees, The Atomic Comic Strip'
     url = 'http://www.nukees.com/'
     stripUrl = url + 'd/%s'
     firstStripUrl = stripUrl % '19970121'

@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2013 Bastian Kleineidam
+# Copyright (C) 2012-2014 Bastian Kleineidam
 
 from re import compile, escape
 from ..scraper import _BasicScraper
@@ -19,7 +19,6 @@ class PandyLand(_BasicScraper):
 
 
 class ParadigmShift(_BasicScraper):
-    description = u'A Paranormal Graphic Novel by Dirk I. Tiede'
     url = 'http://www.paradigmshiftmanga.com/'
     starter = indirectStarter(url, compile(tagre("a", "href", r'([^"]+)', after="next-comic-link")))
     stripUrl = url + 'ps/%s.html'
@@ -41,7 +40,6 @@ class ParallelUniversum(_BasicScraper):
 
 
 class PartiallyClips(_BasicScraper):
-    description = u'PartiallyClips - The true stories behind your favorite clip art.'
     url = 'http://partiallyclips.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -83,23 +81,40 @@ class PennyAndAggie(_BasicScraper):
 class PennyArcade(_BasicScraper):
     url = 'http://penny-arcade.com/comic/'
     rurl = escape(url)
-    starter = bounceStarter(url,
-       compile(tagre("a", "href", r'(%s[^"]+)' % rurl, before="btnNext"))
-    )
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1998/11/18'
     imageSearch = compile(tagre("img", "src", r'(http://art\.penny-arcade\.com/photos/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, before="btnPrev"))
-    help = 'Index format: yyyy/mm/dd'
+    nextSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, before="btnNext"))
+    help = 'Index format: yyyy/mm/dd/'
+
+    @classmethod
+    def prevUrlModifier(cls, prevUrl):
+        if prevUrl:
+            dummy, yyyy, mm, dd = prevUrl.rsplit('/', 3)
+            try:
+                int(dd)
+            except ValueError:
+                # URL has form yyyy/mm/dd/stripname
+                prevUrl = "%s/%s/%s" % (dummy, yyyy, mm)
+            return prevUrl
+
+    @classmethod
+    def starter(cls):
+        """Get bounced start URL."""
+        data = cls.getPage(cls.url)
+        url1 = cls.fetchUrl(cls.url, data, cls.prevSearch)
+        data = cls.getPage(url1)
+        url2 = cls.fetchUrl(url1, data, cls.nextSearch)
+        return cls.prevUrlModifier(url2)
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
-        dummy, yyyy, mm, dd = pageUrl.rsplit('/', 3)
-        return '%04d%02d%02d' % (int(yyyy), int(mm), int(dd))
+        p = pageUrl.split('/')
+        return '%04d%02d%02d' % (int(p[4]), int(p[5]), int(p[6]))
 
 
 class PeppermintSaga(_BasicScraper):
-    description = u'Sexy Fucking Fantasy Adventure Webcomic - NSFW'
     url = 'http://www.pepsaga.com/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'
@@ -120,9 +135,14 @@ class PHDComics(_BasicScraper):
         tagre("img", "src", r'(?:comics/)?images/prev_button\.gif', quote=""))
     help = 'Index format: number'
 
+    def shouldSkipUrl(self, url, data):
+        """Skip pages without images."""
+        return url in (
+            self.stripUrl % '1669', # video
+        )
+
 
 class PicPakDog(_BasicScraper):
-    description = u'A comic by Kim Belding'
     url = 'http://www.picpak.net/'
     rurl = escape(url)
     stripUrl = url + 'comic/%s/'
@@ -143,12 +163,12 @@ class Pixel(_BasicScraper):
 
 
 class PiledHigherAndDeeper(_BasicScraper):
-    url = 'http://www.phdcomics.com/comics/archive.php'
-    starter = bounceStarter(url, compile(r'<a href=(archive\.php\?comicid=\d+)><img height=52 width=49 src=images/next_button\.gif border=0 align=middle>'))
+    url = 'http://www.phdcomics.com/comics.php'
+    starter = bounceStarter(url, compile(r'<a href=(archive\.php\?comicid=\d+)>.*<img [^>]*next_button\.gif'))
     stripUrl = url + '?comicid=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.phdcomics\.com/comics/archive/phd\d+s?\.\w{3,4})', quote=""))
-    prevSearch = compile(r'<a href=(archive\.php\?comicid=\d+)><img height=52 width=49 src=images/prev_button\.gif border=0 align=middle>')
+    imageSearch = compile(tagre("img", "src", r'(http://www\.phdcomics\.com/comics/archive/phd\d+s\d?\.\w{3,4})', quote=""))
+    prevSearch = compile(r'<a href=((comics/)?archive\.php\?comicid=\d+)>.*<img [^>]*prev_button\.gif')
     help = 'Index format: n (unpadded)'
     namer = queryNamer('comicid', usePageUrl=True)
 
@@ -187,6 +207,16 @@ class PokeyThePenguin(_BasicScraper):
         num = int(mo.group(1)) - 1
         prefix = url.rsplit('/', 1)[0]
         return "%s/index%d.html" % (prefix, num)
+
+
+class PoorlyDrawnLines(_BasicScraper):
+    url = 'http://poorlydrawnlines.com/comic/'
+    rurl = escape(url)
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % 'campus-characters/'
+    imageSearch = compile(tagre("img", "src", r'(http://poorlydrawnlines\.com/wp-content/uploads/\d+/\d+/[^"]+)'))
+    prevSearch = compile(tagre("li", "class", r'previous') + tagre("a", "href", r'(%s[^"]+)' % rurl))
+    help = 'Index Format: name'
 
 
 class Precocious(_BasicScraper):
@@ -231,5 +261,5 @@ class PvPonline(_BasicScraper):
     url = 'http://pvponline.com/comic'
     stripUrl = url + '%s'
     imageSearch = compile(tagre("img", "src", r'(http://s3[^"]+\.amazonaws\.com/pvponlinenew/img/comic/\d+/\d+/pvp[^"]+\.jpg)'))
-    prevSearch = compile(tagre("a", "href", r'(/comic/[^"]+)', after="Previous"))
+    prevSearch = compile(tagre("a", "href", r'(/comic/[^"]+)', after="left divider"))
     help = 'Index format: yyyy/mm/dd/stripname'

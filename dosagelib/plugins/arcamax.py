@@ -1,5 +1,5 @@
 # -*- coding: iso-8859-1 -*-
-# Copyright (C) 2013 Bastian Kleineidam
+# Copyright (C) 2013-2014 Bastian Kleineidam
 """
 Arcamax comic strips
 """
@@ -8,7 +8,7 @@ from ..scraper import make_scraper
 from ..util import tagre
 
 
-_imageSearch = compile(tagre("a", "href", r'(/newspics/[^"]+)', after='zoom'))
+_imageSearch = compile(tagre("img", "data-zoom-image", r'(/newspics/[^"]+)'))
 _prevSearch = compile(tagre("a", "href", r'(/[^"]+)', before='prev'))
 
 def add(name, shortname):
@@ -43,7 +43,6 @@ add('BleekerTheRechargeableDog', '/thefunnies/bleekertherechargeabledog/')
 add('Blondie', '/thefunnies/blondie/')
 add('Boondocks', '/thefunnies/boondocks/')
 add('BrilliantMindofEdisonLee', '/thefunnies/brilliantmindofedisonlee/')
-#add('CafConLeche', '/thefunnies/cafeconleche/')
 #add('Candorville', '/thefunnies/candorville/')
 #add('Cathy', '/thefunnies/cathy/')
 #add('ChuckleBros', '/thefunnies/chucklebros/')
@@ -71,18 +70,21 @@ add('FamilyCircus', '/thefunnies/familycircus/')
 #add('HerbandJamaal', '/thefunnies/herbandjamaal/')
 add('HiandLois', '/thefunnies/hiandlois/')
 #add('HomeAndAway', '/thefunnies/homeandaway/')
+add('IntelligentLife', '/thefunnies/intelligentlife/')
 add('JerryKingCartoons', '/thefunnies/humorcartoon/')
 #add('LittleDogLost', '/thefunnies/littledoglost/')
+#add('LongStoryShort', '/thefunnies/longstoryshort/')
+#add('LooseParts', '/thefunnies/looseparts/')
 #add('Luann', '/thefunnies/luann/')
 add('MallardFillmore', '/thefunnies/mallardfillmore/')
 add('Marvin', '/thefunnies/marvin/')
 add('MeaningofLila', '/thefunnies/meaningoflila/')
+#add('MikeDuJour', '/thefunnies/mikedujour/')
 #add('Momma', '/thefunnies/momma/')
 add('MotherGooseAndGrimm', '/thefunnies/mothergooseandgrimm/')
 add('Mutts', '/thefunnies/mutts/')
 #add('NestHeads', '/thefunnies/nestheads/')
 #add('NonSequitur', '/thefunnies/nonsequitur/')
-#add('OnaClaireDay', '/thefunnies/onaclaireday/')
 #add('OneBigHappy', '/thefunnies/onebighappy/')
 #add('Peanuts', '/thefunnies/peanuts/')
 #add('PearlsBeforeSwine', '/thefunnies/pearlsbeforeswine/')
@@ -91,6 +93,7 @@ add('Mutts', '/thefunnies/mutts/')
 #add('ReplyAll', '/thefunnies/replyall/')
 add('RhymeswithOrange', '/thefunnies/rhymeswithorange/')
 #add('Rubes', '/thefunnies/rubes/')
+#add('RudyPark', '/thefunnies/rudypark/')
 #add('Rugrats', '/thefunnies/rugrats/')
 #add('ScaryGary', '/thefunnies/scarygary/')
 #add('SpeedBump', '/thefunnies/speedbump/')
@@ -99,9 +102,7 @@ add('TakeItFromTheTinkersons', '/thefunnies/takeitfromthetinkersons/')
 #add('TheBarn', '/thefunnies/thebarn/')
 add('TheLockhorns', '/thefunnies/thelockhorns/')
 #add('TheOtherCoast', '/thefunnies/theothercoast/')
-#add('ThinLines', '/thefunnies/thinlines/')
 add('TinasGroove', '/thefunnies/tinasgroove/')
-#add('WatchYourHead', '/thefunnies/watchyourhead/')
 #add('WeePals', '/thefunnies/weepals/')
 #add('WizardofId', '/thefunnies/wizardofid/')
 #add('WorkingitOut', '/thefunnies/workingitout/')

@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2013 Bastian Kleineidam
+# Copyright (C) 2012-2014 Bastian Kleineidam
 
 from re import compile, escape, IGNORECASE
 
@@ -52,9 +52,8 @@ class WebDesignerCOTW(_BasicScraper):
     multipleImagesPerStrip = True
     prevSearch = compile(tagre("link", "href", r"(%s\d+/\d+/[^']+)" % rurl, before='prev', quote="'"))
     help = 'Index format: yyyy/mm/stripname'
-    description = u"The content revolves around web design, blogging and funny situations that we encounter in our daily lives as designers and this week we focus on Christmas. These great cartoons are created by Jerry King, an award-winning cartoonist who’s one of the most published, prolific and versatile cartoonists in the world today."
 
-    def shouldSkipUrl(self, url):
+    def shouldSkipUrl(self, url, data):
         """Skip non-comic URLs."""
         return 'comics-of-the-week' not in url
 
@@ -66,7 +65,6 @@ class WebDesignerCOTW(_BasicScraper):
 
 
 class WeCanSleepTomorrow(_BasicScraper):
-    description = u'We Can Sleep Tomorrow - Life does not take bathroom breaks. A webcomic that updates Mondays and Fridays'
     url = 'http://wecansleeptomorrow.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -76,7 +74,6 @@ class WeCanSleepTomorrow(_BasicScraper):
 
 
 class Weregeek(_BasicScraper):
-    description = u'Weregeek'
     url = 'http://www.weregeek.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -105,6 +102,16 @@ class WhiteNoise(_BasicScraper):
     help = 'Index format: n'
 
 
+class Whomp(_BasicScraper):
+    url = 'http://www.whompcomic.com/'
+    rurl = escape(url)
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2010/06/14/06142010'
+    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl, after="navi-prev"))
+    help = 'Index format: yyyy/mm/dd/stripname'
+
+
 class WhyTheLongFace(_BasicScraper):
     baseUrl = 'http://www.absurdnotions.org/'
     rurl = escape(baseUrl)
@@ -118,7 +125,6 @@ class WhyTheLongFace(_BasicScraper):
 
 
 class Wigu(_BasicScraper):
-    description = u'WIGU: A COMIC ON INTERNET'
     url = 'http://wigucomics.com/'
     stripUrl = url + 'oc/index.php?comic=%s'
     firstStripUrl = stripUrl % '1'
@@ -182,7 +188,6 @@ class WorldOfMrToast(_BasicScraper):
 
 
 class WormWorldSaga(_BasicScraper):
-    description = u'The Wormworld Saga Online Graphic Novel by Daniel Lieske - An Epic Fantasy Adventure for all Ages'
     url = 'http://www.wormworldsaga.com/'
     stripUrl = url + 'chapters/%s/index.php'
     firstStripUrl = stripUrl % 'chapter01/EN'
@@ -237,7 +242,6 @@ class _WorldOfWarcraftEh(_BasicScraper):
 
 
 class Wulffmorgenthaler(_BasicScraper):
-    description = u"Entertainment - Since 2002. Wulff & Morgenthaler's Personal humoristic social commentary on life, nostalgia and the World in general. Nothing is taboo: They deal with Politics, News, Entertainment, Technology, Culture, and Weirdo Beavers"
     url = 'http://kindofnormal.com/wumo/'
     rurl = escape(url)
     stripUrl = url + '%s'

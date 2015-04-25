@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2013 Bastian Kleineidam
+# Copyright (C) 2012-2014 Bastian Kleineidam
 #     ___
 #    /   \___  ___  __ _  __ _  ___
 #   / /\ / _ \/ __|/ _` |/ _` |/ _ \
@@ -15,10 +15,10 @@ import os
 import argparse
 import pydoc
 from io import StringIO
-
-from dosagelib import events, scraper, configuration
+import pycountry
+from dosagelib import events, configuration, singleton, director
 from dosagelib.output import out
-from dosagelib.util import internal_error, getDirname, strlimit, getLangName
+from dosagelib.util import internal_error, strlimit
 from dosagelib.ansicolor import get_columns
 
 
@@ -48,10 +48,6 @@ directory:
 If you already have downloaded several comics and want to get the latest
 strips of all of them:
   dosage --continue @
-
-On Unix, xargs(1) can download several comic strips in parallel,
-for example using up to 4 processes:
-  cd Comics && find . -type d | xargs -n1 -P4 dosage -b . -v
 """
 
 
@@ -137,29 +133,11 @@ def setOutputInfo(options):
     #add_stderr_logger()
 
 
-def saveComicStrip(strip, basepath, dryrun):
-    """Save a comic strip which can consist of multiple images."""
-    errors = 0
-    allskipped = True
-    for image in strip.getImages():
-        try:
-            if dryrun:
-                filename, saved = "", False
-            else:
-                filename, saved = image.save(basepath)
-            if saved:
-                allskipped = False
-        except Exception as msg:
-            out.exception('Could not save image at %s to %s: %r' % (image.referrer, image.filename, msg))
-            errors += 1
-    return errors, allskipped
-
-
 def displayHelp(options):
     """Print help for comic strips."""
     errors = 0
     try:
-        for scraperobj in getScrapers(options.comic, options.basepath):
+        for scraperobj in director.getScrapers(options.comic, options.basepath, listing=True):
             errors += displayComicHelp(scraperobj)
     except ValueError as msg:
         out.exception(msg)
@@ -168,16 +146,13 @@ def displayHelp(options):
 
 
 def displayComicHelp(scraperobj):
-    """Print description and help for a comic."""
+    """Print help for a comic."""
+    orig_context = out.context
     out.context = getScraperName(scraperobj)
     try:
         out.info(u"URL: " + scraperobj.url)
-        if scraperobj.description:
-            out.info(u"Description: " + scraperobj.description)
         if scraperobj.lang:
-            out.info(u"Language: " + getLangName(scraperobj.lang))
-        if scraperobj.genres:
-            out.info(u"Genres: " + ", ".join(scraperobj.genres))
+            out.info(u"Language: " + pycountry.languages.get(alpha2 = scraperobj.lang).name)
         if scraperobj.help:
             for line in scraperobj.help.splitlines():
                 out.info(line)
@@ -186,36 +161,28 @@ def displayComicHelp(scraperobj):
         out.exception(msg)
         return 1
     finally:
-        out.context = u''
+        out.context = orig_context
 
 
-def getComics(options):
-    """Retrieve comics."""
-    if options.handler:
-        for name in set(options.handler):
-            events.addHandler(name, options.basepath, options.baseurl)
-    events.getHandler().start()
+def voteComics(options):
+    """Vote for comics."""
     errors = 0
     try:
-        for scraperobj in getScrapers(options.comic, options.basepath, options.adult, options.multimatch):
-            if options.vote:
-                errors += vote(scraperobj)
-            else:
-                errors += getStrips(scraperobj, options)
+        for scraperobj in director.getScrapers(options.comic, options.basepath, options.adult, options.multimatch):
+            errors += voteComic(scraperobj)
     except ValueError as msg:
         out.exception(msg)
         errors += 1
-    finally:
-        events.getHandler().end()
     return errors
 
 
-def vote(scraperobj):
+def voteComic(scraperobj):
     """Vote for given comic scraper."""
     errors = 0
-    name = scraperobj.getName()
-    out.context = name
+    orig_context = out.context
+    out.context = getScraperName(scraperobj)
     try:
+        name = scraperobj.getName()
         answer = scraperobj.vote()
         out.debug(u'Vote answer %r' % answer)
         if answer == 'counted':
@@ -231,46 +198,15 @@ def vote(scraperobj):
         out.exception(msg)
         errors += 1
     finally:
-        out.context = u''
-    return errors
-
-
-def getStrips(scraperobj, options):
-    """Get all strips from a scraper."""
-    errors = 0
-    if options.all or options.cont:
-        numstrips = None
-    elif options.numstrips:
-        numstrips = options.numstrips
-    else:
-        # get current strip
-        numstrips = 1
-    out.context = scraperobj.getName()
-    try:
-        if scraperobj.isComplete(options.basepath):
-            out.info(u"All comics are already downloaded.")
-            return 0
-        for strip in scraperobj.getStrips(numstrips):
-            _errors, skipped = saveComicStrip(strip, options.basepath, options.dry_run)
-            errors += _errors
-            if skipped and options.cont:
-                # stop when retrieval skipped an image for one comic strip
-                out.info(u"Stop retrieval because image file already exists")
-                break
-        if options.all and not (errors or options.dry_run or
-                                options.cont or scraperobj.indexes):
-            scraperobj.setComplete(options.basepath)
-    except Exception as msg:
-        out.exception(msg)
-        errors += 1
-    finally:
-        out.context = u''
+        out.context = orig_context
     return errors
 
 
 def run(options):
     """Execute comic commands."""
     setOutputInfo(options)
+    # ensure only one instance of dosage is running
+    me = singleton.SingleInstance()
     if options.version:
         return displayVersion(options.verbose)
     if options.list:
@@ -283,63 +219,83 @@ def run(options):
         return 1
     if options.modulehelp:
         return displayHelp(options)
-    return getComics(options)
+    if options.vote:
+        return voteComics(options)
+    return director.getComics(options)
 
 
 def doList(columnList=True, verbose=False):
     """List available comics."""
-    page = hasattr(sys.stdout, "isatty") and sys.stdout.isatty()
-    if page:
-        fd = StringIO(u'')
-        out.setStream(fd)
-    out.info(u'Available comic scrapers:')
-    out.info(u'Comics tagged with [%s] require age confirmation with the --adult option.' % TAG_ADULT)
-    out.info(u'Non-english comics are tagged with [%s].' % TAG_LANG)
-    scrapers = sorted(getScrapers(['@@']), key=lambda s: s.getName())
-    if columnList:
-        num = doColumnList(scrapers)
-    else:
-        num = doSingleList(scrapers, verbose=verbose)
-    out.info(u'%d supported comics.' % num)
-    if page:
-        pydoc.pager(fd.getvalue())
-    return 0
+    orig_context = out.context
+    out.context = u''
+    try:
+        page = hasattr(sys.stdout, "isatty") and sys.stdout.isatty()
+        if page:
+            fd = StringIO(u'')
+            out.setStream(fd)
+        out.info(u'Available comic scrapers:')
+        out.info(u'Comics tagged with [%s] require age confirmation with the --adult option.' % TAG_ADULT)
+        out.info(u'Non-english comics are tagged with [%s].' % TAG_LANG)
+        scrapers = sorted(director.getAllScrapers(listing=True), key=lambda s: s.getName())
+        if columnList:
+            num, disabled = doColumnList(scrapers)
+        else:
+            num, disabled = doSingleList(scrapers, verbose=verbose)
+        out.info(u'%d supported comics.' % num)
+        if disabled:
+            out.info('')
+            out.info(u'Some comics are disabled, they are tagged with [%s:REASON], where REASON is one of:' % TAG_DISABLED)
+            for k in disabled:
+                out.info(u'  %-10s %s' % (k, disabled[k]))
+        if page:
+            pydoc.pager(fd.getvalue())
+        return 0
+    finally:
+        out.context = orig_context
 
 
 def doSingleList(scrapers, verbose=False):
     """Get list of scraper names, one per line."""
+    disabled = {}
     for num, scraperobj in enumerate(scrapers):
         if verbose:
             displayComicHelp(scraperobj)
         else:
-            out.info(getScraperName(scraperobj))
-    return num
+            out.info(getScraperName(scraperobj, reasons=disabled))
+    return num, disabled
 
 
 def doColumnList(scrapers):
     """Get list of scraper names with multiple names per line."""
+    disabled = {}
     screenWidth = get_columns(sys.stdout)
     # limit name length so at least two columns are there
     limit = (screenWidth // 2) - 8
-    names = [getScraperName(scraperobj, limit=limit) for scraperobj in scrapers]
+    names = [getScraperName(scraperobj, limit=limit, reasons=disabled) for scraperobj in scrapers]
     num = len(names)
     maxlen = max(len(name) for name in names)
     namesPerLine = max(screenWidth // (maxlen + 1), 1)
     while names:
         out.info(u''.join(name.ljust(maxlen) for name in names[:namesPerLine]))
         del names[:namesPerLine]
-    return num
+    return num, disabled
 
 TAG_ADULT = "adult"
 TAG_LANG = "lang"
+TAG_DISABLED = "dis"
 
-def getScraperName(scraperobj, limit=None):
+def getScraperName(scraperobj, limit=None, reasons=None):
     """Get comic scraper name."""
     tags = []
     if scraperobj.adult:
         tags.append(TAG_ADULT)
     if scraperobj.lang != "en":
         tags.append("%s:%s" % (TAG_LANG, scraperobj.lang))
+    disabled = scraperobj.getDisabledReasons()
+    if disabled:
+        reasons.update(disabled)
+    for reason in disabled:
+        tags.append("%s:%s" % (TAG_DISABLED, reason))
     if tags:
         suffix = " [" + ", ".join(tags) + "]"
     else:
@@ -350,64 +306,12 @@ def getScraperName(scraperobj, limit=None):
     return name + suffix
 
 
-def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False):
-    """Get scraper objects for the given comics."""
-    if '@' in comics:
-        # only scrapers whose directory already exists
-        if len(comics) > 1:
-            out.warn(u"using '@' as comic name ignores all other specified comics.")
-        for scraperclass in scraper.get_scraperclasses():
-            dirname = getDirname(scraperclass.getName())
-            if os.path.isdir(os.path.join(basepath, dirname)):
-                if not adult and scraperclass.adult:
-                    warn_adult(scraperclass)
-                    continue
-                yield scraperclass()
-    elif '@@' in comics:
-        # all scrapers
-        for scraperclass in scraper.get_scraperclasses():
-            if not adult and scraperclass.adult:
-                warn_adult(scraperclass)
-                continue
-            yield scraperclass()
-    else:
-        # get only selected comic scrapers
-        # store them in a set to eliminate duplicates
-        scrapers = set()
-        for comic in comics:
-            # Helpful when using shell completion to pick comics to get
-            comic.rstrip(os.path.sep)
-            if basepath and comic.startswith(basepath):
-                # make the following command work:
-                # find Comics -type d | xargs -n1 -P10 dosage -b Comics
-                comic = comic[len(basepath):].lstrip(os.sep)
-            if ':' in comic:
-                name, index = comic.split(':', 1)
-                indexes = index.split(',')
-            else:
-                name = comic
-                indexes = None
-            scraperclasses = scraper.find_scraperclasses(name, multiple_allowed=multiple_allowed)
-            for scraperclass in scraperclasses:
-                if not adult and scraperclass.adult:
-                    warn_adult(scraperclass)
-                    continue
-                scraperobj = scraperclass(indexes=indexes)
-                if scraperobj not in scrapers:
-                    scrapers.add(scraperobj)
-                    yield scraperobj
-
-
-def warn_adult(scraperclass):
-    """Print warning about adult content."""
-    out.warn(u"skipping adult comic %s; use the --adult option to confirm your age" % scraperclass.getName())
-
-
 def main():
     """Parse options and execute commands."""
     try:
-        parser = setupOptions()
-        res = run(parser.parse_args())
+        options = setupOptions().parse_args()
+        options.basepath = os.path.expanduser(options.basepath)
+        res = run(options)
     except KeyboardInterrupt:
         print("Aborted.")
         res = 1

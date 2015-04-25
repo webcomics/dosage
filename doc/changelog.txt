@@ -1,3 +1,101 @@
+Dosage 2.16 (released xx.xx.xxxx)
+
+Features:
+- comics: Added Nimona, ShotgunShuffle, Optipess.
+  Closes: GH bug #80, #81, #86
+- comics: image text can be optional (not on every page)
+- output: Next and previous link in HTML output also at the end of the page
+
+Fixes:
+- output: Don't crash when HTML output is run more than once
+  per day.
+  Closes: GH bug #78
+- comics: Fixed AbstruseGoose, Carciphona, Curtailed, DieFruehreifen,
+  DorkTower, GrrlPower, MadamAndEve, OnTheFastTrack, PennyArcade, PvPonline,
+  RedMeat, Ruthe, ShermansLagoon, SnowFlakes, SnowFlame.
+  Closes: GH bug #73, #77
+
+
+Dosage 2.15 (released 3.7.2014)
+
+Features:
+- comics: Added TheThinHLine, Whomp.
+  Closes: GH bug #64, #67
+
+Fixes:
+- comics: Fixed DungeonsAndDenizens, GirlGenius, GirlsWithSlingshots,
+  LookingForGroup, ScandinaviaAndTheWorld.
+  Closes: GH bug #63, #66
+
+
+Dosage 2.14 (released 8.6.2014)
+
+Changes:
+- installation: Source releases are now available from PyPi.
+
+Fixes:
+- comics: Fixed LoadingArtist, PennyArcade, ZenPencils.
+  Closes: GH bug #62
+
+
+Dosage 2.13 (released 3.3.2014)
+
+Features:
+- comics: Added OhJoySexToy, TheGentlemansArmchair, Underling, DongeonsAndDenizens,
+  GrimTalesFromDownBelow, TheLandscaper, DieFruehreifen, MonsieurLeChien.
+
+Fixes:
+- comics: Fixed EvilInc, FredoAndPidjin.
+- cmdline: Make download threads interruptable with Ctrl-C
+
+
+Dosage 2.12 (released 24.1.2014)
+
+Changes:
+- cmdline: The --basepath option now replaces "~" or "~user" with the
+  users home directory.
+- documentation: Added install instructions at doc/install.txt
+
+Fixes:
+- comics: Fix AbstruseGoose, AxeCop, BardsWorth, DemolitionSquad.
+- comics: Remove broken ChugWorth.
+
+
+Dosage 2.11 (released 15.1.2014)
+
+Features:
+- comics: Added CampComic, EatThatToast, FoulLanguage,
+  PoorlyDrawnLines and StandStillStaySilent.
+
+
+Dosage 2.10 (released 5.1.2014)
+
+Features:
+- comics: Comic strips are downloaded in parallel. To prevent overload
+  of comic sites, no more than one download thread per host is allowed.
+
+Changes:
+- cmdline: Ensure only one instance of dosage is running to prevent
+  accidental DoS when fetching multiple comics of one site.
+- comics: Wait up to 1 second between two URL page downloads.
+
+
+Dosage 2.9 (released 22.12.2013)
+
+Features:
+- events: Ensure maximum display width on RSS and HTML images.
+- comics: Added EdmundFinney, Gaia, GaiaGerman, InternetWebcomic,
+  NotInventedHere, RedsPlanet, RomanticallyApocalyptic,
+  ScandinaviaAndTheWorld, TheGamerCat, Weregeek.
+  Thanks to Null000 for the patches.
+  Closes: GH bug #48
+
+Fixes:
+- comics: Get larger images from GoComics.
+- comics: Fix AbstruseGoose and QuestionabelContent.
+  Closes: GH bug #50
+
+
 Dosage 2.8 (released 8.12.2013)
 
 Features:

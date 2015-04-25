@@ -1,5 +1,5 @@
 # -*- coding: iso-8859-1 -*-
-# Copyright (C) 2012-2013 Bastian Kleineidam
+# Copyright (C) 2012-2014 Bastian Kleineidam
 from unittest import TestCase
 from dosagelib import scraper, util
 try:
@@ -19,4 +19,3 @@ class TestComicNames(TestCase):
             else:
                 comicname = name
             self.assertEqual(util.asciify(comicname), comicname)
-            self.assertTrue(isinstance(scraperclass.description, text_type), "Invalid description in %s: %r" % (scraperclass, scraperclass.description))

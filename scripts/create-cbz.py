@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Copyright (C) 2013 Bastian Kleineidam
+# Copyright (C) 2013-2014 Bastian Kleineidam
 """
 Creates a CBZ file in the comic directory.
 Uses an ordered symlink directory (see order-symlinks.py) if it exists,

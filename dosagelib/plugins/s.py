@@ -1,16 +1,15 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2013 Bastian Kleineidam
+# Copyright (C) 2012-2014 Bastian Kleineidam
 
 from re import compile, escape, IGNORECASE, sub
 from os.path import splitext
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter
 from ..util import tagre, getPageContent
 
 
 class SabrinaOnline(_BasicScraper):
-    description = u'Skunks, computers and porn'
     url = 'http://sabrina-online.com/'
     imageSearch = compile(tagre("a", "href", r'(strips/[^"]*)'))
     prevSearch = compile(tagre("a", "href", r"(\d\d\d\d-\d\d.html)") +
@@ -28,6 +27,14 @@ class SabrinaOnline(_BasicScraper):
         archivepages = search.findall(data)
         return cls.url + archivepages[-1]
 
+class SafelyEndangered(_BasicScraper):
+    url = 'http://www.safelyendangered.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl =  stripUrl % 'ignored'
+    imageSearch = compile(tagre("img", "src", r'(http://www\.safelyendangered\.com/wp-content/uploads/\d+/\d+/[^"]+\.[a-z]+).*'))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)', after="navi navi-prev"))
+    textSearch = compile(tagre("img", "title", r'([^"]+)', before=r'http://www\.safelyendangered\.com/wp-content/uploads'))
+    help = 'Index format: yyyy/mm/stripname'
 
 class SailorsunOrg(_BasicScraper):
     url = 'http://sailorsun.org/'
@@ -40,36 +47,12 @@ class SailorsunOrg(_BasicScraper):
 
 
 class SamAndFuzzy(_BasicScraper):
-    description = u"Serial about a cab driver and his bear-like friend by Sam Logan. Offers a reader's guide, forum, and frequently asked questions."
     url = 'http://www.samandfuzzy.com/'
     stripUrl = 'http://samandfuzzy.com/%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(r'(/comics/.+?)" alt')
     prevSearch = compile(r'"><a href="(.+?)"><img src="imgint/nav_prev.gif"')
     help = 'Index format: nnnn'
-
-
-class SandraAndWoo(_BasicScraper):
-    description = u'Sandra and Woo: a webcomic about friendship, life and the art of (not) eating squirrels, featuring the girl Sandra and her pet raccoon Woo.'
-    url = 'http://www.sandraandwoo.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2000/01/01/welcome-to-sandra-and-woo'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+-[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+/)' % rurl, after="prev"))
-    help = 'Index format: yyyy/mm/dd/number-stripname'
-
-
-class SandraAndWooGerman(_BasicScraper):
-    description = u'Sandra und Woo: ein Webcomic \xfcber Freundschaft, das Leben und die Kunst (keine) Eichh\xf6rnchen zu essen; mit dem M\xe4dchen Sandra und ihrem Waschb\xe4ren Woo in den Hauptrollen'
-    url = 'http://www.sandraandwoo.com/woode/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2008/10/19/ein-ausgefuchster-waschbar'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+-[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+/)' % rurl, after="prev"))
-    help = 'Index format: yyyy/mm/dd/number-stripname'
-    lang = 'de'
 
 class SandraOnTheRocks(_BasicScraper):
     url = 'http://www.sandraontherocks.com/'
@@ -80,10 +63,9 @@ class SandraOnTheRocks(_BasicScraper):
     help = 'Index format: name'
 
 class ScandinaviaAndTheWorld(_BasicScraper):
-    description = u'Scandinavia and the World'
     url = 'http://satwcomic.com/'
     rurl = escape(url)
-    stripUrl = url + '%s/'
+    stripUrl = url + '%s'
     firstStripUrl = stripUrl % 'sweden-denmark-and-norway'
     imageSearch = compile(tagre("img", "src", r'(%sart/[^"/]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s[^"/]+)' % rurl)+"\s*"+tagre('span', 'class', 'spritePrevious'))
@@ -99,7 +81,6 @@ class ScaryGoRound(_BasicScraper):
 
 
 class ScenesFromAMultiverse(_BasicScraper):
-    description = u'SFAM Guest Month wraps up today with a contribution by Meredith Gran of Octopus Pie that is sure to tickle and delight even the grumpiest of codgers.'
     url = 'http://amultiverse.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -115,7 +96,6 @@ class ScenesFromAMultiverse(_BasicScraper):
 
 
 class SchlockMercenary(_BasicScraper):
-    description = u'2 days ago ... Travel the galaxy. Meet new and fascinating life-forms.'
     url = 'http://www.schlockmercenary.com/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '2000-06-12'
@@ -153,7 +133,6 @@ class Science(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+/)' % rurl, after="prev"))
     imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
     help = 'Index format: stripname'
-    description = u'A comic about science, technology, skepticism, geekery, video games, atheism, and more.'
 
 
 class SequentialArt(_BasicScraper):
@@ -185,7 +164,6 @@ class SexyLosers(_BasicScraper):
 
 # XXX site has been hacked
 class _ShadowGirls(_BasicScraper):
-    description = u"It's like H.P. Lovecraft meets the Gilmore Girls!"
     url = 'http://www.shadowgirlscomic.com/'
     stripUrl = url + 'comics/%s'
     firstStripUrl = stripUrl % 'book-1/chapter-1-broken-dreams/welcome'
@@ -196,7 +174,6 @@ class _ShadowGirls(_BasicScraper):
 
 
 class Sheldon(_BasicScraper):
-    description = u'The story of a software company tycoon billionaire ten-year-old, his grampa, his duck, his pug and a lizard.'
     url = 'http://www.sheldoncomics.com/'
     rurl = escape(url)
     stripUrl = url + 'archive/%s.html'
@@ -207,19 +184,19 @@ class Sheldon(_BasicScraper):
 
 
 class ShermansLagoon(_BasicScraper):
-    description = u"Sherman's Lagoon by Jim Toomey"
     url = 'http://shermanslagoon.com/'
-    rurl = escape(url)
     stripUrl = url + 'comics/%s'
     firstStripUrl = stripUrl % '/december-29-2003/'
-    imageSearch = compile(tagre("img", "src", r'(http://safr\.kingfeatures\.com/idn/etv/zone/xml/content.php\?file=[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(%scomics/[^"]+/)' % rurl) + '&laquo; previous')
-    starter = bounceStarter(url,
-        compile(tagre("a", "href", r'(%scomics/[^"]+/)' % rurl, after="next")))
+    imageSearch = compile(tagre("img", "src", r'(http://safr\.kingfeatures\.com/idn/test/zone/xml/content\.php\?file=.+?)'))
+    prevSearch = compile(r'id="previouscomic" class="button white"><a href="(%scomics/[a-z0-9-]+/)"' % url)
+    help = 'Index format: monthname-day-year'
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
-        name = pageUrl.split('/')[-2]
+        name = pageUrl.rsplit('/', 3)[2]
+        if name == "shermanslagoon.com":
+            import datetime
+            name = datetime.date.today().strftime("%B-%d-%Y").lower()
         # name is monthname-day-year
         month, day, year = name.split('-')
         return "%s-%s-%s" % (year, month, day)
@@ -245,14 +222,22 @@ class _Shortpacked(_BasicScraper):
     help = 'Index format: yyyy/comic/book-nn/mm-name1/name2'
 
 
+class ShotgunShuffle(_BasicScraper):
+    url = 'http://shotgunshuffle.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl =  stripUrl % 'pilot/'
+    imageSearch = compile(tagre("img", "src", r'(http://shotgunshuffle.com/wp-content/uploads/\d+/\d+/\d+-[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)', after="navi navi-prev"))
+    help = 'Index format: stripname'
+
+
 class SinFest(_BasicScraper):
-    description = u'Strip dealing with contemporary issues and religion. Created by Tatsuya Ishida.'
     name = 'KeenSpot/SinFest'
     url = 'http://www.sinfest.net/'
-    stripUrl = url + 'archive_page.php?comicID=%s'
-    imageSearch = compile(r'<img src=".+?(/comikaze/comics/.+?)"')
-    prevSearch = compile(r'(/archive_page.php\?comicID=.+?)".+?prev_a')
-    help = 'Index format: n (unpadded)'
+    stripUrl = url + 'view.php?date=%s'
+    imageSearch = compile(tagre("img","src", r'(btphp/comics/.+)', after="alt"))
+    prevSearch = compile(tagre("a", "href", r'(view\.php\?date=.+)') + '\\s*' + tagre("img", "src", r'\.\./images/prev\.gif'))
+    help = 'Index format: yyyy-mm-dd'
 
 
 # XXX disallowed by robots.txt
@@ -265,7 +250,6 @@ class _Sketchesnatched(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r"(http://sketchesnatched\.blogspot\.[a-z]+/search[^']+)",
         before=r"blog-pager-older-link", quote="'"))
     help = 'Index format: yyyy-mm-ddThh:mm:ss'
-    description = u"Artwork by Massimo Carnevale"
 
 
 class SkinDeep(_BasicScraper):
@@ -291,11 +275,11 @@ class SluggyFreelance(_BasicScraper):
     stripUrl = url + 'comics/archives/daily/%s'
     imageSearch = compile(r'<img src="(/images/comics/.+?)"')
     prevSearch = compile(r'<a href="(.+?)"[^>]+?><span class="ui-icon ui-icon-seek-prev">')
+    multipleImagesPerStrip = True
     help = 'Index format: yymmdd'
 
 
 class SMBC(_BasicScraper):
-    description = u"Saturday Morning Breakfast Cereal"
     url = 'http://www.smbc-comics.com/'
     rurl = escape(url)
     stripUrl = url + '?id=%s'
@@ -304,7 +288,7 @@ class SMBC(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'([^"]+)#comic', after="backRollover"))
     help = 'Index format: nnnn'
 
-    def shouldSkipUrl(self, url):
+    def shouldSkipUrl(self, url, data):
         """Skip promo or missing update pages."""
         return url in (
             self.stripUrl % '2865',
@@ -319,7 +303,6 @@ class SMBC(_BasicScraper):
 
 
 class SnowFlakes(_BasicScraper):
-    description = u'Snowflakes - A comic by James Ashby, Chris Jones and Zach Weiner.'
     url = 'http://www.snowflakescomic.com/'
     stripUrl = url + '?id=%s&sl=%s'
     firstStripUrl = stripUrl % ('103', '1')
@@ -336,7 +319,7 @@ class SnowFlakes(_BasicScraper):
     def starter(cls):
         return cls.stripUrl % ('530', '5')
 
-    def getStripIndexUrl(self, index):
+    def getIndexStripUrl(self, index):
         return self.stripUrl % (index, index[0])
 
     @classmethod
@@ -346,7 +329,7 @@ class SnowFlakes(_BasicScraper):
         ext = imageUrl.rsplit('.', 1)[1]
         return "SnowFlakes-%d.%s" % (index, ext)
 
-    def shouldSkipUrl(self, url):
+    def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
         return url in (
             self.stripUrl % ('279', '2'), # no comic
@@ -359,7 +342,6 @@ class SnowFlakes(_BasicScraper):
 
 
 class SnowFlame(_BasicScraper):
-    description = u'The fan-comic series featuring "The Man Powered by Cocaine"'
     url = 'http://www.snowflamecomic.com/'
     rurl = escape(url)
     stripUrl = url + '?comic=snowflame-%s-%s'
@@ -372,8 +354,8 @@ class SnowFlame(_BasicScraper):
         tagre("a", "href", r'(%s\?comic=snowflame[^"]+)' % rurl)))
     help = 'Index format: chapter-page'
 
-    def getStripIndexUrl(self, index):
-        return self.stripUrl % index.split('-')
+    def getIndexStripUrl(self, index):
+        return self.stripUrl % tuple(index.split('-'))
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
@@ -396,7 +378,6 @@ class SodiumEyes(_BasicScraper):
 
 
 class Sorcery101(_BasicScraper):
-    description = u'Welcome to the site of Kel McDonald, professional comic illustrator and writer.'
     baseUrl = 'http://www.sorcery101.net/'
     url = baseUrl + 'sorcery-101/'
     rurl = escape(baseUrl)
@@ -417,7 +398,6 @@ class SpaceTrawler(_BasicScraper):
 
 
 class Spamusement(_BasicScraper):
-    description = u'Spamusement! Poorly-drawn cartoons inspired by actual spam subject lines!'
     url = 'http://spamusement.com/'
     rurl = escape(url)
     stripUrl = url + 'index.php/comics/view/%s'
@@ -428,7 +408,6 @@ class Spamusement(_BasicScraper):
 
 
 class SpareParts(_BasicScraper):
-    description = u'Spare Parts by Terrence and Isabel Marks!'
     baseUrl = 'http://www.sparepartscomics.com/'
     url = baseUrl + 'comics/?date=20080328'
     stripUrl = baseUrl + 'comics/index.php?date=%s'
@@ -449,7 +428,6 @@ class Spinnerette(_BasicScraper):
 
 
 class SPQRBlues(_BasicScraper):
-    description = u"You can skip the next comic if you'd like to pass over the rest of this (very mildly) mature theme. I've tried to clarify the legalities as pointed out in the comments."
     url = 'http://spqrblues.com/IV/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'
@@ -457,6 +435,16 @@ class SPQRBlues(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(%scomics/\d+\.png)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl, after="prev"))
     help = 'Index format: number'
+
+
+class StandStillStaySilent(_BasicScraper):
+    url = 'http://www.sssscomic.com/comic.php'
+    rurl = escape(url)
+    stripUrl = url + '?page=%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = compile(tagre("img", "src", r'(comicpages/[^"]+)', before="comicnormal"))
+    prevSearch = compile(tagre("a", "href", r"([^']+)", quote="'") + tagre("div", "id", r'navprev'))
+    help = 'Index Format: number'
 
 
 # XXX disallowed by robots.txt
@@ -490,7 +478,6 @@ class Stubble(_BasicScraper):
 
 
 class StuffNoOneToldMe(_BasicScraper):
-    description = u"Everyday's life advices in the shape of witty and humorous cartoons."
     url = 'http://www.snotm.com/'
     stripUrl = url + '%s.html'
     firstStripUrl = stripUrl % '2010/05/01'
@@ -514,7 +501,7 @@ class StuffNoOneToldMe(_BasicScraper):
         parts, imagename = imageUrl.rsplit('/', 1)
         return '%s-%s-%s-%s' % (year, month, stripname, imagename)
 
-    def shouldSkipUrl(self, url):
+    def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
         return url in (
             self.stripUrl % '2012/08/self-rant', # no comic
@@ -526,7 +513,6 @@ class StuffNoOneToldMe(_BasicScraper):
 
 
 class StrawberryDeathCake(_BasicScraper):
-    description = u"Update2 I'm alive and still working on the comic, but progress has been slow. I'm inching my way through sketches. Update-A little break from the comic."
     url = 'http://strawberrydeathcake.com/'
     rurl = escape(url)
     stripUrl = url + 'archive/%s/'
@@ -534,6 +520,25 @@ class StrawberryDeathCake(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(%sarchive/[^"]+)' % rurl, after="previous"))
     help = 'Index format: stripname'
 
+
+class StrongFemaleProtagonist(_ParserScraper):
+    url = 'http://strongfemaleprotagonist.com/'
+    stripUrl = url + '%s/'
+    css = True
+    imageSearch = 'article p:first-child img'
+    prevSearch = 'div.nav-previous > a'
+    help = 'Index format: issue-?/page-??'
+
+    def shouldSkipUrl(self, url, data):
+        """Skip hiatus & non-comic pages."""
+        return url in (
+            self.stripUrl % 'guest-art/tuesday',
+            self.stripUrl % 'guest-art/friday',
+            self.stripUrl % 'guest-art/wednesday',
+            self.stripUrl % 'issue-5/newspaper',
+            self.stripUrl % 'issue-5/hiatus-1',
+            self.stripUrl % 'issue-5/hiatus-2',
+        )
 
 class SuburbanTribe(_BasicScraper):
     url = 'http://www.pixelwhip.com/'
@@ -557,7 +562,6 @@ class SomethingPositive(_BasicScraper):
 
 
 class StarCrossdDestiny(_BasicScraper):
-    description = u'Furturistic fantasy. A group of outcasts fight to survive in a world that shuns them as freaks.'
     baseUrl = 'http://www.starcrossd.net/'
     rurl = escape(baseUrl)
     url = baseUrl + 'comic.html'
@@ -589,7 +593,6 @@ class _StrangeCandy(_BasicScraper):
 
 
 class SupernormalStep(_BasicScraper):
-    description = u'Supernormal Step - Magic, Face Punching, and a Robot or Two'
     url = 'http://supernormalstep.com/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'

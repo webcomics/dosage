@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2013 Bastian Kleineidam
+# Copyright (C) 2012-2014 Bastian Kleineidam
 
 from re import compile
 
@@ -51,9 +51,10 @@ class VictimsOfTheSystem(_BasicScraper):
 class ViiviJaWagner(_BasicScraper):
     url = 'http://www.hs.fi/viivijawagner/'
     stripUrl = None
-    imageSearch = compile(tagre("link", "href", r'(http://hs\d+\.snstatic\.fi/webkuva/oletus/[^"]+)', before="image_src"))
+    imageSearch = compile(tagre("img", "src", r'(http://hs\d+\.snstatic\.fi/webkuva/sarjis/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/viivijawagner/[^"]+)', before="prev-cm"))
     help = 'Index format: none'
+    lang = 'fi'
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):

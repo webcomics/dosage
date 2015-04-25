@@ -9,6 +9,12 @@ except ImportError:
 import codecs
 import json
 from . import rss, util, configuration
+from .output import out
+
+# Maximum width or height to display an image in exported pages.
+# Note that only the displayed size is adjusted, not the image itself.
+MaxImageSize = (800, 800)
+
 
 class EventHandler(object):
     """Base class for writing events to files. The currently defined events are
@@ -81,9 +87,13 @@ class RSSEventHandler(EventHandler):
     def comicDownloaded(self, comic, filename, text=None):
         """Write RSS entry for downloaded comic."""
         imageUrl = self.getUrlFromFilename(filename)
+        size = getDimensionForImage(filename, MaxImageSize)
         title = '%s - %s' % (comic.name, os.path.basename(filename))
         pageUrl = comic.referrer
-        description = '<img src="%s"/>' % imageUrl
+        description = '<img src="%s"' % imageUrl
+        if size:
+            description += ' width="%d" height="%d"' % size
+        description += '/>'
         if text:
             description += '<br/>%s' % text
         description += '<br/><a href="%s">View Comic Online</a>' % pageUrl
@@ -105,6 +115,22 @@ class RSSEventHandler(EventHandler):
         self.rss.write(self.rssfn)
 
 
+def getDimensionForImage(filename, maxsize):
+    """Return scaled image size in (width, height) format.
+    The scaling preserves the aspect ratio.
+    If PIL is not found returns None."""
+    try:
+        from PIL import Image
+    except ImportError:
+        return None
+    img = Image.open(filename)
+    width, height = img.size
+    if width > maxsize[0] or height > maxsize[1]:
+        img.thumbnail(maxsize)
+        out.info("Downscaled display size from %s to %s" % ((width, height), img.size))
+    return img.size
+
+
 class HtmlEventHandler(EventHandler):
     """Output in HTML format."""
 
@@ -113,10 +139,15 @@ class HtmlEventHandler(EventHandler):
 
     def fnFromDate(self, date):
         """Get filename from date."""
-        fn = time.strftime('comics-%Y%m%d.html', date)
-        fn = os.path.join(self.basepath, 'html', fn)
+        fn = time.strftime('comics-%Y%m%d', date)
+        fn = os.path.join(self.basepath, 'html', fn + ".html")
         fn = os.path.abspath(fn)
         return fn
+
+    def addNavLinks(self):
+        if self.yesterdayUrl:
+            self.html.write(u'<a href="%s">Previous Day</a> | ' % self.yesterdayUrl)
+        self.html.write(u'<a href="%s">Next Day</a>\n' % self.tomorrowUrl)
 
     def start(self):
         """Start HTML output."""
@@ -129,14 +160,22 @@ class HtmlEventHandler(EventHandler):
 
         fn = self.fnFromDate(today)
         if os.path.exists(fn):
-            raise ValueError('output file %r already exists' % fn)
+            out.warn('HTML output file %r already exists' % fn)
+            out.warn('the page link of previous run will skip this file')
+            out.warn('try to generate HTML output only once per day')
+            fn = util.getNonexistingFile(fn)
 
         d = os.path.dirname(fn)
         if not os.path.isdir(d):
             os.makedirs(d)
 
-        yesterdayUrl = self.getUrlFromFilename(self.fnFromDate(yesterday))
-        tomorrowUrl = self.getUrlFromFilename(self.fnFromDate(tomorrow))
+        try:
+            fn_yesterday = self.fnFromDate(yesterday)
+            fn_yesterday = util.getExistingFile(fn_yesterday)
+            self.yesterdayUrl = self.getUrlFromFilename(fn_yesterday)
+        except ValueError:
+            self.yesterdayUrl = None
+        self.tomorrowUrl = self.getUrlFromFilename(self.fnFromDate(tomorrow))
 
         self.html = codecs.open(fn, 'w', self.encoding)
         self.html.write(u'''<!DOCTYPE html>
@@ -147,10 +186,9 @@ class HtmlEventHandler(EventHandler):
 <title>Comics for %s</title>
 </head>
 <body>
-<a href="%s">Previous Day</a> | <a href="%s">Next Day</a>
-<ul>
-''' % (self.encoding, configuration.App, time.strftime('%Y/%m/%d', today),
-       yesterdayUrl, tomorrowUrl))
+'''  % (self.encoding, configuration.App, time.strftime('%Y/%m/%d', today)))
+        self.addNavLinks()
+        self.html.write(u'<ul>\n')
         # last comic name (eg. CalvinAndHobbes)
         self.lastComic = None
         # last comic strip URL (eg. http://example.com/page42)
@@ -160,11 +198,15 @@ class HtmlEventHandler(EventHandler):
         """Write HTML entry for downloaded comic."""
         if self.lastComic != comic.name:
             self.newComic(comic)
+        size = getDimensionForImage(filename, MaxImageSize)
         imageUrl = self.getUrlFromFilename(filename)
         pageUrl = comic.referrer
         if pageUrl != self.lastUrl:
             self.html.write(u'<li><a href="%s">%s</a>\n' % (pageUrl, pageUrl))
-        self.html.write(u'<br/><img src="%s"/>\n' % imageUrl)
+        self.html.write(u'<br/><img src="%s"' % imageUrl)
+        if size:
+            self.html.write(' width="%d" height="%d"' % size)
+        self.html.write('/>\n')
         if text:
             self.html.write(u'<br/>%s\n' % text)
         self.lastComic = comic.name
@@ -185,9 +227,8 @@ class HtmlEventHandler(EventHandler):
             self.html.write(u'</li>\n')
         if self.lastComic is not None:
             self.html.write(u'</ul>\n')
-        self.html.write(u'''</ul>
-</body>
-</html>''')
+        self.html.write(u'</ul>\n')
+        self.addNavLinks()
         self.html.close()
 
 

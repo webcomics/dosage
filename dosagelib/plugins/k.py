@@ -1,6 +1,6 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2013 Bastian Kleineidam
+# Copyright (C) 2012-2014 Bastian Kleineidam
 
 from re import compile, escape, IGNORECASE
 from ..scraper import _BasicScraper
@@ -9,7 +9,6 @@ from ..helpers import indirectStarter
 
 
 class KatzenfutterGeleespritzer(_BasicScraper):
-    description = u'Webcomic mit Geschichten aus dem Alltag eines geeky Cartoonisten und Comiczeichners'
     url = 'http://www.katzenfuttergeleespritzer.de/'
     rurl = escape(url)
     stripUrl = url + 'comics/%s/'
@@ -25,7 +24,6 @@ class KatzenfutterGeleespritzer(_BasicScraper):
 
 
 class KevinAndKell(_BasicScraper):
-    description = u'Kevin & Kell by Bill Holbrook'
     url = 'http://www.kevinandkell.com/'
     stripUrl = url + '%s/kk%s%s.html'
     firstStripUrl = stripUrl % ('1995', '09', '03')
@@ -38,7 +36,6 @@ class KevinAndKell(_BasicScraper):
 
 
 class Key(_BasicScraper):
-    description = u'Key - Fantasy Adventure Webcomic'
     baseUrl = 'http://key.shadilyn.com/'
     url = baseUrl + 'latestpage.html'
     stripUrl = baseUrl + 'pages/%s.html'
@@ -58,7 +55,6 @@ class KickInTheHead(_BasicScraper):
 
 
 class KillerKomics(_BasicScraper):
-    description = u'Web comic - Lorsque tu repasses une chemise, fait attention pour ne pas oublier un endroit... - Web comic drole avec bonhommes allumettes, webcomic avec beaucoup de sang et violence. Pour ceux qui veulent rire \xe0 la violence.'
     baseUrl = 'http://www.killerkomics.com/web-comics/'
     url = baseUrl + 'index_ang.cfm'
     stripUrl = baseUrl + '%s.cfm'
@@ -97,7 +93,6 @@ class Kukuburi(_BasicScraper):
 
 
 class KuroShouri(_BasicScraper):
-    description = u'a webcomic by Kikirini and DJ-Anarchy'
     url = 'http://kuroshouri.com/'
     rurl = escape(url)
     stripUrl = url + '?webcomic_post=%s'

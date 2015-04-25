@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2013 Bastian Kleineidam
+# Copyright (C) 2013-2014 Bastian Kleineidam
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -28,39 +28,41 @@ def run_with_options(options, cmd=dosage_cmd):
 class TestDosage (unittest.TestCase):
     """Test the dosage commandline client."""
 
-    def setUp(self):
-        # create a temporary directory for images
-        self.tmpdir = tempfile.mkdtemp()
-
-    def tearDown(self):
-        shutil.rmtree(self.tmpdir)
-
-    def test_list_comics(self):
+    def test_dosage(self):
+        # list comics
         for option in ("-l", "--list", "--singlelist"):
             run_with_options([option])
-
-    def test_version(self):
+        # display version
         run_with_options(["--version"])
-
-    def test_help(self):
+        # display help
         for option in ("-h", "--help"):
             run_with_options([option])
         # module help
-        run_with_options(["-m", "calvinandhobbes"])
-
-    def test_error(self):
+        run_with_options(["-m", "xkcd"])
         # no comics specified
         self.assertRaises(OSError, run_with_options, [])
         # unknown option
         self.assertRaises(OSError, run_with_options, ['--imadoofus'])
         # multiple comics match
         self.assertRaises(OSError, run_with_options, ['Garfield'])
-
-    def test_fetch_html(self):
-        run_with_options(["-n", "2", "-v", "-b", self.tmpdir, "-o", "html", "-o", "rss", "calvinandhobbes"])
-
-    def test_fetch_rss(self):
-        run_with_options(["--numstrips", "2", "--baseurl", "bla", "--basepath", self.tmpdir, "--output", "rss", "--output", "html", "--adult", "sexyloser"])
-
-    def test_fetch_indexed(self):
-        run_with_options(["-n", "2", "-v", "-b", self.tmpdir, "calvinandhobbes:2012/02/02"])
+        # create a temporary directory for images
+        tmpdir = tempfile.mkdtemp()
+        try:
+            # fetch html and rss
+            run_with_options(["-n", "2", "-v", "-b", tmpdir, "-o", "html", "-o", "rss", "xkcd"])
+        finally:
+            shutil.rmtree(tmpdir)
+        # create a temporary directory for images
+        tmpdir = tempfile.mkdtemp()
+        try:
+            # fetch html and rss 2
+            run_with_options(["--numstrips", "2", "--baseurl", "bla", "--basepath", tmpdir, "--output", "rss", "--output", "html", "--adult", "sexyloser"])
+        finally:
+            shutil.rmtree(tmpdir)
+        # create a temporary directory for images
+        tmpdir = tempfile.mkdtemp()
+        try:
+            # fetch indexed
+            run_with_options(["-n", "2", "-v", "-b", tmpdir, "xkcd:303"])
+        finally:
+            shutil.rmtree(tmpdir)

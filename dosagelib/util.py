@@ -1,15 +1,15 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2013 Bastian Kleineidam
+# Copyright (C) 2012-2014 Bastian Kleineidam
 from __future__ import division, print_function
 try:
     from urllib.parse import quote as url_quote, unquote as url_unquote
 except ImportError:
     from urllib import quote as url_quote, unquote as url_unquote
 try:
-    from urllib.parse import urlparse, urlunparse, urljoin, urlsplit
+    from urllib.parse import urlparse, urlunparse, urlsplit
 except ImportError:
-    from urlparse import urlparse, urlunparse, urljoin, urlsplit
+    from urlparse import urlparse, urlunparse, urlsplit
 try:
     from urllib import robotparser
 except ImportError:
@@ -30,7 +30,6 @@ except ImportError:
 from .decorators import memoized
 from .output import out
 from .configuration import UserAgent, AppName, App, SupportUrl
-from .languages import Iso2Language
 
 # Maximum content size for HTML pages
 MaxContentBytes = 1024 * 1024 * 2 # 2 MB
@@ -176,8 +175,6 @@ def case_insensitive_re(name):
     return "".join("[%s%s]" % (c.lower(), c.upper()) for c in name)
 
 
-baseSearch = re.compile(tagre("base", "href", '([^"]*)'))
-
 def isValidPageContent(data):
     """Check if page content is empty or has error messages."""
     # The python requests library sometimes returns empty data.
@@ -203,14 +200,7 @@ def getPageContent(url, session, max_content_bytes=MaxContentBytes):
     if not isValidPageContent(data):
         raise ValueError("Got invalid page content from %s: %r" % (url, data))
     out.debug(u"Got page content %r" % data, level=3)
-    # determine base URL
-    baseUrl = None
-    match = baseSearch.search(data)
-    if match:
-        baseUrl = match.group(1)
-    else:
-        baseUrl = url
-    return data, baseUrl
+    return data
 
 
 def getImageObject(url, referrer, session, max_content_bytes=MaxImageBytes):
@@ -226,39 +216,16 @@ def makeSequence(item):
     return (item,)
 
 
-def fetchUrls(url, data, baseUrl, urlSearch):
-    """Search all entries for given URL pattern(s) in a HTML page."""
-    searchUrls = []
-    searches = makeSequence(urlSearch)
-    for search in searches:
-        for match in search.finditer(data):
-            searchUrl = match.group(1)
-            if not searchUrl:
-                raise ValueError("Pattern %s matched empty URL at %s." % (search.pattern, url))
-            out.debug(u'matched URL %r with pattern %s' % (searchUrl, search.pattern))
-            searchUrls.append(normaliseURL(urljoin(baseUrl, searchUrl)))
-        if searchUrls:
-            # do not search other links if one pattern matched
-            break
-    if not searchUrls:
-        patterns = [x.pattern for x in searches]
-        raise ValueError("Patterns %s not found at URL %s." % (patterns, url))
-    return searchUrls
-
-
-def fetchUrl(url, data, baseUrl, urlSearch):
-    """Search first URL entry for given URL pattern in a HTML page."""
-    return fetchUrls(url, data, baseUrl, urlSearch)[0]
-
-
-def fetchText(url, data, textSearch):
-    """Search text entry for given text pattern in a HTML page."""#
-    match = textSearch.search(data)
-    if match:
-        text = match.group(1)
-        out.debug(u'matched text %r with pattern %s' % (text, textSearch.pattern))
-        return text
-    raise ValueError("Pattern %s not found at URL %s." % (textSearch.pattern, url))
+def prettyMatcherList(things):
+    """Try to construct a nicely-formatted string for a list of matcher
+    objects. Those may be compiled regular expressions or strings..."""
+    norm = []
+    for x in makeSequence(things):
+        if hasattr(x, 'pattern'):
+            norm.append(x.pattern)
+        else:
+            norm.append(x)
+    return "('%s')" % "', '".join(norm)
 
 
 _htmlparser = HTMLParser()
@@ -270,10 +237,12 @@ def unescape(text):
 _nopathquote_chars = "-;/=,~*+()@!"
 
 def normaliseURL(url):
-    """Removes any leading empty segments to avoid breaking urllib2; also replaces
-    HTML entities and character references.
+    """Normalising
+    - strips and leading or trailing whitespace,
+    - replaces HTML entities and character references,
+    - removes any leading empty segments to avoid breaking urllib2.
     """
-    url = unicode_safe(url)
+    url = unicode_safe(url).strip()
     # XXX: brutal hack
     url = unescape(url)
 
@@ -303,7 +272,7 @@ def check_robotstxt(url, session):
     roboturl = get_roboturl(url)
     rp = get_robotstxt_parser(roboturl, session=session)
     if not rp.can_fetch(UserAgent, str(url)):
-        raise IOError("%s is disallowed by robots.txt" % url)
+        raise IOError("%s is disallowed by %s" % (url, roboturl))
 
 
 @memoized
@@ -327,10 +296,10 @@ def get_robotstxt_parser(url, session=None):
 
 def urlopen(url, session, referrer=None, max_content_bytes=None,
             timeout=ConnectionTimeoutSecs, raise_for_status=True,
-            stream=False, data=None):
+            stream=False, data=None, useragent=UserAgent):
     """Open an URL and return the response object."""
     out.debug(u'Open URL %s' % url)
-    headers = {'User-Agent': UserAgent}
+    headers = {'User-Agent': useragent}
     if referrer:
         headers['Referer'] = referrer
     out.debug(u'Sending headers %s' % headers, level=3)
@@ -545,6 +514,37 @@ def getFilename(name):
     return name
 
 
+def getExistingFile(name, max_suffix=1000):
+    """Add filename suffix until file exists
+    @return: filename if file is found
+    @raise: ValueError if maximum suffix number is reached while searching
+    """
+    num = 1
+    stem, ext = os.path.splitext(name)
+    filename = name
+    while not os.path.exists(filename):
+        suffix = "-%d" % num
+        filename = stem + suffix + ext
+        num += 1
+        if num >= max_suffix:
+            raise ValueError("No file %r found" % name)
+    return filename
+
+
+def getNonexistingFile(name):
+    """Add filename suffix until file not exists
+    @return: filename
+    """
+    num = 1
+    stem, ext = os.path.splitext(name)
+    filename = name
+    while os.path.exists(filename):
+        suffix = "-%d" % num
+        filename = stem + suffix + ext
+        num += 1
+    return filename
+
+
 def strlimit (s, length=72):
     """If the length of the string exceeds the given limit, it will be cut
     off and three dots will be appended.
@@ -561,11 +561,6 @@ def strlimit (s, length=72):
     if length == 0:
         return ""
     return "%s..." % s[:length]
-
-
-def getLangName(code):
-    """Get name of language specified by ISO 693-1 code."""
-    return Iso2Language[code]
 
 
 def writeFile(filename, content, encoding=None):

@@ -1,11 +1,11 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2013 Bastian Kleineidam
+# Copyright (C) 2012-2014 Bastian Kleineidam
 
 from re import compile, escape
 
 from ..util import tagre
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 
 
@@ -18,7 +18,6 @@ class BackwaterPlanet(_BasicScraper):
 
 
 class BadassMuthas(_BasicScraper):
-    description = u'Nobody wants to work for a living. Get yourself some super-powers and come ill with us. Full color update every Friday.'
     url = 'http://badassmuthas.com/pages/comic.php'
     stripUrl = url + '?%s'
     firstStripUrl = stripUrl % '1'
@@ -37,14 +36,13 @@ class BadMachinery(_BasicScraper):
 
 
 class Bardsworth(_BasicScraper):
-    description = u'Bardsworth - Magic, Mischief, and Cookies'
     url = 'http://www.bardsworth.com/'
     rurl = escape(url)
-    stripUrl = url + '?p=%s'
+    stripUrl = url + '?comic=%s'
     firstStripUrl = stripUrl % '750'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
-    help = 'Index format: nnn'
+    help = 'Index format: stripname'
 
 
 class Baroquen(_BasicScraper):
@@ -67,8 +65,27 @@ class Bearmageddon(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
+class Beetlebum(_BasicScraper):
+    url = 'http://blog.beetlebum.de/'
+    rurl = escape(url)
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '2006/03/10/quiz-fur-ruskiphile'
+    starter = indirectStarter(url, compile(tagre('a', 'href', r'(%s\d{4}/\d{2}/\d{2}/[^"]+)' % rurl, after='bookmark')))
+    multipleImagesPerStrip = True
+    imageSearch = compile(tagre('img', 'src', r'(http://blog\.beetlebum\.de/wp-content/uploads/[^"]+)'))
+    prevSearch = compile(tagre('a', 'href', r'(%s\d{4}/\d{2}/\d{2}/[^"]*)' % rurl, after='prev'))
+    help = 'Index format: yyyy/mm/dd/striptitle'
+    lang = 'de'
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        indexes = tuple(pageUrl.rstrip('/').split('/')[-4:])
+        name = '%s-%s-%s-%s' % indexes
+        name = name + '_' + imageUrl.split( '/' )[-1]
+        return name
+
+
 class BetterDays(_BasicScraper):
-    description = u'Better Days'
     url = 'http://jaynaylor.com/betterdays/'
     stripUrl = url + 'archives/%s.html'
     firstStripUrl = stripUrl % '2003/04/post-2'
@@ -78,7 +95,6 @@ class BetterDays(_BasicScraper):
 
 
 class BetweenFailures(_BasicScraper):
-    description = u'Between Failures'
     url = 'http://betweenfailures.com/'
     rurl = escape(url)
     stripUrl = url + 'comics1/%s'
@@ -88,7 +104,6 @@ class BetweenFailures(_BasicScraper):
 
 
 class BigFatWhale(_BasicScraper):
-    description = u'A weekly comic strip for those who are not dumb.'
     url = 'http://www.bigfatwhale.com/'
     stripUrl = url + 'archives/bfw_%s.htm'
     imageSearch = compile(tagre("img", "src", r'(archives/bfw_[^"]+|bfw_[^"]+)'))
@@ -97,7 +112,6 @@ class BigFatWhale(_BasicScraper):
 
 
 class BiggerThanCheeses(_BasicScraper):
-    description = u'Bigger Than Cheeses - My webcomic will knife fight your webcomic'
     url = 'http://www.biggercheese.com/'
     stripUrl = url + 'index.php?comic=%s'
     firstStripUrl = stripUrl % '1'
@@ -107,7 +121,6 @@ class BiggerThanCheeses(_BasicScraper):
 
 
 class BillyTheDunce(_BasicScraper):
-    description = u"Billy the Dunce: A webcomic about some genius kids, some supernatural creatures, and one dumb kid who's stuck with them. Like Goonies, but with more Lovecraft."
     url = 'http://www.duncepress.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -118,7 +131,6 @@ class BillyTheDunce(_BasicScraper):
 
 
 class BizarreUprising(_BasicScraper):
-    description = u"Bizarre Uprising - Manga that's not just good, it's good for you!"
     url = 'http://www.bizarreuprising.com/'
     stripUrl = url + 'view/%s'
     firstStripUrl = stripUrl % '1/awakening-splash'
@@ -127,8 +139,28 @@ class BizarreUprising(_BasicScraper):
     help = 'Index format: n/name'
 
 
+class BladeKitten(_ParserScraper):
+    url = 'http://www.bladekitten.com/'
+    stripUrl = url + 'comics/blade-kitten/%s/page:%s'
+    firstStripUrl = stripUrl % ('1','1')
+    imageSearch = '//img[@class="comic_page_image"]'
+    prevSearch = '//span[@class="comic_nav_prev"]//a'
+    textSearch = '//div[@class="comic_comment_inner"]//p'
+    textOptional = True
+    help = 'Index format: chapter-page'
+    starter = indirectStarter(url, '//h4//a[contains(@href, "/comics/")]')
+
+    def getIndexStripUrl(self, index):
+        return self.stripUrl % tuple(index.split('-'))
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        filename = imageUrl.rsplit('/', 1)[1]
+        _, chapter, page = pageUrl.rsplit('/', 2)
+        page = page.split(':')[1]
+        return "bladekitten-%02i-%02i-%s" % (int(chapter), int(page), filename)
+
 class BlankIt(_BasicScraper):
-    description = u'An absurd, insane, and delightful webcomic from Aric McKeown and Lem Pew.'
     url = 'http://blankitcomics.com/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '0001'
@@ -152,7 +184,6 @@ class Blip(_BasicScraper):
 
 
 class BloodBound(_BasicScraper):
-    description = u'Demonic Vampire Hotness'
     adult = True
     url = 'http://bloodboundcomic.com/'
     rurl = escape(url)
@@ -164,7 +195,6 @@ class BloodBound(_BasicScraper):
 
 
 class BMovieComic(_BasicScraper):
-    description = u"A group of unlikely heroes tackles monsters, mutants and aliens from Hollywood's past and present. See what happens. Or they'll say you haven't seen it."
     url = 'http://www.bmoviecomic.com/'
     stripUrl = url + '?cid=%s'
     firstStripUrl = stripUrl % '8'
@@ -174,7 +204,6 @@ class BMovieComic(_BasicScraper):
 
 
 class BobWhite(_BasicScraper):
-    description = u'Bobwhite by Magnolia Porter'
     url = 'http://www.bobwhitecomics.com/'
     rurl = escape(url)
     stripUrl = url + '?webcomic_post=%s'
@@ -185,7 +214,6 @@ class BobWhite(_BasicScraper):
 
 
 class BookOfBiff(_BasicScraper):
-    description = u'The Book of Biff - new adventures every monday through friday'
     url = 'http://thebookofbiff.com/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2006/01/02/4'
@@ -205,7 +233,6 @@ class BoredAndEvil(_BasicScraper):
 
 
 class BoxerHockey(_BasicScraper):
-    description = u'Boxer Hockey'
     url = 'http://boxerhockey.fireball20xl.com/'
     stripUrl = url + '?id=%s'
     firstStripUrl = stripUrl % '56'
@@ -221,7 +248,6 @@ class BoxerHockey(_BasicScraper):
 
 
 class BoyOnAStickAndSlither(_BasicScraper):
-    description = u'A comic about killer bees, time travel, ethics and despair.'
     url = 'http://www.boasas.com/'
     stripUrl = url + 'page/%s'
     firstStripUrl = stripUrl % '2'
@@ -235,7 +261,6 @@ class BoyOnAStickAndSlither(_BasicScraper):
 
 
 class BratHalla(_BasicScraper):
-    description = u'Norse mythology webcomic where young Thor, Loki, Balder, Hod and more face off against grade school and make an old man out of their immortal dad Odin'
     url = 'http://brat-halla.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '1-balder-dash'
@@ -245,7 +270,6 @@ class BratHalla(_BasicScraper):
 
 
 class BrentalFloss(_BasicScraper):
-    description = u'brentalfloss the comic :: Off To The Races'
     url = 'http://brentalflossthecomic.com/'
     stripUrl = url + '?id=%s'
     fristStripUrl = stripUrl % '1'
@@ -295,7 +319,6 @@ class _BringBackRoomies(_BasicScraper):
 
 
 class Brink(_BasicScraper):
-    description = u"BRINK - You're not as crazy as you think you are"
     url = 'http://paperfangs.com/brink/'
     rurl = escape(url)
     stripUrl = url + '?p=%s'
@@ -306,7 +329,6 @@ class Brink(_BasicScraper):
 
 
 class BrightlyWound(_BasicScraper):
-    description = u'A webcomic of physics, astronomy, math, and grammar.'
     baseUrl = 'http://www.brightlywound.com/'
     url = baseUrl + '?comic=137'
     stripUrl = baseUrl + '?comic=%s'
@@ -317,7 +339,6 @@ class BrightlyWound(_BasicScraper):
 
 
 class BroodHollow(_BasicScraper):
-    description = u'Broodhollow - A MWF cosmic horror adventure comic by Kris Straub'
     url = 'http://broodhollow.chainsawsuit.com/'
     rurl = escape(url)
     stripUrl = url + 'page/%s/'
@@ -347,7 +368,6 @@ class ButterSafe(_BasicScraper):
 
 
 class ButternutSquash(_BasicScraper):
-    description = u'ButterNutSquash - by P\xe9rez & Coughler'
     url = 'http://www.butternutsquash.net/'
     rurl = escape(url)
     stripUrl = url + '%s/'

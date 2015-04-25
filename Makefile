@@ -1,19 +1,19 @@
 # This Makefile is only used by developers.
+# See doc/install.txt on how to install dosage
 PYTHON:=python
 VERSION:=$(shell $(PYTHON) setup.py --version)
 MAINTAINER:=$(shell $(PYTHON) setup.py --maintainer)
 AUTHOR:=$(shell $(PYTHON) setup.py --author)
 APPNAME:=$(shell $(PYTHON) setup.py --name)
-LAPPNAME:=$(shell echo $(APPNAME)|tr "[A-Z]" "[a-z]")
-ARCHIVE_SOURCE:=$(LAPPNAME)-$(VERSION).tar.gz
-ARCHIVE_WIN32:=$(LAPPNAME)-$(VERSION).exe
+ARCHIVE_SOURCE:=$(APPNAME)-$(VERSION).tar.gz
+ARCHIVE_WIN32:=$(APPNAME)-$(VERSION).exe
 GITUSER:=wummel
-GITREPO:=$(LAPPNAME)
-WEBPAGE:=$(HOME)/public_html/dosage-webpage.git
+GITREPO:=$(APPNAME)
+HOMEPAGE:=$(HOME)/public_html/dosage-webpage.git
 WEBMETA:=doc/web/app.yaml
 DEBUILDDIR:=$(HOME)/projects/debian/official
-DEBORIGFILE:=$(DEBUILDDIR)/$(LAPPNAME)_$(VERSION).orig.tar.gz
-DEBPACKAGEDIR:=$(DEBUILDDIR)/$(LAPPNAME)-$(VERSION)
+DEBORIGFILE:=$(DEBUILDDIR)/$(APPNAME)_$(VERSION).orig.tar.gz
+DEBPACKAGEDIR:=$(DEBUILDDIR)/$(APPNAME)-$(VERSION)
 # Default pytest options
 # Note that using -n silently swallows test creation exceptions like
 # import errors.
@@ -32,27 +32,33 @@ chmod:
 
 dist:
 	[ -d dist ] || mkdir dist
-	git archive --format=tar --prefix=$(LAPPNAME)-$(VERSION)/ HEAD | gzip -9 > dist/$(ARCHIVE_SOURCE)
+	$(PYTHON) setup.py sdist --formats=tar
+	gzip --best dist/$(APPNAME)-$(VERSION).tar
 	[ ! -f ../$(ARCHIVE_WIN32) ] || cp ../$(ARCHIVE_WIN32) dist
 
 sign:
 	[ -f dist/$(ARCHIVE_SOURCE).asc ] || gpg --detach-sign --armor dist/$(ARCHIVE_SOURCE)
 	[ -f dist/$(ARCHIVE_WIN32).asc ] || gpg --detach-sign --armor dist/$(ARCHIVE_WIN32)
 
-upload:
-	cp dist/$(ARCHIVE_SOURCE) dist/$(ARCHIVE_WIN32) \
-	  dist/$(ARCHIVE_SOURCE).asc dist/$(ARCHIVE_WIN32).asc \
-	  $(WEBPAGE)/dist
+upload:	upload_source upload_binary
 
-homepage:
+upload_source:
+	twine upload dist/$(ARCHIVE_SOURCE) dist/$(ARCHIVE_SOURCE).asc
+
+upload_binary:
+	cp dist/$(ARCHIVE_WIN32) dist/$(ARCHIVE_WIN32).asc \
+	  $(HOMEPAGE)/dist
+
+update_webmeta:
 # update metadata
 	@echo "version: \"$(VERSION)\"" > $(WEBMETA)
 	@echo "name: \"$(APPNAME)\"" >> $(WEBMETA)
-	@echo "lname: \"$(LAPPNAME)\"" >> $(WEBMETA)
 	@echo "maintainer: \"$(MAINTAINER)\"" >> $(WEBMETA)
 	@echo "author: \"$(AUTHOR)\"" >> $(WEBMETA)
-	git add doc/web/app.yaml
+	git add $(WEBMETA)
 	-git commit -m "Updated webpage meta info"
+
+homepage: update_webmeta
 # update documentation and release website
 	$(MAKE) -C doc
 	$(MAKE) -C doc/web release
@@ -67,8 +73,6 @@ tag:
 register:
 	@echo "Register at Python Package Index..."
 	$(PYTHON) setup.py register
-	@echo "Submit to freecode..."
-	freecode-submit < $(LAPPNAME).freecode
 
 releasecheck:
 	git checkout master
@@ -82,10 +86,7 @@ releasecheck:
 	  echo "Missing WIN32 distribution archive at ../$(ARCHIVE_WIN32)"; \
 	  false; \
 	fi
-	@if ! grep "Version: $(VERSION)" $(LAPPNAME).freecode > /dev/null; then \
-	  echo "Could not release: edit $(LAPPNAME).freecode version"; false; \
-	fi
-	$(PYTHON) setup.py check --restructuredtext
+#	$(PYTHON) setup.py check --restructuredtext
 	git checkout debian
 	@if ! head -1 debian/changelog | grep "$(VERSION)" > /dev/null; then \
 	  echo "Could not release: update debian/changelog version"; false; \
@@ -124,7 +125,7 @@ clean:
 	rm -rf build dist
 
 distclean: clean
-	rm -rf $(APPNAME).egg-info $(LAPPNAME).prof test.sh Comics
+	rm -rf $(APPNAME).egg-info $(APPNAME).prof test.sh Comics
 	rm -f _$(APPNAME)_configdata.py MANIFEST
 
 localbuild:
@@ -141,7 +142,7 @@ deb:
 # To build a local .deb package, use:
 # $ sudo apt-get build-dep dosage; apt-get source dosage; cd dosage-*; debuild binary
 	[ -f $(DEBORIGFILE) ] || cp dist/$(ARCHIVE_SOURCE) $(DEBORIGFILE)
-	sed -i -e 's/VERSION_$(LAPPNAME):=.*/VERSION_$(LAPPNAME):=$(VERSION)/' $(DEBUILDDIR)/$(LAPPNAME).mak
+	sed -i -e 's/VERSION_$(APPNAME):=.*/VERSION_$(APPNAME):=$(VERSION)/' $(DEBUILDDIR)/$(APPNAME).mak
 	[ -d $(DEBPACKAGEDIR) ] || (cd $(DEBUILDDIR); \
 	  patool extract $(DEBORIGFILE); \
 	  cd $(CURDIR); \
@@ -149,7 +150,7 @@ deb:
 	  cp -r debian $(DEBPACKAGEDIR); \
 	  rm -f $(DEBPACKAGEDIR)/debian/.gitignore; \
 	  git checkout master)
-	$(MAKE) -C $(DEBUILDDIR) $(LAPPNAME)_clean $(LAPPNAME)
+	$(MAKE) -C $(DEBUILDDIR) $(APPNAME)_clean $(APPNAME)
 
 update-copyright:
 # update-copyright is a local tool which updates the copyright year for each

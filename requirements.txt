@@ -1,4 +1,8 @@
 # required:
 requests
+pycountry
 # optional:
 argcomplete
+lxml
+cssselect
+Pillow

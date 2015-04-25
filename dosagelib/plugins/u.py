@@ -1,12 +1,21 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2013 Bastian Kleineidam
+# Copyright (C) 2012-2014 Bastian Kleineidam
 
 from re import compile, escape
 
 from ..scraper import _BasicScraper
 from ..helpers import bounceStarter, indirectStarter
 from ..util import getQueryParams, tagre
+
+class Underling(_BasicScraper):
+    url = 'http://underlingcomic.com/'
+    stripUrl = url
+    rurl = escape(url)
+    firstStripUrl = stripUrl + 'page-one/'
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]*)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)', after = r'class="[^"]*navi-prev'))
+    help = 'Index format: nnn'
 
 
 class Undertow(_BasicScraper):
@@ -20,7 +29,6 @@ class Undertow(_BasicScraper):
 
 
 class UnicornJelly(_BasicScraper):
-    description = u'UNICORN JELLY anime manga comic strip by Jennifer Diane Reitz'
     baseUrl = 'http://unicornjelly.com/'
     url = baseUrl + 'uni666.html'
     stripUrl = baseUrl + 'uni%s.html'
@@ -31,7 +39,6 @@ class UnicornJelly(_BasicScraper):
 
 
 class Unsounded(_BasicScraper):
-    description = u'Some dead men tell tales, and some little girls have tails...'
     url = 'http://www.casualvillain.com/Unsounded/'
     stripUrl = url + 'comic/ch%s/ch%s_%s.html'
     firstStripUrl = stripUrl % ('01', '01', '01')
