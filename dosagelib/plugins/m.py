@@ -42,13 +42,13 @@ class MagickChicks(_BasicScraper):
     help = 'Index format: name'
 
 
-class ManlyGuysDoingManlyThings(_BasicScraper):
+class ManlyGuysDoingManlyThings(_ParserScraper):
     url = 'http://thepunchlineismachismo.com/'
-    rurl = escape(url)
     stripUrl = url + 'archives/comic/%s'
     firstStripUrl = stripUrl % '02222010'
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/\d+-\d+-\d+[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%sarchives/comic/[^"]+)' % rurl, after="previous"))
+    css = True
+    imageSearch = "#comic img"
+    prevSearch = ".comic-nav-previous"
     help = 'Index format: ddmmyyyy'
 
 
