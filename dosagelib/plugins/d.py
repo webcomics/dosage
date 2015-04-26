@@ -4,7 +4,7 @@
 
 from re import compile, escape
 
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter
 from ..util import tagre
 
@@ -197,6 +197,16 @@ class DMFA(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'((?:Comics/)?Vol[^"]+)')+
       tagre("img", "src", r'(?:../)?Images/comicprev\.gif'))
     help = 'Index format: nnn (normally, some specials)'
+
+
+class DoctorCat(_ParserScraper):
+    url = "http://doctorcatmd.com/"
+    stripUrl = url + "comic/%s"
+    firstStripUrl = stripUrl % "doctor-cat"
+    css = True
+    imageSearch = '#comic img'
+    prevSearch = '.navi-prev'
+    help = 'Index format: stripname'
 
 
 class DoemainOfOurOwn(_BasicScraper):
