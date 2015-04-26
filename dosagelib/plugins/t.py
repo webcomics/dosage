@@ -48,7 +48,6 @@ class TheDreamlandChronicles(_BasicScraper):
 
 class TheGamerCat(_ParserScraper):
     url = "http://www.thegamercat.com/"
-    rurl = escape(url)
     stripUrl = url + "comic/%s/"
     firstStripUrl = stripUrl % "06102011"
     css = True
