@@ -23,6 +23,7 @@ class MadamAndEve(_BasicScraper):
     imageSearch = compile(tagre('img', 'src', r'(/cartoons/me\d{6}\.(gif|jpg))'))
     multipleImagesPerStrip = True
 
+
 class Magellan(_ParserScraper):
     description = u'A comic strip about Superheroes and Not-Superheroes'
     url = 'http://magellanverse.com/'
@@ -50,6 +51,15 @@ class ManlyGuysDoingManlyThings(_ParserScraper):
     imageSearch = "#comic img"
     prevSearch = ".comic-nav-previous"
     help = 'Index format: ddmmyyyy'
+
+
+class MareInternum(_ParserScraper):
+    description = u'Mare Internum is an online science fiction graphic novel about the isolated inhabitants of the planet Mars. '
+    url = 'http://marecomic.com/'
+    stripUrl = url + 'comics/ch%s'
+    imageSearch = '//div[@id="comic"]//img'
+    prevSearch = '//a[@class="comic-nav-base comic-nav-previous"]'
+    help = 'Index format: <chapter>-page-<pagenum>'
 
 
 class Marilith(_BasicScraper):
