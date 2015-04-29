@@ -22,7 +22,7 @@ class SabrinaOnline(_BasicScraper):
     def starter(cls):
         """Pick last one in a list of archive pages."""
         archive = cls.url + 'archive.html'
-        data = getPageContent(archive, cls.session)[0]
+        data = getPageContent(archive, cls.session)
         search = compile(tagre("a", "href", r"(\d\d\d\d-\d\d.html)"))
         archivepages = search.findall(data)
         return cls.url + archivepages[-1]
@@ -87,9 +87,9 @@ class ScenesFromAMultiverse(_BasicScraper):
     firstStripUrl = stripUrl % '2010/06/14/parenthood'
     imageSearch = (
       compile(tagre("div", "id", "comic") + r"\s*" +
-        tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl)),
+        tagre("img", "src", r'(.*amultiverse.com/wp-content/uploads/\d+/\d+/[^"]+)')),
       compile(tagre("div", "id", "comic") + r"\s*" + tagre("a", "href", r'[^"]*') +
-        tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl)),
+        tagre("img", "src", r'(.*amultiverse.com/wp-content/uploads/\d+/\d+/[^"]+)')),
     )
     prevSearch = compile(tagre("a", "href", r'(%scomic/\d+\d+/\d+/\d+/[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/stripname'
@@ -279,14 +279,19 @@ class SluggyFreelance(_BasicScraper):
     help = 'Index format: yymmdd'
 
 
-class SMBC(_BasicScraper):
+class SMBC(_ParserScraper):
     url = 'http://www.smbc-comics.com/'
     rurl = escape(url)
     stripUrl = url + '?id=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r"(%scomics/\d{8}(?:\w2?|-\d)?\.\w{3})\s*" % rurl, quote="'"))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)#comic', after="backRollover"))
+    imageSearch = '//img[@id="comic"]'
+    prevSearch = '//a[@class="prev"]'
     help = 'Index format: nnnn'
+
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        """Remove random noise from name."""
+        return imageUrl.rsplit('-', 1)[-1]
 
     def shouldSkipUrl(self, url, data):
         """Skip promo or missing update pages."""
@@ -437,13 +442,13 @@ class SPQRBlues(_BasicScraper):
     help = 'Index format: number'
 
 
-class StandStillStaySilent(_BasicScraper):
+class StandStillStaySilent(_ParserScraper):
     url = 'http://www.sssscomic.com/comic.php'
     rurl = escape(url)
     stripUrl = url + '?page=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(comicpages/[^"]+)', before="comicnormal"))
-    prevSearch = compile(tagre("a", "href", r"([^']+)", quote="'") + tagre("div", "id", r'navprev'))
+    imageSearch = '//img[@class="comicnormal"]'
+    prevSearch = '//a//div[@id="navprev"]'
     help = 'Index Format: number'
 
 
