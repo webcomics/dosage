@@ -3,7 +3,7 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 
 from re import compile, escape
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
 
@@ -68,15 +68,13 @@ class OkCancel(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
-class OmakeTheater(_BasicScraper):
-    url = 'http://omaketheater.com/'
-    rurl = escape(url)
-    stripUrl = url + 'comic/%s/'
+class OmakeTheater(_ParserScraper):
+    url = 'http://omaketheater.com/comics/'
+    stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(http://media\.omaketheater\.com/4koma/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(%scomic/\d+/)' % rurl, after="prev"))
-    starter = indirectStarter(url,
-        compile(tagre("a", "href", r'(%scomic/\d+/)' % rurl)))
+    css = True
+    imageSearch = ".comicImage img"
+    prevSearch = ".previous a"
     help = 'Index format: number (unpadded)'
 
 

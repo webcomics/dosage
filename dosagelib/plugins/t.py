@@ -3,7 +3,7 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 
 from re import compile, escape, IGNORECASE
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
 
@@ -46,14 +46,14 @@ class TheDreamlandChronicles(_BasicScraper):
             bp[2] = bp[2][:-1]
         return "%s-%s-%s.%s" % (bp[0], bp[1], bp[2], ext)
 
-class TheGamerCat(_BasicScraper):
-    url = 'http://www.thegamercat.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2011/06/06102011'
-    imageSearch = compile(tagre("img", "src", r'(%swordpress/comics/[^"/]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/[^"/]+/)' % rurl , after="navi navi-prev"))
-    help = 'Index format: yyyy/mm/mmddyyyy'
+class TheGamerCat(_ParserScraper):
+    url = "http://www.thegamercat.com/"
+    stripUrl = url + "comic/%s/"
+    firstStripUrl = stripUrl % "06102011"
+    css = True
+    imageSearch = '#comic img'
+    prevSearch = '.comic-nav-previous'
+    help = 'Index format: stripname'
 
 
 class TheGentlemansArmchair(_BasicScraper):
