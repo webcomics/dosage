@@ -88,11 +88,11 @@ class OnTheEdge(_BasicScraper):
     help = 'Index format: nnn (unpadded)'
 
 
-class OnTheFasttrack(_BasicScraper):
+class OnTheFastrack(_BasicScraper):
     url = 'http://onthefastrack.com/'
     stripUrl = url + 'comics/%s'
     firstStripUrl = stripUrl % 'november-13-2000'
-    imageSearch = compile(tagre("img", "src", r'(http://safr\.kingfeatures\.com/idn/test/zone/xml/content\.php\?file=.+?)'))
+    imageSearch = compile(r'(http://safr\.kingfeatures\.com/idn/cnfeed/zone/js/content\.php\?file=.+)"')
     prevSearch = compile(r'id="previouscomic" class="button white"><a href="(%scomics/[a-z0-9-]+/)"' % url)
     help = 'Index format: monthname-dd-yyyy'
     
