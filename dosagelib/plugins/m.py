@@ -85,6 +85,13 @@ class MarriedToTheSea(_BasicScraper):
         unused, date, filename = imageUrl.rsplit('/', 2)
         return '%s-%s' % (date, filename)
 
+class MaxOveracts(_ParserScraper):
+    url = 'http://occasionalcomics.com/'
+    stripUrl = url + '%s/'
+    css = True
+    imageSearch = '#comic img'
+    prevSearch = '.nav-previous > a'
+    help = 'Index format: nnn'
 
 class Meek(_BasicScraper):
     url = 'http://www.meekcomic.com/'
