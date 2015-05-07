@@ -149,6 +149,14 @@ class Misfile(_BasicScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
+class Moonsticks(_ParserScraper):
+    url = "http://moonsticks.org/"
+    stripUrl = url
+    imageSearch = "//div[@class='entry']//img"
+    prevSearch = u"//a[text()='« Previous']"
+    help = 'Index format: stripname'
+
+
 class MonsieurLeChien(_BasicScraper):
     url = 'http://www.monsieur-le-chien.fr/'
     stripUrl = url + 'index.php?planche=%s'
