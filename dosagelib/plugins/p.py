@@ -59,11 +59,11 @@ class PastelDefender(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class PebbleVersion(_BasicScraper):
+class PebbleVersion(_ParserScraper):
     url = 'http://www.pebbleversion.com/'
     stripUrl = url + 'Archives/Strip%s.html'
-    imageSearch = compile(r'<img src="(ComicStrips/.+?|../ComicStrips/.+?)"')
-    prevSearch = compile(r'<a href="((?!.+?">First Comic)Archives/Strip.+?|(?=.+?">Previous Comic)(?!.+?">First Comic)Strip.+?)"')
+    imageSearch = "//table/tr[2]//img"
+    prevSearch = '//a[text()="Previous Comic"]'
     help = 'Index format: n (unpadded)'
 
 
