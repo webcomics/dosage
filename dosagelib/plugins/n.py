@@ -3,8 +3,8 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 
 from re import compile, escape
-from ..scraper import _BasicScraper
-from ..helpers import indirectStarter, bounceStarter
+from ..scraper import _BasicScraper, _ParserScraper
+from ..helpers import indirectStarter
 from ..util import tagre
 
 
@@ -101,17 +101,12 @@ class NekkoAndJoruba(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class NekoTheKitty(_BasicScraper):
+class NekoTheKitty(_ParserScraper):
     url = 'http://www.nekothekitty.net/'
-    rurl = escape(url)
     stripUrl = url + 'comics/%s'
     firstStripUrl = stripUrl % '936393/001-video-games'
-    starter = bounceStarter(url, compile(tagre("a", "href", r'(%scomics/[^"]+)' % rurl) +
-      tagre("img", "src", r'%sfiles/smallnext\.png' % rurl)))
-    imageSearch = compile(tagre("img", "src", r'(http://(?:img\d+|www)\.smackjeeves\.com/images/uploaded/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(%scomics/[^"]+)' % rurl) +
-      tagre("img", "src", r'%sfiles/smallprev\.png' % rurl))
-    help = 'Index format: n/n-name'
+    imageSearch = '//a[@id="comic_image"]/img'
+    prevSearch = '//a[text()="<-"]'
 
 
 class NichtLustig(_BasicScraper):
