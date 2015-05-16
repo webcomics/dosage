@@ -149,11 +149,16 @@ def displayHelp(options):
 def displayComicHelp(scraperobj):
     """Print help for a comic."""
     orig_context = out.context
-    out.context = getScraperName(scraperobj)
+    out.context = scraperobj.getName()
     try:
         out.info(u"URL: " + scraperobj.url)
         if scraperobj.lang:
             out.info(u"Language: " + pycountry.languages.get(alpha2 = scraperobj.lang).name)
+        if scraperobj.adult:
+            out.info(u"Adult comic, use option --adult to fetch.")
+        disabled = scraperobj.getDisabledReasons()
+        if disabled:
+            out.info(u"Disabled: " + " ".join(disabled.values()))
         if scraperobj.help:
             for line in scraperobj.help.splitlines():
                 out.info(line)
@@ -181,7 +186,7 @@ def voteComic(scraperobj):
     """Vote for given comic scraper."""
     errors = 0
     orig_context = out.context
-    out.context = getScraperName(scraperobj)
+    out.context = scraperobj.getName()
     try:
         name = scraperobj.getName()
         answer = scraperobj.vote()
@@ -262,7 +267,7 @@ def doSingleList(scrapers, verbose=False):
         if verbose:
             displayComicHelp(scraperobj)
         else:
-            out.info(getScraperName(scraperobj, reasons=disabled))
+            out.info(getTaggedScraperName(scraperobj, reasons=disabled))
     return num, disabled
 
 
@@ -272,7 +277,7 @@ def doColumnList(scrapers):
     screenWidth = get_columns(sys.stdout)
     # limit name length so at least two columns are there
     limit = (screenWidth // 2) - 8
-    names = [getScraperName(scraperobj, limit=limit, reasons=disabled) for scraperobj in scrapers]
+    names = [getTaggedScraperName(scraperobj, limit=limit, reasons=disabled) for scraperobj in scrapers]
     num = len(names)
     maxlen = max(len(name) for name in names)
     namesPerLine = max(screenWidth // (maxlen + 1), 1)
@@ -285,7 +290,7 @@ TAG_ADULT = "adult"
 TAG_LANG = "lang"
 TAG_DISABLED = "dis"
 
-def getScraperName(scraperobj, limit=None, reasons=None):
+def getTaggedScraperName(scraperobj, limit=None, reasons=None):
     """Get comic scraper name."""
     tags = []
     if scraperobj.adult:
@@ -293,7 +298,7 @@ def getScraperName(scraperobj, limit=None, reasons=None):
     if scraperobj.lang != "en":
         tags.append("%s:%s" % (TAG_LANG, scraperobj.lang))
     disabled = scraperobj.getDisabledReasons()
-    if disabled:
+    if disabled and reasons:
         reasons.update(disabled)
     for reason in disabled:
         tags.append("%s:%s" % (TAG_DISABLED, reason))
