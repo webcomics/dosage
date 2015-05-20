@@ -338,16 +338,6 @@ class BrightlyWound(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class BroodHollow(_ParserScraper):
-    url = 'http://broodhollow.chainsawsuit.com/'
-    stripUrl = url + 'page/%s/'
-    firstStripUrl = stripUrl % '2012/10/06/book-1-curious-little-thing'
-    css = True
-    imageSearch = "#comic img"
-    prevSearch = ".navi-prev"
-    help = 'Index format: yyyy/mm/dd/stripname'
-
-
 # XXX disallowed by robots.txt
 class _ButtercupFestival(_BasicScraper):
     url = 'http://www.buttercupfestival.com/'
