@@ -268,15 +268,6 @@ class CorydonCafe(_BasicScraper):
         return pageUrl.split('/')[-1].split('.')[0]
 
 
-class CourtingDisaster(_BasicScraper):
-    url = 'http://www.courting-disaster.com/'
-    stripUrl = url + 'archive/%s.html'
-    firstStripUrl = stripUrl % '20050112'
-    imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/archive/\d+\.html)') + tagre("img", "src", r'/images/previous\.gif'))
-    help = 'Index format: yyyymmdd'
-
-
 class CowboyJedi(_BasicScraper):
     url = 'http://www.cowboyjedi.com/'
     rurl = escape(url)
