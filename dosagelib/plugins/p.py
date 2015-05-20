@@ -8,16 +8,6 @@ from ..helpers import bounceStarter, queryNamer, indirectStarter
 from ..util import tagre
 
 
-class PandyLand(_BasicScraper):
-    url = 'http://pandyland.net/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch =  compile(tagre("a", "href", r'(%s\d+/)' % rurl, after="prev"))
-    help = 'Index format: number'
-
-
 class ParadigmShift(_BasicScraper):
     url = 'http://www.paradigmshiftmanga.com/'
     starter = indirectStarter(url, compile(tagre("a", "href", r'([^"]+)', after="next-comic-link")))
