@@ -7,7 +7,7 @@ def add(name, url, firstUrl=None, lang=None):
 		name = name,
 		url = url,
 		imageSearch = '//div[@id="comic"]//img',
-		prevSearch = u'//a[text()="‹ Prev"]',
+		prevSearch = u'//a[contains(text(), " Prev")]',
 	)
 	if lang:
 		attrs['lang'] = lang
