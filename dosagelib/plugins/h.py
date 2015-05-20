@@ -58,15 +58,6 @@ class HijinksEnsue(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
-class Hipsters(_ParserScraper):
-    url = 'http://www.hipsters-comic.com/'
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = stripUrl % 'hip01'
-    imageSearch = '//div[@id="comic"]//img',
-    prevSearch = '//a[contains(text()," Prev")]',
-    help = 'Index format: stripname'
-
-
 class HorribleVille(_BasicScraper):
     url = 'http://horribleville.com/'
     stripUrl = url + 'd/%s.html'

@@ -509,6 +509,6 @@ def check_scrapers():
         d[name] = scraperclass
 
 
-def make_scraper(classname, **attributes):
+def make_scraper(classname, scraperType = _BasicScraper, **attributes):
     """Make a new scraper class with given name and attributes."""
-    return type(classname, (_BasicScraper,), attributes)
+    return type(classname, (scraperType,), attributes)
