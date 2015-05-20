@@ -4,7 +4,7 @@
 
 from re import compile, escape
 
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
 
@@ -187,13 +187,12 @@ class Chisuji(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/strip-name'
 
 
-class CigarroAndCerveja(_BasicScraper):
+class CigarroAndCerveja(_ParserScraper):
     url = 'http://www.cigarro.ca/'
-    stripUrl = url + '?p=%s'
-    imageSearch = compile(r"(/comics/.+?)'")
-    prevSearch = compile(r'(/\?p=.+?)">&laq')
-    help = 'Index format: non'
-
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'reacquaintance'
+    imageSearch = '//div[@id="comic"]//img',
+    prevSearch = '//a[contains(text()," Prev")]',
 
 class Collar6(_BasicScraper):
     url = 'http://collar6.com/'
