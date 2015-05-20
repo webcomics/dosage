@@ -183,17 +183,6 @@ class Blip(_BasicScraper):
             return prevUrl.replace("www.blipcomic.com", "blipcomic.com")
 
 
-class BloodBound(_BasicScraper):
-    adult = True
-    url = 'http://bloodboundcomic.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2006/06/06112006'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
-    help = 'Index format: yyyy/mm/name'
-
-
 class BMovieComic(_BasicScraper):
     url = 'http://www.bmoviecomic.com/'
     stripUrl = url + '?cid=%s'

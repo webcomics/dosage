@@ -16,6 +16,7 @@ def add(name, url, firstUrl=None, lang=None):
     globals()[name] = make_scraper(name, _ParserScraper, **attrs)
 
 
+add('BloodBound', 'http://bloodboundcomic.com/', 'comic/06112006/')
 add('BroodHollow', 'http://broodhollow.chainsawsuit.com/', 'page/2012/10/06/book-1-curious-little-thing')
 add('CourtingDisaster', 'http://www.courting-disaster.com/', 'comic/courting-disaster-17/')
 add('OnTheEdge', 'http://ontheedgecomics.com/', 'comic/ote0001/')
