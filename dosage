@@ -75,6 +75,7 @@ def setupOptions():
     parser.add_argument('-m', '--modulehelp', action='store_true', help='display help for comic modules')
     parser.add_argument('-t', '--timestamps', action='store_true', help='print timestamps for all output at any info level')
     parser.add_argument('-o', '--output', action='append', dest='handler', choices=events.getHandlerNames(), help='sets output handlers for downloaded comics')
+    parser.add_argument('--no-downscale', action='store_false', dest='allowdownscale', help='prevent downscaling when using html or rss handler')
     parser.add_argument('-p', '--parallel', action='store', type=int, default=1, help='fetch comics in parallel. Specify the number of connections')
     parser.add_argument('--adult', action='store_true', help='confirms that you are old enough to view adult content')
     # used for development testing prev/next matching

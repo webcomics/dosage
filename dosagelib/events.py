@@ -20,10 +20,11 @@ class EventHandler(object):
     """Base class for writing events to files. The currently defined events are
     start(), comicDownloaded() and end()."""
 
-    def __init__(self, basepath, baseurl):
+    def __init__(self, basepath, baseurl, allowdownscale):
         """Initialize base path and url."""
         self.basepath = basepath
         self.baseurl = baseurl or self.getBaseUrl()
+        self.allowdownscale = allowdownscale
 
     def getBaseUrl(self):
         '''Return a file: URL that probably points to the basedir.
@@ -87,7 +88,9 @@ class RSSEventHandler(EventHandler):
     def comicDownloaded(self, comic, filename, text=None):
         """Write RSS entry for downloaded comic."""
         imageUrl = self.getUrlFromFilename(filename)
-        size = getDimensionForImage(filename, MaxImageSize)
+        size = None
+        if self.allowdownscale:
+            size = getDimensionForImage(filename, MaxImageSize)
         title = '%s - %s' % (comic.name, os.path.basename(filename))
         pageUrl = comic.referrer
         description = '<img src="%s"' % imageUrl
@@ -198,7 +201,9 @@ class HtmlEventHandler(EventHandler):
         """Write HTML entry for downloaded comic."""
         if self.lastComic != comic.name:
             self.newComic(comic)
-        size = getDimensionForImage(filename, MaxImageSize)
+        size = None
+        if self.allowdownscale:
+            size = getDimensionForImage(filename, MaxImageSize)
         imageUrl = self.getUrlFromFilename(filename)
         pageUrl = comic.referrer
         if pageUrl != self.lastUrl:
@@ -302,11 +307,11 @@ def getHandlerNames():
 
 _handlers = []
 
-def addHandler(name, basepath=None, baseurl=None):
+def addHandler(name, basepath=None, baseurl=None, allowDownscale=False):
     """Add an event handler with given name."""
     if basepath is None:
         basepath = '.'
-    _handlers.append(_handler_classes[name](basepath, baseurl))
+    _handlers.append(_handler_classes[name](basepath, baseurl, allowDownscale))
 
 
 class MultiHandler(object):

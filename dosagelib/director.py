@@ -154,7 +154,7 @@ def getComics(options):
     """Retrieve comics."""
     if options.handler:
         for name in set(options.handler):
-            events.addHandler(name, options.basepath, options.baseurl)
+            events.addHandler(name, options.basepath, options.baseurl, options.allowdownscale)
     events.getHandler().start()
     errors = 0
     try:
