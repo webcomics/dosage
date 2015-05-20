@@ -16,4 +16,5 @@ def add(name, url, firstUrl=None, lang=None):
 	globals()[name] = make_scraper(name, _ParserScraper, **attrs)
 
 add('CourtingDisaster', 'http://www.courting-disaster.com/', 'comic/courting-disaster-17/')
+add('OnTheEdge', 'http://ontheedgecomics.com/', 'comic/ote0001/')
 add('Hipsters', 'http://www.hipsters-comic.com/', 'comic/hip01/')

@@ -75,16 +75,6 @@ class OmakeTheater(_ParserScraper):
     help = 'Index format: number (unpadded)'
 
 
-class OnTheEdge(_BasicScraper):
-    url = 'http://ontheedgecomics.com/'
-    rurl = escape(url)
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = stripUrl % 'ote0001'
-    imageSearch = compile(r'<img src="(%scomics/.+?)"' % rurl)
-    prevSearch = compile(r'<a href="([^"]+)" rel="prev">')
-    help = 'Index format: nnn (unpadded)'
-
-
 class OnTheFastrack(_BasicScraper):
     url = 'http://onthefastrack.com/'
     stripUrl = url + 'comics/%s'
