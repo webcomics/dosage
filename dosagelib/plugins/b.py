@@ -338,13 +338,13 @@ class BrightlyWound(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class BroodHollow(_BasicScraper):
+class BroodHollow(_ParserScraper):
     url = 'http://broodhollow.chainsawsuit.com/'
-    rurl = escape(url)
     stripUrl = url + 'page/%s/'
-    firstStripUrl = stripUrl % '2012/10/08/broodhollow'
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%spage/\d+/\d+/\d+/[^"]+)' % rurl, after="prev"))
+    firstStripUrl = stripUrl % '2012/10/06/book-1-curious-little-thing'
+    css = True
+    imageSearch = "#comic img"
+    prevSearch = ".navi-prev"
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
