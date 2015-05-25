@@ -99,16 +99,6 @@ class CatAndGirl(_BasicScraper):
         )
 
 
-class Catena(_BasicScraper):
-    url = 'http://catenamanor.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2003/06/17/the-start-of-it-all'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)', after='rel="prev"'))
-    help = 'Index format: yyyy/mm/dd/<name>'
-
-
 class CatsAndCameras(_BasicScraper):
     url = 'http://catsncameras.com/cnc/'
     rurl = escape(url)

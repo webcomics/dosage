@@ -249,15 +249,6 @@ class BoyOnAStickAndSlither(_BasicScraper):
         return pageUrl.rsplit('/')[-1]
 
 
-class BratHalla(_BasicScraper):
-    url = 'http://brat-halla.com/'
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = stripUrl % '1-balder-dash'
-    imageSearch = compile(r"(/comics/.+?)' target='_blank")
-    prevSearch = compile(r'headernav2".+?"(http.+?)"')
-    help = 'Index format: number-stripname'
-
-
 class BrentalFloss(_BasicScraper):
     url = 'http://brentalflossthecomic.com/'
     stripUrl = url + '?id=%s'

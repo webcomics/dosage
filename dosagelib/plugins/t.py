@@ -27,25 +27,6 @@ class TheDevilsPanties(_BasicScraper):
     help = 'Index format: number'
 
 
-class TheDreamlandChronicles(_BasicScraper):
-    url = 'http://www.thedreamlandchronicles.com/'
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = stripUrl % 'page-1'
-    rurl = escape(url)
-    imageSearch = compile(tagre("img", "src", r'(http://www\.thedreamlandchronicles\.com/wp-content/uploads/\d+/\d+/\d+-\d+-\d+[^"]*)'))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]*)' % rurl, after='navi-prev"'))
-    help = 'Index format: page-n or chapter-n'
-
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        """Remove trailing digit from day number."""
-        name = imageUrl.split('/')[-1]
-        base, ext = name.split('.', 1)
-        bp = base.split('-')
-        if len(bp[2]) == 3:
-            bp[2] = bp[2][:-1]
-        return "%s-%s-%s.%s" % (bp[0], bp[1], bp[2], ext)
-
 class TheGamerCat(_ParserScraper):
     url = "http://www.thegamercat.com/"
     stripUrl = url + "comic/%s/"

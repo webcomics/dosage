@@ -111,16 +111,6 @@ class MegaTokyo(_BasicScraper):
     help = 'Index format: nnnn'
 
 
-class Meiosis(_BasicScraper):
-    url = 'http://meiosiswebcomic.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2006/10/10142006'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="navi-prev"))
-    help = 'Index format: yyyy/mm/ddmmyyyy'
-
-
 class MenageA3(_BasicScraper):
     adult = True
     url = 'http://www.ma3comic.com/'
@@ -128,16 +118,6 @@ class MenageA3(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'([^"]*/strips-ma3/[^"]+)', before="cn[id]prev"))
     help = 'Index format: name'
-
-
-class Melonpool(_BasicScraper):
-    url = 'http://www.melonpool.com/'
-    rurl = escape(url)
-    stripUrl = url + '?p=%s'
-    firstStripUrl = stripUrl % '41'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl, after="prev"))
-    help = 'Index format: n'
 
 
 class Misfile(_BasicScraper):

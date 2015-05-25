@@ -27,15 +27,6 @@ class ICanBarelyDraw(_BasicScraper):
     help = 'Index format: number'
 
 
-class IDreamOfAJeanieBottle(_BasicScraper):
-    url = 'http://jeaniebottle.com/'
-    stripUrl = url + '?p=%s'
-    firstStripUrl = stripUrl % '15'
-    imageSearch = compile(r'(/comics/.+?)"')
-    prevSearch = compile(tagre("a", "href", r'(http://jeaniebottle\.com/\?p=\d+)', after="prev"))
-    help = 'Index format: n (unpadded)'
-
-
 class InternetWebcomic(_BasicScraper):
     url = 'http://www.internet-webcomic.com/'
     rurl = escape(url)
@@ -53,12 +44,3 @@ class IrregularWebcomic(_BasicScraper):
     imageSearch = compile(r'<img .*src="(.*comics/.*(png|jpg|gif))".*>')
     prevSearch = compile(r'<a href="(/\d+\.html|/cgi-bin/comic\.pl\?comic=\d+)">Previous ')
     help = 'Index format: nnn'
-
-
-class ItsWalky(_BasicScraper):
-    url = 'http://www.itswalky.com/'
-    stripUrl = url + 'd/%s.html'
-    firstStripUrl = stripUrl % '19970908'
-    imageSearch = compile(tagre("img", "src", r'(/comic[s|/][^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'[^"]*(/d/\d+\.s?html)')+r"[^>]+/images/(?:nav_02|previous_day)\.gif")
-    help = 'Index format: yyyymmdd'

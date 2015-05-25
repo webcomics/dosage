@@ -220,16 +220,6 @@ class AmazingSuperPowers(_BasicScraper):
         )
 
 
-class Amya(_BasicScraper):
-    url = 'http://www.amyachronicles.com/'
-    rurl = escape(url)
-    stripUrl = url + 'archives/%s'
-    firstStripUrl = stripUrl % '117'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%sarchives/\d+)' % rurl, after="Previous"))
-    help = 'Index format: n'
-
-
 class Angband(_BasicScraper):
     url = 'http://angband.calamarain.net/'
     stripUrl = url + 'view.php?date=%s'
@@ -331,19 +321,3 @@ class ASkeweredParadise(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(http://aspcomics\.net/sites/default/files[^"]*/asp\d+\.jpg)[^"]+'))
     prevSearch = compile(tagre("a", "href", "(/comic/\d+)")+r"[^>]+Previous")
     help = 'Index format: nnn'
-
-
-class AxeCop(_BasicScraper):
-    url = 'http://axecop.com/'
-    rurl = escape(url)
-    starter = bounceStarter(url,
-        (
-          compile(tagre("a", "href", r'(%scomic/page-\d+-[^"]+/)' % rurl, after="navi-next")),
-          compile(tagre("a", "href", r'(%scomic/[^"]+/)' % rurl, after="navi-next")),
-        )
-    )
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = stripUrl % '0'
-    imageSearch = compile(tagre("img", "src", r'(http://mainsite\.axecop\.wpengine\.com/wp-content/uploads/sites/\d+/\d+/\d+/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+/)' % rurl, after="navi-prev"))
-    help = 'Index format: usually stripname'

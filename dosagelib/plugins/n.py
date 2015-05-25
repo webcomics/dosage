@@ -47,16 +47,6 @@ class NatalieDee(_BasicScraper):
         return '%s-%s' % (date, filename)
 
 
-class Nedroid(_BasicScraper):
-    url = 'http://nedroid.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2005/09/2210-whee'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/[^"]+)' % rurl, after="prev"))
-    help = 'Index format: yyyy/mm/dd/name'
-
-
 class NeoEarth(_BasicScraper):
     url = 'http://www.neo-earth.com/NE/'
     stripUrl = url + 'index.php?date=%s'
@@ -80,16 +70,6 @@ class NewWorld(_BasicScraper):
     imageSearch = compile(r'<img src="(http://www.tfsnewworld.com/comics/.+?)"')
     prevSearch = compile(r'<div class="nav-previous"><a href="([^"]+)" rel="prev">')
     help = 'Index format: yyyy/mm/dd/stripn'
-
-
-class Nicky510(_BasicScraper):
-    url = 'http://www.nickyitis.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % 'close-enough'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl, after="Previous"))
-    help = 'Index format: stripname'
 
 
 class NekkoAndJoruba(_BasicScraper):
