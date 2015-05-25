@@ -78,6 +78,7 @@ def setupOptions():
     parser.add_argument('--no-downscale', action='store_false', dest='allowdownscale', help='prevent downscaling when using html or rss handler')
     parser.add_argument('-p', '--parallel', action='store', type=int, default=1, help='fetch comics in parallel. Specify the number of connections')
     parser.add_argument('--adult', action='store_true', help='confirms that you are old enough to view adult content')
+    parser.add_argument('--allow-multiple', action='store_true', help='allows multiple instances to run at the same time. Use if you know what you are doing.')
     # used for development testing prev/next matching
     parser.add_argument('--dry-run', action='store_true', help=argparse.SUPPRESS)
     # multimatch is only used for development, eg. testing if all comics of a scripted plugin are working
@@ -213,7 +214,8 @@ def run(options):
     """Execute comic commands."""
     setOutputInfo(options)
     # ensure only one instance of dosage is running
-    me = singleton.SingleInstance()
+    if not options.allow_multiple:
+        me = singleton.SingleInstance()
     if options.version:
         return displayVersion(options.verbose)
     if options.list:
