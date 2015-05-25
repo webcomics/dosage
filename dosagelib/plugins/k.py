@@ -8,21 +8,6 @@ from ..util import tagre
 from ..helpers import indirectStarter
 
 
-class KatzenfutterGeleespritzer(_BasicScraper):
-    url = 'http://www.katzenfuttergeleespritzer.de/'
-    rurl = escape(url)
-    stripUrl = url + 'comics/%s/'
-    firstStripUrl = stripUrl % 'dont-drink-and-drive'
-    imageSearch = (
-        compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/\d+-\d+-\d+[^"]+)' % rurl)),
-        compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/mmai_404[^"]+)' % rurl)),
-    )
-    # XXX disallowed by robots.txt
-    #prevSearch = compile(tagre("a", "href", r'(%scomics/[^"]+)' % rurl, after="navi-prev"))
-    #help = 'Index format: stripname'
-    lang = 'de'
-
-
 class KevinAndKell(_BasicScraper):
     url = 'http://www.kevinandkell.com/'
     stripUrl = url + '%s/kk%s%s.html'
