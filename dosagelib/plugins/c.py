@@ -150,13 +150,13 @@ class ChasingTheSunset(_BasicScraper):
     help = 'Index format: n'
 
 
-class CheckerboardNightmare(_BasicScraper):
+class CheckerboardNightmare(_ParserScraper):
     url = 'http://www.checkerboardnightmare.com/'
-    stripUrl = url + 'd/%s.shtml'
-    firstStripUrl = stripUrl % '20001110'
-    imageSearch=compile(tagre("img", "src", r'(/comic[s|/][^"]+)'))
-    prevSearch=compile(tagre("a", "href", r'[^"]*(/d/\d+\.s?html)')+r"[^>]+/images/(?:nav_02|previous_day)\.gif")
-    help='Index format: yyyymmdd'
+    stripUrl = url + 'd/%s'
+    firstStripUrl = stripUrl % '20001110.html'
+    imageSearch = '//td[@colspan="4"]//img'
+    prevSearch = '//td[2]/a'
+    help = 'Index format: yyyymmdd'
 
 
 class Chester5000XYV(_BasicScraper):
