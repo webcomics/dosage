@@ -256,16 +256,6 @@ class CorydonCafe(_ParserScraper):
         return pageUrl.split('/')[-1].split('.')[0]
 
 
-class CowboyJedi(_BasicScraper):
-    url = 'http://www.cowboyjedi.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2009/08/10/a-new-webcomic'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="navi-prev"))
-    help = 'Index format: yyyy/mm/dd/strip-name'
-
-
 class CrapIDrewOnMyLunchBreak(_BasicScraper):
     url = 'http://crap.jinwicked.com/'
     stripUrl = url + '%s/'

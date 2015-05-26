@@ -27,6 +27,7 @@ add('BroodHollow', 'http://broodhollow.chainsawsuit.com/', 'page/2012/10/06/book
 add('Catena', 'http://catenamanor.com/')
 add('CraftedFables', 'http://www.caf-fiends.net/comicpress/')
 add('CourtingDisaster', 'http://www.courting-disaster.com/', 'comic/courting-disaster-17/')
+add('CowboyJedi', 'http://www.cowboyjedi.com/')
 add('Hipsters', 'http://www.hipsters-comic.com/', 'comic/hip01/')
 add('IDreamOfAJeanieBottle', 'http://jeaniebottle.com/')
 add('ItsWalky', 'http://www.itswalky.com/')
