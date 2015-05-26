@@ -46,6 +46,7 @@ add('SailorsunOrg', 'http://sailorsun.org/')
 add('SlightlyDamned', 'http://www.sdamned.com/')
 add('SPQRBlues', 'http://spqrblues.com/IV/')
 add('TheDreamlandChronicles', 'http://www.thedreamlandchronicles.com/')
+add('TheGentlemansArmchair', 'http://thegentlemansarmchair.com/')
 add('YAFGC', 'http://yafgc.net/')
 
 # all comics on HijiNKS ENSUE
