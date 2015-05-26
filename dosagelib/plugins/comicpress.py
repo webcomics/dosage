@@ -57,3 +57,17 @@ for (name, starterXPath) in [
     ('HijinksEnsuePhoto', '//h4[text()="Latest Fancy Photo Comic"]/..//a')
 ]:
     add(name, 'http://hijinksensue.com/', starter=indirectStarter('http://hijinksensue.com/', starterXPath))
+
+# all comics on flowerlarkstudios
+for (name, linkNumber) in [
+    ('Ashes', 1),
+    ('Eryl', 3),
+    # this is a duplicate as it was under this name in previous versions of dosage
+    ('DarkWings', 3),
+    ('Laiyu', 5),
+    ('NoMoreSavePoints', 7),
+    ('EasilyAmused', 9)
+]:
+    add(name, 'http://www.flowerlarkstudios.com/',
+        starter=indirectStarter('http://www.flowerlarkstudios.com/',
+                                '(//div[@id="sidebar-left"]//a)[' + str(linkNumber) + ']'))

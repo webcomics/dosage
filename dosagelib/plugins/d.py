@@ -69,16 +69,6 @@ class DangerouslyChloe(_BasicScraper):
     help = 'Index format: name'
 
 
-class DarkWings(_BasicScraper):
-    url = 'http://www.flowerlarkstudios.com/dark-wings/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2008/05/31/page-i'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="navi-prev"))
-    help = 'Index format: yyyy/mm/dd/page-nn-mm'
-
-
 class DarthsAndDroids(_BasicScraper):
     url = 'http://www.darthsanddroids.net/'
     stripUrl = url + 'episodes/%s.html'
