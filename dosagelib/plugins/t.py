@@ -146,16 +146,6 @@ class _TwoLumps(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
-class TwoTwoOneFour(_BasicScraper):
-    url = 'http://www.nitrocosm.com/go/2214_classic/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(http://content\.nitrocosm\.com/[^"]+)', before="gallery_display"))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+/)' % rurl, after="Previous"))
-    help = 'Index format: n (unpadded)'
-
-
 class TheWhiteboard(_BasicScraper):
     url = 'http://www.the-whiteboard.com/'
     stripUrl = url + 'auto%s.html'
