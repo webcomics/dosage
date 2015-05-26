@@ -181,17 +181,17 @@ class _PlanescapeSurvival(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class PokeyThePenguin(_BasicScraper):
-    baseUrl = 'http://www.yellow5.com/pokey/archive/'
-    url = baseUrl + 'index558.html'
-    stripUrl = baseUrl + 'index%s.html'
+class PokeyThePenguin(_ParserScraper):
+    url = 'http://www.yellow5.com/pokey/archive/'
+    stripUrl = url + 'index%s.html'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(pokey\d+[^"]+)'))
+    imageSearch = '//p/img'
     prevSearch = True
     multipleImagesPerStrip = True
+    starter = indirectStarter(url, "(//a)[last()]")
     help = 'Index format: number'
 
-    def getPrevUrl(self, url, data, baseUrl):
+    def getPrevUrl(self, url, data):
         """Decrease index.html number."""
         mo = compile(r"index(\d+)\.html").search(url)
         num = int(mo.group(1)) - 1
