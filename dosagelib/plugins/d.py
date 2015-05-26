@@ -127,13 +127,12 @@ class DeepFried(_BasicScraper):
     help = 'Index format: none'
 
 
-class DemolitionSquad(_BasicScraper):
+class DemolitionSquad(_ParserScraper):
     url = 'http://www.demolitionsquad.de/'
     stripUrl = url + '?comicbeitrag=%s'
     firstStripUrl = stripUrl % '181'
-    imageSearch = compile(tagre("img", "src", r'(uploads/pics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(\?comicbeitrag=[^"]+)') +
-        tagre("img", "src", r'grafik/system/blaettern_zuruck_n\.gif'))
+    imageSearch = '//img[contains(@src,"uploads/pics/")]'
+    prevSearch = '//img[@name="zuruck"]/..'
     help = 'Index format: number'
     lang = 'de'
 
