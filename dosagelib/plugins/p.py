@@ -229,15 +229,6 @@ class PS238(_ParserScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
-class ProperBarn(_BasicScraper):
-    url = 'http://www.nitrocosm.com/go/gag/'
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(http://content\.nitrocosm\.com/gag/\d+\.[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.nitrocosm\.com/go/gag/\d+/)', after="nav_btn_previous"))
-    help = 'Index format: nnn'
-
-
 class PunksAndNerds(_BasicScraper):
     url = 'http://www.punksandnerds.com/'
     rurl = escape(url)
