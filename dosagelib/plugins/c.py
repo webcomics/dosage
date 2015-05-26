@@ -243,13 +243,12 @@ class CoolCatStudio(_BasicScraper):
     help = 'Index format: ccsyyyymmdd'
 
 
-class CorydonCafe(_BasicScraper):
+class CorydonCafe(_ParserScraper):
     url = 'http://corydoncafe.com/'
-    starter = indirectStarter(url,
-        compile(tagre("a", "href", r'(\./\d+/[^"]+)')))
+    starter = indirectStarter(url, '//ul//a')
     stripUrl = url + '%s.php'
-    imageSearch = compile(tagre("img", "src", r"(\./[^']+)", quote="'"))
-    prevSearch = compile(tagre("a", "href", r"(http://corydoncafe\.com/\d+/[^']+)", after="prev", quote="'"))
+    imageSearch = "//center[2]//img"
+    prevSearch = '//a[@title="prev"]'
     help = 'Index format: yyyy/stripname'
 
     @classmethod
