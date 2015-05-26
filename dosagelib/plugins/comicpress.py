@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+from dosagelib.helpers import indirectStarter
 from ..scraper import make_scraper, _ParserScraper
 
 
-def add(name, url, firstUrl=None, lang=None):
+def add(name, url, firstUrl=None, starter=None, lang=None):
     attrs = dict(
         name=name,
         url=url,
@@ -16,7 +17,10 @@ def add(name, url, firstUrl=None, lang=None):
         attrs['lang'] = lang
     if firstUrl:
         attrs['firstUrl'] = url + firstUrl
+    if starter:
+        attrs['starter'] = starter
     globals()[name] = make_scraper(name, _ParserScraper, **attrs)
+
 
 add('1997', 'http://1977thecomic.com/')
 add('Amya', 'http://www.amyachronicles.com/')
@@ -31,7 +35,7 @@ add('CowboyJedi', 'http://www.cowboyjedi.com/')
 add('Hipsters', 'http://www.hipsters-comic.com/', 'comic/hip01/')
 add('IDreamOfAJeanieBottle', 'http://jeaniebottle.com/')
 add('ItsWalky', 'http://www.itswalky.com/')
-add('KatzenfutterGeleespritzer', 'http://www.katzenfuttergeleespritzer.de/', 'comics/gert-grendil/', 'de')
+add('KatzenfutterGeleespritzer', 'http://www.katzenfuttergeleespritzer.de/', 'comics/gert-grendil/', lang='de')
 add('Meiosis', 'http://meiosiswebcomic.com/')
 add('Melonpool', 'http://www.melonpool.com/')
 add('Nedroid', 'http://nedroid.com/')
@@ -43,3 +47,13 @@ add('SlightlyDamned', 'http://www.sdamned.com/')
 add('SPQRBlues', 'http://spqrblues.com/IV/')
 add('TheDreamlandChronicles', 'http://www.thedreamlandchronicles.com/')
 add('YAFGC', 'http://yafgc.net/')
+
+# all comics on HijiNKS ENSUE
+for (name, starterXPath) in [
+    ('HijinksEnsue', '//h4[text()="Read The Latest HijiNKS ENSUE"]/..//a'),
+    ('HijinksEnsueClassic', '//h4[text()="Read HijiNKS ENSUE Classic"]/..//a[3]'),
+    ('Faneurysm', '//h4[text()="Read The Latest FANEURYSM"]/..//a'),
+    ('HijinksEnsueConvention', '//h4[text()="Latest Fancy Convention Sketches"]/..//a'),
+    ('HijinksEnsuePhoto', '//h4[text()="Latest Fancy Photo Comic"]/..//a')
+]:
+    add(name, 'http://hijinksensue.com/', starter=indirectStarter('http://hijinksensue.com/', starterXPath))
