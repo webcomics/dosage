@@ -334,23 +334,13 @@ class Curtailed(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
-class Curvy(_BasicScraper):
+class Curvy(_ParserScraper):
     url = 'http://www.c.urvy.org/'
     stripUrl = url + '?date=%s'
     firstStripUrl = stripUrl % '20080329'
-    imageSearch = compile(tagre("img", "src", r'(/c/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/\?date=\d+)') +
-        tagre("img", "src", "/nav/prev\.png"))
+    imageSearch = '//div[@id="theActualComic"]//img'
+    prevSearch = '//div[@class="aNavbar"]//p[2]/a'
     help = 'Index format: yyyymmdd'
-    starter = bounceStarter(url,
-        compile(tagre("a", "href", r'(/\?date=\d+)') +
-            tagre("img", "src", "/nav/next\.png")))
-
-    def shouldSkipUrl(self, url, data):
-        """Skip pages without images."""
-        return url in (
-            self.stripUrl % '20130402',
-        )
 
 
 class CyanideAndHappiness(_BasicScraper):
