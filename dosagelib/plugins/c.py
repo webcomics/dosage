@@ -308,17 +308,6 @@ class CrimsonDark(_BasicScraper):
     help = 'Index format: n (unpadded)'
 
 
-class CraftedFables(_BasicScraper):
-    url = 'http://www.craftedfables.com/'
-    baseUrl = 'http://www.caf-fiends.net/'
-    rurl = escape(baseUrl)
-    stripUrl = baseUrl + 'craftedfables/?p=%s'
-    imageSearch = compile(tagre("img", "src", r'(%scraftedfables/comics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%scraftedfables/[^"]+)' % rurl) +
-        tagre("span", "class", r"prev"))
-    help = 'Index format: nnn'
-
-
 class CucumberQuest(_BasicScraper):
     url = 'http://cucumber.gigidigi.com/'
     rurl = escape(url)
