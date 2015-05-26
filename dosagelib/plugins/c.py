@@ -109,14 +109,13 @@ class CatsAndCameras(_BasicScraper):
     help = 'Index format: stripname'
 
 
-class ChainsawSuit(_BasicScraper):
+class ChainsawSuit(_ParserScraper):
     url = 'http://chainsawsuit.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2008/03/12/strip-338'
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%scomic/\d+/\d+/\d+/[^"]+)' % rurl) +
-        tagre("img", "alt", r'previous'))
+    imageSearch = '//div[@id="comic"]//img'
+    prevSearch = '//img[@alt="previous"]/..'
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
