@@ -93,14 +93,6 @@ class MaxOveracts(_ParserScraper):
     prevSearch = '.nav-previous > a'
     help = 'Index format: nnn'
 
-class Meek(_BasicScraper):
-    url = 'http://www.meekcomic.com/'
-    stripUrl = url + '%s'
-    firstStripUrl = stripUrl % '2008/12/27/chapter-1-cover '
-    imageSearch = compile(r'meekcomic.com(/comics/.+?)"')
-    prevSearch = compile(r'\s.+?(http://www.meekcomic.com/.+?)".+?Previous<')
-    help = 'Index format: yyyy/mm/dd/ch-p/'
-
 
 class MegaTokyo(_BasicScraper):
     url = 'http://megatokyo.com/'
