@@ -163,12 +163,12 @@ class PiledHigherAndDeeper(_BasicScraper):
     namer = queryNamer('comicid', usePageUrl=True)
 
 
-class Pimpette(_BasicScraper):
+class Pimpette(_ParserScraper):
     url = 'http://pimpette.ca/'
     stripUrl = url + 'index.php?date=%s'
     firstStripUrl = stripUrl % '20030905'
-    imageSearch = compile(tagre("img", "src", r'(strips/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(index\.php\?date=\d+)') + "Previous")
+    imageSearch = '//div[@id="strip"]/img'
+    prevSearch = '//a[text()="previous"]'
     help = 'Index format: yyyymmdd'
 
 
