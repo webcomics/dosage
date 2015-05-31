@@ -115,14 +115,6 @@ class FonFlatter(_BasicScraper):
        )
 
 
-class Footloose(_ParserScraper):
-    url = 'http://footloosecomic.com/footloose.php'
-    stripUrl = 'http://footloosecomic.com/footloose.php?comic_id=%s'
-    imageSearch = '//body/p[1]//img'
-    prevSearch = '//body/a[2]'
-    help = 'Index format: n (unpadded)'
-
-
 class ForLackOfABetterComic(_BasicScraper):
     url = 'http://forlackofabettercomic.com/'
     rurl = r'http://(?:www\.)?forlackofabettercomic\.com/'
