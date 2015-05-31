@@ -77,15 +77,10 @@ class LittleGamers(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/name'
 
 
-class LoadingArtist(_BasicScraper):
-    url = 'http://www.loadingartist.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2011/01/04/born'
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+/)' % rurl, after="prev"))
-    help = 'Index format: yyyy/mm/dd/stripname'
-
+class LoadingArtist(_ParserScraper):
+    url = 'http://www.loadingartist.com/comic/new-update/'
+    imageSearch = '//div[@class="comic"]//img'
+    prevSearch = "//a[contains(concat(' ', @class, ' '), ' prev ')]"
 
 class LookingForGroup(_ParserScraper):
     url = 'http://www.lfgcomic.com/'
