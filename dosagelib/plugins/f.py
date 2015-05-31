@@ -5,7 +5,7 @@
 from re import compile, escape, IGNORECASE
 
 from ..util import tagre
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 
 
@@ -115,12 +115,11 @@ class FonFlatter(_BasicScraper):
        )
 
 
-class Footloose(_BasicScraper):
-    url = 'http://footloosecomic.com/footloose/today.php'
-    stripUrl = 'http://footloosecomic.com/footloose/pages.php?page=%s'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = compile(r'<img src="/footloose/(.+?)"')
-    prevSearch = compile(r'(?:first.+?[^>]).+?(/footloose/.+?)".+?(?:prev)')
+class Footloose(_ParserScraper):
+    url = 'http://footloosecomic.com/footloose.php'
+    stripUrl = 'http://footloosecomic.com/footloose.php?comic_id=%s'
+    imageSearch = '//body/p[1]//img'
+    prevSearch = '//body/a[2]'
     help = 'Index format: n (unpadded)'
 
 
