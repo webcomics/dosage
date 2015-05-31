@@ -99,16 +99,6 @@ class CatAndGirl(_BasicScraper):
         )
 
 
-class CatsAndCameras(_BasicScraper):
-    url = 'http://catsncameras.com/cnc/'
-    rurl = escape(url)
-    stripUrl = url + '?comic=%s'
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
-    prevSearch = compile(tagre("span", "class", r'mininav-prev') +
-        tagre("a", "href", r'(%s[^"]+)' % rurl))
-    help = 'Index format: stripname'
-
-
 class ChainsawSuit(_ParserScraper):
     url = 'http://chainsawsuit.com/'
     rurl = escape(url)
