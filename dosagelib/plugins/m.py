@@ -176,11 +176,8 @@ class MyCartoons(_BasicScraper):
     lang = 'de'
 
 
-class MysteriesOfTheArcana(_BasicScraper):
+class MysteriesOfTheArcana(_ParserScraper):
     url = 'http://mysteriesofthearcana.com/'
-    rurl = escape(url)
-    stripUrl = url + 'index.php?action=comics&cid=%s'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(%simage\.php\?type=com&i=[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(/index\.php[^"]+)', after="navprevious"))
+    imageSearch = '//div[@id="comic"]//img'
+    prevSearch = '//a[@class="navprevious"]'
     help = 'Index format: n (unpadded)'
