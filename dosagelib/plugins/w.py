@@ -203,7 +203,7 @@ class WormWorldSaga(_BasicScraper):
         return '%schapters/chapter%02d/%s/index.php' % (
             cls.url, cls.latestChapter, cls.lang.upper())
 
-    def getPrevUrl(self, url, data, baseUrl):
+    def getPrevUrl(self, url, data):
         """Find previous URL."""
         if 'chapter04' in url:
             return url.replace('chapter04', 'chapter03')
