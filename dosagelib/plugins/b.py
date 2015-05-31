@@ -35,16 +35,6 @@ class BadMachinery(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
-class Bardsworth(_BasicScraper):
-    url = 'http://www.bardsworth.com/'
-    rurl = escape(url)
-    stripUrl = url + '?comic=%s'
-    firstStripUrl = stripUrl % '750'
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
-    help = 'Index format: stripname'
-
-
 class Baroquen(_BasicScraper):
     url = 'http://www.baroquencomics.com/'
     rurl = escape(url)

@@ -25,6 +25,7 @@ def add(name, url, firstUrl=None, starter=None, lang=None):
 add('1997', 'http://1977thecomic.com/')
 add('Amya', 'http://www.amyachronicles.com/')
 add('AxeCop', 'http://axecop.com/comic/season-two/')
+add('Bardsworth','http://www.bardsworth.com/')
 add('BloodBound', 'http://bloodboundcomic.com/', 'comic/06112006/')
 add('BratHalla', 'http://brat-halla.com/')
 add('BroodHollow', 'http://broodhollow.chainsawsuit.com/', 'page/2012/10/06/book-1-curious-little-thing')
