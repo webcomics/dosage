@@ -5,20 +5,20 @@
 from re import compile, escape, IGNORECASE
 
 from ..helpers import indirectStarter
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 
 
-class EarthsongSaga(_BasicScraper):
-    url = 'http://www.earthsongsaga.com/'
-    starter = indirectStarter(url, compile(tagre("a", "href", r'([^"]+)') + tagre("img", "src", r'[^"]+current\.jpg')))
-    stripUrl = None
-    firstStripUrl = url + 'vol1/vol1cover.html'
-    imageSearch = (
-      compile(tagre("img", "src", r'((?:\.\./)?images/vol\d+/ch\d+/\d+\.\w+)')),
-      compile(tagre("img", "src", r'((?:\.\./)?images/vol\d+/ch\d+/ch\d+cover\.\w+)')),
-    )
-    prevSearch = compile(tagre("a", "href", r'([^"]+)', after="Previous"))
+class EarthsongSaga(_ParserScraper):
+    url = 'http://earthsongsaga.com/index.php'
+    starter = indirectStarter(url, '//div[@id="leftmenu"]/span[1]/a[1]')
+    imageSearch = '//div[@id="comic"]//img'
+    prevSearch = '//a[@title="Previous"]'
+
+    @classmethod
+    def fetchUrls(cls, url, data, urlSearch):
+        urls = super(EarthsongSaga, cls).fetchUrls(url, data, urlSearch)
+        return [x.replace('earthsongsaga.com/../', 'earthsongsaga.com/') for x in urls]
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
