@@ -23,6 +23,7 @@ def add(name, url, firstUrl=None, starter=None, lang=None):
 
 
 add('1997', 'http://1977thecomic.com/')
+add('Alice', 'http://www.alicecomics.com/', starter=indirectStarter('http://www.alicecomics.com/','//a[text()="Latest Alice!"]'))
 add('Amya', 'http://www.amyachronicles.com/')
 add('AxeCop', 'http://axecop.com/comic/season-two/')
 add('Bardsworth','http://www.bardsworth.com/')

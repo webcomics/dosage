@@ -122,15 +122,6 @@ class ALessonIsLearned(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class Alice(_BasicScraper):
-    url = 'http://alice.alicecomics.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/\d+-\d+-\d+[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%salicecomics/[^"]+)' % rurl, after="previous"))
-    help = 'Index format: name'
-
-
 class AlienLovesPredator(_BasicScraper):
     url = 'http://alienlovespredator.com/'
     stripUrl = url + '%s/'
