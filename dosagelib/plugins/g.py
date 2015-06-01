@@ -4,7 +4,7 @@
 
 from re import compile, escape
 
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
 
@@ -131,12 +131,10 @@ class GoblinsComic(_BasicScraper):
     help = 'Index format: ddmmyyyy'
 
 
-class GoGetARoomie(_BasicScraper):
+class GoGetARoomie(_ParserScraper):
     url = 'http://www.gogetaroomie.com/index.php'
-    stripUrl = url + '?id=%s'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre('img', 'src', r'(comics/[^"]+)'))
-    prevSearch = compile(tagre('a', 'href', r'([^"]+)', after='rel="prev"'))
+    imageSearch = '//div[@id="cc-comicbody"]//img'
+    prevSearch = '//a[@rel="prev"]'
     help = 'Index format: nnn'
 
 
