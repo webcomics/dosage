@@ -56,13 +56,13 @@ class SandraOnTheRocks(_BasicScraper):
     help = 'Index format: name'
 
 
-class ScandinaviaAndTheWorld(_BasicScraper):
+class ScandinaviaAndTheWorld(_ParserScraper):
     url = 'http://satwcomic.com/'
-    rurl = escape(url)
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % 'sweden-denmark-and-norway'
-    imageSearch = compile(tagre("img", "src", r'(%sart/[^"/]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"/]+)' % rurl)+"\s*"+tagre('span', 'class', 'spritePrevious'))
+    starter = indirectStarter(url, '//a[text()="View latest comic"]')
+    imageSearch = '//img[@itemprop="image"]'
+    prevSearch = '//a[@accesskey="p"]'
     help = 'Index format: stripname'
 
 
