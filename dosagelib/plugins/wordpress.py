@@ -7,11 +7,14 @@ def add(name, url, firstUrl=None, starter=None, lang=None):
     attrs = dict(
         name=name,
         url=url,
-        imageSearch='//div[@id="comic"]//img',
-        prevSearch=['//a[contains(text(), " Prev")]',
+        imageSearch=['//div[@id="comic"]//img',
+                     '//div[@class="webcomic-image"]//img'],
+        prevSearch=["//a[contains(concat(' ', text(), ' '), ' Prev ')]",
+                    "//a[contains(concat(' ', text(), ' '), ' Previous ')]",
                     "//a[contains(concat(' ', @class, ' '), ' navi-prev ')]",
                     "//a[contains(concat(' ', @class, ' '), ' navi-prev-in ')]",
-                    "//a[contains(concat(' ', @class, ' '), ' navi-previous ')]"]
+                    "//a[contains(concat(' ', @class, ' '), ' navi-previous ')]",
+                    "//a[contains(concat(' ', @class, ' '), ' previous-webcomic-link ')]"]
     )
     if lang:
         attrs['lang'] = lang
@@ -52,6 +55,7 @@ add('Nicky510', 'http://www.nickyitis.com/')
 add('OnTheEdge', 'http://ontheedgecomics.com/', 'comic/ote0001/')
 add('PandyLand', 'http://pandyland.net/', '1/')
 add('SailorsunOrg', 'http://sailorsun.org/')
+add('Sithrah', 'http://sithrah.com/')
 add('SlightlyDamned', 'http://www.sdamned.com/')
 add('SPQRBlues', 'http://spqrblues.com/IV/')
 add('TheDreamlandChronicles', 'http://www.thedreamlandchronicles.com/')
