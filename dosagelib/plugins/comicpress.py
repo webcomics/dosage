@@ -46,6 +46,7 @@ add('KatzenfutterGeleespritzer', 'http://www.katzenfuttergeleespritzer.de/', 'co
 add('Meek', 'http://www.meekcomic.com/')
 add('Meiosis', 'http://meiosiswebcomic.com/')
 add('Melonpool', 'http://www.melonpool.com/')
+add('MistyTheMouse', 'http://www.mistythemouse.com/')
 add('Nedroid', 'http://nedroid.com/')
 add('Nicky510', 'http://www.nickyitis.com/')
 add('OnTheEdge', 'http://ontheedgecomics.com/', 'comic/ote0001/')
