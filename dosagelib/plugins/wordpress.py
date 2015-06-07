@@ -26,10 +26,11 @@ def add(name, url, firstUrl=None, starter=None, lang=None):
 
 
 add('1997', 'http://1977thecomic.com/')
-add('Alice', 'http://www.alicecomics.com/', starter=indirectStarter('http://www.alicecomics.com/','//a[text()="Latest Alice!"]'))
+add('Alice', 'http://www.alicecomics.com/',
+    starter=indirectStarter('http://www.alicecomics.com/', '//a[text()="Latest Alice!"]'))
 add('Amya', 'http://www.amyachronicles.com/')
 add('AxeCop', 'http://axecop.com/comic/season-two/')
-add('Bardsworth','http://www.bardsworth.com/')
+add('Bardsworth', 'http://www.bardsworth.com/')
 add('BloodBound', 'http://bloodboundcomic.com/', 'comic/06112006/')
 add('BratHalla', 'http://brat-halla.com/')
 add('BroodHollow', 'http://broodhollow.chainsawsuit.com/', 'page/2012/10/06/book-1-curious-little-thing')
@@ -60,7 +61,6 @@ add('SlightlyDamned', 'http://www.sdamned.com/')
 add('SPQRBlues', 'http://spqrblues.com/IV/')
 add('TheDreamlandChronicles', 'http://www.thedreamlandchronicles.com/')
 add('TheGentlemansArmchair', 'http://thegentlemansarmchair.com/')
-add('TheWebcomicFactory', 'http://www.thewebcomicfactory.com/')
 add('YAFGC', 'http://yafgc.net/')
 
 # all comics on HijiNKS ENSUE
@@ -86,3 +86,40 @@ for (name, linkNumber) in [
     add(name, 'http://www.flowerlarkstudios.com/',
         starter=indirectStarter('http://www.flowerlarkstudios.com/',
                                 '(//div[@id="sidebar-left"]//a)[' + str(linkNumber) + ']'))
+
+# all comics on the webcomic factory
+
+for (name, url) in [
+    ('AntiwarComic', 'the-antiwar-comic-the-party/'),
+    ('AstheMayoTurns', 'as-the-mayo-turns/'),
+    ('ComicBookMafia', 'comic-book-mafia/'),
+    ('ComicColorKey', 'comic-color-key/'),
+    ('Dealers', 'dealers-1-1998-was-the-year/'),
+    ('DigitalHobo', 'digital-hobo-1-its-a-living-kinda/'),
+    ('EastCoastvs.WestCoast', 'east-coast-vs-west-coast-greetings-from-the-coasts/'),
+    ('GunCulture', 'gun-culture/'),
+    ('IHateMyKids', 'i-hate-my-kids/'),
+    ('InARelationship', 'in-a-relationship-3/'),
+    ('JapaneseSchoolgirlsinLove', 'japanese-schoolgirls-in-love-1/'),
+    ('KingdomoftheDwarves', 'kingdom-of-the-dwarves/'),
+    ('LesterCrenshawisDead', 'lester-crenshaw-is-dead/'),
+    ('Millennials', 'millennials/'),
+    ('MiserableComedians', 'miserable-comedians-1-funny-because-its-sad/'),
+    ('OldeTymeGamer', 'olde-tyme-gamer-playing-injured/'),
+    ('PinJunkies', 'pin-junkies/'),
+    ('PostApocalypticNick', 'post-apocalyptic-nick/'),
+    ('RealTalk', 'real-talk-people-who-cut-in-line/'),
+    ('SoManyNightmares', 'so-many-nightmares-freedom-nightmare/'),
+    ('SportsGuys', 'sports-guys/'),
+    ('TalesOfPizza', 'tales-of-pizza-bad-tipper/'),
+    ('TheGentlemensClub', 'the-gentlemens-club/'),
+    ('TheHorrorOfColony6', 'the-horror-of-colony-6-page-1/'),
+    ('TheKingsofViralVideo', 'the-kings-of-viral-video-premiere/'),
+    ('TheSharonandTonyExperiment', 'the-sharon-and-tony-experiment/'),
+    ('TonyDestructo', 'tony-destructo/'),
+    ('WeirdBikerTales', 'weird-biker-tales-the-last-outlaw/'),
+    ('WillysSpaceDive', 'willys-space-dive/')
+]:
+    add(name, 'http://www.thewebcomicfactory.com',
+        starter=indirectStarter('http://www.thewebcomicfactory.com/comic/' + url,
+                                "//a[contains(concat(' ', text(), ' '), ' Last ')]"))
