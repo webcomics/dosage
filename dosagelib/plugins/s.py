@@ -407,13 +407,12 @@ class SpareParts(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
-class Spinnerette(_BasicScraper):
+class Spinnerette(_ParserScraper):
     url = 'http://www.spinnyverse.com/'
-    rurl = escape(url)
-    stripUrl = url + 'index.php?id=%s'
-    firstStripUrl = stripUrl % '2010/02/09/02092010'
-    imageSearch = compile(tagre("img", "src", r'(comics/[^"]+)', after="comic"))
-    prevSearch = compile(tagre("a", "href", r'(/index\.php\?id=[^"]+)', after="prev"))
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % '02-09-2010'
+    imageSearch = '//div[@id="cc-comicbody"]//img'
+    prevSearch = '//a[@class="prev"]'
     help = 'Index format: number'
 
 
