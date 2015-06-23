@@ -155,7 +155,11 @@ def displayComicHelp(scraperobj):
     try:
         out.info(u"URL: " + scraperobj.url)
         if scraperobj.lang:
-            out.info(u"Language: " + pycountry.languages.get(alpha2 = scraperobj.lang).name)
+            try:
+                lang = pycountry.languages.get(alpha2 = scraperobj.lang)
+            except KeyError:
+                lang = pycountry.languages.get(iso639_1_code = scraperobj.lang)
+            out.info(u"Language: " + lang.name)
         if scraperobj.adult:
             out.info(u"Adult comic, use option --adult to fetch.")
         disabled = scraperobj.getDisabledReasons()
