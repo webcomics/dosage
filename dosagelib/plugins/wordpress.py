@@ -97,7 +97,7 @@ for (name, url) in [
     ('ComicColorKey', 'comic-color-key/'),
     ('Dealers', 'dealers-1-1998-was-the-year/'),
     ('DigitalHobo', 'digital-hobo-1-its-a-living-kinda/'),
-    ('EastCoastvs.WestCoast', 'east-coast-vs-west-coast-greetings-from-the-coasts/'),
+    ('EastCoastVsWestCoast', 'east-coast-vs-west-coast-greetings-from-the-coasts/'),
     ('GunCulture', 'gun-culture/'),
     ('IHateMyKids', 'i-hate-my-kids/'),
     ('InARelationship', 'in-a-relationship-3/'),
