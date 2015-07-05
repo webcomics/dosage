@@ -120,6 +120,10 @@ class Nnewts(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(%s(?:nnewts-)?page-\d+/)' % rurl, after="navi-prev"))
     help = 'Index format: page-number'
 
+    @classmethod
+    def getDisabledReasons(cls):
+        return {'cannotReadOnline': 'Comic is not available for reading online.'}
+
 
 class NobodyScores(_BasicScraper):
     url = 'http://nobodyscores.loosenutstudio.com/'
