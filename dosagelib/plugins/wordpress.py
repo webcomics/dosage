@@ -94,7 +94,6 @@ for (name, url) in [
     ('AntiwarComic', 'the-antiwar-comic-the-party/'),
     ('AstheMayoTurns', 'as-the-mayo-turns/'),
     ('ComicBookMafia', 'comic-book-mafia/'),
-    ('ComicColorKey', 'comic-color-key/'),
     ('Dealers', 'dealers-1-1998-was-the-year/'),
     ('DigitalHobo', 'digital-hobo-1-its-a-living-kinda/'),
     ('EastCoastVsWestCoast', 'east-coast-vs-west-coast-greetings-from-the-coasts/'),
