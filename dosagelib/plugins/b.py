@@ -150,6 +150,10 @@ class BladeKitten(_ParserScraper):
         page = page.split(':')[1]
         return "bladekitten-%02i-%02i-%s" % (int(chapter), int(page), filename)
 
+    @classmethod
+    def getDisabledReasons(cls):
+        return {'cannotReadOnline': 'Comic is not available for reading online.'}
+
 class BlankIt(_BasicScraper):
     url = 'http://blankitcomics.com/'
     stripUrl = url + '%s/'
