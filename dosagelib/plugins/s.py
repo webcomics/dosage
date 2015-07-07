@@ -63,6 +63,7 @@ class ScandinaviaAndTheWorld(_ParserScraper):
     starter = indirectStarter(url, '//a[text()="View latest comic"]')
     imageSearch = '//img[@itemprop="image"]'
     prevSearch = '//a[@accesskey="p"]'
+    textSearch = '//span[@itemprop="articleBody"]'
     help = 'Index format: stripname'
 
 
