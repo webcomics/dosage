@@ -96,6 +96,15 @@ class Eriadan(_BasicScraper):
         )
 
 
+class Erstwhile(_ParserScraper):
+    url = 'http://www.erstwhiletales.com/'
+    stripUrl = url + '%s/'
+    css = True
+    imageSearch = 'div.comicpane a img'
+    prevSearch = 'a.navi-prev'
+    help = 'Index format: title-nn'
+
+
 class ElfOnlyInn(_BasicScraper):
     url = 'http://www.elfonlyinn.net/'
     stripUrl = url + 'd/%s.html'
