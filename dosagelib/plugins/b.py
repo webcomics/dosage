@@ -129,31 +129,6 @@ class BizarreUprising(_BasicScraper):
     help = 'Index format: n/name'
 
 
-class BladeKitten(_ParserScraper):
-    url = 'http://www.bladekitten.com/'
-    stripUrl = url + 'comics/blade-kitten/%s/page:%s'
-    firstStripUrl = stripUrl % ('1','1')
-    imageSearch = '//img[@class="comic_page_image"]'
-    prevSearch = '//span[@class="comic_nav_prev"]//a'
-    textSearch = '//div[@class="comic_comment_inner"]//p'
-    textOptional = True
-    help = 'Index format: chapter-page'
-    starter = indirectStarter(url, '//h4//a[contains(@href, "/comics/")]')
-
-    def getIndexStripUrl(self, index):
-        return self.stripUrl % tuple(index.split('-'))
-
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        filename = imageUrl.rsplit('/', 1)[1]
-        _, chapter, page = pageUrl.rsplit('/', 2)
-        page = page.split(':')[1]
-        return "bladekitten-%02i-%02i-%s" % (int(chapter), int(page), filename)
-
-    @classmethod
-    def getDisabledReasons(cls):
-        return {'cannotReadOnline': 'Comic is not available for reading online.'}
-
 class BlankIt(_BasicScraper):
     url = 'http://blankitcomics.com/'
     stripUrl = url + '%s/'
