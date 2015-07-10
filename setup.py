@@ -56,7 +56,6 @@ setup(
     ),
     install_requires = (
         'requests',
-        'pycountry',
     ),
     extras_require = {
         'xpath': ["lxml"],

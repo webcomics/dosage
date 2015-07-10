@@ -22,7 +22,12 @@ try:
 except ImportError:
     cssselect = None
 
-from . import loader, configuration, util
+try:
+    import pycountry
+except ImportError:
+    pycountry = None
+
+from . import loader, configuration, util, languages
 from .util import (getPageContent, makeSequence, get_system_uid, urlopen,
         getDirname, unescape, tagre, normaliseURL, prettyMatcherList)
 from .comic import ComicStrip
@@ -309,6 +314,25 @@ class Scraper(object):
         """
         return {}
 
+    @classmethod
+    def language(cls):
+        """
+        Return language of the comic as a human-readable language name instead
+        of a 2-character ISO639-1 code.
+        """
+        lang = 'Unknown (%s)' % cls.lang
+        if pycountry is None:
+            if cls.lang in languages.Languages:
+                lang = languages.Languages[cls.lang]
+        else:
+            try:
+                lang = pycountry.languages.get(alpha2 = cls.lang).name
+            except KeyError:
+                try:
+                    lang = pycountry.languages.get(iso639_1_code = cls.lang).name
+                except KeyError:
+                    pass
+        return lang
 
 class _BasicScraper(Scraper):
     """
