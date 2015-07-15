@@ -148,7 +148,7 @@ def generate_comic_testers():
     else:
         # Get limited number of scraper tests on Travis builds to make
         # it faster
-        testscrapernames = ['GoComics/CalvinandHobbes']
+        testscrapernames = ['AbstruseGoose', 'xkcd']
         scraperclasses = [
             scraperclass for scraperclass in scraper.get_scraperclasses()
             if scraperclass.getName() in testscrapernames
