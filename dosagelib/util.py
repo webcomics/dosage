@@ -282,12 +282,10 @@ def get_robotstxt_parser(url, session=None):
     try:
         req = urlopen(url, session, max_content_bytes=MaxContentBytes, raise_for_status=False)
     except Exception:
-        # connect or timeout errors are treated as an absent robotst.txt
+        # connect or timeout errors are treated as an absent robots.txt
         rp.allow_all = True
     else:
-        if req.status_code in (401, 403):
-            rp.disallow_all = True
-        elif req.status_code >= 400:
+        if req.status_code >= 400:
             rp.allow_all = True
         elif req.status_code == 200:
             rp.parse(req.text.splitlines())
