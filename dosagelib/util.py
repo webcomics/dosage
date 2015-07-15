@@ -205,6 +205,7 @@ def getPageContent(url, session, max_content_bytes=MaxContentBytes):
 
 def getImageObject(url, referrer, session, max_content_bytes=MaxImageBytes):
     """Get response object for given image URL."""
+    check_robotstxt(url, session)
     return urlopen(url, session, referrer=referrer, max_content_bytes=max_content_bytes, stream=True)
 
 
