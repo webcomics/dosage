@@ -8,15 +8,6 @@ from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import regexNamer, bounceStarter, indirectStarter
 
 
-class AbleAndBaker(_BasicScraper):
-    url = 'http://www.jimburgessdesign.com/comics/index.php'
-    stripUrl = url + '?comic=%s'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre('img', 'src', r'(comics/.+)'))
-    prevSearch = compile(tagre('a', 'href', r'(.+\d+)') + '.+?previous.gif')
-    help = 'Index format: nnn'
-
-
 class AbsurdNotions(_BasicScraper):
     baseUrl = 'http://www.absurdnotions.org/'
     url = baseUrl + 'page129.html'
