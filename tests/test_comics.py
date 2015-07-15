@@ -153,6 +153,7 @@ def generate_comic_testers():
             scraperclass for scraperclass in scraper.get_scraperclasses()
             if scraperclass.getName() in testscrapernames
         ]
+    scraperclasses.sort(key=lambda scraperclass: scraperclass.__name__)
     for scraperclass in scraperclasses:
         name = 'Test'+scraperclass.__name__
         g[name] = make_comic_tester(name, scraperclass=scraperclass)
