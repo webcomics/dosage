@@ -17,10 +17,6 @@ _prevSearch = compile(tagre("a", "href", r'(/[^"]+/\d+/\d+/\d+)', after="prev"))
 _nextSearch = compile(tagre("a", "href", r'(/[^"]+/\d+/\d+/\d+)', after="next"))
 
 def add(name, shortname):
-    # Unfortunately, the whole http://assets.amuniversal.com/ is blocked by
-    # robots.txt, so we disable GoComics for now...
-    return
-
     baseUrl = 'http://www.gocomics.com'
     url = baseUrl + shortname
     classname = 'GoComics_%s' % name
