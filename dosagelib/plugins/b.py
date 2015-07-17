@@ -221,7 +221,7 @@ class BoyOnAStickAndSlither(_BasicScraper):
 class BrentalFloss(_BasicScraper):
     url = 'http://brentalflossthecomic.com/'
     stripUrl = url + '?id=%s'
-    fristStripUrl = stripUrl % '1'
+    firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'([^"]*/img/comic/[^"]*)'))
     prevSearch = compile(tagre("a", "href", r'([^"]*)') + "Prev")
     help = 'Index format: n'
@@ -236,7 +236,7 @@ class BrentalFlossFit(BrentalFloss):
     name = 'BrentalFloss/FlossedInTime'
     url = 'http://brentalflossthecomic.com/fit/'
     stripUrl = url + '?id=%s'
-    fristStripUrl = stripUrl % '1'
+    firstStripUrl = stripUrl % '1'
 
     @classmethod
     def prevUrlModifier(cls, prevUrl):
@@ -253,7 +253,7 @@ class BrentalFlossGuest(BrentalFloss):
     name = 'BrentalFloss/GuestComics'
     url = 'http://brentalflossthecomic.com/guestcomics/'
     stripUrl = url + '?id=%s'
-    fristStripUrl = stripUrl % '1'
+    firstStripUrl = stripUrl % '1'
 
 
 # XXX disallowed by robots.txt
@@ -281,7 +281,7 @@ class BrightlyWound(_BasicScraper):
     baseUrl = 'http://www.brightlywound.com/'
     url = baseUrl + '?comic=137'
     stripUrl = baseUrl + '?comic=%s'
-    fristStripUrl = stripUrl % '0'
+    firstStripUrl = stripUrl % '0'
     imageSearch = compile(tagre("img", "src", r"(comic/[^']+)", quote="'"))
     prevSearch = compile(r'<div id=\'navback\'><a href=\'(\?comic\=\d+)\'><img src=\'images/previous.png\'')
     help = 'Index format: nnn'
