@@ -4,11 +4,11 @@ python:
   - "3.3"
   - "3.4"
 # install libjpeg-dev for Pillow to handle JPEGs
-before_install:
-  - sudo apt-get update -q -y
-  - sudo apt-get install -q -y libjpeg-dev
-# disabled upgrade: it gives build errors
-#  - sudo apt-get upgrade -q -y
+sudo: false
+addons:
+  apt:
+    packages:
+      - libjpeg-dev
 # command to install dependencies
 install:
   - pip install -r requirements.txt
