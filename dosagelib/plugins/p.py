@@ -172,8 +172,7 @@ class Pimpette(_ParserScraper):
     help = 'Index format: yyyymmdd'
 
 
-# Broken navigation: prev link at http://planescapecomic.com/201.html points to same URL.
-class _PlanescapeSurvival(_BasicScraper):
+class PlanescapeSurvival(_BasicScraper):
     url = 'http://planescapecomic.com/'
     stripUrl = url + '%s.html'
     imageSearch = compile(r'src="(comics/.+?)"')

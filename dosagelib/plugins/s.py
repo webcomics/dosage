@@ -159,17 +159,6 @@ class SexyLosers(_BasicScraper):
         return index + '-' + title
 
 
-# XXX site has been hacked
-class _ShadowGirls(_BasicScraper):
-    url = 'http://www.shadowgirlscomic.com/'
-    stripUrl = url + 'comics/%s'
-    firstStripUrl = stripUrl % 'book-1/chapter-1-broken-dreams/welcome'
-    imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]*)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]*)', after='navi-prev'))
-    help = 'Index format: custom'
-    starter = indirectStarter(url, compile(tagre("a", "href", r'([^"]*/comics/[^"]+)')))
-
-
 class Sheldon(_BasicScraper):
     url = 'http://www.sheldoncomics.com/'
     rurl = escape(url)
@@ -209,14 +198,13 @@ class Shivae(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
-# XXX disallowed by robots.txt
-class _Shortpacked(_BasicScraper):
-    url = 'http://www.shortpacked.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+/comic/[^"]+)' % rurl, after="prev"))
-    help = 'Index format: yyyy/comic/book-nn/mm-name1/name2'
+class Shortpacked(_ParserScraper):
+    url = 'http://www.shortpacked.com/index.php'
+    stripUrl = url + '?id=%s'
+    css = True
+    imageSearch = 'img#comic'
+    prevSearch = 'a.prev'
+    help = 'Index format: nnn'
 
 
 class ShotgunShuffle(_BasicScraper):
@@ -452,14 +440,12 @@ class StandStillStaySilent(_ParserScraper):
     help = 'Index Format: number'
 
 
-# XXX disallowed by robots.txt
-class _StationV3(_BasicScraper):
+class StationV3(_ParserScraper):
     url = 'http://www.stationv3.com/'
-    rurl = escape(url)
     stripUrl = url + 'd/%s.html'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%sd/\d+\.html)' % rurl) +
-      tagre("img", "src", r'http://www\.stationv3\.com/images/previous\.gif'))
+    imageSearch = '//img[contains(@src,"/comics2/")]'
+    prevSearch = '//a[img[contains(@src,"/previous2")]]'
+
     help = 'Index format: yyyymmdd'
 
 

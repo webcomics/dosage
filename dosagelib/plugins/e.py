@@ -152,8 +152,7 @@ class EmergencyExit(_BasicScraper):
     help = 'Index format: n'
 
 
-# XXX disallowed by robots.txt
-class _ErrantStory(_BasicScraper):
+class ErrantStory(_BasicScraper):
     url = 'http://www.errantstory.com/'
     stripUrl = url + '%s'
     imageSearch = compile(r'<img[^>]+?src="([^"]*?comics/.+?)"')

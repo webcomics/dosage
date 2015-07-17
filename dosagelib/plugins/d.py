@@ -286,15 +286,14 @@ class Drive(_BasicScraper):
     help = 'Index format: yymmdd'
 
 
-# XXX navigation works only with JavaScript
-class _DrMcNinja(_BasicScraper):
+class DrMcNinja(_ParserScraper):
     url = 'http://drmcninja.com/'
-    rurl = escape(url)
     stripUrl = url + 'archives/comic/%s/'
     firstStripUrl = stripUrl % '0p1'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%sarchives/comic/[^"]+)' % rurl, after="prev"))
-    help = 'Index format: episode number and page'
+    css = True
+    imageSearch = 'div#comic img'
+    prevSearch = 'a.prev'
+    help = 'Index format: {episode}p{page}'
 
 
 class Drowtales(_BasicScraper):
@@ -311,8 +310,7 @@ class Drowtales(_BasicScraper):
     help = 'Index format: number'
 
 
-# XXX disallowed by robots.txt
-class _DumbingOfAge(_BasicScraper):
+class DumbingOfAge(_BasicScraper):
     url = 'http://www.dumbingofage.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'

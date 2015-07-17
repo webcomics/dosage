@@ -137,8 +137,7 @@ class ToonHole(_BasicScraper):
         return url in (self.stripUrl % "2013/03/if-game-of-thrones-was-animated",)
 
 
-# XXX disallowed by robots.txt
-class _TwoLumps(_BasicScraper):
+class TwoLumps(_BasicScraper):
     url = 'http://www.twolumps.net/'
     stripUrl = url + 'd/%s.html'
     imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))

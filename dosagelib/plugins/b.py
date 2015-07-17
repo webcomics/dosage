@@ -256,17 +256,6 @@ class BrentalFlossGuest(BrentalFloss):
     firstStripUrl = stripUrl % '1'
 
 
-# XXX disallowed by robots.txt
-class _BringBackRoomies(_BasicScraper):
-    url = "http://www.bringbackroomies.com/"
-    rurl = escape(url)
-    stripUrl = url + "comic/%s"
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/\d+-\d+-\d+[^"]+)' % rurl))
-    prevSearch = compile(tagre("span", "class", "mininav-prev") +
-        tagre("a", "href", r'(%scomic/[^"]+)' % rurl))
-    help = 'Index format: stripname'
-
-
 class Brink(_BasicScraper):
     url = 'http://paperfangs.com/brink/'
     rurl = escape(url)
@@ -287,13 +276,13 @@ class BrightlyWound(_BasicScraper):
     help = 'Index format: nnn'
 
 
-# XXX disallowed by robots.txt
-class _ButtercupFestival(_BasicScraper):
+class ButtercupFestival(_ParserScraper):
     url = 'http://www.buttercupfestival.com/'
-    stripUrl = url + '%s.html'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.buttercupfestival\.com/\d+-\d+[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(\d+-\d+\.html)', quote="") + "previous")
-    help = 'Index format: number-number'
+    stripUrl = url + '%s.htm'
+    firstStripUrl = stripUrl % '2-1'
+    imageSearch = '//center/img'
+    prevSearch = '//a[text()="previous"]'
+    help = 'Index format: 2-number'
 
 
 class ButterSafe(_BasicScraper):
