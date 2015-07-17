@@ -451,9 +451,13 @@ class _ParserScraper(Scraper):
     @classmethod
     def fetchText(cls, url, data, textSearch, optional):
         """Search text entry for given text XPath in a HTML page."""
+        if cls.css:
+            searchFun = data.cssselect
+        else:
+            searchFun = data.xpath
         if textSearch:
             text = ''
-            for match in data.xpath(textSearch):
+            for match in searchFun(textSearch):
                 try:
                     text += ' ' + match.text_content()
                 except AttributeError:
