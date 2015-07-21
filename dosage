@@ -299,7 +299,7 @@ def getTaggedScraperName(scraperobj, limit=None, reasons=None):
     if scraperobj.lang != "en":
         tags.append("%s:%s" % (TAG_LANG, scraperobj.lang))
     disabled = scraperobj.getDisabledReasons()
-    if disabled and reasons:
+    if disabled and reasons is not None:
         reasons.update(disabled)
     for reason in disabled:
         tags.append("%s:%s" % (TAG_DISABLED, reason))
