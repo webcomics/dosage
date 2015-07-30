@@ -98,6 +98,12 @@ class CatAndGirl(_BasicScraper):
             self.stripUrl % '4299',
         )
 
+class CatVersusHuman(_ParserScraper):
+    url = 'http://www.catversushuman.com'
+    multipleImagesPerStrip = True
+    imageSearch = '//div[@class="post-body entry-content"]//img'
+    prevSearch = '//a[@class="blog-pager-older-link"]'
+
 
 class ChainsawSuit(_ParserScraper):
     url = 'http://chainsawsuit.com/'
