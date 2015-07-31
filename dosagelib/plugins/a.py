@@ -238,6 +238,11 @@ class Antics(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl, after='prev'))
     help = 'Index format: number'
 
+class AoiHouse(_ParserScraper):
+    url = 'http://www.aoihouse.net/'
+    imageSearch = '//div[@id="comic"]/a[2]/img'
+    prevSearch = '//a[@id="cndprev"]'
+
 
 class AppleGeeks(_BasicScraper):
     url = 'http://www.applegeeks.com/'
