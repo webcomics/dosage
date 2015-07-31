@@ -3,7 +3,7 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 
 from re import compile, escape, IGNORECASE
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from ..helpers import indirectStarter
 
@@ -46,6 +46,11 @@ class KillerKomics(_BasicScraper):
     imageSearch = compile(r'<img src="(http://www.killerkomics.com/FichiersUpload/Comics/.+?)"')
     prevSearch = compile(r'<div id="precedent"><a href="(.+?)"')
     help = 'Index format: strip-name'
+
+class KiwiBlitz(_ParserScraper):
+    url = 'http://www.kiwiblitz.com/'
+    imageSearch = '//div[@id="cc-comicbody"]//img'
+    prevSearch = '//a[@rel="prev"]'
 
 
 # XXX disallowed by robots.txt
