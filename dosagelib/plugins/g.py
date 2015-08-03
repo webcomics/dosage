@@ -131,13 +131,6 @@ class GoblinsComic(_BasicScraper):
     help = 'Index format: ddmmyyyy'
 
 
-class GoGetARoomie(_ParserScraper):
-    url = 'http://www.gogetaroomie.com/index.php'
-    imageSearch = '//div[@id="cc-comicbody"]//img'
-    prevSearch = '//a[@rel="prev"]'
-    help = 'Index format: nnn'
-
-
 class GoneWithTheBlastwave(_BasicScraper):
     url = 'http://www.blastwave-comic.com/index.php?p=comic&nro=1'
     starter = indirectStarter(url,

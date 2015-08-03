@@ -48,11 +48,6 @@ class LeastICouldDo(_BasicScraper):
       compile(tagre("a", "href", r'(%scomic/\d+/)' % rurl, after="feature-comic")))
     help = 'Index format: yyyymmdd'
 
-class LetsSpeakEnglish(_ParserScraper):
-    url = 'http://www.marycagle.com/'
-    imageSearch = '//div[@id="cc-comicbody"]//img'
-    prevSearch = '//a[@rel="prev"]'
-
 
 class Lint(_BasicScraper):
     url = 'http://www.purnicellin.com/lint/'

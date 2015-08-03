@@ -47,11 +47,6 @@ class KillerKomics(_BasicScraper):
     prevSearch = compile(r'<div id="precedent"><a href="(.+?)"')
     help = 'Index format: strip-name'
 
-class KiwiBlitz(_ParserScraper):
-    url = 'http://www.kiwiblitz.com/'
-    imageSearch = '//div[@id="cc-comicbody"]//img'
-    prevSearch = '//a[@rel="prev"]'
-
 
 # XXX disallowed by robots.txt
 class _Kofightclub(_BasicScraper):
