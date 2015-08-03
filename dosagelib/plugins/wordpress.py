@@ -3,7 +3,7 @@ from dosagelib.helpers import indirectStarter
 from ..scraper import make_scraper, _ParserScraper
 
 
-def add(name, url, firstUrl=None, starter=None, lang=None):
+def add(name, url, firstUrl=None, starter=None, textSearch=None, lang=None):
     attrs = dict(
         name=name,
         url=url,
@@ -22,6 +22,8 @@ def add(name, url, firstUrl=None, starter=None, lang=None):
         attrs['firstUrl'] = url + firstUrl
     if starter:
         attrs['starter'] = starter
+    if textSearch:
+        attrs['textSearch'] = textSearch
     globals()[name] = make_scraper(name, _ParserScraper, **attrs)
 
 
@@ -57,6 +59,7 @@ add('Nicky510', 'http://www.nickyitis.com/')
 add('OnTheEdge', 'http://ontheedgecomics.com/', 'comic/ote0001/')
 add('PandyLand', 'http://pandyland.net/', '1/')
 add('SailorsunOrg', 'http://sailorsun.org/')
+add('Sharksplode', 'http://sharksplode.com/', textSearch='//div[@id="comic"]//img/@alt')
 add('Sithrah', 'http://sithrah.com/')
 add('SlightlyDamned', 'http://www.sdamned.com/')
 add('SPQRBlues', 'http://spqrblues.com/IV/')
