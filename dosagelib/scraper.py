@@ -441,7 +441,7 @@ class _ParserScraper(Scraper):
                             searchUrls.append(match.get(attrib))
                 except AttributeError:
                     searchUrls.append(str(match))
-            if searchUrls:
+            if not cls.multipleImagesPerStrip and searchUrls:
                 # do not search other links if one pattern matched
                 break
         if not searchUrls:

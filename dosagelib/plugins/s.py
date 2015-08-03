@@ -283,9 +283,11 @@ class SMBC(_ParserScraper):
     rurl = escape(url)
     stripUrl = url + '?id=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = '//img[@id="comic"]'
+    multipleImagesPerStrip = True
+    imageSearch = ['//img[@id="comic"]', '//div[@id="aftercomic"]/img']
     prevSearch = '//a[@class="prev"]'
     help = 'Index format: nnnn'
+    textSearch = '//img[@id="comic"]/@title'
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
@@ -419,15 +421,6 @@ class SpareParts(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(http://www\.sparepartscomics\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(index\.php\?date=\d+)', quote="'") + "Previous Comic")
     help = 'Index format: yyyymmdd'
-
-
-class Spinnerette(_ParserScraper):
-    url = 'http://www.spinnyverse.com/'
-    stripUrl = url + 'comic/%s'
-    firstStripUrl = stripUrl % '02-09-2010'
-    imageSearch = '//div[@id="cc-comicbody"]//img'
-    prevSearch = '//a[@class="prev"]'
-    help = 'Index format: number'
 
 
 class StandStillStaySilent(_ParserScraper):
