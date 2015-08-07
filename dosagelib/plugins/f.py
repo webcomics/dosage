@@ -125,6 +125,18 @@ class ForLackOfABetterComic(_BasicScraper):
     help = 'Index format: number'
 
 
+class Fragile(_ParserScraper):
+    url = 'http://www.fragilestory.com/'
+    imageSearch = '//div[@id="content_comics"]/a[@class="nobg"]/img'
+    prevSearch = '//a[@class="comicnav" and contains(text(),"Prev")]'
+
+
+class FragileSpanish(_ParserScraper):
+    url = 'http://es.fragilestory.com/'
+    imageSearch = '//div[@id="content_comics"]/a[@class="nobg"]/img'
+    prevSearch = '//a[@class="comicnav" and contains(text(),"Anterior")]'
+    lang = 'es'
+
 class Freefall(_BasicScraper):
     url = 'http://freefall.purrsia.com/default.htm'
     stripUrl = 'http://freefall.purrsia.com/ff%s/fc%s.htm'
