@@ -3,18 +3,21 @@ from dosagelib.helpers import indirectStarter
 from ..scraper import make_scraper, _ParserScraper
 
 
+class _WordpressScraper(_ParserScraper):
+    imageSearch = ('//div[@id="comic"]//img',
+                   '//div[@class="webcomic-image"]//img')
+    prevSearch = ("//a[contains(concat(' ', text(), ' '), ' Prev ')]",
+                  "//a[contains(concat(' ', text(), ' '), ' Previous ')]",
+                  "//a[contains(concat(' ', @class, ' '), ' navi-prev ')]",
+                  "//a[contains(concat(' ', @class, ' '), ' navi-prev-in ')]",
+                  "//a[contains(concat(' ', @class, ' '), ' navi-previous ')]",
+                  "//a[contains(concat(' ', @class, ' '), ' previous-webcomic-link ')]")
+
+
 def add(name, url, firstUrl=None, starter=None, textSearch=None, lang=None):
     attrs = dict(
         name=name,
-        url=url,
-        imageSearch=['//div[@id="comic"]//img',
-                     '//div[@class="webcomic-image"]//img'],
-        prevSearch=["//a[contains(concat(' ', text(), ' '), ' Prev ')]",
-                    "//a[contains(concat(' ', text(), ' '), ' Previous ')]",
-                    "//a[contains(concat(' ', @class, ' '), ' navi-prev ')]",
-                    "//a[contains(concat(' ', @class, ' '), ' navi-prev-in ')]",
-                    "//a[contains(concat(' ', @class, ' '), ' navi-previous ')]",
-                    "//a[contains(concat(' ', @class, ' '), ' previous-webcomic-link ')]"]
+        url=url
     )
     if lang:
         attrs['lang'] = lang
@@ -24,13 +27,16 @@ def add(name, url, firstUrl=None, starter=None, textSearch=None, lang=None):
         attrs['starter'] = starter
     if textSearch:
         attrs['textSearch'] = textSearch
-    globals()[name] = make_scraper(name, _ParserScraper, **attrs)
+    globals()[name] = make_scraper(name, _WordpressScraper, **attrs)
+
+
+class Amya(_WordpressScraper):
+    url = 'http://www.amyachronicles.com/'
 
 
 add('1997', 'http://1977thecomic.com/')
 add('Alice', 'http://www.alicecomics.com/',
     starter=indirectStarter('http://www.alicecomics.com/', '//a[text()="Latest Alice!"]'))
-add('Amya', 'http://www.amyachronicles.com/')
 add('AxeCop', 'http://axecop.com/comic/season-two/')
 add('Bardsworth', 'http://www.bardsworth.com/')
 add('BloodBound', 'http://bloodboundcomic.com/', 'comic/06112006/')
