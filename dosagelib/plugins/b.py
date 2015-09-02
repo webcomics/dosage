@@ -4,7 +4,7 @@
 
 from re import compile, escape
 
-from ..util import tagre
+from ..util import tagre, getPageContent
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 
@@ -160,13 +160,23 @@ class BloomingFaeries(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'http://www.bloomingfaeries.com/wp-content/uploads([^"]+)', after='title'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)', after='comic-nav-base comic-nav-previous'))
     help = 'Index format: stripname'
-
+    
     @classmethod
     def imageUrlModifier(cls, imageUrl, data):
         print imageUrl
         if imageUrl:
             return imageUrl.replace("http://www.bloomingfaeries.com/","http://www.bloomingfaeries.com/wp-content/uploads/")
 
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        bf = imageUrl.split('/')
+        name = bf[-1]
+        re = compile(tagre("div","class",r'comic-id-([^"]+)'))
+        content = getPageContent(pageUrl, cls.session)
+        match = re.search(content)
+        if not match:
+            return None
+        return "BF%s_%s" % (match.group(1),name)
 
 class BMovieComic(_BasicScraper):
     url = 'http://www.bmoviecomic.com/'
