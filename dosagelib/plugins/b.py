@@ -163,7 +163,6 @@ class BloomingFaeries(_BasicScraper):
  
     @classmethod
     def imageUrlModifier(cls, imageUrl, data):
-        print imageUrl
         if imageUrl:
             return imageUrl.replace("http://www.bloomingfaeries.com/","http://www.bloomingfaeries.com/wp-content/uploads/")
 
