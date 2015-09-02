@@ -151,6 +151,22 @@ class Blip(_BasicScraper):
         if prevUrl:
             return prevUrl.replace("www.blipcomic.com", "blipcomic.com")
 
+class BloomingFaeries(_BasicScraper):
+    adult = True
+    url = 'http://www.bloomingfaeries.com/'
+    rurl = escape(url)
+    stripUrl = url + 'comic/public/%s/'
+    firstStripUrl = stripUrl % "pit-stop"
+    imageSearch = compile(tagre("img", "src", r'http://www.bloomingfaeries.com/wp-content/uploads([^"]+)', after='title'))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)', after='comic-nav-base comic-nav-previous'))
+    help = 'Index format: stripname'
+
+    @classmethod
+    def imageUrlModifier(cls, imageUrl, data):
+        print imageUrl
+        if imageUrl:
+            return imageUrl.replace("http://www.bloomingfaeries.com/","http://www.bloomingfaeries.com/wp-content/uploads/")
+
 
 class BMovieComic(_BasicScraper):
     url = 'http://www.bmoviecomic.com/'
