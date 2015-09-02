@@ -160,7 +160,7 @@ class BloomingFaeries(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'http://www.bloomingfaeries.com/wp-content/uploads([^"]+)', after='title'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)', after='comic-nav-base comic-nav-previous'))
     help = 'Index format: stripname'
-    
+ 
     @classmethod
     def imageUrlModifier(cls, imageUrl, data):
         print imageUrl
