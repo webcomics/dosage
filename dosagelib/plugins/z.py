@@ -47,6 +47,7 @@ class ZebraGirl(_BasicScraper):
 class ZenPencils(_BasicScraper):
     url = 'http://zenpencils.com/'
     rurl = escape(url)
+    multipleImagesPerStrip = True
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '1-ralph-waldo-emerson-make-them-cry'
     prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+/)' % rurl, after="navi-prev"))
