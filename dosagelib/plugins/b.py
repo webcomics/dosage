@@ -157,15 +157,10 @@ class BloomingFaeries(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + 'comic/public/%s/'
     firstStripUrl = stripUrl % "pit-stop"
-    imageSearch = compile(tagre("img", "src", r'http://www.bloomingfaeries.com/wp-content/uploads([^"]+)', after='title'))
+    imageSearch = compile(tagre("img", "src", r'(http://www.bloomingfaeries.com/wp-content/uploads[^"]+)', after='title'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)', after='comic-nav-base comic-nav-previous'))
     help = 'Index format: stripname'
  
-    @classmethod
-    def imageUrlModifier(cls, imageUrl, data):
-        if imageUrl:
-            return imageUrl.replace("http://www.bloomingfaeries.com/","http://www.bloomingfaeries.com/wp-content/uploads/")
-
     @classmethod
     def namer(cls, imageUrl, pageUrl):
         bf = imageUrl.split('/')
