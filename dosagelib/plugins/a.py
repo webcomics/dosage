@@ -79,6 +79,16 @@ class AGirlAndHerFed(_BasicScraper):
     help = 'Index format: nnn'
 
 
+class AhoyEarth(_ParserScraper):
+    url = 'http://www.ahoyearth.com/'
+    rurl = escape(url)
+    stripUrl = url + '%s/'
+    css = True
+    imageSearch = '#comic-1 img'
+    prevSearch = '.navi-prev'
+    help = 'Index format: ddmmyyyy'
+	
+	
 class AhoiPolloi(_BasicScraper):
     url = 'http://ahoipolloi.blogger.de/'
     stripUrl = url + '?day=%s'
