@@ -121,13 +121,13 @@ class GleefulNihilism(_BasicScraper):
     help = 'Index format: stripname'
 
 
-class GoblinsComic(_BasicScraper):
+class GoblinsComic(_ParserScraper):
     url = 'http://www.goblinscomic.org/'
     rurl = escape(url)
     stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '06252005'
-    prevSearch = compile(tagre("a", "href", r'(%s[-\d]+/)' % rurl, after="prev"))
-    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+\.[^"]+)' % rurl))
+    css = True
+    imageSearch = '#comic img'
+    prevSearch = '.nav-previous > a'
     help = 'Index format: ddmmyyyy'
 
 
