@@ -97,7 +97,7 @@ class Roza(_BasicScraper):
 
 class Ruthe(_BasicScraper):
     url = 'http://ruthe.de/'
-    stripUrl = url + 'index.php?pic=%s&sort=datum&order=ASC'
+    stripUrl = url + 'cartoon/%s/datum/ASC'
     firstStripUrl = stripUrl % '1'
     lang = 'de'
     imageSearch = compile(tagre("img", "src", r'(/?cartoons/strip_\d+[^"]+)'))
