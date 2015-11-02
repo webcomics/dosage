@@ -55,11 +55,6 @@ ConnectionTimeoutSecs = 60
 UrlEncoding = "utf-8"
 
 
-if hasattr(requests, 'adapters'):
-    # requests >= 1.0
-    requests.adapters.DEFAULT_RETRIES = MaxRetries
-
-
 def get_system_uid():
     """Get a (probably) unique ID to identify a system.
     Used to differentiate votes.
@@ -305,22 +300,16 @@ def urlopen(url, session, referrer=None, max_content_bytes=None,
     kwargs = {
         "headers": headers,
         "timeout": timeout,
+        "stream": stream,
     }
-    if hasattr(requests, 'adapters'):
-        # requests >= 1.0
-        kwargs["stream"] = stream
-    else:
-        # requests << 1.0
-        kwargs["prefetch"] = not stream
-        kwargs["config"] = {"max_retries": MaxRetries}
     if data is None:
-        func = session.get
+        method = 'GET'
     else:
         kwargs['data'] = data
-        func = session.post
+        method = 'POST'
         out.debug(u'Sending POST data %s' % data, level=3)
     try:
-        req = func(url, **kwargs)
+        req = session.request(method, url, **kwargs)
         out.debug(u'Response cookies: %s' % req.cookies)
         check_content_size(url, req.headers, max_content_bytes)
         if raise_for_status:
