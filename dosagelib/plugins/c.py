@@ -7,7 +7,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
-
+from wordpress import _WordpressScraper
 
 class Caggage(_BasicScraper):
     url = 'http://caggagecomic.com/'
@@ -97,6 +97,10 @@ class CatAndGirl(_BasicScraper):
         return url in (
             self.stripUrl % '4299',
         )
+
+class CatNine(_WordpressScraper):
+    url = 'http://cat-nine.net'
+    firstStripUrl = 'http://cat-nine.net/comic/episode-1/first-day-for-everything/'
 
 class CatVersusHuman(_ParserScraper):
     url = 'http://www.catversushuman.com'
