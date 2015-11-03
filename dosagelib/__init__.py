@@ -12,10 +12,9 @@ your intentions, and received permission to distribute.
 The primary interface is the 'dosage' commandline script.
 Comic modules for each comic are located in L{dosagelib.plugins}.
 """
-import sys
-if not (hasattr(sys, 'version_info') or
-        sys.version_info < (2, 7, 0, 'final', 0)):
-    raise SystemExit("This program requires Python 2.7 or later.")
 
-# PEP 396
-from .configuration import Version as __version__
+from pkg_resources import get_distribution
+
+AppName = u'dosage'
+dist = get_distribution(AppName)
+__version__ = dist.version # PEP 396

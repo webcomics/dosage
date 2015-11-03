@@ -4,14 +4,16 @@
 Define basic configuration data like version or application name.
 """
 
-AppName = u'dosage'
-Version = u'2.16' # Should be PEP 440 compatible
-App = AppName + u' ' + Version
+from __future__ import print_function
+from . import __version__, AppName
+
+App = AppName + u' ' + __version__
+
 Maintainer = u'Tobias Gruetzmacher'
 MaintainerEmail = u'tobias-dosage@23.gs'
 Url = u'http://dosage.rocks/'
 SupportUrl = u'https://github.com/webcomics/dosage/issues'
-UserAgent = u"Mozilla/5.0 (compatible; %s/%s; +%s)" % (AppName, Version, Url)
+UserAgent = u"Mozilla/5.0 (compatible; %s/%s; +%s)" % (AppName, __version__, Url)
 Copyright = u"""Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 Copyright (C) 2012-2014 Bastian Kleineidam
 Copyright (C) 2015 Tobias Gruetzmacher

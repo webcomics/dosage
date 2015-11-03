@@ -15,6 +15,7 @@ import os
 import argparse
 import pydoc
 from io import StringIO
+import dosagelib
 from dosagelib import events, configuration, singleton, director
 from dosagelib.output import out
 from dosagelib.util import internal_error, strlimit
@@ -113,7 +114,7 @@ def displayVersion(verbose):
                     text = ('A new version %(version)s of %(app)s is '
                             'available at %(url)s.')
                 attrs = dict(version=version, app=configuration.AppName,
-                             url=url, currentversion=configuration.Version)
+                             url=url, currentversion=dosagelib.__version__)
                 print(text % attrs)
         else:
             if value is None:

@@ -1,7 +1,1 @@
-# required:
 requests>=2.0
-# optional:
-argcomplete
-lxml
-cssselect
-Pillow

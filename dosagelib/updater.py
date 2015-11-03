@@ -3,7 +3,7 @@
 Function to check for updates.
 """
 import os
-from .configuration import Version as CurrentVersion
+import dosagelib
 from .util import urlopen
 from distutils.version import StrictVersion
 import requests
@@ -29,7 +29,7 @@ def check_update ():
     if version is None:
         # value is an error message
         return False, value
-    if version == CurrentVersion:
+    if version == dosagelib.__version__:
         # user has newest version
         return True, None
     if is_newer_version(version):
@@ -55,4 +55,4 @@ def get_online_version ():
 
 def is_newer_version (version):
     """Check if given version is newer than current version."""
-    return StrictVersion(version) > StrictVersion(CurrentVersion)
+    return StrictVersion(version) > StrictVersion(dosagelib.__version__)

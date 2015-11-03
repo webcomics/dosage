@@ -1,3 +1,2 @@
-exclude .git*
-exclude .travis.yml
+exclude .*
 recursive-exclude scripts dosage.*

@@ -5,8 +5,9 @@
 /Comics
 /build
 /dist
-/Changelog.dosage*
+/ChangeLog
 /testresults.txt
 /dosage.prof
 /dosage.egg-info
 /scripts/*.json
+/AUTHORS
