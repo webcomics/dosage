@@ -16,7 +16,7 @@ from scriptutil import contains_case_insensitive, capfirst, save_result, load_re
 
 json_file = __file__.replace(".py", ".json")
 
-url_matcher = re.compile(tagre("a", "href", r'(/comics/[^/]+)\.html') + r'<strong>([^<]+)</strong>')
+url_matcher = re.compile(tagre("a", "href", r'/comics/([^/]+)\.html') + r'<strong>([^<]+)</strong>')
 
 # names of comics to exclude
 exclude_comics = [
@@ -67,16 +67,15 @@ def print_results(args):
     """Print comics."""
     min_comics, filename = args
     with codecs.open(filename, 'a', 'utf-8') as fp:
-        for name, url in sorted(load_result(json_file).items()):
+        for name, path in sorted(load_result(json_file).items()):
             if name in exclude_comics:
                 continue
+            lang = 'Es' if name.lower().endswith('spanish') else ''
             if has_gocomics_comic(name):
-                prefix = u'# duplicate of gocomics '
+                fp.write(u'# %s has a duplicate in gocomics\n' % truncate_name(name))
             else:
-                prefix = u''
-            fp.write(u"%sadd(%r, %r)\n" % (
-              prefix, str(truncate_name(name)), str(url))
-            )
+                fp.write(u"class %s(_Creators%s):\n    path = %r\n\n" %
+                        (truncate_name(name), lang, path))
 
 
 if __name__ == '__main__':
