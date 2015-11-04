@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*-
-from ..scraper import make_scraper, _ParserScraper
+from __future__ import unicode_literals
+from ..scraper import _ParserScraper
 
+class Footloose(_ParserScraper):
+    url = 'http://footloosecomic.com/footloose.php'
+    imageSearch='//body/p[1]//img'
+    prevSearch='//body/a[2]'
 
-def add(name, url):
-    attrs = dict(
-        name=name,
-        url='http://footloosecomic.com/' + url,
-        imageSearch='//body/p[1]//img',
-        prevSearch='//body/a[2]'
-    )
-    globals()[name] = make_scraper(name, _ParserScraper, **attrs)
+class Cherry(Footloose):
+    url = 'http://footloosecomic.com/cherry/index.php'
 
+class Desigaspring(Footloose):
+    url = 'http://footloosecomic.com/dspring/index.php'
 
-add('Cherry', 'cherry/index.php')
-add('Desigaspring', 'dspring/index.php')
-add('Footloose', 'footloose.php')
