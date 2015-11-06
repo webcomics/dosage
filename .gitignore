@@ -1,7 +1,7 @@
 *.orig
 *.pyc
 *.pyo
-/*.egg
+/.eggs
 /Comics
 /build
 /dist

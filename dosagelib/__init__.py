@@ -1,6 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015 Tobias Gruetzmacher
 """
 Automated comic downloader. Dosage traverses comic websites in
 order to download each strip of the comic. The intended use is for
@@ -13,8 +14,8 @@ The primary interface is the 'dosage' commandline script.
 Comic modules for each comic are located in L{dosagelib.plugins}.
 """
 
-from pkg_resources import get_distribution
+from pbr.version import VersionInfo
 
 AppName = u'dosage'
-dist = get_distribution(AppName)
-__version__ = dist.version # PEP 396
+version_info = VersionInfo(AppName)
+__version__ = version_info.version_string() # PEP 396
