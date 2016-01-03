@@ -37,6 +37,12 @@ class LasLindas(_BasicScraper):
     help = 'Index format: stripname'
 
 
+class LastNerdsOnEarth(_ParserScraper):
+    url = 'http://www.lastnerdsonearth.com/latest/'
+    imageSearch = '//div[@id="content"]/a/img'
+    prevSearch = '//div[@id="comicnav"]/a[last()-2]'
+
+
 class LeastICouldDo(_BasicScraper):
     url = 'http://www.leasticoulddo.com/'
     rurl = escape(url)
