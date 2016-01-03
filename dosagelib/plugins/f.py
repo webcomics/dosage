@@ -127,8 +127,9 @@ class ForLackOfABetterComic(_BasicScraper):
 
 class Fragile(_ParserScraper):
     url = 'http://www.fragilestory.com/'
-    imageSearch = '//div[@id="content_comics"]/a[@class="nobg"]/img'
-    prevSearch = '//a[@class="comicnav" and contains(text(),"Prev")]'
+    imageSearch = '//div[@id="comic_strip"]/a[@class="nobg"]/img'
+    prevSearch = '//div[@id="nav_comic_a"]/a[2]'
+    firstStripUrl = url + 'strips/chapter_01'
 
 
 class FragileSpanish(_ParserScraper):
