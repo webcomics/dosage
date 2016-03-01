@@ -32,7 +32,7 @@ from .output import out
 from .configuration import UserAgent, AppName, App, SupportUrl
 
 # Maximum content size for HTML pages
-MaxContentBytes = 1024 * 1024 * 2 # 2 MB
+MaxContentBytes = 1024 * 1024 * 3 # 2 MB
 
 # Maximum content size for images
 MaxImageBytes = 1024 * 1024 * 20 # 20 MB
