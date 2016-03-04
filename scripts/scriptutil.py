@@ -1,7 +1,9 @@
+# -*- coding: utf-8 -*-
 # Copyright (C) 2012-2014 Bastian Kleineidam
-import re
+# Copyright (C) 2016 Tobias Gruetzmacher
 import json
-from dosagelib.util import unescape, unquote, asciify
+from dosagelib.util import unescape, asciify
+
 
 def contains_case_insensitive(adict, akey):
     """Check if key is in adict. The search is case insensitive."""
@@ -11,12 +13,6 @@ def contains_case_insensitive(adict, akey):
     return False
 
 
-_tagre = re.compile(r"<.+?>")
-def remove_html_tags(text):
-    """Remove all HTML tags from text."""
-    return _tagre.sub(u"", text)
-
-
 def capfirst(text):
     """Uppercase the first character of text."""
     if not text:
@@ -24,18 +20,10 @@ def capfirst(text):
     return text[0].upper() + text[1:]
 
 
-_ws = re.compile(ur"\s+")
-def compact_whitespace(text):
-    """Compact all subsequent whitespace to a single space."""
-    if not text:
-        return text
-    return _ws.sub(u" ", text)
-
-
 def save_result(res, json_file):
     """Save result to file."""
     with open(json_file, 'wb') as f:
-        json.dump(res, f, sort_keys=True)
+        json.dump(res, f, sort_keys=True, indent=2, separators=(',', ': '))
 
 
 def load_result(json_file):
@@ -45,8 +33,8 @@ def load_result(json_file):
 
 
 def truncate_name(text):
-    """Ensure the comic name does not exceed 100 characters."""
-    return text[:100]
+    """Ensure the comic name does not exceed 50 characters."""
+    return text[:50]
 
 
 def format_name(text):

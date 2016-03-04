@@ -56,7 +56,7 @@ class TestDosage (unittest.TestCase):
         tmpdir = tempfile.mkdtemp()
         try:
             # fetch html and rss 2
-            run_with_options(["--numstrips", "2", "--baseurl", "bla", "--basepath", tmpdir, "--output", "rss", "--output", "html", "--adult", "sexyloser"])
+            run_with_options(["--numstrips", "2", "--baseurl", "bla", "--basepath", tmpdir, "--output", "rss", "--output", "html", "--adult", "oglaf"])
         finally:
             shutil.rmtree(tmpdir)
         # create a temporary directory for images
