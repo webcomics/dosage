@@ -1,14 +1,16 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2013-2014 Bastian Kleineidam
-from unittest import TestCase
+# Copyright (C) 2016 Tobias Gruetzmacher
+
 from dosagelib import scraper
 
 
 class ATestScraper(scraper._BasicScraper):
     name = 'Test_Test'
 
-class TestVote(TestCase):
+
+class TestVote(object):
 
     def test_vote(self):
         answer = ATestScraper.vote()
-        self.assertTrue(answer in ('counted', 'no'), 'invalid answer %r' % answer)
+        assert answer in ('counted', 'no'), 'invalid answer %r' % answer
