@@ -128,16 +128,21 @@ def get_test_scraperclasses():
         # test all comics (this will take some time)
         scraperclasses = scraper.get_scraperclasses()
     else:
-        # Get limited number of scraper tests on Travis builds to make
-        # it faster
-        testscrapernames = [
-                'AbstruseGoose',
-                'GoComics/CalvinandHobbes',
-                'xkcd'
-        ]
+        if 'TESTCOMICS' in os.environ:
+            scraper_pattern = re.compile(os.environ['TESTCOMICS'])
+        else:
+            # Get limited number of scraper tests on Travis builds to make it
+            # faster
+            testscrapernames = [
+                    'AbstruseGoose',
+                    'GoComics/CalvinandHobbes',
+                    'xkcd'
+            ]
+            scraper_pattern = re.compile('|'.join(testscrapernames))
+
         scraperclasses = [
             scraperclass for scraperclass in scraper.get_scraperclasses()
-            if scraperclass.getName() in testscrapernames
+            if scraper_pattern.match(scraperclass.getName())
         ]
     return scraperclasses
 
