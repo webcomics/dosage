@@ -1,6 +1,8 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2014-2016 Tobias Gruetzmacher
+
 from __future__ import division, print_function
 try:
     from urllib.parse import quote as url_quote, unquote as url_unquote
@@ -15,6 +17,11 @@ try:
 except ImportError:
     import robotparser
 import requests
+from requests.adapters import HTTPAdapter
+try:
+    from urllib3.util.retry import Retry
+except ImportError:
+    from requests.packages.urllib3.util.retry import Retry
 import sys
 import os
 import cgi
@@ -32,16 +39,17 @@ from .output import out
 from .configuration import UserAgent, AppName, App, SupportUrl
 
 # Maximum content size for HTML pages
-MaxContentBytes = 1024 * 1024 * 3 # 2 MB
+MaxContentBytes = 1024 * 1024 * 3  # 3 MB
 
 # Maximum content size for images
-MaxImageBytes = 1024 * 1024 * 20 # 20 MB
+MaxImageBytes = 1024 * 1024 * 20  # 20 MB
 
 # Default number of retries
 MaxRetries = 3
 
-# Time to pause between retries
-RetryPauseSeconds = 5
+# Factor for retry backoff (see urllib3.util.retry, this default means
+# 2s, 4s, 8s)
+RetryBackoffFactor = 2
 
 # Default connection timeout
 ConnectionTimeoutSecs = 60
@@ -53,6 +61,14 @@ ConnectionTimeoutSecs = 60
 # else they use the page encoding for followed link. See als
 # http://code.google.com/p/browsersec/wiki/Part1#Unicode_in_URLs
 UrlEncoding = "utf-8"
+
+
+def requests_session():
+    s = requests.Session()
+    retry = Retry(MaxRetries, backoff_factor=RetryBackoffFactor)
+    s.mount('http://', HTTPAdapter(max_retries=retry))
+    s.mount('https://', HTTPAdapter(max_retries=retry))
+    return s
 
 
 def get_system_uid():
@@ -107,7 +123,7 @@ def get_mac_uid():
     return "%d" % uuid.getnode()
 
 
-def backtick (cmd, encoding='utf-8'):
+def backtick(cmd, encoding='utf-8'):
     """Return decoded output from command."""
     data = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
     return data.decode(encoding)
@@ -155,7 +171,9 @@ def tagre(tag, attribute, value, quote='"', before="", after=""):
         prefix=prefix,
         after=after,
     )
-    return r'<\s*%(tag)s\s+%(prefix)s%(attribute)s\s*=\s*%(quote)s%(value)s%(quote)s[^>]*%(after)s[^>]*>' % attrs
+    return (r'<\s*%(tag)s\s+%(prefix)s' +
+            r'%(attribute)s\s*=\s*%(quote)s%(value)s%(quote)' +
+            r's[^>]*%(after)s[^>]*>') % attrs
 
 
 def case_insensitive_re(name):
@@ -170,37 +188,20 @@ def case_insensitive_re(name):
     return "".join("[%s%s]" % (c.lower(), c.upper()) for c in name)
 
 
-def isValidPageContent(data):
-    """Check if page content is empty or has error messages."""
-    # The python requests library sometimes returns empty data.
-    # Some webservers have a 200 OK status but have an error message as response.
-    return data and not data.startswith("Internal Server Error")
-
-
 def getPageContent(url, session, max_content_bytes=MaxContentBytes):
     """Get text content of given URL."""
     check_robotstxt(url, session)
     # read page data
-    try:
-        page = urlopen(url, session, max_content_bytes=max_content_bytes)
-    except IOError:
-        page = urlopen(url, session, max_content_bytes=max_content_bytes)
+    page = urlopen(url, session, max_content_bytes=max_content_bytes)
     data = page.text
-    tries = MaxRetries
-    while not isValidPageContent(data) and tries > 0:
-        time.sleep(RetryPauseSeconds)
-        page = urlopen(url, session, max_content_bytes=max_content_bytes)
-        data = page.text
-        tries -= 1
-    if not isValidPageContent(data):
-        raise ValueError("Got invalid page content from %s: %r" % (url, data))
     out.debug(u"Got page content %r" % data, level=3)
     return data
 
 
 def getImageObject(url, referrer, session, max_content_bytes=MaxImageBytes):
     """Get response object for given image URL."""
-    return urlopen(url, session, referrer=referrer, max_content_bytes=max_content_bytes, stream=True)
+    return urlopen(url, session, referrer=referrer,
+                   max_content_bytes=max_content_bytes, stream=True)
 
 
 def makeSequence(item):
@@ -224,12 +225,15 @@ def prettyMatcherList(things):
 
 
 _htmlparser = HTMLParser()
+
+
 def unescape(text):
     """Replace HTML entities and character references."""
     return _htmlparser.unescape(text)
 
 
 _nopathquote_chars = "-;/=,~*+()@!"
+
 
 def normaliseURL(url):
     """Normalising
@@ -275,7 +279,8 @@ def get_robotstxt_parser(url, session=None):
     """Get a RobotFileParser for the given robots.txt URL."""
     rp = robotparser.RobotFileParser()
     try:
-        req = urlopen(url, session, max_content_bytes=MaxContentBytes, raise_for_status=False)
+        req = urlopen(url, session, max_content_bytes=MaxContentBytes,
+                      raise_for_status=False)
     except Exception:
         # connect or timeout errors are treated as an absent robots.txt
         rp.allow_all = True
@@ -329,8 +334,9 @@ def check_content_size(url, headers, max_content_bytes):
     if 'content-length' in headers:
         size = int(headers['content-length'])
         if size > max_content_bytes:
-            msg = 'URL content of %s with %d bytes exceeds %d bytes.' % (url, size, max_content_bytes)
-            raise IOError(msg)
+            raise IOError(
+                'URL content of %s with %d bytes exceeds %d bytes.' %
+                (url, size, max_content_bytes))
 
 
 def splitpath(path):
@@ -388,7 +394,8 @@ I can work with ;) .
     print_proxy_info(out=out)
     print_locale_info(out=out)
     print(os.linesep,
-            "******** %s internal error, over and out ********" % AppName, file=out)
+          "******** %s internal error, over and out ********" % AppName,
+          file=out)
 
 
 def print_env_info(key, out=sys.stderr):
@@ -414,7 +421,7 @@ def print_app_info(out=sys.stderr):
     print("System info:", file=out)
     print(App, file=out)
     print("Python %(version)s on %(platform)s" %
-                    {"version": sys.version, "platform": sys.platform}, file=out)
+          {"version": sys.version, "platform": sys.platform}, file=out)
     stime = strtime(time.time())
     print("Local time:", stime, file=out)
     print("sys.argv", sys.argv, file=out)
@@ -422,8 +429,8 @@ def print_app_info(out=sys.stderr):
 
 def strtime(t):
     """Return ISO 8601 formatted time."""
-    return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(t)) + \
-           strtimezone()
+    return (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(t)) +
+            strtimezone())
 
 
 def strtimezone():
@@ -461,7 +468,7 @@ def quote(text, safechars='/'):
     return url_quote(text, safechars)
 
 
-def strsize (b):
+def strsize(b):
     """Return human representation of bytes b. A negative number of bytes
     raises a value error."""
     if b < 0:
@@ -487,7 +494,8 @@ def getDirname(name):
 
 
 def getFilename(name):
-    """Get a filename from given name without dangerous or incompatible characters."""
+    """Get a filename from given name without dangerous or incompatible
+    characters."""
     # first replace all illegal chars
     name = re.sub(r"[^0-9a-zA-Z_\-\.]", "_", name)
     # then remove double dots and underscores
@@ -532,7 +540,7 @@ def getNonexistingFile(name):
     return filename
 
 
-def strlimit (s, length=72):
+def strlimit(s, length=72):
     """If the length of the string exceeds the given limit, it will be cut
     off and three dots will be appended.
 

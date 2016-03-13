@@ -3,7 +3,6 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2014-2016 Tobias Gruetzmacher
 
-import requests
 import time
 import random
 import os
@@ -32,7 +31,7 @@ except ImportError:
 from . import loader, configuration, languages
 from .util import (getPageContent, makeSequence, get_system_uid, urlopen,
                    getDirname, unescape, tagre, normaliseURL,
-                   prettyMatcherList)
+                   prettyMatcherList, requests_session)
 from .comic import ComicStrip
 from .output import out
 from .events import getHandler
@@ -88,8 +87,8 @@ class Scraper(object):
     # usually the index format help
     help = ''
 
-    # HTTP session storing cookies
-    session = requests.session()
+    # HTTP session for configuration & cookies
+    session = requests_session()
 
     def __init__(self, indexes=None):
         """Initialize internal variables."""
