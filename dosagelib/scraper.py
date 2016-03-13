@@ -1,6 +1,8 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2014-2016 Tobias Gruetzmacher
+
 import requests
 import time
 import random
@@ -27,21 +29,24 @@ try:
 except ImportError:
     pycountry = None
 
-from . import loader, configuration, util, languages
+from . import loader, configuration, languages
 from .util import (getPageContent, makeSequence, get_system_uid, urlopen,
-        getDirname, unescape, tagre, normaliseURL, prettyMatcherList)
+                   getDirname, unescape, tagre, normaliseURL,
+                   prettyMatcherList)
 from .comic import ComicStrip
 from .output import out
 from .events import getHandler
 
 
 class Scraper(object):
-    '''Base class for all comic scraper, but without a specific scrape implementation.'''
+    '''Base class for all comic scraper, but without a specific scrape
+    implementation.'''
 
     # The URL for the comic strip
     url = None
 
-    # A string that is interpolated with the strip index to yield the URL for a particular strip.
+    # A string that is interpolated with the strip index to yield the URL for a
+    # particular strip.
     stripUrl = None
 
     # Stop search for previous URLs at this URL
@@ -50,7 +55,8 @@ class Scraper(object):
     # if more than one image per URL is expected
     multipleImagesPerStrip = False
 
-    # set to False if previous URLs do not match the strip URL (ie. because of redirects)
+    # set to False if previous URLs do not match the strip URL (ie. because of
+    # redirects)
     prevUrlMatchesStripUrl = True
 
     # set to True if this comic contains adult content
@@ -122,17 +128,22 @@ class Scraper(object):
         # remove duplicate URLs
         imageUrls = set(imageUrls)
         if len(imageUrls) > 1 and not self.multipleImagesPerStrip:
-            out.warn(u"Found %d images instead of 1 at %s with expressions %s" % (len(imageUrls), url, prettyMatcherList(self.imageSearch)))
+            out.warn(
+                u"Found %d images instead of 1 at %s with expressions %s" %
+                (len(imageUrls), url, prettyMatcherList(self.imageSearch)))
             image = sorted(imageUrls)[0]
             out.warn(u"Choosing image %s" % image)
             imageUrls = (image,)
         elif not imageUrls:
-            out.warn(u"Found no images at %s with expressions %s" % (url, prettyMatcherList(self.imageSearch)))
+            out.warn(u"Found no images at %s with expressions %s" % (url,
+                     prettyMatcherList(self.imageSearch)))
         if self.textSearch:
-            text = self.fetchText(url, data, self.textSearch, optional=self.textOptional)
+            text = self.fetchText(url, data, self.textSearch,
+                                  optional=self.textOptional)
         else:
             text = None
-        return ComicStrip(self.getName(), url, imageUrls, self.namer, self.session, text=text)
+        return ComicStrip(self.getName(), url, imageUrls, self.namer,
+                          self.session, text=text)
 
     def getStrips(self, maxstrips=None):
         """Get comic strips."""
@@ -284,11 +295,11 @@ class Scraper(object):
         of fetchUrls and fetchText.
 
         Implementation notes: While this base class does not restrict how the
-        returned data is structured, subclasses (specific scrapers) should specify
-        how this data works, since the stracture is passed into different methods
-        which can be defined by comic modules and these methods should be able to
-        use the data if they so desire... (Affected methods: shouldSkipUrl,
-        imageUrlModifier)
+        returned data is structured, subclasses (specific scrapers) should
+        specify how this data works, since the stracture is passed into
+        different methods which can be defined by comic modules and these
+        methods should be able to use the data if they so desire... (Affected
+        methods: shouldSkipUrl, imageUrlModifier)
         """
         raise ValueError("No implementation for getPage!")
 
@@ -326,13 +337,14 @@ class Scraper(object):
                 lang = languages.Languages[cls.lang]
         else:
             try:
-                lang = pycountry.languages.get(alpha2 = cls.lang).name
+                lang = pycountry.languages.get(alpha2=cls.lang).name
             except KeyError:
                 try:
-                    lang = pycountry.languages.get(iso639_1_code = cls.lang).name
+                    lang = pycountry.languages.get(iso639_1_code=cls.lang).name
                 except KeyError:
                     pass
         return lang
+
 
 class _BasicScraper(Scraper):
     """
@@ -369,15 +381,18 @@ class _BasicScraper(Scraper):
             for match in search.finditer(data[0]):
                 searchUrl = match.group(1)
                 if not searchUrl:
-                    raise ValueError("Pattern %s matched empty URL at %s." % (search.pattern, url))
-                out.debug(u'matched URL %r with pattern %s' % (searchUrl, search.pattern))
+                    raise ValueError("Pattern %s matched empty URL at %s." %
+                                     (search.pattern, url))
+                out.debug(u'matched URL %r with pattern %s' %
+                          (searchUrl, search.pattern))
                 searchUrls.append(normaliseURL(urljoin(data[1], searchUrl)))
             if searchUrls:
                 # do not search other links if one pattern matched
                 break
         if not searchUrls:
             patterns = [x.pattern for x in searches]
-            raise ValueError("Patterns %s not found at URL %s." % (patterns, url))
+            raise ValueError("Patterns %s not found at URL %s." %
+                             (patterns, url))
         return searchUrls
 
     @classmethod
@@ -387,12 +402,14 @@ class _BasicScraper(Scraper):
             match = textSearch.search(data[0])
             if match:
                 text = match.group(1)
-                out.debug(u'matched text %r with pattern %s' % (text, textSearch.pattern))
+                out.debug(u'matched text %r with pattern %s' %
+                          (text, textSearch.pattern))
                 return unescape(text).strip()
             if optional:
                 return None
             else:
-                raise ValueError("Pattern %s not found at URL %s." % (textSearch.pattern, url))
+                raise ValueError("Pattern %s not found at URL %s." %
+                                 (textSearch.pattern, url))
         else:
             return None
 
@@ -466,7 +483,9 @@ class _ParserScraper(Scraper):
                 if optional:
                     return None
                 else:
-                    raise ValueError("XPath %s did not match anything at URL %s." % (textSearch, url))
+                    raise ValueError(
+                        "XPath %s did not match anything at URL %s." %
+                        (textSearch, url))
             out.debug(u'Matched text %r with XPath %s' % (text, textSearch))
             return unescape(text).strip()
         else:
@@ -476,10 +495,14 @@ class _ParserScraper(Scraper):
     def getDisabledReasons(cls):
         res = {}
         if cls.css and cssselect is None:
-            res['css'] = u"This module needs the cssselect (python-cssselect) python module which is not installed."
+            res['css'] = (u"This module needs the cssselect " +
+                          u"(python-cssselect) python module which is " +
+                          u"not installed.")
         if html is None:
-            res['lxml'] = u"This module needs the lxml (python-lxml) python module which is not installed."
+            res['lxml'] = (u"This module needs the lxml (python-lxml) " +
+                           u"python module which is not installed.")
         return res
+
 
 def find_scraperclasses(comic, multiple_allowed=False):
     """Get a list comic scraper classes. Can return more than one entries if
@@ -508,6 +531,8 @@ def find_scraperclasses(comic, multiple_allowed=False):
 
 
 _scraperclasses = None
+
+
 def get_scraperclasses():
     """Find all comic scraper classes in the plugins directory.
     The result is cached.
@@ -519,7 +544,7 @@ def get_scraperclasses():
         out.debug(u"Loading comic modules...")
         modules = loader.get_modules('plugins')
         plugins = loader.get_plugins(modules, Scraper)
-        _scraperclasses = list(plugins)
+        _scraperclasses = sorted(plugins, key=lambda p: p.getName())
         check_scrapers()
         out.debug(u"... %d modules loaded." % len(_scraperclasses))
     return _scraperclasses
@@ -533,10 +558,11 @@ def check_scrapers():
         if name in d:
             name1 = scraperclass.getName()
             name2 = d[name].getName()
-            raise ValueError('duplicate scrapers %s and %s found' % (name1, name2))
+            raise ValueError('duplicate scrapers %s and %s found' %
+                             (name1, name2))
         d[name] = scraperclass
 
 
-def make_scraper(classname, scraperType = _BasicScraper, **attributes):
+def make_scraper(classname, scraperType=_BasicScraper, **attributes):
     """Make a new scraper class with given name and attributes."""
     return type(classname, (scraperType,), attributes)
