@@ -10,14 +10,14 @@ addons:
   apt:
     packages:
       - libjpeg-dev
-  code_climate:
-    repo_token: 2a411f596959fc32f5d73f3ba7cef8cc4d5733299d742dbfc97fd6c190b9010c
 # command to install dependencies
 install:
   - pip install -r requirements.txt
-  - pip install pytest-xdist pytest-cov
+  - pip install pytest-xdist pytest-cov coveralls
 # command to run tests
 script: make test PYTESTOPTS="--cov=dosage --cov=dosagelib --tb=short -n10"
+after_success:
+      coveralls
 notifications:
   irc:
     channels:
