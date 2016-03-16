@@ -1,6 +1,7 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 
 from re import compile, escape
 
@@ -48,16 +49,6 @@ class Damonk(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(/d/\d+\.html)') +
       tagre("img", "src", r'/images/previous_day\.gif'))
     help = 'Index format: yyyymmdd'
-
-
-# XXX disallowed /search by robots.txt
-class _DandyAndCompany(_BasicScraper):
-    url = 'http://www.dandyandcompany.com/'
-    stripUrl = None
-    multipleImagesPerStrip = True
-    imageSearch = compile(tagre("a", "href", r'(http://\d+\.bp\.blogspot\.com/[^"]+)', after="imageanchor"))
-    prevSearch = compile(tagre("a", "href", r"([^']+)", quote="'", after="Older Posts"))
-    help = 'Index format: none'
 
 
 class DangerouslyChloe(_BasicScraper):
