@@ -18,10 +18,7 @@ except ImportError:
     import robotparser
 import requests
 from requests.adapters import HTTPAdapter
-try:
-    from urllib3.util.retry import Retry
-except ImportError:
-    from requests.packages.urllib3.util.retry import Retry
+from requests.packages.urllib3.util.retry import Retry
 import sys
 import os
 import cgi
