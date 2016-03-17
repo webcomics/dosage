@@ -13,7 +13,7 @@ addons:
 # command to install dependencies
 install:
   - pip install -r requirements.txt
-  - pip install pytest-xdist pytest-cov coveralls
+  - pip install pytest-xdist pytest-cov pytest-travis-fold coveralls
 # command to run tests
 script: make test PYTESTOPTS="--cov=dosage --cov=dosagelib --tb=short -n10"
 after_success:
