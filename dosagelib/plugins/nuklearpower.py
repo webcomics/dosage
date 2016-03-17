@@ -1,30 +1,42 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2016 Tobias Gruetzmacher
 
-from re import compile
-from ..scraper import make_scraper
-from ..util import tagre
-
-_imageSearch = compile(tagre("img", "src", r'(http://v\.cdn\.nuklearpower\.com/comics/[^"]+)'))
-_prevSearch = compile(tagre("a", "href", r'([^"]+)') + "Previous")
-
-def add(name, shortname):
-    baseUrl = 'http://www.nuklearpower.com/'
-    url = baseUrl + shortname + '/'
-    classname = 'NuklearPower_%s' % name
-
-    globals()[classname] = make_scraper(classname,
-        name='NuklearPower/' + name,
-        url = url,
-        stripUrl = baseUrl + '%s',
-        imageSearch = _imageSearch,
-        prevSearch = _prevSearch,
-        help = 'Index format: yyyy/mm/dd/name',
-    )
+from ..scraper import _ParserScraper
 
 
-add('8BitTheater', '8-bit-theater')
-add('Warbot', 'warbot')
-add('HowIKilledYourMaster', 'hikym')
-add('AtomicRobo', 'atomic-robo')
+class _NuklearPower(_ParserScraper):
+    url = 'http://www.nuklearpower.com/'
+    prevSearch = '//a[@rel="prev"]'
+    imageSearch = '//div[@id="comic"]/img'
+
+    @classmethod
+    def starter(cls):
+        return cls.url + cls.path + '/'
+
+    @classmethod
+    def getName(cls):
+        return 'NuklearPower/' + cls.__name__[2:]
+
+
+class NP8BitTheater(_NuklearPower):
+    path = '8-bit-theater'
+
+
+class NPAtomicRobo(_NuklearPower):
+    url = 'http://www.atomic-robo.com/'
+    imageSearch = '//img[@id="cc-comic"]'
+    path = 'atomicrobo'
+
+
+class NPHowIKilledYourMaster(_NuklearPower):
+    path = 'hikym'
+
+
+class NPTheDreadful(_NuklearPower):
+    path = 'dreadful'
+
+
+class NPWarbot(_NuklearPower):
+    path = 'warbot'
