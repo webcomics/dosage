@@ -1,6 +1,8 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2005-2016 Tobias Gruetzmacher
+
 import time
 import sys
 import os
@@ -9,7 +11,9 @@ import traceback
 import codecs
 from .ansicolor import Colorizer
 
+
 lock = threading.Lock()
+
 
 def get_threadname():
     """Return name of current thread."""
@@ -29,7 +33,7 @@ class Output(object):
                 self.encoding = sys.stdout.encoding
             else:
                 self.encoding = 'utf-8'
-            if sys.version_info[0] >= 3:
+            if hasattr(sys.stdout, 'buffer'):
                 stream = sys.stdout.buffer
             else:
                 stream = sys.stdout
@@ -55,8 +59,6 @@ class Output(object):
     def error(self, s, tb=None):
         """Write an error message."""
         self.write(u"ERROR: %s" % s, color='light;red')
-        #if tb is not None:
-        #    self.write('Traceback (most recent call last):', 1)
 
     def exception(self, s):
         """Write error message with traceback info."""
