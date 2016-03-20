@@ -4,6 +4,7 @@
 /.cache
 /.coverage
 /.eggs
+/.tox
 /AUTHORS
 /ChangeLog
 /Comics
