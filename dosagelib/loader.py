@@ -1,5 +1,7 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2016 Tobias Gruetzmacher
+
 """
 Functions to load plugin modules.
 
@@ -7,55 +9,37 @@ Example usage:
     modules = loader.get_modules('plugins')
     plugins = loader.get_plugins(modules, PluginClass)
 """
-import os
-import sys
-import zipfile
+
+from __future__ import absolute_import, division, print_function
+import pkgutil
 import importlib
 from .output import out
 
 
-def is_frozen ():
-    """Return True if running inside a py2exe- or py2app-generated
-    executable."""
-    return hasattr(sys, "frozen")
-
-
 def get_modules(folder):
-    """Find all valid modules in the given folder which must be in
-    in the same directory as this loader.py module. A valid module
-    has a .py extension, and is importable.
+    """Find (and import) all valid modules in the given submodule of this file.
     @return: all loaded valid modules
     @rtype: iterator of module
     """
-    if is_frozen():
-        # find modules in library.zip filename
-        zipname = os.path.dirname(os.path.dirname(__file__))
-        parentmodule = os.path.basename(os.path.dirname(__file__))
-        with zipfile.ZipFile(zipname, 'r') as f:
-            prefix = "%s/%s/" % (parentmodule, folder)
-            modnames = [os.path.splitext(n[len(prefix):])[0]
-              for n in f.namelist()
-              if n.startswith(prefix) and "__init__" not in n]
-    else:
-        dirname = os.path.join(os.path.dirname(__file__), folder)
-        modnames = get_importable_modules(dirname)
-    for modname in modnames:
+    mod = importlib.import_module(".." + folder, __name__)
+    prefix = mod.__name__ + "."
+    modules = [m[1] for m in pkgutil.iter_modules(mod.__path__, prefix)]
+
+    # special handling for PyInstaller
+    importers = map(pkgutil.get_importer, mod.__path__)
+    toc = set()
+    for i in importers:
+        if hasattr(i, 'toc'):
+            toc |= i.toc
+    for elm in toc:
+        if elm.startswith(prefix):
+            modules.append(elm)
+
+    for name in modules:
         try:
-            name ="..%s.%s" % (folder, modname)
-            yield importlib.import_module(name, __name__)
+            yield importlib.import_module(name)
         except ImportError as msg:
-            out.error("could not load module %s: %s" % (modname, msg))
-
-
-def get_importable_modules(folder):
-    """Find all module files in the given folder that end with '.py' and
-    don't start with an underscore.
-    @return module names
-    @rtype: iterator of string
-    """
-    for fname in os.listdir(folder):
-        if fname.endswith('.py') and not fname.startswith('_'):
-            yield fname[:-3]
+            out.error("could not load module %s: %s" % (name, msg))
 
 
 def get_plugins(modules, classobj):
