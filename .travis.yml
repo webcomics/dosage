@@ -4,6 +4,9 @@ python:
   - "3.3"
   - "3.4"
   - "3.5"
+cache:
+  directories:
+    $HOME/.cache/pip
 # install libjpeg-dev for Pillow to handle JPEGs
 sudo: false
 addons:
