@@ -12,10 +12,9 @@ addons:
       - libjpeg-dev
 # command to install dependencies
 install:
-  - pip install -r requirements.txt
-  - pip install pytest-xdist pytest-cov pytest-travis-fold coveralls
+  - pip install pytest-travis-fold tox-travis coveralls
 # command to run tests
-script: make test PYTESTOPTS="--cov=dosage --cov=dosagelib --tb=short -n10"
+script: tox
 after_success:
       coveralls
 notifications:
