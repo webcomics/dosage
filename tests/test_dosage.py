@@ -4,7 +4,7 @@
 
 import pytest
 import sys
-from . import dosage_cmd, run_checked, tmpdir  # noqa
+from . import dosage_cmd, run_checked
 
 
 def run_with_options(options, cmd=dosage_cmd):
@@ -41,14 +41,14 @@ class TestDosage(object):
         with pytest.raises(OSError):
             run_with_options(['Garfield'])
 
-    def test_fetch_html_and_rss(self, tmpdir):  # noqa
-        run_with_options(["-n", "2", "-v", "-b", tmpdir, "-o", "html", "-o",
-                          "rss", "xkcd"])
+    def test_fetch_html_and_rss(self, tmpdir):
+        run_with_options(["-n", "2", "-v", "-b", str(tmpdir), "-o", "html",
+                          "-o", "rss", "xkcd"])
 
-    def test_fetch_html_and_rss_2(self, tmpdir):  # noqa
+    def test_fetch_html_and_rss_2(self, tmpdir):
         run_with_options(["--numstrips", "2", "--baseurl", "bla",
-                          "--basepath", tmpdir, "--output", "rss", "--output",
-                          "html", "--adult", "oglaf"])
+                          "--basepath", str(tmpdir), "--output", "rss",
+                          "--output", "html", "--adult", "oglaf"])
 
-    def test_fetch_indexed(self, tmpdir):  # noqa
-        run_with_options(["-n", "2", "-v", "-b", tmpdir, "xkcd:303"])
+    def test_fetch_indexed(self, tmpdir):
+        run_with_options(["-n", "2", "-v", "-b", str(tmpdir), "xkcd:303"])

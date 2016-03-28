@@ -3,10 +3,7 @@
 # Copyright (C) 2016 Tobias Gruetzmacher
 
 import os
-import pytest
-import shutil
 import subprocess
-import tempfile
 
 basedir = os.path.dirname(__file__)
 dosage_cmd = os.path.join(os.path.dirname(basedir), "dosage")
@@ -28,10 +25,3 @@ def run_checked(cmd, ret_ok=(0,), **kwargs):
         msg = "Command `%s' returned non-zero exit status %d" % (cmd, retcode)
         raise OSError(msg)
     return retcode
-
-
-@pytest.yield_fixture
-def tmpdir():
-    tmpdir = tempfile.mkdtemp()
-    yield tmpdir
-    shutil.rmtree(tmpdir)

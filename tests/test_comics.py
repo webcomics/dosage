@@ -11,7 +11,6 @@ try:
 except ImportError:
     from urlparse import urlsplit
 from dosagelib import scraper
-from . import tmpdir  # noqa
 
 
 def get_host(url):
@@ -42,7 +41,7 @@ def _get_saved_images(outdir, scraper):
     return files
 
 
-def test_comicmodule(tmpdir, scraperclass):  # noqa
+def test_comicmodule(tmpdir, scraperclass):
     '''Test a scraper. It must be able to traverse backward for at least 5
     strips from the start, and find strip images on at least 4 pages.'''
     scraperobj = scraperclass()
@@ -50,10 +49,10 @@ def test_comicmodule(tmpdir, scraperclass):  # noqa
     host = get_host(scraperobj.url)
     try:
         with get_lock(host):
-            _test_comic(tmpdir, scraperobj)
+            _test_comic(str(tmpdir), scraperobj)
     except OSError:
         # interprocess lock not supported
-        _test_comic(tmpdir, scraperobj)
+        _test_comic(str(tmpdir), scraperobj)
 
 
 def _test_comic(outdir, scraperobj):
