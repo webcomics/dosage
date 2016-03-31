@@ -3,6 +3,7 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2016 Tobias Gruetzmacher
 
+from __future__ import absolute_import, division, print_function
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
@@ -155,6 +156,16 @@ class GrrlPower(_BasicScraper):
     help = 'Index format: number'
 
 
+class GUComics(_BasicScraper):
+    url = 'http://www.gucomics.com/'
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '20000710'
+    imageSearch = compile(tagre("img", "src", r'(/comics/\d{4}/gu_[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(/\d+)') +
+                         tagre("img", "src", r'/images/nav/prev\.png'))
+    help = 'Index format: yyyymmdd'
+
+
 class GunnerkriggCourt(_BasicScraper):
     url = 'http://www.gunnerkrigg.com/'
     stripUrl = url + '?p=%s'
@@ -176,13 +187,3 @@ class Gunshow(_BasicScraper):
         tagre("a", "href", r'([^"]+)') +
         tagre("img", "src", r'[^"]*menu/small/previous\.gif'))
     help = 'Index format: n'
-
-
-class GUComics(_BasicScraper):
-    url = 'http://www.gucomics.com/'
-    stripUrl = url + '%s'
-    firstStripUrl = stripUrl % '20000710'
-    imageSearch = compile(tagre("img", "src", r'(/comics/\d{4}/gu_[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/\d+)') +
-                         tagre("img", "src", r'/images/nav/prev\.png'))
-    help = 'Index format: yyyymmdd'

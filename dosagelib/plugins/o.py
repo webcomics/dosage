@@ -1,7 +1,9 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 
+from __future__ import absolute_import, division, print_function
 from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
@@ -47,9 +49,12 @@ class OhJoySexToy(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % 'introduction'
-    imageSearch =  compile(tagre("div", "class", r'comicpane') + "\s*.*\s*" + tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after='navi navi-prev'))
-    textSearch = compile(tagre("div", "class", r'comicpane') + "\s*.*\s*" + tagre("img", "alt", r'([^"]+)'))
+    imageSearch = compile(tagre("div", "class", r'comicpane') + "\s*.*\s*" +
+                          tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl,
+                               after='navi navi-prev'))
+    textSearch = compile(tagre("div", "class", r'comicpane') + "\s*.*\s*" +
+                         tagre("img", "alt", r'([^"]+)'))
     help = 'Index Format: name'
     adult = True
 
@@ -75,6 +80,15 @@ class OmakeTheater(_ParserScraper):
     help = 'Index format: number (unpadded)'
 
 
+class OneQuestion(_BasicScraper):
+    url = 'http://onequestioncomic.com/'
+    stripUrl = url + 'comic.php?strip_id=%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = compile(tagre("img", "src", r'((?:\.\./)?istrip_files/strips/\d+\.\w{3,4})'))
+    prevSearch = compile(tagre("a", "href", r'(comic\.php\?strip_id=\d+)') + tagre("img", "src", r'img/arrow_prev\.jpg'))
+    help = 'Index format: n (unpadded)'
+
+
 class OnTheFastrack(_BasicScraper):
     url = 'http://onthefastrack.com/'
     stripUrl = url + 'comics/%s'
@@ -82,7 +96,7 @@ class OnTheFastrack(_BasicScraper):
     imageSearch = compile(r'(http://safr\.kingfeatures\.com/idn/cnfeed/zone/js/content\.php\?file=.+)"')
     prevSearch = compile(r'id="previouscomic" class="button white"><a href="(%scomics/[a-z0-9-]+/)"' % url)
     help = 'Index format: monthname-dd-yyyy'
-    
+
     @classmethod
     def namer(cls, imageUrl, pageUrl):
         name = pageUrl.rsplit('/', 3)[2]
@@ -94,21 +108,14 @@ class OnTheFastrack(_BasicScraper):
         return "%s.gif" % name.title()
 
 
-class OneQuestion(_BasicScraper):
-    url = 'http://onequestioncomic.com/'
-    stripUrl = url + 'comic.php?strip_id=%s'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'((?:\.\./)?istrip_files/strips/\d+\.\w{3,4})'))
-    prevSearch = compile(tagre("a", "href", r'(comic\.php\?strip_id=\d+)') + tagre("img", "src", r'img/arrow_prev\.jpg'))
-    help = 'Index format: n (unpadded)'
-
-
 class Optipess(_BasicScraper):
     url = 'http://www.optipess.com/'
     stripUrl = url + '%s'
-    firstStripUrl =  url + '2008/12/01/jason-friend-of-the-butterflies/'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[x|\d]+[^"]+\.[^"]+)' % url))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)', after="navi navi-prev"))
+    firstStripUrl = url + '2008/12/01/jason-friend-of-the-butterflies/'
+    imageSearch = compile(tagre("img", "src",
+                                r'(%scomics/[x|\d]+[^"]+\.[^"]+)' % url))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)',
+                               after="navi navi-prev"))
     textSearch = compile(tagre("img", "alt", r'([^"]+)', before=url))
     help = 'Index format: yyyy/mm/dd/stripname'
 
@@ -119,8 +126,9 @@ class OrnerBoy(_BasicScraper):
     stripUrl = url + 'index.php?comicID=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(comics/\d+\.[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(%sindex\.php\?comicID=\d+)' % rurl) +
-        tagre("img", "src", r'images/prev_a\.gif'))
+    prevSearch = compile(tagre("a", "href",
+                               r'(%sindex\.php\?comicID=\d+)' % rurl) +
+                         tagre("img", "src", r'images/prev_a\.gif'))
     help = 'Index format: number'
 
 
@@ -138,6 +146,6 @@ class OverCompensating(_BasicScraper):
     stripUrl = url + 'oc/index.php?comic=%s'
     firstStripUrl = stripUrl % '0'
     imageSearch = compile(tagre("img", "src", r'(/oc/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href",
-      r'(/oc/index\.php\?comic=\d+)', after="go back"))
+    prevSearch = compile(tagre("a", "href", r'(/oc/index\.php\?comic=\d+)',
+                               after="go back"))
     help = 'Index format: number'

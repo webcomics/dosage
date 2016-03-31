@@ -1,7 +1,9 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 
+from __future__ import absolute_import, division, print_function
 from re import compile, escape, IGNORECASE
 
 from ..util import tagre
@@ -24,7 +26,8 @@ class FantasyRealms(_BasicScraper):
     imageSearch = compile(r'<img src="(\d{1,4}.\w{3,4})" width="540"', IGNORECASE)
     prevSearch = compile(r'<a href="(.+?)"><img src="../images/nav-back.gif"', IGNORECASE)
     help = 'Index format: nnn'
-    starter = indirectStarter(url,
+    starter = indirectStarter(
+        url,
         compile(r'<a href="(manga/.+?)"><img src="preview.jpg"', IGNORECASE))
 
 
@@ -82,7 +85,7 @@ class Flemcomics(_BasicScraper):
     stripUrl = url + 'd/%s.html'
     imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/d/\d+\.html)') +
-      tagre("img", "src", r'/images/previous_day\.jpg'))
+                         tagre("img", "src", r'/images/previous_day\.jpg'))
     help = 'Index format: yyyymmdd'
 
 
@@ -92,7 +95,8 @@ class Flipside(_BasicScraper):
     stripUrl = url + '?i=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(http://cdn\.flipside\.keenspot\.com/comic/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(%s\?i=\d+)' % rurl, after="prev"))
+    prevSearch = compile(tagre("a", "href", r'(%s\?i=\d+)' % rurl,
+                               after="prev"))
     help = 'Index format: nnnn'
 
 
@@ -112,7 +116,7 @@ class FonFlatter(_BasicScraper):
             self.stripUrl % "2006/09/21/danke",
             self.stripUrl % "2006/08/23/zgf-zuweilen-gestellte-fragen",
             self.stripUrl % "2005/10/19/naq-never-asked-questions",
-       )
+            )
 
 
 class ForLackOfABetterComic(_BasicScraper):
@@ -138,13 +142,6 @@ class FragileSpanish(_ParserScraper):
     prevSearch = '//a[@class="comicnav" and contains(text(),"Anterior")]'
     lang = 'es'
 
-class Freefall(_BasicScraper):
-    url = 'http://freefall.purrsia.com/default.htm'
-    stripUrl = 'http://freefall.purrsia.com/ff%s/fc%s.htm'
-    imageSearch = compile(r'<img src="(/ff\d+/.+?.\w{3,4})"')
-    prevSearch = compile(r'<A HREF="(/ff\d+/.+?.htm)">Previous</A>')
-    help = 'Index format: nnnn/nnnnn'
-
 
 class FredoAndPidjin(_BasicScraper):
     url = 'http://www.pidjin.net/'
@@ -157,8 +154,17 @@ class FredoAndPidjin(_BasicScraper):
     )
     multipleImagesPerStrip = True
     prevSearch = compile(tagre('a', 'href', '([^"]+)')+"Prev</a>")
-    starter = indirectStarter(url,
+    starter = indirectStarter(
+       url,
        compile(tagre('a', 'href', "("+url+r'\d\d\d\d/\d\d/\d\d/[^"]+/)')))
+
+
+class Freefall(_BasicScraper):
+    url = 'http://freefall.purrsia.com/default.htm'
+    stripUrl = 'http://freefall.purrsia.com/ff%s/fc%s.htm'
+    imageSearch = compile(r'<img src="(/ff\d+/.+?.\w{3,4})"')
+    prevSearch = compile(r'<A HREF="(/ff\d+/.+?.htm)">Previous</A>')
+    help = 'Index format: nnnn/nnnnn'
 
 
 class FullFrontalNerdity(_BasicScraper):

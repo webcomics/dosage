@@ -104,48 +104,20 @@ class CFABrickishSpaceComic(_ComicFury):
     url = 'http://Abrickishspacecomic.webcomic.ws/'
 
 
-class CFACannonadeofHogwash(_ComicFury):
-    url = 'http://cannonadeofhogwash.webcomic.ws/'
-
-
-class CFACelestialStory(_ComicFury):
-    url = 'http://acelestialstory.webcomic.ws/'
-
-
-class CFAForeverQuest(_ComicFury):
-    url = 'http://aforeverquest.webcomic.ws/'
-
-
-class CFAGame(_ComicFury):
-    url = 'http://kirahitogame.webcomic.ws/'
-
-
-class CFAHappierKindOfSad(_ComicFury):
-    url = 'http://ahappierkindofsad.webcomic.ws/'
-
-
-class CFALoonaticsTale(_ComicFury):
-    url = 'http://aloonaticstale.webcomic.ws/'
-
-
-class CFAPiratesLife(_ComicFury):
-    url = 'http://PiratesLife.webcomic.ws/'
-
-
-class CFARVEYToonz(_ComicFury):
-    url = 'http://arveytoonz.webcomic.ws/'
-
-
-class CFASTRAYCATS(_ComicFury):
-    url = 'http://astraycats.webcomic.ws/'
-
-
 class CFAbsentMindedTheatre(_ComicFury):
     url = 'http://amtheatre.webcomic.ws/'
 
 
+class CFACannonadeofHogwash(_ComicFury):
+    url = 'http://cannonadeofhogwash.webcomic.ws/'
+
+
 class CFAccidentallyonPurpose(_ComicFury):
     url = 'http://Accidentally-on-Purpose.webcomic.ws/'
+
+
+class CFACelestialStory(_ComicFury):
+    url = 'http://acelestialstory.webcomic.ws/'
 
 
 class CFAcomicexistense(_ComicFury):
@@ -188,8 +160,16 @@ class CFAetherEarthandSun(_ComicFury):
     url = 'http://aether.webcomic.ws/'
 
 
+class CFAForeverQuest(_ComicFury):
+    url = 'http://aforeverquest.webcomic.ws/'
+
+
 class CFAfterdead(_ComicFury):
     url = 'http://Afterdead.webcomic.ws/'
+
+
+class CFAGame(_ComicFury):
+    url = 'http://kirahitogame.webcomic.ws/'
 
 
 class CFAgency(_ComicFury):
@@ -198,6 +178,10 @@ class CFAgency(_ComicFury):
 
 class CFAgentBishop(_ComicFury):
     url = 'http://agentbishop.webcomic.ws/'
+
+
+class CFAHappierKindOfSad(_ComicFury):
+    url = 'http://ahappierkindofsad.webcomic.ws/'
 
 
 class CFAlbinoBrothers(_ComicFury):
@@ -233,6 +217,10 @@ class CFAlone(_ComicFury):
     url = 'http://Alone.webcomic.ws/'
 
 
+class CFALoonaticsTale(_ComicFury):
+    url = 'http://aloonaticstale.webcomic.ws/'
+
+
 class CFAlyaTheLastChildofLight(_ComicFury):
     url = 'http://Alya.webcomic.ws/'
 
@@ -242,10 +230,6 @@ class CFAmara(_ComicFury):
 
 
 # AnAmericanNerdinAnimatedTokyo is excluded
-class CFAnK(_ComicFury):
-    url = 'http://AnK.webcomic.ws/'
-
-
 class CFAndroidFiles(_ComicFury):
     url = 'http://AndroidFiles.webcomic.ws/'
 
@@ -271,6 +255,10 @@ class CFAnimalInstinct(_ComicFury):
 
 class CFAnimangitis(_ComicFury):
     url = 'http://animangitis.webcomic.ws/'
+
+
+class CFAnK(_ComicFury):
+    url = 'http://AnK.webcomic.ws/'
 
 
 class CFAnne(_ComicFury):
@@ -305,6 +293,10 @@ class CFAntiqueTimeMachine(_ComicFury):
     url = 'http://atm.webcomic.ws/'
 
 
+class CFAPiratesLife(_ComicFury):
+    url = 'http://PiratesLife.webcomic.ws/'
+
+
 class CFApocalypsoAdventure(_ComicFury):
     url = 'http://thewriter13.webcomic.ws/'
 
@@ -325,21 +317,21 @@ class CFArcane(_ComicFury):
     url = 'http://RBSarcane.webcomic.ws/'
 
 
-class CFArchiNinja(_ComicFury):
-    url = 'http://archininja.webcomic.ws/'
-
-
 class CFArchibald(_ComicFury):
     url = 'http://Archibald.webcomic.ws/'
 
 
+class CFArchiNinja(_ComicFury):
+    url = 'http://archininja.webcomic.ws/'
+
+
 # ArchportCityChronicles has a duplicate in smackjeeves/archportcitychronicles
-class CFAreYouDoneYet(_ComicFury):
-    url = 'http://AreYouDoneYet.webcomic.ws/'
-
-
 class CFArea42(_ComicFury):
     url = 'http://area42.webcomic.ws/'
+
+
+class CFAreYouDoneYet(_ComicFury):
+    url = 'http://AreYouDoneYet.webcomic.ws/'
 
 
 class CFArmlessAmy(_ComicFury):
@@ -356,6 +348,10 @@ class CFArtificialStorm(_ComicFury):
 
 class CFArtisticAdventuresinBoredom(_ComicFury):
     url = 'http://AAB.webcomic.ws/'
+
+
+class CFARVEYToonz(_ComicFury):
+    url = 'http://arveytoonz.webcomic.ws/'
 
 
 class CFAshes(_ComicFury):
@@ -376,6 +372,10 @@ class CFAssholeandDouchebag(_ComicFury):
 
 class CFAstralAves(_ComicFury):
     url = 'http://astralaves.webcomic.ws/'
+
+
+class CFASTRAYCATS(_ComicFury):
+    url = 'http://astraycats.webcomic.ws/'
 
 
 class CFAstronautical(_ComicFury):
@@ -434,22 +434,6 @@ class CFAwkwardShelby(_ComicFury):
     url = 'http://awkwardshelby.webcomic.ws/'
 
 
-class CFBASKERVILLE(_ComicFury):
-    url = 'http://baskerville.webcomic.ws/'
-
-
-class CFBASO(_ComicFury):
-    url = 'http://BASO.webcomic.ws/'
-
-
-class CFBELECOMICS(_ComicFury):
-    url = 'http://BELECOMICS.webcomic.ws/'
-
-
-class CFBUXYandDave(_ComicFury):
-    url = 'http://BUXY.webcomic.ws/'
-
-
 class CFBabesofDongaria(_ComicFury):
     url = 'http://dongaria.webcomic.ws/'
 
@@ -477,6 +461,14 @@ class CFBananaCreamCake(_ComicFury):
 
 # BarkingCrayon has a duplicate in gocomics/barkingcrayon
 # BaseballCapsandTiaras is excluded
+class CFBASKERVILLE(_ComicFury):
+    url = 'http://baskerville.webcomic.ws/'
+
+
+class CFBASO(_ComicFury):
+    url = 'http://BASO.webcomic.ws/'
+
+
 class CFBattleoftheRobofemoids(_ComicFury):
     url = 'http://Battle-of-the-Robofemoids.webcomic.ws/'
 
@@ -489,10 +481,6 @@ class CFBeatStuffUpMan(_ComicFury):
     url = 'http://beatstuffupman.webcomic.ws/'
 
 
-class CFBeePolice(_ComicFury):
-    url = 'http://beepolice.webcomic.ws/'
-
-
 class CFBeebleville(_ComicFury):
     url = 'http://Beebleville.webcomic.ws/'
 
@@ -501,12 +489,20 @@ class CFBeepClub(_ComicFury):
     url = 'http://beepclub.webcomic.ws/'
 
 
+class CFBeePolice(_ComicFury):
+    url = 'http://beepolice.webcomic.ws/'
+
+
 class CFBeezwax(_ComicFury):
     url = 'http://beezwax.webcomic.ws/'
 
 
 class CFBeforeAndAfter(_ComicFury):
     url = 'http://BeforeAndAfter.webcomic.ws/'
+
+
+class CFBELECOMICS(_ComicFury):
+    url = 'http://BELECOMICS.webcomic.ws/'
 
 
 class CFBentElbows(_ComicFury):
@@ -518,11 +514,11 @@ class CFBetaParticles(_ComicFury):
     url = 'http://BetaParticles.webcomic.ws/'
 
 
+class CFBetweentheFrames(_ComicFury):
+    url = 'http://BetweenTheFrames.webcomic.ws/'
+
+
 # BeyondTheOrdinary has a duplicate in smackjeeves/beyondtheordinary
-class CFBiMorphon(_ComicFury):
-    url = 'http://bimorphon.webcomic.ws/'
-
-
 class CFBibleBelt(_ComicFury):
     url = 'http://biblebelt.webcomic.ws/'
 
@@ -533,6 +529,10 @@ class CFBicycleBoy(_ComicFury):
 
 class CFBilateralComics(_ComicFury):
     url = 'http://bilateralcomics.webcomic.ws/'
+
+
+class CFBiMorphon(_ComicFury):
+    url = 'http://bimorphon.webcomic.ws/'
 
 
 class CFBioSyte(_ComicFury):
@@ -629,6 +629,10 @@ class CFButterflyEffect(_ComicFury):
     url = 'http://TheButterflyEffect.webcomic.ws/'
 
 
+class CFBUXYandDave(_ComicFury):
+    url = 'http://BUXY.webcomic.ws/'
+
+
 class CFBuyingTime(_ComicFury):
     url = 'http://buyingtime.webcomic.ws/'
 
@@ -637,41 +641,12 @@ class CFCACKLENCOMICS(_ComicFury):
     url = 'http://CackleNComics.webcomic.ws/'
 
 
-class CFCAFEGRUESOME(_ComicFury):
-    url = 'http://CafeGruesome.webcomic.ws/'
-
-
-class CFCHLOE(_ComicFury):
-    url = 'http://chloe.webcomic.ws/'
-
-
-class CFCHRISTMASEVETheFirstLadyOfYuletideCheer(_ComicFury):
-    url = 'http://CoolYuleComics.webcomic.ws/'
-
-
-class CFCKarrus(_ComicFury):
-    url = 'http://CKarrus.webcomic.ws/'
-
-
-class CFCOCHLEAAndEUSTACHIA(_ComicFury):
-    url = 'http://chromefetus.webcomic.ws/'
-
-
-class CFCONIES(_ComicFury):
-    url = 'http://Conies.webcomic.ws/'
-
-
-# CROSSWORLDSNEXUS is excluded
-class CFCRashCourse(_ComicFury):
-    url = 'http://crashcourse.webcomic.ws/'
-
-
-class CFCYXLOSISM(_ComicFury):
-    url = 'http://Cyxlocistic.webcomic.ws/'
-
-
 class CFCactusCanyon(_ComicFury):
     url = 'http://cactuscanyon.webcomic.ws/'
+
+
+class CFCAFEGRUESOME(_ComicFury):
+    url = 'http://CafeGruesome.webcomic.ws/'
 
 
 class CFCagegirl(_ComicFury):
@@ -686,11 +661,11 @@ class CFCastofMadness(_ComicFury):
     url = 'http://castofmadness.webcomic.ws/'
 
 
+# Cataclysm has a duplicate in smackjeeves/cataclysm
 class CFCatHerosepicCatventuresasanHero(_ComicFury):
     url = 'http://CatHero.webcomic.ws/'
 
 
-# Cataclysm has a duplicate in smackjeeves/cataclysm
 class CFCatosApprenticeship(_ComicFury):
     url = 'http://cato.webcomic.ws/'
 
@@ -739,6 +714,10 @@ class CFCharlesAndViktor(_ComicFury):
     url = 'http://charlesandviktor.webcomic.ws/'
 
 
+class CFCHLOE(_ComicFury):
+    url = 'http://chloe.webcomic.ws/'
+
+
 class CFChocoLavaCOMICScom(_ComicFury):
     url = 'http://chocolava.webcomic.ws/'
 
@@ -748,6 +727,10 @@ class CFChosen(_ComicFury):
 
 
 # ChristianHumberReloaded is excluded
+class CFCHRISTMASEVETheFirstLadyOfYuletideCheer(_ComicFury):
+    url = 'http://CoolYuleComics.webcomic.ws/'
+
+
 class CFChristmaswithMadDog(_ComicFury):
     url = 'http://christmas-with-maddog.webcomic.ws/'
 
@@ -764,6 +747,10 @@ class CFCityofDream(_ComicFury):
     url = 'http://CityOfDream.webcomic.ws/'
 
 
+class CFCKarrus(_ComicFury):
+    url = 'http://CKarrus.webcomic.ws/'
+
+
 class CFClassicElsewhere(_ComicFury):
     url = 'http://ClassicElsewhere.webcomic.ws/'
 
@@ -775,6 +762,10 @@ class CFClassicmissjandtheamcomics19842006(_ComicFury):
 # ClockworkAtrium has a duplicate in smackjeeves/clockworkatrium
 class CFClydenOwen(_ComicFury):
     url = 'http://ClydenOwen.webcomic.ws/'
+
+
+class CFCOCHLEAAndEUSTACHIA(_ComicFury):
+    url = 'http://chromefetus.webcomic.ws/'
 
 
 class CFCockeyedComix(_ComicFury):
@@ -813,6 +804,10 @@ class CFConcerningJustice(_ComicFury):
     url = 'http://ConcerningJustice.webcomic.ws/'
 
 
+class CFCONIES(_ComicFury):
+    url = 'http://Conies.webcomic.ws/'
+
+
 # ConradStory is excluded
 class CFConradtheCaterpillar(_ComicFury):
     url = 'http://ConradTheCaterpillar.webcomic.ws/'
@@ -845,6 +840,10 @@ class CFCrackPutty(_ComicFury):
     url = 'http://CrackPutty.webcomic.ws/'
 
 
+class CFCRashCourse(_ComicFury):
+    url = 'http://crashcourse.webcomic.ws/'
+
+
 class CFCrawlers(_ComicFury):
     url = 'http://crawlers.webcomic.ws/'
 
@@ -855,10 +854,6 @@ class CFCrimsonPixelComics(_ComicFury):
 
 class CFCritters(_ComicFury):
     url = 'http://critters.webcomic.ws/'
-
-
-class CFCrossWorld(_ComicFury):
-    url = 'http://crossworld.webcomic.ws/'
 
 
 # Crossing is excluded
@@ -875,6 +870,11 @@ class CFCrossoverlordAndCrossoverkill(_ComicFury):
     url = 'http://crossoverlordkill.webcomic.ws/'
 
 
+class CFCrossWorld(_ComicFury):
+    url = 'http://crossworld.webcomic.ws/'
+
+
+# CROSSWORLDSNEXUS is excluded
 class CFCrowbarASciFiAdventure(_ComicFury):
     url = 'http://crowbar.webcomic.ws/'
 
@@ -911,17 +911,8 @@ class CFCurvyBonedSlunt(_ComicFury):
     url = 'http://curvyboneyosis.webcomic.ws/'
 
 
-class CFDDSR(_ComicFury):
-    url = 'http://ddsr.webcomic.ws/'
-
-
-class CFDEAD(_ComicFury):
-    url = 'http://dead.webcomic.ws/'
-
-
-# DEMENTED has a duplicate in smackjeeves/demented
-class CFDRouggs(_ComicFury):
-    url = 'http://dRouggs.webcomic.ws/'
+class CFCYXLOSISM(_ComicFury):
+    url = 'http://Cyxlocistic.webcomic.ws/'
 
 
 class CFDailyDoodle(_ComicFury):
@@ -940,10 +931,6 @@ class CFDamnHipsters(_ComicFury):
     url = 'http://damnhipsters.webcomic.ws/'
 
 
-class CFDarVal(_ComicFury):
-    url = 'http://MurghComics.webcomic.ws/'
-
-
 class CFDaredoers(_ComicFury):
     url = 'http://daredoers.webcomic.ws/'
 
@@ -952,12 +939,16 @@ class CFDarkHorse(_ComicFury):
     url = 'http://DarkHorse.webcomic.ws/'
 
 
+class CFDarklings(_ComicFury):
+    url = 'http://Darklings.webcomic.ws/'
+
+
 class CFDarkSisters(_ComicFury):
     url = 'http://darksisters.webcomic.ws/'
 
 
-class CFDarklings(_ComicFury):
-    url = 'http://Darklings.webcomic.ws/'
+class CFDarVal(_ComicFury):
+    url = 'http://MurghComics.webcomic.ws/'
 
 
 # Dasien has a duplicate in smackjeeves/dasien
@@ -973,12 +964,12 @@ class CFDaxTapu(_ComicFury):
     url = 'http://DaxTapu.webcomic.ws/'
 
 
-class CFDeadFingers(_ComicFury):
-    url = 'http://DeadFingers.webcomic.ws/'
+class CFDDSR(_ComicFury):
+    url = 'http://ddsr.webcomic.ws/'
 
 
-class CFDeadRabbitCa(_ComicFury):
-    url = 'http://afairtrade.webcomic.ws/'
+class CFDEAD(_ComicFury):
+    url = 'http://dead.webcomic.ws/'
 
 
 class CFDeadatNight(_ComicFury):
@@ -987,6 +978,14 @@ class CFDeadatNight(_ComicFury):
 
 class CFDeadducks(_ComicFury):
     url = 'http://deadducks.webcomic.ws/'
+
+
+class CFDeadFingers(_ComicFury):
+    url = 'http://DeadFingers.webcomic.ws/'
+
+
+class CFDeadRabbitCa(_ComicFury):
+    url = 'http://afairtrade.webcomic.ws/'
 
 
 class CFDeepBlue(_ComicFury):
@@ -1001,6 +1000,7 @@ class CFDemasPokmonAdventure(_ComicFury):
     url = 'http://Nuzlocke-Dema.webcomic.ws/'
 
 
+# DEMENTED has a duplicate in smackjeeves/demented
 # Democomix is excluded
 # DemonEater has a duplicate in smackjeeves/demoneater
 class CFDemonWings(_ComicFury):
@@ -1064,25 +1064,25 @@ class CFDoubleJumpGameComics(_ComicFury):
     url = 'http://doublejump.webcomic.ws/'
 
 
-class CFDrApocalyptosSurvivorama(_ComicFury):
-    url = 'http://docapoc.webcomic.ws/'
-
-
 class CFDraginbeard(_ComicFury):
     url = 'http://draginbeard.webcomic.ws/'
-
-
-class CFDragonCity(_ComicFury):
-    url = 'http://dragoncity.webcomic.ws/'
 
 
 class CFDragonballZElsewhere(_ComicFury):
     url = 'http://dbzelsewhere.webcomic.ws/'
 
 
+class CFDragonCity(_ComicFury):
+    url = 'http://dragoncity.webcomic.ws/'
+
+
 # Dragonet has a duplicate in smackjeeves/dragonet
 class CFDragonsofAzuma(_ComicFury):
     url = 'http://dragonsofazuma.webcomic.ws/'
+
+
+class CFDrApocalyptosSurvivorama(_ComicFury):
+    url = 'http://docapoc.webcomic.ws/'
 
 
 class CFDressedForSuccess(_ComicFury):
@@ -1103,6 +1103,10 @@ class CFDrifting(_ComicFury):
 
 class CFDroned(_ComicFury):
     url = 'http://Droned.webcomic.ws/'
+
+
+class CFDRouggs(_ComicFury):
+    url = 'http://dRouggs.webcomic.ws/'
 
 
 class CFDrugsandKisses(_ComicFury):
@@ -1126,16 +1130,12 @@ class CFDungeonMasterEffect(_ComicFury):
     url = 'http://dungeonmastereffect.webcomic.ws/'
 
 
-class CFECTOPIARY(_ComicFury):
-    url = 'http://ectopiary.webcomic.ws/'
-
-
-class CFEWMIC(_ComicFury):
-    url = 'http://ewmic.webcomic.ws/'
-
-
 class CFEclipseLegend(_ComicFury):
     url = 'http://eclipselegend.webcomic.ws/'
+
+
+class CFECTOPIARY(_ComicFury):
+    url = 'http://ectopiary.webcomic.ws/'
 
 
 class CFEducomix(_ComicFury):
@@ -1223,15 +1223,14 @@ class CFEvilRising(_ComicFury):
     url = 'http://EvilRising.webcomic.ws/'
 
 
+class CFEWMIC(_ComicFury):
+    url = 'http://ewmic.webcomic.ws/'
+
+
 class CFExperiMentalTheatre(_ComicFury):
     url = 'http://eMT.webcomic.ws/'
 
 
-class CFFEZ(_ComicFury):
-    url = 'http://fez.webcomic.ws/'
-
-
-# FPK is excluded
 class CFFairyDust(_ComicFury):
     url = 'http://fairydust.webcomic.ws/'
 
@@ -1257,6 +1256,10 @@ class CFFatalExpression(_ComicFury):
 # Fathead is excluded
 class CFFeliciaSorceressOfKatara(_ComicFury):
     url = 'http://felicia.webcomic.ws/'
+
+
+class CFFEZ(_ComicFury):
+    url = 'http://fez.webcomic.ws/'
 
 
 # Fiascos is excluded
@@ -1292,18 +1295,19 @@ class CFFlintlockevsTheHorde(_ComicFury):
     url = 'http://flintlockevshorde.webcomic.ws/'
 
 
-class CFForNathaniel(_ComicFury):
-    url = 'http://fornathaniel.webcomic.ws/'
-
-
 class CFForeignTerritory(_ComicFury):
     url = 'http://foreignterritory.webcomic.ws/'
+
+
+class CFForNathaniel(_ComicFury):
+    url = 'http://fornathaniel.webcomic.ws/'
 
 
 class CFFoxyFlavoredCookie(_ComicFury):
     url = 'http://PobrePucho.webcomic.ws/'
 
 
+# FPK is excluded
 class CFFracturedTea(_ComicFury):
     url = 'http://fracturedtea.webcomic.ws/'
 
@@ -1320,12 +1324,12 @@ class CFFraternityofEvil(_ComicFury):
     url = 'http://foe.webcomic.ws/'
 
 
-class CFFreQuency(_ComicFury):
-    url = 'http://FreQuency.webcomic.ws/'
-
-
 class CFFreeLancer(_ComicFury):
     url = 'http://Freelancer.webcomic.ws/'
+
+
+class CFFreQuency(_ComicFury):
+    url = 'http://FreQuency.webcomic.ws/'
 
 
 class CFFridayAndGrover(_ComicFury):
@@ -1363,18 +1367,6 @@ class CFFutureRegrets(_ComicFury):
 
 class CFFuzzballAndScuzzball(_ComicFury):
     url = 'http://fuzzballandscuzzball.webcomic.ws/'
-
-
-class CFGODHATESDADS(_ComicFury):
-    url = 'http://godhatesdads.webcomic.ws/'
-
-
-class CFGOODBYEREPTILIANS(_ComicFury):
-    url = 'http://goodbyereptilians.webcomic.ws/'
-
-
-class CFGUS(_ComicFury):
-    url = 'http://gus.webcomic.ws/'
 
 
 class CFGalbertofBruges(_ComicFury):
@@ -1425,6 +1417,10 @@ class CFGodGames(_ComicFury):
     url = 'http://Godgames.webcomic.ws/'
 
 
+class CFGODHATESDADS(_ComicFury):
+    url = 'http://godhatesdads.webcomic.ws/'
+
+
 class CFGoldBlood(_ComicFury):
     url = 'http://goldblood.webcomic.ws/'
 
@@ -1434,6 +1430,10 @@ class CFGoldrush(_ComicFury):
 
 
 # GoodbyeKitty is excluded
+class CFGOODBYEREPTILIANS(_ComicFury):
+    url = 'http://goodbyereptilians.webcomic.ws/'
+
+
 class CFGrandfathersTale(_ComicFury):
     url = 'http://grandfatherstale.webcomic.ws/'
 
@@ -1450,12 +1450,16 @@ class CFGrayling(_ComicFury):
     url = 'http://grayling.webcomic.ws/'
 
 
+class CFGreenerGrass(_ComicFury):
+    url = 'http://GreenerGrass.webcomic.ws/'
+
+
 class CFGreenEyes(_ComicFury):
     url = 'http://GreenEyes.webcomic.ws/'
 
 
-class CFGreenerGrass(_ComicFury):
-    url = 'http://GreenerGrass.webcomic.ws/'
+class CFGreysterJemp(_ComicFury):
+    url = 'http://greysterjemp.webcomic.ws/'
 
 
 class CFGrimReaperSchool(_ComicFury):
@@ -1470,20 +1474,8 @@ class CFGrokBoop(_ComicFury):
     url = 'http://GrokBoop.webcomic.ws/'
 
 
-class CFHARDLUCK(_ComicFury):
-    url = 'http://hardluck.webcomic.ws/'
-
-
-class CFHAYWIRE(_ComicFury):
-    url = 'http://haywire.webcomic.ws/'
-
-
-class CFHCModeRoleplay(_ComicFury):
-    url = 'http://HCModeRoleplay.webcomic.ws/'
-
-
-class CFHUSH(_ComicFury):
-    url = 'http://hush.webcomic.ws/'
+class CFGUS(_ComicFury):
+    url = 'http://gus.webcomic.ws/'
 
 
 class CFHalloweenCameoCaper2012(_ComicFury):
@@ -1498,6 +1490,14 @@ class CFHalloweenCameoCaper2014(_ComicFury):
     url = 'http://halloween2014.webcomic.ws/'
 
 
+class CFHARDLUCK(_ComicFury):
+    url = 'http://hardluck.webcomic.ws/'
+
+
+class CFHAYWIRE(_ComicFury):
+    url = 'http://haywire.webcomic.ws/'
+
+
 class CFHazardousScience(_ComicFury):
     url = 'http://HazSci.webcomic.ws/'
 
@@ -1508,6 +1508,10 @@ class CFHazardsWake(_ComicFury):
 
 class CFHazyDaze(_ComicFury):
     url = 'http://hazydaze.webcomic.ws/'
+
+
+class CFHCModeRoleplay(_ComicFury):
+    url = 'http://HCModeRoleplay.webcomic.ws/'
 
 
 class CFHeadRoom(_ComicFury):
@@ -1530,16 +1534,16 @@ class CFHeavyMetalSailorMoon(_ComicFury):
     url = 'http://hmsm.webcomic.ws/'
 
 
-class CFHellCar(_ComicFury):
-    url = 'http://hellcar.webcomic.ws/'
-
-
 class CFHellbent(_ComicFury):
     url = 'http://hellbent.webcomic.ws/'
 
 
 class CFHellbound(_ComicFury):
     url = 'http://hellboundarchive.webcomic.ws/'
+
+
+class CFHellCar(_ComicFury):
+    url = 'http://hellcar.webcomic.ws/'
 
 
 class CFHelloWanderingStar(_ComicFury):
@@ -1623,6 +1627,10 @@ class CFHurfanosOrphans(_ComicFury):
     url = 'http://huerfanos.webcomic.ws/'
 
 
+class CFHUSH(_ComicFury):
+    url = 'http://hush.webcomic.ws/'
+
+
 class CFHyperactiveComics(_ComicFury):
     url = 'http://hyperactivecomics.webcomic.ws/'
 
@@ -1639,20 +1647,16 @@ class CFIDGet(_ComicFury):
     url = 'http://idget.webcomic.ws/'
 
 
-class CFIHaveNeverActuallySeenaCat(_ComicFury):
-    url = 'http://ihaveneveractuallyseenacat.webcomic.ws/'
-
-
-# IKilledtheHero is excluded
-class CFIMPERIVM(_ComicFury):
-    url = 'http://ImperivmGalactica.webcomic.ws/'
-
-
 # IfAndCanBeFlowers is excluded
 class CFIgnitionZero(_ComicFury):
     url = 'http://ignitionzero.webcomic.ws/'
 
 
+class CFIHaveNeverActuallySeenaCat(_ComicFury):
+    url = 'http://ihaveneveractuallyseenacat.webcomic.ws/'
+
+
+# IKilledtheHero is excluded
 class CFIlusionofTime(_ComicFury):
     url = 'http://illusionoftime.webcomic.ws/'
 
@@ -1671,6 +1675,10 @@ class CFImperialEntanglements(_ComicFury):
 
 class CFImperium(_ComicFury):
     url = 'http://imperium.webcomic.ws/'
+
+
+class CFIMPERIVM(_ComicFury):
+    url = 'http://ImperivmGalactica.webcomic.ws/'
 
 
 class CFIndexmancave(_ComicFury):
@@ -1819,14 +1827,6 @@ class CFJustPeachy(_ComicFury):
     url = 'http://JustPeachy.webcomic.ws/'
 
 
-class CFKAZE(_ComicFury):
-    url = 'http://kaze.webcomic.ws/'
-
-
-class CFKMLsSticks(_ComicFury):
-    url = 'http://kmlssticks.webcomic.ws/'
-
-
 class CFKaChing(_ComicFury):
     url = 'http://kachingcomic.webcomic.ws/'
 
@@ -1847,13 +1847,17 @@ class CFKazasMateGwenna(_ComicFury):
     url = 'http://Kaza-and-gwenna.webcomic.ws/'
 
 
+class CFKAZE(_ComicFury):
+    url = 'http://kaze.webcomic.ws/'
+
+
 # Keel is excluded
-class CFKeepingUpwithThursday(_ComicFury):
-    url = 'http://keepingupwiththursday.webcomic.ws/'
-
-
 class CFKeepingthePeace(_ComicFury):
     url = 'http://keepingthepeace.webcomic.ws/'
+
+
+class CFKeepingUpwithThursday(_ComicFury):
+    url = 'http://keepingupwiththursday.webcomic.ws/'
 
 
 class CFKetsuekiDoku(_ComicFury):
@@ -1873,10 +1877,6 @@ class CFKhulthagar(_ComicFury):
     url = 'http://khulthagar.webcomic.ws/'
 
 
-class CFKiLAiLO(_ComicFury):
-    url = 'http://KiLAiLO.webcomic.ws/'
-
-
 class CFKiasComic(_ComicFury):
     url = 'http://KiasComic.webcomic.ws/'
 
@@ -1885,13 +1885,17 @@ class CFKiasOTHERComic(_ComicFury):
     url = 'http://kiasothercomic.webcomic.ws/'
 
 
+class CFKiLAiLO(_ComicFury):
+    url = 'http://KiLAiLO.webcomic.ws/'
+
+
 # KindergardenCrisIs is excluded
-class CFKingdomPrettyCure(_ComicFury):
-    url = 'http://kingdomprettycure.webcomic.ws/'
-
-
 class CFKingdomoftheDinosaurs(_ComicFury):
     url = 'http://dinosaurkingdom.webcomic.ws/'
+
+
+class CFKingdomPrettyCure(_ComicFury):
+    url = 'http://kingdomprettycure.webcomic.ws/'
 
 
 class CFKirbyvsShyGuy(_ComicFury):
@@ -1900,6 +1904,10 @@ class CFKirbyvsShyGuy(_ComicFury):
 
 class CFKitsune(_ComicFury):
     url = 'http://Kitsune.webcomic.ws/'
+
+
+class CFKMLsSticks(_ComicFury):
+    url = 'http://kmlssticks.webcomic.ws/'
 
 
 class CFKnavesEnd(_ComicFury):
@@ -1924,14 +1932,6 @@ class CFKronosWoWComics(_ComicFury):
 
 class CFKyoniWanderer(_ComicFury):
     url = 'http://KyoniWanderer.webcomic.ws/'
-
-
-class CFLOSTLOVE(_ComicFury):
-    url = 'http://lostlove.webcomic.ws/'
-
-
-class CFLOVEtriologyExtraart(_ComicFury):
-    url = 'http://MLextralove.webcomic.ws/'
 
 
 class CFLaceyInvestigations(_ComicFury):
@@ -1983,12 +1983,12 @@ class CFLegendofPaean(_ComicFury):
     url = 'http://legend-of-paean.webcomic.ws/'
 
 
-class CFLegendofZeldaOcarinaofTim(_ComicFury):
-    url = 'http://ocarinaoftim.webcomic.ws/'
-
-
 class CFLegendoftheRedPhantom(_ComicFury):
     url = 'http://legendoftheredphantom.webcomic.ws/'
+
+
+class CFLegendofZeldaOcarinaofTim(_ComicFury):
+    url = 'http://ocarinaoftim.webcomic.ws/'
 
 
 class CFLethargicMisanthropy(_ComicFury):
@@ -2031,6 +2031,10 @@ class CFLint(_ComicFury):
     url = 'http://lint.webcomic.ws/'
 
 
+class CFLintier(_ComicFury):
+    url = 'http://lintier.webcomic.ws/'
+
+
 class CFLiquidLunch(_ComicFury):
     url = 'http://LiquidLunch.webcomic.ws/'
 
@@ -2043,12 +2047,12 @@ class CFLittleBlackDress(_ComicFury):
     url = 'http://little-black-dress.webcomic.ws/'
 
 
-class CFLittleRedRobo(_ComicFury):
-    url = 'http://littleredrobo.webcomic.ws/'
-
-
 class CFLittlejacquie(_ComicFury):
     url = 'http://littlejacquie.webcomic.ws/'
+
+
+class CFLittleRedRobo(_ComicFury):
+    url = 'http://littleredrobo.webcomic.ws/'
 
 
 # Lola has a duplicate in gocomics/lola
@@ -2065,12 +2069,20 @@ class CFLooneyTunesReborn(_ComicFury):
     url = 'http://LTR.webcomic.ws/'
 
 
-class CFLoveKillsSlowly(_ComicFury):
-    url = 'http://lovekillsslowly.webcomic.ws/'
+class CFLOSTLOVE(_ComicFury):
+    url = 'http://lostlove.webcomic.ws/'
 
 
 class CFLoveisConplicated(_ComicFury):
     url = 'http://Conplicated.webcomic.ws/'
+
+
+class CFLoveKillsSlowly(_ComicFury):
+    url = 'http://lovekillsslowly.webcomic.ws/'
+
+
+class CFLOVEtriologyExtraart(_ComicFury):
+    url = 'http://MLextralove.webcomic.ws/'
 
 
 # LucidsDream is excluded
@@ -2082,34 +2094,9 @@ class CFLunaStar(_ComicFury):
     url = 'http://LunaStar.webcomic.ws/'
 
 
-class CFMAGISAupdatesMonWedFri(_ComicFury):
-    url = 'http://mag-isa.webcomic.ws/'
-
-
-class CFMARS(_ComicFury):
-    url = 'http://mars.webcomic.ws/'
-
-
-class CFMAYBELOVE(_ComicFury):
-    url = 'http://emmacomics.webcomic.ws/'
-
-
-class CFMIGHTYRACCOON(_ComicFury):
-    url = 'http://starraccoon.webcomic.ws/'
-
-
-# MNPB is excluded
-class CFMVPL(_ComicFury):
-    url = 'http://MVPL.webcomic.ws/'
-
-
 # MadDog is excluded
 class CFMadGirl(_ComicFury):
     url = 'http://madgirl.webcomic.ws/'
-
-
-class CFMagicTheScattering(_ComicFury):
-    url = 'http://magicthescattering.webcomic.ws/'
 
 
 class CFMagiceldesencuentro(_ComicFury):
@@ -2118,6 +2105,14 @@ class CFMagiceldesencuentro(_ComicFury):
 
 class CFMagickless(_ComicFury):
     url = 'http://Magickless.webcomic.ws/'
+
+
+class CFMagicTheScattering(_ComicFury):
+    url = 'http://magicthescattering.webcomic.ws/'
+
+
+class CFMAGISAupdatesMonWedFri(_ComicFury):
+    url = 'http://mag-isa.webcomic.ws/'
 
 
 class CFMagnaComica(_ComicFury):
@@ -2136,6 +2131,14 @@ class CFMariosCastleTales(_ComicFury):
     url = 'http://mariocastletales.webcomic.ws/'
 
 
+class CFMarriedtoaTransformersFan(_ComicFury):
+    url = 'http://marriedtoatransformersfan.webcomic.ws/'
+
+
+class CFMARS(_ComicFury):
+    url = 'http://mars.webcomic.ws/'
+
+
 # Mascara has a duplicate in smackjeeves/mascara
 class CFMaskoftheAryans(_ComicFury):
     url = 'http://Mask-of-the-Aryans.webcomic.ws/'
@@ -2151,6 +2154,10 @@ class CFMateys(_ComicFury):
 
 class CFMaxFuture(_ComicFury):
     url = 'http://maxfuture.webcomic.ws/'
+
+
+class CFMAYBELOVE(_ComicFury):
+    url = 'http://emmacomics.webcomic.ws/'
 
 
 class CFMayonakaDensha(_ComicFury):
@@ -2182,10 +2189,6 @@ class CFMessenger(_ComicFury):
     url = 'http://messenger.webcomic.ws/'
 
 
-class CFMiVidaSinUnJetpack(_ComicFury):
-    url = 'http://sinjetpack.webcomic.ws/'
-
-
 class CFMichaelTDesingsArmyAnts(_ComicFury):
     url = 'http://ArmyAnts.webcomic.ws/'
 
@@ -2196,6 +2199,10 @@ class CFMichellesUniverseScrapbook(_ComicFury):
 
 class CFMidnightRUN(_ComicFury):
     url = 'http://midnight-run.webcomic.ws/'
+
+
+class CFMIGHTYRACCOON(_ComicFury):
+    url = 'http://starraccoon.webcomic.ws/'
 
 
 class CFMildlyAmusing(_ComicFury):
@@ -2235,6 +2242,11 @@ class CFMithrilRavens(_ComicFury):
     url = 'http://mithril-ravens.webcomic.ws/'
 
 
+class CFMiVidaSinUnJetpack(_ComicFury):
+    url = 'http://sinjetpack.webcomic.ws/'
+
+
+# MNPB is excluded
 class CFMobiusAdventures(_ComicFury):
     url = 'http://mobiusadventures.webcomic.ws/'
 
@@ -2255,12 +2267,12 @@ class CFMonochromerainbow(_ComicFury):
     url = 'http://monobow.webcomic.ws/'
 
 
-class CFMonsterSoup(_ComicFury):
-    url = 'http://monstersoup.webcomic.ws/'
-
-
 class CFMonsterintheKingdom(_ComicFury):
     url = 'http://monster.webcomic.ws/'
+
+
+class CFMonsterSoup(_ComicFury):
+    url = 'http://monstersoup.webcomic.ws/'
 
 
 class CFMonstersWithBenefits(_ComicFury):
@@ -2271,11 +2283,11 @@ class CFMonstroniverseadventures(_ComicFury):
     url = 'http://Monstroniverse.webcomic.ws/'
 
 
+# Moonlightvalley is excluded
 class CFMoonWraith(_ComicFury):
     url = 'http://MoonWraith.webcomic.ws/'
 
 
-# Moonlightvalley is excluded
 class CFMorningSquirtz(_ComicFury):
     url = 'http://Morningsquirtz.webcomic.ws/'
 
@@ -2309,6 +2321,14 @@ class CFMuttintheMiddle(_ComicFury):
     url = 'http://muttinthemiddle.webcomic.ws/'
 
 
+class CFMVPL(_ComicFury):
+    url = 'http://MVPL.webcomic.ws/'
+
+
+class CFMygirlfriendtheSecretAgent(_ComicFury):
+    url = 'http://mygfthesecagent.webcomic.ws/'
+
+
 # MyImmortalFool is excluded
 class CFMyLifeWithoutAJetpack(_ComicFury):
     url = 'http://nojetpack.webcomic.ws/'
@@ -2318,25 +2338,16 @@ class CFMyLittlePonyFriendshipisBetrayal(_ComicFury):
     url = 'http://mlp-fib.webcomic.ws/'
 
 
-class CFMyTVisEvil(_ComicFury):
-    url = 'http://mytvisevil.webcomic.ws/'
-
-
-class CFMygirlfriendtheSecretAgent(_ComicFury):
-    url = 'http://mygfthesecagent.webcomic.ws/'
-
-
 class CFMysteriousManofSkull(_ComicFury):
     url = 'http://MysteriousManofSkull.webcomic.ws/'
 
 
+class CFMyTVisEvil(_ComicFury):
+    url = 'http://mytvisevil.webcomic.ws/'
+
+
 class CFNA(_ComicFury):
     url = 'http://Noche.webcomic.ws/'
-
-
-# NATO is excluded
-class CFNEXGEN(_ComicFury):
-    url = 'http://nexgentheseries.webcomic.ws/'
 
 
 class CFNamcoWars(_ComicFury):
@@ -2347,6 +2358,7 @@ class CFNarutoJutsuandJinchuriki(_ComicFury):
     url = 'http://jutsuandjinchuriki.webcomic.ws/'
 
 
+# NATO is excluded
 class CFNatureDEEP(_ComicFury):
     url = 'http://NatureDEEP.webcomic.ws/'
 
@@ -2368,12 +2380,20 @@ class CFNewheimburg(_ComicFury):
     url = 'http://newheimburg.webcomic.ws/'
 
 
+class CFNEXGEN(_ComicFury):
+    url = 'http://nexgentheseries.webcomic.ws/'
+
+
 class CFNightshadethemerrywidow(_ComicFury):
     url = 'http://LORDDARKE.webcomic.ws/'
 
 
 class CFNinthLife(_ComicFury):
     url = 'http://NinthLife.webcomic.ws/'
+
+
+class CFNocturne21(_ComicFury):
+    url = 'http://Nocturne21.webcomic.ws/'
 
 
 class CFNoFuture(_ComicFury):
@@ -2384,22 +2404,18 @@ class CFNoKeys(_ComicFury):
     url = 'http://nokeys.webcomic.ws/'
 
 
-# NoSongsForTheDead is excluded
-class CFNocturne21(_ComicFury):
-    url = 'http://Nocturne21.webcomic.ws/'
-
-
 class CFNoprrkele(_ComicFury):
     url = 'http://noprrkele.webcomic.ws/'
 
 
+# NoSongsForTheDead is excluded
+# NothingFits is excluded
+# NothingFitsArtBlog is excluded
 class CFNotSinceYou(_ComicFury):
     url = 'http://notsinceyou.webcomic.ws/'
 
 
 # NotYoursAmI has a duplicate in smackjeeves/notyoursami
-# NothingFits is excluded
-# NothingFitsArtBlog is excluded
 class CFNyxintheOverworld(_ComicFury):
     url = 'http://nyx.webcomic.ws/'
 
@@ -2416,12 +2432,12 @@ class CFOffHours(_ComicFury):
     url = 'http://offhours.webcomic.ws/'
 
 
-class CFOffWorldTheCrease(_ComicFury):
-    url = 'http://thecrease.webcomic.ws/'
-
-
 class CFOfficeLogic(_ComicFury):
     url = 'http://office-logic.webcomic.ws/'
+
+
+class CFOffWorldTheCrease(_ComicFury):
+    url = 'http://thecrease.webcomic.ws/'
 
 
 # Old2G is excluded
@@ -2478,7 +2494,6 @@ class CFOutFeraSmoke(_ComicFury):
     url = 'http://outferasmoke.webcomic.ws/'
 
 
-# OutToLunchTheStingRayWhoreStory is excluded
 class CFOutletting(_ComicFury):
     url = 'http://outletting.webcomic.ws/'
 
@@ -2487,28 +2502,13 @@ class CFOutsideIn(_ComicFury):
     url = 'http://Outside-In.webcomic.ws/'
 
 
-class CFPANAPANSTRAKOVI(_ComicFury):
-    url = 'http://strakovi.webcomic.ws/'
-
-
-class CFPARKER(_ComicFury):
-    url = 'http://Parker.webcomic.ws/'
-
-
-class CFPCMS20(_ComicFury):
-    url = 'http://pcms.webcomic.ws/'
-
-
-class CFPITCHBLACK(_ComicFury):
-    url = 'http://pitchblack.webcomic.ws/'
-
-
-class CFPOWRightintheNostalgia(_ComicFury):
-    url = 'http://PowRightInTheNostalgia.webcomic.ws/'
-
-
+# OutToLunchTheStingRayWhoreStory is excluded
 class CFPalindrome(_ComicFury):
     url = 'http://Palindrome.webcomic.ws/'
+
+
+class CFPANAPANSTRAKOVI(_ComicFury):
+    url = 'http://strakovi.webcomic.ws/'
 
 
 # Pandemonium is excluded
@@ -2528,6 +2528,10 @@ class CFParisel313(_ComicFury):
     url = 'http://parisel313.webcomic.ws/'
 
 
+class CFPARKER(_ComicFury):
+    url = 'http://Parker.webcomic.ws/'
+
+
 class CFParmeshen(_ComicFury):
     url = 'http://parmeshen.webcomic.ws/'
 
@@ -2542,6 +2546,10 @@ class CFPatchworkpeople(_ComicFury):
 
 class CFPateEmpire(_ComicFury):
     url = 'http://pateempire.webcomic.ws/'
+
+
+class CFPCMS20(_ComicFury):
+    url = 'http://pcms.webcomic.ws/'
 
 
 class CFPeepsAndPerks(_ComicFury):
@@ -2585,6 +2593,10 @@ class CFPilgrimenEspaol(_ComicFury):
     url = 'http://pilgrimenespanol.webcomic.ws/'
 
 
+class CFPITCHBLACK(_ComicFury):
+    url = 'http://pitchblack.webcomic.ws/'
+
+
 class CFPlanetChaser(_ComicFury):
     url = 'http://PlanetChaser.webcomic.ws/'
 
@@ -2626,6 +2638,10 @@ class CFPoussiredefe(_ComicFury):
 
 
 # PowerofPower is excluded
+class CFPOWRightintheNostalgia(_ComicFury):
+    url = 'http://PowRightInTheNostalgia.webcomic.ws/'
+
+
 class CFPrimalWarsAftermath(_ComicFury):
     url = 'http://PrimalWars.webcomic.ws/'
 
@@ -2680,14 +2696,6 @@ class CFQuestCorporeal(_ComicFury):
     url = 'http://questcorporeal.webcomic.ws/'
 
 
-class CFRIDDICKQLOSSTALES(_ComicFury):
-    url = 'http://MoizmadComix.webcomic.ws/'
-
-
-class CFRPSLARPComic(_ComicFury):
-    url = 'http://RPS.webcomic.ws/'
-
-
 class CFRadioMustard(_ComicFury):
     url = 'http://radiomustard.webcomic.ws/'
 
@@ -2696,16 +2704,16 @@ class CFRain(_ComicFury):
     url = 'http://rain.webcomic.ws/'
 
 
+class CFRandomlyAssembled(_ComicFury):
+    url = 'http://randomlyassembled.webcomic.ws/'
+
+
 class CFRandomThingsForRandomBeings(_ComicFury):
     url = 'http://RTFRB.webcomic.ws/'
 
 
 class CFRandomThoughts(_ComicFury):
     url = 'http://randomthoughts.webcomic.ws/'
-
-
-class CFRandomlyAssembled(_ComicFury):
-    url = 'http://randomlyassembled.webcomic.ws/'
 
 
 # Ratantia is excluded
@@ -2752,17 +2760,17 @@ class CFRemsSketchbook(_ComicFury):
     url = 'http://rem-sketchbook.webcomic.ws/'
 
 
-# RequiemShadowbornPariah is excluded
 class CFRequiemsGate(_ComicFury):
     url = 'http://requiemsgate.webcomic.ws/'
 
 
-class CFResNullius(_ComicFury):
-    url = 'http://resnullius.webcomic.ws/'
-
-
+# RequiemShadowbornPariah is excluded
 class CFResidentWeirdo(_ComicFury):
     url = 'http://residentweirdo.webcomic.ws/'
+
+
+class CFResNullius(_ComicFury):
+    url = 'http://resnullius.webcomic.ws/'
 
 
 class CFReturnOfWonderland(_ComicFury):
@@ -2771,6 +2779,10 @@ class CFReturnOfWonderland(_ComicFury):
 
 class CFRexfordAvenue(_ComicFury):
     url = 'http://rexfordavenue.webcomic.ws/'
+
+
+class CFRIDDICKQLOSSTALES(_ComicFury):
+    url = 'http://MoizmadComix.webcomic.ws/'
 
 
 class CFRockGardenComics(_ComicFury):
@@ -2797,6 +2809,10 @@ class CFRozak(_ComicFury):
     url = 'http://Rozak.webcomic.ws/'
 
 
+class CFRPSLARPComic(_ComicFury):
+    url = 'http://RPS.webcomic.ws/'
+
+
 class CFRumfAdventures(_ComicFury):
     url = 'http://RumfAdventures.webcomic.ws/'
 
@@ -2804,43 +2820,6 @@ class CFRumfAdventures(_ComicFury):
 # RuneSpark has a duplicate in smackjeeves/runespark
 class CFRunningRiot(_ComicFury):
     url = 'http://RunningRiot.webcomic.ws/'
-
-
-class CFRustAndMagic(_ComicFury):
-    url = 'http://rustandmagic.webcomic.ws/'
-
-
-class CFSEAAOMSagaArchive(_ComicFury):
-    url = 'http://seaaom.webcomic.ws/'
-
-
-class CFSECRETLOVE(_ComicFury):
-    url = 'http://secretlove.webcomic.ws/'
-
-
-class CFSHADOWQUEEN(_ComicFury):
-    url = 'http://shadowqueen.webcomic.ws/'
-
-
-# SLightlyabOVeavErage has a duplicate in smackjeeves/slightlyaboveaverage
-class CFSPOON(_ComicFury):
-    url = 'http://spooncomic.webcomic.ws/'
-
-
-class CFSTARWARSXWingAlliance(_ComicFury):
-    url = 'http://X-WingAlliance.webcomic.ws/'
-
-
-class CFSTASonictheAdventure(_ComicFury):
-    url = 'http://STA.webcomic.ws/'
-
-
-class CFSTICKFODDER(_ComicFury):
-    url = 'http://stickfodder.webcomic.ws/'
-
-
-class CFSWEETCHEERIOSANDORANGEJUICE(_ComicFury):
-    url = 'http://sweetcheeriosandorangejuice.webcomic.ws/'
 
 
 class CFSailorMoonTheEnemyNextDoor(_ComicFury):
@@ -2878,8 +2857,16 @@ class CFScrubDiving(_ComicFury):
     url = 'http://scrubdiving.webcomic.ws/'
 
 
+class CFSEAAOMSagaArchive(_ComicFury):
+    url = 'http://seaaom.webcomic.ws/'
+
+
 # Secondpuberty is excluded
 # Seconds is excluded
+class CFSECRETLOVE(_ComicFury):
+    url = 'http://secretlove.webcomic.ws/'
+
+
 class CFSecretSanta2013(_ComicFury):
     url = 'http://secretsanta2013.webcomic.ws/'
 
@@ -2920,6 +2907,10 @@ class CFShadesofGray(_ComicFury):
     url = 'http://fuzzylittleninjas.webcomic.ws/'
 
 
+class CFSHADOWQUEEN(_ComicFury):
+    url = 'http://shadowqueen.webcomic.ws/'
+
+
 class CFShakingOffSorcery(_ComicFury):
     url = 'http://shakingoffsorcery.webcomic.ws/'
 
@@ -2941,12 +2932,12 @@ class CFShatterrealm(_ComicFury):
     url = 'http://shatterrealm.webcomic.ws/'
 
 
-class CFShenaniganSquares(_ComicFury):
-    url = 'http://ss-comic.webcomic.ws/'
-
-
 class CFShenanigans(_ComicFury):
     url = 'http://s.webcomic.ws/'
+
+
+class CFShenaniganSquares(_ComicFury):
+    url = 'http://ss-comic.webcomic.ws/'
 
 
 class CFShiroandKuro(_ComicFury):
@@ -2980,6 +2971,7 @@ class CFSleazyspacesaga(_ComicFury):
     url = 'http://sleazyspacesage.webcomic.ws/'
 
 
+# SLightlyabOVeavErage has a duplicate in smackjeeves/slightlyaboveaverage
 # SlightlyEccentricOrigins is excluded
 # SlipstreamSingularity has a duplicate in smackjeeves/slipstreamsingularity
 class CFSmallTownValues(_ComicFury):
@@ -3043,12 +3035,12 @@ class CFSpooky(_ComicFury):
     url = 'http://spooky.webcomic.ws/'
 
 
+class CFSPOON(_ComicFury):
+    url = 'http://spooncomic.webcomic.ws/'
+
+
 class CFStampedeJessicasStory(_ComicFury):
     url = 'http://stampedegirl.webcomic.ws/'
-
-
-class CFStarPunchGirl(_ComicFury):
-    url = 'http://starpunchgirl.webcomic.ws/'
 
 
 class CFStarcrossed(_ComicFury):
@@ -3056,12 +3048,32 @@ class CFStarcrossed(_ComicFury):
 
 
 # StardusttheCat is excluded
+class CFStarPunchGirl(_ComicFury):
+    url = 'http://starpunchgirl.webcomic.ws/'
+
+
+class CFStarSovereignSeriesMuladhara(_ComicFury):
+    url = 'http://Muladhara.webcomic.ws/'
+
+
+class CFSTARWARSXWingAlliance(_ComicFury):
+    url = 'http://X-WingAlliance.webcomic.ws/'
+
+
+class CFSTASonictheAdventure(_ComicFury):
+    url = 'http://STA.webcomic.ws/'
+
+
 class CFSteamSword(_ComicFury):
     url = 'http://SteamSword.webcomic.ws/'
 
 
 class CFStevenandtheCrystalGMs(_ComicFury):
     url = 'http://CrystalGMs.webcomic.ws/'
+
+
+class CFSTICKFODDER(_ComicFury):
+    url = 'http://stickfodder.webcomic.ws/'
 
 
 class CFStickLife(_ComicFury):
@@ -3093,15 +3105,15 @@ class CFSuperChibiGirl(_ComicFury):
     url = 'http://superchibigirl.webcomic.ws/'
 
 
-class CFSuperShashi(_ComicFury):
-    url = 'http://supershashi.webcomic.ws/'
-
-
 class CFSuperheroTales(_ComicFury):
     url = 'http://superherobeingsuper.webcomic.ws/'
 
 
 # SupermassiveBlackHoleA has a duplicate in smackjeeves/supermassiveblackholea
+class CFSuperShashi(_ComicFury):
+    url = 'http://supershashi.webcomic.ws/'
+
+
 class CFSupervillainous(_ComicFury):
     url = 'http://supervillainous.webcomic.ws/'
 
@@ -3114,47 +3126,15 @@ class CFSwazzyknocks(_ComicFury):
     url = 'http://swazzyknocks.webcomic.ws/'
 
 
+class CFSWEETCHEERIOSANDORANGEJUICE(_ComicFury):
+    url = 'http://sweetcheeriosandorangejuice.webcomic.ws/'
+
+
 class CFSynapticisms(_ComicFury):
     url = 'http://Synapticisms.webcomic.ws/'
 
 
-class CFTBAold(_ComicFury):
-    url = 'http://tba-old.webcomic.ws/'
-
-
-class CFTHEBIGSCIFIMISHMASH(_ComicFury):
-    url = 'http://thebigsci-fimish-mash.webcomic.ws/'
-
-
-class CFTHEBOOKOFLIES(_ComicFury):
-    url = 'http://BookOfLiesComic.webcomic.ws/'
-
-
-class CFTHESTORMRUNNERS(_ComicFury):
-    url = 'http://thestormrunners.webcomic.ws/'
-
-
-class CFTM47(_ComicFury):
-    url = 'http://TM47.webcomic.ws/'
-
-
-class CFTOLVA(_ComicFury):
-    url = 'http://tolva.webcomic.ws/'
-
-
-class CFTSandTJ(_ComicFury):
-    url = 'http://tsandtj.webcomic.ws/'
-
-
-class CFTWTWE(_ComicFury):
-    url = 'http://TWTWE.webcomic.ws/'
-
-
 # TalamakGreatAdventure is excluded
-class CFTalesOfSpoons(_ComicFury):
-    url = 'http://talesofspoons.webcomic.ws/'
-
-
 class CFTalesfromRiota(_ComicFury):
     url = 'http://ganold.webcomic.ws/'
 
@@ -3165,6 +3145,10 @@ class CFTalesofBrickland(_ComicFury):
 
 class CFTalesofMiddar(_ComicFury):
     url = 'http://talesofmiddar.webcomic.ws/'
+
+
+class CFTalesOfSpoons(_ComicFury):
+    url = 'http://talesofspoons.webcomic.ws/'
 
 
 class CFTalesoftheGalli(_ComicFury):
@@ -3181,6 +3165,14 @@ class CFTangledMessThegirlynerdyterriblystrangejournalcomi(_ComicFury):
 
 class CFTardaasa(_ComicFury):
     url = 'http://tardaasa.webcomic.ws/'
+
+
+class CFTBA(_ComicFury):
+    url = 'http://tba.webcomic.ws/'
+
+
+class CFTBAold(_ComicFury):
+    url = 'http://tba-old.webcomic.ws/'
 
 
 class CFTerwilligersCafe(_ComicFury):
@@ -3245,8 +3237,16 @@ class CFTheBigFoldy(_ComicFury):
     url = 'http://bigfoldy.webcomic.ws/'
 
 
+class CFTHEBIGSCIFIMISHMASH(_ComicFury):
+    url = 'http://thebigsci-fimish-mash.webcomic.ws/'
+
+
 class CFTheBlackPrincess(_ComicFury):
     url = 'http://theblackprincess.webcomic.ws/'
+
+
+class CFTHEBOOKOFLIES(_ComicFury):
+    url = 'http://BookOfLiesComic.webcomic.ws/'
 
 
 class CFTheChroniclesofBuckyONeill(_ComicFury):
@@ -3329,6 +3329,10 @@ class CFTheGarage(_ComicFury):
 
 class CFTheGarden(_ComicFury):
     url = 'http://thegarden.webcomic.ws/'
+
+
+class CFThegingerbreadmanchronicles(_ComicFury):
+    url = 'http://gingerbreadmanchronicles.webcomic.ws/'
 
 
 class CFTheGuardian(_ComicFury):
@@ -3423,10 +3427,6 @@ class CFTheLegendaryPixelCrew(_ComicFury):
     url = 'http://thelegendarypixelcrew.webcomic.ws/'
 
 
-class CFTheLegendofBriva(_ComicFury):
-    url = 'http://letsfly.webcomic.ws/'
-
-
 class CFTheLegendofLink(_ComicFury):
     url = 'http://legendoflink.webcomic.ws/'
 
@@ -3476,6 +3476,10 @@ class CFTheMitchellEffect(_ComicFury):
     url = 'http://themitchelleffect.webcomic.ws/'
 
 
+class CFTheMoonValley(_ComicFury):
+    url = 'http://moonvalley.webcomic.ws/'
+
+
 class CFTheNewAdventuresOfFelicity(_ComicFury):
     url = 'http://felicity.webcomic.ws/'
 
@@ -3501,6 +3505,7 @@ class CFTheOverture(_ComicFury):
 
 
 # ThePainter is excluded
+# Thepiratebalthasar has a duplicate in smackjeeves/thepiratebalthasar
 class CFThePresident(_ComicFury):
     url = 'http://president.webcomic.ws/'
 
@@ -3561,6 +3566,10 @@ class CFTheSpecialCASE(_ComicFury):
 
 
 # TheStickmen is excluded
+class CFTHESTORMRUNNERS(_ComicFury):
+    url = 'http://thestormrunners.webcomic.ws/'
+
+
 class CFTheSupernaturalsEpisode4(_ComicFury):
     url = 'http://TheSupernaturals4.webcomic.ws/'
 
@@ -3584,10 +3593,6 @@ class CFTheUnclean(_ComicFury):
 
 class CFTheUnthinkableHybrid(_ComicFury):
     url = 'http://TheUnthinkableHybrid.webcomic.ws/'
-
-
-class CFTheWWord(_ComicFury):
-    url = 'http://thewword.webcomic.ws/'
 
 
 class CFTheWallachianLibrary(_ComicFury):
@@ -3622,11 +3627,10 @@ class CFTheWrongTree(_ComicFury):
     url = 'http://thewrongtree.webcomic.ws/'
 
 
-class CFThegingerbreadmanchronicles(_ComicFury):
-    url = 'http://gingerbreadmanchronicles.webcomic.ws/'
+class CFTheWWord(_ComicFury):
+    url = 'http://thewword.webcomic.ws/'
 
 
-# Thepiratebalthasar has a duplicate in smackjeeves/thepiratebalthasar
 class CFThisHostileUniverse(_ComicFury):
     url = 'http://hostileuniverse.webcomic.ws/'
 
@@ -3672,8 +3676,16 @@ class CFTiziana(_ComicFury):
     url = 'http://tiziana.webcomic.ws/'
 
 
+class CFTM47(_ComicFury):
+    url = 'http://TM47.webcomic.ws/'
+
+
 class CFTohvelinTuhinoita(_ComicFury):
     url = 'http://Tuhinaloota.webcomic.ws/'
+
+
+class CFTOLVA(_ComicFury):
+    url = 'http://tolva.webcomic.ws/'
 
 
 class CFTomboftheKing(_ComicFury):
@@ -3713,11 +3725,6 @@ class CFTrAgEdY(_ComicFury):
     url = 'http://tragedy.webcomic.ws/'
 
 
-# TransUman has a duplicate in smackjeeves/transuman
-class CFTransUmansUbterran(_ComicFury):
-    url = 'http://sUb-terran.webcomic.ws/'
-
-
 class CFTransdimensionalBrainChip(_ComicFury):
     url = 'http://brainchip.webcomic.ws/'
 
@@ -3728,6 +3735,11 @@ class CFTransientPulseNotIntentionallyObsessive(_ComicFury):
 
 class CFTransmission(_ComicFury):
     url = 'http://transmission.webcomic.ws/'
+
+
+# TransUman has a duplicate in smackjeeves/transuman
+class CFTransUmansUbterran(_ComicFury):
+    url = 'http://sUb-terran.webcomic.ws/'
 
 
 class CFTreeScratches(_ComicFury):
@@ -3750,8 +3762,16 @@ class CFTrollGirl(_ComicFury):
     url = 'http://trollgirl.webcomic.ws/'
 
 
+class CFTrueFist(_ComicFury):
+    url = 'http://true-fist.webcomic.ws/'
+
+
 class CFTruFax(_ComicFury):
     url = 'http://TruFax.webcomic.ws/'
+
+
+class CFTSandTJ(_ComicFury):
+    url = 'http://tsandtj.webcomic.ws/'
 
 
 class CFTsuyuSociety(_ComicFury):
@@ -3798,13 +3818,16 @@ class CFTwoHearts(_ComicFury):
     url = 'http://twohearts.webcomic.ws/'
 
 
+class CFTWTWE(_ComicFury):
+    url = 'http://TWTWE.webcomic.ws/'
+
+
 # TylerHumanRecycler is excluded
 class CFTypicalStrange(_ComicFury):
     url = 'http://typicalstrange.webcomic.ws/'
 
 
 # UAF is excluded
-# USBUnlimitedsimulatedbody is excluded
 class CFUglyBookCovers(_ComicFury):
     url = 'http://uglybookcovers.webcomic.ws/'
 
@@ -3825,20 +3848,17 @@ class CFUniversityofSpeed(_ComicFury):
     url = 'http://U-Speed.webcomic.ws/'
 
 
+class CFUNPROFESSIONAL(_ComicFury):
+    url = 'http://UNPROFESSIONAL.webcomic.ws/'
+
+
 class CFUnreliable(_ComicFury):
     url = 'http://unreliable.webcomic.ws/'
 
 
+# USBUnlimitedsimulatedbody is excluded
 class CFV4(_ComicFury):
     url = 'http://v4.webcomic.ws/'
-
-
-class CFVOE(_ComicFury):
-    url = 'http://VOE.webcomic.ws/'
-
-
-class CFVOEin3D(_ComicFury):
-    url = 'http://VOEin3D.webcomic.ws/'
 
 
 class CFValtersRebellion(_ComicFury):
@@ -3873,20 +3893,12 @@ class CFVisualDiaryofMyLife(_ComicFury):
     url = 'http://VisualDiary.webcomic.ws/'
 
 
-class CFWARG(_ComicFury):
-    url = 'http://Warg.webcomic.ws/'
+class CFVOE(_ComicFury):
+    url = 'http://VOE.webcomic.ws/'
 
 
-class CFWHATSERP(_ComicFury):
-    url = 'http://whatserp.webcomic.ws/'
-
-
-class CFWORMCURSE(_ComicFury):
-    url = 'http://wormcurse.webcomic.ws/'
-
-
-class CFWYIHN(_ComicFury):
-    url = 'http://WYIHN.webcomic.ws/'
+class CFVOEin3D(_ComicFury):
+    url = 'http://VOEin3D.webcomic.ws/'
 
 
 class CFWaitWhat(_ComicFury):
@@ -3894,12 +3906,12 @@ class CFWaitWhat(_ComicFury):
 
 
 # WaketheSleepers is excluded
+class CFWARG(_ComicFury):
+    url = 'http://Warg.webcomic.ws/'
+
+
 class CFWarriorTwentySeven(_ComicFury):
     url = 'http://Warrior27.webcomic.ws/'
-
-
-class CFWasteOfTime(_ComicFury):
-    url = 'http://wasteoftime.webcomic.ws/'
 
 
 class CFWastedAway(_ComicFury):
@@ -3914,12 +3926,20 @@ class CFWastelandersAnonymous(_ComicFury):
     url = 'http://wastelanders.webcomic.ws/'
 
 
+class CFWasteOfTime(_ComicFury):
+    url = 'http://wasteoftime.webcomic.ws/'
+
+
 class CFWayTooOffensive(_ComicFury):
     url = 'http://waytooffensive.webcomic.ws/'
 
 
 class CFWeAreTheLosers(_ComicFury):
     url = 'http://thelosers.webcomic.ws/'
+
+
+class CFWeeabooIsland(_ComicFury):
+    url = 'http://WeeabooIsland.webcomic.ws/'
 
 
 # WeightofEternity is excluded
@@ -3929,6 +3949,10 @@ class CFWestTreeAcademyofHeroes(_ComicFury):
 
 class CFWhatIDontEven(_ComicFury):
     url = 'http://Idonteven.webcomic.ws/'
+
+
+class CFWHATSERP(_ComicFury):
+    url = 'http://whatserp.webcomic.ws/'
 
 
 # WhenPigsFly is excluded
@@ -3993,6 +4017,10 @@ class CFWordstoLiveBy(_ComicFury):
     url = 'http://wordstoliveby.webcomic.ws/'
 
 
+class CFWORMCURSE(_ComicFury):
+    url = 'http://wormcurse.webcomic.ws/'
+
+
 class CFWrightasRayne(_ComicFury):
     url = 'http://wrightasrayne.webcomic.ws/'
 
@@ -4001,12 +4029,12 @@ class CFWrongNumber(_ComicFury):
     url = 'http://wrongnumber.webcomic.ws/'
 
 
+class CFWYIHN(_ComicFury):
+    url = 'http://WYIHN.webcomic.ws/'
+
+
 class CFXit(_ComicFury):
     url = 'http://X-it.webcomic.ws/'
-
-
-class CFYOURCHOICE(_ComicFury):
-    url = 'http://yourchoice.webcomic.ws/'
 
 
 # YeOldeLegotimeTheatre is excluded
@@ -4020,6 +4048,10 @@ class CFYouAreNow(_ComicFury):
 
 class CFYouAreNowEnteringAshburg(_ComicFury):
     url = 'http://Pinefest.webcomic.ws/'
+
+
+class CFYOURCHOICE(_ComicFury):
+    url = 'http://yourchoice.webcomic.ws/'
 
 
 class CFZebraGirl(_ComicFury):
@@ -4036,3 +4068,5 @@ class CFZeroEffortFantasy(_ComicFury):
 
 class CFZwergElf(_ComicFury):
     url = 'http://ZwergElf.webcomic.ws/'
+
+

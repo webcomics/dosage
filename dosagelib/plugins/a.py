@@ -1,22 +1,13 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 
+from __future__ import absolute_import, division, print_function
 from re import compile, escape, MULTILINE
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import regexNamer, bounceStarter, indirectStarter
-
-
-class AbsurdNotions(_BasicScraper):
-    baseUrl = 'http://www.absurdnotions.org/'
-    url = baseUrl + 'page129.html'
-    stripUrl = baseUrl + 'page%s.html'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre('img', 'src', r'(an[^"]+)'))
-    multipleImagesPerStrip = True
-    prevSearch = compile(tagre('a', 'href', r'([^"]+)') + tagre('img', 'src', 'nprev\.gif'))
-    help = 'Index format: n (unpadded)'
 
 
 class AbstruseGoose(_BasicScraper):
@@ -25,7 +16,8 @@ class AbstruseGoose(_BasicScraper):
     starter = bounceStarter(url, compile(tagre('a', 'href', r'(%s\d+)' % rurl)+"Next &raquo;"))
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre('img', 'src', r'(http://abstrusegoose\.com/strips/[^<>"]+)'))
+    imageSearch = compile(tagre('img', 'src',
+                                r'(http://abstrusegoose\.com/strips/[^<>"]+)'))
     prevSearch = compile(tagre('a', 'href', r'(%s\d+)' % rurl) + r'&laquo; Previous')
     nextSearch = compile(tagre('a', 'href', r'(%s\d+)' % rurl) + r'Next &raquo;')
     help = 'Index format: n (unpadded)'
@@ -38,12 +30,25 @@ class AbstruseGoose(_BasicScraper):
         return 'c%03d-%s' % (index, name)
 
 
+class AbsurdNotions(_BasicScraper):
+    baseUrl = 'http://www.absurdnotions.org/'
+    url = baseUrl + 'page129.html'
+    stripUrl = baseUrl + 'page%s.html'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = compile(tagre('img', 'src', r'(an[^"]+)'))
+    multipleImagesPerStrip = True
+    prevSearch = compile(tagre('a', 'href', r'([^"]+)') +
+                         tagre('img', 'src', 'nprev\.gif'))
+    help = 'Index format: n (unpadded)'
+
+
 class AcademyVale(_BasicScraper):
     url = 'http://www.imagerie.com/vale/'
     stripUrl = url + 'avarch.cgi?%s'
     firstStripUrl = stripUrl % '001'
     imageSearch = compile(tagre('img', 'src', r'(avale\d{4}-\d{2}\.gif)'))
-    prevSearch = compile(tagre('a', 'href', r'(avarch[^">]+)', quote="") + tagre('img', 'src', 'AVNavBack\.gif'))
+    prevSearch = compile(tagre('a', 'href', r'(avarch[^">]+)', quote="") +
+                         tagre('img', 'src', 'AVNavBack\.gif'))
     help = 'Index format: nnn'
 
 
@@ -52,7 +57,8 @@ class Achewood(_BasicScraper):
     stripUrl = url + 'index.php?date=%s'
     firstStripUrl = stripUrl % '00000000'
     imageSearch = compile(tagre("img", "src", r'(/comic\.php\?date=\d+)'))
-    prevSearch = compile(tagre("a", "href", r'(index\.php\?date=\d+)', after="Previous"))
+    prevSearch = compile(tagre("a", "href", r'(index\.php\?date=\d+)',
+                               after="Previous"))
     help = 'Index format: mmddyyyy'
     namer = regexNamer(compile(r'date=(\d+)'))
 
@@ -70,8 +76,7 @@ class AfterStrife(_BasicScraper):
 
 class AGirlAndHerFed(_BasicScraper):
     url = 'http://www.agirlandherfed.com/'
-    starter = bounceStarter(url,
-      compile(r'<a href="([^"]+)">[^>]+Back'))
+    starter = bounceStarter(url, compile(r'<a href="([^"]+)">[^>]+Back'))
     stripUrl = url + '1.%s.html'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(img/strip/[^"]+\.jpg)'))
@@ -79,29 +84,30 @@ class AGirlAndHerFed(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class AhoyEarth(_ParserScraper):
-    url = 'http://www.ahoyearth.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    css = True
-    imageSearch = '#comic-1 img'
-    prevSearch = '.navi-prev'
-    help = 'Index format: ddmmyyyy'
-	
-	
 class AhoiPolloi(_BasicScraper):
     url = 'http://ahoipolloi.blogger.de/'
     stripUrl = url + '?day=%s'
     firstStripUrl = stripUrl % '20060306'
     multipleImagesPerStrip = True
     lang = 'de'
-    imageSearch = compile(tagre('img', 'src', r'(/static/antville/ahoipolloi/images/[^"]+)'))
-    prevSearch = compile(tagre('a', 'href', r'(http://ahoipolloi\.blogger\.de/\?day=\d+)'))
+    imageSearch = compile(tagre('img', 'src',
+                                r'(/static/antville/ahoipolloi/images/[^"]+)'))
+    prevSearch = compile(tagre('a', 'href',
+                               r'(http://ahoipolloi\.blogger\.de/\?day=\d+)'))
     help = 'Index format: yyyymmdd'
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
         return imageUrl.rsplit('/', 1)[1]
+
+
+class AhoyEarth(_ParserScraper):
+    url = 'http://www.ahoyearth.com/'
+    stripUrl = url + '%s/'
+    css = True
+    imageSearch = '#comic-1 img'
+    prevSearch = '.navi-prev'
+    help = 'Index format: ddmmyyyy'
 
 
 class AirForceBlues(_BasicScraper):
@@ -115,7 +121,8 @@ class AirForceBlues(_BasicScraper):
 
 class ALessonIsLearned(_BasicScraper):
     url = 'http://www.alessonislearned.com/'
-    prevSearch = compile(tagre("a", "href", r"(index\.php\?comic=\d+)", quote="'")+r"[^>]+previous")
+    prevSearch = compile(tagre("a", "href", r"(index\.php\?comic=\d+)",
+                               quote="'")+r"[^>]+previous")
     starter = indirectStarter(url, prevSearch)
     stripUrl = url + 'index.php?comic=%s'
     firstStripUrl = stripUrl % '1'
@@ -127,7 +134,8 @@ class AlienLovesPredator(_BasicScraper):
     url = 'http://alienlovespredator.com/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2004/10/12/unavoidable-delay'
-    imageSearch = compile(tagre("img", "src", r'([^"]+)', after='border="1" alt="" width="750"'))
+    imageSearch = compile(tagre("img", "src", r'([^"]+)',
+                                after='border="1" alt="" width="750"'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)', after="prev"))
     help = 'Index format: yyyy/mm/dd/name'
 
@@ -244,9 +252,12 @@ class Antics(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + '?p=%s'
     firstStripUrl = stripUrl % '3'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl, after='prev'))
+    imageSearch = compile(tagre("img", "src",
+                                r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl,
+                               after='prev'))
     help = 'Index format: number'
+
 
 class AoiHouse(_ParserScraper):
     url = 'http://www.aoihouse.net/'
@@ -270,8 +281,17 @@ class ARedTailsDream(_BasicScraper):
     url = baseUrl + 'comic/recent.php'
     imageSearch = compile(tagre('img', 'src', r'(chapter.+?/eng[^"]*)'))
     prevSearch = compile(tagre('a', 'href', r'(page\d+\.php)') +
-      tagre("img", "src", r'.*?aprev.*?'))
+                         tagre("img", "src", r'.*?aprev.*?'))
     help = 'Index format: nn'
+
+
+class ASkeweredParadise(_BasicScraper):
+    url = 'http://aspcomics.net/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % '001'
+    imageSearch = compile(tagre("img", "src", r'(http://aspcomics\.net/sites/default/files[^"]*/asp\d+\.jpg)[^"]+'))
+    prevSearch = compile(tagre("a", "href", "(/comic/\d+)")+r"[^>]+Previous")
+    help = 'Index format: nnn'
 
 
 class ASofterWorld(_ParserScraper):
@@ -281,7 +301,6 @@ class ASofterWorld(_ParserScraper):
     imageSearch = '//div[@id="comicimg"]//img'
     prevSearch = '//div[@id="previous"]/a'
     help = 'Index format: n (unpadded)'
-
 
 
 class AstronomyPOTD(_BasicScraper):
@@ -299,22 +318,13 @@ class AstronomyPOTD(_BasicScraper):
     def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
         return url in (
-            self.stripUrl % '130217', # video
-            self.stripUrl % '130218', # video
-            self.stripUrl % '130226', # video
-            self.stripUrl % '130424', # video
+            self.stripUrl % '130217',  # video
+            self.stripUrl % '130218',  # video
+            self.stripUrl % '130226',  # video
+            self.stripUrl % '130424',  # video
         )
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
         return '%s-%s' % (pageUrl.split('/')[-1].split('.')[0][2:],
                           imageUrl.split('/')[-1].split('.')[0])
-
-
-class ASkeweredParadise(_BasicScraper):
-    url = 'http://aspcomics.net/'
-    stripUrl = url + 'comic/%s'
-    firstStripUrl = stripUrl % '001'
-    imageSearch = compile(tagre("img", "src", r'(http://aspcomics\.net/sites/default/files[^"]*/asp\d+\.jpg)[^"]+'))
-    prevSearch = compile(tagre("a", "href", "(/comic/\d+)")+r"[^>]+Previous")
-    help = 'Index format: nnn'

@@ -1,7 +1,9 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 
+from __future__ import absolute_import, division, print_function
 from re import compile
 
 from ..scraper import _BasicScraper
@@ -23,14 +25,8 @@ class VGCats(_BasicScraper):
     firstStripUrl = stripUrl % '0'
     imageSearch = compile(tagre("img", "src", r'(images/\d{6}\.[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(\?strip_id=\d+)') +
-      tagre("img", "src", r"back\.gif"))
+                         tagre("img", "src", r"back\.gif"))
     help = 'Index format: n (unpadded)'
-
-
-class VGCatsSuper(VGCats):
-    name = 'VGCats/Super'
-    url = 'http://www.vgcats.com/super/'
-    stripUrl = url + '?strip_id=%s'
 
 
 class VGCatsAdventure(VGCats):
@@ -39,12 +35,19 @@ class VGCatsAdventure(VGCats):
     stripUrl = url + '?strip_id=%s'
 
 
+class VGCatsSuper(VGCats):
+    name = 'VGCats/Super'
+    url = 'http://www.vgcats.com/super/'
+    stripUrl = url + '?strip_id=%s'
+
+
 class VictimsOfTheSystem(_BasicScraper):
     url = 'http://www.votscomic.com/'
     stripUrl = url + '?id=%s.jpg'
     firstStripUrl = stripUrl % '070103-002452'
     imageSearch = compile(tagre("img", "src", r'(comicpro/strips/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(\?id=\d+-\d+\.jpg)') + "Previous")
+    prevSearch = compile(tagre("a", "href", r'(\?id=\d+-\d+\.jpg)') +
+                         "Previous")
     help = 'Index format: nnn-nnn'
 
 
@@ -52,7 +55,8 @@ class ViiviJaWagner(_BasicScraper):
     url = 'http://www.hs.fi/viivijawagner/'
     stripUrl = None
     imageSearch = compile(tagre("img", "src", r'(http://hs\d+\.snstatic\.fi/webkuva/sarjis/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/viivijawagner/[^"]+)', before="prev-cm"))
+    prevSearch = compile(tagre("a", "href", r'(/viivijawagner/[^"]+)',
+                               before="prev-cm"))
     help = 'Index format: none'
     lang = 'fi'
 

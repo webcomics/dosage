@@ -1,12 +1,15 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 
+from __future__ import absolute_import, division, print_function
 from re import compile, escape
 
 from ..scraper import _BasicScraper
-from ..helpers import bounceStarter, indirectStarter
-from ..util import getQueryParams, tagre
+from ..helpers import indirectStarter
+from ..util import tagre
+
 
 class Underling(_BasicScraper):
     url = 'http://underlingcomic.com/'
@@ -14,7 +17,8 @@ class Underling(_BasicScraper):
     rurl = escape(url)
     firstStripUrl = stripUrl + 'page-one/'
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]*)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)', after = r'class="[^"]*navi-prev'))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)',
+                               after=r'class="[^"]*navi-prev'))
     help = 'Index format: nnn'
 
 
@@ -45,26 +49,12 @@ class Unsounded(_BasicScraper):
     rurl = escape(url)
     imageSearch = compile(tagre("img", "src", r'(pageart/[^"]*)'))
     prevSearch = compile(tagre("a", "href", r'([^"]*)', after='class="back'))
-    starter = indirectStarter(url,
-       compile(tagre("a", "href", r'(%scomic/[^"]*)' % rurl) +
-           tagre("img", "src", r"%simages/newpages\.png" % rurl)))
+    starter = indirectStarter(
+        url, compile(tagre("a", "href", r'(%scomic/[^"]*)' % rurl) +
+                     tagre("img", "src", r"%simages/newpages\.png" % rurl)))
     help = 'Index format: chapter-number'
 
     def getIndexStripUrl(self, index):
         """Get comic strip URL from index."""
         chapter, num = index.split('-')
         return self.stripUrl % (chapter, chapter, num)
-
-
-# XXX disallowed by robots.txt
-class _UserFriendly(_BasicScraper):
-    url = 'http://ars.userfriendly.org/cartoons/?mode=classic'
-    stripUrl = url + '&id=%s'
-    starter = bounceStarter(url, compile(r'<area shape="rect" href="(/cartoons/\?id=\d{8}&mode=classic)" coords="[\d, ]+?" alt="">'))
-    imageSearch = compile(r'<img border="0" src="\s*(http://www.userfriendly.org/cartoons/archives/\d{2}\w{3}/.+?\.gif)"')
-    prevSearch = compile(r'<area shape="rect" href="(/cartoons/\?id=\d{8}&mode=classic)" coords="[\d, ]+?" alt="Previous Cartoon">')
-    help = 'Index format: yyyymmdd'
-
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        return 'uf%s' % (getQueryParams(pageUrl)['id'][0][2:],)
