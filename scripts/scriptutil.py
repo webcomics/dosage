@@ -2,6 +2,8 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2016 Tobias Gruetzmacher
 import json
+import codecs
+
 from dosagelib.util import unescape, asciify
 
 
@@ -22,13 +24,13 @@ def capfirst(text):
 
 def save_result(res, json_file):
     """Save result to file."""
-    with open(json_file, 'wb') as f:
+    with codecs.open(json_file, 'wb', 'utf-8') as f:
         json.dump(res, f, sort_keys=True, indent=2, separators=(',', ': '))
 
 
 def load_result(json_file):
     """Load contents of a json file."""
-    with open(json_file, "rb") as f:
+    with codecs.open(json_file, 'rb', 'utf-8') as f:
         return json.load(f)
 
 
