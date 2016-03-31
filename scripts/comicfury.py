@@ -184,13 +184,18 @@ def find_dups(name):
     return None
 
 
+def first_lower(x):
+    return x[0].lower()
+
+
 def print_results(args):
     """Print all comics that have at least the given number of minimum
     comic strips."""
     min_comics, filename = args
     min_comics = int(min_comics)
     with codecs.open(filename, 'a', 'utf-8') as fp:
-        for name, entry in sorted(load_result(json_file).items()):
+        data = load_result(json_file)
+        for name, entry in sorted(data.items(), key=first_lower):
             url, num, active, lang = entry
             if name in exclude_comics:
                 fp.write(u"# %s is excluded\n" % name)
