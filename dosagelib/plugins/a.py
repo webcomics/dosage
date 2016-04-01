@@ -8,18 +8,22 @@ from re import compile, escape, MULTILINE
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import regexNamer, bounceStarter, indirectStarter
+from .common import _WordPressScraper, _ComicPressScraper
 
 
 class AbstruseGoose(_BasicScraper):
     url = 'http://abstrusegoose.com/'
     rurl = escape(url)
-    starter = bounceStarter(url, compile(tagre('a', 'href', r'(%s\d+)' % rurl)+"Next &raquo;"))
+    starter = bounceStarter(
+        url, compile(tagre('a', 'href', r'(%s\d+)' % rurl) + "Next &raquo;"))
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre('img', 'src',
                                 r'(http://abstrusegoose\.com/strips/[^<>"]+)'))
-    prevSearch = compile(tagre('a', 'href', r'(%s\d+)' % rurl) + r'&laquo; Previous')
-    nextSearch = compile(tagre('a', 'href', r'(%s\d+)' % rurl) + r'Next &raquo;')
+    prevSearch = compile(tagre('a', 'href', r'(%s\d+)' % rurl) +
+                         r'&laquo; Previous')
+    nextSearch = compile(tagre('a', 'href', r'(%s\d+)' % rurl) +
+                         r'Next &raquo;')
     help = 'Index format: n (unpadded)'
     textSearch = compile(tagre("img", "title", r'([^"]+)'))
 
@@ -122,12 +126,18 @@ class AirForceBlues(_BasicScraper):
 class ALessonIsLearned(_BasicScraper):
     url = 'http://www.alessonislearned.com/'
     prevSearch = compile(tagre("a", "href", r"(index\.php\?comic=\d+)",
-                               quote="'")+r"[^>]+previous")
+                               quote="'") + r"[^>]+previous")
     starter = indirectStarter(url, prevSearch)
     stripUrl = url + 'index.php?comic=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r"(cmx/lesson\d+\.[a-z]+)"))
     help = 'Index format: nnn'
+
+
+class Alice(_ComicPressScraper):
+    url = 'http://www.alicecomics.com/'
+    starter = indirectStarter('http://www.alicecomics.com/',
+                              '//a[text()="Latest Alice!"]')
 
 
 class AlienLovesPredator(_BasicScraper):
@@ -220,12 +230,17 @@ class AmazingSuperPowers(_BasicScraper):
         )
 
 
+class Amya(_WordPressScraper):
+    url = 'http://www.amyachronicles.com/'
+
+
 class Angband(_BasicScraper):
     url = 'http://angband.calamarain.net/'
     stripUrl = url + 'view.php?date=%s'
     firstStripUrl = stripUrl % '2005-12-30'
     imageSearch = compile(tagre("img", "src", r'(comics/Scroll[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(view\.php\?date\=[^"]+)')+"Previous")
+    prevSearch = compile(tagre("a", "href", r'(view\.php\?date\=[^"]+)') +
+                         "Previous")
     help = 'Index format: yyyy-mm-dd'
 
 
@@ -233,7 +248,7 @@ class Angels2200(_BasicScraper):
     url = 'http://www.janahoffmann.com/angels/'
     stripUrl = url + '%s'
     imageSearch = compile(tagre("img", "src", r"(http://www\.janahoffmann\.com/angels/comics/[^']+)", quote="'"))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)')+"&laquo; Previous")
+    prevSearch = compile(tagre("a", "href", r'([^"]+)') + "&laquo; Previous")
     help = 'Index format: yyyy/mm/dd/part-<n>-comic-<n>'
 
 
@@ -290,7 +305,8 @@ class ASkeweredParadise(_BasicScraper):
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % '001'
     imageSearch = compile(tagre("img", "src", r'(http://aspcomics\.net/sites/default/files[^"]*/asp\d+\.jpg)[^"]+'))
-    prevSearch = compile(tagre("a", "href", "(/comic/\d+)")+r"[^>]+Previous")
+    prevSearch = compile(tagre("a", "href", "(/comic/\d+)") +
+                         r"[^>]+Previous")
     help = 'Index format: nnn'
 
 
@@ -306,8 +322,8 @@ class ASofterWorld(_ParserScraper):
 class AstronomyPOTD(_BasicScraper):
     baseUrl = 'http://antwrp.gsfc.nasa.gov/apod/'
     url = baseUrl + 'astropix.html'
-    starter = bounceStarter(url,
-        compile(tagre("a", "href", r'(ap\d{6}\.html)') + "&gt;</a>"))
+    starter = bounceStarter(
+        url, compile(tagre("a", "href", r'(ap\d{6}\.html)') + "&gt;</a>"))
     stripUrl = baseUrl + 'ap%s.html'
     firstStripUrl = stripUrl % '061012'
     imageSearch = compile(tagre("a", "href", r'(image/\d{4}/[^"]+)'))
@@ -328,3 +344,7 @@ class AstronomyPOTD(_BasicScraper):
     def namer(cls, imageUrl, pageUrl):
         return '%s-%s' % (pageUrl.split('/')[-1].split('.')[0][2:],
                           imageUrl.split('/')[-1].split('.')[0])
+
+
+class AxeCop(_WordPressScraper):
+    url = 'http://axecop.com/comic/season-two/'

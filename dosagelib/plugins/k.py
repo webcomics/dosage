@@ -3,6 +3,7 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2016 Tobias Gruetzmacher
 
+from __future__ import absolute_import, division, print_function
 from re import compile, escape, IGNORECASE
 from ..scraper import _BasicScraper
 from ..util import tagre

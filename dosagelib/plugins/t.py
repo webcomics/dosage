@@ -8,6 +8,7 @@ from re import compile, escape, IGNORECASE
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
+from .common import _WordPressScraper
 
 
 class TheBrads(_BasicScraper):
@@ -30,6 +31,10 @@ class TheDevilsPanties(_BasicScraper):
     help = 'Index format: number'
 
 
+class TheDreamlandChronicles(_WordPressScraper):
+    url = 'http://www.thedreamlandchronicles.com/'
+
+
 class TheGamerCat(_ParserScraper):
     url = "http://www.thegamercat.com/"
     stripUrl = url + "comic/%s/"
@@ -38,6 +43,10 @@ class TheGamerCat(_ParserScraper):
     imageSearch = '#comic img'
     prevSearch = '.comic-nav-previous'
     help = 'Index format: stripname'
+
+
+class TheGentlemansArmchair(_WordPressScraper):
+    url = 'http://thegentlemansarmchair.com/'
 
 
 class TheLandscaper(_BasicScraper):
@@ -50,6 +59,10 @@ class TheLandscaper(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(/comic/[^"]+)') +
                          '&lsaquo; Previous')
     help = 'Index format: name'
+
+
+class TheMelvinChronicles(_WordPressScraper):
+    url = 'http://melvin.jeaniebottle.com/'
 
 
 class TheNoob(_BasicScraper):

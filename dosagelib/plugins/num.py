@@ -1,8 +1,13 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 
-from re import compile, escape
+from __future__ import absolute_import, division, print_function
 
-from ..util import tagre
-from ..scraper import _BasicScraper
+from .common import _WordPressScraper
+
+
+class NineteenSeventySeven(_WordPressScraper):
+    name = '1977'
+    url = 'http://1977thecomic.com/'

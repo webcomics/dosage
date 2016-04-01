@@ -9,6 +9,7 @@ from re import compile, escape, IGNORECASE
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
+from .common import _WordPressScraper
 
 
 class FalconTwin(_BasicScraper):
@@ -116,7 +117,7 @@ class FonFlatter(_BasicScraper):
             self.stripUrl % "2006/09/21/danke",
             self.stripUrl % "2006/08/23/zgf-zuweilen-gestellte-fragen",
             self.stripUrl % "2005/10/19/naq-never-asked-questions",
-            )
+        )
 
 
 class ForLackOfABetterComic(_BasicScraper):
@@ -127,6 +128,10 @@ class ForLackOfABetterComic(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(%simg/comic/\d+[^"]+)' % rurl, after="comicimg"))
     prevSearch = compile(tagre("a", "href", r'(%s\?id\=\d+)' % rurl) + r'Prev')
     help = 'Index format: number'
+
+
+class FowlLanguage(_WordPressScraper):
+    url = 'http://www.fowllanguagecomics.com/'
 
 
 class Fragile(_ParserScraper):
@@ -153,10 +158,10 @@ class FredoAndPidjin(_BasicScraper):
         compile(tagre('img', 'src', '(http://cdn\.pidjin\.net/wp-content/uploads/old/[^"]+\.[a-z]+)')),
     )
     multipleImagesPerStrip = True
-    prevSearch = compile(tagre('a', 'href', '([^"]+)')+"Prev</a>")
+    prevSearch = compile(tagre('a', 'href', '([^"]+)') + "Prev</a>")
     starter = indirectStarter(
        url,
-       compile(tagre('a', 'href', "("+url+r'\d\d\d\d/\d\d/\d\d/[^"]+/)')))
+       compile(tagre('a', 'href', "(" + url + r'\d\d\d\d/\d\d/\d\d/[^"]+/)')))
 
 
 class Freefall(_BasicScraper):

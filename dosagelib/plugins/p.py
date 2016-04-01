@@ -8,6 +8,12 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, queryNamer, indirectStarter
 from ..util import tagre
+from .common import _WordPressScraper
+
+
+class PandyLand(_WordPressScraper):
+    url = 'http://pandyland.net/'
+    firstStripUrl = 'http://pandyland.net/1/'
 
 
 class ParadigmShift(_BasicScraper):

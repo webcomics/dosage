@@ -4,10 +4,12 @@
 # Copyright (C) 2015-2016 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
+
 from re import compile, escape, IGNORECASE
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
+from .common import _WordPressScraper
 
 
 class MacHall(_BasicScraper):
@@ -95,6 +97,10 @@ class MaxOveracts(_ParserScraper):
     help = 'Index format: nnn'
 
 
+class Meek(_WordPressScraper):
+    url = 'http://www.meekcomic.com/'
+
+
 class MegaTokyo(_BasicScraper):
     url = 'http://megatokyo.com/'
     stripUrl = url + 'strip/%s'
@@ -102,6 +108,14 @@ class MegaTokyo(_BasicScraper):
     imageSearch = compile(r'"(strips/.+?)"', IGNORECASE)
     prevSearch = compile(r'"(./strip/\d+?)">Prev')
     help = 'Index format: nnnn'
+
+
+class Meiosis(_WordPressScraper):
+    url = 'http://meiosiswebcomic.com/'
+
+
+class Melonpool(_WordPressScraper):
+    url = 'http://www.melonpool.com/'
 
 
 class MenageA3(_BasicScraper):
@@ -122,6 +136,12 @@ class Misfile(_BasicScraper):
     prevSearch = compile(tagre("link", "href", r"([^']+)", quote="'",
                                before="Previous"))
     help = 'Index format: yyyy-mm-dd'
+
+
+class MistyTheMouse(_WordPressScraper):
+    url = 'http://www.mistythemouse.com/'
+    prevSearch = '//a[@rel="prev"]'
+    firstStripUrl = 'http://www.mistythemouse.com/?p=12'
 
 
 class MonsieurLeChien(_BasicScraper):

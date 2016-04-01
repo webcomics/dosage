@@ -10,7 +10,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
-from .wordpress import _WordpressScraper
+from .common import _WordPressScraper, _ComicPressScraper
 
 
 class Caggage(_BasicScraper):
@@ -19,7 +19,8 @@ class Caggage(_BasicScraper):
     stripUrl = url + 'archives/%s'
     firstStripUrl = stripUrl % '77'
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%sarchives/\d+)' % rurl, after="prev"))
+    prevSearch = compile(tagre("a", "href", r'(%sarchives/\d+)' % rurl,
+                               after="prev"))
     help = 'Index format: number'
 
 
@@ -102,7 +103,7 @@ class CatAndGirl(_BasicScraper):
     stripUrl = url + '?p=%s'
     firstStripUrl = stripUrl % '1602'
     imageSearch = compile(tagre("img", "src", r'(%sarchive/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)')+r"[^<]+Previous</a>")
+    prevSearch = compile(tagre("a", "href", r'([^"]+)') + r"[^<]+Previous</a>")
     help = 'Index format: n (unpadded)'
 
     def shouldSkipUrl(self, url, data):
@@ -112,9 +113,17 @@ class CatAndGirl(_BasicScraper):
         )
 
 
-class CatNine(_WordpressScraper):
+class Catena(_WordPressScraper):
+    url = 'http://catenamanor.com/'
+
+
+class CatNine(_WordPressScraper):
     url = 'http://cat-nine.net'
     firstStripUrl = 'http://cat-nine.net/comic/episode-1/first-day-for-everything/'
+
+
+class CatsAndCameras(_WordPressScraper):
+    url = 'http://catsncameras.com/'
 
 
 class CatVersusHuman(_ParserScraper):
@@ -275,6 +284,19 @@ class CorydonCafe(_ParserScraper):
     @classmethod
     def namer(cls, imageUrl, pageUrl):
         return pageUrl.split('/')[-1].split('.')[0]
+
+
+class CourtingDisaster(_WordPressScraper):
+    url = 'http://www.courting-disaster.com/'
+    firstStripUrl = 'http://www.courting-disaster.com/comic/courting-disaster-17/'
+
+
+class CowboyJedi(_WordPressScraper):
+    url = 'http://www.cowboyjedi.com/'
+
+
+class CraftedFables(_ComicPressScraper):
+    url = 'http://www.caf-fiends.net/comicpress/'
 
 
 class CrapIDrewOnMyLunchBreak(_BasicScraper):

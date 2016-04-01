@@ -10,6 +10,7 @@ from datetime import datetime
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter
 from ..util import tagre, getPageContent
+from .common import _WordPressScraper
 
 
 class SabrinaOnline(_BasicScraper):
@@ -40,6 +41,10 @@ class SafelyEndangered(_BasicScraper):
                                after="navi navi-prev"))
     textSearch = compile(tagre("img", "title", r'([^"]+)', before=r'http://www\.safelyendangered\.com/wp-content/uploads'))
     help = 'Index format: yyyy/mm/stripname'
+
+
+class SailorsunOrg(_WordPressScraper):
+    url = 'http://sailorsun.org/'
 
 
 class SamAndFuzzy(_BasicScraper):
@@ -166,6 +171,11 @@ class SexyLosers(_BasicScraper):
         return index + '-' + title
 
 
+class Sharksplode(_WordPressScraper):
+    url = 'http://sharksplode.com/'
+    textSearch = '//div[@id="comic"]//img/@alt'
+
+
 class Sheldon(_BasicScraper):
     url = 'http://www.sheldoncomics.com/'
     rurl = escape(url)
@@ -237,6 +247,10 @@ class SinFest(_BasicScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
+class Sithrah(_WordPressScraper):
+    url = 'http://sithrah.com/'
+
+
 class SkinDeep(_BasicScraper):
     url = 'http://www.skindeepcomic.com/'
     stripUrl = url + 'archive/%s/'
@@ -269,6 +283,10 @@ class SleeplessDomain(_ParserScraper):
             # this...
             start = '2015-04-11x'
         return start + "-" + pageUrl.rsplit('/', 1)[-1]
+
+
+class SlightlyDamned(_WordPressScraper):
+    url = 'http://www.sdamned.com/'
 
 
 class SluggyFreelance(_BasicScraper):
@@ -443,6 +461,10 @@ class SpareParts(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(index\.php\?date=\d+)',
                                quote="'") + "Previous Comic")
     help = 'Index format: yyyymmdd'
+
+
+class SPQRBlues(_WordPressScraper):
+    url = 'http://spqrblues.com/IV/'
 
 
 class StandStillStaySilent(_ParserScraper):

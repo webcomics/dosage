@@ -8,6 +8,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
+from .common import _WordPressScraper
 
 
 class Namesake(_BasicScraper):
@@ -30,7 +31,7 @@ class NamirDeiter(_BasicScraper):
     stripUrl = url + 'comics/index.php?date=%s'
     firstStripUrl = stripUrl % '19991128'
     imageSearch = compile(tagre("img", "src", r"'?(%scomics/\d+\.jpg)'?" % rurl, quote=""))
-    prevSearch = compile(tagre("a", "href", r'(%scomics/index\.php\?date=\d+)' % rurl, quote="'")+"Previous")
+    prevSearch = compile(tagre("a", "href", r'(%scomics/index\.php\?date=\d+)' % rurl, quote="'") + "Previous")
     help = 'Index format: yyyymmdd'
 
 
@@ -48,6 +49,11 @@ class NatalieDee(_BasicScraper):
     def namer(cls, imageUrl, pageUrl):
         unused, date, filename = imageUrl.rsplit('/', 2)
         return '%s-%s' % (date, filename)
+
+
+class Nedroid(_WordPressScraper):
+    url = 'http://nedroid.com/'
+    prevSearch = '//a[@rel="prev"]'
 
 
 class NekkoAndJoruba(_BasicScraper):
@@ -76,6 +82,11 @@ class NeoEarth(_BasicScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
+class NerfNow(_WordPressScraper):
+    url = 'https://www.nerfnow.com/'
+    prevSearch = '//li[@id="nav_previous"]/a'
+
+
 class NewAdventuresOfBobbin(_BasicScraper):
     url = 'http://www.bobbin-comic.com/bobbin_strips/'
     imageSearch = compile(tagre("a", "href", r'(\d+\.gif)'))
@@ -101,6 +112,11 @@ class NichtLustig(_BasicScraper):
     help = 'Index format: yymmdd'
     starter = indirectStarter(
         url, compile(tagre("a", "href", r'([^"]*toondb/\d+\.html)')))
+
+
+class Nicky510(_WordPressScraper):
+    url = 'http://www.nickyitis.com/'
+    prevSearch = "//a[contains(concat(' ', @class, ' '), ' navi-prev ')]"
 
 
 class Nimona(_BasicScraper):
@@ -146,7 +162,8 @@ class NotInventedHere(_BasicScraper):
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % 'on/2009-9-21'
     imageSearch = compile(tagre("img", "src", r'(http://thiswas.notinventedhe.re/on/\d+-\d+-\d+)'))
-    prevSearch = compile(tagre("a", "href", r'(/on/\d+-\d+-\d+)')+'\s*Previous')
+    prevSearch = compile(tagre("a", "href", r'(/on/\d+-\d+-\d+)') +
+                         '\s*Previous')
     help = 'Index format: yyyy-mm-dd'
 
 

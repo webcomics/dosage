@@ -1,78 +1,18 @@
 # -*- coding: utf-8 -*-
-from dosagelib.helpers import indirectStarter
-from ..scraper import make_scraper, _ParserScraper
+from ..helpers import indirectStarter
+from ..scraper import make_scraper
+from .common import _WordPressScraper
 
 
-class _WordpressScraper(_ParserScraper):
-    imageSearch = ('//div[@id="comic"]//img',
-                   '//div[@class="webcomic-image"]//img')
-    prevSearch = ("//a[contains(concat(' ', text(), ' '), ' Prev ')]",
-                  "//a[contains(concat(' ', text(), ' '), ' Previous ')]",
-                  "//a[contains(concat(' ', @class, ' '), ' navi-prev ')]",
-                  "//a[contains(concat(' ', @class, ' '), ' navi-prev-in ')]",
-                  "//a[contains(concat(' ', @class, ' '), ' navi-previous ')]",
-                  "//a[contains(concat(' ', @class, ' '), ' previous-webcomic-link ')]")
-
-
-def add(name, url, firstUrl=None, starter=None, textSearch=None, lang=None):
+def add(name, url, starter=None):
     attrs = dict(
         name=name,
         url=url
     )
-    if lang:
-        attrs['lang'] = lang
-    if firstUrl:
-        attrs['firstUrl'] = url + firstUrl
     if starter:
         attrs['starter'] = starter
-    if textSearch:
-        attrs['textSearch'] = textSearch
-    globals()[name] = make_scraper(name, _WordpressScraper, **attrs)
+    globals()[name] = make_scraper(name, _WordPressScraper, **attrs)
 
-
-class Amya(_WordpressScraper):
-    url = 'http://www.amyachronicles.com/'
-
-
-add('1997', 'http://1977thecomic.com/')
-add('Alice', 'http://www.alicecomics.com/',
-    starter=indirectStarter('http://www.alicecomics.com/', '//a[text()="Latest Alice!"]'))
-add('AxeCop', 'http://axecop.com/comic/season-two/')
-add('Bardsworth', 'http://www.bardsworth.com/')
-add('BloodBound', 'http://bloodboundcomic.com/', 'comic/06112006/')
-add('BratHalla', 'http://brat-halla.com/')
-add('BroodHollow', 'http://broodhollow.chainsawsuit.com/', 'page/2012/10/06/book-1-curious-little-thing')
-add('Buni', 'http://www.bunicomic.com/')
-add('BusinessCat', 'http://www.businesscat.happyjar.com/')
-add('Catena', 'http://catenamanor.com/')
-add('CatsAndCameras', 'http://catsncameras.com/')
-add('CraftedFables', 'http://www.caf-fiends.net/comicpress/')
-add('CourtingDisaster', 'http://www.courting-disaster.com/', 'comic/courting-disaster-17/')
-add('CowboyJedi', 'http://www.cowboyjedi.com/')
-add('FowlLanguage', 'http://www.fowllanguagecomics.com/')
-add('HappyJar', 'http://www.happyjar.com/')
-add('Hipsters', 'http://www.hipsters-comic.com/', 'comic/hip01/')
-add('IDreamOfAJeanieBottle', 'http://jeaniebottle.com/')
-add('ItsWalky', 'http://www.itswalky.com/')
-add('KatzenfutterGeleespritzer', 'http://www.katzenfuttergeleespritzer.de/', 'comics/gert-grendil/', lang='de')
-add('Meek', 'http://www.meekcomic.com/')
-add('Meiosis', 'http://meiosiswebcomic.com/')
-add('Melonpool', 'http://www.melonpool.com/')
-add('MistyTheMouse', 'http://www.mistythemouse.com/')
-add('Nedroid', 'http://nedroid.com/')
-add('NerfNow', 'https://www.nerfnow.com/')
-add('Nicky510', 'http://www.nickyitis.com/')
-add('OnTheEdge', 'http://ontheedgecomics.com/', 'comic/ote0001/')
-add('PandyLand', 'http://pandyland.net/', '1/')
-add('SailorsunOrg', 'http://sailorsun.org/')
-add('Sharksplode', 'http://sharksplode.com/', textSearch='//div[@id="comic"]//img/@alt')
-add('Sithrah', 'http://sithrah.com/')
-add('SlightlyDamned', 'http://www.sdamned.com/')
-add('SPQRBlues', 'http://spqrblues.com/IV/')
-add('TheDreamlandChronicles', 'http://www.thedreamlandchronicles.com/')
-add('TheGentlemansArmchair', 'http://thegentlemansarmchair.com/')
-add('TheMelvinChronicles', 'http://melvin.jeaniebottle.com/')
-add('YAFGC', 'http://yafgc.net/')
 
 # all comics on HijiNKS ENSUE
 for (name, starterXPath) in [

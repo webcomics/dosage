@@ -4,10 +4,13 @@
 # Copyright (C) 2015-2016 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
+
 from re import compile, escape
+
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
+from .common import _WordPressScraper
 
 
 class OctopusPie(_ParserScraper):
@@ -26,7 +29,8 @@ class OddFish(_BasicScraper):
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % 'tv-tentacles'
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="navi-prev"))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl,
+                               after="navi-prev"))
     help = 'Index format: stripname'
 
 
@@ -65,7 +69,8 @@ class OkCancel(_BasicScraper):
     stripUrl = url + 'comic/%s.html'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(%sstrips/okcancel\d{8}\.gif)' % rurl))
-    prevSearch = compile(tagre("div", "class", "previous") + tagre("a", "href", r'(%scomic/\d{1,4}\.html)' % rurl))
+    prevSearch = compile(tagre("div", "class", "previous") +
+                         tagre("a", "href", r'(%scomic/\d{1,4}\.html)' % rurl))
     starter = indirectStarter(url, prevSearch)
     help = 'Index format: yyyymmdd'
 
@@ -85,8 +90,14 @@ class OneQuestion(_BasicScraper):
     stripUrl = url + 'comic.php?strip_id=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'((?:\.\./)?istrip_files/strips/\d+\.\w{3,4})'))
-    prevSearch = compile(tagre("a", "href", r'(comic\.php\?strip_id=\d+)') + tagre("img", "src", r'img/arrow_prev\.jpg'))
+    prevSearch = compile(tagre("a", "href", r'(comic\.php\?strip_id=\d+)') +
+                         tagre("img", "src", r'img/arrow_prev\.jpg'))
     help = 'Index format: n (unpadded)'
+
+
+class OnTheEdge(_WordPressScraper):
+    url = 'http://ontheedgecomics.com/'
+    firstStripUrl = 'http://ontheedgecomics.com/comic/ote0001/'
 
 
 class OnTheFastrack(_BasicScraper):

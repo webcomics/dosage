@@ -4,11 +4,13 @@
 # Copyright (C) 2015-2016 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
+
 from re import compile, escape
 
 from ..util import tagre, getPageContent
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
+from .common import _WordPressScraper, _ComicPressScraper
 
 
 class BackwaterPlanet(_BasicScraper):
@@ -36,6 +38,12 @@ class BadMachinery(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(strips/\d+[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(\?date=\d+)') + 'Previous')
     help = 'Index format: yyyymmdd'
+
+
+class Bardsworth(_WordPressScraper):
+    url = 'http://www.bardsworth.com/'
+    starter = indirectStarter('http://www.bardsworth.com/',
+                              '//a[@rel="bookmark"]')
 
 
 class Baroquen(_BasicScraper):
@@ -162,6 +170,11 @@ class Blip(_BasicScraper):
             return prevUrl.replace("www.blipcomic.com", "blipcomic.com")
 
 
+class BloodBound(_WordPressScraper):
+    url = 'http://bloodboundcomic.com/'
+    firstStripUrl = 'http://bloodboundcomic.com/comic/06112006/'
+
+
 class BloomingFaeries(_BasicScraper):
     adult = True
     url = 'http://www.bloomingfaeries.com/'
@@ -255,6 +268,10 @@ class BoyOnAStickAndSlither(_BasicScraper):
         return pageUrl.rsplit('/')[-1]
 
 
+class BratHalla(_WordPressScraper):
+    url = 'http://brat-halla.com/'
+
+
 class BrentalFloss(_BasicScraper):
     url = 'http://brentalflossthecomic.com/'
     stripUrl = url + '?id=%s'
@@ -311,6 +328,19 @@ class Brink(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
     help = 'Index format: number'
+
+
+class BroodHollow(_WordPressScraper):
+    url = 'http://broodhollow.chainsawsuit.com/'
+    firstStripUrl = 'http://broodhollow.chainsawsuit.com/page/2012/10/06/book-1-curious-little-thing'
+
+
+class Buni(_WordPressScraper):
+    url = 'http://www.bunicomic.com/'
+
+
+class BusinessCat(_ComicPressScraper):
+    url = 'http://www.businesscat.happyjar.com/'
 
 
 class ButtercupFestival(_ParserScraper):
