@@ -106,7 +106,8 @@ class ComicImage(object):
         fn = fnbase + self.ext
         # compare with >= since content length could be the compressed size
         if os.path.isfile(fn) and os.path.getsize(fn) >= self.contentLength:
-            self._exist_err(fn)
+            out.info(u'Skipping existing file "%s".' % fn)
+            getHandler().comicDownloaded(self, fn, text=self.text)
             return fn, False
         out.debug(u'Writing comic to file %s...' % fn)
         with self.fileout(fn) as f:
