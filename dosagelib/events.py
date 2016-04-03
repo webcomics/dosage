@@ -94,6 +94,7 @@ class RSSEventHandler(EventHandler):
 
         self.newfile = True
         self.rss = rss.Feed('Daily Dosage', link, 'Comics for %s' % time.strftime('%Y/%m/%d', today))
+<<<<<<< eba2fd914dcb4f6078f2a8acd57e8bdd755426c9
 
     def comicDownloaded(self, comic, filename):
         """Write RSS entry for downloaded comic."""
@@ -126,6 +127,64 @@ class RSSEventHandler(EventHandler):
     def end(self):
         """Write RSS data to file."""
         self.rss.write(self.rssfn)
+
+
+class AtomEventHandler(EventHandler):
+    """Output in Atom format."""
+
+    name = 'atom'
+
+    def getFilename(self):
+        """Return Atom filename."""
+        return os.path.abspath(os.path.join(self.basepath, 'dailydose.atom'))
+
+    def start(self):
+        """Log start event."""
+        today = time.time()
+        yesterday = today - 86400
+        today = time.localtime(today)
+        yesterday = time.localtime(yesterday)
+
+        link = configuration.Url
+
+        self.atomfn = self.getFilename()
+
+        self.newfile = True
+        self.atom = atom.Feed('Daily Dosage', os.path.join(self.baseurl, 'dailydose.atom'), 'Comics for %s' % time.strftime('%Y/%m/%d', today))
+=======
+>>>>>>> Support Atom
+
+    def comicDownloaded(self, comic, filename, text=None):
+        """Write Atom entry for downloaded comic."""
+        imageUrl = self.getUrlFromFilename(filename)
+        size = None
+        if self.allowdownscale:
+            size = getDimensionForImage(filename, MaxImageSize)
+        title = '%s - %s' % (comic.name, os.path.basename(filename))
+        pageUrl = comic.referrer
+        description = '<img src="%s"' % imageUrl
+        if size:
+            description += ' width="%d" height="%d"' % size
+        description += '/>'
+        if text:
+            description += '<br/>%s' % text
+        description += '<br/><a href="%s">View Comic Online</a>' % pageUrl
+        args = (
+            title,
+            imageUrl,
+            description,
+            util.rfc822date(time.time())
+        )
+
+        if self.newfile:
+            self.newfile = False
+            self.atom.addItem(*args)
+        else:
+            self.atom.addItem(*args, append=False)
+
+    def end(self):
+        """Write Atom data to file."""
+        self.atom.write(self.atomfn)
 
 
 class AtomEventHandler(EventHandler):
