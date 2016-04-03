@@ -4,11 +4,13 @@
 # Copyright (C) 2015-2016 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
+
 from re import compile, escape
+
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
-from .common import _WordPressScraper
+from .common import _WordPressScraper, WP_LATEST_SEARCH
 
 
 class Namesake(_BasicScraper):
@@ -138,6 +140,12 @@ class NobodyScores(_BasicScraper):
     multipleImagesPerStrip = True
     prevSearch = compile(r'<a href="(%sindex.php.+?)">the one before </a>' % rurl)
     help = 'Index format: nnn'
+
+
+class NoMoreSavePoints(_WordPressScraper):
+    url = 'http://www.flowerlarkstudios.com/comic/no-more-save-points/mushroom-hopping/'
+    firstStripUrl = url
+    starter = indirectStarter(firstStripUrl, WP_LATEST_SEARCH)
 
 
 class NoNeedForBushido(_BasicScraper):

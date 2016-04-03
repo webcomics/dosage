@@ -13,6 +13,9 @@ from ..scraper import _ParserScraper
 # expression is for which comics.
 
 
+WP_LATEST_SEARCH = '//a[contains(concat(" ", @class, " "), " comic-nav-last ")]'
+
+
 class _WordPressScraper(_ParserScraper):
     imageSearch = '//div[@id="comic"]//img'
     prevSearch = "//a[contains(concat(' ', @class, ' '), ' comic-nav-previous ')]"

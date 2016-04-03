@@ -1,11 +1,16 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
 
 from re import compile, escape
+
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
+from .common import _WordPressScraper, WP_LATEST_SEARCH
 
 
 class Lackadaisy(_BasicScraper):
@@ -14,10 +19,12 @@ class Lackadaisy(_BasicScraper):
     stripUrl = baseUrl + 'comic.php?comicid=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(http://www\.lackadaisycats\.com/comic/[^"]*)'))
-    prevSearch = compile(tagre("a", "href", r"(/comic\.php\?comicid=[0-9]+)") + "&lt; Previous")
+    prevSearch = compile(tagre("a", "href", r"(/comic\.php\?comicid=[0-9]+)") +
+                         "&lt; Previous")
     help = 'Index format: n'
-    starter = bounceStarter(url,
-        compile(tagre("a", "href", r"(/comic.php\?comicid=[0-9]+)") + "Next"))
+    starter = bounceStarter(
+        url, compile(tagre("a", "href", r"(/comic.php\?comicid=[0-9]+)") +
+                     "Next"))
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
@@ -25,6 +32,12 @@ class Lackadaisy(_BasicScraper):
         num = pageUrl.rsplit('=', 1)[-1]
         ext = imageUrl.rsplit('.', 1)[-1]
         return 'lackadaisy_%s.%s' % (num, ext)
+
+
+class Laiyu(_WordPressScraper):
+    url = 'http://www.flowerlarkstudios.com/comic/preliminary-concepts/welcome/'
+    firstStripUrl = url
+    starter = indirectStarter(firstStripUrl, WP_LATEST_SEARCH)
 
 
 class LasLindas(_BasicScraper):
@@ -49,9 +62,11 @@ class LeastICouldDo(_BasicScraper):
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % '20130109'
     imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/\d{8,9}\.\w{1,4})' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%scomic/\d+/)' % rurl, after="Previous"))
-    starter = indirectStarter(url,
-      compile(tagre("a", "href", r'(%scomic/\d+/)' % rurl, after="feature-comic")))
+    prevSearch = compile(tagre("a", "href", r'(%scomic/\d+/)' % rurl,
+                               after="Previous"))
+    starter = indirectStarter(
+        url, compile(tagre("a", "href", r'(%scomic/\d+/)' % rurl,
+                           after="feature-comic")))
     help = 'Index format: yyyymmdd'
 
 
@@ -87,6 +102,7 @@ class LoadingArtist(_ParserScraper):
     url = 'http://www.loadingartist.com/comic/new-update/'
     imageSearch = '//div[@class="comic"]//img'
     prevSearch = "//a[contains(concat(' ', @class, ' '), ' prev ')]"
+
 
 class LookingForGroup(_ParserScraper):
     url = 'http://www.lfgcomic.com/'

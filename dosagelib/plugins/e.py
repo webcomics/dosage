@@ -4,11 +4,13 @@
 # Copyright (C) 2015-2016 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
+
 from re import compile, escape, IGNORECASE
 
 from ..helpers import indirectStarter
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
+from .common import _WordPressScraper, WP_LATEST_SEARCH
 
 
 class EarthsongSaga(_ParserScraper):
@@ -38,6 +40,12 @@ class EarthsongSaga(_ParserScraper):
           int(imgmatch.group(3)), suffix)
 
 
+class EasilyAmused(_WordPressScraper):
+    url = 'http://www.flowerlarkstudios.com/comic/college-daze/ea01/'
+    firstStripUrl = url
+    starter = indirectStarter(firstStripUrl, WP_LATEST_SEARCH)
+
+
 class EatLiver(_BasicScraper):
     url = 'http://www.eatliver.com/'
     rurl = escape(url)
@@ -57,9 +65,11 @@ class EatThatToast(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % 'thewizard/'
-    imageSearch =  compile(tagre("div", "id", r'comic') + "\s*.*\s*" + tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after='comic-nav-base comic-nav-previous'))
-    textSearch = compile(tagre("div", "id", r'comic') + "\s*.*\s*" + tagre("img", "alt", r'([^"]+)'))
+    imageSearch = compile(tagre("div", "id", r'comic') + "\s*.*\s*" + tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl,
+                               after='comic-nav-base comic-nav-previous'))
+    textSearch = compile(tagre("div", "id", r'comic') + "\s*.*\s*" +
+                         tagre("img", "alt", r'([^"]+)'))
     help = 'Index Format: name'
 
 
@@ -68,7 +78,8 @@ class EdibleDirt(_BasicScraper):
     stripUrl = url + 'index.php?id=%s'
     firstStripUrl = stripUrl % '0'
     imageSearch = compile(tagre("img", "src", r'(strips/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r"(index\.php\?id=\d+)")+"Previous")
+    prevSearch = compile(tagre("a", "href", r"(index\.php\?id=\d+)") +
+                         "Previous")
     help = 'Index format: number'
 
 
@@ -170,6 +181,13 @@ class Erstwhile(_ParserScraper):
     imageSearch = 'div.comicpane a img'
     prevSearch = 'a.navi-prev'
     help = 'Index format: title-nn'
+
+
+class Eryl(_WordPressScraper):
+    url = 'http://www.flowerlarkstudios.com/comic/prologue-migration/page-i/'
+    firstStripUrl = url
+    starter = indirectStarter(firstStripUrl, WP_LATEST_SEARCH)
+    help = 'This was known as DarkWings in previous Dosage versions'
 
 
 class EverybodyLovesEricRaymond(_BasicScraper):

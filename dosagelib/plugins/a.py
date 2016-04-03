@@ -8,7 +8,7 @@ from re import compile, escape, MULTILINE
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import regexNamer, bounceStarter, indirectStarter
-from .common import _WordPressScraper, _ComicPressScraper
+from .common import _WordPressScraper, _ComicPressScraper, WP_LATEST_SEARCH
 
 
 class AbstruseGoose(_BasicScraper):
@@ -298,6 +298,12 @@ class ARedTailsDream(_BasicScraper):
     prevSearch = compile(tagre('a', 'href', r'(page\d+\.php)') +
                          tagre("img", "src", r'.*?aprev.*?'))
     help = 'Index format: nn'
+
+
+class Ashes(_WordPressScraper):
+    url = 'http://www.flowerlarkstudios.com/comic/prologue/10232009/'
+    firstStripUrl = url
+    starter = indirectStarter(firstStripUrl, WP_LATEST_SEARCH)
 
 
 class ASkeweredParadise(_BasicScraper):
