@@ -10,7 +10,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
-from .common import _WordPressScraper, WP_LATEST_SEARCH
+from .common import _ComicControlScraper, _WordPressScraper, WP_LATEST_SEARCH
 
 
 class Lackadaisy(_BasicScraper):
@@ -68,6 +68,10 @@ class LeastICouldDo(_BasicScraper):
         url, compile(tagre("a", "href", r'(%scomic/\d+/)' % rurl,
                            after="feature-comic")))
     help = 'Index format: yyyymmdd'
+
+
+class LetsSpeakEnglish(_ComicControlScraper):
+    url = 'http://www.marycagle.com'
 
 
 class Lint(_BasicScraper):

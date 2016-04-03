@@ -9,6 +9,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
+from .common import _ComicControlScraper
 
 
 class Galaxion(_BasicScraper):
@@ -126,6 +127,10 @@ class GoblinsComic(_ParserScraper):
     imageSearch = '#comic img'
     prevSearch = '.nav-previous > a'
     help = 'Index format: ddmmyyyy'
+
+
+class GoGetARoomie(_ComicControlScraper):
+    url = 'http://www.gogetaroomie.com'
 
 
 class GoneWithTheBlastwave(_BasicScraper):

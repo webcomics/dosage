@@ -4,13 +4,15 @@
 # Copyright (C) 2015-2016 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
+
 from re import compile, escape, IGNORECASE, sub
 from os.path import splitext
-from datetime import datetime
+import datetime
+
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter
 from ..util import tagre, getPageContent
-from .common import _WordPressScraper
+from .common import _ComicControlScraper, _WordPressScraper
 
 
 class SabrinaOnline(_BasicScraper):
@@ -199,7 +201,6 @@ class ShermansLagoon(_BasicScraper):
     def namer(cls, imageUrl, pageUrl):
         name = pageUrl.rsplit('/', 3)[2]
         if name == "shermanslagoon.com":
-            import datetime
             name = datetime.date.today().strftime("%B-%d-%Y").lower()
         # name is monthname-day-year
         month, day, year = name.split('-')
@@ -260,29 +261,8 @@ class SkinDeep(_BasicScraper):
     help = 'Index format: custom'
 
 
-class SleeplessDomain(_ParserScraper):
+class SleeplessDomain(_ComicControlScraper):
     url = 'http://www.sleeplessdomain.com/'
-    stripUrl = url + 'comic/%s'
-    firstStripUrl = stripUrl % 'chapter-1-cover'
-    css = True
-    imageSearch = 'img#cc-comic'
-    prevSearch = 'div.nav a.prev'
-    starter = bounceStarter(url, 'div.nav a.next')
-    help = 'Index format: chapter-X-page-Y (unpadded)'
-
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        """Image file name is UNIX time stamp & something for most of the comics..."""
-        start = ''
-        tsmatch = compile(r'/(\d+)-').search(imageUrl)
-        if tsmatch:
-            start = datetime.utcfromtimestamp(
-                    int(tsmatch.group(1))).strftime("%Y-%m-%d")
-        else:
-            # There were only chapter 1, page 4 and 5 not matching when writing
-            # this...
-            start = '2015-04-11x'
-        return start + "-" + pageUrl.rsplit('/', 1)[-1]
 
 
 class SlightlyDamned(_WordPressScraper):
@@ -463,6 +443,10 @@ class SpareParts(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
+class Spinnerette(_ComicControlScraper):
+    url = 'http://www.spinnyverse.com'
+
+
 class SPQRBlues(_WordPressScraper):
     url = 'http://spqrblues.com/IV/'
 
@@ -526,6 +510,10 @@ class StrawberryDeathCake(_BasicScraper):
                                 r'(%swp-content/webcomic/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%sarchive/[^"]+)' % rurl,
                                after="previous"))
+
+
+class StreetFighter(_ComicControlScraper):
+    url = 'http://www.streetfightercomics.com'
 
 
 class StrongFemaleProtagonist(_ParserScraper):

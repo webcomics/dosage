@@ -10,7 +10,7 @@ from re import compile, escape
 from ..util import tagre, getPageContent
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
-from .common import _WordPressScraper, _ComicPressScraper
+from .common import _ComicControlScraper, _ComicPressScraper, _WordPressScraper
 
 
 class BackwaterPlanet(_BasicScraper):
@@ -38,6 +38,10 @@ class BadMachinery(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(strips/\d+[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(\?date=\d+)') + 'Previous')
     help = 'Index format: yyyymmdd'
+
+
+class BalderDash(_ComicControlScraper):
+    url = 'http://www.balderdashcomic.com/'
 
 
 class Bardsworth(_WordPressScraper):

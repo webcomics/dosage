@@ -9,7 +9,7 @@ from re import compile, escape, IGNORECASE
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import _WordPressScraper
+from .common import _ComicControlScraper, _WordPressScraper
 
 
 class MacHall(_BasicScraper):
@@ -126,6 +126,10 @@ class MenageA3(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'([^"]*/strips-ma3/[^"]+)',
                                before="cn[id]prev"))
     help = 'Index format: name'
+
+
+class Metacarpolis(_ComicControlScraper):
+    url = 'http://www.metacarpolis.com'
 
 
 class Misfile(_BasicScraper):

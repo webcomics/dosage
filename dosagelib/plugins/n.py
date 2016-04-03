@@ -10,21 +10,11 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
-from .common import _WordPressScraper, WP_LATEST_SEARCH
+from .common import _ComicControlScraper, _WordPressScraper, WP_LATEST_SEARCH
 
 
-class Namesake(_BasicScraper):
+class Namesake(_ComicControlScraper):
     url = 'http://namesakecomic.com/'
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = stripUrl % 'prologue-cover-3'
-    imageSearch = compile(tagre("img", "src", r'([^"]*/wp-content/uploads/[^"]+)', after='title='))
-    prevSearch = compile(tagre("a", "href", r'([^"]*/comic/[^"]+)', after='navi-prev'))
-    help = 'Index format: name'
-
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        imgmatch = compile(r'uploads/(\d+)/(\d+)/(.+)$').search(imageUrl)
-        return '-'.join(imgmatch.groups())
 
 
 class NamirDeiter(_BasicScraper):

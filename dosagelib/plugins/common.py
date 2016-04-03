@@ -23,3 +23,8 @@ class _WordPressScraper(_ParserScraper):
 
 class _ComicPressScraper(_WordPressScraper):
     prevSearch = "//a[contains(concat(' ', @class, ' '), ' navi-prev-in ')]"
+
+
+class _ComicControlScraper(_ParserScraper):
+    imageSearch = '//img[@id="cc-comic"]'
+    prevSearch = '//a[@rel="prev"]'

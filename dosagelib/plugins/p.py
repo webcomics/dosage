@@ -8,7 +8,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, queryNamer, indirectStarter
 from ..util import tagre
-from .common import _WordPressScraper
+from .common import _ComicControlScraper, _WordPressScraper
 
 
 class PandyLand(_WordPressScraper):
@@ -146,6 +146,10 @@ class PHDComics(_BasicScraper):
         return url in (
             self.stripUrl % '1669',  # video
         )
+
+
+class Picklewhistle(_ComicControlScraper):
+    url = 'http://www.picklewhistle.com/'
 
 
 class PicPakDog(_BasicScraper):
