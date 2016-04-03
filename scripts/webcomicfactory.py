@@ -68,8 +68,9 @@ def print_results(args):
     with codecs.open(filename, 'a', 'utf-8') as fp:
         data = load_result(json_file)
         for name, url in sorted(data.items(), key=first_lower):
-            fp.write(u"\n\nclass %s(_WebcomicFactory):\n    firstStripUrl = %r\n" % (
+            fp.write(u"\n\nclass %s(_WebcomicFactory):\n    url = %r\n" % (
                      truncate_name(name), str(url)))
+            fp.write(u"    firstStripUrl = url\n")
 
 
 if __name__ == '__main__':

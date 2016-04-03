@@ -25,120 +25,150 @@ class _WebcomicFactory(_WordPressScraper):
 
 
 class AsTheMayoTurns(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/as-the-mayo-turns/'
+    url = 'http://www.thewebcomicfactory.com/comic/as-the-mayo-turns/'
+    firstStripUrl = url
 
 
 class ComicBookMafia(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/comic-book-mafia/'
+    url = 'http://www.thewebcomicfactory.com/comic/comic-book-mafia/'
+    firstStripUrl = url
 
 
 class Dealers(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/dealers-1-1998-was-the-year/'
+    url = 'http://www.thewebcomicfactory.com/comic/dealers-1-1998-was-the-year/'
+    firstStripUrl = url
 
 
 class DigitalHobo(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/digital-hobo-1-its-a-living-kinda/'
+    url = 'http://www.thewebcomicfactory.com/comic/digital-hobo-1-its-a-living-kinda/'
+    firstStripUrl = url
 
 
 class ECoastVsWCoast(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/east-coast-vs-west-coast-greetings-from-the-coasts/'
+    url = 'http://www.thewebcomicfactory.com/comic/east-coast-vs-west-coast-greetings-from-the-coasts/'
+    firstStripUrl = url
 
 
 class GunCulture(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/gun-culture/'
+    url = 'http://www.thewebcomicfactory.com/comic/gun-culture/'
+    firstStripUrl = url
 
 
 class IHateMyKids(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/i-hate-my-kids/'
+    url = 'http://www.thewebcomicfactory.com/comic/i-hate-my-kids/'
+    firstStripUrl = url
 
 
 class InARelationship(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/in-a-relationship-3/'
+    url = 'http://www.thewebcomicfactory.com/comic/in-a-relationship-3/'
+    firstStripUrl = url
 
 
 class IntergalacticMedicalDoctor(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/intergalactic-medical-doctor/'
+    url = 'http://www.thewebcomicfactory.com/comic/intergalactic-medical-doctor/'
+    firstStripUrl = url
 
 
 class JSchoolgirlsInLove(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/japanese-schoolgirls-in-love-1/'
+    url = 'http://www.thewebcomicfactory.com/comic/japanese-schoolgirls-in-love-1/'
+    firstStripUrl = url
 
 
 class KingdomOfTheDwarves(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/kingdom-of-the-dwarves/'
+    url = 'http://www.thewebcomicfactory.com/comic/kingdom-of-the-dwarves/'
+    firstStripUrl = url
 
 
 class LesterCrenshawIsDead(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/lester-crenshaw-is-dead/'
+    url = 'http://www.thewebcomicfactory.com/comic/lester-crenshaw-is-dead/'
+    firstStripUrl = url
 
 
 class Millennials(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/millennials/'
+    url = 'http://www.thewebcomicfactory.com/comic/millennials/'
+    firstStripUrl = url
 
 
 class MiserableComedians(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/miserable-comedians-1-funny-because-its-sad/'
+    url = 'http://www.thewebcomicfactory.com/comic/miserable-comedians-1-funny-because-its-sad/'
+    firstStripUrl = url
 
 
 class OldeTymeGamer(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/olde-tyme-gamer-playing-injured/'
+    url = 'http://www.thewebcomicfactory.com/comic/olde-tyme-gamer-playing-injured/'
+    firstStripUrl = url
 
 
 class PinJunkies(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/pin-junkies/'
+    url = 'http://www.thewebcomicfactory.com/comic/pin-junkies/'
+    firstStripUrl = url
 
 
 class PostApocalypticNick(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/post-apocalyptic-nick/'
+    url = 'http://www.thewebcomicfactory.com/comic/post-apocalyptic-nick/'
+    firstStripUrl = url
 
 
 class RealTalk(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/real-talk-people-who-cut-in-line/'
+    url = 'http://www.thewebcomicfactory.com/comic/real-talk-people-who-cut-in-line/'
+    firstStripUrl = url
 
 
 class SoManyNightmares(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/so-many-nightmares-freedom-nightmare/'
+    url = 'http://www.thewebcomicfactory.com/comic/so-many-nightmares-freedom-nightmare/'
+    firstStripUrl = url
 
 
 class SportsGuys(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/sports-guys/'
+    url = 'http://www.thewebcomicfactory.com/comic/sports-guys/'
+    firstStripUrl = url
 
 
 class TalesOfPizza(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/tales-of-pizza-bad-tipper/'
+    url = 'http://www.thewebcomicfactory.com/comic/tales-of-pizza-bad-tipper/'
+    firstStripUrl = url
 
 
 class TAndA(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/the-webcomic-factory-premiere-t-and-a/'
+    url = 'http://www.thewebcomicfactory.com/comic/the-webcomic-factory-premiere-t-and-a/'
+    firstStripUrl = url
 
 
 class TheAntiwarComic(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/the-antiwar-comic-the-party/'
+    url = 'http://www.thewebcomicfactory.com/comic/the-antiwar-comic-the-party/'
+    firstStripUrl = url
 
 
 class TheGentlemensClub(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/the-gentlemens-club/'
+    url = 'http://www.thewebcomicfactory.com/comic/the-gentlemens-club/'
+    firstStripUrl = url
 
 
 class TheHorrorOfColony6(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/the-horror-of-colony-6-page-1/'
+    url = 'http://www.thewebcomicfactory.com/comic/the-horror-of-colony-6-page-1/'
+    firstStripUrl = url
 
 
 class TheKingsOfViralVideo(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/the-kings-of-viral-video-premiere/'
+    url = 'http://www.thewebcomicfactory.com/comic/the-kings-of-viral-video-premiere/'
+    firstStripUrl = url
 
 
 class TheSharonAndTonyExperiment(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/the-sharon-and-tony-experiment/'
+    url = 'http://www.thewebcomicfactory.com/comic/the-sharon-and-tony-experiment/'
+    firstStripUrl = url
 
 
 class TonyDestructo(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/tony-destructo/'
+    url = 'http://www.thewebcomicfactory.com/comic/tony-destructo/'
+    firstStripUrl = url
 
 
 class WeirdBikerTales(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/weird-biker-tales-the-last-outlaw/'
+    url = 'http://www.thewebcomicfactory.com/comic/weird-biker-tales-the-last-outlaw/'
+    firstStripUrl = url
 
 
 class WillysSpaceDive(_WebcomicFactory):
-    firstStripUrl = 'http://www.thewebcomicfactory.com/comic/willys-space-dive/'
+    url = 'http://www.thewebcomicfactory.com/comic/willys-space-dive/'
+    firstStripUrl = url
