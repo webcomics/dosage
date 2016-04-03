@@ -37,39 +37,3 @@ for (name, linkNumber) in [
     add(name, 'http://www.flowerlarkstudios.com/',
         starter=indirectStarter('http://www.flowerlarkstudios.com/',
                                 '(//div[@id="sidebar-left"]//a)[' + str(linkNumber) + ']'))
-
-# all comics on the webcomic factory
-
-for (name, url) in [
-    ('AntiwarComic', 'the-antiwar-comic-the-party/'),
-    ('AstheMayoTurns', 'as-the-mayo-turns/'),
-    ('ComicBookMafia', 'comic-book-mafia/'),
-    ('Dealers', 'dealers-1-1998-was-the-year/'),
-    ('DigitalHobo', 'digital-hobo-1-its-a-living-kinda/'),
-    ('EastCoastVsWestCoast', 'east-coast-vs-west-coast-greetings-from-the-coasts/'),
-    ('GunCulture', 'gun-culture/'),
-    ('IHateMyKids', 'i-hate-my-kids/'),
-    ('InARelationship', 'in-a-relationship-3/'),
-    ('JapaneseSchoolgirlsinLove', 'japanese-schoolgirls-in-love-1/'),
-    ('KingdomoftheDwarves', 'kingdom-of-the-dwarves/'),
-    ('LesterCrenshawisDead', 'lester-crenshaw-is-dead/'),
-    ('Millennials', 'millennials/'),
-    ('MiserableComedians', 'miserable-comedians-1-funny-because-its-sad/'),
-    ('OldeTymeGamer', 'olde-tyme-gamer-playing-injured/'),
-    ('PinJunkies', 'pin-junkies/'),
-    ('PostApocalypticNick', 'post-apocalyptic-nick/'),
-    ('RealTalk', 'real-talk-people-who-cut-in-line/'),
-    ('SoManyNightmares', 'so-many-nightmares-freedom-nightmare/'),
-    ('SportsGuys', 'sports-guys/'),
-    ('TalesOfPizza', 'tales-of-pizza-bad-tipper/'),
-    ('TheGentlemensClub', 'the-gentlemens-club/'),
-    ('TheHorrorOfColony6', 'the-horror-of-colony-6-page-1/'),
-    ('TheKingsofViralVideo', 'the-kings-of-viral-video-premiere/'),
-    ('TheSharonandTonyExperiment', 'the-sharon-and-tony-experiment/'),
-    ('TonyDestructo', 'tony-destructo/'),
-    ('WeirdBikerTales', 'weird-biker-tales-the-last-outlaw/'),
-    ('WillysSpaceDive', 'willys-space-dive/')
-]:
-    add(name, 'http://www.thewebcomicfactory.com',
-        starter=indirectStarter('http://www.thewebcomicfactory.com/comic/' + url,
-                                "//a[contains(concat(' ', text(), ' '), ' Last ')]"))
