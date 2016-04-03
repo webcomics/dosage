@@ -1,32 +1,35 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
 
 from re import compile, escape
-from ..scraper import _BasicScraper
+
+from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from ..helpers import bounceStarter
 
 
-class ZapComic(_BasicScraper):
+class ZapComic(_ParserScraper):
     url = 'http://www.zapcomic.com/'
-    rurl = escape(url[:-1]) # without trailing slash
-    stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(%s\?comic_object\=\d+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s/[^"]+)' % rurl, after="previous-comic-link"))
-    help = 'Index format: yyyy/mm/nnn-stripname'
+    css = True
+    imageSearch = 'img.comic-item'
+    prevSearch = 'a.previous-comic-link'
 
 
 class Zapiro(_BasicScraper):
     url = 'http://www.mg.co.za/zapiro/'
-    starter = bounceStarter(url,
-      compile(tagre("li", "class", r'nav_older') +
-              tagre("a", "href", r'(http://mg\.co\.za/cartoon/[^"]+)')))
+    starter = bounceStarter(
+        url, compile(tagre("li", "class", r'nav_older') +
+                     tagre("a", "href", r'(http://mg\.co\.za/cartoon/[^"]+)')))
     stripUrl = 'http://mg.co.za/cartoon/%s'
     firstStripUrl = stripUrl % 'zapiro_681'
     imageSearch = compile(tagre("img", "src", r'(http://cdn\.mg\.co\.za/crop/content/cartoons/[^"]+)'))
     prevSearch = compile(tagre("li", "class", r'nav_older') +
-        tagre("a", "href", r'(http://mg\.co\.za/cartoon/[^"]+)'))
+                         tagre("a", "href",
+                               r'(http://mg\.co\.za/cartoon/[^"]+)'))
     help = 'Index format: yyyy-mm-dd-stripname'
 
     @classmethod
@@ -35,22 +38,14 @@ class Zapiro(_BasicScraper):
         return name
 
 
-class ZebraGirl(_BasicScraper):
-    url = 'http://www.zebragirl.net/'
-    stripUrl = url + '?date=%s'
-    firstStripUrl = stripUrl % '2000-05-06'
-    imageSearch = compile(tagre("img", "src", r"(comics/[^']+)", quote="'"))
-    prevSearch = compile(tagre("link", "href", r"(/\?date=[^']+)", quote="'", before='Previous'))
-    help = 'Index format: yyyy-mm-dd'
-
-
 class ZenPencils(_BasicScraper):
     url = 'http://zenpencils.com/'
     rurl = escape(url)
     multipleImagesPerStrip = True
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '1-ralph-waldo-emerson-make-them-cry'
-    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+/)' % rurl, after="navi-prev"))
+    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+/)' % rurl,
+                               after="navi-prev"))
     imageSearch = compile(tagre("img", "src", r'(http://cdn\.zenpencils\.com/wp-content/uploads/\d+[^"]+)'))
     help = 'Index format: num-stripname'
 
@@ -76,7 +71,9 @@ class Zwarwald(_BasicScraper):
         compile(tagre("img", "src", r'(http://wp1163540\.wp190\.webpack\.hosteurope\.de/wordpress/images/\d+/\d+/[^"]+)')),
     )
     prevSearch = compile(tagre("a", "href", r'(%sindex\.php/page/\d+/)' % rurl) +
-        tagre("img", "src", r'http://zwarwald\.de/images/prev\.jpg', quote="'"))
+                         tagre("img", "src",
+                               r'http://zwarwald\.de/images/prev\.jpg',
+                               quote="'"))
     help = 'Index format: number'
 
     def shouldSkipUrl(self, url, data):
