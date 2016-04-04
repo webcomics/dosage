@@ -1,6 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 import os
+import datetime
 import time
 try:
     from urllib.parse import quote as url_quote
@@ -156,7 +157,7 @@ class AtomEventHandler(EventHandler):
             title,
             imageUrl,
             description,
-            util.rfc822date(time.time())
+            datetime.datetime.now()
         )
 
         if self.newfile:
