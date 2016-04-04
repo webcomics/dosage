@@ -6,6 +6,7 @@
 from __future__ import absolute_import, division, print_function
 
 import os
+import datetime
 import time
 from six.moves.urllib.parse import quote as url_quote
 import codecs
@@ -229,7 +230,7 @@ class AtomEventHandler(EventHandler):
             title,
             imageUrl,
             description,
-            util.rfc822date(time.time())
+            datetime.datetime.now()
         )
 
         if self.newfile:

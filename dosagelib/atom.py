@@ -4,8 +4,6 @@
 
 import xml.dom.minidom
 from datetime import datetime
-import pytz
-from time import mktime
 import dateutil.parser
 import email.utils
 from .configuration import App
@@ -38,7 +36,7 @@ class Feed(object):
         node = self.atom.createTextNode(value)
         return parent.appendChild(elem).appendChild(node)
 
-    def addItem(self, title, link, description, rfc822date, append=True):
+    def addItem(self, title, link, description, date, append=True):
         """Insert an entry."""
         entry = self.atom.createElement('entry')
 
@@ -52,8 +50,7 @@ class Feed(object):
         content.appendChild(self.atom.createTextNode(description))
         entry.appendChild(content)
         self.addElement(entry, 'id', link)
-        date = pytz.timezone('America/Toronto').localize(datetime.fromtimestamp(mktime(email.utils.parsedate(rfc822date)))).isoformat()
-        self.addElement(entry, 'updated', date)
+        self.addElement(entry, 'updated', '{0}Z'.format(date.isoformat()))
 
         if append:
             self.feed.appendChild(entry)
