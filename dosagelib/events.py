@@ -222,6 +222,7 @@ class AtomEventHandler(EventHandler):
         pageUrl = comic.referrer
         doc = xml.dom.minidom.Document()
         content = doc.createElement('div')
+        content.setAttribute('xmlns', 'http://www.w3.org/1999/xhtml')
         p = doc.createElement('p')
         img = doc.createElement('img')
         img.setAttribute('src', imageUrl)
