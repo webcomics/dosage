@@ -8,7 +8,11 @@ from __future__ import absolute_import, division, print_function
 import os
 import datetime
 import time
-from six.moves.urllib.parse import quote as url_quote
+try:
+    from six.moves.urllib.parse import quote as url_quote
+except ImportError:
+    from urllib import quote as url_quote
+import xml.dom.minidom
 import codecs
 import json
 
@@ -95,7 +99,6 @@ class RSSEventHandler(EventHandler):
 
         self.newfile = True
         self.rss = rss.Feed('Daily Dosage', link, 'Comics for %s' % time.strftime('%Y/%m/%d', today))
-<<<<<<< eba2fd914dcb4f6078f2a8acd57e8bdd755426c9
 
     def comicDownloaded(self, comic, filename):
         """Write RSS entry for downloaded comic."""
@@ -152,8 +155,6 @@ class AtomEventHandler(EventHandler):
 
         self.newfile = True
         self.atom = atom.Feed('Daily Dosage', os.path.join(self.baseurl, 'dailydose.atom'), 'Comics for %s' % time.strftime('%Y/%m/%d', today))
-=======
->>>>>>> Support Atom
 
     def comicDownloaded(self, comic, filename, text=None):
         """Write Atom entry for downloaded comic."""
@@ -219,17 +220,30 @@ class AtomEventHandler(EventHandler):
             size = getDimensionForImage(filename, MaxImageSize)
         title = '%s - %s' % (comic.name, os.path.basename(filename))
         pageUrl = comic.referrer
-        description = '<img src="%s"' % imageUrl
+        doc = xml.dom.minidom.Document()
+        content = doc.createElement('div')
+        p = doc.createElement('p')
+        img = doc.createElement('img')
+        img.setAttribute('src', imageUrl)
         if size:
-            description += ' width="%d" height="%d"' % size
-        description += '/>'
+            img.setAttribute('width', str(size[0]))
+            img.setAttribute('height', str(size[1]))
+        p.appendChild(img)
+        content.appendChild(p)
         if text:
-            description += '<br/>%s' % text
-        description += '<br/><a href="%s">View Comic Online</a>' % pageUrl
+            p = doc.createElement('p')
+            p.appendChild(doc.createTextNode(text))
+            content.appendChild(p)
+        p = doc.createElement('p')
+        a = doc.createElement('a')
+        a.setAttribute('href', pageUrl)
+        a.appendChild(doc.createTextNode('View Comic Online'))
+        p.appendChild(a)
+        content.appendChild(p)
         args = (
             title,
             imageUrl,
-            description,
+            content,
             datetime.datetime.now()
         )
 
