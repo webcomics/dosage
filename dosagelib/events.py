@@ -3,6 +3,7 @@
 import os
 import datetime
 import time
+import xml.dom.minidom
 try:
     from urllib.parse import quote as url_quote
 except ImportError:
@@ -146,17 +147,30 @@ class AtomEventHandler(EventHandler):
             size = getDimensionForImage(filename, MaxImageSize)
         title = '%s - %s' % (comic.name, os.path.basename(filename))
         pageUrl = comic.referrer
-        description = '<img src="%s"' % imageUrl
+        doc = xml.dom.minidom.Document()
+        content = doc.createElement('div')
+        p = doc.createElement('p')
+        img = doc.createElement('img')
+        img.setAttribute('src', imageUrl)
         if size:
-            description += ' width="%d" height="%d"' % size
-        description += '/>'
+            img.setAttribute('width', str(size[0]))
+            img.setAttribute('height', str(size[1]))
+        p.appendChild(img)
+        content.appendChild(p)
         if text:
-            description += '<br/>%s' % text
-        description += '<br/><a href="%s">View Comic Online</a>' % pageUrl
+            p = doc.createElement('p')
+            p.appendChild(doc.createTextNode(text))
+            content.appendChild(p)
+        p = doc.createElement('p')
+        a = doc.createElement('a')
+        a.setAttribute('href', pageUrl)
+        a.appendChild(doc.createTextNode('View Comic Online'))
+        p.appendChild(a)
+        content.appendChild(p)
         args = (
             title,
             imageUrl,
-            description,
+            content,
             datetime.datetime.now()
         )
 
