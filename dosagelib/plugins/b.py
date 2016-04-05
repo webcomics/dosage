@@ -7,10 +7,11 @@ from __future__ import absolute_import, division, print_function
 
 from re import compile, escape
 
-from ..util import tagre, getPageContent
+from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
-from .common import _ComicControlScraper, _ComicPressScraper, _WordPressScraper
+from .common import (_ComicControlScraper, _ComicPressScraper,
+                     _WordPressScraper, WP_PREV_SEARCH)
 
 
 class BackwaterPlanet(_BasicScraper):
@@ -179,26 +180,16 @@ class BloodBound(_WordPressScraper):
     firstStripUrl = 'http://bloodboundcomic.com/comic/06112006/'
 
 
-class BloomingFaeries(_BasicScraper):
+class BloomingFaeries(_ParserScraper):
     adult = True
     url = 'http://www.bloomingfaeries.com/'
-    stripUrl = url + 'comic/public/%s/'
-    firstStripUrl = stripUrl % "pit-stop"
-    imageSearch = compile(tagre("img", "src", r'(http://www.bloomingfaeries.com/wp-content/uploads[^"]+)', after='title'))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)',
-                               after='comic-nav-base comic-nav-previous'))
-    help = 'Index format: stripname'
+    firstStripUrl = url + 'comic/public/pit-stop/'
+    imageSearch = '//div[@id="comic"]//img'
+    prevSearch = WP_PREV_SEARCH
 
     @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        bf = imageUrl.split('/')
-        name = bf[-1]
-        re = compile(tagre("div", "class", r'comic-id-([^"]+)'))
-        content = getPageContent(pageUrl, cls.session)
-        match = re.search(content)
-        if not match:
-            return None
-        return "BF%s_%s" % (match.group(1), name)
+    def namer(cls, image_url, page_url):
+        return "_".join(image_url.rsplit('/', 3)[1:])
 
 
 class BMovieComic(_BasicScraper):

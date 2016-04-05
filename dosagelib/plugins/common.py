@@ -12,13 +12,13 @@ from ..scraper import _ParserScraper
 # please don't use lists of expression, as that makes it hard to track which
 # expression is for which comics.
 
-
 WP_LATEST_SEARCH = '//a[contains(concat(" ", @class, " "), " comic-nav-last ")]'
+WP_PREV_SEARCH = '//a[contains(concat(" ", @class, " "), " comic-nav-previous ")]'
 
 
 class _WordPressScraper(_ParserScraper):
     imageSearch = '//div[@id="comic"]//img'
-    prevSearch = "//a[contains(concat(' ', @class, ' '), ' comic-nav-previous ')]"
+    prevSearch = WP_PREV_SEARCH
 
 
 class _ComicPressScraper(_WordPressScraper):
