@@ -11,16 +11,18 @@ import datetime
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter
-from ..util import tagre, getPageContent
-from .common import _ComicControlScraper, _WordPressScraper
+from ..util import tagre
+from .common import _ComicControlScraper, _WordPressScraper, WP_LATEST_SEARCH
 
 
 class SabrinaOnline(_BasicScraper):
     url = 'http://sabrina-online.com/'
+    stripUrl = url + '%s.html'
+    firstStripUrl = stripUrl % '1996-01'
     imageSearch = compile(tagre("a", "href", r'(strips/[^"]*)'))
     prevSearch = compile(tagre("a", "href", r"(\d\d\d\d-\d\d.html)") +
                          tagre("img", "src", "b_back.gif"))
-    help = 'Index format: n (unpadded)'
+    help = 'Index format: yyyy-qq'
     adult = True
     multipleImagesPerStrip = True
 
@@ -28,10 +30,10 @@ class SabrinaOnline(_BasicScraper):
     def starter(cls):
         """Pick last one in a list of archive pages."""
         archive = cls.url + 'archive.html'
-        data = getPageContent(archive, cls.session)
+        data = cls.getPage(archive)
         search = compile(tagre("a", "href", r"(\d\d\d\d-\d\d.html)"))
-        archivepages = search.findall(data)
-        return cls.url + archivepages[-1]
+        archivepages = cls.fetchUrls(archive, data, search)
+        return archivepages[-1]
 
 
 class SafelyEndangered(_BasicScraper):
@@ -308,58 +310,11 @@ class SMBC(_ParserScraper):
         )
 
 
-class SnowFlakes(_BasicScraper):
-    url = 'http://www.snowflakescomic.com/'
-    stripUrl = url + '?id=%s&sl=%s'
-    firstStripUrl = stripUrl % ('103', '1')
-    endOfLife = True
-    imageSearch = (
-        compile(tagre("img", "src", r'(comics/[^"]+)')),
-        compile(tagre("img", "src",
-                      r'(http://www.snowflakescomic.com/comics/[^"]+)')),
-    )
-    prevSearch = compile(tagre("a", "href", r'(/\?id=\d+\&sl=\d)', quote="") +
-                         tagre("img", "src", r'images/nav_prior-ON\.gif'))
-    help = 'Index format: number'
-
-    @classmethod
-    def starter(cls):
-        return cls.stripUrl % ('530', '5')
-
-    def getIndexStripUrl(self, index):
-        return self.stripUrl % (index, index[0])
-
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        """Use strip index number for image name."""
-        index = int(compile(r'id=(\d+)').search(pageUrl).group(1))
-        ext = imageUrl.rsplit('.', 1)[1]
-        return "SnowFlakes-%d.%s" % (index, ext)
-
-    def shouldSkipUrl(self, url, data):
-        """Skip pages without images."""
-        return url in (
-            self.stripUrl % ('279', '2'),  # no comic
-            self.stripUrl % ('278', '2'),  # no comic
-            self.stripUrl % ('277', '2'),  # no comic
-            self.stripUrl % ('276', '2'),  # no comic
-            self.stripUrl % ('275', '2'),  # no comic
-            self.stripUrl % ('214', '2'),  # no comic
-        )
-
-
-class SnowFlame(_BasicScraper):
+class SnowFlame(_WordPressScraper):
     url = 'http://www.snowflamecomic.com/'
-    rurl = escape(url)
     stripUrl = url + '?comic=snowflame-%s-%s'
     firstStripUrl = stripUrl % ('01', '01')
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl, after="Snow[Ff]lame "))
-    prevSearch = compile(tagre("span", "class", "mininav-prev") +
-                         tagre("a", "href",
-                               r'(%s\?comic=snowflame[^"]+)' % rurl))
-    starter = bounceStarter(
-        url, compile(tagre("span", "class", "mininav-next") +
-                     tagre("a", "href", r'(%s\?comic=snowflame[^"]+)' % rurl)))
+    starter = bounceStarter(url, WP_LATEST_SEARCH)
     help = 'Index format: chapter-page'
 
     def getIndexStripUrl(self, index):
@@ -375,15 +330,8 @@ class SnowFlame(_BasicScraper):
         return "%s-%s-%s" % (chapter, page, filename)
 
 
-class SodiumEyes(_BasicScraper):
+class SodiumEyes(_WordPressScraper):
     url = 'http://sodiumeyes.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2007/11/08/damning-evidence'
-    imageSearch = compile(tagre("img", "src", r'(%scomic/[^ ]+)' % rurl,
-                                quote=""))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
-    help = 'Index format: yyyy/mm/dd/stripname'
 
 
 class SomethingPositive(_BasicScraper):
@@ -410,15 +358,12 @@ class Sorcery101(_BasicScraper):
     help = 'Index format: stripname'
 
 
-class SpaceTrawler(_BasicScraper):
-    url = 'http://spacetrawler.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2010/01/01/spacetrawler-4'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl,
-                               after="navi-prev"))
-    help = 'Index format: yyyy/mm/dd/stripname'
+class SpaceTrawler(_WordPressScraper):
+    base_url = 'http://spacetrawler.com/'
+    url = base_url + '2013/12/24/spacetrawler-379/'
+    firstStripUrl = base_url + '2010/01/01/spacetrawler-4/'
+    prevSearch = "//a[contains(concat(' ', @class, ' '), ' navi-prev ')]"
+    endOfLife = True
 
 
 class Spamusement(_BasicScraper):
@@ -453,22 +398,20 @@ class SPQRBlues(_WordPressScraper):
 
 class StandStillStaySilent(_ParserScraper):
     url = 'http://www.sssscomic.com/comic.php'
-    rurl = escape(url)
     stripUrl = url + '?page=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = '//img[@class="comicnormal"]'
-    prevSearch = '//a//div[@id="navprev"]'
+    prevSearch = '//a[div[@id="navprev"]]'
     help = 'Index Format: number'
 
 
-class StarCrossdDestiny(_BasicScraper):
+class StarCrossdDestiny(_ParserScraper):
     baseUrl = 'http://www.starcrossd.net/'
-    rurl = escape(baseUrl)
     url = baseUrl + 'comic.html'
     stripUrl = baseUrl + 'archives/%s.html'
     firstStripUrl = stripUrl % '00000001'
-    imageSearch = compile(tagre("img", "src", r'(http://(?:www\.)?starcrossd\.net/(?:ch1|strips|book2)/[^"]+)'))
-    prevSearch = compile(r'<a href="(%s(?:ch1/)?archives/\d+\.html)"[^>]*"[^"]*"[^>]*>prev' % rurl, IGNORECASE)
+    imageSearch = '//div[@id="comic"]//img'
+    prevSearch = '//a[text()="prev"]'
     help = 'Index format: nnnnnnnn'
 
     @classmethod
@@ -520,7 +463,7 @@ class StrongFemaleProtagonist(_ParserScraper):
     url = 'http://strongfemaleprotagonist.com/'
     stripUrl = url + '%s/'
     css = True
-    imageSearch = 'article p:first-child img'
+    imageSearch = 'article p img'
     prevSearch = 'div.nav-previous > a'
     help = 'Index format: issue-?/page-??'
 
@@ -533,18 +476,8 @@ class StrongFemaleProtagonist(_ParserScraper):
             self.stripUrl % 'issue-5/newspaper',
             self.stripUrl % 'issue-5/hiatus-1',
             self.stripUrl % 'issue-5/hiatus-2',
+            self.stripUrl % 'ssue-1/no-page',
         )
-
-
-class Stubble(_BasicScraper):
-    url = 'http://stubblecomics.com/'
-    rurl = escape(url)
-    stripUrl = url + '?p=%s'
-    firstStripUrl = stripUrl % '4'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl,
-                               after="navi-prev"))
-    help = 'Index format: number'
 
 
 class StuffNoOneToldMe(_BasicScraper):
@@ -585,22 +518,5 @@ class StuffNoOneToldMe(_BasicScraper):
         )
 
 
-class SuburbanTribe(_BasicScraper):
-    url = 'http://www.pixelwhip.com/'
-    rurl = escape(url)
-    stripUrl = url + '?p=%s'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl,
-                               after="prev"))
-    help = 'Index format: nnnn'
-
-
-class SupernormalStep(_BasicScraper):
+class SupernormalStep(_ComicControlScraper):
     url = 'http://supernormalstep.com/'
-    rurl = escape(url)
-    stripUrl = url + '?p=%s'
-    firstStripUrl = stripUrl % '8'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl,
-                               after="prev"))
-    help = 'Index format: number'
