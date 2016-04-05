@@ -9,20 +9,24 @@ from ..helpers import bounceStarter
 from ..util import tagre
 
 
-class xkcd(_BasicScraper):
+class Xkcd(_BasicScraper):
+    name = 'xkcd'
     url = 'http://xkcd.com/'
-    starter = bounceStarter(url, compile(tagre("a", "href", r'(/\d+/)', before="next")))
+    starter = bounceStarter(url, compile(tagre("a", "href", r'(/\d+/)',
+                                               before="next")))
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(//imgs\.xkcd\.com/comics/[^"]+)'))
+    imageSearch = compile(tagre("img", "src",
+                                r'(//imgs\.xkcd\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/\d+/)', before="prev"))
     help = 'Index format: n (unpadded)'
-    textSearch = compile(tagre("img", "title", r'([^"]+)', before=r'//imgs\.xkcd\.com/comics/'))
+    textSearch = compile(tagre("img", "title", r'([^"]+)',
+                               before=r'//imgs\.xkcd\.com/comics/'))
 
     @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        index = int(pageUrl.rstrip('/').rsplit('/', 1)[-1])
-        name = imageUrl.rsplit('/', 1)[-1].split('.')[0]
+    def namer(cls, image_url, page_url):
+        index = int(page_url.rstrip('/').rsplit('/', 1)[-1])
+        name = image_url.rsplit('/', 1)[-1].split('.')[0]
         return '%03d-%s' % (index, name)
 
     @classmethod
@@ -30,3 +34,8 @@ class xkcd(_BasicScraper):
         if url and '/large/' in data:
             return url.replace(".png", "_large.png")
         return url
+
+    def shouldSkipUrl(self, url, data):
+        return url in (
+            self.stripUrl % '1663',  # Garden
+        )
