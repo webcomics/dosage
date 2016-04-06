@@ -185,14 +185,13 @@ def case_insensitive_re(name):
     return "".join("[%s%s]" % (c.lower(), c.upper()) for c in name)
 
 
-def getPageContent(url, session, max_content_bytes=MaxContentBytes):
+def get_page(url, session, max_content_bytes=MaxContentBytes):
     """Get text content of given URL."""
     check_robotstxt(url, session)
     # read page data
     page = urlopen(url, session, max_content_bytes=max_content_bytes)
-    data = page.text
-    out.debug(u"Got page content %r" % data, level=3)
-    return data
+    out.debug(u"Got page content %r" % page.content, level=3)
+    return page
 
 
 def getImageObject(url, referrer, session, max_content_bytes=MaxImageBytes):
@@ -437,7 +436,7 @@ def strtimezone():
         zone = time.altzone
     else:
         zone = time.timezone
-    return "%+04d" % (-zone//3600)
+    return "%+04d" % (-zone // 3600)
 
 
 def rfc822date(indate):
@@ -477,12 +476,12 @@ def strsize(b):
     if b < 1024 * 1024:
         return "%.2fKB" % (float(b) / 1024)
     if b < 1024 * 1024 * 10:
-        return "%.2fMB" % (float(b) / (1024*1024))
+        return "%.2fMB" % (float(b) / (1024 * 1024))
     if b < 1024 * 1024 * 1024:
-        return "%.1fMB" % (float(b) / (1024*1024))
+        return "%.1fMB" % (float(b) / (1024 * 1024))
     if b < 1024 * 1024 * 1024 * 10:
-        return "%.2fGB" % (float(b) / (1024*1024*1024))
-    return "%.1fGB" % (float(b) / (1024*1024*1024))
+        return "%.2fGB" % (float(b) / (1024 * 1024 * 1024))
+    return "%.1fGB" % (float(b) / (1024 * 1024 * 1024))
 
 
 def getDirname(name):

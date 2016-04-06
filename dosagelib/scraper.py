@@ -29,8 +29,8 @@ except ImportError:
     pycountry = None
 
 from . import loader, configuration, languages
-from .util import (getPageContent, makeSequence, get_system_uid, urlopen,
-                   getDirname, unescape, tagre, normaliseURL,
+from .util import (get_page, makeSequence, get_system_uid, urlopen, getDirname,
+        unescape, tagre, normaliseURL,
                    prettyMatcherList, requests_session)
 from .comic import ComicStrip
 from .output import out
@@ -361,7 +361,7 @@ class _BasicScraper(Scraper):
 
     @classmethod
     def getPage(cls, url):
-        content = getPageContent(url, cls.session)
+        content = get_page(url, cls.session).text
         # determine base URL
         baseUrl = None
         match = cls.BASE_SEARCH.search(content)
@@ -430,13 +430,27 @@ class _ParserScraper(Scraper):
     of the HTML element and returns that.
     """
 
+    # Taken directly from LXML
+    XML_DECL = re.compile(
+        r'^(<\?xml[^>]+)\s+encoding\s*=\s*["\'][^"\']*["\'](\s*\?>|)', re.U)
+
     # Switch between CSS and XPath selectors for this class. Since CSS needs
     # another Python module, XPath is the default for now.
     css = False
 
     @classmethod
     def getPage(cls, url):
-        tree = html.document_fromstring(getPageContent(url, cls.session))
+        page = get_page(url, cls.session)
+        if page.encoding:
+            # Requests figured out the encoding, so we can deliver Unicode to
+            # LXML. Unfortunatly, LXML feels betrayed if there is still an XML
+            # declaration with (probably wrong!) encoding at the top of the
+            # document. Web browsers ignore such if the encoding was specified
+            # in the HTTP header and so do we.
+            text = cls.XML_DECL.sub('\1\2', page.text, count=1)
+            tree = html.document_fromstring(text)
+        else:
+            tree = html.document_fromstring(page.content)
         tree.make_links_absolute(url)
         return tree
 

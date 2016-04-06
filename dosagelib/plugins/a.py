@@ -88,21 +88,15 @@ class AGirlAndHerFed(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class AhoiPolloi(_BasicScraper):
+class AhoiPolloi(_ParserScraper):
     url = 'http://ahoipolloi.blogger.de/'
     stripUrl = url + '?day=%s'
     firstStripUrl = stripUrl % '20060306'
     multipleImagesPerStrip = True
     lang = 'de'
-    imageSearch = compile(tagre('img', 'src',
-                                r'(/static/antville/ahoipolloi/images/[^"]+)'))
-    prevSearch = compile(tagre('a', 'href',
-                               r'(http://ahoipolloi\.blogger\.de/\?day=\d+)'))
+    imageSearch = '//img[contains(@src, "/static/antville/ahoipolloi/")]'
+    prevSearch = '//a[contains(@href, "/?day=")]'
     help = 'Index format: yyyymmdd'
-
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        return imageUrl.rsplit('/', 1)[1]
 
 
 class AhoyEarth(_ParserScraper):
