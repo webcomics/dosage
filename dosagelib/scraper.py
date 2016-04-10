@@ -30,8 +30,8 @@ except ImportError:
 
 from . import loader, configuration, languages
 from .util import (get_page, makeSequence, get_system_uid, urlopen, getDirname,
-        unescape, tagre, normaliseURL,
-                   prettyMatcherList, requests_session)
+                   unescape, tagre, normaliseURL, prettyMatcherList,
+                   requests_session)
 from .comic import ComicStrip
 from .output import out
 from .events import getHandler
@@ -489,9 +489,9 @@ class _ParserScraper(Scraper):
             text = ''
             for match in searchFun(textSearch):
                 try:
-                    text += ' ' + match.text_content()
+                    text += u' ' + match.text_content()
                 except AttributeError:
-                    text += ' ' + unicode(match)
+                    text += u' ' + match
             if text.strip() == '':
                 if optional:
                     return None
