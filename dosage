@@ -1,7 +1,8 @@
 #!/usr/bin/env python
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 #     ___
 #    /   \___  ___  __ _  __ _  ___
 #   / /\ / _ \/ __|/ _` |/ _` |/ _ \
@@ -9,17 +10,14 @@
 # /___,' \___/|___/\__,_|\__, |\___|
 #                        |___/
 
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 import sys
 import os
 import argparse
-import pydoc
-from io import StringIO
 import dosagelib
 from dosagelib import events, configuration, singleton, director
 from dosagelib.output import out
 from dosagelib.util import internal_error, strlimit
-from dosagelib.ansicolor import get_columns
 
 
 class ArgumentParser(argparse.ArgumentParser):
@@ -27,18 +25,12 @@ class ArgumentParser(argparse.ArgumentParser):
 
     def print_help(self, file=None):
         """Paginate help message on TTYs."""
-        msg = self.format_help()
-        if file is None:
-            file = sys.stdout
-        if hasattr(file, "isatty") and file.isatty():
-            pydoc.pager(msg)
-        else:
-            print(msg, file=file)
-
+        with out.pager():
+            out.info(self.format_help())
 
 Examples = """\
 EXAMPLES
-List available comics (ca. 3000 at the moment):
+List available comics:
   dosage -l
 
 Get the latest comic of for example CalvinAndHobbes and save it in the "Comics"
@@ -51,14 +43,14 @@ strips of all of them:
 """
 
 
-def setupOptions():
+def setup_options():
     """Construct option parser.
     @return: new option parser
     @rtype argparse.ArgumentParser
     """
     kwargs = dict(
-        description = "A comic downloader and archiver.",
-        epilog = Examples,
+        description="A comic downloader and archiver.",
+        epilog=Examples,
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser = ArgumentParser(**kwargs)
@@ -92,7 +84,7 @@ def setupOptions():
     return parser
 
 
-def displayVersion(verbose):
+def display_version(verbose):
     """Display application name, version, copyright and license."""
     print(configuration.App)
     print(configuration.Copyright)
@@ -126,29 +118,26 @@ def displayVersion(verbose):
     return 0
 
 
-def setOutputInfo(options):
+def set_output_info(options):
     """Set global output level and timestamp option."""
     out.level = 0
     out.level += options.verbose
     out.timestamps = options.timestamps
-    # debug urllib3
-    #from requests.packages.urllib3 import add_stderr_logger
-    #add_stderr_logger()
 
 
-def displayHelp(options):
+def display_help(options):
     """Print help for comic strips."""
     errors = 0
     try:
         for scraperobj in director.getScrapers(options.comic, options.basepath, listing=True):
-            errors += displayComicHelp(scraperobj)
+            errors += display_comic_help(scraperobj)
     except ValueError as msg:
         out.exception(msg)
         return 2
     return errors
 
 
-def displayComicHelp(scraperobj):
+def display_comic_help(scraperobj):
     """Print help for a comic."""
     orig_context = out.context
     out.context = scraperobj.getName()
@@ -171,19 +160,21 @@ def displayComicHelp(scraperobj):
         out.context = orig_context
 
 
-def voteComics(options):
+def vote_comics(options):
     """Vote for comics."""
     errors = 0
     try:
-        for scraperobj in director.getScrapers(options.comic, options.basepath, options.adult, options.multimatch):
-            errors += voteComic(scraperobj)
+        for scraperobj in director.getScrapers(options.comic, options.basepath,
+                                               options.adult,
+                                               options.multimatch):
+            errors += vote_comic(scraperobj)
     except ValueError as msg:
         out.exception(msg)
         errors += 1
     return errors
 
 
-def voteComic(scraperobj):
+def vote_comic(scraperobj):
     """Vote for given comic scraper."""
     errors = 0
     orig_context = out.context
@@ -211,88 +202,82 @@ def voteComic(scraperobj):
 
 def run(options):
     """Execute comic commands."""
-    setOutputInfo(options)
+    set_output_info(options)
     # ensure only one instance of dosage is running
     if not options.allow_multiple:
-        me = singleton.SingleInstance()
+        singleton.SingleInstance()
     if options.version:
-        return displayVersion(options.verbose)
+        return display_version(options.verbose)
     if options.list:
-        return doList()
+        return do_list()
     if options.singlelist:
-        return doList(columnList=False, verbose=options.verbose)
+        return do_list(column_list=False, verbose=options.verbose)
     # after this a list of comic strips is needed
     if not options.comic:
         out.warn(u'No comics specified, bailing out!')
         return 1
     if options.modulehelp:
-        return displayHelp(options)
+        return display_help(options)
     if options.vote:
-        return voteComics(options)
+        return vote_comics(options)
     return director.getComics(options)
 
 
-def doList(columnList=True, verbose=False):
+def do_list(column_list=True, verbose=False):
     """List available comics."""
-    orig_context = out.context
-    out.context = u''
-    try:
-        page = hasattr(sys.stdout, "isatty") and sys.stdout.isatty()
-        if page:
-            fd = StringIO(u'')
-            out.setStream(fd)
+    with out.pager():
         out.info(u'Available comic scrapers:')
         out.info(u'Comics tagged with [%s] require age confirmation with the --adult option.' % TAG_ADULT)
         out.info(u'Non-english comics are tagged with [%s].' % TAG_LANG)
-        scrapers = sorted(director.getAllScrapers(listing=True), key=lambda s: s.getName())
-        if columnList:
-            num, disabled = doColumnList(scrapers)
+        scrapers = sorted(director.getAllScrapers(listing=True),
+                          key=lambda s: s.getName())
+        if column_list:
+            num, disabled = do_column_list(scrapers)
         else:
-            num, disabled = doSingleList(scrapers, verbose=verbose)
+            num, disabled = do_single_list(scrapers, verbose=verbose)
         out.info(u'%d supported comics.' % num)
         if disabled:
             out.info('')
             out.info(u'Some comics are disabled, they are tagged with [%s:REASON], where REASON is one of:' % TAG_DISABLED)
             for k in disabled:
                 out.info(u'  %-10s %s' % (k, disabled[k]))
-        if page:
-            pydoc.pager(fd.getvalue())
-        return 0
-    finally:
-        out.context = orig_context
+    return 0
 
 
-def doSingleList(scrapers, verbose=False):
+def do_single_list(scrapers, verbose=False):
     """Get list of scraper names, one per line."""
     disabled = {}
     for num, scraperobj in enumerate(scrapers):
         if verbose:
-            displayComicHelp(scraperobj)
+            display_comic_help(scraperobj)
         else:
-            out.info(getTaggedScraperName(scraperobj, reasons=disabled))
+            out.info(get_tagged_scraper_name(scraperobj, reasons=disabled))
     return num, disabled
 
 
-def doColumnList(scrapers):
+def do_column_list(scrapers):
     """Get list of scraper names with multiple names per line."""
     disabled = {}
-    screenWidth = get_columns(sys.stdout)
+    width = out.width
     # limit name length so at least two columns are there
-    limit = (screenWidth // 2) - 8
-    names = [getTaggedScraperName(scraperobj, limit=limit, reasons=disabled) for scraperobj in scrapers]
+    limit = (width // 2) - 8
+    names = [get_tagged_scraper_name(scraperobj, limit=limit, reasons=disabled)
+             for scraperobj in scrapers]
     num = len(names)
     maxlen = max(len(name) for name in names)
-    namesPerLine = max(screenWidth // (maxlen + 1), 1)
+    names_per_line = max(width // (maxlen + 1), 1)
     while names:
-        out.info(u''.join(name.ljust(maxlen) for name in names[:namesPerLine]))
-        del names[:namesPerLine]
+        out.info(u''.join(name.ljust(maxlen) for name in
+                 names[:names_per_line]))
+        del names[:names_per_line]
     return num, disabled
 
 TAG_ADULT = "adult"
 TAG_LANG = "lang"
 TAG_DISABLED = "dis"
 
-def getTaggedScraperName(scraperobj, limit=None, reasons=None):
+
+def get_tagged_scraper_name(scraperobj, limit=None, reasons=None):
     """Get comic scraper name."""
     tags = []
     if scraperobj.adult:
@@ -317,7 +302,7 @@ def getTaggedScraperName(scraperobj, limit=None, reasons=None):
 def main():
     """Parse options and execute commands."""
     try:
-        options = setupOptions().parse_args()
+        options = setup_options().parse_args()
         options.basepath = os.path.expanduser(options.basepath)
         res = run(options)
     except KeyboardInterrupt:
@@ -344,5 +329,3 @@ def viewprof():
 
 if __name__ == '__main__':
     sys.exit(main())
-    #profile()
-    #viewprof()
