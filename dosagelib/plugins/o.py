@@ -10,7 +10,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
-from .common import _WordPressScraper
+from .common import _WordPressScraper, xpath_class
 
 
 class OctopusPie(_ParserScraper):
@@ -21,17 +21,6 @@ class OctopusPie(_ParserScraper):
     imageSearch = '//img[@title]'
     prevSearch = '//a[@rel="prev"]'
     help = 'Index format: yyyy-mm-dd/nnn-strip-name'
-
-
-class OddFish(_BasicScraper):
-    url = 'http://www.odd-fish.net/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % 'tv-tentacles'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl,
-                               after="navi-prev"))
-    help = 'Index format: stripname'
 
 
 class Oglaf(_BasicScraper):
@@ -48,18 +37,11 @@ class Oglaf(_BasicScraper):
     adult = True
 
 
-class OhJoySexToy(_BasicScraper):
+class OhJoySexToy(_WordPressScraper):
     url = 'http://www.ohjoysextoy.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % 'introduction'
-    imageSearch = compile(tagre("div", "class", r'comicpane') + "\s*.*\s*" +
-                          tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl,
-                               after='navi navi-prev'))
-    textSearch = compile(tagre("div", "class", r'comicpane') + "\s*.*\s*" +
-                         tagre("img", "alt", r'([^"]+)'))
-    help = 'Index Format: name'
+    firstStripUrl = url + 'introduction/'
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
+    textSearch = '//div[@id="comic"]//img/@alt'
     adult = True
 
 
@@ -119,16 +101,11 @@ class OnTheFastrack(_BasicScraper):
         return "%s.gif" % name.title()
 
 
-class Optipess(_BasicScraper):
+class Optipess(_WordPressScraper):
     url = 'http://www.optipess.com/'
-    stripUrl = url + '%s'
     firstStripUrl = url + '2008/12/01/jason-friend-of-the-butterflies/'
-    imageSearch = compile(tagre("img", "src",
-                                r'(%scomics/[x|\d]+[^"]+\.[^"]+)' % url))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)',
-                               after="navi navi-prev"))
-    textSearch = compile(tagre("img", "alt", r'([^"]+)', before=url))
-    help = 'Index format: yyyy/mm/dd/stripname'
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
+    textSearch = '//div[@id="comic"]//img/@alt'
 
 
 class OrnerBoy(_BasicScraper):

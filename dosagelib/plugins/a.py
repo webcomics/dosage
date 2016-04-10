@@ -4,11 +4,13 @@
 # Copyright (C) 2015-2016 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
+
 from re import compile, escape, MULTILINE
+
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import regexNamer, bounceStarter, indirectStarter
-from .common import _WordPressScraper, _ComicPressScraper, WP_LATEST_SEARCH
+from .common import _WordPressScraper, xpath_class, WP_LATEST_SEARCH
 
 
 class AbstruseGoose(_BasicScraper):
@@ -67,15 +69,14 @@ class Achewood(_BasicScraper):
     namer = regexNamer(compile(r'date=(\d+)'))
 
 
-class AfterStrife(_BasicScraper):
+class AfterStrife(_WordPressScraper):
     baseUrl = 'http://afterstrife.com/'
-    rurl = escape(baseUrl)
     stripUrl = baseUrl + '?p=%s'
     url = stripUrl % '262'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(r'<img src="(%sstrips/.+?)"' % rurl)
-    prevSearch = compile(r'<a href="(.+?)" class="navi navi-prev"')
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
     help = 'Index format: nnn'
+    endOfLife = True
 
 
 class AGirlAndHerFed(_BasicScraper):
@@ -99,13 +100,9 @@ class AhoiPolloi(_ParserScraper):
     help = 'Index format: yyyymmdd'
 
 
-class AhoyEarth(_ParserScraper):
+class AhoyEarth(_WordPressScraper):
     url = 'http://www.ahoyearth.com/'
-    stripUrl = url + '%s/'
-    css = True
-    imageSearch = '#comic-1 img'
-    prevSearch = '.navi-prev'
-    help = 'Index format: ddmmyyyy'
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
 class AirForceBlues(_WordPressScraper):
@@ -124,8 +121,9 @@ class ALessonIsLearned(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class Alice(_ComicPressScraper):
+class Alice(_WordPressScraper):
     url = 'http://www.alicecomics.com/'
+    prevSearch = '//a[%s]' % xpath_class('navi-prev-in')
     starter = indirectStarter('http://www.alicecomics.com/',
                               '//a[text()="Latest Alice!"]')
 

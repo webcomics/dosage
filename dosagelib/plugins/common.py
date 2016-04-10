@@ -12,17 +12,20 @@ from ..scraper import _ParserScraper
 # please don't use lists of expression, as that makes it hard to track which
 # expression is for which comics.
 
-WP_LATEST_SEARCH = '//a[contains(concat(" ", @class, " "), " comic-nav-last ")]'
-WP_PREV_SEARCH = '//a[contains(concat(" ", @class, " "), " comic-nav-previous ")]'
+
+def xpath_class(name):
+    """Returns an XPath expressions which finds a tag which has a specified
+    class."""
+    return 'contains(concat(" ", @class, " "), " %s ")' % name
+
+
+WP_LATEST_SEARCH = '//a[%s]' % xpath_class('comic-nav-last')
+WP_PREV_SEARCH = '//a[%s]' % xpath_class('comic-nav-previous')
 
 
 class _WordPressScraper(_ParserScraper):
     imageSearch = '//div[@id="comic"]//img'
     prevSearch = WP_PREV_SEARCH
-
-
-class _ComicPressScraper(_WordPressScraper):
-    prevSearch = "//a[contains(concat(' ', @class, ' '), ' navi-prev-in ')]"
 
 
 class _ComicControlScraper(_ParserScraper):

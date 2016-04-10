@@ -4,22 +4,19 @@
 # Copyright (C) 2015-2016 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
+
 from re import compile, escape
 
 from ..scraper import _BasicScraper
 from ..helpers import indirectStarter
 from ..util import tagre
+from .common import _WordPressScraper, xpath_class
 
 
-class Underling(_BasicScraper):
+class Underling(_WordPressScraper):
     url = 'http://underlingcomic.com/'
-    stripUrl = url
-    rurl = escape(url)
-    firstStripUrl = stripUrl + 'page-one/'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]*)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)',
-                               after=r'class="[^"]*navi-prev'))
-    help = 'Index format: nnn'
+    firstStripUrl = url + 'page-one/'
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
 class Undertow(_BasicScraper):

@@ -12,7 +12,8 @@ import datetime
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, WP_LATEST_SEARCH
+from .common import (_ComicControlScraper, _WordPressScraper, WP_LATEST_SEARCH,
+                     xpath_class)
 
 
 class SabrinaOnline(_BasicScraper):
@@ -36,15 +37,10 @@ class SabrinaOnline(_BasicScraper):
         return archivepages[-1]
 
 
-class SafelyEndangered(_BasicScraper):
+class SafelyEndangered(_WordPressScraper):
     url = 'http://www.safelyendangered.com/'
-    stripUrl = url + 'comic/%s'
-    firstStripUrl = stripUrl % 'ignored'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.safelyendangered\.com/wp-content/uploads/\d+/\d+/[^"]+\.[a-z]+).*'))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)',
-                               after="navi navi-prev"))
-    textSearch = compile(tagre("img", "title", r'([^"]+)', before=r'http://www\.safelyendangered\.com/wp-content/uploads'))
-    help = 'Index format: yyyy/mm/stripname'
+    firstStripUrl = url + 'comic/ignored/'
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
 class SailorsunOrg(_WordPressScraper):
@@ -209,15 +205,9 @@ class ShermansLagoon(_BasicScraper):
         return "%s-%s-%s" % (year, month, day)
 
 
-class Shivae(_BasicScraper):
-    url = 'http://shivae.net/'
-    rurl = escape(url)
-    stripUrl = url + 'blog/%s/'
-    firstStripUrl = stripUrl % '2007/09/21/09212007'
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/blogs\.dir/\d+/files/\d+/\d+/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%sblog/[^"]+)' % rurl,
-                               after="navi-prev"))
-    help = 'Index format: yyyy/mm/dd/stripname'
+class Shivae(_WordPressScraper):
+    url = 'http://shivae.com/'
+    firstStripUrl = url + 'gnip/ck-chapter-01/caidenkoel-title-01/'
 
 
 class Shortpacked(_ParserScraper):
@@ -229,14 +219,9 @@ class Shortpacked(_ParserScraper):
     help = 'Index format: nnn'
 
 
-class ShotgunShuffle(_BasicScraper):
+class ShotgunShuffle(_WordPressScraper):
     url = 'http://shotgunshuffle.com/'
-    stripUrl = url + 'comic/%s'
-    firstStripUrl = stripUrl % 'pilot/'
-    imageSearch = compile(tagre("img", "src", r'(http://shotgunshuffle.com/wp-content/uploads/\d+/\d+/\d+-[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)',
-                         after="navi navi-prev"))
-    help = 'Index format: stripname'
+    firstStripUrl = url + 'comic/pilot/'
 
 
 class SinFest(_BasicScraper):
@@ -362,7 +347,7 @@ class SpaceTrawler(_WordPressScraper):
     base_url = 'http://spacetrawler.com/'
     url = base_url + '2013/12/24/spacetrawler-379/'
     firstStripUrl = base_url + '2010/01/01/spacetrawler-4/'
-    prevSearch = "//a[contains(concat(' ', @class, ' '), ' navi-prev ')]"
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
     endOfLife = True
 
 

@@ -10,7 +10,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
-from .common import _WordPressScraper, _ComicPressScraper
+from .common import _WordPressScraper
 
 
 class Caggage(_BasicScraper):
@@ -295,8 +295,9 @@ class CowboyJedi(_WordPressScraper):
     url = 'http://www.cowboyjedi.com/'
 
 
-class CraftedFables(_ComicPressScraper):
+class CraftedFables(_WordPressScraper):
     url = 'http://www.caf-fiends.net/comicpress/'
+    prevSearch = '//a[@rel="prev"]'
 
 
 class CrapIDrewOnMyLunchBreak(_BasicScraper):

@@ -4,12 +4,13 @@
 # Copyright (C) 2015-2016 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
+
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
-from .common import _ComicControlScraper
+from .common import _ComicControlScraper, _WordPressScraper, xpath_class
 
 
 class Galaxion(_BasicScraper):
@@ -150,15 +151,10 @@ class GoneWithTheBlastwave(_BasicScraper):
         return '%02d' % int(compile(r'nro=(\d+)').search(pageUrl).group(1))
 
 
-class GrrlPower(_BasicScraper):
+class GrrlPower(_WordPressScraper):
     url = 'http://grrlpowercomic.com/'
-    rurl = escape(url)
-    stripUrl = url + 'archives/%s'
-    firstStripUrl = stripUrl % '48'
-    imageSearch = compile(tagre("img", "src", r'(.*/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(.*/archives/\d+)',
-                               after="navi-prev"))
-    help = 'Index format: number'
+    firstStripUrl = url + 'archives/48'
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
 class GUComics(_BasicScraper):

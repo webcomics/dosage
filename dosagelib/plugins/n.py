@@ -10,7 +10,8 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, WP_LATEST_SEARCH
+from .common import (_ComicControlScraper, _WordPressScraper, WP_LATEST_SEARCH,
+                     xpath_class)
 
 
 class Namesake(_ComicControlScraper):
@@ -108,7 +109,7 @@ class NichtLustig(_BasicScraper):
 
 class Nicky510(_WordPressScraper):
     url = 'http://www.nickyitis.com/'
-    prevSearch = "//a[contains(concat(' ', @class, ' '), ' navi-prev ')]"
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
 class Nimona(_BasicScraper):

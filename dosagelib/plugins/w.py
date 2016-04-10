@@ -4,11 +4,13 @@
 # Copyright (C) 2015-2016 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
+
 from re import compile, escape, IGNORECASE
 
 from ..scraper import _BasicScraper
 from ..util import tagre
 from ..helpers import indirectStarter
+from .common import _ComicControlScraper, _WordPressScraper
 
 
 class WapsiSquare(_BasicScraper):
@@ -108,15 +110,10 @@ class WhiteNoise(_BasicScraper):
     help = 'Index format: n'
 
 
-class Whomp(_BasicScraper):
+class Whomp(_ComicControlScraper):
     url = 'http://www.whompcomic.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2010/06/14/06142010'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl,
-                               after="navi-prev"))
-    help = 'Index format: yyyy/mm/dd/stripname'
+    firstStripUrl = url + 'comic/06152010'
+    textSearch = '//img[@id="cc-comic"]/@title'
 
 
 class WhyTheLongFace(_BasicScraper):
@@ -193,16 +190,13 @@ class WorldOfMrToast(_BasicScraper):
     def getPrevUrl(self, url, data, baseUrl):
         idx = self.prevurls.index(url)
         try:
-            return self.prevurls[idx+1]
+            return self.prevurls[idx + 1]
         except IndexError:
             return None
 
 
-class WorldOfWarcraftEh(_BasicScraper):
+class WorldOfWarcraftEh(_WordPressScraper):
     url = 'http://woweh.com/'
-    stripUrl = None
-    imageSearch = compile(r'http://woweh.com/(comics/.+?)"')
-    prevSearch = compile(r'woweh.com/(\?p=.+:?)".+:?="prev')
 
 
 class WormWorldSaga(_BasicScraper):
@@ -242,12 +236,3 @@ class WormWorldSagaGerman(WormWorldSaga):
 
 class WormWorldSagaSpanish(WormWorldSaga):
     lang = 'es'
-
-
-class WotNow(_BasicScraper):
-    url = 'http://shadowburn.binmode.com/wotnow/'
-    stripUrl = url + 'comic.php?comic_id=%s'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = compile(r'<IMG SRC="(comics/.+?)"')
-    prevSearch = compile(r'<A HREF="(.+?)"><IMG SRC="images/b_prev.gif" ')
-    help = 'Index format: n (unpadded)'

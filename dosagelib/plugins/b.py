@@ -10,8 +10,8 @@ from re import compile, escape
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
-from .common import (_ComicControlScraper, _ComicPressScraper,
-                     _WordPressScraper, WP_PREV_SEARCH)
+from .common import (_ComicControlScraper, _WordPressScraper, WP_PREV_SEARCH,
+                     xpath_class)
 
 
 class BackwaterPlanet(_BasicScraper):
@@ -61,15 +61,10 @@ class Baroquen(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/strip-name'
 
 
-class Bearmageddon(_BasicScraper):
+class Bearmageddon(_WordPressScraper):
     url = 'http://bearmageddon.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2011/08/01/page-1'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl,
-                               after='navi-prev'))
-    help = 'Index format: yyyy/mm/dd/stripname'
+    firstStripUrl = url + '2011/08/01/page-1/'
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
 class Beetlebum(_BasicScraper):
@@ -334,8 +329,9 @@ class Buni(_WordPressScraper):
     url = 'http://www.bunicomic.com/'
 
 
-class BusinessCat(_ComicPressScraper):
+class BusinessCat(_WordPressScraper):
     url = 'http://www.businesscat.happyjar.com/'
+    prevSearch = '//a[%s]' % xpath_class('navi-prev-in')
 
 
 class ButtercupFestival(_ParserScraper):

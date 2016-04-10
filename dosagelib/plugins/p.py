@@ -4,11 +4,13 @@
 # Copyright (C) 2015-2016 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
+
 from re import compile, escape
+
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, queryNamer, indirectStarter
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper
+from .common import _ComicControlScraper, _WordPressScraper, xpath_class
 
 
 class PandyLand(_WordPressScraper):
@@ -40,14 +42,9 @@ class ParallelUniversum(_BasicScraper):
     lang = 'de'
 
 
-class PartiallyClips(_BasicScraper):
+class PartiallyClips(_WordPressScraper):
     url = 'http://partiallyclips.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2001/10/28/screaming-woman'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
-    help = 'Index format: yyyy/mm/dd/stripname'
+    firstStripUrl = url + 'comic/screaming-woman/'
 
 
 class PastelDefender(_BasicScraper):
@@ -252,23 +249,12 @@ class PS238(_ParserScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
-class PunksAndNerds(_BasicScraper):
+class PunksAndNerds(_WordPressScraper):
     url = 'http://www.punksandnerds.com/'
-    rurl = escape(url)
     stripUrl = url + '?p=%s'
     firstStripUrl = stripUrl % '15'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl,
-                               after="navi-prev"))
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
     help = 'Index format: nnn'
-
-
-class PunksAndNerdsOld(_BasicScraper):
-    url = 'http://original.punksandnerds.com/'
-    stripUrl = url + 'd/%s.html'
-    imageSearch = compile(r' src="(/comics/.+?)"')
-    prevSearch = compile(r'><strong><a href="(.+?)"[^>]+?><img[^>]+?src="/previouscomic.gif">')
-    help = 'Index format: yyyymmdd'
 
 
 class PvPonline(_BasicScraper):

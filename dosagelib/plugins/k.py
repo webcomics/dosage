@@ -10,7 +10,7 @@ from re import compile, escape, IGNORECASE
 from ..scraper import _BasicScraper
 from ..util import tagre
 from ..helpers import indirectStarter
-from .common import _ComicControlScraper
+from .common import _ComicControlScraper, _WordPressScraper, xpath_class
 
 
 class KevinAndKell(_BasicScraper):
@@ -37,17 +37,10 @@ class Key(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class KickInTheHead(_BasicScraper):
+class KickInTheHead(_WordPressScraper):
     url = 'http://www.kickinthehead.org/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2003/03/20/ipod-envy'
-    imageSearch = compile(
-        tagre("img", "src",
-              r'(%skickinthehead3/comics/\d+-\d+-\d+[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl,
-                               after="navi-prev"))
-    help = 'Index format: yyyy/mm/dd/stripname'
+    firstStripUrl = url + '2003/03/20/ipod-envy/'
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
 class KiwiBlitz(_ComicControlScraper):

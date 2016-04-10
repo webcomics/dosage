@@ -10,7 +10,7 @@ from re import compile, escape, IGNORECASE
 from ..helpers import indirectStarter
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import _WordPressScraper, WP_LATEST_SEARCH
+from .common import _WordPressScraper, WP_LATEST_SEARCH, xpath_class
 
 
 class EarthsongSaga(_ParserScraper):
@@ -83,12 +83,10 @@ class EdibleDirt(_BasicScraper):
     help = 'Index format: number'
 
 
-class EdmundFinney(_ParserScraper):
+class EdmundFinney(_WordPressScraper):
     url = 'http://eqcomics.com/'
     firstStripUrl = url + '2009/03/08/sunday-aliens/'
-    imageSearch = '//div[@id="comic"]//img'
-    prevSearch = '//a[@class="navi navi-prev"]'
-    help = 'Index format: yyyy/mm/dd/stripname'
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
 class EerieCuties(_BasicScraper):
@@ -174,13 +172,10 @@ class ErrantStory(_BasicScraper):
     help = 'Index format: yyyy-mm-dd/num'
 
 
-class Erstwhile(_ParserScraper):
+class Erstwhile(_WordPressScraper):
     url = 'http://www.erstwhiletales.com/'
-    stripUrl = url + '%s/'
-    css = True
-    imageSearch = 'div.comicpane a img'
-    prevSearch = 'a.navi-prev'
-    help = 'Index format: title-nn'
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
+    endOfLife = True
 
 
 class Eryl(_WordPressScraper):
@@ -199,14 +194,10 @@ class EverybodyLovesEricRaymond(_BasicScraper):
     help = 'Index format: name-of-old-comic'
 
 
-class EverydayBlues(_BasicScraper):
+class EverydayBlues(_WordPressScraper):
     url = 'http://everydayblues.everydayblues.net/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2010/02/11/sometimes'
-    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+/)' % rurl, after="navi-prev"))
-    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+-[^"]+)' % rurl))
-    help = 'Index format: yyyy/mm/dd/stripname'
+    firstStripUrl = url + '2010/02/11/sometimes/'
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
 class EvilDiva(_BasicScraper):
@@ -242,15 +233,11 @@ class Exiern(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
-class ExploitationNow(_BasicScraper):
+class ExploitationNow(_WordPressScraper):
     url = 'http://www.exploitationnow.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s'
-    firstStripUrl = stripUrl % '2000-07-07/9'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl,
-                               after="navi-prev"))
-    help = 'Index format: yyyy-mm-dd/num'
+    firstStripUrl = url + '2000-07-07/9'
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
+    endOfLife = True
 
 
 class ExtraLife(_BasicScraper):
