@@ -16,8 +16,7 @@ from .common import _WordPressScraper, xpath_class, WP_LATEST_SEARCH
 class AbstruseGoose(_BasicScraper):
     url = 'http://abstrusegoose.com/'
     rurl = escape(url)
-    starter = bounceStarter(
-        url, compile(tagre('a', 'href', r'(%s\d+)' % rurl) + "Next &raquo;"))
+    starter = bounceStarter()
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre('img', 'src',
@@ -81,7 +80,6 @@ class AfterStrife(_WordPressScraper):
 
 class AGirlAndHerFed(_BasicScraper):
     url = 'http://www.agirlandherfed.com/'
-    starter = bounceStarter(url, compile(r'<a href="([^"]+)">[^>]+Back'))
     stripUrl = url + '1.%s.html'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(img/strip/[^"]+\.jpg)'))
@@ -114,7 +112,6 @@ class ALessonIsLearned(_BasicScraper):
     url = 'http://www.alessonislearned.com/'
     prevSearch = compile(tagre("a", "href", r"(index\.php\?comic=\d+)",
                                quote="'") + r"[^>]+previous")
-    starter = indirectStarter(url, prevSearch)
     stripUrl = url + 'index.php?comic=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r"(cmx/lesson\d+\.[a-z]+)"))
@@ -124,8 +121,8 @@ class ALessonIsLearned(_BasicScraper):
 class Alice(_WordPressScraper):
     url = 'http://www.alicecomics.com/'
     prevSearch = '//a[%s]' % xpath_class('navi-prev-in')
-    starter = indirectStarter('http://www.alicecomics.com/',
-                              '//a[text()="Latest Alice!"]')
+    latestSearch = '//a[text()="Latest Alice!"]'
+    starter = indirectStarter()
 
 
 class AlienLovesPredator(_BasicScraper):
@@ -264,7 +261,8 @@ class ARedTailsDream(_BasicScraper):
 class Ashes(_WordPressScraper):
     url = 'http://www.flowerlarkstudios.com/comic/prologue/10232009/'
     firstStripUrl = url
-    starter = indirectStarter(firstStripUrl, WP_LATEST_SEARCH)
+    latestSearch = WP_LATEST_SEARCH
+    starter = indirectStarter()
 
 
 class ASkeweredParadise(_BasicScraper):
@@ -289,12 +287,13 @@ class ASofterWorld(_ParserScraper):
 class AstronomyPOTD(_ParserScraper):
     baseUrl = 'http://apod.nasa.gov/apod/'
     url = baseUrl + 'astropix.html'
-    starter = bounceStarter(url, '//a[text()=">"]')
+    starter = bounceStarter()
     stripUrl = baseUrl + 'ap%s.html'
     firstStripUrl = stripUrl % '061012'
     imageSearch = '//a/img'
     multipleImagesPerStrip = True
     prevSearch = '//a[text()="<"]'
+    nextSearch = '//a[text()=">"]'
     help = 'Index format: yymmdd'
 
     def shouldSkipUrl(self, url, data):

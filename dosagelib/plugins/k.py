@@ -9,7 +9,6 @@ from re import compile, escape, IGNORECASE
 
 from ..scraper import _BasicScraper
 from ..util import tagre
-from ..helpers import indirectStarter
 from .common import _ComicControlScraper, _WordPressScraper, xpath_class
 
 
@@ -81,4 +80,3 @@ class KuroShouri(_BasicScraper):
         tagre("a", "href", r'(%s\?webcomic_post\=[^"]+)' % rurl,
               after="previous"))
     help = 'Index format: chapter-n-page-m'
-    starter = indirectStarter(url, prevSearch)

@@ -1,8 +1,12 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
 
 from re import compile, escape
+
 from ..scraper import _BasicScraper
 from ..util import tagre
 from ..helpers import indirectStarter
@@ -30,9 +34,12 @@ class JerkCity(_BasicScraper):
 class JimBenton(_BasicScraper):
     url = 'http://www.jimbenton.com/page14/page14.html'
     stripUrl = 'http://www.jimbenton.com/page14/files/JimBentonComic-%s.html'
-    starter = indirectStarter(url, compile(tagre("a", "href", r'(files/JimBentonComic-[^>]+\.html)', quote="")))
-    imageSearch = compile(tagre("img", "src", r'(JimBentonComic-[^"]+)', before="photo-frame"))
-    prevSearch = compile(tagre("a", "href", r'(JimBentonComic-[^>]+\.html)', quote="") + "Next")
+    starter = indirectStarter()
+    imageSearch = compile(tagre("img", "src", r'(JimBentonComic-[^"]+)',
+                                before="photo-frame"))
+    prevSearch = compile(tagre("a", "href", r'(JimBentonComic-[^>]+\.html)',
+                               quote="") + "Next")
+    latestSearch = compile(tagre("a", "href", r'(files/JimBentonComic-[^>]+\.html)', quote=""))
     help = 'Index format: stripname'
 
 
@@ -58,6 +65,7 @@ class JustAnotherEscape(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + 'index.cgi?date=%s'
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s/index\.cgi\?date=\d+)' % rurl)
-     + tagre("img", "alt", "Previous Comic"))
+    prevSearch = compile(tagre("a", "href",
+                               r'(%s/index\.cgi\?date=\d+)' % rurl) +
+                         tagre("img", "alt", "Previous Comic"))
     help = 'Index format: yyyymmdd'

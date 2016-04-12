@@ -1,10 +1,13 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
 
 from re import compile, escape
-from ..scraper import _BasicScraper
-from ..scraper import _ParserScraper
+
+from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter
 from ..util import tagre
 
@@ -15,6 +18,7 @@ class RadioactivePanda(_BasicScraper):
     imageSearch = compile(r'<img src="(/Assets/.*?)".+?"comicimg"')
     prevSearch = compile(r'<a href="(/comic/.*?)".+?previous_btn')
     help = 'Index format: n (no padding)'
+
 
 class RalfTheDestroyer(_ParserScraper):
     url = 'http://ralfthedestroyer.com/'
@@ -47,12 +51,12 @@ class RealmOfAtland(_BasicScraper):
 class RedMeat(_BasicScraper):
     baseUrl = 'http://www.redmeat.com/redmeat/'
     url = baseUrl + 'current/index.html'
-    starter = bounceStarter(url,
-        compile(tagre("a", "href", r'(http://www\.redmeat\.com/[^"]*)', after="next")))
+    starter = bounceStarter()
     stripUrl = baseUrl + '%s/index.html'
     firstStripUrl = stripUrl % '1996-06-10'
     imageSearch = compile(tagre("img", "src", r'(http://www\.redmeat\.com/imager/b/redmeat/[^"]*\.png)'))
     prevSearch = compile(tagre("a", "href", r'(http://www\.redmeat\.com/[^"]*)', after="prev"))
+    nextSearch = compile(tagre("a", "href", r'(http://www\.redmeat\.com/[^"]*)', after="next"))
     help = 'Index format: yyyy-mm-dd'
 
 
@@ -81,7 +85,8 @@ class RomanticallyApocalyptic(_BasicScraper):
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(%sart/\d+[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+[^"]+)' % rurl)+"\s*"+tagre('span', 'class', 'spritePrevious'))
+    prevSearch = compile(tagre("a", "href", r'(%s\d+[^"]+)' % rurl) + "\s*" +
+                         tagre('span', 'class', 'spritePrevious'))
     help = 'Index format: n'
     adult = True
 
@@ -101,5 +106,6 @@ class Ruthe(_BasicScraper):
     firstStripUrl = stripUrl % '1'
     lang = 'de'
     imageSearch = compile(tagre("img", "src", r'(/?cartoons/strip_\d+[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/cartoon/\d+/datum/asc/)')+'vorheriger')
+    prevSearch = compile(tagre("a", "href", r'(/cartoon/\d+/datum/asc/)') +
+                         'vorheriger')
     help = 'Index format: number'

@@ -27,15 +27,15 @@ class Garanos(_BasicScraper):
     baseUrl = 'http://garanos.alexheberling.com/'
     rurl = escape(baseUrl)
     url = baseUrl + 'pages/page-1/'
-    starter = indirectStarter(
-        url, compile(tagre("a", "href", r'(%spages/[^"]+)' % rurl,
-                     after="nav-last")))
+    starter = indirectStarter()
     stripUrl = baseUrl + 'pages/page-%s'
     imageSearch = compile(
         tagre("img", "src",
               r'(%swp-content/uploads/sites/\d+/\d+/\d+/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%spages/[^"]+)' % rurl,
                                after="prev"))
+    latestSearch = compile(tagre("a", "href", r'(%spages/[^"]+)' % rurl,
+                                 after="nav-last"))
     help = 'Index format: n (unpadded)'
 
 
@@ -136,14 +136,14 @@ class GoGetARoomie(_ComicControlScraper):
 
 class GoneWithTheBlastwave(_BasicScraper):
     url = 'http://www.blastwave-comic.com/index.php?p=comic&nro=1'
-    starter = indirectStarter(
-        url, compile(r'href="(index.php\?p=comic&amp;nro=\d+)">' +
-                     r'<img src="images/page/default/latest'))
+    starter = indirectStarter()
     stripUrl = url[:-1] + '%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(r'<img.+src=".+(/comics/.+?)"')
     prevSearch = compile(r'href="(index.php\?p=comic&amp;nro=\d+)">' +
                          r'<img src="images/page/default/previous')
+    latestSearch = compile(r'href="(index.php\?p=comic&amp;nro=\d+)">' +
+                           r'<img src="images/page/default/latest')
     help = 'Index format: n'
 
     @classmethod

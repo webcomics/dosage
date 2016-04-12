@@ -13,17 +13,12 @@ from ..util import tagre
 from .common import _WordPressScraper, xpath_class
 
 
-class DailyDose(_BasicScraper):
+class DailyDose(_ParserScraper):
     url = 'http://dailydoseofcomics.com/'
-    starter = indirectStarter(
-        url, compile(tagre("a", "href",
-                           r'(http://dailydoseofcomics\.com/[^"]+)',
-                           after="preview")))
-    stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'([^"]+)',
-                                before="align(?:none|center)"))
-    prevSearch = compile(tagre("a", "href", r'(http://dailydoseofcomics\.com/[^"]+)', after="prev"))
-    help = 'Index format: stripname'
+    starter = indirectStarter()
+    imageSearch = '//p/a/img'
+    prevSearch = '//a[@rel="prev"]'
+    latestSearch = '//a[@rel="bookmark"]'
 
 
 class DamnLol(_BasicScraper):
@@ -31,13 +26,13 @@ class DamnLol(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + '%s.html'
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
+    nextSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="next"))
     imageSearch = (
         compile(tagre("img", "src", r'(%si/[^"]+)' % rurl)),
         compile(tagre("img", "src", r'(%spics/[^"]+)' % rurl)),
     )
     help = 'Index format: stripname-number'
-    starter = bounceStarter(
-        url, compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="next")))
+    starter = bounceStarter()
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
@@ -160,9 +155,12 @@ class Dilbert(_BasicScraper):
     url = 'http://dilbert.com/'
     stripUrl = url + '/strip/%s/'
     firstStripUrl = stripUrl % '1989-04-16'
-    starter = indirectStarter(url, compile(tagre("a", "href", r'(http://dilbert.com/strip/[0-9-]*)', after="Click to see")))
+    starter = indirectStarter()
     prevSearch = compile(tagre("a", "href", r'(/strip/\d+-\d+-\d+)', after="Older Strip"))
     imageSearch = compile(tagre("img", "src", r'(http://assets.amuniversal.com/\w+)'))
+    latestSearch = compile(tagre("a", "href",
+                                 r'(http://dilbert.com/strip/[0-9-]*)',
+                                 after="Click to see"))
     help = 'Index format: yyyy-mm-dd'
 
     @classmethod
@@ -254,9 +252,10 @@ class DresdenCodak(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl) +
                          tagre("img", "src", r"%sm_prev2?\.png" % rurl,
                                quote=""))
-    starter = indirectStarter(
-        url, compile(tagre("div", "id", "preview") +
-                     tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl)))
+    latestSearch = compile(tagre("div", "id", "preview") +
+                           tagre("a", "href",
+                                 r'(%s\d+/\d+/\d+/[^"]+)' % rurl))
+    starter = indirectStarter()
 
 
 class DrFun(_BasicScraper):

@@ -21,10 +21,10 @@ class Lackadaisy(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(http://www\.lackadaisycats\.com/comic/[^"]*)'))
     prevSearch = compile(tagre("a", "href", r"(/comic\.php\?comicid=[0-9]+)") +
                          "&lt; Previous")
+    nextSearch = compile(tagre("a", "href", r"(/comic.php\?comicid=[0-9]+)") +
+                         "Next")
     help = 'Index format: n'
-    starter = bounceStarter(
-        url, compile(tagre("a", "href", r"(/comic.php\?comicid=[0-9]+)") +
-                     "Next"))
+    starter = bounceStarter()
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
@@ -37,7 +37,8 @@ class Lackadaisy(_BasicScraper):
 class Laiyu(_WordPressScraper):
     url = 'http://www.flowerlarkstudios.com/comic/preliminary-concepts/welcome/'
     firstStripUrl = url
-    starter = indirectStarter(firstStripUrl, WP_LATEST_SEARCH)
+    latestSearch = WP_LATEST_SEARCH
+    starter = indirectStarter()
 
 
 class LasLindas(_BasicScraper):
@@ -64,9 +65,9 @@ class LeastICouldDo(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/\d{8,9}\.\w{1,4})' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%scomic/\d+/)' % rurl,
                                after="Previous"))
-    starter = indirectStarter(
-        url, compile(tagre("a", "href", r'(%scomic/\d+/)' % rurl,
-                           after="feature-comic")))
+    latestSearch = compile(tagre("a", "href", r'(%scomic/\d+/)' % rurl,
+                                 after="feature-comic"))
+    starter = indirectStarter()
     help = 'Index format: yyyymmdd'
 
 
@@ -110,12 +111,11 @@ class LoadingArtist(_ParserScraper):
 
 class LookingForGroup(_ParserScraper):
     url = 'http://www.lfgcomic.com/'
-    rurl = escape(url)
     stripUrl = url + 'page/%s/'
     firstStripUrl = stripUrl % '1'
     css = True
     imageSearch = '#comic img'
     prevSearch = '#comic-left > a'
-    starter = indirectStarter(url, '#header-dropdown-comic-lfg > a:nth-of-type(2)')
-    nameSearch = compile(r'/page/([-0-9]+)/')
+    latestSearch = '#header-dropdown-comic-lfg > a:nth-of-type(2)'
+    starter = indirectStarter()
     help = 'Index format: nnn'

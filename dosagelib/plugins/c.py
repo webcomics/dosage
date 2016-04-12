@@ -55,7 +55,7 @@ class Carciphona(_BasicScraper):
                                after="prevarea"))
     latestSearch = compile(tagre("a", "href",
                                  r'(view\.php\?page=[0-9]+[^"]*)'))
-    starter = indirectStarter(url, latestSearch)
+    starter = indirectStarter()
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
@@ -275,10 +275,11 @@ class CoolCatStudio(_BasicScraper):
 
 class CorydonCafe(_ParserScraper):
     url = 'http://corydoncafe.com/'
-    starter = indirectStarter(url, '//ul//a')
+    starter = indirectStarter()
     stripUrl = url + '%s.php'
     imageSearch = "//center[2]//img"
     prevSearch = '//a[@title="prev"]'
+    latestSearch = '//ul//a'
     help = 'Index format: yyyy/stripname'
 
     @classmethod
@@ -345,14 +346,15 @@ class CucumberQuest(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + 'cq/%s/'
     firstStripUrl = stripUrl % 'page-1'
-    starter = indirectStarter(url + 'recent.html',
-                              compile(r'window\.location="(/cq/[^"]+/)"'))
+    startUrl = url + 'recent.html'
+    starter = indirectStarter()
     imageSearch = (
         compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/\d+[^"]+)' % rurl)),
         compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/ch\d+[^"]+)' % rurl)),
         compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/bonus[^"]+)' % rurl)),
     )
     prevSearch = compile(tagre("a", "href", r'(%scq/[^"]+/)' % rurl, after="previous"))
+    latestSearch = compile(r'window\.location="(/cq/[^"]+/)"')
     help = 'Index format: stripname'
 
 
@@ -377,11 +379,12 @@ class Curvy(_ParserScraper):
 
 class CyanideAndHappiness(_BasicScraper):
     url = 'http://www.explosm.net/comics/'
-    starter = bounceStarter(url, compile(tagre("a", "href", r"(/comics/\d+/)", after="next-comic")))
+    starter = bounceStarter()
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '15'
     imageSearch = compile(tagre("img", "src", r'(//files.explosm.net/comics/[^"]+)', before="main-comic"))
     prevSearch = compile(tagre("a", "href", r'(/comics/\d+/)', after="previous-comic"))
+    nextSearch = compile(tagre("a", "href", r"(/comics/\d+/)", after="next-comic"))
     help = 'Index format: n (unpadded)'
 
     def shouldSkipUrl(self, url, data):

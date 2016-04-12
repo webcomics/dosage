@@ -76,14 +76,14 @@ class TheNoob(_BasicScraper):
 
 
 class TheOrderOfTheStick(_BasicScraper):
-    baseUrl = 'http://www.giantitp.com/'
-    url = baseUrl + 'comics/oots0863.html'
-    stripUrl = baseUrl + 'comics/oots%s.html'
+    url = 'http://www.giantitp.com/'
+    stripUrl = url + 'comics/oots%s.html'
     firstStripUrl = stripUrl % '0001'
     imageSearch = compile(r'<IMG src="(/comics/images/[^"]+)">')
     prevSearch = compile(r'<A href="(/comics/oots\d{4}\.html)"><IMG src="/Images/redesign/ComicNav_Back.gif"')
+    latestSearch = compile(r'<A href="(/comics/oots\d{4}\.html)"')
     help = 'Index format: n (unpadded)'
-    starter = indirectStarter(baseUrl, compile(r'<A href="(/comics/oots\d{4}\.html)"'))
+    starter = indirectStarter()
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
@@ -116,9 +116,13 @@ class TheThinHLine(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + 'post/%s'
     firstStripUrl = stripUrl % '3517345105'
-    imageSearch = compile(tagre('img', 'data-src', r'([^"]+media.tumblr.com/[^"]+)', before='content-image'))
+    imageSearch = compile(tagre('img', 'data-src',
+                                r'([^"]+media.tumblr.com/[^"]+)',
+                                before='content-image'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)') + '&gt;</a>')
-    starter = indirectStarter(url, compile(tagre("a", "href", r'([^"]+)', after='class="timestamp"')))
+    latestSearch = compile(tagre("a", "href", r'([^"]+)',
+                                 after='class="timestamp"'))
+    starter = indirectStarter()
     adult = True
 
     indirectImageSearch = compile(tagre('a', 'href', r'(%simage/\d+)' % rurl))

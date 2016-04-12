@@ -41,15 +41,15 @@ class _HappyJar(_WordPressScraper):
 class HarkAVagrant(_BasicScraper):
     url = 'http://www.harkavagrant.com/'
     rurl = escape(url)
-    starter = bounceStarter(
-        url, compile(tagre("a", "href", r'(%sindex\.php\?id=\d+)' % rurl) +
-                     tagre("img", "src", "buttonnext.png")))
+    starter = bounceStarter()
     stripUrl = url + 'index.php?id=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(%s[^"]+)' % rurl,
                                 after='BORDER'))
     prevSearch = compile(tagre("a", "href", r'(%sindex\.php\?id=\d+)' % rurl) +
                          tagre("img", "src", "buttonprevious.png"))
+    nextSearch = compile(tagre("a", "href", r'(%sindex\.php\?id=\d+)' % rurl) +
+                         tagre("img", "src", "buttonnext.png"))
     help = 'Index format: number'
 
     @classmethod

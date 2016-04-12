@@ -69,9 +69,10 @@ class ScandinaviaAndTheWorld(_ParserScraper):
     url = 'http://satwcomic.com/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % 'sweden-denmark-and-norway'
-    starter = indirectStarter(url, '//a[text()="View latest comic"]')
+    starter = indirectStarter()
     imageSearch = '//img[@itemprop="image"]'
     prevSearch = '//a[@accesskey="p"]'
+    latestSearch = '//a[text()="View latest comic"]'
     textSearch = '//span[@itemprop="articleBody"]'
     help = 'Index format: stripname'
 
@@ -194,9 +195,9 @@ class SexyLosers(_BasicScraper):
     stripUrl = url + '%s.html'
     imageSearch = compile(r'<img src\s*=\s*"\s*(comics/[\w\.]+?)"', IGNORECASE)
     prevSearch = compile(r'<a href="(/\d{3}\.\w+?)"><font color = FFAAAA><<', IGNORECASE)
+    latestSearch = compile(r'SEXY LOSERS <A HREF="(.+?)">Latest SL Comic \(#\d+\)</A>', IGNORECASE)
     help = 'Index format: nnn'
-    starter = indirectStarter(url,
-                              compile(r'SEXY LOSERS <A HREF="(.+?)">Latest SL Comic \(#\d+\)</A>', IGNORECASE))
+    starter = indirectStarter()
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
@@ -333,7 +334,8 @@ class SnowFlame(_WordPressScraper):
     url = 'http://www.snowflamecomic.com/'
     stripUrl = url + '?comic=snowflame-%s-%s'
     firstStripUrl = stripUrl % ('01', '01')
-    starter = bounceStarter(url, WP_LATEST_SEARCH)
+    starter = bounceStarter()
+    nextSearch = WP_LATEST_SEARCH
     help = 'Index format: chapter-page'
 
     def getIndexStripUrl(self, index):
@@ -392,8 +394,9 @@ class Spamusement(_BasicScraper):
     imageSearch = compile(r'<img src="(%sgfx/\d+\..+?)"' % rurl, IGNORECASE)
     prevSearch = compile(r'<a href="(%sindex.php/comics/view/.+?)">' % rurl,
                          IGNORECASE)
+    latestSearch = prevSearch
     help = 'Index format: n (unpadded)'
-    starter = indirectStarter(url, prevSearch)
+    starter = indirectStarter()
 
 
 class SpareParts(_BasicScraper):
@@ -504,8 +507,7 @@ class StuffNoOneToldMe(_BasicScraper):
     stripUrl = url + '%s.html'
     firstStripUrl = stripUrl % '2010/05/01'
     olderHref = r"(http://www\.snotm\.com/\d+/\d+/[^']+\.html)"
-    starter = indirectStarter(
-        url, compile(tagre("a", "href", olderHref, quote="'")))
+    starter = indirectStarter()
     imageSearch = (
         compile(tagre("img", "src", r'(http://i\.imgur\.com/[^"]+)') +
                 r"(?:</a>|<br />)"),
@@ -515,6 +517,7 @@ class StuffNoOneToldMe(_BasicScraper):
     )
     prevSearch = compile(tagre("a", "href", olderHref, quote="'",
                                before="older-link"))
+    latestSearch = compile(tagre("a", "href", olderHref, quote="'"))
     multipleImagesPerStrip = True
     help = 'Index format: yyyy/mm/stripname'
 

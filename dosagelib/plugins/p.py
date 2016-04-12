@@ -20,12 +20,13 @@ class PandyLand(_WordPressScraper):
 
 class ParadigmShift(_BasicScraper):
     url = 'http://www.paradigmshiftmanga.com/'
-    starter = indirectStarter(url, compile(tagre("a", "href", r'([^"]+)',
-                                                 after="next-comic-link")))
+    starter = indirectStarter()
     stripUrl = url + 'ps/%s.html'
     imageSearch = compile(tagre("img", "src", r'([^"]*comics/ps/[^"]*)'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)',
                                after="previous-comic-link"))
+    latestSearch = compile(tagre("a", "href", r'([^"]+)',
+                                 after="next-comic-link"))
     help = 'Index format: custom'
 
 
@@ -72,7 +73,6 @@ class PennyAndAggie(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(http://www\.pennyandaggie\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r"(index\.php\?p\=\d+)", quote="'") +
                          tagre("img", "src", r'%simages/previous_day\.gif' % rurl, quote=""))
-    starter = indirectStarter(url, prevSearch)
     help = 'Index format: n (unpadded)'
 
 
@@ -162,11 +162,12 @@ class PicPakDog(_BasicScraper):
 
 class PiledHigherAndDeeper(_BasicScraper):
     url = 'http://www.phdcomics.com/comics.php'
-    starter = bounceStarter(url, compile(r'<a href=(archive\.php\?comicid=\d+)>.*<img [^>]*next_button\.gif'))
+    starter = bounceStarter()
     stripUrl = url + '?comicid=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(http://www\.phdcomics\.com/comics/archive/phd\d+s\d?\.\w{3,4})', quote=""))
     prevSearch = compile(r'<a href=((comics/)?archive\.php\?comicid=\d+)>.*<img [^>]*prev_button\.gif')
+    nextSearch = compile(r'<a href=(archive\.php\?comicid=\d+)>.*<img [^>]*next_button\.gif')
     help = 'Index format: n (unpadded)'
     namer = queryNamer('comicid', usePageUrl=True)
 
@@ -204,9 +205,9 @@ class PokeyThePenguin(_ParserScraper):
     stripUrl = url + 'index%s.html'
     firstStripUrl = stripUrl % '1'
     imageSearch = '//p/img'
-    prevSearch = True
+    latestSearch = '(//a)[last()]'
     multipleImagesPerStrip = True
-    starter = indirectStarter(url, "(//a)[last()]")
+    starter = indirectStarter()
     help = 'Index format: number'
 
     def getPrevUrl(self, url, data):
@@ -230,22 +231,22 @@ class PoorlyDrawnLines(_BasicScraper):
 
 class Precocious(_BasicScraper):
     url = 'http://www.precociouscomic.com/'
-    starter = indirectStarter(
-        url, compile(tagre("a", "href", r'(/archive/comic/[^"]+)') +
-                     tagre("img", "src", r"/templates/precocious_main/images/next_arrow\.png"))
-    )
+    starter = indirectStarter()
     stripUrl = url + 'archive/comic/%s'
     imageSearch = compile(tagre("img", "src", r'(/comics/\d+[^"]*\.(?:jpg|gif))'))
     prevSearch = compile(tagre("a", "href", r'(/archive/comic/[^"]+)') + tagre("img", "src", r"/templates/precocious_main/images/back_arrow\.png"))
+    latestSearch = compile(tagre("a", "href", r'(/archive/comic/[^"]+)') +
+                           tagre("img", "src", r"/templates/precocious_main/images/next_arrow\.png"))
     help = 'Index format: yyyy/mm/dd'
 
 
 class PS238(_ParserScraper):
     url = 'http://ps238.nodwick.com/'
     stripUrl = url + '/comic/%s/'
-    starter = bounceStarter(url, '//a[@class="comic-nav-base comic-nav-next"]')
+    starter = bounceStarter()
     imageSearch = '//div[@id="comic"]//img'
     prevSearch = '//a[@class="comic-nav-base comic-nav-previous"]'
+    nextSearch = '//a[@class="comic-nav-base comic-nav-next"]'
     help = 'Index format: yyyy-mm-dd'
 
 

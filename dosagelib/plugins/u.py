@@ -21,12 +21,10 @@ class Underling(_WordPressScraper):
 
 class Undertow(_BasicScraper):
     url = 'http://undertow.dreamshards.org/'
-    stripUrl = url + '%s'
     imageSearch = compile(tagre("img", "src", r'([^"]+\.jpg)'))
     prevSearch = compile(r'href="(.+?)".+?teynpoint')
-    help = 'Index format: good luck !'
-    starter = indirectStarter(url,
-                              compile(r'href="(.+?)".+?Most recent page'))
+    latestSearch = compile(r'href="(.+?)".+?Most recent page')
+    starter = indirectStarter()
 
 
 class UnicornJelly(_BasicScraper):
@@ -46,9 +44,10 @@ class Unsounded(_BasicScraper):
     rurl = escape(url)
     imageSearch = compile(tagre("img", "src", r'(pageart/[^"]*)'))
     prevSearch = compile(tagre("a", "href", r'([^"]*)', after='class="back'))
-    starter = indirectStarter(
-        url, compile(tagre("a", "href", r'(%scomic/[^"]*)' % rurl) +
-                     tagre("img", "src", r"%simages/newpages\.png" % rurl)))
+    latestSearch = compile(tagre("a", "href", r'(%scomic/[^"]*)' % rurl) +
+                           tagre("img", "src",
+                                 r"%simages/newpages\.png" % rurl))
+    starter = indirectStarter()
     help = 'Index format: chapter-number'
 
     def getIndexStripUrl(self, index):

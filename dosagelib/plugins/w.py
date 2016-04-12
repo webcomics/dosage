@@ -45,7 +45,7 @@ class WayfarersMoon(_BasicScraper):
 class WebDesignerCOTW(_BasicScraper):
     url = 'http://www.webdesignerdepot.com/'
     rurl = escape(url)
-    starter = indirectStarter(url, compile(tagre("a", "href", r'(%s\d+/\d+/[^"]+/)' % rurl)))
+    starter = indirectStarter()
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2009/11/comics-of-the-week-1'
     imageSearch = (
@@ -57,6 +57,7 @@ class WebDesignerCOTW(_BasicScraper):
     multipleImagesPerStrip = True
     prevSearch = compile(tagre("link", "href", r"(%s\d+/\d+/[^']+)" % rurl,
                                before='prev', quote="'"))
+    latestSearch = compile(tagre("a", "href", r'(%s\d+/\d+/[^"]+/)' % rurl))
     help = 'Index format: yyyy/mm/stripname'
 
     def shouldSkipUrl(self, url, data):

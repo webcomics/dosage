@@ -26,10 +26,9 @@ class FantasyRealms(_BasicScraper):
     stripUrl = url + 'manga/%s.php'
     imageSearch = compile(r'<img src="(\d{1,4}.\w{3,4})" width="540"', IGNORECASE)
     prevSearch = compile(r'<a href="(.+?)"><img src="../images/nav-back.gif"', IGNORECASE)
+    latestSearch = compile(r'<a href="(manga/.+?)"><img src="preview.jpg"', IGNORECASE)
     help = 'Index format: nnn'
-    starter = indirectStarter(
-        url,
-        compile(r'<a href="(manga/.+?)"><img src="preview.jpg"', IGNORECASE))
+    starter = indirectStarter()
 
 
 class FauxPas(_BasicScraper):
@@ -47,8 +46,9 @@ class FeyWinds(_BasicScraper):
     stripUrl = baseUrl + 'comic/page.php?id=%s'
     imageSearch = compile(r"(../comic/pages//.+?)'")
     prevSearch = compile(r"(page.php\?id=.+?)'.+?navprevious.png")
+    latestSearch = compile(r'(comic/page.php\?id.+?)"')
     help = 'Index format: n (unpadded)'
-    starter = indirectStarter(url, compile(r'(comic/page.php\?id.+?)"'))
+    starter = indirectStarter()
 
 
 class FilibusterCartoons(_BasicScraper):
@@ -159,9 +159,9 @@ class FredoAndPidjin(_BasicScraper):
     )
     multipleImagesPerStrip = True
     prevSearch = compile(tagre('a', 'href', '([^"]+)') + "Prev</a>")
-    starter = indirectStarter(
-       url,
-       compile(tagre('a', 'href', "(" + url + r'\d\d\d\d/\d\d/\d\d/[^"]+/)')))
+    latestSearch = compile(tagre('a', 'href', "(" + url +
+                                 r'\d\d\d\d/\d\d/\d\d/[^"]+/)'))
+    starter = indirectStarter()
 
 
 class Freefall(_BasicScraper):

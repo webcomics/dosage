@@ -15,9 +15,10 @@ from .common import _WordPressScraper, WP_LATEST_SEARCH, xpath_class
 
 class EarthsongSaga(_ParserScraper):
     url = 'http://earthsongsaga.com/index.php'
-    starter = indirectStarter(url, '//div[@id="leftmenu"]/span[1]/a[1]')
+    starter = indirectStarter()
     imageSearch = '//div[@id="comic"]//img'
     prevSearch = '//a[@title="Previous"]'
+    latestSearch = '//div[@id="leftmenu"]/span[1]/a[1]'
 
     @classmethod
     def fetchUrls(cls, url, data, urlSearch):
@@ -43,21 +44,23 @@ class EarthsongSaga(_ParserScraper):
 class EasilyAmused(_WordPressScraper):
     url = 'http://www.flowerlarkstudios.com/comic/college-daze/ea01/'
     firstStripUrl = url
-    starter = indirectStarter(firstStripUrl, WP_LATEST_SEARCH)
+    latestSearch = WP_LATEST_SEARCH
+    starter = indirectStarter()
 
 
 class EatLiver(_BasicScraper):
     url = 'http://www.eatliver.com/'
     rurl = escape(url)
-    starter = indirectStarter(url, compile(
-        tagre("a", "href", r'(i\.php\?n=\d+)') +
-        tagre("img", "src", r'img/small/[^"]+') + r"</a>\s*<br"))
+    starter = indirectStarter()
     stripUrl = url + "i.php?n=%s"
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("link", "href", r'(%simg/\d+/[^"]+)' % rurl,
                                 before="image_src"))
     prevSearch = compile(tagre("a", "href", r'(i\.php\?n=\d+)') +
                          "&#060;&#060; Previous")
+    latestSearch = compile(tagre("a", "href", r'(i\.php\?n=\d+)') +
+                           tagre("img", "src", r'img/small/[^"]+') +
+                           r"</a>\s*<br")
 
 
 class EatThatToast(_BasicScraper):
@@ -181,7 +184,8 @@ class Erstwhile(_WordPressScraper):
 class Eryl(_WordPressScraper):
     url = 'http://www.flowerlarkstudios.com/comic/prologue-migration/page-i/'
     firstStripUrl = url
-    starter = indirectStarter(firstStripUrl, WP_LATEST_SEARCH)
+    latestSearch = WP_LATEST_SEARCH
+    starter = indirectStarter()
     help = 'This was known as DarkWings in previous Dosage versions'
 
 

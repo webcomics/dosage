@@ -8,7 +8,6 @@ from __future__ import absolute_import, division, print_function
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter
 from ..util import tagre
 from .common import _WordPressScraper, xpath_class
 
@@ -53,7 +52,6 @@ class OkCancel(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(%sstrips/okcancel\d{8}\.gif)' % rurl))
     prevSearch = compile(tagre("div", "class", "previous") +
                          tagre("a", "href", r'(%scomic/\d{1,4}\.html)' % rurl))
-    starter = indirectStarter(url, prevSearch)
     help = 'Index format: yyyymmdd'
 
 

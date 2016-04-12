@@ -4,13 +4,13 @@ from ..scraper import make_scraper
 from .common import _WordPressScraper
 
 
-def add(name, url, starter=None):
+def add(name, start):
     attrs = dict(
         name=name,
-        url=url
+        url='http://hijinksensue.com/',
+        latestSearch=start,
+        starter=indirectStarter()
     )
-    if starter:
-        attrs['starter'] = starter
     globals()[name] = make_scraper(name, _WordPressScraper, **attrs)
 
 
@@ -22,4 +22,4 @@ for (name, starterXPath) in [
     ('HijinksEnsueConvention', '//h4[text()="Latest Fancy Convention Sketches"]/..//a'),
     ('HijinksEnsuePhoto', '//h4[text()="Latest Fancy Photo Comic"]/..//a')
 ]:
-    add(name, 'http://hijinksensue.com/', starter=indirectStarter('http://hijinksensue.com/', starterXPath))
+    add(name, starterXPath)
