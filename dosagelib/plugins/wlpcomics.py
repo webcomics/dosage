@@ -6,25 +6,19 @@
 from __future__ import absolute_import, division, print_function
 
 from ..scraper import _ParserScraper
+from ..helpers import bounceStarter
 
 
 class _WLPComics(_ParserScraper):
     imageSearch = '//center/*/img[contains(@alt, " Comic")]'
     prevSearch = '//a[contains(text(), "Previous ")]'
     nextSearch = '//a[contains(text(), "Next ")]'
+    starter = bounceStarter()
     help = 'Index format: nnn'
 
     @classmethod
     def getName(cls):
         return 'WLP/' + cls.__name__
-
-    @classmethod
-    def starter(cls):
-        """Get bounced start URL."""
-        data = cls.getPage(cls.url)
-        url2 = cls.fetchUrl(cls.url, data, cls.prevSearch)
-        data = cls.getPage(url2)
-        return cls.fetchUrl(url2, data, cls.nextSearch)
 
     @classmethod
     def namer(cls, image_url, page_url):
