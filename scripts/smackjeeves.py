@@ -1,21 +1,33 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 """
-Script to get a list of smackjeeves.com comics and save the info in a JSON file for further processing.
+Script to get a list of smackjeeves.com comics and save the info in a JSON file
+for further processing.
 """
-from __future__ import print_function
+from __future__ import absolute_import, division, print_function
+
 import codecs
 import re
 import sys
 import os
-import urlparse
+try:
+    from urllib.parse import urljoin
+except ImportError:
+    from urlparse import urljoin
+
 import requests
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
-from dosagelib.util import getPageContent, tagre
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))  # noqa
+from dosagelib.util import get_page, tagre
 from dosagelib.scraper import get_scraperclasses
 from scriptutil import contains_case_insensitive, save_result, load_result, truncate_name, format_name
 
+
 json_file = __file__.replace(".py", ".json")
+
 
 # names of comics to exclude
 exclude_comics = [
@@ -97,6 +109,7 @@ exclude_comics = [
     "WerewolfRichard", # does not follow standard layout
     "WinterMelody", # missing images
 ]
+
 
 # the latest URL of some comics repeats the previous URL
 # flag this so the bounceStart uses the correct URL
@@ -236,28 +249,32 @@ repeat_comics = [
     "Zodiac",
 ]
 
+
 # links to last valid strips
 url_overrides = {
 }
 
+
 # HTML content matcher
-page_matcher = re.compile(tagre("a", "href", r'(comicprofile\.php\?id=\d+)', after="site_banner") +
-  tagre("img", "title", r'([^"]+)'))
+page_matcher = re.compile(tagre("a", "href", r'(comicprofile\.php\?id=\d+)',
+                                after="site_banner") +
+                          tagre("img", "title", r'([^"]+)'))
 url_matcher = re.compile(tagre("a", "href", r'(http://[^"]+/comics/)') + "Latest Comic")
 num_matcher = re.compile(r'50%">\s+(\d+)\s+')
 adult_matcher = re.compile(tagre("img", "src", r'http://www\.smackjeeves\.com/images/mature_content\.png'))
+
 
 def handle_url(url, session, res):
     """Parse one search result page."""
     print("Parsing", url, file=sys.stderr)
     try:
-        data = getPageContent(url, session)
+        data = get_page(url, session).text
     except IOError as msg:
         print("ERROR:", msg, file=sys.stderr)
         return
     for match in page_matcher.finditer(data):
         page_url = match.group(1)
-        page_url = urlparse.urljoin(url, page_url)
+        page_url = urljoin(url, page_url)
         name = format_name(match.group(2))
         if name in exclude_comics:
             continue
@@ -269,13 +286,14 @@ def handle_url(url, session, res):
         end = match.end()
         mo = num_matcher.search(data[end:])
         if not mo:
-            print("ERROR matching number:", repr(data[end:end+300]), file=sys.stderr)
+            print("ERROR matching number:", repr(data[end:end + 300]),
+                  file=sys.stderr)
             continue
         num = int(mo.group(1))
         # search for url in extra page
         print("Getting", page_url)
         try:
-            data2 = getPageContent(page_url, session)
+            data2 = get_page(page_url, session).text
         except IOError as msg:
             print("ERROR:", msg, file=sys.stderr)
             return
@@ -302,8 +320,8 @@ def get_results():
     result_pages = 286
     print("Parsing", result_pages, "search result pages...", file=sys.stderr)
     for i in range(0, result_pages):
-        print(i+1, file=sys.stderr, end=" ")
-        handle_url(base % (i*12), session, res)
+        print(i + 1, file=sys.stderr, end=" ")
+        handle_url(base % (i * 12), session, res)
     save_result(res, json_file)
 
 

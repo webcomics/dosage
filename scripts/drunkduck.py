@@ -1,17 +1,25 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 """
-Script to get a list of drunkduck comics and save the info in a JSON file for further processing.
+Script to get a list of drunkduck comics and save the info in a JSON file for
+further processing.
 """
-from __future__ import print_function
+from __future__ import absolute_import, division, print_function
+
 import codecs
 import re
 import sys
 import os
+
 import requests
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
-from dosagelib.util import tagre, getPageContent, unquote, unescape, asciify
-from scriptutil import contains_case_insensitive, capfirst, save_result, load_result, truncate_name
+
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))  # noqa
+from dosagelib.util import tagre, get_page, unquote, unescape
+from scriptutil import (contains_case_insensitive, capfirst, save_result,
+                        load_result, truncate_name, asciify)
 
 json_file = __file__.replace(".py", ".json")
 
@@ -169,7 +177,7 @@ exclude_comics = [
 def handle_url(url, session, url_matcher, num_matcher, res):
     """Parse one search result page."""
     try:
-        data = getPageContent(url, session)
+        data = get_page(url, session).text
     except IOError as msg:
         print("ERROR:", msg, file=sys.stderr)
         return
@@ -187,7 +195,7 @@ def handle_url(url, session, url_matcher, num_matcher, res):
         end = match.end(1)
         mo = num_matcher.search(data[end:])
         if not mo:
-            print("ERROR:", repr(data[end:end+300]), file=sys.stderr)
+            print("ERROR:", repr(data[end:end + 300]), file=sys.stderr)
             continue
         num = int(mo.group(1))
         res[name] = (path, num)

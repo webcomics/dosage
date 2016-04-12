@@ -1,18 +1,25 @@
 #!/usr/bin/env python
-# Copyright (C) 2013-2014 Bastian Kleineidam
+# -*- coding: utf-8 -*-
+# Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
+# Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 """
-Script to get arcamax comics and save the info in a JSON file for further processing.
+Script to get arcamax comics and save the info in a JSON file for further
+processing.
 """
-from __future__ import print_function
+from __future__ import absolute_import, division, print_function
+
 import codecs
 import re
 import sys
 import os
+
 import requests
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
-from dosagelib.util import getPageContent, asciify, unescape
+
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))  # noqa
+from dosagelib.util import get_page
 from dosagelib.scraper import get_scraperclasses
-from scriptutil import contains_case_insensitive, capfirst, save_result, load_result, truncate_name
+from scriptutil import contains_case_insensitive, save_result, load_result, truncate_name, format_name
 
 json_file = __file__.replace(".py", ".json")
 
@@ -20,7 +27,7 @@ url_matcher = re.compile(r'<li><a href="(/thefunnies/[^"]+)">([^<]+)</a>')
 
 # names of comics to exclude
 exclude_comics = [
-    "HagartheHorrible", # better source available
+    "HagartheHorrible",  # better source available
 ]
 
 
@@ -28,15 +35,13 @@ def handle_url(url, session, res):
     """Parse one search result page."""
     print("Parsing", url, file=sys.stderr)
     try:
-        data = getPageContent(url, session)
+        data = get_page(url, session).text
     except IOError as msg:
         print("ERROR:", msg, file=sys.stderr)
         return
     for match in url_matcher.finditer(data):
         shortname = match.group(1)
-        name = unescape(match.group(2))
-        name = asciify(name.replace('&', 'And').replace('@', 'At'))
-        name = capfirst(name)
+        name = format_name(match.group(2))
         if name in exclude_comics:
             continue
         if contains_case_insensitive(res, name):
@@ -86,7 +91,7 @@ def print_results(args):
             else:
                 prefix = u''
             fp.write(u"%sadd(%r, %r)\n" % (prefix, str(truncate_name(name)),
-              str(shortname)))
+                                           str(shortname)))
 
 
 if __name__ == '__main__':

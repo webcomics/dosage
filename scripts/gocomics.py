@@ -1,15 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Copyright (C) 2013-2014 Bastian Kleineidam
-# Copyright (C) 2016 Tobias Gruetzmacher
+# Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
+# Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 """
-Script to get a list of gocomics and save the info in a JSON file for further processing.
+Script to get a list of gocomics and save the info in a JSON file for further
+processing.
 """
 from __future__ import absolute_import, division, print_function
 
 import codecs
 import sys
 import os
+
 import requests
 from lxml import html
 

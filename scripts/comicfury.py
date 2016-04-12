@@ -1,19 +1,23 @@
 #!/usr/bin/env python
-# Copyright (C) 2013-2014 Bastian Kleineidam
-# Copyright (C) 2016 Tobias Gruetzmacher
+# -*- coding: utf-8 -*-
+# Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
+# Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 """
 Script to get ComicFury comics and save the info in a JSON file for further
 processing.
 """
-from __future__ import print_function, absolute_import
+from __future__ import absolute_import, division, print_function
+
 import codecs
 import sys
 import os
+
 import requests
 from lxml import html
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))  # noqa
-from dosagelib.util import getPageContent
+from dosagelib.util import get_page
 from dosagelib.scraper import get_scraperclasses
 from scriptutil import (contains_case_insensitive, save_result, load_result,
                         truncate_name, format_name)
@@ -120,7 +124,7 @@ def handle_url(url, session, res):
     """Parse one search result page."""
     print("Parsing", url, file=sys.stderr)
     try:
-        data = html.document_fromstring(getPageContent(url, session))
+        data = html.document_fromstring(get_page(url, session).text)
         data.make_links_absolute(url)
     except IOError as msg:
         print("ERROR:", msg, file=sys.stderr)

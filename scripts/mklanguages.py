@@ -1,5 +1,11 @@
 #!/usr/bin/python
-# update languages.py from pycountry
+# -*- coding: utf-8 -*-
+# Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
+# Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
+'''update languages.py from pycountry'''
+from __future__ import absolute_import, division, print_function
+
 import os
 import sys
 import codecs
@@ -7,7 +13,8 @@ import codecs
 basepath = os.path.dirname(os.path.dirname(__file__))
 sys.path.append(basepath)
 
-from dosagelib.scraper import get_scraperclasses
+from dosagelib.scraper import get_scraperclasses  # noqa
+
 
 def main():
     """Update language information in dosagelib/languages.py."""
@@ -28,6 +35,7 @@ def get_used_languages():
         if l not in lang:
             lang[l] = scraperclass.language()
     return lang
+
 
 def write_languages(f, l):
     """Write language information."""

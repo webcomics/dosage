@@ -1,27 +1,37 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 """
 Script to get a list of KeenSpot comics and save the info in a
 JSON file for further processing.
 """
-from __future__ import print_function
+from __future__ import absolute_import, division, print_function
+
 import codecs
 import re
 import sys
 import os
+
 import requests
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
-from dosagelib.util import getPageContent, asciify, unescape, tagre, check_robotstxt
+
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))  # noqa
+from dosagelib.util import get_page, tagre, check_robotstxt
 from dosagelib.scraper import get_scraperclasses
-from scriptutil import contains_case_insensitive, capfirst, save_result, load_result, truncate_name
+from scriptutil import (contains_case_insensitive, save_result, load_result,
+                        truncate_name, format_name)
+
 
 json_file = __file__.replace(".py", ".json")
+
 
 url_matcher = re.compile(
   tagre("td", "onmouseover", r'([^"]+)') +
   tagre("a", "href", r'([^"]+\.keenspot\.com/)[^"]*') +
   r"(?:<b>)?([^<]+)(?:</b>)?</a>"
 )
+
 
 # names of comics to exclude
 exclude_comics = [
@@ -47,23 +57,23 @@ exclude_comics = [
     "YouDamnKid", # non-standard navigation
 ]
 
+
 # links to last valid strips
 url_overrides = {
 }
+
 
 def handle_url(url, session, res):
     """Parse one search result page."""
     print("Parsing", url, file=sys.stderr)
     try:
-        data = getPageContent(url, session)
+        data = get_page(url, session).text
     except IOError as msg:
         print("ERROR:", msg, file=sys.stderr)
         return
     for match in url_matcher.finditer(data):
         comicurl = match.group(2)
-        name = unescape(match.group(3))
-        name = asciify(name.replace('&', 'And').replace('@', 'At'))
-        name = capfirst(name)
+        name = format_name(match.group(3))
         if name in exclude_comics:
             continue
         if contains_case_insensitive(res, name):
@@ -72,7 +82,7 @@ def handle_url(url, session, res):
             continue
         try:
             if "/d/" not in comicurl:
-                check_robotstxt(comicurl+"d/", session)
+                check_robotstxt(comicurl + "d/", session)
             else:
                 check_robotstxt(comicurl, session)
         except IOError:

@@ -444,11 +444,6 @@ def rfc822date(indate):
     return time.strftime("%a, %d %b %Y %H:%M:%S GMT", time.gmtime(indate))
 
 
-def asciify(name):
-    """Remove non-ascii characters from string."""
-    return re.sub("[^0-9a-zA-Z_]", "", name)
-
-
 def unquote(text):
     """Replace all percent-encoded entities in text."""
     while '%' in text:

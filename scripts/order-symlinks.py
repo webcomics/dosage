@@ -1,24 +1,31 @@
 #!/usr/bin/env python
-# Copyright (C) 2013 Tobias Gruetzmacher
+# -*- coding: utf-8 -*-
+# Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
+# Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 """
 This script takes the JSON file created by 'dosage -o json' and uses the
 metadata to build a symlink farm in the deduced order of the comic. It created
 those in a subdirectory called 'inorder'.
 """
-from __future__ import print_function
+from __future__ import absolute_import, division, print_function
+
 import sys
 import os
 import codecs
 import json
 
+
 def jsonFn(d):
     """Get JSON filename."""
     return os.path.join(d, 'dosage.json')
+
 
 def loadJson(d):
     """Return JSON data."""
     with codecs.open(jsonFn(d), 'r', 'utf-8') as f:
         return json.load(f)
+
 
 def prepare_output(d):
     """Clean pre-existing links in output directory."""
@@ -30,6 +37,7 @@ def prepare_output(d):
         if os.path.islink(f):
             os.remove(f)
     return outDir
+
 
 def create_symlinks(d):
     """Create new symbolic links in output directory."""
@@ -68,4 +76,3 @@ if __name__ == '__main__':
                 print("No JSON file found in '%s'." % (d))
     else:
         print("Usage: %s comic-dirs" % (os.path.basename(sys.argv[0])))
-

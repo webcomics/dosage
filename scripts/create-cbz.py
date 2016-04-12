@@ -1,15 +1,20 @@
 #!/usr/bin/env python
-# Copyright (C) 2013-2014 Bastian Kleineidam
+# -*- coding: utf-8 -*-
+# Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
+# Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 """
 Creates a CBZ file in the comic directory.
 Uses an ordered symlink directory (see order-symlinks.py) if it exists,
 else the plain files are used.
 """
-from __future__ import print_function
+from __future__ import absolute_import, division, print_function
+
 import sys
 import os
 import zipfile
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))  # noqa
 from dosagelib.configuration import App
 
 
@@ -20,6 +25,7 @@ ImageExts = (
     ".gif",
     ".png",
 )
+
 
 def is_image(filename):
     """Determine if given filename is an image."""

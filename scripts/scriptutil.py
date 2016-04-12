@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
+# Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2016 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
+import re
 import json
 import codecs
 
-from dosagelib.util import unescape, asciify
+from dosagelib.util import unescape
 
 
 def contains_case_insensitive(adict, akey):
@@ -40,6 +42,11 @@ def load_result(json_file):
 def truncate_name(text):
     """Ensure the comic name does not exceed 50 characters."""
     return text[:50]
+
+
+def asciify(name):
+    """Remove non-ascii characters from string."""
+    return re.sub("[^0-9a-zA-Z_]", "", name)
 
 
 def format_name(text):
