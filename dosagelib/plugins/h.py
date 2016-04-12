@@ -33,7 +33,8 @@ class HagarTheHorrible(_BasicScraper):
         return starturl
 
 
-class HappyJar(_WordPressScraper):
+# "Hiatus", navigation missing
+class _HappyJar(_WordPressScraper):
     url = 'http://www.happyjar.com/'
 
 
@@ -61,13 +62,3 @@ class HarkAVagrant(_BasicScraper):
 class Hipsters(_WordPressScraper):
     url = 'http://www.hipsters-comic.com/'
     firstStripUrl = 'http://www.hipsters-comic.com/comic/hip01/'
-
-
-class HorribleVille(_BasicScraper):
-    url = 'http://horribleville.com/'
-    stripUrl = url + 'd/%s.html'
-    firstStripUrl = stripUrl % '20051220'
-    imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/d/[^"]+)') +
-                         tagre("img", "src", r'/images/previous\.png'))
-    help = 'Index format: yyyymmdd'
