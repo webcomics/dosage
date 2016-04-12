@@ -12,8 +12,8 @@ class _GoComics(_ParserScraper):
     url = 'http://www.gocomics.com/'
     imageSearch = ('//div/img[@class="strip"]',
                    '//p[@class="feature_item"]/img[@class="strip"]')
-    prevSearch = '//a[@class="prev"]'
-    nextSearch = '//a[@class="next"]'
+    prevSearch = '//ul[@class="feature-nav"]//a[@class="prev"]'
+    nextSearch = '//ul[@class="feature-nav"]//a[@class="next"]'
     help = 'Index format: yyyy/mm/dd'
 
     @classmethod
