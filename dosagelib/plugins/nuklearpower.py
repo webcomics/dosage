@@ -7,12 +7,12 @@ from ..scraper import _ParserScraper
 
 
 class _NuklearPower(_ParserScraper):
-    url = 'http://www.nuklearpower.com/'
     prevSearch = '//a[@rel="prev"]'
     imageSearch = '//div[@id="comic"]/img'
 
-    def starter(self):
-        return self.url + self.path + '/'
+    @property
+    def url(self):
+        return 'http://www.nuklearpower.com/' + self.path + '/'
 
     @property
     def name(self):
@@ -26,7 +26,6 @@ class NP8BitTheater(_NuklearPower):
 class NPAtomicRobo(_NuklearPower):
     url = 'http://www.atomic-robo.com/'
     imageSearch = '//img[@id="cc-comic"]'
-    path = 'atomicrobo'
 
 
 class NPHowIKilledYourMaster(_NuklearPower):

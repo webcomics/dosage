@@ -6,6 +6,7 @@
 from __future__ import absolute_import, division, print_function
 
 from ..scraper import _ParserScraper
+from ..helpers import bounceStarter
 
 
 class _GoComics(_ParserScraper):
@@ -14,18 +15,16 @@ class _GoComics(_ParserScraper):
                    '//p[@class="feature_item"]/img[@class="strip"]')
     prevSearch = '//ul[@class="feature-nav"]//a[@class="prev"]'
     nextSearch = '//ul[@class="feature-nav"]//a[@class="next"]'
+    starter = bounceStarter
     help = 'Index format: yyyy/mm/dd'
 
     @property
     def name(self):
         return 'GoComics/' + super(_GoComics, self).name[2:]
 
-    def starter(self):
-        url1 = self.url + self.path
-        data = self.getPage(url1)
-        url2 = self.fetchUrl(url1, data, self.prevSearch)
-        data = self.getPage(url2)
-        return self.fetchUrl(url2, data, self.nextSearch)
+    @property
+    def url(self):
+        return 'http://www.gocomics.com/' + self.path
 
     @classmethod
     def namer(cls, image_url, page_url):

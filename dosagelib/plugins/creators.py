@@ -6,22 +6,22 @@
 from __future__ import absolute_import, division, print_function
 
 from ..scraper import _ParserScraper
+from ..helpers import indirectStarter
 
 
 class _Creators(_ParserScraper):
-    url = 'https://www.creators.com/features/'
     imageSearch = '//a[contains(@class,"fancybox")]/img'
     prevSearch = '//a[@id="nav_prev"]'
     latestSearch = '//div[contains(@class,"caption")]/a'
+    starter = indirectStarter
 
     @property
     def name(self):
         return 'Creators/' + super(_Creators, self).name
 
-    def starter(self):
-        start = self.url + self.path
-        data = self.getPage(start)
-        return self.fetchUrl(start, data, self.latestSearch)
+    @property
+    def url(self):
+        return 'https://www.creators.com/features/' + self.path
 
 
 class _CreatorsEs(_Creators):
