@@ -29,9 +29,9 @@ class _ComicFury(_ParserScraper):
         num = parts[-1]
         return "%s_%s%s" % (cls.__name__[2:], num, ext)
 
-    @classmethod
-    def getName(cls):
-        return 'ComicFury/' + cls.__name__[2:]
+    @property
+    def name(self):
+        return 'ComicFury/' + super(_ComicFury, self).name[2:]
 
     def getIndexStripUrl(self, index):
         return self.url + 'comics/%s' % index

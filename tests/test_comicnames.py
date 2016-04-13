@@ -13,8 +13,8 @@ from dosagelib import scraper
 class TestComicNames(object):
 
     def test_names(self):
-        for scraperclass in scraper.get_scraperclasses():
-            name = scraperclass.getName()
+        for scraperobj in scraper.get_scrapers():
+            name = scraperobj.name
             assert name.count('/') <= 1
             if '/' in name:
                 comicname = name.split('/')[1]

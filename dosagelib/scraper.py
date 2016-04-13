@@ -90,13 +90,19 @@ class Scraper(object):
     # HTTP session for configuration & cookies
     session = requests_session()
 
-    def __init__(self, indexes=None):
+    @property
+    def indexes(self):
+        return self._indexes
+
+    @indexes.setter
+    def indexes(self, val):
+        if val:
+            self._indexes = tuple(sorted(val))
+
+    def __init__(self):
         """Initialize internal variables."""
         self.urls = set()
-        if indexes:
-            self.indexes = tuple(sorted(indexes))
-        else:
-            self.indexes = tuple()
+        self._indexes = tuple()
         self.skippedUrls = set()
         self.hitFirstStripUrl = False
 
@@ -105,7 +111,7 @@ class Scraper(object):
         if not isinstance(other, Scraper):
             return 1
         # first, order by name
-        d = cmp(self.getName(), other.getName())
+        d = cmp(self.name, other.name)
         if d != 0:
             return d
         # then by indexes
@@ -113,7 +119,7 @@ class Scraper(object):
 
     def __hash__(self):
         """Get hash value from name and index list."""
-        return hash((self.getName(), self.indexes))
+        return hash((self.name, self.indexes))
 
     def shouldSkipUrl(self, url, data):
         """Determine if search for images in given URL should be skipped."""
@@ -141,7 +147,7 @@ class Scraper(object):
                                   optional=self.textOptional)
         else:
             text = None
-        return ComicStrip(self.getName(), url, imageUrls, self.namer,
+        return ComicStrip(self.name, url, imageUrls, self.namer,
                           self.session, text=text)
 
     def getStrips(self, maxstrips=None):
@@ -217,24 +223,21 @@ class Scraper(object):
             else:
                 prevUrl = self.prevUrlModifier(prevUrl)
                 out.debug(u"Found previous URL %s" % prevUrl)
-                getHandler().comicPageLink(self.getName(), url, prevUrl)
+                getHandler().comicPageLink(self.name, url, prevUrl)
         return prevUrl
 
     def getIndexStripUrl(self, index):
         """Get comic strip URL from index."""
         return self.stripUrl % index
 
-    @classmethod
-    def getName(cls):
+    @property
+    def name(self):
         """Get scraper name."""
-        if hasattr(cls, 'name'):
-            return cls.name
-        return cls.__name__
+        return self.__class__.__name__
 
-    @classmethod
-    def starter(cls):
+    def starter(self):
         """Get starter URL from where to scrape comic strips."""
-        return cls.url
+        return self.url
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
@@ -261,18 +264,17 @@ class Scraper(object):
         """Get starter URL from where to scrape comic strips."""
         return self.starter()
 
-    @classmethod
-    def vote(cls):
+    def vote(self):
         """Cast a public vote for this comic."""
         url = configuration.VoteUrl + 'count/'
         uid = get_system_uid()
-        data = {"name": cls.getName().replace('/', '_'), "uid": uid}
-        page = urlopen(url, cls.session, data=data)
+        data = {"name": self.name.replace('/', '_'), "uid": uid}
+        page = urlopen(url, self.session, data=data)
         return page.text
 
     def getCompleteFile(self, basepath):
         """Get filename indicating all comics are downloaded."""
-        dirname = getDirname(self.getName())
+        dirname = getDirname(self.name)
         return os.path.join(basepath, dirname, "complete.txt")
 
     def isComplete(self, basepath):
@@ -517,63 +519,66 @@ class _ParserScraper(Scraper):
         return res
 
 
-def find_scraperclasses(comic, multiple_allowed=False):
-    """Get a list comic scraper classes. Can return more than one entries if
-    multiple_allowed is True, else it raises a ValueError if multiple
-    modules match. The match is a case insensitive substring search."""
+def find_scrapers(comic, multiple_allowed=False):
+    """Get a list comic scraper objects.
+
+    Can return more than one entry if multiple_allowed is True, else it raises
+    a ValueError if multiple modules match. The match is a case insensitive
+    substring search.
+    """
     if not comic:
         raise ValueError("empty comic name")
     candidates = []
     cname = comic.lower()
-    for scraperclass in get_scraperclasses():
-        lname = scraperclass.getName().lower()
+    for scrapers in get_scrapers():
+        lname = scrapers.name.lower()
         if lname == cname:
             # perfect match
             if not multiple_allowed:
-                return [scraperclass]
+                return [scrapers]
             else:
-                candidates.append(scraperclass)
+                candidates.append(scrapers)
         elif cname in lname:
-            candidates.append(scraperclass)
+            candidates.append(scrapers)
     if len(candidates) > 1 and not multiple_allowed:
-        comics = ", ".join(x.getName() for x in candidates)
+        comics = ", ".join(x.name for x in candidates)
         raise ValueError('multiple comics found: %s' % comics)
     elif not candidates:
         raise ValueError('comic %r not found' % comic)
     return candidates
 
 
-_scraperclasses = None
+_scrapers = None
 
 
-def get_scraperclasses():
+def get_scrapers():
     """Find all comic scraper classes in the plugins directory.
     The result is cached.
     @return: list of Scraper classes
     @rtype: list of Scraper
     """
-    global _scraperclasses
-    if _scraperclasses is None:
+    global _scrapers
+    if _scrapers is None:
         out.debug(u"Loading comic modules...")
         modules = loader.get_modules('plugins')
         plugins = loader.get_plugins(modules, Scraper)
-        _scraperclasses = sorted(plugins, key=lambda p: p.getName())
+        _scrapers = sorted([x() for x in plugins], key=lambda p: p.name)
         check_scrapers()
-        out.debug(u"... %d modules loaded." % len(_scraperclasses))
-    return _scraperclasses
+        out.debug(u"... %d modules loaded." % len(_scrapers))
+    return _scrapers
 
 
 def check_scrapers():
-    """Check for duplicate scraper class names."""
+    """Check for duplicate scraper names."""
     d = {}
-    for scraperclass in _scraperclasses:
-        name = scraperclass.getName().lower()
+    for scraper in _scrapers:
+        name = scraper.name.lower()
         if name in d:
-            name1 = scraperclass.getName()
-            name2 = d[name].getName()
+            name1 = scraper.name
+            name2 = d[name].name
             raise ValueError('duplicate scrapers %s and %s found' %
                              (name1, name2))
-        d[name] = scraperclass
+        d[name] = scraper
 
 
 def make_scraper(classname, scraperType=_BasicScraper, **attributes):

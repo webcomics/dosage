@@ -16,9 +16,9 @@ class _GoComics(_ParserScraper):
     nextSearch = '//ul[@class="feature-nav"]//a[@class="next"]'
     help = 'Index format: yyyy/mm/dd'
 
-    @classmethod
-    def getName(cls):
-        return 'GoComics/' + cls.__name__[2:]
+    @property
+    def name(self):
+        return 'GoComics/' + super(_GoComics, self).name[2:]
 
     def starter(self):
         url1 = self.url + self.path

@@ -140,7 +140,7 @@ def display_help(options):
 def display_comic_help(scraperobj):
     """Print help for a comic."""
     orig_context = out.context
-    out.context = scraperobj.getName()
+    out.context = scraperobj.name
     try:
         out.info(u"URL: " + scraperobj.url)
         out.info(u"Language: " + scraperobj.language())
@@ -178,9 +178,9 @@ def vote_comic(scraperobj):
     """Vote for given comic scraper."""
     errors = 0
     orig_context = out.context
-    out.context = scraperobj.getName()
+    out.context = scraperobj.name
     try:
-        name = scraperobj.getName()
+        name = scraperobj.name
         answer = scraperobj.vote()
         out.debug(u'Vote answer %r' % answer)
         if answer == 'counted':
@@ -230,7 +230,7 @@ def do_list(column_list=True, verbose=False):
         out.info(u'Comics tagged with [%s] require age confirmation with the --adult option.' % TAG_ADULT)
         out.info(u'Non-english comics are tagged with [%s].' % TAG_LANG)
         scrapers = sorted(director.getAllScrapers(listing=True),
-                          key=lambda s: s.getName())
+                          key=lambda s: s.name)
         if column_list:
             num, disabled = do_column_list(scrapers)
         else:
@@ -293,7 +293,7 @@ def get_tagged_scraper_name(scraperobj, limit=None, reasons=None):
         suffix = " [" + ", ".join(tags) + "]"
     else:
         suffix = ""
-    name = scraperobj.getName()
+    name = scraperobj.name
     if limit is not None:
         name = strlimit(name, limit)
     return name + suffix
@@ -317,7 +317,7 @@ def main():
 def profile():
     """Profile the loading of all scrapers."""
     import cProfile
-    cProfile.run("scraper.get_scraperclasses()", "dosage.prof")
+    cProfile.run("scraper.get_scrapers()", "dosage.prof")
 
 
 def viewprof():

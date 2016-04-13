@@ -29,7 +29,7 @@ lock = threading.Lock()
 
 def get_threadname():
     """Return name of current thread."""
-    return threading.current_thread().getName()
+    return threading.current_thread().name
 
 
 class Output(object):

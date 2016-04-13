@@ -33,18 +33,17 @@ def get_lock(host):
     return _locks[host]
 
 
-def _get_saved_images(outdir, scraper):
+def _get_saved_images(outdir, scraperobj):
     """Get saved images."""
-    dirs = tuple(scraper.getName().split('/'))
+    dirs = tuple(scraperobj.name.split('/'))
     files = os.listdir(os.path.join(outdir, *dirs))
     files = [x for x in files if not x.endswith(".txt")]
     return files
 
 
-def test_comicmodule(tmpdir, scraperclass):
+def test_comicmodule(tmpdir, scraperobj):
     '''Test a scraper. It must be able to traverse backward for at least 5
     strips from the start, and find strip images on at least 4 pages.'''
-    scraperobj = scraperclass()
     # Limit number of connections to one host.
     host = get_host(scraperobj.url)
     try:
@@ -121,11 +120,11 @@ def _check_stripurl(strip, scraperobj):
     assert mo is not None, err
 
 
-def get_test_scraperclasses():
+def get_test_scrapers():
     """Return scrapers that should be tested."""
     if "TESTALL" in os.environ:
         # test all comics (this will take some time)
-        scraperclasses = scraper.get_scraperclasses()
+        scrapers = scraper.get_scrapers()
     else:
         if 'TESTCOMICS' in os.environ:
             scraper_pattern = re.compile(os.environ['TESTCOMICS'])
@@ -139,13 +138,13 @@ def get_test_scraperclasses():
             ]
             scraper_pattern = re.compile('|'.join(testscrapernames))
 
-        scraperclasses = [
-            scraperclass for scraperclass in scraper.get_scraperclasses()
-            if scraper_pattern.match(scraperclass.getName())
+        scrapers = [
+            scraperobj for scraperobj in scraper.get_scrapers()
+            if scraper_pattern.match(scraperobj.name)
         ]
-    return scraperclasses
+    return scrapers
 
 
 def pytest_generate_tests(metafunc):
-    if 'scraperclass' in metafunc.fixturenames:
-        metafunc.parametrize('scraperclass', get_test_scraperclasses())
+    if 'scraperobj' in metafunc.fixturenames:
+        metafunc.parametrize('scraperobj', get_test_scrapers())

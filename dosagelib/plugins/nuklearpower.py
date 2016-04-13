@@ -14,9 +14,9 @@ class _NuklearPower(_ParserScraper):
     def starter(self):
         return self.url + self.path + '/'
 
-    @classmethod
-    def getName(cls):
-        return 'NuklearPower/' + cls.__name__[2:]
+    @property
+    def name(self):
+        return 'NuklearPower/' + super(_NuklearPower, self).name[2:]
 
 
 class NP8BitTheater(_NuklearPower):

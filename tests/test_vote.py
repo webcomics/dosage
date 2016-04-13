@@ -12,5 +12,5 @@ class ATestScraper(scraper._BasicScraper):
 class TestVote(object):
 
     def test_vote(self):
-        answer = ATestScraper.vote()
+        answer = ATestScraper().vote()
         assert answer in ('counted', 'no'), 'invalid answer %r' % answer

@@ -9,20 +9,19 @@ from dosagelib import scraper
 class TestScraper(object):
     """Test scraper module functions."""
 
-    def test_get_scraperclasses(self):
-        for scraperclass in scraper.get_scraperclasses():
-            scraperobj = scraperclass()
-            scraperobj = scraperclass(indexes=["bla"])
-            assert scraperobj.url, "missing url in %s" % scraperobj.getName()
+    def test_get_scrapers(self):
+        for scraperobj in scraper.get_scrapers():
+            scraperobj.indexes = ["bla"]
+            assert scraperobj.url, "missing url in %s" % scraperobj.name
 
-    def test_find_scraperclasses_single(self):
-        result = scraper.find_scraperclasses("xkcd")
+    def test_find_scrapers_single(self):
+        result = scraper.find_scrapers("xkcd")
         assert len(result) == 1
 
-    def test_find_scraperclasses_multi(self):
-        result = scraper.find_scraperclasses("a", multiple_allowed=True)
+    def test_find_scrapers_multi(self):
+        result = scraper.find_scrapers("a", multiple_allowed=True)
         assert len(result) > 1
 
-    def test_find_scraperclasses_error(self):
+    def test_find_scrapers_error(self):
         with pytest.raises(ValueError):
-            scraper.find_scraperclasses("")
+            scraper.find_scrapers("")

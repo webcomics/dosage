@@ -16,9 +16,9 @@ class _WLPComics(_ParserScraper):
     starter = bounceStarter
     help = 'Index format: nnn'
 
-    @classmethod
-    def getName(cls):
-        return 'WLP/' + cls.__name__
+    @property
+    def name(self):
+        return 'WLP/' + super(_WLPComics, self).name
 
     @classmethod
     def namer(cls, image_url, page_url):

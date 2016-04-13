@@ -14,9 +14,9 @@ class _Creators(_ParserScraper):
     prevSearch = '//a[@id="nav_prev"]'
     latestSearch = '//div[contains(@class,"caption")]/a'
 
-    @classmethod
-    def getName(cls):
-        return 'Creators/' + cls.__name__
+    @property
+    def name(self):
+        return 'Creators/' + super(_Creators, self).name
 
     def starter(self):
         start = self.url + self.path

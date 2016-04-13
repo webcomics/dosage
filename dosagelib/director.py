@@ -1,5 +1,10 @@
-# -*- coding: iso-8859-1 -*-
-# Copyright (C) 2014 Bastian Kleineidam
+# -*- coding: utf-8 -*-
+# Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
+# Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
+
 import os
 import threading
 try:
@@ -14,6 +19,7 @@ try:
     from urllib.parse import urlparse
 except ImportError:
     from urlparse import urlparse
+
 from .output import out
 from . import events, scraper
 from .util import getDirname
@@ -55,6 +61,8 @@ def get_hostname(url):
 
 
 lock = threading.Lock()
+
+
 def get_host_lock(url):
     """Get lock object for given URL host."""
     hostname = get_hostname(url)
@@ -68,7 +76,7 @@ class ComicGetter(threading.Thread):
         """Store options."""
         super(ComicGetter, self).__init__()
         self.options = options
-        self.origname = self.getName()
+        self.origname = self.name
         self.stopped = False
         self.errors = 0
 
@@ -76,10 +84,10 @@ class ComicGetter(threading.Thread):
         """Process from queue until it is empty."""
         try:
             while not self.stopped:
-                scraperobj = jobs.get(False)
-                self.setName(scraperobj.getName())
+                scraper = jobs.get(False)
+                self.name = scraper.name
                 try:
-                    self.getStrips(scraperobj)
+                    self.getStrips(scraper)
                 finally:
                     jobs.task_done()
                     self.setName(self.origname)
@@ -93,7 +101,7 @@ class ComicGetter(threading.Thread):
         with lock:
             host_lock = get_host_lock(scraperobj.url)
         with host_lock:
-            self._getStrips(scraperobj)
+            self._getStrips(scraper)
 
     def _getStrips(self, scraperobj):
         """Get all strips from a scraper."""
@@ -117,7 +125,8 @@ class ComicGetter(threading.Thread):
                 if self.stopped:
                     break
             if self.options.all and not (self.errors or self.options.dry_run or
-                                    self.options.cont or scraperobj.indexes):
+                                         self.options.cont or
+                                         scraperobj.indexes):
                 scraperobj.setComplete(self.options.basepath)
         except Exception as msg:
             out.exception(msg)
@@ -158,7 +167,8 @@ def getComics(options):
     events.getHandler().start()
     errors = 0
     try:
-        for scraperobj in getScrapers(options.comic, options.basepath, options.adult, options.multimatch):
+        for scraperobj in getScrapers(options.comic, options.basepath,
+                                      options.adult, options.multimatch):
             jobs.put(scraperobj)
         # start threads
         num_threads = min(options.parallel, jobs.qsize())
@@ -200,16 +210,16 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False, listi
         # only scrapers whose directory already exists
         if len(comics) > 1:
             out.warn(u"using '@' as comic name ignores all other specified comics.")
-        for scraperclass in scraper.get_scraperclasses():
-            dirname = getDirname(scraperclass.getName())
+        for scraperobj in scraper.get_scrapers():
+            dirname = getDirname(scraperobj.name)
             if os.path.isdir(os.path.join(basepath, dirname)):
-                if shouldRunScraper(scraperclass, adult, listing):
-                    yield scraperclass()
+                if shouldRunScraper(scraperobj, adult, listing):
+                    yield scraperobj
     elif '@@' in comics:
         # all scrapers
-        for scraperclass in scraper.get_scraperclasses():
-            if shouldRunScraper(scraperclass, adult, listing):
-                yield scraperclass()
+        for scraperobj in scraper.get_scrapers():
+            if shouldRunScraper(scraperobj, adult, listing):
+                yield scraperobj
     else:
         # get only selected comic scrapers
         # store them in a set to eliminate duplicates
@@ -227,32 +237,34 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False, listi
             else:
                 name = comic
                 indexes = None
-            scraperclasses = scraper.find_scraperclasses(name, multiple_allowed=multiple_allowed)
-            for scraperclass in scraperclasses:
-                if shouldRunScraper(scraperclass, adult, listing):
-                    scraperobj = scraperclass(indexes=indexes)
+            scrapers = scraper.find_scrapers(name, multiple_allowed=multiple_allowed)
+            for scraperobj in scrapers:
+                if shouldRunScraper(scraperobj, adult, listing):
+                    # FIXME: Find a better way to work with indexes
+                    scraperobj.indexes = indexes
                     if scraperobj not in scrapers:
                         scrapers.add(scraperobj)
                         yield scraperobj
 
 
-def shouldRunScraper(scraperclass, adult=True, listing=False):
+def shouldRunScraper(scraperobj, adult=True, listing=False):
     if listing:
         return True
-    if not adult and scraperclass.adult:
-        warn_adult(scraperclass)
+    if not adult and scraperobj.adult:
+        warn_adult(scraperobj)
         return False
-    reasons = scraperclass.getDisabledReasons()
+    reasons = scraperobj.getDisabledReasons()
     if reasons:
-        warn_disabled(scraperclass, reasons)
+        warn_disabled(scraperobj, reasons)
         return False
     return True
 
 
-def warn_adult(scraperclass):
+def warn_adult(scraperobj):
     """Print warning about adult content."""
-    out.warn(u"skipping adult comic %s; use the --adult option to confirm your age" % scraperclass.getName())
+    out.warn(u"skipping adult comic %s; use the --adult option to confirm your age" % scraperobj.name)
 
-def warn_disabled(scraperclass, reasons):
+
+def warn_disabled(scraperobj, reasons):
     """Print warning about disabled comic modules."""
-    out.warn(u"Skipping comic %s: %s" % (scraperclass.getName(), ' '.join(reasons.values())))
+    out.warn(u"Skipping comic %s: %s" % (scraperobj.name, ' '.join(reasons.values())))
