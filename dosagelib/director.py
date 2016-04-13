@@ -84,13 +84,13 @@ class ComicGetter(threading.Thread):
         """Process from queue until it is empty."""
         try:
             while not self.stopped:
-                scraper = jobs.get(False)
-                self.name = scraper.name
+                scraperobj = jobs.get(False)
+                self.name = scraperobj.name
                 try:
-                    self.getStrips(scraper)
+                    self.getStrips(scraperobj)
                 finally:
                     jobs.task_done()
-                    self.setName(self.origname)
+                    self.name = self.origname
         except Empty:
             pass
         except KeyboardInterrupt:
@@ -101,7 +101,7 @@ class ComicGetter(threading.Thread):
         with lock:
             host_lock = get_host_lock(scraperobj.url)
         with host_lock:
-            self._getStrips(scraper)
+            self._getStrips(scraperobj)
 
     def _getStrips(self, scraperobj):
         """Get all strips from a scraper."""
@@ -169,6 +169,7 @@ def getComics(options):
     try:
         for scraperobj in getScrapers(options.comic, options.basepath,
                                       options.adult, options.multimatch):
+            print(scraperobj)
             jobs.put(scraperobj)
         # start threads
         num_threads = min(options.parallel, jobs.qsize())
@@ -237,12 +238,13 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False, listi
             else:
                 name = comic
                 indexes = None
-            scrapers = scraper.find_scrapers(name, multiple_allowed=multiple_allowed)
-            for scraperobj in scrapers:
+            found_scrapers = scraper.find_scrapers(name, multiple_allowed=multiple_allowed)
+            for scraperobj in found_scrapers:
                 if shouldRunScraper(scraperobj, adult, listing):
                     # FIXME: Find a better way to work with indexes
                     scraperobj.indexes = indexes
                     if scraperobj not in scrapers:
+                        print("A")
                         scrapers.add(scraperobj)
                         yield scraperobj
 
