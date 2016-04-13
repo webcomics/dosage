@@ -20,7 +20,7 @@ class _ComicFury(_ParserScraper):
     prevSearch = ('//a[@rel="prev"]', XPATH_LINK % "Previous")
     nextSearch = ('//a[@rel="next"]', XPATH_LINK % "Next")
     help = 'Index format: n'
-    starter = bounceStarter()
+    starter = bounceStarter
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):

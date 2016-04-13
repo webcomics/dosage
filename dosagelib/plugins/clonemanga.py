@@ -1,7 +1,12 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
+
 from re import compile
+
 from ..scraper import make_scraper
 from ..util import tagre, getQueryParams
 
@@ -10,6 +15,7 @@ _linkTag = tagre("a", "href", r'([^"]+)')
 _prevSearch = compile(_linkTag + tagre("img", "src", r"previous\.gif"))
 _nextSearch = compile(_linkTag + tagre("img", "src", r"next\.gif"))
 _lastSearch = compile(_linkTag + tagre("img", "src", r"last\.gif"))
+
 
 def add(name, shortName, imageFolder=None, lastStrip=None):
     classname = 'CloneManga_%s' % name
@@ -22,22 +28,21 @@ def add(name, shortName, imageFolder=None, lastStrip=None):
     def namer(cls, imageUrl, pageUrl):
         return '%03d' % int(getQueryParams(pageUrl)['page'][0])
 
-    @classmethod
-    def _starter(cls):
+    def _starter(self):
         # first, try hopping to previous and next comic
-        data = cls.getPage(baseUrl)
+        data = self.getPage(baseUrl)
         try:
-            url = cls.fetchUrl(baseUrl, data, _prevSearch)
+            url = self.fetchUrl(baseUrl, data, _prevSearch)
         except ValueError:
             # no previous link found, try hopping to last comic
-            return cls.fetchUrl(baseUrl, data, _lastSearch)
+            return self.fetchUrl(baseUrl, data, _lastSearch)
         else:
-            data = cls.getPage(url)
-            return cls.fetchUrl(url, data, _nextSearch)
+            data = self.getPage(url)
+            return self.fetchUrl(url, data, _nextSearch)
 
     attrs = dict(
         name='CloneManga/' + name,
-        stripUrl = baseUrl + '?page=%s',
+        stripUrl=baseUrl + '?page=%s',
         imageSearch=compile(tagre("img", "src", r'((?:%s/)?%s/[^"]+)' % (_url, imageFolder), after="center")),
         prevSearch=_prevSearch,
         help='Index format: n',

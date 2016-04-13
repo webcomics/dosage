@@ -48,7 +48,7 @@ class BalderDash(_ComicControlScraper):
 class Bardsworth(_WordPressScraper):
     url = 'http://www.bardsworth.com/'
     latestSearch = '//a[@rel="bookmark"]'
-    starter = indirectStarter()
+    starter = indirectStarter
 
 
 class Baroquen(_BasicScraper):
@@ -72,7 +72,7 @@ class Beetlebum(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '2006/03/10/quiz-fur-ruskiphile'
-    starter = indirectStarter()
+    starter = indirectStarter
     multipleImagesPerStrip = True
     imageSearch = compile(tagre('img', 'src', r'(http://blog\.beetlebum\.de/wp-content/uploads/[^"]+)'))
     prevSearch = compile(tagre('a', 'href',
@@ -227,7 +227,7 @@ class BoredAndEvil(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(strips/[^"]+)'))
     prevSearch = compile(r'First Comic.+<a href="(.+?)".+previous-on.gif')
     latestSearch = prevSearch
-    starter = indirectStarter()
+    starter = indirectStarter
     help = 'Index format: yyyy-mm-dd'
 
 

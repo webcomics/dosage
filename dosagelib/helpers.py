@@ -30,32 +30,24 @@ def regexNamer(regex, usePageUrl=False):
     return _namer
 
 
-def bounceStarter():
+def bounceStarter(self):
     """Get start URL by "bouncing" back and forth one time.
 
     This needs the url and nextSearch properties be defined on the class.
     """
-    @classmethod
-    def _starter(cls):
-        """Get bounced start URL."""
-        data = cls.getPage(cls.url)
-        url1 = cls.fetchUrl(cls.url, data, cls.prevSearch)
-        data = cls.getPage(url1)
-        return cls.fetchUrl(url1, data, cls.nextSearch)
-    return _starter
+    data = self.getPage(self.url)
+    url1 = self.fetchUrl(self.url, data, self.prevSearch)
+    data = self.getPage(url1)
+    return self.fetchUrl(url1, data, self.nextSearch)
 
 
-def indirectStarter():
+def indirectStarter(self):
     """Get start URL by indirection.
 
     This is useful for comics where the latest comic can't be reached at a
     stable URL. If the class has an attribute 'startUrl', this page is fetched
     first, otherwise the page at 'url' is fetched. After that, the attribute
     'latestSearch' is used on the page content to find the latest strip."""
-    @classmethod
-    def _starter(cls):
-        """Get indirect start URL."""
-        url = cls.startUrl if hasattr(cls, "startUrl") else cls.url
-        data = cls.getPage(url)
-        return cls.fetchUrl(url, data, cls.latestSearch)
-    return _starter
+    url = self.startUrl if hasattr(self, "startUrl") else self.url
+    data = self.getPage(url)
+    return self.fetchUrl(url, data, self.latestSearch)

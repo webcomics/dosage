@@ -83,7 +83,7 @@ class TheOrderOfTheStick(_BasicScraper):
     prevSearch = compile(r'<A href="(/comics/oots\d{4}\.html)"><IMG src="/Images/redesign/ComicNav_Back.gif"')
     latestSearch = compile(r'<A href="(/comics/oots\d{4}\.html)"')
     help = 'Index format: n (unpadded)'
-    starter = indirectStarter()
+    starter = indirectStarter
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
@@ -122,7 +122,7 @@ class TheThinHLine(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'([^"]+)') + '&gt;</a>')
     latestSearch = compile(tagre("a", "href", r'([^"]+)',
                                  after='class="timestamp"'))
-    starter = indirectStarter()
+    starter = indirectStarter
     adult = True
 
     indirectImageSearch = compile(tagre('a', 'href', r'(%simage/\d+)' % rurl))
@@ -180,16 +180,13 @@ class ThreePanelSoul(_BasicScraper):
 
 
 class ThunderAndLightning(_BasicScraper):
-    url = 'http://www.talcomic.com/wp/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
+    baseUrl = 'http://www.talcomic.com/wp/'
+    url = baseUrl + '?latestcomic'
+    rurl = escape(baseUrl)
+    stripUrl = baseUrl + '%s/'
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     help = 'Index format: yyyy/mm/dd/page-nn'
-
-    @classmethod
-    def starter(cls):
-        return cls.url + '?latestcomic'
 
 
 class TinyKittenTeeth(_BasicScraper):

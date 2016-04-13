@@ -24,7 +24,7 @@ class Lackadaisy(_BasicScraper):
     nextSearch = compile(tagre("a", "href", r"(/comic.php\?comicid=[0-9]+)") +
                          "Next")
     help = 'Index format: n'
-    starter = bounceStarter()
+    starter = bounceStarter
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
@@ -38,7 +38,7 @@ class Laiyu(_WordPressScraper):
     url = 'http://www.flowerlarkstudios.com/comic/preliminary-concepts/welcome/'
     firstStripUrl = url
     latestSearch = WP_LATEST_SEARCH
-    starter = indirectStarter()
+    starter = indirectStarter
 
 
 class LasLindas(_BasicScraper):
@@ -67,7 +67,7 @@ class LeastICouldDo(_BasicScraper):
                                after="Previous"))
     latestSearch = compile(tagre("a", "href", r'(%scomic/\d+/)' % rurl,
                                  after="feature-comic"))
-    starter = indirectStarter()
+    starter = indirectStarter
     help = 'Index format: yyyymmdd'
 
 
@@ -117,5 +117,5 @@ class LookingForGroup(_ParserScraper):
     imageSearch = '#comic img'
     prevSearch = '#comic-left > a'
     latestSearch = '#header-dropdown-comic-lfg > a:nth-of-type(2)'
-    starter = indirectStarter()
+    starter = indirectStarter
     help = 'Index format: nnn'

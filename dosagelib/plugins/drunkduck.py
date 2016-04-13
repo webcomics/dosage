@@ -1,17 +1,23 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
 
 from re import compile
+
 from ..scraper import make_scraper
 from ..util import tagre
 
+
 # note: adding the compile() functions inside add() is a major performance hog
-_imageSearch =  compile(tagre("img", "src", r'(https://s3\.amazonaws\.com/media\.drunkduck\.com/[^"]+)', before="page-image"))
+_imageSearch = compile(tagre("img", "src", r'(https://s3\.amazonaws\.com/media\.drunkduck\.com/[^"]+)', before="page-image"))
 _linkSearch = tagre("a", "href", r'(/[^"]+/\d+/)')
 _prevSearch = compile(_linkSearch + tagre("img", "class", "arrow_prev"))
 _nextSearch = compile(_linkSearch + tagre("img", "class", "arrow_next"))
 _lastSearch = compile(_linkSearch + tagre("img", "class", "arrow_last"))
+
 
 def add(name, path):
     # XXX disallowed by the server administrator
@@ -24,18 +30,17 @@ def add(name, path):
         ext = imageUrl.rsplit('.')[-1]
         return '%d.%s' % (index, ext)
 
-    @classmethod
-    def _starter(cls):
+    def _starter(self):
         # first, try hopping to previous and next comic
-        data = cls.getPage(_url)
+        data = self.getPage(_url)
         try:
-            url = cls.fetchUrl(_url, data, _prevSearch)
+            url = self.fetchUrl(_url, data, _prevSearch)
         except ValueError:
             # no previous link found, try hopping to last comic
-            return cls.fetchUrl(_url, data, _lastSearch)
+            return self.fetchUrl(_url, data, _lastSearch)
         else:
-            data = cls.getPage(url)
-            return cls.fetchUrl(url, data, _nextSearch)
+            data = self.getPage(url)
+            return self.fetchUrl(url, data, _nextSearch)
 
     attrs = dict(
         name = 'DrunkDuck/' + name,

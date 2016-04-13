@@ -22,7 +22,7 @@ class ZapComic(_ParserScraper):
 
 class Zapiro(_BasicScraper):
     url = 'http://www.mg.co.za/zapiro/'
-    starter = bounceStarter()
+    starter = bounceStarter
     stripUrl = 'http://mg.co.za/cartoon/%s'
     firstStripUrl = stripUrl % 'zapiro_681'
     imageSearch = compile(tagre("img", "src", r'(http://cdn\.mg\.co\.za/crop/content/cartoons/[^"]+)'))

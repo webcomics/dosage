@@ -51,7 +51,7 @@ class RealmOfAtland(_BasicScraper):
 class RedMeat(_BasicScraper):
     baseUrl = 'http://www.redmeat.com/redmeat/'
     url = baseUrl + 'current/index.html'
-    starter = bounceStarter()
+    starter = bounceStarter
     stripUrl = baseUrl + '%s/index.html'
     firstStripUrl = stripUrl % '1996-06-10'
     imageSearch = compile(tagre("img", "src", r'(http://www\.redmeat\.com/imager/b/redmeat/[^"]*\.png)'))

@@ -45,7 +45,7 @@ class WayfarersMoon(_BasicScraper):
 class WebDesignerCOTW(_BasicScraper):
     url = 'http://www.webdesignerdepot.com/'
     rurl = escape(url)
-    starter = indirectStarter()
+    starter = indirectStarter
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2009/11/comics-of-the-week-1'
     imageSearch = (
@@ -211,10 +211,9 @@ class WormWorldSaga(_BasicScraper):
     latestChapter = 5
     multipleImagesPerStrip = True
 
-    @classmethod
-    def starter(cls):
+    def starter(self):
         return '%schapters/chapter%02d/%s/index.php' % (
-            cls.url, cls.latestChapter, cls.lang.upper())
+            self.url, self.latestChapter, self.lang.upper())
 
     def getPrevUrl(self, url, data):
         """Find previous URL."""

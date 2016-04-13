@@ -15,7 +15,7 @@ from .common import _WordPressScraper, WP_LATEST_SEARCH, xpath_class
 
 class EarthsongSaga(_ParserScraper):
     url = 'http://earthsongsaga.com/index.php'
-    starter = indirectStarter()
+    starter = indirectStarter
     imageSearch = '//div[@id="comic"]//img'
     prevSearch = '//a[@title="Previous"]'
     latestSearch = '//div[@id="leftmenu"]/span[1]/a[1]'
@@ -45,13 +45,13 @@ class EasilyAmused(_WordPressScraper):
     url = 'http://www.flowerlarkstudios.com/comic/college-daze/ea01/'
     firstStripUrl = url
     latestSearch = WP_LATEST_SEARCH
-    starter = indirectStarter()
+    starter = indirectStarter
 
 
 class EatLiver(_BasicScraper):
     url = 'http://www.eatliver.com/'
     rurl = escape(url)
-    starter = indirectStarter()
+    starter = indirectStarter
     stripUrl = url + "i.php?n=%s"
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("link", "href", r'(%simg/\d+/[^"]+)' % rurl,
@@ -185,7 +185,7 @@ class Eryl(_WordPressScraper):
     url = 'http://www.flowerlarkstudios.com/comic/prologue-migration/page-i/'
     firstStripUrl = url
     latestSearch = WP_LATEST_SEARCH
-    starter = indirectStarter()
+    starter = indirectStarter
     help = 'This was known as DarkWings in previous Dosage versions'
 
 

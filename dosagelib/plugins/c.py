@@ -55,7 +55,7 @@ class Carciphona(_BasicScraper):
                                after="prevarea"))
     latestSearch = compile(tagre("a", "href",
                                  r'(view\.php\?page=[0-9]+[^"]*)'))
-    starter = indirectStarter()
+    starter = indirectStarter
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
@@ -275,7 +275,7 @@ class CoolCatStudio(_BasicScraper):
 
 class CorydonCafe(_ParserScraper):
     url = 'http://corydoncafe.com/'
-    starter = indirectStarter()
+    starter = indirectStarter
     stripUrl = url + '%s.php'
     imageSearch = "//center[2]//img"
     prevSearch = '//a[@title="prev"]'
@@ -347,7 +347,7 @@ class CucumberQuest(_BasicScraper):
     stripUrl = url + 'cq/%s/'
     firstStripUrl = stripUrl % 'page-1'
     startUrl = url + 'recent.html'
-    starter = indirectStarter()
+    starter = indirectStarter
     imageSearch = (
         compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/\d+[^"]+)' % rurl)),
         compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/ch\d+[^"]+)' % rurl)),
@@ -379,7 +379,7 @@ class Curvy(_ParserScraper):
 
 class CyanideAndHappiness(_BasicScraper):
     url = 'http://www.explosm.net/comics/'
-    starter = bounceStarter()
+    starter = bounceStarter
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '15'
     imageSearch = compile(tagre("img", "src", r'(//files.explosm.net/comics/[^"]+)', before="main-comic"))

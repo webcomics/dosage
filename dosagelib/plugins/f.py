@@ -28,7 +28,7 @@ class FantasyRealms(_BasicScraper):
     prevSearch = compile(r'<a href="(.+?)"><img src="../images/nav-back.gif"', IGNORECASE)
     latestSearch = compile(r'<a href="(manga/.+?)"><img src="preview.jpg"', IGNORECASE)
     help = 'Index format: nnn'
-    starter = indirectStarter()
+    starter = indirectStarter
 
 
 class FauxPas(_BasicScraper):
@@ -48,7 +48,7 @@ class FeyWinds(_BasicScraper):
     prevSearch = compile(r"(page.php\?id=.+?)'.+?navprevious.png")
     latestSearch = compile(r'(comic/page.php\?id.+?)"')
     help = 'Index format: n (unpadded)'
-    starter = indirectStarter()
+    starter = indirectStarter
 
 
 class FilibusterCartoons(_BasicScraper):
@@ -161,7 +161,7 @@ class FredoAndPidjin(_BasicScraper):
     prevSearch = compile(tagre('a', 'href', '([^"]+)') + "Prev</a>")
     latestSearch = compile(tagre('a', 'href', "(" + url +
                                  r'\d\d\d\d/\d\d/\d\d/[^"]+/)'))
-    starter = indirectStarter()
+    starter = indirectStarter
 
 
 class Freefall(_BasicScraper):

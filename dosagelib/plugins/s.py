@@ -27,13 +27,12 @@ class SabrinaOnline(_BasicScraper):
     adult = True
     multipleImagesPerStrip = True
 
-    @classmethod
-    def starter(cls):
+    def starter(self):
         """Pick last one in a list of archive pages."""
-        archive = cls.url + 'archive.html'
-        data = cls.getPage(archive)
+        archive = self.url + 'archive.html'
+        data = self.getPage(archive)
         search = compile(tagre("a", "href", r"(\d\d\d\d-\d\d.html)"))
-        archivepages = cls.fetchUrls(archive, data, search)
+        archivepages = self.fetchUrls(archive, data, search)
         return archivepages[-1]
 
 
@@ -69,7 +68,7 @@ class ScandinaviaAndTheWorld(_ParserScraper):
     url = 'http://satwcomic.com/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % 'sweden-denmark-and-norway'
-    starter = indirectStarter()
+    starter = indirectStarter
     imageSearch = '//img[@itemprop="image"]'
     prevSearch = '//a[@accesskey="p"]'
     latestSearch = '//a[text()="View latest comic"]'
@@ -166,14 +165,13 @@ class ScurryAndCover(_ParserScraper):
                 image = images[0]
                 return [cls.url + '/images/pages/' + image + '-xsmall.png']
 
-    @classmethod
-    def starter(cls):
+    def starter(self):
         """Go forward as far as possibe, then start."""
-        url = cls.url
+        url = self.url
         while True:
-            data = cls.getPage(url)
+            data = self.getPage(url)
             try:
-                url = cls.fetchUrl(url, data, cls.nextSearch)
+                url = self.fetchUrl(url, data, self.nextSearch)
             except ValueError:
                 break
         return url
@@ -197,7 +195,7 @@ class SexyLosers(_BasicScraper):
     prevSearch = compile(r'<a href="(/\d{3}\.\w+?)"><font color = FFAAAA><<', IGNORECASE)
     latestSearch = compile(r'SEXY LOSERS <A HREF="(.+?)">Latest SL Comic \(#\d+\)</A>', IGNORECASE)
     help = 'Index format: nnn'
-    starter = indirectStarter()
+    starter = indirectStarter
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
@@ -334,7 +332,7 @@ class SnowFlame(_WordPressScraper):
     url = 'http://www.snowflamecomic.com/'
     stripUrl = url + '?comic=snowflame-%s-%s'
     firstStripUrl = stripUrl % ('01', '01')
-    starter = bounceStarter()
+    starter = bounceStarter
     nextSearch = WP_LATEST_SEARCH
     help = 'Index format: chapter-page'
 
@@ -396,7 +394,7 @@ class Spamusement(_BasicScraper):
                          IGNORECASE)
     latestSearch = prevSearch
     help = 'Index format: n (unpadded)'
-    starter = indirectStarter()
+    starter = indirectStarter
 
 
 class SpareParts(_BasicScraper):
@@ -507,7 +505,7 @@ class StuffNoOneToldMe(_BasicScraper):
     stripUrl = url + '%s.html'
     firstStripUrl = stripUrl % '2010/05/01'
     olderHref = r"(http://www\.snotm\.com/\d+/\d+/[^']+\.html)"
-    starter = indirectStarter()
+    starter = indirectStarter
     imageSearch = (
         compile(tagre("img", "src", r'(http://i\.imgur\.com/[^"]+)') +
                 r"(?:</a>|<br />)"),

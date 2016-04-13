@@ -11,9 +11,8 @@ class _NuklearPower(_ParserScraper):
     prevSearch = '//a[@rel="prev"]'
     imageSearch = '//div[@id="comic"]/img'
 
-    @classmethod
-    def starter(cls):
-        return cls.url + cls.path + '/'
+    def starter(self):
+        return self.url + self.path + '/'
 
     @classmethod
     def getName(cls):

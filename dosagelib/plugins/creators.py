@@ -18,11 +18,10 @@ class _Creators(_ParserScraper):
     def getName(cls):
         return 'Creators/' + cls.__name__
 
-    @classmethod
-    def starter(cls):
-        start = cls.url + cls.path
-        data = cls.getPage(start)
-        return cls.fetchUrl(start, data, cls.latestSearch)
+    def starter(self):
+        start = self.url + self.path
+        data = self.getPage(start)
+        return self.fetchUrl(start, data, self.latestSearch)
 
 
 class _CreatorsEs(_Creators):

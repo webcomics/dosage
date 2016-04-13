@@ -16,7 +16,7 @@ from .common import _WordPressScraper, xpath_class, WP_LATEST_SEARCH
 class AbstruseGoose(_BasicScraper):
     url = 'http://abstrusegoose.com/'
     rurl = escape(url)
-    starter = bounceStarter()
+    starter = bounceStarter
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre('img', 'src',
@@ -122,7 +122,7 @@ class Alice(_WordPressScraper):
     url = 'http://www.alicecomics.com/'
     prevSearch = '//a[%s]' % xpath_class('navi-prev-in')
     latestSearch = '//a[text()="Latest Alice!"]'
-    starter = indirectStarter()
+    starter = indirectStarter
 
 
 class AlienLovesPredator(_BasicScraper):
@@ -262,7 +262,7 @@ class Ashes(_WordPressScraper):
     url = 'http://www.flowerlarkstudios.com/comic/prologue/10232009/'
     firstStripUrl = url
     latestSearch = WP_LATEST_SEARCH
-    starter = indirectStarter()
+    starter = indirectStarter
 
 
 class ASkeweredParadise(_BasicScraper):
@@ -287,7 +287,7 @@ class ASofterWorld(_ParserScraper):
 class AstronomyPOTD(_ParserScraper):
     baseUrl = 'http://apod.nasa.gov/apod/'
     url = baseUrl + 'astropix.html'
-    starter = bounceStarter()
+    starter = bounceStarter
     stripUrl = baseUrl + 'ap%s.html'
     firstStripUrl = stripUrl % '061012'
     imageSearch = '//a/img'

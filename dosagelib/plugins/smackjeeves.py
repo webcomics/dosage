@@ -1,9 +1,15 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
+
 from re import compile
+
 from ..scraper import make_scraper
 from ..util import tagre, quote, case_insensitive_re
+
 
 # SmackJeeves is a crawlers nightmare - users are allowed to edit HTML directly.
 # That's why there are so much different search patterns.
@@ -31,6 +37,7 @@ _nextSearch = (
     compile(_linkSearch + tagre("img", "src", r"[^']+/(?:forthnav)\.png[^']*", quote="'")),
 )
 
+
 def add(name, url, adult, bounce):
     classname = 'SmackJeeves_' + name
 
@@ -41,15 +48,14 @@ def add(name, url, adult, bounce):
             return 'http://www.smackjeeves.com/mature.php?ref=' + quote(pageUrl)
         return pageUrl
 
-    @classmethod
-    def _starter(cls):
+    def _starter(self):
         """Get start URL."""
         url1 = modifier(url)
-        data = cls.getPage(url1)
-        url2 = cls.fetchUrl(url1, data, cls.prevSearch)
+        data = self.getPage(url1)
+        url2 = self.fetchUrl(url1, data, self.prevSearch)
         if bounce:
-            data = cls.getPage(url2)
-            url3 = cls.fetchUrl(url2, data, _nextSearch)
+            data = self.getPage(url2)
+            url3 = self.fetchUrl(url2, data, _nextSearch)
             return modifier(url3)
         return modifier(url2)
 
@@ -76,7 +82,8 @@ def add(name, url, adult, bounce):
     )
 
 
-# do not edit anything below since these entries are generated from scripts/update.sh
+# do not edit anything below since these entries are generated from
+# scripts/update_plugins.sh
 # DO NOT REMOVE
 add('20TimesKirby', 'http://20xkirby.smackjeeves.com/comics/', False, True)
 add('2Kingdoms', 'http://2kingdoms.smackjeeves.com/comics/', False, False)
@@ -110,7 +117,7 @@ add('AlwaysRainingHere', 'http://alwaysraininghere.smackjeeves.com/comics/', Fal
 add('Amaravati', 'http://amaravati.smackjeeves.com/comics/', False, True)
 add('AmorVincitOmnia', 'http://avo.smackjeeves.com/comics/', True, True)
 add('AmsdenEstate', 'http://monsterous.smackjeeves.com/comics/', False, True)
-#add('Amya', 'http://amya.smackjeeves.com/comics/', False, True)
+# add('Amya', 'http://amya.smackjeeves.com/comics/', False, True)
 add('Anathemacomics', 'http://anathema-comics.smackjeeves.com/comics/', False, True)
 add('AngelBeast', 'http://angel-beast.smackjeeves.com/comics/', False, True)
 add('AngelGuardian', 'http://angel-guardian.smackjeeves.com/comics/', False, True)
@@ -176,7 +183,7 @@ add('Cambion', 'http://cambion.smackjeeves.com/comics/', True, True)
 add('CaptiveSoul', 'http://captive-soul.smackjeeves.com/comics/', False, True)
 add('Captor', 'http://captor.smackjeeves.com/comics/', False, True)
 add('CaravanaTaleofGodsandMen', 'http://www.caravantale.com/comics/', False, True)
-#add('Carciphona', 'http://carciphona.smackjeeves.com/comics/', False, True)
+# add('Carciphona', 'http://carciphona.smackjeeves.com/comics/', False, True)
 add('Cataclysm', 'http://cataclysm.smackjeeves.com/comics/', False, True)
 add('Catnip', 'http://catnipmanga.smackjeeves.com/comics/', True, True)
 add('Cerintha', 'http://cerintha.smackjeeves.com/comics/', False, True)
@@ -281,7 +288,7 @@ add('FinalArcanum', 'http://finalarcanum.smackjeeves.com/comics/', False, True)
 add('FireWire', 'http://firewire.smackjeeves.com/comics/', False, True)
 add('FireredLisasReise', 'http://lisasreise.smackjeeves.com/comics/', False, True)
 add('FlyorFail', 'http://flyorfail.smackjeeves.com/comics/', False, False)
-#add('FootLoose', 'http://footloose.smackjeeves.com/comics/', False, True)
+# add('FootLoose', 'http://footloose.smackjeeves.com/comics/', False, True)
 add('ForcedSeduction', 'http://forced-seduction.smackjeeves.com/comics/', False, True)
 add('ForestHill', 'http://www.foresthillcomic.org/comics/', False, False)
 add('ForgettheDistance', 'http://forgetthedistance.smackjeeves.com/comics/', True, True)
@@ -474,7 +481,7 @@ add('MythsofUnovaAWhiteNuzlockeRunHardMode', 'http://mythsofunova.smackjeeves.co
 add('NIK', 'http://nik.smackjeeves.com/comics/', False, True)
 add('Nah', 'http://thecomicformerlyknownasgenlab.smackjeeves.com/comics/', False, True)
 add('Negligence', 'http://negligence.smackjeeves.com/comics/', False, True)
-#add('NekotheKitty', 'http://www.nekothekitty.net/comics/', False, True)
+# add('NekotheKitty', 'http://www.nekothekitty.net/comics/', False, True)
 add('NeoCrystalAdventures', 'http://neocrystaladventures.smackjeeves.com/comics/', False, True)
 add('NeonGlow', 'http://neonglow.smackjeeves.com/comics/', False, True)
 add('NevertheHero', 'http://neverthehero.smackjeeves.com/comics/', False, True)
@@ -766,7 +773,7 @@ add('WhenSheWasBad', 'http://whenshewasbad.smackjeeves.com/comics/', False, True
 add('Whenweweresilent', 'http://silence.smackjeeves.com/comics/', False, False)
 add('WhereaboutsOfTime', 'http://wot.smackjeeves.com/comics/', False, True)
 add('WhiteHeart', 'http://whiteheart.smackjeeves.com/comics/', True, False)
-#add('WhiteNoise', 'http://white-noise.smackjeeves.com/comics/', False, True)
+# add('WhiteNoise', 'http://white-noise.smackjeeves.com/comics/', False, True)
 add('WildWingBoys', 'http://wwb.smackjeeves.com/comics/', False, True)
 add('WildWingBoysKoathArc', 'http://wwbka.smackjeeves.com/comics/', False, True)
 add('Wildflowers', 'http://wildflowers.smackjeeves.com/comics/', False, True)

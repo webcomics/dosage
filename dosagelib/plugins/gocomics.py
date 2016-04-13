@@ -20,13 +20,12 @@ class _GoComics(_ParserScraper):
     def getName(cls):
         return 'GoComics/' + cls.__name__[2:]
 
-    @classmethod
-    def starter(cls):
-        url1 = cls.url + cls.path
-        data = cls.getPage(url1)
-        url2 = cls.fetchUrl(url1, data, cls.prevSearch)
-        data = cls.getPage(url2)
-        return cls.fetchUrl(url2, data, cls.nextSearch)
+    def starter(self):
+        url1 = self.url + self.path
+        data = self.getPage(url1)
+        url2 = self.fetchUrl(url1, data, self.prevSearch)
+        data = self.getPage(url2)
+        return self.fetchUrl(url2, data, self.nextSearch)
 
     @classmethod
     def namer(cls, image_url, page_url):

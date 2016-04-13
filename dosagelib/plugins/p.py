@@ -20,7 +20,7 @@ class PandyLand(_WordPressScraper):
 
 class ParadigmShift(_BasicScraper):
     url = 'http://www.paradigmshiftmanga.com/'
-    starter = indirectStarter()
+    starter = indirectStarter
     stripUrl = url + 'ps/%s.html'
     imageSearch = compile(tagre("img", "src", r'([^"]*comics/ps/[^"]*)'))
     prevSearch = compile(tagre("a", "href", r'([^"]+)',
@@ -86,6 +86,7 @@ class PennyArcade(_BasicScraper):
                                before="btnPrev"))
     nextSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl,
                                before="btnNext"))
+    starter = bounceStarter
     help = 'Index format: yyyy/mm/dd/'
 
     @classmethod
@@ -98,15 +99,6 @@ class PennyArcade(_BasicScraper):
                 # URL has form yyyy/mm/dd/stripname
                 prevUrl = "%s/%s/%s" % (dummy, yyyy, mm)
             return prevUrl
-
-    @classmethod
-    def starter(cls):
-        """Get bounced start URL."""
-        data = cls.getPage(cls.url)
-        url1 = cls.fetchUrl(cls.url, data, cls.prevSearch)
-        data = cls.getPage(url1)
-        url2 = cls.fetchUrl(url1, data, cls.nextSearch)
-        return cls.prevUrlModifier(url2)
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
@@ -162,7 +154,7 @@ class PicPakDog(_BasicScraper):
 
 class PiledHigherAndDeeper(_BasicScraper):
     url = 'http://www.phdcomics.com/comics.php'
-    starter = bounceStarter()
+    starter = bounceStarter
     stripUrl = url + '?comicid=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(http://www\.phdcomics\.com/comics/archive/phd\d+s\d?\.\w{3,4})', quote=""))
@@ -207,7 +199,7 @@ class PokeyThePenguin(_ParserScraper):
     imageSearch = '//p/img'
     latestSearch = '(//a)[last()]'
     multipleImagesPerStrip = True
-    starter = indirectStarter()
+    starter = indirectStarter
     help = 'Index format: number'
 
     def getPrevUrl(self, url, data):
@@ -231,7 +223,7 @@ class PoorlyDrawnLines(_BasicScraper):
 
 class Precocious(_BasicScraper):
     url = 'http://www.precociouscomic.com/'
-    starter = indirectStarter()
+    starter = indirectStarter
     stripUrl = url + 'archive/comic/%s'
     imageSearch = compile(tagre("img", "src", r'(/comics/\d+[^"]*\.(?:jpg|gif))'))
     prevSearch = compile(tagre("a", "href", r'(/archive/comic/[^"]+)') + tagre("img", "src", r"/templates/precocious_main/images/back_arrow\.png"))
@@ -243,7 +235,7 @@ class Precocious(_BasicScraper):
 class PS238(_ParserScraper):
     url = 'http://ps238.nodwick.com/'
     stripUrl = url + '/comic/%s/'
-    starter = bounceStarter()
+    starter = bounceStarter
     imageSearch = '//div[@id="comic"]//img'
     prevSearch = '//a[@class="comic-nav-base comic-nav-previous"]'
     nextSearch = '//a[@class="comic-nav-base comic-nav-next"]'

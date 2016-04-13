@@ -15,7 +15,7 @@ from ..util import tagre
 class Xkcd(_BasicScraper):
     name = 'xkcd'
     url = 'http://xkcd.com/'
-    starter = bounceStarter()
+    starter = bounceStarter
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src",

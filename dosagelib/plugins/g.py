@@ -27,7 +27,7 @@ class Garanos(_BasicScraper):
     baseUrl = 'http://garanos.alexheberling.com/'
     rurl = escape(baseUrl)
     url = baseUrl + 'pages/page-1/'
-    starter = indirectStarter()
+    starter = indirectStarter
     stripUrl = baseUrl + 'pages/page-%s'
     imageSearch = compile(
         tagre("img", "src",
@@ -136,7 +136,7 @@ class GoGetARoomie(_ComicControlScraper):
 
 class GoneWithTheBlastwave(_BasicScraper):
     url = 'http://www.blastwave-comic.com/index.php?p=comic&nro=1'
-    starter = indirectStarter()
+    starter = indirectStarter
     stripUrl = url[:-1] + '%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(r'<img.+src=".+(/comics/.+?)"')

@@ -9,7 +9,7 @@ def add(name, start):
         name=name,
         url='http://hijinksensue.com/',
         latestSearch=start,
-        starter=indirectStarter()
+        starter=indirectStarter
     )
     globals()[name] = make_scraper(name, _WordPressScraper, **attrs)
 

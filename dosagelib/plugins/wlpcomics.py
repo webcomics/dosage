@@ -13,7 +13,7 @@ class _WLPComics(_ParserScraper):
     imageSearch = '//center/*/img[contains(@alt, " Comic")]'
     prevSearch = '//a[contains(text(), "Previous ")]'
     nextSearch = '//a[contains(text(), "Next ")]'
-    starter = bounceStarter()
+    starter = bounceStarter
     help = 'Index format: nnn'
 
     @classmethod

@@ -34,7 +34,7 @@ class JerkCity(_BasicScraper):
 class JimBenton(_BasicScraper):
     url = 'http://www.jimbenton.com/page14/page14.html'
     stripUrl = 'http://www.jimbenton.com/page14/files/JimBentonComic-%s.html'
-    starter = indirectStarter()
+    starter = indirectStarter
     imageSearch = compile(tagre("img", "src", r'(JimBentonComic-[^"]+)',
                                 before="photo-frame"))
     prevSearch = compile(tagre("a", "href", r'(JimBentonComic-[^>]+\.html)',

@@ -6,15 +6,11 @@
 from __future__ import absolute_import, division, print_function
 
 from .common import _WordPressScraper, WP_LATEST_SEARCH
-
+from ..helpers import indirectStarter
 
 class _WebcomicFactory(_WordPressScraper):
-    @classmethod
-    def starter(cls):
-        """this is basically helpers.indirectStarter, but dynamically selecting
-        the right parameters."""
-        data = cls.getPage(cls.firstStripUrl)
-        return cls.fetchUrl(cls.firstStripUrl, data, WP_LATEST_SEARCH)
+    starter = indirectStarter
+    latestSearch = WP_LATEST_SEARCH
 
 
 # do not edit anything below since these entries are generated from

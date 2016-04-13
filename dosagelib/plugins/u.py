@@ -24,7 +24,7 @@ class Undertow(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'([^"]+\.jpg)'))
     prevSearch = compile(r'href="(.+?)".+?teynpoint')
     latestSearch = compile(r'href="(.+?)".+?Most recent page')
-    starter = indirectStarter()
+    starter = indirectStarter
 
 
 class UnicornJelly(_BasicScraper):
@@ -47,7 +47,7 @@ class Unsounded(_BasicScraper):
     latestSearch = compile(tagre("a", "href", r'(%scomic/[^"]*)' % rurl) +
                            tagre("img", "src",
                                  r"%simages/newpages\.png" % rurl))
-    starter = indirectStarter()
+    starter = indirectStarter
     help = 'Index format: chapter-number'
 
     def getIndexStripUrl(self, index):

@@ -104,7 +104,7 @@ class NichtLustig(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(http://static\.nichtlustig\.de/toondb/\d+\.html)'))
     latestSearch = compile(tagre("a", "href", r'([^"]*toondb/\d+\.html)'))
     help = 'Index format: yymmdd'
-    starter = indirectStarter()
+    starter = indirectStarter
 
 
 class Nicky510(_WordPressScraper):
@@ -137,7 +137,7 @@ class NoMoreSavePoints(_WordPressScraper):
     url = 'http://www.flowerlarkstudios.com/comic/no-more-save-points/mushroom-hopping/'
     firstStripUrl = url
     latestSearch = WP_LATEST_SEARCH
-    starter = indirectStarter()
+    starter = indirectStarter
 
 
 class NoNeedForBushido(_BasicScraper):
@@ -153,7 +153,7 @@ class NoNeedForBushido(_BasicScraper):
     latestSearch = compile(tagre("a", "href", r'(%s\?webcomic1=[^"]+)' % rurl,
                                  after="last-webcomic"))
     help = 'Index format: nnn'
-    starter = indirectStarter()
+    starter = indirectStarter
 
 
 class NotInventedHere(_BasicScraper):

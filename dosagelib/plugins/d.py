@@ -15,7 +15,7 @@ from .common import _WordPressScraper, xpath_class
 
 class DailyDose(_ParserScraper):
     url = 'http://dailydoseofcomics.com/'
-    starter = indirectStarter()
+    starter = indirectStarter
     imageSearch = '//p/a/img'
     prevSearch = '//a[@rel="prev"]'
     latestSearch = '//a[@rel="bookmark"]'
@@ -32,7 +32,7 @@ class DamnLol(_BasicScraper):
         compile(tagre("img", "src", r'(%spics/[^"]+)' % rurl)),
     )
     help = 'Index format: stripname-number'
-    starter = bounceStarter()
+    starter = bounceStarter
 
     @classmethod
     def namer(cls, imageUrl, pageUrl):
@@ -155,7 +155,7 @@ class Dilbert(_BasicScraper):
     url = 'http://dilbert.com/'
     stripUrl = url + '/strip/%s/'
     firstStripUrl = stripUrl % '1989-04-16'
-    starter = indirectStarter()
+    starter = indirectStarter
     prevSearch = compile(tagre("a", "href", r'(/strip/\d+-\d+-\d+)', after="Older Strip"))
     imageSearch = compile(tagre("img", "src", r'(http://assets.amuniversal.com/\w+)'))
     latestSearch = compile(tagre("a", "href",
@@ -255,7 +255,7 @@ class DresdenCodak(_BasicScraper):
     latestSearch = compile(tagre("div", "id", "preview") +
                            tagre("a", "href",
                                  r'(%s\d+/\d+/\d+/[^"]+)' % rurl))
-    starter = indirectStarter()
+    starter = indirectStarter
 
 
 class DrFun(_BasicScraper):

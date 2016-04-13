@@ -22,13 +22,12 @@ class HagarTheHorrible(_BasicScraper):
     prevSearch = compile(tagre("a", "href", prevUrl, after="Previous"))
     help = 'Index format: number'
 
-    @classmethod
-    def starter(cls):
+    def starter(self):
         """Return last gallery link."""
         url = 'http://www.hagardunor.net/comics.php'
-        data = cls.getPage(url)
-        pattern = compile(tagre("a", "href", cls.prevUrl))
-        for starturl in cls.fetchUrls(url, data, pattern):
+        data = self.getPage(url)
+        pattern = compile(tagre("a", "href", self.prevUrl))
+        for starturl in self.fetchUrls(url, data, pattern):
             pass
         return starturl
 
@@ -41,7 +40,7 @@ class _HappyJar(_WordPressScraper):
 class HarkAVagrant(_BasicScraper):
     url = 'http://www.harkavagrant.com/'
     rurl = escape(url)
-    starter = bounceStarter()
+    starter = bounceStarter
     stripUrl = url + 'index.php?id=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'(%s[^"]+)' % rurl,
