@@ -10,20 +10,19 @@ processing.
 from __future__ import absolute_import, division, print_function
 
 import codecs
-import re
 import sys
 import os
 
 import requests
+from lxml import html
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))  # noqa
 from dosagelib.util import get_page
-from dosagelib.scraper import get_scraperclasses
-from scriptutil import contains_case_insensitive, save_result, load_result, truncate_name, format_name
+from dosagelib.scraper import get_scrapers
+from scriptutil import (contains_case_insensitive, save_result, load_result,
+                        truncate_name, format_name)
 
 json_file = __file__.replace(".py", ".json")
-
-url_matcher = re.compile(r'<li><a href="(/thefunnies/[^"]+)">([^<]+)</a>')
 
 # names of comics to exclude
 exclude_comics = [
@@ -35,20 +34,22 @@ def handle_url(url, session, res):
     """Parse one search result page."""
     print("Parsing", url, file=sys.stderr)
     try:
-        data = get_page(url, session).text
+        data = html.document_fromstring(get_page(url, session).text)
+        data.make_links_absolute(url)
     except IOError as msg:
         print("ERROR:", msg, file=sys.stderr)
         return
-    for match in url_matcher.finditer(data):
-        shortname = match.group(1)
-        name = format_name(match.group(2))
+
+    for comiclink in data.cssselect('a.comic-icon'):
+        path = comiclink.attrib['href']
+        name = format_name(comiclink.attrib['title'])
         if name in exclude_comics:
             continue
         if contains_case_insensitive(res, name):
             # we cannot handle two comics that only differ in case
             print("INFO: skipping possible duplicate", repr(name), file=sys.stderr)
             continue
-        res[name] = shortname
+        res[name] = path.rsplit('/', 2)[1]
     if not res:
         print("ERROR:", "did not match any comics", file=sys.stderr)
 
@@ -62,7 +63,7 @@ def get_results():
     save_result(res, json_file)
 
 
-def has_comic(name):
+def find_dups(name):
     """Check if comic name already exists."""
     names = [
         ("Creators/%s" % name).lower(),
@@ -72,26 +73,29 @@ def has_comic(name):
         ("ComicGenesis/%s" % name).lower(),
         ("SmackJeeves/%s" % name).lower(),
     ]
-    for scraperclass in get_scraperclasses():
-        lname = scraperclass.getName().lower()
+    for scraperobj in get_scrapers():
+        lname = scraperobj.name.lower()
         if lname in names or lname == name.lower():
-            return True
-    return False
+            return scraperobj.name
+    return None
+
+
+def first_lower(x):
+    return x[0].lower()
 
 
 def print_results(args):
     """Print all comics that have at least the given number of minimum comic strips."""
     min_comics, filename = args
     with codecs.open(filename, 'a', 'utf-8') as fp:
-        for name, shortname in sorted(load_result(json_file).items()):
-            if name in exclude_comics:
-                continue
-            if has_comic(name):
-                prefix = u'#'
+        data = load_result(json_file)
+        for name, path in sorted(data.items(), key=first_lower):
+            dup = find_dups(name)
+            if dup is not None:
+                fp.write(u"# %s has a duplicate in %s\n" % (name, dup))
             else:
-                prefix = u''
-            fp.write(u"%sadd(%r, %r)\n" % (prefix, str(truncate_name(name)),
-                                           str(shortname)))
+                fp.write(u"\n\nclass %s(_Arcamax):\n    path = %r\n" % (
+                    truncate_name(name), path))
 
 
 if __name__ == '__main__':
