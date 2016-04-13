@@ -169,7 +169,6 @@ def getComics(options):
     try:
         for scraperobj in getScrapers(options.comic, options.basepath,
                                       options.adult, options.multimatch):
-            print(scraperobj)
             jobs.put(scraperobj)
         # start threads
         num_threads = min(options.parallel, jobs.qsize())
@@ -244,7 +243,6 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False, listi
                     # FIXME: Find a better way to work with indexes
                     scraperobj.indexes = indexes
                     if scraperobj not in scrapers:
-                        print("A")
                         scrapers.add(scraperobj)
                         yield scraperobj
 
