@@ -1,39 +1,134 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 
-from re import compile
-from ..scraper import make_scraper
+from __future__ import absolute_import, division, print_function
 
-_imageSearch = compile(r'<img src=http://\w+\.snafu-comics\.com/(comics/\d{6}_\w*\.\w{3,4})')
-_prevSearch = compile(r'<a href="(\?comic_id=\d+)">Previous</a>')
-
-
-def add(name, host):
-    baseUrl = 'http://%s.snafu-comics.com/' % host
-    classname = 'SnafuComics_%s' % name
-
-    globals()[classname] = make_scraper(classname,
-        name='SnafuComics/%s' % name,
-        url = baseUrl,
-        stripUrl = baseUrl + '?comic_id=%s',
-        imageSearch = _imageSearch,
-        prevSearch = _prevSearch,
-        help = 'Index format: n (unpadded)',
-    )
+from ..scraper import _ParserScraper
+from ..helpers import indirectStarter
 
 
-add('KOF', 'kof')
-add('PowerPuffGirls', 'ppg')
-add('Tin', 'tin')
-add('TW', 'tw')
-add('Sugar', 'sugar')
-add('SF', 'sf')
-add('Titan', 'titan')
-add('EA', 'ea')
-add('Zim', 'zim')
-add('Soul', 'soul')
-add('FT', 'ft')
-add('Bunnywith', 'bunnywith')
-add('Braindead', 'braindead')
-add('GrimTalesFromDownBelow', 'grim')
+class _Snafu(_ParserScraper):
+    # Next and Previous are swapped...
+    prevSearch = '//a[@class="next"]'
+    imageSearch = '//div[@class="comicpage"]/img'
+    latestSearch = '//div[@id="feed"]/a'
+    starter = indirectStarter
+
+    @property
+    def name(self):
+        return 'SnafuComics/' + super(_Snafu, self).name
+
+    @classmethod
+    def namer(cls, image_url, page_url):
+        year, month, name = image_url.rsplit('/', 3)[1:]
+        return "%04s_%02s_%s" % (year, month, name)
+
+    @property
+    def url(self):
+        return 'http://snafu-comics.com/swmseries/' + self.path
+
+
+class Braindead(_Snafu):
+    path = 'braindead'
+
+
+class Bunnywith(_Snafu):
+    path = 'bunnywith'
+
+
+class DeliverUsEvil(_Snafu):
+    path = 'deliverusevil'
+
+
+class DigitalPurgatory(_Snafu):
+    path = 'digital-purgatory'
+
+
+class EA(_Snafu):
+    path = 'ea'
+
+
+class FT(_Snafu):
+    path = 'ft'
+
+
+class GrimTalesFromDownBelow(_Snafu):
+    path = 'grimtales'
+
+
+class KOF(_Snafu):
+    path = 'kof'
+
+
+class MyPanda(_Snafu):
+    path = 'mypanda'
+
+
+class NarutoHeroesPath(_Snafu):
+    path = 'naruto'
+
+
+class NewSuperMarioAdventures(_Snafu):
+    path = 'nsma'
+
+
+class PowerPuffGirls(_Snafu):
+    path = 'powerpuffgirls'
+
+
+class PSG2(_Snafu):
+    path = 'psg2'
+
+
+class SatansExcrement(_Snafu):
+    path = 'satansexcrement'
+
+
+class SF(_Snafu):
+    path = 'sf'
+
+
+class SkullBoy(_Snafu):
+    path = 'skullboy'
+
+
+class Snafu(_Snafu):
+    path = 'snafu'
+
+
+class Soul(_Snafu):
+    path = 'soul'
+
+
+class Sugar(_Snafu):
+    path = 'sugarbits'
+
+
+class SureToBeBanD(_Snafu):
+    path = 'stbb'
+
+
+class TheLeague(_Snafu):
+    path = 'league'
+
+
+class Tin(_Snafu):
+    path = 'tin'
+
+
+class Titan(_Snafu):
+    path = 'titan'
+
+
+class TrunksAndSoto(_Snafu):
+    path = 'trunks-and-soto'
+
+
+class TW(_Snafu):
+    path = 'tw'
+
+
+class Zim(_Snafu):
+    path = 'zim'
