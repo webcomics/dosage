@@ -18,7 +18,7 @@ import requests
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))  # noqa
 from dosagelib.util import get_page, tagre, check_robotstxt
-from dosagelib.scraper import get_scraperclasses
+from dosagelib.scraper import get_scrapers
 from scriptutil import (contains_case_insensitive, save_result, load_result,
                         truncate_name, format_name)
 
@@ -435,8 +435,8 @@ def has_comic(name):
         ("Creators/%s" % name).lower(),
         ("GoComics/%s" % name).lower(),
     ]
-    for scraperclass in get_scraperclasses():
-        lname = scraperclass.getName().lower()
+    for scraperobj in get_scrapers():
+        lname = scraperclass.name.lower()
         if lname in names:
             return True
     return False

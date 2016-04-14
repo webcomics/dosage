@@ -22,7 +22,7 @@ import requests
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))  # noqa
 from dosagelib.util import get_page, tagre
-from dosagelib.scraper import get_scraperclasses
+from dosagelib.scraper import get_scrapers
 from scriptutil import contains_case_insensitive, save_result, load_result, truncate_name, format_name
 
 
@@ -328,8 +328,8 @@ def get_results():
 def has_comic(name):
     """Check if comic name already exists."""
     cname = name.lower()
-    for scraperclass in get_scraperclasses():
-        lname = scraperclass.getName().lower()
+    for scraperobj in get_scrapers():
+        lname = scraperobj.name.lower()
         if lname == cname:
             return True
     return False
