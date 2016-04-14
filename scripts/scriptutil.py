@@ -32,12 +32,13 @@ class ComicListUpdater(object):
         self.json = name.replace(".py", ".json")
         self.session = requests.Session()
 
-    def get_url(self, url):
+    def get_url(self, url, expand=True):
         """Get an HTML page and parse it with LXML."""
         print("Parsing", url, file=sys.stderr)
         try:
             data = html.document_fromstring(get_page(url, self.session).text)
-            data.make_links_absolute(url)
+            if expand:
+                data.make_links_absolute(url)
             return data
         except IOError as msg:
             print("ERROR:", msg, file=sys.stderr)

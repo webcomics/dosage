@@ -48,6 +48,10 @@ class GCAbnormalTruth(_GoComics):
     path = 'abnormal-truth'
 
 
+class GCABomb(_GoComics):
+    path = 'a-bomb'
+
+
 class GCABootsAndPupComic(_GoComics):
     path = 'a-boots-and-pup-comic'
 
@@ -655,10 +659,6 @@ class GCAaronGuile(_GoComics):
 
 class GCABitSketch(_GoComics):
     path = 'a-bit-sketch'
-
-
-class GCABomb(_GoComics):
-    path = 'a-bomb'
 
 
 class GCACMEINKD(_GoComics):
@@ -1639,10 +1639,6 @@ class GCHankAndDalesOurWorld(_GoComics):
 
 class GCHaphazardHumor(_GoComics):
     path = 'haphazard-humor'
-
-
-class GCHappyBoyBobsAnimatedGifs(_GoComics):
-    path = 'happy-boy-bobs-animated-gifs'
 
 
 class GCHarambeeHills(_GoComics):
@@ -2899,6 +2895,10 @@ class GCSubSub(_GoComics):
 
 class GCSuburbanFairyTales(_GoComics):
     path = 'suburban-fairy-tales'
+
+
+class GCSUITSANDGUARDERS(_GoComics):
+    path = 'suits-and-guarders'
 
 
 class GCSunnyStreet(_GoComics):

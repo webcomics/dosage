@@ -30,7 +30,7 @@ class GoComicsUpdater(ComicListUpdater):
 
     def handle_url(self, url):
         """Parse one search result page."""
-        data = self.get_url(url)
+        data = self.get_url(url, expand=False)
 
         for comiclink in data.cssselect('a.alpha_list'):
             link = comiclink.attrib['href']
