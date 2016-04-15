@@ -72,12 +72,9 @@ def add(name, url, adult, bounce):
         url = url,
         starter = _starter,
         prevUrlModifier = lambda cls, url: modifier(url),
-        stripUrl = url + '%s/',
         imageSearch = _imageSearch,
         prevSearch = _prevSearch,
-        prevUrlMatchesStripUrl = not adult,
         lang = 'es' if name.lower().endswith('spanish') else 'en',
-        help = 'Index format: nnnn (some increasing number)',
         namer = namer,
     )
 

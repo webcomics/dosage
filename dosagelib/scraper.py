@@ -54,10 +54,6 @@ class Scraper(object):
     # if more than one image per URL is expected
     multipleImagesPerStrip = False
 
-    # set to False if previous URLs do not match the strip URL (ie. because of
-    # redirects)
-    prevUrlMatchesStripUrl = True
-
     # set to True if this comic contains adult content
     adult = False
 

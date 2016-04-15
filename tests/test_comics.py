@@ -60,7 +60,7 @@ def _test_comic(outdir, scraperobj):
     for strip in scraperobj.getStrips(MaxStrips):
         _check_strip(outdir, strip, scraperobj.multipleImagesPerStrip)
 
-        if num_strips > 0 and scraperobj.prevUrlMatchesStripUrl:
+        if num_strips > 0:
             _check_stripurl(strip, scraperobj)
         num_strips += 1
 
