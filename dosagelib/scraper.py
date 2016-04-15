@@ -167,7 +167,7 @@ class Scraper(object):
             self.starter()
             urls = [self.getIndexStripUrl(index) for index in self.indexes]
         else:
-            urls = [self.getLatestUrl()]
+            urls = [self.starter()]
         if self.adult:
             msg += u" (including adult content)"
         out.info(msg)
@@ -259,10 +259,6 @@ class Scraper(object):
         not modify the URL. The given data is the URL page data.
         """
         return imageUrl
-
-    def getLatestUrl(self):
-        """Get starter URL from where to scrape comic strips."""
-        return self.starter()
 
     def vote(self):
         """Cast a public vote for this comic."""
