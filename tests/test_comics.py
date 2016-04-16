@@ -5,6 +5,7 @@
 
 import re
 import os
+import operator
 import multiprocessing
 try:
     from urllib.parse import urlsplit
@@ -133,7 +134,7 @@ def get_test_scrapers():
             # faster
             testscrapernames = [
                     'AbstruseGoose',
-                    'GoComics/CalvinandHobbes',
+                    'GoComics/CalvinAndHobbes',
                     'xkcd'
             ]
             scraper_pattern = re.compile('|'.join(testscrapernames))
@@ -147,4 +148,5 @@ def get_test_scrapers():
 
 def pytest_generate_tests(metafunc):
     if 'scraperobj' in metafunc.fixturenames:
-        metafunc.parametrize('scraperobj', get_test_scrapers())
+        metafunc.parametrize('scraperobj', get_test_scrapers(),
+                             ids=operator.attrgetter('name'))
