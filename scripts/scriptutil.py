@@ -102,7 +102,7 @@ class ComicListUpdater(object):
         if names:
             for scraperobj in scraper.get_scrapers():
                 lname = scraperobj.name.lower()
-                if lname in names or lname == name.lower():
+                if lname in names:
                     return scraperobj.name
         return None
 

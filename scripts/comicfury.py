@@ -10,6 +10,10 @@ processing.
 from __future__ import absolute_import, division, print_function
 
 import sys
+try:
+    from urllib.parse import urlsplit
+except ImportError:
+    from urlparse import urlsplit
 
 from scriptutil import ComicListUpdater
 
@@ -18,8 +22,17 @@ class ComicFuryUpdater(ComicListUpdater):
     # Absolute minumum number of pages a comic may have (restrict search space)
     MIN_COMICS = 90
 
-    dup_templates = ("Creators/%s", "DrunkDuck/%s", "GoComics/%s",
-                     "KeenSpot/%s", "SmackJeeves/%s", "Arcamax/%s")
+    dup_templates = ('Creators/%s', 'DrunkDuck/%s', 'GoComics/%s',
+                     'KeenSpot/%s', 'SmackJeeves/%s', 'Arcamax/%s')
+
+    langmap = {
+        'german': 'de',
+        'spanish': 'es',
+        'italian': 'it',
+        'japanese': 'ja',
+        'french': 'fr',
+        'portuguese': 'pt',
+    }
 
     # names of comics to exclude
     excluded_comics = (
@@ -149,7 +162,16 @@ class ComicFuryUpdater(ComicListUpdater):
 
     def get_classdef(self, name, entry):
         url, active, lang = entry
-        return u"class CF%s(_ComicFury):\n    url = %r" % (name, url)
+        langopt = ''
+        if lang != "english":
+            if lang in self.langmap:
+                langopt = '\n    lang = %r' % self.langmap[lang]
+            else:
+                print("WARNING:", "Unknown language:", lang)
+
+        sub = urlsplit(url).hostname.split('.', 1)[0]
+        return u"class CF%s(_ComicFury):\n    sub = %r%s" % (name, sub,
+                                                             langopt)
 
 
 if __name__ == '__main__':
