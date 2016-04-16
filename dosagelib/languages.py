@@ -7,4 +7,7 @@ Languages = {
     'es': u'Spanish; Castilian',
     'fi': u'Finnish',
     'fr': u'French',
+    'it': u'Italian',
+    'ja': u'Japanese',
+    'pt': u'Portuguese',
 }

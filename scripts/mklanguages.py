@@ -11,9 +11,9 @@ import sys
 import codecs
 
 basepath = os.path.dirname(os.path.dirname(__file__))
-sys.path.append(basepath)
+sys.path.insert(0, basepath)
 
-from dosagelib.scraper import get_scraperclasses  # noqa
+from dosagelib.scraper import get_scrapers  # noqa
 
 
 def main():
@@ -30,10 +30,10 @@ def main():
 
 def get_used_languages():
     lang = {}
-    for scraperclass in get_scraperclasses():
-        l = scraperclass.lang
+    for scraperobj in get_scrapers():
+        l = scraperobj.lang
         if l not in lang:
-            lang[l] = scraperclass.language()
+            lang[l] = scraperobj.language()
     return lang
 
 
