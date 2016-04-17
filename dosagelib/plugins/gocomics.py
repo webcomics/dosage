@@ -184,12 +184,12 @@ class GCElfandMotorbelly(_GoComics):
     path = 'elf-and-motorbelly'
 
 
-class GCEspressoCity(_GoComics):
-    path = 'Espresso-City'
-
-
 class GCEngagAndNevets(_GoComics):
     path = 'engag-nevets'
+
+
+class GCEspressoCity(_GoComics):
+    path = 'Espresso-City'
 
 
 class GCEttoreandBaldo(_GoComics):
@@ -432,6 +432,10 @@ class GCQuestionsForKids(_GoComics):
     path = 'questions-for-kids'
 
 
+class GCRackafracka(_GoComics):
+    path = 'rackafracka'
+
+
 class GCRegularCreatures(_GoComics):
     path = 'regular-creatures'
 
@@ -468,10 +472,6 @@ class GCSmallNerdyCreatures(_GoComics):
     path = 'small-nerdy-creatures'
 
 
-class GCSpinCrazy(_GoComics):
-    path = 'spin-crazy'
-
-
 class GCSNAFU(_GoComics):
     path = 'snafu'
 
@@ -486,6 +486,10 @@ class GCSPACESLUGS(_GoComics):
 
 class GCSpaceTimeFunnies(_GoComics):
     path = 'spacetimefunnies'
+
+
+class GCSpinCrazy(_GoComics):
+    path = 'spin-crazy'
 
 
 class GCSTEPDAD(_GoComics):
@@ -731,10 +735,6 @@ class GCAnecdote(_GoComics):
 
 class GCAngryLittleGirls(_GoComics):
     path = 'angry-little-girls'
-
-
-class GCAngryProgrammer(_GoComics):
-    path = 'angryprogrammer'
 
 
 class GCAnimalCrackers(_GoComics):
@@ -1005,10 +1005,6 @@ class GCBroomHilda(_GoComics):
     path = 'broomhilda'
 
 
-class GCBuffaloChips(_GoComics):
-    path = 'buffalo-chips'
-
-
 class GCBully(_GoComics):
     path = 'bully'
 
@@ -1157,10 +1153,6 @@ class GCCowTown(_GoComics):
     path = 'cowtown'
 
 
-class GCCrawdiddy(_GoComics):
-    path = 'crawdiddy'
-
-
 class GCCrumb(_GoComics):
     path = 'crumb'
 
@@ -1215,10 +1207,6 @@ class GCDiamondLil(_GoComics):
 
 class GCDickTracy(_GoComics):
     path = 'dicktracy'
-
-
-class GCDilbert(_GoComics):
-    path = 'dilbert'
 
 
 class GCDilbertClassics(_GoComics):
@@ -2469,10 +2457,6 @@ class GCPhoebeAndHerUnicorn(_GoComics):
     path = 'phoebe-and-her-unicorn'
 
 
-class GCPi(_GoComics):
-    path = 'pi'
-
-
 class GCPibgorn(_GoComics):
     path = 'pibgorn'
 
@@ -2573,10 +2557,6 @@ class GCRabbitsAgainstMagic(_GoComics):
     path = 'rabbitsagainstmagic'
 
 
-class GCRackafracka(_GoComics):
-    path = 'rackafracka'
-
-
 class GCRaisingDuncan(_GoComics):
     path = 'raising-duncan'
 
@@ -2587,10 +2567,6 @@ class GCRandolphItch2Am(_GoComics):
 
 class GCRandomActsOfNancy(_GoComics):
     path = 'random-acts-of-nancy'
-
-
-class GCRandysRationale(_GoComics):
-    path = 'randys-rationale'
 
 
 class GCRealityCheck(_GoComics):
@@ -2609,10 +2585,6 @@ class GCRedAndRover(_GoComics):
     path = 'redandrover'
 
 
-class GCRedMeat(_GoComics):
-    path = 'redmeat'
-
-
 class GCReplyAll(_GoComics):
     path = 'replyall'
 
@@ -2623,10 +2595,6 @@ class GCReplyAllLite(_GoComics):
 
 class GCRichardsPoorAlmanac(_GoComics):
     path = 'richards-poor-almanac'
-
-
-class GCRicigsToonTrivia(_GoComics):
-    path = 'ricigs-toon-trivia'
 
 
 class GCRingers(_GoComics):
@@ -2751,10 +2719,6 @@ class GCSignGarden(_GoComics):
 
 class GCSignsOfAFrustratedGolfer(_GoComics):
     path = 'signs-of-a-frustrated-golfer'
-
-
-class GCSignsOfOurTimes(_GoComics):
-    path = 'signs-of-our-times'
 
 
 class GCSketchyChics(_GoComics):

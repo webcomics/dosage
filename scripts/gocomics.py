@@ -16,16 +16,22 @@ class GoComicsUpdater(ComicListUpdater):
     # names of comics to exclude
     excluded_comics = [
             # "coming soon"
-            "Angryprogrammer",
+            "AngryProgrammer",
             "Guinness",
             "Jabberwoncky",
-            "RandysRationale"
+            "Pi",
+            "RandysRationale",
             "SignsOfOurTimes",
             "TheGagwriter",
             "Yaoyao",
 
             # duplicate
+            "Dilbert",
             "SaturdayMorningBreakfastCereal",
+
+            # not available
+            "BuffaloChips",
+            "Crawdiddy",
     ]
 
     def handle_url(self, url):
