@@ -56,6 +56,7 @@ class ComicFuryUpdater(ComicListUpdater):
         "Fanartgyle",
         "FrigginRandom",
         "GoodbyeKitty",
+        "GoodSirICannotDraw",
         "HighlyExperiMental",
         "IfAndCanBeFlowers",
         "JournalismStory",
@@ -88,6 +89,7 @@ class ComicFuryUpdater(ComicListUpdater):
         "StrangerThanFiction",
         "TalamakGreatAdventure",
         "TheBattalion",
+        "TheBends",
         "TheDailyProblem",
         "TheMansionOfE",
         "ThePainter",
@@ -104,6 +106,7 @@ class ComicFuryUpdater(ComicListUpdater):
 
         # no content
         "Angst",
+        "TheDevonLegacyPrologue",
 
         # images gone
         "BaseballCapsAndTiaras",
@@ -113,6 +116,7 @@ class ComicFuryUpdater(ComicListUpdater):
         "KindergardenCrisIs",
         "NoSongsForTheDead",
         "RequiemShadowbornPariah",
+        "STICKFODDER",
         "TezzleAndZeek",
 
         # broken HTML

@@ -1339,6 +1339,10 @@ class CFFriendshipIsDragons(_ComicFury):
     sub = 'friendshipisdragons'
 
 
+class CFFromDustToRuination(_ComicFury):
+    sub = 'fromdust2ruination'
+
+
 class CFFrontier2170(_ComicFury):
     sub = 'frontier2170'
 
@@ -1434,10 +1438,6 @@ class CFGoldrush(_ComicFury):
 
 class CFGOODBYEREPTILIANS(_ComicFury):
     sub = 'goodbyereptilians'
-
-
-class CFGoodSirICannotDraw(_ComicFury):
-    sub = 'icannotdraw'
 
 
 class CFGrandfathersTale(_ComicFury):
@@ -3055,10 +3055,6 @@ class CFStevenAndTheCrystalGMs(_ComicFury):
     sub = 'crystalgms'
 
 
-class CFSTICKFODDER(_ComicFury):
-    sub = 'stickfodder'
-
-
 class CFStickLife(_ComicFury):
     sub = 'sticklife'
 
@@ -3220,10 +3216,6 @@ class CFTheBend(_ComicFury):
     sub = 'thebend'
 
 
-class CFTheBends(_ComicFury):
-    sub = 'thebends'
-
-
 class CFTheBigFoldy(_ComicFury):
     sub = 'bigfoldy'
 
@@ -3275,10 +3267,6 @@ class CFTheDailyDoodle(_ComicFury):
 
 class CFTheDevilsHorn(_ComicFury):
     sub = 'thedevilshorn'
-
-
-class CFTheDevonLegacyPrologue(_ComicFury):
-    sub = 'prologue'
 
 
 class CFTheDragonFistsOfSmortySmythe(_ComicFury):
