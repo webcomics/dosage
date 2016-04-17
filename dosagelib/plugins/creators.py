@@ -49,10 +49,6 @@ class GirlsAndSports(_Creators):
     path = 'girls-and-sports'
 
 
-class GirlsandSportsSpanish(_CreatorsEs):
-    path = 'girls-and-sports-spanish'
-
-
 class HomeOffice(_Creators):
     path = 'stay-at-home-dad'
 
@@ -79,10 +75,6 @@ class Recess(_Creators):
 
 class Rugrats(_Creators):
     path = 'rugrats'
-
-
-class RugratsSpanish(_CreatorsEs):
-    path = 'rugrats-spanish'
 
 
 class TheQuigmans(_Creators):

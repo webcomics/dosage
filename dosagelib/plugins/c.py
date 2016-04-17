@@ -176,15 +176,6 @@ class ChasingTheSunset(_BasicScraper):
     help = 'Index format: n'
 
 
-class CheckerboardNightmare(_ParserScraper):
-    url = 'http://www.checkerboardnightmare.com/'
-    stripUrl = url + 'd/%s'
-    firstStripUrl = stripUrl % '20001110.html'
-    imageSearch = '//td[@colspan="4"]//img'
-    prevSearch = '//td[2]/a'
-    help = 'Index format: yyyymmdd'
-
-
 class Chester5000XYV(_BasicScraper):
     url = 'http://jessfink.com/Chester5000XYV/'
     stripUrl = url + '?p=%s'
@@ -229,17 +220,6 @@ class Comedity(_BasicScraper):
     imageSearch = compile(r'<img src="(Comedity_files/.+?)"')
     prevSearch = compile(r'<a href="(/?index.php\?strip_id=\d+?)"> *<img alt=\"Prior Strip')
     help = 'Index format: n (no padding)'
-
-
-class Commissioned(_BasicScraper):
-    url = 'http://www.commissionedcomic.com/'
-    rurl = escape(url)
-    stripUrl = url + '?p=%s'
-    firstStripUrl = stripUrl % '139'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl,
-                               after="prev"))
-    help = 'Index format: n'
 
 
 class CompanyY(_BasicScraper):
@@ -317,28 +297,6 @@ class CrimsonDark(_BasicScraper):
     imageSearch = compile(r'src="(.+?strips/.+?)"')
     prevSearch = compile(r'<a href=[\'"](/crimsondark/index\.php\?view=comic&amp;strip_id=\d+)[\'"]><img src=[\'"]themes/cdtheme/images/active_prev.png[\'"]')
     help = 'Index format: n (unpadded)'
-
-
-class CtrlAltDel(_BasicScraper):
-    url = 'http://www.cad-comic.com/cad/'
-    stripUrl = url + '%s'
-    imageSearch = compile(tagre("img", "src", r'(http://v\.cdn\.cad-comic\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)', after="nav-back"))
-    help = 'Index format: yyyymmdd'
-
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        """Remove random junk from image names."""
-        imgname = imageUrl.split('/')[-1]
-        imgbase = imgname.rsplit('-', 1)[0]
-        imgext = imgname.rsplit('.', 1)[1]
-        return '%s.%s' % (imgbase, imgext)
-
-
-class CtrlAltDelSillies(CtrlAltDel):
-    name = 'CtrlAltDel/Sillies'
-    url = 'http://www.cad-comic.com/sillies/'
-    stripUrl = url + '%s'
 
 
 class CucumberQuest(_BasicScraper):

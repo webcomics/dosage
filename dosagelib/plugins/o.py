@@ -65,16 +65,6 @@ class OmakeTheater(_ParserScraper):
     help = 'Index format: number (unpadded)'
 
 
-class OneQuestion(_BasicScraper):
-    url = 'http://onequestioncomic.com/'
-    stripUrl = url + 'comic.php?strip_id=%s'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'((?:\.\./)?istrip_files/strips/\d+\.\w{3,4})'))
-    prevSearch = compile(tagre("a", "href", r'(comic\.php\?strip_id=\d+)') +
-                         tagre("img", "src", r'img/arrow_prev\.jpg'))
-    help = 'Index format: n (unpadded)'
-
-
 class OnTheEdge(_WordPressScraper):
     url = 'http://ontheedgecomics.com/'
     firstStripUrl = 'http://ontheedgecomics.com/comic/ote0001/'
@@ -104,18 +94,6 @@ class Optipess(_WordPressScraper):
     firstStripUrl = url + '2008/12/01/jason-friend-of-the-butterflies/'
     prevSearch = '//a[%s]' % xpath_class('navi-prev')
     textSearch = '//div[@id="comic"]//img/@alt'
-
-
-class OrnerBoy(_BasicScraper):
-    url = 'http://www.orneryboy.com/'
-    rurl = escape(url)
-    stripUrl = url + 'index.php?comicID=%s'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(comics/\d+\.[^"]+)'))
-    prevSearch = compile(tagre("a", "href",
-                               r'(%sindex\.php\?comicID=\d+)' % rurl) +
-                         tagre("img", "src", r'images/prev_a\.gif'))
-    help = 'Index format: number'
 
 
 class OurHomePlanet(_BasicScraper):

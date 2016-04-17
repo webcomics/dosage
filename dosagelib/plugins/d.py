@@ -86,15 +86,6 @@ class DeadWinter(_BasicScraper):
     help = 'Index format: number'
 
 
-class DeathToTheExtremist(_BasicScraper):
-    url = 'http://www.dtecomic.com/'
-    stripUrl = url + '?n=%s'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = compile(r'"(comics/.*?)"')
-    prevSearch = compile(r'</a> <a href="(\?n=.*?)"><.+?/aprev.gif"')
-    help = 'Index format: nnn'
-
-
 class DeepFried(_BasicScraper):
     url = 'http://www.whatisdeepfried.com/'
     rurl = escape(url)

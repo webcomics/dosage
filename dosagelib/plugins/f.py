@@ -9,7 +9,6 @@ from re import compile, escape, IGNORECASE
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
-from .common import _WordPressScraper
 
 
 class FalconTwin(_BasicScraper):
@@ -38,17 +37,6 @@ class FauxPas(_BasicScraper):
     imageSearch = compile(r'<img .*src="(.*fp/fp.*(png|jpg|gif))"')
     prevSearch = compile(r'<a href="(pl-fp1\.cgi\?\d+)">Previous Strip')
     help = 'Index format: nnn'
-
-
-class FeyWinds(_BasicScraper):
-    baseUrl = 'http://kitsune.rydia.net/'
-    url = baseUrl + 'index.html'
-    stripUrl = baseUrl + 'comic/page.php?id=%s'
-    imageSearch = compile(r"(../comic/pages//.+?)'")
-    prevSearch = compile(r"(page.php\?id=.+?)'.+?navprevious.png")
-    latestSearch = compile(r'(comic/page.php\?id.+?)"')
-    help = 'Index format: n (unpadded)'
-    starter = indirectStarter
 
 
 class FilibusterCartoons(_BasicScraper):
@@ -130,22 +118,11 @@ class ForLackOfABetterComic(_BasicScraper):
     help = 'Index format: number'
 
 
-class FowlLanguage(_WordPressScraper):
-    url = 'http://www.fowllanguagecomics.com/'
-
-
 class Fragile(_ParserScraper):
     url = 'http://www.fragilestory.com/'
     imageSearch = '//div[@id="comic_strip"]/a[@class="nobg"]/img'
     prevSearch = '//div[@id="nav_comic_a"]/a[2]'
     firstStripUrl = url + 'strips/chapter_01'
-
-
-class FragileSpanish(_ParserScraper):
-    url = 'http://es.fragilestory.com/'
-    imageSearch = '//div[@id="content_comics"]/a[@class="nobg"]/img'
-    prevSearch = '//a[@class="comicnav" and contains(text(),"Anterior")]'
-    lang = 'es'
 
 
 class FredoAndPidjin(_BasicScraper):

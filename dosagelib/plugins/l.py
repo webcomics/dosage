@@ -75,25 +75,6 @@ class LetsSpeakEnglish(_ComicControlScraper):
     url = 'http://www.marycagle.com'
 
 
-class Lint(_BasicScraper):
-    url = 'http://www.purnicellin.com/lint/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2004/01/10/01102004'
-    imageSearch = compile(r'<img src="(%scomics/.+?)"' % rurl)
-    prevSearch = compile(r'\| <a href="([^"]+)" rel="prev">')
-    help = 'Index format: yyyy/mm/dd/num-name'
-
-
-class LinuxComFridayFunnies(_BasicScraper):
-    url = 'https://www.linux.com/news/friday-funnies/'
-    stripUrl = url + '%s'
-    firstStripUrl = stripUrl % 'the-road-to-japan'
-    imageSearch = compile(tagre("img", "src", r'(/news/friday-funnies/episode/[^"]+\?format=image[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/news/friday-funnies/[^"]+)') + "Previous")
-    help = 'Index format: stripname'
-
-
 class LittleGamers(_BasicScraper):
     url = 'http://www.little-gamers.com/'
     stripUrl = url + '%s/'

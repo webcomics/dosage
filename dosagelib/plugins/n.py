@@ -7,7 +7,7 @@ from __future__ import absolute_import, division, print_function
 
 from re import compile, escape
 
-from ..scraper import _BasicScraper, _ParserScraper
+from ..scraper import _BasicScraper
 from ..helpers import indirectStarter
 from ..util import tagre
 from .common import (_ComicControlScraper, _WordPressScraper, WP_LATEST_SEARCH,
@@ -49,23 +49,6 @@ class Nedroid(_WordPressScraper):
     prevSearch = '//a[@rel="prev"]'
 
 
-class NekkoAndJoruba(_BasicScraper):
-    url = 'http://www.nekkoandjoruba.com/'
-    stripUrl = url + '?p=%s'
-    firstStripUrl = stripUrl % '7'
-    imageSearch = compile(r'<img src="(http://www\.nekkoandjoruba\.com/comics/.+?)"')
-    prevSearch = compile(r'<a href="(.+?)">&lsaquo;</a>')
-    help = 'Index format: nnn'
-
-
-class NekoTheKitty(_ParserScraper):
-    url = 'http://www.nekothekitty.net/'
-    stripUrl = url + 'comics/%s'
-    firstStripUrl = stripUrl % '936393/001-video-games'
-    imageSearch = '//a[@id="comic_image"]/img'
-    prevSearch = '//a[text()="<-"]'
-
-
 class NeoEarth(_BasicScraper):
     url = 'http://www.neo-earth.com/NE/'
     stripUrl = url + 'index.php?date=%s'
@@ -78,13 +61,6 @@ class NeoEarth(_BasicScraper):
 class NerfNow(_WordPressScraper):
     url = 'https://www.nerfnow.com/'
     prevSearch = '//li[@id="nav_previous"]/a'
-
-
-class NewAdventuresOfBobbin(_BasicScraper):
-    url = 'http://www.bobbin-comic.com/bobbin_strips/'
-    imageSearch = compile(tagre("a", "href", r'(\d+\.gif)'))
-    multipleImagesPerStrip = True
-    help = 'Index format: none'
 
 
 class NewWorld(_BasicScraper):
