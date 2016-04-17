@@ -45,8 +45,6 @@ class ComicListUpdater(object):
             raise
 
     def should_skip(self, name):
-        if name in self.excluded_comics:
-            return True
         if contains_case_insensitive(self.res, name):
             # we cannot handle two comics that only differ in case
             print("INFO: skipping possible duplicate", repr(name),
@@ -85,6 +83,8 @@ class ComicListUpdater(object):
             with codecs.open(self.json, 'rb', 'utf-8') as f:
                 data = json.load(f)
             for name, entry in sorted(data.items(), key=first_lower):
+                if name in self.excluded_comics:
+                    continue
                 count = entry['count']
                 if count and count < min_comics:
                     continue
