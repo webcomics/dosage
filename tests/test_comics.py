@@ -3,6 +3,8 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2016 Tobias Gruetzmacher
 
+from __future__ import absolute_import, division, print_function
+
 import re
 import os
 import multiprocessing
@@ -70,7 +72,7 @@ def _test_comic(outdir, scraperobj):
         msg = 'Traversed %d strips instead of %d.' % (num_strips,
                                                       num_strips_expected)
         if strip:
-            msg += " Check the prevSearch pattern at %s" % strip.stripUrl
+            msg += " Check the prevSearch pattern at %s" % strip.strip_url
         assert num_strips == num_strips_expected, msg
         if strip:
             _check_scraperesult(outdir, num_strips_expected, strip, scraperobj)
@@ -83,10 +85,10 @@ def _check_strip(outdir, strip, multipleImagesPerStrip):
     for image in strip.getImages():
         images.append(image.url)
         image.save(outdir)
-    assert images, 'failed to find images at %s' % strip.stripUrl
+    assert images, 'failed to find images at %s' % strip.strip_url
     if not multipleImagesPerStrip:
         assert len(images) == 1, 'found more than 1 image at %s: %s' % (
-                strip.stripUrl, images)
+                strip.strip_url, images)
 
 
 def _check_scraperesult(outdir, num_images_expected, strip, scraperobj):
@@ -113,7 +115,7 @@ def _check_stripurl(strip, scraperobj):
     urlmatch = urlmatch.replace(r"\%s", r".+")
     urlmatch = "^%s$" % urlmatch
     ro = re.compile(urlmatch)
-    mo = ro.search(strip.stripUrl)
+    mo = ro.search(strip.strip_url)
     err = 'strip URL %r does not match stripUrl pattern %s' % (
-            strip.stripUrl, urlmatch)
+            strip.strip_url, urlmatch)
     assert mo is not None, err
