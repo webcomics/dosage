@@ -310,8 +310,7 @@ class Scraper(object):
     def fetchText(cls, url, data, textSearch, optional):
         raise ValueError("No implementation for fetchText!")
 
-    @classmethod
-    def getDisabledReasons(cls):
+    def getDisabledReasons(self):
         """
         Get a dict of reasons why this comic module is disabled. The key is a
         short (unique) identifier, the value is a string explaining why the
@@ -320,22 +319,22 @@ class Scraper(object):
         """
         return {}
 
-    @classmethod
-    def language(cls):
+    def language(self):
         """
         Return language of the comic as a human-readable language name instead
         of a 2-character ISO639-1 code.
         """
-        lang = 'Unknown (%s)' % cls.lang
+        lang = 'Unknown (%s)' % self.lang
         if pycountry is None:
-            if cls.lang in languages.Languages:
-                lang = languages.Languages[cls.lang]
+            if self.lang in languages.Languages:
+                lang = languages.Languages[self.lang]
         else:
             try:
-                lang = pycountry.languages.get(alpha2=cls.lang).name
+                lang = pycountry.languages.get(alpha2=self.lang).name
             except KeyError:
                 try:
-                    lang = pycountry.languages.get(iso639_1_code=cls.lang).name
+                    lang = pycountry.languages.get(
+                        iso639_1_code=self.lang).name
                 except KeyError:
                     pass
         return lang
@@ -505,10 +504,9 @@ class _ParserScraper(Scraper):
         else:
             return None
 
-    @classmethod
-    def getDisabledReasons(cls):
+    def getDisabledReasons(self):
         res = {}
-        if cls.css and cssselect is None:
+        if self.css and cssselect is None:
             res['css'] = (u"This module needs the cssselect " +
                           u"(python-cssselect) python module which is " +
                           u"not installed.")
