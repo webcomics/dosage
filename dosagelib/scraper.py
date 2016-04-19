@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2014-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
 
 import time
 import random
@@ -428,6 +430,10 @@ class _ParserScraper(Scraper):
     XML_DECL = re.compile(
         r'^(<\?xml[^>]+)\s+encoding\s*=\s*["\'][^"\']*["\'](\s*\?>|)', re.U)
 
+    NS = {
+        "re": "http://exslt.org/regular-expressions"
+    }
+
     # Switch between CSS and XPath selectors for this class. Since CSS needs
     # another Python module, XPath is the default for now.
     css = False
@@ -455,7 +461,8 @@ class _ParserScraper(Scraper):
         if cls.css:
             searchFun = data.cssselect
         else:
-            searchFun = data.xpath
+            def searchFun(s):
+                return data.xpath(s, namespaces=cls.NS)
         searches = makeSequence(urlSearch)
         for search in searches:
             for match in searchFun(search):
