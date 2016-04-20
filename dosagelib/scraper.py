@@ -468,9 +468,13 @@ class _ParserScraper(Scraper):
                 try:
                     for attrib in html_link_attrs:
                         if attrib in match.attrib:
-                            searchUrls.append(match.get(attrib))
+                            searchUrl = match.get(attrib)
                 except AttributeError:
-                    searchUrls.append(str(match))
+                    searchUrls = str(match)
+                out.debug(u'Matched URL %r with pattern %s' %
+                          (searchUrl, search))
+                searchUrls.append(searchUrl)
+
             if not cls.multipleImagesPerStrip and searchUrls:
                 # do not search other links if one pattern matched
                 break
