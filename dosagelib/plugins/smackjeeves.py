@@ -5,785 +5,2866 @@
 
 from __future__ import absolute_import, division, print_function
 
-from re import compile
+from ..util import quote
+from ..scraper import _ParserScraper
 
-from ..scraper import make_scraper
-from ..util import tagre, quote, case_insensitive_re
-
-
-# SmackJeeves is a crawlers nightmare - users are allowed to edit HTML directly.
-# That's why there are so much different search patterns.
-
-_imageSearch = compile(tagre("img", "src", r'([^"]+)', after='id="comic_image"'))
-_linkSearch = tagre("a", "href", r'([^>"]*/comics/\d+/[^>"]*)', quote='"?')
-_attrs = dict(
-    back = case_insensitive_re("back"),
-    prev = case_insensitive_re("prev"),
-    next = case_insensitive_re("next"),
-)
-_prevSearch = (
-    compile(_linkSearch +
-  r'(?:<img[^>]+alt="[^"]*%(prev)s|<img[^>]+(?:button_previous|naviButtons_Previous|nav_prev4|prev|previous|webbuttonback|PrevArrow)\.|[^<]*%(back)s|\s*<<? (?:%(back)s|%(prev)s)|[^<]*%(prev)s)' % _attrs),
-    compile(_linkSearch + r'[^<]*Atras<'),
-    compile(_linkSearch + tagre("img", "src", r'[^"]+/(?:backrg|JZj4a3C|b5175a677Zd6b)\.png')),
-    compile(_linkSearch + tagre("img", "src", r"[^']+/(?:backnav)\.png", quote="'")),
-    compile(_linkSearch + r"\s*" + tagre("img", "src", r'[^"]+/prev\.jpg')),
-)
-_nextSearch = (
-    compile(_linkSearch +
-  r'(?:<img[^>]+alt="%(next)s|<img[^>]+(?:button_next|naviButtons_Next|nav_next4|next|webbuttonnext-1|NextArrow)\.|\s*<?[^<]*%(next)s)' % _attrs),
-    compile(_linkSearch + r'Siguiente'),
-    compile(_linkSearch + tagre("img", "src", r'[^"]+/(?:arrow3_zps03f490e3|60ecbaed7gbJs)\.png[^"]*')),
-    compile(_linkSearch + tagre("img", "src", r"[^']+/(?:forthnav)\.png[^']*", quote="'")),
-)
+# SmackJeeves is a crawlers nightmare - users are allowed to edit HTML
+# directly.
 
 
-def add(name, url, adult, bounce):
-    classname = 'SmackJeeves_' + name
+class _SmackJeeves(_ParserScraper):
+    ONLY_COMICS = '[contains(@href, "/comics/")]'
 
-    def modifier(pageUrl):
-        if adult:
-            # mature content can be viewed directly with:
-            # http://www.smackjeeves.com/mature.php?ref=<percent-encoded-url>
-            return 'http://www.smackjeeves.com/mature.php?ref=' + quote(pageUrl)
-        return pageUrl
+    prevSearch = (
+        '//a[@class="nav-prev"]' + ONLY_COMICS,
+        '//a[img[re:test(@alt, "prev", "i")]]' + ONLY_COMICS,
+        '//a[re:test(@title, "previous", "i")]' + ONLY_COMICS,
+        '//a[re:test(text(), "prev|back", "i")]' + ONLY_COMICS,
+        '//select[@class="jumpbox"]/preceding::a[1]' + ONLY_COMICS,
+    )
 
-    def _starter(self):
+    nextSearch = (
+        '//a[@class="nav-next"]' + ONLY_COMICS,
+        '//a[img[re:test(@alt, "next", "i")]]' + ONLY_COMICS,
+        '//a[re:test(@title, "next", "i")]' + ONLY_COMICS,
+        '//a[re:test(text(), "next", "i")]' + ONLY_COMICS,
+        '//select[@class="jumpbox"]/following::a[1]' + ONLY_COMICS,
+    )
+
+    imageSearch = (
+        '//img[@id="comic_image"]',
+        '//div[@id="comic-image"]//img',
+        '//img[@id="comic"]',
+    )
+
+    @property
+    def name(self):
+        return 'SmackJeeves/' + super(_SmackJeeves, self).name[2:]
+
+    @property
+    def url(self):
+        if hasattr(self, 'host'):
+            return 'http://%s/comics/' % self.host
+        else:
+            return 'http://%s.smackjeeves.com/comics/' % self.sub
+
+    def starter(self):
         """Get start URL."""
-        url1 = modifier(url)
-        data = self.getPage(url1)
-        url2 = self.fetchUrl(url1, data, self.prevSearch)
-        if bounce:
-            data = self.getPage(url2)
-            url3 = self.fetchUrl(url2, data, _nextSearch)
-            return modifier(url3)
-        return modifier(url2)
+        start = self.url
+        if self.adult:
+            start = 'http://www.smackjeeves.com/mature.php?ref=' + quote(start)
+        data = self.getPage(start)
+        startimg = None
+        if not self.shouldSkipUrl(start, data):
+            startimg = self.fetchUrl(start, data, self.imageSearch)
+        prevurl = self.fetchUrl(start, data, self.prevSearch)
+        data = self.getPage(prevurl)
+        previmg = None
+        if not self.shouldSkipUrl(prevurl, data):
+            previmg = self.fetchUrl(prevurl, data, self.imageSearch)
+        if startimg and previmg and startimg == previmg:
+            print("Matching! %s %s" % (prevurl, self.name))
+            return prevurl
+        else:
+            return self.fetchUrl(prevurl, data, self.nextSearch)
 
     @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        parts = pageUrl.split('/')
+    def namer(cls, image_url, page_url):
+        parts = page_url.split('/')
         name = parts[-2]
         num = parts[-3]
         return "%s_%s" % (name, num)
 
-    globals()[classname] = make_scraper(classname,
-        name = 'SmackJeeves/' + name,
-        adult = adult,
-        url = url,
-        starter = _starter,
-        prevUrlModifier = lambda cls, url: modifier(url),
-        imageSearch = _imageSearch,
-        prevSearch = _prevSearch,
-        lang = 'es' if name.lower().endswith('spanish') else 'en',
-        namer = namer,
-    )
-
+    def shouldSkipUrl(self, url, data):
+        return data.xpath('//img[contains(@src, "/images/image_na.gif")]')
 
 # do not edit anything below since these entries are generated from
 # scripts/update_plugins.sh
 # DO NOT REMOVE
-add('20TimesKirby', 'http://20xkirby.smackjeeves.com/comics/', False, True)
-add('2Kingdoms', 'http://2kingdoms.smackjeeves.com/comics/', False, False)
-add('355Days', 'http://355days.smackjeeves.com/comics/', False, True)
-add('AB', 'http://alistairandboggart.smackjeeves.com/comics/', True, True)
-add('ADoodleADay', 'http://adoodleaday.smackjeeves.com/comics/', False, True)
-add('AGirlAndHerShadow', 'http://agirlandhershadow.smackjeeves.com/comics/', False, True)
-add('AGirlontheServer', 'http://girlontheserver.smackjeeves.com/comics/', False, True)
-add('AKirbyKomic', 'http://akirbykomic.smackjeeves.com/comics/', False, True)
-add('ALaMode', 'http://alamode.smackjeeves.com/comics/', False, False)
-add('ANGELOU', 'http://angelou-esp.smackjeeves.com/comics/', False, True)
-add('APTComic', 'http://aptcomic.smackjeeves.com/comics/', False, True)
-add('AQuestionOfCharacter', 'http://aqoc.smackjeeves.com/comics/', False, True)
-add('ASongforElise', 'http://asongforelise.smackjeeves.com/comics/', True, True)
-add('AYuriCollab', 'http://ayuricollabbitches.smackjeeves.com/comics/', True, True)
-add('Aarrevaara', 'http://aarrevaara.smackjeeves.com/comics/', False, True)
-add('AchievementStuck', 'http://achievementstuck.smackjeeves.com/comics/', False, True)
-add('AcidMonday', 'http://acidmonday.smackjeeves.com/comics/', True, True)
-add('Adalsysla', 'http://adalsysla.smackjeeves.com/comics/', False, True)
-add('AddictiveScience', 'http://addictivescience.smackjeeves.com/comics/', False, True)
-add('AdventuresofLumandFriends', 'http://aolaf.smackjeeves.com/comics/', False, True)
-add('AdventuresoftheWeird', 'http://adventuresoftheweird.smackjeeves.com/comics/', False, True)
-add('AetherTheories', 'http://aethertheories.smackjeeves.com/comics/', False, True)
-add('AgeoftheGray', 'http://ageofthegray.smackjeeves.com/comics/', True, True)
-add('AllInLOVE', 'http://allinlove.smackjeeves.com/comics/', False, True)
-add('AllStarHeroes', 'http://allstarheroes.smackjeeves.com/comics/', False, True)
-add('Allthatglitters', 'http://atg.smackjeeves.com/comics/', True, True)
-add('AloversRule', 'http://aloversrule.smackjeeves.com/comics/', True, True)
-add('AlwaysDamnedWebcomic', 'http://alwaysdamned.smackjeeves.com/comics/', True, True)
-add('AlwaysRainingHere', 'http://alwaysraininghere.smackjeeves.com/comics/', False, True)
-add('Amaravati', 'http://amaravati.smackjeeves.com/comics/', False, True)
-add('AmorVincitOmnia', 'http://avo.smackjeeves.com/comics/', True, True)
-add('AmsdenEstate', 'http://monsterous.smackjeeves.com/comics/', False, True)
-# add('Amya', 'http://amya.smackjeeves.com/comics/', False, True)
-add('Anathemacomics', 'http://anathema-comics.smackjeeves.com/comics/', False, True)
-add('AngelBeast', 'http://angel-beast.smackjeeves.com/comics/', False, True)
-add('AngelGuardian', 'http://angel-guardian.smackjeeves.com/comics/', False, True)
-add('AnimalAdventures', 'http://animaladventures.smackjeeves.com/comics/', False, True)
-add('Animayhem', 'http://animayhem.smackjeeves.com/comics/', False, True)
-add('Anythingaboutnothing', 'http://www.anythingcomic.com/comics/', False, True)
-add('ArchportCityChronicles', 'http://tjs.smackjeeves.com/comics/', False, True)
-add('Area9', 'http://area-9.smackjeeves.com/comics/', False, False)
-add('AroundtheBlock', 'http://aroundtheblock.smackjeeves.com/comics/', False, True)
-add('ArtofAFantasy', 'http://artofafantasy.smackjeeves.com/comics/', True, True)
-add('AtArmsLength', 'http://atarmslength.smackjeeves.com/comics/', False, True)
-add('Atlaswebcomic', 'http://atlaswebcomic.smackjeeves.com/comics/', False, True)
-add('Autophobia', 'http://autophobia.smackjeeves.com/comics/', True, False)
-add('Aware', 'http://aware.smackjeeves.com/comics/', False, True)
-add('AwesomeSauce', 'http://tdawesomesauce.smackjeeves.com/comics/', False, True)
-add('AyaTakeo', 'http://ayatakeo.smackjeeves.com/comics/', False, True)
-add('BLDShortComics', 'http://bldshortcomics.smackjeeves.com/comics/', False, True)
-add('BLOT', 'http://blotcomic.smackjeeves.com/comics/', False, True)
-add('BabysittingFourDemons', 'http://babysitting4demons.smackjeeves.com/comics/', False, True)
-add('Babywhatsyoursign', 'http://babywhatsyoursign.smackjeeves.com/comics/', False, True)
-add('BadassRiz', 'http://badassriz.smackjeeves.com/comics/', False, True)
-add('BallandChain', 'http://ballandchain.smackjeeves.com/comics/', False, True)
-add('Bard', 'http://barred.smackjeeves.com/comics/', False, True)
-add('BassComicAdventures', 'http://basscomicadventures.smackjeeves.com/comics/', False, True)
-add('BattleSequence', 'http://battlesequence.smackjeeves.com/comics/', False, True)
-add('Bearhoney', 'http://bear-honey.smackjeeves.com/comics/', False, True)
-add('BearlyAbel', 'http://bearlyabel.smackjeeves.com/comics/', False, False)
-add('BeautifulLies', 'http://beautiful-lies.smackjeeves.com/comics/', False, True)
-add('BehindTheObsidianMirror', 'http://obsidian-mirror.smackjeeves.com/comics/', True, True)
-add('Behindtheglasscurtain', 'http://g1ass.smackjeeves.com/comics/', False, True)
-add('BeretCatComics', 'http://beretcatcomics.smackjeeves.com/comics/', False, True)
-add('Bestbrosforever', 'http://bestbrosforever.smackjeeves.com/comics/', False, True)
-add('Betovering', 'http://betovering.smackjeeves.com/comics/', False, True)
-add('BettencourtHotel', 'http://www.welcometobettencourt.com/comics/', False, True)
-add('BetweenLightandDark', 'http://bld.smackjeeves.com/comics/', False, True)
-add('BetweenWorlds', 'http://betweenworlds.smackjeeves.com/comics/', True, True)
-add('Betwin', 'http://be-twin.smackjeeves.com/comics/', False, True)
-add('BeyondTemptation', 'http://beyondtemptation.smackjeeves.com/comics/', False, True)
-add('BeyondTheOrdinary', 'http://bto.smackjeeves.com/comics/', False, True)
-add('BioRevelation', 'http://biorevelation.smackjeeves.com/comics/', False, True)
-add('Bl3', 'http://bl3.smackjeeves.com/comics/', False, True)
-add('BlackDragon', 'http://blackdragon.smackjeeves.com/comics/', False, True)
-add('BlackFridayRule', 'http://blackfridayrule.smackjeeves.com/comics/', False, True)
-add('BlackSheepcomic', 'http://black-sheep.smackjeeves.com/comics/', False, True)
-add('BlackandBlue', 'http://black-and-blue.smackjeeves.com/comics/', False, True)
-add('Blackdemon', 'http://blackdemoncomics.smackjeeves.com/comics/', False, True)
-add('BleachRedux', 'http://bleachredux.smackjeeves.com/comics/', False, True)
-add('BlindandBlue', 'http://blindandblue.smackjeeves.com/comics/', False, False)
-add('BloodhuntersBirthofavampire', 'http://bloodhunters.smackjeeves.com/comics/', False, True)
-add('Bloodyfairytale', 'http://yaika.smackjeeves.com/comics/', False, True)
-add('BloomaPokemonConquestComic', 'http://bloomconquest.smackjeeves.com/comics/', False, True)
-add('BlueHair', 'http://bluehair.smackjeeves.com/comics/', False, True)
-add('BlueWell', 'http://www.bluewellcomic.com/comics/', False, False)
-add('BoilingPointofBrain', 'http://bpob.smackjeeves.com/comics/', False, True)
-add('BoogeyDancingMonkeyPot', 'http://monkeypot.smackjeeves.com/comics/', False, True)
-add('BreachofAgency', 'http://breachofagency.smackjeeves.com/comics/', False, True)
-add('BreakfastonaCliff', 'http://boac.smackjeeves.com/comics/', False, True)
-add('Burn', 'http://burn.smackjeeves.com/comics/', False, True)
-add('ByTheBook', 'http://bythebook.smackjeeves.com/comics/', False, False)
-add('CafeAmargo', 'http://cafeamargo.smackjeeves.com/comics/', False, True)
-add('CafeSuada', 'http://cafesuada.smackjeeves.com/comics/', False, True)
-add('Cambion', 'http://cambion.smackjeeves.com/comics/', True, True)
-add('CaptiveSoul', 'http://captive-soul.smackjeeves.com/comics/', False, True)
-add('Captor', 'http://captor.smackjeeves.com/comics/', False, True)
-add('CaravanaTaleofGodsandMen', 'http://www.caravantale.com/comics/', False, True)
-# add('Carciphona', 'http://carciphona.smackjeeves.com/comics/', False, True)
-add('Cataclysm', 'http://cataclysm.smackjeeves.com/comics/', False, True)
-add('Catnip', 'http://catnipmanga.smackjeeves.com/comics/', True, True)
-add('Cerintha', 'http://cerintha.smackjeeves.com/comics/', False, True)
-add('ChampionofChampions', 'http://championofchampions.smackjeeves.com/comics/', False, True)
-add('ChampionsandHeroesAgeofDragons', 'http://championsandheroes.smackjeeves.com/comics/', False, True)
-add('ChannelDDDNews', 'http://dddnews.smackjeeves.com/comics/', False, True)
-add('ChaosAdventuresII', 'http://chaosadventuresii.smackjeeves.com/comics/', False, True)
-add('ChaosTheory2005', 'http://chaostheory2005.smackjeeves.com/comics/', False, True)
-add('ChaoticNation', 'http://chaoticnation.smackjeeves.com/comics/', True, True)
-add('Charaktermaske', 'http://charaktermaske.smackjeeves.com/comics/', False, True)
-add('Chatuplines', 'http://chatuplines.smackjeeves.com/comics/', False, True)
-add('CheneysGotaGun', 'http://cheney.smackjeeves.com/comics/', False, True)
-add('ChickenScratches', 'http://chickenscratches.smackjeeves.com/comics/', False, True)
-add('ChildrenoftheNight', 'http://cotn.smackjeeves.com/comics/', False, True)
-add('ChimiMouryou', 'http://cmmr.smackjeeves.com/comics/', False, True)
-add('ChocolatewithPepper', 'http://chocolate-with-pepper.smackjeeves.com/comics/', False, True)
-add('CityFolk', 'http://cityfolk.smackjeeves.com/comics/', False, True)
-add('ClairetheFlare', 'http://clairetheflare.smackjeeves.com/comics/', False, False)
-add('CleanCure', 'http://cleanpluscure.smackjeeves.com/comics/', False, True)
-add('ClockworkAtrium', 'http://www.clockwork-atrium.com/comics/', False, True)
-add('CloeRemembrance', 'http://cloe.smackjeeves.com/comics/', False, False)
-add('CockroachTheater', 'http://cockroachtheater.smackjeeves.com/comics/', False, True)
-add('Cogs', 'http://cogs.smackjeeves.com/comics/', False, True)
-add('ColorBlind', 'http://cbcomic.smackjeeves.com/comics/', False, True)
-add('ConventionalWisdom', 'http://conventionalwisdom.smackjeeves.com/comics/', False, True)
-add('CosmicDash', 'http://cosmicdash.smackjeeves.com/comics/', False, True)
-add('Cramberries', 'http://cramberries.smackjeeves.com/comics/', False, True)
-add('CrimsonWings', 'http://crimson-wings.smackjeeves.com/comics/', False, True)
-add('CrocodileTears', 'http://crocodile-tears.smackjeeves.com/comics/', True, True)
-add('CupofOlea', 'http://cupofolea.smackjeeves.com/comics/', False, True)
-add('CurseLineage', 'http://curselineage.smackjeeves.com/comics/', False, True)
-add('DBON', 'http://dbondoujin.smackjeeves.com/comics/', False, True)
-add('DEGAF', 'http://degaf.smackjeeves.com/comics/', False, True)
-add('DEMENTED', 'http://demented.smackjeeves.com/comics/', True, True)
-add('DaddysGirl', 'http://daddysgirl.smackjeeves.com/comics/', False, True)
-add('DanielleDark', 'http://danielledark.smackjeeves.com/comics/', False, True)
-add('Dasien', 'http://dasien.smackjeeves.com/comics/', True, True)
-add('DavidDoesntGetIt', 'http://daviddoesntgetit.smackjeeves.com/comics/', False, True)
-add('DeadtoDay', 'http://deadtoday.smackjeeves.com/comics/', False, True)
-add('DeathNoteIridescent', 'http://dn-iridescent.smackjeeves.com/comics/', False, False)
-add('DebtSettlement2OperationExtinction', 'http://debts2.smackjeeves.com/comics/', True, True)
-add('Debtsettlement', 'http://debts.smackjeeves.com/comics/', True, True)
-add('DefyingGravityTheFourGreatGuardians', 'http://defyinggravitycomic.smackjeeves.com/comics/', False, True)
-add('DemonBattles', 'http://demonbattles.smackjeeves.com/comics/', False, True)
-add('DemonCat', 'http://demoncat.smackjeeves.com/comics/', False, True)
-add('DemonEater', 'http://demoneater.smackjeeves.com/comics/', True, False)
-add('DenizensAttention', 'http://denizensattention.smackjeeves.com/comics/', False, False)
-add('Destinationunknown', 'http://destination-unknown.smackjeeves.com/comics/', False, True)
-add('DevilTrainee', 'http://deviltrainee.smackjeeves.com/comics/', False, True)
-add('DevilTraineeSpanish', 'http://deviltraineespanish.smackjeeves.com/comics/', False, True)
-add('DevilsCake', 'http://devilscake.smackjeeves.com/comics/', False, False)
-add('DevotoMusicinHell', 'http://devoto.smackjeeves.com/comics/', True, True)
-add('Diaz', 'http://diaz.smackjeeves.com/comics/', False, True)
-add('Diexemor', 'http://diexemor.smackjeeves.com/comics/', False, True)
-add('DigimonSaviors', 'http://digimonsaviors.smackjeeves.com/comics/', False, True)
-add('DigimonTamersMiraiProject', 'http://digimontamersmiraiproject.smackjeeves.com/comics/', False, True)
-add('DigisRandomSpriteshack', 'http://digisspriteshack.smackjeeves.com/comics/', False, True)
-add('DigitalInsanity', 'http://digitalinsanity.smackjeeves.com/comics/', False, True)
-add('DoItYourself', 'http://diy.smackjeeves.com/comics/', False, True)
-add('Dontdie', 'http://dontdie.smackjeeves.com/comics/', False, True)
-add('DoodleBeans', 'http://beans.smackjeeves.com/comics/', True, True)
-add('DoodlingAround', 'http://doodlingcomic.smackjeeves.com/comics/', False, True)
-add('DoomsdayMyDear', 'http://www.doomsdaymydear.com/comics/', False, True)
-add('DragonKid', 'http://dragonkid.smackjeeves.com/comics/', False, True)
-add('Dragonet', 'http://dragonet.smackjeeves.com/comics/', False, True)
-add('DumpofManyPeople', 'http://dumpofmanypeople.smackjeeves.com/comics/', False, True)
-add('DungeonHordes', 'http://dungeonhordes.smackjeeves.com/comics/', False, True)
-add('EATATAU', 'http://eatatau.smackjeeves.com/comics/', False, True)
-add('EDepthAngel', 'http://edepth.smackjeeves.com/comics/', False, True)
-add('ERAConvergence', 'http://convergence.smackjeeves.com/comics/', False, True)
-add('ERAIbuki', 'http://eraibuki.smackjeeves.com/comics/', False, True)
-add('ERRORERROR', 'http://errorerror.smackjeeves.com/comics/', False, False)
-add('EidolonWhispersofEternity', 'http://whispersofeternity.smackjeeves.com/comics/', False, True)
-add('ElementalSpirits', 'http://elementalspirits.smackjeeves.com/comics/', False, True)
-add('ElfenLiedDifferences', 'http://differences.smackjeeves.com/comics/', True, True)
-add('EnkeltenKentta', 'http://enkeltenkentta.smackjeeves.com/comics/', True, True)
-add('Enthrall', 'http://enthrall.smackjeeves.com/comics/', True, True)
-add('Entreeuxdeux', 'http://entreuxdeux.smackjeeves.com/comics/', False, True)
-add('Entuthrie', 'http://entuthrie.smackjeeves.com/comics/', True, True)
-add('Eorah', 'http://eorah.smackjeeves.com/comics/', True, True)
-add('EozinKadonnutKuningas', 'http://eozinkadonnutkuningas.smackjeeves.com/comics/', False, True)
-add('EpicChaos', 'http://epicchaos.smackjeeves.com/comics/', False, True)
-add('Equsopia', 'http://equsopia.smackjeeves.com/comics/', False, True)
-add('EternalKnights', 'http://eternalknights.smackjeeves.com/comics/', True, True)
-add('EuphemisticEephus', 'http://eephus.smackjeeves.com/comics/', False, True)
-add('EvD', 'http://ev-d.smackjeeves.com/comics/', False, True)
-add('EvilPlan', 'http://evilplan.thewebcomic.com/comics/', False, False)
-add('ExperimentalMegaman', 'http://ex90081.smackjeeves.com/comics/', False, True)
-add('EyesofaDigimon', 'http://eoad.smackjeeves.com/comics/', False, True)
-add('FailureConfetti', 'http://failureconfetti.smackjeeves.com/comics/', False, False)
-add('FairyTaleRejects', 'http://fairytalerejects.thewebcomic.com/comics/', True, True)
-add('FaithlessDigitals', 'http://faithlessdigitals.smackjeeves.com/comics/', False, True)
-add('FalconersDailyStrips', 'http://falcdaily.smackjeeves.com/comics/', False, True)
-add('FallenAngelslove', 'http://fallen-angels-love.smackjeeves.com/comics/', False, True)
-add('FarOutMantic', 'http://meteorflo.smackjeeves.com/comics/', False, True)
-add('FarOutThere', 'http://faroutthere.smackjeeves.com/comics/', False, True)
-add('FatetheAnthologyofKaienandhisfuckingmagicfriends', 'http://fatehoho.smackjeeves.com/comics/', False, True)
-add('FeathersPI', 'http://featherpi.smackjeeves.com/comics/', True, True)
-add('FemmeSchism', 'http://femmeschism.smackjeeves.com/comics/', False, True)
-add('FeralGentry', 'http://feralgentry.smackjeeves.com/comics/', False, True)
-add('FinalArcanum', 'http://finalarcanum.smackjeeves.com/comics/', False, True)
-add('FireWire', 'http://firewire.smackjeeves.com/comics/', False, True)
-add('FireredLisasReise', 'http://lisasreise.smackjeeves.com/comics/', False, True)
-add('FlyorFail', 'http://flyorfail.smackjeeves.com/comics/', False, False)
-# add('FootLoose', 'http://footloose.smackjeeves.com/comics/', False, True)
-add('ForcedSeduction', 'http://forced-seduction.smackjeeves.com/comics/', False, True)
-add('ForestHill', 'http://www.foresthillcomic.org/comics/', False, False)
-add('ForgettheDistance', 'http://forgetthedistance.smackjeeves.com/comics/', True, True)
-add('Fortheloveofabrokenstring', 'http://fortheloveofabrokenstring.smackjeeves.com/comics/', False, True)
-add('FramebyFrame', 'http://frame-by-frame.smackjeeves.com/comics/', True, True)
-add('FrenzyRedux', 'http://theadventuresoffrenzy.smackjeeves.com/comics/', False, True)
-add('FrobertTheDemon', 'http://frobby.smackjeeves.com/comics/', False, False)
-add('FrogKing', 'http://frogking.smackjeeves.com/comics/', False, True)
-add('FromnowonImagirl', 'http://fromnowonimagirl.smackjeeves.com/comics/', False, True)
-add('FruitloopAndMrDownbeat', 'http://fruitbeat.smackjeeves.com/comics/', False, True)
-add('FuckMyLife', 'http://fuckmylife.smackjeeves.com/comics/', False, True)
-add('FurtherDowntheRabbitHole', 'http://fdtrh.smackjeeves.com/comics/', True, True)
-add('GATEKEEPER', 'http://gatekeepercomic.smackjeeves.com/comics/', False, True)
-add('GamerCafe', 'http://gamercafe.smackjeeves.com/comics/', False, True)
-add('GamesPeoplePlayUpdatedWeekly', 'http://gamespeopleplay.smackjeeves.com/comics/', False, True)
-add('GardenofHearts', 'http://gardenofhearts.smackjeeves.com/comics/', False, True)
-add('GayBacon', 'http://gaybacon.smackjeeves.com/comics/', False, True)
-add('GayTimesWithRyanandJay', 'http://gtwraj.smackjeeves.com/comics/', False, True)
-add('GearTheTakedown', 'http://geartd.smackjeeves.com/comics/', False, True)
-add('GetUpandGo', 'http://getupandgo.smackjeeves.com/comics/', True, True)
-add('GigisNuzlockeRuns', 'http://giginuzlocke.smackjeeves.com/comics/', False, True)
-add('Gloomverse', 'http://gloomverse.smackjeeves.com/comics/', False, True)
-add('Gnoph', 'http://gnoph.smackjeeves.com/comics/', False, True)
-add('GoldenSunGenerationsAftermathVolume1', 'http://gsgbtsyearone.smackjeeves.com/comics/', False, False)
-add('GoldenSunGenerationsColossoVolume6', 'http://gsgbtsyearthree.smackjeeves.com/comics/', False, False)
-add('GoodGame', 'http://goodgame.smackjeeves.com/comics/', False, True)
-add('GoodnightMrsGoose', 'http://goose.smackjeeves.com/comics/', False, True)
-add('GraveImpressions', 'http://graveimpressions.smackjeeves.com/comics/', True, True)
-add('Grayscale', 'http://grayscale.smackjeeves.com/comics/', True, True)
-add('GreenKirbyandabunchofotherpeopledoinstuff', 'http://gkandabunchofotherppl.smackjeeves.com/comics/', False, True)
-add('GuardianGhost', 'http://guardianghost.smackjeeves.com/comics/', False, True)
-add('GuardiansoftheGalaxialSpaceways', 'http://ggs.smackjeeves.com/comics/', False, False)
-add('HIPS', 'http://hips.smackjeeves.com/comics/', True, True)
-add('Habibahssong', 'http://habibahsong.smackjeeves.com/comics/', False, True)
-add('Harfang', 'http://harfang.smackjeeves.com/comics/', False, True)
-add('HarvestMoonParadiseFound', 'http://paradisefound.smackjeeves.com/comics/', False, True)
-add('HatShop', 'http://hatshop.smackjeeves.com/comics/', False, False)
-add('HatethePlayer', 'http://hatetheplayer.thewebcomic.com/comics/', False, True)
-add('Helix', 'http://helix.smackjeeves.com/comics/', True, False)
-add('HeltonShelton', 'http://heltonshelton.smackjeeves.com/comics/', False, True)
-add('Hephaestus', 'http://hephaestus.thewebcomic.com/comics/', False, False)
-add('HereBeVoodoo', 'http://herebevoodoo.smackjeeves.com/comics/', True, True)
-add('HiddenStrengthAWhiteNuzlocke', 'http://hsnuzlocke.smackjeeves.com/comics/', False, True)
-add('Hinata', 'http://hinata.smackjeeves.com/comics/', False, True)
-add('HitandMiss', 'http://hitandmiss.smackjeeves.com/comics/', False, True)
-add('Holocrash', 'http://holocrash.smackjeeves.com/comics/', True, True)
-add('HolyBlasphemy', 'http://holyblasphemy.smackjeeves.com/comics/', False, False)
-add('HolyCrap', 'http://holycrap.smackjeeves.com/comics/', False, True)
-add('HopeForABreeze', 'http://h4ab.smackjeeves.com/comics/', False, False)
-add('HotChocolate', 'http://hot-chocolate.smackjeeves.com/comics/', False, True)
-add('HouseofCraziness', 'http://craziness.smackjeeves.com/comics/', False, True)
-add('HurrocksFardel', 'http://hurrocksfardel.smackjeeves.com/comics/', False, True)
-add('Hybristorific', 'http://hybristorific.smackjeeves.com/comics/', True, True)
-add('IWishIggysWish', 'http://i-wish-comic.smackjeeves.com/comics/', False, True)
-add('Ianua', 'http://ianua.smackjeeves.com/comics/', False, True)
-add('IciVontLesMorts', 'http://icivontlesmorts.smackjeeves.com/comics/', True, True)
-add('ImminentMoose', 'http://imminentmoose.smackjeeves.com/comics/', False, True)
-add('InHouseHumor', 'http://inhousehumor.smackjeeves.com/comics/', False, True)
-add('Inchoatica', 'http://inchoatica.smackjeeves.com/comics/', False, True)
-add('Ingloriousbasterds', 'http://ingloriousbasterds.smackjeeves.com/comics/', False, True)
-add('Inhuman', 'http://inhumancomic.smackjeeves.com/comics/', False, True)
-add('InsideOuTAYuriTale', 'http://insideout-a-yuri-tale.smackjeeves.com/comics/', False, False)
-add('InspiredByADream', 'http://inspiredbyadream.smackjeeves.com/comics/', False, True)
-add('InthePride', 'http://in-the-pride.smackjeeves.com/comics/', False, True)
-add('Intoxicated', 'http://intoxicated.smackjeeves.com/comics/', True, True)
-add('Itsan8BitWorldBlankWorld', 'http://8bitblankworld.smackjeeves.com/comics/', False, True)
-add('JackiesStory', 'http://jackiestory.smackjeeves.com/comics/', False, True)
-add('Jantar', 'http://jantar.smackjeeves.com/comics/', False, True)
-add('Jantarpol', 'http://jantar-pl.smackjeeves.com/comics/', False, True)
-add('Jason', 'http://jasoncomic.smackjeeves.com/comics/', False, True)
-add('JoeysAdventure', 'http://joeysadventure.smackjeeves.com/comics/', False, True)
-add('JourneyMan', 'http://journeyman.smackjeeves.com/comics/', False, True)
-add('JoyToTheWorld', 'http://joytotheworld.smackjeeves.com/comics/', False, True)
-add('June', 'http://june.smackjeeves.com/comics/', False, True)
-add('JustAnotherLife', 'http://justanotherlife.smackjeeves.com/comics/', False, True)
-add('JustCrazy', 'http://justcrazy.smackjeeves.com/comics/', False, True)
-add('Justmyluck', 'http://justmyluck.smackjeeves.com/comics/', False, True)
-add('KCNO', 'http://kcno.smackjeeves.com/comics/', False, True)
-add('KaitoShuno', 'http://kaitoshuno.smackjeeves.com/comics/', True, True)
-add('KasaKeira', 'http://kasakeira.smackjeeves.com/comics/', False, False)
-add('Katran', 'http://katran.smackjeeves.com/comics/', False, True)
-add('KazanatoFuneralPlanningService', 'http://kazanato.smackjeeves.com/comics/', False, True)
-add('KezroChroniclesPhantomOps', 'http://phantomops.smackjeeves.com/comics/', False, True)
-add('Kirbandfriendsshowcase', 'http://kas.smackjeeves.com/comics/', False, True)
-add('KirbiesoftheAlternateDimension', 'http://kirbyaltdimension.smackjeeves.com/comics/', False, True)
-add('KirbyAdventure', 'http://kirbysadventure.smackjeeves.com/comics/', False, False)
-add('KirbyDreamTeam', 'http://kirbysdreamteam.smackjeeves.com/comics/', False, True)
-add('KirbyFunfestTheOriginals', 'http://kirbyfunfestold.smackjeeves.com/comics/', False, False)
-add('KirbyTheDeeArmy', 'http://kirbyandthedeearmy.smackjeeves.com/comics/', False, True)
-add('KirbysDreamAdventure', 'http://kirbyda.smackjeeves.com/comics/', False, True)
-add('KirbysDreamlandAdventures', 'http://kirbysdreamlandadventures.smackjeeves.com/comics/', False, True)
-add('KissmeSnow', 'http://kissmesnow.smackjeeves.com/comics/', False, True)
-add('KissoftheDevil', 'http://kissofthedevil.smackjeeves.com/comics/', False, True)
-add('Knife', 'http://knife.smackjeeves.com/comics/', False, True)
-add('Knightface', 'http://knightface.smackjeeves.com/comics/', True, True)
-add('KnightsRequiem', 'http://knightsrequiem.smackjeeves.com/comics/', False, True)
-add('KojiX5', 'http://kojix5.smackjeeves.com/comics/', False, True)
-add('Kranburn', 'http://kranburn.thewebcomic.com/comics/', False, True)
-add('Kreetor', 'http://kreetor.smackjeeves.com/comics/', False, True)
-add('Kruptos', 'http://kruptos.smackjeeves.com/comics/', False, True)
-add('KuroNeko', 'http://kuro-neko.smackjeeves.com/comics/', False, True)
-add('KuronaFlutterandLylaSpamTime', 'http://icantflyaplane.smackjeeves.com/comics/', False, True)
-add('LOGOS', 'http://logoscomic.smackjeeves.com/comics/', True, False)
-add('LOKI', 'http://loki.smackjeeves.com/comics/', False, True)
-add('LastBlockStanding', 'http://lastblockstanding.smackjeeves.com/comics/', False, True)
-add('LastLivingSouls', 'http://lastlivingsouls.smackjeeves.com/comics/', False, True)
-add('LatchkeyKingdom', 'http://latchkeykingdom.smackjeeves.com/comics/', False, True)
-add('LavenderLegend', 'http://lavenderlegend.smackjeeves.com/comics/', False, True)
-add('LeCirquedObscure', 'http://cirquedobscure.smackjeeves.com/comics/', False, False)
-add('LedbyaMadMan', 'http://ledbyamadman.smackjeeves.com/comics/', False, True)
-add('LegendofZeldaAHerosStory', 'http://aherosstory.smackjeeves.com/comics/', False, True)
-add('LegendofZeldaStaffofPower', 'http://loz-sop.smackjeeves.com/comics/', False, True)
-add('LegendofZeldaTheEdgeandTheLight', 'http://legendofzelda.smackjeeves.com/comics/', False, True)
-add('LegendofZeldaTheWindWaker', 'http://zeldawindwaker.smackjeeves.com/comics/', False, True)
-add('LegendsofMobiusBookOne', 'http://legendsofmobius-bookone.smackjeeves.com/comics/', False, True)
-add('Lemongrass', 'http://lemongrass.smackjeeves.com/comics/', False, True)
-add('LesCendresdelHiver', 'http://cendres.smackjeeves.com/comics/', False, True)
-add('LetLoveRule', 'http://letloverule.smackjeeves.com/comics/', False, True)
-add('LethalDose', 'http://lethaldosecomic.smackjeeves.com/comics/', True, False)
-add('LetsBreakitforReals', 'http://breaktehmentality.smackjeeves.com/comics/', False, True)
-add('LicensedHeroes', 'http://licensedheroes.smackjeeves.com/comics/', False, True)
-add('LifeAsACutOut', 'http://lifeasacutout.thewebcomic.com/comics/', False, True)
-add('LifeAsItWas', 'http://lifeasitwas.smackjeeves.com/comics/', False, True)
-add('LifeLessOrdinary', 'http://lifelessordinary.smackjeeves.com/comics/', True, True)
-add('Lifeonpaper', 'http://lifeonpaper.smackjeeves.com/comics/', False, True)
-add('LightLovers', 'http://lightlovers.smackjeeves.com/comics/', False, True)
-add('LightwithinShadow', 'http://lightwithinshadow.smackjeeves.com/comics/', False, True)
-add('LilLevi', 'http://lillevi.smackjeeves.com/comics/', False, True)
-add('LiliBleu', 'http://lilibleu.smackjeeves.com/comics/', False, True)
-add('LondonUnderworld', 'http://lunderworld.smackjeeves.com/comics/', False, True)
-add('LostNova', 'http://lostnova.smackjeeves.com/comics/', False, True)
-add('LoveHarbor', 'http://shipcentral.smackjeeves.com/comics/', False, True)
-add('LoveMeLoveMyTeddyBear', 'http://teddybear.smackjeeves.com/comics/', False, True)
-add('LoveTwister', 'http://lovetwister.smackjeeves.com/comics/', False, True)
-add('LoveandIcecream', 'http://lovexandxicecream.smackjeeves.com/comics/', False, True)
-add('LoveroftheSunandMoon', 'http://loverofthesunandmoon.smackjeeves.com/comics/', False, True)
-add('LsEmpire', 'http://l-empire.smackjeeves.com/comics/', False, False)
-add('LuffinpuffandEric', 'http://luffinpuff.smackjeeves.com/comics/', False, True)
-add('LumasParadise', 'http://luma.smackjeeves.com/comics/', False, True)
-add('MUTE', 'http://muterobot.smackjeeves.com/comics/', False, True)
-add('MYth', 'http://myth.smackjeeves.com/comics/', False, False)
-add('MagicalGirlAlice', 'http://magicalgirlalice.smackjeeves.com/comics/', False, True)
-add('MagicalMisfits', 'http://magicalmisfits.smackjeeves.com/comics/', False, True)
-add('Magience', 'http://www.magience.co/comics/', False, True)
-add('Magipunk', 'http://magipunk.smackjeeves.com/comics/', False, True)
-add('Manifestedpart1', 'http://manifested.smackjeeves.com/comics/', False, True)
-add('MarXistemTWC', 'http://marxistem.smackjeeves.com/comics/', False, True)
-add('MarioandLuigiMisadventures', 'http://mandladventures.smackjeeves.com/comics/', False, True)
-add('MariosDayJob', 'http://mariosjob.smackjeeves.com/comics/', False, True)
-add('MariovsSonicvsMegaMan', 'http://mvsvmm.smackjeeves.com/comics/', False, False)
-add('MarsMind', 'http://marsmind.smackjeeves.com/comics/', False, True)
-add('Mascara', 'http://mascara.smackjeeves.com/comics/', False, True)
-add('MasqueradeWTTM', 'http://masqueradewttm.smackjeeves.com/comics/', False, True)
-add('MatildasSweetCakeCafe', 'http://mscc.smackjeeves.com/comics/', True, True)
-add('MaytheRainCome', 'http://maytheraincome.smackjeeves.com/comics/', False, True)
-add('Mazscara', 'http://mazscara.smackjeeves.com/comics/', False, True)
-add('MegaManBattleNetwork7', 'http://mmbn7-twt.smackjeeves.com/comics/', False, True)
-add('MegaManTales', 'http://megamantales.smackjeeves.com/comics/', False, True)
-add('MegaManiacs', 'http://megamaniacscomics.smackjeeves.com/comics/', False, True)
-add('MegaPain', 'http://megapain.smackjeeves.com/comics/', False, True)
-add('MelodyAndMacabre', 'http://melodyandmacabre.smackjeeves.com/comics/', False, True)
-add('MerirosvotSeikkailumerella', 'http://merirosvotseikkailumerella.smackjeeves.com/comics/', False, True)
-add('MetroJack', 'http://metro-jack.smackjeeves.com/comics/', True, True)
-add('MewsDynasty', 'http://mews-dynasty.smackjeeves.com/comics/', False, True)
-add('MidnightPrince', 'http://midnightprince.smackjeeves.com/comics/', False, True)
-add('MineS', 'http://mines.smackjeeves.com/comics/', False, True)
-add('Minibot', 'http://minibot.smackjeeves.com/comics/', False, True)
-add('MinorActsofHeroism', 'http://www.minoractsofheroism.com/comics/', False, True)
-add('Missing', 'http://missing.smackjeeves.com/comics/', False, True)
-add('Missingversionfrancaise', 'http://missingfr.smackjeeves.com/comics/', False, True)
-add('MixupofallMixups', 'http://mixupofmixups.smackjeeves.com/comics/', False, True)
-add('MobianChaos', 'http://mobianchaos.smackjeeves.com/comics/', False, True)
-add('Mokepon', 'http://mokepon.smackjeeves.com/comics/', False, False)
-add('MomthegamestorerippedusoffAGAIN', 'http://crappygames.smackjeeves.com/comics/', False, True)
-add('Monstar', 'http://monstar.thewebcomic.com/comics/', False, True)
-add('MoonValley', 'http://moonvalley.smackjeeves.com/comics/', False, True)
-add('MoonlitDawnAMythicalTale', 'http://moonlitdawn.smackjeeves.com/comics/', False, True)
-add('MorphE', 'http://morphe.thewebcomic.com/comics/', False, True)
-add('Mortifer', 'http://mortifer.smackjeeves.com/comics/', False, True)
-add('MrFactory', 'http://mrfactory.smackjeeves.com/comics/', False, True)
-add('MyBoyfriendisaMobBoss', 'http://mbmb.smackjeeves.com/comics/', True, True)
-add('MyFakeHeart', 'http://myfakeheart.smackjeeves.com/comics/', False, False)
-add('MySistertheDragon', 'http://sisterdragon.smackjeeves.com/comics/', False, True)
-add('MySparklingPrincesama', 'http://kiraouji.smackjeeves.com/comics/', False, True)
-add('MyStereoBot', 'http://mystereobot.smackjeeves.com/comics/', False, True)
-add('MyTrollLife', 'http://mytrolllife.smackjeeves.com/comics/', False, True)
-add('MyTwoCentsPlusTax', 'http://mtcpt.smackjeeves.com/comics/', False, True)
-add('MysticanDreams', 'http://mysticandreams.smackjeeves.com/comics/', False, True)
-add('MythsofUnovaAWhiteNuzlockeRunHardMode', 'http://mythsofunova.smackjeeves.com/comics/', False, True)
-add('NIK', 'http://nik.smackjeeves.com/comics/', False, True)
-add('Nah', 'http://thecomicformerlyknownasgenlab.smackjeeves.com/comics/', False, True)
-add('Negligence', 'http://negligence.smackjeeves.com/comics/', False, True)
-# add('NekotheKitty', 'http://www.nekothekitty.net/comics/', False, True)
-add('NeoCrystalAdventures', 'http://neocrystaladventures.smackjeeves.com/comics/', False, True)
-add('NeonGlow', 'http://neonglow.smackjeeves.com/comics/', False, True)
-add('NevertheHero', 'http://neverthehero.smackjeeves.com/comics/', False, True)
-add('Nexus', 'http://nexus.smackjeeves.com/comics/', False, True)
-add('NiceKitty', 'http://nicekitty.smackjeeves.com/comics/', False, False)
-add('NighHeavenandHell', 'http://nighheavenandhell.smackjeeves.com/comics/', False, True)
-add('NightSpace', 'http://nightspace.smackjeeves.com/comics/', False, True)
-add('NihilWandasJourney', 'http://nihil.smackjeeves.com/comics/', False, True)
-add('NissiesDragonPrincess', 'http://drgnprincess.smackjeeves.com/comics/', False, True)
-add('NixsFireRedNuzlocke', 'http://nixnuzlocke.smackjeeves.com/comics/', False, True)
-add('NoEnd', 'http://no-end.smackjeeves.com/comics/', False, True)
-add('NobleHeartsHiruandMerroug', 'http://hiruandmerroug.smackjeeves.com/comics/', True, True)
-add('NormalcyisforWimps', 'http://normalcyisforwimps.smackjeeves.com/comics/', False, True)
-add('NotyoursamI', 'http://notyoursami.smackjeeves.com/comics/', True, True)
-add('ObsidianHeart', 'http://obsidianheart.smackjeeves.com/comics/', False, True)
-add('October20th', 'http://www.october20comic.com/comics/', False, True)
-add('OddContact', 'http://oddcontact.smackjeeves.com/comics/', False, True)
-add('OddPlaceOddTime', 'http://oddplaceoddtime.smackjeeves.com/comics/', False, True)
-add('Ohman', 'http://ohman.smackjeeves.com/comics/', False, True)
-add('OldElastikid', 'http://oldelastikid.smackjeeves.com/comics/', False, True)
-add('OneFrameGags', 'http://oneframegags.smackjeeves.com/comics/', False, True)
-add('OneRainyDay', 'http://one-rainy-day.smackjeeves.com/comics/', True, True)
-add('Onlyonelovesong', 'http://onlyonelovesong.smackjeeves.com/comics/', False, True)
-add('OperationTheater', 'http://operation-theater.smackjeeves.com/comics/', False, True)
-add('OriginBook1Codearth', 'http://theoriginbooks.smackjeeves.com/comics/', False, True)
-add('OurTimeinEden', 'http://ourtimeineden.smackjeeves.com/comics/', False, True)
-add('Outbreak', 'http://xoutbreak.smackjeeves.com/comics/', False, True)
-add('OutofKey', 'http://outofkey.smackjeeves.com/comics/', False, True)
-add('OverSync', 'http://linearperspective.smackjeeves.com/comics/', False, True)
-add('PMDExplorersofHeart', 'http://pmd-explorers-of-heart.smackjeeves.com/comics/', False, True)
-add('PMDTeamFirefox', 'http://pmdteamfirefox.smackjeeves.com/comics/', False, True)
-add('PMDVictoryFire', 'http://victoryfire.smackjeeves.com/comics/', False, True)
-add('PRAGUERACE', 'http://praguerace.smackjeeves.com/comics/', False, True)
-add('PTO', 'http://pto.smackjeeves.com/comics/', True, False)
-add('Pahantekija', 'http://pahantekija.smackjeeves.com/comics/', False, True)
-add('Panacea', 'http://panacea.smackjeeves.com/comics/', True, False)
-add('PantsParty', 'http://partypants.smackjeeves.com/comics/', False, True)
-add('PanzerDragonandEnigmaCompleteEdition', 'http://panzerdragonandenigma.smackjeeves.com/comics/', False, True)
-add('Paradox', 'http://paradoxcomic.smackjeeves.com/comics/', True, True)
-add('Paripety', 'http://paripety.smackjeeves.com/comics/', False, True)
-add('Pause', 'http://pause.smackjeeves.com/comics/', False, True)
-add('PencilviewUpdatesMondayscough', 'http://pencilview.smackjeeves.com/comics/', False, True)
-add('Perinto', 'http://perinto.smackjeeves.com/comics/', False, True)
-add('PerplexingMagnoliaDisruption', 'http://smgpmd.smackjeeves.com/comics/', False, True)
-add('PeterPan', 'http://peterpan.smackjeeves.com/comics/', False, True)
-add('Phantomland', 'http://phantomland.smackjeeves.com/comics/', False, True)
-add('PhotoShootnarusasuDoujinshi', 'http://photoshootnarusasu.smackjeeves.com/comics/', True, True)
-add('PlasticKings', 'http://plastickings.smackjeeves.com/comics/', False, True)
-add('PlatonicBoyfriends', 'http://platonicboyfriends.smackjeeves.com/comics/', False, True)
-add('PlayTime', 'http://dollysplaytime.smackjeeves.com/comics/', False, True)
-add('Plotlessnesses', 'http://plotlessnesses.smackjeeves.com/comics/', False, True)
-add('PokeVenturous', 'http://pokeventuras.smackjeeves.com/comics/', False, True)
-add('PokemonBeta', 'http://pokemonbeta.smackjeeves.com/comics/', False, True)
-add('PokemonCrystalDoubleNuzlockeChallenge', 'http://miinuzlocke.smackjeeves.com/comics/', False, True)
-add('PokemonGleamingCrystal', 'http://gleamingcrystal.smackjeeves.com/comics/', False, True)
-add('PokemonLANDSKY', 'http://www.landxsky.com/comics/', False, True)
-add('PokemonMysteryDungeonTeamCrystal', 'http://crystalmysterydungeon.smackjeeves.com/comics/', False, True)
-add('PokemonParallel', 'http://pokemon-parallel.smackjeeves.com/comics/', False, True)
-add('PokemonSAKOHJU', 'http://sakohju.smackjeeves.com/comics/', False, True)
-add('PokemonnoRakuen', 'http://pokemon-no-rakuen.smackjeeves.com/comics/', False, True)
-add('Ponzi', 'http://ponzi.smackjeeves.com/comics/', False, True)
-add('PrettyMouth', 'http://prettymouth.smackjeeves.com/comics/', False, True)
-add('PrincessChroma', 'http://princesschroma.smackjeeves.com/comics/', False, True)
-add('ProfessorDolphinpresentsPokemon', 'http://pdpp.smackjeeves.com/comics/', False, True)
-add('ProjectCAPLimit', 'http://imagecap.smackjeeves.com/comics/', False, True)
-add('Puck', 'http://puck.smackjeeves.com/comics/', False, True)
-add('PulseandBolt', 'http://pulse-bolt.smackjeeves.com/comics/', False, True)
-add('PumpkinFlower', 'http://pumpkinflower.smackjeeves.com/comics/', False, True)
-add('PurpureaNoxa', 'http://purpureanoxa.smackjeeves.com/comics/', True, True)
-add('QueerQueen', 'http://queerqueen.smackjeeves.com/comics/', False, True)
-add('RANDOM', 'http://randomthecomic.smackjeeves.com/comics/', False, True)
-add('ROSIER', 'http://rosier.smackjeeves.com/comics/', False, True)
-add('RainLGBT', 'http://rainlgbt.smackjeeves.com/comics/', False, False)
-add('RainxSasori', 'http://rainxsasori.smackjeeves.com/comics/', True, True)
-add('RareCandyTreatment', 'http://www.rarecandytreatment.com/comics/', False, True)
-add('RavenWolf', 'http://ravenwolf.smackjeeves.com/comics/', False, True)
-add('Razor', 'http://razor-.smackjeeves.com/comics/', True, True)
-add('RedVelvetRequiem', 'http://rvr.smackjeeves.com/comics/', False, True)
-add('Regina', 'http://regina.smackjeeves.com/comics/', False, True)
-add('ReidyandFriendsShowcase', 'http://reidynfriends.smackjeeves.com/comics/', False, False)
-add('RemoteAngel', 'http://remoteangel.smackjeeves.com/comics/', False, True)
-add('Replica', 'http://replica.smackjeeves.com/comics/', True, True)
-add('Respectable', 'http://respectable.smackjeeves.com/comics/', True, True)
-add('ReturntoEden', 'http://rte.smackjeeves.com/comics/', False, True)
-add('RiversideExtras', 'http://www.riversidecomics.co/comics/', True, True)
-add('RottenApple', 'http://rottenapple.smackjeeves.com/comics/', False, True)
-add('RoyalIcing', 'http://royalicing.smackjeeves.com/comics/', False, True)
-add('RubyNation', 'http://www.therubynation.com/comics/', False, True)
-add('RuderiQuest', 'http://ruderi.smackjeeves.com/comics/', False, True)
-add('RuneSpark', 'http://runespark.smackjeeves.com/comics/', False, True)
-add('RyuManwebcomicversion', 'http://ryuman-web.smackjeeves.com/comics/', False, True)
-add('SAKANA', 'http://sakana.smackjeeves.com/comics/', False, True)
-add('SChIzO', 'http://schizophrenic.smackjeeves.com/comics/', False, True)
-add('SFCBlackjackBay', 'http://blackjackbay.smackjeeves.com/comics/', False, True)
-add('SFCForestofDreams', 'http://sfcforestofdreams.smackjeeves.com/comics/', False, True)
-add('SLightlyabOVeavErage', 'http://slightlyaboveaverage.smackjeeves.com/comics/', True, True)
-add('SOSRadio', 'http://sosradio.smackjeeves.com/comics/', False, True)
-add('SPRITEDHeroesofDobalia', 'http://spritedhod.smackjeeves.com/comics/', False, True)
-add('SUNRISESTORY', 'http://sunrisestory.smackjeeves.com/comics/', False, True)
-add('SabishiiGhost', 'http://sabishiighost.smackjeeves.com/comics/', False, True)
-add('SaintforRent', 'http://saint-for-rent.smackjeeves.com/comics/', False, True)
-add('SakuraDAY', 'http://sakuraday.smackjeeves.com/comics/', False, True)
-add('SakuraMishzo', 'http://sakurazo.smackjeeves.com/comics/', True, True)
-add('SalemUncommons', 'http://salemuncommons.smackjeeves.com/comics/', False, True)
-add('SallySprocketAndPistonPete', 'http://ssnpp.smackjeeves.com/comics/', False, False)
-add('SaltyKiss', 'http://saltykiss.smackjeeves.com/comics/', False, True)
-add('Saywhatyoumean', 'http://saywhatyoumean.smackjeeves.com/comics/', False, True)
-add('SchoolofRejectsSoRe', 'http://sore.smackjeeves.com/comics/', False, True)
-add('ScionsoftheSeraph', 'http://www.sossaga.com/comics/', True, True)
-add('ScrappedProject', 'http://scrappedproject.smackjeeves.com/comics/', False, True)
-add('SecretPowerbk1', 'http://secretpower1.smackjeeves.com/comics/', False, True)
-add('SecretPowerbk2', 'http://secretpower2.smackjeeves.com/comics/', False, True)
-add('Seki', 'http://se-ki.smackjeeves.com/comics/', True, True)
-add('SenoireDelirium', 'http://senoiredelirium.smackjeeves.com/comics/', False, True)
-add('SerendipityAnEquestrianTale', 'http://talesofserendipity.smackjeeves.com/comics/', False, True)
-add('SeriousTimes', 'http://serioustimes.smackjeeves.com/comics/', False, True)
-add('ShacklesInstallment02', 'http://shackles02.smackjeeves.com/comics/', False, True)
-add('Shameless', 'http://shamelesscomic.smackjeeves.com/comics/', False, True)
-add('ShamelessAdvertisements', 'http://advertiseat.smackjeeves.com/comics/', False, True)
-add('ShotoutofCanon', 'http://akumathfs.smackjeeves.com/comics/', False, True)
-add('ShroudofLight', 'http://shroudoflight.smackjeeves.com/comics/', False, True)
-add('Signifikat', 'http://signifikat.smackjeeves.com/comics/', True, True)
-add('SimonSues', 'http://simonsues.smackjeeves.com/comics/', False, False)
-add('SimpleBear', 'http://simplebear.smackjeeves.com/comics/', False, False)
-add('SimplySarah', 'http://simplysarah.smackjeeves.com/comics/', False, True)
-add('Sire', 'http://sire.thewebcomic.com/comics/', False, True)
-add('Skeptical', 'http://skeptical.smackjeeves.com/comics/', False, True)
-add('Slackmatic', 'http://slackmatic.smackjeeves.com/comics/', False, True)
-add('SlipstreamSingularity', 'http://slipstreamsingularity.smackjeeves.com/comics/', False, True)
-add('SmallPressAdventures', 'http://smallpressadventures.smackjeeves.com/comics/', False, False)
-add('SocksMittensandScarfs', 'http://socksmitsscarfs.smackjeeves.com/comics/', False, True)
-add('SomebodyShootMe', 'http://somebodyshootme.smackjeeves.com/comics/', False, True)
-add('SomethingLikeaPhenomenon', 'http://somethinglikeaphenomenon.smackjeeves.com/comics/', True, True)
-add('SonicAuthorAdventII', 'http://saa2.smackjeeves.com/comics/', False, True)
-add('SonicBoom', 'http://sonic-boom.smackjeeves.com/comics/', False, True)
-add('SonicClub', 'http://sonicclub.smackjeeves.com/comics/', False, True)
-add('SonicDashly', 'http://sonicdashly.smackjeeves.com/comics/', False, True)
-add('SonicFuture', 'http://sonicfuture.smackjeeves.com/comics/', False, True)
-add('SonicSchoolRedo', 'http://sonicschoolredo.smackjeeves.com/comics/', False, True)
-add('SonicUniverseAsk', 'http://sonicuniverseask.smackjeeves.com/comics/', False, True)
-add('SoulGuardian', 'http://soulguardian.smackjeeves.com/comics/', False, False)
-add('SouthernCross', 'http://southerncross.thewebcomic.com/comics/', False, True)
-add('SovereignTheMostAmazingComicEver', 'http://mostamazingcomicever.smackjeeves.com/comics/', False, True)
-add('SpaghettiAndMeatballs', 'http://spaghettiandmeatballs.smackjeeves.com/comics/', True, True)
-add('SparElricsextras', 'http://sparextras.smackjeeves.com/comics/', False, True)
-add('SparkStory', 'http://sparkstory.smackjeeves.com/comics/', False, True)
-add('Spellcross', 'http://spellcross.smackjeeves.com/comics/', False, True)
-add('SpiderWings', 'http://spiderwings.smackjeeves.com/comics/', False, True)
-add('Spidersilk', 'http://spidersilk.smackjeeves.com/comics/', False, True)
-add('SplitScreen', 'http://splitscreencomic.smackjeeves.com/comics/', True, True)
-add('Spriterschaos', 'http://spriterschaos.smackjeeves.com/comics/', False, True)
-add('Sprytts', 'http://sprytts.smackjeeves.com/comics/', False, True)
-add('StarTrip', 'http://startrip.smackjeeves.com/comics/', False, True)
-add('Stay', 'http://stay-comic.smackjeeves.com/comics/', True, False)
-add('StellaInChrome', 'http://stellainchrome.smackjeeves.com/comics/', False, False)
-add('Stereophonic', 'http://stereophonic.thewebcomic.com/comics/', False, True)
-add('Storyofadamnedlove', 'http://storyofadamnedlove.smackjeeves.com/comics/', False, True)
-add('StrangersandFriends', 'http://hemu.smackjeeves.com/comics/', False, False)
-add('Striped', 'http://striped.smackjeeves.com/comics/', True, True)
-add('StuntRayWalterswish', 'http://stuntray.smackjeeves.com/comics/', False, True)
-add('SubjecttoChangeCollegeWoes', 'http://subject-to-change.smackjeeves.com/comics/', False, True)
-add('Sunfall', 'http://sunfall.thewebcomic.com/comics/', False, True)
-add('SunmeetsMoon', 'http://sunmeetsmoon.smackjeeves.com/comics/', False, False)
-add('SuperDimensionAfterTheHero', 'http://afterthehero.smackjeeves.com/comics/', False, True)
-add('SuperMarioBros3', 'http://smb3.smackjeeves.com/comics/', False, True)
-add('SuperMarjoBros', 'http://marjobros.smackjeeves.com/comics/', False, True)
-add('SupermassiveBlackHoleA', 'http://smbhax.smackjeeves.com/comics/', False, True)
-add('SurvivorFanCharacters', 'http://sfc.smackjeeves.com/comics/', False, True)
-add('SweetestPoison', 'http://sweetestpoison.smackjeeves.com/comics/', False, True)
-add('SwitchMechanism', 'http://switchmechanism.smackjeeves.com/comics/', False, True)
-add('Symbios', 'http://symbios.smackjeeves.com/comics/', True, True)
-add('TEN', 'http://ten.smackjeeves.com/comics/', False, False)
-add('TLAAOK', 'http://tlaaok.smackjeeves.com/comics/', True, True)
-add('TPTruePower', 'http://truepower.smackjeeves.com/comics/', False, False)
-add('TRIPP', 'http://tripp.smackjeeves.com/comics/', False, True)
-add('TaikiTheWebcomic', 'http://taiki.smackjeeves.com/comics/', False, False)
-add('TailsAdventureThroughTimeandOtherWorlds', 'http://tailsadventure.smackjeeves.com/comics/', False, True)
-add('TakingPicturesofStrangers', 'http://darrenandkale.smackjeeves.com/comics/', True, True)
-add('TalesfromAaronsWings', 'http://tfaw.smackjeeves.com/comics/', False, True)
-add('TeKscloset', 'http://tekchats.smackjeeves.com/comics/', True, True)
-add('TechnicolorLondon', 'http://technicolorlondon.smackjeeves.com/comics/', False, False)
-add('ThatWasntThereYesterday', 'http://twty.smackjeeves.com/comics/', False, False)
-add('The13thWorld', 'http://the13thworld.smackjeeves.com/comics/', False, True)
-add('TheAdventuresofBanjoZ', 'http://abz-fancomic.smackjeeves.com/comics/', True, True)
-add('TheAntihero', 'http://antihero.smackjeeves.com/comics/', False, False)
-add('TheArchipelago', 'http://thearchipelago.smackjeeves.com/comics/', False, True)
-add('TheAttackoftheRecoloursSeason1', 'http://mysticalvalley.smackjeeves.com/comics/', False, True)
-add('TheAvianStories', 'http://theavianstories.smackjeeves.com/comics/', False, True)
-add('TheBattleInTheSky', 'http://thebattleinthesky.smackjeeves.com/comics/', False, True)
-add('TheBookofNosferatu', 'http://www.thebookofnosferatu.com/comics/', False, True)
-add('TheBrideoftheShark', 'http://sameyome.smackjeeves.com/comics/', True, False)
-add('TheBucket', 'http://thebucket.smackjeeves.com/comics/', False, True)
-add('TheCafedAlizee', 'http://alizee.smackjeeves.com/comics/', False, False)
-add('TheCavernofSecrets', 'http://cavern.smackjeeves.com/comics/', False, True)
-add('TheColony', 'http://thecolony.smackjeeves.com/comics/', True, True)
-add('TheContract', 'http://the-contract.smackjeeves.com/comics/', False, True)
-add('TheCrawl', 'http://www.thecrawlcomic.com/comics/', False, True)
-add('TheCurtandTonyShow', 'http://thecurtandtonyshow.smackjeeves.com/comics/', False, True)
-add('TheDarkAgeofMobius', 'http://thedarkageofmobius.smackjeeves.com/comics/', False, True)
-add('TheDarkLegacy', 'http://tdlcomic.smackjeeves.com/comics/', False, True)
-add('TheDemonicAdventuresofAngelWitchPita', 'http://angelwitchpita.smackjeeves.com/comics/', True, True)
-add('TheDestroyer', 'http://heartless-destroyer.smackjeeves.com/comics/', True, True)
-add('TheDragonandtheLemur', 'http://dal.smackjeeves.com/comics/', True, True)
-add('TheDreaming', 'http://thedreaming.smackjeeves.com/comics/', False, True)
-add('TheDrifter', 'http://thedrifter.smackjeeves.com/comics/', True, True)
-add('TheElectricRose', 'http://electricrosecomic.smackjeeves.com/comics/', False, True)
-add('TheForestofWhispers', 'http://theforestofwhispers.smackjeeves.com/comics/', False, True)
-add('TheGhostWithTheMost', 'http://theghostwiththemost.smackjeeves.com/comics/', False, True)
-add('TheGoldRiderofPern', 'http://goldrider.smackjeeves.com/comics/', False, True)
-add('TheGrayZone', 'http://thegrayzone.smackjeeves.com/comics/', False, True)
-add('TheHeadhunters', 'http://headhunters.smackjeeves.com/comics/', False, True)
-add('TheHeartofEarth', 'http://heart-of-earth.smackjeeves.com/comics/', False, True)
-add('TheHobbitbic', 'http://hobbit.smackjeeves.com/comics/', False, True)
-add('TheJosephComics', 'http://josephcomics.smackjeeves.com/comics/', False, True)
-add('TheKeyHotelEnding', 'http://tekeyhotel.smackjeeves.com/comics/', False, True)
-add('TheKeyToReality', 'http://keytoreality.smackjeeves.com/comics/', False, True)
-add('TheKwiddexProtocol', 'http://kwiddexprotocol.smackjeeves.com/comics/', False, False)
-add('TheLastBloodCafe', 'http://lastbloodcafe.smackjeeves.com/comics/', False, True)
-add('TheLegendaryQueen', 'http://legendaryqueen.smackjeeves.com/comics/', True, True)
-add('TheLifeofMagFlamequill', 'http://lifeofmag.smackjeeves.com/comics/', False, True)
-add('TheLoneSwordsman', 'http://theloneswordsman.smackjeeves.com/comics/', False, True)
-add('TheLostland', 'http://thelostlandcomic.smackjeeves.com/comics/', False, True)
-add('TheMegaManandSonicSpriteShowcase', 'http://megamanshowcase.smackjeeves.com/comics/', False, True)
-add('TheMewExperiment', 'http://themewexperiment.smackjeeves.com/comics/', False, True)
-add('TheMoistTouch', 'http://themoisttouch.smackjeeves.com/comics/', False, True)
-add('TheNOMEDSEGA', 'http://nomed.smackjeeves.com/comics/', False, True)
-add('TheNightSurfers', 'http://thenightsurfers.smackjeeves.com/comics/', False, True)
-add('TheNocheComicSeries', 'http://nochecomicseries.smackjeeves.com/comics/', True, True)
-add('ThePirateBalthasar', 'http://thepiratebalthasar.smackjeeves.com/comics/', False, False)
-add('ThePremise', 'http://thepremise.smackjeeves.com/comics/', False, True)
-add('ThePrincessandtheGiant', 'http://princess.smackjeeves.com/comics/', False, True)
-add('ThePropertyofHate', 'http://tpoh.smackjeeves.com/comics/', False, True)
-add('TheRandomObscureFairyTaleNoOnesEverReallyHeardOf', 'http://tro.smackjeeves.com/comics/', False, False)
-add('TheReborn', 'http://reborn.smackjeeves.com/comics/', False, False)
-add('TheSearchforHenryJekyll', 'http://thesearchforhenryjekyll.smackjeeves.com/comics/', False, True)
-add('TheSilverLeague', 'http://thesilverleague.smackjeeves.com/comics/', False, True)
-add('TheSomewhereOther', 'http://somewhere-other.smackjeeves.com/comics/', False, True)
-add('TheSummerofBlakeSinclair', 'http://blake-sinclair.smackjeeves.com/comics/', False, True)
-add('TheTimeDog', 'http://timedog.smackjeeves.com/comics/', False, True)
-add('TheTytonNuzlockeChallengeEmeraldEdition', 'http://tytonnuzlockeemerald.smackjeeves.com/comics/', False, False)
-add('TheWastelands', 'http://wastelands.smackjeeves.com/comics/', False, True)
-add('TheWhiteTower', 'http://thewhitetower.smackjeeves.com/comics/', False, True)
-add('TheWinterCampaign', 'http://winterc.smackjeeves.com/comics/', False, True)
-add('TheYoshiHerd', 'http://theyoshiherd.smackjeeves.com/comics/', False, True)
-add('Theatrics', 'http://theatrics.smackjeeves.com/comics/', False, True)
-add('ThehumanBEing', 'http://thehumanbeing.smackjeeves.com/comics/', False, False)
-add('TheiaMania', 'http://theia-mania.smackjeeves.com/comics/', False, True)
-add('ThelaughingDeath', 'http://thelaughingdeath.smackjeeves.com/comics/', False, True)
-add('Themadman', 'http://themadman.smackjeeves.com/comics/', False, True)
-add('Theswordsmanandtheamnesiac', 'http://tsata.smackjeeves.com/comics/', True, True)
-add('ThiefCatcherRingTail', 'http://tcringtail.smackjeeves.com/comics/', False, True)
-add('ThinkBeforeYouThink', 'http://thinkbeforeyouthink.smackjeeves.com/comics/', False, True)
-add('ThornTopia', 'http://tnt100.smackjeeves.com/comics/', False, True)
-add('ThornsComic', 'http://thornscomic.smackjeeves.com/comics/', False, True)
-add('ThroughtheWonkyEye', 'http://through-the-wonky-eye.smackjeeves.com/comics/', False, True)
-add('TitleUnrelated', 'http://www.titleunrelated.com/comics/', False, True)
-add('TosiHuonoYaoiSarjis', 'http://tosihuonoyaoisarjis.smackjeeves.com/comics/', True, True)
-add('TotalPokemonIsland', 'http://tpi.smackjeeves.com/comics/', False, True)
-add('TotallyCrossover', 'http://totallycrossover.smackjeeves.com/comics/', False, True)
-add('TrainerWantstoFight', 'http://twtf.smackjeeves.com/comics/', False, True)
-add('TransUMan', 'http://transuman.smackjeeves.com/comics/', True, True)
-add('Transfusions', 'http://transfusions.smackjeeves.com/comics/', False, True)
-add('TrillyAndSilly', 'http://trillysilly.smackjeeves.com/comics/', False, True)
-add('Troublenextdoor', 'http://troublenextdoor.smackjeeves.com/comics/', False, True)
-add('UglyBoysLove', 'http://shounenai.smackjeeves.com/comics/', False, True)
-add('Uglygame', 'http://uglygame.smackjeeves.com/comics/', False, True)
-add('UndertheDeadSkies', 'http://underthedeadskies.thewebcomic.com/comics/', True, True)
-add('UnicampaLapis', 'http://ual.smackjeeves.com/comics/', False, True)
-add('UpDown', 'http://updown.smackjeeves.com/comics/', True, True)
-add('UshalaatWorldsEnd', 'http://ushala.smackjeeves.com/comics/', True, True)
-add('VACANT', 'http://vacant.smackjeeves.com/comics/', False, True)
-add('Vacan7', 'http://vacan7.smackjeeves.com/comics/', True, True)
-add('VampireFetish', 'http://vampire-fetish.smackjeeves.com/comics/', False, True)
-add('VerloreGeleentheid', 'http://verlore.thewebcomic.com/comics/', False, True)
-add('VoidMisadventures', 'http://voidmisadventures.smackjeeves.com/comics/', False, True)
-add('VoyageoftheBrokenPromise', 'http://voyageofthebrokenpromise.smackjeeves.com/comics/', True, True)
-add('WHATaboutSHADOWS', 'http://was.smackjeeves.com/comics/', False, True)
-add('WakeEcho', 'http://echo.smackjeeves.com/comics/', False, True)
-add('Wander', 'http://wander.smackjeeves.com/comics/', False, True)
-add('WantedDeadorDead', 'http://wanteddeadordead.smackjeeves.com/comics/', False, True)
-add('Wayfar', 'http://wayfar.smackjeeves.com/comics/', False, True)
-add('Waysoftheheart', 'http://wayoftheheart.smackjeeves.com/comics/', False, True)
-add('WeAreGolden', 'http://wearegolden.smackjeeves.com/comics/', True, True)
-add('WelcometoFreakshow', 'http://welcometofreakshow.smackjeeves.com/comics/', False, False)
-add('WelcometothePCA', 'http://welcometothepca.smackjeeves.com/comics/', False, True)
-add('WhatAboutLove', 'http://whataboutlove.smackjeeves.com/comics/', True, True)
-add('Whatisdeepinonesheart', 'http://ones-mindt.smackjeeves.com/comics/', False, True)
-add('WhenSheWasBad', 'http://whenshewasbad.smackjeeves.com/comics/', False, True)
-add('Whenweweresilent', 'http://silence.smackjeeves.com/comics/', False, False)
-add('WhereaboutsOfTime', 'http://wot.smackjeeves.com/comics/', False, True)
-add('WhiteHeart', 'http://whiteheart.smackjeeves.com/comics/', True, False)
-# add('WhiteNoise', 'http://white-noise.smackjeeves.com/comics/', False, True)
-add('WildWingBoys', 'http://wwb.smackjeeves.com/comics/', False, True)
-add('WildWingBoysKoathArc', 'http://wwbka.smackjeeves.com/comics/', False, True)
-add('Wildflowers', 'http://wildflowers.smackjeeves.com/comics/', False, True)
-add('WingsOverEthereal', 'http://wings-over-ethereal.smackjeeves.com/comics/', False, True)
-add('WingsTurnedtoDust', 'http://wingsturnedtodust.smackjeeves.com/comics/', False, True)
-add('WolfWolf', 'http://wolfwolf.smackjeeves.com/comics/', False, True)
-add('WonderTheatre', 'http://wondertheater.smackjeeves.com/comics/', False, True)
-add('Wootlabs', 'http://wootlabs.thewebcomic.com/comics/', False, True)
-add('XXMoralityXx', 'http://xxmoralityxx.smackjeeves.com/comics/', False, True)
-add('YadotCakeShop', 'http://yadotcakeshop.smackjeeves.com/comics/', True, True)
-add('YamanaokiHighSchool', 'http://yamanaokihs.smackjeeves.com/comics/', False, True)
-add('YouAreTheReasonForTheEndOfTheWorld', 'http://thereasonfortheendoftheworld.smackjeeves.com/comics/', False, True)
-add('YoungCannibals', 'http://www.youngcannibals.net/comics/', False, True)
-add('ZaenWell', 'http://zaenwell.smackjeeves.com/comics/', False, True)
-add('ZeldaTheNewAdventureofLinkIIMajorasMask', 'http://newlink.smackjeeves.com/comics/', False, True)
-add('_A_', 'http://a-the-stalker.smackjeeves.com/comics/', False, True)
+
+
+class SJ20TimesKirby(_SmackJeeves):
+    sub = '20xkirby'
+
+
+class SJ2Kingdoms(_SmackJeeves):
+    sub = '2kingdoms'
+
+
+class SJ355Days(_SmackJeeves):
+    sub = '355days'
+
+
+class SJAB(_SmackJeeves):
+    sub = 'alistairandboggart'
+    adult = True
+
+
+class SJADoodleADay(_SmackJeeves):
+    sub = 'adoodleaday'
+
+
+class SJAGirlAndHerShadow(_SmackJeeves):
+    sub = 'agirlandhershadow'
+
+
+class SJAGirlontheServer(_SmackJeeves):
+    sub = 'girlontheserver'
+
+
+class SJAKirbyKomic(_SmackJeeves):
+    sub = 'akirbykomic'
+
+
+class SJALaMode(_SmackJeeves):
+    sub = 'alamode'
+
+
+class SJANGELOU(_SmackJeeves):
+    sub = 'angelou-esp'
+
+
+class SJAPTComic(_SmackJeeves):
+    sub = 'aptcomic'
+
+
+class SJAQuestionOfCharacter(_SmackJeeves):
+    sub = 'aqoc'
+
+
+class SJASongforElise(_SmackJeeves):
+    sub = 'asongforelise'
+    adult = True
+
+
+class SJAYuriCollab(_SmackJeeves):
+    sub = 'ayuricollabbitches'
+    adult = True
+
+
+class SJAarrevaara(_SmackJeeves):
+    sub = 'aarrevaara'
+
+
+class SJAcidMonday(_SmackJeeves):
+    sub = 'acidmonday'
+    adult = True
+
+
+class SJAdalsysla(_SmackJeeves):
+    sub = 'adalsysla'
+
+
+class SJAddictiveScience(_SmackJeeves):
+    sub = 'addictivescience'
+
+
+class SJAdventuresofLumandFriends(_SmackJeeves):
+    sub = 'aolaf'
+
+
+class SJAdventuresoftheWeird(_SmackJeeves):
+    sub = 'adventuresoftheweird'
+
+
+class SJAetherTheories(_SmackJeeves):
+    sub = 'aethertheories'
+
+
+class SJAgeoftheGray(_SmackJeeves):
+    sub = 'ageofthegray'
+    adult = True
+
+
+class SJAllInLOVE(_SmackJeeves):
+    sub = 'allinlove'
+
+
+class SJAllStarHeroes(_SmackJeeves):
+    sub = 'allstarheroes'
+
+
+class SJAloversRule(_SmackJeeves):
+    sub = 'aloversrule'
+    adult = True
+
+
+class SJAlwaysDamnedWebcomic(_SmackJeeves):
+    sub = 'alwaysdamned'
+    adult = True
+
+
+class SJAlwaysRainingHere(_SmackJeeves):
+    sub = 'alwaysraininghere'
+
+
+class SJAmaravati(_SmackJeeves):
+    sub = 'amaravati'
+
+
+class SJAmorVincitOmnia(_SmackJeeves):
+    sub = 'avo'
+    adult = True
+
+
+class SJAmsdenEstate(_SmackJeeves):
+    sub = 'monsterous'
+
+
+class SJAnathemacomics(_SmackJeeves):
+    sub = 'anathema-comics'
+
+
+class SJAngelGuardian(_SmackJeeves):
+    sub = 'angel-guardian'
+
+
+class SJAnimalAdventures(_SmackJeeves):
+    sub = 'animaladventures'
+
+
+class SJAnimayhem(_SmackJeeves):
+    sub = 'animayhem'
+
+
+class SJAnythingaboutnothing(_SmackJeeves):
+    host = 'www.anythingcomic.com'
+
+
+class SJArchportCityChronicles(_SmackJeeves):
+    sub = 'tjs'
+
+
+class SJArea9(_SmackJeeves):
+    sub = 'area-9'
+
+
+class SJAroundtheBlock(_SmackJeeves):
+    sub = 'aroundtheblock'
+
+
+class SJArtofAFantasy(_SmackJeeves):
+    sub = 'artofafantasy'
+    adult = True
+
+
+class SJAtArmsLength(_SmackJeeves):
+    sub = 'atarmslength'
+
+
+class SJAtlaswebcomic(_SmackJeeves):
+    sub = 'atlaswebcomic'
+
+
+class SJAutophobia(_SmackJeeves):
+    sub = 'autophobia'
+    adult = True
+
+
+class SJAware(_SmackJeeves):
+    sub = 'aware'
+
+
+class SJAwesomeSauce(_SmackJeeves):
+    sub = 'tdawesomesauce'
+
+
+class SJAyaTakeo(_SmackJeeves):
+    sub = 'ayatakeo'
+
+
+class SJBLDShortComics(_SmackJeeves):
+    sub = 'bldshortcomics'
+
+
+class SJBabysittingFourDemons(_SmackJeeves):
+    sub = 'babysitting4demons'
+
+
+class SJBabywhatsyoursign(_SmackJeeves):
+    sub = 'babywhatsyoursign'
+
+
+class SJBadassRiz(_SmackJeeves):
+    sub = 'badassriz'
+
+
+class SJBallandChain(_SmackJeeves):
+    sub = 'ballandchain'
+
+
+class SJBard(_SmackJeeves):
+    sub = 'barred'
+
+
+class SJBassComicAdventures(_SmackJeeves):
+    sub = 'basscomicadventures'
+
+
+class SJBattleSequence(_SmackJeeves):
+    sub = 'battlesequence'
+
+
+class SJBearhoney(_SmackJeeves):
+    sub = 'bear-honey'
+
+
+class SJBearlyAbel(_SmackJeeves):
+    sub = 'bearlyabel'
+
+
+class SJBeautifulLies(_SmackJeeves):
+    sub = 'beautiful-lies'
+
+
+class SJBehindTheObsidianMirror(_SmackJeeves):
+    sub = 'obsidian-mirror'
+    adult = True
+
+
+class SJBehindtheglasscurtain(_SmackJeeves):
+    sub = 'g1ass'
+
+
+class SJBeretCatComics(_SmackJeeves):
+    sub = 'beretcatcomics'
+
+
+class SJBestbrosforever(_SmackJeeves):
+    sub = 'bestbrosforever'
+
+
+class SJBetovering(_SmackJeeves):
+    sub = 'betovering'
+    adult = True
+
+
+class SJBettencourtHotel(_SmackJeeves):
+    sub = 'bettencourt'
+
+
+class SJBetweenLightandDark(_SmackJeeves):
+    sub = 'bld'
+
+
+class SJBetweenWorlds(_SmackJeeves):
+    sub = 'betweenworlds'
+    adult = True
+
+
+class SJBetwin(_SmackJeeves):
+    sub = 'be-twin'
+
+
+class SJBeyondTheOrdinary(_SmackJeeves):
+    sub = 'bto'
+
+
+class SJBioRevelation(_SmackJeeves):
+    sub = 'biorevelation'
+
+
+class SJBl3(_SmackJeeves):
+    sub = 'bl3'
+
+
+class SJBlackDragon(_SmackJeeves):
+    sub = 'blackdragon'
+
+
+class SJBlackFridayRule(_SmackJeeves):
+    sub = 'blackfridayrule'
+
+
+class SJBlackSheepcomic(_SmackJeeves):
+    sub = 'black-sheep'
+
+
+class SJBlackandBlue(_SmackJeeves):
+    sub = 'black-and-blue'
+
+
+class SJBlackdemon(_SmackJeeves):
+    sub = 'blackdemoncomics'
+
+
+class SJBleachRedux(_SmackJeeves):
+    sub = 'bleachredux'
+
+
+class SJBlindandBlue(_SmackJeeves):
+    sub = 'blindandblue'
+
+
+class SJBloodhuntersBirthofavampire(_SmackJeeves):
+    sub = 'bloodhunters'
+
+
+class SJBloomaPokemonConquestComic(_SmackJeeves):
+    sub = 'bloomconquest'
+
+
+class SJBlueHair(_SmackJeeves):
+    sub = 'bluehair'
+
+
+class SJBlueWell(_SmackJeeves):
+    host = 'www.bluewellcomic.com'
+
+
+class SJBoilingPointofBrain(_SmackJeeves):
+    sub = 'bpob'
+
+
+class SJBoogeyDancingMonkeyPot(_SmackJeeves):
+    sub = 'monkeypot'
+
+
+class SJBreachofAgency(_SmackJeeves):
+    sub = 'breachofagency'
+
+
+class SJBreakfastonaCliff(_SmackJeeves):
+    sub = 'boac'
+
+
+class SJBurn(_SmackJeeves):
+    sub = 'burn'
+
+
+class SJByTheBook(_SmackJeeves):
+    sub = 'bythebook'
+
+
+class SJCafeAmargo(_SmackJeeves):
+    sub = 'cafeamargo'
+
+
+class SJCafeSuada(_SmackJeeves):
+    sub = 'cafesuada'
+
+
+class SJCambion(_SmackJeeves):
+    sub = 'cambion'
+    adult = True
+
+
+class SJCaptiveSoul(_SmackJeeves):
+    sub = 'captive-soul'
+
+
+class SJCaravanaTaleofGodsandMen(_SmackJeeves):
+    sub = 'caravantale'
+
+
+class SJCataclysm(_SmackJeeves):
+    sub = 'cataclysm'
+
+
+class SJCatnip(_SmackJeeves):
+    sub = 'catnipmanga'
+    adult = True
+
+
+class SJCerintha(_SmackJeeves):
+    sub = 'cerintha'
+
+
+class SJChampionofChampions(_SmackJeeves):
+    sub = 'championofchampions'
+
+
+class SJChampionsandHeroesAgeofDragons(_SmackJeeves):
+    sub = 'championsandheroes'
+
+
+class SJChannelDDDNews(_SmackJeeves):
+    sub = 'dddnews'
+
+
+class SJChaosAdventuresII(_SmackJeeves):
+    sub = 'chaosadventuresii'
+
+
+class SJChaoticNation(_SmackJeeves):
+    sub = 'chaoticnation'
+    adult = True
+
+
+class SJCharaktermaske(_SmackJeeves):
+    sub = 'charaktermaske'
+
+
+class SJChatuplines(_SmackJeeves):
+    sub = 'chatuplines'
+
+
+class SJCheneysGotaGun(_SmackJeeves):
+    sub = 'cheney'
+
+
+class SJChickenScratches(_SmackJeeves):
+    sub = 'chickenscratches'
+
+
+class SJChildrenoftheNight(_SmackJeeves):
+    sub = 'cotn'
+
+
+class SJChimiMouryou(_SmackJeeves):
+    sub = 'cmmr'
+
+
+class SJChocolatewithPepper(_SmackJeeves):
+    sub = 'chocolate-with-pepper'
+
+
+class SJCityFolk(_SmackJeeves):
+    sub = 'cityfolk'
+
+
+class SJClairetheFlare(_SmackJeeves):
+    sub = 'clairetheflare'
+
+
+class SJCleanCure(_SmackJeeves):
+    sub = 'cleanpluscure'
+
+
+class SJClockworkAtrium(_SmackJeeves):
+    host = 'www.clockwork-atrium.com'
+
+
+class SJCloeRemembrance(_SmackJeeves):
+    sub = 'cloe'
+
+
+class SJCockroachTheater(_SmackJeeves):
+    sub = 'cockroachtheater'
+
+
+class SJCogs(_SmackJeeves):
+    sub = 'cogs'
+
+
+class SJColorBlind(_SmackJeeves):
+    sub = 'cbcomic'
+
+
+class SJConventionalWisdom(_SmackJeeves):
+    sub = 'conventionalwisdom'
+
+
+class SJCosmicDash(_SmackJeeves):
+    sub = 'cosmicdash'
+
+
+class SJCramberries(_SmackJeeves):
+    sub = 'cramberries'
+
+
+class SJCrimsonWings(_SmackJeeves):
+    sub = 'crimson-wings'
+
+
+class SJCrocodileTears(_SmackJeeves):
+    sub = 'crocodile-tears'
+    adult = True
+
+
+class SJCupofOlea(_SmackJeeves):
+    sub = 'cupofolea'
+
+
+class SJCurseLineage(_SmackJeeves):
+    sub = 'curselineage'
+
+
+class SJDBON(_SmackJeeves):
+    sub = 'dbondoujin'
+
+
+class SJDEGAF(_SmackJeeves):
+    sub = 'degaf'
+
+
+class SJDEMENTED(_SmackJeeves):
+    sub = 'demented'
+    adult = True
+
+
+class SJDaddysGirl(_SmackJeeves):
+    sub = 'daddysgirl'
+
+
+class SJDanielleDark(_SmackJeeves):
+    sub = 'danielledark'
+
+
+class SJDasien(_SmackJeeves):
+    sub = 'dasien'
+    adult = True
+
+
+class SJDavidDoesntGetIt(_SmackJeeves):
+    sub = 'daviddoesntgetit'
+
+
+class SJDeadtoDay(_SmackJeeves):
+    sub = 'deadtoday'
+
+
+class SJDeathNoteIridescent(_SmackJeeves):
+    sub = 'dn-iridescent'
+
+
+class SJDebtSettlement2OperationExtinction(_SmackJeeves):
+    sub = 'debts2'
+    adult = True
+
+
+class SJDefyingGravityTheFourGreatGuardians(_SmackJeeves):
+    sub = 'defyinggravitycomic'
+
+
+class SJDemonBattles(_SmackJeeves):
+    sub = 'demonbattles'
+
+
+class SJDemonCat(_SmackJeeves):
+    sub = 'demoncat'
+
+
+class SJDemonEater(_SmackJeeves):
+    sub = 'demoneater'
+    adult = True
+
+
+class SJDenizensAttention(_SmackJeeves):
+    sub = 'denizensattention'
+
+
+class SJDestinationunknown(_SmackJeeves):
+    sub = 'destination-unknown'
+
+
+class SJDevilTraineeSpanish(_SmackJeeves):
+    sub = 'deviltraineespanish'
+
+
+class SJDevilsCake(_SmackJeeves):
+    sub = 'devilscake'
+
+
+class SJDevotoMusicinHell(_SmackJeeves):
+    sub = 'devoto'
+    adult = True
+
+
+class SJDiaz(_SmackJeeves):
+    sub = 'diaz'
+
+
+class SJDiexemor(_SmackJeeves):
+    sub = 'diexemor'
+
+
+class SJDigimonSaviors(_SmackJeeves):
+    sub = 'digimonsaviors'
+
+
+class SJDigimonTamersMiraiProject(_SmackJeeves):
+    sub = 'digimontamersmiraiproject'
+
+
+class SJDigisRandomSpriteshack(_SmackJeeves):
+    sub = 'digisspriteshack'
+
+
+class SJDigitalInsanity(_SmackJeeves):
+    sub = 'digitalinsanity'
+
+
+class SJDoItYourself(_SmackJeeves):
+    sub = 'diy'
+
+
+class SJDontdie(_SmackJeeves):
+    sub = 'dontdie'
+
+
+class SJDoodleBeans(_SmackJeeves):
+    sub = 'beans'
+    adult = True
+
+
+class SJDoodlingAround(_SmackJeeves):
+    sub = 'doodlingcomic'
+
+
+class SJDoomsdayMyDear(_SmackJeeves):
+    host = 'www.doomsdaymydear.com'
+
+
+class SJDragonKid(_SmackJeeves):
+    sub = 'dragonkid'
+
+
+class SJDragonet(_SmackJeeves):
+    sub = 'dragonet'
+
+
+class SJDumpofManyPeople(_SmackJeeves):
+    sub = 'dumpofmanypeople'
+
+
+class SJDungeonHordes(_SmackJeeves):
+    sub = 'dungeonhordes'
+
+
+class SJEATATAU(_SmackJeeves):
+    sub = 'eatatau'
+
+
+class SJEDepthAngel(_SmackJeeves):
+    sub = 'edepth'
+
+
+class SJERAConvergence(_SmackJeeves):
+    sub = 'convergence'
+
+
+class SJERAIbuki(_SmackJeeves):
+    sub = 'eraibuki'
+
+
+class SJERRORERROR(_SmackJeeves):
+    sub = 'errorerror'
+
+
+class SJEidolonWhispersofEternity(_SmackJeeves):
+    sub = 'whispersofeternity'
+
+
+class SJElementalSpirits(_SmackJeeves):
+    sub = 'elementalspirits'
+
+
+class SJElfenLiedDifferences(_SmackJeeves):
+    sub = 'differences'
+    adult = True
+
+
+class SJEnkeltenKentta(_SmackJeeves):
+    sub = 'enkeltenkentta'
+    adult = True
+
+
+class SJEnthrall(_SmackJeeves):
+    sub = 'enthrall'
+    adult = True
+
+
+class SJEntreeuxdeux(_SmackJeeves):
+    sub = 'entreuxdeux'
+
+
+class SJEntuthrie(_SmackJeeves):
+    sub = 'entuthrie'
+    adult = True
+
+
+class SJEorah(_SmackJeeves):
+    sub = 'eorah'
+    adult = True
+
+
+class SJEozinKadonnutKuningas(_SmackJeeves):
+    sub = 'eozinkadonnutkuningas'
+
+
+class SJEpicChaos(_SmackJeeves):
+    sub = 'epicchaos'
+
+
+class SJEqusopia(_SmackJeeves):
+    sub = 'equsopia'
+
+
+class SJEternalKnights(_SmackJeeves):
+    sub = 'eternalknights'
+    adult = True
+
+
+class SJEuphemisticEephus(_SmackJeeves):
+    sub = 'eephus'
+
+
+class SJEvD(_SmackJeeves):
+    sub = 'ev-d'
+
+
+class SJEvilPlan(_SmackJeeves):
+    host = 'evilplan.thewebcomic.com'
+
+
+class SJExperimentalMegaman(_SmackJeeves):
+    sub = 'ex90081'
+
+
+class SJEyesofaDigimon(_SmackJeeves):
+    sub = 'eoad'
+
+
+class SJFailureConfetti(_SmackJeeves):
+    sub = 'failureconfetti'
+
+
+class SJFairyTaleRejects(_SmackJeeves):
+    host = 'fairytalerejects.thewebcomic.com'
+    adult = True
+
+
+class SJFaithlessDigitals(_SmackJeeves):
+    sub = 'faithlessdigitals'
+
+
+class SJFalconersDailyStrips(_SmackJeeves):
+    sub = 'falcdaily'
+
+
+class SJFallenAngelslove(_SmackJeeves):
+    sub = 'fallen-angels-love'
+
+
+class SJFarOutMantic(_SmackJeeves):
+    sub = 'meteorflo'
+
+
+class SJFarOutThere(_SmackJeeves):
+    sub = 'faroutthere'
+
+
+class SJFatetheAnthologyofKaienandhisfuckingmagicfriends(_SmackJeeves):
+    sub = 'fatehoho'
+
+
+class SJFeathersPI(_SmackJeeves):
+    sub = 'featherpi'
+    adult = True
+
+
+class SJFemmeSchism(_SmackJeeves):
+    sub = 'femmeschism'
+
+
+class SJFeralGentry(_SmackJeeves):
+    sub = 'feralgentry'
+
+
+class SJFinalArcanum(_SmackJeeves):
+    sub = 'finalarcanum'
+
+
+class SJFireWire(_SmackJeeves):
+    sub = 'firewire'
+
+
+class SJFireredLisasReise(_SmackJeeves):
+    sub = 'lisasreise'
+
+
+class SJFlyorFail(_SmackJeeves):
+    sub = 'flyorfail'
+
+
+class SJForcedSeduction(_SmackJeeves):
+    sub = 'forced-seduction'
+
+
+class SJForestHill(_SmackJeeves):
+    host = 'www.foresthillcomic.org'
+
+
+class SJForgettheDistance(_SmackJeeves):
+    sub = 'forgetthedistance'
+    adult = True
+
+
+class SJFortheloveofabrokenstring(_SmackJeeves):
+    sub = 'fortheloveofabrokenstring'
+
+
+class SJFramebyFrame(_SmackJeeves):
+    sub = 'frame-by-frame'
+    adult = True
+
+
+class SJFrenzyRedux(_SmackJeeves):
+    sub = 'theadventuresoffrenzy'
+
+
+class SJFrobertTheDemon(_SmackJeeves):
+    sub = 'frobby'
+
+
+class SJFrogKing(_SmackJeeves):
+    sub = 'frogking'
+
+
+class SJFromnowonImagirl(_SmackJeeves):
+    sub = 'fromnowonimagirl'
+
+
+class SJFruitloopAndMrDownbeat(_SmackJeeves):
+    sub = 'fruitbeat'
+
+
+class SJFuckMyLife(_SmackJeeves):
+    sub = 'fuckmylife'
+
+
+class SJFurtherDowntheRabbitHole(_SmackJeeves):
+    sub = 'fdtrh'
+    adult = True
+
+
+class SJGATEKEEPER(_SmackJeeves):
+    sub = 'gatekeepercomic'
+
+
+class SJGamerCafe(_SmackJeeves):
+    sub = 'gamercafe'
+
+
+class SJGamesPeoplePlayUpdatedWeekly(_SmackJeeves):
+    sub = 'gamespeopleplay'
+
+
+class SJGardenofHearts(_SmackJeeves):
+    sub = 'gardenofhearts'
+
+
+class SJGayBacon(_SmackJeeves):
+    sub = 'gaybacon'
+
+
+class SJGayTimesWithRyanandJay(_SmackJeeves):
+    sub = 'gtwraj'
+
+
+class SJGearTheTakedown(_SmackJeeves):
+    sub = 'geartd'
+
+
+class SJGetUpandGo(_SmackJeeves):
+    sub = 'getupandgo'
+    adult = True
+
+
+class SJGigisNuzlockeRuns(_SmackJeeves):
+    sub = 'giginuzlocke'
+
+
+class SJGloomverse(_SmackJeeves):
+    sub = 'gloomverse'
+
+
+class SJGnoph(_SmackJeeves):
+    sub = 'gnoph'
+
+
+class SJGoldenSunGenerationsAftermathVolume1(_SmackJeeves):
+    sub = 'gsgbtsyearone'
+
+
+class SJGoldenSunGenerationsColossoVolume6(_SmackJeeves):
+    sub = 'gsgbtsyearthree'
+
+
+class SJGoodGame(_SmackJeeves):
+    sub = 'goodgame'
+
+
+class SJGoodnightMrsGoose(_SmackJeeves):
+    sub = 'goose'
+
+
+class SJGraveImpressions(_SmackJeeves):
+    sub = 'graveimpressions'
+    adult = True
+
+
+class SJGrayscale(_SmackJeeves):
+    sub = 'grayscale'
+    adult = True
+
+
+class SJGreenKirbyandabunchofotherpeopledoinstuff(_SmackJeeves):
+    sub = 'gkandabunchofotherppl'
+
+
+class SJGuardianGhost(_SmackJeeves):
+    sub = 'guardianghost'
+
+
+class SJGuardiansoftheGalaxialSpaceways(_SmackJeeves):
+    sub = 'ggs'
+
+
+class SJHIPS(_SmackJeeves):
+    sub = 'hips'
+    adult = True
+
+
+class SJHabibahssong(_SmackJeeves):
+    sub = 'habibahsong'
+
+
+class SJHarfang(_SmackJeeves):
+    sub = 'harfang'
+
+
+class SJHarvestMoonParadiseFound(_SmackJeeves):
+    sub = 'paradisefound'
+
+
+class SJHatShop(_SmackJeeves):
+    sub = 'hatshop'
+
+
+class SJHatethePlayer(_SmackJeeves):
+    host = 'hatetheplayer.thewebcomic.com'
+
+
+class SJHelix(_SmackJeeves):
+    sub = 'helix'
+    adult = True
+
+
+class SJHeltonShelton(_SmackJeeves):
+    sub = 'heltonshelton'
+
+
+class SJHephaestus(_SmackJeeves):
+    host = 'hephaestus.thewebcomic.com'
+
+
+class SJHereBeVoodoo(_SmackJeeves):
+    sub = 'herebevoodoo'
+    adult = True
+
+
+class SJHiddenStrengthAWhiteNuzlocke(_SmackJeeves):
+    sub = 'hsnuzlocke'
+
+
+class SJHinata(_SmackJeeves):
+    sub = 'hinata'
+
+
+class SJHitandMiss(_SmackJeeves):
+    sub = 'hitandmiss'
+
+
+class SJHolocrash(_SmackJeeves):
+    sub = 'holocrash'
+    adult = True
+
+
+class SJHolyBlasphemy(_SmackJeeves):
+    sub = 'holyblasphemy'
+
+
+class SJHolyCrap(_SmackJeeves):
+    sub = 'holycrap'
+
+
+class SJHopeForABreeze(_SmackJeeves):
+    sub = 'h4ab'
+
+
+class SJHotChocolate(_SmackJeeves):
+    sub = 'hot-chocolate'
+
+
+class SJHouseofCraziness(_SmackJeeves):
+    sub = 'craziness'
+
+
+class SJHurrocksFardel(_SmackJeeves):
+    sub = 'hurrocksfardel'
+
+
+class SJHybristorific(_SmackJeeves):
+    sub = 'hybristorific'
+    adult = True
+
+
+class SJIWishIggysWish(_SmackJeeves):
+    sub = 'i-wish-comic'
+
+
+class SJIanua(_SmackJeeves):
+    sub = 'ianua'
+
+
+class SJIciVontLesMorts(_SmackJeeves):
+    sub = 'icivontlesmorts'
+    adult = True
+
+
+class SJImminentMoose(_SmackJeeves):
+    sub = 'imminentmoose'
+
+
+class SJInHouseHumor(_SmackJeeves):
+    sub = 'inhousehumor'
+
+
+class SJInchoatica(_SmackJeeves):
+    sub = 'inchoatica'
+
+
+class SJIngloriousbasterds(_SmackJeeves):
+    sub = 'ingloriousbasterds'
+
+
+class SJInhuman(_SmackJeeves):
+    sub = 'inhumancomic'
+
+
+class SJInsideOuTAYuriTale(_SmackJeeves):
+    sub = 'insideout-a-yuri-tale'
+
+
+class SJInspiredByADream(_SmackJeeves):
+    sub = 'inspiredbyadream'
+
+
+class SJInthePride(_SmackJeeves):
+    sub = 'in-the-pride'
+
+
+class SJIntoxicated(_SmackJeeves):
+    sub = 'intoxicated'
+    adult = True
+
+
+class SJItsan8BitWorldBlankWorld(_SmackJeeves):
+    sub = '8bitblankworld'
+
+
+class SJJackiesStory(_SmackJeeves):
+    sub = 'jackiestory'
+
+
+class SJJantar(_SmackJeeves):
+    sub = 'jantar'
+
+
+class SJJantarpol(_SmackJeeves):
+    sub = 'jantar-pl'
+
+
+class SJJason(_SmackJeeves):
+    sub = 'jasoncomic'
+
+
+class SJJoeysAdventure(_SmackJeeves):
+    sub = 'joeysadventure'
+
+
+class SJJourneyMan(_SmackJeeves):
+    sub = 'journeyman'
+
+
+class SJJoyToTheWorld(_SmackJeeves):
+    sub = 'joytotheworld'
+
+
+class SJJune(_SmackJeeves):
+    sub = 'june'
+
+
+class SJJustAnotherLife(_SmackJeeves):
+    sub = 'justanotherlife'
+
+
+class SJJustCrazy(_SmackJeeves):
+    sub = 'justcrazy'
+
+
+class SJJustmyluck(_SmackJeeves):
+    sub = 'justmyluck'
+
+
+class SJKCNO(_SmackJeeves):
+    sub = 'kcno'
+
+
+class SJKaitoShuno(_SmackJeeves):
+    sub = 'kaitoshuno'
+    adult = True
+
+
+class SJKasaKeira(_SmackJeeves):
+    sub = 'kasakeira'
+
+
+class SJKatran(_SmackJeeves):
+    sub = 'katran'
+
+
+class SJKazanatoFuneralPlanningService(_SmackJeeves):
+    sub = 'kazanato'
+
+
+class SJKezroChroniclesPhantomOps(_SmackJeeves):
+    sub = 'phantomops'
+
+
+class SJKirbandfriendsshowcase(_SmackJeeves):
+    sub = 'kas'
+
+
+class SJKirbiesoftheAlternateDimension(_SmackJeeves):
+    sub = 'kirbyaltdimension'
+
+
+class SJKirbyAdventure(_SmackJeeves):
+    sub = 'kirbysadventure'
+
+
+class SJKirbyDreamTeam(_SmackJeeves):
+    sub = 'kirbysdreamteam'
+
+
+class SJKirbyFunfestTheOriginals(_SmackJeeves):
+    sub = 'kirbyfunfestold'
+
+
+class SJKirbyTheDeeArmy(_SmackJeeves):
+    sub = 'kirbyandthedeearmy'
+
+
+class SJKirbysDreamAdventure(_SmackJeeves):
+    sub = 'kirbyda'
+
+
+class SJKirbysDreamlandAdventures(_SmackJeeves):
+    sub = 'kirbysdreamlandadventures'
+
+
+class SJKissmeSnow(_SmackJeeves):
+    sub = 'kissmesnow'
+
+
+class SJKissoftheDevil(_SmackJeeves):
+    sub = 'kissofthedevil'
+
+
+class SJKnife(_SmackJeeves):
+    sub = 'knife'
+
+
+class SJKnightface(_SmackJeeves):
+    sub = 'knightface'
+    adult = True
+
+
+class SJKnightsRequiem(_SmackJeeves):
+    sub = 'knightsrequiem'
+
+
+class SJKojiX5(_SmackJeeves):
+    sub = 'kojix5'
+
+
+class SJKranburn(_SmackJeeves):
+    host = 'kranburn.thewebcomic.com'
+
+
+class SJKreetor(_SmackJeeves):
+    sub = 'kreetor'
+
+
+class SJKruptos(_SmackJeeves):
+    sub = 'kruptos'
+
+
+class SJKuroNeko(_SmackJeeves):
+    sub = 'kuro-neko'
+
+
+class SJKuronaFlutterandLylaSpamTime(_SmackJeeves):
+    sub = 'icantflyaplane'
+
+
+class SJLOGOS(_SmackJeeves):
+    sub = 'logoscomic'
+    adult = True
+
+
+class SJLOKI(_SmackJeeves):
+    sub = 'loki'
+
+
+class SJLastBlockStanding(_SmackJeeves):
+    sub = 'lastblockstanding'
+
+
+class SJLastLivingSouls(_SmackJeeves):
+    sub = 'lastlivingsouls'
+
+
+class SJLatchkeyKingdom(_SmackJeeves):
+    sub = 'latchkeykingdom'
+
+
+class SJLavenderLegend(_SmackJeeves):
+    sub = 'lavenderlegend'
+
+
+class SJLeCirquedObscure(_SmackJeeves):
+    sub = 'cirquedobscure'
+
+
+class SJLedbyaMadMan(_SmackJeeves):
+    sub = 'ledbyamadman'
+
+
+class SJLegendofZeldaAHerosStory(_SmackJeeves):
+    sub = 'aherosstory'
+
+
+class SJLegendofZeldaStaffofPower(_SmackJeeves):
+    sub = 'loz-sop'
+
+
+class SJLegendofZeldaTheEdgeandTheLight(_SmackJeeves):
+    sub = 'legendofzelda'
+
+
+class SJLegendofZeldaTheWindWaker(_SmackJeeves):
+    sub = 'zeldawindwaker'
+
+
+class SJLegendsofMobiusBookOne(_SmackJeeves):
+    sub = 'legendsofmobius-bookone'
+
+
+class SJLemongrass(_SmackJeeves):
+    sub = 'lemongrass'
+
+
+class SJLesCendresdelHiver(_SmackJeeves):
+    sub = 'cendres'
+
+
+class SJLetLoveRule(_SmackJeeves):
+    sub = 'letloverule'
+
+
+class SJLethalDose(_SmackJeeves):
+    sub = 'lethaldosecomic'
+    adult = True
+
+
+class SJLetsBreakitforReals(_SmackJeeves):
+    sub = 'breaktehmentality'
+
+
+class SJLicensedHeroes(_SmackJeeves):
+    sub = 'licensedheroes'
+
+
+class SJLifeAsACutOut(_SmackJeeves):
+    host = 'lifeasacutout.thewebcomic.com'
+
+
+class SJLifeAsItWas(_SmackJeeves):
+    sub = 'lifeasitwas'
+
+
+class SJLifeLessOrdinary(_SmackJeeves):
+    sub = 'lifelessordinary'
+    adult = True
+
+
+class SJLifeonpaper(_SmackJeeves):
+    sub = 'lifeonpaper'
+
+
+class SJLightLovers(_SmackJeeves):
+    sub = 'lightlovers'
+
+
+class SJLightwithinShadow(_SmackJeeves):
+    sub = 'lightwithinshadow'
+
+
+class SJLilLevi(_SmackJeeves):
+    sub = 'lillevi'
+
+
+class SJLiliBleu(_SmackJeeves):
+    sub = 'lilibleu'
+
+
+class SJLondonUnderworld(_SmackJeeves):
+    sub = 'lunderworld'
+
+
+class SJLostNova(_SmackJeeves):
+    sub = 'lostnova'
+
+
+class SJLoveHarbor(_SmackJeeves):
+    sub = 'shipcentral'
+
+
+class SJLoveMeLoveMyTeddyBear(_SmackJeeves):
+    sub = 'teddybear'
+
+
+class SJLoveTwister(_SmackJeeves):
+    sub = 'lovetwister'
+
+
+class SJLoveandIcecream(_SmackJeeves):
+    sub = 'lovexandxicecream'
+
+
+class SJLoveroftheSunandMoon(_SmackJeeves):
+    sub = 'loverofthesunandmoon'
+
+
+class SJLsEmpire(_SmackJeeves):
+    sub = 'l-empire'
+
+
+class SJLuffinpuffandEric(_SmackJeeves):
+    sub = 'luffinpuff'
+
+
+class SJLumasParadise(_SmackJeeves):
+    sub = 'luma'
+
+
+class SJMUTE(_SmackJeeves):
+    sub = 'muterobot'
+
+
+class SJMYth(_SmackJeeves):
+    sub = 'myth'
+
+
+class SJMagicalGirlAlice(_SmackJeeves):
+    sub = 'magicalgirlalice'
+
+
+class SJMagicalMisfits(_SmackJeeves):
+    sub = 'magicalmisfits'
+
+
+class SJMagience(_SmackJeeves):
+    host = 'www.magience.co'
+
+
+class SJMagipunk(_SmackJeeves):
+    sub = 'magipunk'
+
+
+class SJManifestedpart1(_SmackJeeves):
+    sub = 'manifested'
+
+
+class SJMarXistemTWC(_SmackJeeves):
+    sub = 'marxistem'
+
+
+class SJMarioandLuigiMisadventures(_SmackJeeves):
+    sub = 'mandladventures'
+
+
+class SJMariosDayJob(_SmackJeeves):
+    sub = 'mariosjob'
+
+
+class SJMariovsSonicvsMegaMan(_SmackJeeves):
+    sub = 'mvsvmm'
+
+
+class SJMarsMind(_SmackJeeves):
+    sub = 'marsmind'
+
+
+class SJMascara(_SmackJeeves):
+    sub = 'mascara'
+
+
+class SJMasqueradeWTTM(_SmackJeeves):
+    sub = 'masqueradewttm'
+
+
+class SJMatildasSweetCakeCafe(_SmackJeeves):
+    sub = 'mscc'
+    adult = True
+
+
+class SJMaytheRainCome(_SmackJeeves):
+    sub = 'maytheraincome'
+
+
+class SJMazscara(_SmackJeeves):
+    sub = 'mazscara'
+
+
+class SJMegaManBattleNetwork7(_SmackJeeves):
+    sub = 'mmbn7-twt'
+
+
+class SJMegaManTales(_SmackJeeves):
+    sub = 'megamantales'
+
+
+class SJMegaManiacs(_SmackJeeves):
+    sub = 'megamaniacscomics'
+
+
+class SJMegaPain(_SmackJeeves):
+    sub = 'megapain'
+
+
+class SJMelodyAndMacabre(_SmackJeeves):
+    sub = 'melodyandmacabre'
+
+
+class SJMerirosvotSeikkailumerella(_SmackJeeves):
+    sub = 'merirosvotseikkailumerella'
+
+
+class SJMetroJack(_SmackJeeves):
+    sub = 'metro-jack'
+    adult = True
+
+
+class SJMewsDynasty(_SmackJeeves):
+    sub = 'mews-dynasty'
+
+
+class SJMidnightPrince(_SmackJeeves):
+    sub = 'midnightprince'
+
+
+class SJMineS(_SmackJeeves):
+    sub = 'mines'
+
+
+class SJMinibot(_SmackJeeves):
+    sub = 'minibot'
+
+
+class SJMinorActsofHeroism(_SmackJeeves):
+    host = 'www.minoractsofheroism.com'
+
+
+class SJMissing(_SmackJeeves):
+    sub = 'missing'
+
+
+class SJMissingversionfrancaise(_SmackJeeves):
+    sub = 'missingfr'
+
+
+class SJMixupofallMixups(_SmackJeeves):
+    sub = 'mixupofmixups'
+
+
+class SJMobianChaos(_SmackJeeves):
+    sub = 'mobianchaos'
+
+
+class SJMokepon(_SmackJeeves):
+    sub = 'mokepon'
+
+
+class SJMomthegamestorerippedusoffAGAIN(_SmackJeeves):
+    sub = 'crappygames'
+
+
+class SJMonstar(_SmackJeeves):
+    host = 'monstar.thewebcomic.com'
+
+
+class SJMoonValley(_SmackJeeves):
+    sub = 'moonvalley'
+
+
+class SJMoonlitDawnAMythicalTale(_SmackJeeves):
+    sub = 'moonlitdawn'
+
+
+class SJMorphE(_SmackJeeves):
+    host = 'morphe.thewebcomic.com'
+
+
+class SJMortifer(_SmackJeeves):
+    sub = 'mortifer'
+
+
+class SJMrFactory(_SmackJeeves):
+    sub = 'mrfactory'
+
+
+class SJMyBoyfriendisaMobBoss(_SmackJeeves):
+    sub = 'mbmb'
+    adult = True
+
+
+class SJMyFakeHeart(_SmackJeeves):
+    sub = 'myfakeheart'
+
+
+class SJMySistertheDragon(_SmackJeeves):
+    sub = 'sisterdragon'
+
+
+class SJMySparklingPrincesama(_SmackJeeves):
+    sub = 'kiraouji'
+
+
+class SJMyStereoBot(_SmackJeeves):
+    sub = 'mystereobot'
+
+
+class SJMyTrollLife(_SmackJeeves):
+    sub = 'mytrolllife'
+
+
+class SJMyTwoCentsPlusTax(_SmackJeeves):
+    sub = 'mtcpt'
+
+
+class SJMysticanDreams(_SmackJeeves):
+    sub = 'mysticandreams'
+
+
+class SJMythsofUnovaAWhiteNuzlockeRunHardMode(_SmackJeeves):
+    sub = 'mythsofunova'
+
+
+class SJNIK(_SmackJeeves):
+    sub = 'nik'
+
+
+class SJNah(_SmackJeeves):
+    sub = 'thecomicformerlyknownasgenlab'
+
+
+class SJNegligence(_SmackJeeves):
+    sub = 'negligence'
+
+
+class SJNeoCrystalAdventures(_SmackJeeves):
+    sub = 'neocrystaladventures'
+
+
+class SJNeonGlow(_SmackJeeves):
+    sub = 'neonglow'
+
+
+class SJNevertheHero(_SmackJeeves):
+    sub = 'neverthehero'
+
+
+class SJNexus(_SmackJeeves):
+    sub = 'nexus'
+
+
+class SJNiceKitty(_SmackJeeves):
+    sub = 'nicekitty'
+
+
+class SJNighHeavenandHell(_SmackJeeves):
+    sub = 'oldnighheavenandhell'
+    adult = True
+
+
+class SJNightSpace(_SmackJeeves):
+    sub = 'nightspace'
+
+
+class SJNissiesDragonPrincess(_SmackJeeves):
+    sub = 'drgnprincess'
+
+
+class SJNixsFireRedNuzlocke(_SmackJeeves):
+    sub = 'nixnuzlocke'
+
+
+class SJNoEnd(_SmackJeeves):
+    sub = 'no-end'
+
+
+class SJNobleHeartsHiruandMerroug(_SmackJeeves):
+    sub = 'hiruandmerroug'
+    adult = True
+
+
+class SJNormalcyisforWimps(_SmackJeeves):
+    sub = 'normalcyisforwimps'
+
+
+class SJNotyoursamI(_SmackJeeves):
+    sub = 'notyoursami'
+    adult = True
+
+
+class SJObsidianHeart(_SmackJeeves):
+    sub = 'obsidianheart'
+
+
+class SJOctober20th(_SmackJeeves):
+    host = 'www.october20comic.com'
+
+
+class SJOddContact(_SmackJeeves):
+    sub = 'oddcontact'
+
+
+class SJOddPlaceOddTime(_SmackJeeves):
+    sub = 'oddplaceoddtime'
+
+
+class SJOhman(_SmackJeeves):
+    sub = 'ohman'
+
+
+class SJOldElastikid(_SmackJeeves):
+    sub = 'oldelastikid'
+
+
+class SJOneFrameGags(_SmackJeeves):
+    sub = 'oneframegags'
+
+
+class SJOneRainyDay(_SmackJeeves):
+    sub = 'one-rainy-day'
+    adult = True
+
+
+class SJOnlyonelovesong(_SmackJeeves):
+    sub = 'onlyonelovesong'
+
+
+class SJOperationTheater(_SmackJeeves):
+    sub = 'operation-theater'
+
+
+class SJOriginBook1Codearth(_SmackJeeves):
+    sub = 'theoriginbooks'
+
+
+class SJOurTimeinEden(_SmackJeeves):
+    sub = 'ourtimeineden'
+
+
+class SJOutbreak(_SmackJeeves):
+    sub = 'xoutbreak'
+
+
+class SJOutofKey(_SmackJeeves):
+    sub = 'outofkey'
+
+
+class SJOverSync(_SmackJeeves):
+    sub = 'linearperspective'
+
+
+class SJPMDExplorersofHeart(_SmackJeeves):
+    sub = 'pmd-explorers-of-heart'
+
+
+class SJPMDTeamFirefox(_SmackJeeves):
+    sub = 'pmdteamfirefox'
+
+
+class SJPMDVictoryFire(_SmackJeeves):
+    sub = 'victoryfire'
+
+
+class SJPRAGUERACE(_SmackJeeves):
+    sub = 'praguerace'
+
+
+class SJPTO(_SmackJeeves):
+    sub = 'pto'
+    adult = True
+
+
+class SJPahantekija(_SmackJeeves):
+    sub = 'pahantekija'
+
+
+class SJPanacea(_SmackJeeves):
+    sub = 'panacea'
+    adult = True
+
+
+class SJPantsParty(_SmackJeeves):
+    sub = 'partypants'
+
+
+class SJPanzerDragonandEnigmaCompleteEdition(_SmackJeeves):
+    sub = 'panzerdragonandenigma'
+
+
+class SJParadox(_SmackJeeves):
+    sub = 'paradoxcomic'
+    adult = True
+
+
+class SJParipety(_SmackJeeves):
+    sub = 'paripety'
+
+
+class SJPause(_SmackJeeves):
+    sub = 'pause'
+
+
+class SJPencilviewUpdatesMondayscough(_SmackJeeves):
+    sub = 'pencilview'
+
+
+class SJPerinto(_SmackJeeves):
+    sub = 'perinto'
+
+
+class SJPerplexingMagnoliaDisruption(_SmackJeeves):
+    sub = 'smgpmd'
+
+
+class SJPeterPan(_SmackJeeves):
+    sub = 'peterpan'
+
+
+class SJPhantomland(_SmackJeeves):
+    sub = 'phantomland'
+
+
+class SJPhotoShootnarusasuDoujinshi(_SmackJeeves):
+    sub = 'photoshootnarusasu'
+    adult = True
+
+
+class SJPlasticKings(_SmackJeeves):
+    sub = 'plastickings'
+
+
+class SJPlatonicBoyfriends(_SmackJeeves):
+    sub = 'platonicboyfriends'
+
+
+class SJPlayTime(_SmackJeeves):
+    sub = 'dollysplaytime'
+
+
+class SJPokeVenturous(_SmackJeeves):
+    sub = 'pokeventuras'
+
+
+class SJPokemonBeta(_SmackJeeves):
+    sub = 'pokemonbeta'
+
+
+class SJPokemonCrystalDoubleNuzlockeChallenge(_SmackJeeves):
+    sub = 'miinuzlocke'
+
+
+class SJPokemonGleamingCrystal(_SmackJeeves):
+    sub = 'gleamingcrystal'
+
+
+class SJPokemonLANDSKY(_SmackJeeves):
+    host = 'www.landxsky.com'
+
+
+class SJPokemonMysteryDungeonTeamCrystal(_SmackJeeves):
+    sub = 'crystalmysterydungeon'
+
+
+class SJPokemonParallel(_SmackJeeves):
+    sub = 'pokemon-parallel'
+
+
+class SJPokemonSAKOHJU(_SmackJeeves):
+    sub = 'sakohju'
+
+
+class SJPokemonnoRakuen(_SmackJeeves):
+    sub = 'pokemon-no-rakuen'
+
+
+class SJPonzi(_SmackJeeves):
+    sub = 'ponzi'
+
+
+class SJPrettyMouth(_SmackJeeves):
+    sub = 'prettymouth'
+
+
+class SJPrincessChroma(_SmackJeeves):
+    sub = 'princesschroma'
+
+
+class SJProfessorDolphinpresentsPokemon(_SmackJeeves):
+    sub = 'pdpp'
+
+
+class SJProjectCAPLimit(_SmackJeeves):
+    sub = 'imagecap'
+
+
+class SJPuck(_SmackJeeves):
+    sub = 'puck'
+
+
+class SJPulseandBolt(_SmackJeeves):
+    sub = 'pulse-bolt'
+
+
+class SJPurpureaNoxa(_SmackJeeves):
+    sub = 'purpureanoxa'
+    adult = True
+
+
+class SJQueerQueen(_SmackJeeves):
+    sub = 'queerqueen'
+
+
+class SJRANDOM(_SmackJeeves):
+    sub = 'randomthecomic'
+
+
+class SJROSIER(_SmackJeeves):
+    sub = 'rosier'
+
+
+class SJRainLGBT(_SmackJeeves):
+    sub = 'rainlgbt'
+
+
+class SJRainxSasori(_SmackJeeves):
+    sub = 'rainxsasori'
+    adult = True
+
+
+class SJRareCandyTreatment(_SmackJeeves):
+    host = 'www.rarecandytreatment.com'
+
+
+class SJRavenWolf(_SmackJeeves):
+    sub = 'ravenwolf'
+
+
+class SJRedVelvetRequiem(_SmackJeeves):
+    sub = 'rvr'
+
+
+class SJRegina(_SmackJeeves):
+    sub = 'regina'
+
+
+class SJReidyandFriendsShowcase(_SmackJeeves):
+    sub = 'reidynfriends'
+
+
+class SJRemoteAngel(_SmackJeeves):
+    sub = 'remoteangel'
+
+
+class SJReplica(_SmackJeeves):
+    sub = 'replica'
+    adult = True
+
+
+class SJRespectable(_SmackJeeves):
+    sub = 'respectable'
+    adult = True
+
+
+class SJReturntoEden(_SmackJeeves):
+    sub = 'rte'
+
+
+class SJRiversideExtras(_SmackJeeves):
+    host = 'www.riversidecomics.co'
+    adult = True
+
+
+class SJRottenApple(_SmackJeeves):
+    sub = 'rottenapple'
+
+
+class SJRoyalIcing(_SmackJeeves):
+    sub = 'royalicing'
+
+
+class SJRubyNation(_SmackJeeves):
+    host = 'www.therubynation.com'
+
+
+class SJRuderiQuest(_SmackJeeves):
+    sub = 'ruderi'
+
+
+class SJRuneSpark(_SmackJeeves):
+    sub = 'runespark'
+
+
+class SJRyuManwebcomicversion(_SmackJeeves):
+    sub = 'ryuman-web'
+
+
+class SJSAKANA(_SmackJeeves):
+    sub = 'sakana'
+
+
+class SJSChIzO(_SmackJeeves):
+    sub = 'schizophrenic'
+
+
+class SJSFCBlackjackBay(_SmackJeeves):
+    sub = 'blackjackbay'
+
+
+class SJSFCForestofDreams(_SmackJeeves):
+    sub = 'sfcforestofdreams'
+
+
+class SJSLightlyabOVeavErage(_SmackJeeves):
+    sub = 'slightlyaboveaverage'
+    adult = True
+
+
+class SJSOSRadio(_SmackJeeves):
+    sub = 'sosradio'
+
+
+class SJSPRITEDHeroesofDobalia(_SmackJeeves):
+    sub = 'spritedhod'
+
+
+class SJSUNRISESTORY(_SmackJeeves):
+    sub = 'sunrisestory'
+
+
+class SJSabishiiGhost(_SmackJeeves):
+    sub = 'sabishiighost'
+
+
+class SJSaintforRent(_SmackJeeves):
+    sub = 'saint-for-rent'
+
+
+class SJSakuraDAY(_SmackJeeves):
+    sub = 'sakuraday'
+
+
+class SJSakuraMishzo(_SmackJeeves):
+    sub = 'sakurazo'
+    adult = True
+
+
+class SJSalemUncommons(_SmackJeeves):
+    sub = 'salemuncommons'
+
+
+class SJSallySprocketAndPistonPete(_SmackJeeves):
+    sub = 'ssnpp'
+
+
+class SJSaltyKiss(_SmackJeeves):
+    sub = 'saltykiss'
+
+
+class SJSaywhatyoumean(_SmackJeeves):
+    sub = 'saywhatyoumean'
+
+
+class SJSchoolofRejectsSoRe(_SmackJeeves):
+    sub = 'sore'
+
+
+class SJScionsoftheSeraph(_SmackJeeves):
+    sub = 'scions'
+    adult = True
+
+
+class SJScrappedProject(_SmackJeeves):
+    sub = 'scrappedproject'
+
+
+class SJSecretPowerbk1(_SmackJeeves):
+    sub = 'secretpower1'
+
+
+class SJSecretPowerbk2(_SmackJeeves):
+    sub = 'secretpower2'
+
+
+class SJSeki(_SmackJeeves):
+    sub = 'se-ki'
+    adult = True
+
+
+class SJSenoireDelirium(_SmackJeeves):
+    sub = 'senoiredelirium'
+
+
+class SJSeriousTimes(_SmackJeeves):
+    sub = 'serioustimes'
+
+
+class SJShameless(_SmackJeeves):
+    sub = 'shamelesscomic'
+
+
+class SJShamelessAdvertisements(_SmackJeeves):
+    sub = 'advertiseat'
+
+
+class SJShotoutofCanon(_SmackJeeves):
+    sub = 'akumathfs'
+
+
+class SJShroudofLight(_SmackJeeves):
+    sub = 'shroudoflight'
+
+
+class SJSignifikat(_SmackJeeves):
+    sub = 'signifikat'
+    adult = True
+
+
+class SJSimonSues(_SmackJeeves):
+    sub = 'simonsues'
+
+
+class SJSimpleBear(_SmackJeeves):
+    sub = 'simplebear'
+
+
+class SJSimplySarah(_SmackJeeves):
+    sub = 'simplysarah'
+
+
+class SJSire(_SmackJeeves):
+    host = 'sire.thewebcomic.com'
+
+
+class SJSkeptical(_SmackJeeves):
+    sub = 'skeptical'
+
+
+class SJSlackmatic(_SmackJeeves):
+    sub = 'slackmatic'
+
+
+class SJSlipstreamSingularity(_SmackJeeves):
+    sub = 'slipstreamsingularity'
+
+
+class SJSmallPressAdventures(_SmackJeeves):
+    sub = 'smallpressadventures'
+
+
+class SJSocksMittensandScarfs(_SmackJeeves):
+    sub = 'socksmitsscarfs'
+
+
+class SJSomebodyShootMe(_SmackJeeves):
+    sub = 'somebodyshootme'
+
+
+class SJSomethingLikeaPhenomenon(_SmackJeeves):
+    sub = 'somethinglikeaphenomenon'
+    adult = True
+
+
+class SJSonicAuthorAdventII(_SmackJeeves):
+    sub = 'saa2'
+
+
+class SJSonicBoom(_SmackJeeves):
+    sub = 'sonic-boom'
+
+
+class SJSonicClub(_SmackJeeves):
+    sub = 'sonicclub'
+
+
+class SJSonicDashly(_SmackJeeves):
+    sub = 'sonicdashly'
+
+
+class SJSonicFuture(_SmackJeeves):
+    sub = 'sonicfuture'
+
+
+class SJSonicSchoolRedo(_SmackJeeves):
+    sub = 'sonicschoolredo'
+
+
+class SJSonicUniverseAsk(_SmackJeeves):
+    sub = 'sonicuniverseask'
+
+
+class SJSoulGuardian(_SmackJeeves):
+    sub = 'soulguardian'
+
+
+class SJSouthernCross(_SmackJeeves):
+    host = 'southerncross.thewebcomic.com'
+
+
+class SJSovereignTheMostAmazingComicEver(_SmackJeeves):
+    sub = 'mostamazingcomicever'
+
+
+class SJSpaghettiAndMeatballs(_SmackJeeves):
+    sub = 'spaghettiandmeatballs'
+    adult = True
+
+
+class SJSparElricsextras(_SmackJeeves):
+    sub = 'sparextras'
+
+
+class SJSparkStory(_SmackJeeves):
+    sub = 'sparkstory'
+
+
+class SJSpellcross(_SmackJeeves):
+    sub = 'spellcross'
+
+
+class SJSpiderWings(_SmackJeeves):
+    sub = 'spiderwings'
+
+
+class SJSpidersilk(_SmackJeeves):
+    sub = 'spidersilk'
+
+
+class SJSplitScreen(_SmackJeeves):
+    sub = 'splitscreencomic'
+    adult = True
+
+
+class SJSpriterschaos(_SmackJeeves):
+    sub = 'spriterschaos'
+
+
+class SJSprytts(_SmackJeeves):
+    sub = 'sprytts'
+
+
+class SJStarTrip(_SmackJeeves):
+    sub = 'startrip'
+
+
+class SJStay(_SmackJeeves):
+    sub = 'stay-comic'
+    adult = True
+
+
+class SJStellaInChrome(_SmackJeeves):
+    sub = 'stellainchrome'
+
+
+class SJStereophonic(_SmackJeeves):
+    host = 'stereophonic.thewebcomic.com'
+
+
+class SJStoryofadamnedlove(_SmackJeeves):
+    sub = 'storyofadamnedlove'
+
+
+class SJStrangersandFriends(_SmackJeeves):
+    sub = 'hemu'
+
+
+class SJStriped(_SmackJeeves):
+    sub = 'striped'
+    adult = True
+
+
+class SJStuntRayWalterswish(_SmackJeeves):
+    sub = 'stuntray'
+
+
+class SJSubjecttoChangeCollegeWoes(_SmackJeeves):
+    sub = 'subject-to-change'
+
+
+class SJSunfall(_SmackJeeves):
+    host = 'sunfall.thewebcomic.com'
+
+
+class SJSunmeetsMoon(_SmackJeeves):
+    sub = 'sunmeetsmoon'
+
+
+class SJSuperDimensionAfterTheHero(_SmackJeeves):
+    sub = 'afterthehero'
+
+
+class SJSuperMarioBros3(_SmackJeeves):
+    sub = 'smb3'
+
+
+class SJSuperMarjoBros(_SmackJeeves):
+    sub = 'marjobros'
+
+
+class SJSupermassiveBlackHoleA(_SmackJeeves):
+    sub = 'smbhax'
+
+
+class SJSurvivorFanCharacters(_SmackJeeves):
+    sub = 'sfc'
+
+
+class SJSweetestPoison(_SmackJeeves):
+    sub = 'sweetestpoison'
+
+
+class SJSwitchMechanism(_SmackJeeves):
+    sub = 'switchmechanism'
+
+
+class SJSymbios(_SmackJeeves):
+    sub = 'symbios'
+    adult = True
+
+
+class SJTEN(_SmackJeeves):
+    sub = 'ten'
+
+
+class SJTLAAOK(_SmackJeeves):
+    sub = 'tlaaok'
+    adult = True
+
+
+class SJTPTruePower(_SmackJeeves):
+    sub = 'truepower'
+
+
+class SJTRIPP(_SmackJeeves):
+    sub = 'tripp'
+
+
+class SJTaikiTheWebcomic(_SmackJeeves):
+    sub = 'taiki'
+
+
+class SJTailsAdventureThroughTimeandOtherWorlds(_SmackJeeves):
+    sub = 'tailsadventure'
+
+
+class SJTakingPicturesofStrangers(_SmackJeeves):
+    sub = 'darrenandkale'
+    adult = True
+
+
+class SJTalesfromAaronsWings(_SmackJeeves):
+    sub = 'tfaw'
+
+
+class SJThatWasntThereYesterday(_SmackJeeves):
+    sub = 'twty'
+
+
+class SJThe13thWorld(_SmackJeeves):
+    sub = 'the13thworld'
+
+
+class SJTheAdventuresofBanjoZ(_SmackJeeves):
+    sub = 'abz-fancomic'
+    adult = True
+
+
+class SJTheAntihero(_SmackJeeves):
+    sub = 'antihero'
+
+
+class SJTheArchipelago(_SmackJeeves):
+    sub = 'thearchipelago'
+
+
+class SJTheAvianStories(_SmackJeeves):
+    sub = 'theavianstories'
+
+
+class SJTheBattleInTheSky(_SmackJeeves):
+    sub = 'thebattleinthesky'
+
+
+class SJTheBookofNosferatu(_SmackJeeves):
+    host = 'www.thebookofnosferatu.com'
+
+
+class SJTheBrideoftheShark(_SmackJeeves):
+    sub = 'sameyome'
+    adult = True
+
+
+class SJTheBucket(_SmackJeeves):
+    sub = 'thebucket'
+
+
+class SJTheCafedAlizee(_SmackJeeves):
+    sub = 'alizee'
+
+
+class SJTheCavernofSecrets(_SmackJeeves):
+    sub = 'cavern'
+
+
+class SJTheColony(_SmackJeeves):
+    sub = 'thecolony'
+    adult = True
+
+
+class SJTheContract(_SmackJeeves):
+    sub = 'the-contract'
+
+
+class SJTheCrawl(_SmackJeeves):
+    sub = 'thecrawl'
+
+
+class SJTheCurtandTonyShow(_SmackJeeves):
+    sub = 'thecurtandtonyshow'
+
+
+class SJTheDarkAgeofMobius(_SmackJeeves):
+    sub = 'thedarkageofmobius'
+
+
+class SJTheDarkLegacy(_SmackJeeves):
+    sub = 'tdlcomic'
+
+
+class SJTheDemonicAdventuresofAngelWitchPita(_SmackJeeves):
+    sub = 'angelwitchpita'
+    adult = True
+
+
+class SJTheDestroyer(_SmackJeeves):
+    sub = 'heartless-destroyer'
+    adult = True
+
+
+class SJTheDragonandtheLemur(_SmackJeeves):
+    sub = 'dal'
+    adult = True
+
+
+class SJTheDreaming(_SmackJeeves):
+    sub = 'thedreaming'
+
+
+class SJTheDrifter(_SmackJeeves):
+    sub = 'thedrifter'
+    adult = True
+
+
+class SJTheElectricRose(_SmackJeeves):
+    sub = 'electricrosecomic'
+
+
+class SJTheForestofWhispers(_SmackJeeves):
+    sub = 'theforestofwhispers'
+
+
+class SJTheGhostWithTheMost(_SmackJeeves):
+    sub = 'theghostwiththemost'
+
+
+class SJTheGoldRiderofPern(_SmackJeeves):
+    sub = 'goldrider'
+
+
+class SJTheGrayZone(_SmackJeeves):
+    sub = 'thegrayzone'
+
+
+class SJTheHeadhunters(_SmackJeeves):
+    sub = 'headhunters'
+
+
+class SJTheHeartofEarth(_SmackJeeves):
+    sub = 'heart-of-earth'
+
+
+class SJTheHobbitbic(_SmackJeeves):
+    sub = 'hobbit'
+
+
+class SJTheJosephComics(_SmackJeeves):
+    sub = 'josephcomics'
+
+
+class SJTheKeyHotelEnding(_SmackJeeves):
+    sub = 'tekeyhotel'
+
+
+class SJTheKeyToReality(_SmackJeeves):
+    sub = 'keytoreality'
+
+
+class SJTheKwiddexProtocol(_SmackJeeves):
+    sub = 'kwiddexprotocol'
+
+
+class SJTheLastBloodCafe(_SmackJeeves):
+    sub = 'lastbloodcafe'
+
+
+class SJTheLegendaryQueen(_SmackJeeves):
+    sub = 'legendaryqueen'
+    adult = True
+
+
+class SJTheLifeofMagFlamequill(_SmackJeeves):
+    sub = 'lifeofmag'
+
+
+class SJTheLoneSwordsman(_SmackJeeves):
+    sub = 'theloneswordsman'
+
+
+class SJTheLostland(_SmackJeeves):
+    sub = 'thelostlandcomic'
+
+
+class SJTheMegaManandSonicSpriteShowcase(_SmackJeeves):
+    sub = 'megamanshowcase'
+
+
+class SJTheMoistTouch(_SmackJeeves):
+    sub = 'themoisttouch'
+
+
+class SJTheNOMEDSEGA(_SmackJeeves):
+    sub = 'nomed'
+
+
+class SJTheNightSurfers(_SmackJeeves):
+    sub = 'thenightsurfers'
+
+
+class SJTheNocheComicSeries(_SmackJeeves):
+    sub = 'nochecomicseries'
+    adult = True
+
+
+class SJThePirateBalthasar(_SmackJeeves):
+    sub = 'thepiratebalthasar'
+
+
+class SJThePremise(_SmackJeeves):
+    sub = 'thepremise'
+
+
+class SJThePrincessandtheGiant(_SmackJeeves):
+    sub = 'princess'
+
+
+class SJThePropertyofHate(_SmackJeeves):
+    sub = 'tpoh'
+
+
+class SJTheReborn(_SmackJeeves):
+    sub = 'reborn'
+
+
+class SJTheSearchforHenryJekyll(_SmackJeeves):
+    sub = 'thesearchforhenryjekyll'
+
+
+class SJTheSilverLeague(_SmackJeeves):
+    sub = 'thesilverleague'
+
+
+class SJTheSummerofBlakeSinclair(_SmackJeeves):
+    sub = 'blake-sinclair'
+
+
+class SJTheTimeDog(_SmackJeeves):
+    sub = 'timedog'
+
+
+class SJTheTytonNuzlockeChallengeEmeraldEdition(_SmackJeeves):
+    sub = 'tytonnuzlockeemerald'
+
+
+class SJTheWastelands(_SmackJeeves):
+    sub = 'wastelands'
+
+
+class SJTheWhiteTower(_SmackJeeves):
+    sub = 'thewhitetower'
+
+
+class SJTheWinterCampaign(_SmackJeeves):
+    sub = 'winterc'
+
+
+class SJTheYoshiHerd(_SmackJeeves):
+    sub = 'theyoshiherd'
+
+
+class SJTheatrics(_SmackJeeves):
+    sub = 'theatrics'
+
+
+class SJTheiaMania(_SmackJeeves):
+    sub = 'theia-mania'
+
+
+class SJThelaughingDeath(_SmackJeeves):
+    sub = 'thelaughingdeath'
+
+
+class SJThemadman(_SmackJeeves):
+    sub = 'themadman'
+
+
+class SJTheswordsmanandtheamnesiac(_SmackJeeves):
+    sub = 'tsata'
+    adult = True
+
+
+class SJThiefCatcherRingTail(_SmackJeeves):
+    sub = 'tcringtail'
+
+
+class SJThinkBeforeYouThink(_SmackJeeves):
+    sub = 'thinkbeforeyouthink'
+
+
+class SJThornTopia(_SmackJeeves):
+    sub = 'tnt100'
+
+
+class SJThornsComic(_SmackJeeves):
+    sub = 'thornscomic'
+
+
+class SJThroughtheWonkyEye(_SmackJeeves):
+    sub = 'through-the-wonky-eye'
+
+
+class SJTosiHuonoYaoiSarjis(_SmackJeeves):
+    sub = 'tosihuonoyaoisarjis'
+    adult = True
+
+
+class SJTotallyCrossover(_SmackJeeves):
+    sub = 'totallycrossover'
+
+
+class SJTrainerWantstoFight(_SmackJeeves):
+    sub = 'twtf'
+
+
+class SJTransUMan(_SmackJeeves):
+    sub = 'transuman'
+    adult = True
+
+
+class SJTransfusions(_SmackJeeves):
+    sub = 'transfusions'
+
+
+class SJTroublenextdoor(_SmackJeeves):
+    sub = 'troublenextdoor'
+
+
+class SJUglyBoysLove(_SmackJeeves):
+    sub = 'shounenai'
+
+
+class SJUglygame(_SmackJeeves):
+    sub = 'uglygame'
+
+
+class SJUndertheDeadSkies(_SmackJeeves):
+    host = 'underthedeadskies.thewebcomic.com'
+    adult = True
+
+
+class SJUnicampaLapis(_SmackJeeves):
+    sub = 'ual'
+
+
+class SJUpDown(_SmackJeeves):
+    sub = 'updown'
+    adult = True
+
+
+class SJUshalaatWorldsEnd(_SmackJeeves):
+    sub = 'ushala'
+    adult = True
+
+
+class SJVACANT(_SmackJeeves):
+    sub = 'vacant'
+
+
+class SJVacan7(_SmackJeeves):
+    sub = 'vacan7'
+    adult = True
+
+
+class SJVerloreGeleentheid(_SmackJeeves):
+    host = 'verlore.thewebcomic.com'
+
+
+class SJVoidMisadventures(_SmackJeeves):
+    sub = 'voidmisadventures'
+
+
+class SJVoyageoftheBrokenPromise(_SmackJeeves):
+    sub = 'voyageofthebrokenpromise'
+    adult = True
+
+
+class SJWHATaboutSHADOWS(_SmackJeeves):
+    sub = 'was'
+
+
+class SJWakeEcho(_SmackJeeves):
+    sub = 'echo'
+
+
+class SJWander(_SmackJeeves):
+    sub = 'wander'
+
+
+class SJWantedDeadorDead(_SmackJeeves):
+    sub = 'wanteddeadordead'
+
+
+class SJWayfar(_SmackJeeves):
+    sub = 'wayfar'
+
+
+class SJWaysoftheheart(_SmackJeeves):
+    sub = 'wayoftheheart'
+
+
+class SJWeAreGolden(_SmackJeeves):
+    sub = 'wearegolden'
+    adult = True
+
+
+class SJWelcometoFreakshow(_SmackJeeves):
+    sub = 'welcometofreakshow'
+
+
+class SJWelcometothePCA(_SmackJeeves):
+    sub = 'welcometothepca'
+
+
+class SJWhatAboutLove(_SmackJeeves):
+    sub = 'whataboutlove'
+    adult = True
+
+
+class SJWhatisdeepinonesheart(_SmackJeeves):
+    sub = 'ones-mindt'
+
+
+class SJWhenSheWasBad(_SmackJeeves):
+    sub = 'whenshewasbad'
+
+
+class SJWhenweweresilent(_SmackJeeves):
+    sub = 'silence'
+
+
+class SJWhereaboutsOfTime(_SmackJeeves):
+    sub = 'wot'
+
+
+class SJWhiteHeart(_SmackJeeves):
+    sub = 'whiteheart'
+    adult = True
+
+
+class SJWhiteNoise(_SmackJeeves):
+    sub = 'white-noise'
+
+
+class SJWildWingBoys(_SmackJeeves):
+    sub = 'wwb'
+
+
+class SJWildWingBoysKoathArc(_SmackJeeves):
+    sub = 'wwbka'
+
+
+class SJWildflowers(_SmackJeeves):
+    sub = 'wildflowers'
+
+
+class SJWingsOverEthereal(_SmackJeeves):
+    sub = 'wings-over-ethereal'
+
+
+class SJWingsTurnedtoDust(_SmackJeeves):
+    sub = 'wingsturnedtodust'
+
+
+class SJWootlabs(_SmackJeeves):
+    host = 'wootlabs.thewebcomic.com'
+
+
+class SJXXMoralityXx(_SmackJeeves):
+    sub = 'xxmoralityxx'
+
+
+class SJYadotCakeShop(_SmackJeeves):
+    sub = 'yadotcakeshop'
+    adult = True
+
+
+class SJYamanaokiHighSchool(_SmackJeeves):
+    sub = 'yamanaokihs'
+
+
+class SJYouAreTheReasonForTheEndOfTheWorld(_SmackJeeves):
+    sub = 'thereasonfortheendoftheworld'
+
+
+class SJYoungCannibals(_SmackJeeves):
+    host = 'www.youngcannibals.net'
+
+
+class SJZaenWell(_SmackJeeves):
+    sub = 'zaenwell'
+
+
+class SJZeldaTheNewAdventureofLinkIIMajorasMask(_SmackJeeves):
+    sub = 'newlink'
+
+
+class SJ_A_(_SmackJeeves):
+    sub = 'a-the-stalker'
