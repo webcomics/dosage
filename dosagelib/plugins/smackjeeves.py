@@ -18,6 +18,7 @@ class _SmackJeeves(_ParserScraper):
     prevSearch = (
         '//a[@class="nav-prev"]' + ONLY_COMICS,
         '//a[img[re:test(@alt, "prev", "i")]]' + ONLY_COMICS,
+        '//a[img[re:test(@src, "/(prev|back)")]]' + ONLY_COMICS,
         '//a[re:test(@title, "previous", "i")]' + ONLY_COMICS,
         '//a[re:test(text(), "prev|back", "i")]' + ONLY_COMICS,
         '//select[@class="jumpbox"]/preceding::a[1]' + ONLY_COMICS,
@@ -26,6 +27,7 @@ class _SmackJeeves(_ParserScraper):
     nextSearch = (
         '//a[@class="nav-next"]' + ONLY_COMICS,
         '//a[img[re:test(@alt, "next", "i")]]' + ONLY_COMICS,
+        '//a[img[re:test(@src, "/next", "i")]]' + ONLY_COMICS,
         '//a[re:test(@title, "next", "i")]' + ONLY_COMICS,
         '//a[re:test(text(), "next", "i")]' + ONLY_COMICS,
         '//select[@class="jumpbox"]/following::a[1]' + ONLY_COMICS,
@@ -35,6 +37,7 @@ class _SmackJeeves(_ParserScraper):
         '//img[@id="comic_image"]',
         '//div[@id="comic-image"]//img',
         '//img[@id="comic"]',
+        '//div[@id="comicset"]/object/param[@name="movie"]/@value',
     )
 
     @property
@@ -848,11 +851,6 @@ class SJFatetheAnthologyofKaienandhisfuckingmagicfriends(_SmackJeeves):
     sub = 'fatehoho'
 
 
-class SJFeathersPI(_SmackJeeves):
-    sub = 'featherpi'
-    adult = True
-
-
 class SJFemmeSchism(_SmackJeeves):
     sub = 'femmeschism'
 
@@ -863,10 +861,6 @@ class SJFeralGentry(_SmackJeeves):
 
 class SJFinalArcanum(_SmackJeeves):
     sub = 'finalarcanum'
-
-
-class SJFireWire(_SmackJeeves):
-    sub = 'firewire'
 
 
 class SJFireredLisasReise(_SmackJeeves):
@@ -928,10 +922,6 @@ class SJFurtherDowntheRabbitHole(_SmackJeeves):
     adult = True
 
 
-class SJGATEKEEPER(_SmackJeeves):
-    sub = 'gatekeepercomic'
-
-
 class SJGamerCafe(_SmackJeeves):
     sub = 'gamercafe'
 
@@ -950,10 +940,6 @@ class SJGayBacon(_SmackJeeves):
 
 class SJGayTimesWithRyanandJay(_SmackJeeves):
     sub = 'gtwraj'
-
-
-class SJGearTheTakedown(_SmackJeeves):
-    sub = 'geartd'
 
 
 class SJGetUpandGo(_SmackJeeves):
@@ -1018,10 +1004,6 @@ class SJHIPS(_SmackJeeves):
 
 class SJHabibahssong(_SmackJeeves):
     sub = 'habibahsong'
-
-
-class SJHarfang(_SmackJeeves):
-    sub = 'harfang'
 
 
 class SJHarvestMoonParadiseFound(_SmackJeeves):
@@ -1113,10 +1095,6 @@ class SJIciVontLesMorts(_SmackJeeves):
     adult = True
 
 
-class SJImminentMoose(_SmackJeeves):
-    sub = 'imminentmoose'
-
-
 class SJInHouseHumor(_SmackJeeves):
     sub = 'inhousehumor'
 
@@ -1139,10 +1117,6 @@ class SJInsideOuTAYuriTale(_SmackJeeves):
 
 class SJInspiredByADream(_SmackJeeves):
     sub = 'inspiredbyadream'
-
-
-class SJInthePride(_SmackJeeves):
-    sub = 'in-the-pride'
 
 
 class SJIntoxicated(_SmackJeeves):
@@ -1263,10 +1237,6 @@ class SJKissoftheDevil(_SmackJeeves):
     sub = 'kissofthedevil'
 
 
-class SJKnife(_SmackJeeves):
-    sub = 'knife'
-
-
 class SJKnightface(_SmackJeeves):
     sub = 'knightface'
     adult = True
@@ -1278,10 +1248,6 @@ class SJKnightsRequiem(_SmackJeeves):
 
 class SJKojiX5(_SmackJeeves):
     sub = 'kojix5'
-
-
-class SJKranburn(_SmackJeeves):
-    host = 'kranburn.thewebcomic.com'
 
 
 class SJKreetor(_SmackJeeves):
@@ -1427,10 +1393,6 @@ class SJLoveMeLoveMyTeddyBear(_SmackJeeves):
     sub = 'teddybear'
 
 
-class SJLoveTwister(_SmackJeeves):
-    sub = 'lovetwister'
-
-
 class SJLoveandIcecream(_SmackJeeves):
     sub = 'lovexandxicecream'
 
@@ -1528,10 +1490,6 @@ class SJMegaManTales(_SmackJeeves):
     sub = 'megamantales'
 
 
-class SJMegaManiacs(_SmackJeeves):
-    sub = 'megamaniacscomics'
-
-
 class SJMegaPain(_SmackJeeves):
     sub = 'megapain'
 
@@ -1547,10 +1505,6 @@ class SJMerirosvotSeikkailumerella(_SmackJeeves):
 class SJMetroJack(_SmackJeeves):
     sub = 'metro-jack'
     adult = True
-
-
-class SJMewsDynasty(_SmackJeeves):
-    sub = 'mews-dynasty'
 
 
 class SJMidnightPrince(_SmackJeeves):
@@ -1589,20 +1543,12 @@ class SJMokepon(_SmackJeeves):
     sub = 'mokepon'
 
 
-class SJMomthegamestorerippedusoffAGAIN(_SmackJeeves):
-    sub = 'crappygames'
-
-
 class SJMonstar(_SmackJeeves):
     host = 'monstar.thewebcomic.com'
 
 
 class SJMoonValley(_SmackJeeves):
     sub = 'moonvalley'
-
-
-class SJMoonlitDawnAMythicalTale(_SmackJeeves):
-    sub = 'moonlitdawn'
 
 
 class SJMorphE(_SmackJeeves):
@@ -1729,10 +1675,6 @@ class SJOctober20th(_SmackJeeves):
     host = 'www.october20comic.com'
 
 
-class SJOddContact(_SmackJeeves):
-    sub = 'oddcontact'
-
-
 class SJOddPlaceOddTime(_SmackJeeves):
     sub = 'oddplaceoddtime'
 
@@ -1743,10 +1685,6 @@ class SJOhman(_SmackJeeves):
 
 class SJOldElastikid(_SmackJeeves):
     sub = 'oldelastikid'
-
-
-class SJOneFrameGags(_SmackJeeves):
-    sub = 'oneframegags'
 
 
 class SJOneRainyDay(_SmackJeeves):
@@ -1779,7 +1717,7 @@ class SJOutofKey(_SmackJeeves):
 
 
 class SJOverSync(_SmackJeeves):
-    sub = 'linearperspective'
+    sub = 'oversync'
 
 
 class SJPMDExplorersofHeart(_SmackJeeves):
@@ -1792,10 +1730,6 @@ class SJPMDTeamFirefox(_SmackJeeves):
 
 class SJPMDVictoryFire(_SmackJeeves):
     sub = 'victoryfire'
-
-
-class SJPRAGUERACE(_SmackJeeves):
-    sub = 'praguerace'
 
 
 class SJPTO(_SmackJeeves):
@@ -1887,7 +1821,7 @@ class SJPokemonGleamingCrystal(_SmackJeeves):
 
 
 class SJPokemonLANDSKY(_SmackJeeves):
-    host = 'www.landxsky.com'
+    sub = 'landsky'
 
 
 class SJPokemonMysteryDungeonTeamCrystal(_SmackJeeves):
@@ -2025,10 +1959,6 @@ class SJRuneSpark(_SmackJeeves):
 
 class SJRyuManwebcomicversion(_SmackJeeves):
     sub = 'ryuman-web'
-
-
-class SJSAKANA(_SmackJeeves):
-    sub = 'sakana'
 
 
 class SJSChIzO(_SmackJeeves):

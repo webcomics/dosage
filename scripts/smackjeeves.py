@@ -84,6 +84,7 @@ class SmackJeevesUpdater(ComicListUpdater):
         # images are 403 forbidden
         "AngelJunkPileFelix",
         "AntavioussGenLab",
+        "Harfang",
         "Okamirai",
 
         # missing images
