@@ -31,8 +31,7 @@ class Xkcd(_BasicScraper):
         name = image_url.rsplit('/', 1)[-1].split('.')[0]
         return '%03d-%s' % (index, name)
 
-    @classmethod
-    def imageUrlModifier(cls, url, data):
+    def imageUrlModifier(self, url, data):
         if url and '/large/' in data:
             return url.replace(".png", "_large.png")
         return url

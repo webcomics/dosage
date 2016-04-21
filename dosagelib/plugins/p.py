@@ -89,16 +89,15 @@ class PennyArcade(_BasicScraper):
     starter = bounceStarter
     help = 'Index format: yyyy/mm/dd/'
 
-    @classmethod
-    def prevUrlModifier(cls, prevUrl):
-        if prevUrl:
-            dummy, yyyy, mm, dd = prevUrl.rsplit('/', 3)
+    def prevUrlModifier(self, prev_url):
+        if prev_url:
+            dummy, yyyy, mm, dd = prev_url.rsplit('/', 3)
             try:
                 int(dd)
             except ValueError:
                 # URL has form yyyy/mm/dd/stripname
-                prevUrl = "%s/%s/%s" % (dummy, yyyy, mm)
-            return prevUrl
+                prev_url = "%s/%s/%s" % (dummy, yyyy, mm)
+            return prev_url
 
     def namer(self, image_url, page_url):
         p = page_url.split('/')

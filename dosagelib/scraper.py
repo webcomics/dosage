@@ -241,21 +241,19 @@ class Scraper(object):
         """Return filename for given image and page URL."""
         return None
 
-    @classmethod
-    def prevUrlModifier(cls, prevUrl):
+    def prevUrlModifier(self, prev_url):
         """Optional modification of parsed previous URLs. Useful if
         there are domain redirects. The default implementation does
         not modify the URL.
         """
-        return prevUrl
+        return prev_url
 
-    @classmethod
-    def imageUrlModifier(cls, imageUrl, data):
+    def imageUrlModifier(self, image_url, data):
         """Optional modification of parsed image URLs. Useful if the URL
         needs to be fixed before usage. The default implementation does
         not modify the URL. The given data is the URL page data.
         """
-        return imageUrl
+        return image_url
 
     def vote(self):
         """Cast a public vote for this comic."""
@@ -469,7 +467,7 @@ class _ParserScraper(Scraper):
                         if attrib in match.attrib:
                             searchUrl = match.get(attrib)
                 except AttributeError:
-                    searchUrls = str(match)
+                    searchUrl = str(match)
                 out.debug(u'Matched URL %r with pattern %s' %
                           (searchUrl, search))
                 searchUrls.append(searchUrl)

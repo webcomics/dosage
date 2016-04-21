@@ -1,6 +1,9 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
 
 from re import compile
 from ..scraper import make_scraper
@@ -21,10 +24,9 @@ def add(name, url):
     else:
         stripUrl = url + 'd/%s.html'
 
-    @classmethod
-    def _prevUrlModifier(cls, prevUrl):
-        if prevUrl:
-            return prevUrl.replace("keenspace.com", "comicgenesis.com"
+    def _prevUrlModifier(self, prev_url):
+        if prev_url:
+            return prev_url.replace("keenspace.com", "comicgenesis.com"
               ).replace("keenspot.com", "comicgenesis.com"
               ).replace("toonspace.com", "comicgenesis.com"
               ).replace("comicgen.com", "comicgenesis.com")
