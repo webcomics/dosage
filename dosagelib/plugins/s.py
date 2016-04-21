@@ -150,10 +150,9 @@ class ScurryAndCover(_ParserScraper):
     nextSearch = '//div[@id="nextpage"]/..'
     imageSearch = 'MARKER'
 
-    @classmethod
-    def fetchUrls(cls, url, data, urlSearch):
-        if urlSearch != cls.imageSearch:
-            return super(ScurryAndCover, cls).fetchUrls(url, data, urlSearch)
+    def fetchUrls(self, url, data, urlsearch):
+        if urlsearch != self.imageSearch:
+            return super(ScurryAndCover, self).fetchUrls(url, data, urlsearch)
 
         # get javascript element and parse a variable value
         scripts = data.xpath('//body/script[@type="text/javascript"]')
@@ -163,7 +162,7 @@ class ScurryAndCover(_ParserScraper):
             images = regex.findall(script.text)
             if len(images) > 0:
                 image = images[0]
-                return [cls.url + '/images/pages/' + image + '-xsmall.png']
+                return [self.url + '/images/pages/' + image + '-xsmall.png']
 
     def starter(self):
         """Go forward as far as possibe, then start."""

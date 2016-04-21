@@ -56,10 +56,8 @@ class Stellar(_WLPComics):
     url = 'http://www.wlpcomics.com/adult/stellar/'
     adult = True
 
-    @classmethod
-    def fetchUrls(cls, url, data, urlSearch):
+    def prevUrlModifier(self, prev_url):
         """Bugfix for empty page..."""
-        urls = super(Stellar, cls).fetchUrls(url, data, urlSearch)
-        if cls.url + '075.html' in urls:
-            urls = [cls.url + '074.html']
-        return urls
+        if prev_url == self.url + '075.html':
+            return self.url + '074.html'
+        return prev_url

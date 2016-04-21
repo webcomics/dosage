@@ -20,9 +20,8 @@ class EarthsongSaga(_ParserScraper):
     prevSearch = '//a[@title="Previous"]'
     latestSearch = '//div[@id="leftmenu"]/span[1]/a[1]'
 
-    @classmethod
-    def fetchUrls(cls, url, data, urlSearch):
-        urls = super(EarthsongSaga, cls).fetchUrls(url, data, urlSearch)
+    def fetchUrls(self, url, data, urlSearch):
+        urls = super(EarthsongSaga, self).fetchUrls(url, data, urlSearch)
         return [x.replace('earthsongsaga.com/../',
                           'earthsongsaga.com/') for x in urls]
 

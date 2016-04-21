@@ -280,8 +280,7 @@ class Scraper(object):
                 with open(filename, 'w') as f:
                     f.write('All comics should be downloaded here.')
 
-    @classmethod
-    def getPage(cls, url):
+    def getPage(self, url):
         """
         Fetch a page and return the opaque repesentation for the data parameter
         of fetchUrls and fetchText.
@@ -295,16 +294,13 @@ class Scraper(object):
         """
         raise ValueError("No implementation for getPage!")
 
-    @classmethod
-    def fetchUrls(cls, url, data, urlSearch):
+    def fetchUrls(self, url, data, urlsearch):
         raise ValueError("No implementation for fetchUrls!")
 
-    @classmethod
-    def fetchUrl(cls, url, data, urlSearch):
-        return cls.fetchUrls(url, data, urlSearch)[0]
+    def fetchUrl(self, url, data, urlsearch):
+        return self.fetchUrls(url, data, urlsearch)[0]
 
-    @classmethod
-    def fetchText(cls, url, data, textSearch, optional):
+    def fetchText(self, url, data, textsearch, optional):
         raise ValueError("No implementation for fetchText!")
 
     def getDisabledReasons(self):
@@ -351,20 +347,18 @@ class _BasicScraper(Scraper):
 
     BASE_SEARCH = re.compile(tagre("base", "href", '([^"]*)'))
 
-    @classmethod
-    def getPage(cls, url):
-        content = get_page(url, cls.session).text
+    def getPage(self, url):
+        content = get_page(url, self.session).text
         # determine base URL
         baseUrl = None
-        match = cls.BASE_SEARCH.search(content)
+        match = self.BASE_SEARCH.search(content)
         if match:
             baseUrl = match.group(1)
         else:
             baseUrl = url
         return (content, baseUrl)
 
-    @classmethod
-    def fetchUrls(cls, url, data, urlSearch):
+    def fetchUrls(self, url, data, urlSearch):
         """Search all entries for given URL pattern(s) in a HTML page."""
         searchUrls = []
         searches = makeSequence(urlSearch)
@@ -386,8 +380,7 @@ class _BasicScraper(Scraper):
                              (patterns, url))
         return searchUrls
 
-    @classmethod
-    def fetchText(cls, url, data, textSearch, optional):
+    def fetchText(self, url, data, textSearch, optional):
         """Search text entry for given text pattern in a HTML page."""
         if textSearch:
             match = textSearch.search(data[0])
@@ -434,31 +427,29 @@ class _ParserScraper(Scraper):
     # another Python module, XPath is the default for now.
     css = False
 
-    @classmethod
-    def getPage(cls, url):
-        page = get_page(url, cls.session)
+    def getPage(self, url):
+        page = get_page(url, self.session)
         if page.encoding:
             # Requests figured out the encoding, so we can deliver Unicode to
             # LXML. Unfortunatly, LXML feels betrayed if there is still an XML
             # declaration with (probably wrong!) encoding at the top of the
             # document. Web browsers ignore such if the encoding was specified
             # in the HTTP header and so do we.
-            text = cls.XML_DECL.sub('\1\2', page.text, count=1)
+            text = self.XML_DECL.sub('\1\2', page.text, count=1)
             tree = html.document_fromstring(text)
         else:
             tree = html.document_fromstring(page.content)
         tree.make_links_absolute(url)
         return tree
 
-    @classmethod
-    def fetchUrls(cls, url, data, urlSearch):
+    def fetchUrls(self, url, data, urlSearch):
         """Search all entries for given XPath in a HTML page."""
         searchUrls = []
-        if cls.css:
+        if self.css:
             searchFun = data.cssselect
         else:
             def searchFun(s):
-                return data.xpath(s, namespaces=cls.NS)
+                return data.xpath(s, namespaces=self.NS)
         searches = makeSequence(urlSearch)
         for search in searches:
             for match in searchFun(search):
@@ -472,17 +463,16 @@ class _ParserScraper(Scraper):
                           (searchUrl, search))
                 searchUrls.append(searchUrl)
 
-            if not cls.multipleImagesPerStrip and searchUrls:
+            if not self.multipleImagesPerStrip and searchUrls:
                 # do not search other links if one pattern matched
                 break
         if not searchUrls:
             raise ValueError("XPath %s not found at URL %s." % (searches, url))
         return searchUrls
 
-    @classmethod
-    def fetchText(cls, url, data, textSearch, optional):
+    def fetchText(self, url, data, textSearch, optional):
         """Search text entry for given text XPath in a HTML page."""
-        if cls.css:
+        if self.css:
             searchFun = data.cssselect
         else:
             searchFun = data.xpath
