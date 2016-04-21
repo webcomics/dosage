@@ -445,55 +445,59 @@ class _ParserScraper(Scraper):
     def fetchUrls(self, url, data, urlSearch):
         """Search all entries for given XPath in a HTML page."""
         searchUrls = []
+        for match, search in self._matchPattern(data, urlSearch):
+            searchUrl = None
+            try:
+                for attrib in html_link_attrs:
+                    if attrib in match.attrib:
+                        searchUrl = match.get(attrib)
+            except AttributeError:
+                searchUrl = str(match)
+            out.debug(u'Matched URL %r with pattern %s' % (searchUrl, search))
+            if searchUrl is not None:
+                searchUrls.append(searchUrl)
+
+        if not searchUrls:
+            raise ValueError("XPath %s not found at URL %s." %
+                             (urlSearch, url))
+        return searchUrls
+
+    def fetchText(self, url, data, textSearch, optional):
+        """Search text entry for given text XPath in a HTML page."""
+        if not textSearch:
+            return None
+        text = []
+        for match, search in self._matchPattern(data, textSearch):
+            try:
+                text.append(match.text_content())
+            except AttributeError:
+                text.append(match)
+            out.debug(u'Matched text %r with XPath %s' % (text, search))
+        text = u' '.join(text)
+        if text.strip() == '':
+            if optional:
+                return None
+            else:
+                raise ValueError("XPath %s did not match anything at URL %s." %
+                                 (textSearch, url))
+        return text.strip()
+
+    def _matchPattern(self, data, patterns):
         if self.css:
             searchFun = data.cssselect
         else:
             def searchFun(s):
                 return data.xpath(s, namespaces=self.NS)
-        searches = makeSequence(urlSearch)
-        for search in searches:
+        patterns = makeSequence(patterns)
+        for search in patterns:
+            matched = False
             for match in searchFun(search):
-                try:
-                    for attrib in html_link_attrs:
-                        if attrib in match.attrib:
-                            searchUrl = match.get(attrib)
-                except AttributeError:
-                    searchUrl = str(match)
-                out.debug(u'Matched URL %r with pattern %s' %
-                          (searchUrl, search))
-                searchUrls.append(searchUrl)
+                matched = True
+                yield match, search
 
-            if not self.multipleImagesPerStrip and searchUrls:
+            if matched and not self.multipleImagesPerStrip:
                 # do not search other links if one pattern matched
                 break
-        if not searchUrls:
-            raise ValueError("XPath %s not found at URL %s." % (searches, url))
-        return searchUrls
-
-    def fetchText(self, url, data, textSearch, optional):
-        """Search text entry for given text XPath in a HTML page."""
-        if self.css:
-            searchFun = data.cssselect
-        else:
-            searchFun = data.xpath
-        if textSearch:
-            text = ''
-            for match in searchFun(textSearch):
-                try:
-                    text += u' ' + match.text_content()
-                except AttributeError:
-                    text += u' ' + match
-            if text.strip() == '':
-                if optional:
-                    return None
-                else:
-                    raise ValueError(
-                        "XPath %s did not match anything at URL %s." %
-                        (textSearch, url))
-            out.debug(u'Matched text %r with XPath %s' % (text, textSearch))
-            return unescape(text).strip()
-        else:
-            return None
 
     def getDisabledReasons(self):
         res = {}
