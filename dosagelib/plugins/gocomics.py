@@ -26,10 +26,9 @@ class _GoComics(_ParserScraper):
     def url(self):
         return 'http://www.gocomics.com/' + self.path
 
-    @classmethod
-    def namer(cls, image_url, page_url):
+    def namer(self, image_url, page_url):
         prefix, year, month, day = page_url.rsplit('/', 3)
-        return "%s_%s%s%s.gif" % (cls.__name__[2:], year, month, day)
+        return "%s_%s%s%s.gif" % (self.__class__.__name__[2:], year, month, day)
 
     def getIndexStripUrl(self, index):
         return self.url + self.path + '/%s' % index

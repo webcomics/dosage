@@ -74,13 +74,12 @@ class OnTheFastrack(_BasicScraper):
     url = 'http://onthefastrack.com/'
     stripUrl = url + 'comics/%s'
     firstStripUrl = stripUrl % 'november-13-2000'
-    imageSearch = compile(r'(http://safr\.kingfeatures\.com/idn/cnfeed/zone/js/content\.php\?file=.+)"')
+    imageSearch = compile(r'(https://safr\.kingfeatures\.com/idn/cnfeed/zone/js/content\.php\?file=.+)"')
     prevSearch = compile(r'id="previouscomic" class="button white"><a href="(%scomics/[a-z0-9-]+/)"' % url)
     help = 'Index format: monthname-dd-yyyy'
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        name = pageUrl.rsplit('/', 3)[2]
+    def namer(self, image_url, page_url):
+        name = page_url.rsplit('/', 3)[2]
         if name == "onthefastrack.com":
                 import datetime
                 name = datetime.date.today().strftime("%B-%d-%Y")

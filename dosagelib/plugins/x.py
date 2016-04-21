@@ -26,8 +26,7 @@ class Xkcd(_BasicScraper):
     textSearch = compile(tagre("img", "title", r'([^"]+)',
                                before=r'//imgs\.xkcd\.com/comics/'))
 
-    @classmethod
-    def namer(cls, image_url, page_url):
+    def namer(self, image_url, page_url):
         index = int(page_url.rstrip('/').rsplit('/', 1)[-1])
         name = image_url.rsplit('/', 1)[-1].split('.')[0]
         return '%03d-%s' % (index, name)

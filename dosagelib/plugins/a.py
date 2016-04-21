@@ -28,8 +28,7 @@ class AbstruseGoose(_BasicScraper):
     help = 'Index format: n (unpadded)'
     textSearch = compile(tagre("img", "title", r'([^"]+)'))
 
-    @classmethod
-    def namer(cls, image_url, page_url):
+    def namer(self, image_url, page_url):
         index = int(page_url.rstrip('/').split('/')[-1])
         name = image_url.split('/')[-1].split('.')[0]
         return 'c%03d-%s' % (index, name)
@@ -300,8 +299,7 @@ class AstronomyPOTD(_ParserScraper):
         """Skip pages without images."""
         return data.xpath('//iframe')  # videos
 
-    @classmethod
-    def namer(cls, image_url, page_url):
+    def namer(self, image_url, page_url):
         return '%s-%s' % (page_url.split('/')[-1].split('.')[0][2:],
                           image_url.split('/')[-1].split('.')[0])
 

@@ -26,11 +26,10 @@ class Lackadaisy(_BasicScraper):
     help = 'Index format: n'
     starter = bounceStarter
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         """Use comic id for filename."""
-        num = pageUrl.rsplit('=', 1)[-1]
-        ext = imageUrl.rsplit('.', 1)[-1]
+        num = page_url.rsplit('=', 1)[-1]
+        ext = image_url.rsplit('.', 1)[-1]
         return 'lackadaisy_%s.%s' % (num, ext)
 
 

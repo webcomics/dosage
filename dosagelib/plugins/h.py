@@ -51,10 +51,9 @@ class HarkAVagrant(_BasicScraper):
                          tagre("img", "src", "buttonnext.png"))
     help = 'Index format: number'
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        filename = imageUrl.rsplit('/', 1)[1]
-        num = pageUrl.rsplit('=', 1)[1]
+    def namer(self, image_url, page_url):
+        filename = image_url.rsplit('/', 1)[1]
+        num = page_url.rsplit('=', 1)[1]
         return '%s-%s' % (num, filename)
 
 

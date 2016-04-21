@@ -100,9 +100,8 @@ class PennyArcade(_BasicScraper):
                 prevUrl = "%s/%s/%s" % (dummy, yyyy, mm)
             return prevUrl
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        p = pageUrl.split('/')
+    def namer(self, image_url, page_url):
+        p = page_url.split('/')
         return '%04d%02d%02d' % (int(p[4]), int(p[5]), int(p[6]))
 
 
@@ -161,7 +160,7 @@ class PiledHigherAndDeeper(_BasicScraper):
     prevSearch = compile(r'<a href=((comics/)?archive\.php\?comicid=\d+)>.*<img [^>]*prev_button\.gif')
     nextSearch = compile(r'<a href=(archive\.php\?comicid=\d+)>.*<img [^>]*next_button\.gif')
     help = 'Index format: n (unpadded)'
-    namer = queryNamer('comicid', usePageUrl=True)
+    namer = queryNamer('comicid', use_page_url=True)
 
 
 class Pimpette(_ParserScraper):

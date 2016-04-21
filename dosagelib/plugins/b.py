@@ -76,11 +76,10 @@ class Beetlebum(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/striptitle'
     lang = 'de'
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        indexes = tuple(pageUrl.rstrip('/').split('/')[-4:])
+    def namer(self, image_url, page_url):
+        indexes = tuple(page_url.rstrip('/').split('/')[-4:])
         name = '%s-%s-%s-%s' % indexes
-        name = name + '_' + imageUrl.split('/')[-1]
+        name = name + '_' + image_url.split('/')[-1]
         return name
 
 
@@ -154,8 +153,7 @@ class BloomingFaeries(_ParserScraper):
     imageSearch = '//div[@id="comic"]//img'
     prevSearch = WP_PREV_SEARCH
 
-    @classmethod
-    def namer(cls, image_url, page_url):
+    def namer(self, image_url, page_url):
         return "_".join(image_url.rsplit('/', 3)[1:])
 
 
@@ -197,9 +195,8 @@ class BoyOnAStickAndSlither(_BasicScraper):
                          "<span>Next page")
     help = 'Index format: n (unpadded)'
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        return pageUrl.rsplit('/')[-1]
+    def namer(self, image_url, page_url):
+        return page_url.rsplit('/')[-1]
 
 
 class BratHalla(_WordPressScraper):

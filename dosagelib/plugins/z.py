@@ -34,9 +34,8 @@ class Zapiro(_BasicScraper):
                                r'(http://mg\.co\.za/cartoon/[^"]+)'))
     help = 'Index format: yyyy-mm-dd-stripname'
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        name = imageUrl.split('/')[-3]
+    def namer(self, image_url, page_url):
+        name = image_url.split('/')[-3]
         return name
 
 
@@ -84,7 +83,6 @@ class Zwarwald(_BasicScraper):
             self.stripUrl % '495',
         )
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        prefix, year, month, name = imageUrl.rsplit('/', 3)
+    def namer(self, image_url, page_url):
+        prefix, year, month, name = image_url.rsplit('/', 3)
         return "%s_%s_%s" % (year, month, name)

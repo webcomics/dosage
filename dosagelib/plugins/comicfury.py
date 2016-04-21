@@ -22,12 +22,11 @@ class _ComicFury(_ParserScraper):
     help = 'Index format: n'
     starter = bounceStarter
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        parts = pageUrl.split('/')
-        path, ext = os.path.splitext(imageUrl)
+    def namer(self, image_url, page_url):
+        parts = page_url.split('/')
+        path, ext = os.path.splitext(image_url)
         num = parts[-1]
-        return "%s_%s%s" % (cls.__name__[2:], num, ext)
+        return "%s_%s%s" % (self.__class__.__name__[2:], num, ext)
 
     @property
     def url(self):

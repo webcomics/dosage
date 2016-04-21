@@ -237,8 +237,7 @@ class Scraper(object):
         """Get starter URL from where to scrape comic strips."""
         return self.url
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         """Return filename for given image and page URL."""
         return None
 

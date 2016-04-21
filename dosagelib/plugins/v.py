@@ -60,6 +60,5 @@ class ViiviJaWagner(_BasicScraper):
     help = 'Index format: none'
     lang = 'fi'
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        return imageUrl.split('=')[1]
+    def namer(self, image_url, page_url):
+        return image_url.split('=')[1]

@@ -26,13 +26,12 @@ class EarthsongSaga(_ParserScraper):
         return [x.replace('earthsongsaga.com/../',
                           'earthsongsaga.com/') for x in urls]
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         imgmatch = compile(r'images/vol(\d+)/ch(\d+)/(\d+)\.\w+$',
-                           IGNORECASE).search(imageUrl)
+                           IGNORECASE).search(image_url)
         if not imgmatch:
             imgmatch = compile(r'images/vol(\d+)/ch(\d+)/ch(\d+)cover\.\w+$',
-                               IGNORECASE).search(imageUrl)
+                               IGNORECASE).search(image_url)
             suffix = "cover"
         else:
             suffix = ""

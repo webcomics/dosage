@@ -85,9 +85,8 @@ class TheOrderOfTheStick(_BasicScraper):
     help = 'Index format: n (unpadded)'
     starter = indirectStarter
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        return pageUrl.rsplit('/', 1)[-1][:-5]
+    def namer(self, image_url, page_url):
+        return page_url.rsplit('/', 1)[-1][:-5]
 
 
 class TheParkingLotIsFull(_BasicScraper):
@@ -123,11 +122,10 @@ class TheThinHLine(_BasicScraper):
         pageData = self.getPage(pageUrl)
         return super(TheThinHLine, self).getComicStrip(pageUrl, pageData)
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         """Use page URL sequence which is apparently increasing."""
-        num = pageUrl.split('/')[-1]
-        ext = imageUrl.rsplit('.', 1)[1]
+        num = page_url.split('/')[-1]
+        ext = image_url.rsplit('.', 1)[1]
         return "thethinhline-%s.%s" % (num, ext)
 
 

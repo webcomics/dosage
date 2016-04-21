@@ -8,22 +8,20 @@ from __future__ import absolute_import, division, print_function
 from .util import getQueryParams
 
 
-def queryNamer(paramName, usePageUrl=False):
+def queryNamer(param, use_page_url=False):
     """Get name from URL query part."""
-    @classmethod
-    def _namer(cls, imageUrl, pageUrl):
+    def _namer(self, image_url, page_url):
         """Get URL query part."""
-        url = pageUrl if usePageUrl else imageUrl
-        return getQueryParams(url)[paramName][0]
+        url = page_url if use_page_url else image_url
+        return getQueryParams(url)[param][0]
     return _namer
 
 
-def regexNamer(regex, usePageUrl=False):
+def regexNamer(regex, use_page_url=False):
     """Get name from regular expression."""
-    @classmethod
-    def _namer(cls, imageUrl, pageUrl):
+    def _namer(self, image_url, page_url):
         """Get first regular expression group."""
-        url = pageUrl if usePageUrl else imageUrl
+        url = page_url if use_page_url else image_url
         mo = regex.search(url)
         if mo:
             return mo.group(1)

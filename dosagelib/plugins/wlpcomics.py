@@ -20,8 +20,7 @@ class _WLPComics(_ParserScraper):
     def name(self):
         return 'WLP/' + super(_WLPComics, self).name
 
-    @classmethod
-    def namer(cls, image_url, page_url):
+    def namer(self, image_url, page_url):
         return (page_url.rsplit('/', 1)[-1].split('.')[0] + '_' +
                 image_url.rsplit('/', 1)[-1])
 

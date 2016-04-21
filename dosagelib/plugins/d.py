@@ -34,10 +34,9 @@ class DamnLol(_BasicScraper):
     help = 'Index format: stripname-number'
     starter = bounceStarter
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        ext = imageUrl.rsplit('.', 1)[1]
-        path = pageUrl.rsplit('/', 1)[1][:-5]
+    def namer(self, image_url, page_url):
+        ext = image_url.rsplit('.', 1)[1]
+        path = page_url.rsplit('/', 1)[1][:-5]
         stripname, number = path.rsplit('-', 1)
         return '%s-%s.%s' % (number, stripname, ext)
 
@@ -136,10 +135,9 @@ class DieselSweeties(_BasicScraper):
                          tagre("img", "src", r'(?:http://www\.dieselsweeties\.com/ximages/blackbackarrow160.png|/ximages/prev\.gif)'))
     help = 'Index format: n (unpadded)'
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        index = int(imageUrl.split('/')[-1].split('.')[0])
-        return 'sw%02d' % (index,)
+    def namer(self, image_url, page_url):
+        index = int(image_url.split('/')[-1].split('.')[0])
+        return 'sw%02d' % index
 
 
 class Dilbert(_BasicScraper):
@@ -154,9 +152,8 @@ class Dilbert(_BasicScraper):
                                  after="Click to see"))
     help = 'Index format: yyyy-mm-dd'
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        name = pageUrl.rsplit("/", 1)[1]
+    def namer(self, image_url, page_url):
+        name = page_url.rsplit("/", 1)[1]
         return "%s" % name
 
 

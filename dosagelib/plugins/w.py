@@ -64,10 +64,9 @@ class WebDesignerCOTW(_BasicScraper):
         """Skip non-comic URLs."""
         return 'comics-of-the-week' not in url
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        imagename = imageUrl.rsplit('/', 1)[1]
-        week = compile(r'week-(\d+)').search(pageUrl).group(1)
+    def namer(self, image_url, page_url):
+        imagename = image_url.rsplit('/', 1)[1]
+        week = compile(r'week-(\d+)').search(page_url).group(1)
         return "%s-%s" % (week, imagename)
 
 

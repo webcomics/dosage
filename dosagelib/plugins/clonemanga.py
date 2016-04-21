@@ -24,9 +24,8 @@ def add(name, shortName, imageFolder=None, lastStrip=None):
     if imageFolder is None:
         imageFolder = shortName
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        return '%03d' % int(getQueryParams(pageUrl)['page'][0])
+    def namer(self, image_url, page_url):
+        return '%03d' % int(getQueryParams(page_url)['page'][0])
 
     def _starter(self):
         # first, try hopping to previous and next comic

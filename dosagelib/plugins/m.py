@@ -82,9 +82,8 @@ class MarriedToTheSea(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'([^"]+)') + "&lt;&lt; Yesterday")
     help = 'Index format: mmddyy'
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        unused, date, filename = imageUrl.rsplit('/', 2)
+    def namer(self, image_url, page_url):
+        unused, date, filename = image_url.rsplit('/', 2)
         return '%s-%s' % (date, filename)
 
 

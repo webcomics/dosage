@@ -57,9 +57,8 @@ class Carciphona(_BasicScraper):
                                  r'(view\.php\?page=[0-9]+[^"]*)'))
     starter = indirectStarter
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        ip = imageUrl.split('/')
+    def namer(self, image_url, page_url):
+        ip = image_url.split('/')
         return "volume_%s_page_%s" % (ip[-2], ip[-1])
 
 
@@ -262,9 +261,8 @@ class CorydonCafe(_ParserScraper):
     latestSearch = '//ul//a'
     help = 'Index format: yyyy/stripname'
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        return pageUrl.split('/')[-1].split('.')[0]
+    def namer(self, image_url, page_url):
+        return page_url.split('/')[-1].split('.')[0]
 
 
 class CourtingDisaster(_WordPressScraper):
@@ -349,10 +347,9 @@ class CyanideAndHappiness(_BasicScraper):
         """Skip pages without images."""
         return "/comics/play-button.png" in data[0]
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        imgname = imageUrl.split('/')[-1]
+    def namer(self, image_url, page_url):
+        imgname = image_url.split('/')[-1]
         # only get the first 100 chars for the image name
         imgname = imgname[:100]
-        imgnum = pageUrl.split('/')[-2]
+        imgnum = page_url.split('/')[-2]
         return '%s_%s' % (imgnum, imgname)

@@ -68,8 +68,7 @@ class _SmackJeeves(_ParserScraper):
         else:
             return self.fetchUrl(prevurl, data, self.nextSearch)
 
-    @classmethod
-    def namer(cls, image_url, page_url):
+    def namer(self, image_url, page_url):
         parts = page_url.split('/')
         name = parts[-2]
         num = parts[-3]

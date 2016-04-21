@@ -146,9 +146,8 @@ class GoneWithTheBlastwave(_BasicScraper):
                            r'<img src="images/page/default/latest')
     help = 'Index format: n'
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        return '%02d' % int(compile(r'nro=(\d+)').search(pageUrl).group(1))
+    def namer(self, image_url, page_url):
+        return '%02d' % int(compile(r'nro=(\d+)').search(page_url).group(1))
 
 
 class GrrlPower(_WordPressScraper):

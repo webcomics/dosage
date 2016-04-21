@@ -197,10 +197,9 @@ class SexyLosers(_BasicScraper):
     help = 'Index format: nnn'
     starter = indirectStarter
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        index = pageUrl.split('/')[-1].split('.')[0]
-        title = imageUrl.split('/')[-1].split('.')[0]
+    def namer(self, image_url, page_url):
+        index = page_url.split('/')[-1].split('.')[0]
+        title = image_url.split('/')[-1].split('.')[0]
         return index + '-' + title
 
 
@@ -228,9 +227,8 @@ class ShermansLagoon(_BasicScraper):
     prevSearch = compile(r'id="previouscomic" class="button white"><a href="(%scomics/[a-z0-9-]+/)"' % url)
     help = 'Index format: monthname-day-year'
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        name = pageUrl.rsplit('/', 3)[2]
+    def namer(self, image_url, page_url):
+        name = page_url.rsplit('/', 3)[2]
         if name == "shermanslagoon.com":
             name = datetime.date.today().strftime("%B-%d-%Y").lower()
         # name is monthname-day-year
@@ -309,10 +307,9 @@ class SMBC(_ParserScraper):
     help = 'Index format: nnnn'
     textSearch = '//img[@id="comic"]/@title'
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         """Remove random noise from name."""
-        return imageUrl.rsplit('-', 1)[-1]
+        return image_url.rsplit('-', 1)[-1]
 
     def shouldSkipUrl(self, url, data):
         """Skip promo or missing update pages."""
@@ -339,11 +336,10 @@ class SnowFlame(_WordPressScraper):
     def getIndexStripUrl(self, index):
         return self.stripUrl % tuple(index.split('-'))
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        prefix, filename = imageUrl.rsplit('/', 1)
+    def namer(self, image_url, page_url):
+        prefix, filename = image_url.rsplit('/', 1)
         ro = compile(r'snowflame-([^-]+)-([^-]+)')
-        mo = ro.search(pageUrl)
+        mo = ro.search(page_url)
         chapter = mo.group(1)
         page = mo.group(2)
         return "%s-%s-%s" % (chapter, page, filename)
@@ -434,15 +430,14 @@ class StarCrossdDestiny(_ParserScraper):
     prevSearch = '//a[text()="prev"]'
     help = 'Index format: nnnnnnnn'
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        if imageUrl.find('ch1') == -1:
+    def namer(self, image_url, page_url):
+        if image_url.find('ch1') == -1:
             # At first all images were stored in a strips/ directory but
             # that was changed with the introduction of book2
-            imageUrl = sub('(?:strips)|(?:images)', 'book1', imageUrl)
-        elif not imageUrl.find('strips') == -1:
-            imageUrl = imageUrl.replace('strips/', '')
-        directory, filename = imageUrl.split('/')[-2:]
+            image_url = sub('(?:strips)|(?:images)', 'book1', image_url)
+        elif not image_url.find('strips') == -1:
+            image_url = image_url.replace('strips/', '')
+        directory, filename = image_url.split('/')[-2:]
         filename, extension = splitext(filename)
         return directory + '-' + filename
 
@@ -519,12 +514,11 @@ class StuffNoOneToldMe(_BasicScraper):
     multipleImagesPerStrip = True
     help = 'Index format: yyyy/mm/stripname'
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         """Use page URL to construct meaningful image name."""
-        parts, year, month, stripname = pageUrl.rsplit('/', 3)
+        parts, year, month, stripname = page_url.rsplit('/', 3)
         stripname = stripname.rsplit('.', 1)[0]
-        parts, imagename = imageUrl.rsplit('/', 1)
+        parts, imagename = image_url.rsplit('/', 1)
         return '%s-%s-%s-%s' % (year, month, stripname, imagename)
 
     def shouldSkipUrl(self, url, data):

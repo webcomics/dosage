@@ -24,10 +24,9 @@ def add(name, path):
     classname = '_DrunkDuck_%s' % name
     _url = 'http://www.theduckwebcomics.com/%s/' % path
 
-    @classmethod
-    def _namer(cls, imageUrl, pageUrl):
-        index = int(pageUrl.rstrip('/').split('/')[-1])
-        ext = imageUrl.rsplit('.')[-1]
+    def _namer(self, image_url, page_url):
+        index = int(page_url.rstrip('/').split('/')[-1])
+        ext = image_url.rsplit('.')[-1]
         return '%d.%s' % (index, ext)
 
     def _starter(self):

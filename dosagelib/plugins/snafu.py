@@ -20,8 +20,7 @@ class _Snafu(_ParserScraper):
     def name(self):
         return 'SnafuComics/' + super(_Snafu, self).name
 
-    @classmethod
-    def namer(cls, image_url, page_url):
+    def namer(self, image_url, page_url):
         year, month, name = image_url.rsplit('/', 3)[1:]
         return "%04s_%02s_%s" % (year, month, name)
 
