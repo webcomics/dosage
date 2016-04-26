@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2014-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
 
 import re
 import operator
@@ -22,11 +24,15 @@ def get_test_scrapers():
             # Get limited number of scraper tests on Travis builds to make it
             # faster
             testscrapernames = [
+                    # "classic" _BasicScraper
                     'AbstruseGoose',
+                    # complex _ParserScraper
                     'GoComics/CalvinAndHobbes',
-                    'xkcd'
+                    # _WordPressScraper
+                    'GrrlPower'
             ]
-            scraper_pattern = re.compile('|'.join(testscrapernames))
+            scraper_pattern = re.compile('^(' + '|'.join(testscrapernames) +
+                                         ')$')
 
         scrapers = [
             scraperobj for scraperobj in scraper.get_scrapers()
