@@ -436,10 +436,14 @@ class _ParserScraper(Scraper):
             # document. Web browsers ignore such if the encoding was specified
             # in the HTTP header and so do we.
             text = self.XML_DECL.sub('\1\2', page.text, count=1)
-            tree = html.document_fromstring(text)
+            tree = self._parse_page(text)
         else:
-            tree = html.document_fromstring(page.content)
+            tree = self._parse_page(page.content)
         tree.make_links_absolute(url)
+        return tree
+
+    def _parse_page(self, data):
+        tree = html.document_fromstring(data)
         return tree
 
     def fetchUrls(self, url, data, urlSearch):

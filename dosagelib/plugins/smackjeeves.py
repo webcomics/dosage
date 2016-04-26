@@ -5,14 +5,20 @@
 
 from __future__ import absolute_import, division, print_function
 
+import re
+
 from ..util import quote
 from ..scraper import _ParserScraper
+from ..output import out
 
 # SmackJeeves is a crawlers nightmare - users are allowed to edit HTML
-# directly.
+# directly. Additionally, users use unescaped < characters sometimes, which
+# breaks the parse tree on libxml2 before 2.9.3...
 
 
 class _SmackJeeves(_ParserScraper):
+    BROKEN_NOT_OPEN_TAGS = re.compile(r'(<+)([ =0-9])')
+
     ONLY_COMICS = '[contains(@href, "/comics/")]'
 
     prevSearch = (
@@ -51,6 +57,17 @@ class _SmackJeeves(_ParserScraper):
         else:
             return 'http://%s.smackjeeves.com/comics/' % self.sub
 
+    def _parse_page(self, data):
+        import lxml.etree
+        if lxml.etree.LIBXML_VERSION < (2, 9, 3):
+            def fix_not_open_tags(match):
+                fix = (len(match.group(1)) * '&lt;') + match.group(2)
+                out.warn("Found possibly broken HTML '%s', fixing as '%s'" % (
+                         match.group(0), fix), level=2)
+                return fix
+            data = self.BROKEN_NOT_OPEN_TAGS.sub(fix_not_open_tags, data)
+        return super(_SmackJeeves, self)._parse_page(data)
+
     def starter(self):
         """Get start URL."""
         start = self.url
@@ -66,7 +83,7 @@ class _SmackJeeves(_ParserScraper):
         if not self.shouldSkipUrl(prevurl, data):
             previmg = self.fetchUrl(prevurl, data, self.imageSearch)
         if startimg and previmg and startimg == previmg:
-            print("Matching! %s %s" % (prevurl, self.name))
+            out.debug("Matching! %s %s" % (prevurl, self.name))
             return prevurl
         else:
             return self.fetchUrl(prevurl, data, self.nextSearch)
