@@ -78,13 +78,14 @@ class Output(object):
         # "white" is the default color for most terminals...
         self.write(s, level=level, color=Fore.WHITE)
 
-    def warn(self, s):
+    def warn(self, s, level=0):
         """Write a warning message."""
-        self.write(u"WARN: %s" % s, color=Style.BRIGHT + Fore.YELLOW)
+        self.write(u"WARN: %s" % s, level=level, color=Style.BRIGHT +
+                   Fore.YELLOW)
 
-    def error(self, s, tb=None):
+    def error(self, s, level=0):
         """Write an error message."""
-        self.write(u"ERROR: %s" % s, color=Style.DIM + Fore.RED)
+        self.write(u"ERROR: %s" % s, level=level, color=Style.DIM + Fore.RED)
 
     def exception(self, s):
         """Write error message with traceback info."""
