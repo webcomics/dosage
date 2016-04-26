@@ -76,13 +76,14 @@ class ScandinaviaAndTheWorld(_ParserScraper):
     help = 'Index format: stripname'
 
 
-class ScaryGoRound(_BasicScraper):
-    url = 'http://www.scarygoround.com/'
-    stripUrl = url + '?date=%s'
-    firstStripUrl = stripUrl % '20090918'
-    imageSearch = compile(tagre("img", "src", r'(strips/\d+\.png)'))
-    prevSearch = compile(tagre("a", "href", r'(\?date=\d+)') + "Previous")
-    help = 'Index format: n (unpadded)'
+class ScaryGoRound(_ParserScraper):
+    url = 'http://www.scarygoround.com/sgr/ar.php'
+    stripUrl = url + 'ar.php?date=%s'
+    firstStripUrl = stripUrl % '20020604'
+    imageSearch = '//img[contains(@src, "/strips/")]'
+    prevSearch = '//a[contains(text(), "Previous")]'
+    endOfLife = True
+    help = 'Index format: yyyymmdd'
 
 
 class ScenesFromAMultiverse(_BasicScraper):
@@ -186,19 +187,20 @@ class SequentialArt(_BasicScraper):
     help = 'Index format: name'
 
 
-class SexyLosers(_BasicScraper):
+class SexyLosers(_ParserScraper):
     adult = True
     url = 'http://www.sexylosers.com/'
-    stripUrl = url + '%s.html'
-    imageSearch = compile(r'<img src\s*=\s*"\s*(comics/[\w\.]+?)"', IGNORECASE)
-    prevSearch = compile(r'<a href="(/\d{3}\.\w+?)"><font color = FFAAAA><<', IGNORECASE)
-    latestSearch = compile(r'SEXY LOSERS <A HREF="(.+?)">Latest SL Comic \(#\d+\)</A>', IGNORECASE)
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % '003'
+    imageSearch = '//div[@class="entry-content"]//img'
+    prevSearch = '//a[@rel="prev"]'
+    latestSearch = '//a[@rel="bookmark"]'
     help = 'Index format: nnn'
     starter = indirectStarter
 
     def namer(self, image_url, page_url):
-        index = page_url.split('/')[-1].split('.')[0]
-        title = image_url.split('/')[-1].split('.')[0]
+        index = page_url.rsplit('/', 2)[1]
+        title = image_url.rsplit('/', 1)[1]
         return index + '-' + title
 
 

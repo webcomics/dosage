@@ -24,12 +24,12 @@ class BadassMuthas(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class BadMachinery(_BasicScraper):
+class BadMachinery(_ParserScraper):
     url = 'http://scarygoround.com/'
     stripUrl = url + '?date=%s'
     firstStripUrl = stripUrl % '20090918'
-    imageSearch = compile(tagre("img", "src", r'(strips/\d+[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(\?date=\d+)') + 'Previous')
+    imageSearch = '//img[@class="comicimg"]'
+    prevSearch = '//a[contains(text(), "Previous")]'
     help = 'Index format: yyyymmdd'
 
 
@@ -111,14 +111,13 @@ class BiggerThanCheeses(_BasicScraper):
     help = 'Index format: n (unpadded)'
 
 
-class BillyTheDunce(_BasicScraper):
+class BillyTheDunce(_ParserScraper):
     url = 'http://www.duncepress.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2009/06/an-introduction-of-sorts'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(r'<div class="nav-previous"><a href="(%s[^"]+)" rel="prev">' % rurl)
-    help = 'Index format: yyyy/mm/stripname'
+    firstStripUrl = url + '2009/06/an-introduction-of-sorts'
+    imageSearch = '//div[@class="entry"]/p[1]/a'
+    prevSearch = '//a[@rel="prev"]'
+    latestSearch = '//h2[@class="post-title"]/a'
+    starter = indirectStarter
 
 
 class BizarreUprising(_BasicScraper):
