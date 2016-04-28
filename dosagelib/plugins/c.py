@@ -10,7 +10,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
-from .common import _WordPressScraper
+from .common import _WordPressScraper, xpath_class
 
 
 class Caggage(_BasicScraper):
@@ -127,9 +127,10 @@ class CatsAndCameras(_WordPressScraper):
 
 class CatVersusHuman(_ParserScraper):
     url = 'http://www.catversushuman.com'
-    multipleImagesPerStrip = True
     imageSearch = '//div[@class="post-body entry-content"]//img'
-    prevSearch = '//a[@class="blog-pager-older-link"]'
+    prevSearch = '//a[@id="Blog1_blog-pager-older-link"]'
+    latestSearch = '//a[@rel="bookmark"]'
+    starter = indirectStarter
 
 
 class ChainsawSuit(_ParserScraper):
@@ -175,22 +176,27 @@ class ChasingTheSunset(_BasicScraper):
     help = 'Index format: n'
 
 
-class Chester5000XYV(_BasicScraper):
+class Chester5000XYV(_WordPressScraper):
     url = 'http://jessfink.com/Chester5000XYV/'
     stripUrl = url + '?p=%s'
     firstStripUrl = stripUrl % '34'
-    imageSearch = compile(tagre("img", "src", r'(http://jessfink\.com/Chester5000XYV/comics/[^"]+)'))
-    prevSearch = compile(r'<a href="(.+?)"><span class="prev">')
-    help = 'Index format: nnn'
+    prevSearch = '//a[@rel="prev"]'
+    adult = True
+    help = 'Index format: n (unpadded)'
+
+    def prevUrlModifier(self, prev_url):
+        """Bugfix for link to blog"""
+        if prev_url == self.stripUrl % '714':
+            return self.stripUrl % '710'
+        return prev_url
 
 
-class Chisuji(_BasicScraper):
+class Chisuji(_WordPressScraper):
     url = 'http://www.chisuji.com/'
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2009/05/02/chisujiposter01'
-    imageSearch = compile(r'<img src="(http://www.chisuji.com/comics/.+?)"')
-    prevSearch = compile(r'<div class="nav-previous"><a href="(http://www.chisuji.com/.+?)">')
-    help = 'Index format: yyyy/mm/dd/strip-name'
+    stripUrl = url + '?p=%s'
+    firstStripUrl = stripUrl % '266'
+    prevSearch = '//div[@class="nav-previous"]/a'
+    help = 'Index format: nnn'
 
 
 class CigarroAndCerveja(_ParserScraper):
@@ -201,15 +207,23 @@ class CigarroAndCerveja(_ParserScraper):
     prevSearch = '//a[contains(text()," Prev")]',
 
 
-class Collar6(_BasicScraper):
-    url = 'http://collar6.com/'
-    rurl = escape(url)
-    stripUrl = url + 'archive/%s'
-    firstStripUrl = stripUrl % 'collar-6-187'
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/webcomic/collar6/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%sarchive/[^"]+)' % rurl,
-                               after="previous"))
-    help = 'Index format: <name>'
+class Collar6(_ParserScraper):
+    url = 'http://collar6.tumblr.com/'
+    firstStripUrl = url + 'post/138117470810/the-very-first-strip-from-when-i-thought-it-was'
+    imageSearch = '//figure[@class="photo-hires-item"]//img'
+    prevSearch = '//a[@class="previous-button"]'
+    latestSearch = '//li[@class="timestamp"]/a'
+    starter = indirectStarter
+    adult = True
+
+    def namer(self, image_url, page_url):
+        # tumblr URLs: http://host/post/num/name
+        #              0    1 2    3    4   5
+        parts = page_url.split('/')
+        if len(parts) > 5:
+            return '%s_%s' % (parts[4], parts[5])
+        else:
+            return parts[4]
 
 
 class Comedity(_BasicScraper):
@@ -272,6 +286,13 @@ class CourtingDisaster(_WordPressScraper):
 
 class CowboyJedi(_WordPressScraper):
     url = 'http://www.cowboyjedi.com/'
+    nextSearch = '//a[%s]' % xpath_class('comic-nav-next')
+    starter = bounceStarter
+
+    def shouldSkipUrl(self, url, data):
+        return url in (
+            self.url + 'comic/darth-bart-wont-stop/',
+        )
 
 
 class CraftedFables(_WordPressScraper):
@@ -314,14 +335,9 @@ class CucumberQuest(_BasicScraper):
     help = 'Index format: stripname'
 
 
-class Curtailed(_BasicScraper):
+class Curtailed(_WordPressScraper):
     url = 'http://curtailedcomic.com/'
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2012/04/08/sneeze'
-    rurl = escape(url)
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/[0-9]+/[^"]*)' % rurl))
-    prevSearch = compile('<a href="([^"]*)" class="comic-nav-base comic-nav-previous"')
-    help = 'Index format: yyyy/mm/dd/stripname'
+    firstStripUrl = url + 'comic/001-sneeze/'
 
 
 class Curvy(_ParserScraper):
