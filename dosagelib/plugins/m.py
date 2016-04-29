@@ -55,12 +55,11 @@ class ManlyGuysDoingManlyThings(_ParserScraper):
     help = 'Index format: ddmmyyyy'
 
 
-class MareInternum(_ParserScraper):
-    url = 'http://marecomic.com/'
-    stripUrl = url + 'comics/ch%s'
-    imageSearch = '//div[@id="comic"]//img'
-    prevSearch = '//a[@class="comic-nav-base comic-nav-previous"]'
-    help = 'Index format: <chapter>-page-<pagenum>'
+class MareInternum(_WordPressScraper):
+    url = 'http://www.marecomic.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'intro-page-1'
+    help = 'Index format: ch<chapter>-page-<pagenum> (most of the time)'
 
 
 class Marilith(_BasicScraper):
@@ -161,12 +160,12 @@ class MonsieurLeChien(_BasicScraper):
 class Moonsticks(_ParserScraper):
     url = "http://moonsticks.org/"
     imageSearch = "//div[@class='entry']//img"
-    prevSearch = u"//a[text()='« Previous']"
+    prevSearch = u"//a[text()='\u00AB Prev']"
 
 
 class MrLovenstein(_BasicScraper):
     url = 'http://www.mrlovenstein.com/'
-    stripUrl = url + 'comic/%s#comic'
+    stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = (
         # captures rollover comic
