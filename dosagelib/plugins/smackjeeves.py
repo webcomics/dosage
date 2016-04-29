@@ -637,11 +637,6 @@ class SJDeathNoteIridescent(_SmackJeeves):
     sub = 'dn-iridescent'
 
 
-class SJDebtSettlement2OperationExtinction(_SmackJeeves):
-    sub = 'debts2'
-    adult = True
-
-
 class SJDefyingGravityTheFourGreatGuardians(_SmackJeeves):
     sub = 'defyinggravitycomic'
 
@@ -661,14 +656,6 @@ class SJDemonEater(_SmackJeeves):
 
 class SJDenizensAttention(_SmackJeeves):
     sub = 'denizensattention'
-
-
-class SJDestinationunknown(_SmackJeeves):
-    sub = 'destination-unknown'
-
-
-class SJDevilTraineeSpanish(_SmackJeeves):
-    sub = 'deviltraineespanish'
 
 
 class SJDevilsCake(_SmackJeeves):
@@ -767,11 +754,6 @@ class SJEidolonWhispersofEternity(_SmackJeeves):
 
 class SJElementalSpirits(_SmackJeeves):
     sub = 'elementalspirits'
-
-
-class SJElfenLiedDifferences(_SmackJeeves):
-    sub = 'differences'
-    adult = True
 
 
 class SJEnkeltenKentta(_SmackJeeves):
@@ -918,25 +900,12 @@ class SJFrobertTheDemon(_SmackJeeves):
     sub = 'frobby'
 
 
-class SJFrogKing(_SmackJeeves):
-    sub = 'frogking'
-
-
 class SJFromnowonImagirl(_SmackJeeves):
     sub = 'fromnowonimagirl'
 
 
 class SJFruitloopAndMrDownbeat(_SmackJeeves):
     sub = 'fruitbeat'
-
-
-class SJFuckMyLife(_SmackJeeves):
-    sub = 'fuckmylife'
-
-
-class SJFurtherDowntheRabbitHole(_SmackJeeves):
-    sub = 'fdtrh'
-    adult = True
 
 
 class SJGamerCafe(_SmackJeeves):
@@ -992,18 +961,9 @@ class SJGoodnightMrsGoose(_SmackJeeves):
     sub = 'goose'
 
 
-class SJGraveImpressions(_SmackJeeves):
-    sub = 'graveimpressions'
-    adult = True
-
-
 class SJGrayscale(_SmackJeeves):
     sub = 'grayscale'
     adult = True
-
-
-class SJGreenKirbyandabunchofotherpeopledoinstuff(_SmackJeeves):
-    sub = 'gkandabunchofotherppl'
 
 
 class SJGuardianGhost(_SmackJeeves):
@@ -1082,10 +1042,6 @@ class SJHopeForABreeze(_SmackJeeves):
     sub = 'h4ab'
 
 
-class SJHotChocolate(_SmackJeeves):
-    sub = 'hot-chocolate'
-
-
 class SJHouseofCraziness(_SmackJeeves):
     sub = 'craziness'
 
@@ -1101,10 +1057,6 @@ class SJHybristorific(_SmackJeeves):
 
 class SJIWishIggysWish(_SmackJeeves):
     sub = 'i-wish-comic'
-
-
-class SJIanua(_SmackJeeves):
-    sub = 'ianua'
 
 
 class SJIciVontLesMorts(_SmackJeeves):
