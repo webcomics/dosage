@@ -9,6 +9,7 @@ from re import compile, escape, IGNORECASE
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
+from .common import _WPNaviIn
 
 
 class FalconTwin(_BasicScraper):
@@ -18,6 +19,12 @@ class FalconTwin(_BasicScraper):
     imageSearch = compile(r'"(strips/.+?)"')
     prevSearch = compile(r'"prev"><a href="(index.+?)"')
     help = 'Index format: nnn'
+
+
+class Faneurysm(_WPNaviIn):
+    url = 'http://hijinksensue.com/comic/think-only-tree/'
+    firstStripUrl = 'http://hijinksensue.com/comic/captains-prerogative/'
+    endOfLife = True
 
 
 class FantasyRealms(_BasicScraper):

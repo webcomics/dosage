@@ -6,10 +6,11 @@
 from __future__ import absolute_import, division, print_function
 
 from re import compile, escape
+
 from ..scraper import _BasicScraper
 from ..util import tagre
-from ..helpers import bounceStarter
-from .common import _WordPressScraper
+from ..helpers import bounceStarter, indirectStarter
+from .common import _WordPressScraper, _WPNaviIn
 
 
 class HagarTheHorrible(_BasicScraper):
@@ -60,3 +61,28 @@ class HarkAVagrant(_BasicScraper):
 class Hipsters(_WordPressScraper):
     url = 'http://www.hipsters-comic.com/'
     firstStripUrl = 'http://www.hipsters-comic.com/comic/hip01/'
+
+
+class HijinksEnsue(_WPNaviIn):
+    url = 'http://hijinksensue.com/'
+    latestSearch = '//a[text()="Latest HijiNKS ENSUE"]'
+    firstStripUrl = 'http://hijinksensue.com/comic/who-is-your-daddy-and-what-does-he-do/'
+    starter = indirectStarter
+
+
+class HijinksEnsueClassic(_WPNaviIn):
+    url = 'http://hijinksensue.com/comic/open-your-eyes/'
+    firstStripUrl = 'http://hijinksensue.com/comic/a-soul-as-black-as-eyeliner/'
+    endOfLife = True
+
+
+class HijinksEnsueConvention(_WPNaviIn):
+    url = 'http://hijinksensue.com/comic/emerald-city-comicon-2015-fancy-sketches-part-4/'
+    firstStripUrl = 'http://hijinksensue.com/comic/whatever-dad-im-outta-here/'
+    endOfLife = True
+
+
+class HijinksEnsuePhoto(_WPNaviIn):
+    url = 'http://hijinksensue.com/comic/emerald-city-comicon-2015-fancy-photo-comic-part-2/'
+    firstStripUrl = 'http://hijinksensue.com/comic/san-diego-comic-con-fancy-picto-comic-pt-1/'
+    endOfLife = True

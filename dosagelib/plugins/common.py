@@ -28,6 +28,10 @@ class _WordPressScraper(_ParserScraper):
     prevSearch = WP_PREV_SEARCH
 
 
+class _WPNaviIn(_WordPressScraper):
+    prevSearch = '//a[%s]' % xpath_class('navi-prev-in')
+
+
 class _ComicControlScraper(_ParserScraper):
     imageSearch = '//img[@id="cc-comic"]'
     prevSearch = '//a[@rel="prev"]'

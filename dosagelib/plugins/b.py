@@ -10,8 +10,8 @@ from re import compile, escape
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
-from .common import (_ComicControlScraper, _WordPressScraper, WP_PREV_SEARCH,
-                     xpath_class)
+from .common import (_ComicControlScraper, _WordPressScraper, _WPNaviIn,
+                     WP_PREV_SEARCH, xpath_class)
 
 
 class BadassMuthas(_BasicScraper):
@@ -221,9 +221,8 @@ class Buni(_WordPressScraper):
     url = 'http://www.bunicomic.com/'
 
 
-class BusinessCat(_WordPressScraper):
+class BusinessCat(_WPNaviIn):
     url = 'http://www.businesscat.happyjar.com/'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev-in')
 
 
 class ButtercupFestival(_ParserScraper):

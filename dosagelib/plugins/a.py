@@ -10,7 +10,7 @@ from re import compile, escape, MULTILINE
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import regexNamer, bounceStarter, indirectStarter
-from .common import _WordPressScraper, xpath_class, WP_LATEST_SEARCH
+from .common import _WordPressScraper, _WPNaviIn, xpath_class, WP_LATEST_SEARCH
 
 
 class AbstruseGoose(_BasicScraper):
@@ -117,9 +117,8 @@ class ALessonIsLearned(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class Alice(_WordPressScraper):
+class Alice(_WPNaviIn):
     url = 'http://www.alicecomics.com/'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev-in')
     latestSearch = '//a[text()="Latest Alice!"]'
     starter = indirectStarter
 

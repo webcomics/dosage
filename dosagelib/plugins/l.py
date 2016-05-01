@@ -10,7 +10,8 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, WP_LATEST_SEARCH
+from .common import (_ComicControlScraper, _WordPressScraper, _WPNaviIn,
+                     WP_LATEST_SEARCH)
 
 
 class Lackadaisy(_BasicScraper):
@@ -87,6 +88,12 @@ class LoadingArtist(_ParserScraper):
     url = 'http://www.loadingartist.com/comic/new-update/'
     imageSearch = '//div[@class="comic"]//img'
     prevSearch = "//a[contains(concat(' ', @class, ' '), ' prev ')]"
+
+
+class LoFiJinks(_WPNaviIn):
+    url = 'http://hijinksensue.com/comic/learning-to-love-again/'
+    firstStripUrl = 'http://hijinksensue.com/comic/lo-fijinks-everything-i-know-anout-james-camerons-avatar-movie/'
+    endOfLife = True
 
 
 class LookingForGroup(_ParserScraper):
