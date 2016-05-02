@@ -209,6 +209,16 @@ class EvilInc(_BasicScraper):
     help = 'Index format: stripname'
 
 
+class Evilish(_ParserScraper):
+    url = 'http://evilish.pensandtales.com/'
+    stripUrl = url + '?date=%s'
+    firstStripUrl = stripUrl % '20020630'
+    imageSearch = '//img[@alt="Today\'s Comics"]'
+    prevSearch = '//a[img[@alt="Previous Comic"]]'
+    endOfLife = True
+    help = 'Index format: yyyymmdd'
+
+
 class Exiern(_BasicScraper):
     url = 'http://www.exiern.com/'
     rurl = escape(url)

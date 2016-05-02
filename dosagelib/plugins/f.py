@@ -9,7 +9,7 @@ from re import compile, escape, IGNORECASE
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
-from .common import _WPNaviIn
+from .common import _WPNaviIn, _WordPressScraper
 
 
 class FalconTwin(_BasicScraper):
@@ -54,6 +54,11 @@ class FilibusterCartoons(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/name'
+
+
+class FireflyCross(_WordPressScraper):
+    url = 'http://www.fireflycross.pensandtales.com/'
+    firstStripUrl = url + '?comic=05062002'
 
 
 class FirstWorldProblems(_BasicScraper):
