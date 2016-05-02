@@ -14,11 +14,8 @@ try:
 except ImportError:
     from urlparse import urljoin
 
-try:
-    from lxml import html
-    from lxml.html.defs import link_attrs as html_link_attrs
-except ImportError:
-    html = None
+from lxml import html, etree
+from lxml.html.defs import link_attrs as html_link_attrs
 
 try:
     import cssselect
@@ -415,6 +412,8 @@ class _ParserScraper(Scraper):
     of the HTML element and returns that.
     """
 
+    BROKEN_NOT_OPEN_TAGS = re.compile(r'(<+)([ =0-9])')
+
     # Taken directly from LXML
     XML_DECL = re.compile(
         r'^(<\?xml[^>]+)\s+encoding\s*=\s*["\'][^"\']*["\'](\s*\?>|)', re.U)
@@ -426,6 +425,11 @@ class _ParserScraper(Scraper):
     # Switch between CSS and XPath selectors for this class. Since CSS needs
     # another Python module, XPath is the default for now.
     css = False
+
+    # Activate a workaround for unescaped < characters on libxml version older
+    # then 2.9.3. This is disabled by default since most sites are not THAT
+    # broken ;)
+    broken_html_bugfix = False
 
     def getPage(self, url):
         page = get_page(url, self.session)
@@ -443,6 +447,14 @@ class _ParserScraper(Scraper):
         return tree
 
     def _parse_page(self, data):
+        if self.broken_html_bugfix and etree.LIBXML_VERSION < (2, 9, 3):
+            def fix_not_open_tags(match):
+                fix = (len(match.group(1)) * '&lt;') + match.group(2)
+                out.warn("Found possibly broken HTML '%s', fixing as '%s'" % (
+                         match.group(0), fix), level=2)
+                return fix
+            data = self.BROKEN_NOT_OPEN_TAGS.sub(fix_not_open_tags, data)
+
         tree = html.document_fromstring(data)
         return tree
 
@@ -509,9 +521,6 @@ class _ParserScraper(Scraper):
             res['css'] = (u"This module needs the cssselect " +
                           u"(python-cssselect) python module which is " +
                           u"not installed.")
-        if html is None:
-            res['lxml'] = (u"This module needs the lxml (python-lxml) " +
-                           u"python module which is not installed.")
         return res
 
 

@@ -5,8 +5,6 @@
 
 from __future__ import absolute_import, division, print_function
 
-import re
-
 from ..util import quote
 from ..scraper import _ParserScraper
 from ..output import out
@@ -17,8 +15,6 @@ from ..output import out
 
 
 class _SmackJeeves(_ParserScraper):
-    BROKEN_NOT_OPEN_TAGS = re.compile(r'(<+)([ =0-9])')
-
     ONLY_COMICS = '[contains(@href, "/comics/")]'
 
     prevSearch = (
@@ -46,6 +42,8 @@ class _SmackJeeves(_ParserScraper):
         '//div[@id="comicset"]/object/param[@name="movie"]/@value',
     )
 
+    broken_html_bugfix = True
+
     @property
     def name(self):
         return 'SmackJeeves/' + super(_SmackJeeves, self).name[2:]
@@ -56,17 +54,6 @@ class _SmackJeeves(_ParserScraper):
             return 'http://%s/comics/' % self.host
         else:
             return 'http://%s.smackjeeves.com/comics/' % self.sub
-
-    def _parse_page(self, data):
-        import lxml.etree
-        if lxml.etree.LIBXML_VERSION < (2, 9, 3):
-            def fix_not_open_tags(match):
-                fix = (len(match.group(1)) * '&lt;') + match.group(2)
-                out.warn("Found possibly broken HTML '%s', fixing as '%s'" % (
-                         match.group(0), fix), level=2)
-                return fix
-            data = self.BROKEN_NOT_OPEN_TAGS.sub(fix_not_open_tags, data)
-        return super(_SmackJeeves, self)._parse_page(data)
 
     def starter(self):
         """Get start URL."""

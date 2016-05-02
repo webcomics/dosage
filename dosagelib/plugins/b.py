@@ -30,6 +30,7 @@ class BadMachinery(_ParserScraper):
     firstStripUrl = stripUrl % '20090918'
     imageSearch = '//img[@class="comicimg"]'
     prevSearch = '//a[contains(text(), "Previous")]'
+    broken_html_bugfix = True
     help = 'Index format: yyyymmdd'
 
 
