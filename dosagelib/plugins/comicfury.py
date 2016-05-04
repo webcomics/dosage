@@ -1046,10 +1046,6 @@ class CFDonutsForSharks(_ComicFury):
     sub = 'donutsforsharks'
 
 
-class CFDooblu(_ComicFury):
-    sub = 'dooblu'
-
-
 class CFDoodlelandComics(_ComicFury):
     sub = 'doodlelandcomics'
 
@@ -1150,10 +1146,6 @@ class CFEducomix(_ComicFury):
 
 class CFEffinguKookoo(_ComicFury):
     sub = 'effingukookoo'
-
-
-class CFEightBitAdventuresOfCaptainA(_ComicFury):
-    sub = 'eightbitadventures'
 
 
 class CFElektrosComicAnthology(_ComicFury):
@@ -1621,10 +1613,6 @@ class CFHowWeStaySaneAtWork(_ComicFury):
 
 class CFHumanCookies(_ComicFury):
     sub = 'humancookies'
-
-
-class CFHungerAndHunters(_ComicFury):
-    sub = 'hnh'
 
 
 class CFHurfanosOrphans(_ComicFury):
