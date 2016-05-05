@@ -56,8 +56,8 @@ class OkCancel(_BasicScraper):
 
 
 class OmakeTheater(_ParserScraper):
-    url = 'http://omaketheater.com/comics/'
-    stripUrl = url + '%s/'
+    url = 'http://omaketheater.com/comic/'
+    stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1'
     css = True
     imageSearch = ".comicImage img"

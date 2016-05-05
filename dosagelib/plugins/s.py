@@ -46,13 +46,13 @@ class SailorsunOrg(_WordPressScraper):
     url = 'http://sailorsun.org/'
 
 
-class SamAndFuzzy(_BasicScraper):
+class SamAndFuzzy(_ParserScraper):
     url = 'http://www.samandfuzzy.com/'
-    stripUrl = 'http://samandfuzzy.com/%s'
+    stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(r'(/comics/.+?)" alt')
-    prevSearch = compile(r'"><a href="(.+?)"><img src="imgint/nav_prev.gif"')
-    help = 'Index format: nnnn'
+    imageSearch = '//img[@class="comic-image"]'
+    prevSearch = '//li[@class="prev-page"]/a'
+    help = 'Index format: n (unpadded)'
 
 
 class SandraOnTheRocks(_BasicScraper):
@@ -78,7 +78,7 @@ class ScandinaviaAndTheWorld(_ParserScraper):
 
 class ScaryGoRound(_ParserScraper):
     url = 'http://www.scarygoround.com/sgr/ar.php'
-    stripUrl = url + 'ar.php?date=%s'
+    stripUrl = url + '?date=%s'
     firstStripUrl = stripUrl % '20020604'
     imageSearch = '//img[contains(@src, "/strips/")]'
     prevSearch = '//a[contains(text(), "Previous")]'
@@ -104,14 +104,13 @@ class ScenesFromAMultiverse(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
-class SchlockMercenary(_BasicScraper):
+class SchlockMercenary(_ParserScraper):
     url = 'http://www.schlockmercenary.com/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '2000-06-12'
-    imageSearch = compile(tagre("img", "src", r'(http://static\.schlockmercenary\.com/comics/[^"]+)'))
+    imageSearch = '//div[@class="strip-image-wrapper"]/img'
     multipleImagesPerStrip = True
-    prevSearch = compile(tagre("a", "href", r'(/\d+-\d+-\d+)', quote="'",
-                               after="nav-previous"))
+    prevSearch = '//a[@class="previous-strip"]'
     help = 'Index format: yyyy-mm-dd'
 
 
@@ -267,8 +266,10 @@ class SinFest(_BasicScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
-class Sithrah(_WordPressScraper):
+class Sithrah(_ParserScraper):
     url = 'http://sithrah.com/'
+    imageSearch = '//div[@class="webcomic-image"]/img'
+    prevSearch = '//a[%s]' % xpath_class('previous-webcomic-link')
 
 
 class SkinDeep(_BasicScraper):
@@ -284,8 +285,9 @@ class SleeplessDomain(_ComicControlScraper):
     url = 'http://www.sleeplessdomain.com/'
 
 
-class SlightlyDamned(_WordPressScraper):
+class SlightlyDamned(_ComicControlScraper):
     url = 'http://www.sdamned.com/'
+    firstStripUrl = url + 'comic/part-one-to-hell-and-back'
 
 
 class SluggyFreelance(_BasicScraper):
@@ -299,8 +301,7 @@ class SluggyFreelance(_BasicScraper):
 
 class SMBC(_ParserScraper):
     url = 'http://www.smbc-comics.com/'
-    rurl = escape(url)
-    stripUrl = url + '?id=%s'
+    stripUrl = url + 'index.php?id=%s'
     firstStripUrl = stripUrl % '1'
     multipleImagesPerStrip = True
     imageSearch = ['//img[@id="comic"]', '//div[@id="aftercomic"]/img']
@@ -363,14 +364,15 @@ class SomethingPositive(_BasicScraper):
     help = 'Index format: mmddyyyy'
 
 
-class Sorcery101(_BasicScraper):
-    baseUrl = 'http://www.sorcery101.net/'
-    url = baseUrl + 'sorcery-101/'
-    rurl = escape(baseUrl)
-    stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%ssorcery-101/[^"]+)' % rurl,
-                               after="previous-"))
+class Sorcery101(_ParserScraper):
+    baseUrl = 'http://www.sorcery101.net/sorcery-101/'
+    stripUrl = baseUrl + '%s/'
+    url = stripUrl % 'sorcery101-ch-01'
+    firstStripUrl = url
+    imageSearch = '//div[@class="webcomic-image"]/img'
+    prevSearch = '//a[@rel="prev"]'
+    latestSearch = '//a[%s]' % xpath_class('last-webcomic-link')
+    starter = indirectStarter
     help = 'Index format: stripname'
 
 
@@ -423,7 +425,7 @@ class StandStillStaySilent(_ParserScraper):
 
 
 class StarCrossdDestiny(_ParserScraper):
-    baseUrl = 'http://www.starcrossd.net/'
+    baseUrl = 'http://starcrossd.net/'
     url = baseUrl + 'comic.html'
     stripUrl = baseUrl + 'archives/%s.html'
     firstStripUrl = stripUrl % '00000001'
@@ -445,10 +447,10 @@ class StarCrossdDestiny(_ParserScraper):
 
 class StationV3(_ParserScraper):
     url = 'http://www.stationv3.com/'
-    stripUrl = url + 'd/%s.html'
+    stripUrl = url + 'd2/%s.html'
+    firstStripUrl = stripUrl % '20150628'
     imageSearch = '//img[contains(@src,"/comics2/")]'
     prevSearch = '//a[img[contains(@src,"/previous2")]]'
-
     help = 'Index format: yyyymmdd'
 
 
@@ -460,15 +462,6 @@ class StickyDillyBuns(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'([^"]*/strips-sdb/[^"]+)',
                                before="cn[id]prev"))
     help = 'Index format: name'
-
-
-class StrawberryDeathCake(_BasicScraper):
-    url = 'http://strawberrydeathcake.com/'
-    rurl = escape(url)
-    imageSearch = compile(tagre("img", "src",
-                                r'(%swp-content/webcomic/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%sarchive/[^"]+)' % rurl,
-                               after="previous"))
 
 
 class StreetFighter(_ComicControlScraper):

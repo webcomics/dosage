@@ -7,7 +7,7 @@ from __future__ import absolute_import, division, print_function
 
 from re import compile, escape
 
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
 from .common import (_ComicControlScraper, _WordPressScraper, WP_LATEST_SEARCH,
@@ -18,13 +18,14 @@ class Namesake(_ComicControlScraper):
     url = 'http://namesakecomic.com/'
 
 
-class NamirDeiter(_BasicScraper):
-    url = 'http://www.namirdeiter.com/'
-    rurl = escape(url)
-    stripUrl = url + 'comics/index.php?date=%s'
-    firstStripUrl = stripUrl % '19991128'
-    imageSearch = compile(tagre("img", "src", r"'?(%scomics/\d+\.jpg)'?" % rurl, quote=""))
-    prevSearch = compile(tagre("a", "href", r'(%scomics/index\.php\?date=\d+)' % rurl, quote="'") + "Previous")
+class NamirDeiter(_ParserScraper):
+    baseUrl = 'http://www.namirdeiter.com/comics/'
+    stripUrl = baseUrl + 'index.php?date=%s'
+    url = stripUrl % '20150410'
+    firstStripUrl = baseUrl
+    imageSearch = '//a/img'
+    prevSearch = '//a[text()="Previous"]'
+    endOfLife = True
     help = 'Index format: yyyymmdd'
 
 
@@ -89,8 +90,8 @@ class Nicky510(_WordPressScraper):
 
 class Nimona(_BasicScraper):
     url = 'http://gingerhaze.com/nimona/'
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % "comic/page-1"
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % "page-1"
     imageSearch = compile(tagre("img", "src", r'(http://gingerhaze\.com/sites/default/files/nimona-pages/.+?)'))
     prevSearch = compile(r'<a href="(/nimona/comic/[^"]+)"><img src="http://gingerhaze\.com/sites/default/files/comicdrop/comicdrop_prev_label_file\.png"')
     help = 'Index format: stripname'
@@ -115,31 +116,21 @@ class NoMoreSavePoints(_WordPressScraper):
     starter = indirectStarter
 
 
-class NoNeedForBushido(_BasicScraper):
+class NoNeedForBushido(_ParserScraper):
     url = 'http://nn4b.com/'
-    rurl = escape(url)
-    stripUrl = url + '?webcomic1=%s'
-    imageSearch = compile(
-      tagre("a", "rel", "next") +
-      tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl,
-            after="attachment-full"))
-    prevSearch = compile(tagre("a", "href", r'(%s\?webcomic1=[^"]+)' % rurl,
-                               after="previous-webcomic"))
-    latestSearch = compile(tagre("a", "href", r'(%s\?webcomic1=[^"]+)' % rurl,
-                                 after="last-webcomic"))
+    stripUrl = url + 'comic/%s'
+    imageSearch = '//div[@id="comic-image"]//img'
+    prevSearch = '//a[@rel="prev"]'
     help = 'Index format: nnn'
-    starter = indirectStarter
 
 
-class NotInventedHere(_BasicScraper):
+class NotInventedHere(_ParserScraper):
     url = 'http://notinventedhe.re/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % 'on/2009-9-21'
-    imageSearch = compile(tagre("img", "src", r'(http://thiswas.notinventedhe.re/on/\d+-\d+-\d+)'))
-    prevSearch = compile(tagre("a", "href", r'(/on/\d+-\d+-\d+)') +
-                         '\s*Previous')
-    help = 'Index format: yyyy-mm-dd'
+    stripUrl = url + 'on/%s'
+    firstStripUrl = stripUrl % '2009-9-21'
+    imageSearch = '//div[@id="comic-content"]//img'
+    prevSearch = '//a[@id="nav-previous"]'
+    help = 'Index format: yyyy-m-d'
 
 
 class Nukees(_BasicScraper):

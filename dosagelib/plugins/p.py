@@ -76,28 +76,16 @@ class PennyAndAggie(_BasicScraper):
     help = 'Index format: n (unpadded)'
 
 
-class PennyArcade(_BasicScraper):
-    url = 'http://penny-arcade.com/comic/'
+class PennyArcade(_ParserScraper):
+    url = 'http://www.penny-arcade.com/comic/'
     rurl = escape(url)
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1998/11/18'
-    imageSearch = compile(tagre("img", "src", r'(http://art\.penny-arcade\.com/photos/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl,
-                               before="btnPrev"))
-    nextSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl,
-                               before="btnNext"))
+    imageSearch = '//div[@id="comicFrame"]//img'
+    prevSearch = '//a[%s]' % xpath_class('btnPrev')
+    nextSearch = '//a[%s]' % xpath_class('btnNext')
     starter = bounceStarter
-    help = 'Index format: yyyy/mm/dd/'
-
-    def prevUrlModifier(self, prev_url):
-        if prev_url:
-            dummy, yyyy, mm, dd = prev_url.rsplit('/', 3)
-            try:
-                int(dd)
-            except ValueError:
-                # URL has form yyyy/mm/dd/stripname
-                prev_url = "%s/%s/%s" % (dummy, yyyy, mm)
-            return prev_url
+    help = 'Index format: yyyy/mm/dd'
 
     def namer(self, image_url, page_url):
         p = page_url.split('/')
@@ -116,17 +104,15 @@ class PeppermintSaga(_BasicScraper):
     adult = True
 
 
-class PHDComics(_BasicScraper):
+class PHDComics(_ParserScraper):
     baseUrl = 'http://phdcomics.com/'
     url = baseUrl + 'comics.php'
     stripUrl = baseUrl + 'comics/archive.php?comicid=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.phdcomics\.com/comics/archive/phd[^ ]+)', quote=""))
-    prevSearch = compile(
-        tagre("a", "href", r'((?:comics/)?archive\.php\?comicid=\d+)',
-              quote="") +
-        tagre("img", "src", r'(?:comics/)?images/prev_button\.gif', quote=""))
-    help = 'Index format: number'
+    imageSearch = '//img[@id="comic"]'
+    prevSearch = '//a[img[contains(@src, "prev_button")]]'
+    nextSearch = '//a[img[contains(@src, "next_button")]]'
+    help = 'Index format: n (unpadded)'
 
     def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
@@ -150,15 +136,9 @@ class PicPakDog(_BasicScraper):
     help = 'Index format: stripname'
 
 
-class PiledHigherAndDeeper(_BasicScraper):
-    url = 'http://www.phdcomics.com/comics.php'
+# Keep, because naming is different to PHDComics...
+class PiledHigherAndDeeper(PHDComics):
     starter = bounceStarter
-    stripUrl = url + '?comicid=%s'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.phdcomics\.com/comics/archive/phd\d+s\d?\.\w{3,4})', quote=""))
-    prevSearch = compile(r'<a href=((comics/)?archive\.php\?comicid=\d+)>.*<img [^>]*prev_button\.gif')
-    nextSearch = compile(r'<a href=(archive\.php\?comicid=\d+)>.*<img [^>]*next_button\.gif')
-    help = 'Index format: n (unpadded)'
     namer = queryNamer('comicid', use_page_url=True)
 
 
@@ -232,11 +212,9 @@ class Precocious(_BasicScraper):
 
 class PS238(_ParserScraper):
     url = 'http://ps238.nodwick.com/'
-    stripUrl = url + '/comic/%s/'
-    starter = bounceStarter
+    stripUrl = url + 'comic/%s/'
     imageSearch = '//div[@id="comic"]//img'
     prevSearch = '//a[@class="comic-nav-base comic-nav-previous"]'
-    nextSearch = '//a[@class="comic-nav-base comic-nav-next"]'
     help = 'Index format: yyyy-mm-dd'
 
 

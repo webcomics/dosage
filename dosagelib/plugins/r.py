@@ -5,11 +5,16 @@
 
 from __future__ import absolute_import, division, print_function
 
-from re import compile, escape
+from re import compile
+try:
+    from urllib.parse import urljoin
+except ImportError:
+    from urlparse import urljoin
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import bounceStarter
+from ..helpers import indirectStarter
 from ..util import tagre
+from .common import _WordPressScraper, xpath_class
 
 
 class RadioactivePanda(_BasicScraper):
@@ -20,23 +25,23 @@ class RadioactivePanda(_BasicScraper):
     help = 'Index format: n (no padding)'
 
 
-class RalfTheDestroyer(_ParserScraper):
+class RalfTheDestroyer(_WordPressScraper):
     url = 'http://ralfthedestroyer.com/'
-    stripUrl = url + '%s/'
-    css = True
-    imageSearch = '#comic-1 > a:first-child img'
-    prevSearch = 'td.comic_navi_left > a:nth-of-type(2)'
-    help = 'Index format: stripname'
 
 
-class RealLife(_BasicScraper):
+class RealLife(_WordPressScraper):
     url = 'http://reallifecomics.com/'
-    rurl = escape(url)
     stripUrl = url + 'comic.php?comic=%s'
-    firstStripUrl = stripUrl % '991115'
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'((?:%s)?comic\.php\?comic=[^"]+)' % rurl, after="nav-previous"))
-    help = 'Index format: monthname-dd-yyyy)'
+    firstStripUrl = stripUrl % 'title-1'
+    help = 'Index format: monthname-dd-yyyy'
+
+    def getPrevUrl(self, url, data):
+        # "Parse" JavaScript
+        prevtag = data.find_class('comic-nav-previous')
+        if not prevtag:
+            return None
+        target = prevtag[0].get('onclick').split("'")[1]
+        return urljoin(url, target)
 
 
 class RealmOfAtland(_BasicScraper):
@@ -48,26 +53,14 @@ class RealmOfAtland(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class RedMeat(_BasicScraper):
-    baseUrl = 'http://www.redmeat.com/redmeat/'
-    url = baseUrl + 'current/index.html'
-    starter = bounceStarter
-    stripUrl = baseUrl + '%s/index.html'
-    firstStripUrl = stripUrl % '1996-06-10'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.redmeat\.com/imager/b/redmeat/[^"]*\.png)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.redmeat\.com/[^"]*)', after="prev"))
-    nextSearch = compile(tagre("a", "href", r'(http://www\.redmeat\.com/[^"]*)', after="next"))
-    help = 'Index format: yyyy-mm-dd'
+class RedMeat(_ParserScraper):
+    url = 'http://www.redmeat.com/max-cannon/FreshMeat'
+    imageSearch = '//div[@class="comicStrip"]//img'
+    prevSearch = '//a[@class="prev"]'
 
-
-class RedsPlanet(_BasicScraper):
-    url = 'http://www.redsplanet.com/comic/'
-    rurl = escape(url)
-    stripUrl = url + 'rp/%s/'
-    firstStripUrl = stripUrl % 'pro/prologue-01'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+_[^"/]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%srp/[^"/]+/[^"/]+/)' % rurl))
-    help = 'Index format: chapter/stripname'
+    def namer(self, image_url, page_url):
+        parts = image_url.rsplit('/', 2)
+        return '_'.join(parts[1:3])
 
 
 class RedString(_BasicScraper):
@@ -79,30 +72,30 @@ class RedString(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class RomanticallyApocalyptic(_BasicScraper):
+class RomanticallyApocalyptic(_ParserScraper):
     url = 'http://romanticallyapocalyptic.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(%sart/\d+[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+[^"]+)' % rurl) + "\s*" +
-                         tagre('span', 'class', 'spritePrevious'))
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '0'
+    imageSearch = '//div[%s]/center//img' % xpath_class('comicpanel')
+    prevSearch = '//a[@accesskey="p"]'
+    latestSearch = '//a[span[%s]]' % xpath_class('glyphicon-fast-forward')
+    starter = indirectStarter
     help = 'Index format: n'
     adult = True
 
 
-class Roza(_BasicScraper):
+class Roza(_ParserScraper):
     url = 'http://www.junglestudio.com/roza/index.php'
     stripUrl = url + '?date=%s'
     firstStripUrl = stripUrl % '2007-05-01'
-    imageSearch = compile(r'<img src="(pages/.+?)"')
-    prevSearch = compile(r'<a href="(index.php\?date=.+?)">[^>].+?navtable_01.gif')
+    imageSearch = '//img[contains(@src, "pages/")]'
+    prevSearch = '//a[img[contains(@src, "navtable_01.gif")]]'
     help = 'Index format: yyyy-mm-dd'
 
 
 class Ruthe(_BasicScraper):
     url = 'http://ruthe.de/'
-    stripUrl = url + 'cartoon/%s/datum/ASC'
+    stripUrl = url + 'cartoon/%s/datum/asc/'
     firstStripUrl = stripUrl % '1'
     lang = 'de'
     imageSearch = compile(tagre("img", "src", r'(/?cartoons/strip_\d+[^"]+)'))
