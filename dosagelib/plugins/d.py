@@ -121,7 +121,7 @@ class DieFruehreifen(_BasicScraper):
 
 
 class DieselSweeties(_ParserScraper):
-    url = 'http://www.dieselsweeties.com/'
+    url = 'http://dieselsweeties.com/'
     stripUrl = url + 'ics/%s/'
     firstStripUrl = stripUrl % '1'
     imageSearch = '//img[@class="xomic"]'
@@ -132,7 +132,7 @@ class DieselSweeties(_ParserScraper):
 
 
 class DieselSweetiesOld(_ParserScraper):
-    url = 'http://www.dieselsweeties.com/archive/'
+    url = 'http://dieselsweeties.com/archive/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = '//img[contains(@src, "/hstrips/")]'
@@ -150,7 +150,7 @@ class DieselSweetiesOld(_ParserScraper):
 
 class Dilbert(_BasicScraper):
     url = 'http://dilbert.com/'
-    stripUrl = url + '/strip/%s'
+    stripUrl = url + 'strip/%s'
     firstStripUrl = stripUrl % '1989-04-16'
     starter = indirectStarter
     prevSearch = compile(tagre("a", "href", r'(/strip/\d+-\d+-\d+)', after="Older Strip"))
