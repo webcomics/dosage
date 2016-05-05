@@ -4,18 +4,10 @@
 # Copyright (C) 2015-2016 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
-try:
-    from urllib.parse import quote as url_quote, unquote as url_unquote
-except ImportError:
-    from urllib import quote as url_quote, unquote as url_unquote
-try:
-    from urllib.parse import urlparse, urlunparse, urlsplit
-except ImportError:
-    from urlparse import urlparse, urlunparse, urlsplit
-try:
-    from urllib import robotparser
-except ImportError:
-    import robotparser
+
+from six.moves.urllib.parse import (
+    quote as url_quote, unquote as url_unquote, urlparse, urlunparse, urlsplit)
+from six.moves.urllib import robotparser
 import requests
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
@@ -26,10 +18,9 @@ import re
 import traceback
 import time
 import subprocess
-try:
-    from HTMLParser import HTMLParser
-except ImportError:
-    from html.parser import HTMLParser
+from six.moves.html_parser import HTMLParser
+import six
+
 from .decorators import memoized
 from .output import out
 from .configuration import UserAgent, AppName, App, SupportUrl
@@ -124,11 +115,7 @@ def backtick(cmd, encoding='utf-8'):
 
 def unicode_safe(text, encoding=UrlEncoding, errors='ignore'):
     """Decode text to Unicode if not already done."""
-    try:
-        text_type = unicode
-    except NameError:
-        text_type = str
-    if isinstance(text, text_type):
+    if isinstance(text, six.text_type):
         return text
     return text.decode(encoding, errors)
 

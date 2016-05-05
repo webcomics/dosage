@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2013-2014 Bastian Kleineidam
-# Copyright (C) 2016 Tobias Gruetzmacher
+# Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
+# Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
 
 import pytest
 import sys
+
 from . import dosage_cmd, run_checked
 
 
@@ -41,9 +45,9 @@ class TestDosage(object):
         with pytest.raises(OSError):
             run_with_options(['Garfield'])
 
-    def test_fetch_html_and_rss(self, tmpdir):
+    def test_fetch_html_and_rss_json(self, tmpdir):
         run_with_options(["-n", "2", "-v", "-b", str(tmpdir), "-o", "html",
-                          "-o", "rss", "xkcd"])
+                          "-o", "rss", "-o", "json", "xkcd"])
 
     def test_fetch_html_and_rss_2(self, tmpdir):
         run_with_options(["--numstrips", "2", "--baseurl", "bla",

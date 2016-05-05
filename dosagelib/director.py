@@ -7,18 +7,9 @@ from __future__ import absolute_import, division, print_function
 
 import os
 import threading
-try:
-    import _thread as thread
-except ImportError:
-    import thread
-try:
-    from Queue import Queue, Empty
-except ImportError:
-    from queue import Queue, Empty
-try:
-    from urllib.parse import urlparse
-except ImportError:
-    from urlparse import urlparse
+from six.moves import _thread
+from six.moves.queue import Queue, Empty
+from six.moves.urllib.parse import urlparse
 
 from .output import out
 from . import events, scraper
@@ -94,7 +85,7 @@ class ComicGetter(threading.Thread):
         except Empty:
             pass
         except KeyboardInterrupt:
-            thread.interrupt_main()
+            _thread.interrupt_main()
 
     def getStrips(self, scraperobj):
         """Download comic strips."""

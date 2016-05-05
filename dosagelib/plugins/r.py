@@ -6,10 +6,7 @@
 from __future__ import absolute_import, division, print_function
 
 from re import compile
-try:
-    from urllib.parse import urljoin
-except ImportError:
-    from urlparse import urljoin
+from six.moves.urllib.parse import urljoin
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter

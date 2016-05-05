@@ -2,3 +2,4 @@ colorama
 lxml
 pbr
 requests>=2.0
+six

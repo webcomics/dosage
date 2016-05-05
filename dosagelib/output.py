@@ -14,6 +14,7 @@ import codecs
 import contextlib
 import pydoc
 import io
+import six
 
 try:
     import curses
@@ -110,12 +111,8 @@ class Output(object):
                 self.stream.write(u'%s%s> ' % (timestamp, get_threadname()))
             if color and self.has_color:
                 s = u'%s%s%s' % (color, s, Style.RESET_ALL)
-            try:
-                text_type = unicode
-            except NameError:
-                text_type = str
-            self.stream.write(text_type(s))
-            self.stream.write(text_type(os.linesep))
+            self.stream.write(six.text_type(s))
+            self.stream.write(six.text_type(os.linesep))
             self.stream.flush()
 
     def writelines(self, lines, level=0):

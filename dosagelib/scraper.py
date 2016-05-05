@@ -9,10 +9,7 @@ import time
 import random
 import os
 import re
-try:
-    from urllib.parse import urljoin
-except ImportError:
-    from urlparse import urljoin
+from six.moves.urllib.parse import urljoin
 
 from lxml import html, etree
 from lxml.html.defs import link_attrs as html_link_attrs

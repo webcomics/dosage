@@ -1,13 +1,16 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
+# Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
+
 import os
 import time
-try:
-    from urllib.parse import quote as url_quote
-except ImportError:
-    from urllib import quote as url_quote
+from six.moves.urllib.parse import quote as url_quote
 import codecs
 import json
+
 from . import rss, util, configuration
 from .output import out
 
@@ -189,7 +192,7 @@ class HtmlEventHandler(EventHandler):
 <title>Comics for %s</title>
 </head>
 <body>
-'''  % (self.encoding, configuration.App, time.strftime('%Y/%m/%d', today)))
+''' % (self.encoding, configuration.App, time.strftime('%Y/%m/%d', today)))
         self.addNavLinks()
         self.html.write(u'<ul>\n')
         # last comic name (eg. CalvinAndHobbes)
@@ -260,14 +263,14 @@ class JSONEventHandler(EventHandler):
                 with codecs.open(self.jsonFn(comic), 'r', self.encoding) as f:
                     self.data[comic] = json.load(f)
             else:
-                self.data[comic] = {'pages':{}}
+                self.data[comic] = {'pages': {}}
         return self.data[comic]
 
     def getPageInfo(self, comic, url):
         """Return dictionary with comic page info."""
         comicData = self.getComicData(comic)
         if url not in comicData['pages']:
-            comicData['pages'][url] = {'images':{}}
+            comicData['pages'][url] = {'images': {}}
         return comicData['pages'][url]
 
     def comicDownloaded(self, comic, filename, text=None):
@@ -289,6 +292,7 @@ class JSONEventHandler(EventHandler):
 
 _handler_classes = {}
 
+
 def addHandlerClass(clazz):
     """Register handler class."""
     if not issubclass(clazz, EventHandler):
@@ -306,6 +310,7 @@ def getHandlerNames():
 
 
 _handlers = []
+
 
 def addHandler(name, basepath=None, baseurl=None, allowDownscale=False):
     """Add an event handler with given name."""
@@ -339,6 +344,7 @@ class MultiHandler(object):
 
 
 multihandler = MultiHandler()
+
 
 def getHandler():
     """Get installed event handler."""

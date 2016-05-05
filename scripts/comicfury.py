@@ -10,10 +10,7 @@ processing.
 from __future__ import absolute_import, division, print_function
 
 import sys
-try:
-    from urllib.parse import urlsplit
-except ImportError:
-    from urlparse import urlsplit
+from six.moves.urllib.parse import urlsplit
 
 from scriptutil import ComicListUpdater
 

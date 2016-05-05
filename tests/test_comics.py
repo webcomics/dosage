@@ -8,10 +8,7 @@ from __future__ import absolute_import, division, print_function
 import re
 import os
 import multiprocessing
-try:
-    from urllib.parse import urlsplit
-except ImportError:
-    from urlparse import urlsplit
+from six.moves.urllib.parse import urlsplit
 
 
 def get_host(url):
