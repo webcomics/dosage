@@ -46,16 +46,6 @@ class FauxPas(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class FilibusterCartoons(_BasicScraper):
-    url = 'http://www.filibustercartoons.com/'
-    rurl = escape(url)
-    stripUrl = url + 'index.php/%s'
-    firstStripUrl = stripUrl % '2001/06/28/poor-jean'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
-    help = 'Index format: yyyy/mm/dd/name'
-
-
 class FireflyCross(_WordPressScraper):
     url = 'http://www.fireflycross.pensandtales.com/'
     firstStripUrl = url + '?comic=05062002'
@@ -101,14 +91,13 @@ class Flipside(_BasicScraper):
     help = 'Index format: nnnn'
 
 
-class FonFlatter(_BasicScraper):
+class FonFlatter(_ParserScraper):
     url = 'http://www.fonflatter.de/'
-    rurl = escape(url)
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2005/09/20/01-begegnung-mit-batman'
     lang = 'de'
-    imageSearch = compile(r'src="(%s\d+/fred_\d+-\d+-\d+[^"]+)' % rurl)
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
+    imageSearch = r'//img[re:test(@src, "/fred_\d+")]'
+    prevSearch = '//a[@rel="prev"]'
     help = 'Index format: yyyy/mm/dd/number-stripname'
 
     def shouldSkipUrl(self, url, data):

@@ -10,7 +10,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
-from .common import _WordPressScraper, xpath_class
+from .common import _TumblrScraper, _WordPressScraper, xpath_class
 
 
 class Caggage(_BasicScraper):
@@ -207,23 +207,13 @@ class CigarroAndCerveja(_ParserScraper):
     prevSearch = '//a[contains(text()," Prev")]',
 
 
-class Collar6(_ParserScraper):
+class Collar6(_TumblrScraper):
     url = 'http://collar6.tumblr.com/'
     firstStripUrl = url + 'post/138117470810/the-very-first-strip-from-when-i-thought-it-was'
     imageSearch = '//figure[@class="photo-hires-item"]//img'
     prevSearch = '//a[@class="previous-button"]'
     latestSearch = '//li[@class="timestamp"]/a'
-    starter = indirectStarter
     adult = True
-
-    def namer(self, image_url, page_url):
-        # tumblr URLs: http://host/post/num/name
-        #              0    1 2    3    4   5
-        parts = page_url.split('/')
-        if len(parts) > 5:
-            return '%s_%s' % (parts[4], parts[5])
-        else:
-            return parts[4]
 
 
 class Comedity(_BasicScraper):

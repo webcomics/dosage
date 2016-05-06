@@ -4,11 +4,13 @@
 # Copyright (C) 2015-2016 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
+
 from re import compile, escape, IGNORECASE
+
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
-from .common import _WordPressScraper
+from .common import _ComicControlScraper, _TumblrScraper, _WordPressScraper
 
 
 class TheBrads(_BasicScraper):
@@ -50,9 +52,8 @@ class TheGentlemansArmchair(_WordPressScraper):
 
 
 class TheLandscaper(_BasicScraper):
-    url = 'http://landscaper.visual-assault.net/comic/latest'
-    rurl = escape(url)
-    stripUrl = url + 'comic/%s'
+    stripUrl = 'http://landscaper.visual-assault.net/comic/%s'
+    url = stripUrl % 'latest'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src",
                                 r'(/comics/comic/comic_page/[^"]+)'))
@@ -65,14 +66,11 @@ class TheMelvinChronicles(_WordPressScraper):
     url = 'http://melvin.jeaniebottle.com/'
 
 
-class TheNoob(_BasicScraper):
-    url = 'http://www.thenoobcomic.com/index.php'
-    stripUrl = url + '?pos=%s'
+class TheNoob(_WordPressScraper):
+    url = 'http://thenoobcomic.com/'
+    stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(/headquarters/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(\?pos=\d+)',
-                               before="comic_nav_previous_button"))
-    help = 'Index format: nnnn'
+    help = 'Index format: n (unpadded)'
 
 
 class TheOrderOfTheStick(_BasicScraper):
@@ -100,33 +98,21 @@ class TheParkingLotIsFull(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class TheThinHLine(_BasicScraper):
+class TheThinHLine(_TumblrScraper):
     url = 'http://thinhline.tumblr.com/'
-    rurl = escape(url)
-    stripUrl = url + 'post/%s'
-    firstStripUrl = stripUrl % '3517345105'
-    imageSearch = compile(tagre('img', 'data-src',
-                                r'([^"]+media.tumblr.com/[^"]+)',
-                                before='content-image'))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)') + '&gt;</a>')
-    latestSearch = compile(tagre("a", "href", r'([^"]+)',
-                                 after='class="timestamp"'))
-    starter = indirectStarter
+    firstStripUrl = url + 'post/4177372348/thl-1-a-cats-got-his-tongue-click-on-the'
+    imageSearch = '//img[@id="content-image"]/@data-src'
+    prevSearch = '//div[@id="pagination"]/a[text()=">"]'
+    latestSearch = '//a[@class="timestamp"]'
     adult = True
 
-    indirectImageSearch = compile(tagre('a', 'href', r'(%simage/\d+)' % rurl))
+    indirectImageSearch = '//div[@id="post"]//a[not(@rel) and img]'
 
     def getComicStrip(self, url, data):
         """The comic strip image is in a separate page."""
-        pageUrl = self.fetchUrl(url, data, self.indirectImageSearch)
-        pageData = self.getPage(pageUrl)
-        return super(TheThinHLine, self).getComicStrip(pageUrl, pageData)
-
-    def namer(self, image_url, page_url):
-        """Use page URL sequence which is apparently increasing."""
-        num = page_url.split('/')[-1]
-        ext = image_url.rsplit('.', 1)[1]
-        return "thethinhline-%s.%s" % (num, ext)
+        subPage = self.fetchUrl(url, data, self.indirectImageSearch)
+        pageData = self.getPage(subPage)
+        return super(TheThinHLine, self).getComicStrip(subPage, pageData)
 
 
 class TheWhiteboard(_BasicScraper):
@@ -137,13 +123,9 @@ class TheWhiteboard(_BasicScraper):
     help = 'Index format: twb or wb + n wg. twb1000'
 
 
-class TheWotch(_BasicScraper):
+class TheWotch(_WordPressScraper):
     url = 'http://www.thewotch.com/'
-    stripUrl = url + '?date=%s'
-    firstStripUrl = stripUrl % '2002-11-21'
-    imageSearch = compile(r"<img.+?src='(comics/.+?)'")
-    prevSearch = compile(r"<link rel='Previous' href='(/\?date=\d+-\d+-\d+)'")
-    help = 'Index format: yyyy-mm-dd'
+    firstStripUrl = url + '?comic=enter-the-wotch'
 
 
 class ThisIsIndexed(_BasicScraper):
@@ -157,23 +139,16 @@ class ThisIsIndexed(_BasicScraper):
     help = 'Index format: number'
 
 
-class ThreePanelSoul(_BasicScraper):
+class ThreePanelSoul(_ComicControlScraper):
     url = 'http://threepanelsoul.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2006/05/11/a-test-comic'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl, after="prev"))
-    help = 'Index format: yyyy/mm/dd/stripname'
+    firstStripUrl = url + 'comic/a-test-comic'
 
 
-class ToonHole(_BasicScraper):
+class ToonHole(_WordPressScraper):
     url = 'http://www.toonhole.com/'
-    rurl = escape(url)
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2009/12/toon-hole-coming-soon-2010'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/[^"]+)' % rurl, after="prev"))
+    prevSearch = '//a[@rel="prev"]'
     help = 'Index format: yyyy/mm/stripname'
 
     def shouldSkipUrl(self, url, data):

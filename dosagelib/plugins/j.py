@@ -10,6 +10,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper
 from ..util import tagre
 from ..helpers import indirectStarter
+from .common import _ComicControlScraper
 
 
 class JackCannon(_BasicScraper):
@@ -51,13 +52,8 @@ class JoeAndMonkey(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class JohnnyWander(_BasicScraper):
+class JohnnyWander(_ComicControlScraper):
     url = 'http://www.johnnywander.com/'
-    stripUrl = url + 'comics/%s'
-    firstStripUrl = stripUrl % '423'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.johnnywander\.com/files/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/comics/\d+)') + r'prev')
-    help = 'Index format: nnn'
 
 
 class JustAnotherEscape(_BasicScraper):
