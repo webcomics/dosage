@@ -1,26 +1,44 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
+# Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 
-from re import compile
-from ..scraper import make_scraper
-from ..util import tagre
+from __future__ import absolute_import, division, print_function
 
-_prevSearch = compile(tagre("a", "href", r'(\?id=\d+)') + tagre("img", "src", r'images/navi-zurueck\.gif'))
-_imageSearch = compile(tagre("img", "src", r'([^"]+/img/comic/[^"]+)', after="comicimg"))
-
-def add(name, shortname):
-    url = 'http://%s.webcomic.eu/' % shortname
-    classname = 'WebcomicEu_%s' % name
-    globals()[classname] = make_scraper(classname,
-        name = 'WebcomicEu/' + name,
-        url = url,
-        stripUrl = url + '?id=%s',
-        imageSearch = _imageSearch,
-        prevSearch = _prevSearch,
-        help = 'Index format: number',
-    )
+from ..scraper import _ParserScraper
 
 
-add('TheBessEffect', 'thebesseffect')
-add('TheBessEffectEnglish', 'tbe-english')
-add('Talandor', 'talandor')
+class _WebcomicEu(_ParserScraper):
+    imageSearch = '//img[@id="comicimg"]'
+    prevSearch = '//a[img[contains(@src, "navi-zurueck")]]'
+    help = 'Index format: number'
+
+    @property
+    def name(self):
+        return 'WebcomicEu/' + super(_WebcomicEu, self).name
+
+    @property
+    def url(self):
+        return 'http://%s.webcomic.eu/' % self.sub
+
+    @property
+    def stripUrl(self):
+        return self.url + '?id=%s'
+
+    @property
+    def firstStripUrl(self):
+        return self.stripUrl % '1'
+
+
+class TheBessEffect(_WebcomicEu):
+    lang = 'de'
+    sub = 'thebesseffect'
+
+
+class TheBessEffectEnglish(_WebcomicEu):
+    sub = 'tbe-english'
+
+
+class Talandor(_WebcomicEu):
+    lang = 'de'
+    sub = 'talandor'
