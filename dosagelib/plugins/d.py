@@ -148,16 +148,14 @@ class DieselSweetiesOld(_ParserScraper):
         return 'sw%02d' % index
 
 
-class Dilbert(_BasicScraper):
+class Dilbert(_ParserScraper):
     url = 'http://dilbert.com/'
     stripUrl = url + 'strip/%s'
     firstStripUrl = stripUrl % '1989-04-16'
     starter = indirectStarter
-    prevSearch = compile(tagre("a", "href", r'(/strip/\d+-\d+-\d+)', after="Older Strip"))
-    imageSearch = compile(tagre("img", "src", r'(http://assets.amuniversal.com/\w+)'))
-    latestSearch = compile(tagre("a", "href",
-                                 r'(http://dilbert.com/strip/[0-9-]*)',
-                                 after="Click to see"))
+    prevSearch = '//div[%s]/a' % xpath_class('nav-left')
+    imageSearch = '//img[%s]' % xpath_class('img-comic')
+    latestSearch = '//a[@class="img-comic-link"]'
     help = 'Index format: yyyy-mm-dd'
 
     def namer(self, image_url, page_url):
