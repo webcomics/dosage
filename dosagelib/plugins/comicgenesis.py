@@ -12,10 +12,11 @@ from ..util import tagre
 
 _imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]+)'))
 _prevSearch = compile(tagre("a", "href", r'([^"]*/d/\d{8}\.html)') +
-   '(?:Previous comic' + '|' +
-    tagre("img", "alt", "Previous comic") + '|' +
-    tagre("img", "src", "images/back\.gif") +
-    ')')
+                      '(?:Previous comic' + '|' +
+                      tagre("img", "alt", "Previous comic") + '|' +
+                      tagre("img", "src", "images/back\.gif") +
+                      ')')
+
 
 def add(name, url):
     classname = 'ComicGenesis_%s' % name
@@ -26,20 +27,22 @@ def add(name, url):
 
     def _prevUrlModifier(self, prev_url):
         if prev_url:
-            return prev_url.replace("keenspace.com", "comicgenesis.com"
-              ).replace("keenspot.com", "comicgenesis.com"
-              ).replace("toonspace.com", "comicgenesis.com"
-              ).replace("comicgen.com", "comicgenesis.com")
+            return prev_url.replace(
+                "keenspace.com", "comicgenesis.com").replace(
+                "keenspot.com", "comicgenesis.com").replace(
+                "toonspace.com", "comicgenesis.com").replace(
+                "comicgen.com", "comicgenesis.com")
 
-    globals()[classname] = make_scraper(classname,
+    globals()[classname] = make_scraper(
+        classname,
         name='ComicGenesis/' + name,
         url=url,
         stripUrl=stripUrl,
-        imageSearch = _imageSearch,
-        prevSearch = _prevSearch,
-        prevUrlModifier = _prevUrlModifier,
-        multipleImagesPerStrip = True,
-        help = 'Index format: yyyymmdd',
+        imageSearch=_imageSearch,
+        prevSearch=_prevSearch,
+        prevUrlModifier=_prevUrlModifier,
+        multipleImagesPerStrip=True,
+        help='Index format: yyyymmdd',
     )
 
 # Comicgenesis has a lot of comics, but most of them are disallowed by robots.txt
@@ -58,7 +61,6 @@ add('BlindSight', 'http://blindsight.comicgenesis.com/')
 add('BreakingtheDoldrum', 'http://breakingthedoldrum.comicgenesis.com/')
 add('Candi', 'http://candicomics.com/')
 add('CorporateLife', 'http://corporatelife.comicgenesis.com/')
-add('CryHavoc', 'http://cryhavoc.comicgenesis.com/')
 add('DarkWelkin', 'http://darkwelkin.comicgenesis.com/')
 add('DemonEater', 'http://demoneater.comicgenesis.com/')
 add('DoodleDiaries', 'http://doodlediaries.comicgenesis.com/')
@@ -108,7 +110,6 @@ add('SamandElisAdventures', 'http://sameliadv.comicgenesis.com/')
 add('SarahZero', 'http://plughead.comicgenesis.com/')
 add('SixByNineCollege', 'http://sixbyninecollege.comicgenesis.com/')
 add('SpoononHighandFireontheMountian', 'http://spoon.comicgenesis.com/')
-add('SueosdelSur', 'http://sds.comicgenesis.com/')
 add('SynapticMisfires', 'http://synapticmisfires.comicgenesis.com/')
 add('TakingStock', 'http://mapaghimagsik.comicgenesis.com/')
 add('TemplarArizona', 'http://templaraz.comicgenesis.com/')

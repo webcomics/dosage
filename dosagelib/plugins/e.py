@@ -130,16 +130,6 @@ class ElGoonishShiveNP(_BasicScraper):
     help = 'Index format: number'
 
 
-class Ellerbisms(_BasicScraper):
-    url = 'http://www.ellerbisms.com/'
-    rurl = escape(url)
-    stripUrl = url + '?p=%s'
-    firstStripUrl = stripUrl % '15'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
-    help = 'Index format: nnn'
-
-
 class EmergencyExit(_BasicScraper):
     url = 'http://www.eecomics.net/'
     stripUrl = url + "?strip_id=%s"
