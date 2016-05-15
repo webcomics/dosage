@@ -1427,10 +1427,6 @@ class CFGoldrush(_ComicFury):
     sub = 'goldrush-dynllewcomics'
 
 
-class CFGOODBYEREPTILIANS(_ComicFury):
-    sub = 'goodbyereptilians'
-
-
 class CFGrandfathersTale(_ComicFury):
     sub = 'grandfatherstale'
 
@@ -1709,10 +1705,6 @@ class CFIntergalacticTruckstop(_ComicFury):
 
 class CFInternetSuperbuddies(_ComicFury):
     sub = 'isb'
-
-
-class CFInvizibleComixGroup(_ComicFury):
-    sub = 'inviziblecomixgroup'
 
 
 class CFIsaacAndFriends(_ComicFury):
@@ -2802,10 +2794,6 @@ class CFSailorMoonTheEnemyNextDoor(_ComicFury):
 # SakuraDAY has a duplicate in SmackJeeves/SakuraDAY
 
 
-class CFSandboxDrama(_ComicFury):
-    sub = 'sandboxdrama'
-
-
 class CFSanityProtectionFactor(_ComicFury):
     sub = 'spf1337'
 
@@ -3595,10 +3583,6 @@ class CFTheWrongTree(_ComicFury):
 
 class CFTheWWord(_ComicFury):
     sub = 'thewword'
-
-
-class CFThisHostileUniverse(_ComicFury):
-    sub = 'hostileuniverse'
 
 
 class CFThisIsNormal(_ComicFury):

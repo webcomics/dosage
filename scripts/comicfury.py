@@ -109,11 +109,13 @@ class ComicFuryUpdater(ComicListUpdater):
         "BaseballCapsAndTiaras",
         "CROSSWORLDSNEXUS",
         "Fathead",
+        "GOODBYEREPTILIANS",
         "KevinZombie",
         "KindergardenCrisIs",
         "NoSongsForTheDead",
         "RequiemShadowbornPariah",
         "STICKFODDER",
+        "SandboxDrama",
         "TezzleAndZeek",
 
         # broken HTML
