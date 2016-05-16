@@ -30,6 +30,7 @@ class GoComicsUpdater(ComicListUpdater):
             "SaturdayMorningBreakfastCereal",
 
             # not available
+            "BillyAndCo",
             "BuffaloChips",
             "Crawdiddy",
     ]

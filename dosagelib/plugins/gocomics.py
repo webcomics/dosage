@@ -167,10 +167,6 @@ class GCEBEJeebie(_GoComics):
     path = 'ebe-jeebie'
 
 
-class GCEconogirl(_GoComics):
-    path = 'econogirl'
-
-
 class GCEDITORIALPASTANDPRESENT(_GoComics):
     path = 'editorial-past-and-present'
 
@@ -315,6 +311,10 @@ class GCLucasLuminous(_GoComics):
     path = 'lucas-luminous'
 
 
+class GCMagnificatzOld(_GoComics):
+    path = 'magnificatz-sherpa'
+
+
 class GCMarkonpaper(_GoComics):
     path = 'mark-on-paper'
 
@@ -401,10 +401,6 @@ class GCPeanizles(_GoComics):
 
 class GCPetFood(_GoComics):
     path = 'pet-food'
-
-
-class GCPigtimesCartoon(_GoComics):
-    path = 'pigtimes-cartoon'
 
 
 class GCPipethePelican(_GoComics):
@@ -511,10 +507,6 @@ class GCTheAdventuresofHeromanGuy(_GoComics):
     path = 'adventures-of-heroman-guy'
 
 
-class GCTheAdventuresofTeetyBallerina(_GoComics):
-    path = 'the-adventures-of-teety-ballerina'
-
-
 class GCTheEdperiment(_GoComics):
     path = 'the-edperiment'
 
@@ -581,10 +573,6 @@ class GCTonyAuth(_GoComics):
 
 class GCToocrazy(_GoComics):
     path = 'too-crazy'
-
-
-class GCTOWHOMITMAYCONCERN(_GoComics):
-    path = 'towhomitmayconcern'
 
 
 class GCTwitchyOToole(_GoComics):
@@ -738,6 +726,10 @@ class GCAngryLittleGirls(_GoComics):
 
 class GCAnimalCrackers(_GoComics):
     path = 'animalcrackers'
+
+
+class GCAnimalMitchell(_GoComics):
+    path = 'animal-mitchell'
 
 
 class GCAnnie(_GoComics):
@@ -898,10 +890,6 @@ class GCBigNateFirstClass(_GoComics):
 
 class GCBigTop(_GoComics):
     path = 'bigtop'
-
-
-class GCBillyAndCo(_GoComics):
-    path = 'billy-and-co'
 
 
 class GCBiographic(_GoComics):
@@ -1124,10 +1112,6 @@ class GCComputoon(_GoComics):
     path = 'compu-toon'
 
 
-class GCCondorito(_GoComicsEs):
-    path = 'espanol/condorito'
-
-
 class GCConnieToTheWonnie(_GoComics):
     path = 'connie-to-the-wonnie'
 
@@ -1256,6 +1240,10 @@ class GCDoonesbury(_GoComics):
     path = 'doonesbury'
 
 
+class GCDorrisMcComics(_GoComics):
+    path = 'dorris-mccomics'
+
+
 class GCDrabble(_GoComics):
     path = 'drabble'
 
@@ -1302,6 +1290,14 @@ class GCDutchnPals(_GoComics):
 
 class GCDysconnected(_GoComics):
     path = 'dysconnected'
+
+
+class GCEconogirl(_GoComics):
+    path = 'econogirl'
+
+
+class GCEdgeCity(_GoComics):
+    path = 'edge-city'
 
 
 class GCEdgeOfAdventure(_GoComics):
@@ -1848,10 +1844,6 @@ class GCKartoonsByKline(_GoComics):
     path = 'kartoons-by-kline'
 
 
-class GCKateTheGreat(_GoComics):
-    path = 'kate-the-great'
-
-
 class GCKenCatalino(_GoComics):
     path = 'kencatalino'
 
@@ -2069,7 +2061,7 @@ class GCMagicInAMinute(_GoComics):
 
 
 class GCMagnificatz(_GoComics):
-    path = 'magnificatz-sherpa'
+    path = 'magnificatz'
 
 
 class GCMaintaining(_GoComics):
@@ -2328,6 +2320,10 @@ class GCNotInventedHere(_GoComics):
     path = 'not-invented-here'
 
 
+class GCNpchumorcom(_GoComics):
+    path = 'npchumor'
+
+
 class GCOffTheMark(_GoComics):
     path = 'offthemark'
 
@@ -2382,6 +2378,10 @@ class GCOverQuirked(_GoComics):
 
 class GCOverTheHedge(_GoComics):
     path = 'overthehedge'
+
+
+class GCOwlturd(_GoComics):
+    path = 'owlturd'
 
 
 class GCOzyAndMillie(_GoComics):
@@ -3020,6 +3020,10 @@ class GCTheDinetteSet(_GoComics):
     path = 'dinetteset'
 
 
+class GCTheDinkledorfs(_GoComics):
+    path = 'the-dinkledorfs'
+
+
 class GCTheDoozies(_GoComics):
     path = 'thedoozies'
 
@@ -3080,6 +3084,10 @@ class GCTheLostBear(_GoComics):
     path = 'the-lost-bear'
 
 
+class GCTheMagicForest(_GoComics):
+    path = 'the-magic-forest'
+
+
 class GCTheMartianConfederacy(_GoComics):
     path = 'the-martian-confederacy'
 
@@ -3138,6 +3146,10 @@ class GCTheSunshineClub(_GoComics):
 
 class GCTheUnemployed(_GoComics):
     path = 'the-unemployed'
+
+
+class GCTheWagesOfSindy(_GoComics):
+    path = 'the-wages-of-sindy'
 
 
 class GCTheWanderingMelon(_GoComics):
@@ -3246,6 +3258,10 @@ class GCTwaggies(_GoComics):
 
 class GCUncleArtsFunland(_GoComics):
     path = 'uncleartsfunland'
+
+
+class GCUnderdone(_GoComics):
+    path = 'underdone'
 
 
 class GCUnderstandingChaos(_GoComics):
