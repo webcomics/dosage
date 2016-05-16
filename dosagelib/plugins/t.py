@@ -145,7 +145,7 @@ class ThreePanelSoul(_ComicControlScraper):
 
 
 class ToonHole(_WordPressScraper):
-    url = 'http://www.toonhole.com/'
+    url = 'http://toonhole.com/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2009/12/toon-hole-coming-soon-2010'
     prevSearch = '//a[@rel="prev"]'

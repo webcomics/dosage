@@ -52,9 +52,11 @@ class LasLindas(_BasicScraper):
 
 
 class LastNerdsOnEarth(_ParserScraper):
-    url = 'http://www.lastnerdsonearth.com/latest/'
+    baseUrl = 'http://www.lastnerdsonearth.com/'
+    url = baseUrl + 'latest/'
+    firstStripUrl = baseUrl + 'ch1p1'
     imageSearch = '//div[@id="content"]/a/img'
-    prevSearch = '//div[@id="comicnav"]/a[last()-2]'
+    prevSearch = '//div[@id="comicnav"]/a[img[contains(@src, "nav-prev")]]'
 
 
 class LeastICouldDo(_BasicScraper):
@@ -97,7 +99,7 @@ class LoFiJinks(_WPNaviIn):
 
 
 class LookingForGroup(_ParserScraper):
-    url = 'http://www.lfgcomic.com/'
+    url = 'http://www.lfg.co/'
     stripUrl = url + 'page/%s/'
     firstStripUrl = stripUrl % '1'
     css = True

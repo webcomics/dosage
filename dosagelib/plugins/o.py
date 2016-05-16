@@ -93,6 +93,7 @@ class Optipess(_WordPressScraper):
     firstStripUrl = url + '2008/12/01/jason-friend-of-the-butterflies/'
     prevSearch = '//a[%s]' % xpath_class('navi-prev')
     textSearch = '//div[@id="comic"]//img/@alt'
+    textOptional = True
 
 
 class OurHomePlanet(_BasicScraper):

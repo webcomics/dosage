@@ -7,20 +7,15 @@ from __future__ import absolute_import, division, print_function
 
 from re import compile, escape, IGNORECASE
 
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from ..helpers import indirectStarter
-from .common import _ComicControlScraper, _WordPressScraper
+from .common import _ComicControlScraper, _WordPressScraper, xpath_class
 
 
-class WapsiSquare(_BasicScraper):
+class WapsiSquare(_WordPressScraper):
     url = 'http://wapsisquare.com/'
-    rurl = escape(url)
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = stripUrl % '09092001'
-    imageSearch = compile(r'<img src="(%scomics/.+?)"' % rurl)
-    prevSearch = compile(r'<a href="(.+?)"[^>]+?>Previous</a>')
-    help = 'Index format: stripname'
+    firstStripUrl = url + 'comic/09092001/'
 
 
 class WastedTalent(_BasicScraper):
@@ -31,15 +26,6 @@ class WastedTalent(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(/comic/[^"]+)',
                                after="comic_prev"))
     help = 'Index format: stripname'
-
-
-class WayfarersMoon(_BasicScraper):
-    url = 'http://www.wayfarersmoon.com/'
-    stripUrl = url + 'index.php?page=%s'
-    firstStripUrl = stripUrl % '0'
-    imageSearch = compile(r'<img src="(/admin.+?)"')
-    prevSearch = compile(r'<a href="(.+?)".+?btn_back.gif')
-    help = 'Index format: nn'
 
 
 class WebDesignerCOTW(_BasicScraper):
@@ -91,23 +77,10 @@ class Weregeek(_BasicScraper):
     help = 'Index format: yyyy/mm/dd'
 
 
-class WhiteNinja(_BasicScraper):
-    baseUrl = 'http://www.whiteninjacomics.com/'
-    url = baseUrl + 'comics.shtml'
-    stripUrl = baseUrl + 'comics/%s.shtml'
-    imageSearch = compile(r'<img src=(/images/comics/(?!t-).+?\.gif) border=0')
-    prevSearch = compile(r'(/comics/.+?shtml).+?previous')
-    help = 'Index format: s (comic name)'
-
-
-class WhiteNoise(_BasicScraper):
-    baseUrl = 'http://www.wncomic.com/'
-    url = baseUrl + 'archive.php'
-    stripUrl = baseUrl + 'archive_comments.php?strip_id=%s'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = compile(r'(istrip_files/strips/.+?)"')
-    prevSearch = compile(r'</a><a href="(.+?)"><img src="images/top_back.jpg" ')
-    help = 'Index format: n'
+class WhiteNoise(_WordPressScraper):
+    url = 'http://whitenoisecomic.com/'
+    firstStripUrl = url + 'comic/book-one/'
+    prevSearch = '//a[%s]' % xpath_class('previous-webcomic-link')
 
 
 class Whomp(_ComicControlScraper):
@@ -129,13 +102,13 @@ class WhyTheLongFace(_BasicScraper):
     help = 'Index format: yyyymm'
 
 
-class Wigu(_BasicScraper):
-    url = 'http://wigucomics.com/'
-    stripUrl = url + 'oc/index.php?comic=%s'
+class Wigu(_ParserScraper):
+    stripUrl = 'http://www.wigucomics.com/adventures/index.php?comic=%s'
+    url = stripUrl % '-1'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(/oc/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/oc/index\.php\?comic=\d+)',
-                               after="go back"))
+    imageSearch = '//div[@id="comic"]//img[contains(@src, "/comics/")]'
+    prevSearch = '//a[@alt="go back"]'
+    endOfLife = True
     help = 'Index format: n'
 
 
@@ -164,7 +137,6 @@ class Wondermark(_BasicScraper):
 class WorldOfMrToast(_BasicScraper):
     baseUrl = 'http://www.theimaginaryworld.com/'
     url = baseUrl + 'mrTcomicA.html'
-    stripUrl = baseUrl + '%s.html'
     imageSearch = compile(tagre("img", "src", r'(comic[^"]+)'))
     # list the archive links since there is no prev/next navigation
     prevurls = (
@@ -185,9 +157,9 @@ class WorldOfMrToast(_BasicScraper):
     )
     firstStripUrl = prevurls[-1]
     multipleImagesPerStrip = True
-    help = 'Index format: none'
+    endOfLife = True
 
-    def getPrevUrl(self, url, data, baseUrl):
+    def getPrevUrl(self, url, data):
         idx = self.prevurls.index(url)
         try:
             return self.prevurls[idx + 1]

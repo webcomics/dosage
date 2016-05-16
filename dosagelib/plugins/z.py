@@ -20,23 +20,16 @@ class ZapComic(_ParserScraper):
     prevSearch = 'a.previous-comic-link'
 
 
-class Zapiro(_BasicScraper):
-    url = 'http://www.mg.co.za/zapiro/'
+class Zapiro(_ParserScraper):
+    url = 'http://mg.co.za/zapiro/'
     starter = bounceStarter
-    stripUrl = 'http://mg.co.za/cartoon/%s'
-    firstStripUrl = stripUrl % 'zapiro_681'
-    imageSearch = compile(tagre("img", "src", r'(http://cdn\.mg\.co\.za/crop/content/cartoons/[^"]+)'))
-    prevSearch = compile(tagre("li", "class", r'nav_older') +
-                         tagre("a", "href",
-                               r'(http://mg\.co\.za/cartoon/[^"]+)'))
-    nextSearch = compile(tagre("li", "class", r'nav_older') +
-                         tagre("a", "href",
-                               r'(http://mg\.co\.za/cartoon/[^"]+)'))
-    help = 'Index format: yyyy-mm-dd-stripname'
+    imageSearch = '//div[@id="cartoon_full_size"]//img'
+    prevSearch = '//li[@class="nav_older"]/a'
+    nextSearch = '//li[@class="nav_newer"]/a'
 
     def namer(self, image_url, page_url):
-        name = image_url.split('/')[-3]
-        return name
+        parts = page_url.rsplit('/', 1)
+        return parts[1]
 
 
 class ZenPencils(_WordPressScraper):

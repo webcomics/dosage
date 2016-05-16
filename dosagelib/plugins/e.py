@@ -46,19 +46,13 @@ class EasilyAmused(_WordPressScraper):
     starter = indirectStarter
 
 
-class EatLiver(_BasicScraper):
+class EatLiver(_ParserScraper):
     url = 'http://www.eatliver.com/'
-    rurl = escape(url)
     starter = indirectStarter
-    stripUrl = url + "i.php?n=%s"
-    firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("link", "href", r'(%simg/\d+/[^"]+)' % rurl,
-                                before="image_src"))
-    prevSearch = compile(tagre("a", "href", r'(i\.php\?n=\d+)') +
-                         "&#060;&#060; Previous")
-    latestSearch = compile(tagre("a", "href", r'(i\.php\?n=\d+)') +
-                           tagre("img", "src", r'img/small/[^"]+') +
-                           r"</a>\s*<br")
+    multipleImagesPerStrip = True
+    imageSearch = '//div[%s]//img' % xpath_class('post-content')
+    prevSearch = '//a[@rel="prev"]'
+    latestSearch = '//a[@rel="bookmark"]'
 
 
 class EatThatToast(_BasicScraper):
@@ -185,18 +179,9 @@ class EvilDiva(_BasicScraper):
     help = 'Index format: n (unpadded)'
 
 
-class EvilInc(_BasicScraper):
+class EvilInc(_WordPressScraper):
     url = 'http://evil-inc.com/'
-    stripUrl = url + 'comic/%s'
-    firstStripUrl = stripUrl % 'monday-3'
-    imageSearch = compile(
-        tagre("div", "id", "comic") +
-        r'\s*.*\s*' +  # filter out the variant href tag
-        tagre("img", "src",
-              r'(http://i\d\.wp\.com/evil-inc\.com/wp-content/uploads/[^"]+)'))
-    prevSearch = compile(tagre("span", "class", "mininav-prev") +
-                         tagre("a", "href", r'([^"]+)'))
-    help = 'Index format: stripname'
+    firstStripUrl = url + 'comic/monday-3/'
 
 
 class Evilish(_ParserScraper):

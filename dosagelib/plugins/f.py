@@ -92,9 +92,9 @@ class Flipside(_BasicScraper):
 
 
 class FonFlatter(_ParserScraper):
-    url = 'http://www.fonflatter.de/'
+    url = 'https://www.fonflatter.de/'
     stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2005/09/20/01-begegnung-mit-batman'
+    firstStripUrl = url + '2005/09/20/01-begegnung-mit-batman/'
     lang = 'de'
     imageSearch = r'//img[re:test(@src, "/fred_\d+")]'
     prevSearch = '//a[@rel="prev"]'

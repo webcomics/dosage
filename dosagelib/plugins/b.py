@@ -186,19 +186,6 @@ class BoredAndEvil(_BasicScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
-class BoyOnAStickAndSlither(_BasicScraper):
-    url = 'http://www.boasas.com/'
-    stripUrl = url + 'page/%s'
-    firstStripUrl = stripUrl % '2'
-    imageSearch = compile(tagre("img", "src", r'(http://\d+\.media\.tumblr\.com/[^"]+_1280\.png)'))
-    prevSearch = compile(tagre("a", "href", r'(/page/\d+)') +
-                         "<span>Next page")
-    help = 'Index format: n (unpadded)'
-
-    def namer(self, image_url, page_url):
-        return page_url.rsplit('/')[-1]
-
-
 class BratHalla(_WordPressScraper):
     url = 'http://brat-halla.com/'
 

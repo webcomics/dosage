@@ -117,7 +117,9 @@ class PHDComics(_ParserScraper):
     def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
         return url in (
-            self.stripUrl % '1669',  # video
+            # video
+            self.stripUrl % '1880',
+            self.stripUrl % '1669',
         )
 
 
@@ -125,15 +127,9 @@ class Picklewhistle(_ComicControlScraper):
     url = 'http://www.picklewhistle.com/'
 
 
-class PicPakDog(_BasicScraper):
+class PicPakDog(_WordPressScraper):
     url = 'http://www.picpak.net/'
-    rurl = escape(url)
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = stripUrl % 'dogs-cant-spell'
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/\d+-\d+-\d+-[^"]+\.png)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl,
-                               after="nav-prev"))
-    help = 'Index format: stripname'
+    firstStripUrl = url + 'comic/dogs-cant-spell/'
 
 
 # Keep, because naming is different to PHDComics...
@@ -199,14 +195,12 @@ class PoorlyDrawnLines(_BasicScraper):
     help = 'Index Format: name'
 
 
-class Precocious(_BasicScraper):
+class Precocious(_ParserScraper):
     url = 'http://www.precociouscomic.com/'
-    starter = indirectStarter
     stripUrl = url + 'archive/comic/%s'
-    imageSearch = compile(tagre("img", "src", r'(/comics/\d+[^"]*\.(?:jpg|gif))'))
-    prevSearch = compile(tagre("a", "href", r'(/archive/comic/[^"]+)') + tagre("img", "src", r"/templates/precocious_main/images/back_arrow\.png"))
-    latestSearch = compile(tagre("a", "href", r'(/archive/comic/[^"]+)') +
-                           tagre("img", "src", r"/templates/precocious_main/images/next_arrow\.png"))
+    firstStripUrl = stripUrl % '2009/03/09'
+    imageSearch = '//img[contains(@src, "/comics/")]'
+    prevSearch = '//a[img[contains(@src, "/back_arrow")]]'
     help = 'Index format: yyyy/mm/dd'
 
 

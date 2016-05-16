@@ -126,8 +126,8 @@ class DieselSweeties(_ParserScraper):
     firstStripUrl = stripUrl % '1'
     imageSearch = '//img[@class="xomic"]'
     prevSearch = '//div[@id="prev"]//a[contains(text(), "previous")]'
-    nextSearch = '//div[@id="prev"]//a[contains(text(), "next")]'
-    starter = bounceStarter
+    latestSearch = prevSearch
+    starter = indirectStarter
     help = 'Index format: n (unpadded)'
 
 
