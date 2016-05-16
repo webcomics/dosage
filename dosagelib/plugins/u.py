@@ -54,3 +54,8 @@ class Unsounded(_BasicScraper):
         """Get comic strip URL from index."""
         chapter, num = index.split('-')
         return self.stripUrl % (chapter, chapter, num)
+
+
+class UrgentTransformationCrisis(_WordPressScraper):
+    url = 'http://www.catomix.com/utc/'
+    firstStripUrl = url + 'comic/cover1'

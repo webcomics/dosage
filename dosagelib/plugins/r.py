@@ -26,6 +26,11 @@ class RalfTheDestroyer(_WordPressScraper):
     url = 'http://ralfthedestroyer.com/'
 
 
+class RaynaOnTheRiver(_WordPressScraper):
+    url = 'http://www.catomix.com/rayna/'
+    firstStripUrl = url + 'archives/comic/teaser-poster'
+
+
 class RealLife(_WordPressScraper):
     url = 'http://reallifecomics.com/'
     stripUrl = url + 'comic.php?comic=%s'
