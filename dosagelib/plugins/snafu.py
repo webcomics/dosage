@@ -16,9 +16,8 @@ class _Snafu(_ParserScraper):
     latestSearch = '//div[@id="feed"]/a'
     starter = indirectStarter
 
-    @property
-    def name(self):
-        return 'SnafuComics/' + super(_Snafu, self).name
+    def __init__(self, name):
+        super(_Snafu, self).__init__('SnafuComics/' + name)
 
     def namer(self, image_url, page_url):
         year, month, name = image_url.rsplit('/', 3)[1:]

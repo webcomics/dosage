@@ -44,9 +44,8 @@ class _SmackJeeves(_ParserScraper):
 
     broken_html_bugfix = True
 
-    @property
-    def name(self):
-        return 'SmackJeeves/' + super(_SmackJeeves, self).name[2:]
+    def __init__(self, name):
+        super(_SmackJeeves, self).__init__('SmackJeeves/' + name[2:])
 
     @property
     def url(self):

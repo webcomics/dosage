@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
 
 from ..scraper import _ParserScraper
 
@@ -10,13 +12,12 @@ class _NuklearPower(_ParserScraper):
     prevSearch = '//a[@rel="prev"]'
     imageSearch = '//div[@id="comic"]/img'
 
+    def __init__(self, name):
+        super(_NuklearPower, self).__init__('NuklearPower/' + name[2:])
+
     @property
     def url(self):
         return 'http://www.nuklearpower.com/' + self.path + '/'
-
-    @property
-    def name(self):
-        return 'NuklearPower/' + super(_NuklearPower, self).name[2:]
 
 
 class NP8BitTheater(_NuklearPower):

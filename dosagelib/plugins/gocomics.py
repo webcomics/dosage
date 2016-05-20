@@ -18,9 +18,8 @@ class _GoComics(_ParserScraper):
     starter = bounceStarter
     help = 'Index format: yyyy/mm/dd'
 
-    @property
-    def name(self):
-        return 'GoComics/' + super(_GoComics, self).name[2:]
+    def __init__(self, name):
+        super(_GoComics, self).__init__('GoComics/' + name[2:])
 
     @property
     def url(self):

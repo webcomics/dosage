@@ -82,6 +82,10 @@ class Scraper(object):
     # HTTP session for configuration & cookies
     session = requests_session()
 
+    @classmethod
+    def getmodules(cls):
+        return [cls(cls.__name__)]
+
     @property
     def indexes(self):
         return self._indexes
@@ -91,8 +95,9 @@ class Scraper(object):
         if val:
             self._indexes = tuple(sorted(val))
 
-    def __init__(self):
+    def __init__(self, name):
         """Initialize internal variables."""
+        self.name = name
         self.urls = set()
         self._indexes = tuple()
         self.skippedUrls = set()
@@ -221,11 +226,6 @@ class Scraper(object):
     def getIndexStripUrl(self, index):
         """Get comic strip URL from index."""
         return self.stripUrl % index
-
-    @property
-    def name(self):
-        """Get scraper name."""
-        return self.__class__.__name__
 
     def starter(self):
         """Get starter URL from where to scrape comic strips."""
@@ -563,10 +563,12 @@ def get_scrapers():
     if _scrapers is None:
         out.debug(u"Loading comic modules...")
         modules = loader.get_modules('plugins')
-        plugins = loader.get_plugins(modules, Scraper)
-        _scrapers = sorted([x() for x in plugins], key=lambda p: p.name)
+        plugins = list(loader.get_plugins(modules, Scraper))
+        _scrapers = sorted([m for x in plugins for m in x.getmodules()],
+                           key=lambda p: p.name)
         check_scrapers()
-        out.debug(u"... %d modules loaded." % len(_scrapers))
+        out.debug(u"... %d modules loaded from %d classes." % (
+            len(_scrapers), len(plugins)))
     return _scrapers
 
 

@@ -7,58 +7,55 @@ from __future__ import absolute_import, division, print_function
 
 from re import compile
 
-from ..scraper import make_scraper
+from ..scraper import _BasicScraper
 from ..util import tagre, getQueryParams
 
 
-_linkTag = tagre("a", "href", r'([^"]+)')
-_prevSearch = compile(_linkTag + tagre("img", "src", r"previous\.gif"))
-_nextSearch = compile(_linkTag + tagre("img", "src", r"next\.gif"))
-_lastSearch = compile(_linkTag + tagre("img", "src", r"last\.gif"))
+class CloneManga(_BasicScraper):
+    _linkTag = tagre("a", "href", r'([^"]+)')
+    prevSearch = compile(_linkTag + tagre("img", "src", r"previous\.gif"))
+    nextSearch = compile(_linkTag + tagre("img", "src", r"next\.gif"))
+    latestSearch = compile(_linkTag + tagre("img", "src", r"last\.gif"))
+    help = 'Index format: n'
 
+    def __init__(self, name, shortName, imageFolder=None, lastStrip=None):
+        super(CloneManga, self).__init__('CloneManga/' + name)
 
-def add(name, shortName, imageFolder=None, lastStrip=None):
-    classname = 'CloneManga_%s' % name
-    _url = 'http://manga.clone-army.org'
-    baseUrl = '%s/%s.php' % (_url, shortName)
-    if imageFolder is None:
-        imageFolder = shortName
+        _url = 'http://manga.clone-army.org'
+        self.url = '%s/%s.php' % (_url, shortName)
+        if imageFolder is None:
+            imageFolder = shortName
+        self.stripUrl = self.url + '?page=%s'
+        self.imageSearch = compile(tagre("img", "src", r'((?:%s/)?%s/[^"]+)' % (_url, imageFolder), after="center"))
+
+        if lastStrip is None:
+            self.starter = self._starter
+        else:
+            self.url = self.stripUrl % lastStrip
 
     def namer(self, image_url, page_url):
         return '%03d' % int(getQueryParams(page_url)['page'][0])
 
     def _starter(self):
         # first, try hopping to previous and next comic
-        data = self.getPage(baseUrl)
+        data = self.getPage(self.url)
         try:
-            url = self.fetchUrl(baseUrl, data, _prevSearch)
+            url = self.fetchUrl(self.url, data, self.prevSearch)
         except ValueError:
             # no previous link found, try hopping to last comic
-            return self.fetchUrl(baseUrl, data, _lastSearch)
+            return self.fetchUrl(self.url, data, self.latestSearch)
         else:
             data = self.getPage(url)
-            return self.fetchUrl(url, data, _nextSearch)
+            return self.fetchUrl(url, data, self.nextSearch)
 
-    attrs = dict(
-        name='CloneManga/' + name,
-        stripUrl=baseUrl + '?page=%s',
-        imageSearch=compile(tagre("img", "src", r'((?:%s/)?%s/[^"]+)' % (_url, imageFolder), after="center")),
-        prevSearch=_prevSearch,
-        help='Index format: n',
-        namer=namer,
-        url=baseUrl,
-    )
-    if lastStrip is None:
-        attrs['starter'] = _starter
-    else:
-        attrs['url'] = attrs['stripUrl'] % lastStrip
-    globals()[classname] = make_scraper(classname, **attrs)
-
-
-add('AprilAndMay', 'anm', imageFolder='AAM')
-add('Kanami', 'kanami')
-add('MomokaCorner', 'momoka')
-add('NanasEverydayLife', 'nana', lastStrip='78')
-add('PaperEleven', 'pxi', imageFolder='papereleven', lastStrip='311')
-add('Tomoyo42sRoom', 't42r')
-add('PennyTribute', 'penny')
+    @classmethod
+    def getmodules(cls):
+        return [
+            cls('AprilAndMay', 'anm', imageFolder='AAM'),
+            cls('Kanami', 'kanami'),
+            cls('MomokaCorner', 'momoka'),
+            cls('NanasEverydayLife', 'nana', lastStrip='78'),
+            cls('PaperEleven', 'pxi', imageFolder='papereleven', lastStrip='311'),
+            cls('Tomoyo42sRoom', 't42r'),
+            cls('PennyTribute', 'penny'),
+        ]

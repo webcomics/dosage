@@ -22,6 +22,9 @@ class _ComicFury(_ParserScraper):
     help = 'Index format: n'
     starter = bounceStarter
 
+    def __init__(self, name):
+        super(_ComicFury, self).__init__('ComicFury/' + name[2:])
+
     def namer(self, image_url, page_url):
         parts = page_url.split('/')
         path, ext = os.path.splitext(image_url)
@@ -31,10 +34,6 @@ class _ComicFury(_ParserScraper):
     @property
     def url(self):
         return 'http://%s.webcomic.ws/comics/' % self.sub
-
-    @property
-    def name(self):
-        return 'ComicFury/' + super(_ComicFury, self).name[2:]
 
     def getIndexStripUrl(self, index):
         return self.url + 'comics/%s' % index

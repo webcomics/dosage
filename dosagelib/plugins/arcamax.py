@@ -12,13 +12,12 @@ class _Arcamax(_ParserScraper):
     imageSearch = '//img[@id="comic-zoom"]'
     prevSearch = '//a[@class="prev"]'
 
+    def __init__(self, name):
+        super(_Arcamax, self).__init__('Arcamax/' + name)
+
     @property
     def url(self):
         return 'http://www.arcamax.com/thefunnies/' + self.path + '/'
-
-    @property
-    def name(self):
-        return 'Arcamax/' + super(_Arcamax, self).name
 
 
 # do not edit anything below since these entries are generated from

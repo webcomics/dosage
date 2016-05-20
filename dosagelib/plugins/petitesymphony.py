@@ -1,33 +1,50 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
 
 from re import compile
-from ..scraper import make_scraper
+
+from ..scraper import _BasicScraper
 from ..util import tagre
-
-_imageSearch = compile(tagre("img", "src", r'(http://[a-z0-9]+\.petitesymphony\.com/files/comics/[^"]+)'))
-_prevSearch = compile(tagre("a", "href", r'(http://[a-z0-9]+\.petitesymphony\.com/comic/[^"]+)', after="navi-prev"))
-
-def add(name):
-    classname = 'PetiteSymphony_%s' % name.capitalize()
-    url = 'http://%s.petitesymphony.com/' % name
-    globals()[classname] = make_scraper(classname,
-        name='PetiteSymphony/' + name.capitalize(),
-        url = url,
-        stripUrl = url + 'comic/%s',
-        imageSearch = _imageSearch,
-        prevSearch = _prevSearch,
-        multipleImagesPerStrip = True,
-        help='Index format: named number'
-    )
+from .common import _WordPressScraper
 
 
-add("djandora")
-add("generation17")
-add("knuckleup")
-add("kickinrad")
-add("orangegrind")
-add("rascals")
-add("sangria")
-add("seed")
+class PetiteSymphony(_BasicScraper):
+    imageSearch = compile(tagre("img", "src", r'(http://[a-z0-9]+\.petitesymphony\.com/files/comics/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'(http://[a-z0-9]+\.petitesymphony\.com/comic/[^"]+)', after="navi-prev"))
+    multipleImagesPerStrip = True
+    help = 'Index format: named number'
+
+    def __init__(self, name):
+        super(PetiteSymphony, self).__init__('PetiteSymphony/' +
+                                             name.capitalize())
+        self.url = 'http://%s.petitesymphony.com/' % name
+        self.stripUrl = self.url + 'comic/%s'
+
+    @classmethod
+    def getmodules(cls):
+        return [
+            cls("knuckleup"),
+            cls("kickinrad"),
+            cls("orangegrind"),
+            cls("rascals"),
+            cls("sangria"),
+            cls("seed"),
+        ]
+
+
+class ComicsBreak(_WordPressScraper):
+
+    def __init__(self, name):
+        super(ComicsBreak, self).__init__('ComicsBreak/' + name)
+        self.url = 'http://%s.comicsbreak.com/' % name.lower()
+
+    @classmethod
+    def getmodules(cls):
+        return [
+            cls("Djandora"),
+            cls("Generation17"),
+        ]

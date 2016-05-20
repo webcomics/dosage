@@ -16,9 +16,8 @@ class _WLPComics(_ParserScraper):
     starter = bounceStarter
     help = 'Index format: nnn'
 
-    @property
-    def name(self):
-        return 'WLP/' + super(_WLPComics, self).name
+    def __init__(self, name):
+        super(_WLPComics, self).__init__('WLP/' + name)
 
     def namer(self, image_url, page_url):
         return (page_url.rsplit('/', 1)[-1].split('.')[0] + '_' +

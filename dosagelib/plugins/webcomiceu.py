@@ -13,9 +13,8 @@ class _WebcomicEu(_ParserScraper):
     prevSearch = '//a[img[contains(@src, "navi-zurueck")]]'
     help = 'Index format: number'
 
-    @property
-    def name(self):
-        return 'WebcomicEu/' + super(_WebcomicEu, self).name
+    def __init__(self, name):
+        super(_WebcomicEu, self).__init__('WebcomicEu/' + name)
 
     @property
     def url(self):

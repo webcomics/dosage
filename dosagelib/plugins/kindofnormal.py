@@ -1,19 +1,27 @@
 # -*- coding: utf-8 -*-
-from dosagelib.helpers import indirectStarter
-from ..scraper import make_scraper, _ParserScraper
+# Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
+# Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
+
+from ..scraper import _ParserScraper
 
 
-def add(name, url):
-    attrs = dict(
-        name=name,
-        url='http://kindofnormal.com/' + url,
-        imageSearch='//article[1]//div[@class="box-content"]//img',
-        prevSearch='//a[@class="prev"]'
-    )
-    globals()[name] = make_scraper(name, _ParserScraper, **attrs)
+class KindOfNormal(_ParserScraper):
+    imageSearch = '//article[1]//div[@class="box-content"]//img'
+    prevSearch = '//a[@class="prev"]'
 
+    def __init__(self, name, url):
+        super(KindOfNormal, self).__init__(name)
+        self.url = 'http://kindofnormal.com/' + url
 
-add('MeAndDanielle', 'meanddanielle')
-add('TruthFacts', 'truthfacts')
-add('Wumo', 'wumo')
-add('Wulffmorgenthaler', 'wumo') # name in previous versions
+    @classmethod
+    def getmodules(cls):
+        return [
+            cls('MeAndDanielle', 'meanddanielle'),
+            cls('TruthFacts', 'truthfacts'),
+            cls('Wumo', 'wumo'),
+            # name in previous versions
+            cls('Wulffmorgenthaler', 'wumo'),
+        ]

@@ -15,9 +15,8 @@ class _Creators(_ParserScraper):
     latestSearch = '//div[contains(@class,"caption")]/a'
     starter = indirectStarter
 
-    @property
-    def name(self):
-        return 'Creators/' + super(_Creators, self).name
+    def __init__(self, name):
+        super(_Creators, self).__init__('Creators/' + name)
 
     @property
     def url(self):
