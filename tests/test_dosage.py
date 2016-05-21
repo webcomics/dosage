@@ -52,7 +52,7 @@ class TestDosage(object):
     def test_fetch_html_and_rss_2(self, tmpdir):
         run_with_options(["--numstrips", "2", "--baseurl", "bla",
                           "--basepath", str(tmpdir), "--output", "rss",
-                          "--output", "html", "--adult", "oglaf"])
+                          "--output", "html", "--adult", "TheThinHLine"])
 
     def test_fetch_indexed(self, tmpdir):
         run_with_options(["-n", "2", "-v", "-b", str(tmpdir), "xkcd:303"])
