@@ -22,18 +22,31 @@ class OctopusPie(_ParserScraper):
     help = 'Index format: yyyy-mm-dd/nnn-strip-name'
 
 
-class Oglaf(_BasicScraper):
+class Oglaf(_ParserScraper):
     url = 'http://oglaf.com/'
     stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://media\.oglaf\.com/comic/[^"]+)', before="strip"))
-    prevSearch = (
-      # first search for "next page" URLs
-      compile(tagre("a", "href", r'(/[^"]+/\d+/)') + tagre("div", "id", "nx")),
-      # then for "prev story"
-      compile(tagre("a", "href", r'(/[^"]+)') + tagre("div", "id", "pvs?")),
-    )
-    help = 'Index format: stripname'
+    imageSearch = '//img[@id="strip"]'
+    # search for "previous story" only
+    prevSearch = '//a[div[@id="pvs"]]'
+    # search for "next page"
+    nextSearch = '//a[div[@id="nx"]]'
+    multipleImagesPerStrip = True
     adult = True
+
+    def fetchUrls(self, url, data, search):
+        urls = []
+        urls.extend(super(Oglaf, self).fetchUrls(url, data, search))
+        if search == self.imageSearch:
+            try:
+                nexturls = self.fetchUrls(url, data, self.nextSearch)
+            except ValueError:
+                pass
+            else:
+                while nexturls and nexturls[0].startswith(url):
+                    data = self.getPage(nexturls[0])
+                    urls.extend(super(Oglaf, self).fetchUrls(nexturls, data, search))
+                    nexturls = self.fetchUrls(url, data, self.nextSearch)
+        return urls
 
 
 class OhJoySexToy(_WordPressScraper):
