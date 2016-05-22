@@ -52,8 +52,8 @@ class GoComicsUpdater(ComicListUpdater):
         self.handle_url('http://www.gocomics.com/explore/sherpa_list')
 
     def get_entry(self, name, url):
-        return u"class GC%s(_GoComics%s):\n    path = %r" % (
-            name, 'Es' if 'espanol/' in url else '', url[1:])
+        langopt = ", 'es'" if 'espanol/' in url else ''
+        return u"cls('%s', '%s'%s)," % (name, url[1:], langopt)
 
 
 if __name__ == '__main__':

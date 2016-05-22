@@ -9,7 +9,7 @@ from ..scraper import _ParserScraper
 from ..helpers import bounceStarter
 
 
-class _GoComics(_ParserScraper):
+class GoComics(_ParserScraper):
     url = 'http://www.gocomics.com/'
     imageSearch = ('//div/img[@class="strip"]',
                    '//p[@class="feature_item"]/img[@class="strip"]')
@@ -18,16 +18,16 @@ class _GoComics(_ParserScraper):
     starter = bounceStarter
     help = 'Index format: yyyy/mm/dd'
 
-    def __init__(self, name):
-        super(_GoComics, self).__init__('GoComics/' + name[2:])
-
-    @property
-    def url(self):
-        return 'http://www.gocomics.com/' + self.path
+    def __init__(self, name, path, lang=None):
+        super(GoComics, self).__init__('GoComics/' + name)
+        self.url = 'http://www.gocomics.com/' + path
+        self.shortname = name
+        if lang:
+            self.lang = lang
 
     def namer(self, image_url, page_url):
         prefix, year, month, day = page_url.rsplit('/', 3)
-        return "%s_%s%s%s.gif" % (self.__class__.__name__[2:], year, month, day)
+        return "%s_%s%s%s.gif" % (self.shortname, year, month, day)
 
     def getIndexStripUrl(self, index):
         return self.url + self.path + '/%s' % index
@@ -36,3449 +36,872 @@ class _GoComics(_ParserScraper):
         """Skip pages without images."""
         return data.xpath('//img[contains(@src, "content-error-missing")]')
 
-
-class _GoComicsEs(_GoComics):
-    lang = 'es'
-
-
-# old comics removed from the listing
-class GCAbnormalTruth(_GoComics):
-    path = 'abnormal-truth'
-
-
-class GCABomb(_GoComics):
-    path = 'a-bomb'
-
-
-class GCABootsAndPupComic(_GoComics):
-    path = 'a-boots-and-pup-comic'
-
-
-class GCAdventuresofDaisy(_GoComics):
-    path = 'Adventures-of-Daisy'
-
-
-class GCAdventuresOfMartyAndTurkey(_GoComics):
-    path = 'marty-and-turkey'
-
-
-class GCAdventuresofMikeAndSimon(_GoComics):
-    path = 'adventures-of-mike-and-simon'
-
-
-class GCAnythingGoes(_GoComics):
-    path = 'anything-goes'
-
-
-class GCBarkingCrayon(_GoComics):
-    path = 'barking-crayon'
-
-
-class GCBenAndSeymour(_GoComics):
-    path = 'ben-seymour'
-
-
-class GCBERSERKALERT(_GoComics):
-    path = 'berserk-alert'
-
-
-class GCBestInShow(_GoComics):
-    path = 'best-in-show'
-
-
-class GCBobtheGroanUP(_GoComics):
-    path = 'bob-the-groanup'
-
-
-class GCCalAndOzz(_GoComics):
-    path = 'cal-and-ozz'
-
-
-class GCCandyPills(_GoComics):
-    path = 'candy-pills'
-
-
-class GCCartertoons(_GoComics):
-    path = 'cartertoons'
-
-
-class GCCatsAtWork(_GoComics):
-    path = 'cats-at-work'
-
-
-class GCChasingUnicorns(_GoComics):
-    path = 'chasing-unicorns'
-
-
-class GCChubbyGirlComics(_GoComics):
-    path = 'chubbygirlcomics'
-
-
-class GCClassifudds(_GoComics):
-    path = 'classifudds'
-
-
-class GCCockroachComix(_GoComics):
-    path = 'cockroachcomix'
-
-
-class GCColonelKernel(_GoComics):
-    path = 'colonel-kernel'
-
-
-class GCCowSheepandaGnomeNamedHelga(_GoComics):
-    path = 'cow-sheep-and-a-gnome-named-helga'
-
-
-class GCCoyoteVille(_GoComics):
-    path = 'coyteville'
-
-
-class GCCrooksville(_GoComics):
-    path = 'crooksville'
-
-
-class GCDabneyandDad(_GoComics):
-    path = 'dabney-and-dad'
-
-
-class GCDialHforHBomb(_GoComics):
-    path = 'dial-h-for-h-bomb'
-
-
-class GCDiligentCity(_GoComics):
-    path = 'diligent-city'
-
-
-class GCDitzAbledPrincess(_GoComics):
-    path = 'ditzabled-princess'
-
-
-class GCDogsDucksandAliens(_GoComics):
-    path = 'dogs-ducks-and-aliens'
-
-
-class GCDoodleDaysComics(_GoComics):
-    path = 'doodle-days'
-
-
-class GCEBEJeebie(_GoComics):
-    path = 'ebe-jeebie'
-
-
-class GCEDITORIALPASTANDPRESENT(_GoComics):
-    path = 'editorial-past-and-present'
-
-
-class GCElephantintheRoom(_GoComics):
-    path = 'elephant-in-the-room'
-
-
-class GCElfandMotorbelly(_GoComics):
-    path = 'elf-and-motorbelly'
-
-
-class GCEngagAndNevets(_GoComics):
-    path = 'engag-nevets'
-
-
-class GCEspressoCity(_GoComics):
-    path = 'Espresso-City'
-
-
-class GCEttoreandBaldo(_GoComics):
-    path = 'ettore-and-baldo'
-
-
-class GCFantasticMegaLeague(_GoComics):
-    path = 'fantastiteam'
-
-
-class GCFarcesofNature(_GoComics):
-    path = 'farces-of-nature'
-
-
-class GCFeatherweight(_GoComics):
-    path = 'featherweight'
-
-
-class GCFleasonFlick(_GoComics):
-    path = 'fleasonflick'
-
-
-class GCFrizziToons(_GoComics):
-    path = 'frizzitoons'
-
-
-class GCFundayMorning(_GoComics):
-    path = 'funday-morning'
-
-
-class GCGatorsAndSuch(_GoComics):
-    path = 'gators-and-such'
-
-
-class GCGenerationMute(_GoComics):
-    path = 'generation-mute'
-
-
-class GCGetAGrip(_GoComics):
-    path = 'get-a-grip'
-
-
-class GCHanginOut(_GoComics):
-    path = 'hangin-out'
-
-
-class GCHanktheSock(_GoComics):
-    path = 'hank-the-sock'
-
-
-class GCHbenson7(_GoComics):
-    path = 'hbenson7'
-
-
-class GCHeadComics(_GoComics):
-    path = 'head-comics'
-
-
-class GCHeavenlyNostrils(_GoComics):
-    path = 'heavenly-nostrils'
-
-
-class GCHolySchnark(_GoComics):
-    path = 'holy-schnark!'
-
-
-class GCHumblebeeandBob(_GoComics):
-    path = 'humblebee-and-bob'
-
-
-class GCHumoresque(_GoComics):
-    path = 'humoresque'
-
-
-class GCImaDillo(_GoComics):
-    path = 'i-m-a-dillo'
-
-
-class GCImTellingMom(_GoComics):
-    path = 'telling-mom'
-
-
-class GCIsleofEx(_GoComics):
-    path = 'isle-of-ex'
-
-
-class GCJillpokeBohemia(_GoComics):
-    path = 'jillpoke-bohemia'
-
-
-class GCJordanandBentley(_GoComics):
-    path = 'jordan-and-bentley'
-
-
-class GCKirbysTreehouse(_GoComics):
-    path = 'kirbys-treehouse'
-
-
-class GCKozmooftheCosmos(_GoComics):
-    path = 'kozmoofthecosmos'
-
-
-class GCLardWantsWorldPeace(_GoComics):
-    path = 'lard-wants-world-peace'
-
-
-class GCLeadbellies(_GoComics):
-    path = 'leadbellies'
-
-
-class GCLeGooseyLu(_GoComics):
-    path = 'LeGoosey-Lu'
-
-
-class GCLIGHTERSIDE(_GoComics):
-    path = 'lighter-side'
-
-
-class GCLostInTranslation(_GoComics):
-    path = 'lost-in-translation'
-
-
-class GCLucasLuminous(_GoComics):
-    path = 'lucas-luminous'
-
-
-class GCMagnificatzOld(_GoComics):
-    path = 'magnificatz-sherpa'
-
-
-class GCMarkonpaper(_GoComics):
-    path = 'mark-on-paper'
-
-
-class GCMaryBWary(_GoComics):
-    path = 'mary-b-wary'
-
-
-class GCMaximus(_GoComics):
-    path = 'maximus'
-
-
-class GCMick(_GoComics):
-    path = 'mick'
-
-
-class GCMixedMedications(_GoComics):
-    path = 'mixedmedications'
-
-
-class GCMortimer(_GoComics):
-    path = 'mortimer'
-
-
-class GCMrMorris(_GoComics):
-    path = 'mr-morris'
-
-
-class GCMyCage(_GoComics):
-    path = 'mycage'
-
-
-class GCMyGuardianGrandpa(_GoComics):
-    path = 'my-guardian-grandpa'
-
-
-class GCNeatStep(_GoComics):
-    path = 'neatstep'
-
-
-class GCNeighborhoodZone(_GoComics):
-    path = 'neightborhood-zone'
-
-
-class GCNobodysHome(_GoComics):
-    path = 'nobodys-home'
-
-
-class GCNoPlaceLikeHolmes(_GoComics):
-    path = 'no-place-like-holmes'
-
-
-class GCOat(_GoComics):
-    path = 'oat'
-
-
-class GCObamaandtheFatman(_GoComics):
-    path = 'obama-and-the-fatman'
-
-
-class GCOntheQuad(_GoComics):
-    path = 'on-the-quad'
-
-
-class GCOrangesareFunny(_GoComics):
-    path = 'oranges-are-funny'
-
-
-class GCOutnumbered(_GoComics):
-    path = 'outnumbered'
-
-
-class GCPamosWorld(_GoComics):
-    path = 'pamos-world'
-
-
-class GCParisDoodles(_GoComics):
-    path = 'mo-willems-paris-doodles'
-
-
-class GCPeanizles(_GoComics):
-    path = 'peanizles'
-
-
-class GCPetFood(_GoComics):
-    path = 'pet-food'
-
-
-class GCPipethePelican(_GoComics):
-    path = 'pipe-the-pelican'
-
-
-class GCPlasticBabyHeadsfromOuterSpace(_GoComics):
-    path = 'plastic-babyheads'
-
-
-class GCPlentyofPenguins(_GoComics):
-    path = 'plenty-of-penguins'
-
-
-class GCPuppets(_GoComics):
-    path = 'puppets'
-
-
-class GCPutz(_GoComics):
-    path = 'putz'
-
-
-class GCQuestionsForKids(_GoComics):
-    path = 'questions-for-kids'
-
-
-class GCRackafracka(_GoComics):
-    path = 'rackafracka'
-
-
-class GCRegularCreatures(_GoComics):
-    path = 'regular-creatures'
-
-
-class GCRogueSymmetry(_GoComics):
-    path = 'rogue_symmetry'
-
-
-class GCRosy(_GoComics):
-    path = 'rosy'
-
-
-class GCSabine(_GoComics):
-    path = 'sabine'
-
-
-class GCSCAIRYTALESTheNotSoScaryFairyTales(_GoComics):
-    path = 'Scairy-Tales:-the-not-so-scary-fairy-tales!'
-
-
-class GCSecondPrize(_GoComics):
-    path = 'secondprize'
-
-
-class GCSincerelyBeatrice(_GoComics):
-    path = 'sincerely-beatrice'
-
-
-class GCSkooled(_GoComics):
-    path = 'skooled'
-
-
-class GCSmallNerdyCreatures(_GoComics):
-    path = 'small-nerdy-creatures'
-
-
-class GCSNAFU(_GoComics):
-    path = 'snafu'
-
-
-class GCSpaceNutz(_GoComics):
-    path = 'space-nutz'
-
-
-class GCSPACESLUGS(_GoComics):
-    path = 'spaceslugs'
-
-
-class GCSpaceTimeFunnies(_GoComics):
-    path = 'spacetimefunnies'
-
-
-class GCSpinCrazy(_GoComics):
-    path = 'spin-crazy'
-
-
-class GCSTEPDAD(_GoComics):
-    path = 'stepdad'
-
-
-class GCStookie(_GoComics):
-    path = 'Stookie'
-
-
-class GCSuburbanWilderness(_GoComics):
-    path = 'suburban-wilderness'
-
-
-class GCSuckerHeadSmack(_GoComics):
-    path = 'suckerhead-smack'
-
-
-class GCTheAdventuresofHeromanGuy(_GoComics):
-    path = 'adventures-of-heroman-guy'
-
-
-class GCTheEdperiment(_GoComics):
-    path = 'the-edperiment'
-
-
-class GCTheFamilyBlend(_GoComics):
-    path = 'the-family-blend'
-
-
-class GCTheFruitBowl(_GoComics):
-    path = 'thefruitbowl'
-
-
-class GCTheGoldenKid(_GoComics):
-    path = 'golden-kid'
-
-
-class GCTheInsolentLemon(_GoComics):
-    path = 'the-insolent-lemon'
-
-
-class GCTheLightedLab(_GoComics):
-    path = 'the-lighted-lab'
-
-
-class GCTheLilMiesters(_GoComics):
-    path = 'the-lil-miesters'
-
-
-class GCTheOdderLimits(_GoComics):
-    path = 'the-odder-limits'
-
-
-class GCTHESILVERLINING(_GoComics):
-    path = 'silver-lining'
-
-
-class GCTheSingleDadDiaries(_GoComics):
-    path = 'single-dad-diaries'
-
-
-class GCTheVernalPool(_GoComics):
-    path = 'vernal-pool'
-
-
-class GCTheWinyChild(_GoComics):
-    path = 'the-winy-child'
-
-
-class GCThrompTM(_GoComics):
-    path = 'thromp'
-
-
-class GCTnCComics(_GoComics):
-    path = 'tnc-comics'
-
-
-class GCToBeNamed(_GoComics):
-    path = 'to-be-named'
-
-
-class GCTonyAuth(_GoComics):
-    path = 'tonyauth'
-
-
-class GCToocrazy(_GoComics):
-    path = 'too-crazy'
-
-
-class GCTwitchyOToole(_GoComics):
-    path = 'twitchy-otoole'
-
-
-class GCTwoBits(_GoComics):
-    path = 'two-bits'
-
-
-class GCVernscartoons(_GoComics):
-    path = 'vernscartoons'
-
-
-class GCWayOutInLeftField(_GoComics):
-    path = 'Way-Out-In-Left-Field'
-
-
-class GCWelcometoFriendly(_GoComics):
-    path = 'welcome-to-friendly'
-
-
-class GCWendlesLife(_GoComics):
-    path = 'wendleslife'
-
-
-class GCWhatcatscanandcantdo(_GoComics):
-    path = 'whatcatscanandcantdo'
-
-
-class GCWillSays(_GoComics):
-    path = 'will-says'
-
-
-class GCWillyWho(_GoComics):
-    path = 'willy-who'
-
-
-class GCWindingRoads(_GoComics):
-    path = 'winding-roads'
-
-
-class GCYouGuysAreMyFriendsTheComic(_GoComics):
-    path = 'you-guys-are-my-friends'
-
-
-# do not edit anything below since these entries are generated from
-# scripts/update_plugins.sh
-# START AUTOUPDATE
-
-
-class GC060(_GoComics):
-    path = '0-60'
-
-
-class GC1AndDone(_GoComics):
-    path = '1-and-done'
-
-
-class GC2CowsAndAChicken(_GoComics):
-    path = '2cowsandachicken'
-
-
-class GC9ChickweedLane(_GoComics):
-    path = '9chickweedlane'
-
-
-class GC9To5(_GoComics):
-    path = '9to5'
-
-
-class GCAaronGuile(_GoComics):
-    path = 'aaron-guile'
-
-
-class GCABitSketch(_GoComics):
-    path = 'a-bit-sketch'
-
-
-class GCACMEINKD(_GoComics):
-    path = 'acme-inkd'
-
-
-class GCAcornPark(_GoComics):
-    path = 'acorn-park'
-
-
-class GCAdamAtHome(_GoComics):
-    path = 'adamathome'
-
-
-class GCAdmiralSquirt(_GoComics):
-    path = 'admiral-squirt'
-
-
-class GCAdultChildren(_GoComics):
-    path = 'adult-children'
-
-
-class GCAgentGates(_GoComics):
-    path = 'agent-gates'
-
-
-class GCAgnes(_GoComics):
-    path = 'agnes'
-
-
-class GCAJAndMagnus(_GoComics):
-    path = 'aj-and-magnus'
-
-
-class GCAlisonWard(_GoComics):
-    path = 'alison-ward'
-
-
-class GCAlleyOop(_GoComics):
-    path = 'alley-oop'
-
-
-class GCAllInGoodTime(_GoComics):
-    path = 'all-in-good-time'
-
-
-class GCAmandaTheGreat(_GoComics):
-    path = 'amanda-the-great'
-
-
-class GCAmaZnEvents(_GoComics):
-    path = 'amaznevents'
-
-
-class GCAndertoons(_GoComics):
-    path = 'andertoons'
-
-
-class GCAndNow(_GoComics):
-    path = 'and-now'
-
-
-class GCAndyCapp(_GoComics):
-    path = 'andycapp'
-
-
-class GCAnecdote(_GoComics):
-    path = 'anecdote'
-
-
-class GCAngryLittleGirls(_GoComics):
-    path = 'angry-little-girls'
-
-
-class GCAnimalCrackers(_GoComics):
-    path = 'animalcrackers'
-
-
-class GCAnimalMitchell(_GoComics):
-    path = 'animal-mitchell'
-
-
-class GCAnnie(_GoComics):
-    path = 'annie'
-
-
-class GCAppleCreekComics(_GoComics):
-    path = 'apple-creek'
-
-
-class GCArloAndJanis(_GoComics):
-    path = 'arloandjanis'
-
-
-class GCAskACat(_GoComics):
-    path = 'ask-a-cat'
-
-
-class GCAskShagg(_GoComics):
-    path = 'askshagg'
-
-
-class GCATasteOfTimes(_GoComics):
-    path = 'a-taste-of-times'
-
-
-class GCAtTheZoo(_GoComics):
-    path = 'at-the-zoo'
-
-
-class GCAuntyAcid(_GoComics):
-    path = 'aunty-acid'
-
-
-class GCBackInTheDay(_GoComics):
-    path = 'backintheday'
-
-
-class GCBackToBC(_GoComics):
-    path = 'back-to-bc'
-
-
-class GCBadlands(_GoComics):
-    path = 'badlands'
-
-
-class GCBadMachinery(_GoComics):
-    path = 'bad-machinery'
-
-
-class GCBadReporter(_GoComics):
-    path = 'badreporter'
-
-
-class GCBaldo(_GoComics):
-    path = 'baldo'
-
-
-class GCBaldoEnEspaol(_GoComicsEs):
-    path = 'espanol/baldoespanol'
-
-
-class GCBallardStreet(_GoComics):
-    path = 'ballardstreet'
-
-
-class GCBananaTriangle(_GoComics):
-    path = 'banana-triangle'
-
-
-class GCBarkeaterLake(_GoComics):
-    path = 'barkeaterlake'
-
-
-class GCBarneyAndClyde(_GoComics):
-    path = 'barneyandclyde'
-
-
-class GCBasicInstructions(_GoComics):
-    path = 'basicinstructions'
-
-
-class GCBatchRejection(_GoComics):
-    path = 'batch-rejection'
-
-
-class GCBazoobee(_GoComics):
-    path = 'bazoobee'
-
-
-class GCBC(_GoComics):
-    path = 'bc'
-
-
-class GCBCEnEspaol(_GoComicsEs):
-    path = 'espanol/bcespanol'
-
-
-class GCBeanieTheBrownie(_GoComics):
-    path = 'beanie-the-brownie'
-
-
-class GCBeardo(_GoComics):
-    path = 'beardo'
-
-
-class GCBeMisery(_GoComics):
-    path = 'bemisery'
-
-
-class GCBen(_GoComics):
-    path = 'ben'
-
-
-class GCBeneathTheFerns(_GoComics):
-    path = 'beneath-the-ferns'
-
-
-class GCBenitinYEneas(_GoComicsEs):
-    path = 'espanol/muttandjeffespanol'
-
-
-class GCBentObjects(_GoComics):
-    path = 'bent-objects'
-
-
-class GCBergerAndWyse(_GoComics):
-    path = 'berger-and-wyse'
-
-
-class GCBerkeleyMews(_GoComics):
-    path = 'berkeley-mews'
-
-
-class GCBetty(_GoComics):
-    path = 'betty'
-
-
-class GCBewley(_GoComics):
-    path = 'bewley'
-
-
-class GCBiffAndRiley(_GoComics):
-    path = 'biff-and-riley'
-
-
-class GCBigJim(_GoComics):
-    path = 'bigjim'
-
-
-class GCBigNate(_GoComics):
-    path = 'bignate'
-
-
-class GCBigNateFirstClass(_GoComics):
-    path = 'big-nate-first-class'
-
-
-class GCBigTop(_GoComics):
-    path = 'bigtop'
-
-
-class GCBiographic(_GoComics):
-    path = 'biographic'
-
-
-class GCBirdbrains(_GoComics):
-    path = 'birdbrains'
-
-
-class GCBleekerTheRechargeableDog(_GoComics):
-    path = 'bleeker'
-
-
-class GCBliss(_GoComics):
-    path = 'bliss'
-
-
-class GCBloomCounty(_GoComics):
-    path = 'bloomcounty'
-
-
-class GCBloomCounty2015(_GoComics):
-    path = 'bloom-county'
-
-
-class GCBluebonnets(_GoComics):
-    path = 'cowsandstuff'
-
-
-class GCBlueSkiesToons(_GoComics):
-    path = 'blue-skies-toons'
-
-
-class GCBobGorrell(_GoComics):
-    path = 'bobgorrell'
-
-
-class GCBobTheSquirrel(_GoComics):
-    path = 'bobthesquirrel'
-
-
-class GCBoltsAndNuts(_GoComics):
-    path = 'bolts-and-nuts'
-
-
-class GCBoNanas(_GoComics):
-    path = 'bonanas'
-
-
-class GCBoomerangs(_GoComics):
-    path = 'boomerangs'
-
-
-class GCBork(_GoComics):
-    path = 'bork'
-
-
-class GCBottAuto(_GoComics):
-    path = 'bott-auto'
-
-
-class GCBottomliners(_GoComics):
-    path = 'bottomliners'
-
-
-class GCBoundAndGagged(_GoComics):
-    path = 'boundandgagged'
-
-
-class GCBradsPit(_GoComics):
-    path = 'brads-pit'
-
-
-class GCBrainSquirts(_GoComics):
-    path = 'brain-squirts'
-
-
-class GCBreakingCatNews(_GoComics):
-    path = 'breaking-cat-news'
-
-
-class GCBreakOfDay(_GoComics):
-    path = 'break-of-day'
-
-
-class GCBrevity(_GoComics):
-    path = 'brevity'
-
-
-class GCBrewsterRockit(_GoComics):
-    path = 'brewsterrockit'
-
-
-class GCBrianMcFadden(_GoComics):
-    path = 'brian-mcfadden'
-
-
-class GCBroomHilda(_GoComics):
-    path = 'broomhilda'
-
-
-class GCBully(_GoComics):
-    path = 'bully'
-
-
-class GCBuni(_GoComics):
-    path = 'buni'
-
-
-class GCBUNS(_GoComics):
-    path = 'buns'
-
-
-class GCBushyTales(_GoComics):
-    path = 'bushy-tales'
-
-
-class GCCafConLeche(_GoComics):
-    path = 'cafeconleche'
-
-
-class GCCAFFEINATED(_GoComics):
-    path = 'CAFFEINATED'
-
-
-class GCCalvinAndHobbes(_GoComics):
-    path = 'calvinandhobbes'
-
-
-class GCCalvinAndHobbesEnEspaol(_GoComicsEs):
-    path = 'espanol/calvinandhobbesespanol'
-
-
-class GCCandacenCompany(_GoComics):
-    path = 'candace-n-company'
-
-
-class GCCandorville(_GoComics):
-    path = 'candorville'
-
-
-class GCCapsulasMedicas(_GoComicsEs):
-    path = 'espanol/capsulas-medicas'
-
-
-class GCCarteBlanche(_GoComics):
-    path = 'carte-blanche'
-
-
-class GCCathy(_GoComics):
-    path = 'cathy'
-
-
-class GCCestLaVie(_GoComics):
-    path = 'cestlavie'
-
-
-class GCChanLowe(_GoComics):
-    path = 'chanlowe'
-
-
-class GCCharmysArmy(_GoComics):
-    path = 'charmys-army'
-
-
-class GCCheapThrillsCuisine(_GoComics):
-    path = 'cheap-thrills-cuisine'
-
-
-class GCChipBok(_GoComics):
-    path = 'chipbok'
-
-
-class GCChrisBritt(_GoComics):
-    path = 'chrisbritt'
-
-
-class GCChuckleBros(_GoComics):
-    path = 'chucklebros'
-
-
-class GCCitizenDog(_GoComics):
-    path = 'citizendog'
-
-
-class GCClayBennett(_GoComics):
-    path = 'claybennett'
-
-
-class GCClayJones(_GoComics):
-    path = 'clayjones'
-
-
-class GCClearBlueWater(_GoComics):
-    path = 'clearbluewater'
-
-
-class GCCleats(_GoComics):
-    path = 'cleats'
-
-
-class GCCleoAndCompany(_GoComics):
-    path = 'cleo-and-company'
-
-
-class GCCloseToHome(_GoComics):
-    path = 'closetohome'
-
-
-class GCCoffeeShopTidbits(_GoComics):
-    path = 'coffee-shop-tidbits'
-
-
-class GCCommitted(_GoComics):
-    path = 'committed'
-
-
-class GCComputoon(_GoComics):
-    path = 'compu-toon'
-
-
-class GCConnieToTheWonnie(_GoComics):
-    path = 'connie-to-the-wonnie'
-
-
-class GCCooper(_GoComics):
-    path = 'cooper'
-
-
-class GCCornered(_GoComics):
-    path = 'cornered'
-
-
-class GCCourageousManAdventures(_GoComics):
-    path = 'courageous-man-adventures'
-
-
-class GCCowAndBoyClassics(_GoComics):
-    path = 'cowandboy'
-
-
-class GCCowTown(_GoComics):
-    path = 'cowtown'
-
-
-class GCCrumb(_GoComics):
-    path = 'crumb'
-
-
-class GCCulDeSac(_GoComics):
-    path = 'culdesac'
-
-
-class GCDaddingBadly(_GoComics):
-    path = 'dadding-badly'
-
-
-class GCDaddysHome(_GoComics):
-    path = 'daddyshome'
-
-
-class GCDadsDay(_GoComics):
-    path = 'dads-day'
-
-
-class GCDanaSummers(_GoComics):
-    path = 'danasummers'
-
-
-class GCDanWasserman(_GoComics):
-    path = 'danwasserman'
-
-
-class GCDarkSideOfTheHorse(_GoComics):
-    path = 'darksideofthehorse'
-
-
-class GCDarrinBell(_GoComics):
-    path = 'darrin-bell'
-
-
-class GCDBCartoons(_GoComics):
-    path = 'db-cartoons'
-
-
-class GCDeepDarkFears(_GoComics):
-    path = 'deep-dark-fears'
-
-
-class GCDevinCraneComicStripGhostwriter(_GoComics):
-    path = 'devincranecomicstripghostwriter'
-
-
-class GCDiamondLil(_GoComics):
-    path = 'diamondlil'
-
-
-class GCDickTracy(_GoComics):
-    path = 'dicktracy'
-
-
-class GCDilbertClassics(_GoComics):
-    path = 'dilbert-classics'
-
-
-class GCDilbertEnEspaol(_GoComicsEs):
-    path = 'espanol/dilbert-en-espanol'
-
-
-class GCDinosaurComics(_GoComics):
-    path = 'dinosaur-comics'
-
-
-class GCDogEatDoug(_GoComics):
-    path = 'dogeatdoug'
-
-
-class GCDoghouseInYourSoul(_GoComics):
-    path = 'doghouse-in-your-soul'
-
-
-class GCDogsOfCKennel(_GoComics):
-    path = 'dogsofckennel'
-
-
-class GCDoingTime(_GoComics):
-    path = 'doingtime'
-
-
-class GCDomesticAbuse(_GoComics):
-    path = 'domesticabuse'
-
-
-class GCDonBrutus(_GoComicsEs):
-    path = 'espanol/don-brutus'
-
-
-class GCDontPickTheFlowers(_GoComics):
-    path = 'dont-pick-the-flowers'
-
-
-class GCDoodleTown(_GoComics):
-    path = 'doodle-town'
-
-
-class GCDoonesbury(_GoComics):
-    path = 'doonesbury'
-
-
-class GCDorrisMcComics(_GoComics):
-    path = 'dorris-mccomics'
-
-
-class GCDrabble(_GoComics):
-    path = 'drabble'
-
-
-class GCDragin(_GoComics):
-    path = 'dragin'
-
-
-class GCDragonGirl(_GoComics):
-    path = 'dragon-girl'
-
-
-class GCDrewSheneman(_GoComics):
-    path = 'drewsheneman'
-
-
-class GCDrive(_GoComics):
-    path = 'drive'
-
-
-class GCDromo(_GoComics):
-    path = 'dro-mo'
-
-
-class GCDudeAndDude(_GoComics):
-    path = 'dudedude'
-
-
-class GCDumbQuestionBadAnswer(_GoComics):
-    path = 'dumb-question-bad-answer'
-
-
-class GCDungeonHordes(_GoComics):
-    path = 'dungeon-hordes'
-
-
-class GCDustSpecks(_GoComics):
-    path = 'dust-specks'
-
-
-class GCDutchnPals(_GoComics):
-    path = 'dutch-n-pals'
-
-
-class GCDysconnected(_GoComics):
-    path = 'dysconnected'
-
-
-class GCEconogirl(_GoComics):
-    path = 'econogirl'
-
-
-class GCEdgeCity(_GoComics):
-    path = 'edge-city'
-
-
-class GCEdgeOfAdventure(_GoComics):
-    path = 'edge-of-adventure'
-
-
-class GCEek(_GoComics):
-    path = 'eek'
-
-
-class GCEightballEyeball(_GoComics):
-    path = 'eightball-eyeball'
-
-
-class GCElCafDePoncho(_GoComicsEs):
-    path = 'espanol/poochcafeespanol'
-
-
-class GCEleriMaiHarrisCartoons(_GoComics):
-    path = 'eleri-mai-harris-cartoons'
-
-
-class GCElmo(_GoComics):
-    path = 'elmo'
-
-
-class GCElMundoDeBeakman(_GoComics):
-    path = 'beakmanespanol'
-
-
-class GCEmmyLou(_GoComics):
-    path = 'emmy-lou'
-
-
-class GCEndtown(_GoComics):
-    path = 'endtown'
-
-
-class GCEricTheCircle(_GoComics):
-    path = 'eric-the-circle'
-
-
-class GCEyebeam(_GoComics):
-    path = 'eyebeam'
-
-
-class GCFacesOfTheNewsByKerryWaghorn(_GoComics):
-    path = 'facesinthenews'
-
-
-class GCFamilyTree(_GoComics):
-    path = 'familytree'
-
-
-class GCFamousAndNotSoFamousQuotes(_GoComics):
-    path = 'famous-and-not-so-famous-quotes'
-
-
-class GCFarcus(_GoComics):
-    path = 'farcus'
-
-
-class GCFarOut(_GoComics):
-    path = 'far-out'
-
-
-class GCFatCats(_GoComics):
-    path = 'fat-cats'
-
-
-class GCFatherOfTheBrood(_GoComics):
-    path = 'father-of-the-brood'
-
-
-class GCFloAndFriends(_GoComics):
-    path = 'floandfriends'
-
-
-class GCFloydAndTony(_GoComics):
-    path = 'floyd-and-tony'
-
-
-class GCFMinus(_GoComics):
-    path = 'fminus'
-
-
-class GCFoolishMortals(_GoComics):
-    path = 'foolish-mortals'
-
-
-class GCForBetterOrForWorse(_GoComics):
-    path = 'forbetterorforworse'
-
-
-class GCForHeavensSake(_GoComics):
-    path = 'forheavenssake'
-
-
-class GCFortKnox(_GoComics):
-    path = 'fortknox'
-
-
-class GCFourEyes(_GoComics):
-    path = 'four-eyes'
-
-
-class GCFowlLanguage(_GoComics):
-    path = 'fowl-language'
-
-
-class GCFoxTrot(_GoComics):
-    path = 'foxtrot'
-
-
-class GCFoxTrotClassics(_GoComics):
-    path = 'foxtrotclassics'
-
-
-class GCFoxTrotEnEspaol(_GoComicsEs):
-    path = 'espanol/foxtrotespanol'
-
-
-class GCFrancis(_GoComics):
-    path = 'francis'
-
-
-class GCFrankAndErnest(_GoComics):
-    path = 'frank-and-ernest'
-
-
-class GCFrankAndSteinway(_GoComics):
-    path = 'frank-and-steinway'
-
-
-class GCFrankieComics(_GoComics):
-    path = 'frankie-comics'
-
-
-class GCFrazz(_GoComics):
-    path = 'frazz'
-
-
-class GCFredBasset(_GoComics):
-    path = 'fredbasset'
-
-
-class GCFredBassetEnEspaol(_GoComicsEs):
-    path = 'espanol/fredbassetespanol'
-
-
-class GCFreeRange(_GoComics):
-    path = 'freerange'
-
-
-class GCFreshlySqueezed(_GoComics):
-    path = 'freshlysqueezed'
-
-
-class GCFriedCritter(_GoComics):
-    path = 'fried-critter'
-
-
-class GCFrogApplause(_GoComics):
-    path = 'frogapplause'
-
-
-class GCFromTheMoWillemsSketchbook(_GoComics):
-    path = 'from-the-mo-willems-sketchbook'
-
-
-class GCGarciaCartoonCo(_GoComics):
-    path = 'garcia-cartoon-co'
-
-
-class GCGarfield(_GoComics):
-    path = 'garfield'
-
-
-class GCGarfieldEnEspaol(_GoComicsEs):
-    path = 'espanol/garfieldespanol'
-
-
-class GCGarfieldMinusGarfield(_GoComics):
-    path = 'garfieldminusgarfield'
-
-
-class GCGaryMarkstein(_GoComics):
-    path = 'garymarkstein'
-
-
-class GCGaryVarvel(_GoComics):
-    path = 'garyvarvel'
-
-
-class GCGasolineAlley(_GoComics):
-    path = 'gasolinealley'
-
-
-class GCGaturro(_GoComicsEs):
-    path = 'espanol/gaturro'
-
-
-class GCGeech(_GoComics):
-    path = 'geech'
-
-
-class GCGentleCreatures(_GoComics):
-    path = 'gentle-creatures'
-
-
-class GCGetALife(_GoComics):
-    path = 'getalife'
-
-
-class GCGetFuzzy(_GoComics):
-    path = 'getfuzzy'
-
-
-class GCGil(_GoComics):
-    path = 'gil'
-
-
-class GCGilThorp(_GoComics):
-    path = 'gilthorp'
-
-
-class GCGingerMeggs(_GoComics):
-    path = 'gingermeggs'
-
-
-class GCGingerMeggsEnEspaol(_GoComicsEs):
-    path = 'espanol/gingermeggsespanol'
-
-
-class GCGIRTH(_GoComics):
-    path = 'girth'
-
-
-class GCGlasbergenCartoons(_GoComics):
-    path = 'glasbergen-cartoons'
-
-
-class GCGlennMcCoy(_GoComics):
-    path = 'glennmccoy'
-
-
-class GCGManWebcomics(_GoComics):
-    path = 'g-man-webcomics'
-
-
-class GCGoats(_GoComics):
-    path = 'goats'
-
-
-class GCGoComicsFanArt(_GoComics):
-    path = 'fan-art'
-
-
-class GCGraffiti(_GoComics):
-    path = 'graffiti'
-
-
-class GCGramDragon(_GoComics):
-    path = 'gramdragon'
-
-
-class GCGrandAvenue(_GoComics):
-    path = 'grand-avenue'
-
-
-class GCGrandmaSnoops(_GoComics):
-    path = 'grandmasnoops'
-
-
-class GCGrannyAnny(_GoComics):
-    path = 'granny-anny'
-
-
-class GCGravy(_GoComics):
-    path = 'gravy'
-
-
-class GCGrayMatters(_GoComics):
-    path = 'gray-matters'
-
-
-class GCGreenHumour(_GoComics):
-    path = 'green-humour'
-
-
-class GCGreenPieces(_GoComics):
-    path = 'green-pieces'
-
-
-class GCGunstonStreet(_GoComics):
-    path = 'gunston-street'
-
-
-class GCHaikuEwe(_GoComics):
-    path = 'haikuewe'
-
-
-class GCHalfFull(_GoComics):
-    path = 'half-full'
-
-
-class GCHalfFullEnEspaol(_GoComicsEs):
-    path = 'espanol/half-full-espanol'
-
-
-class GCHallEditorialCartoons(_GoComics):
-    path = 'hall-editorial-cartoons'
-
-
-class GCHamShears(_GoComics):
-    path = 'ham-shears'
-
-
-class GCHankAndDalesOurWorld(_GoComics):
-    path = 'hank-and-dales-our-world'
-
-
-class GCHaphazardHumor(_GoComics):
-    path = 'haphazard-humor'
-
-
-class GCHarambeeHills(_GoComics):
-    path = 'harambeehills'
-
-
-class GCHeadcheese(_GoComics):
-    path = 'headcheese'
-
-
-class GCHealthCapsules(_GoComics):
-    path = 'healthcapsules'
-
-
-class GCHeartOfTheCity(_GoComics):
-    path = 'heartofthecity'
-
-
-class GCHeathcliff(_GoComics):
-    path = 'heathcliff'
-
-
-class GCHeathcliffEnEspaol(_GoComicsEs):
-    path = 'espanol/heathcliffespanol'
-
-
-class GCHenryPayne(_GoComics):
-    path = 'henrypayne'
-
-
-class GCHerbAndJamaal(_GoComics):
-    path = 'herbandjamaal'
-
-
-class GCHerman(_GoComics):
-    path = 'herman'
-
-
-class GCHermanEnEspaol(_GoComicsEs):
-    path = 'espanol/herman-en-espanol'
-
-
-class GCHipsterPicnic(_GoComics):
-    path = 'hipster-picnic'
-
-
-class GCHogwashed(_GoComics):
-    path = 'hogwashed'
-
-
-class GCHolidayDoodles(_GoComics):
-    path = 'holiday-doodles'
-
-
-class GCHomeAndAway(_GoComics):
-    path = 'homeandaway'
-
-
-class GCHotComicsForCoolPeople(_GoComics):
-    path = 'hot-comics-for-cool-people'
-
-
-class GCHubbel(_GoComics):
-    path = 'hubbel'
-
-
-class GCHUBRIS(_GoComics):
-    path = 'hubris'
-
-
-class GCHugoComics(_GoComics):
-    path = 'hugo-comics'
-
-
-class GCHumanCull(_GoComics):
-    path = 'human-cull'
-
-
-class GCHurrieTheMisManager(_GoComics):
-    path = 'hurrie'
-
-
-class GCHutchOwen(_GoComics):
-    path = 'hutch-owen'
-
-
-class GCImagineThis(_GoComics):
-    path = 'imaginethis'
-
-
-class GCInheritTheMirth(_GoComics):
-    path = 'inherit-the-mirth'
-
-
-class GCInkPen(_GoComics):
-    path = 'inkpen'
-
-
-class GCInkwellForest(_GoComics):
-    path = 'inkwell-forest'
-
-
-class GCInspectorDangersCrimeQuiz(_GoComics):
-    path = 'inspector-dangers-crime-quiz'
-
-
-class GCInTheBleachers(_GoComics):
-    path = 'inthebleachers'
-
-
-class GCInTheSticks(_GoComics):
-    path = 'inthesticks'
-
-
-class GCInvisibleBread(_GoComics):
-    path = 'invisible-bread'
-
-
-class GCIronyOr(_GoComics):
-    path = 'irony-or'
-
-
-class GCItsAllAboutYou(_GoComics):
-    path = 'itsallaboutyou'
-
-
-class GCItsJustJim(_GoComics):
-    path = 'its-just-jim'
-
-
-class GCJackOhman(_GoComics):
-    path = 'jackohman'
-
-
-class GCJackRadioComics(_GoComics):
-    path = 'jack-radio-comics'
-
-
-class GCJanesWorld(_GoComics):
-    path = 'janesworld'
-
-
-class GCJayAndBoneheadTheMunkysMrCowhide(_GoComics):
-    path = 'jayandbonehead'
-
-
-class GCJeffDanziger(_GoComics):
-    path = 'jeffdanziger'
-
-
-class GCJeffStahler(_GoComics):
-    path = 'jeffstahler'
-
-
-class GCJenSorensen(_GoComics):
-    path = 'jen-sorensen'
-
-
-class GCJerryHolbert(_GoComics):
-    path = 'jerryholbert'
-
-
-class GCJetpackJr(_GoComics):
-    path = 'jetpack-jr'
-
-
-class GCJimAndSarah(_GoComics):
-    path = 'jim-and-sarah'
-
-
-class GCJimBentonCartoons(_GoComics):
-    path = 'jim-benton-cartoons'
-
-
-class GCJimMorin(_GoComics):
-    path = 'jimmorin'
-
-
-class GCJimsJournal(_GoComics):
-    path = 'jimsjournal'
-
-
-class GCJoeHeller(_GoComics):
-    path = 'joe-heller'
-
-
-class GCJoelPett(_GoComics):
-    path = 'joelpett'
-
-
-class GCJoeVanilla(_GoComics):
-    path = 'joevanilla'
-
-
-class GCJohnDeering(_GoComics):
-    path = 'johndeering'
-
-
-class GCJolleyStuffBrowser(_GoComics):
-    path = 'jolleystuff-browser'
-
-
-class GCJumpStart(_GoComics):
-    path = 'jumpstart'
-
-
-class GCJustoYFranco(_GoComicsEs):
-    path = 'espanol/justo-y-franco'
-
-
-class GCJustSayUncle(_GoComics):
-    path = 'just-say-uncle'
-
-
-class GCKALEECHIKORNERS(_GoComics):
-    path = 'kaleechi-korners'
-
-
-class GCKartoonsByKline(_GoComics):
-    path = 'kartoons-by-kline'
-
-
-class GCKenCatalino(_GoComics):
-    path = 'kencatalino'
-
-
-class GCKevinKallaugher(_GoComics):
-    path = 'kevinkallaugher'
-
-
-class GCKidBeowulf(_GoComics):
-    path = 'kid-beowulf'
-
-
-class GCKidShayComics(_GoComics):
-    path = 'kid-shay-comics'
-
-
-class GCKidSpot(_GoComics):
-    path = 'kidspot'
-
-
-class GCKidTown(_GoComics):
-    path = 'kidtown'
-
-
-class GCKitchenCapers(_GoComics):
-    path = 'kitchen-capers'
-
-
-class GCKitNCarlyle(_GoComics):
-    path = 'kitandcarlyle'
-
-
-class GCKliban(_GoComics):
-    path = 'kliban'
-
-
-class GCKlibansCats(_GoComics):
-    path = 'klibans-cats'
-
-
-class GCLaCucaracha(_GoComics):
-    path = 'lacucaracha'
-
-
-class GCLaCucarachaEnEspaol(_GoComicsEs):
-    path = 'espanol/la-cucaracha-en-espanol'
-
-
-class GCLaffToons(_GoComics):
-    path = 'lafftoons'
-
-
-class GCLaloAlcaraz(_GoComics):
-    path = 'laloalcaraz'
-
-
-class GCLaloAlcarazEnEspaol(_GoComicsEs):
-    path = 'espanol/laloenespanol'
-
-
-class GCLardsWorldPeaceTips(_GoComics):
-    path = 'lards-world-peace-tips'
-
-
-class GCLarryvilleBlue(_GoComics):
-    path = 'larryville-blue'
-
-
-class GCLasHermanasStone(_GoComicsEs):
-    path = 'espanol/stonesoup_espanol'
-
-
-class GCLastKiss(_GoComics):
-    path = 'lastkiss'
-
-
-class GCLayLines(_GoComics):
-    path = 'lay-lines'
-
-
-class GCLearnToSpeakCat(_GoComics):
-    path = 'learn-to-speak-cat'
-
-
-class GCLEFTOVERS(_GoComics):
-    path = 'leftovers'
-
-
-class GCLegendOfBill(_GoComics):
-    path = 'legendofbill'
-
-
-class GCLeighLunaComics(_GoComics):
-    path = 'leigh-luna-comics'
-
-
-class GCLibertyMeadows(_GoComics):
-    path = 'libertymeadows'
-
-
-class GCLilAbner(_GoComics):
-    path = 'lil-abner'
-
-
-class GCLiliAndDerek(_GoComics):
-    path = 'lili-and-derek'
-
-
-class GCLilleysSillies(_GoComics):
-    path = 'lilleys-sillies'
-
-
-class GCLimboRoad(_GoComics):
-    path = 'limbo-road'
-
-
-class GCLio(_GoComics):
-    path = 'lio'
-
-
-class GCLioEnEspaol(_GoComicsEs):
-    path = 'espanol/lioespanol'
-
-
-class GCLisaBenson(_GoComics):
-    path = 'lisabenson'
-
-
-class GCLittleDogLost(_GoComics):
-    path = 'littledoglost'
-
-
-class GCLittleFriedChickenAndSushi(_GoComics):
-    path = 'little-fried-chicken-and-sushi'
-
-
-class GCLittleNemo(_GoComics):
-    path = 'little-nemo'
-
-
-class GCLola(_GoComics):
-    path = 'lola'
-
-
-class GCLolaEnEspaol(_GoComicsEs):
-    path = 'espanol/lola-en-espanol'
-
-
-class GCLooksGoodOnPaper(_GoComics):
-    path = 'looks-good-on-paper'
-
-
-class GCLoose(_GoComics):
-    path = 'loose'
-
-
-class GCLooseParts(_GoComics):
-    path = 'looseparts'
-
-
-class GCLosOsorios(_GoComicsEs):
-    path = 'espanol/los-osorios'
-
-
-class GCLostSheep(_GoComics):
-    path = 'lostsheep'
-
-
-class GCLostSideOfSuburbia(_GoComics):
-    path = 'lostsideofsuburbia'
-
-
-class GCLuann(_GoComics):
-    path = 'luann'
-
-
-class GCLuannAgainn(_GoComics):
-    path = 'luann-againn'
-
-
-class GCLuannEnEspaol(_GoComicsEs):
-    path = 'espanol/luannspanish'
-
-
-class GCLucan(_GoComics):
-    path = 'lucan'
-
-
-class GCLuckyCow(_GoComics):
-    path = 'luckycow'
-
-
-class GCLugNuts(_GoComics):
-    path = 'lug-nuts'
-
-
-class GCLumAndAbner(_GoComics):
-    path = 'lum-and-abner'
-
-
-class GCLunarbaboon(_GoComics):
-    path = 'lunarbaboon'
-
-
-class GCMac(_GoComics):
-    path = 'mac'
-
-
-class GCMadDogGhettoCop(_GoComics):
-    path = 'maddogghettocop'
-
-
-class GCMagicInAMinute(_GoComics):
-    path = 'magicinaminute'
-
-
-class GCMagnificatz(_GoComics):
-    path = 'magnificatz'
-
-
-class GCMaintaining(_GoComics):
-    path = 'maintaining'
-
-
-class GCMakingIt(_GoComics):
-    path = 'making-it'
-
-
-class GCMariasDay(_GoComics):
-    path = 'marias-day'
-
-
-class GCMarmaduke(_GoComics):
-    path = 'marmaduke'
-
-
-class GCMarmadukeEnEspaol(_GoComicsEs):
-    path = 'espanol/marmaduke-en-espanol'
-
-
-class GCMarshallRamsey(_GoComics):
-    path = 'marshallramsey'
-
-
-class GCMarysNature(_GoComics):
-    path = 'marys-nature'
-
-
-class GCMassiveFalls(_GoComics):
-    path = 'massive-falls'
-
-
-class GCMattBors(_GoComics):
-    path = 'matt-bors'
-
-
-class GCMattDavies(_GoComics):
-    path = 'mattdavies'
-
-
-class GCMattWuerker(_GoComics):
-    path = 'mattwuerker'
-
-
-class GCMazeToonsPuzzle(_GoComics):
-    path = 'mazetoons-puzzle'
-
-
-class GCMcArroni(_GoComics):
-    path = 'mcarroni'
-
-
-class GCMediumLarge(_GoComics):
-    path = 'medium-large'
-
-
-class GCMegClassics(_GoComics):
-    path = 'meg-classics'
-
-
-class GCMichaelRamirez(_GoComics):
-    path = 'michaelramirez'
-
-
-class GCMicrocosm(_GoComics):
-    path = 'microcosm'
-
-
-class GCMikeDuJour(_GoComics):
-    path = 'mike-du-jour'
-
-
-class GCMikeLester(_GoComics):
-    path = 'mike-lester'
-
-
-class GCMikeLuckovich(_GoComics):
-    path = 'mikeluckovich'
-
-
-class GCMillennialhood(_GoComics):
-    path = 'millennialhood'
-
-
-class GCMillennialville(_GoComics):
-    path = 'millennialville'
-
-
-class GCMilton50(_GoComics):
-    path = 'milton-5-0'
-
-
-class GCMindframe(_GoComics):
-    path = 'mindframe'
-
-
-class GCMinihahas(_GoComics):
-    path = 'vernscartoons'
-
-
-class GCMinimumSecurity(_GoComics):
-    path = 'minimumsecurity'
-
-
-class GCMiscSoup(_GoComics):
-    path = 'misc-soup'
-
-
-class GCMisterAndMe(_GoComics):
-    path = 'mister-and-me'
-
-
-class GCMockAll(_GoComics):
-    path = 'mock-all'
-
-
-class GCModeratelyConfused(_GoComics):
-    path = 'moderately-confused'
-
-
-class GCMolebashed(_GoComics):
-    path = 'molebashed'
-
-
-class GCMollyAndTheBear(_GoComics):
-    path = 'mollyandthebear'
-
-
-class GCMomma(_GoComics):
-    path = 'momma'
-
-
-class GCMomsCancer(_GoComics):
-    path = 'moms-cancer'
-
-
-class GCMongrels(_GoComics):
-    path = 'mongrels'
-
-
-class GCMonty(_GoComics):
-    path = 'monty'
-
-
-class GCMontyDiaros(_GoComicsEs):
-    path = 'espanol/monty-diarios'
-
-
-class GCMortsIsland(_GoComics):
-    path = 'noahs-island'
-
-
-class GCMotleyClassics(_GoComics):
-    path = 'motley-classics'
-
-
-class GCMrGigiAndTheSquid(_GoComics):
-    path = 'mr-gigi-and-the-squid'
-
-
-class GCMrLowe(_GoComics):
-    path = 'mr-lowe'
-
-
-class GCMulligan(_GoComics):
-    path = 'mulligan'
-
-
-class GCMustardAndBoloney(_GoComics):
-    path = 'mustard-and-boloney'
-
-
-class GCMuttAndJeff(_GoComics):
-    path = 'muttandjeff'
-
-
-class GCMyCageNewAndOld(_GoComics):
-    path = 'mycage'
-
-
-class GCMySonIsADog(_GoComics):
-    path = 'my-son-is-a-dog'
-
-
-class GCMythTickle(_GoComics):
-    path = 'mythtickle'
-
-
-class GCNancy(_GoComics):
-    path = 'nancy'
-
-
-class GCNancyClassics(_GoComics):
-    path = 'nancy-classics'
-
-
-class GCNateElGrande(_GoComicsEs):
-    path = 'espanol/nate-el-grande'
-
-
-class GCNavyBean(_GoComics):
-    path = 'navybean'
-
-
-class GCNedAndLarry(_GoComics):
-    path = 'ned-and-larry'
-
-
-class GCNestHeads(_GoComics):
-    path = 'nestheads'
-
-
-class GCNEUROTICA(_GoComics):
-    path = 'neurotica'
-
-
-class GCNewAdventuresOfQueenVictoria(_GoComics):
-    path = 'thenewadventuresofqueenvictoria'
-
-
-class GCNickAnderson(_GoComics):
-    path = 'nickanderson'
-
-
-class GCNickAndZuzu(_GoComics):
-    path = 'nick-and-zuzu'
-
-
-class GCNoAmbiguity(_GoComics):
-    path = 'no-ambiguity'
-
-
-class GCNoBusinessIKnow(_GoComics):
-    path = 'nobusinessiknow'
-
-
-class GCNonSequitur(_GoComics):
-    path = 'nonsequitur'
-
-
-class GCNoOrdinaryLife(_GoComics):
-    path = 'no-ordinary-life'
-
-
-class GCNorman(_GoComics):
-    path = 'Norman'
-
-
-class GCNothingIsNotSomething(_GoComics):
-    path = 'nothing-is-not-something'
-
-
-class GCNotInventedHere(_GoComics):
-    path = 'not-invented-here'
-
-
-class GCNpchumorcom(_GoComics):
-    path = 'npchumor'
-
-
-class GCOffTheMark(_GoComics):
-    path = 'offthemark'
-
-
-class GCOhBrother(_GoComics):
-    path = 'oh-brother'
-
-
-class GCOllieAndQuentin(_GoComics):
-    path = 'ollie-and-quentin'
-
-
-class GCOnAClaireDay(_GoComics):
-    path = 'onaclaireday'
-
-
-class GCOneBigHappy(_GoComics):
-    path = 'onebighappy'
-
-
-class GCONIONAndPEA(_GoComics):
-    path = 'onion-and-pea'
-
-
-class GCOrdinaryBill(_GoComics):
-    path = 'ordinary-bill'
-
-
-class GCOriginsOfTheSundayComics(_GoComics):
-    path = 'origins-of-the-sunday-comics'
-
-
-class GCOscarAndAnnie(_GoComics):
-    path = 'oscar-and-annie'
-
-
-class GCOutOfTheGenePoolReRuns(_GoComics):
-    path = 'outofthegenepool'
-
-
-class GCOverboard(_GoComics):
-    path = 'overboard'
-
-
-class GCOverboardEnEspaol(_GoComicsEs):
-    path = 'espanol/overboardespanol'
-
-
-class GCOverQuirked(_GoComics):
-    path = 'over-quirked'
-
-
-class GCOverTheHedge(_GoComics):
-    path = 'overthehedge'
-
-
-class GCOwlturd(_GoComics):
-    path = 'owlturd'
-
-
-class GCOzyAndMillie(_GoComics):
-    path = 'ozy-and-millie'
-
-
-class GCPaddedCell(_GoComics):
-    path = 'padded-cell'
-
-
-class GCPainterly(_GoComics):
-    path = 'sparcomics'
-
-
-class GCPatOliphant(_GoComics):
-    path = 'patoliphant'
-
-
-class GCPaulSzep(_GoComics):
-    path = 'paulszep'
-
-
-class GCPawsForThoughtComics(_GoComics):
-    path = 'paws-for-thought-comics'
-
-
-class GCPCAndPixel(_GoComics):
-    path = 'pcandpixel'
-
-
-class GCPeanuts(_GoComics):
-    path = 'peanuts'
-
-
-class GCPeanutsBegins(_GoComics):
-    path = 'peanuts-begins'
-
-
-class GCPeanutsEnEspaol(_GoComicsEs):
-    path = 'espanol/peanuts-espanol'
-
-
-class GCPearlsBeforeSwine(_GoComics):
-    path = 'pearlsbeforeswine'
-
-
-class GCPeeples(_GoComics):
-    path = 'peeples'
-
-
-class GCPeopleOfEarth(_GoComics):
-    path = 'frankblunt'
-
-
-class GCPeriquita(_GoComicsEs):
-    path = 'espanol/periquita'
-
-
-class GCPerlasParaLosCerdos(_GoComicsEs):
-    path = 'espanol/perlas-para-los-cerdos'
-
-
-class GCPerryBibleFellowship(_GoComics):
-    path = 'perry-bible-fellowship'
-
-
-class GCPhilHands(_GoComics):
-    path = 'phil-hands'
-
-
-class GCPhoebeAndHerUnicorn(_GoComics):
-    path = 'phoebe-and-her-unicorn'
-
-
-class GCPibgorn(_GoComics):
-    path = 'pibgorn'
-
-
-class GCPibgornSketches(_GoComics):
-    path = 'pibgornsketches'
-
-
-class GCPickles(_GoComics):
-    path = 'pickles'
-
-
-class GCPicpakDog(_GoComics):
-    path = 'picpak-dog'
-
-
-class GCPicturesInBoxes(_GoComics):
-    path = 'pictures-in-boxes'
-
-
-class GCPieComic(_GoComics):
-    path = 'pie-comic'
-
-
-class GCPinkerton(_GoComics):
-    path = 'pinkerton'
-
-
-class GCPirateMike(_GoComics):
-    path = 'pirate-mike'
-
-
-class GCPlanB(_GoComics):
-    path = 'planb'
-
-
-class GCPleaseListenToMe(_GoComics):
-    path = 'please-listen-to-me'
-
-
-class GCPluggers(_GoComics):
-    path = 'pluggers'
-
-
-class GCPoliceLimit(_GoComics):
-    path = 'policelimit'
-
-
-class GCPoochCafe(_GoComics):
-    path = 'poochcafe'
-
-
-class GCPoorlyDrawnLines(_GoComics):
-    path = 'poorly-drawn-lines'
-
-
-class GCPopCultureShockTherapy(_GoComics):
-    path = 'pop-culture-shock-therapy'
-
-
-class GCPoptropica(_GoComics):
-    path = 'poptropica'
-
-
-class GCPotShots(_GoComics):
-    path = 'pot-shots'
-
-
-class GCPreTeena(_GoComics):
-    path = 'preteena'
-
-
-class GCPricklyCity(_GoComics):
-    path = 'pricklycity'
-
-
-class GCPrideland(_GoComics):
-    path = 'prideland'
-
-
-class GCPrimusTheBadPhilosopher(_GoComics):
-    path = 'primus-the-bad-philosopher'
-
-
-class GCPromisesPromises(_GoComics):
-    path = 'promises-promises'
-
-
-class GCQuestionableQuotebook(_GoComics):
-    path = 'questionable-quotebook'
-
-
-class GCQuickDraw(_GoComics):
-    path = 'quickdraw'
-
-
-class GCRabbitsAgainstMagic(_GoComics):
-    path = 'rabbitsagainstmagic'
-
-
-class GCRaisingDuncan(_GoComics):
-    path = 'raising-duncan'
-
-
-class GCRandolphItch2Am(_GoComics):
-    path = 'randolphitch'
-
-
-class GCRandomActsOfNancy(_GoComics):
-    path = 'random-acts-of-nancy'
-
-
-class GCRealityCheck(_GoComics):
-    path = 'realitycheck'
-
-
-class GCRealLifeAdventures(_GoComics):
-    path = 'reallifeadventures'
-
-
-class GCRebeccaHendin(_GoComics):
-    path = 'rebecca-hendin'
-
-
-class GCRedAndRover(_GoComics):
-    path = 'redandrover'
-
-
-class GCReplyAll(_GoComics):
-    path = 'replyall'
-
-
-class GCReplyAllLite(_GoComics):
-    path = 'reply-all-lite'
-
-
-class GCRichardsPoorAlmanac(_GoComics):
-    path = 'richards-poor-almanac'
-
-
-class GCRingers(_GoComics):
-    path = 'ringers'
-
-
-class GCRipHaywire(_GoComics):
-    path = 'riphaywire'
-
-
-class GCRipleysBelieveItOrNot(_GoComics):
-    path = 'ripleysbelieveitornot'
-
-
-class GCRipleysBelieveItOrNotSpanish(_GoComicsEs):
-    path = 'espanol/ripleys-en-espanol'
-
-
-class GCRisible(_GoComics):
-    path = 'risible'
-
-
-class GCRobbieAndBobby(_GoComics):
-    path = 'robbie-and-bobby'
-
-
-class GCRobertAriail(_GoComics):
-    path = 'robert-ariail'
-
-
-class GCRobRogers(_GoComics):
-    path = 'robrogers'
-
-
-class GCRonWarren(_GoComics):
-    path = 'ron-warren'
-
-
-class GCRosaDominical(_GoComicsEs):
-    path = 'espanol/rosa-dominical'
-
-
-class GCRoseIsRose(_GoComics):
-    path = 'roseisrose'
-
-
-class GCRubes(_GoComics):
-    path = 'rubes'
-
-
-class GCRudyPark(_GoComics):
-    path = 'rudypark'
-
-
-class GCRufus(_GoComics):
-    path = 'rufus'
-
-
-class GCSandSharkBeach(_GoComics):
-    path = 'sandshark-beach'
-
-
-class GCSarahsScribbles(_GoComics):
-    path = 'sarahs-scribbles'
-
-
-class GCSavageChickens(_GoComics):
-    path = 'savage-chickens'
-
-
-class GCScaryGary(_GoComics):
-    path = 'scarygary'
-
-
-class GCScenesFromAMultiverse(_GoComics):
-    path = 'scenes-from-a-multiverse'
-
-
-class GCScottStantis(_GoComics):
-    path = 'scottstantis'
-
-
-class GCSharpCurveComics(_GoComics):
-    path = 'sharp-curve-comics'
-
-
-class GCSheldon(_GoComics):
-    path = 'sheldon'
-
-
-class GCSherpaAid(_GoComics):
-    path = 'sherpaaid'
-
-
-class GCShirleyAndSonClassics(_GoComics):
-    path = 'shirley-and-son-classics'
-
-
-class GCShoe(_GoComics):
-    path = 'shoe'
-
-
-class GCShoecabbage(_GoComics):
-    path = 'shoecabbage'
-
-
-class GCShortcuts(_GoComics):
-    path = 'shortcuts'
-
-
-class GCShutterbugFollies(_GoComics):
-    path = 'shutterbug-follies'
-
-
-class GCSigneWilkinson(_GoComics):
-    path = 'signewilkinson'
-
-
-class GCSignGarden(_GoComics):
-    path = 'signgarden'
-
-
-class GCSignsOfAFrustratedGolfer(_GoComics):
-    path = 'signs-of-a-frustrated-golfer'
-
-
-class GCSketchyChics(_GoComics):
-    path = 'sketchy-chics'
-
-
-class GCSkinHorse(_GoComics):
-    path = 'skinhorse'
-
-
-class GCSkippy(_GoComics):
-    path = 'skippy'
-
-
-class GCSkull(_GoComics):
-    path = 'skull'
-
-
-class GCSkylarking(_GoComics):
-    path = 'skylarking'
-
-
-class GCSleepytownBeagles(_GoComics):
-    path = 'sleepytown-beagles'
-
-
-class GCSmith(_GoComics):
-    path = 'smith'
-
-
-class GCSnowflakes(_GoComics):
-    path = 'snowflakes'
-
-
-class GCSnowSez(_GoComics):
-    path = 'snow-sez'
-
-
-class GCSoccerDude(_GoComics):
-    path = 'soccer-dude'
-
-
-class GCSoccerEarth(_GoComics):
-    path = 'soccer-earth'
-
-
-class GCSOD(_GoComics):
-    path = 'sod'
-
-
-class GCSomethingAboutCeleste(_GoComics):
-    path = 'something-about-celeste'
-
-
-class GCSookyRottweiler(_GoComics):
-    path = 'sooky-rottweiler'
-
-
-class GCSoulmates(_GoComics):
-    path = 'soulmates'
-
-
-class GCSoupToNutz(_GoComics):
-    path = 'soup-to-nutz'
-
-
-class GCSpaceport51(_GoComics):
-    path = 'spaceport-51'
-
-
-class GCSpectickles(_GoComics):
-    path = 'abbotts-spectickles'
-
-
-class GCSpeechless(_GoComics):
-    path = 'speechless'
-
-
-class GCSpeedBump(_GoComics):
-    path = 'speedbump'
-
-
-class GCSportsByVoort(_GoComics):
-    path = 'sports-by-voort'
-
-
-class GCSpotTheFrog(_GoComics):
-    path = 'spot-the-frog'
-
-
-class GCStaleCrackers(_GoComics):
-    path = 'clifton'
-
-
-class GCStankoAndTibor(_GoComics):
-    path = 'stankotibor'
-
-
-class GCStarslip(_GoComics):
-    path = 'starslip'
-
-
-class GCSteveBenson(_GoComics):
-    path = 'stevebenson'
-
-
-class GCSteveBreen(_GoComics):
-    path = 'stevebreen'
-
-
-class GCSteveKelley(_GoComics):
-    path = 'stevekelley'
-
-
-class GCStickyComics(_GoComics):
-    path = 'sticky-comics'
-
-
-class GCStoneSoup(_GoComics):
-    path = 'stonesoup'
-
-
-class GCStoneSoupClassics(_GoComics):
-    path = 'stone-soup-classics'
-
-
-class GCStrangeBrew(_GoComics):
-    path = 'strangebrew'
-
-
-class GCStuartCarlson(_GoComics):
-    path = 'stuartcarlson'
-
-
-class GCSubSub(_GoComics):
-    path = 'subsub'
-
-
-class GCSuburbanFairyTales(_GoComics):
-    path = 'suburban-fairy-tales'
-
-
-class GCSUITSANDGUARDERS(_GoComics):
-    path = 'suits-and-guarders'
-
-
-class GCSunnyStreet(_GoComics):
-    path = 'sunny-street'
-
-
-class GCSunshineState(_GoComics):
-    path = 'sunshine-state'
-
-
-class GCSuperFunPakComix(_GoComics):
-    path = 'super-fun-pak-comix'
-
-
-class GCSuperSiblings(_GoComics):
-    path = 'super-siblings'
-
-
-class GCSweetAndSourPork(_GoComics):
-    path = 'sweet-and-sour-pork'
-
-
-class GCSylvia(_GoComics):
-    path = 'sylvia'
-
-
-class GCTankMcNamara(_GoComics):
-    path = 'tankmcnamara'
-
-
-class GCTarzan(_GoComics):
-    path = 'tarzan'
-
-
-class GCTarzanEnEspaol(_GoComicsEs):
-    path = 'espanol/tarzan-en-espanol'
-
-
-class GCTeacherInk(_GoComics):
-    path = 'teacher-ink'
-
-
-class GCTedRall(_GoComics):
-    path = 'tedrall'
-
-
-class GCTenCats(_GoComics):
-    path = 'ten-cats'
-
-
-class GCThatababy(_GoComics):
-    path = 'thatababy'
-
-
-class GCThatIsPriceless(_GoComics):
-    path = 'that-is-priceless'
-
-
-class GCThatMonkeyTune(_GoComics):
-    path = 'that-monkey-tune'
-
-
-class GCThatNewCarlSmell(_GoComics):
-    path = 'that-new-carl-smell'
-
-
-class GCThatsLife(_GoComics):
-    path = 'thats-life'
-
-
-class GCTheAcademiaWaltz(_GoComics):
-    path = 'academiawaltz'
-
-
-class GCTheAdventuresOfBusinessCat(_GoComics):
-    path = 'the-adventures-of-business-cat'
-
-
-class GCTheAngryGamer(_GoComics):
-    path = 'the-angry-gamer'
-
-
-class GCTheArgyleSweater(_GoComics):
-    path = 'theargylesweater'
-
-
-class GCTheAwkwardYeti(_GoComics):
-    path = 'the-awkward-yeti'
-
-
-class GCTheBarn(_GoComics):
-    path = 'thebarn'
-
-
-class GCTheBeauforts(_GoComics):
-    path = 'the-beauforts'
-
-
-class GCTheBellies(_GoComics):
-    path = 'the-bellies'
-
-
-class GCTheBentPinky(_GoComics):
-    path = 'the-bent-pinky'
-
-
-class GCTheBestMedicineCartoon(_GoComics):
-    path = 'the-best-medicine'
-
-
-class GCTheBigPicture(_GoComics):
-    path = 'thebigpicture'
-
-
-class GCTheBoobiehatch(_GoComics):
-    path = 'the-boobiehatch'
-
-
-class GCTheBoondocks(_GoComics):
-    path = 'boondocks'
-
-
-class GCTheBornLoser(_GoComics):
-    path = 'the-born-loser'
-
-
-class GCTheBuckets(_GoComics):
-    path = 'thebuckets'
-
-
-class GCTheCardinal(_GoComics):
-    path = 'thecardinal'
-
-
-class GCTheCity(_GoComics):
-    path = 'thecity'
-
-
-class GCTheComicStripThatHasAFinaleEveryDay(_GoComics):
-    path = 'the-comic-strip-that-has-a-finale-every-day'
-
-
-class GCTheConjurers(_GoComics):
-    path = 'the-conjurers'
-
-
-class GCTheCreeps(_GoComics):
-    path = 'the-creeps'
-
-
-class GCTheDailyDrawing(_GoComics):
-    path = 'the-daily-drawing'
-
-
-class GCTheDinetteSet(_GoComics):
-    path = 'dinetteset'
-
-
-class GCTheDinkledorfs(_GoComics):
-    path = 'the-dinkledorfs'
-
-
-class GCTheDoozies(_GoComics):
-    path = 'thedoozies'
-
-
-class GCTheDuplex(_GoComics):
-    path = 'duplex'
-
-
-class GCTheElderberries(_GoComics):
-    path = 'theelderberries'
-
-
-class GCTheEntrepiranha(_GoComics):
-    path = 'the-entrepiranha'
-
-
-class GCTheFabulousBushPigs(_GoComics):
-    path = 'the-fabulous-bush-pigs'
-
-
-class GCTheFlyingMcCoys(_GoComics):
-    path = 'theflyingmccoys'
-
-
-class GCTheFuscoBrothers(_GoComics):
-    path = 'thefuscobrothers'
-
-
-class GCTheGrayZone(_GoComics):
-    path = 'the-gray-zone'
-
-
-class GCTheGreenMonkeys(_GoComics):
-    path = 'thegreenmonkeys'
-
-
-class GCTheGrizzwells(_GoComics):
-    path = 'thegrizzwells'
-
-
-class GCTheHumbleStumble(_GoComics):
-    path = 'humble-stumble'
-
-
-class GCTheKChronicles(_GoComics):
-    path = 'thekchronicles'
-
-
-class GCTheKnightLife(_GoComics):
-    path = 'theknightlife'
-
-
-class GCTheLeftyBoscoPictureShow(_GoComics):
-    path = 'leftyboscopictureshow'
-
-
-class GCTheLostBear(_GoComics):
-    path = 'the-lost-bear'
-
-
-class GCTheMagicForest(_GoComics):
-    path = 'the-magic-forest'
-
-
-class GCTheMartianConfederacy(_GoComics):
-    path = 'the-martian-confederacy'
-
-
-class GCTheMeaningOfLila(_GoComics):
-    path = 'meaningoflila'
-
-
-class GCTheMiddletons(_GoComics):
-    path = 'themiddletons'
-
-
-class GCTheMothManAndLarvaeBoy(_GoComics):
-    path = 'the-mothman-and-larvae-boy'
-
-
-class GCTheNeighborhood(_GoComics):
-    path = 'the-neighborhood'
-
-
-class GCTheNevilleYouKnow(_GoComics):
-    path = 'the-neville-you-know'
-
-
-class GCTheNonsenseNewz(_GoComics):
-    path = 'the-nonsense-newz'
-
-
-class GCTheNorm40(_GoComics):
-    path = 'the-norm-4-0'
-
-
-class GCTheNormClassics(_GoComics):
-    path = 'thenorm'
-
-
-class GCTheOldManAndHisDog(_GoComics):
-    path = 'old-man-and-his-dog'
-
-
-class GCTheOtherCoast(_GoComics):
-    path = 'theothercoast'
-
-
-class GCTheQuinnAndFinnShow(_GoComics):
-    path = 'quinn-and-finn'
-
-
-class GCTheQuixoteSyndrome(_GoComics):
-    path = 'the-quixote-syndrome'
-
-
-class GCTheSunshineClub(_GoComics):
-    path = 'the-sunshine-club'
-
-
-class GCTheUnemployed(_GoComics):
-    path = 'the-unemployed'
-
-
-class GCTheWagesOfSindy(_GoComics):
-    path = 'the-wages-of-sindy'
-
-
-class GCTheWanderingMelon(_GoComics):
-    path = 'the-wandering-melon'
-
-
-class GCTheWizardOfIdSpanish(_GoComicsEs):
-    path = 'espanol/wizardofidespanol'
-
-
-class GCTheWorriedWell(_GoComics):
-    path = 'the-worried-well'
-
-
-class GCTheWorstThingIveEverDone(_GoComics):
-    path = 'the-worst-thing-ive-ever-done'
-
-
-class GCThingsesque(_GoComics):
-    path = 'thingsesque'
-
-
-class GCthink(_GoComics):
-    path = 'think'
-
-
-class GCThinLines(_GoComics):
-    path = 'thinlines'
-
-
-class GCTimEagan(_GoComics):
-    path = 'tim-eagan'
-
-
-class GCTinyConfessions(_GoComics):
-    path = 'tiny-confessions'
-
-
-class GCTinySepuku(_GoComics):
-    path = 'tinysepuku'
-
-
-class GCTOBY(_GoComics):
-    path = 'toby'
-
-
-class GCTodaysDogg(_GoComics):
-    path = 'todays-dogg'
-
-
-class GCTodaysTrump(_GoComics):
-    path = 'todays-trump'
-
-
-class GCTomTheDancingBug(_GoComics):
-    path = 'tomthedancingbug'
-
-
-class GCTomToles(_GoComics):
-    path = 'tomtoles'
-
-
-class GCTooMuchCoffeeMan(_GoComics):
-    path = 'toomuchcoffeeman'
-
-
-class GCTopicToons(_GoComics):
-    path = 'topictoons'
-
-
-class GCToughTown(_GoComics):
-    path = 'tough-town'
-
-
-class GCToxicValues(_GoComics):
-    path = 'toxic-values'
-
-
-class GCTrivquiz(_GoComics):
-    path = 'trivquiz'
-
-
-class GCTrucutu(_GoComicsEs):
-    path = 'espanol/trucutu'
-
-
-class GCTruthBeKnown(_GoComics):
-    path = 'truth-be-known'
-
-
-class GCTruthFacts(_GoComics):
-    path = 'truth-facts'
-
-
-class GCTuesdaysWithCory(_GoComics):
-    path = 'tuesdays-with-cory'
-
-
-class GCTutelandia(_GoComicsEs):
-    path = 'espanol/tutelandia'
-
-
-class GCTwaggies(_GoComics):
-    path = 'twaggies'
-
-
-class GCUncleArtsFunland(_GoComics):
-    path = 'uncleartsfunland'
-
-
-class GCUnderdone(_GoComics):
-    path = 'underdone'
-
-
-class GCUnderstandingChaos(_GoComics):
-    path = 'understanding-chaos'
-
-
-class GCUnMannerlyWays(_GoComics):
-    path = 'mannerly-ways'
-
-
-class GCUnstrangePhenomena(_GoComics):
-    path = 'unstrange-phenomena'
-
-
-class GCUpAndOut(_GoComics):
-    path = 'up-and-out'
-
-
-class GCUSAcres(_GoComics):
-    path = 'us-acres'
-
-
-class GCViewFromTheCouch(_GoComics):
-    path = 'view-from-the-couch'
-
-
-class GCViewsAfrica(_GoComics):
-    path = 'viewsafrica'
-
-
-class GCViewsAmerica(_GoComics):
-    path = 'viewsamerica'
-
-
-class GCViewsAsia(_GoComics):
-    path = 'viewsasia'
-
-
-class GCViewsBusiness(_GoComics):
-    path = 'viewsbusiness'
-
-
-class GCViewsEurope(_GoComics):
-    path = 'viewseurope'
-
-
-class GCViewsLatinAmerica(_GoComics):
-    path = 'viewslatinamerica'
-
-
-class GCViewsMidEast(_GoComics):
-    path = 'viewsmideast'
-
-
-class GCViewsOfTheWorld(_GoComics):
-    path = 'viewsoftheworld'
-
-
-class GCViiviAndWagner(_GoComics):
-    path = 'viivi-and-wagner'
-
-
-class GCVoicesInTheDark(_GoComics):
-    path = 'voices-in-the-dark'
-
-
-class GCWallaceTheBrave(_GoComics):
-    path = 'wallace-the-brave'
-
-
-class GCWaltHandelsman(_GoComics):
-    path = 'walthandelsman'
-
-
-class GCWarpedAndDemented(_GoComics):
-    path = 'warped-and-demented'
-
-
-class GCWaskataskahiskewaskewan(_GoComics):
-    path = 'waskataskahiskewaskewan'
-
-
-class GCWatchYourHead(_GoComics):
-    path = 'watchyourhead'
-
-
-class GCWaynoVision(_GoComics):
-    path = 'waynovision'
-
-
-class GCWayOutComics(_GoComics):
-    path = 'way-out-comics'
-
-
-class GCWeaselInk(_GoComics):
-    path = 'weasel-ink'
-
-
-class GCWeePals(_GoComics):
-    path = 'weepals'
-
-
-class GCWhiskeyFalls(_GoComics):
-    path = 'whiskey-falls'
-
-
-class GCWhiteouts(_GoComics):
-    path = 'whiteouts'
-
-
-class GCWickedCrispy(_GoComics):
-    path = 'wicked-crispy'
-
-
-class GCWideOpen(_GoComics):
-    path = 'wide-open'
-
-
-class GCWindsock(_GoComics):
-    path = 'windsock'
-
-
-class GCWinLoseDrew(_GoComics):
-    path = 'drewlitton'
-
-
-class GCWinston(_GoComics):
-    path = 'winston'
-
-
-class GCWitOfTheWorld(_GoComics):
-    path = 'witoftheworld'
-
-
-class GCWittOfWill(_GoComics):
-    path = 'witt-of-will'
-
-
-class GCWizardOfId(_GoComics):
-    path = 'wizardofid'
-
-
-class GCWizardOfIdClassics(_GoComics):
-    path = 'wizard-of-id-classics'
-
-
-class GCWorkingDaze(_GoComics):
-    path = 'working-daze'
-
-
-class GCWorkingItOut(_GoComics):
-    path = 'workingitout'
-
-
-class GCWorldOfWonder(_GoComics):
-    path = 'world-of-wonder'
-
-
-class GCWrobbertCartoons(_GoComics):
-    path = 'wrobbertcartoons'
-
-
-class GCWrongHands(_GoComics):
-    path = 'wrong-hands'
-
-
-class GCWTDuck(_GoComics):
-    path = 'wtduck'
-
-
-class GCWuMo(_GoComics):
-    path = 'wumo'
-
-
-class GCWumoEnEspaol(_GoComicsEs):
-    path = 'espanol/wumoespanol'
-
-
-class GCWyatt(_GoComics):
-    path = 'wyatt'
-
-
-class GCYennyEnEspaol(_GoComicsEs):
-    path = 'espanol/yennyespanol'
-
-
-class GCYennyLopez(_GoComics):
-    path = 'yenny-lopez'
-
-
-class GCYouCanWithBeakmanAndJax(_GoComics):
-    path = 'beakman'
-
-
-class GCZackHill(_GoComics):
-    path = 'zackhill'
-
-
-class GCZenPencils(_GoComics):
-    path = 'zen-pencils'
-
-
-class GCZiggy(_GoComics):
-    path = 'ziggy'
-
-
-class GCZiggyEnEspaol(_GoComicsEs):
-    path = 'espanol/ziggyespanol'
-
-
-class GCZITO(_GoComics):
-    path = 'zito'
-
-
-class GCZombieHeights(_GoComics):
-    path = 'zombie-heights'
-
-
-class GCZootopia(_GoComics):
-    path = 'zootopia'
-# END AUTOUPDATE
+    @classmethod
+    def getmodules(cls):
+        return (
+            # old comics removed from the listing
+            cls('AbnormalTruth', 'abnormal-truth'),
+            cls('ABomb', 'a-bomb'),
+            cls('ABootsAndPupComic', 'a-boots-and-pup-comic'),
+            cls('AdventuresofDaisy', 'Adventures-of-Daisy'),
+            cls('AdventuresOfMartyAndTurkey', 'marty-and-turkey'),
+            cls('AdventuresofMikeAndSimon', 'adventures-of-mike-and-simon'),
+            cls('AnythingGoes', 'anything-goes'),
+            cls('BarkingCrayon', 'barking-crayon'),
+            cls('BenAndSeymour', 'ben-seymour'),
+            cls('BERSERKALERT', 'berserk-alert'),
+            cls('BestInShow', 'best-in-show'),
+            cls('BobtheGroanUP', 'bob-the-groanup'),
+            cls('CalAndOzz', 'cal-and-ozz'),
+            cls('CandyPills', 'candy-pills'),
+            cls('Cartertoons', 'cartertoons'),
+            cls('CatsAtWork', 'cats-at-work'),
+            cls('ChasingUnicorns', 'chasing-unicorns'),
+            cls('ChubbyGirlComics', 'chubbygirlcomics'),
+            cls('Classifudds', 'classifudds'),
+            cls('CockroachComix', 'cockroachcomix'),
+            cls('ColonelKernel', 'colonel-kernel'),
+            cls('CowSheepandaGnomeNamedHelga', 'cow-sheep-and-a-gnome-named-helga'),
+            cls('CoyoteVille', 'coyteville'),
+            cls('Crooksville', 'crooksville'),
+            cls('DabneyandDad', 'dabney-and-dad'),
+            cls('DialHforHBomb', 'dial-h-for-h-bomb'),
+            cls('DiligentCity', 'diligent-city'),
+            cls('DitzAbledPrincess', 'ditzabled-princess'),
+            cls('DogsDucksandAliens', 'dogs-ducks-and-aliens'),
+            cls('DoodleDaysComics', 'doodle-days'),
+            cls('EBEJeebie', 'ebe-jeebie'),
+            cls('EDITORIALPASTANDPRESENT', 'editorial-past-and-present'),
+            cls('ElephantintheRoom', 'elephant-in-the-room'),
+            cls('ElfandMotorbelly', 'elf-and-motorbelly'),
+            cls('EngagAndNevets', 'engag-nevets'),
+            cls('EspressoCity', 'Espresso-City'),
+            cls('EttoreandBaldo', 'ettore-and-baldo'),
+            cls('FantasticMegaLeague', 'fantastiteam'),
+            cls('FarcesofNature', 'farces-of-nature'),
+            cls('Featherweight', 'featherweight'),
+            cls('FleasonFlick', 'fleasonflick'),
+            cls('FrizziToons', 'frizzitoons'),
+            cls('FundayMorning', 'funday-morning'),
+            cls('GatorsAndSuch', 'gators-and-such'),
+            cls('GenerationMute', 'generation-mute'),
+            cls('GetAGrip', 'get-a-grip'),
+            cls('HanginOut', 'hangin-out'),
+            cls('HanktheSock', 'hank-the-sock'),
+            cls('Hbenson7', 'hbenson7'),
+            cls('HeadComics', 'head-comics'),
+            cls('HeavenlyNostrils', 'heavenly-nostrils'),
+            cls('HolySchnark', 'holy-schnark!'),
+            cls('HumblebeeandBob', 'humblebee-and-bob'),
+            cls('Humoresque', 'humoresque'),
+            cls('ImaDillo', 'i-m-a-dillo'),
+            cls('ImTellingMom', 'telling-mom'),
+            cls('IsleofEx', 'isle-of-ex'),
+            cls('JillpokeBohemia', 'jillpoke-bohemia'),
+            cls('JordanandBentley', 'jordan-and-bentley'),
+            cls('KirbysTreehouse', 'kirbys-treehouse'),
+            cls('KozmooftheCosmos', 'kozmoofthecosmos'),
+            cls('LardWantsWorldPeace', 'lard-wants-world-peace'),
+            cls('Leadbellies', 'leadbellies'),
+            cls('LeGooseyLu', 'LeGoosey-Lu'),
+            cls('LIGHTERSIDE', 'lighter-side'),
+            cls('LostInTranslation', 'lost-in-translation'),
+            cls('LucasLuminous', 'lucas-luminous'),
+            cls('MagnificatzOld', 'magnificatz-sherpa'),
+            cls('Markonpaper', 'mark-on-paper'),
+            cls('MaryBWary', 'mary-b-wary'),
+            cls('Maximus', 'maximus'),
+            cls('Mick', 'mick'),
+            cls('MixedMedications', 'mixedmedications'),
+            cls('Mortimer', 'mortimer'),
+            cls('MrMorris', 'mr-morris'),
+            cls('MyCage', 'mycage'),
+            cls('MyGuardianGrandpa', 'my-guardian-grandpa'),
+            cls('NeatStep', 'neatstep'),
+            cls('NeighborhoodZone', 'neightborhood-zone'),
+            cls('NobodysHome', 'nobodys-home'),
+            cls('NoPlaceLikeHolmes', 'no-place-like-holmes'),
+            cls('Oat', 'oat'),
+            cls('ObamaandtheFatman', 'obama-and-the-fatman'),
+            cls('OntheQuad', 'on-the-quad'),
+            cls('OrangesareFunny', 'oranges-are-funny'),
+            cls('Outnumbered', 'outnumbered'),
+            cls('PamosWorld', 'pamos-world'),
+            cls('ParisDoodles', 'mo-willems-paris-doodles'),
+            cls('Peanizles', 'peanizles'),
+            cls('PetFood', 'pet-food'),
+            cls('PipethePelican', 'pipe-the-pelican'),
+            cls('PlasticBabyHeadsfromOuterSpace', 'plastic-babyheads'),
+            cls('PlentyofPenguins', 'plenty-of-penguins'),
+            cls('Puppets', 'puppets'),
+            cls('Putz', 'putz'),
+            cls('QuestionsForKids', 'questions-for-kids'),
+            cls('Rackafracka', 'rackafracka'),
+            cls('RegularCreatures', 'regular-creatures'),
+            cls('RogueSymmetry', 'rogue_symmetry'),
+            cls('Rosy', 'rosy'),
+            cls('Sabine', 'sabine'),
+            cls('SCAIRYTALESTheNotSoScaryFairyTales', 'Scairy-Tales:-the-not-so-scary-fairy-tales!'),
+            cls('SecondPrize', 'secondprize'),
+            cls('SincerelyBeatrice', 'sincerely-beatrice'),
+            cls('Skooled', 'skooled'),
+            cls('SmallNerdyCreatures', 'small-nerdy-creatures'),
+            cls('SNAFU', 'snafu'),
+            cls('SpaceNutz', 'space-nutz'),
+            cls('SPACESLUGS', 'spaceslugs'),
+            cls('SpaceTimeFunnies', 'spacetimefunnies'),
+            cls('SpinCrazy', 'spin-crazy'),
+            cls('STEPDAD', 'stepdad'),
+            cls('Stookie', 'Stookie'),
+            cls('SuburbanWilderness', 'suburban-wilderness'),
+            cls('SuckerHeadSmack', 'suckerhead-smack'),
+            cls('TheAdventuresofHeromanGuy', 'adventures-of-heroman-guy'),
+            cls('TheEdperiment', 'the-edperiment'),
+            cls('TheFamilyBlend', 'the-family-blend'),
+            cls('TheFruitBowl', 'thefruitbowl'),
+            cls('TheGoldenKid', 'golden-kid'),
+            cls('TheInsolentLemon', 'the-insolent-lemon'),
+            cls('TheLightedLab', 'the-lighted-lab'),
+            cls('TheLilMiesters', 'the-lil-miesters'),
+            cls('TheOdderLimits', 'the-odder-limits'),
+            cls('THESILVERLINING', 'silver-lining'),
+            cls('TheSingleDadDiaries', 'single-dad-diaries'),
+            cls('TheVernalPool', 'vernal-pool'),
+            cls('TheWinyChild', 'the-winy-child'),
+            cls('ThrompTM', 'thromp'),
+            cls('TnCComics', 'tnc-comics'),
+            cls('ToBeNamed', 'to-be-named'),
+            cls('TonyAuth', 'tonyauth'),
+            cls('Toocrazy', 'too-crazy'),
+            cls('TwitchyOToole', 'twitchy-otoole'),
+            cls('TwoBits', 'two-bits'),
+            cls('Vernscartoons', 'vernscartoons'),
+            cls('WayOutInLeftField', 'Way-Out-In-Left-Field'),
+            cls('WelcometoFriendly', 'welcome-to-friendly'),
+            cls('WendlesLife', 'wendleslife'),
+            cls('Whatcatscanandcantdo', 'whatcatscanandcantdo'),
+            cls('WillSays', 'will-says'),
+            cls('WillyWho', 'willy-who'),
+            cls('WindingRoads', 'winding-roads'),
+            cls('YouGuysAreMyFriendsTheComic', 'you-guys-are-my-friends'),
+
+            # do not edit anything below since these entries are generated from
+            # scripts/gocomics.py
+            # START AUTOUPDATE
+            cls('060', '0-60'),
+            cls('1AndDone', '1-and-done'),
+            cls('2CowsAndAChicken', '2cowsandachicken'),
+            cls('9ChickweedLane', '9chickweedlane'),
+            cls('9To5', '9to5'),
+            cls('AaronGuile', 'aaron-guile'),
+            cls('ABitSketch', 'a-bit-sketch'),
+            cls('ACMEINKD', 'acme-inkd'),
+            cls('AcornPark', 'acorn-park'),
+            cls('AdamAtHome', 'adamathome'),
+            cls('AdmiralSquirt', 'admiral-squirt'),
+            cls('AdultChildren', 'adult-children'),
+            cls('AgentGates', 'agent-gates'),
+            cls('Agnes', 'agnes'),
+            cls('AJAndMagnus', 'aj-and-magnus'),
+            cls('AlisonWard', 'alison-ward'),
+            cls('AlleyOop', 'alley-oop'),
+            cls('AllInGoodTime', 'all-in-good-time'),
+            cls('AmandaTheGreat', 'amanda-the-great'),
+            cls('AmaZnEvents', 'amaznevents'),
+            cls('Andertoons', 'andertoons'),
+            cls('AndNow', 'and-now'),
+            cls('AndyCapp', 'andycapp'),
+            cls('Anecdote', 'anecdote'),
+            cls('AngryLittleGirls', 'angry-little-girls'),
+            cls('AnimalCrackers', 'animalcrackers'),
+            cls('AnimalMitchell', 'animal-mitchell'),
+            cls('Annie', 'annie'),
+            cls('AppleCreekComics', 'apple-creek'),
+            cls('ArloAndJanis', 'arloandjanis'),
+            cls('AskACat', 'ask-a-cat'),
+            cls('AskShagg', 'askshagg'),
+            cls('ATasteOfTimes', 'a-taste-of-times'),
+            cls('AtTheZoo', 'at-the-zoo'),
+            cls('AuntyAcid', 'aunty-acid'),
+            cls('BackInTheDay', 'backintheday'),
+            cls('BackToBC', 'back-to-bc'),
+            cls('Badlands', 'badlands'),
+            cls('BadMachinery', 'bad-machinery'),
+            cls('BadReporter', 'badreporter'),
+            cls('Baldo', 'baldo'),
+            cls('BaldoEnEspaol', 'espanol/baldoespanol', 'es'),
+            cls('BallardStreet', 'ballardstreet'),
+            cls('BananaTriangle', 'banana-triangle'),
+            cls('BarkeaterLake', 'barkeaterlake'),
+            cls('BarneyAndClyde', 'barneyandclyde'),
+            cls('BasicInstructions', 'basicinstructions'),
+            cls('BatchRejection', 'batch-rejection'),
+            cls('Bazoobee', 'bazoobee'),
+            cls('BC', 'bc'),
+            cls('BCEnEspaol', 'espanol/bcespanol', 'es'),
+            cls('BeanieTheBrownie', 'beanie-the-brownie'),
+            cls('Beardo', 'beardo'),
+            cls('BeMisery', 'bemisery'),
+            cls('Ben', 'ben'),
+            cls('BeneathTheFerns', 'beneath-the-ferns'),
+            cls('BenitinYEneas', 'espanol/muttandjeffespanol', 'es'),
+            cls('BentObjects', 'bent-objects'),
+            cls('BergerAndWyse', 'berger-and-wyse'),
+            cls('BerkeleyMews', 'berkeley-mews'),
+            cls('Betty', 'betty'),
+            cls('Bewley', 'bewley'),
+            cls('BiffAndRiley', 'biff-and-riley'),
+            cls('BigJim', 'bigjim'),
+            cls('BigNate', 'bignate'),
+            cls('BigNateFirstClass', 'big-nate-first-class'),
+            cls('BigTop', 'bigtop'),
+            cls('Biographic', 'biographic'),
+            cls('Birdbrains', 'birdbrains'),
+            cls('BleekerTheRechargeableDog', 'bleeker'),
+            cls('Bliss', 'bliss'),
+            cls('BloomCounty', 'bloomcounty'),
+            cls('BloomCounty2015', 'bloom-county'),
+            cls('Bluebonnets', 'cowsandstuff'),
+            cls('BlueSkiesToons', 'blue-skies-toons'),
+            cls('BobGorrell', 'bobgorrell'),
+            cls('BobTheSquirrel', 'bobthesquirrel'),
+            cls('BoltsAndNuts', 'bolts-and-nuts'),
+            cls('BoNanas', 'bonanas'),
+            cls('Boomerangs', 'boomerangs'),
+            cls('Bork', 'bork'),
+            cls('BottAuto', 'bott-auto'),
+            cls('Bottomliners', 'bottomliners'),
+            cls('BoundAndGagged', 'boundandgagged'),
+            cls('BradsPit', 'brads-pit'),
+            cls('BrainSquirts', 'brain-squirts'),
+            cls('BreakingCatNews', 'breaking-cat-news'),
+            cls('BreakOfDay', 'break-of-day'),
+            cls('Brevity', 'brevity'),
+            cls('BrewsterRockit', 'brewsterrockit'),
+            cls('BrianMcFadden', 'brian-mcfadden'),
+            cls('BroomHilda', 'broomhilda'),
+            cls('Bully', 'bully'),
+            cls('Buni', 'buni'),
+            cls('BUNS', 'buns'),
+            cls('BushyTales', 'bushy-tales'),
+            cls('CafConLeche', 'cafeconleche'),
+            cls('CAFFEINATED', 'CAFFEINATED'),
+            cls('CalvinAndHobbes', 'calvinandhobbes'),
+            cls('CalvinAndHobbesEnEspaol', 'espanol/calvinandhobbesespanol', 'es'),
+            cls('CandacenCompany', 'candace-n-company'),
+            cls('Candorville', 'candorville'),
+            cls('CapsulasMedicas', 'espanol/capsulas-medicas', 'es'),
+            cls('CarteBlanche', 'carte-blanche'),
+            cls('Cathy', 'cathy'),
+            cls('CestLaVie', 'cestlavie'),
+            cls('ChanLowe', 'chanlowe'),
+            cls('CharmysArmy', 'charmys-army'),
+            cls('CheapThrillsCuisine', 'cheap-thrills-cuisine'),
+            cls('ChipBok', 'chipbok'),
+            cls('ChrisBritt', 'chrisbritt'),
+            cls('ChuckleBros', 'chucklebros'),
+            cls('CitizenDog', 'citizendog'),
+            cls('ClayBennett', 'claybennett'),
+            cls('ClayJones', 'clayjones'),
+            cls('ClearBlueWater', 'clearbluewater'),
+            cls('Cleats', 'cleats'),
+            cls('CleoAndCompany', 'cleo-and-company'),
+            cls('CloseToHome', 'closetohome'),
+            cls('CoffeeShopTidbits', 'coffee-shop-tidbits'),
+            cls('Committed', 'committed'),
+            cls('Computoon', 'compu-toon'),
+            cls('ConnieToTheWonnie', 'connie-to-the-wonnie'),
+            cls('Cooper', 'cooper'),
+            cls('Cornered', 'cornered'),
+            cls('CourageousManAdventures', 'courageous-man-adventures'),
+            cls('CowAndBoyClassics', 'cowandboy'),
+            cls('CowTown', 'cowtown'),
+            cls('Crumb', 'crumb'),
+            cls('CulDeSac', 'culdesac'),
+            cls('DaddingBadly', 'dadding-badly'),
+            cls('DaddysHome', 'daddyshome'),
+            cls('DadsDay', 'dads-day'),
+            cls('DanaSummers', 'danasummers'),
+            cls('DanWasserman', 'danwasserman'),
+            cls('DarkSideOfTheHorse', 'darksideofthehorse'),
+            cls('DarrinBell', 'darrin-bell'),
+            cls('DBCartoons', 'db-cartoons'),
+            cls('DeepDarkFears', 'deep-dark-fears'),
+            cls('DevinCraneComicStripGhostwriter', 'devincranecomicstripghostwriter'),
+            cls('DiamondLil', 'diamondlil'),
+            cls('DickTracy', 'dicktracy'),
+            cls('DilbertClassics', 'dilbert-classics'),
+            cls('DilbertEnEspaol', 'espanol/dilbert-en-espanol', 'es'),
+            cls('DinosaurComics', 'dinosaur-comics'),
+            cls('DogEatDoug', 'dogeatdoug'),
+            cls('DoghouseInYourSoul', 'doghouse-in-your-soul'),
+            cls('DogsOfCKennel', 'dogsofckennel'),
+            cls('DoingTime', 'doingtime'),
+            cls('DomesticAbuse', 'domesticabuse'),
+            cls('DonBrutus', 'espanol/don-brutus', 'es'),
+            cls('DontPickTheFlowers', 'dont-pick-the-flowers'),
+            cls('DoodleTown', 'doodle-town'),
+            cls('Doonesbury', 'doonesbury'),
+            cls('DorrisMcComics', 'dorris-mccomics'),
+            cls('Drabble', 'drabble'),
+            cls('Dragin', 'dragin'),
+            cls('DragonGirl', 'dragon-girl'),
+            cls('DrewSheneman', 'drewsheneman'),
+            cls('Drive', 'drive'),
+            cls('Dromo', 'dro-mo'),
+            cls('DudeAndDude', 'dudedude'),
+            cls('DumbQuestionBadAnswer', 'dumb-question-bad-answer'),
+            cls('DungeonHordes', 'dungeon-hordes'),
+            cls('DustSpecks', 'dust-specks'),
+            cls('DutchnPals', 'dutch-n-pals'),
+            cls('Dysconnected', 'dysconnected'),
+            cls('Econogirl', 'econogirl'),
+            cls('EdgeCity', 'edge-city'),
+            cls('EdgeOfAdventure', 'edge-of-adventure'),
+            cls('Eek', 'eek'),
+            cls('EightballEyeball', 'eightball-eyeball'),
+            cls('ElCafDePoncho', 'espanol/poochcafeespanol', 'es'),
+            cls('EleriMaiHarrisCartoons', 'eleri-mai-harris-cartoons'),
+            cls('Elmo', 'elmo'),
+            cls('ElMundoDeBeakman', 'beakmanespanol'),
+            cls('EmmyLou', 'emmy-lou'),
+            cls('Endtown', 'endtown'),
+            cls('EricTheCircle', 'eric-the-circle'),
+            cls('Eyebeam', 'eyebeam'),
+            cls('FacesOfTheNewsByKerryWaghorn', 'facesinthenews'),
+            cls('FamilyTree', 'familytree'),
+            cls('FamousAndNotSoFamousQuotes', 'famous-and-not-so-famous-quotes'),
+            cls('Farcus', 'farcus'),
+            cls('FarOut', 'far-out'),
+            cls('FatCats', 'fat-cats'),
+            cls('FatherOfTheBrood', 'father-of-the-brood'),
+            cls('FloAndFriends', 'floandfriends'),
+            cls('FloydAndTony', 'floyd-and-tony'),
+            cls('FMinus', 'fminus'),
+            cls('FoolishMortals', 'foolish-mortals'),
+            cls('ForBetterOrForWorse', 'forbetterorforworse'),
+            cls('ForHeavensSake', 'forheavenssake'),
+            cls('FortKnox', 'fortknox'),
+            cls('FourEyes', 'four-eyes'),
+            cls('FowlLanguage', 'fowl-language'),
+            cls('FoxTrot', 'foxtrot'),
+            cls('FoxTrotClassics', 'foxtrotclassics'),
+            cls('FoxTrotEnEspaol', 'espanol/foxtrotespanol', 'es'),
+            cls('Francis', 'francis'),
+            cls('FrankAndErnest', 'frank-and-ernest'),
+            cls('FrankAndSteinway', 'frank-and-steinway'),
+            cls('FrankieComics', 'frankie-comics'),
+            cls('Frazz', 'frazz'),
+            cls('FredBasset', 'fredbasset'),
+            cls('FredBassetEnEspaol', 'espanol/fredbassetespanol', 'es'),
+            cls('FreeRange', 'freerange'),
+            cls('FreshlySqueezed', 'freshlysqueezed'),
+            cls('FriedCritter', 'fried-critter'),
+            cls('FrogApplause', 'frogapplause'),
+            cls('FromTheMoWillemsSketchbook', 'from-the-mo-willems-sketchbook'),
+            cls('GarciaCartoonCo', 'garcia-cartoon-co'),
+            cls('Garfield', 'garfield'),
+            cls('GarfieldEnEspaol', 'espanol/garfieldespanol', 'es'),
+            cls('GarfieldMinusGarfield', 'garfieldminusgarfield'),
+            cls('GaryMarkstein', 'garymarkstein'),
+            cls('GaryVarvel', 'garyvarvel'),
+            cls('GasolineAlley', 'gasolinealley'),
+            cls('Gaturro', 'espanol/gaturro', 'es'),
+            cls('Geech', 'geech'),
+            cls('GentleCreatures', 'gentle-creatures'),
+            cls('GetALife', 'getalife'),
+            cls('GetFuzzy', 'getfuzzy'),
+            cls('Gil', 'gil'),
+            cls('GilThorp', 'gilthorp'),
+            cls('GingerMeggs', 'gingermeggs'),
+            cls('GingerMeggsEnEspaol', 'espanol/gingermeggsespanol', 'es'),
+            cls('GIRTH', 'girth'),
+            cls('GlasbergenCartoons', 'glasbergen-cartoons'),
+            cls('GlennMcCoy', 'glennmccoy'),
+            cls('GManWebcomics', 'g-man-webcomics'),
+            cls('Goats', 'goats'),
+            cls('GoComicsFanArt', 'fan-art'),
+            cls('Graffiti', 'graffiti'),
+            cls('GramDragon', 'gramdragon'),
+            cls('GrandAvenue', 'grand-avenue'),
+            cls('GrandmaSnoops', 'grandmasnoops'),
+            cls('GrannyAnny', 'granny-anny'),
+            cls('Gravy', 'gravy'),
+            cls('GrayMatters', 'gray-matters'),
+            cls('GreenHumour', 'green-humour'),
+            cls('GreenPieces', 'green-pieces'),
+            cls('GunstonStreet', 'gunston-street'),
+            cls('HaikuEwe', 'haikuewe'),
+            cls('HalfFull', 'half-full'),
+            cls('HalfFullEnEspaol', 'espanol/half-full-espanol', 'es'),
+            cls('HallEditorialCartoons', 'hall-editorial-cartoons'),
+            cls('HamShears', 'ham-shears'),
+            cls('HankAndDalesOurWorld', 'hank-and-dales-our-world'),
+            cls('HaphazardHumor', 'haphazard-humor'),
+            cls('HarambeeHills', 'harambeehills'),
+            cls('Headcheese', 'headcheese'),
+            cls('HealthCapsules', 'healthcapsules'),
+            cls('HeartOfTheCity', 'heartofthecity'),
+            cls('Heathcliff', 'heathcliff'),
+            cls('HeathcliffEnEspaol', 'espanol/heathcliffespanol', 'es'),
+            cls('HenryPayne', 'henrypayne'),
+            cls('HerbAndJamaal', 'herbandjamaal'),
+            cls('Herman', 'herman'),
+            cls('HermanEnEspaol', 'espanol/herman-en-espanol', 'es'),
+            cls('HipsterPicnic', 'hipster-picnic'),
+            cls('Hogwashed', 'hogwashed'),
+            cls('HolidayDoodles', 'holiday-doodles'),
+            cls('HomeAndAway', 'homeandaway'),
+            cls('HotComicsForCoolPeople', 'hot-comics-for-cool-people'),
+            cls('Hubbel', 'hubbel'),
+            cls('HUBRIS', 'hubris'),
+            cls('HugoComics', 'hugo-comics'),
+            cls('HumanCull', 'human-cull'),
+            cls('HurrieTheMisManager', 'hurrie'),
+            cls('HutchOwen', 'hutch-owen'),
+            cls('ImagineThis', 'imaginethis'),
+            cls('InheritTheMirth', 'inherit-the-mirth'),
+            cls('InkPen', 'inkpen'),
+            cls('InkwellForest', 'inkwell-forest'),
+            cls('InspectorDangersCrimeQuiz', 'inspector-dangers-crime-quiz'),
+            cls('InTheBleachers', 'inthebleachers'),
+            cls('InTheSticks', 'inthesticks'),
+            cls('InvisibleBread', 'invisible-bread'),
+            cls('IronyOr', 'irony-or'),
+            cls('ItsAllAboutYou', 'itsallaboutyou'),
+            cls('ItsJustJim', 'its-just-jim'),
+            cls('JackOhman', 'jackohman'),
+            cls('JackRadioComics', 'jack-radio-comics'),
+            cls('JanesWorld', 'janesworld'),
+            cls('JayAndBoneheadTheMunkysMrCowhide', 'jayandbonehead'),
+            cls('JeffDanziger', 'jeffdanziger'),
+            cls('JeffStahler', 'jeffstahler'),
+            cls('JenSorensen', 'jen-sorensen'),
+            cls('JerryHolbert', 'jerryholbert'),
+            cls('JetpackJr', 'jetpack-jr'),
+            cls('JimAndSarah', 'jim-and-sarah'),
+            cls('JimBentonCartoons', 'jim-benton-cartoons'),
+            cls('JimMorin', 'jimmorin'),
+            cls('JimsJournal', 'jimsjournal'),
+            cls('JoeHeller', 'joe-heller'),
+            cls('JoelPett', 'joelpett'),
+            cls('JoeVanilla', 'joevanilla'),
+            cls('JohnDeering', 'johndeering'),
+            cls('JolleyStuffBrowser', 'jolleystuff-browser'),
+            cls('JumpStart', 'jumpstart'),
+            cls('JustoYFranco', 'espanol/justo-y-franco', 'es'),
+            cls('JustSayUncle', 'just-say-uncle'),
+            cls('KALEECHIKORNERS', 'kaleechi-korners'),
+            cls('KartoonsByKline', 'kartoons-by-kline'),
+            cls('KenCatalino', 'kencatalino'),
+            cls('KevinKallaugher', 'kevinkallaugher'),
+            cls('KidBeowulf', 'kid-beowulf'),
+            cls('KidShayComics', 'kid-shay-comics'),
+            cls('KidSpot', 'kidspot'),
+            cls('KidTown', 'kidtown'),
+            cls('KitchenCapers', 'kitchen-capers'),
+            cls('KitNCarlyle', 'kitandcarlyle'),
+            cls('Kliban', 'kliban'),
+            cls('KlibansCats', 'klibans-cats'),
+            cls('LaCucaracha', 'lacucaracha'),
+            cls('LaCucarachaEnEspaol', 'espanol/la-cucaracha-en-espanol', 'es'),
+            cls('LaffToons', 'lafftoons'),
+            cls('LaloAlcaraz', 'laloalcaraz'),
+            cls('LaloAlcarazEnEspaol', 'espanol/laloenespanol', 'es'),
+            cls('LardsWorldPeaceTips', 'lards-world-peace-tips'),
+            cls('LarryvilleBlue', 'larryville-blue'),
+            cls('LasHermanasStone', 'espanol/stonesoup_espanol', 'es'),
+            cls('LastKiss', 'lastkiss'),
+            cls('LayLines', 'lay-lines'),
+            cls('LearnToSpeakCat', 'learn-to-speak-cat'),
+            cls('LEFTOVERS', 'leftovers'),
+            cls('LegendOfBill', 'legendofbill'),
+            cls('LeighLunaComics', 'leigh-luna-comics'),
+            cls('LibertyMeadows', 'libertymeadows'),
+            cls('LilAbner', 'lil-abner'),
+            cls('LiliAndDerek', 'lili-and-derek'),
+            cls('LilleysSillies', 'lilleys-sillies'),
+            cls('LimboRoad', 'limbo-road'),
+            cls('Lio', 'lio'),
+            cls('LioEnEspaol', 'espanol/lioespanol', 'es'),
+            cls('LisaBenson', 'lisabenson'),
+            cls('LittleDogLost', 'littledoglost'),
+            cls('LittleFriedChickenAndSushi', 'little-fried-chicken-and-sushi'),
+            cls('LittleNemo', 'little-nemo'),
+            cls('Lola', 'lola'),
+            cls('LolaEnEspaol', 'espanol/lola-en-espanol', 'es'),
+            cls('LooksGoodOnPaper', 'looks-good-on-paper'),
+            cls('Loose', 'loose'),
+            cls('LooseParts', 'looseparts'),
+            cls('LosOsorios', 'espanol/los-osorios', 'es'),
+            cls('LostSheep', 'lostsheep'),
+            cls('LostSideOfSuburbia', 'lostsideofsuburbia'),
+            cls('Luann', 'luann'),
+            cls('LuannAgainn', 'luann-againn'),
+            cls('LuannEnEspaol', 'espanol/luannspanish', 'es'),
+            cls('Lucan', 'lucan'),
+            cls('LuckyCow', 'luckycow'),
+            cls('LugNuts', 'lug-nuts'),
+            cls('LumAndAbner', 'lum-and-abner'),
+            cls('Lunarbaboon', 'lunarbaboon'),
+            cls('Mac', 'mac'),
+            cls('MadDogGhettoCop', 'maddogghettocop'),
+            cls('MagicInAMinute', 'magicinaminute'),
+            cls('Magnificatz', 'magnificatz'),
+            cls('Maintaining', 'maintaining'),
+            cls('MakingIt', 'making-it'),
+            cls('MariasDay', 'marias-day'),
+            cls('Marmaduke', 'marmaduke'),
+            cls('MarmadukeEnEspaol', 'espanol/marmaduke-en-espanol', 'es'),
+            cls('MarshallRamsey', 'marshallramsey'),
+            cls('MarysNature', 'marys-nature'),
+            cls('MassiveFalls', 'massive-falls'),
+            cls('MattBors', 'matt-bors'),
+            cls('MattDavies', 'mattdavies'),
+            cls('MattWuerker', 'mattwuerker'),
+            cls('MazeToonsPuzzle', 'mazetoons-puzzle'),
+            cls('McArroni', 'mcarroni'),
+            cls('MediumLarge', 'medium-large'),
+            cls('MegClassics', 'meg-classics'),
+            cls('MichaelRamirez', 'michaelramirez'),
+            cls('Microcosm', 'microcosm'),
+            cls('MikeDuJour', 'mike-du-jour'),
+            cls('MikeLester', 'mike-lester'),
+            cls('MikeLuckovich', 'mikeluckovich'),
+            cls('Millennialhood', 'millennialhood'),
+            cls('Millennialville', 'millennialville'),
+            cls('Milton50', 'milton-5-0'),
+            cls('Mindframe', 'mindframe'),
+            cls('Minihahas', 'vernscartoons'),
+            cls('MinimumSecurity', 'minimumsecurity'),
+            cls('MiscSoup', 'misc-soup'),
+            cls('MisterAndMe', 'mister-and-me'),
+            cls('MockAll', 'mock-all'),
+            cls('ModeratelyConfused', 'moderately-confused'),
+            cls('Molebashed', 'molebashed'),
+            cls('MollyAndTheBear', 'mollyandthebear'),
+            cls('Momma', 'momma'),
+            cls('MomsCancer', 'moms-cancer'),
+            cls('Mongrels', 'mongrels'),
+            cls('Monty', 'monty'),
+            cls('MontyDiaros', 'espanol/monty-diarios', 'es'),
+            cls('MortsIsland', 'noahs-island'),
+            cls('MotleyClassics', 'motley-classics'),
+            cls('MrGigiAndTheSquid', 'mr-gigi-and-the-squid'),
+            cls('MrLowe', 'mr-lowe'),
+            cls('Mulligan', 'mulligan'),
+            cls('MustardAndBoloney', 'mustard-and-boloney'),
+            cls('MuttAndJeff', 'muttandjeff'),
+            cls('MyCageNewAndOld', 'mycage'),
+            cls('MySonIsADog', 'my-son-is-a-dog'),
+            cls('MythTickle', 'mythtickle'),
+            cls('Nancy', 'nancy'),
+            cls('NancyClassics', 'nancy-classics'),
+            cls('NateElGrande', 'espanol/nate-el-grande', 'es'),
+            cls('NavyBean', 'navybean'),
+            cls('NedAndLarry', 'ned-and-larry'),
+            cls('NestHeads', 'nestheads'),
+            cls('NEUROTICA', 'neurotica'),
+            cls('NewAdventuresOfQueenVictoria', 'thenewadventuresofqueenvictoria'),
+            cls('NickAnderson', 'nickanderson'),
+            cls('NickAndZuzu', 'nick-and-zuzu'),
+            cls('NoAmbiguity', 'no-ambiguity'),
+            cls('NoBusinessIKnow', 'nobusinessiknow'),
+            cls('NonSequitur', 'nonsequitur'),
+            cls('NoOrdinaryLife', 'no-ordinary-life'),
+            cls('Norman', 'Norman'),
+            cls('NothingIsNotSomething', 'nothing-is-not-something'),
+            cls('NotInventedHere', 'not-invented-here'),
+            cls('Npchumorcom', 'npchumor'),
+            cls('OffTheMark', 'offthemark'),
+            cls('OhBrother', 'oh-brother'),
+            cls('OllieAndQuentin', 'ollie-and-quentin'),
+            cls('OnAClaireDay', 'onaclaireday'),
+            cls('OneBigHappy', 'onebighappy'),
+            cls('ONIONAndPEA', 'onion-and-pea'),
+            cls('OrdinaryBill', 'ordinary-bill'),
+            cls('OriginsOfTheSundayComics', 'origins-of-the-sunday-comics'),
+            cls('OscarAndAnnie', 'oscar-and-annie'),
+            cls('OutOfTheGenePoolReRuns', 'outofthegenepool'),
+            cls('Overboard', 'overboard'),
+            cls('OverboardEnEspaol', 'espanol/overboardespanol', 'es'),
+            cls('OverQuirked', 'over-quirked'),
+            cls('OverTheHedge', 'overthehedge'),
+            cls('Owlturd', 'owlturd'),
+            cls('OzyAndMillie', 'ozy-and-millie'),
+            cls('PaddedCell', 'padded-cell'),
+            cls('Painterly', 'sparcomics'),
+            cls('PatOliphant', 'patoliphant'),
+            cls('PaulSzep', 'paulszep'),
+            cls('PawsForThoughtComics', 'paws-for-thought-comics'),
+            cls('PCAndPixel', 'pcandpixel'),
+            cls('Peanuts', 'peanuts'),
+            cls('PeanutsBegins', 'peanuts-begins'),
+            cls('PeanutsEnEspaol', 'espanol/peanuts-espanol', 'es'),
+            cls('PearlsBeforeSwine', 'pearlsbeforeswine'),
+            cls('Peeples', 'peeples'),
+            cls('PeopleOfEarth', 'frankblunt'),
+            cls('Periquita', 'espanol/periquita', 'es'),
+            cls('PerlasParaLosCerdos', 'espanol/perlas-para-los-cerdos', 'es'),
+            cls('PerryBibleFellowship', 'perry-bible-fellowship'),
+            cls('PhilHands', 'phil-hands'),
+            cls('PhoebeAndHerUnicorn', 'phoebe-and-her-unicorn'),
+            cls('Pibgorn', 'pibgorn'),
+            cls('PibgornSketches', 'pibgornsketches'),
+            cls('Pickles', 'pickles'),
+            cls('PicpakDog', 'picpak-dog'),
+            cls('PicturesInBoxes', 'pictures-in-boxes'),
+            cls('PieComic', 'pie-comic'),
+            cls('Pinkerton', 'pinkerton'),
+            cls('PirateMike', 'pirate-mike'),
+            cls('PlanB', 'planb'),
+            cls('PleaseListenToMe', 'please-listen-to-me'),
+            cls('Pluggers', 'pluggers'),
+            cls('PoliceLimit', 'policelimit'),
+            cls('PoochCafe', 'poochcafe'),
+            cls('PoorlyDrawnLines', 'poorly-drawn-lines'),
+            cls('PopCultureShockTherapy', 'pop-culture-shock-therapy'),
+            cls('Poptropica', 'poptropica'),
+            cls('PotShots', 'pot-shots'),
+            cls('PreTeena', 'preteena'),
+            cls('PricklyCity', 'pricklycity'),
+            cls('Prideland', 'prideland'),
+            cls('PrimusTheBadPhilosopher', 'primus-the-bad-philosopher'),
+            cls('PromisesPromises', 'promises-promises'),
+            cls('QuestionableQuotebook', 'questionable-quotebook'),
+            cls('QuickDraw', 'quickdraw'),
+            cls('RabbitsAgainstMagic', 'rabbitsagainstmagic'),
+            cls('RaisingDuncan', 'raising-duncan'),
+            cls('RandolphItch2Am', 'randolphitch'),
+            cls('RandomActsOfNancy', 'random-acts-of-nancy'),
+            cls('RealityCheck', 'realitycheck'),
+            cls('RealLifeAdventures', 'reallifeadventures'),
+            cls('RebeccaHendin', 'rebecca-hendin'),
+            cls('RedAndRover', 'redandrover'),
+            cls('ReplyAll', 'replyall'),
+            cls('ReplyAllLite', 'reply-all-lite'),
+            cls('RichardsPoorAlmanac', 'richards-poor-almanac'),
+            cls('Ringers', 'ringers'),
+            cls('RipHaywire', 'riphaywire'),
+            cls('RipleysBelieveItOrNot', 'ripleysbelieveitornot'),
+            cls('RipleysBelieveItOrNotSpanish', 'espanol/ripleys-en-espanol', 'es'),
+            cls('Risible', 'risible'),
+            cls('RobbieAndBobby', 'robbie-and-bobby'),
+            cls('RobertAriail', 'robert-ariail'),
+            cls('RobRogers', 'robrogers'),
+            cls('RonWarren', 'ron-warren'),
+            cls('RosaDominical', 'espanol/rosa-dominical', 'es'),
+            cls('RoseIsRose', 'roseisrose'),
+            cls('Rubes', 'rubes'),
+            cls('RudyPark', 'rudypark'),
+            cls('Rufus', 'rufus'),
+            cls('SandSharkBeach', 'sandshark-beach'),
+            cls('SarahsScribbles', 'sarahs-scribbles'),
+            cls('SavageChickens', 'savage-chickens'),
+            cls('ScaryGary', 'scarygary'),
+            cls('ScenesFromAMultiverse', 'scenes-from-a-multiverse'),
+            cls('ScottStantis', 'scottstantis'),
+            cls('SharpCurveComics', 'sharp-curve-comics'),
+            cls('Sheldon', 'sheldon'),
+            cls('SherpaAid', 'sherpaaid'),
+            cls('ShirleyAndSonClassics', 'shirley-and-son-classics'),
+            cls('Shoe', 'shoe'),
+            cls('Shoecabbage', 'shoecabbage'),
+            cls('Shortcuts', 'shortcuts'),
+            cls('ShutterbugFollies', 'shutterbug-follies'),
+            cls('SigneWilkinson', 'signewilkinson'),
+            cls('SignGarden', 'signgarden'),
+            cls('SignsOfAFrustratedGolfer', 'signs-of-a-frustrated-golfer'),
+            cls('SketchyChics', 'sketchy-chics'),
+            cls('SkinHorse', 'skinhorse'),
+            cls('Skippy', 'skippy'),
+            cls('Skull', 'skull'),
+            cls('Skylarking', 'skylarking'),
+            cls('SleepytownBeagles', 'sleepytown-beagles'),
+            cls('Smith', 'smith'),
+            cls('Snowflakes', 'snowflakes'),
+            cls('SnowSez', 'snow-sez'),
+            cls('SoccerDude', 'soccer-dude'),
+            cls('SoccerEarth', 'soccer-earth'),
+            cls('SOD', 'sod'),
+            cls('SomethingAboutCeleste', 'something-about-celeste'),
+            cls('SookyRottweiler', 'sooky-rottweiler'),
+            cls('Soulmates', 'soulmates'),
+            cls('SoupToNutz', 'soup-to-nutz'),
+            cls('Spaceport51', 'spaceport-51'),
+            cls('Spectickles', 'abbotts-spectickles'),
+            cls('Speechless', 'speechless'),
+            cls('SpeedBump', 'speedbump'),
+            cls('SportsByVoort', 'sports-by-voort'),
+            cls('SpotTheFrog', 'spot-the-frog'),
+            cls('StaleCrackers', 'clifton'),
+            cls('StankoAndTibor', 'stankotibor'),
+            cls('Starslip', 'starslip'),
+            cls('SteveBenson', 'stevebenson'),
+            cls('SteveBreen', 'stevebreen'),
+            cls('SteveKelley', 'stevekelley'),
+            cls('StickyComics', 'sticky-comics'),
+            cls('StoneSoup', 'stonesoup'),
+            cls('StoneSoupClassics', 'stone-soup-classics'),
+            cls('StrangeBrew', 'strangebrew'),
+            cls('StuartCarlson', 'stuartcarlson'),
+            cls('SubSub', 'subsub'),
+            cls('SuburbanFairyTales', 'suburban-fairy-tales'),
+            cls('SUITSANDGUARDERS', 'suits-and-guarders'),
+            cls('SunnyStreet', 'sunny-street'),
+            cls('SunshineState', 'sunshine-state'),
+            cls('SuperFunPakComix', 'super-fun-pak-comix'),
+            cls('SuperSiblings', 'super-siblings'),
+            cls('SweetAndSourPork', 'sweet-and-sour-pork'),
+            cls('Sylvia', 'sylvia'),
+            cls('TankMcNamara', 'tankmcnamara'),
+            cls('Tarzan', 'tarzan'),
+            cls('TarzanEnEspaol', 'espanol/tarzan-en-espanol', 'es'),
+            cls('TeacherInk', 'teacher-ink'),
+            cls('TedRall', 'tedrall'),
+            cls('TenCats', 'ten-cats'),
+            cls('Thatababy', 'thatababy'),
+            cls('ThatIsPriceless', 'that-is-priceless'),
+            cls('ThatMonkeyTune', 'that-monkey-tune'),
+            cls('ThatNewCarlSmell', 'that-new-carl-smell'),
+            cls('ThatsLife', 'thats-life'),
+            cls('TheAcademiaWaltz', 'academiawaltz'),
+            cls('TheAdventuresOfBusinessCat', 'the-adventures-of-business-cat'),
+            cls('TheAngryGamer', 'the-angry-gamer'),
+            cls('TheArgyleSweater', 'theargylesweater'),
+            cls('TheAwkwardYeti', 'the-awkward-yeti'),
+            cls('TheBarn', 'thebarn'),
+            cls('TheBeauforts', 'the-beauforts'),
+            cls('TheBellies', 'the-bellies'),
+            cls('TheBentPinky', 'the-bent-pinky'),
+            cls('TheBestMedicineCartoon', 'the-best-medicine'),
+            cls('TheBigPicture', 'thebigpicture'),
+            cls('TheBoobiehatch', 'the-boobiehatch'),
+            cls('TheBoondocks', 'boondocks'),
+            cls('TheBornLoser', 'the-born-loser'),
+            cls('TheBuckets', 'thebuckets'),
+            cls('TheCardinal', 'thecardinal'),
+            cls('TheCity', 'thecity'),
+            cls('TheComicStripThatHasAFinaleEveryDay', 'the-comic-strip-that-has-a-finale-every-day'),
+            cls('TheConjurers', 'the-conjurers'),
+            cls('TheCreeps', 'the-creeps'),
+            cls('TheDailyDrawing', 'the-daily-drawing'),
+            cls('TheDinetteSet', 'dinetteset'),
+            cls('TheDinkledorfs', 'the-dinkledorfs'),
+            cls('TheDoozies', 'thedoozies'),
+            cls('TheDuplex', 'duplex'),
+            cls('TheElderberries', 'theelderberries'),
+            cls('TheEntrepiranha', 'the-entrepiranha'),
+            cls('TheFabulousBushPigs', 'the-fabulous-bush-pigs'),
+            cls('TheFlyingMcCoys', 'theflyingmccoys'),
+            cls('TheFuscoBrothers', 'thefuscobrothers'),
+            cls('TheGrayZone', 'the-gray-zone'),
+            cls('TheGreenMonkeys', 'thegreenmonkeys'),
+            cls('TheGrizzwells', 'thegrizzwells'),
+            cls('TheHumbleStumble', 'humble-stumble'),
+            cls('TheKChronicles', 'thekchronicles'),
+            cls('TheKnightLife', 'theknightlife'),
+            cls('TheLeftyBoscoPictureShow', 'leftyboscopictureshow'),
+            cls('TheLostBear', 'the-lost-bear'),
+            cls('TheMagicForest', 'the-magic-forest'),
+            cls('TheMartianConfederacy', 'the-martian-confederacy'),
+            cls('TheMeaningOfLila', 'meaningoflila'),
+            cls('TheMiddletons', 'themiddletons'),
+            cls('TheMothManAndLarvaeBoy', 'the-mothman-and-larvae-boy'),
+            cls('TheNeighborhood', 'the-neighborhood'),
+            cls('TheNevilleYouKnow', 'the-neville-you-know'),
+            cls('TheNonsenseNewz', 'the-nonsense-newz'),
+            cls('TheNorm40', 'the-norm-4-0'),
+            cls('TheNormClassics', 'thenorm'),
+            cls('TheOldManAndHisDog', 'old-man-and-his-dog'),
+            cls('TheOtherCoast', 'theothercoast'),
+            cls('TheQuinnAndFinnShow', 'quinn-and-finn'),
+            cls('TheQuixoteSyndrome', 'the-quixote-syndrome'),
+            cls('TheSunshineClub', 'the-sunshine-club'),
+            cls('TheUnemployed', 'the-unemployed'),
+            cls('TheWagesOfSindy', 'the-wages-of-sindy'),
+            cls('TheWanderingMelon', 'the-wandering-melon'),
+            cls('TheWizardOfIdSpanish', 'espanol/wizardofidespanol', 'es'),
+            cls('TheWorriedWell', 'the-worried-well'),
+            cls('TheWorstThingIveEverDone', 'the-worst-thing-ive-ever-done'),
+            cls('Thingsesque', 'thingsesque'),
+            cls('think', 'think'),
+            cls('ThinLines', 'thinlines'),
+            cls('TimEagan', 'tim-eagan'),
+            cls('TinyConfessions', 'tiny-confessions'),
+            cls('TinySepuku', 'tinysepuku'),
+            cls('TOBY', 'toby'),
+            cls('TodaysDogg', 'todays-dogg'),
+            cls('TodaysTrump', 'todays-trump'),
+            cls('TomTheDancingBug', 'tomthedancingbug'),
+            cls('TomToles', 'tomtoles'),
+            cls('TooMuchCoffeeMan', 'toomuchcoffeeman'),
+            cls('TopicToons', 'topictoons'),
+            cls('ToughTown', 'tough-town'),
+            cls('ToxicValues', 'toxic-values'),
+            cls('Trivquiz', 'trivquiz'),
+            cls('Trucutu', 'espanol/trucutu', 'es'),
+            cls('TruthBeKnown', 'truth-be-known'),
+            cls('TruthFacts', 'truth-facts'),
+            cls('TuesdaysWithCory', 'tuesdays-with-cory'),
+            cls('Tutelandia', 'espanol/tutelandia', 'es'),
+            cls('Twaggies', 'twaggies'),
+            cls('UncleArtsFunland', 'uncleartsfunland'),
+            cls('Underdone', 'underdone'),
+            cls('UnderstandingChaos', 'understanding-chaos'),
+            cls('UnMannerlyWays', 'mannerly-ways'),
+            cls('UnstrangePhenomena', 'unstrange-phenomena'),
+            cls('UpAndOut', 'up-and-out'),
+            cls('USAcres', 'us-acres'),
+            cls('ViewFromTheCouch', 'view-from-the-couch'),
+            cls('ViewsAfrica', 'viewsafrica'),
+            cls('ViewsAmerica', 'viewsamerica'),
+            cls('ViewsAsia', 'viewsasia'),
+            cls('ViewsBusiness', 'viewsbusiness'),
+            cls('ViewsEurope', 'viewseurope'),
+            cls('ViewsLatinAmerica', 'viewslatinamerica'),
+            cls('ViewsMidEast', 'viewsmideast'),
+            cls('ViewsOfTheWorld', 'viewsoftheworld'),
+            cls('ViiviAndWagner', 'viivi-and-wagner'),
+            cls('VoicesInTheDark', 'voices-in-the-dark'),
+            cls('WallaceTheBrave', 'wallace-the-brave'),
+            cls('WaltHandelsman', 'walthandelsman'),
+            cls('WarpedAndDemented', 'warped-and-demented'),
+            cls('Waskataskahiskewaskewan', 'waskataskahiskewaskewan'),
+            cls('WatchYourHead', 'watchyourhead'),
+            cls('WaynoVision', 'waynovision'),
+            cls('WayOutComics', 'way-out-comics'),
+            cls('WeaselInk', 'weasel-ink'),
+            cls('WeePals', 'weepals'),
+            cls('WhiskeyFalls', 'whiskey-falls'),
+            cls('Whiteouts', 'whiteouts'),
+            cls('WickedCrispy', 'wicked-crispy'),
+            cls('WideOpen', 'wide-open'),
+            cls('Windsock', 'windsock'),
+            cls('WinLoseDrew', 'drewlitton'),
+            cls('Winston', 'winston'),
+            cls('WitOfTheWorld', 'witoftheworld'),
+            cls('WittOfWill', 'witt-of-will'),
+            cls('WizardOfId', 'wizardofid'),
+            cls('WizardOfIdClassics', 'wizard-of-id-classics'),
+            cls('WorkingDaze', 'working-daze'),
+            cls('WorkingItOut', 'workingitout'),
+            cls('WorldOfWonder', 'world-of-wonder'),
+            cls('WrobbertCartoons', 'wrobbertcartoons'),
+            cls('WrongHands', 'wrong-hands'),
+            cls('WTDuck', 'wtduck'),
+            cls('WuMo', 'wumo'),
+            cls('WumoEnEspaol', 'espanol/wumoespanol', 'es'),
+            cls('Wyatt', 'wyatt'),
+            cls('YennyEnEspaol', 'espanol/yennyespanol', 'es'),
+            cls('YennyLopez', 'yenny-lopez'),
+            cls('YouCanWithBeakmanAndJax', 'beakman'),
+            cls('ZackHill', 'zackhill'),
+            cls('ZenPencils', 'zen-pencils'),
+            cls('Ziggy', 'ziggy'),
+            cls('ZiggyEnEspaol', 'espanol/ziggyespanol', 'es'),
+            cls('ZITO', 'zito'),
+            cls('ZombieHeights', 'zombie-heights'),
+            cls('Zootopia', 'zootopia'),
+            # END AUTOUPDATE
+        )
