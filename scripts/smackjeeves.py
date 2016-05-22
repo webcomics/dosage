@@ -164,14 +164,13 @@ class SmackJeevesUpdater(ComicListUpdater):
 
     def get_entry(self, name, data):
         sub, top = urlsplit(data[0]).hostname.split('.', 1)
-        cl = u"class SJ%s(_SmackJeeves):" % name
         if top.lower() == "smackjeeves.com":
-            cl += "\n    sub = '%s'" % sub
+            opt = "sub='%s'" % sub
         else:
-            cl += "\n    host = '%s.%s'" % (sub, top)
+            opt = "host='%s.%s'" % (sub, top)
         if data[1]:
-            cl += "\n    adult = True"
-        return cl
+            opt += ", adult=True"
+        return u"cls('%s', %s)," % (name, opt)
 
 if __name__ == '__main__':
     SmackJeevesUpdater(__file__).run()
