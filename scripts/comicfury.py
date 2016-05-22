@@ -173,7 +173,7 @@ class ComicFuryUpdater(ComicListUpdater):
                 print("WARNING:", "Unknown language:", lang)
 
         sub = urlsplit(url).hostname.split('.', 1)[0]
-        return u"cls('%s', '%s'%s)" % (name, sub, langopt)
+        return u"cls('%s', '%s'%s)," % (name, sub, langopt)
 
 
 if __name__ == '__main__':
