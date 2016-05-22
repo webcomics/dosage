@@ -168,13 +168,12 @@ class ComicFuryUpdater(ComicListUpdater):
         langopt = ''
         if lang != "english":
             if lang in self.langmap:
-                langopt = '\n    lang = %r' % self.langmap[lang]
+                langopt = ", '%s'" % self.langmap[lang]
             else:
                 print("WARNING:", "Unknown language:", lang)
 
         sub = urlsplit(url).hostname.split('.', 1)[0]
-        return u"class CF%s(_ComicFury):\n    sub = %r%s" % (name, sub,
-                                                             langopt)
+        return u"cls('%s', '%s'%s)" % (name, sub, langopt)
 
 
 if __name__ == '__main__':
