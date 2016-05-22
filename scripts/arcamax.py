@@ -18,7 +18,9 @@ class ArcamaxUpdater(ComicListUpdater):
 
     # names of comics to exclude
     excluded_comics = (
-        "HagartheHorrible",  # better source available
+        # better source available
+        "Dilbert",
+        "HagarTheHorrible",
     )
 
     def handle_url(self, url):
@@ -36,7 +38,7 @@ class ArcamaxUpdater(ComicListUpdater):
         self.handle_url('http://www.arcamax.com/comics')
 
     def get_entry(self, name, entry):
-        return u"class %s(_Arcamax):\n    path = %r" % (name, entry)
+        return u"cls('%s', '%s')," % (name, entry)
 
 
 if __name__ == '__main__':
