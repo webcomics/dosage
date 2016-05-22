@@ -36,7 +36,7 @@ class CreatorsUpdater(ComicListUpdater):
         self.handle_url('https://www.creators.com/categories/comics/all')
         self.handle_url('https://www.creators.com/categories/cartoons/all')
 
-    def get_classdef(self, name, data):
+    def get_entry(self, name, data):
         lang = 'Es' if name.lower().endswith('spanish') else ''
         return u"class %s(_Creators%s):\n    path = %r" % (name, lang, data)
 

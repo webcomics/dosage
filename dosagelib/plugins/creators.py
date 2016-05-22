@@ -86,7 +86,7 @@ class WinnieThePooh(_Creators):
 
 # do not edit anything below since these entries are generated from
 # scripts/update_plugins.sh
-# DO NOT REMOVE
+# START AUTOUPDATE
 # Agnes has a duplicate in gocomics
 # AndyCapp has a duplicate in gocomics
 class AndyMarlette(_Creators):
@@ -163,3 +163,4 @@ class WizardOfIdSpanish(_CreatorsEs):
 
 # WorkingItOut has a duplicate in gocomics
 # ZackHill has a duplicate in gocomics
+# END AUTOUPDATE

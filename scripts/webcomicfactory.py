@@ -39,7 +39,7 @@ class WebComicFactoryUpdater(ComicListUpdater):
             comicurl = self.find_first(comicurl)
             self.add_comic(name, comicurl)
 
-    def get_classdef(self, name, url):
+    def get_entry(self, name, url):
         return (u"class %s(_WebcomicFactory):\n    url = %r\n" % (name, url) +
                 u"    firstStripUrl = url")
 

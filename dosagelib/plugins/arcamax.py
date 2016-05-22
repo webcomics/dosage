@@ -22,7 +22,7 @@ class _Arcamax(_ParserScraper):
 
 # do not edit anything below since these entries are generated from
 # scripts/update_plugins.sh
-# DO NOT REMOVE
+# START AUTOUPDATE
 # 9ChickweedLane has a duplicate in GoComics/9ChickweedLane
 # Agnes has a duplicate in GoComics/Agnes
 # AndyCapp has a duplicate in GoComics/AndyCapp
@@ -211,3 +211,4 @@ class TinasGroove(_Arcamax):
 
 class Zits(_Arcamax):
     path = 'zits'
+# END AUTOUPDATE

@@ -61,7 +61,7 @@ Overrides = {
 
 
 # do not edit anything below since these entries are generated from scripts/update.sh
-# DO NOT REMOVE
+# START AUTOUPDATE
 add('12_Men_Died_Making_This_Strip', '12_Men_Died_Making_This_Strip')
 add('1337_Joe_and_Fellow_Seth', '1337_Joe_and_Fellow_Seth')
 add('20_Galaxies', '20_Galaxies')
@@ -1295,3 +1295,4 @@ add('Yamete_Kudasai', 'Yamete_Kudasai')
 add('Yaoi_Seth', 'Yaoi_Seth')
 add('Yeah_wait_what', 'Yeah_wait_what')
 add('Yoshi_Saga', 'Yoshi_Saga')
+# END AUTOUPDATE

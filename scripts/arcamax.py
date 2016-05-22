@@ -35,7 +35,7 @@ class ArcamaxUpdater(ComicListUpdater):
         """Parse all search result pages."""
         self.handle_url('http://www.arcamax.com/comics')
 
-    def get_classdef(self, name, entry):
+    def get_entry(self, name, entry):
         return u"class %s(_Arcamax):\n    path = %r" % (name, entry)
 
 

@@ -32,7 +32,7 @@ class KeenSpot(_BasicScraper):
         return [
             # do not edit anything below since these entries are generated from
             # scripts/update_plugins.sh
-            # DO NOT REMOVE
+            # START AUTOUPDATE
             cls('27TwentySeven', 'twenty-seven'),
             cls('Adventurers', 'adventurers'),
             cls('AntiheroForHire', 'antihero'),
@@ -76,4 +76,5 @@ class KeenSpot(_BasicScraper):
             cls('TheHuntersofSalamanstra', 'salamanstra'),
             cls('TheLounge', 'thelounge'),
             cls('WICKEDPOWERED', 'wickedpowered'),
+            # END AUTOUPDATE
         ]

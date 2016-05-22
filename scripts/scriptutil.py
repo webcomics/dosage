@@ -11,6 +11,11 @@ import sys
 import json
 import codecs
 
+try:
+    from os import replace as rename
+except ImportError:
+    from os import rename
+
 import requests
 from lxml import html
 
@@ -27,6 +32,9 @@ def first_lower(x):
 class ComicListUpdater(object):
     dup_templates = ()
     excluded_comics = ()
+
+    START = "# START AUTOUPDATE"
+    END = "# END AUTOUPDATE"
 
     def __init__(self, name):
         self.json = name.replace(".py", ".json")
@@ -79,22 +87,48 @@ class ComicListUpdater(object):
         comic strips."""
         min_comics, filename = args
         min_comics = int(min_comics)
-        with codecs.open(filename, 'a', 'utf-8') as fp:
+        oldf = codecs.open(filename, 'r', 'utf-8')
+        newf = codecs.open(filename + '.new', 'w', 'utf-8')
+        with oldf, newf:
+            indent = self.copy_until_start(oldf, newf)
             with codecs.open(self.json, 'rb', 'utf-8') as f:
                 data = json.load(f)
             for name, entry in sorted(data.items(), key=first_lower):
-                if name in self.excluded_comics:
-                    continue
-                count = entry['count']
-                if count and count < min_comics:
-                    continue
-                dup = self.find_dups(name)
-                if dup is not None:
-                    fp.write(u"# %s has a duplicate in %s\n" % (name, dup))
-                else:
-                    fp.write(u"\n\n%s\n" %
-                             self.get_classdef(truncate_name(name),
-                                               entry['data']))
+                self.write_entry(newf, name, entry, min_comics, indent)
+            self.copy_after_end(oldf, newf)
+        rename(filename + '.new', filename)
+
+    def copy_until_start(self, src, dest):
+        for line in src:
+            dest.write(line)
+            if line.strip().startswith(self.START):
+                return line.find(self.START)
+        raise RuntimeError("can't find start marker!")
+
+    def copy_after_end(self, src, dest):
+        skip = True
+        for line in src:
+            if line.strip().startswith(self.END):
+                skip = False
+            if not skip:
+                dest.write(line)
+        if skip:
+            raise RuntimeError("can't find end marker!")
+
+    def write_entry(self, fp, name, entry, min_comics, indent):
+        if name in self.excluded_comics:
+            return
+        count = entry['count']
+        if count and count < min_comics:
+            return
+        dup = self.find_dups(name)
+        fp.write(" " * indent)
+        if dup is not None:
+            fp.write(u"# %s has a duplicate in %s\n" % (name, dup))
+        else:
+            fp.write(self.get_entry(
+                truncate_name(name),
+                entry['data']).replace("\n", "\n" + (" " * indent)) + "\n")
 
     def find_dups(self, name):
         """Check if comic name already exists."""
@@ -106,7 +140,8 @@ class ComicListUpdater(object):
                     return scraperobj.name
         return None
 
-    def get_classdef(self, name, data):
+    def get_entry(self, name, data):
+        """Return an entry for the module generator."""
         raise NotImplementedError
 
     def run(self):

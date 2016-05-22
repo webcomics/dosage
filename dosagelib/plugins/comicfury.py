@@ -46,7 +46,7 @@ class CFDandyAndCompany(_ComicFury):
 
 # do not edit anything below since these entries are generated from
 # scripts/update_plugins.sh
-# DO NOT REMOVE
+# START AUTOUPDATE
 
 
 class CF0Eight(_ComicFury):
@@ -4018,3 +4018,4 @@ class CFZeroEffortFantasy(_ComicFury):
 class CFZwergElf(_ComicFury):
     sub = 'zwergelf'
     lang = 'de'
+# END AUTOUPDATE

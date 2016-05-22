@@ -14,6 +14,5 @@ fi
 for script in $list; do
   target="${d}/../dosagelib/plugins/${script}.py"
   echo "Upating $target"
-  "${d}/removeafter.py" "$target" "# DO NOT REMOVE"
   "${d}/${script}.py" $mincomics "$target"
 done

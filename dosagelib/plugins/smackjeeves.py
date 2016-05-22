@@ -85,7 +85,7 @@ class _SmackJeeves(_ParserScraper):
 
 # do not edit anything below since these entries are generated from
 # scripts/update_plugins.sh
-# DO NOT REMOVE
+# START AUTOUPDATE
 
 
 class SJ20TimesKirby(_SmackJeeves):
@@ -2752,3 +2752,4 @@ class SJZeldaTheNewAdventureofLinkIIMajorasMask(_SmackJeeves):
 
 class SJ_A_(_SmackJeeves):
     sub = 'a-the-stalker'
+# END AUTOUPDATE

@@ -620,7 +620,7 @@ class GCYouGuysAreMyFriendsTheComic(_GoComics):
 
 # do not edit anything below since these entries are generated from
 # scripts/update_plugins.sh
-# DO NOT REMOVE
+# START AUTOUPDATE
 
 
 class GC060(_GoComics):
@@ -3481,3 +3481,4 @@ class GCZombieHeights(_GoComics):
 
 class GCZootopia(_GoComics):
     path = 'zootopia'
+# END AUTOUPDATE

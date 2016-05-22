@@ -162,7 +162,7 @@ class SmackJeevesUpdater(ComicListUpdater):
             print(last_count, file=sys.stderr, end=" ")
             next_url, last_count = self.handle_url(next_url)
 
-    def get_classdef(self, name, data):
+    def get_entry(self, name, data):
         sub, top = urlsplit(data[0]).hostname.split('.', 1)
         cl = u"class SJ%s(_SmackJeeves):" % name
         if top.lower() == "smackjeeves.com":

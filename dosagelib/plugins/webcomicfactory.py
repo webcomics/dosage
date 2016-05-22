@@ -8,6 +8,7 @@ from __future__ import absolute_import, division, print_function
 from .common import _WordPressScraper, WP_LATEST_SEARCH
 from ..helpers import indirectStarter
 
+
 class _WebcomicFactory(_WordPressScraper):
     starter = indirectStarter
     latestSearch = WP_LATEST_SEARCH
@@ -15,7 +16,7 @@ class _WebcomicFactory(_WordPressScraper):
 
 # do not edit anything below since these entries are generated from
 # scripts/update_plugins.sh
-# DO NOT REMOVE
+# START AUTOUPDATE
 
 
 class AsTheMayoTurns(_WebcomicFactory):
@@ -166,3 +167,4 @@ class WeirdBikerTales(_WebcomicFactory):
 class WillysSpaceDive(_WebcomicFactory):
     url = 'http://www.thewebcomicfactory.com/comic/willys-space-dive/'
     firstStripUrl = url
+# END AUTOUPDATE

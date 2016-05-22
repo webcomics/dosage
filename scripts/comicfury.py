@@ -163,7 +163,7 @@ class ComicFuryUpdater(ComicListUpdater):
             page += 1
             print(last_count, file=sys.stderr, end=" ")
 
-    def get_classdef(self, name, entry):
+    def get_entry(self, name, entry):
         url, active, lang = entry
         langopt = ''
         if lang != "english":
