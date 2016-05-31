@@ -44,7 +44,8 @@ def create_symlinks(d):
     data = loadJson(d)
     outDir = prepare_output(d)
 
-    unseen = data["pages"].keys()
+    unseen = list(data["pages"].keys())
+
     while len(unseen) > 0:
         latest = work = unseen[0]
         while work in unseen:
