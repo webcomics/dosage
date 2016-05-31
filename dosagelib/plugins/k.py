@@ -42,6 +42,14 @@ class KickInTheHead(_WordPressScraper):
     prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
+class KillSixBillionDemons(_WordPressScraper):
+    url = 'http://killsixbilliondemons.com/'
+    firstStripUrl = url + 'comic/kill-six-billion-demons-chapter-1/'
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
+    multipleImagesPerStrip = True
+    adult = True
+
+
 class KiwiBlitz(_ComicControlScraper):
     url = 'http://www.kiwiblitz.com'
 
