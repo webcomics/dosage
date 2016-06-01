@@ -468,6 +468,12 @@ class StreetFighter(_ComicControlScraper):
     url = 'http://www.streetfightercomics.com'
 
 
+class StringTheory(_WordPressScraper):
+    url = 'http://www.stringtheorycomic.com/'
+    firstStripUrl = url + 'comics/chapterone/chapterone/'
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
+
+
 class StrongFemaleProtagonist(_ParserScraper):
     url = 'http://strongfemaleprotagonist.com/'
     stripUrl = url + '%s/'
