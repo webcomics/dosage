@@ -754,7 +754,6 @@ class ComicFury(_ParserScraper):
             cls('RumfAdventures', 'rumfadventures'),
             # RuneSpark has a duplicate in SmackJeeves/RuneSpark
             cls('RunningRiot', 'runningriot'),
-            cls('SagaOfYuukiDebreInsonis', 'debreinsonis'),
             cls('SailorMoonTheEnemyNextDoor', 'sailormoontheenemynextdoor'),
             # SakuraDAY has a duplicate in SmackJeeves/SakuraDAY
             cls('SanityProtectionFactor', 'spf1337'),
