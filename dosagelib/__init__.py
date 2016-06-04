@@ -18,8 +18,8 @@ from pbr.version import VersionInfo
 import pkg_resources
 
 AppName = u'dosage'
-version_info = VersionInfo(AppName)
 try:
+        version_info = VersionInfo(AppName)
         __version__ = version_info.version_string()  # PEP 396
         AppVersion = version_info.version_string_with_vcs()
 except pkg_resources.DistributionNotFound:
