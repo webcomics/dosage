@@ -166,6 +166,12 @@ class BMovieComic(_BasicScraper):
     help = 'Index format: n'
 
 
+class BobWhite(_ParserScraper):
+    url = 'http://www.bobwhitecomics.com/'
+    imageSearch = '//span[%s]/img' % xpath_class('webcomic-object')
+    prevSearch = '//a[@rel="previous"]'
+
+
 class BookOfBiff(_BasicScraper):
     url = 'http://thebookofbiff.com/'
     stripUrl = url + '%s/'
