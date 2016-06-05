@@ -453,11 +453,6 @@ def strsize(b):
     return "%.1fGB" % (float(b) / (1024 * 1024 * 1024))
 
 
-def getDirname(name):
-    """Replace slashes with path separator of name."""
-    return name.replace('/', os.sep)
-
-
 def getFilename(name):
     """Get a filename from given name without dangerous or incompatible
     characters."""

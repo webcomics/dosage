@@ -12,7 +12,7 @@ import contextlib
 from datetime import datetime
 
 from .output import out
-from .util import unquote, getDirname, getFilename, urlopen, strsize
+from .util import unquote, getFilename, urlopen, strsize
 from .events import getHandler
 
 
@@ -25,13 +25,11 @@ RFC_1123_DT_STR = "%a, %d %b %Y %H:%M:%S GMT"
 class ComicStrip(object):
     """A list of comic image URLs."""
 
-    def __init__(self, name, strip_url, image_urls, namer, session, text=None):
+    def __init__(self, scraper, strip_url, image_urls, text=None):
         """Store the image URL list."""
-        self.name = name
+        self.scraper = scraper
         self.strip_url = strip_url
         self.image_urls = image_urls
-        self.namer = namer
-        self.session = session
         self.text = text
 
     def getImages(self):
@@ -41,12 +39,11 @@ class ComicStrip(object):
 
     def getDownloader(self, url):
         """Get an image downloader."""
-        filename = self.namer(url, self.strip_url)
+        filename = self.scraper.namer(url, self.strip_url)
         if filename is None:
             filename = url.rsplit('/', 1)[1]
-        dirname = getDirname(self.name)
-        return ComicImage(self.name, url, self.strip_url, dirname, filename,
-                          self.session, text=self.text)
+        return ComicImage(self.scraper, url, self.strip_url, filename,
+                          text=self.text)
 
 
 class ComicImage(object):
@@ -54,16 +51,13 @@ class ComicImage(object):
 
     ChunkBytes = 1024 * 100  # 100KB
 
-    def __init__(self, name, url, referrer, dirname, filename, session,
-                 text=None):
+    def __init__(self, scraper, url, referrer, filename, text=None):
         """Set URL and filename."""
-        self.name = name
+        self.scraper = scraper
         self.referrer = referrer
         self.url = url
-        self.dirname = dirname
         filename = getFilename(filename)
         self.filename, self.ext = os.path.splitext(filename)
-        self.session = session
         self.text = text
 
     def connect(self, lastchange=None):
@@ -71,7 +65,8 @@ class ComicImage(object):
         headers = {}
         if lastchange:
             headers['If-Modified-Since'] = lastchange.strftime(RFC_1123_DT_STR)
-        self.urlobj = urlopen(self.url, self.session, referrer=self.referrer,
+        self.urlobj = urlopen(self.url, self.scraper.session,
+                              referrer=self.referrer,
                               max_content_bytes=MaxImageBytes, stream=True,
                               headers=headers)
         if self.urlobj.status_code == 304:  # Not modified
@@ -97,7 +92,7 @@ class ComicImage(object):
 
     def save(self, basepath):
         """Save comic URL to filename on disk."""
-        comicdir = os.path.join(basepath, self.dirname)
+        comicdir = self.scraper.get_download_dir(basepath)
         if not os.path.isdir(comicdir):
             os.makedirs(comicdir)
         fnbase = os.path.join(comicdir, self.filename)
@@ -125,7 +120,7 @@ class ComicImage(object):
             out.debug(u'Writing comic text to file %s...' % fntext)
             with self.fileout(fntext, encoding='utf-8') as f:
                 f.write(self.text)
-        getHandler().comicDownloaded(self, fn, text=self.text)
+        getHandler().comicDownloaded(self, fn)
         return fn, True
 
     @contextlib.contextmanager

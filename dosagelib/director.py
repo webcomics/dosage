@@ -13,7 +13,6 @@ from six.moves.urllib.parse import urlparse
 
 from .output import out
 from . import events, scraper
-from .util import getDirname
 
 
 class ComicQueue(Queue):
@@ -196,11 +195,8 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False, listi
         # only scrapers whose directory already exists
         if len(comics) > 1:
             out.warn(u"using '@' as comic name ignores all other specified comics.")
-        for scraperobj in scraper.get_scrapers(include_removed=True):
-            dirname = getDirname(scraperobj.name)
-            if os.path.isdir(os.path.join(basepath, dirname)):
-                if shouldRunScraper(scraperobj, adult, listing):
-                    yield scraperobj
+        for comic in get_existing_comics(basepath, adult, listing):
+            yield comic
     else:
         # get only selected comic scrapers
         # store them in a set to eliminate duplicates
@@ -226,6 +222,14 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False, listi
                     if scraperobj not in scrapers:
                         scrapers.add(scraperobj)
                         yield scraperobj
+
+
+def get_existing_comics(basepath=None, adult=True, listing=False):
+    for scraperobj in scraper.get_scrapers(include_removed=True):
+        dirname = scraperobj.get_download_dir(basepath)
+        if os.path.isdir(dirname):
+            if shouldRunScraper(scraperobj, adult, listing):
+                yield scraperobj
 
 
 def shouldRunScraper(scraperobj, adult=True, listing=False):

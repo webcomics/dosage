@@ -25,7 +25,7 @@ except ImportError:
     pycountry = None
 
 from . import loader, configuration, languages
-from .util import (get_page, makeSequence, get_system_uid, urlopen, getDirname,
+from .util import (get_page, makeSequence, get_system_uid, urlopen,
                    unescape, tagre, normaliseURL, prettyMatcherList,
                    requests_session)
 from .comic import ComicStrip
@@ -147,8 +147,7 @@ class Scraper(object):
                                   optional=self.textOptional)
         else:
             text = None
-        return ComicStrip(self.name, url, imageUrls, self.namer,
-                          self.session, text=text)
+        return ComicStrip(self, url, imageUrls, text=text)
 
     def getStrips(self, maxstrips=None):
         """Get comic strips."""
@@ -223,7 +222,7 @@ class Scraper(object):
             else:
                 prevUrl = self.prevUrlModifier(prevUrl)
                 out.debug(u"Found previous URL %s" % prevUrl)
-                getHandler().comicPageLink(self.name, url, prevUrl)
+                getHandler().comicPageLink(self, url, prevUrl)
         return prevUrl
 
     def getIndexStripUrl(self, index):
@@ -260,10 +259,28 @@ class Scraper(object):
         page = urlopen(url, self.session, data=data)
         return page.text
 
+    def get_download_dir(self, basepath):
+        """Try to find the corect download directory, ignoring case
+        differences."""
+        path = basepath
+        for part in self.name.split('/'):
+            done = False
+            if (os.path.isdir(path) and
+               not os.path.isdir(os.path.join(path, part))):
+                for entry in os.listdir(path):
+                    if (entry.lower() == part.lower() and
+                       os.path.isdir(os.path.join(path, entry))):
+                        path = os.path.join(path, entry)
+                        done = True
+                        break
+            if not done:
+                path = os.path.join(path, part)
+        return path
+
     def getCompleteFile(self, basepath):
         """Get filename indicating all comics are downloaded."""
-        dirname = getDirname(self.name)
-        return os.path.join(basepath, dirname, "complete.txt")
+        dirname = self.get_download_dir(basepath)
+        return os.path.join(dirname, "complete.txt")
 
     def isComplete(self, basepath):
         """Check if all comics are downloaded."""
