@@ -152,7 +152,6 @@ class Eryl(_WordPressScraper):
     firstStripUrl = url
     latestSearch = WP_LATEST_SEARCH
     starter = indirectStarter
-    help = 'This was known as DarkWings in previous Dosage versions'
 
 
 class EverybodyLovesEricRaymond(_BasicScraper):

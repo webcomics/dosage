@@ -535,7 +535,7 @@ def find_scrapers(comic, multiple_allowed=False):
         raise ValueError("empty comic name")
     candidates = []
     cname = comic.lower()
-    for scrapers in get_scrapers():
+    for scrapers in get_scrapers(include_removed=True):
         lname = scrapers.name.lower()
         if lname == cname:
             # perfect match
@@ -543,7 +543,7 @@ def find_scrapers(comic, multiple_allowed=False):
                 return [scrapers]
             else:
                 candidates.append(scrapers)
-        elif cname in lname:
+        elif cname in lname and scrapers.url:
             candidates.append(scrapers)
     if len(candidates) > 1 and not multiple_allowed:
         comics = ", ".join(x.name for x in candidates)
@@ -556,7 +556,7 @@ def find_scrapers(comic, multiple_allowed=False):
 _scrapers = None
 
 
-def get_scrapers():
+def get_scrapers(include_removed=False):
     """Find all comic scraper classes in the plugins directory.
     The result is cached.
     @return: list of Scraper classes
@@ -572,7 +572,10 @@ def get_scrapers():
         check_scrapers()
         out.debug(u"... %d modules loaded from %d classes." % (
             len(_scrapers), len(plugins)))
-    return _scrapers
+    if include_removed:
+        return _scrapers
+    else:
+        return [x for x in _scrapers if x.url]
 
 
 def check_scrapers():

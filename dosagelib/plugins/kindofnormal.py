@@ -22,6 +22,4 @@ class KindOfNormal(_ParserScraper):
             cls('MeAndDanielle', 'meanddanielle'),
             cls('TruthFacts', 'truthfacts'),
             cls('Wumo', 'wumo'),
-            # name in previous versions
-            cls('Wulffmorgenthaler', 'wumo'),
         ]

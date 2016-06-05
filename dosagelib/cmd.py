@@ -7,8 +7,9 @@ from __future__ import absolute_import, division, print_function
 
 import os
 import argparse
+import six
 
-from . import events, configuration, singleton, director, __version__
+from . import events, configuration, singleton, director, scraper, __version__
 from .output import out
 from .util import internal_error, strlimit
 
@@ -89,6 +90,10 @@ def setup_options():
     # multimatch is only used for development, eg. testing if all comics of a scripted plugin are working
     parser.add_argument('--multimatch', action='store_true',
                         help=argparse.SUPPRESS)
+    # List all comic modules, even those normally suppressed, because they
+    # are not "real" (moved & removed)
+    parser.add_argument('--list-all', action='store_true',
+                        help=argparse.SUPPRESS)
     parser.add_argument('comic', nargs='*',
                         help='comic module name (including case insensitive substrings)')
     try:
@@ -157,7 +162,7 @@ def display_comic_help(scraperobj):
     orig_context = out.context
     out.context = scraperobj.name
     try:
-        out.info(u"URL: " + scraperobj.url)
+        out.info(u"URL: " + six.text_type(scraperobj.url))
         out.info(u"Language: " + scraperobj.language())
         if scraperobj.adult:
             out.info(u"Adult comic, use option --adult to fetch.")
@@ -225,8 +230,9 @@ def run(options):
         return display_version(options.verbose)
     if options.list:
         return do_list()
-    if options.singlelist:
-        return do_list(column_list=False, verbose=options.verbose)
+    if options.singlelist or options.list_all:
+        return do_list(column_list=False, verbose=options.verbose,
+                       listall=options.list_all)
     # after this a list of comic strips is needed
     if not options.comic:
         out.warn(u'No comics specified, bailing out!')
@@ -238,14 +244,14 @@ def run(options):
     return director.getComics(options)
 
 
-def do_list(column_list=True, verbose=False):
+def do_list(column_list=True, verbose=False, listall=False):
     """List available comics."""
     with out.pager():
         out.info(u'Available comic scrapers:')
         out.info(u'Comics tagged with [%s] require age confirmation with the --adult option.' % TAG_ADULT)
         out.info(u'Non-english comics are tagged with [%s].' % TAG_LANG)
-        scrapers = sorted(director.getAllScrapers(listing=True),
-                          key=lambda s: s.name)
+        scrapers = sorted(scraper.get_scrapers(listall),
+                          key=lambda s: s.name.lower())
         if column_list:
             num, disabled = do_column_list(scrapers)
         else:
@@ -267,7 +273,7 @@ def do_single_list(scrapers, verbose=False):
             display_comic_help(scraperobj)
         else:
             out.info(get_tagged_scraper_name(scraperobj, reasons=disabled))
-    return num, disabled
+    return num + 1, disabled
 
 
 def do_column_list(scrapers):

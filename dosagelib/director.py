@@ -190,18 +190,13 @@ def finish():
     out.warn("Waiting for download threads to finish.")
 
 
-def getAllScrapers(listing=False):
-    """Get all scrapers."""
-    return getScrapers(['@@'], listing=listing)
-
-
 def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False, listing=False):
     """Get scraper objects for the given comics."""
     if '@' in comics:
         # only scrapers whose directory already exists
         if len(comics) > 1:
             out.warn(u"using '@' as comic name ignores all other specified comics.")
-        for scraperobj in scraper.get_scrapers():
+        for scraperobj in scraper.get_scrapers(include_removed=True):
             dirname = getDirname(scraperobj.name)
             if os.path.isdir(os.path.join(basepath, dirname)):
                 if shouldRunScraper(scraperobj, adult, listing):
