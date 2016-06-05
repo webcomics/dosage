@@ -13,15 +13,18 @@ your intentions, and received permission to distribute.
 The primary interface is the 'dosage' commandline script.
 Comic modules for each comic are located in L{dosagelib.plugins}.
 """
+from __future__ import absolute_import, division, print_function
 
+import sys
+import os
 from pbr.version import VersionInfo
-import pkg_resources
 
 AppName = u'dosage'
-try:
-        version_info = VersionInfo(AppName)
-        __version__ = version_info.version_string()  # PEP 396
-        AppVersion = version_info.version_string_with_vcs()
-except pkg_resources.DistributionNotFound:
-        __version__ = "2.15.0"
-        AppVersion = __version__ + "-unknown"
+
+# Workaround for pkg_resources not working inside PyInstaller...
+if hasattr(sys, 'frozen'):
+    os.environ['PBR_VERSION'] = '2.15.0'
+
+version_info = VersionInfo(AppName)
+__version__ = version_info.version_string()  # PEP 396
+AppVersion = version_info.release_string()
