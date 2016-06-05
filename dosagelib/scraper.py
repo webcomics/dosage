@@ -84,7 +84,10 @@ class Scraper(object):
 
     @classmethod
     def getmodules(cls):
-        return [cls(cls.__name__)]
+        name = cls.__name__
+        if hasattr(cls, 'name'):
+            name = cls.name
+        return [cls(name)]
 
     @property
     def indexes(self):
