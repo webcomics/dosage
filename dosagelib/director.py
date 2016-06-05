@@ -201,11 +201,6 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False, listi
             if os.path.isdir(os.path.join(basepath, dirname)):
                 if shouldRunScraper(scraperobj, adult, listing):
                     yield scraperobj
-    elif '@@' in comics:
-        # all scrapers
-        for scraperobj in scraper.get_scrapers():
-            if shouldRunScraper(scraperobj, adult, listing):
-                yield scraperobj
     else:
         # get only selected comic scrapers
         # store them in a set to eliminate duplicates
