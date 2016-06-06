@@ -7,7 +7,7 @@ from __future__ import absolute_import, division, print_function
 
 from six.moves.urllib.parse import (
     quote as url_quote, unquote as url_unquote, urlparse, urlunparse, urlsplit)
-from six.moves.urllib import robotparser
+from six.moves.urllib_robotparser import RobotFileParser
 import requests
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
@@ -250,7 +250,7 @@ def check_robotstxt(url, session):
 @memoized
 def get_robotstxt_parser(url, session=None):
     """Get a RobotFileParser for the given robots.txt URL."""
-    rp = robotparser.RobotFileParser()
+    rp = RobotFileParser()
     try:
         req = urlopen(url, session, max_content_bytes=MaxContentBytes,
                       raise_for_status=False)
