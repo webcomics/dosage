@@ -6,7 +6,6 @@
 from __future__ import absolute_import, division, print_function
 
 import re
-import os
 import multiprocessing
 from six.moves.urllib.parse import urlsplit
 
@@ -31,14 +30,6 @@ def get_lock(host):
     return _locks[host]
 
 
-def _get_saved_images(outdir, scraperobj):
-    """Get saved images."""
-    dirs = tuple(scraperobj.name.split('/'))
-    files = os.listdir(os.path.join(outdir, *dirs))
-    files = [x for x in files if not x.endswith(".txt")]
-    return files
-
-
 def test_comicmodule(tmpdir, scraperobj):
     '''Test a scraper. It must be able to traverse backward for at least 5
     strips from the start, and find strip images on at least 4 pages.'''
@@ -55,8 +46,10 @@ def test_comicmodule(tmpdir, scraperobj):
 def _test_comic(outdir, scraperobj):
     num_strips = 0
     strip = None
+    files = []
     for strip in scraperobj.getStrips(MaxStrips):
-        _check_strip(outdir, strip, scraperobj.multipleImagesPerStrip)
+        files.append(_check_strip(outdir, strip,
+                                  scraperobj.multipleImagesPerStrip))
 
         if num_strips > 0:
             _check_stripurl(strip, scraperobj)
@@ -72,34 +65,42 @@ def _test_comic(outdir, scraperobj):
             msg += " Check the prevSearch pattern at %s" % strip.strip_url
         assert num_strips == num_strips_expected, msg
         if strip:
-            _check_scraperesult(outdir, num_strips_expected, strip, scraperobj)
+            _check_scraperesult(files, num_strips_expected, strip, scraperobj)
 
 
 def _check_strip(outdir, strip, multipleImagesPerStrip):
     '''Check that a specific page yields images and the comic module correctly
     declares if there are multiple images per page.'''
     images = []
+    files = []
     for image in strip.getImages():
         images.append(image.url)
-        image.save(outdir)
+
+        # write a fake image (to download less)
+        fakeimg = image._fnbase(outdir) + '.fake'
+        with open(fakeimg, 'w') as f:
+            f.write("fake image for testing")
+
+        fn, _ = image.save(outdir)
+        files.append(fn)
     assert images, 'failed to find images at %s' % strip.strip_url
     if not multipleImagesPerStrip:
         assert len(images) == 1, 'found more than 1 image at %s: %s' % (
                 strip.strip_url, images)
+    return files
 
 
-def _check_scraperesult(outdir, num_images_expected, strip, scraperobj):
+def _check_scraperesult(saved_images, num_images_expected, strip, scraperobj):
     '''Check that exactly or for multiple pages at least num_strips images are
     saved. This checks saved files, ie. it detects duplicate filenames.'''
-    saved_images = _get_saved_images(outdir, scraperobj)
     num_images = len(saved_images)
 
-    attrs = (num_images, saved_images, num_images_expected, outdir)
+    attrs = (num_images, saved_images, num_images_expected)
     if scraperobj.multipleImagesPerStrip:
-        err = 'saved %d %s instead of at least %d images in %s' % attrs
+        err = 'saved %d %s instead of at least %d images' % attrs
         assert num_images >= num_images_expected, err
     else:
-        err = 'saved %d %s instead of %d images in %s' % attrs
+        err = 'saved %d %s instead of %d images' % attrs
         assert num_images == num_images_expected, err
 
 

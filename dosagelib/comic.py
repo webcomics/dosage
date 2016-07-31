@@ -92,24 +92,21 @@ class ComicImage(object):
 
     def save(self, basepath):
         """Save comic URL to filename on disk."""
-        comicdir = self.scraper.get_download_dir(basepath)
-        if not os.path.isdir(comicdir):
-            os.makedirs(comicdir)
-        fnbase = os.path.join(comicdir, self.filename)
+        fnbase = self._fnbase(basepath)
         exist = [x for x in glob.glob(fnbase + ".*") if not x.endswith(".txt")]
         out.info(u"Get image URL %s" % self.url, level=1)
         if len(exist) == 1:
             lastchange = os.path.getmtime(exist[0])
             self.connect(datetime.utcfromtimestamp(lastchange))
             if self.urlobj.status_code == 304:  # Not modified
-                self.exist_err(exist[0])
+                self._exist_err(exist[0])
                 return exist[0], False
         else:
             self.connect()
         fn = fnbase + self.ext
         # compare with >= since content length could be the compressed size
         if os.path.isfile(fn) and os.path.getsize(fn) >= self.contentLength:
-            self.exist_err(fn)
+            self._exist_err(fn)
             return fn, False
         out.debug(u'Writing comic to file %s...' % fn)
         with self.fileout(fn) as f:
@@ -144,5 +141,13 @@ class ComicImage(object):
         else:
             out.info(u"Saved %s (%s)." % (filename, strsize(size)))
 
-    def exist_err(self, fn):
+    def _exist_err(self, fn):
         out.info(u'Skipping existing file "%s".' % fn)
+
+    def _fnbase(self, basepath):
+        '''Determine the target base name of this comic file and make sure the
+        directory exists.'''
+        comicdir = self.scraper.get_download_dir(basepath)
+        if not os.path.isdir(comicdir):
+            os.makedirs(comicdir)
+        return os.path.join(comicdir, self.filename)
