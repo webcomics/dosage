@@ -203,6 +203,21 @@ class Precocious(_ParserScraper):
     prevSearch = '//a[img[contains(@src, "/back_arrow")]]'
     help = 'Index format: yyyy/mm/dd'
 
+class PrinceOfSartar(_WordPressScraper):
+    url = 'http://www.princeofsartar.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'introduction-chapter-1'
+    imageSearch = '//div[@id="comic"]//img'
+    prevSearch = '//a[@class="navi comic-nav-previous navi-prev"]'
+    nextSearch = '//a[@class="navi comic-nav-next navi-next"]'
+    starter = bounceStarter
+    help = 'Index format: name'
+
+    def namer(self, image_url, page_url):
+        """Use page URL to contruct a unique name."""
+        title = page_url.rsplit('/', 2)[1]
+        image_ext = image_url.rsplit('.', 1)[1]
+        return '%s.%s' % (title, image_ext)
 
 class PS238(_ParserScraper):
     url = 'http://ps238.nodwick.com/'
