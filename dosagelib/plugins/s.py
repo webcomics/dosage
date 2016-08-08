@@ -383,6 +383,13 @@ class SpaceTrawler(_WordPressScraper):
     prevSearch = '//a[%s]' % xpath_class('navi-prev')
     endOfLife = True
 
+class SpaceJunkArlia(_BasicScraper):
+    url = 'http://spacejunkarlia.com'
+    stripUrl = url + '/index.php?strip_id=%s'
+    firstStripUrl = stripUrl % '0'
+    imageSearch = compile(tagre('img', 'src', r'(comics/[^"]+)'))
+    prevSearch = compile(tagre('a', 'href', r'(\?strip_id=\d+)') + '&lt;<')
+    help = 'Index format: number'
 
 class Spamusement(_BasicScraper):
     url = 'http://spamusement.com/'
