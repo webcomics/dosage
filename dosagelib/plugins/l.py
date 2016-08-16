@@ -87,7 +87,7 @@ class LittleGamers(_BasicScraper):
 
 
 class LoadingArtist(_ParserScraper):
-    url = 'http://www.loadingartist.com/comic/new-update/'
+    url = 'http://www.loadingartist.com/latest'
     imageSearch = '//div[@class="comic"]//img'
     prevSearch = "//a[contains(concat(' ', @class, ' '), ' prev ')]"
 
