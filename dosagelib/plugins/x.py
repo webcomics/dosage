@@ -5,26 +5,20 @@
 
 from __future__ import absolute_import, division, print_function
 
-from re import compile
-
-from ..scraper import _BasicScraper
+from ..scraper import _ParserScraper
 from ..helpers import bounceStarter
-from ..util import tagre
 
-
-class Xkcd(_BasicScraper):
+class Xkcd(_ParserScraper):
     name = 'xkcd'
     url = 'http://xkcd.com/'
     starter = bounceStarter
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src",
-                                r'(//imgs\.xkcd\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/\d+/)', before="prev"))
-    nextSearch = compile(tagre("a", "href", r'(/\d+/)', before="next"))
+    imageSearch = '//div[@id="comic"]/img'
+    prevSearch = '//a[@rel="prev"]'
+    nextSearch = '//a[@rel="next"]'
     help = 'Index format: n (unpadded)'
-    textSearch = compile(tagre("img", "title", r'([^"]+)',
-                               before=r'//imgs\.xkcd\.com/comics/'))
+    textSearch = '//div[@id="comic"]/img/@title'
 
     def namer(self, image_url, page_url):
         index = int(page_url.rstrip('/').rsplit('/', 1)[-1])
