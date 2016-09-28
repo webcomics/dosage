@@ -10,7 +10,7 @@ from re import compile, escape, MULTILINE
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import regexNamer, bounceStarter, indirectStarter
-from .common import _WordPressScraper, _WPNaviIn, xpath_class, WP_LATEST_SEARCH
+from .common import _WordPressScraper, xpath_class, WP_LATEST_SEARCH
 
 
 class AbstruseGoose(_BasicScraper):
@@ -117,7 +117,7 @@ class ALessonIsLearned(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class Alice(_WPNaviIn):
+class Alice(_WordPressScraper):
     url = 'http://www.alicecomics.com/'
     latestSearch = '//a[text()="Latest Alice!"]'
     starter = indirectStarter
@@ -152,8 +152,11 @@ class AlphaLuna(_BasicScraper):
     url = 'http://www.alphaluna.net/'
     stripUrl = url + 'issue-%s/'
     firstStripUrl = stripUrl % '1/cover'
-    imageSearch = compile(tagre("a", "href", r'[^"]*/(?:issue-|support/upcoming)[^"]+') + tagre("img", "src", r'([^"]*/PAGINAS/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)') + tagre("img", "alt", "Prev"))
+    imageSearch = compile(tagre("a", "href",
+                                r'[^"]*/(?:issue-|support/upcoming)[^"]+') +
+                          tagre("img", "src", r'([^"]*/PAGINAS/[^"]+)'))
+    prevSearch = compile(tagre("a", "href", r'([^"]+)') +
+                         tagre("img", "alt", "Prev"))
     help = 'Index format: issue/page (e.g. 4/05)'
 
 
@@ -261,16 +264,6 @@ class Ashes(_WordPressScraper):
     firstStripUrl = url
     latestSearch = WP_LATEST_SEARCH
     starter = indirectStarter
-
-
-class ASkeweredParadise(_BasicScraper):
-    url = 'http://aspcomics.net/'
-    stripUrl = url + 'comic/%s'
-    firstStripUrl = stripUrl % '001'
-    imageSearch = compile(tagre("img", "src", r'(http://aspcomics\.net/sites/default/files[^"]*/asp\d+\.jpg)[^"]+'))
-    prevSearch = compile(tagre("a", "href", "(/comic/\d+)") +
-                         r"[^>]+Previous")
-    help = 'Index format: nnn'
 
 
 class ASofterWorld(_ParserScraper):

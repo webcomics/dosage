@@ -57,7 +57,8 @@ class Baroquen(_BasicScraper):
 class Bearmageddon(_WordPressScraper):
     url = 'http://bearmageddon.com/'
     firstStripUrl = url + '2011/08/01/page-1/'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
+    latestSearch = '//a[div[%s]]' % xpath_class('latest-page')
+    starter = indirectStarter
 
 
 class Beetlebum(_BasicScraper):
@@ -209,6 +210,9 @@ class Brink(_BasicScraper):
 class BroodHollow(_WordPressScraper):
     url = 'http://broodhollow.chainsawsuit.com/'
     firstStripUrl = 'http://broodhollow.chainsawsuit.com/page/2012/10/06/book-1-curious-little-thing'
+
+    def shouldSkipUrl(self, url, data):
+        return data.xpath('//div[@id="comic"]//iframe')
 
 
 class Buni(_WordPressScraper):
