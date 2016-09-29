@@ -163,12 +163,7 @@ class EverybodyLovesEricRaymond(_BasicScraper):
     help = 'Index format: name-of-old-comic'
 
 
-class EverydayBlues(_WordPressScraper):
-    url = 'http://everydayblues.everydayblues.net/'
-    firstStripUrl = url + '2010/02/11/sometimes/'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
-
-
+# Seems to be GeoBlocked from Europe?
 class EvilDiva(_BasicScraper):
     url = 'http://www.evildivacomics.com/'
     stripUrl = url + '?p=%s'

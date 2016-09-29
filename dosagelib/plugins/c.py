@@ -156,15 +156,9 @@ class Champ2010(_BasicScraper):
     help = 'Index format: yy-dd-mm'
 
 
-class ChannelAte(_BasicScraper):
+class ChannelAte(_WordPressScraper):
     url = 'http://www.channelate.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src",
-                                r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href",
-                               r'(%s\d+/\d+/\d+/[^"]+)' % rurl, after="prev"))
-    help = 'Index format: yyyy/mm/dd/name'
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
 class ChasingTheSunset(_BasicScraper):
@@ -272,17 +266,6 @@ class CorydonCafe(_ParserScraper):
 class CourtingDisaster(_WordPressScraper):
     url = 'http://www.courting-disaster.com/'
     firstStripUrl = 'http://www.courting-disaster.com/comic/courting-disaster-17/'
-
-
-class CowboyJedi(_WordPressScraper):
-    url = 'http://www.cowboyjedi.com/'
-    nextSearch = '//a[%s]' % xpath_class('comic-nav-next')
-    starter = bounceStarter
-
-    def shouldSkipUrl(self, url, data):
-        return url in (
-            self.url + 'comic/darth-bart-wont-stop/',
-        )
 
 
 class CraftedFables(_WordPressScraper):

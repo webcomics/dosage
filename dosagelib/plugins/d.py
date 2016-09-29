@@ -13,19 +13,12 @@ from ..util import tagre
 from .common import _WordPressScraper, xpath_class
 
 
-class DailyDose(_ParserScraper):
-    url = 'http://dailydoseofcomics.com/'
-    starter = indirectStarter
-    imageSearch = '//p/a/img'
-    prevSearch = '//a[@rel="prev"]'
-    latestSearch = '//a[@rel="bookmark"]'
-
-
 class DamnLol(_ParserScraper):
     url = 'http://www.damnlol.com/'
-    prevSearch = '//a[@id="prev"]'
-    nextSearch = '//a[@id="next"]'
-    imageSearch = '//div[@id="hideFooter"]/img'
+    # Classes for next and previous seem to be swapped...
+    prevSearch = '//a[%s]' % xpath_class("next")
+    nextSearch = '//a[%s]' % xpath_class("previous")
+    imageSearch = '//img[@id="post-image"]'
     starter = bounceStarter
 
     def namer(self, image_url, page_url):
@@ -122,7 +115,7 @@ class DieFruehreifen(_BasicScraper):
 
 class DieselSweeties(_ParserScraper):
     url = 'http://dieselsweeties.com/'
-    stripUrl = url + 'ics/%s/'
+    stripUrl = url + 'ics/%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = '//img[@class="xomic"]'
     prevSearch = '//div[@id="prev"]//a[contains(text(), "previous")]'
@@ -174,12 +167,6 @@ class DMFA(_BasicScraper):
     help = 'Index format: nnn (normally, some specials)'
 
 
-class DoctorCat(_WordPressScraper):
-    url = 'http://doctorcatmd.com/'
-    firstStripUrl = url + 'comic/doctor-cat'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
-
-
 class DoemainOfOurOwn(_BasicScraper):
     url = 'http://www.doemain.com/'
     stripUrl = url + 'index.cgi/%s'
@@ -229,11 +216,11 @@ class Dracula(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class DreamKeepersPrelude(_BasicScraper):
+class DreamKeepersPrelude(_ParserScraper):
     url = 'http://www.dreamkeeperscomic.com/Prelude.php'
     stripUrl = url + '?pg=%s'
-    imageSearch = compile(r'(images/PreludeNew/.+?)"')
-    prevSearch = compile(r'(Prelude.php\?pg=.+?)"')
+    imageSearch = '//div[@class="Preludecomic"]/table//a/img'
+    prevSearch = '//a[@id="prev"]'
     help = 'Index format: n'
 
 

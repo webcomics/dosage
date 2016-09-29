@@ -9,7 +9,7 @@ from re import compile, escape, IGNORECASE
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
-from .common import _WPNaviIn, _WordPressScraper
+from .common import _WPNaviIn, _WordPressScraper, xpath_class
 
 
 class FalconTwin(_BasicScraper):
@@ -37,12 +37,12 @@ class FantasyRealms(_BasicScraper):
     starter = indirectStarter
 
 
-class FauxPas(_BasicScraper):
+class FauxPas(_ParserScraper):
     url = 'http://www.ozfoxes.net/cgi/pl-fp1.cgi'
     stripUrl = url + '?%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(r'<img .*src="(.*fp/fp.*(png|jpg|gif))"')
-    prevSearch = compile(r'<a href="(pl-fp1\.cgi\?\d+)">Previous Strip')
+    imageSearch = '//img[@name]'
+    prevSearch = '//a[img[@alt="Previous"]]'
     help = 'Index format: nnn'
 
 
@@ -126,19 +126,14 @@ class Fragile(_ParserScraper):
     firstStripUrl = url + 'strips/chapter_01'
 
 
-class FredoAndPidjin(_BasicScraper):
+class FredoAndPidjin(_ParserScraper):
     url = 'http://www.pidjin.net/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2006/02/19/goofy-monday'
-    help = 'Index format: yyyy/mm/dd/number-index'
-    imageSearch = (
-        compile(tagre('img', 'src', '(http://cdn\.pidjin\.net/wp-content/uploads/\d+/\d+/\d+[^"]+\.[a-z]+)')),
-        compile(tagre('img', 'src', '(http://cdn\.pidjin\.net/wp-content/uploads/old/[^"]+\.[a-z]+)')),
-    )
+    imageSearch = '//div[%s]//img' % xpath_class("episode")
     multipleImagesPerStrip = True
-    prevSearch = compile(tagre('a', 'href', '([^"]+)') + "Prev</a>")
-    latestSearch = compile(tagre('a', 'href', "(" + url +
-                                 r'\d\d\d\d/\d\d/\d\d/[^"]+/)'))
+    prevSearch = '//span[%s]/a' % xpath_class("prev")
+    latestSearch = '//section[%s]//a' % xpath_class("latest")
     starter = indirectStarter
 
 

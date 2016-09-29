@@ -15,6 +15,7 @@ class Removed(Scraper):
         'del': 'Comic was removed from the web.',
         'block': 'The comic site is blocking us.',
         'unk': 'Comic was removed for an unknown reason.',
+        'brk': 'Comic navigation is broken.',
     }
 
     def __init__(self, name, reason='del'):
@@ -173,14 +174,18 @@ class Removed(Scraper):
             cls('ComicGenesis/CryHavoc'),
             cls('ComicGenesis/SueosdelSur'),
             cls('Commissioned'),
+            cls('CowboyJedi', 'brk'),
             cls('Creators/BCinSpanish'),
             cls('Creators/GirlsandSportsinSpanish'),
             cls('Creators/RugratsinSpanish'),
             cls('CtrlAltDel', 'block'),
             cls('CtrlAltDel/Sillies', 'block'),
+            cls('DailyDose'),
             cls('DeathToTheExtremist'),
+            cls('DoctorCat', 'brk'),
             cls('Ellerbisms'),
             cls('Eriadan'),
+            cls('EverydayBlues'),
             cls('FeyWinds'),
             cls('FilibusterCartoons'),
             cls('FowlLanguage', 'block'),
