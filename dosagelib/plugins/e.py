@@ -205,6 +205,15 @@ class ExploitationNow(_WordPressScraper):
     endOfLife = True
 
 
+class ExtraFabulousComics(_WordPressScraper):
+    url = 'http://extrafabulouscomics.com/comic/buttfly/'
+    firstStripUrl = url
+    imageSearch = '//div[@id="comic"]//img'
+    latestSearch = '//a[%s]' % xpath_class('navi-last')
+    starter = indirectStarter
+    multipleImagesPerStrip = True
+
+
 class ExtraLife(_BasicScraper):
     url = 'http://www.myextralife.com/'
     stripUrl = url + 'comic/%s/'
