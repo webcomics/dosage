@@ -5,6 +5,7 @@
 
 from __future__ import absolute_import, division, print_function
 
+import os
 from re import compile, escape, IGNORECASE
 
 from ..helpers import indirectStarter
@@ -208,10 +209,14 @@ class ExploitationNow(_WordPressScraper):
 class ExtraFabulousComics(_WordPressScraper):
     url = 'http://extrafabulouscomics.com/comic/buttfly/'
     firstStripUrl = url
-    imageSearch = '//div[@id="comic"]//img'
     latestSearch = '//a[%s]' % xpath_class('navi-last')
     starter = indirectStarter
     multipleImagesPerStrip = True
+
+    def namer(self, image_url, page_url):
+        imagename = os.path.basename(image_url)
+        pagepart = compile(r'/comic/([^/]+)/$').search(page_url).group(1)
+        return '_'.join((pagepart, imagename))
 
 
 class ExtraLife(_BasicScraper):
