@@ -6,16 +6,14 @@ python:
   - "3.5"
 cache: pip
 # install libjpeg-dev for Pillow to handle JPEGs
-# install python-dateutil to parse date formats
 sudo: false
 addons:
   apt:
     packages:
       - libjpeg-dev
-      - python-dateutil
 # command to install dependencies
 install:
-  - pip install tox-travis coveralls
+  - pip install tox-travis coveralls python-dateutil
 # command to run tests
 script: tox
 after_success:
