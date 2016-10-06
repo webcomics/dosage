@@ -94,8 +94,12 @@ class RSSEventHandler(EventHandler):
 
         self.rssfn = self.getFilename()
 
-        self.newfile = True
-        self.rss = rss.Feed('Daily Dosage', link, 'Comics for %s' % time.strftime('%Y/%m/%d', today))
+        if os.path.exists(self.rssfn):
+            self.newfile = False
+            self.rss = rss.parseFeed(self.rssfn, yesterday)
+        else:
+            self.newfile = True
+            self.rss = rss.Feed('Daily Dosage', link, 'Comics for %s' % time.strftime('%Y/%m/%d', today))
 
     def comicDownloaded(self, comic, filename):
         """Write RSS entry for downloaded comic."""
