@@ -11,6 +11,7 @@ import time
 from six.moves.urllib.parse import quote as url_quote
 import codecs
 import json
+import xml
 
 from . import atom, rss, util, configuration
 from .output import out
@@ -158,7 +159,7 @@ class AtomEventHandler(EventHandler):
         size = None
         if self.allowdownscale:
             size = getDimensionForImage(filename, MaxImageSize)
-        title = '%s - %s' % (comic.name, os.path.basename(filename))
+        title = '%s - %s' % (comic.scraper.name, os.path.basename(filename))
         pageUrl = comic.referrer
         doc = xml.dom.minidom.Document()
         content = doc.createElement('div')
