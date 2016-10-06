@@ -1,39 +1,62 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 
-from re import compile
-from ..util import tagre
-from ..scraper import make_scraper
+from __future__ import absolute_import, division, print_function
+
+from ..scraper import _ParserScraper
 from ..helpers import bounceStarter
 
 
-_imageSearch = compile(tagre("img", "src", r'(http://www\.wlpcomics\.com/(?:adult|general)/[^"]+/comics/[^"]+)'))
-_prevSearch = compile(tagre("a", "href", r'(\w+.html)') + 'Previous')
-_nextSearch = compile(tagre("a", "href", r'(\w+.html)') + 'Next')
+class _WLPComics(_ParserScraper):
+    imageSearch = '//center/*/img[contains(@alt, " Comic")]'
+    prevSearch = '//a[contains(text(), "Previous ")]'
+    nextSearch = '//a[contains(text(), "Next ")]'
+    starter = bounceStarter
+    help = 'Index format: nnn'
+
+    def __init__(self, name):
+        super(_WLPComics, self).__init__('WLP/' + name)
+
+    def namer(self, image_url, page_url):
+        return (page_url.rsplit('/', 1)[-1].split('.')[0] + '_' +
+                image_url.rsplit('/', 1)[-1])
+
+    def getIndexStripUrl(self, index):
+        return self.url + '%s.html'
 
 
-def add(name, path):
-    baseUrl = 'http://www.wlpcomics.com/' + path
-    classname = 'WLP_' + name
-
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        return pageUrl.split('/')[-1].split('.')[0]
-
-    globals()[classname] = make_scraper(classname,
-       name = 'WLP/' + name,
-       url = baseUrl,
-       starter = bounceStarter(baseUrl, _nextSearch),
-       stripUrl = baseUrl + '%s.html',
-       imageSearch = _imageSearch,
-       prevSearch = _prevSearch,
-       namer = namer,
-       help = 'Index format: nnn',
-    )
+class ChichiChan(_WLPComics):
+    url = 'http://www.wlpcomics.com/adult/chichi/'
+    adult = True
 
 
-add('ChichiChan', 'adult/chichi/')
-add('ChocolateMilkMaid', 'adult/cm/')
-add('MaidAttack', 'general/maidattack/')
-add('ShadowChasers', 'general/shadowchasers/')
+class ChocolateMilkMaid(_WLPComics):
+    # Newer pages seem to be broken
+    url = 'http://www.wlpcomics.com/adult/cm/262.html'
+    adult = True
+
+
+class MaidAttack(_WLPComics):
+    url = 'http://www.wlpcomics.com/general/maidattack/'
+
+
+class PeterIsTheWolfAdult(_WLPComics):
+    url = 'http://www.peteristhewolf.com/adult/home.html'
+    adult = True
+
+
+class PeterIsTheWolfGeneral(_WLPComics):
+    url = 'http://www.peteristhewolf.com/general/'
+
+
+class Stellar(_WLPComics):
+    url = 'http://www.wlpcomics.com/adult/stellar/'
+    adult = True
+
+    def prevUrlModifier(self, prev_url):
+        """Bugfix for empty page..."""
+        if prev_url == self.url + '075.html':
+            return self.url + '074.html'
+        return prev_url

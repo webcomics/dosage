@@ -1,21 +1,13 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2014-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 
-from __future__ import division, print_function
-try:
-    from urllib.parse import quote as url_quote, unquote as url_unquote
-except ImportError:
-    from urllib import quote as url_quote, unquote as url_unquote
-try:
-    from urllib.parse import urlparse, urlunparse, urlsplit
-except ImportError:
-    from urlparse import urlparse, urlunparse, urlsplit
-try:
-    from urllib import robotparser
-except ImportError:
-    import robotparser
+from __future__ import absolute_import, division, print_function
+
+from six.moves.urllib.parse import (
+    quote as url_quote, unquote as url_unquote, urlparse, urlunparse, urlsplit)
+from six.moves.urllib_robotparser import RobotFileParser
 import requests
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
@@ -23,23 +15,18 @@ import sys
 import os
 import cgi
 import re
-import codecs
 import traceback
 import time
 import subprocess
-try:
-    from HTMLParser import HTMLParser
-except ImportError:
-    from html.parser import HTMLParser
+from six.moves.html_parser import HTMLParser
+import six
+
 from .decorators import memoized
 from .output import out
 from .configuration import UserAgent, AppName, App, SupportUrl
 
 # Maximum content size for HTML pages
 MaxContentBytes = 1024 * 1024 * 3  # 3 MB
-
-# Maximum content size for images
-MaxImageBytes = 1024 * 1024 * 20  # 20 MB
 
 # Default number of retries
 MaxRetries = 3
@@ -128,11 +115,7 @@ def backtick(cmd, encoding='utf-8'):
 
 def unicode_safe(text, encoding=UrlEncoding, errors='ignore'):
     """Decode text to Unicode if not already done."""
-    try:
-        text_type = unicode
-    except NameError:
-        text_type = str
-    if isinstance(text, text_type):
+    if isinstance(text, six.text_type):
         return text
     return text.decode(encoding, errors)
 
@@ -185,20 +168,13 @@ def case_insensitive_re(name):
     return "".join("[%s%s]" % (c.lower(), c.upper()) for c in name)
 
 
-def getPageContent(url, session, max_content_bytes=MaxContentBytes):
+def get_page(url, session, max_content_bytes=MaxContentBytes):
     """Get text content of given URL."""
     check_robotstxt(url, session)
     # read page data
     page = urlopen(url, session, max_content_bytes=max_content_bytes)
-    data = page.text
-    out.debug(u"Got page content %r" % data, level=3)
-    return data
-
-
-def getImageObject(url, referrer, session, max_content_bytes=MaxImageBytes):
-    """Get response object for given image URL."""
-    return urlopen(url, session, referrer=referrer,
-                   max_content_bytes=max_content_bytes, stream=True)
+    out.debug(u"Got page content %r" % page.content, level=3)
+    return page
 
 
 def makeSequence(item):
@@ -274,7 +250,7 @@ def check_robotstxt(url, session):
 @memoized
 def get_robotstxt_parser(url, session=None):
     """Get a RobotFileParser for the given robots.txt URL."""
-    rp = robotparser.RobotFileParser()
+    rp = RobotFileParser()
     try:
         req = urlopen(url, session, max_content_bytes=MaxContentBytes,
                       raise_for_status=False)
@@ -290,26 +266,23 @@ def get_robotstxt_parser(url, session=None):
 
 
 def urlopen(url, session, referrer=None, max_content_bytes=None,
-            timeout=ConnectionTimeoutSecs, raise_for_status=True,
-            stream=False, data=None, useragent=UserAgent):
+            raise_for_status=True, useragent=UserAgent, **kwargs):
     """Open an URL and return the response object."""
     out.debug(u'Open URL %s' % url)
-    headers = {'User-Agent': useragent}
+    if 'headers' not in kwargs:
+        kwargs['headers'] = {}
+    kwargs['headers']['User-Agent'] = useragent
     if referrer:
-        headers['Referer'] = referrer
-    out.debug(u'Sending headers %s' % headers, level=3)
+        kwargs['headers']['Referer'] = referrer
+    out.debug(u'Sending headers %s' % kwargs['headers'], level=3)
     out.debug(u'Sending cookies %s' % session.cookies)
-    kwargs = {
-        "headers": headers,
-        "timeout": timeout,
-        "stream": stream,
-    }
-    if data is None:
+    if 'timeout' not in kwargs:
+        kwargs['timeout'] = ConnectionTimeoutSecs
+    if 'data' not in kwargs:
         method = 'GET'
     else:
-        kwargs['data'] = data
         method = 'POST'
-        out.debug(u'Sending POST data %s' % data, level=3)
+        out.debug(u'Sending POST data %s' % kwargs['data'], level=3)
     try:
         req = session.request(method, url, **kwargs)
         out.debug(u'Response cookies: %s' % req.cookies)
@@ -437,17 +410,12 @@ def strtimezone():
         zone = time.altzone
     else:
         zone = time.timezone
-    return "%+04d" % (-zone//3600)
+    return "%+04d" % (-zone // 3600)
 
 
 def rfc822date(indate):
     """Format date in rfc822 format."""
     return time.strftime("%a, %d %b %Y %H:%M:%S GMT", time.gmtime(indate))
-
-
-def asciify(name):
-    """Remove non-ascii characters from string."""
-    return re.sub("[^0-9a-zA-Z_]", "", name)
 
 
 def unquote(text):
@@ -477,17 +445,12 @@ def strsize(b):
     if b < 1024 * 1024:
         return "%.2fKB" % (float(b) / 1024)
     if b < 1024 * 1024 * 10:
-        return "%.2fMB" % (float(b) / (1024*1024))
+        return "%.2fMB" % (float(b) / (1024 * 1024))
     if b < 1024 * 1024 * 1024:
-        return "%.1fMB" % (float(b) / (1024*1024))
+        return "%.1fMB" % (float(b) / (1024 * 1024))
     if b < 1024 * 1024 * 1024 * 10:
-        return "%.2fGB" % (float(b) / (1024*1024*1024))
-    return "%.1fGB" % (float(b) / (1024*1024*1024))
-
-
-def getDirname(name):
-    """Replace slashes with path separator of name."""
-    return name.replace('/', os.sep)
+        return "%.2fGB" % (float(b) / (1024 * 1024 * 1024))
+    return "%.1fGB" % (float(b) / (1024 * 1024 * 1024))
 
 
 def getFilename(name):
@@ -553,31 +516,3 @@ def strlimit(s, length=72):
     if length == 0:
         return ""
     return "%s..." % s[:length]
-
-
-def writeFile(filename, content, encoding=None):
-    """Write content to given filename. Checks for zero-sized files.
-    If encoding is given writes to a codec.open() file."""
-    if not content:
-        raise OSError("empty content for file %s" % filename)
-
-    def getfp(filename, encoding):
-        """Get open file object."""
-        if encoding:
-            return codecs.open(filename, 'w', encoding)
-        return open(filename, 'wb')
-
-    try:
-        with getfp(filename, encoding) as fp:
-            fp.write(content)
-            fp.flush()
-            os.fsync(fp.fileno())
-            size = os.path.getsize(filename)
-            if size == 0:
-                raise OSError("empty file %s" % filename)
-    except Exception:
-        if os.path.isfile(filename):
-            os.remove(filename)
-        raise
-    else:
-        out.info(u"Saved %s (%s)." % (filename, strsize(size)))

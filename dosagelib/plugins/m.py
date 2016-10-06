@@ -9,7 +9,7 @@ from re import compile, escape, IGNORECASE
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import _WordPressScraper
+from .common import _ComicControlScraper, _WordPressScraper
 
 
 class MacHall(_BasicScraper):
@@ -55,12 +55,11 @@ class ManlyGuysDoingManlyThings(_ParserScraper):
     help = 'Index format: ddmmyyyy'
 
 
-class MareInternum(_ParserScraper):
-    url = 'http://marecomic.com/'
-    stripUrl = url + 'comics/ch%s'
-    imageSearch = '//div[@id="comic"]//img'
-    prevSearch = '//a[@class="comic-nav-base comic-nav-previous"]'
-    help = 'Index format: <chapter>-page-<pagenum>'
+class MareInternum(_WordPressScraper):
+    url = 'http://www.marecomic.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'intro-page-1'
+    help = 'Index format: ch<chapter>-page-<pagenum> (most of the time)'
 
 
 class Marilith(_BasicScraper):
@@ -82,9 +81,8 @@ class MarriedToTheSea(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'([^"]+)') + "&lt;&lt; Yesterday")
     help = 'Index format: mmddyy'
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        unused, date, filename = imageUrl.rsplit('/', 2)
+    def namer(self, image_url, page_url):
+        unused, date, filename = image_url.rsplit('/', 2)
         return '%s-%s' % (date, filename)
 
 
@@ -128,6 +126,10 @@ class MenageA3(_BasicScraper):
     help = 'Index format: name'
 
 
+class Metacarpolis(_ComicControlScraper):
+    url = 'http://www.metacarpolis.com'
+
+
 class Misfile(_BasicScraper):
     url = 'http://www.misfile.com/'
     stripUrl = url + '?date=%s'
@@ -158,12 +160,12 @@ class MonsieurLeChien(_BasicScraper):
 class Moonsticks(_ParserScraper):
     url = "http://moonsticks.org/"
     imageSearch = "//div[@class='entry']//img"
-    prevSearch = u"//a[text()='« Previous']"
+    prevSearch = u"//a[text()='\u00AB Prev']"
 
 
 class MrLovenstein(_BasicScraper):
     url = 'http://www.mrlovenstein.com/'
-    stripUrl = url + 'comic/%s#comic'
+    stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = (
         # captures rollover comic

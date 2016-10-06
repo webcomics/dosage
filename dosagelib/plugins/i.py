@@ -4,10 +4,12 @@
 # Copyright (C) 2015-2016 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
+
 from re import compile, escape
+
 from ..scraper import _BasicScraper
 from ..util import tagre
-from .common import _WordPressScraper
+from .common import _WordPressScraper, xpath_class
 
 
 class IAmArg(_BasicScraper):
@@ -34,13 +36,11 @@ class IDreamOfAJeanieBottle(_WordPressScraper):
     url = 'http://jeaniebottle.com/'
 
 
-class InternetWebcomic(_BasicScraper):
+class InternetWebcomic(_WordPressScraper):
     url = 'http://www.internet-webcomic.com/'
-    rurl = escape(url)
     stripUrl = url + '?p=%s'
     firstStripUrl = stripUrl % '30'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"/]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl, after="navi navi-prev"))
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
     help = 'Index format: n'
 
 

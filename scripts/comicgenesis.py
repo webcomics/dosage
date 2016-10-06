@@ -1,24 +1,36 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 """
 Script to get a list of ComicGenesis comics and save the info in a
 JSON file for further processing.
 """
-from __future__ import print_function
+from __future__ import absolute_import, division, print_function
+
 import codecs
 import re
 import sys
 import os
+
 import requests
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
-from dosagelib.util import getPageContent, asciify, unescape, tagre, check_robotstxt
-from dosagelib.scraper import get_scraperclasses
-from scriptutil import contains_case_insensitive, capfirst, save_result, load_result, truncate_name
+
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))  # noqa
+from dosagelib.util import get_page, tagre, check_robotstxt
+from dosagelib.scraper import get_scrapers
+from scriptutil import (contains_case_insensitive, save_result, load_result,
+                        truncate_name, format_name)
 
 json_file = __file__.replace(".py", ".json")
 
-# <div class="comictitle"><strong><a target="_blank" onclick="pageTrackerCG._link('http://collegepros.comicgenesis.com'); return false;" href="http://collegepros.comicgenesis.com">Adventures of the College Pros</a>
-url_matcher = re.compile(r'<div class="comictitle"><strong>' + tagre("a", "href", r'(http://[^"]+)') + r'([^<]+)</a>')
+# <div class="comictitle"><strong><a target="_blank"
+# onclick="pageTrackerCG._link('http://collegepros.comicgenesis.com'); return
+# false;" href="http://collegepros.comicgenesis.com">Adventures of the College
+# Pros</a>
+url_matcher = re.compile(r'<div class="comictitle"><strong>' +
+                         tagre("a", "href", r'(http://[^"]+)') +
+                         r'([^<]+)</a>')
 num_matcher = re.compile(r'Number of Days: (\d+)')
 
 # names of comics to exclude
@@ -368,19 +380,18 @@ url_overrides = {
     "Zortic": "http://zortic.comicgenesis.com/d/20030922.html",
 }
 
+
 def handle_url(url, session, res):
     """Parse one search result page."""
     print("Parsing", url, file=sys.stderr)
     try:
-        data = getPageContent(url, session)
+        data = get_page(url, session).text
     except IOError as msg:
         print("ERROR:", msg, file=sys.stderr)
         return
     for match in url_matcher.finditer(data):
         url = match.group(1) + '/'
-        name = unescape(match.group(2))
-        name = asciify(name.replace('&', 'And').replace('@', 'At'))
-        name = capfirst(name)
+        name = format_name(match.group(2))
         if name in exclude_comics:
             continue
         if contains_case_insensitive(res, name):
@@ -391,13 +402,13 @@ def handle_url(url, session, res):
         end = match.end()
         mo = num_matcher.search(data[end:])
         if not mo:
-            print("ERROR:", repr(data[end:end+300]), file=sys.stderr)
+            print("ERROR:", repr(data[end:end + 300]), file=sys.stderr)
             continue
         num = int(mo.group(1))
         url = url_overrides.get(name, url)
         try:
             if "/d/" not in url:
-                check_robotstxt(url+"d/", session)
+                check_robotstxt(url + "d/", session)
             else:
                 check_robotstxt(url, session)
         except IOError:
@@ -424,8 +435,8 @@ def has_comic(name):
         ("Creators/%s" % name).lower(),
         ("GoComics/%s" % name).lower(),
     ]
-    for scraperclass in get_scraperclasses():
-        lname = scraperclass.getName().lower()
+    for scraperobj in get_scrapers():
+        lname = scraperclass.name.lower()
         if lname in names:
             return True
     return False

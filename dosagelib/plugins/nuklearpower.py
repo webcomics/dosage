@@ -1,23 +1,23 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
 
 from ..scraper import _ParserScraper
 
 
 class _NuklearPower(_ParserScraper):
-    url = 'http://www.nuklearpower.com/'
     prevSearch = '//a[@rel="prev"]'
     imageSearch = '//div[@id="comic"]/img'
 
-    @classmethod
-    def starter(cls):
-        return cls.url + cls.path + '/'
+    def __init__(self, name):
+        super(_NuklearPower, self).__init__('NuklearPower/' + name[2:])
 
-    @classmethod
-    def getName(cls):
-        return 'NuklearPower/' + cls.__name__[2:]
+    @property
+    def url(self):
+        return 'http://www.nuklearpower.com/' + self.path + '/'
 
 
 class NP8BitTheater(_NuklearPower):
@@ -27,7 +27,6 @@ class NP8BitTheater(_NuklearPower):
 class NPAtomicRobo(_NuklearPower):
     url = 'http://www.atomic-robo.com/'
     imageSearch = '//img[@id="cc-comic"]'
-    path = 'atomicrobo'
 
 
 class NPHowIKilledYourMaster(_NuklearPower):

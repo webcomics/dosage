@@ -1,801 +1,933 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015 Tobias Gruetzmacher
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 
-from re import compile
-from ..scraper import make_scraper
-from ..util import tagre
+from __future__ import absolute_import, division, print_function
+
+from ..scraper import _ParserScraper
 from ..helpers import bounceStarter
 
-_imageSearch = (
-    compile(tagre("img", "src", r'(http://assets\.amuniversal\.com/[0-9a-fA-F]+)', before='alt="[0-9a-fA-F]+"')),
-    compile(tagre("img", "src", r'(http://assets\.amuniversal\.com/[0-9a-fA-F]+)')),
-    compile(tagre("meta", "content", r'(http://assets\.amuniversal\.com/[0-9a-fA-F]+)', before="og:image")),
-)
-_prevSearch = compile(tagre("a", "href", r'(/[^"]+/\d+/\d+/\d+)', after="prev"))
-_nextSearch = compile(tagre("a", "href", r'(/[^"]+/\d+/\d+/\d+)', after="next"))
 
-def add(name, shortname):
-    baseUrl = 'http://www.gocomics.com'
-    url = baseUrl + shortname
-    classname = 'GoComics_%s' % name
+class GoComics(_ParserScraper):
+    url = 'http://www.gocomics.com/'
+    imageSearch = ('//div/img[@class="strip"]',
+                   '//p[@class="feature_item"]/img[@class="strip"]')
+    prevSearch = '//ul[@class="feature-nav"]//a[@class="prev"]'
+    nextSearch = '//ul[@class="feature-nav"]//a[@class="next"]'
+    starter = bounceStarter
+    help = 'Index format: yyyy/mm/dd'
+
+    def __init__(self, name, path, lang=None):
+        super(GoComics, self).__init__('GoComics/' + name)
+        self.url = 'http://www.gocomics.com/' + path
+        self.shortname = name
+        if lang:
+            self.lang = lang
+
+    def namer(self, image_url, page_url):
+        prefix, year, month, day = page_url.rsplit('/', 3)
+        return "%s_%s%s%s.gif" % (self.shortname, year, month, day)
+
+    def getIndexStripUrl(self, index):
+        return self.url + self.path + '/%s' % index
+
+    def shouldSkipUrl(self, url, data):
+        """Skip pages without images."""
+        return data.xpath('//img[contains(@src, "content-error-missing")]')
 
     @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        prefix, year, month, day = pageUrl.rsplit('/', 3)
-        return "%s_%s%s%s.gif" % (name, year, month, day)
+    def getmodules(cls):
+        return (
+            # old comics removed from the listing
+            cls('AbnormalTruth', 'abnormal-truth'),
+            cls('ABootsAndPupComic', 'a-boots-and-pup-comic'),
+            cls('AdmiralSquirt', 'admiral-squirt'),
+            cls('AdventuresofDaisy', 'Adventures-of-Daisy'),
+            cls('AdventuresOfMartyAndTurkey', 'marty-and-turkey'),
+            cls('AdventuresofMikeAndSimon', 'adventures-of-mike-and-simon'),
+            cls('AmaZnEvents', 'amaznevents'),
+            cls('AnythingGoes', 'anything-goes'),
+            cls('BarkingCrayon', 'barking-crayon'),
+            cls('BenAndSeymour', 'ben-seymour'),
+            cls('BERSERKALERT', 'berserk-alert'),
+            cls('BestInShow', 'best-in-show'),
+            cls('BobtheGroanUP', 'bob-the-groanup'),
+            cls('BradsPit', 'brads-pit'),
+            cls('CalAndOzz', 'cal-and-ozz'),
+            cls('CandyPills', 'candy-pills'),
+            cls('Cartertoons', 'cartertoons'),
+            cls('CatsAtWork', 'cats-at-work'),
+            cls('ChasingUnicorns', 'chasing-unicorns'),
+            cls('ChubbyGirlComics', 'chubbygirlcomics'),
+            cls('Classifudds', 'classifudds'),
+            cls('CockroachComix', 'cockroachcomix'),
+            cls('CoffeeShopTidbits', 'coffee-shop-tidbits'),
+            cls('ColonelKernel', 'colonel-kernel'),
+            cls('Cooper', 'cooper'),
+            cls('CowSheepandaGnomeNamedHelga', 'cow-sheep-and-a-gnome-named-helga'),
+            cls('CoyoteVille', 'coyteville'),
+            cls('Crooksville', 'crooksville'),
+            cls('DabneyandDad', 'dabney-and-dad'),
+            cls('DialHforHBomb', 'dial-h-for-h-bomb'),
+            cls('DiligentCity', 'diligent-city'),
+            cls('DitzAbledPrincess', 'ditzabled-princess'),
+            cls('DogsDucksandAliens', 'dogs-ducks-and-aliens'),
+            cls('DoingTime', 'doingtime'),
+            cls('DoodleDaysComics', 'doodle-days'),
+            cls('EBEJeebie', 'ebe-jeebie'),
+            cls('EDITORIALPASTANDPRESENT', 'editorial-past-and-present'),
+            cls('ElephantintheRoom', 'elephant-in-the-room'),
+            cls('ElfandMotorbelly', 'elf-and-motorbelly'),
+            cls('EngagAndNevets', 'engag-nevets'),
+            cls('EspressoCity', 'Espresso-City'),
+            cls('EttoreandBaldo', 'ettore-and-baldo'),
+            cls('FantasticMegaLeague', 'fantastiteam'),
+            cls('FarcesofNature', 'farces-of-nature'),
+            cls('Featherweight', 'featherweight'),
+            cls('FleasonFlick', 'fleasonflick'),
+            cls('FrizziToons', 'frizzitoons'),
+            cls('FundayMorning', 'funday-morning'),
+            cls('GatorsAndSuch', 'gators-and-such'),
+            cls('GenerationMute', 'generation-mute'),
+            cls('GetAGrip', 'get-a-grip'),
+            cls('GramDragon', 'gramdragon'),
+            cls('HanginOut', 'hangin-out'),
+            cls('HankAndDalesOurWorld', 'hank-and-dales-our-world'),
+            cls('HanktheSock', 'hank-the-sock'),
+            cls('HarambeeHills', 'harambeehills'),
+            cls('Hbenson7', 'hbenson7'),
+            cls('HeadComics', 'head-comics'),
+            cls('HeavenlyNostrils', 'heavenly-nostrils'),
+            cls('HolySchnark', 'holy-schnark!'),
+            cls('HumblebeeandBob', 'humblebee-and-bob'),
+            cls('Humoresque', 'humoresque'),
+            cls('ImaDillo', 'i-m-a-dillo'),
+            cls('ImTellingMom', 'telling-mom'),
+            cls('IsleofEx', 'isle-of-ex'),
+            cls('JackRadioComics', 'jack-radio-comics'),
+            cls('JillpokeBohemia', 'jillpoke-bohemia'),
+            cls('JimAndSarah', 'jim-and-sarah'),
+            cls('JordanandBentley', 'jordan-and-bentley'),
+            cls('KirbysTreehouse', 'kirbys-treehouse'),
+            cls('KozmooftheCosmos', 'kozmoofthecosmos'),
+            cls('LardWantsWorldPeace', 'lard-wants-world-peace'),
+            cls('LarryvilleBlue', 'larryville-blue'),
+            cls('Leadbellies', 'leadbellies'),
+            cls('LEFTOVERS', 'leftovers'),
+            cls('LeGooseyLu', 'LeGoosey-Lu'),
+            cls('LIGHTERSIDE', 'lighter-side'),
+            cls('LostInTranslation', 'lost-in-translation'),
+            cls('LucasLuminous', 'lucas-luminous'),
+            cls('MagnificatzOld', 'magnificatz-sherpa'),
+            cls('Markonpaper', 'mark-on-paper'),
+            cls('MaryBWary', 'mary-b-wary'),
+            cls('Maximus', 'maximus'),
+            cls('Mick', 'mick'),
+            cls('MixedMedications', 'mixedmedications'),
+            cls('Mortimer', 'mortimer'),
+            cls('MrMorris', 'mr-morris'),
+            cls('MyCage', 'mycage'),
+            cls('MyGuardianGrandpa', 'my-guardian-grandpa'),
+            cls('NeatStep', 'neatstep'),
+            cls('NeighborhoodZone', 'neightborhood-zone'),
+            cls('NobodysHome', 'nobodys-home'),
+            cls('NoPlaceLikeHolmes', 'no-place-like-holmes'),
+            cls('Oat', 'oat'),
+            cls('ObamaandtheFatman', 'obama-and-the-fatman'),
+            cls('OntheQuad', 'on-the-quad'),
+            cls('OrangesareFunny', 'oranges-are-funny'),
+            cls('Outnumbered', 'outnumbered'),
+            cls('PamosWorld', 'pamos-world'),
+            cls('ParisDoodles', 'mo-willems-paris-doodles'),
+            cls('Peanizles', 'peanizles'),
+            cls('PetFood', 'pet-food'),
+            cls('PipethePelican', 'pipe-the-pelican'),
+            cls('PlasticBabyHeadsfromOuterSpace', 'plastic-babyheads'),
+            cls('PlentyofPenguins', 'plenty-of-penguins'),
+            cls('Puppets', 'puppets'),
+            cls('Putz', 'putz'),
+            cls('QuestionsForKids', 'questions-for-kids'),
+            cls('Rackafracka', 'rackafracka'),
+            cls('RegularCreatures', 'regular-creatures'),
+            cls('Risible', 'risible'),
+            cls('RogueSymmetry', 'rogue_symmetry'),
+            cls('Rosy', 'rosy'),
+            cls('Sabine', 'sabine'),
+            cls('SCAIRYTALESTheNotSoScaryFairyTales', 'Scairy-Tales:-the-not-so-scary-fairy-tales!'),
+            cls('SecondPrize', 'secondprize'),
+            cls('SincerelyBeatrice', 'sincerely-beatrice'),
+            cls('Skooled', 'skooled'),
+            cls('SNAFU', 'snafu'),
+            cls('SpaceNutz', 'space-nutz'),
+            cls('SPACESLUGS', 'spaceslugs'),
+            cls('SpaceTimeFunnies', 'spacetimefunnies'),
+            cls('Spectickles', 'abbotts-spectickles'),
+            cls('SpinCrazy', 'spin-crazy'),
+            cls('STEPDAD', 'stepdad'),
+            cls('Stookie', 'Stookie'),
+            cls('SuburbanWilderness', 'suburban-wilderness'),
+            cls('SuckerHeadSmack', 'suckerhead-smack'),
+            cls('TeacherInk', 'teacher-ink'),
+            cls('TheAdventuresofHeromanGuy', 'adventures-of-heroman-guy'),
+            cls('TheEdperiment', 'the-edperiment'),
+            cls('TheFamilyBlend', 'the-family-blend'),
+            cls('TheFruitBowl', 'thefruitbowl'),
+            cls('TheGoldenKid', 'golden-kid'),
+            cls('TheInsolentLemon', 'the-insolent-lemon'),
+            cls('TheLightedLab', 'the-lighted-lab'),
+            cls('TheLilMiesters', 'the-lil-miesters'),
+            cls('TheOdderLimits', 'the-odder-limits'),
+            cls('THESILVERLINING', 'silver-lining'),
+            cls('TheSingleDadDiaries', 'single-dad-diaries'),
+            cls('TheVernalPool', 'vernal-pool'),
+            cls('TheWinyChild', 'the-winy-child'),
+            cls('ThrompTM', 'thromp'),
+            cls('TnCComics', 'tnc-comics'),
+            cls('ToBeNamed', 'to-be-named'),
+            cls('TonyAuth', 'tonyauth'),
+            cls('Toocrazy', 'too-crazy'),
+            cls('TwitchyOToole', 'twitchy-otoole'),
+            cls('TwoBits', 'two-bits'),
+            cls('Vernscartoons', 'vernscartoons'),
+            cls('WayOutInLeftField', 'Way-Out-In-Left-Field'),
+            cls('WelcometoFriendly', 'welcome-to-friendly'),
+            cls('WendlesLife', 'wendleslife'),
+            cls('Whatcatscanandcantdo', 'whatcatscanandcantdo'),
+            cls('Whiteouts', 'whiteouts'),
+            cls('WillSays', 'will-says'),
+            cls('WillyWho', 'willy-who'),
+            cls('WindingRoads', 'winding-roads'),
+            cls('WittOfWill', 'witt-of-will'),
+            cls('YouGuysAreMyFriendsTheComic', 'you-guys-are-my-friends'),
 
-    globals()[classname] = make_scraper(classname,
-        url = url,
-        starter = bounceStarter(url, _nextSearch),
-        name='GoComics/' + name,
-        stripUrl=baseUrl + shortname + '/%s',
-        imageSearch = _imageSearch,
-        prevSearch = _prevSearch,
-        help='Index format: yyyy/mm/dd',
-        namer=namer,
-    )
-
-# old comics removed from the listing
-add('AdventuresofDaisy', '/Adventures-of-Daisy')
-add('AdventuresofMikeAndSimon', '/adventures-of-mike-and-simon')
-add('AnythingGoes', '/anything-goes')
-add('BarkingCrayon', '/barking-crayon')
-add('BenAndSeymour', '/ben-seymour')
-add('BestInShow', '/best-in-show')
-add('BobtheGroanUP', '/bob-the-groanup')
-add('Cartertoons', '/cartertoons')
-add('CockroachComix', '/cockroachcomix')
-add('CowSheepandaGnomeNamedHelga', '/cow-sheep-and-a-gnome-named-helga')
-add('DabneyandDad', '/dabney-and-dad')
-add('DialHforHBomb', '/dial-h-for-h-bomb')
-add('DitzAbledPrincess', '/ditzabled-princess')
-add('DoodleDaysComics', '/doodle-days')
-add('Dragin', '/dragin')
-add('EBEJeebie', '/ebe-jeebie')
-add('EDITORIALPASTANDPRESENT', '/editorial-past-and-present')
-add('ElephantintheRoom', '/elephant-in-the-room')
-add('ElfandMotorbelly', '/elf-and-motorbelly')
-add('EngagAndNevets', '/engag-nevets')
-add('EttoreandBaldo', '/ettore-and-baldo')
-add('FantasticMegaLeague', '/fantastiteam')
-add('FarcesofNature', '/farces-of-nature')
-add('Featherweight', '/featherweight')
-add('FrizziToons', '/frizzitoons')
-add('FundayMorning', '/funday-morning')
-add('GetAGrip', '/get-a-grip')
-add('GunstonStreet', '/gunston-street')
-add('HanginOut', '/hangin-out')
-add('HarambeeHills', '/harambeehills')
-add('Hbenson7', '/hbenson7')
-add('HeadComics', '/head-comics')
-add('HeavenlyNostrils', '/heavenly-nostrils')
-add('HolySchnark', '/holy-schnark!')
-add('Humoresque', '/humoresque')
-add('ImaDillo', '/i-m-a-dillo')
-add('KozmooftheCosmos', '/kozmoofthecosmos')
-add('LeGooseyLu', '/LeGoosey-Lu')
-add('Leadbellies', '/leadbellies')
-add('LostInTranslation', '/lost-in-translation')
-add('LucasLuminous', '/lucas-luminous')
-add('Markonpaper', '/mark-on-paper')
-add('MaryBWary', '/mary-b-wary')
-add('MidLifewAlan', '/mid-life-with-alan')
-add('MixedMedications', '/mixedmedications')
-add('MrMorris', '/mr-morris')
-add('MyCage', '/mycage')
-add('MyGuardianGrandpa', '/my-guardian-grandpa')
-add('NeatStep', '/neatstep')
-add('NedAndLarry', '/ned-and-larry')
-add('NeighborhoodZone', '/neightborhood-zone')
-add('NobodysHome', '/nobodys-home')
-add('OntheQuad', '/on-the-quad')
-add('OrangesareFunny', '/oranges-are-funny')
-add('Outnumbered', '/outnumbered')
-add('ParisDoodles', '/mo-willems-paris-doodles')
-add('PetFood', '/pet-food')
-add('PlentyofPenguins', '/plenty-of-penguins')
-add('Putz', '/putz')
-add('QuestionsForKids', '/questions-for-kids')
-add('RogueSymmetry', '/rogue_symmetry')
-add('SNAFU', '/snafu')
-add('SPACESLUGS', '/spaceslugs')
-add('STEPDAD', '/stepdad')
-add('Sabine', '/sabine')
-add('SecondPrize', '/secondprize')
-add('Skooled', '/skooled')
-add('SpaceNutz', '/space-nutz')
-add('SpaceTimeFunnies', '/spacetimefunnies')
-add('Stookie', '/Stookie')
-add('SuburbanWilderness', '/suburban-wilderness')
-add('SuckerHeadSmack', '/suckerhead-smack')
-add('THESILVERLINING', '/silver-lining')
-add('TOWHOMITMAYCONCERN', '/towhomitmayconcern')
-add('TheAdventuresofTeetyBallerina', '/the-adventures-of-teety-ballerina')
-add('TheEdperiment', '/the-edperiment')
-add('TheFruitBowl', '/thefruitbowl')
-add('TheGoldenKid', '/golden-kid')
-add('TheLilMiesters', '/the-lil-miesters')
-add('TheOdderLimits', '/the-odder-limits')
-add('TheSingleDadDiaries', '/single-dad-diaries')
-add('TheVernalPool', '/vernal-pool')
-add('ThrompTM', '/thromp')
-add('ToBeNamed', '/to-be-named')
-add('TonyAuth', '/tonyauth')
-add('Toocrazy', '/too-crazy')
-add('WayOutInLeftField', '/Way-Out-In-Left-Field')
-add('Whatcatscanandcantdo', '/whatcatscanandcantdo')
-add('YouGuysAreMyFriendsTheComic', '/you-guys-are-my-friends')
-
-
-# do not edit anything below since these entries are generated from scripts/update_plugins.sh
-# DO NOT REMOVE
-add('060', '/0-60')
-add('2CowsandaChicken', '/2cowsandachicken')
-add('5thYearSenior', '/5th-year-senior')
-add('9ChickweedLane', '/9chickweedlane')
-add('9to5', '/9to5')
-add('ABitSketch', '/a-bit-sketch')
-add('ABomb', '/a-bomb')
-add('ABootsAndPupComic', '/a-boots-and-pup-comic')
-add('ACMEINKD', '/acme-inkd')
-add('APEanimalpuns4every1', '/ape')
-add('AbnormalTruth', '/abnormal-truth')
-add('AdamAtHome', '/adamathome')
-add('AdmiralSquirt', '/admiral-squirt')
-add('AdultChildren', '/adult-children')
-add('AdventuresofMartyandTurkey', '/marty-and-turkey')
-add('Agnes', '/agnes')
-add('AlisonWard', '/alison-ward')
-add('AlleyOop', '/alley-oop')
-add('AmaZnEvents', '/amaznevents')
-add('AmandatheGreat', '/amanda-the-great')
-add('Andertoons', '/andertoons')
-add('Andnow', '/and-now')
-add('AndyCapp', '/andycapp')
-add('Anecdote', '/anecdote')
-add('AngryLittleGirls', '/angry-little-girls')
-add('AnimalCrackers', '/animalcrackers')
-add('Annie', '/annie')
-add('AppleCreekComics', '/apple-creek')
-add('ArloandJanis', '/arloandjanis')
-add('AskShagg', '/askshagg')
-add('AuntyAcid', '/aunty-acid')
-add('BC', '/bc')
-add('BCenEspaol', '/espanol/bcespanol')
-add('BERSERKALERT', '/berserk-alert')
-add('BUNS', '/buns')
-add('BUSHYTALES', '/bushy-tales')
-add('BackintheDay', '/backintheday')
-add('BadReporter', '/badreporter')
-add('Badlands', '/badlands')
-add('Baldo', '/baldo')
-add('BaldoenEspaol', '/espanol/baldoespanol')
-add('BallardStreet', '/ballardstreet')
-add('BananaTriangle', '/banana-triangle')
-add('BarkeaterLake', '/barkeaterlake')
-add('BarneyAndClyde', '/barneyandclyde')
-add('BasicInstructions', '/basicinstructions')
-add('BatchRejection', '/batch-rejection')
-add('Bazoobee', '/bazoobee')
-add('BeMisery', '/bemisery')
-add('BeanietheBrownie', '/beanie-the-brownie')
-add('Beardo', '/beardo')
-add('Ben', '/ben')
-add('BeneaththeFerns', '/beneath-the-ferns')
-add('BenitinyEneas', '/espanol/muttandjeffespanol')
-add('BergerAndWyse', '/berger-and-wyse')
-add('BerkeleyMews', '/berkeley-mews')
-add('Betty', '/betty')
-add('Bewley', '/bewley')
-add('BiffAndRiley', '/biff-and-riley')
-add('BigNate', '/bignate')
-add('BigNateFirstClass', '/big-nate-first-class')
-add('BigTop', '/bigtop')
-add('BillyAndCo', '/billy-and-co')
-add('Biographic', '/biographic')
-add('Birdbrains', '/birdbrains')
-add('Bliss', '/bliss')
-add('BloomCounty', '/bloomcounty')
-add('BlueSkiesToons', '/blue-skies-toons')
-add('Bluebonnets', '/cowsandstuff')
-add('BoNanas', '/bonanas')
-add('BobGorrell', '/bobgorrell')
-add('BobtheSquirrel', '/bobthesquirrel')
-add('Boogerbrain', '/boogerbrain')
-add('Boomerangs', '/boomerangs')
-add('Bork', '/bork')
-add('BotBrothers', '/bot-brothers')
-add('BottAuto', '/bott-auto')
-add('Bottomliners', '/bottomliners')
-add('BoundandGagged', '/boundandgagged')
-add('BrainSquirts', '/brain-squirts')
-add('BreakingCatNews', '/breaking-cat-news')
-add('BreakofDay', '/break-of-day')
-add('Brevity', '/brevity')
-add('BrewsterRockit', '/brewsterrockit')
-add('BrianMcFadden', '/brian-mcfadden')
-add('BrilliantMines', '/brilliant-mines')
-add('BroomHilda', '/broomhilda')
-add('BuffaloChips', '/buffalo-chips')
-add('Bully', '/bully')
-add('Buni', '/buni')
-add('BuzzaWuzza', '/buzza-wuzza')
-add('CAFFEINATED', '/CAFFEINATED')
-add('CafconLeche', '/cafeconleche')
-add('CalAndOzz', '/cal-and-ozz')
-add('CalvinandHobbes', '/calvinandhobbes')
-add('CalvinandHobbesenEspaol', '/espanol/calvinandhobbesespanol')
-add('CandacenCompany', '/candace-n-company')
-add('Candorville', '/candorville')
-add('CandyPills', '/candy-pills')
-add('CapsulasMedicas', '/espanol/capsulas-medicas')
-add('Cathy', '/cathy')
-add('CatsAtWork', '/cats-at-work')
-add('CestlaVie', '/cestlavie')
-add('ChanLowe', '/chanlowe')
-add('CharmysArmy', '/charmys-army')
-add('ChasingUnicorns', '/chasing-unicorns')
-add('CheapThrillsCuisine', '/cheap-thrills-cuisine')
-add('ChipBok', '/chipbok')
-add('ChrisBritt', '/chrisbritt')
-add('ChubbyGirlComics', '/chubbygirlcomics')
-add('ChuckleBros', '/chucklebros')
-add('CitizenDog', '/citizendog')
-add('Classifudds', '/classifudds')
-add('ClayBennett', '/claybennett')
-add('ClayJones', '/clayjones')
-add('ClearBlueWater', '/clearbluewater')
-add('Cleats', '/cleats')
-add('CleoandCompany', '/cleo-and-company')
-add('ClosetoHome', '/closetohome')
-add('CoffeeShopTidbits', '/coffee-shop-tidbits')
-add('ColonelKernel', '/colonel-kernel')
-add('Committed', '/committed')
-add('Computoon', '/compu-toon')
-add('Condorito', '/espanol/condorito')
-add('ConnietotheWonnie', '/connie-to-the-wonnie')
-add('Cornered', '/cornered')
-add('CourageousManAdventures', '/courageous-man-adventures')
-add('CowTown', '/cowtown')
-add('CowandBoyClassics', '/cowandboy')
-add('CoyoteVille', '/coyteville')
-add('Crooksville', '/crooksville')
-add('Crumb', '/crumb')
-add('CuldeSac', '/culdesac')
-add('DBCartoons', '/db-cartoons')
-add('DaddysHome', '/daddyshome')
-add('DanWasserman', '/danwasserman')
-add('DanaSummers', '/danasummers')
-add('DarkSideoftheHorse', '/darksideofthehorse')
-add('DarrinBell', '/darrin-bell')
-add('DeepDarkFears', '/deep-dark-fears')
-add('DevinCraneComicStripGhostwriter', '/devincranecomicstripghostwriter')
-add('DiamondLil', '/diamondlil')
-add('DickTracy', '/dicktracy')
-add('DilbertClassics', '/dilbert-classics')
-add('DilbertenEspaol', '/espanol/dilbert-en-espanol')
-add('DiligentCity', '/diligent-city')
-add('DinosaurComics', '/dinosaur-comics')
-add('DogEatDoug', '/dogeatdoug')
-add('DogsDucksandAliens', '/dogs-ducks-and-aliens')
-add('DogsofCKennel', '/dogsofckennel')
-add('DoingTime', '/doingtime')
-add('DomesticAbuse', '/domesticabuse')
-add('DonBrutus', '/espanol/don-brutus')
-add('DontPicktheFlowers', '/dont-pick-the-flowers')
-add('DoodleTown', '/doodle-town')
-add('Doonesbury', '/doonesbury')
-add('Drabble', '/drabble')
-add('DrewSheneman', '/drewsheneman')
-add('Dromo', '/dro-mo')
-add('DudeandDude', '/dudedude')
-add('DumbQuestionBadAnswer', '/dumb-question-bad-answer')
-add('DustSpecks', '/dust-specks')
-add('Econogirl', '/econogirl')
-add('Eek', '/eek')
-add('EightballEyeball', '/eightball-eyeball')
-add('ElCafdePoncho', '/espanol/poochcafeespanol')
-add('ElMundodeBeakman', '/beakmanespanol')
-add('EleriMaiHarrisCartoons', '/eleri-mai-harris-cartoons')
-add('Elmo', '/elmo')
-add('EmmyLou', '/emmy-lou')
-add('Endtown', '/endtown')
-add('ErictheCircle', '/eric-the-circle')
-add('EspressoCity', '/Espresso-City')
-add('FMinus', '/fminus')
-add('FacesoftheNewsbyKerryWaghorn', '/facesinthenews')
-add('FamilyTree', '/familytree')
-add('FarOut', '/far-out')
-add('Farcus', '/farcus')
-add('FatCats', '/fat-cats')
-add('FleasonFlick', '/fleasonflick')
-add('FloandFriends', '/floandfriends')
-add('FoolishMortals', '/foolish-mortals')
-add('ForBetterorForWorse', '/forbetterorforworse')
-add('ForHeavensSake', '/forheavenssake')
-add('FortKnox', '/fortknox')
-add('FourEyes', '/four-eyes')
-add('FoxTrot', '/foxtrot')
-add('FoxTrotClassics', '/foxtrotclassics')
-add('FoxTrotenEspaol', '/espanol/foxtrotespanol')
-add('Francis', '/francis')
-add('FrankAndErnest', '/frankandernest')
-add('FrankAndSteinway', '/frank-and-steinway')
-add('FrankBlunt', '/frankblunt')
-add('FrankieComics', '/frankie-comics')
-add('Frazz', '/frazz')
-add('FredBasset', '/fredbasset')
-add('FredBassetenEspaol', '/espanol/fredbassetespanol')
-add('FreeRange', '/freerange')
-add('FreshlySqueezed', '/freshlysqueezed')
-add('FriedCritter', '/fried-critter')
-add('FritzMurphyAndMulligan', '/fritz-murphy-and-mulligan')
-add('FrogApplause', '/frogapplause')
-add('FromtheMoWillemsSketchbook', '/from-the-mo-willems-sketchbook')
-add('GIRTH', '/girth')
-add('GarciaCartoonCo', '/garcia-cartoon-co')
-add('Garfield', '/garfield')
-add('GarfieldMinusGarfield', '/garfieldminusgarfield')
-add('GarfieldenEspaol', '/espanol/garfieldespanol')
-add('GaryMarkstein', '/garymarkstein')
-add('GaryVarvel', '/garyvarvel')
-add('GasolineAlley', '/gasolinealley')
-add('GatorsAndSuch', '/gators-and-such')
-add('Gaturro', '/espanol/gaturro')
-add('Geech', '/geech')
-add('GenerationMute', '/generation-mute')
-add('GentleCreatures', '/gentle-creatures')
-add('GetFuzzy', '/getfuzzy')
-add('GetaLife', '/getalife')
-add('GilThorp', '/gilthorp')
-add('GingerMeggs', '/gingermeggs')
-add('GingerMeggsenEspaol', '/espanol/gingermeggsespanol')
-add('GlasbergenCartoons', '/glasbergen-cartoons')
-add('GlennMcCoy', '/glennmccoy')
-add('GoComicsontheRoad', '/gocomics-on-the-road')
-add('Graffiti', '/graffiti')
-add('GramDragon', '/gramdragon')
-add('GrandAvenue', '/grand-avenue')
-add('GrandmaSnoops', '/grandmasnoops')
-add('GrannyAnny', '/granny-anny')
-add('GrayMatters', '/gray-matters')
-add('GreenHumour', '/green-humour')
-add('GreenPieces', '/green-pieces')
-add('HIP', '/hip')
-add('HUBRIS', '/hubris')
-add('HaikuEwe', '/haikuewe')
-add('HalfFull', '/half-full')
-add('HalfFullenEspaol', '/espanol/half-full-espanol')
-add('HamShears', '/ham-shears')
-add('HankandDalesOurWorld', '/hank-and-dales-our-world')
-add('HanktheSock', '/hank-the-sock')
-add('HaphazardHumor', '/haphazard-humor')
-add('Headcheese', '/headcheese')
-add('HealthCapsules', '/healthcapsules')
-add('HeartoftheCity', '/heartofthecity')
-add('Heathcliff', '/heathcliff')
-add('HeathcliffenEspaol', '/espanol/heathcliffespanol')
-add('HenryPayne', '/henrypayne')
-add('HerbandJamaal', '/herbandjamaal')
-add('Herman', '/herman')
-add('HermanenEspaol', '/espanol/herman-en-espanol')
-add('HipsterPicnic', '/hipster-picnic')
-add('Hogwashed', '/hogwashed')
-add('HolidayDoodles', '/holiday-doodles')
-add('Hollywoodpecker', '/hollywoodpecker')
-add('HomeandAway', '/homeandaway')
-add('HugoComics', '/hugo-comics')
-add('HumanCull', '/human-cull')
-add('HumblebeeandBob', '/humblebee-and-bob')
-add('HutchOwen', '/hutch-owen')
-add('ImTellingMom', '/telling-mom')
-add('ImagineThis', '/imaginethis')
-add('InherittheMirth', '/inherit-the-mirth')
-add('InkPen', '/inkpen')
-add('InspectorDangersCrimeQuiz', '/inspector-dangers-crime-quiz')
-add('IntheBleachers', '/inthebleachers')
-add('IntheSticks', '/inthesticks')
-add('InvisibleBread', '/invisible-bread')
-add('IsleofEx', '/isle-of-ex')
-add('ItsAllAboutYou', '/itsallaboutyou')
-add('ItsjustJim', '/its-just-jim')
-add('JackOhman', '/jackohman')
-add('JackRadioComics', '/jack-radio-comics')
-add('JanesWorld', '/janesworld')
-add('JeffDanziger', '/jeffdanziger')
-add('JeffStahler', '/jeffstahler')
-add('JenSorensen', '/jen-sorensen')
-add('JerryHolbert', '/jerryholbert')
-add('JillpokeBohemia', '/jillpoke-bohemia')
-add('JimAndSarah', '/jim-and-sarah')
-add('JimBentonCartoons', '/jim-benton-cartoons')
-add('JimMorin', '/jimmorin')
-add('JimsJournal', '/jimsjournal')
-add('JoeHeller', '/joe-heller')
-add('JoeVanilla', '/joevanilla')
-add('JoelPett', '/joelpett')
-add('JohnDeering', '/johndeering')
-add('JolleyStuffBrowser', '/jolleystuff-browser')
-add('JordanandBentley', '/jordan-and-bentley')
-add('JumpStart', '/jumpstart')
-add('JustSayUncle', '/just-say-uncle')
-add('JustoyFranco', '/espanol/justo-y-franco')
-add('KartoonsByKline', '/kartoons-by-kline')
-add('KatetheGreat', '/kate-the-great')
-add('KenCatalino', '/kencatalino')
-add('KevinKallaugher', '/kevinkallaugher')
-add('KidBeowulf', '/kid-beowulf')
-add('KidShayComics', '/kid-shay-comics')
-add('KidSpot', '/kidspot')
-add('KidTown', '/kidtown')
-add('KirbysTreehouse', '/kirbys-treehouse')
-add('KitNCarlyle', '/kitandcarlyle')
-add('KitchenCapers', '/kitchen-capers')
-add('Kliban', '/kliban')
-add('KlibansCats', '/klibans-cats')
-add('LIGHTERSIDE', '/lighter-side')
-add('LaCucaracha', '/lacucaracha')
-add('LaCucarachaenEspaol', '/espanol/la-cucaracha-en-espanol')
-add('LaloAlcaraz', '/laloalcaraz')
-add('LaloAlcarazenEspaol', '/espanol/laloenespanol')
-add('LardWantsWorldPeace', '/lard-wants-world-peace')
-add('LardsWorldPeaceTips', '/lards-world-peace-tips')
-add('LarryvilleBlue', '/larryville-blue')
-add('LasHermanasStone', '/espanol/stonesoup_espanol')
-add('LastKiss', '/lastkiss')
-add('LayLines', '/lay-lines')
-add('LearntoSpeakCat', '/learn-to-speak-cat')
-add('LegendofBill', '/legendofbill')
-add('LeighLunaComics', '/leigh-luna-comics')
-add('LibertyMeadows', '/libertymeadows')
-add('LilAbner', '/lil-abner')
-add('LiliandDerek', '/lili-and-derek')
-add('Lio', '/lio')
-add('LioenEspaol', '/espanol/lioespanol')
-add('LisaBenson', '/lisabenson')
-add('LittleDogLost', '/littledoglost')
-add('LittleFriedChickenandSushi', '/little-fried-chicken-and-sushi')
-add('LittleNemo', '/little-nemo')
-add('Lola', '/lola')
-add('LolaenEspaol', '/espanol/lola-en-espanol')
-add('LooksGoodonPaper', '/looks-good-on-paper')
-add('LooseParts', '/looseparts')
-add('LosOsorios', '/espanol/los-osorios')
-add('LostSheep', '/lostsheep')
-add('LostSideofSuburbia', '/lostsideofsuburbia')
-add('Luann', '/luann')
-add('LuannAgainn', '/luann-againn')
-add('LuannenEspaol', '/espanol/luannspanish')
-add('Lucan', '/lucan')
-add('LuckyCow', '/luckycow')
-add('LugNuts', '/lug-nuts')
-add('LumandAbner', '/lum-and-abner')
-add('Mac', '/mac')
-add('MadDogGhettoCop', '/maddogghettocop')
-add('MagicinaMinute', '/magicinaminute')
-add('Magnificatz', '/magnificatz')
-add('Maintaining', '/maintaining')
-add('MakingIt', '/making-it')
-add('MariasDay', '/marias-day')
-add('Marmaduke', '/marmaduke')
-add('MarmadukeenEspaol', '/espanol/marmaduke-en-espanol')
-add('MarshallRamsey', '/marshallramsey')
-add('MassiveFalls', '/massive-falls')
-add('MattBors', '/matt-bors')
-add('MattDavies', '/mattdavies')
-add('MattWuerker', '/mattwuerker')
-add('Maximus', '/maximus')
-add('McArroni', '/mcarroni')
-add('MediumLarge', '/medium-large')
-add('MegClassics', '/meg-classics')
-add('MichaelRamirez', '/michaelramirez')
-add('Mick', '/mick')
-add('MikeLester', '/mike-lester')
-add('MikeLuckovich', '/mikeluckovich')
-add('MikeduJour', '/mike-du-jour')
-add('Millennialhood', '/millennialhood')
-add('Millennialville', '/millennialville')
-add('Milton50', '/milton-5-0')
-add('Mindframe', '/mindframe')
-add('MinimumSecurity', '/minimumsecurity')
-add('MiscSoup', '/misc-soup')
-add('MisterAndMe', '/mister-and-me')
-add('ModeratelyConfused', '/moderately-confused')
-add('MollyandtheBear', '/mollyandthebear')
-add('Momma', '/momma')
-add('Mongrels', '/mongrels')
-add('MonstersR4Real', '/monsters-r4-real')
-add('Monty', '/monty')
-add('MontyDiaros', '/espanol/monty-diarios')
-add('Mortimer', '/mortimer')
-add('MortsIsland', '/noahs-island')
-add('MotleyClassics', '/motley-classics')
-add('MrGigiandtheSquid', '/mr-gigi-and-the-squid')
-add('Mulligan', '/mulligan')
-add('MustardandBoloney', '/mustard-and-boloney')
-add('MuttAndJeff', '/muttandjeff')
-add('MyCageClassics', '/mycage')
-add('MythTickle', '/mythtickle')
-add('NEUROTICA', '/neurotica')
-add('Nancy', '/nancy')
-add('NancyClassics', '/nancy-classics')
-add('NateelGrande', '/espanol/nate-el-grande')
-add('NavyBean', '/navybean')
-add('NestHeads', '/nestheads')
-add('NewAdventuresofQueenVictoria', '/thenewadventuresofqueenvictoria')
-add('NickAnderson', '/nickanderson')
-add('NickandZuzu', '/nick-and-zuzu')
-add('NoBusinessIKnow', '/nobusinessiknow')
-add('NoOrdinaryLife', '/no-ordinary-life')
-add('NoPlaceLikeHolmes', '/no-place-like-holmes')
-add('NonSequitur', '/nonsequitur')
-add('Norman', '/Norman')
-add('NothingisNotSomething', '/nothing-is-not-something')
-add('ONIONAndPEA', '/onion-and-pea')
-add('Oat', '/oat')
-add('ObamaandtheFatman', '/obama-and-the-fatman')
-add('OfftheMark', '/offthemark')
-add('OhBrother', '/oh-brother')
-add('OllieandQuentin', '/ollie-and-quentin')
-add('OnAClaireDay', '/onaclaireday')
-add('OneBigHappy', '/onebighappy')
-add('OrdinaryBill', '/ordinary-bill')
-add('OriginsoftheSundayComics', '/origins-of-the-sunday-comics')
-add('OutoftheGenePoolReRuns', '/outofthegenepool')
-add('OverQuirked', '/over-quirked')
-add('Overboard', '/overboard')
-add('OverboardenEspaol', '/espanol/overboardespanol')
-add('OvertheHedge', '/overthehedge')
-add('OzyandMillie', '/ozy-and-millie')
-add('PCandPixel', '/pcandpixel')
-add('PaddedCell', '/padded-cell')
-add('PamosWorld', '/pamos-world')
-add('PatOliphant', '/patoliphant')
-add('PaulSzep', '/paulszep')
-add('PawsForThoughtComics', '/paws-for-thought-comics')
-add('Peanizles', '/peanizles')
-add('Peanuts', '/peanuts')
-add('PeanutsBegins', '/peanuts-begins')
-add('PeanutsenEspaol', '/espanol/peanuts-espanol')
-add('PearlsBeforeSwine', '/pearlsbeforeswine')
-add('Peeples', '/peeples')
-add('Periquita', '/espanol/periquita')
-add('PerlasparalosCerdos', '/espanol/perlas-para-los-cerdos')
-add('PerryBibleFellowship', '/perry-bible-fellowship')
-add('PhilHands', '/phil-hands')
-add('PhoebeandHerUnicorn', '/phoebe-and-her-unicorn')
-add('Pi', '/pi')
-add('Pibgorn', '/pibgorn')
-add('PibgornSketches', '/pibgornsketches')
-add('Pickles', '/pickles')
-add('PicpakDog', '/picpak-dog')
-add('PicturesinBoxes', '/pictures-in-boxes')
-add('PigtimesCartoon', '/pigtimes-cartoon')
-add('Pinkerton', '/pinkerton')
-add('PipethePelican', '/pipe-the-pelican')
-add('PirateMike', '/pirate-mike')
-add('PlanB', '/planb')
-add('PlasticBabyHeadsfromOuterSpace', '/plastic-babyheads')
-add('Pluggers', '/pluggers')
-add('PoliceLimit', '/policelimit')
-add('PoochCafe', '/poochcafe')
-add('PoorlyDrawnLines', '/poorly-drawn-lines')
-add('PopCultureShockTherapy', '/pop-culture-shock-therapy')
-add('Poptropica', '/poptropica')
-add('PreTeena', '/preteena')
-add('PricklyCity', '/pricklycity')
-add('Primusthebadphilosopher', '/primus-the-bad-philosopher')
-add('Puppets', '/puppets')
-add('RabbitsAgainstMagic', '/rabbitsagainstmagic')
-add('Rackafracka', '/rackafracka')
-add('RaisingDuncan', '/raising-duncan')
-add('RandolphItch2am', '/randolphitch')
-add('RandomActsofNancy', '/random-acts-of-nancy')
-add('RealLifeAdventures', '/reallifeadventures')
-add('RealityCheck', '/realitycheck')
-add('RebeccaHendin', '/rebecca-hendin')
-add('RedMeat', '/redmeat')
-add('RedandRover', '/redandrover')
-add('RegularCreatures', '/regular-creatures')
-add('ReplyAll', '/replyall')
-add('ReplyAllLite', '/reply-all-lite')
-add('RicigsToonTrivia', '/ricigs-toon-trivia')
-add('RipHaywire', '/riphaywire')
-add('RipleysBelieveItorNot', '/ripleysbelieveitornot')
-add('RipleysBelieveitorNotSpanish', '/espanol/ripleys-en-espanol')
-add('Risible', '/risible')
-add('RobRogers', '/robrogers')
-add('RobbieandBobby', '/robbie-and-bobby')
-add('RobertAriail', '/robert-ariail')
-add('RonWarren', '/ron-warren')
-add('RosaDominical', '/espanol/rosa-dominical')
-add('RoseisRose', '/roseisrose')
-add('Rosy', '/rosy')
-add('Rubes', '/rubes')
-add('RudyPark', '/rudypark')
-add('SCAIRYTALESTheNotSoScaryFairyTales', '/Scairy-Tales:-the-not-so-scary-fairy-tales!')
-add('SOD', '/sod')
-add('SandSharkBeach', '/sandshark-beach')
-add('SantavsDracula', '/santa-vs-dracula')
-add('SarahsScribbles', '/sarahs-scribbles')
-add('SavageChickens', '/savage-chickens')
-add('ScaryGary', '/scarygary')
-add('ScorchedEarth', '/scorched-earth')
-add('ScottStantis', '/scottstantis')
-add('Scurvyville', '/scurvyville')
-add('ShirleyandSonClassics', '/shirley-and-son-classics')
-add('Shoe', '/shoe')
-add('Shoecabbage', '/shoecabbage')
-add('Shortcuts', '/shortcuts')
-add('ShutterbugFollies', '/shutterbug-follies')
-add('SignGarden', '/signgarden')
-add('SigneWilkinson', '/signewilkinson')
-add('SincerelyBeatrice', '/sincerely-beatrice')
-add('SkinHorse', '/skinhorse')
-add('Skippy', '/skippy')
-add('Skylarking', '/skylarking')
-add('SleepytownBeagles', '/sleepytown-beagles')
-add('SmallNerdyCreatures', '/small-nerdy-creatures')
-add('Smith', '/smith')
-add('SnowSez', '/snowsez')
-add('SoccerDude', '/soccer-dude')
-add('SoccerEarth', '/soccer-earth')
-add('SookyRottweiler', '/sooky-rottweiler')
-add('SouptoNutz', '/soup-to-nutz')
-add('Spectickles', '/abbotts-spectickles')
-add('Speechless', '/speechless')
-add('SpeedBump', '/speedbump')
-add('SpinCrazy', '/spin-crazy')
-add('SportsbyVoort', '/sports-by-voort')
-add('SpottheFrog', '/spot-the-frog')
-add('StankoAndTibor', '/stankotibor')
-add('Starslip', '/starslip')
-add('SteveBenson', '/stevebenson')
-add('SteveBreen', '/stevebreen')
-add('SteveKelley', '/stevekelley')
-add('StoneSoup', '/stonesoup')
-add('StrangeBrew', '/strangebrew')
-add('StuartCarlson', '/stuartcarlson')
-add('SubSub', '/subsub')
-add('SuburbanFairyTales', '/suburban-fairy-tales')
-add('SunnyStreet', '/sunny-street')
-add('SunshineState', '/sunshine-state')
-add('SuperFunPakComix', '/super-fun-pak-comix')
-add('SuperSiblings', '/super-siblings')
-add('Sylvia', '/sylvia')
-add('TOBY', '/toby')
-add('TankMcNamara', '/tankmcnamara')
-add('Tarzan', '/tarzan')
-add('TarzanenEspaol', '/espanol/tarzan-en-espanol')
-add('TeacherInk', '/teacher-ink')
-add('TedRall', '/tedrall')
-add('TeddyBearsKillingSpree', '/teddy-bears-killing-spree')
-add('TenCats', '/ten-cats')
-add('ThatMonkeyTune', '/that-monkey-tune')
-add('ThatNewCarlSmell', '/that-new-carl-smell')
-add('Thatababy', '/thatababy')
-add('ThatisPriceless', '/that-is-priceless')
-add('ThatsLife', '/thats-life')
-add('TheAcademiaWaltz', '/academiawaltz')
-add('TheAdventuresofHeromanGuy', '/adventures-of-heroman-guy')
-add('TheArgyleSweater', '/theargylesweater')
-add('TheAwkwardYeti', '/the-awkward-yeti')
-add('TheBarn', '/thebarn')
-add('TheBeauforts', '/the-beauforts')
-add('TheBellies', '/the-bellies')
-add('TheBentPinky', '/the-bent-pinky')
-add('TheBigPicture', '/thebigpicture')
-add('TheBoobiehatch', '/the-boobiehatch')
-add('TheBoondocks', '/boondocks')
-add('TheBornLoser', '/the-born-loser')
-add('TheBuckets', '/thebuckets')
-add('TheCardinal', '/thecardinal')
-add('TheCity', '/thecity')
-add('TheCreeps', '/the-creeps')
-add('TheDailyDrawing', '/the-daily-drawing')
-add('TheDinetteSet', '/dinetteset')
-add('TheDoozies', '/thedoozies')
-add('TheDuplex', '/duplex')
-add('TheElderberries', '/theelderberries')
-add('TheFamilyBlend', '/the-family-blend')
-add('TheFlyingMcCoys', '/theflyingmccoys')
-add('TheFuscoBrothers', '/thefuscobrothers')
-add('TheGreenMonkeys', '/thegreenmonkeys')
-add('TheGrizzwells', '/thegrizzwells')
-add('TheHumbleStumble', '/humble-stumble')
-add('TheInsolentLemon', '/the-insolent-lemon')
-add('TheKChronicles', '/thekchronicles')
-add('TheKnightLife', '/theknightlife')
-add('TheLeftyBoscoPictureShow', '/leftyboscopictureshow')
-add('TheLightedLab', '/the-lighted-lab')
-add('TheLostBear', '/the-lost-bear')
-add('TheMartianConfederacy', '/the-martian-confederacy')
-add('TheMeaningofLila', '/meaningoflila')
-add('TheMiddletons', '/themiddletons')
-add('TheNorm40', '/the-norm-4-0')
-add('TheNormClassics', '/thenorm')
-add('TheOldManAndHisDog', '/old-man-and-his-dog')
-add('TheOtherCoast', '/theothercoast')
-add('TheQuinnAndFinnShow', '/quinn-and-finn')
-add('TheQuixoteSyndrome', '/the-quixote-syndrome')
-add('TheSmileFile', '/mid-life-with-alan')
-add('TheSunshineClub', '/the-sunshine-club')
-add('TheUnemployed', '/the-unemployed')
-add('TheWanderingMelon', '/the-wandering-melon')
-add('TheWinyChild', '/the-winy-child')
-add('TheWizardofIdSpanish', '/espanol/wizardofidespanol')
-add('TheWorstThingIveEverDone', '/the-worst-thing-ive-ever-done')
-add('ThinLines', '/thinlines')
-add('Thingsesque', '/thingsesque')
-add('Think', '/think')
-add('TimEagan', '/tim-eagan')
-add('TinyConfessions', '/tiny-confessions')
-add('TinySepuku', '/tinysepuku')
-add('TnCComics', '/tnc-comics')
-add('TodaysDogg', '/todays-dogg')
-add('TomToles', '/tomtoles')
-add('TomtheDancingBug', '/tomthedancingbug')
-add('TooMuchCoffeeMan', '/toomuchcoffeeman')
-add('ToughTown', '/tough-town')
-add('Trivquiz', '/trivquiz')
-add('Trucutu', '/espanol/trucutu')
-add('TruthFacts', '/truth-facts')
-add('Tutelandia', '/espanol/tutelandia')
-add('Twaggies', '/twaggies')
-add('TwitchyOToole', '/twitchy-otoole')
-add('TwoBits', '/two-bits')
-add('USAcres', '/us-acres')
-add('UnMannerlyWays', '/mannerly-ways')
-add('UncleArtsFunland', '/uncleartsfunland')
-add('UnderstandingChaos', '/understanding-chaos')
-add('UnstrangePhenomena', '/unstrange-phenomena')
-add('UpandOut', '/up-and-out')
-add('Vernscartoons', '/vernscartoons')
-add('ViewsAfrica', '/viewsafrica')
-add('ViewsAmerica', '/viewsamerica')
-add('ViewsAsia', '/viewsasia')
-add('ViewsBusiness', '/viewsbusiness')
-add('ViewsEurope', '/viewseurope')
-add('ViewsLatinAmerica', '/viewslatinamerica')
-add('ViewsMidEast', '/viewsmideast')
-add('ViewsoftheWorld', '/viewsoftheworld')
-add('ViiviAndWagner', '/viivi-and-wagner')
-add('WTDuck', '/wtduck')
-add('WaltHandelsman', '/walthandelsman')
-add('WarpedAnddemented', '/warped-and-demented')
-add('WatchYourHead', '/watchyourhead')
-add('WayOutComics', '/way-out-comics')
-add('WaynoVision', '/waynovision')
-add('WeePals', '/weepals')
-add('WelcometoFriendly', '/welcome-to-friendly')
-add('WendlesLife', '/wendleslife')
-add('WhiskeyFalls', '/whiskey-falls')
-add('WideOpen', '/wide-open')
-add('WillSays', '/will-says')
-add('WillyWho', '/willy-who')
-add('WinLoseDrew', '/drewlitton')
-add('WindingRoads', '/winding-roads')
-add('Winston', '/winston')
-add('WitoftheWorld', '/witoftheworld')
-add('WittOfWill', '/witt-of-will')
-add('WizardofId', '/wizardofid')
-add('WizardofIdClassics', '/wizard-of-id-classics')
-add('WorkingDaze', '/working-daze')
-add('WorkingItOut', '/workingitout')
-add('WorldofWonder', '/world-of-wonder')
-add('Wrobbertcartoons', '/wrobbertcartoons')
-add('WrongHands', '/wrong-hands')
-add('WuMo', '/wumo')
-add('WumoenEspaol', '/espanol/wumoespanol')
-add('Wyatt', '/wyatt')
-add('YennyLopez', '/yenny-lopez')
-add('YennyenEspaol', '/espanol/yennyespanol')
-add('YouCanwithBeakmanandJax', '/beakman')
-add('ZackHill', '/zackhill')
-add('ZenPencils', '/zen-pencils')
-add('ZeroGravity', '/zero-gravity')
-add('Ziggy', '/ziggy')
-add('ZiggyenEspaol', '/espanol/ziggyespanol')
-add('Zootopia', '/zootopia')
+            # do not edit anything below since these entries are generated from
+            # scripts/gocomics.py
+            # START AUTOUPDATE
+            cls('060', '0-60'),
+            cls('1AndDone', '1-and-done'),
+            cls('2CowsAndAChicken', '2cowsandachicken'),
+            cls('9ChickweedLane', '9chickweedlane'),
+            cls('9To5', '9to5'),
+            cls('AaronGuile', 'aaron-guile'),
+            cls('ABitSketch', 'a-bit-sketch'),
+            cls('ABomb', 'a-bomb'),
+            cls('ACMEINKD', 'acme-inkd'),
+            cls('AcornPark', 'acorn-park'),
+            cls('AdamAtHome', 'adamathome'),
+            cls('AdultChildren', 'adult-children'),
+            cls('Adulting', 'adulting'),
+            cls('Agnes', 'agnes'),
+            cls('AJAndMagnus', 'aj-and-magnus'),
+            cls('AlisHouse', 'alis-house'),
+            cls('AlisonWard', 'alison-ward'),
+            cls('AlleyOop', 'alley-oop'),
+            cls('AllInGoodTime', 'all-in-good-time'),
+            cls('AmandaTheGreat', 'amanda-the-great'),
+            cls('Andertoons', 'andertoons'),
+            cls('AndNow', 'and-now'),
+            cls('AndyCapp', 'andycapp'),
+            cls('Anecdote', 'anecdote'),
+            cls('AngryLittleGirls', 'angry-little-girls'),
+            cls('AnimalCrackers', 'animalcrackers'),
+            cls('AnimalMitchell', 'animal-mitchell'),
+            cls('AnneAndPythagoras', 'anne-and-pythagoras'),
+            cls('Annie', 'annie'),
+            cls('AppleCreekComics', 'apple-creek'),
+            cls('ArloAndJanis', 'arloandjanis'),
+            cls('AskACat', 'ask-a-cat'),
+            cls('AskShagg', 'askshagg'),
+            cls('ATasteOfTimes', 'a-taste-of-times'),
+            cls('AtTavicat', 'tavicat'),
+            cls('AtTheZoo', 'at-the-zoo'),
+            cls('AuntyAcid', 'aunty-acid'),
+            cls('BackInTheDay', 'backintheday'),
+            cls('BackToBC', 'back-to-bc'),
+            cls('Bacon', 'bacon'),
+            cls('Badlands', 'badlands'),
+            cls('BadMachinery', 'bad-machinery'),
+            cls('BadReporter', 'badreporter'),
+            cls('Baldo', 'baldo'),
+            cls('BaldoEnEspaol', 'espanol/baldoespanol', 'es'),
+            cls('BallardStreet', 'ballardstreet'),
+            cls('BananaTriangle', 'banana-triangle'),
+            cls('BarkeaterLake', 'barkeaterlake'),
+            cls('BarneyAndClyde', 'barneyandclyde'),
+            cls('BasicInstructions', 'basicinstructions'),
+            cls('BatchRejection', 'batch-rejection'),
+            cls('Bazoobee', 'bazoobee'),
+            cls('BC', 'bc'),
+            cls('BeanieTheBrownie', 'beanie-the-brownie'),
+            cls('Beardo', 'beardo'),
+            cls('BeMisery', 'bemisery'),
+            cls('Ben', 'ben'),
+            cls('BeneathTheFerns', 'beneath-the-ferns'),
+            cls('BenitinYEneas', 'espanol/muttandjeffespanol', 'es'),
+            cls('BentObjects', 'bent-objects'),
+            cls('BergerAndWyse', 'berger-and-wyse'),
+            cls('BerkeleyMews', 'berkeley-mews'),
+            cls('Betty', 'betty'),
+            cls('Bewley', 'bewley'),
+            cls('BiffAndRiley', 'biff-and-riley'),
+            cls('BigJim', 'bigjim'),
+            cls('BigNate', 'bignate'),
+            cls('BigNateFirstClass', 'big-nate-first-class'),
+            cls('BigTop', 'bigtop'),
+            cls('Biographic', 'biographic'),
+            cls('Birdbrains', 'birdbrains'),
+            cls('BleekerTheRechargeableDog', 'bleeker'),
+            cls('Bliss', 'bliss'),
+            cls('BloomCounty', 'bloomcounty'),
+            cls('BloomCounty2016', 'bloom-county'),
+            cls('Bluebonnets', 'cowsandstuff'),
+            cls('BlueSkiesToons', 'blue-skies-toons'),
+            cls('BobGorrell', 'bobgorrell'),
+            cls('BobTheSquirrel', 'bobthesquirrel'),
+            cls('BoltsAndNuts', 'bolts-and-nuts'),
+            cls('BoNanas', 'bonanas'),
+            cls('Boomerangs', 'boomerangs'),
+            cls('Bork', 'bork'),
+            cls('BottAuto', 'bott-auto'),
+            cls('Bottomliners', 'bottomliners'),
+            cls('BoundAndGagged', 'boundandgagged'),
+            cls('BrainSquirts', 'brain-squirts'),
+            cls('BreakingCatNews', 'breaking-cat-news'),
+            cls('BreakOfDay', 'break-of-day'),
+            cls('Brevity', 'brevity'),
+            cls('BrewsterRockit', 'brewsterrockit'),
+            cls('BrianMcFadden', 'brian-mcfadden'),
+            cls('BroomHilda', 'broomhilda'),
+            cls('Bully', 'bully'),
+            cls('Buni', 'buni'),
+            cls('BUNS', 'buns'),
+            cls('Bushscrubs', 'bushscrubs'),
+            cls('BushyTales', 'bushy-tales'),
+            cls('CAFFEINATED', 'CAFFEINATED'),
+            cls('CalvinAndHobbes', 'calvinandhobbes'),
+            cls('CalvinAndHobbesEnEspaol', 'espanol/calvinandhobbesespanol', 'es'),
+            cls('CandacenCompany', 'candace-n-company'),
+            cls('Candorville', 'candorville'),
+            cls('CapsulasMedicas', 'espanol/capsulas-medicas', 'es'),
+            cls('CarteBlanche', 'carte-blanche'),
+            cls('Cathy', 'cathy'),
+            cls('CattitudeDoggonit', 'cattitude-doggonit'),
+            cls('CestLaVie', 'cestlavie'),
+            cls('ChanLowe', 'chanlowe'),
+            cls('CharmysArmy', 'charmys-army'),
+            cls('CheapThrillsCuisine', 'cheap-thrills-cuisine'),
+            cls('ChipBok', 'chipbok'),
+            cls('ChrisBritt', 'chrisbritt'),
+            cls('ChuckleBros', 'chucklebros'),
+            cls('CitizenDog', 'citizendog'),
+            cls('Claw', 'claw'),
+            cls('ClayBennett', 'claybennett'),
+            cls('ClayJones', 'clayjones'),
+            cls('ClearBlueWater', 'clearbluewater'),
+            cls('Cleats', 'cleats'),
+            cls('CleoAndCompany', 'cleo-and-company'),
+            cls('CloseToHome', 'closetohome'),
+            cls('Committed', 'committed'),
+            cls('Complex', 'complex'),
+            cls('Computoon', 'compu-toon'),
+            cls('ConnieToTheWonnie', 'connie-to-the-wonnie'),
+            cls('Cornered', 'cornered'),
+            cls('CourageousManAdventures', 'courageous-man-adventures'),
+            cls('CowAndBoyClassics', 'cowandboy'),
+            cls('CowTown', 'cowtown'),
+            cls('Crumb', 'crumb'),
+            cls('CulDeSac', 'culdesac'),
+            cls('DaddingBadly', 'dadding-badly'),
+            cls('DaddysHome', 'daddyshome'),
+            cls('DadsDay', 'dads-day'),
+            cls('DanaSummers', 'danasummers'),
+            cls('DanWasserman', 'danwasserman'),
+            cls('DarkSideOfTheHorse', 'darksideofthehorse'),
+            cls('DarrinBell', 'darrin-bell'),
+            cls('DBCartoons', 'db-cartoons'),
+            cls('DeepDarkFears', 'deep-dark-fears'),
+            cls('DevinCraneComicStripGhostwriter', 'devincranecomicstripghostwriter'),
+            cls('DiamondLil', 'diamondlil'),
+            cls('DickTracy', 'dicktracy'),
+            cls('DilbertClassics', 'dilbert-classics'),
+            cls('DilbertEnEspaol', 'espanol/dilbert-en-espanol', 'es'),
+            cls('DinosaurComics', 'dinosaur-comics'),
+            cls('DogEatDoug', 'dogeatdoug'),
+            cls('DoghouseInYourSoul', 'doghouse-in-your-soul'),
+            cls('DogsOfCKennel', 'dogsofckennel'),
+            cls('DomesticAbuse', 'domesticabuse'),
+            cls('DonBrutus', 'espanol/don-brutus', 'es'),
+            cls('DontPickTheFlowers', 'dont-pick-the-flowers'),
+            cls('DoodleTown', 'doodle-town'),
+            cls('Doonesbury', 'doonesbury'),
+            cls('DorrisMcComics', 'dorris-mccomics'),
+            cls('Drabble', 'drabble'),
+            cls('Dragin', 'dragin'),
+            cls('DragonGirl', 'dragon-girl'),
+            cls('DrewSheneman', 'drewsheneman'),
+            cls('Drive', 'drive'),
+            cls('Dromo', 'dro-mo'),
+            cls('DrWhiskers', 'dr-whiskers'),
+            cls('DudeAndDude', 'dudedude'),
+            cls('DumbQuestionBadAnswer', 'dumb-question-bad-answer'),
+            cls('DungeonHordes', 'dungeon-hordes'),
+            cls('DustSpecks', 'dust-specks'),
+            cls('DutchnPals', 'dutch-n-pals'),
+            cls('Dysconnected', 'dysconnected'),
+            cls('Econogirl', 'econogirl'),
+            cls('EdgeCity', 'edge-city'),
+            cls('EdgeOfAdventure', 'edge-of-adventure'),
+            cls('Eek', 'eek'),
+            cls('EightballEyeball', 'eightball-eyeball'),
+            cls('ElCafDePoncho', 'espanol/poochcafeespanol', 'es'),
+            cls('Elmo', 'elmo'),
+            cls('EmmyLou', 'emmy-lou'),
+            cls('Endangered', 'endangered'),
+            cls('Endtown', 'endtown'),
+            cls('EricTheCircle', 'eric-the-circle'),
+            cls('EverydayPeopleCartoons', 'everyday-people-cartoons'),
+            cls('Eyebeam', 'eyebeam'),
+            cls('FacesOfTheNewsByKerryWaghorn', 'facesinthenews'),
+            cls('FamilyTree', 'familytree'),
+            cls('FamousAndNotSoFamousQuotes', 'famous-and-not-so-famous-quotes'),
+            cls('Farcus', 'farcus'),
+            cls('FarOut', 'far-out'),
+            cls('FatCats', 'fat-cats'),
+            cls('FatherOfTheBrood', 'father-of-the-brood'),
+            cls('FloAndFriends', 'floandfriends'),
+            cls('FloydAndTony', 'floyd-and-tony'),
+            cls('FMinus', 'fminus'),
+            cls('FoolishMortals', 'foolish-mortals'),
+            cls('ForBetterOrForWorse', 'forbetterorforworse'),
+            cls('ForHeavensSake', 'forheavenssake'),
+            cls('FortKnox', 'fortknox'),
+            cls('FourEyes', 'four-eyes'),
+            cls('FowlLanguage', 'fowl-language'),
+            cls('FoxTrot', 'foxtrot'),
+            cls('FoxTrotClassics', 'foxtrotclassics'),
+            cls('FoxTrotEnEspaol', 'espanol/foxtrotespanol', 'es'),
+            cls('Francis', 'francis'),
+            cls('FrankAndErnest', 'frank-and-ernest'),
+            cls('FrankAndSteinway', 'frank-and-steinway'),
+            cls('FrankieComics', 'frankie-comics'),
+            cls('Frazz', 'frazz'),
+            cls('FredBasset', 'fredbasset'),
+            cls('FredBassetEnEspaol', 'espanol/fredbassetespanol', 'es'),
+            cls('FreeRange', 'freerange'),
+            cls('FreshlySqueezed', 'freshlysqueezed'),
+            cls('FriedCritter', 'fried-critter'),
+            cls('FrogApplause', 'frogapplause'),
+            cls('FromTheMoWillemsSketchbook', 'from-the-mo-willems-sketchbook'),
+            cls('GarciaCartoonCo', 'garcia-cartoon-co'),
+            cls('Garfield', 'garfield'),
+            cls('GarfieldClassics', 'garfield-classics'),
+            cls('GarfieldEnEspaol', 'espanol/garfieldespanol', 'es'),
+            cls('GarfieldMinusGarfield', 'garfieldminusgarfield'),
+            cls('GaryMarkstein', 'garymarkstein'),
+            cls('GaryVarvel', 'garyvarvel'),
+            cls('GasolineAlley', 'gasolinealley'),
+            cls('Gaturro', 'espanol/gaturro', 'es'),
+            cls('Geech', 'geech'),
+            cls('GentleCreatures', 'gentle-creatures'),
+            cls('GetALife', 'getalife'),
+            cls('GetFuzzy', 'getfuzzy'),
+            cls('Gil', 'gil'),
+            cls('GilThorp', 'gilthorp'),
+            cls('GingerMeggs', 'gingermeggs'),
+            cls('GingerMeggsEnEspaol', 'espanol/gingermeggsespanol', 'es'),
+            cls('GIRTH', 'girth'),
+            cls('GlasbergenCartoons', 'glasbergen-cartoons'),
+            cls('GlennMcCoy', 'glennmccoy'),
+            cls('GManWebcomics', 'g-man-webcomics'),
+            cls('GnomeSyndicate', 'gnome-syndicate'),
+            cls('Goats', 'goats'),
+            cls('GoComicsFanArt', 'fan-art'),
+            cls('Graffiti', 'graffiti'),
+            cls('GrandAvenue', 'grand-avenue'),
+            cls('GrandmaSnoops', 'grandmasnoops'),
+            cls('GrannyAnny', 'granny-anny'),
+            cls('Gravy', 'gravy'),
+            cls('GrayMatters', 'gray-matters'),
+            cls('GreenHumour', 'green-humour'),
+            cls('GreenPieces', 'green-pieces'),
+            cls('GunstonStreet', 'gunston-street'),
+            cls('HaikuEwe', 'haikuewe'),
+            cls('HalfFull', 'half-full'),
+            cls('HalfFullEnEspaol', 'espanol/half-full-espanol', 'es'),
+            cls('HallEditorialCartoons', 'hall-editorial-cartoons'),
+            cls('HaloAndHorns', 'no-place-like-holmes'),
+            cls('HamShears', 'ham-shears'),
+            cls('HaphazardHumor', 'haphazard-humor'),
+            cls('Headcheese', 'headcheese'),
+            cls('HealthCapsules', 'healthcapsules'),
+            cls('HeartOfTheCity', 'heartofthecity'),
+            cls('Heathcliff', 'heathcliff'),
+            cls('HeathcliffEnEspaol', 'espanol/heathcliffespanol', 'es'),
+            cls('HenryPayne', 'henrypayne'),
+            cls('HerbAndJamaal', 'herbandjamaal'),
+            cls('Herman', 'herman'),
+            cls('HermanEnEspaol', 'espanol/herman-en-espanol', 'es'),
+            cls('HipsterPicnic', 'hipster-picnic'),
+            cls('Hogwashed', 'hogwashed'),
+            cls('HolidayDoodles', 'holiday-doodles'),
+            cls('HomeAndAway', 'homeandaway'),
+            cls('HomeLife', 'home-life'),
+            cls('HotComicsForCoolPeople', 'hot-comics-for-cool-people'),
+            cls('Hubbel', 'hubbel'),
+            cls('HUBRIS', 'hubris'),
+            cls('HugoComics', 'hugo-comics'),
+            cls('HumanCull', 'human-cull'),
+            cls('HurrieTheMisManager', 'hurrie'),
+            cls('HuskyTales', 'husky-tales'),
+            cls('HutchOwen', 'hutch-owen'),
+            cls('ImagineThis', 'imaginethis'),
+            cls('InheritTheMirth', 'inherit-the-mirth'),
+            cls('InkPen', 'inkpen'),
+            cls('InkwellForest', 'inkwell-forest'),
+            cls('InspectorDangersCrimeQuiz', 'inspector-dangers-crime-quiz'),
+            cls('InTheBleachers', 'inthebleachers'),
+            cls('InTheSticks', 'inthesticks'),
+            cls('InvisibleBread', 'invisible-bread'),
+            cls('IronyOr', 'irony-or'),
+            cls('ItsAllAboutYou', 'itsallaboutyou'),
+            cls('ItsJustJim', 'its-just-jim'),
+            cls('JackOhman', 'jackohman'),
+            cls('JanesWorld', 'janesworld'),
+            cls('JeffDanziger', 'jeffdanziger'),
+            cls('JeffStahler', 'jeffstahler'),
+            cls('JenSorensen', 'jen-sorensen'),
+            cls('JerryHolbert', 'jerryholbert'),
+            cls('JetpackJr', 'jetpack-jr'),
+            cls('JimBentonCartoons', 'jim-benton-cartoons'),
+            cls('JimMorin', 'jimmorin'),
+            cls('JimsJournal', 'jimsjournal'),
+            cls('JoeHeller', 'joe-heller'),
+            cls('JoelPett', 'joelpett'),
+            cls('JoeVanilla', 'joevanilla'),
+            cls('JohnDeering', 'johndeering'),
+            cls('JolleyStuffBrowser', 'jolleystuff-browser'),
+            cls('JumpStart', 'jumpstart'),
+            cls('JustoYFranco', 'espanol/justo-y-franco', 'es'),
+            cls('JustSayUncle', 'just-say-uncle'),
+            cls('KALEECHIKORNERS', 'kaleechi-korners'),
+            cls('KartoonsByKline', 'kartoons-by-kline'),
+            cls('KenCatalino', 'kencatalino'),
+            cls('KevinKallaugher', 'kevinkallaugher'),
+            cls('KidBeowulf', 'kid-beowulf'),
+            cls('KidShayComics', 'kid-shay-comics'),
+            cls('KidSpot', 'kidspot'),
+            cls('KidTown', 'kidtown'),
+            cls('KitchenCapers', 'kitchen-capers'),
+            cls('KitNCarlyle', 'kitandcarlyle'),
+            cls('Kliban', 'kliban'),
+            cls('KlibansCats', 'klibans-cats'),
+            cls('LaCucaracha', 'lacucaracha'),
+            cls('LaCucarachaEnEspaol', 'espanol/la-cucaracha-en-espanol', 'es'),
+            cls('LaffToons', 'lafftoons'),
+            cls('LaloAlcaraz', 'laloalcaraz'),
+            cls('LaloAlcarazEnEspaol', 'espanol/laloenespanol', 'es'),
+            cls('LardsWorldPeaceTips', 'lards-world-peace-tips'),
+            cls('LasHermanasStone', 'espanol/stonesoup_espanol', 'es'),
+            cls('LastKiss', 'lastkiss'),
+            cls('LayLines', 'lay-lines'),
+            cls('LearnToSpeakCat', 'learn-to-speak-cat'),
+            cls('LegendOfBill', 'legendofbill'),
+            cls('LeighLunaComics', 'leigh-luna-comics'),
+            cls('LibertyMeadows', 'libertymeadows'),
+            cls('LilAbner', 'lil-abner'),
+            cls('LiliAndDerek', 'lili-and-derek'),
+            cls('LilleysSillies', 'lilleys-sillies'),
+            cls('LimboRoad', 'limbo-road'),
+            cls('Lio', 'lio'),
+            cls('LioEnEspaol', 'espanol/lioespanol', 'es'),
+            cls('LisaBenson', 'lisabenson'),
+            cls('LittleDogLost', 'littledoglost'),
+            cls('LittleFriedChickenAndSushi', 'little-fried-chicken-and-sushi'),
+            cls('LittleNemo', 'little-nemo'),
+            cls('Lola', 'lola'),
+            cls('LolaEnEspaol', 'espanol/lola-en-espanol', 'es'),
+            cls('LooksGoodOnPaper', 'looks-good-on-paper'),
+            cls('Loose', 'loose'),
+            cls('LooseParts', 'looseparts'),
+            cls('LosOsorios', 'espanol/los-osorios', 'es'),
+            cls('LostSheep', 'lostsheep'),
+            cls('LostSideOfSuburbia', 'lostsideofsuburbia'),
+            cls('Luann', 'luann'),
+            cls('LuannAgainn', 'luann-againn'),
+            cls('LuannEnEspaol', 'espanol/luannspanish', 'es'),
+            cls('Lucan', 'lucan'),
+            cls('LuckyCow', 'luckycow'),
+            cls('LugNuts', 'lug-nuts'),
+            cls('LumAndAbner', 'lum-and-abner'),
+            cls('Lunarbaboon', 'lunarbaboon'),
+            cls('MadDogGhettoCop', 'maddogghettocop'),
+            cls('MagicInAMinute', 'magicinaminute'),
+            cls('Magnificatz', 'magnificatz'),
+            cls('Maintaining', 'maintaining'),
+            cls('MakingIt', 'making-it'),
+            cls('MariasDay', 'marias-day'),
+            cls('Marmaduke', 'marmaduke'),
+            cls('MarmadukeEnEspaol', 'espanol/marmaduke-en-espanol', 'es'),
+            cls('MarshallRamsey', 'marshallramsey'),
+            cls('MarysNature', 'marys-nature'),
+            cls('MassiveFalls', 'massive-falls'),
+            cls('MattBors', 'matt-bors'),
+            cls('MattDavies', 'mattdavies'),
+            cls('MattWuerker', 'mattwuerker'),
+            cls('MazeToonsPuzzle', 'mazetoons-puzzle'),
+            cls('MediumLarge', 'medium-large'),
+            cls('MegClassics', 'meg-classics'),
+            cls('MichaelRamirez', 'michaelramirez'),
+            cls('Microcosm', 'microcosm'),
+            cls('MikeDuJour', 'mike-du-jour'),
+            cls('MikeLester', 'mike-lester'),
+            cls('MikeLuckovich', 'mikeluckovich'),
+            cls('Millennialville', 'millennialville'),
+            cls('Milton50', 'milton-5-0'),
+            cls('Mindframe', 'mindframe'),
+            cls('Minihahas', 'vernscartoons'),
+            cls('MinimumSecurity', 'minimumsecurity'),
+            cls('MiscSoup', 'misc-soup'),
+            cls('MisterAndMe', 'mister-and-me'),
+            cls('MockAll', 'mock-all'),
+            cls('ModeratelyConfused', 'moderately-confused'),
+            cls('Molebashed', 'molebashed'),
+            cls('MollyAndTheBear', 'mollyandthebear'),
+            cls('Moments', 'moments'),
+            cls('Momma', 'momma'),
+            cls('MomsCancer', 'moms-cancer'),
+            cls('Mongrels', 'mongrels'),
+            cls('Monty', 'monty'),
+            cls('MontyDiaros', 'espanol/monty-diarios', 'es'),
+            cls('MortsIsland', 'noahs-island'),
+            cls('MotleyClassics', 'motley-classics'),
+            cls('MrLowe', 'mr-lowe'),
+            cls('Mulligan', 'mulligan'),
+            cls('MustardAndBoloney', 'mustard-and-boloney'),
+            cls('MuttAndJeff', 'muttandjeff'),
+            cls('MyCageNewAndOld', 'mycage'),
+            cls('MySonIsADog', 'my-son-is-a-dog'),
+            cls('MythTickle', 'mythtickle'),
+            cls('Nancy', 'nancy'),
+            cls('NancyClassics', 'nancy-classics'),
+            cls('NateElGrande', 'espanol/nate-el-grande', 'es'),
+            cls('NavyBean', 'navybean'),
+            cls('NedAndLarry', 'ned-and-larry'),
+            cls('NestHeads', 'nestheads'),
+            cls('NEUROTICA', 'neurotica'),
+            cls('NewAdventuresOfQueenVictoria', 'thenewadventuresofqueenvictoria'),
+            cls('NextDoorNeighbors', 'next-door-neighbors'),
+            cls('NickAnderson', 'nickanderson'),
+            cls('NickAndZuzu', 'nick-and-zuzu'),
+            cls('NoAmbiguity', 'no-ambiguity'),
+            cls('NoBusinessIKnow', 'nobusinessiknow'),
+            cls('NonSequitur', 'nonsequitur'),
+            cls('NoOrdinaryLife', 'no-ordinary-life'),
+            cls('Norman', 'Norman'),
+            cls('NothingIsNotSomething', 'nothing-is-not-something'),
+            cls('NotInventedHere', 'not-invented-here'),
+            cls('NowRecharging', 'now-recharging'),
+            cls('Npchumorcom', 'npchumor'),
+            cls('OffTheMark', 'offthemark'),
+            cls('OhBrother', 'oh-brother'),
+            cls('OllieAndQuentin', 'ollie-and-quentin'),
+            cls('OnAClaireDay', 'onaclaireday'),
+            cls('OneBigHappy', 'onebighappy'),
+            cls('OneFunnyGoldenRetriever', 'one-funny-golden-retriever'),
+            cls('ONIONAndPEA', 'onion-and-pea'),
+            cls('OrdinaryBill', 'ordinary-bill'),
+            cls('OriginsOfTheSundayComics', 'origins-of-the-sunday-comics'),
+            cls('OscarAndAnnie', 'oscar-and-annie'),
+            cls('OutOfTheGenePoolReRuns', 'outofthegenepool'),
+            cls('Overboard', 'overboard'),
+            cls('OverboardEnEspaol', 'espanol/overboardespanol', 'es'),
+            cls('OverQuirked', 'over-quirked'),
+            cls('OverTheHedge', 'overthehedge'),
+            cls('Owlturd', 'owlturd'),
+            cls('OzyAndMillie', 'ozy-and-millie'),
+            cls('PaddedCell', 'padded-cell'),
+            cls('Painterly', 'sparcomics'),
+            cls('PalAndBuddy', 'pal-and-buddy'),
+            cls('PatOliphant', 'patoliphant'),
+            cls('PaulSzep', 'paulszep'),
+            cls('PawsForThoughtComics', 'paws-for-thought-comics'),
+            cls('PCAndPixel', 'pcandpixel'),
+            cls('Peanuts', 'peanuts'),
+            cls('PeanutsBegins', 'peanuts-begins'),
+            cls('PeanutsEnEspaol', 'espanol/peanuts-espanol', 'es'),
+            cls('PearlsBeforeSwine', 'pearlsbeforeswine'),
+            cls('Peeples', 'peeples'),
+            cls('PeopleOfEarth', 'frankblunt'),
+            cls('Periquita', 'espanol/periquita', 'es'),
+            cls('PerlasParaLosCerdos', 'espanol/perlas-para-los-cerdos', 'es'),
+            cls('PerryBibleFellowship', 'perry-bible-fellowship'),
+            cls('PhilHands', 'phil-hands'),
+            cls('PhoebeAndHerUnicorn', 'phoebe-and-her-unicorn'),
+            cls('Pibgorn', 'pibgorn'),
+            cls('PibgornSketches', 'pibgornsketches'),
+            cls('Pickles', 'pickles'),
+            cls('PicpakDog', 'picpak-dog'),
+            cls('PicturesInBoxes', 'pictures-in-boxes'),
+            cls('PieComic', 'pie-comic'),
+            cls('Pinkerton', 'pinkerton'),
+            cls('PirateMike', 'pirate-mike'),
+            cls('PlanB', 'planb'),
+            cls('PleaseListenToMe', 'please-listen-to-me'),
+            cls('Pluggers', 'pluggers'),
+            cls('PoliceLimit', 'policelimit'),
+            cls('PoliticallyMad', 'politically-mad'),
+            cls('PoliticularJokesAndRuffus', 'politcular-jokes-and-ruffas'),
+            cls('PoochCafe', 'poochcafe'),
+            cls('Poorcraft', 'poorcraft'),
+            cls('PoorlyDrawnLines', 'poorly-drawn-lines'),
+            cls('PopCultureShockTherapy', 'pop-culture-shock-therapy'),
+            cls('Poptropica', 'poptropica'),
+            cls('PotShots', 'pot-shots'),
+            cls('PreTeena', 'preteena'),
+            cls('PricklyCity', 'pricklycity'),
+            cls('Prideland', 'prideland'),
+            cls('PrimusTheBadPhilosopher', 'primus-the-bad-philosopher'),
+            cls('ProfessorHerbertAndGEO', 'professor-herbert-and-geo'),
+            cls('PromisesPromises', 'promises-promises'),
+            cls('QueenBlackbeard', 'queen-blackbeard'),
+            cls('QuestionableQuotebook', 'questionable-quotebook'),
+            cls('QuickDraw', 'quickdraw'),
+            cls('RabbitsAgainstMagic', 'rabbitsagainstmagic'),
+            cls('RaisingDuncan', 'raising-duncan'),
+            cls('RandolphItch2Am', 'randolphitch'),
+            cls('RandomActsOfNancy', 'random-acts-of-nancy'),
+            cls('RealityCheck', 'realitycheck'),
+            cls('RealLifeAdventures', 'reallifeadventures'),
+            cls('RebeccaHendin', 'rebecca-hendin'),
+            cls('RedAndRover', 'redandrover'),
+            cls('ReplyAll', 'replyall'),
+            cls('ReplyAllLite', 'reply-all-lite'),
+            cls('RichardsPoorAlmanac', 'richards-poor-almanac'),
+            cls('Ringers', 'ringers'),
+            cls('RipHaywire', 'riphaywire'),
+            cls('RipleysBelieveItOrNot', 'ripleysbelieveitornot'),
+            cls('RipleysBelieveItOrNotSpanish', 'espanol/ripleys-en-espanol', 'es'),
+            cls('RobbieAndBobby', 'robbie-and-bobby'),
+            cls('RobertAriail', 'robert-ariail'),
+            cls('RobRogers', 'robrogers'),
+            cls('RonWarren', 'ron-warren'),
+            cls('RosaDominical', 'espanol/rosa-dominical', 'es'),
+            cls('RoseIsRose', 'roseisrose'),
+            cls('Rubes', 'rubes'),
+            cls('RudyPark', 'rudypark'),
+            cls('Rufus', 'rufus'),
+            cls('SandSharkBeach', 'sandshark-beach'),
+            cls('SarahsScribbles', 'sarahs-scribbles'),
+            cls('SavageChickens', 'savage-chickens'),
+            cls('ScaryGary', 'scarygary'),
+            cls('ScenesFromAMultiverse', 'scenes-from-a-multiverse'),
+            cls('ScottStantis', 'scottstantis'),
+            cls('SharpCurveComics', 'sharp-curve-comics'),
+            cls('Sheldon', 'sheldon'),
+            cls('SherpaAid', 'sherpaaid'),
+            cls('ShirleyAndSonClassics', 'shirley-and-son-classics'),
+            cls('Shoe', 'shoe'),
+            cls('Shoecabbage', 'shoecabbage'),
+            cls('Shortcuts', 'shortcuts'),
+            cls('ShutterbugFollies', 'shutterbug-follies'),
+            cls('SigneWilkinson', 'signewilkinson'),
+            cls('SignGarden', 'signgarden'),
+            cls('SignsOfAFrustratedGolfer', 'signs-of-a-frustrated-golfer'),
+            cls('SketchsharkComics', 'sketchshark-comics'),
+            cls('SketchyChics', 'sketchy-chics'),
+            cls('SkinHorse', 'skinhorse'),
+            cls('Skippy', 'skippy'),
+            cls('Skull', 'skull'),
+            cls('Skylarking', 'skylarking'),
+            cls('SleepytownBeagles', 'sleepytown-beagles'),
+            cls('SmallNerdyCreatures', 'small-nerdy-creatures'),
+            cls('Smith', 'smith'),
+            cls('Snootle', 'snootle'),
+            cls('Snowflakes', 'snowflakes'),
+            cls('SnowSez', 'snow-sez'),
+            cls('SoccerDude', 'soccer-dude'),
+            cls('SoccerEarth', 'soccer-earth'),
+            cls('SOD', 'sod'),
+            cls('SomethingAboutCeleste', 'something-about-celeste'),
+            cls('SookyRottweiler', 'sooky-rottweiler'),
+            cls('Soulmates', 'soulmates'),
+            cls('SoupToNutz', 'soup-to-nutz'),
+            cls('Spaceport51', 'spaceport-51'),
+            cls('Speechless', 'speechless'),
+            cls('SpeedBump', 'speedbump'),
+            cls('SportsByVoort', 'sports-by-voort'),
+            cls('SpotTheFrog', 'spot-the-frog'),
+            cls('StaleCrackers', 'clifton'),
+            cls('StankoAndTibor', 'stankotibor'),
+            cls('Starling', 'starling'),
+            cls('Starslip', 'starslip'),
+            cls('SteveBenson', 'stevebenson'),
+            cls('SteveBreen', 'stevebreen'),
+            cls('SteveKelley', 'stevekelley'),
+            cls('StickyComics', 'sticky-comics'),
+            cls('StoneSoup', 'stonesoup'),
+            cls('StoneSoupClassics', 'stone-soup-classics'),
+            cls('StrangeBrew', 'strangebrew'),
+            cls('StuartCarlson', 'stuartcarlson'),
+            cls('SubSub', 'subsub'),
+            cls('SuburbanFairyTales', 'suburban-fairy-tales'),
+            cls('SUITSANDGUARDERS', 'suits-and-guarders'),
+            cls('SunnyStreet', 'sunny-street'),
+            cls('SunshineState', 'sunshine-state'),
+            cls('SuperFunPakComix', 'super-fun-pak-comix'),
+            cls('SuperSiblings', 'super-siblings'),
+            cls('SweetAndSourPork', 'sweet-and-sour-pork'),
+            cls('Sylvia', 'sylvia'),
+            cls('TankMcNamara', 'tankmcnamara'),
+            cls('Tarzan', 'tarzan'),
+            cls('TarzanEnEspaol', 'espanol/tarzan-en-espanol', 'es'),
+            cls('TedRall', 'tedrall'),
+            cls('TenCats', 'ten-cats'),
+            cls('Thatababy', 'thatababy'),
+            cls('ThatIsPriceless', 'that-is-priceless'),
+            cls('ThatMonkeyTune', 'that-monkey-tune'),
+            cls('ThatNewCarlSmell', 'that-new-carl-smell'),
+            cls('ThatsLife', 'thats-life'),
+            cls('TheAcademiaWaltz', 'academiawaltz'),
+            cls('TheAdventuresOfBusinessCat', 'the-adventures-of-business-cat'),
+            cls('TheAngryGamer', 'the-angry-gamer'),
+            cls('TheArgyleSweater', 'theargylesweater'),
+            cls('TheAwkwardYeti', 'the-awkward-yeti'),
+            cls('TheBarn', 'thebarn'),
+            cls('TheBeauforts', 'the-beauforts'),
+            cls('TheBellies', 'the-bellies'),
+            cls('TheBentPinky', 'the-bent-pinky'),
+            cls('TheBestMedicineCartoon', 'the-best-medicine'),
+            cls('TheBigPicture', 'thebigpicture'),
+            cls('TheBoobiehatch', 'the-boobiehatch'),
+            cls('TheBoondocks', 'boondocks'),
+            cls('TheBornLoser', 'the-born-loser'),
+            cls('TheBuckets', 'thebuckets'),
+            cls('TheCardinal', 'thecardinal'),
+            cls('TheCity', 'thecity'),
+            cls('TheComicStripThatHasAFinaleEveryDay', 'the-comic-strip-that-has-a-finale-every-day'),
+            cls('TheConjurers', 'the-conjurers'),
+            cls('TheCreeps', 'the-creeps'),
+            cls('TheDailyDrawing', 'the-daily-drawing'),
+            cls('TheDinetteSet', 'dinetteset'),
+            cls('TheDinkledorfs', 'the-dinkledorfs'),
+            cls('TheDoozies', 'thedoozies'),
+            cls('TheDuplex', 'duplex'),
+            cls('TheElderberries', 'theelderberries'),
+            cls('TheEntrepiranha', 'the-entrepiranha'),
+            cls('TheFabulousBushPigs', 'the-fabulous-bush-pigs'),
+            cls('TheFlyingMcCoys', 'theflyingmccoys'),
+            cls('TheFuscoBrothers', 'thefuscobrothers'),
+            cls('TheGentlemansArmchair', 'the-gentlemans-armchair'),
+            cls('TheGrayZone', 'the-gray-zone'),
+            cls('TheGreenMonkeys', 'thegreenmonkeys'),
+            cls('TheGrizzwells', 'thegrizzwells'),
+            cls('TheHumbleStumble', 'humble-stumble'),
+            cls('TheKChronicles', 'thekchronicles'),
+            cls('TheKnightLife', 'theknightlife'),
+            cls('TheLeftyBoscoPictureShow', 'leftyboscopictureshow'),
+            cls('TheLostBear', 'the-lost-bear'),
+            cls('TheMagicForest', 'the-magic-forest'),
+            cls('TheMartianConfederacy', 'the-martian-confederacy'),
+            cls('TheMeaningOfLila', 'meaningoflila'),
+            cls('TheMiddletons', 'themiddletons'),
+            cls('TheMothManAndLarvaeBoy', 'the-mothman-and-larvae-boy'),
+            cls('TheMountainMen', 'the-mountain-men'),
+            cls('TheNeighborhood', 'the-neighborhood'),
+            cls('TheNevilleYouKnow', 'the-neville-you-know'),
+            cls('TheNonsenseNewz', 'the-nonsense-newz'),
+            cls('TheNorm40', 'the-norm-4-0'),
+            cls('TheNormClassics', 'thenorm'),
+            cls('TheOldManAndHisDog', 'old-man-and-his-dog'),
+            cls('TheOtherCoast', 'theothercoast'),
+            cls('TheOtherEnd', 'the-other-end'),
+            cls('TheQuinnAndFinnShow', 'quinn-and-finn'),
+            cls('TheQuixoteSyndrome', 'the-quixote-syndrome'),
+            cls('TheRocks', 'the-rocks'),
+            cls('TheSunshineClub', 'the-sunshine-club'),
+            cls('TheUnemployed', 'the-unemployed'),
+            cls('TheWagesOfSindy', 'the-wages-of-sindy'),
+            cls('TheWanderingMelon', 'the-wandering-melon'),
+            cls('TheWizardOfIdSpanish', 'espanol/wizardofidespanol', 'es'),
+            cls('TheWorriedWell', 'the-worried-well'),
+            cls('TheWorstThingIveEverDone', 'the-worst-thing-ive-ever-done'),
+            cls('Thingsesque', 'thingsesque'),
+            cls('think', 'think'),
+            cls('ThinLines', 'thinlines'),
+            cls('TimEagan', 'tim-eagan'),
+            cls('TinyConfessions', 'tiny-confessions'),
+            cls('TinySepuku', 'tinysepuku'),
+            cls('TOBY', 'toby'),
+            cls('TodaysDogg', 'todays-dogg'),
+            cls('TodaysTrump', 'todays-trump'),
+            cls('TomTheDancingBug', 'tomthedancingbug'),
+            cls('TomToles', 'tomtoles'),
+            cls('TooMuchCoffeeMan', 'toomuchcoffeeman'),
+            cls('TopicToons', 'topictoons'),
+            cls('ToughTown', 'tough-town'),
+            cls('ToxicValues', 'toxic-values'),
+            cls('Trivquiz', 'trivquiz'),
+            cls('Trucutu', 'espanol/trucutu', 'es'),
+            cls('TruthBeKnown', 'truth-be-known'),
+            cls('TruthFacts', 'truth-facts'),
+            cls('TuesdaysWithCory', 'tuesdays-with-cory'),
+            cls('Tutelandia', 'espanol/tutelandia', 'es'),
+            cls('UncleArtsFunland', 'uncleartsfunland'),
+            cls('Underdone', 'underdone'),
+            cls('UnderstandingChaos', 'understanding-chaos'),
+            cls('UnMannerlyWays', 'mannerly-ways'),
+            cls('UnstrangePhenomena', 'unstrange-phenomena'),
+            cls('UpAndOut', 'up-and-out'),
+            cls('USAcres', 'us-acres'),
+            cls('ViewFromTheCouch', 'view-from-the-couch'),
+            cls('ViewsAfrica', 'viewsafrica'),
+            cls('ViewsAmerica', 'viewsamerica'),
+            cls('ViewsAsia', 'viewsasia'),
+            cls('ViewsBusiness', 'viewsbusiness'),
+            cls('ViewsEurope', 'viewseurope'),
+            cls('ViewsLatinAmerica', 'viewslatinamerica'),
+            cls('ViewsMidEast', 'viewsmideast'),
+            cls('ViewsOfTheWorld', 'viewsoftheworld'),
+            cls('ViiviAndWagner', 'viivi-and-wagner'),
+            cls('VoicesInTheDark', 'voices-in-the-dark'),
+            cls('WallaceTheBrave', 'wallace-the-brave'),
+            cls('WaltHandelsman', 'walthandelsman'),
+            cls('Warped', 'warped'),
+            cls('WarpedAndDemented', 'warped-and-demented'),
+            cls('Waskataskahiskewaskewan', 'waskataskahiskewaskewan'),
+            cls('WatchYourHead', 'watchyourhead'),
+            cls('WaynoVision', 'waynovision'),
+            cls('WayOutComics', 'way-out-comics'),
+            cls('WeaselInk', 'weasel-ink'),
+            cls('WeePals', 'weepals'),
+            cls('WhiskeyFalls', 'whiskey-falls'),
+            cls('WickedCrispy', 'wicked-crispy'),
+            cls('Widdershins', 'widdershins'),
+            cls('WideOpen', 'wide-open'),
+            cls('Windsock', 'windsock'),
+            cls('WinLoseDrew', 'drewlitton'),
+            cls('Winston', 'winston'),
+            cls('WitOfTheWorld', 'witoftheworld'),
+            cls('WizardOfId', 'wizardofid'),
+            cls('WizardOfIdClassics', 'wizard-of-id-classics'),
+            cls('Wondermark', 'wondermark'),
+            cls('WorkingDaze', 'working-daze'),
+            cls('WorkingItOut', 'workingitout'),
+            cls('WorldOfWonder', 'world-of-wonder'),
+            cls('WrobbertCartoons', 'wrobbertcartoons'),
+            cls('WrongHands', 'wrong-hands'),
+            cls('WTDuck', 'wtduck'),
+            cls('WuMo', 'wumo'),
+            cls('WumoEnEspaol', 'espanol/wumoespanol', 'es'),
+            cls('Wyatt', 'wyatt'),
+            cls('YennyEnEspaol', 'espanol/yennyespanol', 'es'),
+            cls('YennyLopez', 'yenny-lopez'),
+            cls('YinYangster', 'yin-yangster'),
+            cls('ZackHill', 'zackhill'),
+            cls('ZenPencils', 'zen-pencils'),
+            cls('Ziggy', 'ziggy'),
+            cls('ZiggyEnEspaol', 'espanol/ziggyespanol', 'es'),
+            cls('ZITO', 'zito'),
+            cls('ZombieHeights', 'zombie-heights'),
+            cls('Zootopia', 'zootopia'),
+            # END AUTOUPDATE
+        )

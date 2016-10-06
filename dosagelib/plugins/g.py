@@ -4,11 +4,13 @@
 # Copyright (C) 2015-2016 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
+
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
+from .common import _ComicControlScraper, _WordPressScraper, xpath_class
 
 
 class Galaxion(_BasicScraper):
@@ -25,15 +27,15 @@ class Garanos(_BasicScraper):
     baseUrl = 'http://garanos.alexheberling.com/'
     rurl = escape(baseUrl)
     url = baseUrl + 'pages/page-1/'
-    starter = indirectStarter(
-        url, compile(tagre("a", "href", r'(%spages/[^"]+)' % rurl,
-                     after="nav-last")))
+    starter = indirectStarter
     stripUrl = baseUrl + 'pages/page-%s'
     imageSearch = compile(
         tagre("img", "src",
               r'(%swp-content/uploads/sites/\d+/\d+/\d+/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%spages/[^"]+)' % rurl,
                                after="prev"))
+    latestSearch = compile(tagre("a", "href", r'(%spages/[^"]+)' % rurl,
+                                 after="nav-last"))
     help = 'Index format: n (unpadded)'
 
 
@@ -128,32 +130,30 @@ class GoblinsComic(_ParserScraper):
     help = 'Index format: ddmmyyyy'
 
 
+class GoGetARoomie(_ComicControlScraper):
+    url = 'http://www.gogetaroomie.com'
+
+
 class GoneWithTheBlastwave(_BasicScraper):
     url = 'http://www.blastwave-comic.com/index.php?p=comic&nro=1'
-    starter = indirectStarter(
-        url, compile(r'href="(index.php\?p=comic&amp;nro=\d+)">' +
-                     r'<img src="images/page/default/latest'))
+    starter = indirectStarter
     stripUrl = url[:-1] + '%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(r'<img.+src=".+(/comics/.+?)"')
     prevSearch = compile(r'href="(index.php\?p=comic&amp;nro=\d+)">' +
                          r'<img src="images/page/default/previous')
+    latestSearch = compile(r'href="(index.php\?p=comic&amp;nro=\d+)">' +
+                           r'<img src="images/page/default/latest')
     help = 'Index format: n'
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        return '%02d' % int(compile(r'nro=(\d+)').search(pageUrl).group(1))
+    def namer(self, image_url, page_url):
+        return '%02d' % int(compile(r'nro=(\d+)').search(page_url).group(1))
 
 
-class GrrlPower(_BasicScraper):
+class GrrlPower(_WordPressScraper):
     url = 'http://grrlpowercomic.com/'
-    rurl = escape(url)
-    stripUrl = url + 'archives/%s'
-    firstStripUrl = stripUrl % '48'
-    imageSearch = compile(tagre("img", "src", r'(.*/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(.*/archives/\d+)',
-                               after="navi-prev"))
-    help = 'Index format: number'
+    firstStripUrl = url + 'archives/48'
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
 class GUComics(_BasicScraper):

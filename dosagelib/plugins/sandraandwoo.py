@@ -1,30 +1,27 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-from re import compile, escape
-from ..scraper import make_scraper
-from ..util import tagre
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
+
+from .common import _WordPressScraper
 
 
-def add(name, urlName, firstUrl, lang=None):
-    baseUrl = 'http://www.sandraandwoo.com/' + urlName
-    rurl = escape(baseUrl)
+class SandraAndWoo(_WordPressScraper):
+    prevSearch = '//a[@rel="prev"]'
 
-    attrs = dict(
-        name = name,
-        url = baseUrl,
-        stripUrl = baseUrl + '%s/',
-        firstStripUrl = '%s/%s/' % (baseUrl, firstUrl),
-        imageSearch = compile(tagre("img", "src", r'(/%scomics/\d+-\d+-\d+-[^"]+)' % urlName)),
-        prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+/)' % rurl, after="prev")),
-        help='Index format: yyyy/mm/dd/(number-)stripname',
-    )
-    if lang:
-        attrs['lang'] = lang
-    globals()[name] = make_scraper(name, **attrs)
+    def __init__(self, name, urlName, firstUrl, lang='en'):
+        super(SandraAndWoo, self).__init__(name)
+        self.url = 'http://www.sandraandwoo.com/' + urlName
+        self.firstStripUrl = self.url + firstUrl
+        self.lang = lang
 
-add('Gaia', 'gaia/', '2000/01/01/welcome-to-gaia/')
-add('GaiaGerman', 'gaiade/', '2000/01/01/welcome-to-gaia', lang='de')
-add('SandraAndWoo', '', '2000/01/01/welcome-to-sandra-and-woo')
-add('SandraAndWooGerman', 'woode/', '2008/10/19/ein-ausgefuchster-waschbar', lang='de')
-
+    @classmethod
+    def getmodules(cls):
+        return [
+            cls('Gaia', 'gaia/', '2000/01/01/welcome-to-gaia/'),
+            cls('GaiaGerman', 'gaiade/', '2000/01/01/welcome-to-gaia/', lang='de'),
+            cls('SandraAndWoo', '', '2000/01/01/welcome-to-sandra-and-woo/'),
+            cls('SandraAndWooGerman', 'woode/', '2008/10/19/ein-ausgefuchster-waschbar/', lang='de'),
+        ]

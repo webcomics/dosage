@@ -9,7 +9,7 @@ from re import compile, escape, IGNORECASE
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
-from .common import _WordPressScraper
+from .common import _WPNaviIn, _WordPressScraper, xpath_class
 
 
 class FalconTwin(_BasicScraper):
@@ -21,44 +21,34 @@ class FalconTwin(_BasicScraper):
     help = 'Index format: nnn'
 
 
+class Faneurysm(_WPNaviIn):
+    url = 'http://hijinksensue.com/comic/think-only-tree/'
+    firstStripUrl = 'http://hijinksensue.com/comic/captains-prerogative/'
+    endOfLife = True
+
+
 class FantasyRealms(_BasicScraper):
     url = 'http://www.fantasyrealmsonline.com/'
     stripUrl = url + 'manga/%s.php'
     imageSearch = compile(r'<img src="(\d{1,4}.\w{3,4})" width="540"', IGNORECASE)
     prevSearch = compile(r'<a href="(.+?)"><img src="../images/nav-back.gif"', IGNORECASE)
+    latestSearch = compile(r'<a href="(manga/.+?)"><img src="preview.jpg"', IGNORECASE)
     help = 'Index format: nnn'
-    starter = indirectStarter(
-        url,
-        compile(r'<a href="(manga/.+?)"><img src="preview.jpg"', IGNORECASE))
+    starter = indirectStarter
 
 
-class FauxPas(_BasicScraper):
+class FauxPas(_ParserScraper):
     url = 'http://www.ozfoxes.net/cgi/pl-fp1.cgi'
     stripUrl = url + '?%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(r'<img .*src="(.*fp/fp.*(png|jpg|gif))"')
-    prevSearch = compile(r'<a href="(pl-fp1\.cgi\?\d+)">Previous Strip')
+    imageSearch = '//img[@name]'
+    prevSearch = '//a[img[@alt="Previous"]]'
     help = 'Index format: nnn'
 
 
-class FeyWinds(_BasicScraper):
-    baseUrl = 'http://kitsune.rydia.net/'
-    url = baseUrl + 'index.html'
-    stripUrl = baseUrl + 'comic/page.php?id=%s'
-    imageSearch = compile(r"(../comic/pages//.+?)'")
-    prevSearch = compile(r"(page.php\?id=.+?)'.+?navprevious.png")
-    help = 'Index format: n (unpadded)'
-    starter = indirectStarter(url, compile(r'(comic/page.php\?id.+?)"'))
-
-
-class FilibusterCartoons(_BasicScraper):
-    url = 'http://www.filibustercartoons.com/'
-    rurl = escape(url)
-    stripUrl = url + 'index.php/%s'
-    firstStripUrl = stripUrl % '2001/06/28/poor-jean'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
-    help = 'Index format: yyyy/mm/dd/name'
+class FireflyCross(_WordPressScraper):
+    url = 'http://www.fireflycross.pensandtales.com/'
+    firstStripUrl = url + '?comic=05062002'
 
 
 class FirstWorldProblems(_BasicScraper):
@@ -101,14 +91,13 @@ class Flipside(_BasicScraper):
     help = 'Index format: nnnn'
 
 
-class FonFlatter(_BasicScraper):
-    url = 'http://www.fonflatter.de/'
-    rurl = escape(url)
+class FonFlatter(_ParserScraper):
+    url = 'https://www.fonflatter.de/'
     stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2005/09/20/01-begegnung-mit-batman'
+    firstStripUrl = url + '2005/09/20/01-begegnung-mit-batman/'
     lang = 'de'
-    imageSearch = compile(r'src="(%s\d+/fred_\d+-\d+-\d+[^"]+)' % rurl)
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
+    imageSearch = r'//img[re:test(@src, "/fred_\d+")]'
+    prevSearch = '//a[@rel="prev"]'
     help = 'Index format: yyyy/mm/dd/number-stripname'
 
     def shouldSkipUrl(self, url, data):
@@ -130,10 +119,6 @@ class ForLackOfABetterComic(_BasicScraper):
     help = 'Index format: number'
 
 
-class FowlLanguage(_WordPressScraper):
-    url = 'http://www.fowllanguagecomics.com/'
-
-
 class Fragile(_ParserScraper):
     url = 'http://www.fragilestory.com/'
     imageSearch = '//div[@id="comic_strip"]/a[@class="nobg"]/img'
@@ -141,27 +126,15 @@ class Fragile(_ParserScraper):
     firstStripUrl = url + 'strips/chapter_01'
 
 
-class FragileSpanish(_ParserScraper):
-    url = 'http://es.fragilestory.com/'
-    imageSearch = '//div[@id="content_comics"]/a[@class="nobg"]/img'
-    prevSearch = '//a[@class="comicnav" and contains(text(),"Anterior")]'
-    lang = 'es'
-
-
-class FredoAndPidjin(_BasicScraper):
+class FredoAndPidjin(_ParserScraper):
     url = 'http://www.pidjin.net/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2006/02/19/goofy-monday'
-    help = 'Index format: yyyy/mm/dd/number-index'
-    imageSearch = (
-        compile(tagre('img', 'src', '(http://cdn\.pidjin\.net/wp-content/uploads/\d+/\d+/\d+[^"]+\.[a-z]+)')),
-        compile(tagre('img', 'src', '(http://cdn\.pidjin\.net/wp-content/uploads/old/[^"]+\.[a-z]+)')),
-    )
+    imageSearch = '//div[%s]//img' % xpath_class("episode")
     multipleImagesPerStrip = True
-    prevSearch = compile(tagre('a', 'href', '([^"]+)') + "Prev</a>")
-    starter = indirectStarter(
-       url,
-       compile(tagre('a', 'href', "(" + url + r'\d\d\d\d/\d\d/\d\d/[^"]+/)')))
+    prevSearch = '//span[%s]/a' % xpath_class("prev")
+    latestSearch = '//section[%s]//a' % xpath_class("latest")
+    starter = indirectStarter
 
 
 class Freefall(_BasicScraper):

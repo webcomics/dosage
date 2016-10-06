@@ -4,32 +4,34 @@
 # Copyright (C) 2015-2016 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
+
+import os
 from re import compile, escape, IGNORECASE
 
 from ..helpers import indirectStarter
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
+from .common import _WordPressScraper, WP_LATEST_SEARCH, xpath_class
 
 
 class EarthsongSaga(_ParserScraper):
     url = 'http://earthsongsaga.com/index.php'
-    starter = indirectStarter(url, '//div[@id="leftmenu"]/span[1]/a[1]')
+    starter = indirectStarter
     imageSearch = '//div[@id="comic"]//img'
     prevSearch = '//a[@title="Previous"]'
+    latestSearch = '//div[@id="leftmenu"]/span[1]/a[1]'
 
-    @classmethod
-    def fetchUrls(cls, url, data, urlSearch):
-        urls = super(EarthsongSaga, cls).fetchUrls(url, data, urlSearch)
+    def fetchUrls(self, url, data, urlSearch):
+        urls = super(EarthsongSaga, self).fetchUrls(url, data, urlSearch)
         return [x.replace('earthsongsaga.com/../',
                           'earthsongsaga.com/') for x in urls]
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         imgmatch = compile(r'images/vol(\d+)/ch(\d+)/(\d+)\.\w+$',
-                           IGNORECASE).search(imageUrl)
+                           IGNORECASE).search(image_url)
         if not imgmatch:
             imgmatch = compile(r'images/vol(\d+)/ch(\d+)/ch(\d+)cover\.\w+$',
-                               IGNORECASE).search(imageUrl)
+                               IGNORECASE).search(image_url)
             suffix = "cover"
         else:
             suffix = ""
@@ -38,18 +40,20 @@ class EarthsongSaga(_ParserScraper):
           int(imgmatch.group(3)), suffix)
 
 
-class EatLiver(_BasicScraper):
+class EasilyAmused(_WordPressScraper):
+    url = 'http://www.flowerlarkstudios.com/comic/college-daze/ea01/'
+    firstStripUrl = url
+    latestSearch = WP_LATEST_SEARCH
+    starter = indirectStarter
+
+
+class EatLiver(_ParserScraper):
     url = 'http://www.eatliver.com/'
-    rurl = escape(url)
-    starter = indirectStarter(url, compile(
-        tagre("a", "href", r'(i\.php\?n=\d+)') +
-        tagre("img", "src", r'img/small/[^"]+') + r"</a>\s*<br"))
-    stripUrl = url + "i.php?n=%s"
-    firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("link", "href", r'(%simg/\d+/[^"]+)' % rurl,
-                                before="image_src"))
-    prevSearch = compile(tagre("a", "href", r'(i\.php\?n=\d+)') +
-                         "&#060;&#060; Previous")
+    starter = indirectStarter
+    multipleImagesPerStrip = True
+    imageSearch = '//div[%s]//img' % xpath_class('post-content')
+    prevSearch = '//a[@rel="prev"]'
+    latestSearch = '//a[@rel="bookmark"]'
 
 
 class EatThatToast(_BasicScraper):
@@ -57,9 +61,11 @@ class EatThatToast(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % 'thewizard/'
-    imageSearch =  compile(tagre("div", "id", r'comic') + "\s*.*\s*" + tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after='comic-nav-base comic-nav-previous'))
-    textSearch = compile(tagre("div", "id", r'comic') + "\s*.*\s*" + tagre("img", "alt", r'([^"]+)'))
+    imageSearch = compile(tagre("div", "id", r'comic') + "\s*.*\s*" + tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl,
+                               after='comic-nav-base comic-nav-previous'))
+    textSearch = compile(tagre("div", "id", r'comic') + "\s*.*\s*" +
+                         tagre("img", "alt", r'([^"]+)'))
     help = 'Index Format: name'
 
 
@@ -68,16 +74,15 @@ class EdibleDirt(_BasicScraper):
     stripUrl = url + 'index.php?id=%s'
     firstStripUrl = stripUrl % '0'
     imageSearch = compile(tagre("img", "src", r'(strips/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r"(index\.php\?id=\d+)")+"Previous")
+    prevSearch = compile(tagre("a", "href", r"(index\.php\?id=\d+)") +
+                         "Previous")
     help = 'Index format: number'
 
 
-class EdmundFinney(_ParserScraper):
+class EdmundFinney(_WordPressScraper):
     url = 'http://eqcomics.com/'
     firstStripUrl = url + '2009/03/08/sunday-aliens/'
-    imageSearch = '//div[@id="comic"]//img'
-    prevSearch = '//a[@class="navi navi-prev"]'
-    help = 'Index format: yyyy/mm/dd/stripname'
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
 class EerieCuties(_BasicScraper):
@@ -120,16 +125,6 @@ class ElGoonishShiveNP(_BasicScraper):
     help = 'Index format: number'
 
 
-class Ellerbisms(_BasicScraper):
-    url = 'http://www.ellerbisms.com/'
-    rurl = escape(url)
-    stripUrl = url + '?p=%s'
-    firstStripUrl = stripUrl % '15'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
-    help = 'Index format: nnn'
-
-
 class EmergencyExit(_BasicScraper):
     url = 'http://www.eecomics.net/'
     stripUrl = url + "?strip_id=%s"
@@ -137,22 +132,6 @@ class EmergencyExit(_BasicScraper):
     imageSearch = compile(r'"(comics/.+?)"')
     prevSearch = compile(tagre("a", "href", r'(\?strip_id=\d+)') + tagre("img", "alt", r"Prior"))
     help = 'Index format: n'
-
-
-class Eriadan(_BasicScraper):
-    url = 'http://www.shockdom.com/webcomics/eriadan/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    multipleImagesPerStrip = True
-    imageSearch = compile(tagre("img", "src", r'(%sfiles/[^"]+)' % rurl,
-                                after='width="[68]00"'))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)', after="prev"))
-    help = 'Index format: yyyy/mm/dd/nnn (unpadded)'
-
-    def shouldSkipUrl(self, url, data):
-        return url in (
-             self.stripUrl % "2013/04/02/istruzioni-per-il-non-uso",  # video
-        )
 
 
 class ErrantStory(_BasicScraper):
@@ -163,13 +142,17 @@ class ErrantStory(_BasicScraper):
     help = 'Index format: yyyy-mm-dd/num'
 
 
-class Erstwhile(_ParserScraper):
+class Erstwhile(_WordPressScraper):
     url = 'http://www.erstwhiletales.com/'
-    stripUrl = url + '%s/'
-    css = True
-    imageSearch = 'div.comicpane a img'
-    prevSearch = 'a.navi-prev'
-    help = 'Index format: title-nn'
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
+    endOfLife = True
+
+
+class Eryl(_WordPressScraper):
+    url = 'http://www.flowerlarkstudios.com/comic/prologue-migration/page-i/'
+    firstStripUrl = url
+    latestSearch = WP_LATEST_SEARCH
+    starter = indirectStarter
 
 
 class EverybodyLovesEricRaymond(_BasicScraper):
@@ -181,16 +164,7 @@ class EverybodyLovesEricRaymond(_BasicScraper):
     help = 'Index format: name-of-old-comic'
 
 
-class EverydayBlues(_BasicScraper):
-    url = 'http://everydayblues.everydayblues.net/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2010/02/11/sometimes'
-    prevSearch = compile(tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+/)' % rurl, after="navi-prev"))
-    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+-[^"]+)' % rurl))
-    help = 'Index format: yyyy/mm/dd/stripname'
-
-
+# Seems to be GeoBlocked from Europe?
 class EvilDiva(_BasicScraper):
     url = 'http://www.evildivacomics.com/'
     stripUrl = url + '?p=%s'
@@ -200,18 +174,19 @@ class EvilDiva(_BasicScraper):
     help = 'Index format: n (unpadded)'
 
 
-class EvilInc(_BasicScraper):
+class EvilInc(_WordPressScraper):
     url = 'http://evil-inc.com/'
-    stripUrl = url + 'comic/%s'
-    firstStripUrl = stripUrl % 'monday-3'
-    imageSearch = compile(
-        tagre("div", "id", "comic") +
-        r'\s*.*\s*' +  # filter out the variant href tag
-        tagre("img", "src",
-              r'(http://i\d\.wp\.com/evil-inc\.com/wp-content/uploads/[^"]+)'))
-    prevSearch = compile(tagre("span", "class", "mininav-prev") +
-                         tagre("a", "href", r'([^"]+)'))
-    help = 'Index format: stripname'
+    firstStripUrl = url + 'comic/monday-3/'
+
+
+class Evilish(_ParserScraper):
+    url = 'http://evilish.pensandtales.com/'
+    stripUrl = url + '?date=%s'
+    firstStripUrl = stripUrl % '20020630'
+    imageSearch = '//img[@alt="Today\'s Comics"]'
+    prevSearch = '//a[img[@alt="Previous Comic"]]'
+    endOfLife = True
+    help = 'Index format: yyyymmdd'
 
 
 class Exiern(_BasicScraper):
@@ -224,15 +199,24 @@ class Exiern(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
-class ExploitationNow(_BasicScraper):
+class ExploitationNow(_WordPressScraper):
     url = 'http://www.exploitationnow.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s'
-    firstStripUrl = stripUrl % '2000-07-07/9'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl,
-                               after="navi-prev"))
-    help = 'Index format: yyyy-mm-dd/num'
+    firstStripUrl = url + '2000-07-07/9'
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
+    endOfLife = True
+
+
+class ExtraFabulousComics(_WordPressScraper):
+    url = 'http://extrafabulouscomics.com/comic/buttfly/'
+    firstStripUrl = url
+    latestSearch = '//a[%s]' % xpath_class('navi-last')
+    starter = indirectStarter
+    multipleImagesPerStrip = True
+
+    def namer(self, image_url, page_url):
+        imagename = os.path.basename(image_url)
+        pagepart = compile(r'/comic/([^/]+)/$').search(page_url).group(1)
+        return '_'.join((pagepart, imagename))
 
 
 class ExtraLife(_BasicScraper):

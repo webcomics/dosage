@@ -1,39 +1,55 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 
-from re import compile
-from ..scraper import make_scraper
+from __future__ import absolute_import, division, print_function
 
-_imageSearch = compile(r'<img src=http://\w+\.snafu-comics\.com/(comics/\d{6}_\w*\.\w{3,4})')
-_prevSearch = compile(r'<a href="(\?comic_id=\d+)">Previous</a>')
-
-
-def add(name, host):
-    baseUrl = 'http://%s.snafu-comics.com/' % host
-    classname = 'SnafuComics_%s' % name
-
-    globals()[classname] = make_scraper(classname,
-        name='SnafuComics/%s' % name,
-        url = baseUrl,
-        stripUrl = baseUrl + '?comic_id=%s',
-        imageSearch = _imageSearch,
-        prevSearch = _prevSearch,
-        help = 'Index format: n (unpadded)',
-    )
+from ..scraper import _ParserScraper
+from ..helpers import indirectStarter
 
 
-add('KOF', 'kof')
-add('PowerPuffGirls', 'ppg')
-add('Tin', 'tin')
-add('TW', 'tw')
-add('Sugar', 'sugar')
-add('SF', 'sf')
-add('Titan', 'titan')
-add('EA', 'ea')
-add('Zim', 'zim')
-add('Soul', 'soul')
-add('FT', 'ft')
-add('Bunnywith', 'bunnywith')
-add('Braindead', 'braindead')
-add('GrimTalesFromDownBelow', 'grim')
+class Snafu(_ParserScraper):
+    # Next and Previous are swapped...
+    prevSearch = '//a[@class="next"]'
+    imageSearch = '//div[@class="comicpage"]/img'
+    latestSearch = '//div[@id="feed"]/a'
+    starter = indirectStarter
+
+    def __init__(self, name, path):
+        super(Snafu, self).__init__('SnafuComics/' + name)
+        self.url = 'http://snafu-comics.com/swmseries/' + path
+
+    def namer(self, image_url, page_url):
+        year, month, name = image_url.rsplit('/', 3)[1:]
+        return "%04s_%02s_%s" % (year, month, name)
+
+    @classmethod
+    def getmodules(cls):
+        return [
+            cls('Braindead', 'braindead'),
+            cls('Bunnywith', 'bunnywith'),
+            cls('DeliverUsEvil', 'deliverusevil'),
+            cls('EA', 'ea'),
+            cls('FT', 'ft'),
+            cls('GrimTalesFromDownBelow', 'grimtales'),
+            cls('KOF', 'kof'),
+            cls('MyPanda', 'mypanda'),
+            cls('NarutoHeroesPath', 'naruto'),
+            cls('NewSuperMarioAdventures', 'nsma'),
+            cls('PowerPuffGirls', 'powerpuffgirls'),
+            # cls('PSG2', 'psg2'), -- Strangely broken
+            cls('SatansExcrement', 'satansexcrement'),
+            cls('SF', 'sf'),
+            cls('SkullBoy', 'skullboy'),
+            cls('Snafu', 'snafu'),
+            cls('Soul', 'soul'),
+            cls('Sugar', 'sugarbits'),
+            cls('SureToBeBanD', 'stbb'),
+            cls('TheLeague', 'league'),
+            cls('Tin', 'tin'),
+            cls('Titan', 'titan'),
+            cls('TrunksAndSoto', 'trunks-and-soto'),
+            cls('TW', 'tw'),
+            cls('Zim', 'zim'),
+        ]

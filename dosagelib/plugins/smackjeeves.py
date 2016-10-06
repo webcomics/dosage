@@ -1,785 +1,735 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-from re import compile
-from ..scraper import make_scraper
-from ..util import tagre, quote, case_insensitive_re
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 
-# SmackJeeves is a crawlers nightmare - users are allowed to edit HTML directly.
-# That's why there are so much different search patterns.
+from __future__ import absolute_import, division, print_function
 
-_imageSearch = compile(tagre("img", "src", r'([^"]+)', after='id="comic_image"'))
-_linkSearch = tagre("a", "href", r'([^>"]*/comics/\d+/[^>"]*)', quote='"?')
-_attrs = dict(
-    back = case_insensitive_re("back"),
-    prev = case_insensitive_re("prev"),
-    next = case_insensitive_re("next"),
-)
-_prevSearch = (
-    compile(_linkSearch +
-  r'(?:<img[^>]+alt="[^"]*%(prev)s|<img[^>]+(?:button_previous|naviButtons_Previous|nav_prev4|prev|previous|webbuttonback|PrevArrow)\.|[^<]*%(back)s|\s*<<? (?:%(back)s|%(prev)s)|[^<]*%(prev)s)' % _attrs),
-    compile(_linkSearch + r'[^<]*Atras<'),
-    compile(_linkSearch + tagre("img", "src", r'[^"]+/(?:backrg|JZj4a3C|b5175a677Zd6b)\.png')),
-    compile(_linkSearch + tagre("img", "src", r"[^']+/(?:backnav)\.png", quote="'")),
-    compile(_linkSearch + r"\s*" + tagre("img", "src", r'[^"]+/prev\.jpg')),
-)
-_nextSearch = (
-    compile(_linkSearch +
-  r'(?:<img[^>]+alt="%(next)s|<img[^>]+(?:button_next|naviButtons_Next|nav_next4|next|webbuttonnext-1|NextArrow)\.|\s*<?[^<]*%(next)s)' % _attrs),
-    compile(_linkSearch + r'Siguiente'),
-    compile(_linkSearch + tagre("img", "src", r'[^"]+/(?:arrow3_zps03f490e3|60ecbaed7gbJs)\.png[^"]*')),
-    compile(_linkSearch + tagre("img", "src", r"[^']+/(?:forthnav)\.png[^']*", quote="'")),
-)
+from ..util import quote
+from ..scraper import _ParserScraper
+from ..output import out
 
-def add(name, url, adult, bounce):
-    classname = 'SmackJeeves_' + name
+# SmackJeeves is a crawlers nightmare - users are allowed to edit HTML
+# directly. Additionally, users use unescaped < characters sometimes, which
+# breaks the parse tree on libxml2 before 2.9.3...
 
-    def modifier(pageUrl):
+
+class SmackJeeves(_ParserScraper):
+    ONLY_COMICS = '[contains(@href, "/comics/")]'
+
+    prevSearch = (
+        '//a[@class="nav-prev"]' + ONLY_COMICS,
+        '//a[img[re:test(@alt, "prev", "i")]]' + ONLY_COMICS,
+        '//a[img[re:test(@src, "/(prev|back)")]]' + ONLY_COMICS,
+        '//a[re:test(@title, "previous", "i")]' + ONLY_COMICS,
+        '//a[re:test(text(), "prev|back", "i")]' + ONLY_COMICS,
+        '//select[@class="jumpbox"]/preceding::a[1]' + ONLY_COMICS,
+    )
+
+    nextSearch = (
+        '//a[@class="nav-next"]' + ONLY_COMICS,
+        '//a[img[re:test(@alt, "next", "i")]]' + ONLY_COMICS,
+        '//a[img[re:test(@src, "/next", "i")]]' + ONLY_COMICS,
+        '//a[re:test(@title, "next", "i")]' + ONLY_COMICS,
+        '//a[re:test(text(), "next", "i")]' + ONLY_COMICS,
+        '//select[@class="jumpbox"]/following::a[1]' + ONLY_COMICS,
+    )
+
+    imageSearch = (
+        '//img[@id="comic_image"]',
+        '//div[@id="comic-image"]//img',
+        '//img[@id="comic"]',
+        '//div[@id="comicset"]/object/param[@name="movie"]/@value',
+    )
+
+    broken_html_bugfix = True
+
+    def __init__(self, name, host=None, sub=None, adult=False):
+        super(SmackJeeves, self).__init__('SmackJeeves/' + name)
+        if host:
+            self.url = 'http://%s/comics/' % host
+        else:
+            self.url = 'http://%s.smackjeeves.com/comics/' % sub
         if adult:
-            # mature content can be viewed directly with:
-            # http://www.smackjeeves.com/mature.php?ref=<percent-encoded-url>
-            return 'http://www.smackjeeves.com/mature.php?ref=' + quote(pageUrl)
-        return pageUrl
+            self.adult = True
 
-    @classmethod
-    def _starter(cls):
+    def starter(self):
         """Get start URL."""
-        url1 = modifier(url)
-        data = cls.getPage(url1)
-        url2 = cls.fetchUrl(url1, data, cls.prevSearch)
-        if bounce:
-            data = cls.getPage(url2)
-            url3 = cls.fetchUrl(url2, data, _nextSearch)
-            return modifier(url3)
-        return modifier(url2)
+        start = self.url
+        if self.adult:
+            start = 'http://www.smackjeeves.com/mature.php?ref=' + quote(start)
+        data = self.getPage(start)
+        startimg = None
+        if not self.shouldSkipUrl(start, data):
+            startimg = self.fetchUrl(start, data, self.imageSearch)
+        prevurl = self.fetchUrl(start, data, self.prevSearch)
+        data = self.getPage(prevurl)
+        previmg = None
+        if not self.shouldSkipUrl(prevurl, data):
+            previmg = self.fetchUrl(prevurl, data, self.imageSearch)
+        if startimg and previmg and startimg == previmg:
+            out.debug("Matching! %s %s" % (prevurl, self.name))
+            return prevurl
+        else:
+            return self.fetchUrl(prevurl, data, self.nextSearch)
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        parts = pageUrl.split('/')
+    def namer(self, image_url, page_url):
+        parts = page_url.split('/')
         name = parts[-2]
         num = parts[-3]
         return "%s_%s" % (name, num)
 
-    globals()[classname] = make_scraper(classname,
-        name = 'SmackJeeves/' + name,
-        adult = adult,
-        url = url,
-        starter = _starter,
-        prevUrlModifier = lambda cls, url: modifier(url),
-        stripUrl = url + '%s/',
-        imageSearch = _imageSearch,
-        prevSearch = _prevSearch,
-        prevUrlMatchesStripUrl = not adult,
-        lang = 'es' if name.lower().endswith('spanish') else 'en',
-        help = 'Index format: nnnn (some increasing number)',
-        namer = namer,
-    )
+    def shouldSkipUrl(self, url, data):
+        return data.xpath('//img[contains(@src, "/images/image_na.gif")]')
 
-
-# do not edit anything below since these entries are generated from scripts/update.sh
-# DO NOT REMOVE
-add('20TimesKirby', 'http://20xkirby.smackjeeves.com/comics/', False, True)
-add('2Kingdoms', 'http://2kingdoms.smackjeeves.com/comics/', False, False)
-add('355Days', 'http://355days.smackjeeves.com/comics/', False, True)
-add('AB', 'http://alistairandboggart.smackjeeves.com/comics/', True, True)
-add('ADoodleADay', 'http://adoodleaday.smackjeeves.com/comics/', False, True)
-add('AGirlAndHerShadow', 'http://agirlandhershadow.smackjeeves.com/comics/', False, True)
-add('AGirlontheServer', 'http://girlontheserver.smackjeeves.com/comics/', False, True)
-add('AKirbyKomic', 'http://akirbykomic.smackjeeves.com/comics/', False, True)
-add('ALaMode', 'http://alamode.smackjeeves.com/comics/', False, False)
-add('ANGELOU', 'http://angelou-esp.smackjeeves.com/comics/', False, True)
-add('APTComic', 'http://aptcomic.smackjeeves.com/comics/', False, True)
-add('AQuestionOfCharacter', 'http://aqoc.smackjeeves.com/comics/', False, True)
-add('ASongforElise', 'http://asongforelise.smackjeeves.com/comics/', True, True)
-add('AYuriCollab', 'http://ayuricollabbitches.smackjeeves.com/comics/', True, True)
-add('Aarrevaara', 'http://aarrevaara.smackjeeves.com/comics/', False, True)
-add('AchievementStuck', 'http://achievementstuck.smackjeeves.com/comics/', False, True)
-add('AcidMonday', 'http://acidmonday.smackjeeves.com/comics/', True, True)
-add('Adalsysla', 'http://adalsysla.smackjeeves.com/comics/', False, True)
-add('AddictiveScience', 'http://addictivescience.smackjeeves.com/comics/', False, True)
-add('AdventuresofLumandFriends', 'http://aolaf.smackjeeves.com/comics/', False, True)
-add('AdventuresoftheWeird', 'http://adventuresoftheweird.smackjeeves.com/comics/', False, True)
-add('AetherTheories', 'http://aethertheories.smackjeeves.com/comics/', False, True)
-add('AgeoftheGray', 'http://ageofthegray.smackjeeves.com/comics/', True, True)
-add('AllInLOVE', 'http://allinlove.smackjeeves.com/comics/', False, True)
-add('AllStarHeroes', 'http://allstarheroes.smackjeeves.com/comics/', False, True)
-add('Allthatglitters', 'http://atg.smackjeeves.com/comics/', True, True)
-add('AloversRule', 'http://aloversrule.smackjeeves.com/comics/', True, True)
-add('AlwaysDamnedWebcomic', 'http://alwaysdamned.smackjeeves.com/comics/', True, True)
-add('AlwaysRainingHere', 'http://alwaysraininghere.smackjeeves.com/comics/', False, True)
-add('Amaravati', 'http://amaravati.smackjeeves.com/comics/', False, True)
-add('AmorVincitOmnia', 'http://avo.smackjeeves.com/comics/', True, True)
-add('AmsdenEstate', 'http://monsterous.smackjeeves.com/comics/', False, True)
-#add('Amya', 'http://amya.smackjeeves.com/comics/', False, True)
-add('Anathemacomics', 'http://anathema-comics.smackjeeves.com/comics/', False, True)
-add('AngelBeast', 'http://angel-beast.smackjeeves.com/comics/', False, True)
-add('AngelGuardian', 'http://angel-guardian.smackjeeves.com/comics/', False, True)
-add('AnimalAdventures', 'http://animaladventures.smackjeeves.com/comics/', False, True)
-add('Animayhem', 'http://animayhem.smackjeeves.com/comics/', False, True)
-add('Anythingaboutnothing', 'http://www.anythingcomic.com/comics/', False, True)
-add('ArchportCityChronicles', 'http://tjs.smackjeeves.com/comics/', False, True)
-add('Area9', 'http://area-9.smackjeeves.com/comics/', False, False)
-add('AroundtheBlock', 'http://aroundtheblock.smackjeeves.com/comics/', False, True)
-add('ArtofAFantasy', 'http://artofafantasy.smackjeeves.com/comics/', True, True)
-add('AtArmsLength', 'http://atarmslength.smackjeeves.com/comics/', False, True)
-add('Atlaswebcomic', 'http://atlaswebcomic.smackjeeves.com/comics/', False, True)
-add('Autophobia', 'http://autophobia.smackjeeves.com/comics/', True, False)
-add('Aware', 'http://aware.smackjeeves.com/comics/', False, True)
-add('AwesomeSauce', 'http://tdawesomesauce.smackjeeves.com/comics/', False, True)
-add('AyaTakeo', 'http://ayatakeo.smackjeeves.com/comics/', False, True)
-add('BLDShortComics', 'http://bldshortcomics.smackjeeves.com/comics/', False, True)
-add('BLOT', 'http://blotcomic.smackjeeves.com/comics/', False, True)
-add('BabysittingFourDemons', 'http://babysitting4demons.smackjeeves.com/comics/', False, True)
-add('Babywhatsyoursign', 'http://babywhatsyoursign.smackjeeves.com/comics/', False, True)
-add('BadassRiz', 'http://badassriz.smackjeeves.com/comics/', False, True)
-add('BallandChain', 'http://ballandchain.smackjeeves.com/comics/', False, True)
-add('Bard', 'http://barred.smackjeeves.com/comics/', False, True)
-add('BassComicAdventures', 'http://basscomicadventures.smackjeeves.com/comics/', False, True)
-add('BattleSequence', 'http://battlesequence.smackjeeves.com/comics/', False, True)
-add('Bearhoney', 'http://bear-honey.smackjeeves.com/comics/', False, True)
-add('BearlyAbel', 'http://bearlyabel.smackjeeves.com/comics/', False, False)
-add('BeautifulLies', 'http://beautiful-lies.smackjeeves.com/comics/', False, True)
-add('BehindTheObsidianMirror', 'http://obsidian-mirror.smackjeeves.com/comics/', True, True)
-add('Behindtheglasscurtain', 'http://g1ass.smackjeeves.com/comics/', False, True)
-add('BeretCatComics', 'http://beretcatcomics.smackjeeves.com/comics/', False, True)
-add('Bestbrosforever', 'http://bestbrosforever.smackjeeves.com/comics/', False, True)
-add('Betovering', 'http://betovering.smackjeeves.com/comics/', False, True)
-add('BettencourtHotel', 'http://www.welcometobettencourt.com/comics/', False, True)
-add('BetweenLightandDark', 'http://bld.smackjeeves.com/comics/', False, True)
-add('BetweenWorlds', 'http://betweenworlds.smackjeeves.com/comics/', True, True)
-add('Betwin', 'http://be-twin.smackjeeves.com/comics/', False, True)
-add('BeyondTemptation', 'http://beyondtemptation.smackjeeves.com/comics/', False, True)
-add('BeyondTheOrdinary', 'http://bto.smackjeeves.com/comics/', False, True)
-add('BioRevelation', 'http://biorevelation.smackjeeves.com/comics/', False, True)
-add('Bl3', 'http://bl3.smackjeeves.com/comics/', False, True)
-add('BlackDragon', 'http://blackdragon.smackjeeves.com/comics/', False, True)
-add('BlackFridayRule', 'http://blackfridayrule.smackjeeves.com/comics/', False, True)
-add('BlackSheepcomic', 'http://black-sheep.smackjeeves.com/comics/', False, True)
-add('BlackandBlue', 'http://black-and-blue.smackjeeves.com/comics/', False, True)
-add('Blackdemon', 'http://blackdemoncomics.smackjeeves.com/comics/', False, True)
-add('BleachRedux', 'http://bleachredux.smackjeeves.com/comics/', False, True)
-add('BlindandBlue', 'http://blindandblue.smackjeeves.com/comics/', False, False)
-add('BloodhuntersBirthofavampire', 'http://bloodhunters.smackjeeves.com/comics/', False, True)
-add('Bloodyfairytale', 'http://yaika.smackjeeves.com/comics/', False, True)
-add('BloomaPokemonConquestComic', 'http://bloomconquest.smackjeeves.com/comics/', False, True)
-add('BlueHair', 'http://bluehair.smackjeeves.com/comics/', False, True)
-add('BlueWell', 'http://www.bluewellcomic.com/comics/', False, False)
-add('BoilingPointofBrain', 'http://bpob.smackjeeves.com/comics/', False, True)
-add('BoogeyDancingMonkeyPot', 'http://monkeypot.smackjeeves.com/comics/', False, True)
-add('BreachofAgency', 'http://breachofagency.smackjeeves.com/comics/', False, True)
-add('BreakfastonaCliff', 'http://boac.smackjeeves.com/comics/', False, True)
-add('Burn', 'http://burn.smackjeeves.com/comics/', False, True)
-add('ByTheBook', 'http://bythebook.smackjeeves.com/comics/', False, False)
-add('CafeAmargo', 'http://cafeamargo.smackjeeves.com/comics/', False, True)
-add('CafeSuada', 'http://cafesuada.smackjeeves.com/comics/', False, True)
-add('Cambion', 'http://cambion.smackjeeves.com/comics/', True, True)
-add('CaptiveSoul', 'http://captive-soul.smackjeeves.com/comics/', False, True)
-add('Captor', 'http://captor.smackjeeves.com/comics/', False, True)
-add('CaravanaTaleofGodsandMen', 'http://www.caravantale.com/comics/', False, True)
-#add('Carciphona', 'http://carciphona.smackjeeves.com/comics/', False, True)
-add('Cataclysm', 'http://cataclysm.smackjeeves.com/comics/', False, True)
-add('Catnip', 'http://catnipmanga.smackjeeves.com/comics/', True, True)
-add('Cerintha', 'http://cerintha.smackjeeves.com/comics/', False, True)
-add('ChampionofChampions', 'http://championofchampions.smackjeeves.com/comics/', False, True)
-add('ChampionsandHeroesAgeofDragons', 'http://championsandheroes.smackjeeves.com/comics/', False, True)
-add('ChannelDDDNews', 'http://dddnews.smackjeeves.com/comics/', False, True)
-add('ChaosAdventuresII', 'http://chaosadventuresii.smackjeeves.com/comics/', False, True)
-add('ChaosTheory2005', 'http://chaostheory2005.smackjeeves.com/comics/', False, True)
-add('ChaoticNation', 'http://chaoticnation.smackjeeves.com/comics/', True, True)
-add('Charaktermaske', 'http://charaktermaske.smackjeeves.com/comics/', False, True)
-add('Chatuplines', 'http://chatuplines.smackjeeves.com/comics/', False, True)
-add('CheneysGotaGun', 'http://cheney.smackjeeves.com/comics/', False, True)
-add('ChickenScratches', 'http://chickenscratches.smackjeeves.com/comics/', False, True)
-add('ChildrenoftheNight', 'http://cotn.smackjeeves.com/comics/', False, True)
-add('ChimiMouryou', 'http://cmmr.smackjeeves.com/comics/', False, True)
-add('ChocolatewithPepper', 'http://chocolate-with-pepper.smackjeeves.com/comics/', False, True)
-add('CityFolk', 'http://cityfolk.smackjeeves.com/comics/', False, True)
-add('ClairetheFlare', 'http://clairetheflare.smackjeeves.com/comics/', False, False)
-add('CleanCure', 'http://cleanpluscure.smackjeeves.com/comics/', False, True)
-add('ClockworkAtrium', 'http://www.clockwork-atrium.com/comics/', False, True)
-add('CloeRemembrance', 'http://cloe.smackjeeves.com/comics/', False, False)
-add('CockroachTheater', 'http://cockroachtheater.smackjeeves.com/comics/', False, True)
-add('Cogs', 'http://cogs.smackjeeves.com/comics/', False, True)
-add('ColorBlind', 'http://cbcomic.smackjeeves.com/comics/', False, True)
-add('ConventionalWisdom', 'http://conventionalwisdom.smackjeeves.com/comics/', False, True)
-add('CosmicDash', 'http://cosmicdash.smackjeeves.com/comics/', False, True)
-add('Cramberries', 'http://cramberries.smackjeeves.com/comics/', False, True)
-add('CrimsonWings', 'http://crimson-wings.smackjeeves.com/comics/', False, True)
-add('CrocodileTears', 'http://crocodile-tears.smackjeeves.com/comics/', True, True)
-add('CupofOlea', 'http://cupofolea.smackjeeves.com/comics/', False, True)
-add('CurseLineage', 'http://curselineage.smackjeeves.com/comics/', False, True)
-add('DBON', 'http://dbondoujin.smackjeeves.com/comics/', False, True)
-add('DEGAF', 'http://degaf.smackjeeves.com/comics/', False, True)
-add('DEMENTED', 'http://demented.smackjeeves.com/comics/', True, True)
-add('DaddysGirl', 'http://daddysgirl.smackjeeves.com/comics/', False, True)
-add('DanielleDark', 'http://danielledark.smackjeeves.com/comics/', False, True)
-add('Dasien', 'http://dasien.smackjeeves.com/comics/', True, True)
-add('DavidDoesntGetIt', 'http://daviddoesntgetit.smackjeeves.com/comics/', False, True)
-add('DeadtoDay', 'http://deadtoday.smackjeeves.com/comics/', False, True)
-add('DeathNoteIridescent', 'http://dn-iridescent.smackjeeves.com/comics/', False, False)
-add('DebtSettlement2OperationExtinction', 'http://debts2.smackjeeves.com/comics/', True, True)
-add('Debtsettlement', 'http://debts.smackjeeves.com/comics/', True, True)
-add('DefyingGravityTheFourGreatGuardians', 'http://defyinggravitycomic.smackjeeves.com/comics/', False, True)
-add('DemonBattles', 'http://demonbattles.smackjeeves.com/comics/', False, True)
-add('DemonCat', 'http://demoncat.smackjeeves.com/comics/', False, True)
-add('DemonEater', 'http://demoneater.smackjeeves.com/comics/', True, False)
-add('DenizensAttention', 'http://denizensattention.smackjeeves.com/comics/', False, False)
-add('Destinationunknown', 'http://destination-unknown.smackjeeves.com/comics/', False, True)
-add('DevilTrainee', 'http://deviltrainee.smackjeeves.com/comics/', False, True)
-add('DevilTraineeSpanish', 'http://deviltraineespanish.smackjeeves.com/comics/', False, True)
-add('DevilsCake', 'http://devilscake.smackjeeves.com/comics/', False, False)
-add('DevotoMusicinHell', 'http://devoto.smackjeeves.com/comics/', True, True)
-add('Diaz', 'http://diaz.smackjeeves.com/comics/', False, True)
-add('Diexemor', 'http://diexemor.smackjeeves.com/comics/', False, True)
-add('DigimonSaviors', 'http://digimonsaviors.smackjeeves.com/comics/', False, True)
-add('DigimonTamersMiraiProject', 'http://digimontamersmiraiproject.smackjeeves.com/comics/', False, True)
-add('DigisRandomSpriteshack', 'http://digisspriteshack.smackjeeves.com/comics/', False, True)
-add('DigitalInsanity', 'http://digitalinsanity.smackjeeves.com/comics/', False, True)
-add('DoItYourself', 'http://diy.smackjeeves.com/comics/', False, True)
-add('Dontdie', 'http://dontdie.smackjeeves.com/comics/', False, True)
-add('DoodleBeans', 'http://beans.smackjeeves.com/comics/', True, True)
-add('DoodlingAround', 'http://doodlingcomic.smackjeeves.com/comics/', False, True)
-add('DoomsdayMyDear', 'http://www.doomsdaymydear.com/comics/', False, True)
-add('DragonKid', 'http://dragonkid.smackjeeves.com/comics/', False, True)
-add('Dragonet', 'http://dragonet.smackjeeves.com/comics/', False, True)
-add('DumpofManyPeople', 'http://dumpofmanypeople.smackjeeves.com/comics/', False, True)
-add('DungeonHordes', 'http://dungeonhordes.smackjeeves.com/comics/', False, True)
-add('EATATAU', 'http://eatatau.smackjeeves.com/comics/', False, True)
-add('EDepthAngel', 'http://edepth.smackjeeves.com/comics/', False, True)
-add('ERAConvergence', 'http://convergence.smackjeeves.com/comics/', False, True)
-add('ERAIbuki', 'http://eraibuki.smackjeeves.com/comics/', False, True)
-add('ERRORERROR', 'http://errorerror.smackjeeves.com/comics/', False, False)
-add('EidolonWhispersofEternity', 'http://whispersofeternity.smackjeeves.com/comics/', False, True)
-add('ElementalSpirits', 'http://elementalspirits.smackjeeves.com/comics/', False, True)
-add('ElfenLiedDifferences', 'http://differences.smackjeeves.com/comics/', True, True)
-add('EnkeltenKentta', 'http://enkeltenkentta.smackjeeves.com/comics/', True, True)
-add('Enthrall', 'http://enthrall.smackjeeves.com/comics/', True, True)
-add('Entreeuxdeux', 'http://entreuxdeux.smackjeeves.com/comics/', False, True)
-add('Entuthrie', 'http://entuthrie.smackjeeves.com/comics/', True, True)
-add('Eorah', 'http://eorah.smackjeeves.com/comics/', True, True)
-add('EozinKadonnutKuningas', 'http://eozinkadonnutkuningas.smackjeeves.com/comics/', False, True)
-add('EpicChaos', 'http://epicchaos.smackjeeves.com/comics/', False, True)
-add('Equsopia', 'http://equsopia.smackjeeves.com/comics/', False, True)
-add('EternalKnights', 'http://eternalknights.smackjeeves.com/comics/', True, True)
-add('EuphemisticEephus', 'http://eephus.smackjeeves.com/comics/', False, True)
-add('EvD', 'http://ev-d.smackjeeves.com/comics/', False, True)
-add('EvilPlan', 'http://evilplan.thewebcomic.com/comics/', False, False)
-add('ExperimentalMegaman', 'http://ex90081.smackjeeves.com/comics/', False, True)
-add('EyesofaDigimon', 'http://eoad.smackjeeves.com/comics/', False, True)
-add('FailureConfetti', 'http://failureconfetti.smackjeeves.com/comics/', False, False)
-add('FairyTaleRejects', 'http://fairytalerejects.thewebcomic.com/comics/', True, True)
-add('FaithlessDigitals', 'http://faithlessdigitals.smackjeeves.com/comics/', False, True)
-add('FalconersDailyStrips', 'http://falcdaily.smackjeeves.com/comics/', False, True)
-add('FallenAngelslove', 'http://fallen-angels-love.smackjeeves.com/comics/', False, True)
-add('FarOutMantic', 'http://meteorflo.smackjeeves.com/comics/', False, True)
-add('FarOutThere', 'http://faroutthere.smackjeeves.com/comics/', False, True)
-add('FatetheAnthologyofKaienandhisfuckingmagicfriends', 'http://fatehoho.smackjeeves.com/comics/', False, True)
-add('FeathersPI', 'http://featherpi.smackjeeves.com/comics/', True, True)
-add('FemmeSchism', 'http://femmeschism.smackjeeves.com/comics/', False, True)
-add('FeralGentry', 'http://feralgentry.smackjeeves.com/comics/', False, True)
-add('FinalArcanum', 'http://finalarcanum.smackjeeves.com/comics/', False, True)
-add('FireWire', 'http://firewire.smackjeeves.com/comics/', False, True)
-add('FireredLisasReise', 'http://lisasreise.smackjeeves.com/comics/', False, True)
-add('FlyorFail', 'http://flyorfail.smackjeeves.com/comics/', False, False)
-#add('FootLoose', 'http://footloose.smackjeeves.com/comics/', False, True)
-add('ForcedSeduction', 'http://forced-seduction.smackjeeves.com/comics/', False, True)
-add('ForestHill', 'http://www.foresthillcomic.org/comics/', False, False)
-add('ForgettheDistance', 'http://forgetthedistance.smackjeeves.com/comics/', True, True)
-add('Fortheloveofabrokenstring', 'http://fortheloveofabrokenstring.smackjeeves.com/comics/', False, True)
-add('FramebyFrame', 'http://frame-by-frame.smackjeeves.com/comics/', True, True)
-add('FrenzyRedux', 'http://theadventuresoffrenzy.smackjeeves.com/comics/', False, True)
-add('FrobertTheDemon', 'http://frobby.smackjeeves.com/comics/', False, False)
-add('FrogKing', 'http://frogking.smackjeeves.com/comics/', False, True)
-add('FromnowonImagirl', 'http://fromnowonimagirl.smackjeeves.com/comics/', False, True)
-add('FruitloopAndMrDownbeat', 'http://fruitbeat.smackjeeves.com/comics/', False, True)
-add('FuckMyLife', 'http://fuckmylife.smackjeeves.com/comics/', False, True)
-add('FurtherDowntheRabbitHole', 'http://fdtrh.smackjeeves.com/comics/', True, True)
-add('GATEKEEPER', 'http://gatekeepercomic.smackjeeves.com/comics/', False, True)
-add('GamerCafe', 'http://gamercafe.smackjeeves.com/comics/', False, True)
-add('GamesPeoplePlayUpdatedWeekly', 'http://gamespeopleplay.smackjeeves.com/comics/', False, True)
-add('GardenofHearts', 'http://gardenofhearts.smackjeeves.com/comics/', False, True)
-add('GayBacon', 'http://gaybacon.smackjeeves.com/comics/', False, True)
-add('GayTimesWithRyanandJay', 'http://gtwraj.smackjeeves.com/comics/', False, True)
-add('GearTheTakedown', 'http://geartd.smackjeeves.com/comics/', False, True)
-add('GetUpandGo', 'http://getupandgo.smackjeeves.com/comics/', True, True)
-add('GigisNuzlockeRuns', 'http://giginuzlocke.smackjeeves.com/comics/', False, True)
-add('Gloomverse', 'http://gloomverse.smackjeeves.com/comics/', False, True)
-add('Gnoph', 'http://gnoph.smackjeeves.com/comics/', False, True)
-add('GoldenSunGenerationsAftermathVolume1', 'http://gsgbtsyearone.smackjeeves.com/comics/', False, False)
-add('GoldenSunGenerationsColossoVolume6', 'http://gsgbtsyearthree.smackjeeves.com/comics/', False, False)
-add('GoodGame', 'http://goodgame.smackjeeves.com/comics/', False, True)
-add('GoodnightMrsGoose', 'http://goose.smackjeeves.com/comics/', False, True)
-add('GraveImpressions', 'http://graveimpressions.smackjeeves.com/comics/', True, True)
-add('Grayscale', 'http://grayscale.smackjeeves.com/comics/', True, True)
-add('GreenKirbyandabunchofotherpeopledoinstuff', 'http://gkandabunchofotherppl.smackjeeves.com/comics/', False, True)
-add('GuardianGhost', 'http://guardianghost.smackjeeves.com/comics/', False, True)
-add('GuardiansoftheGalaxialSpaceways', 'http://ggs.smackjeeves.com/comics/', False, False)
-add('HIPS', 'http://hips.smackjeeves.com/comics/', True, True)
-add('Habibahssong', 'http://habibahsong.smackjeeves.com/comics/', False, True)
-add('Harfang', 'http://harfang.smackjeeves.com/comics/', False, True)
-add('HarvestMoonParadiseFound', 'http://paradisefound.smackjeeves.com/comics/', False, True)
-add('HatShop', 'http://hatshop.smackjeeves.com/comics/', False, False)
-add('HatethePlayer', 'http://hatetheplayer.thewebcomic.com/comics/', False, True)
-add('Helix', 'http://helix.smackjeeves.com/comics/', True, False)
-add('HeltonShelton', 'http://heltonshelton.smackjeeves.com/comics/', False, True)
-add('Hephaestus', 'http://hephaestus.thewebcomic.com/comics/', False, False)
-add('HereBeVoodoo', 'http://herebevoodoo.smackjeeves.com/comics/', True, True)
-add('HiddenStrengthAWhiteNuzlocke', 'http://hsnuzlocke.smackjeeves.com/comics/', False, True)
-add('Hinata', 'http://hinata.smackjeeves.com/comics/', False, True)
-add('HitandMiss', 'http://hitandmiss.smackjeeves.com/comics/', False, True)
-add('Holocrash', 'http://holocrash.smackjeeves.com/comics/', True, True)
-add('HolyBlasphemy', 'http://holyblasphemy.smackjeeves.com/comics/', False, False)
-add('HolyCrap', 'http://holycrap.smackjeeves.com/comics/', False, True)
-add('HopeForABreeze', 'http://h4ab.smackjeeves.com/comics/', False, False)
-add('HotChocolate', 'http://hot-chocolate.smackjeeves.com/comics/', False, True)
-add('HouseofCraziness', 'http://craziness.smackjeeves.com/comics/', False, True)
-add('HurrocksFardel', 'http://hurrocksfardel.smackjeeves.com/comics/', False, True)
-add('Hybristorific', 'http://hybristorific.smackjeeves.com/comics/', True, True)
-add('IWishIggysWish', 'http://i-wish-comic.smackjeeves.com/comics/', False, True)
-add('Ianua', 'http://ianua.smackjeeves.com/comics/', False, True)
-add('IciVontLesMorts', 'http://icivontlesmorts.smackjeeves.com/comics/', True, True)
-add('ImminentMoose', 'http://imminentmoose.smackjeeves.com/comics/', False, True)
-add('InHouseHumor', 'http://inhousehumor.smackjeeves.com/comics/', False, True)
-add('Inchoatica', 'http://inchoatica.smackjeeves.com/comics/', False, True)
-add('Ingloriousbasterds', 'http://ingloriousbasterds.smackjeeves.com/comics/', False, True)
-add('Inhuman', 'http://inhumancomic.smackjeeves.com/comics/', False, True)
-add('InsideOuTAYuriTale', 'http://insideout-a-yuri-tale.smackjeeves.com/comics/', False, False)
-add('InspiredByADream', 'http://inspiredbyadream.smackjeeves.com/comics/', False, True)
-add('InthePride', 'http://in-the-pride.smackjeeves.com/comics/', False, True)
-add('Intoxicated', 'http://intoxicated.smackjeeves.com/comics/', True, True)
-add('Itsan8BitWorldBlankWorld', 'http://8bitblankworld.smackjeeves.com/comics/', False, True)
-add('JackiesStory', 'http://jackiestory.smackjeeves.com/comics/', False, True)
-add('Jantar', 'http://jantar.smackjeeves.com/comics/', False, True)
-add('Jantarpol', 'http://jantar-pl.smackjeeves.com/comics/', False, True)
-add('Jason', 'http://jasoncomic.smackjeeves.com/comics/', False, True)
-add('JoeysAdventure', 'http://joeysadventure.smackjeeves.com/comics/', False, True)
-add('JourneyMan', 'http://journeyman.smackjeeves.com/comics/', False, True)
-add('JoyToTheWorld', 'http://joytotheworld.smackjeeves.com/comics/', False, True)
-add('June', 'http://june.smackjeeves.com/comics/', False, True)
-add('JustAnotherLife', 'http://justanotherlife.smackjeeves.com/comics/', False, True)
-add('JustCrazy', 'http://justcrazy.smackjeeves.com/comics/', False, True)
-add('Justmyluck', 'http://justmyluck.smackjeeves.com/comics/', False, True)
-add('KCNO', 'http://kcno.smackjeeves.com/comics/', False, True)
-add('KaitoShuno', 'http://kaitoshuno.smackjeeves.com/comics/', True, True)
-add('KasaKeira', 'http://kasakeira.smackjeeves.com/comics/', False, False)
-add('Katran', 'http://katran.smackjeeves.com/comics/', False, True)
-add('KazanatoFuneralPlanningService', 'http://kazanato.smackjeeves.com/comics/', False, True)
-add('KezroChroniclesPhantomOps', 'http://phantomops.smackjeeves.com/comics/', False, True)
-add('Kirbandfriendsshowcase', 'http://kas.smackjeeves.com/comics/', False, True)
-add('KirbiesoftheAlternateDimension', 'http://kirbyaltdimension.smackjeeves.com/comics/', False, True)
-add('KirbyAdventure', 'http://kirbysadventure.smackjeeves.com/comics/', False, False)
-add('KirbyDreamTeam', 'http://kirbysdreamteam.smackjeeves.com/comics/', False, True)
-add('KirbyFunfestTheOriginals', 'http://kirbyfunfestold.smackjeeves.com/comics/', False, False)
-add('KirbyTheDeeArmy', 'http://kirbyandthedeearmy.smackjeeves.com/comics/', False, True)
-add('KirbysDreamAdventure', 'http://kirbyda.smackjeeves.com/comics/', False, True)
-add('KirbysDreamlandAdventures', 'http://kirbysdreamlandadventures.smackjeeves.com/comics/', False, True)
-add('KissmeSnow', 'http://kissmesnow.smackjeeves.com/comics/', False, True)
-add('KissoftheDevil', 'http://kissofthedevil.smackjeeves.com/comics/', False, True)
-add('Knife', 'http://knife.smackjeeves.com/comics/', False, True)
-add('Knightface', 'http://knightface.smackjeeves.com/comics/', True, True)
-add('KnightsRequiem', 'http://knightsrequiem.smackjeeves.com/comics/', False, True)
-add('KojiX5', 'http://kojix5.smackjeeves.com/comics/', False, True)
-add('Kranburn', 'http://kranburn.thewebcomic.com/comics/', False, True)
-add('Kreetor', 'http://kreetor.smackjeeves.com/comics/', False, True)
-add('Kruptos', 'http://kruptos.smackjeeves.com/comics/', False, True)
-add('KuroNeko', 'http://kuro-neko.smackjeeves.com/comics/', False, True)
-add('KuronaFlutterandLylaSpamTime', 'http://icantflyaplane.smackjeeves.com/comics/', False, True)
-add('LOGOS', 'http://logoscomic.smackjeeves.com/comics/', True, False)
-add('LOKI', 'http://loki.smackjeeves.com/comics/', False, True)
-add('LastBlockStanding', 'http://lastblockstanding.smackjeeves.com/comics/', False, True)
-add('LastLivingSouls', 'http://lastlivingsouls.smackjeeves.com/comics/', False, True)
-add('LatchkeyKingdom', 'http://latchkeykingdom.smackjeeves.com/comics/', False, True)
-add('LavenderLegend', 'http://lavenderlegend.smackjeeves.com/comics/', False, True)
-add('LeCirquedObscure', 'http://cirquedobscure.smackjeeves.com/comics/', False, False)
-add('LedbyaMadMan', 'http://ledbyamadman.smackjeeves.com/comics/', False, True)
-add('LegendofZeldaAHerosStory', 'http://aherosstory.smackjeeves.com/comics/', False, True)
-add('LegendofZeldaStaffofPower', 'http://loz-sop.smackjeeves.com/comics/', False, True)
-add('LegendofZeldaTheEdgeandTheLight', 'http://legendofzelda.smackjeeves.com/comics/', False, True)
-add('LegendofZeldaTheWindWaker', 'http://zeldawindwaker.smackjeeves.com/comics/', False, True)
-add('LegendsofMobiusBookOne', 'http://legendsofmobius-bookone.smackjeeves.com/comics/', False, True)
-add('Lemongrass', 'http://lemongrass.smackjeeves.com/comics/', False, True)
-add('LesCendresdelHiver', 'http://cendres.smackjeeves.com/comics/', False, True)
-add('LetLoveRule', 'http://letloverule.smackjeeves.com/comics/', False, True)
-add('LethalDose', 'http://lethaldosecomic.smackjeeves.com/comics/', True, False)
-add('LetsBreakitforReals', 'http://breaktehmentality.smackjeeves.com/comics/', False, True)
-add('LicensedHeroes', 'http://licensedheroes.smackjeeves.com/comics/', False, True)
-add('LifeAsACutOut', 'http://lifeasacutout.thewebcomic.com/comics/', False, True)
-add('LifeAsItWas', 'http://lifeasitwas.smackjeeves.com/comics/', False, True)
-add('LifeLessOrdinary', 'http://lifelessordinary.smackjeeves.com/comics/', True, True)
-add('Lifeonpaper', 'http://lifeonpaper.smackjeeves.com/comics/', False, True)
-add('LightLovers', 'http://lightlovers.smackjeeves.com/comics/', False, True)
-add('LightwithinShadow', 'http://lightwithinshadow.smackjeeves.com/comics/', False, True)
-add('LilLevi', 'http://lillevi.smackjeeves.com/comics/', False, True)
-add('LiliBleu', 'http://lilibleu.smackjeeves.com/comics/', False, True)
-add('LondonUnderworld', 'http://lunderworld.smackjeeves.com/comics/', False, True)
-add('LostNova', 'http://lostnova.smackjeeves.com/comics/', False, True)
-add('LoveHarbor', 'http://shipcentral.smackjeeves.com/comics/', False, True)
-add('LoveMeLoveMyTeddyBear', 'http://teddybear.smackjeeves.com/comics/', False, True)
-add('LoveTwister', 'http://lovetwister.smackjeeves.com/comics/', False, True)
-add('LoveandIcecream', 'http://lovexandxicecream.smackjeeves.com/comics/', False, True)
-add('LoveroftheSunandMoon', 'http://loverofthesunandmoon.smackjeeves.com/comics/', False, True)
-add('LsEmpire', 'http://l-empire.smackjeeves.com/comics/', False, False)
-add('LuffinpuffandEric', 'http://luffinpuff.smackjeeves.com/comics/', False, True)
-add('LumasParadise', 'http://luma.smackjeeves.com/comics/', False, True)
-add('MUTE', 'http://muterobot.smackjeeves.com/comics/', False, True)
-add('MYth', 'http://myth.smackjeeves.com/comics/', False, False)
-add('MagicalGirlAlice', 'http://magicalgirlalice.smackjeeves.com/comics/', False, True)
-add('MagicalMisfits', 'http://magicalmisfits.smackjeeves.com/comics/', False, True)
-add('Magience', 'http://www.magience.co/comics/', False, True)
-add('Magipunk', 'http://magipunk.smackjeeves.com/comics/', False, True)
-add('Manifestedpart1', 'http://manifested.smackjeeves.com/comics/', False, True)
-add('MarXistemTWC', 'http://marxistem.smackjeeves.com/comics/', False, True)
-add('MarioandLuigiMisadventures', 'http://mandladventures.smackjeeves.com/comics/', False, True)
-add('MariosDayJob', 'http://mariosjob.smackjeeves.com/comics/', False, True)
-add('MariovsSonicvsMegaMan', 'http://mvsvmm.smackjeeves.com/comics/', False, False)
-add('MarsMind', 'http://marsmind.smackjeeves.com/comics/', False, True)
-add('Mascara', 'http://mascara.smackjeeves.com/comics/', False, True)
-add('MasqueradeWTTM', 'http://masqueradewttm.smackjeeves.com/comics/', False, True)
-add('MatildasSweetCakeCafe', 'http://mscc.smackjeeves.com/comics/', True, True)
-add('MaytheRainCome', 'http://maytheraincome.smackjeeves.com/comics/', False, True)
-add('Mazscara', 'http://mazscara.smackjeeves.com/comics/', False, True)
-add('MegaManBattleNetwork7', 'http://mmbn7-twt.smackjeeves.com/comics/', False, True)
-add('MegaManTales', 'http://megamantales.smackjeeves.com/comics/', False, True)
-add('MegaManiacs', 'http://megamaniacscomics.smackjeeves.com/comics/', False, True)
-add('MegaPain', 'http://megapain.smackjeeves.com/comics/', False, True)
-add('MelodyAndMacabre', 'http://melodyandmacabre.smackjeeves.com/comics/', False, True)
-add('MerirosvotSeikkailumerella', 'http://merirosvotseikkailumerella.smackjeeves.com/comics/', False, True)
-add('MetroJack', 'http://metro-jack.smackjeeves.com/comics/', True, True)
-add('MewsDynasty', 'http://mews-dynasty.smackjeeves.com/comics/', False, True)
-add('MidnightPrince', 'http://midnightprince.smackjeeves.com/comics/', False, True)
-add('MineS', 'http://mines.smackjeeves.com/comics/', False, True)
-add('Minibot', 'http://minibot.smackjeeves.com/comics/', False, True)
-add('MinorActsofHeroism', 'http://www.minoractsofheroism.com/comics/', False, True)
-add('Missing', 'http://missing.smackjeeves.com/comics/', False, True)
-add('Missingversionfrancaise', 'http://missingfr.smackjeeves.com/comics/', False, True)
-add('MixupofallMixups', 'http://mixupofmixups.smackjeeves.com/comics/', False, True)
-add('MobianChaos', 'http://mobianchaos.smackjeeves.com/comics/', False, True)
-add('Mokepon', 'http://mokepon.smackjeeves.com/comics/', False, False)
-add('MomthegamestorerippedusoffAGAIN', 'http://crappygames.smackjeeves.com/comics/', False, True)
-add('Monstar', 'http://monstar.thewebcomic.com/comics/', False, True)
-add('MoonValley', 'http://moonvalley.smackjeeves.com/comics/', False, True)
-add('MoonlitDawnAMythicalTale', 'http://moonlitdawn.smackjeeves.com/comics/', False, True)
-add('MorphE', 'http://morphe.thewebcomic.com/comics/', False, True)
-add('Mortifer', 'http://mortifer.smackjeeves.com/comics/', False, True)
-add('MrFactory', 'http://mrfactory.smackjeeves.com/comics/', False, True)
-add('MyBoyfriendisaMobBoss', 'http://mbmb.smackjeeves.com/comics/', True, True)
-add('MyFakeHeart', 'http://myfakeheart.smackjeeves.com/comics/', False, False)
-add('MySistertheDragon', 'http://sisterdragon.smackjeeves.com/comics/', False, True)
-add('MySparklingPrincesama', 'http://kiraouji.smackjeeves.com/comics/', False, True)
-add('MyStereoBot', 'http://mystereobot.smackjeeves.com/comics/', False, True)
-add('MyTrollLife', 'http://mytrolllife.smackjeeves.com/comics/', False, True)
-add('MyTwoCentsPlusTax', 'http://mtcpt.smackjeeves.com/comics/', False, True)
-add('MysticanDreams', 'http://mysticandreams.smackjeeves.com/comics/', False, True)
-add('MythsofUnovaAWhiteNuzlockeRunHardMode', 'http://mythsofunova.smackjeeves.com/comics/', False, True)
-add('NIK', 'http://nik.smackjeeves.com/comics/', False, True)
-add('Nah', 'http://thecomicformerlyknownasgenlab.smackjeeves.com/comics/', False, True)
-add('Negligence', 'http://negligence.smackjeeves.com/comics/', False, True)
-#add('NekotheKitty', 'http://www.nekothekitty.net/comics/', False, True)
-add('NeoCrystalAdventures', 'http://neocrystaladventures.smackjeeves.com/comics/', False, True)
-add('NeonGlow', 'http://neonglow.smackjeeves.com/comics/', False, True)
-add('NevertheHero', 'http://neverthehero.smackjeeves.com/comics/', False, True)
-add('Nexus', 'http://nexus.smackjeeves.com/comics/', False, True)
-add('NiceKitty', 'http://nicekitty.smackjeeves.com/comics/', False, False)
-add('NighHeavenandHell', 'http://nighheavenandhell.smackjeeves.com/comics/', False, True)
-add('NightSpace', 'http://nightspace.smackjeeves.com/comics/', False, True)
-add('NihilWandasJourney', 'http://nihil.smackjeeves.com/comics/', False, True)
-add('NissiesDragonPrincess', 'http://drgnprincess.smackjeeves.com/comics/', False, True)
-add('NixsFireRedNuzlocke', 'http://nixnuzlocke.smackjeeves.com/comics/', False, True)
-add('NoEnd', 'http://no-end.smackjeeves.com/comics/', False, True)
-add('NobleHeartsHiruandMerroug', 'http://hiruandmerroug.smackjeeves.com/comics/', True, True)
-add('NormalcyisforWimps', 'http://normalcyisforwimps.smackjeeves.com/comics/', False, True)
-add('NotyoursamI', 'http://notyoursami.smackjeeves.com/comics/', True, True)
-add('ObsidianHeart', 'http://obsidianheart.smackjeeves.com/comics/', False, True)
-add('October20th', 'http://www.october20comic.com/comics/', False, True)
-add('OddContact', 'http://oddcontact.smackjeeves.com/comics/', False, True)
-add('OddPlaceOddTime', 'http://oddplaceoddtime.smackjeeves.com/comics/', False, True)
-add('Ohman', 'http://ohman.smackjeeves.com/comics/', False, True)
-add('OldElastikid', 'http://oldelastikid.smackjeeves.com/comics/', False, True)
-add('OneFrameGags', 'http://oneframegags.smackjeeves.com/comics/', False, True)
-add('OneRainyDay', 'http://one-rainy-day.smackjeeves.com/comics/', True, True)
-add('Onlyonelovesong', 'http://onlyonelovesong.smackjeeves.com/comics/', False, True)
-add('OperationTheater', 'http://operation-theater.smackjeeves.com/comics/', False, True)
-add('OriginBook1Codearth', 'http://theoriginbooks.smackjeeves.com/comics/', False, True)
-add('OurTimeinEden', 'http://ourtimeineden.smackjeeves.com/comics/', False, True)
-add('Outbreak', 'http://xoutbreak.smackjeeves.com/comics/', False, True)
-add('OutofKey', 'http://outofkey.smackjeeves.com/comics/', False, True)
-add('OverSync', 'http://linearperspective.smackjeeves.com/comics/', False, True)
-add('PMDExplorersofHeart', 'http://pmd-explorers-of-heart.smackjeeves.com/comics/', False, True)
-add('PMDTeamFirefox', 'http://pmdteamfirefox.smackjeeves.com/comics/', False, True)
-add('PMDVictoryFire', 'http://victoryfire.smackjeeves.com/comics/', False, True)
-add('PRAGUERACE', 'http://praguerace.smackjeeves.com/comics/', False, True)
-add('PTO', 'http://pto.smackjeeves.com/comics/', True, False)
-add('Pahantekija', 'http://pahantekija.smackjeeves.com/comics/', False, True)
-add('Panacea', 'http://panacea.smackjeeves.com/comics/', True, False)
-add('PantsParty', 'http://partypants.smackjeeves.com/comics/', False, True)
-add('PanzerDragonandEnigmaCompleteEdition', 'http://panzerdragonandenigma.smackjeeves.com/comics/', False, True)
-add('Paradox', 'http://paradoxcomic.smackjeeves.com/comics/', True, True)
-add('Paripety', 'http://paripety.smackjeeves.com/comics/', False, True)
-add('Pause', 'http://pause.smackjeeves.com/comics/', False, True)
-add('PencilviewUpdatesMondayscough', 'http://pencilview.smackjeeves.com/comics/', False, True)
-add('Perinto', 'http://perinto.smackjeeves.com/comics/', False, True)
-add('PerplexingMagnoliaDisruption', 'http://smgpmd.smackjeeves.com/comics/', False, True)
-add('PeterPan', 'http://peterpan.smackjeeves.com/comics/', False, True)
-add('Phantomland', 'http://phantomland.smackjeeves.com/comics/', False, True)
-add('PhotoShootnarusasuDoujinshi', 'http://photoshootnarusasu.smackjeeves.com/comics/', True, True)
-add('PlasticKings', 'http://plastickings.smackjeeves.com/comics/', False, True)
-add('PlatonicBoyfriends', 'http://platonicboyfriends.smackjeeves.com/comics/', False, True)
-add('PlayTime', 'http://dollysplaytime.smackjeeves.com/comics/', False, True)
-add('Plotlessnesses', 'http://plotlessnesses.smackjeeves.com/comics/', False, True)
-add('PokeVenturous', 'http://pokeventuras.smackjeeves.com/comics/', False, True)
-add('PokemonBeta', 'http://pokemonbeta.smackjeeves.com/comics/', False, True)
-add('PokemonCrystalDoubleNuzlockeChallenge', 'http://miinuzlocke.smackjeeves.com/comics/', False, True)
-add('PokemonGleamingCrystal', 'http://gleamingcrystal.smackjeeves.com/comics/', False, True)
-add('PokemonLANDSKY', 'http://www.landxsky.com/comics/', False, True)
-add('PokemonMysteryDungeonTeamCrystal', 'http://crystalmysterydungeon.smackjeeves.com/comics/', False, True)
-add('PokemonParallel', 'http://pokemon-parallel.smackjeeves.com/comics/', False, True)
-add('PokemonSAKOHJU', 'http://sakohju.smackjeeves.com/comics/', False, True)
-add('PokemonnoRakuen', 'http://pokemon-no-rakuen.smackjeeves.com/comics/', False, True)
-add('Ponzi', 'http://ponzi.smackjeeves.com/comics/', False, True)
-add('PrettyMouth', 'http://prettymouth.smackjeeves.com/comics/', False, True)
-add('PrincessChroma', 'http://princesschroma.smackjeeves.com/comics/', False, True)
-add('ProfessorDolphinpresentsPokemon', 'http://pdpp.smackjeeves.com/comics/', False, True)
-add('ProjectCAPLimit', 'http://imagecap.smackjeeves.com/comics/', False, True)
-add('Puck', 'http://puck.smackjeeves.com/comics/', False, True)
-add('PulseandBolt', 'http://pulse-bolt.smackjeeves.com/comics/', False, True)
-add('PumpkinFlower', 'http://pumpkinflower.smackjeeves.com/comics/', False, True)
-add('PurpureaNoxa', 'http://purpureanoxa.smackjeeves.com/comics/', True, True)
-add('QueerQueen', 'http://queerqueen.smackjeeves.com/comics/', False, True)
-add('RANDOM', 'http://randomthecomic.smackjeeves.com/comics/', False, True)
-add('ROSIER', 'http://rosier.smackjeeves.com/comics/', False, True)
-add('RainLGBT', 'http://rainlgbt.smackjeeves.com/comics/', False, False)
-add('RainxSasori', 'http://rainxsasori.smackjeeves.com/comics/', True, True)
-add('RareCandyTreatment', 'http://www.rarecandytreatment.com/comics/', False, True)
-add('RavenWolf', 'http://ravenwolf.smackjeeves.com/comics/', False, True)
-add('Razor', 'http://razor-.smackjeeves.com/comics/', True, True)
-add('RedVelvetRequiem', 'http://rvr.smackjeeves.com/comics/', False, True)
-add('Regina', 'http://regina.smackjeeves.com/comics/', False, True)
-add('ReidyandFriendsShowcase', 'http://reidynfriends.smackjeeves.com/comics/', False, False)
-add('RemoteAngel', 'http://remoteangel.smackjeeves.com/comics/', False, True)
-add('Replica', 'http://replica.smackjeeves.com/comics/', True, True)
-add('Respectable', 'http://respectable.smackjeeves.com/comics/', True, True)
-add('ReturntoEden', 'http://rte.smackjeeves.com/comics/', False, True)
-add('RiversideExtras', 'http://www.riversidecomics.co/comics/', True, True)
-add('RottenApple', 'http://rottenapple.smackjeeves.com/comics/', False, True)
-add('RoyalIcing', 'http://royalicing.smackjeeves.com/comics/', False, True)
-add('RubyNation', 'http://www.therubynation.com/comics/', False, True)
-add('RuderiQuest', 'http://ruderi.smackjeeves.com/comics/', False, True)
-add('RuneSpark', 'http://runespark.smackjeeves.com/comics/', False, True)
-add('RyuManwebcomicversion', 'http://ryuman-web.smackjeeves.com/comics/', False, True)
-add('SAKANA', 'http://sakana.smackjeeves.com/comics/', False, True)
-add('SChIzO', 'http://schizophrenic.smackjeeves.com/comics/', False, True)
-add('SFCBlackjackBay', 'http://blackjackbay.smackjeeves.com/comics/', False, True)
-add('SFCForestofDreams', 'http://sfcforestofdreams.smackjeeves.com/comics/', False, True)
-add('SLightlyabOVeavErage', 'http://slightlyaboveaverage.smackjeeves.com/comics/', True, True)
-add('SOSRadio', 'http://sosradio.smackjeeves.com/comics/', False, True)
-add('SPRITEDHeroesofDobalia', 'http://spritedhod.smackjeeves.com/comics/', False, True)
-add('SUNRISESTORY', 'http://sunrisestory.smackjeeves.com/comics/', False, True)
-add('SabishiiGhost', 'http://sabishiighost.smackjeeves.com/comics/', False, True)
-add('SaintforRent', 'http://saint-for-rent.smackjeeves.com/comics/', False, True)
-add('SakuraDAY', 'http://sakuraday.smackjeeves.com/comics/', False, True)
-add('SakuraMishzo', 'http://sakurazo.smackjeeves.com/comics/', True, True)
-add('SalemUncommons', 'http://salemuncommons.smackjeeves.com/comics/', False, True)
-add('SallySprocketAndPistonPete', 'http://ssnpp.smackjeeves.com/comics/', False, False)
-add('SaltyKiss', 'http://saltykiss.smackjeeves.com/comics/', False, True)
-add('Saywhatyoumean', 'http://saywhatyoumean.smackjeeves.com/comics/', False, True)
-add('SchoolofRejectsSoRe', 'http://sore.smackjeeves.com/comics/', False, True)
-add('ScionsoftheSeraph', 'http://www.sossaga.com/comics/', True, True)
-add('ScrappedProject', 'http://scrappedproject.smackjeeves.com/comics/', False, True)
-add('SecretPowerbk1', 'http://secretpower1.smackjeeves.com/comics/', False, True)
-add('SecretPowerbk2', 'http://secretpower2.smackjeeves.com/comics/', False, True)
-add('Seki', 'http://se-ki.smackjeeves.com/comics/', True, True)
-add('SenoireDelirium', 'http://senoiredelirium.smackjeeves.com/comics/', False, True)
-add('SerendipityAnEquestrianTale', 'http://talesofserendipity.smackjeeves.com/comics/', False, True)
-add('SeriousTimes', 'http://serioustimes.smackjeeves.com/comics/', False, True)
-add('ShacklesInstallment02', 'http://shackles02.smackjeeves.com/comics/', False, True)
-add('Shameless', 'http://shamelesscomic.smackjeeves.com/comics/', False, True)
-add('ShamelessAdvertisements', 'http://advertiseat.smackjeeves.com/comics/', False, True)
-add('ShotoutofCanon', 'http://akumathfs.smackjeeves.com/comics/', False, True)
-add('ShroudofLight', 'http://shroudoflight.smackjeeves.com/comics/', False, True)
-add('Signifikat', 'http://signifikat.smackjeeves.com/comics/', True, True)
-add('SimonSues', 'http://simonsues.smackjeeves.com/comics/', False, False)
-add('SimpleBear', 'http://simplebear.smackjeeves.com/comics/', False, False)
-add('SimplySarah', 'http://simplysarah.smackjeeves.com/comics/', False, True)
-add('Sire', 'http://sire.thewebcomic.com/comics/', False, True)
-add('Skeptical', 'http://skeptical.smackjeeves.com/comics/', False, True)
-add('Slackmatic', 'http://slackmatic.smackjeeves.com/comics/', False, True)
-add('SlipstreamSingularity', 'http://slipstreamsingularity.smackjeeves.com/comics/', False, True)
-add('SmallPressAdventures', 'http://smallpressadventures.smackjeeves.com/comics/', False, False)
-add('SocksMittensandScarfs', 'http://socksmitsscarfs.smackjeeves.com/comics/', False, True)
-add('SomebodyShootMe', 'http://somebodyshootme.smackjeeves.com/comics/', False, True)
-add('SomethingLikeaPhenomenon', 'http://somethinglikeaphenomenon.smackjeeves.com/comics/', True, True)
-add('SonicAuthorAdventII', 'http://saa2.smackjeeves.com/comics/', False, True)
-add('SonicBoom', 'http://sonic-boom.smackjeeves.com/comics/', False, True)
-add('SonicClub', 'http://sonicclub.smackjeeves.com/comics/', False, True)
-add('SonicDashly', 'http://sonicdashly.smackjeeves.com/comics/', False, True)
-add('SonicFuture', 'http://sonicfuture.smackjeeves.com/comics/', False, True)
-add('SonicSchoolRedo', 'http://sonicschoolredo.smackjeeves.com/comics/', False, True)
-add('SonicUniverseAsk', 'http://sonicuniverseask.smackjeeves.com/comics/', False, True)
-add('SoulGuardian', 'http://soulguardian.smackjeeves.com/comics/', False, False)
-add('SouthernCross', 'http://southerncross.thewebcomic.com/comics/', False, True)
-add('SovereignTheMostAmazingComicEver', 'http://mostamazingcomicever.smackjeeves.com/comics/', False, True)
-add('SpaghettiAndMeatballs', 'http://spaghettiandmeatballs.smackjeeves.com/comics/', True, True)
-add('SparElricsextras', 'http://sparextras.smackjeeves.com/comics/', False, True)
-add('SparkStory', 'http://sparkstory.smackjeeves.com/comics/', False, True)
-add('Spellcross', 'http://spellcross.smackjeeves.com/comics/', False, True)
-add('SpiderWings', 'http://spiderwings.smackjeeves.com/comics/', False, True)
-add('Spidersilk', 'http://spidersilk.smackjeeves.com/comics/', False, True)
-add('SplitScreen', 'http://splitscreencomic.smackjeeves.com/comics/', True, True)
-add('Spriterschaos', 'http://spriterschaos.smackjeeves.com/comics/', False, True)
-add('Sprytts', 'http://sprytts.smackjeeves.com/comics/', False, True)
-add('StarTrip', 'http://startrip.smackjeeves.com/comics/', False, True)
-add('Stay', 'http://stay-comic.smackjeeves.com/comics/', True, False)
-add('StellaInChrome', 'http://stellainchrome.smackjeeves.com/comics/', False, False)
-add('Stereophonic', 'http://stereophonic.thewebcomic.com/comics/', False, True)
-add('Storyofadamnedlove', 'http://storyofadamnedlove.smackjeeves.com/comics/', False, True)
-add('StrangersandFriends', 'http://hemu.smackjeeves.com/comics/', False, False)
-add('Striped', 'http://striped.smackjeeves.com/comics/', True, True)
-add('StuntRayWalterswish', 'http://stuntray.smackjeeves.com/comics/', False, True)
-add('SubjecttoChangeCollegeWoes', 'http://subject-to-change.smackjeeves.com/comics/', False, True)
-add('Sunfall', 'http://sunfall.thewebcomic.com/comics/', False, True)
-add('SunmeetsMoon', 'http://sunmeetsmoon.smackjeeves.com/comics/', False, False)
-add('SuperDimensionAfterTheHero', 'http://afterthehero.smackjeeves.com/comics/', False, True)
-add('SuperMarioBros3', 'http://smb3.smackjeeves.com/comics/', False, True)
-add('SuperMarjoBros', 'http://marjobros.smackjeeves.com/comics/', False, True)
-add('SupermassiveBlackHoleA', 'http://smbhax.smackjeeves.com/comics/', False, True)
-add('SurvivorFanCharacters', 'http://sfc.smackjeeves.com/comics/', False, True)
-add('SweetestPoison', 'http://sweetestpoison.smackjeeves.com/comics/', False, True)
-add('SwitchMechanism', 'http://switchmechanism.smackjeeves.com/comics/', False, True)
-add('Symbios', 'http://symbios.smackjeeves.com/comics/', True, True)
-add('TEN', 'http://ten.smackjeeves.com/comics/', False, False)
-add('TLAAOK', 'http://tlaaok.smackjeeves.com/comics/', True, True)
-add('TPTruePower', 'http://truepower.smackjeeves.com/comics/', False, False)
-add('TRIPP', 'http://tripp.smackjeeves.com/comics/', False, True)
-add('TaikiTheWebcomic', 'http://taiki.smackjeeves.com/comics/', False, False)
-add('TailsAdventureThroughTimeandOtherWorlds', 'http://tailsadventure.smackjeeves.com/comics/', False, True)
-add('TakingPicturesofStrangers', 'http://darrenandkale.smackjeeves.com/comics/', True, True)
-add('TalesfromAaronsWings', 'http://tfaw.smackjeeves.com/comics/', False, True)
-add('TeKscloset', 'http://tekchats.smackjeeves.com/comics/', True, True)
-add('TechnicolorLondon', 'http://technicolorlondon.smackjeeves.com/comics/', False, False)
-add('ThatWasntThereYesterday', 'http://twty.smackjeeves.com/comics/', False, False)
-add('The13thWorld', 'http://the13thworld.smackjeeves.com/comics/', False, True)
-add('TheAdventuresofBanjoZ', 'http://abz-fancomic.smackjeeves.com/comics/', True, True)
-add('TheAntihero', 'http://antihero.smackjeeves.com/comics/', False, False)
-add('TheArchipelago', 'http://thearchipelago.smackjeeves.com/comics/', False, True)
-add('TheAttackoftheRecoloursSeason1', 'http://mysticalvalley.smackjeeves.com/comics/', False, True)
-add('TheAvianStories', 'http://theavianstories.smackjeeves.com/comics/', False, True)
-add('TheBattleInTheSky', 'http://thebattleinthesky.smackjeeves.com/comics/', False, True)
-add('TheBookofNosferatu', 'http://www.thebookofnosferatu.com/comics/', False, True)
-add('TheBrideoftheShark', 'http://sameyome.smackjeeves.com/comics/', True, False)
-add('TheBucket', 'http://thebucket.smackjeeves.com/comics/', False, True)
-add('TheCafedAlizee', 'http://alizee.smackjeeves.com/comics/', False, False)
-add('TheCavernofSecrets', 'http://cavern.smackjeeves.com/comics/', False, True)
-add('TheColony', 'http://thecolony.smackjeeves.com/comics/', True, True)
-add('TheContract', 'http://the-contract.smackjeeves.com/comics/', False, True)
-add('TheCrawl', 'http://www.thecrawlcomic.com/comics/', False, True)
-add('TheCurtandTonyShow', 'http://thecurtandtonyshow.smackjeeves.com/comics/', False, True)
-add('TheDarkAgeofMobius', 'http://thedarkageofmobius.smackjeeves.com/comics/', False, True)
-add('TheDarkLegacy', 'http://tdlcomic.smackjeeves.com/comics/', False, True)
-add('TheDemonicAdventuresofAngelWitchPita', 'http://angelwitchpita.smackjeeves.com/comics/', True, True)
-add('TheDestroyer', 'http://heartless-destroyer.smackjeeves.com/comics/', True, True)
-add('TheDragonandtheLemur', 'http://dal.smackjeeves.com/comics/', True, True)
-add('TheDreaming', 'http://thedreaming.smackjeeves.com/comics/', False, True)
-add('TheDrifter', 'http://thedrifter.smackjeeves.com/comics/', True, True)
-add('TheElectricRose', 'http://electricrosecomic.smackjeeves.com/comics/', False, True)
-add('TheForestofWhispers', 'http://theforestofwhispers.smackjeeves.com/comics/', False, True)
-add('TheGhostWithTheMost', 'http://theghostwiththemost.smackjeeves.com/comics/', False, True)
-add('TheGoldRiderofPern', 'http://goldrider.smackjeeves.com/comics/', False, True)
-add('TheGrayZone', 'http://thegrayzone.smackjeeves.com/comics/', False, True)
-add('TheHeadhunters', 'http://headhunters.smackjeeves.com/comics/', False, True)
-add('TheHeartofEarth', 'http://heart-of-earth.smackjeeves.com/comics/', False, True)
-add('TheHobbitbic', 'http://hobbit.smackjeeves.com/comics/', False, True)
-add('TheJosephComics', 'http://josephcomics.smackjeeves.com/comics/', False, True)
-add('TheKeyHotelEnding', 'http://tekeyhotel.smackjeeves.com/comics/', False, True)
-add('TheKeyToReality', 'http://keytoreality.smackjeeves.com/comics/', False, True)
-add('TheKwiddexProtocol', 'http://kwiddexprotocol.smackjeeves.com/comics/', False, False)
-add('TheLastBloodCafe', 'http://lastbloodcafe.smackjeeves.com/comics/', False, True)
-add('TheLegendaryQueen', 'http://legendaryqueen.smackjeeves.com/comics/', True, True)
-add('TheLifeofMagFlamequill', 'http://lifeofmag.smackjeeves.com/comics/', False, True)
-add('TheLoneSwordsman', 'http://theloneswordsman.smackjeeves.com/comics/', False, True)
-add('TheLostland', 'http://thelostlandcomic.smackjeeves.com/comics/', False, True)
-add('TheMegaManandSonicSpriteShowcase', 'http://megamanshowcase.smackjeeves.com/comics/', False, True)
-add('TheMewExperiment', 'http://themewexperiment.smackjeeves.com/comics/', False, True)
-add('TheMoistTouch', 'http://themoisttouch.smackjeeves.com/comics/', False, True)
-add('TheNOMEDSEGA', 'http://nomed.smackjeeves.com/comics/', False, True)
-add('TheNightSurfers', 'http://thenightsurfers.smackjeeves.com/comics/', False, True)
-add('TheNocheComicSeries', 'http://nochecomicseries.smackjeeves.com/comics/', True, True)
-add('ThePirateBalthasar', 'http://thepiratebalthasar.smackjeeves.com/comics/', False, False)
-add('ThePremise', 'http://thepremise.smackjeeves.com/comics/', False, True)
-add('ThePrincessandtheGiant', 'http://princess.smackjeeves.com/comics/', False, True)
-add('ThePropertyofHate', 'http://tpoh.smackjeeves.com/comics/', False, True)
-add('TheRandomObscureFairyTaleNoOnesEverReallyHeardOf', 'http://tro.smackjeeves.com/comics/', False, False)
-add('TheReborn', 'http://reborn.smackjeeves.com/comics/', False, False)
-add('TheSearchforHenryJekyll', 'http://thesearchforhenryjekyll.smackjeeves.com/comics/', False, True)
-add('TheSilverLeague', 'http://thesilverleague.smackjeeves.com/comics/', False, True)
-add('TheSomewhereOther', 'http://somewhere-other.smackjeeves.com/comics/', False, True)
-add('TheSummerofBlakeSinclair', 'http://blake-sinclair.smackjeeves.com/comics/', False, True)
-add('TheTimeDog', 'http://timedog.smackjeeves.com/comics/', False, True)
-add('TheTytonNuzlockeChallengeEmeraldEdition', 'http://tytonnuzlockeemerald.smackjeeves.com/comics/', False, False)
-add('TheWastelands', 'http://wastelands.smackjeeves.com/comics/', False, True)
-add('TheWhiteTower', 'http://thewhitetower.smackjeeves.com/comics/', False, True)
-add('TheWinterCampaign', 'http://winterc.smackjeeves.com/comics/', False, True)
-add('TheYoshiHerd', 'http://theyoshiherd.smackjeeves.com/comics/', False, True)
-add('Theatrics', 'http://theatrics.smackjeeves.com/comics/', False, True)
-add('ThehumanBEing', 'http://thehumanbeing.smackjeeves.com/comics/', False, False)
-add('TheiaMania', 'http://theia-mania.smackjeeves.com/comics/', False, True)
-add('ThelaughingDeath', 'http://thelaughingdeath.smackjeeves.com/comics/', False, True)
-add('Themadman', 'http://themadman.smackjeeves.com/comics/', False, True)
-add('Theswordsmanandtheamnesiac', 'http://tsata.smackjeeves.com/comics/', True, True)
-add('ThiefCatcherRingTail', 'http://tcringtail.smackjeeves.com/comics/', False, True)
-add('ThinkBeforeYouThink', 'http://thinkbeforeyouthink.smackjeeves.com/comics/', False, True)
-add('ThornTopia', 'http://tnt100.smackjeeves.com/comics/', False, True)
-add('ThornsComic', 'http://thornscomic.smackjeeves.com/comics/', False, True)
-add('ThroughtheWonkyEye', 'http://through-the-wonky-eye.smackjeeves.com/comics/', False, True)
-add('TitleUnrelated', 'http://www.titleunrelated.com/comics/', False, True)
-add('TosiHuonoYaoiSarjis', 'http://tosihuonoyaoisarjis.smackjeeves.com/comics/', True, True)
-add('TotalPokemonIsland', 'http://tpi.smackjeeves.com/comics/', False, True)
-add('TotallyCrossover', 'http://totallycrossover.smackjeeves.com/comics/', False, True)
-add('TrainerWantstoFight', 'http://twtf.smackjeeves.com/comics/', False, True)
-add('TransUMan', 'http://transuman.smackjeeves.com/comics/', True, True)
-add('Transfusions', 'http://transfusions.smackjeeves.com/comics/', False, True)
-add('TrillyAndSilly', 'http://trillysilly.smackjeeves.com/comics/', False, True)
-add('Troublenextdoor', 'http://troublenextdoor.smackjeeves.com/comics/', False, True)
-add('UglyBoysLove', 'http://shounenai.smackjeeves.com/comics/', False, True)
-add('Uglygame', 'http://uglygame.smackjeeves.com/comics/', False, True)
-add('UndertheDeadSkies', 'http://underthedeadskies.thewebcomic.com/comics/', True, True)
-add('UnicampaLapis', 'http://ual.smackjeeves.com/comics/', False, True)
-add('UpDown', 'http://updown.smackjeeves.com/comics/', True, True)
-add('UshalaatWorldsEnd', 'http://ushala.smackjeeves.com/comics/', True, True)
-add('VACANT', 'http://vacant.smackjeeves.com/comics/', False, True)
-add('Vacan7', 'http://vacan7.smackjeeves.com/comics/', True, True)
-add('VampireFetish', 'http://vampire-fetish.smackjeeves.com/comics/', False, True)
-add('VerloreGeleentheid', 'http://verlore.thewebcomic.com/comics/', False, True)
-add('VoidMisadventures', 'http://voidmisadventures.smackjeeves.com/comics/', False, True)
-add('VoyageoftheBrokenPromise', 'http://voyageofthebrokenpromise.smackjeeves.com/comics/', True, True)
-add('WHATaboutSHADOWS', 'http://was.smackjeeves.com/comics/', False, True)
-add('WakeEcho', 'http://echo.smackjeeves.com/comics/', False, True)
-add('Wander', 'http://wander.smackjeeves.com/comics/', False, True)
-add('WantedDeadorDead', 'http://wanteddeadordead.smackjeeves.com/comics/', False, True)
-add('Wayfar', 'http://wayfar.smackjeeves.com/comics/', False, True)
-add('Waysoftheheart', 'http://wayoftheheart.smackjeeves.com/comics/', False, True)
-add('WeAreGolden', 'http://wearegolden.smackjeeves.com/comics/', True, True)
-add('WelcometoFreakshow', 'http://welcometofreakshow.smackjeeves.com/comics/', False, False)
-add('WelcometothePCA', 'http://welcometothepca.smackjeeves.com/comics/', False, True)
-add('WhatAboutLove', 'http://whataboutlove.smackjeeves.com/comics/', True, True)
-add('Whatisdeepinonesheart', 'http://ones-mindt.smackjeeves.com/comics/', False, True)
-add('WhenSheWasBad', 'http://whenshewasbad.smackjeeves.com/comics/', False, True)
-add('Whenweweresilent', 'http://silence.smackjeeves.com/comics/', False, False)
-add('WhereaboutsOfTime', 'http://wot.smackjeeves.com/comics/', False, True)
-add('WhiteHeart', 'http://whiteheart.smackjeeves.com/comics/', True, False)
-#add('WhiteNoise', 'http://white-noise.smackjeeves.com/comics/', False, True)
-add('WildWingBoys', 'http://wwb.smackjeeves.com/comics/', False, True)
-add('WildWingBoysKoathArc', 'http://wwbka.smackjeeves.com/comics/', False, True)
-add('Wildflowers', 'http://wildflowers.smackjeeves.com/comics/', False, True)
-add('WingsOverEthereal', 'http://wings-over-ethereal.smackjeeves.com/comics/', False, True)
-add('WingsTurnedtoDust', 'http://wingsturnedtodust.smackjeeves.com/comics/', False, True)
-add('WolfWolf', 'http://wolfwolf.smackjeeves.com/comics/', False, True)
-add('WonderTheatre', 'http://wondertheater.smackjeeves.com/comics/', False, True)
-add('Wootlabs', 'http://wootlabs.thewebcomic.com/comics/', False, True)
-add('XXMoralityXx', 'http://xxmoralityxx.smackjeeves.com/comics/', False, True)
-add('YadotCakeShop', 'http://yadotcakeshop.smackjeeves.com/comics/', True, True)
-add('YamanaokiHighSchool', 'http://yamanaokihs.smackjeeves.com/comics/', False, True)
-add('YouAreTheReasonForTheEndOfTheWorld', 'http://thereasonfortheendoftheworld.smackjeeves.com/comics/', False, True)
-add('YoungCannibals', 'http://www.youngcannibals.net/comics/', False, True)
-add('ZaenWell', 'http://zaenwell.smackjeeves.com/comics/', False, True)
-add('ZeldaTheNewAdventureofLinkIIMajorasMask', 'http://newlink.smackjeeves.com/comics/', False, True)
-add('_A_', 'http://a-the-stalker.smackjeeves.com/comics/', False, True)
+    @classmethod
+    def getmodules(cls):
+        return (
+            # do not edit anything below since these entries are generated from
+            # scripts/smackjeeves.py
+            # START AUTOUPDATE
+            cls('20TimesKirby', sub='20xkirby'),
+            cls('2Kingdoms', sub='2kingdoms'),
+            cls('355Days', sub='355days'),
+            cls('AB', sub='alistairandboggart', adult=True),
+            cls('ADoodleADay', sub='adoodleaday'),
+            cls('AGirlAndHerShadow', sub='agirlandhershadow'),
+            cls('AGirlontheServer', sub='girlontheserver'),
+            cls('AKirbyKomic', sub='akirbykomic'),
+            cls('ALaMode', sub='alamode'),
+            cls('ANGELOU', sub='angelou-esp'),
+            cls('APTComic', sub='aptcomic'),
+            cls('AQuestionOfCharacter', sub='aqoc'),
+            cls('ASongforElise', sub='asongforelise', adult=True),
+            cls('AYuriCollab', sub='ayuricollabbitches', adult=True),
+            cls('Aarrevaara', sub='aarrevaara'),
+            cls('AcidMonday', sub='acidmonday', adult=True),
+            cls('Adalsysla', sub='adalsysla'),
+            cls('AddictiveScience', sub='addictivescience'),
+            cls('AdventuresofLumandFriends', sub='aolaf'),
+            cls('AdventuresoftheWeird', sub='adventuresoftheweird'),
+            cls('AetherTheories', sub='aethertheories'),
+            cls('AgeoftheGray', sub='ageofthegray', adult=True),
+            cls('AllInLOVE', sub='allinlove'),
+            cls('AllStarHeroes', sub='allstarheroes'),
+            cls('AloversRule', sub='aloversrule', adult=True),
+            cls('AlwaysDamnedWebcomic', sub='alwaysdamned', adult=True),
+            cls('AlwaysRainingHere', sub='alwaysraininghere'),
+            cls('Amaravati', sub='amaravati'),
+            cls('AmorVincitOmnia', sub='avo', adult=True),
+            cls('AmsdenEstate', sub='monsterous'),
+            cls('Anathemacomics', sub='anathema-comics'),
+            cls('AngelGuardian', sub='angel-guardian'),
+            cls('AnimalAdventures', sub='animaladventures'),
+            cls('Animayhem', sub='animayhem'),
+            cls('Anythingaboutnothing', host='www.anythingcomic.com'),
+            cls('ArchportCityChronicles', sub='tjs'),
+            cls('Area9', sub='area-9'),
+            cls('AroundtheBlock', sub='aroundtheblock'),
+            cls('ArtofAFantasy', sub='artofafantasy', adult=True),
+            cls('AtArmsLength', sub='atarmslength'),
+            cls('Atlaswebcomic', sub='atlaswebcomic'),
+            cls('Autophobia', sub='autophobia', adult=True),
+            cls('Aware', sub='aware'),
+            cls('AwesomeSauce', sub='tdawesomesauce'),
+            cls('AyaTakeo', sub='ayatakeo'),
+            cls('BLDShortComics', sub='bldshortcomics'),
+            cls('BabysittingFourDemons', sub='babysitting4demons'),
+            cls('Babywhatsyoursign', sub='babywhatsyoursign'),
+            cls('BadassRiz', sub='badassriz'),
+            cls('BallandChain', sub='ballandchain'),
+            cls('Bard', sub='barred'),
+            cls('BassComicAdventures', sub='basscomicadventures'),
+            cls('BattleSequence', sub='battlesequence'),
+            cls('Bearhoney', sub='bear-honey'),
+            cls('BearlyAbel', sub='bearlyabel'),
+            cls('BeautifulLies', sub='beautiful-lies'),
+            cls('BehindTheObsidianMirror', sub='obsidian-mirror', adult=True),
+            cls('Behindtheglasscurtain', sub='g1ass'),
+            cls('BeretCatComics', sub='beretcatcomics'),
+            cls('Bestbrosforever', sub='bestbrosforever'),
+            cls('Betovering', sub='betovering', adult=True),
+            cls('BettencourtHotel', sub='bettencourt'),
+            cls('BetweenLightandDark', sub='bld'),
+            cls('BetweenWorlds', sub='betweenworlds', adult=True),
+            cls('Betwin', sub='be-twin'),
+            cls('BeyondTheOrdinary', sub='bto'),
+            cls('BioRevelation', sub='biorevelation'),
+            cls('Bl3', sub='bl3'),
+            cls('BlackDragon', sub='blackdragon'),
+            cls('BlackFridayRule', sub='blackfridayrule'),
+            cls('BlackSheepcomic', sub='black-sheep'),
+            cls('BlackandBlue', sub='black-and-blue'),
+            cls('Blackdemon', sub='blackdemoncomics'),
+            cls('BleachRedux', sub='bleachredux'),
+            cls('BlindandBlue', sub='blindandblue'),
+            cls('BloodhuntersBirthofavampire', sub='bloodhunters'),
+            cls('BloomaPokemonConquestComic', sub='bloomconquest'),
+            cls('BlueHair', sub='bluehair'),
+            cls('BlueWell', host='www.bluewellcomic.com'),
+            cls('BoilingPointofBrain', sub='bpob'),
+            cls('BoogeyDancingMonkeyPot', sub='monkeypot'),
+            cls('BreachofAgency', sub='breachofagency'),
+            cls('BreakfastonaCliff', sub='boac'),
+            cls('Burn', sub='burn'),
+            cls('ByTheBook', sub='bythebook'),
+            cls('CafeAmargo', sub='cafeamargo'),
+            cls('CafeSuada', sub='cafesuada'),
+            cls('Cambion', sub='cambion', adult=True),
+            cls('CaptiveSoul', sub='captive-soul'),
+            cls('CaravanaTaleofGodsandMen', sub='caravantale'),
+            cls('Cataclysm', sub='cataclysm'),
+            cls('Catnip', sub='catnipmanga', adult=True),
+            cls('Cerintha', sub='cerintha'),
+            cls('ChampionofChampions', sub='championofchampions'),
+            cls('ChampionsandHeroesAgeofDragons', sub='championsandheroes'),
+            cls('ChannelDDDNews', sub='dddnews'),
+            cls('ChaosAdventuresII', sub='chaosadventuresii'),
+            cls('ChaoticNation', sub='chaoticnation', adult=True),
+            cls('Charaktermaske', sub='charaktermaske'),
+            cls('Chatuplines', sub='chatuplines'),
+            cls('CheneysGotaGun', sub='cheney'),
+            cls('ChickenScratches', sub='chickenscratches'),
+            cls('ChildrenoftheNight', sub='cotn'),
+            cls('ChimiMouryou', sub='cmmr'),
+            cls('ChocolatewithPepper', sub='chocolate-with-pepper'),
+            cls('CityFolk', sub='cityfolk'),
+            cls('ClairetheFlare', sub='clairetheflare'),
+            cls('CleanCure', sub='cleanpluscure'),
+            cls('ClockworkAtrium', host='www.clockwork-atrium.com'),
+            cls('CloeRemembrance', sub='cloe'),
+            cls('CockroachTheater', sub='cockroachtheater'),
+            cls('Cogs', sub='cogs'),
+            cls('ColorBlind', sub='cbcomic'),
+            cls('ConventionalWisdom', sub='conventionalwisdom'),
+            cls('CosmicDash', sub='cosmicdash'),
+            cls('Cramberries', sub='cramberries'),
+            cls('CrimsonWings', sub='crimson-wings'),
+            cls('CrocodileTears', sub='crocodile-tears', adult=True),
+            cls('CupofOlea', sub='cupofolea'),
+            cls('CurseLineage', sub='curselineage'),
+            cls('DBON', sub='dbondoujin'),
+            cls('DEGAF', sub='degaf'),
+            cls('DEMENTED', sub='demented', adult=True),
+            cls('DaddysGirl', sub='daddysgirl'),
+            cls('DanielleDark', sub='danielledark'),
+            cls('Dasien', sub='dasien', adult=True),
+            cls('DavidDoesntGetIt', sub='daviddoesntgetit'),
+            cls('DeadtoDay', sub='deadtoday'),
+            cls('DeathNoteIridescent', sub='dn-iridescent'),
+            cls('DefyingGravityTheFourGreatGuardians', sub='defyinggravitycomic'),
+            cls('DemonBattles', sub='demonbattles'),
+            cls('DemonCat', sub='demoncat'),
+            cls('DemonEater', sub='demoneater', adult=True),
+            cls('DenizensAttention', sub='denizensattention'),
+            cls('DevilsCake', sub='devilscake'),
+            cls('DevotoMusicinHell', sub='devoto', adult=True),
+            cls('Diaz', sub='diaz'),
+            cls('Diexemor', sub='diexemor'),
+            cls('DigimonSaviors', sub='digimonsaviors'),
+            cls('DigimonTamersMiraiProject', sub='digimontamersmiraiproject'),
+            cls('DigisRandomSpriteshack', sub='digisspriteshack'),
+            cls('DigitalInsanity', sub='digitalinsanity'),
+            cls('DoItYourself', sub='diy'),
+            cls('Dontdie', sub='dontdie'),
+            cls('DoodleBeans', sub='beans', adult=True),
+            cls('DoodlingAround', sub='doodlingcomic'),
+            cls('DoomsdayMyDear', host='www.doomsdaymydear.com'),
+            cls('DragonKid', sub='dragonkid'),
+            cls('Dragonet', sub='dragonet'),
+            cls('DumpofManyPeople', sub='dumpofmanypeople'),
+            cls('DungeonHordes', sub='dungeonhordes'),
+            cls('EATATAU', sub='eatatau'),
+            cls('EDepthAngel', sub='edepth'),
+            cls('ERAConvergence', sub='convergence'),
+            cls('ERAIbuki', sub='eraibuki'),
+            cls('ERRORERROR', sub='errorerror'),
+            cls('EidolonWhispersofEternity', sub='whispersofeternity'),
+            cls('ElementalSpirits', sub='elementalspirits'),
+            cls('EnkeltenKentta', sub='enkeltenkentta', adult=True),
+            cls('Enthrall', sub='enthrall', adult=True),
+            cls('Entreeuxdeux', sub='entreuxdeux'),
+            cls('Entuthrie', sub='entuthrie', adult=True),
+            cls('Eorah', sub='eorah', adult=True),
+            cls('EozinKadonnutKuningas', sub='eozinkadonnutkuningas'),
+            cls('EpicChaos', sub='epicchaos'),
+            cls('Equsopia', sub='equsopia'),
+            cls('EternalKnights', sub='eternalknights', adult=True),
+            cls('EuphemisticEephus', sub='eephus'),
+            cls('EvD', sub='ev-d'),
+            cls('EvilPlan', host='evilplan.thewebcomic.com'),
+            cls('ExperimentalMegaman', sub='ex90081'),
+            cls('EyesofaDigimon', sub='eoad'),
+            cls('FailureConfetti', sub='failureconfetti'),
+            cls('FairyTaleRejects', host='fairytalerejects.thewebcomic.com', adult=True),
+            cls('FaithlessDigitals', sub='faithlessdigitals'),
+            cls('FalconersDailyStrips', sub='falcdaily'),
+            cls('FallenAngelslove', sub='fallen-angels-love'),
+            cls('FarOutMantic', sub='meteorflo'),
+            cls('FarOutThere', sub='faroutthere'),
+            cls('FatetheAnthologyofKaienandhisfuckingmagicfriends', sub='fatehoho'),
+            cls('FemmeSchism', sub='femmeschism'),
+            cls('FeralGentry', sub='feralgentry'),
+            cls('FinalArcanum', sub='finalarcanum'),
+            cls('FireredLisasReise', sub='lisasreise'),
+            cls('FlyorFail', sub='flyorfail'),
+            cls('ForcedSeduction', sub='forced-seduction'),
+            cls('ForestHill', host='www.foresthillcomic.org'),
+            cls('ForgettheDistance', sub='forgetthedistance', adult=True),
+            cls('Fortheloveofabrokenstring', sub='fortheloveofabrokenstring'),
+            cls('FramebyFrame', sub='frame-by-frame', adult=True),
+            cls('FrenzyRedux', sub='theadventuresoffrenzy'),
+            cls('FrobertTheDemon', sub='frobby'),
+            cls('FromnowonImagirl', sub='fromnowonimagirl'),
+            cls('FruitloopAndMrDownbeat', sub='fruitbeat'),
+            cls('GamerCafe', sub='gamercafe'),
+            cls('GamesPeoplePlayUpdatedWeekly', sub='gamespeopleplay'),
+            cls('GardenofHearts', sub='gardenofhearts'),
+            cls('GayBacon', sub='gaybacon'),
+            cls('GayTimesWithRyanandJay', sub='gtwraj'),
+            cls('GetUpandGo', sub='getupandgo', adult=True),
+            cls('GigisNuzlockeRuns', sub='giginuzlocke'),
+            cls('Gloomverse', sub='gloomverse'),
+            cls('Gnoph', sub='gnoph'),
+            cls('GoldenSunGenerationsAftermathVolume1', sub='gsgbtsyearone'),
+            cls('GoldenSunGenerationsColossoVolume6', sub='gsgbtsyearthree'),
+            cls('GoodGame', sub='goodgame'),
+            cls('GoodnightMrsGoose', sub='goose'),
+            cls('Grayscale', sub='grayscale', adult=True),
+            cls('GuardianGhost', sub='guardianghost'),
+            cls('GuardiansoftheGalaxialSpaceways', sub='ggs'),
+            cls('HIPS', sub='hips', adult=True),
+            cls('Habibahssong', sub='habibahsong'),
+            cls('HarvestMoonParadiseFound', sub='paradisefound'),
+            cls('HatShop', sub='hatshop'),
+            cls('HatethePlayer', host='hatetheplayer.thewebcomic.com'),
+            cls('Helix', sub='helix', adult=True),
+            cls('HeltonShelton', sub='heltonshelton'),
+            cls('Hephaestus', host='hephaestus.thewebcomic.com'),
+            cls('HereBeVoodoo', sub='herebevoodoo', adult=True),
+            cls('HiddenStrengthAWhiteNuzlocke', sub='hsnuzlocke'),
+            cls('Hinata', sub='hinata'),
+            cls('HitandMiss', sub='hitandmiss'),
+            cls('Holocrash', sub='holocrash', adult=True),
+            cls('HolyBlasphemy', sub='holyblasphemy'),
+            cls('HolyCrap', sub='holycrap'),
+            cls('HopeForABreeze', sub='h4ab'),
+            cls('HouseofCraziness', sub='craziness'),
+            cls('HurrocksFardel', sub='hurrocksfardel'),
+            cls('Hybristorific', sub='hybristorific', adult=True),
+            cls('IWishIggysWish', sub='i-wish-comic'),
+            cls('IciVontLesMorts', sub='icivontlesmorts', adult=True),
+            cls('InHouseHumor', sub='inhousehumor'),
+            cls('Inchoatica', sub='inchoatica'),
+            cls('Ingloriousbasterds', sub='ingloriousbasterds'),
+            cls('Inhuman', sub='inhumancomic'),
+            cls('InsideOuTAYuriTale', sub='insideout-a-yuri-tale'),
+            cls('InspiredByADream', sub='inspiredbyadream'),
+            cls('Intoxicated', sub='intoxicated', adult=True),
+            cls('Itsan8BitWorldBlankWorld', sub='8bitblankworld'),
+            cls('JackiesStory', sub='jackiestory'),
+            cls('Jantar', sub='jantar'),
+            cls('Jantarpol', sub='jantar-pl'),
+            cls('Jason', sub='jasoncomic'),
+            cls('JoeysAdventure', sub='joeysadventure'),
+            cls('JourneyMan', sub='journeyman'),
+            cls('JoyToTheWorld', sub='joytotheworld'),
+            cls('June', sub='june'),
+            cls('JustAnotherLife', sub='justanotherlife'),
+            cls('JustCrazy', sub='justcrazy'),
+            cls('Justmyluck', sub='justmyluck'),
+            cls('KCNO', sub='kcno'),
+            cls('KaitoShuno', sub='kaitoshuno', adult=True),
+            cls('KasaKeira', sub='kasakeira'),
+            cls('Katran', sub='katran'),
+            cls('KazanatoFuneralPlanningService', sub='kazanato'),
+            cls('KezroChroniclesPhantomOps', sub='phantomops'),
+            cls('Kirbandfriendsshowcase', sub='kas'),
+            cls('KirbiesoftheAlternateDimension', sub='kirbyaltdimension'),
+            cls('KirbyAdventure', sub='kirbysadventure'),
+            cls('KirbyDreamTeam', sub='kirbysdreamteam'),
+            cls('KirbyFunfestTheOriginals', sub='kirbyfunfestold'),
+            cls('KirbyTheDeeArmy', sub='kirbyandthedeearmy'),
+            cls('KirbysDreamAdventure', sub='kirbyda'),
+            cls('KirbysDreamlandAdventures', sub='kirbysdreamlandadventures'),
+            cls('KissmeSnow', sub='kissmesnow'),
+            cls('KissoftheDevil', sub='kissofthedevil'),
+            cls('Knightface', sub='knightface', adult=True),
+            cls('KnightsRequiem', sub='knightsrequiem'),
+            cls('KojiX5', sub='kojix5'),
+            cls('Kreetor', sub='kreetor'),
+            cls('Kruptos', sub='kruptos'),
+            cls('KuroNeko', sub='kuro-neko'),
+            cls('KuronaFlutterandLylaSpamTime', sub='icantflyaplane'),
+            cls('LOGOS', sub='logoscomic', adult=True),
+            cls('LOKI', sub='loki'),
+            cls('LastBlockStanding', sub='lastblockstanding'),
+            cls('LastLivingSouls', sub='lastlivingsouls'),
+            cls('LatchkeyKingdom', sub='latchkeykingdom'),
+            cls('LavenderLegend', sub='lavenderlegend'),
+            cls('LeCirquedObscure', sub='cirquedobscure'),
+            cls('LedbyaMadMan', sub='ledbyamadman'),
+            cls('LegendofZeldaAHerosStory', sub='aherosstory'),
+            cls('LegendofZeldaStaffofPower', sub='loz-sop'),
+            cls('LegendofZeldaTheEdgeandTheLight', sub='legendofzelda'),
+            cls('LegendofZeldaTheWindWaker', sub='zeldawindwaker'),
+            cls('LegendsofMobiusBookOne', sub='legendsofmobius-bookone'),
+            cls('Lemongrass', sub='lemongrass'),
+            cls('LesCendresdelHiver', sub='cendres'),
+            cls('LetLoveRule', sub='letloverule'),
+            cls('LethalDose', sub='lethaldosecomic', adult=True),
+            cls('LetsBreakitforReals', sub='breaktehmentality'),
+            cls('LicensedHeroes', sub='licensedheroes'),
+            cls('LifeAsACutOut', host='lifeasacutout.thewebcomic.com'),
+            cls('LifeAsItWas', sub='lifeasitwas'),
+            cls('LifeLessOrdinary', sub='lifelessordinary', adult=True),
+            cls('Lifeonpaper', sub='lifeonpaper'),
+            cls('LightLovers', sub='lightlovers'),
+            cls('LightwithinShadow', sub='lightwithinshadow'),
+            cls('LilLevi', sub='lillevi'),
+            cls('LiliBleu', sub='lilibleu'),
+            cls('LondonUnderworld', sub='lunderworld'),
+            cls('LostNova', sub='lostnova'),
+            cls('LoveHarbor', sub='shipcentral'),
+            cls('LoveMeLoveMyTeddyBear', sub='teddybear'),
+            cls('LoveandIcecream', sub='lovexandxicecream'),
+            cls('LoveroftheSunandMoon', sub='loverofthesunandmoon'),
+            cls('LsEmpire', sub='l-empire'),
+            cls('LuffinpuffandEric', sub='luffinpuff'),
+            cls('LumasParadise', sub='luma'),
+            cls('MUTE', sub='muterobot'),
+            cls('MYth', sub='myth'),
+            cls('MagicalGirlAlice', sub='magicalgirlalice'),
+            cls('MagicalMisfits', sub='magicalmisfits'),
+            cls('Magience', host='www.magience.co'),
+            cls('Magipunk', sub='magipunk'),
+            cls('Manifestedpart1', sub='manifested'),
+            cls('MarXistemTWC', sub='marxistem'),
+            cls('MarioandLuigiMisadventures', sub='mandladventures'),
+            cls('MariosDayJob', sub='mariosjob'),
+            cls('MariovsSonicvsMegaMan', sub='mvsvmm'),
+            cls('MarsMind', sub='marsmind'),
+            cls('Mascara', sub='mascara'),
+            cls('MasqueradeWTTM', sub='masqueradewttm'),
+            cls('MatildasSweetCakeCafe', sub='mscc', adult=True),
+            cls('MaytheRainCome', sub='maytheraincome'),
+            cls('Mazscara', sub='mazscara'),
+            cls('MegaManBattleNetwork7', sub='mmbn7-twt'),
+            cls('MegaManTales', sub='megamantales'),
+            cls('MegaPain', sub='megapain'),
+            cls('MelodyAndMacabre', sub='melodyandmacabre'),
+            cls('MerirosvotSeikkailumerella', sub='merirosvotseikkailumerella'),
+            cls('MetroJack', sub='metro-jack', adult=True),
+            cls('MidnightPrince', sub='midnightprince'),
+            cls('MineS', sub='mines'),
+            cls('Minibot', sub='minibot'),
+            cls('MinorActsofHeroism', host='www.minoractsofheroism.com'),
+            cls('Missing', sub='missing'),
+            cls('Missingversionfrancaise', sub='missingfr'),
+            cls('MixupofallMixups', sub='mixupofmixups'),
+            cls('MobianChaos', sub='mobianchaos'),
+            cls('Mokepon', sub='mokepon'),
+            cls('Monstar', host='monstar.thewebcomic.com'),
+            cls('MoonValley', sub='moonvalley'),
+            cls('MorphE', host='morphe.thewebcomic.com'),
+            cls('Mortifer', sub='mortifer'),
+            cls('MrFactory', sub='mrfactory'),
+            cls('MyBoyfriendisaMobBoss', sub='mbmb', adult=True),
+            cls('MyFakeHeart', sub='myfakeheart'),
+            cls('MySistertheDragon', sub='sisterdragon'),
+            cls('MySparklingPrincesama', sub='kiraouji'),
+            cls('MyStereoBot', sub='mystereobot'),
+            cls('MyTrollLife', sub='mytrolllife'),
+            cls('MyTwoCentsPlusTax', sub='mtcpt'),
+            cls('MysticanDreams', sub='mysticandreams'),
+            cls('MythsofUnovaAWhiteNuzlockeRunHardMode', sub='mythsofunova'),
+            cls('NIK', sub='nik'),
+            cls('Nah', sub='thecomicformerlyknownasgenlab'),
+            cls('Negligence', sub='negligence'),
+            cls('NeoCrystalAdventures', sub='neocrystaladventures'),
+            cls('NeonGlow', sub='neonglow'),
+            cls('NevertheHero', sub='neverthehero'),
+            cls('Nexus', sub='nexus'),
+            cls('NiceKitty', sub='nicekitty'),
+            cls('NighHeavenandHell', sub='oldnighheavenandhell', adult=True),
+            cls('NightSpace', sub='nightspace'),
+            cls('NissiesDragonPrincess', sub='drgnprincess'),
+            cls('NixsFireRedNuzlocke', sub='nixnuzlocke'),
+            cls('NoEnd', sub='no-end'),
+            cls('NobleHeartsHiruandMerroug', sub='hiruandmerroug', adult=True),
+            cls('NormalcyisforWimps', sub='normalcyisforwimps'),
+            cls('NotyoursamI', sub='notyoursami', adult=True),
+            cls('ObsidianHeart', sub='obsidianheart'),
+            cls('October20th', host='www.october20comic.com'),
+            cls('OddPlaceOddTime', sub='oddplaceoddtime'),
+            cls('Ohman', sub='ohman'),
+            cls('OldElastikid', sub='oldelastikid'),
+            cls('OneRainyDay', sub='one-rainy-day', adult=True),
+            cls('Onlyonelovesong', sub='onlyonelovesong'),
+            cls('OperationTheater', sub='operation-theater'),
+            cls('OriginBook1Codearth', sub='theoriginbooks'),
+            cls('OurTimeinEden', sub='ourtimeineden'),
+            cls('Outbreak', sub='xoutbreak'),
+            cls('OutofKey', sub='outofkey'),
+            cls('OverSync', sub='oversync'),
+            cls('PMDExplorersofHeart', sub='pmd-explorers-of-heart'),
+            cls('PMDTeamFirefox', sub='pmdteamfirefox'),
+            cls('PMDVictoryFire', sub='victoryfire'),
+            cls('PTO', sub='pto', adult=True),
+            cls('Pahantekija', sub='pahantekija'),
+            cls('Panacea', sub='panacea', adult=True),
+            cls('PantsParty', sub='partypants'),
+            cls('PanzerDragonandEnigmaCompleteEdition', sub='panzerdragonandenigma'),
+            cls('Paradox', sub='paradoxcomic', adult=True),
+            cls('Paripety', sub='paripety'),
+            cls('Pause', sub='pause'),
+            cls('PencilviewUpdatesMondayscough', sub='pencilview'),
+            cls('Perinto', sub='perinto'),
+            cls('PerplexingMagnoliaDisruption', sub='smgpmd'),
+            cls('PeterPan', sub='peterpan'),
+            cls('Phantomland', sub='phantomland'),
+            cls('PhotoShootnarusasuDoujinshi', sub='photoshootnarusasu', adult=True),
+            cls('PlasticKings', sub='plastickings'),
+            cls('PlatonicBoyfriends', sub='platonicboyfriends'),
+            cls('PlayTime', sub='dollysplaytime'),
+            cls('PokeVenturous', sub='pokeventuras'),
+            cls('PokemonBeta', sub='pokemonbeta'),
+            cls('PokemonCrystalDoubleNuzlockeChallenge', sub='miinuzlocke'),
+            cls('PokemonGleamingCrystal', sub='gleamingcrystal'),
+            cls('PokemonLANDSKY', sub='landsky'),
+            cls('PokemonMysteryDungeonTeamCrystal', sub='crystalmysterydungeon'),
+            cls('PokemonParallel', sub='pokemon-parallel'),
+            cls('PokemonSAKOHJU', sub='sakohju'),
+            cls('PokemonnoRakuen', sub='pokemon-no-rakuen'),
+            cls('Ponzi', sub='ponzi'),
+            cls('PrettyMouth', sub='prettymouth'),
+            cls('PrincessChroma', sub='princesschroma'),
+            cls('ProfessorDolphinpresentsPokemon', sub='pdpp'),
+            cls('ProjectCAPLimit', sub='imagecap'),
+            cls('Puck', sub='puck'),
+            cls('PulseandBolt', sub='pulse-bolt'),
+            cls('PurpureaNoxa', sub='purpureanoxa', adult=True),
+            cls('QueerQueen', sub='queerqueen'),
+            cls('RANDOM', sub='randomthecomic'),
+            cls('ROSIER', sub='rosier'),
+            cls('RainLGBT', sub='rainlgbt'),
+            cls('RainxSasori', sub='rainxsasori', adult=True),
+            cls('RareCandyTreatment', host='www.rarecandytreatment.com'),
+            cls('RavenWolf', sub='ravenwolf'),
+            cls('RedVelvetRequiem', sub='rvr'),
+            cls('Regina', sub='regina'),
+            cls('ReidyandFriendsShowcase', sub='reidynfriends'),
+            cls('RemoteAngel', sub='remoteangel'),
+            cls('Replica', sub='replica', adult=True),
+            cls('Respectable', sub='respectable', adult=True),
+            cls('ReturntoEden', sub='rte'),
+            cls('RiversideExtras', host='www.riversidecomics.co', adult=True),
+            cls('RottenApple', sub='rottenapple'),
+            cls('RoyalIcing', sub='royalicing'),
+            cls('RubyNation', host='www.therubynation.com'),
+            cls('RuderiQuest', sub='ruderi'),
+            cls('RuneSpark', sub='runespark'),
+            cls('RyuManwebcomicversion', sub='ryuman-web'),
+            cls('SChIzO', sub='schizophrenic'),
+            cls('SFCBlackjackBay', sub='blackjackbay'),
+            cls('SFCForestofDreams', sub='sfcforestofdreams'),
+            cls('SLightlyabOVeavErage', sub='slightlyaboveaverage', adult=True),
+            cls('SOSRadio', sub='sosradio'),
+            cls('SPRITEDHeroesofDobalia', sub='spritedhod'),
+            cls('SUNRISESTORY', sub='sunrisestory'),
+            cls('SabishiiGhost', sub='sabishiighost'),
+            cls('SaintforRent', sub='saint-for-rent'),
+            cls('SakuraDAY', sub='sakuraday'),
+            cls('SakuraMishzo', sub='sakurazo', adult=True),
+            cls('SalemUncommons', sub='salemuncommons'),
+            cls('SallySprocketAndPistonPete', sub='ssnpp'),
+            cls('SaltyKiss', sub='saltykiss'),
+            cls('Saywhatyoumean', sub='saywhatyoumean'),
+            cls('SchoolofRejectsSoRe', sub='sore'),
+            cls('ScionsoftheSeraph', sub='scions', adult=True),
+            cls('ScrappedProject', sub='scrappedproject'),
+            cls('SecretPowerbk1', sub='secretpower1'),
+            cls('SecretPowerbk2', sub='secretpower2'),
+            cls('Seki', sub='se-ki', adult=True),
+            cls('SenoireDelirium', sub='senoiredelirium'),
+            cls('SeriousTimes', sub='serioustimes'),
+            cls('Shameless', sub='shamelesscomic'),
+            cls('ShamelessAdvertisements', sub='advertiseat'),
+            cls('ShotoutofCanon', sub='akumathfs'),
+            cls('ShroudofLight', sub='shroudoflight'),
+            cls('Signifikat', sub='signifikat', adult=True),
+            cls('SimonSues', sub='simonsues'),
+            cls('SimpleBear', sub='simplebear'),
+            cls('SimplySarah', sub='simplysarah'),
+            cls('Sire', host='sire.thewebcomic.com'),
+            cls('Skeptical', sub='skeptical'),
+            cls('Slackmatic', sub='slackmatic'),
+            cls('SlipstreamSingularity', sub='slipstreamsingularity'),
+            cls('SmallPressAdventures', sub='smallpressadventures'),
+            cls('SocksMittensandScarfs', sub='socksmitsscarfs'),
+            cls('SomebodyShootMe', sub='somebodyshootme'),
+            cls('SomethingLikeaPhenomenon', sub='somethinglikeaphenomenon', adult=True),
+            cls('SonicAuthorAdventII', sub='saa2'),
+            cls('SonicBoom', sub='sonic-boom'),
+            cls('SonicClub', sub='sonicclub'),
+            cls('SonicDashly', sub='sonicdashly'),
+            cls('SonicFuture', sub='sonicfuture'),
+            cls('SonicSchoolRedo', sub='sonicschoolredo'),
+            cls('SonicUniverseAsk', sub='sonicuniverseask'),
+            cls('SoulGuardian', sub='soulguardian'),
+            cls('SouthernCross', host='southerncross.thewebcomic.com'),
+            cls('SovereignTheMostAmazingComicEver', sub='mostamazingcomicever'),
+            cls('SpaghettiAndMeatballs', sub='spaghettiandmeatballs', adult=True),
+            cls('SparElricsextras', sub='sparextras'),
+            cls('SparkStory', sub='sparkstory'),
+            cls('Spellcross', sub='spellcross'),
+            cls('SpiderWings', sub='spiderwings'),
+            cls('Spidersilk', sub='spidersilk'),
+            cls('SplitScreen', sub='splitscreencomic', adult=True),
+            cls('Spriterschaos', sub='spriterschaos'),
+            cls('Sprytts', sub='sprytts'),
+            cls('StarTrip', sub='startrip'),
+            cls('Stay', sub='stay-comic', adult=True),
+            cls('StellaInChrome', sub='stellainchrome'),
+            cls('Stereophonic', host='stereophonic.thewebcomic.com'),
+            cls('Storyofadamnedlove', sub='storyofadamnedlove'),
+            cls('StrangersandFriends', sub='hemu'),
+            cls('Striped', sub='striped', adult=True),
+            cls('StuntRayWalterswish', sub='stuntray'),
+            cls('SubjecttoChangeCollegeWoes', sub='subject-to-change'),
+            cls('Sunfall', host='sunfall.thewebcomic.com'),
+            cls('SunmeetsMoon', sub='sunmeetsmoon'),
+            cls('SuperDimensionAfterTheHero', sub='afterthehero'),
+            cls('SuperMarioBros3', sub='smb3'),
+            cls('SuperMarjoBros', sub='marjobros'),
+            cls('SupermassiveBlackHoleA', sub='smbhax'),
+            cls('SurvivorFanCharacters', sub='sfc'),
+            cls('SweetestPoison', sub='sweetestpoison'),
+            cls('SwitchMechanism', sub='switchmechanism'),
+            cls('Symbios', sub='symbios', adult=True),
+            cls('TEN', sub='ten'),
+            cls('TLAAOK', sub='tlaaok', adult=True),
+            cls('TPTruePower', sub='truepower'),
+            cls('TRIPP', sub='tripp'),
+            cls('TaikiTheWebcomic', sub='taiki'),
+            cls('TailsAdventureThroughTimeandOtherWorlds', sub='tailsadventure'),
+            cls('TakingPicturesofStrangers', sub='darrenandkale', adult=True),
+            cls('TalesfromAaronsWings', sub='tfaw'),
+            cls('ThatWasntThereYesterday', sub='twty'),
+            cls('The13thWorld', sub='the13thworld'),
+            cls('TheAdventuresofBanjoZ', sub='abz-fancomic', adult=True),
+            cls('TheAntihero', sub='antihero'),
+            cls('TheArchipelago', sub='thearchipelago'),
+            cls('TheAvianStories', sub='theavianstories'),
+            cls('TheBattleInTheSky', sub='thebattleinthesky'),
+            cls('TheBookofNosferatu', host='www.thebookofnosferatu.com'),
+            cls('TheBrideoftheShark', sub='sameyome', adult=True),
+            cls('TheBucket', sub='thebucket'),
+            cls('TheCafedAlizee', sub='alizee'),
+            cls('TheCavernofSecrets', sub='cavern'),
+            cls('TheColony', sub='thecolony', adult=True),
+            cls('TheContract', sub='the-contract'),
+            cls('TheCrawl', sub='thecrawl'),
+            cls('TheCurtandTonyShow', sub='thecurtandtonyshow'),
+            cls('TheDarkAgeofMobius', sub='thedarkageofmobius'),
+            cls('TheDarkLegacy', sub='tdlcomic'),
+            cls('TheDemonicAdventuresofAngelWitchPita', sub='angelwitchpita', adult=True),
+            cls('TheDestroyer', sub='heartless-destroyer', adult=True),
+            cls('TheDragonandtheLemur', sub='dal', adult=True),
+            cls('TheDreaming', sub='thedreaming'),
+            cls('TheDrifter', sub='thedrifter', adult=True),
+            cls('TheElectricRose', sub='electricrosecomic'),
+            cls('TheForestofWhispers', sub='theforestofwhispers'),
+            cls('TheGhostWithTheMost', sub='theghostwiththemost'),
+            cls('TheGoldRiderofPern', sub='goldrider'),
+            cls('TheGrayZone', sub='thegrayzone'),
+            cls('TheHeadhunters', sub='headhunters'),
+            cls('TheHeartofEarth', sub='heart-of-earth'),
+            cls('TheHobbitbic', sub='hobbit'),
+            cls('TheJosephComics', sub='josephcomics'),
+            cls('TheKeyHotelEnding', sub='tekeyhotel'),
+            cls('TheKeyToReality', sub='keytoreality'),
+            cls('TheKwiddexProtocol', sub='kwiddexprotocol'),
+            cls('TheLastBloodCafe', sub='lastbloodcafe'),
+            cls('TheLegendaryQueen', sub='legendaryqueen', adult=True),
+            cls('TheLifeofMagFlamequill', sub='lifeofmag'),
+            cls('TheLoneSwordsman', sub='theloneswordsman'),
+            cls('TheLostland', sub='thelostlandcomic'),
+            cls('TheMegaManandSonicSpriteShowcase', sub='megamanshowcase'),
+            cls('TheMoistTouch', sub='themoisttouch'),
+            cls('TheNOMEDSEGA', sub='nomed'),
+            cls('TheNightSurfers', sub='thenightsurfers'),
+            cls('TheNocheComicSeries', sub='nochecomicseries', adult=True),
+            cls('ThePirateBalthasar', sub='thepiratebalthasar'),
+            cls('ThePremise', sub='thepremise'),
+            cls('ThePrincessandtheGiant', sub='princess'),
+            cls('ThePropertyofHate', sub='tpoh'),
+            cls('TheReborn', sub='reborn'),
+            cls('TheSearchforHenryJekyll', sub='thesearchforhenryjekyll'),
+            cls('TheSilverLeague', sub='thesilverleague'),
+            cls('TheSummerofBlakeSinclair', sub='blake-sinclair'),
+            cls('TheTimeDog', sub='timedog'),
+            cls('TheTytonNuzlockeChallengeEmeraldEdition', sub='tytonnuzlockeemerald'),
+            cls('TheWastelands', sub='wastelands'),
+            cls('TheWhiteTower', sub='thewhitetower'),
+            cls('TheWinterCampaign', sub='winterc'),
+            cls('TheYoshiHerd', sub='theyoshiherd'),
+            cls('Theatrics', sub='theatrics'),
+            cls('TheiaMania', sub='theia-mania'),
+            cls('ThelaughingDeath', sub='thelaughingdeath'),
+            cls('Themadman', sub='themadman'),
+            cls('Theswordsmanandtheamnesiac', sub='tsata', adult=True),
+            cls('ThiefCatcherRingTail', sub='tcringtail'),
+            cls('ThinkBeforeYouThink', sub='thinkbeforeyouthink'),
+            cls('ThornTopia', sub='tnt100'),
+            cls('ThornsComic', sub='thornscomic'),
+            cls('ThroughtheWonkyEye', sub='through-the-wonky-eye'),
+            cls('TosiHuonoYaoiSarjis', sub='tosihuonoyaoisarjis', adult=True),
+            cls('TotallyCrossover', sub='totallycrossover'),
+            cls('TrainerWantstoFight', sub='twtf'),
+            cls('TransUMan', sub='transuman', adult=True),
+            cls('Transfusions', sub='transfusions'),
+            cls('Troublenextdoor', sub='troublenextdoor'),
+            cls('UglyBoysLove', sub='shounenai'),
+            cls('Uglygame', sub='uglygame'),
+            cls('UndertheDeadSkies', host='underthedeadskies.thewebcomic.com', adult=True),
+            cls('UnicampaLapis', sub='ual'),
+            cls('UpDown', sub='updown', adult=True),
+            cls('UshalaatWorldsEnd', sub='ushala', adult=True),
+            cls('VACANT', sub='vacant'),
+            cls('Vacan7', sub='vacan7', adult=True),
+            cls('VerloreGeleentheid', host='verlore.thewebcomic.com'),
+            cls('VoidMisadventures', sub='voidmisadventures'),
+            cls('VoyageoftheBrokenPromise', sub='voyageofthebrokenpromise', adult=True),
+            cls('WHATaboutSHADOWS', sub='was'),
+            cls('WakeEcho', sub='echo'),
+            cls('Wander', sub='wander'),
+            cls('WantedDeadorDead', sub='wanteddeadordead'),
+            cls('Wayfar', sub='wayfar'),
+            cls('Waysoftheheart', sub='wayoftheheart'),
+            cls('WeAreGolden', sub='wearegolden', adult=True),
+            cls('WelcometoFreakshow', sub='welcometofreakshow'),
+            cls('WelcometothePCA', sub='welcometothepca'),
+            cls('WhatAboutLove', sub='whataboutlove', adult=True),
+            cls('Whatisdeepinonesheart', sub='ones-mindt'),
+            cls('WhenSheWasBad', sub='whenshewasbad'),
+            cls('Whenweweresilent', sub='silence'),
+            cls('WhereaboutsOfTime', sub='wot'),
+            cls('WhiteHeart', sub='whiteheart', adult=True),
+            cls('WhiteNoise', sub='white-noise'),
+            cls('WildWingBoys', sub='wwb'),
+            cls('WildWingBoysKoathArc', sub='wwbka'),
+            cls('Wildflowers', sub='wildflowers'),
+            cls('WingsOverEthereal', sub='wings-over-ethereal'),
+            cls('WingsTurnedtoDust', sub='wingsturnedtodust'),
+            cls('Wootlabs', host='wootlabs.thewebcomic.com'),
+            cls('XXMoralityXx', sub='xxmoralityxx'),
+            cls('YadotCakeShop', sub='yadotcakeshop', adult=True),
+            cls('YamanaokiHighSchool', sub='yamanaokihs'),
+            cls('YouAreTheReasonForTheEndOfTheWorld', sub='thereasonfortheendoftheworld'),
+            cls('YoungCannibals', host='www.youngcannibals.net'),
+            cls('ZaenWell', sub='zaenwell'),
+            cls('ZeldaTheNewAdventureofLinkIIMajorasMask', sub='newlink'),
+            cls('_A_', sub='a-the-stalker'),
+            # END AUTOUPDATE
+        )

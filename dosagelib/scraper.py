@@ -1,22 +1,18 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2014-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
 
 import time
 import random
 import os
 import re
-try:
-    from urllib.parse import urljoin
-except ImportError:
-    from urlparse import urljoin
+from six.moves.urllib.parse import urljoin
 
-try:
-    from lxml import html
-    from lxml.html.defs import link_attrs as html_link_attrs
-except ImportError:
-    html = None
+from lxml import html, etree
+from lxml.html.defs import link_attrs as html_link_attrs
 
 try:
     import cssselect
@@ -29,9 +25,9 @@ except ImportError:
     pycountry = None
 
 from . import loader, configuration, languages
-from .util import (getPageContent, makeSequence, get_system_uid, urlopen,
-                   getDirname, unescape, tagre, normaliseURL,
-                   prettyMatcherList, requests_session)
+from .util import (get_page, makeSequence, get_system_uid, urlopen,
+                   unescape, tagre, normaliseURL, prettyMatcherList,
+                   requests_session)
 from .comic import ComicStrip
 from .output import out
 from .events import getHandler
@@ -53,10 +49,6 @@ class Scraper(object):
 
     # if more than one image per URL is expected
     multipleImagesPerStrip = False
-
-    # set to False if previous URLs do not match the strip URL (ie. because of
-    # redirects)
-    prevUrlMatchesStripUrl = True
 
     # set to True if this comic contains adult content
     adult = False
@@ -90,13 +82,27 @@ class Scraper(object):
     # HTTP session for configuration & cookies
     session = requests_session()
 
-    def __init__(self, indexes=None):
+    @classmethod
+    def getmodules(cls):
+        name = cls.__name__
+        if hasattr(cls, 'name'):
+            name = cls.name
+        return [cls(name)]
+
+    @property
+    def indexes(self):
+        return self._indexes
+
+    @indexes.setter
+    def indexes(self, val):
+        if val:
+            self._indexes = tuple(sorted(val))
+
+    def __init__(self, name):
         """Initialize internal variables."""
+        self.name = name
         self.urls = set()
-        if indexes:
-            self.indexes = tuple(sorted(indexes))
-        else:
-            self.indexes = tuple()
+        self._indexes = tuple()
         self.skippedUrls = set()
         self.hitFirstStripUrl = False
 
@@ -105,7 +111,7 @@ class Scraper(object):
         if not isinstance(other, Scraper):
             return 1
         # first, order by name
-        d = cmp(self.getName(), other.getName())
+        d = cmp(self.name, other.name)
         if d != 0:
             return d
         # then by indexes
@@ -113,7 +119,7 @@ class Scraper(object):
 
     def __hash__(self):
         """Get hash value from name and index list."""
-        return hash((self.getName(), self.indexes))
+        return hash((self.name, self.indexes))
 
     def shouldSkipUrl(self, url, data):
         """Determine if search for images in given URL should be skipped."""
@@ -141,8 +147,7 @@ class Scraper(object):
                                   optional=self.textOptional)
         else:
             text = None
-        return ComicStrip(self.getName(), url, imageUrls, self.namer,
-                          self.session, text=text)
+        return ComicStrip(self, url, imageUrls, text=text)
 
     def getStrips(self, maxstrips=None):
         """Get comic strips."""
@@ -161,7 +166,7 @@ class Scraper(object):
             self.starter()
             urls = [self.getIndexStripUrl(index) for index in self.indexes]
         else:
-            urls = [self.getLatestUrl()]
+            urls = [self.starter()]
         if self.adult:
             msg += u" (including adult content)"
         out.info(msg)
@@ -217,63 +222,65 @@ class Scraper(object):
             else:
                 prevUrl = self.prevUrlModifier(prevUrl)
                 out.debug(u"Found previous URL %s" % prevUrl)
-                getHandler().comicPageLink(self.getName(), url, prevUrl)
+                getHandler().comicPageLink(self, url, prevUrl)
         return prevUrl
 
     def getIndexStripUrl(self, index):
         """Get comic strip URL from index."""
         return self.stripUrl % index
 
-    @classmethod
-    def getName(cls):
-        """Get scraper name."""
-        if hasattr(cls, 'name'):
-            return cls.name
-        return cls.__name__
-
-    @classmethod
-    def starter(cls):
+    def starter(self):
         """Get starter URL from where to scrape comic strips."""
-        return cls.url
+        return self.url
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         """Return filename for given image and page URL."""
         return None
 
-    @classmethod
-    def prevUrlModifier(cls, prevUrl):
+    def prevUrlModifier(self, prev_url):
         """Optional modification of parsed previous URLs. Useful if
         there are domain redirects. The default implementation does
         not modify the URL.
         """
-        return prevUrl
+        return prev_url
 
-    @classmethod
-    def imageUrlModifier(cls, imageUrl, data):
+    def imageUrlModifier(self, image_url, data):
         """Optional modification of parsed image URLs. Useful if the URL
         needs to be fixed before usage. The default implementation does
         not modify the URL. The given data is the URL page data.
         """
-        return imageUrl
+        return image_url
 
-    def getLatestUrl(self):
-        """Get starter URL from where to scrape comic strips."""
-        return self.starter()
-
-    @classmethod
-    def vote(cls):
+    def vote(self):
         """Cast a public vote for this comic."""
         url = configuration.VoteUrl + 'count/'
         uid = get_system_uid()
-        data = {"name": cls.getName().replace('/', '_'), "uid": uid}
-        page = urlopen(url, cls.session, data=data)
+        data = {"name": self.name.replace('/', '_'), "uid": uid}
+        page = urlopen(url, self.session, data=data)
         return page.text
+
+    def get_download_dir(self, basepath):
+        """Try to find the corect download directory, ignoring case
+        differences."""
+        path = basepath
+        for part in self.name.split('/'):
+            done = False
+            if (os.path.isdir(path) and
+               not os.path.isdir(os.path.join(path, part))):
+                for entry in os.listdir(path):
+                    if (entry.lower() == part.lower() and
+                       os.path.isdir(os.path.join(path, entry))):
+                        path = os.path.join(path, entry)
+                        done = True
+                        break
+            if not done:
+                path = os.path.join(path, part)
+        return path
 
     def getCompleteFile(self, basepath):
         """Get filename indicating all comics are downloaded."""
-        dirname = getDirname(self.getName())
-        return os.path.join(basepath, dirname, "complete.txt")
+        dirname = self.get_download_dir(basepath)
+        return os.path.join(dirname, "complete.txt")
 
     def isComplete(self, basepath):
         """Check if all comics are downloaded."""
@@ -287,8 +294,7 @@ class Scraper(object):
                 with open(filename, 'w') as f:
                     f.write('All comics should be downloaded here.')
 
-    @classmethod
-    def getPage(cls, url):
+    def getPage(self, url):
         """
         Fetch a page and return the opaque repesentation for the data parameter
         of fetchUrls and fetchText.
@@ -302,20 +308,16 @@ class Scraper(object):
         """
         raise ValueError("No implementation for getPage!")
 
-    @classmethod
-    def fetchUrls(cls, url, data, urlSearch):
+    def fetchUrls(self, url, data, urlsearch):
         raise ValueError("No implementation for fetchUrls!")
 
-    @classmethod
-    def fetchUrl(cls, url, data, urlSearch):
-        return cls.fetchUrls(url, data, urlSearch)[0]
+    def fetchUrl(self, url, data, urlsearch):
+        return self.fetchUrls(url, data, urlsearch)[0]
 
-    @classmethod
-    def fetchText(cls, url, data, textSearch, optional):
+    def fetchText(self, url, data, textsearch, optional):
         raise ValueError("No implementation for fetchText!")
 
-    @classmethod
-    def getDisabledReasons(cls):
+    def getDisabledReasons(self):
         """
         Get a dict of reasons why this comic module is disabled. The key is a
         short (unique) identifier, the value is a string explaining why the
@@ -324,22 +326,22 @@ class Scraper(object):
         """
         return {}
 
-    @classmethod
-    def language(cls):
+    def language(self):
         """
         Return language of the comic as a human-readable language name instead
         of a 2-character ISO639-1 code.
         """
-        lang = 'Unknown (%s)' % cls.lang
+        lang = 'Unknown (%s)' % self.lang
         if pycountry is None:
-            if cls.lang in languages.Languages:
-                lang = languages.Languages[cls.lang]
+            if self.lang in languages.Languages:
+                lang = languages.Languages[self.lang]
         else:
             try:
-                lang = pycountry.languages.get(alpha2=cls.lang).name
+                lang = pycountry.languages.get(alpha2=self.lang).name
             except KeyError:
                 try:
-                    lang = pycountry.languages.get(iso639_1_code=cls.lang).name
+                    lang = pycountry.languages.get(
+                        iso639_1_code=self.lang).name
                 except KeyError:
                     pass
         return lang
@@ -359,20 +361,18 @@ class _BasicScraper(Scraper):
 
     BASE_SEARCH = re.compile(tagre("base", "href", '([^"]*)'))
 
-    @classmethod
-    def getPage(cls, url):
-        content = getPageContent(url, cls.session)
+    def getPage(self, url):
+        content = get_page(url, self.session).text
         # determine base URL
         baseUrl = None
-        match = cls.BASE_SEARCH.search(content)
+        match = self.BASE_SEARCH.search(content)
         if match:
             baseUrl = match.group(1)
         else:
             baseUrl = url
         return (content, baseUrl)
 
-    @classmethod
-    def fetchUrls(cls, url, data, urlSearch):
+    def fetchUrls(self, url, data, urlSearch):
         """Search all entries for given URL pattern(s) in a HTML page."""
         searchUrls = []
         searches = makeSequence(urlSearch)
@@ -394,8 +394,7 @@ class _BasicScraper(Scraper):
                              (patterns, url))
         return searchUrls
 
-    @classmethod
-    def fetchText(cls, url, data, textSearch, optional):
+    def fetchText(self, url, data, textSearch, optional):
         """Search text entry for given text pattern in a HTML page."""
         if textSearch:
             match = textSearch.search(data[0])
@@ -430,138 +429,180 @@ class _ParserScraper(Scraper):
     of the HTML element and returns that.
     """
 
+    BROKEN_NOT_OPEN_TAGS = re.compile(r'(<+)([ =0-9])')
+
+    # Taken directly from LXML
+    XML_DECL = re.compile(
+        r'^(<\?xml[^>]+)\s+encoding\s*=\s*["\'][^"\']*["\'](\s*\?>|)', re.U)
+
+    NS = {
+        "re": "http://exslt.org/regular-expressions"
+    }
+
     # Switch between CSS and XPath selectors for this class. Since CSS needs
     # another Python module, XPath is the default for now.
     css = False
 
-    @classmethod
-    def getPage(cls, url):
-        tree = html.document_fromstring(getPageContent(url, cls.session))
+    # Activate a workaround for unescaped < characters on libxml version older
+    # then 2.9.3. This is disabled by default since most sites are not THAT
+    # broken ;)
+    broken_html_bugfix = False
+
+    def getPage(self, url):
+        page = get_page(url, self.session)
+        if page.encoding:
+            # Requests figured out the encoding, so we can deliver Unicode to
+            # LXML. Unfortunatly, LXML feels betrayed if there is still an XML
+            # declaration with (probably wrong!) encoding at the top of the
+            # document. Web browsers ignore such if the encoding was specified
+            # in the HTTP header and so do we.
+            text = self.XML_DECL.sub('\1\2', page.text, count=1)
+            tree = self._parse_page(text)
+        else:
+            tree = self._parse_page(page.content)
         tree.make_links_absolute(url)
         return tree
 
-    @classmethod
-    def fetchUrls(cls, url, data, urlSearch):
+    def _parse_page(self, data):
+        if self.broken_html_bugfix and etree.LIBXML_VERSION < (2, 9, 3):
+            def fix_not_open_tags(match):
+                fix = (len(match.group(1)) * '&lt;') + match.group(2)
+                out.warn("Found possibly broken HTML '%s', fixing as '%s'" % (
+                         match.group(0), fix), level=2)
+                return fix
+            data = self.BROKEN_NOT_OPEN_TAGS.sub(fix_not_open_tags, data)
+
+        tree = html.document_fromstring(data)
+        return tree
+
+    def fetchUrls(self, url, data, urlSearch):
         """Search all entries for given XPath in a HTML page."""
         searchUrls = []
-        if cls.css:
-            searchFun = data.cssselect
-        else:
-            searchFun = data.xpath
-        searches = makeSequence(urlSearch)
-        for search in searches:
-            for match in searchFun(search):
-                try:
-                    for attrib in html_link_attrs:
-                        if attrib in match.attrib:
-                            searchUrls.append(match.get(attrib))
-                except AttributeError:
-                    searchUrls.append(str(match))
-            if not cls.multipleImagesPerStrip and searchUrls:
-                # do not search other links if one pattern matched
-                break
+        for match, search in self._matchPattern(data, urlSearch):
+            searchUrl = None
+            try:
+                for attrib in html_link_attrs:
+                    if attrib in match.attrib:
+                        searchUrl = match.get(attrib)
+            except AttributeError:
+                searchUrl = str(match)
+            out.debug(u'Matched URL %r with pattern %s' % (searchUrl, search))
+            if searchUrl is not None:
+                searchUrls.append(searchUrl)
+
         if not searchUrls:
-            raise ValueError("XPath %s not found at URL %s." % (searches, url))
+            raise ValueError("XPath %s not found at URL %s." %
+                             (urlSearch, url))
         return searchUrls
 
-    @classmethod
-    def fetchText(cls, url, data, textSearch, optional):
+    def fetchText(self, url, data, textSearch, optional):
         """Search text entry for given text XPath in a HTML page."""
-        if cls.css:
+        if not textSearch:
+            return None
+        text = []
+        for match, search in self._matchPattern(data, textSearch):
+            try:
+                text.append(match.text_content())
+            except AttributeError:
+                text.append(match)
+            out.debug(u'Matched text %r with XPath %s' % (text, search))
+        text = u' '.join(text)
+        if text.strip() == '':
+            if optional:
+                return None
+            else:
+                raise ValueError("XPath %s did not match anything at URL %s." %
+                                 (textSearch, url))
+        return text.strip()
+
+    def _matchPattern(self, data, patterns):
+        if self.css:
             searchFun = data.cssselect
         else:
-            searchFun = data.xpath
-        if textSearch:
-            text = ''
-            for match in searchFun(textSearch):
-                try:
-                    text += ' ' + match.text_content()
-                except AttributeError:
-                    text += ' ' + unicode(match)
-            if text.strip() == '':
-                if optional:
-                    return None
-                else:
-                    raise ValueError(
-                        "XPath %s did not match anything at URL %s." %
-                        (textSearch, url))
-            out.debug(u'Matched text %r with XPath %s' % (text, textSearch))
-            return unescape(text).strip()
-        else:
-            return None
+            def searchFun(s):
+                return data.xpath(s, namespaces=self.NS)
+        patterns = makeSequence(patterns)
+        for search in patterns:
+            matched = False
+            for match in searchFun(search):
+                matched = True
+                yield match, search
 
-    @classmethod
-    def getDisabledReasons(cls):
+            if matched and not self.multipleImagesPerStrip:
+                # do not search other links if one pattern matched
+                break
+
+    def getDisabledReasons(self):
         res = {}
-        if cls.css and cssselect is None:
+        if self.css and cssselect is None:
             res['css'] = (u"This module needs the cssselect " +
                           u"(python-cssselect) python module which is " +
                           u"not installed.")
-        if html is None:
-            res['lxml'] = (u"This module needs the lxml (python-lxml) " +
-                           u"python module which is not installed.")
         return res
 
 
-def find_scraperclasses(comic, multiple_allowed=False):
-    """Get a list comic scraper classes. Can return more than one entries if
-    multiple_allowed is True, else it raises a ValueError if multiple
-    modules match. The match is a case insensitive substring search."""
+def find_scrapers(comic, multiple_allowed=False):
+    """Get a list comic scraper objects.
+
+    Can return more than one entry if multiple_allowed is True, else it raises
+    a ValueError if multiple modules match. The match is a case insensitive
+    substring search.
+    """
     if not comic:
         raise ValueError("empty comic name")
     candidates = []
     cname = comic.lower()
-    for scraperclass in get_scraperclasses():
-        lname = scraperclass.getName().lower()
+    for scrapers in get_scrapers(include_removed=True):
+        lname = scrapers.name.lower()
         if lname == cname:
             # perfect match
             if not multiple_allowed:
-                return [scraperclass]
+                return [scrapers]
             else:
-                candidates.append(scraperclass)
-        elif cname in lname:
-            candidates.append(scraperclass)
+                candidates.append(scrapers)
+        elif cname in lname and scrapers.url:
+            candidates.append(scrapers)
     if len(candidates) > 1 and not multiple_allowed:
-        comics = ", ".join(x.getName() for x in candidates)
+        comics = ", ".join(x.name for x in candidates)
         raise ValueError('multiple comics found: %s' % comics)
     elif not candidates:
         raise ValueError('comic %r not found' % comic)
     return candidates
 
 
-_scraperclasses = None
+_scrapers = None
 
 
-def get_scraperclasses():
+def get_scrapers(include_removed=False):
     """Find all comic scraper classes in the plugins directory.
     The result is cached.
     @return: list of Scraper classes
     @rtype: list of Scraper
     """
-    global _scraperclasses
-    if _scraperclasses is None:
+    global _scrapers
+    if _scrapers is None:
         out.debug(u"Loading comic modules...")
         modules = loader.get_modules('plugins')
-        plugins = loader.get_plugins(modules, Scraper)
-        _scraperclasses = sorted(plugins, key=lambda p: p.getName())
+        plugins = list(loader.get_plugins(modules, Scraper))
+        _scrapers = sorted([m for x in plugins for m in x.getmodules()],
+                           key=lambda p: p.name)
         check_scrapers()
-        out.debug(u"... %d modules loaded." % len(_scraperclasses))
-    return _scraperclasses
+        out.debug(u"... %d modules loaded from %d classes." % (
+            len(_scrapers), len(plugins)))
+    if include_removed:
+        return _scrapers
+    else:
+        return [x for x in _scrapers if x.url]
 
 
 def check_scrapers():
-    """Check for duplicate scraper class names."""
+    """Check for duplicate scraper names."""
     d = {}
-    for scraperclass in _scraperclasses:
-        name = scraperclass.getName().lower()
+    for scraper in _scrapers:
+        name = scraper.name.lower()
         if name in d:
-            name1 = scraperclass.getName()
-            name2 = d[name].getName()
+            name1 = scraper.name
+            name2 = d[name].name
             raise ValueError('duplicate scrapers %s and %s found' %
                              (name1, name2))
-        d[name] = scraperclass
-
-
-def make_scraper(classname, scraperType=_BasicScraper, **attributes):
-    """Make a new scraper class with given name and attributes."""
-    return type(classname, (scraperType,), attributes)
+        d[name] = scraper

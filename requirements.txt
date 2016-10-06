@@ -1,3 +1,5 @@
-requests>=2.0
-pbr
+colorama
 lxml
+pbr
+requests>=2.0
+six

@@ -8,9 +8,8 @@ from __future__ import absolute_import, division, print_function
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter
 from ..util import tagre
-from .common import _WordPressScraper
+from .common import _WordPressScraper, xpath_class
 
 
 class OctopusPie(_ParserScraper):
@@ -23,43 +22,38 @@ class OctopusPie(_ParserScraper):
     help = 'Index format: yyyy-mm-dd/nnn-strip-name'
 
 
-class OddFish(_BasicScraper):
-    url = 'http://www.odd-fish.net/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % 'tv-tentacles'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl,
-                               after="navi-prev"))
-    help = 'Index format: stripname'
-
-
-class Oglaf(_BasicScraper):
+class Oglaf(_ParserScraper):
     url = 'http://oglaf.com/'
     stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(http://media\.oglaf\.com/comic/[^"]+)', before="strip"))
-    prevSearch = (
-      # first search for "next page" URLs
-      compile(tagre("a", "href", r'(/[^"]+/\d+/)') + tagre("div", "id", "nx")),
-      # then for "prev story"
-      compile(tagre("a", "href", r'(/[^"]+)') + tagre("div", "id", "pvs?")),
-    )
-    help = 'Index format: stripname'
+    imageSearch = '//img[@id="strip"]'
+    # search for "previous story" only
+    prevSearch = '//a[div[@id="pvs"]]'
+    # search for "next page"
+    nextSearch = '//a[div[@id="nx"]]'
+    multipleImagesPerStrip = True
     adult = True
 
+    def fetchUrls(self, url, data, search):
+        urls = []
+        urls.extend(super(Oglaf, self).fetchUrls(url, data, search))
+        if search == self.imageSearch:
+            try:
+                nexturls = self.fetchUrls(url, data, self.nextSearch)
+            except ValueError:
+                pass
+            else:
+                while nexturls and nexturls[0].startswith(url):
+                    data = self.getPage(nexturls[0])
+                    urls.extend(super(Oglaf, self).fetchUrls(nexturls, data, search))
+                    nexturls = self.fetchUrls(url, data, self.nextSearch)
+        return urls
 
-class OhJoySexToy(_BasicScraper):
+
+class OhJoySexToy(_WordPressScraper):
     url = 'http://www.ohjoysextoy.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % 'introduction'
-    imageSearch = compile(tagre("div", "class", r'comicpane') + "\s*.*\s*" +
-                          tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl,
-                               after='navi navi-prev'))
-    textSearch = compile(tagre("div", "class", r'comicpane') + "\s*.*\s*" +
-                         tagre("img", "alt", r'([^"]+)'))
-    help = 'Index Format: name'
+    firstStripUrl = url + 'introduction/'
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
+    textSearch = '//div[@id="comic"]//img/@alt'
     adult = True
 
 
@@ -71,28 +65,17 @@ class OkCancel(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(%sstrips/okcancel\d{8}\.gif)' % rurl))
     prevSearch = compile(tagre("div", "class", "previous") +
                          tagre("a", "href", r'(%scomic/\d{1,4}\.html)' % rurl))
-    starter = indirectStarter(url, prevSearch)
     help = 'Index format: yyyymmdd'
 
 
 class OmakeTheater(_ParserScraper):
-    url = 'http://omaketheater.com/comics/'
-    stripUrl = url + '%s/'
+    url = 'http://omaketheater.com/comic/'
+    stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1'
     css = True
     imageSearch = ".comicImage img"
     prevSearch = ".previous a"
     help = 'Index format: number (unpadded)'
-
-
-class OneQuestion(_BasicScraper):
-    url = 'http://onequestioncomic.com/'
-    stripUrl = url + 'comic.php?strip_id=%s'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'((?:\.\./)?istrip_files/strips/\d+\.\w{3,4})'))
-    prevSearch = compile(tagre("a", "href", r'(comic\.php\?strip_id=\d+)') +
-                         tagre("img", "src", r'img/arrow_prev\.jpg'))
-    help = 'Index format: n (unpadded)'
 
 
 class OnTheEdge(_WordPressScraper):
@@ -104,13 +87,12 @@ class OnTheFastrack(_BasicScraper):
     url = 'http://onthefastrack.com/'
     stripUrl = url + 'comics/%s'
     firstStripUrl = stripUrl % 'november-13-2000'
-    imageSearch = compile(r'(http://safr\.kingfeatures\.com/idn/cnfeed/zone/js/content\.php\?file=.+)"')
+    imageSearch = compile(r'(https://safr\.kingfeatures\.com/idn/cnfeed/zone/js/content\.php\?file=.+)"')
     prevSearch = compile(r'id="previouscomic" class="button white"><a href="(%scomics/[a-z0-9-]+/)"' % url)
     help = 'Index format: monthname-dd-yyyy'
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        name = pageUrl.rsplit('/', 3)[2]
+    def namer(self, image_url, page_url):
+        name = page_url.rsplit('/', 3)[2]
         if name == "onthefastrack.com":
                 import datetime
                 name = datetime.date.today().strftime("%B-%d-%Y")
@@ -119,28 +101,12 @@ class OnTheFastrack(_BasicScraper):
         return "%s.gif" % name.title()
 
 
-class Optipess(_BasicScraper):
+class Optipess(_WordPressScraper):
     url = 'http://www.optipess.com/'
-    stripUrl = url + '%s'
     firstStripUrl = url + '2008/12/01/jason-friend-of-the-butterflies/'
-    imageSearch = compile(tagre("img", "src",
-                                r'(%scomics/[x|\d]+[^"]+\.[^"]+)' % url))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)',
-                               after="navi navi-prev"))
-    textSearch = compile(tagre("img", "alt", r'([^"]+)', before=url))
-    help = 'Index format: yyyy/mm/dd/stripname'
-
-
-class OrnerBoy(_BasicScraper):
-    url = 'http://www.orneryboy.com/'
-    rurl = escape(url)
-    stripUrl = url + 'index.php?comicID=%s'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(comics/\d+\.[^"]+)'))
-    prevSearch = compile(tagre("a", "href",
-                               r'(%sindex\.php\?comicID=\d+)' % rurl) +
-                         tagre("img", "src", r'images/prev_a\.gif'))
-    help = 'Index format: number'
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
+    textSearch = '//div[@id="comic"]//img/@alt'
+    textOptional = True
 
 
 class OurHomePlanet(_BasicScraper):

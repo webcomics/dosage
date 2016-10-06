@@ -1,32 +1,36 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
 
-from re import compile
+from __future__ import absolute_import, division, print_function
 
-from ..scraper import _BasicScraper
+from ..scraper import _ParserScraper
 from ..helpers import bounceStarter
-from ..util import tagre
 
-
-class xkcd(_BasicScraper):
+class Xkcd(_ParserScraper):
+    name = 'xkcd'
     url = 'http://xkcd.com/'
-    starter = bounceStarter(url, compile(tagre("a", "href", r'(/\d+/)', before="next")))
+    starter = bounceStarter
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(//imgs\.xkcd\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/\d+/)', before="prev"))
+    imageSearch = '//div[@id="comic"]/img'
+    prevSearch = '//a[@rel="prev"]'
+    nextSearch = '//a[@rel="next"]'
     help = 'Index format: n (unpadded)'
-    textSearch = compile(tagre("img", "title", r'([^"]+)', before=r'//imgs\.xkcd\.com/comics/'))
+    textSearch = '//div[@id="comic"]/img/@title'
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        index = int(pageUrl.rstrip('/').rsplit('/', 1)[-1])
-        name = imageUrl.rsplit('/', 1)[-1].split('.')[0]
+    def namer(self, image_url, page_url):
+        index = int(page_url.rstrip('/').rsplit('/', 1)[-1])
+        name = image_url.rsplit('/', 1)[-1].split('.')[0]
         return '%03d-%s' % (index, name)
 
-    @classmethod
-    def imageUrlModifier(cls, url, data):
+    def imageUrlModifier(self, url, data):
         if url and '/large/' in data:
             return url.replace(".png", "_large.png")
         return url
+
+    def shouldSkipUrl(self, url, data):
+        return url in (
+            self.stripUrl % '1663',  # Garden
+        )

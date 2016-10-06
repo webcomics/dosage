@@ -3,40 +3,27 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2016 Tobias Gruetzmacher
 
+from __future__ import absolute_import, division, print_function
+
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter
 from ..util import tagre
+from .common import _WordPressScraper, xpath_class
 
 
-class DailyDose(_BasicScraper):
-    url = 'http://dailydoseofcomics.com/'
-    starter = indirectStarter(url,
-      compile(tagre("a", "href", r'(http://dailydoseofcomics\.com/[^"]+)', after="preview")))
-    stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'([^"]+)', before="align(?:none|center)"))
-    prevSearch = compile(tagre("a", "href", r'(http://dailydoseofcomics\.com/[^"]+)', after="prev"))
-    help = 'Index format: stripname'
-
-
-class DamnLol(_BasicScraper):
+class DamnLol(_ParserScraper):
     url = 'http://www.damnlol.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s.html'
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
-    imageSearch = (
-        compile(tagre("img", "src", r'(%si/[^"]+)' % rurl)),
-        compile(tagre("img", "src", r'(%spics/[^"]+)' % rurl)),
-    )
-    help = 'Index format: stripname-number'
-    starter = bounceStarter(url,
-        compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="next")))
+    # Classes for next and previous seem to be swapped...
+    prevSearch = '//a[%s]' % xpath_class("next")
+    nextSearch = '//a[%s]' % xpath_class("previous")
+    imageSearch = '//img[@id="post-image"]'
+    starter = bounceStarter
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        ext = imageUrl.rsplit('.', 1)[1]
-        path = pageUrl.rsplit('/', 1)[1][:-5]
+    def namer(self, image_url, page_url):
+        ext = image_url.rsplit('.', 1)[1]
+        path = page_url.rsplit('/', 1)[1][:-5]
         stripname, number = path.rsplit('-', 1)
         return '%s-%s.%s' % (number, stripname, ext)
 
@@ -47,7 +34,7 @@ class Damonk(_BasicScraper):
     firstStripUrl = stripUrl % '20060522'
     imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/d/\d+\.html)') +
-      tagre("img", "src", r'/images/previous_day\.gif'))
+                         tagre("img", "src", r'/images/previous_day\.gif'))
     help = 'Index format: yyyymmdd'
 
 
@@ -64,19 +51,15 @@ class DarthsAndDroids(_BasicScraper):
     url = 'http://www.darthsanddroids.net/'
     stripUrl = url + 'episodes/%s.html'
     firstStripUrl = stripUrl % '0001'
-    prevSearch = compile(tagre("a", "href", r'(/episodes/\d\d\d\d.html)') + '&lt;PREVIOUS' )
+    prevSearch = compile(tagre("a", "href", r'(/episodes/\d\d\d\d.html)') +
+                         '&lt;PREVIOUS')
     imageSearch = compile(tagre("img", "src", r'(/comics/darths\d\d\d\d\.jpg)'))
 
 
-class DasLebenIstKeinPonyhof(_BasicScraper):
+class DasLebenIstKeinPonyhof(_WordPressScraper):
     url = 'http://sarahburrini.com/wordpress/'
-    rurl = escape(url)
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = stripUrl % 'mein-erster-webcomic'
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/\d+-\d+-\d+[^"]+)' % rurl))
+    firstStripUrl = url + 'comic/mein-erster-webcomic/'
     multipleImagesPerStrip = True
-    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl, after="navi-prev"))
-    help = 'Index format: stripname'
     lang = 'de'
 
 
@@ -87,15 +70,6 @@ class DeadWinter(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r"(/static/page/strip/\d+[^']+)", quote="'"))
     prevSearch = compile(tagre("a", "href", r'(/page/\d+)') + "Previous")
     help = 'Index format: number'
-
-
-class DeathToTheExtremist(_BasicScraper):
-    url = 'http://www.dtecomic.com/'
-    stripUrl = url + '?n=%s'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = compile(r'"(comics/.*?)"')
-    prevSearch = compile(r'</a> <a href="(\?n=.*?)"><.+?/aprev.gif"')
-    help = 'Index format: nnn'
 
 
 class DeepFried(_BasicScraper):
@@ -118,12 +92,12 @@ class DemolitionSquad(_ParserScraper):
     lang = 'de'
 
 
-class DerTodUndDasMaedchen(_BasicScraper):
+class DerTodUndDasMaedchen(_ParserScraper):
     url = 'http://www.cartoontomb.de/deutsch/tod2.php'
     stripUrl = url + '?bild=%s.jpg'
     firstStripUrl = stripUrl % '00_01_01'
-    imageSearch = compile(tagre("img", "src", r"(\.\./images/tod/teil2/[^']+)", quote="'"))
-    prevSearch = compile(tagre("a", "href", r"(/deutsch/tod2\.php\?bild=[^']+)", quote="'") + "zur&uuml;ck")
+    imageSearch = '//img[contains(@src, "images/tod/teil2")]'
+    prevSearch = u'//a[text()="zur\u00FCck"]'
     help = 'Index format: nn_nn_nn'
     lang = 'de'
 
@@ -133,38 +107,52 @@ class DieFruehreifen(_BasicScraper):
     stripUrl = url + '?id=%s&order=DESC'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'([^"]*/strips/[Ff]rueh_?[Ss]trip_\d+.jpg)'))
-    prevSearch = compile(tagre("a", "href", r"(index\.php\?id=\d+&order=DESC)") + tagre("img","id",r"naechster"))
+    prevSearch = compile(tagre("a", "href", r"(index\.php\?id=\d+&order=DESC)") +
+                         tagre("img", "id", r"naechster"))
     help = 'Index format: n (unpadded)'
     lang = 'de'
 
 
-class DieselSweeties(_BasicScraper):
-    url = 'http://www.dieselsweeties.com/'
-    stripUrl = url + 'archive/%s'
+class DieselSweeties(_ParserScraper):
+    url = 'http://dieselsweeties.com/'
+    stripUrl = url + 'ics/%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(/hstrips/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/archive/\d+)') +
-      tagre("img", "src", r'(?:http://www\.dieselsweeties\.com/ximages/blackbackarrow160.png|/ximages/prev\.gif)'))
+    imageSearch = '//img[@class="xomic"]'
+    prevSearch = '//div[@id="prev"]//a[contains(text(), "previous")]'
+    latestSearch = prevSearch
+    starter = indirectStarter
     help = 'Index format: n (unpadded)'
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        index = int(imageUrl.split('/')[-1].split('.')[0])
-        return 'sw%02d' % (index,)
+
+class DieselSweetiesOld(_ParserScraper):
+    url = 'http://dieselsweeties.com/archive/'
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//img[contains(@src, "/hstrips/")]'
+    prevSearch = '//a[contains(@title, "previous")]'
+    help = 'Index format: n (unpadded)'
+    endOfLife = True
+
+    def starter(self):
+        return self.stripUrl % '4000'
+
+    def namer(self, image_url, page_url):
+        index = int(image_url.split('/')[-1].split('.')[0])
+        return 'sw%02d' % index
 
 
-class Dilbert(_BasicScraper):
+class Dilbert(_ParserScraper):
     url = 'http://dilbert.com/'
-    stripUrl = url + '/strip/%s/'
+    stripUrl = url + 'strip/%s'
     firstStripUrl = stripUrl % '1989-04-16'
-    starter = indirectStarter(url, compile(tagre("a", "href", r'(http://dilbert.com/strip/[0-9-]*)', after="Click to see")))
-    prevSearch = compile(tagre("a", "href", r'(/strip/\d+-\d+-\d+)', after="Older Strip"))
-    imageSearch = compile(tagre("img", "src", r'(http://assets.amuniversal.com/\w+)'))
+    starter = indirectStarter
+    prevSearch = '//div[%s]/a' % xpath_class('nav-left')
+    imageSearch = '//img[%s]' % xpath_class('img-comic')
+    latestSearch = '//a[@class="img-comic-link"]'
     help = 'Index format: yyyy-mm-dd'
 
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        name = pageUrl.rsplit("/", 1)[1]
+    def namer(self, image_url, page_url):
+        name = page_url.rsplit("/", 1)[1]
         return "%s" % name
 
 
@@ -174,19 +162,9 @@ class DMFA(_BasicScraper):
     firstStripUrl = stripUrl % '001'
     imageSearch = compile(tagre("img", "src", r'((?:Comics/|Vol)[^"]+)'))
     multipleImagesPerStrip = True
-    prevSearch = compile(tagre("a", "href", r'((?:Comics/)?Vol[^"]+)')+
-      tagre("img", "src", r'(?:../)?Images/comicprev\.gif'))
+    prevSearch = compile(tagre("a", "href", r'((?:Comics/)?Vol[^"]+)') +
+                         tagre("img", "src", r'(?:../)?Images/comicprev\.gif'))
     help = 'Index format: nnn (normally, some specials)'
-
-
-class DoctorCat(_ParserScraper):
-    url = "http://doctorcatmd.com/"
-    stripUrl = url + "comic/%s"
-    firstStripUrl = stripUrl % "doctor-cat"
-    css = True
-    imageSearch = '#comic img'
-    prevSearch = '.navi-prev'
-    help = 'Index format: stripname'
 
 
 class DoemainOfOurOwn(_BasicScraper):
@@ -221,8 +199,11 @@ class DorkTower(_BasicScraper):
     rurl = escape(url)
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '1997/01/01/shadis-magazine-strip-1'
-    imageSearch = compile(tagre("div", "class", "entry-content") + "\s*<p>\s*" + tagre("img", "src", r'(%sfiles/[0-9]+/[0-9]+/[^"]*Dork[^"]+\.(?:gif|jpg))' % rurl, after=' alt'))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl)+"Previous")
+    imageSearch = compile(tagre("div", "class", "entry-content") +
+                          "\s*<p>\s*" +
+                          tagre("img", "src", r'(%sfiles/[0-9]+/[0-9]+/[^"]*Dork[^"]+\.(?:gif|jpg))' % rurl,
+                                after=' alt'))
+    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl) + "Previous")
     help = 'Index format: yyyy/mm/dd/stripname-dd-mm-yy'
 
 
@@ -235,11 +216,11 @@ class Dracula(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class DreamKeepersPrelude(_BasicScraper):
+class DreamKeepersPrelude(_ParserScraper):
     url = 'http://www.dreamkeeperscomic.com/Prelude.php'
     stripUrl = url + '?pg=%s'
-    imageSearch = compile(r'(images/PreludeNew/.+?)"')
-    prevSearch = compile(r'(Prelude.php\?pg=.+?)"')
+    imageSearch = '//div[@class="Preludecomic"]/table//a/img'
+    prevSearch = '//a[@id="prev"]'
     help = 'Index format: n'
 
 
@@ -250,9 +231,12 @@ class DresdenCodak(_BasicScraper):
     firstStripUrl = url + '2007/02/08/pom/'
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl) +
-        tagre("img", "src", r"%sm_prev2?\.png" % rurl, quote=""))
-    starter = indirectStarter(url, compile(tagre("div", "id", "preview") +
-        tagre("a", "href", r'(%s\d+/\d+/\d+/[^"]+)' % rurl)))
+                         tagre("img", "src", r"%sm_prev2?\.png" % rurl,
+                               quote=""))
+    latestSearch = compile(tagre("div", "id", "preview") +
+                           tagre("a", "href",
+                                 r'(%s\d+/\d+/\d+/[^"]+)' % rurl))
+    starter = indirectStarter
 
 
 class DrFun(_BasicScraper):
@@ -309,10 +293,9 @@ class DumbingOfAge(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
     help = 'Index format: yyyy/comic/book-num/seriesname/stripname'
 
-class DungeonsAndDenizens(_BasicScraper):
+
+class DungeonsAndDenizens(_WordPressScraper):
     url = 'http://dungeond.com/'
-    stripUrl = url + r'\d+/\d+/\d+/%s/'
-    firstStripUrl = stripUrl % '08232005'
-    imageSearch = compile(tagre("img", "src", r'(%sfiles//comics/[^"]+)' % url))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % url) + "Previous")
-    help = 'Index format: ddmmyyyy'
+    firstStripUrl = url + '2005/08/23/08232005/'
+    endOfLife = True
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')

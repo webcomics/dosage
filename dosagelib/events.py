@@ -1,15 +1,17 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
+# Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2016 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
+
 import os
 import datetime
 import time
-import xml.dom.minidom
-try:
-    from urllib.parse import quote as url_quote
-except ImportError:
-    from urllib import quote as url_quote
+from six.moves.urllib.parse import quote as url_quote
 import codecs
 import json
+
 from . import atom, rss, util, configuration
 from .output import out
 
@@ -47,12 +49,23 @@ class EventHandler(object):
         """Emit a start event. Should be overridden in subclass."""
         pass
 
-    def comicDownloaded(self, comic, filename, text=None):
-        """Emit a comic downloaded event. Should be overridden in subclass."""
+    def comicDownloaded(self, comic, filename):
+        """Emit a comic downloaded event. Should be overridden in subclass.
+        Parameters are:
+
+        comic: The ComicImage class calling this event
+        filename: The target filename
+        """
         pass
 
-    def comicPageLink(self, comic, url, prevUrl):
-        """Emit an event to inform the handler about links between comic pages. Should be overridden in subclass."""
+    def comicPageLink(self, scraper, url, prevUrl):
+        """Emit an event to inform the handler about links between comic pages.
+        Should be overridden in subclass. Parameters are:
+
+        scraper: The Scraper class calling this event
+        url: The current page url
+        prevUrl: The previous page url
+        """
         pass
 
     def end(self):
@@ -83,20 +96,20 @@ class RSSEventHandler(EventHandler):
         self.newfile = True
         self.rss = rss.Feed('Daily Dosage', link, 'Comics for %s' % time.strftime('%Y/%m/%d', today))
 
-    def comicDownloaded(self, comic, filename, text=None):
+    def comicDownloaded(self, comic, filename):
         """Write RSS entry for downloaded comic."""
         imageUrl = self.getUrlFromFilename(filename)
         size = None
         if self.allowdownscale:
             size = getDimensionForImage(filename, MaxImageSize)
-        title = '%s - %s' % (comic.name, os.path.basename(filename))
+        title = '%s - %s' % (comic.scraper.name, os.path.basename(filename))
         pageUrl = comic.referrer
         description = '<img src="%s"' % imageUrl
         if size:
             description += ' width="%d" height="%d"' % size
         description += '/>'
-        if text:
-            description += '<br/>%s' % text
+        if comic.text:
+            description += '<br/>%s' % comic.text
         description += '<br/><a href="%s">View Comic Online</a>' % pageUrl
         args = (
             title,
@@ -257,7 +270,7 @@ class HtmlEventHandler(EventHandler):
 <title>Comics for %s</title>
 </head>
 <body>
-'''  % (self.encoding, configuration.App, time.strftime('%Y/%m/%d', today)))
+''' % (self.encoding, configuration.App, time.strftime('%Y/%m/%d', today)))
         self.addNavLinks()
         self.html.write(u'<ul>\n')
         # last comic name (eg. CalvinAndHobbes)
@@ -267,7 +280,7 @@ class HtmlEventHandler(EventHandler):
 
     def comicDownloaded(self, comic, filename, text=None):
         """Write HTML entry for downloaded comic."""
-        if self.lastComic != comic.name:
+        if self.lastComic != comic.scraper.name:
             self.newComic(comic)
         size = None
         if self.allowdownscale:
@@ -282,7 +295,7 @@ class HtmlEventHandler(EventHandler):
         self.html.write('/>\n')
         if text:
             self.html.write(u'<br/>%s\n' % text)
-        self.lastComic = comic.name
+        self.lastComic = comic.scraper.name
         self.lastUrl = pageUrl
 
     def newComic(self, comic):
@@ -291,7 +304,7 @@ class HtmlEventHandler(EventHandler):
             self.html.write(u'</li>\n')
         if self.lastComic is not None:
             self.html.write(u'</ul>\n')
-        self.html.write(u'<li>%s</li>\n' % comic.name)
+        self.html.write(u'<li>%s</li>\n' % comic.scraper.name)
         self.html.write(u'<ul>\n')
 
     def end(self):
@@ -315,47 +328,48 @@ class JSONEventHandler(EventHandler):
         """Start with empty data."""
         self.data = {}
 
-    def jsonFn(self, comic):
+    def jsonFn(self, scraper):
         """Get filename for the JSON file for a comic."""
-        fn = os.path.join(self.basepath, comic, 'dosage.json')
+        fn = os.path.join(scraper.get_download_dir(self.basepath), 'dosage.json')
         fn = os.path.abspath(fn)
         return fn
 
-    def getComicData(self, comic):
+    def getComicData(self, scraper):
         """Return dictionary with comic info."""
-        if comic not in self.data:
-            if os.path.exists(self.jsonFn(comic)):
-                with codecs.open(self.jsonFn(comic), 'r', self.encoding) as f:
-                    self.data[comic] = json.load(f)
+        if scraper not in self.data:
+            if os.path.exists(self.jsonFn(scraper)):
+                with codecs.open(self.jsonFn(scraper), 'r', self.encoding) as f:
+                    self.data[scraper] = json.load(f)
             else:
-                self.data[comic] = {'pages':{}}
-        return self.data[comic]
+                self.data[scraper] = {'pages': {}}
+        return self.data[scraper]
 
-    def getPageInfo(self, comic, url):
+    def getPageInfo(self, scraper, url):
         """Return dictionary with comic page info."""
-        comicData = self.getComicData(comic)
+        comicData = self.getComicData(scraper)
         if url not in comicData['pages']:
-            comicData['pages'][url] = {'images':{}}
+            comicData['pages'][url] = {'images': {}}
         return comicData['pages'][url]
 
-    def comicDownloaded(self, comic, filename, text=None):
+    def comicDownloaded(self, comic, filename):
         """Add URL-to-filename mapping into JSON."""
-        pageInfo = self.getPageInfo(comic.name, comic.referrer)
+        pageInfo = self.getPageInfo(comic.scraper, comic.referrer)
         pageInfo['images'][comic.url] = os.path.basename(filename)
 
-    def comicPageLink(self, comic, url, prevUrl):
+    def comicPageLink(self, scraper, url, prevUrl):
         """Write previous link into JSON."""
-        pageInfo = self.getPageInfo(comic, url)
+        pageInfo = self.getPageInfo(scraper, url)
         pageInfo['prev'] = prevUrl
 
     def end(self):
         """Write all JSON data to files."""
-        for comic in self.data:
-            with codecs.open(self.jsonFn(comic), 'w', self.encoding) as f:
-                json.dump(self.data[comic], f, indent=2, separators=(',', ': '), sort_keys=True)
+        for scraper in self.data:
+            with codecs.open(self.jsonFn(scraper), 'w', self.encoding) as f:
+                json.dump(self.data[scraper], f, indent=2, separators=(',', ': '), sort_keys=True)
 
 
 _handler_classes = {}
+
 
 def addHandlerClass(clazz):
     """Register handler class."""
@@ -376,6 +390,7 @@ def getHandlerNames():
 
 _handlers = []
 
+
 def addHandler(name, basepath=None, baseurl=None, allowDownscale=False):
     """Add an event handler with given name."""
     if basepath is None:
@@ -391,15 +406,15 @@ class MultiHandler(object):
         for handler in _handlers:
             handler.start()
 
-    def comicDownloaded(self, comic, filename, text=None):
+    def comicDownloaded(self, comic, filename):
         """Emit comic downloaded events for handlers."""
         for handler in _handlers:
-            handler.comicDownloaded(comic, filename, text=text)
+            handler.comicDownloaded(comic, filename)
 
-    def comicPageLink(self, comic, url, prevUrl):
+    def comicPageLink(self, scraper, url, prevUrl):
         """Emit an event to inform the handler about links between comic pages. Should be overridden in subclass."""
         for handler in _handlers:
-            handler.comicPageLink(comic, url, prevUrl)
+            handler.comicPageLink(scraper, url, prevUrl)
 
     def end(self):
         """Emit end events for handlers."""
@@ -408,6 +423,7 @@ class MultiHandler(object):
 
 
 multihandler = MultiHandler()
+
 
 def getHandler():
     """Get installed event handler."""
