@@ -130,6 +130,10 @@ class GoblinsComic(_ParserScraper):
     help = 'Index format: ddmmyyyy'
 
 
+class GodChild(_WordPressScraper):
+    url = 'http://godchild.keenspot.com/'
+
+
 class GoGetARoomie(_ComicControlScraper):
     url = 'http://www.gogetaroomie.com'
 

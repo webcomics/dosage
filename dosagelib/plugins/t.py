@@ -10,7 +10,8 @@ from re import compile, escape, IGNORECASE
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
-from .common import _ComicControlScraper, _TumblrScraper, _WordPressScraper
+from .common import (_ComicControlScraper, _TumblrScraper, _WordPressScraper,
+                     xpath_class)
 
 
 class TheBrads(_BasicScraper):
@@ -174,6 +175,14 @@ class TwoGuysAndGuy(_BasicScraper):
                                after='title="Previous"'))
     help = 'Index format: number'
     adult = True
+
+
+class Twokinds(_ParserScraper):
+    url = 'http://twokinds.keenspot.com/'
+    imageSearch = ('//p[@id="cg_img"]//img',
+                   '//article/p//img')
+    prevSearch = ('//a[@id="cg_back"]',
+                  '//a[%s]' % xpath_class('navprev'))
 
 
 class TwoLumps(_BasicScraper):

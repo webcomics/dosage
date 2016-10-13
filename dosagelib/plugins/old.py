@@ -16,6 +16,7 @@ class Removed(Scraper):
         'block': 'The comic site is blocking us.',
         'unk': 'Comic was removed for an unknown reason.',
         'brk': 'Comic navigation is broken.',
+        'mov': 'Comic moved to a new hoster and no new module was written.',
     }
 
     def __init__(self, name, reason='del'):
@@ -238,6 +239,8 @@ class Removed(Scraper):
             cls('GunnerkrigCourt'),
             cls('HorribleVille'),
             cls('KatzenfutterGeleespritzer'),
+            cls('KeenSpot/Adventurers', 'mov'),
+            cls('KeenSpot/AntiheroForHire', 'mov'),
             cls('KillerKomics'),
             cls('Lint'),
             cls('LinuxComFridayFunnies'),
@@ -350,7 +353,7 @@ class Renamed(Scraper):
 
     @classmethod
     def getmodules(cls):
-        return [
+        return (
             # Renamed in 2.16
             cls('1997', '1977'),
             cls('ComicFury/Alya', 'ComicFury/AlyaTheLastChildOfLight'),
@@ -361,12 +364,15 @@ class Renamed(Scraper):
             cls('ComicFury/ICanSeeYourFeels', 'ComicFury/SeeYourFeels'),
             cls('ComicFury/MAGISAupdatesMonWedFri', 'ComicFury/MAGISAPARASAYOupdatesMonFri'),
             cls('ComicFury/ThomasAndZachary', 'ComicFury/ThomasAndZacharyArchives'),
+            cls('ComicGenesis/TheLounge', 'KeenSpot/TheLounge'),
             cls('Creators/ArchieinSpanish', 'Creators/ArchieSpanish'),
             cls('Creators/HeathcliffinSpanish', 'Creators/HeathcliffSpanish'),
             cls('Creators/TheWizardofIdinSpanish', 'Creators/WizardOfIdSpanish'),
             cls('DarkWings', 'Eryl'),
             cls('FoulLanguage', 'GoComics/FowlLanguage'),
             cls('GoComics/BloomCounty2015', 'GoComics/BloomCounty2016'),
+            cls('KeenSpot/Newshounds', 'KeenSpot/InfinityRefugees'),
+            cls('KeenSpot/TheGodChild', 'GodChild'),
             cls('Wulffmorgenthaler', 'WuMo'),
             cls('ZebraGirl', 'ComicFury/ZebraGirl'),
-        ]
+        )

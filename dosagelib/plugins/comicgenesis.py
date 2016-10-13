@@ -119,7 +119,6 @@ class ComicGenesis(_BasicScraper):
             cls('TheAdventuresofKaniraBaxter', 'kanirabaxter'),
             cls('TheAdventuresofVindibuddSuperheroInTraining', 'vindibudd', last='20070720'),
             cls('TheEasyBreather', 'easybreather'),
-            cls('TheLounge', 'thelounge'),
             cls('TheMisadventuresofOkk', 'okk'),
             cls('ThePath', 'thepath'),
             cls('TheTalesofKalduras', 'kalduras'),
