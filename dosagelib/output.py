@@ -17,12 +17,12 @@ import io
 import six
 
 try:
-    import curses
+    from shutil import get_terminal_size
 except ImportError:
-    curses = None
+    from backports.shutil_get_terminal_size import get_terminal_size
 
 import colorama
-from colorama import Fore, Style, win32
+from colorama import Fore, Style
 
 
 lock = threading.Lock()
@@ -109,7 +109,7 @@ class Output(object):
                 self.stream.write(u'%s%s> ' % (timestamp, self.context))
             elif self.context is None:
                 self.stream.write(u'%s%s> ' % (timestamp, get_threadname()))
-            if color and self.has_color:
+            if color and self.is_tty:
                 s = u'%s%s%s' % (color, s, Style.RESET_ALL)
             self.stream.write(six.text_type(s))
             self.stream.write(six.text_type(os.linesep))
@@ -122,43 +122,19 @@ class Output(object):
                 self.write(line.rstrip(u'\n'), level=level)
 
     @property
-    def has_color(self):
-        if not self.is_tty:
-            return False
-        elif os.name == 'nt':
-            return True
-        elif curses:
-            try:
-                curses.setupterm(os.environ.get("TERM"),
-                                 self._base_stream.fileno())
-                # More than 8 colors are good enough.
-                return curses.tigetnum("colors") >= 8
-            except curses.error:
-                return False
-        return False
-
-    @property
     def width(self):
         """Get width of this output."""
         if not self.is_tty:
             return self.DEFAULT_WIDTH
-        elif os.name == 'nt':
-            csbi = win32.GetConsoleScreenBufferInfo(win32.STDOUT)
-            return csbi.dwSize.X
-        elif curses:
-            try:
-                curses.setupterm(os.environ.get("TERM"),
-                                 self._base_stream.fileno())
-                return curses.tigetnum("cols")
-            except curses.error:
-                pass
-        return self.DEFAULT_WIDTH
+        try:
+            return get_terminal_size().columns
+        except ValueError:
+            return self.DEFAULT_WIDTH
 
     @property
     def is_tty(self):
         """Is this output stream a terminal?"""
-        return (hasattr(self._base_stream, "isatty") and
-                self._base_stream.isatty())
+        return getattr(self._base_stream, "isatty", lambda: False)()
 
     @contextlib.contextmanager
     def temporary_context(self, context):
