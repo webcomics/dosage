@@ -256,7 +256,6 @@ class ShotgunShuffle(_WordPressScraper):
 
 
 class SinFest(_BasicScraper):
-    name = 'KeenSpot/SinFest'
     url = 'http://www.sinfest.net/'
     stripUrl = url + 'view.php?date=%s'
     imageSearch = compile(tagre("img", "src", r'(btphp/comics/.+)',
@@ -383,6 +382,7 @@ class SpaceTrawler(_WordPressScraper):
     prevSearch = '//a[%s]' % xpath_class('navi-prev')
     endOfLife = True
 
+
 class SpaceJunkArlia(_BasicScraper):
     url = 'http://spacejunkarlia.com'
     stripUrl = url + '/index.php?strip_id=%s'
@@ -390,6 +390,7 @@ class SpaceJunkArlia(_BasicScraper):
     imageSearch = compile(tagre('img', 'src', r'(comics/[^"]+)'))
     prevSearch = compile(tagre('a', 'href', r'(\?strip_id=\d+)') + '&lt;<')
     help = 'Index format: number'
+
 
 class Spamusement(_BasicScraper):
     url = 'http://spamusement.com/'

@@ -104,7 +104,6 @@ class ElfOnlyInn(_BasicScraper):
 
 
 class ElGoonishShive(_BasicScraper):
-    name = 'KeenSpot/ElGoonishShive'
     url = 'http://www.egscomics.com/'
     stripUrl = url + 'index.php?id=%s'
     imageSearch = compile(tagre("img", "src", r'(comics/[^"]+)',
@@ -115,7 +114,6 @@ class ElGoonishShive(_BasicScraper):
 
 
 class ElGoonishShiveNP(_BasicScraper):
-    name = 'KeenSpot/ElGoonishShiveNP'
     url = 'http://www.egscomics.com/egsnp.php'
     stripUrl = url + '?id=%s'
     imageSearch = compile(tagre("img", "src", r'(comics/[^"]+)',
