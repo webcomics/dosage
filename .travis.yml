@@ -13,7 +13,7 @@ addons:
       - libjpeg-dev
 # command to install dependencies
 install:
-  - pip install tox-travis coveralls
+  - pip install -U tox-travis coveralls setuptools
 # command to run tests
 script: tox
 after_success:
