@@ -303,10 +303,10 @@ class SMBC(_ParserScraper):
     stripUrl = url + 'index.php?id=%s'
     firstStripUrl = stripUrl % '1'
     multipleImagesPerStrip = True
-    imageSearch = ['//img[@id="comic"]', '//div[@id="aftercomic"]/img']
+    imageSearch = ['//img[@id="cc-comic"]', '//div[@id="aftercomic"]/img']
     prevSearch = '//a[@class="prev"]'
     help = 'Index format: nnnn'
-    textSearch = '//img[@id="comic"]/@title'
+    textSearch = '//img[@id="cc-comic"]/@title'
 
     def namer(self, image_url, page_url):
         """Remove random noise from name."""
