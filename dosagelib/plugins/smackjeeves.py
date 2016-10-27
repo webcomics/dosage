@@ -520,7 +520,7 @@ class SmackJeeves(_ParserScraper):
             cls('QueerQueen', sub='queerqueen'),
             cls('RANDOM', sub='randomthecomic'),
             cls('ROSIER', sub='rosier'),
-            cls('RainbowMansion', sub='rainbow-mansion', adult=True),
+            cls('RainbowMansion', sub='rainbow-mansion.thewebcomic.com', adult=True),
             cls('RainLGBT', sub='rainlgbt'),
             cls('RainxSasori', sub='rainxsasori', adult=True),
             cls('RareCandyTreatment', host='www.rarecandytreatment.com'),
