@@ -21,7 +21,11 @@ import subprocess
 from six.moves.html_parser import HTMLParser
 import six
 
-from .decorators import memoized
+try:
+    from functools import lru_cache
+except ImportError:
+    from backports.functools_lru_cache import lru_cache
+
 from .output import out
 from .configuration import UserAgent, AppName, App, SupportUrl
 
@@ -247,7 +251,7 @@ def check_robotstxt(url, session):
         raise IOError("%s is disallowed by %s" % (url, roboturl))
 
 
-@memoized
+@lru_cache()
 def get_robotstxt_parser(url, session=None):
     """Get a RobotFileParser for the given robots.txt URL."""
     rp = RobotFileParser()
