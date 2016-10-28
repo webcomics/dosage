@@ -16,7 +16,7 @@ Url = u'http://dosage.rocks/'
 SupportUrl = u'https://github.com/webcomics/dosage/issues'
 UserAgent = u"Mozilla/5.0 (compatible; %s/%s; +%s)" % (AppName, AppVersion,
                                                        Url)
-Copyright = u"""Copyright (C) 2004-2005 Tristan Seligmann and Jonathan Jacobs
+Copyright = u"""Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 Copyright (C) 2012-2014 Bastian Kleineidam
 Copyright (C) 2015-2016 Tobias Gruetzmacher
 """
