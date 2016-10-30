@@ -127,6 +127,9 @@ class ComicFuryUpdater(ComicListUpdater):
         "Schizmatic",
         "WakeTheSleepers",
         "WeightOfEternity",
+
+        # moved
+        "OopsComicAdventure",
     )
 
     def handle_url(self, url):

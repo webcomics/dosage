@@ -101,6 +101,10 @@ class OnTheFastrack(_BasicScraper):
         return "%s.gif" % name.title()
 
 
+class OopsComicAdventure(_WordPressScraper):
+    url = 'http://oopscomicadventure.com/'
+
+
 class Optipess(_WordPressScraper):
     url = 'http://www.optipess.com/'
     firstStripUrl = url + '2008/12/01/jason-friend-of-the-butterflies/'
