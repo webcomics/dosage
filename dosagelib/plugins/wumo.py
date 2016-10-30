@@ -14,12 +14,12 @@ class KindOfNormal(_ParserScraper):
 
     def __init__(self, name, url):
         super(KindOfNormal, self).__init__(name)
-        self.url = 'http://kindofnormal.com/' + url
+        self.url = 'http://wumo.com/' + url
 
     @classmethod
     def getmodules(cls):
-        return [
+        return (
             cls('MeAndDanielle', 'meanddanielle'),
             cls('TruthFacts', 'truthfacts'),
             cls('Wumo', 'wumo'),
-        ]
+        )
