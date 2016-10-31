@@ -144,38 +144,6 @@ class Science(_BasicScraper):
     help = 'Index format: stripname'
 
 
-class ScurryAndCover(_ParserScraper):
-    url = 'http://scurry.ink'
-    prevSearch = '//div[@id="prevpage"]/..'
-    nextSearch = '//div[@id="nextpage"]/..'
-    imageSearch = 'MARKER'
-
-    def fetchUrls(self, url, data, urlsearch):
-        if urlsearch != self.imageSearch:
-            return super(ScurryAndCover, self).fetchUrls(url, data, urlsearch)
-
-        # get javascript element and parse a variable value
-        scripts = data.xpath('//body/script[@type="text/javascript"]')
-
-        regex = compile("var fileRoot = '([^']+)")
-        for script in scripts:
-            images = regex.findall(script.text)
-            if len(images) > 0:
-                image = images[0]
-                return [self.url + '/images/pages/' + image + '-xsmall.png']
-
-    def starter(self):
-        """Go forward as far as possibe, then start."""
-        url = self.url
-        while True:
-            data = self.getPage(url)
-            try:
-                url = self.fetchUrl(url, data, self.nextSearch)
-            except ValueError:
-                break
-        return url
-
-
 class SequentialArt(_BasicScraper):
     url = 'http://www.collectedcurios.com/sequentialart.php'
     stripUrl = url + '?s=%s'
