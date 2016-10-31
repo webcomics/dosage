@@ -203,6 +203,7 @@ class Precocious(_ParserScraper):
     prevSearch = '//a[img[contains(@src, "/back_arrow")]]'
     help = 'Index format: yyyy/mm/dd'
 
+
 class PrinceOfSartar(_WordPressScraper):
     url = 'http://www.princeofsartar.com/'
     stripUrl = url + 'comic/%s/'
@@ -219,20 +220,13 @@ class PrinceOfSartar(_WordPressScraper):
         image_ext = image_url.rsplit('.', 1)[1]
         return '%s.%s' % (title, image_ext)
 
+
 class PS238(_ParserScraper):
     url = 'http://ps238.nodwick.com/'
     stripUrl = url + 'comic/%s/'
     imageSearch = '//div[@id="comic"]//img'
     prevSearch = '//a[@class="comic-nav-base comic-nav-previous"]'
     help = 'Index format: yyyy-mm-dd'
-
-
-class PunksAndNerds(_WordPressScraper):
-    url = 'http://www.punksandnerds.com/'
-    stripUrl = url + '?p=%s'
-    firstStripUrl = stripUrl % '15'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
-    help = 'Index format: nnn'
 
 
 class PvPonline(_BasicScraper):

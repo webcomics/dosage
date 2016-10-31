@@ -56,17 +56,10 @@ class EatLiver(_ParserScraper):
     latestSearch = '//a[@rel="bookmark"]'
 
 
-class EatThatToast(_BasicScraper):
+class EatThatToast(_WordPressScraper):
     url = 'http://eatthattoast.com/'
-    rurl = escape(url)
-    stripUrl = url + 'comic/%s'
-    firstStripUrl = stripUrl % 'thewizard/'
-    imageSearch = compile(tagre("div", "id", r'comic') + "\s*.*\s*" + tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl,
-                               after='comic-nav-base comic-nav-previous'))
-    textSearch = compile(tagre("div", "id", r'comic') + "\s*.*\s*" +
-                         tagre("img", "alt", r'([^"]+)'))
-    help = 'Index Format: name'
+    firstStripUrl = url + 'comic/thewizard/'
+    textSearch = _WordPressScraper.imageSearch + '/@alt'
 
 
 class EdibleDirt(_BasicScraper):
@@ -225,13 +218,12 @@ class ExtraLife(_BasicScraper):
     help = 'Index format: stripname'
 
 
-class ExtraOrdinary(_BasicScraper):
+class ExtraOrdinary(_ParserScraper):
     url = 'http://www.exocomics.com/'
-    rurl = escape(url)
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '01'
-    prevSearch = compile(tagre("a", "href", r'(%s\d+)' % rurl, before="prev"))
-    imageSearch = compile(tagre("img", "src", r'(%scomics/comics/\d+\.[^"]+)' % rurl))
+    prevSearch = '//a[%s]' % xpath_class('prev')
+    imageSearch = '//img[%s]' % xpath_class('image-style-main-comic')
     help = 'Index format: number'
 
 

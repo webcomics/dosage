@@ -167,11 +167,12 @@ class DMFA(_BasicScraper):
     help = 'Index format: nnn (normally, some specials)'
 
 
-class DoemainOfOurOwn(_BasicScraper):
+class DoemainOfOurOwn(_ParserScraper):
     url = 'http://www.doemain.com/'
     stripUrl = url + 'index.cgi/%s'
-    imageSearch = compile(r"<img border='0' width='\d+' height='\d+' src='(/strips/\d{4}/\d{6}-[^\']+)'")
-    prevSearch = compile(r'<a href="(/index\.cgi/\d{4}-\d{2}-\d{2})"><img width="\d+" height="\d+" border="\d+" alt="Previous Strip"')
+    imageSearch = '//td/img[contains(@src, "/strips/")]'
+    prevSearch = '//a[img[@alt="Previous Strip"]]'
+    endOfLife = True
     help = 'Index format: yyyy-mm-dd'
 
 
@@ -194,17 +195,11 @@ class DominicDeegan(_BasicScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
-class DorkTower(_BasicScraper):
+class DorkTower(_ParserScraper):
     url = 'http://www.dorktower.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '1997/01/01/shadis-magazine-strip-1'
-    imageSearch = compile(tagre("div", "class", "entry-content") +
-                          "\s*<p>\s*" +
-                          tagre("img", "src", r'(%sfiles/[0-9]+/[0-9]+/[^"]*Dork[^"]+\.(?:gif|jpg))' % rurl,
-                                after=' alt'))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl) + "Previous")
-    help = 'Index format: yyyy/mm/dd/stripname-dd-mm-yy'
+    firstStripUrl = url + '1997/01/01/shadis-magazine-strip-1/'
+    imageSearch = '//div[%s]//a/img' % xpath_class('entry-content')
+    prevSearch = '//a[%s][text()="Previous"]' % xpath_class('btn')
 
 
 class Dracula(_BasicScraper):

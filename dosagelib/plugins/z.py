@@ -23,9 +23,9 @@ class ZapComic(_ParserScraper):
 class Zapiro(_ParserScraper):
     url = 'http://mg.co.za/zapiro/'
     starter = bounceStarter
-    imageSearch = '//div[@id="cartoon_full_size"]//img'
-    prevSearch = '//li[@class="nav_older"]/a'
-    nextSearch = '//li[@class="nav_newer"]/a'
+    imageSearch = '//img[%s]' % xpath_class('img-fluid')
+    prevSearch = '//a[%s]' % xpath_class('left')
+    nextSearch = '//a[%s]' % xpath_class('right')
 
     def namer(self, image_url, page_url):
         parts = page_url.rsplit('/', 1)

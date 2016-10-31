@@ -9,7 +9,6 @@ from re import compile
 from six.moves.urllib.parse import urljoin
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter
 from ..util import tagre
 from .common import _WordPressScraper, xpath_class
 
@@ -80,8 +79,6 @@ class RomanticallyApocalyptic(_ParserScraper):
     firstStripUrl = stripUrl % '0'
     imageSearch = '//div[%s]/center//img' % xpath_class('comicpanel')
     prevSearch = '//a[@accesskey="p"]'
-    latestSearch = '//a[span[%s]]' % xpath_class('glyphicon-fast-forward')
-    starter = indirectStarter
     help = 'Index format: n'
     adult = True
 

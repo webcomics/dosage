@@ -298,32 +298,16 @@ class SluggyFreelance(_BasicScraper):
     help = 'Index format: yymmdd'
 
 
-class SMBC(_ParserScraper):
+class SMBC(_ComicControlScraper):
     url = 'http://www.smbc-comics.com/'
-    stripUrl = url + 'index.php?id=%s'
-    firstStripUrl = stripUrl % '1'
+    firstStripUrl = url + 'comic/2002-09-05'
     multipleImagesPerStrip = True
     imageSearch = ['//img[@id="cc-comic"]', '//div[@id="aftercomic"]/img']
-    prevSearch = '//a[@class="prev"]'
-    help = 'Index format: nnnn'
     textSearch = '//img[@id="cc-comic"]/@title'
 
     def namer(self, image_url, page_url):
         """Remove random noise from name."""
         return image_url.rsplit('-', 1)[-1]
-
-    def shouldSkipUrl(self, url, data):
-        """Skip promo or missing update pages."""
-        return url in (
-            self.stripUrl % '2865',
-            self.stripUrl % '2653',
-            self.stripUrl % '2424',
-            self.stripUrl % '2226',
-            self.stripUrl % '2069',
-            self.stripUrl % '1895',
-            self.stripUrl % '1896',
-            self.stripUrl % '1589',
-        )
 
 
 class SnowFlame(_WordPressScraper):
@@ -375,21 +359,20 @@ class Sorcery101(_ParserScraper):
     help = 'Index format: stripname'
 
 
-class SpaceTrawler(_WordPressScraper):
-    base_url = 'http://spacetrawler.com/'
-    url = base_url + '2013/12/24/spacetrawler-379/'
-    firstStripUrl = base_url + '2010/01/01/spacetrawler-4/'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
-    endOfLife = True
-
-
-class SpaceJunkArlia(_BasicScraper):
-    url = 'http://spacejunkarlia.com'
-    stripUrl = url + '/index.php?strip_id=%s'
+class SpaceJunkArlia(_ParserScraper):
+    url = 'http://spacejunkarlia.com/'
+    stripUrl = url + '?strip_id=%s'
     firstStripUrl = stripUrl % '0'
-    imageSearch = compile(tagre('img', 'src', r'(comics/[^"]+)'))
-    prevSearch = compile(tagre('a', 'href', r'(\?strip_id=\d+)') + '&lt;<')
+    imageSearch = '//div[%s]/img' % xpath_class('content')
+    prevSearch = '//a[text()="<"]'
     help = 'Index format: number'
+
+
+class SpaceTrawler(_ParserScraper):
+    url = 'https://www.baldwinpage.com/spacetrawler/'
+    firstStripUrl = url + '2010/01/01/spacetrawler-4/'
+    imageSearch = '//img[%s]' % xpath_class('size-full')
+    prevSearch = '//a[@rel="prev"]'
 
 
 class Spamusement(_BasicScraper):
@@ -487,7 +470,7 @@ class StrongFemaleProtagonist(_ParserScraper):
     stripUrl = url + '%s/'
     css = True
     imageSearch = 'article p img'
-    prevSearch = 'div.nav-previous > a'
+    prevSearch = 'a.page-nav__item--left'
     help = 'Index format: issue-?/page-??'
 
     def shouldSkipUrl(self, url, data):
@@ -499,7 +482,7 @@ class StrongFemaleProtagonist(_ParserScraper):
             self.stripUrl % 'issue-5/newspaper',
             self.stripUrl % 'issue-5/hiatus-1',
             self.stripUrl % 'issue-5/hiatus-2',
-            self.stripUrl % 'ssue-1/no-page',
+            self.stripUrl % 'issue-1/no-page',
         )
 
 
@@ -532,6 +515,7 @@ class StuffNoOneToldMe(_BasicScraper):
     def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
         return url in (
+            self.stripUrl % '2016/05/so-you-would-like-to-share-my-comics',  # no comic
             self.stripUrl % '2012/08/self-rant',  # no comic
             self.stripUrl % '2012/06/if-you-wonder-where-ive-been',  # video
             self.stripUrl % '2011/10/i-didnt-make-this-nor-have-anything-to',  # video

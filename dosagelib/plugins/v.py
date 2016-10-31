@@ -6,8 +6,9 @@
 from __future__ import absolute_import, division, print_function
 from re import compile
 
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
+from .common import xpath_class
 
 
 class VampireCheerleaders(_BasicScraper):
@@ -51,13 +52,10 @@ class VictimsOfTheSystem(_BasicScraper):
     help = 'Index format: nnn-nnn'
 
 
-class ViiviJaWagner(_BasicScraper):
+class ViiviJaWagner(_ParserScraper):
     url = 'http://www.hs.fi/viivijawagner/'
-    stripUrl = None
-    imageSearch = compile(tagre("img", "src", r'(http://hs\d+\.snstatic\.fi/webkuva/sarjis/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/viivijawagner/[^"]+)',
-                               before="prev-cm"))
-    help = 'Index format: none'
+    imageSearch = '//div[@id="full-comic"]//img'
+    prevSearch = '//a[%s]' % xpath_class('prev-cm')
     lang = 'fi'
 
     def namer(self, image_url, page_url):

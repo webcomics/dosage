@@ -14,14 +14,11 @@ from .common import (_ComicControlScraper, _TumblrScraper, _WordPressScraper,
                      xpath_class)
 
 
-class TheBrads(_BasicScraper):
-    url = 'http://bradcolbow.com/archive/C4/'
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % 'P125'
-    imageSearch = compile(tagre("img", "src", r'(http://s3\.amazonaws\.com/the_brads/the-?brads[-_][^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://bradcolbow\.com/archive/C4/[^"]+)', before="prev"))
+class TheBrads(_ParserScraper):
+    url = 'http://bradcolbow.com/archive/'
+    imageSearch = '//div[%s]//img' % xpath_class('entry')
+    prevSearch = '//a[%s]' % xpath_class('prev')
     multipleImagesPerStrip = True
-    help = 'Index format: a letter and a number'
 
 
 class TheDevilsPanties(_BasicScraper):
@@ -88,17 +85,6 @@ class TheOrderOfTheStick(_BasicScraper):
         return page_url.rsplit('/', 1)[-1][:-5]
 
 
-class TheParkingLotIsFull(_BasicScraper):
-    baseUrl = 'http://plif.courageunfettered.com/'
-    url = baseUrl + 'archive/arch2002.htm'
-    stripUrl = baseUrl + 'archive/arch%s.htm'
-    firstStripUrl = stripUrl % '1998'
-    imageSearch = compile(r'<td align="center"><A TARGET=_parent HREF="(wc\d+\..+?)">')
-    multipleImagesPerStrip = True
-    prevSearch = compile(r'\d{4} -\s+<A HREF="(arch\d{4}\.htm)">\d{4}')
-    help = 'Index format: nnn'
-
-
 class TheThinHLine(_TumblrScraper):
     url = 'http://thinhline.tumblr.com/'
     firstStripUrl = url + 'post/4177372348/thl-1-a-cats-got-his-tongue-click-on-the'
@@ -147,13 +133,10 @@ class ThreePanelSoul(_ComicControlScraper):
 
 class ToonHole(_WordPressScraper):
     url = 'http://toonhole.com/'
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2009/12/toon-hole-coming-soon-2010'
-    prevSearch = '//a[@rel="prev"]'
-    help = 'Index format: yyyy/mm/stripname'
+    firstStripUrl = url + 'comic/toon-hole-coming-soon-2010/'
 
     def shouldSkipUrl(self, url, data):
-        return url in (self.stripUrl % "2013/03/if-game-of-thrones-was-animated",)
+        return url in (self.url + "comic/if-game-of-thrones-was-animated/",)
 
 
 class TracyAndTristan(_BasicScraper):
