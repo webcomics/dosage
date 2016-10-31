@@ -26,14 +26,10 @@ class PetiteSymphony(_BasicScraper):
 
     @classmethod
     def getmodules(cls):
-        return [
+        return (
             cls("knuckleup"),
-            cls("kickinrad"),
-            cls("orangegrind"),
-            cls("rascals"),
             cls("sangria"),
-            cls("seed"),
-        ]
+        )
 
 
 class ComicsBreak(_WordPressScraper):
@@ -44,7 +40,7 @@ class ComicsBreak(_WordPressScraper):
 
     @classmethod
     def getmodules(cls):
-        return [
+        return (
             cls("Djandora"),
             cls("Generation17"),
-        ]
+        )
