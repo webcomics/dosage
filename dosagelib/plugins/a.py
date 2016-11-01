@@ -245,6 +245,7 @@ class AppleGeeks(_BasicScraper):
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'((?:/comics/)?issue\d+\.jpg)'))
     prevSearch = compile(r'<div class="caption">Previous Comic</div>\s*<p><a href="([^"]+)">', MULTILINE)
+    allow_errors = (404,)
     help = 'Index format: n (unpadded)'
 
 

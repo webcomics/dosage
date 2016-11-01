@@ -79,6 +79,12 @@ class Scraper(object):
     # usually the index format help
     help = ''
 
+    # Specifing a list of HTTP error codes which should be handled as a
+    # successful request.  This is a workaround for some comics which return
+    # regular pages with strange HTTP codes. By default, all HTTP errors raise
+    # exceptions.
+    allow_errors = ()
+
     # HTTP session for configuration & cookies
     session = requests_session()
 
@@ -306,7 +312,7 @@ class Scraper(object):
         methods should be able to use the data if they so desire... (Affected
         methods: shouldSkipUrl, imageUrlModifier)
         """
-        raise ValueError("No implementation for getPage!")
+        return get_page(url, self.session, allow_errors=self.allow_errors)
 
     def fetchUrls(self, url, data, urlsearch):
         raise ValueError("No implementation for fetchUrls!")
@@ -362,7 +368,7 @@ class _BasicScraper(Scraper):
     BASE_SEARCH = re.compile(tagre("base", "href", '([^"]*)'))
 
     def getPage(self, url):
-        content = get_page(url, self.session).text
+        content = super(_BasicScraper, self).getPage(url).text
         # determine base URL
         baseUrl = None
         match = self.BASE_SEARCH.search(content)
@@ -449,7 +455,7 @@ class _ParserScraper(Scraper):
     broken_html_bugfix = False
 
     def getPage(self, url):
-        page = get_page(url, self.session)
+        page = super(_ParserScraper, self).getPage(url)
         if page.encoding:
             # Requests figured out the encoding, so we can deliver Unicode to
             # LXML. Unfortunatly, LXML feels betrayed if there is still an XML

@@ -18,7 +18,9 @@ import re
 import traceback
 import time
 import subprocess
+
 from six.moves.html_parser import HTMLParser
+from six.moves import range
 import six
 
 try:
@@ -172,11 +174,11 @@ def case_insensitive_re(name):
     return "".join("[%s%s]" % (c.lower(), c.upper()) for c in name)
 
 
-def get_page(url, session, max_content_bytes=MaxContentBytes):
+def get_page(url, session, **kwargs):
     """Get text content of given URL."""
     check_robotstxt(url, session)
     # read page data
-    page = urlopen(url, session, max_content_bytes=max_content_bytes)
+    page = urlopen(url, session, max_content_bytes=MaxContentBytes, **kwargs)
     out.debug(u"Got page content %r" % page.content, level=3)
     return page
 
@@ -257,7 +259,7 @@ def get_robotstxt_parser(url, session=None):
     rp = RobotFileParser()
     try:
         req = urlopen(url, session, max_content_bytes=MaxContentBytes,
-                      raise_for_status=False)
+                      allow_errors=range(600))
     except Exception:
         # connect or timeout errors are treated as an absent robots.txt
         rp.allow_all = True
@@ -270,7 +272,7 @@ def get_robotstxt_parser(url, session=None):
 
 
 def urlopen(url, session, referrer=None, max_content_bytes=None,
-            raise_for_status=True, useragent=UserAgent, **kwargs):
+            allow_errors=(), useragent=UserAgent, **kwargs):
     """Open an URL and return the response object."""
     out.debug(u'Open URL %s' % url)
     if 'headers' not in kwargs:
@@ -291,7 +293,7 @@ def urlopen(url, session, referrer=None, max_content_bytes=None,
         req = session.request(method, url, **kwargs)
         out.debug(u'Response cookies: %s' % req.cookies)
         check_content_size(url, req.headers, max_content_bytes)
-        if raise_for_status:
+        if req.status_code not in allow_errors:
             req.raise_for_status()
         return req
     except requests.exceptions.RequestException as err:

@@ -174,6 +174,7 @@ class SexyLosers(_ParserScraper):
 class Sharksplode(_WordPressScraper):
     url = 'http://sharksplode.com/'
     textSearch = '//div[@id="comic"]//img/@alt'
+    allow_errors = (403,)
 
 
 class Sheldon(_BasicScraper):
@@ -324,6 +325,7 @@ class Sorcery101(_ParserScraper):
     prevSearch = '//a[@rel="prev"]'
     latestSearch = '//a[%s]' % xpath_class('last-webcomic-link')
     starter = indirectStarter
+    allow_errors = (500,)
     help = 'Index format: stripname'
 
 
