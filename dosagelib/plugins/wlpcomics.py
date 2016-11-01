@@ -5,6 +5,8 @@
 
 from __future__ import absolute_import, division, print_function
 
+import re
+
 from ..scraper import _ParserScraper
 from ..helpers import bounceStarter
 
@@ -24,7 +26,7 @@ class _WLPComics(_ParserScraper):
                 image_url.rsplit('/', 1)[-1])
 
     def getIndexStripUrl(self, index):
-        return self.url + '%s.html'
+        return self.url + '%s.html' % index
 
 
 class ChichiChan(_WLPComics):
@@ -34,8 +36,21 @@ class ChichiChan(_WLPComics):
 
 class ChocolateMilkMaid(_WLPComics):
     # Newer pages seem to be broken
-    url = 'http://www.wlpcomics.com/adult/cm/262.html'
+    baseurl = 'http://www.wlpcomics.com/adult/cm/'
+    url = baseurl + '264.html'
     adult = True
+
+    def getIndexStripUrl(self, index):
+        return self.baseurl + '%s.html' % index
+
+    def link_modifier(self, fromurl, tourl):
+        """Bugfix for self-referencing pages..."""
+        if tourl == fromurl:
+            return re.sub(r'/(\d+)\.ht',
+                          lambda m: '/%03i.ht' % (int(m.group(1)) - 1), tourl)
+        if '263.html' in fromurl and '265.html' in tourl:
+            return self.baseurl + '264.html'
+        return tourl
 
 
 class MaidAttack(_WLPComics):
