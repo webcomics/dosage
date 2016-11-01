@@ -34,9 +34,11 @@ def bounceStarter(self):
     This needs the url and nextSearch properties be defined on the class.
     """
     data = self.getPage(self.url)
-    url1 = self.fetchUrl(self.url, data, self.prevSearch)
-    data = self.getPage(url1)
-    return self.fetchUrl(url1, data, self.nextSearch)
+    prevurl = self.fetchUrl(self.url, data, self.prevSearch)
+    prevurl = self.link_modifier(self.url, prevurl)
+    data = self.getPage(prevurl)
+    nexturl = self.fetchUrl(prevurl, data, self.nextSearch)
+    return self.link_modifier(prevurl, nexturl)
 
 
 def indirectStarter(self):
@@ -48,4 +50,5 @@ def indirectStarter(self):
     'latestSearch' is used on the page content to find the latest strip."""
     url = self.startUrl if hasattr(self, "startUrl") else self.url
     data = self.getPage(url)
-    return self.fetchUrl(url, data, self.latestSearch)
+    newurl = self.fetchUrl(url, data, self.latestSearch)
+    return self.link_modifier(url, newurl)

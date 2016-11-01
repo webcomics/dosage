@@ -24,13 +24,12 @@ class ComicGenesis(_BasicScraper):
     multipleImagesPerStrip = True
     help = 'Index format: yyyymmdd'
 
-    def prevUrlModifier(self, prev_url):
-        if prev_url:
-            return prev_url.replace(
-                "keenspace.com", "comicgenesis.com").replace(
-                "keenspot.com", "comicgenesis.com").replace(
-                "toonspace.com", "comicgenesis.com").replace(
-                "comicgen.com", "comicgenesis.com")
+    def link_modifier(self, fromurl, tourl):
+        return tourl.replace(
+            "keenspace.com", "comicgenesis.com").replace(
+            "keenspot.com", "comicgenesis.com").replace(
+            "toonspace.com", "comicgenesis.com").replace(
+            "comicgen.com", "comicgenesis.com")
 
     def __init__(self, name, sub=None, last=None, baseUrl=None):
         super(ComicGenesis, self).__init__('ComicGenesis/' + name)

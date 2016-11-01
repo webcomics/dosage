@@ -220,7 +220,7 @@ class Scraper(object):
                 # assume there is no previous URL, but print a warning
                 out.warn(u"%s Assuming no previous comic strips exist." % msg)
             else:
-                prevUrl = self.prevUrlModifier(prevUrl)
+                prevUrl = self.link_modifier(url, prevUrl)
                 out.debug(u"Found previous URL %s" % prevUrl)
                 getHandler().comicPageLink(self, url, prevUrl)
         return prevUrl
@@ -237,12 +237,12 @@ class Scraper(object):
         """Return filename for given image and page URL."""
         return None
 
-    def prevUrlModifier(self, prev_url):
-        """Optional modification of parsed previous URLs. Useful if
-        there are domain redirects. The default implementation does
+    def link_modifier(self, fromurl, tourl):
+        """Optional modification of parsed link (previous/back/latest) URLs.
+        Useful if there are domain redirects. The default implementation does
         not modify the URL.
         """
-        return prev_url
+        return tourl
 
     def imageUrlModifier(self, image_url, data):
         """Optional modification of parsed image URLs. Useful if the URL

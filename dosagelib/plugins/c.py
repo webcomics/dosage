@@ -178,11 +178,11 @@ class Chester5000XYV(_WordPressScraper):
     adult = True
     help = 'Index format: n (unpadded)'
 
-    def prevUrlModifier(self, prev_url):
+    def link_modifier(self, fromurl, tourl):
         """Bugfix for link to blog"""
-        if prev_url == self.stripUrl % '714':
+        if tourl == self.stripUrl % '714':
             return self.stripUrl % '710'
-        return prev_url
+        return tourl
 
 
 class Chisuji(_WordPressScraper):

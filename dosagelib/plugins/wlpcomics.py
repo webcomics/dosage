@@ -55,8 +55,8 @@ class Stellar(_WLPComics):
     url = 'http://www.wlpcomics.com/adult/stellar/'
     adult = True
 
-    def prevUrlModifier(self, prev_url):
+    def link_modifier(self, fromurl, tourl):
         """Bugfix for empty page..."""
-        if prev_url == self.url + '075.html':
+        if tourl == self.url + '075.html':
             return self.url + '074.html'
-        return prev_url
+        return tourl
