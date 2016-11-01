@@ -14,11 +14,13 @@ from scriptutil import ComicListUpdater
 
 class GoComicsUpdater(ComicListUpdater):
     # names of comics to exclude
-    excluded_comics = [
+    excluded_comics = (
             # "coming soon"
             "AngryProgrammer",
+            "Complex",
             "Guinness",
             "Jabberwoncky",
+            "Moments",
             "Pi",
             "RandysRationale",
             "SignsOfOurTimes",
@@ -33,7 +35,7 @@ class GoComicsUpdater(ComicListUpdater):
             "BillyAndCo",
             "BuffaloChips",
             "Crawdiddy",
-    ]
+    )
 
     def handle_url(self, url):
         """Parse one search result page."""
