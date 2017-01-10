@@ -25,7 +25,7 @@ class TheDevilsPanties(_BasicScraper):
     url = 'http://thedevilspanties.com/'
     stripUrl = url + 'archives/%s'
     firstStripUrl = stripUrl % '300'
-    imageSearch = compile(tagre("img", "src", r'(http://cdn\.thedevilspanties\.com/comics/[^"]+)'))
+    imageSearch = compile(tagre("img", "src", r'(http://origin\.thedevilspanties\.com/comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/archives/\d+)',
                                after="Previous"))
     help = 'Index format: number'
