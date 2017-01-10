@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -192,5 +192,5 @@ def format_name(text):
     """Format a comic name."""
     name = unescape(text)
     name = "".join(capfirst(x) for x in name.split(" "))
-    name = asciify(name.replace(u'&', u'And').replace(u'@', u'At'))
+    name = asciify(name.replace(u'&', u'And').replace(u'@', u'At').replace('ñ', 'n'))
     return name
