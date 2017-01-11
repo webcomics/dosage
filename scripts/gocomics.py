@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 """
 Script to get a list of gocomics and save the info in a JSON file for further
 processing.
@@ -15,46 +15,28 @@ from scriptutil import ComicListUpdater
 class GoComicsUpdater(ComicListUpdater):
     # names of comics to exclude
     excluded_comics = (
-            # "coming soon"
-            "AngryProgrammer",
-            "Complex",
-            "Guinness",
-            "Jabberwoncky",
-            "Moments",
-            "Pi",
-            "RandysRationale",
-            "SignsOfOurTimes",
-            "TheGagwriter",
-            "Yaoyao",
-
-            # duplicate
-            "Dilbert",
-            "SaturdayMorningBreakfastCereal",
-
-            # not available
-            "BillyAndCo",
-            "BuffaloChips",
-            "Crawdiddy",
+        # too short
+        'LukeyMcGarrysTLDR',
     )
 
-    def handle_url(self, url):
-        """Parse one search result page."""
+    def handle_gocomics(self, url, outercss='a.amu-media-item-link', lang=None):
+        """Parse one GoComics alphabetic page."""
         data = self.get_url(url, expand=False)
 
-        for comiclink in data.cssselect('a.alpha_list'):
+        for comiclink in data.cssselect(outercss):
             link = comiclink.attrib['href']
-            name = comiclink.text
-            self.add_comic(name, link)
+            name = comiclink.cssselect('h4')[0].text
+            self.add_comic(name, (link, lang))
 
     def collect_results(self):
         """Parse all listing pages."""
-        self.handle_url('http://www.gocomics.com/features')
-        self.handle_url('http://www.gocomics.com/explore/espanol')
-        self.handle_url('http://www.gocomics.com/explore/editorial_list')
-        self.handle_url('http://www.gocomics.com/explore/sherpa_list')
+        for part in ('a-b', 'c-e', 'f-i', 'j-n', 'o-r', 's-t', 'u-%23'):
+            self.handle_gocomics('http://www.gocomics.com/comics/a-to-z?page=' + part)
+        self.handle_gocomics('http://www.gocomics.com/comics/espanol', 'a.gc-card-item', 'es')
 
-    def get_entry(self, name, url):
-        langopt = ", 'es'" if 'espanol/' in url else ''
+    def get_entry(self, name, data):
+        url, lang = data
+        langopt = ", '%s'" % lang if lang else ''
         return u"cls('%s', '%s'%s)," % (name, url[1:], langopt)
 
 
