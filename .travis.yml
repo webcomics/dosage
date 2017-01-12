@@ -5,8 +5,6 @@ python:
   - "3.4"
   - "3.5"
   - "3.6"
-  - "pypy"
-  - "pypy3"
 cache: pip
 # install libjpeg-dev for Pillow to handle JPEGs
 sudo: false
