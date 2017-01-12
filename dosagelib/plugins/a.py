@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -265,15 +265,6 @@ class Ashes(_WordPressScraper):
     firstStripUrl = url
     latestSearch = WP_LATEST_SEARCH
     starter = indirectStarter
-
-
-class ASofterWorld(_ParserScraper):
-    url = 'http://www.asofterworld.com/'
-    stripUrl = url + 'index.php?id=%s'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = '//div[@id="comicimg"]//img'
-    prevSearch = '//div[@id="previous"]/a'
-    help = 'Index format: n (unpadded)'
 
 
 class AstronomyPOTD(_ParserScraper):

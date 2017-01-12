@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -11,17 +11,6 @@ from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
 from .common import _TumblrScraper, _WordPressScraper, xpath_class
-
-
-class Caggage(_BasicScraper):
-    url = 'http://caggagecomic.com/'
-    rurl = escape(url)
-    stripUrl = url + 'archives/%s'
-    firstStripUrl = stripUrl % '77'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%sarchives/\d+)' % rurl,
-                               after="prev"))
-    help = 'Index format: number'
 
 
 class CampComic(_BasicScraper):
@@ -114,11 +103,6 @@ class CatAndGirl(_BasicScraper):
 
 class Catena(_WordPressScraper):
     url = 'http://catenamanor.com/'
-
-
-class CatNine(_WordPressScraper):
-    url = 'http://cat-nine.net'
-    firstStripUrl = 'http://cat-nine.net/comic/episode-1/first-day-for-everything/'
 
 
 class CatsAndCameras(_WordPressScraper):

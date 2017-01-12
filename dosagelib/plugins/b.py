@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -120,16 +120,6 @@ class BillyTheDunce(_ParserScraper):
     prevSearch = '//a[@rel="prev"]'
     latestSearch = '//h2[@class="post-title"]/a'
     starter = indirectStarter
-
-
-class BizarreUprising(_BasicScraper):
-    url = 'http://www.bizarreuprising.com/'
-    stripUrl = url + 'view/%s'
-    firstStripUrl = stripUrl % '1/awakening-splash'
-    imageSearch = compile(tagre("img", "src", r'(comic/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(view/\d+/[^"]+)') +
-                         tagre("img", "src", r'images/b_prev\.gif'))
-    help = 'Index format: n/name'
 
 
 class BlankIt(_BasicScraper):
