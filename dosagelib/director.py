@@ -10,6 +10,7 @@ import threading
 from six.moves import _thread
 from six.moves.queue import Queue, Empty
 from six.moves.urllib.parse import urlparse
+import traceback
 
 from .output import out
 from . import events, scraper
@@ -137,6 +138,7 @@ class ComicGetter(threading.Thread):
                     break
             except Exception as msg:
                 out.exception('Could not save image at %s to %s: %r' % (image.referrer, image.filename, msg))
+                traceback.print_exc()
                 self.errors += 1
         return allskipped
 

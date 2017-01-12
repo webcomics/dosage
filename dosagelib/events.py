@@ -158,10 +158,14 @@ class AtomEventHandler(EventHandler):
 
         self.atomfn = self.getFilename()
 
-        self.newfile = True
-        self.atom = atom.Feed('Daily Dosage', os.path.join(self.baseurl, 'dailydose.atom'), 'Comics for %s' % time.strftime('%Y/%m/%d', today))
+        if os.path.exists(self.atomfn):
+            self.newfile = False
+            self.atom = atom.parseFeed(self.atomfn, yesterday)
+        else:
+            self.newfile = True
+            self.atom = atom.Feed('Daily Dosage', os.path.join(self.baseurl, 'dailydose.atom'), 'Comics for %s' % time.strftime('%Y/%m/%d', today))
 
-    def comicDownloaded(self, comic, filename, text=None):
+    def comicDownloaded(self, comic, filename):
         """Write Atom entry for downloaded comic."""
         imageUrl = self.getUrlFromFilename(filename)
         size = None
@@ -173,14 +177,14 @@ class AtomEventHandler(EventHandler):
         if size:
             description += ' width="%d" height="%d"' % size
         description += '/>'
-        if text:
-            description += '<br/>%s' % text
+        if comic.text:
+            description += '<br/>%s' % comic.text
         description += '<br/><a href="%s">View Comic Online</a>' % pageUrl
         args = (
             title,
             imageUrl,
             description,
-            util.rfc822date(time.time())
+            datetime.datetime.now().isoformat('T')
         )
 
         if self.newfile:

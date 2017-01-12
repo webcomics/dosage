@@ -4,6 +4,7 @@
 
 import xml.dom.minidom
 from datetime import datetime
+from time import mktime
 import dateutil.parser
 import email.utils
 from .configuration import App
@@ -47,10 +48,11 @@ class Feed(object):
         entry.appendChild(altLink)
         content = self.atom.createElement('content')
         content.setAttribute('type', 'xhtml')
-        content.appendChild(description)
+        contentEl = xml.dom.minidom.parseString('<div>%s</div>' % description).childNodes[0]
+        content.appendChild(self.atom.importNode(contentEl, True))
         entry.appendChild(content)
         self.addElement(entry, 'id', link)
-        self.addElement(entry, 'updated', '{0}Z'.format(date.isoformat()))
+        self.addElement(entry, 'updated', date)
 
         if append:
             self.feed.appendChild(entry)
@@ -81,16 +83,16 @@ def parseFeed(filename, yesterday):
     content = getNode('feed')[0] # Only one feed node
 
     feedTitle = getText(content, 'title')
-    feedLink = getText(content, 'link')
+    feedLink = getNode('link')[0].getAttribute('href')
     feedDesc = getText(content, 'subtitle')
 
     feed = Feed(feedTitle, feedLink, feedDesc)
 
     for entry in getNode('entry'):
         entryDate = dateutil.parser.parse(getText(entry, 'updated'))
-        if (entryDate > yesterday): # If newer than yesterday
+        if (entryDate > datetime.fromtimestamp(mktime(yesterday))): # If newer than yesterday
             feed.addItem(getText(entry, 'title'),
-                         getText(entry, 'link'),
-                         getText(entry, 'description'),
+                         getNode('link')[0].getAttribute('href'),
+                         entry.getElementsByTagName('content')[0].toxml(),
                          getText(entry, 'updated'))
     return feed
