@@ -200,3 +200,7 @@ class MysteriesOfTheArcana(_ParserScraper):
     url = 'http://mysteriesofthearcana.com/'
     imageSearch = '//div[@id="comic"]//img'
     prevSearch = '//a[@class="navprevious"]'
+
+class MonsterUnderTheBed(_WordPressScraper):
+	adult = True
+	url = 'http://themonsterunderthebed.net/'
