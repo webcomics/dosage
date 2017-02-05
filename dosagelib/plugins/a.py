@@ -231,6 +231,10 @@ class Annyseed(_ParserScraper):
     imageSearch = '//div/img[contains(@src, "Annyseed")]'
     prevSearch = '//a[img[@name="Previousbtn"]]'
     help = 'Index format: nnn'
+    FIX_RE = compile(r'Annyseed/Finished%20For%20Print/')
+
+    def imageUrlModifier(self, image_url, data):
+        return self.FIX_RE.sub('', image_url)
 
 
 class AoiHouse(_ParserScraper):

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 """
 Script to get ComicFury comics and save the info in a JSON file for further
 processing.
@@ -107,6 +107,7 @@ class ComicFuryUpdater(ComicListUpdater):
 
         # images gone
         "BaseballCapsAndTiaras",
+        "BiMorphon",
         "CROSSWORLDSNEXUS",
         "Fathead",
         "GOODBYEREPTILIANS",

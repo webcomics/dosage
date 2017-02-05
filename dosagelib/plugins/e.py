@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -27,17 +27,10 @@ class EarthsongSaga(_ParserScraper):
                           'earthsongsaga.com/') for x in urls]
 
     def namer(self, image_url, page_url):
-        imgmatch = compile(r'images/vol(\d+)/ch(\d+)/(\d+)\.\w+$',
+        imgmatch = compile(r'images/vol(\d+)/ch(\d+)/(.*)\.\w+$',
                            IGNORECASE).search(image_url)
-        if not imgmatch:
-            imgmatch = compile(r'images/vol(\d+)/ch(\d+)/ch(\d+)cover\.\w+$',
-                               IGNORECASE).search(image_url)
-            suffix = "cover"
-        else:
-            suffix = ""
-        return 'vol%02d_ch%02d_%02d%s' % (
-          int(imgmatch.group(1)), int(imgmatch.group(2)),
-          int(imgmatch.group(3)), suffix)
+        return 'vol%02d_ch%02d_%s' % (
+          int(imgmatch.group(1)), int(imgmatch.group(2)), imgmatch.group(3))
 
 
 class EasilyAmused(_WordPressScraper):
@@ -208,6 +201,9 @@ class ExtraFabulousComics(_WordPressScraper):
         imagename = os.path.basename(image_url)
         pagepart = compile(r'/comic/([^/]+)/$').search(page_url).group(1)
         return '_'.join((pagepart, imagename))
+
+    def shouldSkipUrl(self, url, data):
+        return data.xpath('//div[@id="comic"]//iframe')
 
 
 class ExtraLife(_BasicScraper):

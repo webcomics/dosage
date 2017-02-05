@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -206,9 +206,7 @@ class ComicFury(_ParserScraper):
             # BeyondTheOrdinary has a duplicate in SmackJeeves/BeyondTheOrdinary
             cls('BibleBelt', 'biblebelt'),
             cls('BicycleBoy', 'bicycleboy'),
-            cls('BigBookOfLameJokes', 'bigbook'),
             cls('BilateralComics', 'bilateralcomics'),
-            cls('BiMorphon', 'bimorphon'),
             cls('BionicleTales', 'bionicletales'),
             cls('BioSyte', 'biosyte'),
             cls('Birdman', 'birdman'),
@@ -728,7 +726,6 @@ class ComicFury(_ParserScraper):
             cls('MushroomGo', 'mushroomgo'),
             cls('MutantElf', 'mutantelf'),
             cls('Mutigenx', 'mutigenx'),
-            cls('MuttInTheMiddle', 'muttinthemiddle'),
             cls('MVPL', 'mvpl'),
             cls('MyForgottenPast', 'myforgottenpast'),
             cls('MyGirlfriendTheSecretAgent', 'mygfthesecagent'),
@@ -849,7 +846,6 @@ class ComicFury(_ParserScraper):
             cls('RED', 'redthecomic'),
             # RedVelvetRequiem has a duplicate in SmackJeeves/RedVelvetRequiem
             cls('RegardingDandelions', 'regardingdandelions'),
-            cls('ReiketsuouNoKimi', 'rnk'),
             cls('Remedy', 'remedy'),
             cls('RememberBedlam', 'bedlam'),
             cls('RequiemsGate', 'requiemsgate'),
@@ -943,7 +939,6 @@ class ComicFury(_ParserScraper):
             cls('StarSovereignSeriesMuladhara', 'muladhara'),
             cls('STARWARSXWingAlliance', 'x-wingalliance'),
             cls('STASonicTheAdventure', 'sta'),
-            cls('SteamSword', 'steamsword'),
             cls('StereotyPixs', 'stereotypixs'),
             cls('StevenAndTheCrystalGMs', 'crystalgms'),
             cls('StickLife', 'sticklife'),
@@ -1118,7 +1113,6 @@ class ComicFury(_ParserScraper):
             cls('TigerWrestling', 'anybodythere'),
             cls('Timezone', 'timezone'),
             cls('Tinytown', 'tinytown'),
-            cls('Tiziana', 'tiziana'),
             cls('TM47', 'tm47'),
             cls('TohvelinTuhinoita', 'tuhinaloota'),
             cls('TOLVA', 'tolva'),
