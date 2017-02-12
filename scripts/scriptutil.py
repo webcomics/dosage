@@ -8,6 +8,7 @@ from __future__ import absolute_import, division, print_function
 import os
 import re
 import sys
+import time
 import json
 import codecs
 
@@ -39,6 +40,7 @@ class ComicListUpdater(object):
     def __init__(self, name):
         self.json = name.replace(".py", ".json")
         self.session = requests.Session()
+        self.sleep = 0
 
     def get_url(self, url, expand=True):
         """Get an HTML page and parse it with LXML."""
@@ -47,6 +49,8 @@ class ComicListUpdater(object):
             data = html.document_fromstring(get_page(url, self.session).text)
             if expand:
                 data.make_links_absolute(url)
+            if self.sleep > 0:
+                time.sleep(self.sleep)
             return data
         except IOError as msg:
             print("ERROR:", msg, file=sys.stderr)

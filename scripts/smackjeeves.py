@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 """
 Script to get a list of smackjeeves.com comics and save the info in a JSON file
 for further processing.
@@ -114,6 +114,10 @@ class SmackJeevesUpdater(ComicListUpdater):
         # broken host name
         "Razor",
     )
+
+    def __init__(self, name):
+        super(SmackJeevesUpdater, self).__init__(name)
+        self.sleep = 2
 
     def handle_url(self, url):
         """Parse one search result page."""
