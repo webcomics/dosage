@@ -19,7 +19,7 @@ class ComicFuryUpdater(ComicListUpdater):
     # Absolute minumum number of pages a comic may have (restrict search space)
     MIN_COMICS = 90
 
-    dup_templates = ('Creators/%s', 'DrunkDuck/%s', 'GoComics/%s',
+    dup_templates = ('ComicSherpa/%s', 'Creators/%s', 'GoComics/%s',
                      'KeenSpot/%s', 'SmackJeeves/%s', 'Arcamax/%s')
 
     langmap = {
@@ -109,6 +109,7 @@ class ComicFuryUpdater(ComicListUpdater):
         "BaseballCapsAndTiaras",
         "BiMorphon",
         "CROSSWORLDSNEXUS",
+        "DevilSpy",
         "Fathead",
         "GOODBYEREPTILIANS",
         "KevinZombie",

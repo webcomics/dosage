@@ -59,8 +59,8 @@ class ComicFury(_ParserScraper):
     def getmodules(cls):
         return (
             # These were once in the list below, but fell out from the index...
-            cls('DandyAndCompany', 'dandyandcompany'),
             cls('BadassologyByMichaelBay', 'strudelology'),
+            cls('DandyAndCompany', 'dandyandcompany'),
             cls('DeadAtNight', 'deadnight'),
             cls('Shatterrealm', 'shatterrealm'),
 
@@ -124,7 +124,7 @@ class ComicFury(_ParserScraper):
             cls('AmyOok', 'amyook'),
             cls('AndroidFiles', 'androidfiles'),
             # AngelGuardian has a duplicate in SmackJeeves/AngelGuardian
-            cls('AngelGuardianEnEspaol', 'angelguardianespanol', 'es'),
+            cls('AngelGuardianEnEspanol', 'angelguardianespanol', 'es'),
             cls('AngelsOfIblis', 'angelsofiblis'),
             cls('AngryFaerie', 'angryfaerie'),
             cls('AnimalInstinct', 'fur-realanimalinstinct'),
@@ -185,7 +185,7 @@ class ComicFury(_ParserScraper):
             cls('BadAdjectives', 'badadjectives'),
             # BallAndChain has a duplicate in SmackJeeves/BallandChain
             cls('BananaCreamCake', 'bananacreamcake'),
-            # BarkingCrayon has a duplicate in GoComics/BarkingCrayon
+            cls('BarkingCrayon', 'barkingcrayon'),
             cls('BASKERVILLE', 'baskerville'),
             cls('BASO', 'baso'),
             cls('BattleOfTheRobofemoids', 'battle-of-the-robofemoids'),
@@ -299,7 +299,7 @@ class ComicFury(_ParserScraper):
             cls('Corpses', 'corpses'),
             # CosmicDash has a duplicate in SmackJeeves/CosmicDash
             cls('Cosmos', 'planetcosmos'),
-            # CourageousManAdventures has a duplicate in GoComics/CourageousManAdventures
+            # CourageousManAdventures has a duplicate in ComicSherpa/CourageousManAdventures
             cls('CowboysAndCrossovers', 'cowboysandcrossovers'),
             cls('Cowtoon', 'cowtoon'),
             cls('CrackPutty', 'crackputty'),
@@ -319,7 +319,6 @@ class ComicFury(_ParserScraper):
             cls('CtrlZ', 'ctrlz'),
             cls('CubeCows', 'cubecows'),
             cls('CupcakeGraffiti', 'cupcakegraffiti'),
-            cls('CurvyBonedSlunt', 'curvyboneyosis'),
             cls('CYXLOSISM', 'cyxlocistic'),
             cls('Daffodil', 'daffodil'),
             cls('DailyDoodle', 'dailydoodle'),
@@ -341,7 +340,6 @@ class ComicFury(_ParserScraper):
             cls('DeadDucks', 'deadducks'),
             cls('DeadFingers', 'deadfingers'),
             cls('DeadRabbitCa', 'afairtrade'),
-            cls('DeathsLight', 'deathslight'),
             cls('DeepBlue', 'deepblue'),
             cls('DefineHero', 'definehero'),
             cls('DELIA', 'delia'),
@@ -352,7 +350,6 @@ class ComicFury(_ParserScraper):
             # DenizensAttention has a duplicate in SmackJeeves/DenizensAttention
             cls('DesertGrey', 'desertgrey'),
             cls('DesertShark', 'desertshark'),
-            cls('DevilSpy', 'devilspy'),
             cls('Dictatorship', 'dictatorship'),
             cls('DieRabbitDie', 'dierabbitdie'),
             cls('DimensioNoir', 'dimensionoir'),
@@ -384,7 +381,7 @@ class ComicFury(_ParserScraper):
             cls('DubCity', 'dubcity'),
             cls('DueEast', 'dueeast'),
             cls('DuelingHeroes', 'duelingheroes'),
-            # DungeonHordes has a duplicate in GoComics/DungeonHordes
+            # DungeonHordes has a duplicate in ComicSherpa/DungeonHordes
             cls('DungeonMasterEffect', 'dungeonmastereffect'),
             cls('DyerinsLine', 'dyerinsline'),
             cls('EclipseLegend', 'eclipselegend'),
@@ -572,7 +569,7 @@ class ComicFury(_ParserScraper):
             cls('JenffersShowsMissJAndJensPhotoAlbum', 'missjandjensphotoalbum'),
             cls('JenffersShowTheNewStoriesOfMissJAndJen', 'thenewstoriesofmissjandjen'),
             cls('Jericho', 'jericho'),
-            # JillpokeBohemia has a duplicate in GoComics/JillpokeBohemia
+            cls('JillpokeBohemia', 'jillpokebohemia'),
             cls('Jix', 'jix'),
             cls('JohnnyBullet', 'johnnybullet'),
             cls('JonathinQuackupOfThePlanetWeralt', 'quackup'),
@@ -638,7 +635,7 @@ class ComicFury(_ParserScraper):
             cls('Lightside', 'lightside'),
             cls('LilHeroArtists', 'lilheroartists'),
             cls('LilithDark', 'lilithdark'),
-            # LimboRoad has a duplicate in GoComics/LimboRoad
+            # LimboRoad has a duplicate in ComicSherpa/LimboRoad
             cls('Lint', 'lint'),
             cls('Lintier', 'lintier'),
             cls('LiquidLunch', 'liquidlunch'),
@@ -682,7 +679,6 @@ class ComicFury(_ParserScraper):
             cls('MegamanComic', 'megamancomic'),
             cls('MeganKearneysBeautyAndTheBeast', 'batb'),
             cls('MelancholyGoRound', 'melancholygoround'),
-            cls('MemoriesOfTheFuture', 'memoriesofthefuture'),
             cls('MerelyMortal', 'merelymortal'),
             cls('MeridianSixColdReset', 'meridiansix'),
             cls('Messenger', 'messenger'),
@@ -718,9 +714,8 @@ class ComicFury(_ParserScraper):
             cls('MotherOfAllMonsters', 'moam'),
             cls('MousebearComedy', 'mousebearcomedy'),
             cls('MrCow', 'mrcow'),
-            # MrMorris has a duplicate in GoComics/MrMorris
             cls('MrPunchAndProfRatbaggyEmeritus', 'punch'),
-            cls('Muddlemarch', 'muddlemarch'),
+            cls('MuddlemarchMudCompany', 'muddlemarch'),
             cls('Mudskipper', 'mudskipper'),
             cls('Muscleheart', 'muscleheart'),
             cls('MushroomGo', 'mushroomgo'),
@@ -800,7 +795,7 @@ class ComicFury(_ParserScraper):
             cls('PhantomsTrail', 'phantomstrail'),
             cls('Phoenix', 'phoenix'),
             cls('Pilgrim', 'pilgrimsprogress'),
-            cls('PilgrimEnEspaol', 'pilgrimenespanol', 'es'),
+            cls('PilgrimEnEspanol', 'pilgrimenespanol', 'es'),
             cls('PITCHBLACK', 'pitchblack'),
             cls('PlanetChaser', 'planetchaser'),
             cls('PlasticBulletsMayhemUnloaded', 'plasticbulletsmayhemunloaded'),
@@ -833,7 +828,6 @@ class ComicFury(_ParserScraper):
             cls('RadioMustard', 'radiomustard'),
             cls('Rain', 'rain'),
             cls('RandomlyAssembled', 'randomlyassembled'),
-            cls('RandomThingsForRandomBeings', 'rtfrb'),
             cls('RandomThoughts', 'randomthoughts'),
             cls('RapturousArcane', 'rapturousarcane'),
             # RavenWolf has a duplicate in SmackJeeves/RavenWolf
@@ -856,7 +850,7 @@ class ComicFury(_ParserScraper):
             cls('Revive', 'revive'),
             cls('RexAfterDark', 'rexafterdark'),
             cls('RexfordAvenue', 'rexfordavenue'),
-            # Ringers has a duplicate in GoComics/Ringers
+            # Ringers has a duplicate in ComicSherpa/Ringers
             cls('RockGardenComics', 'rockgardencomics'),
             cls('RoguesOfClwydRhan', 'rocr'),
             cls('RoleplayingPartyTales', 'rpt'),
