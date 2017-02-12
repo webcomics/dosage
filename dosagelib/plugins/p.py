@@ -105,6 +105,8 @@ class PeppermintSaga(_BasicScraper):
 
 
 class PHDComics(_ParserScraper):
+    BROKEN_COMMENT_END = compile(r'--!>')
+
     baseUrl = 'http://phdcomics.com/'
     url = baseUrl + 'comics.php'
     stripUrl = baseUrl + 'comics/archive.php?comicid=%s'
@@ -113,6 +115,11 @@ class PHDComics(_ParserScraper):
     prevSearch = '//a[img[contains(@src, "prev_button")]]'
     nextSearch = '//a[img[contains(@src, "next_button")]]'
     help = 'Index format: n (unpadded)'
+
+    # Ugly hack :(
+    def _parse_page(self, data):
+        data = self.BROKEN_COMMENT_END.sub('-->', data)
+        return super(PHDComics, self)._parse_page(data)
 
     def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
