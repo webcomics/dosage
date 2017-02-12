@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 from re import compile
 
 from ..scraper import _BasicScraper, _ParserScraper
+from ..helpers import indirectStarter
 from ..util import tagre
 from .common import xpath_class
 
@@ -54,9 +55,11 @@ class VictimsOfTheSystem(_BasicScraper):
 
 class ViiviJaWagner(_ParserScraper):
     url = 'http://www.hs.fi/viivijawagner/'
-    imageSearch = '//div[@id="full-comic"]//img'
-    prevSearch = '//a[%s]' % xpath_class('prev-cm')
+    imageSearch = '//meta[@property="og:image"]/@content'
+    prevSearch = '//a[%s]' % xpath_class('prev')
+    latestSearch = '//div[%s]//a' % xpath_class('cartoon-content')
+    starter = indirectStarter
     lang = 'fi'
 
     def namer(self, image_url, page_url):
-        return image_url.split('=')[1]
+        return page_url.rsplit('-', 1)[1].split('.')[0]
