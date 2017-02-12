@@ -36,21 +36,6 @@ class CaptainSNES(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/nnn-stripname'
 
 
-class Carciphona(_BasicScraper):
-    url = 'http://carciphona.com/'
-    imageSearch = compile(tagre("div", "style",
-                                r'background-image:url\((_pages[^)]*)\)'))
-    prevSearch = compile(tagre("a", "href", r'(view\.php\?[^"]*)',
-                               after="prevarea"))
-    latestSearch = compile(tagre("a", "href",
-                                 r'(view\.php\?page=[0-9]+[^"]*)'))
-    starter = indirectStarter
-
-    def namer(self, image_url, page_url):
-        ip = image_url.split('/')
-        return "volume_%s_page_%s" % (ip[-2], ip[-1])
-
-
 class CaseyAndAndy(_BasicScraper):
     url = 'http://www.galactanet.com/comic/'
     stripUrl = url + 'view.php?strip=%s'

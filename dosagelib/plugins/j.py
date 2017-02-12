@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
 from re import compile, escape
 
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from ..helpers import indirectStarter
 from .common import _ComicControlScraper, xpath_class
@@ -23,12 +23,12 @@ class JackCannon(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/page-nnn'
 
 
-class JerkCity(_BasicScraper):
+class JerkCity(_ParserScraper):
     url = 'http://www.jerkcity.com/'
-    stripUrl = url + '_jerkcity%s.html'
+    stripUrl = url + 'jerkcity%s.html'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(/jerkcity[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/_jerkcity[^"]+)') + r'&lt;&lt;Previous')
+    imageSearch = '//div[@id="rapist"]//img'
+    prevSearch = '//div[@id="rapist"]/a'
     help = 'Index format: n'
 
 

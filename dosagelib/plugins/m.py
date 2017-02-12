@@ -72,7 +72,7 @@ class Marilith(_BasicScraper):
 
 
 class MarriedToTheSea(_ParserScraper):
-    url = 'http://www.marriedtothesea.com/'
+    url = 'http://marriedtothesea.com/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '022806'
     imageSearch = '//div[%s]//p/img' % xpath_class('jumbotron')
