@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -109,7 +109,7 @@ class PHDComics(_ParserScraper):
     url = baseUrl + 'comics.php'
     stripUrl = baseUrl + 'comics/archive.php?comicid=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = '//img[@id="comic"]'
+    imageSearch = '//img[@id="comic2"]'
     prevSearch = '//a[img[contains(@src, "prev_button")]]'
     nextSearch = '//a[img[contains(@src, "next_button")]]'
     help = 'Index format: n (unpadded)'
@@ -136,15 +136,6 @@ class PicPakDog(_WordPressScraper):
 class PiledHigherAndDeeper(PHDComics):
     starter = bounceStarter
     namer = queryNamer('comicid', use_page_url=True)
-
-
-class Pimpette(_ParserScraper):
-    url = 'http://pimpette.ca/'
-    stripUrl = url + 'index.php?date=%s'
-    firstStripUrl = stripUrl % '20030905'
-    imageSearch = '//div[@id="strip"]/img'
-    prevSearch = '//a[text()="previous"]'
-    help = 'Index format: yyyymmdd'
 
 
 class Pixel(_BasicScraper):

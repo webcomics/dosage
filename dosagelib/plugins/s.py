@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -65,7 +65,7 @@ class SandraOnTheRocks(_BasicScraper):
 
 
 class ScandinaviaAndTheWorld(_ParserScraper):
-    url = 'http://satwcomic.com/'
+    url = 'https://satwcomic.com/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % 'sweden-denmark-and-norway'
     starter = indirectStarter
@@ -156,7 +156,7 @@ class SequentialArt(_BasicScraper):
 
 class SexyLosers(_ParserScraper):
     adult = True
-    url = 'http://www.sexylosers.com/'
+    url = 'https://www.sexylosers.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '003'
     imageSearch = '//div[@class="entry-content"]//img'
@@ -240,13 +240,10 @@ class Sithrah(_ParserScraper):
     prevSearch = '//a[%s]' % xpath_class('previous-webcomic-link')
 
 
-class SkinDeep(_BasicScraper):
+class SkinDeep(_ParserScraper):
     url = 'http://www.skindeepcomic.com/'
-    stripUrl = url + 'archive/%s/'
-    imageSearch = compile(r'<span class="webcomic-object[^>]*><img src="([^"]*)"')
-    prevSearch = compile(tagre("a", "href", r'([^"]+)',
-                               after="previous-webcomic-link"))
-    help = 'Index format: custom'
+    imageSearch = '//a[%s]/img' % xpath_class('webcomic-link')
+    prevSearch = '//a[%s]' % xpath_class('previous-webcomic-link')
 
 
 class SleeplessDomain(_ComicControlScraper):
@@ -408,9 +405,9 @@ class StarCrossdDestiny(_ParserScraper):
 
 class StationV3(_ParserScraper):
     url = 'http://www.stationv3.com/'
-    stripUrl = url + 'd2/%s.html'
-    firstStripUrl = stripUrl % '20150628'
-    imageSearch = '//img[contains(@src,"/comics2/")]'
+    stripUrl = url + 'd3/%s.html'
+    firstStripUrl = stripUrl % '20170101'
+    imageSearch = '//img[contains(@src,"/comics3/")]'
     prevSearch = '//a[img[contains(@src,"/previous2")]]'
     help = 'Index format: yyyymmdd'
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -219,19 +219,18 @@ class DreamKeepersPrelude(_ParserScraper):
     help = 'Index format: n'
 
 
-class DresdenCodak(_BasicScraper):
+class DresdenCodak(_ParserScraper):
     url = 'http://dresdencodak.com/'
-    rurl = escape(url)
-    stripUrl = None
+    startUrl = url + 'cat/comic/'
     firstStripUrl = url + '2007/02/08/pom/'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl) +
-                         tagre("img", "src", r"%sm_prev2?\.png" % rurl,
-                               quote=""))
-    latestSearch = compile(tagre("div", "id", "preview") +
-                           tagre("a", "href",
-                                 r'(%s\d+/\d+/\d+/[^"]+)' % rurl))
+    imageSearch = '//section[%s]//img' % xpath_class('entry-content')
+    prevSearch = '//a[@rel="prev"]'
+    latestSearch = '//a[%s]' % xpath_class('tc-grid-bg-link')
     starter = indirectStarter
+
+    # Blog and comic are mixed...
+    def shouldSkipUrl(self, url, data):
+        return not data.xpath(self.imageSearch)
 
 
 class DrFun(_BasicScraper):
@@ -287,10 +286,3 @@ class DumbingOfAge(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(%s\d+/[^"]+)' % rurl, after="prev"))
     imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
     help = 'Index format: yyyy/comic/book-num/seriesname/stripname'
-
-
-class DungeonsAndDenizens(_WordPressScraper):
-    url = 'http://dungeond.com/'
-    firstStripUrl = url + '2005/08/23/08232005/'
-    endOfLife = True
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -113,12 +113,12 @@ class Optipess(_WordPressScraper):
     textOptional = True
 
 
-class OurHomePlanet(_BasicScraper):
-    url = 'http://gdk.gd-kun.net/'
-    stripUrl = url + '%s.html'
+class OurHomePlanet(_ParserScraper):
+    url = 'http://www.ourhomeplanet.net/'
+    stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % '01'
-    imageSearch = compile(r'<img src="(pages/comic.+?)"')
-    prevSearch = compile(r'coords="50,18,95,65".+?href="(.+?\.html)".+?alt=')
+    imageSearch = '//a[@rel="next"]/img'
+    prevSearch = '//a[@rel="prev"]'
     help = 'Index format: n (unpadded)'
 
 

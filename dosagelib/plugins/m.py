@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -9,7 +9,7 @@ from re import compile, escape, IGNORECASE
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper
+from .common import _ComicControlScraper, _WordPressScraper, xpath_class
 
 
 class MacHall(_BasicScraper):
@@ -71,14 +71,12 @@ class Marilith(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
-class MarriedToTheSea(_BasicScraper):
+class MarriedToTheSea(_ParserScraper):
     url = 'http://www.marriedtothesea.com/'
-    rurl = escape(url)
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '022806'
-    imageSearch = compile(tagre("img", "src", r'(%s\d+/[^"]+)' % rurl,
-                                before="overflow"))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)') + "&lt;&lt; Yesterday")
+    imageSearch = '//div[%s]//p/img' % xpath_class('jumbotron')
+    prevSearch = '//a[contains(text(), "Yesterday")]'
     help = 'Index format: mmddyy'
 
     def namer(self, image_url, page_url):
@@ -201,6 +199,7 @@ class MysteriesOfTheArcana(_ParserScraper):
     imageSearch = '//div[@id="comic"]//img'
     prevSearch = '//a[@class="navprevious"]'
 
+
 class MonsterUnderTheBed(_WordPressScraper):
-	adult = True
-	url = 'http://themonsterunderthebed.net/'
+    adult = True
+    url = 'http://themonsterunderthebed.net/'
