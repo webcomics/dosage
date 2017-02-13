@@ -9,8 +9,8 @@ from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from ..helpers import indirectStarter
-from .common import _ComicControlScraper, xpath_class
+from ..helpers import indirectStarter, xpath_class
+from .common import _ComicControlScraper
 
 
 class JackCannon(_BasicScraper):

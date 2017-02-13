@@ -9,9 +9,9 @@ from re import compile, escape
 
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter
+from ..helpers import indirectStarter, xpath_class
 from .common import (_ComicControlScraper, _WordPressScraper, _WPNaviIn,
-                     WP_PREV_SEARCH, xpath_class)
+                     WP_PREV_SEARCH)
 
 
 class BadassMuthas(_BasicScraper):

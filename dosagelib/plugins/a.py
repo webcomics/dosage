@@ -9,8 +9,8 @@ from re import compile, escape, MULTILINE
 
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import regexNamer, bounceStarter, indirectStarter
-from .common import _WordPressScraper, xpath_class, WP_LATEST_SEARCH
+from ..helpers import regexNamer, bounceStarter, indirectStarter, xpath_class
+from .common import _WordPressScraper, WP_LATEST_SEARCH
 
 
 class AbstruseGoose(_BasicScraper):

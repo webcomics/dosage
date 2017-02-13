@@ -6,8 +6,7 @@
 from __future__ import absolute_import, division, print_function
 
 from ..scraper import _ParserScraper
-from ..helpers import bounceStarter
-from .common import xpath_class
+from ..helpers import bounceStarter, xpath_class
 
 
 class GoComics(_ParserScraper):

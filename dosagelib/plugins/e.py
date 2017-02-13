@@ -8,10 +8,10 @@ from __future__ import absolute_import, division, print_function
 import os
 from re import compile, escape, IGNORECASE
 
-from ..helpers import indirectStarter
+from ..helpers import indirectStarter, xpath_class
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import _WordPressScraper, WP_LATEST_SEARCH, xpath_class
+from .common import _WordPressScraper, WP_LATEST_SEARCH
 
 
 class EarthsongSaga(_ParserScraper):

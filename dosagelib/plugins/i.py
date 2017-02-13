@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
 from re import compile, escape
 
+from ..helpers import xpath_class
 from ..scraper import _BasicScraper
 from ..util import tagre
-from .common import _WordPressScraper, xpath_class
+from .common import _WordPressScraper
 
 
 class IAmArg(_BasicScraper):

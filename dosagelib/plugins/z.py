@@ -9,8 +9,8 @@ from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from ..helpers import bounceStarter
-from .common import _WordPressScraper, xpath_class
+from ..helpers import bounceStarter, xpath_class
+from .common import _WordPressScraper
 
 
 class ZapComic(_ParserScraper):

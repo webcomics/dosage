@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -52,3 +52,9 @@ def indirectStarter(self):
     data = self.getPage(url)
     newurl = self.fetchUrl(url, data, self.latestSearch)
     return self.link_modifier(url, newurl)
+
+
+def xpath_class(name):
+    """Returns an XPath expressions which finds a tag which has a specified
+    class."""
+    return 'contains(concat(" ", @class, " "), " %s ")' % name

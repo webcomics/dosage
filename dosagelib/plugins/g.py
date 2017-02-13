@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter
+from ..helpers import indirectStarter, xpath_class
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, xpath_class
+from .common import _ComicControlScraper, _WordPressScraper
 
 
 class Galaxion(_BasicScraper):

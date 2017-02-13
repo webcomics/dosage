@@ -7,9 +7,10 @@ from __future__ import absolute_import, division, print_function
 
 from re import compile, escape, IGNORECASE
 
+from ..helpers import xpath_class
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, xpath_class
+from .common import _ComicControlScraper, _WordPressScraper
 
 
 class MacHall(_BasicScraper):

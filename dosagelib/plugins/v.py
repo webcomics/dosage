@@ -7,9 +7,8 @@ from __future__ import absolute_import, division, print_function
 from re import compile
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter
+from ..helpers import indirectStarter, xpath_class
 from ..util import tagre
-from .common import xpath_class
 
 
 class VampireCheerleaders(_BasicScraper):

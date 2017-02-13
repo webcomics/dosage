@@ -8,9 +8,9 @@ from __future__ import absolute_import, division, print_function
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter, bounceStarter
+from ..helpers import indirectStarter, bounceStarter, xpath_class
 from ..util import tagre
-from .common import _WordPressScraper, xpath_class
+from .common import _WordPressScraper
 
 
 class DamnLol(_ParserScraper):

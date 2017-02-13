@@ -10,10 +10,9 @@ from os.path import splitext
 import datetime
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter, bounceStarter
+from ..helpers import indirectStarter, bounceStarter, xpath_class
 from ..util import tagre
-from .common import (_ComicControlScraper, _WordPressScraper, WP_LATEST_SEARCH,
-                     xpath_class)
+from .common import _ComicControlScraper, _WordPressScraper, WP_LATEST_SEARCH
 
 
 class SabrinaOnline(_BasicScraper):

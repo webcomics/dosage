@@ -8,9 +8,9 @@ from __future__ import absolute_import, division, print_function
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import bounceStarter, indirectStarter
+from ..helpers import bounceStarter, indirectStarter, xpath_class
 from ..util import tagre
-from .common import _TumblrScraper, _WordPressScraper, xpath_class
+from .common import _TumblrScraper, _WordPressScraper
 
 
 class CampComic(_BasicScraper):
