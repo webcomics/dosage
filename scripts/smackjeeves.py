@@ -19,13 +19,10 @@ class SmackJeevesUpdater(ComicListUpdater):
     # Absolute minumum number of pages a comic may have (restrict search space)
     MIN_COMICS = 90
 
-    ADULT_IMG = 'http://www.smackjeeves.com/images/mature_content.png'
-
     # names of comics to exclude
     excluded_comics = (
         # comic moved/we have a better module
         "Amya",
-        "Carciphona",
         "Footloose",
         "TitleUnrelated",
 
@@ -85,11 +82,14 @@ class SmackJeevesUpdater(ComicListUpdater):
         "Okamirai",
 
         # missing images
+        "AGirlAndHerShadow",
+        "Carciphona",
         "CatboyattheCon",
         "ContraandtheSpamDump",
         "Darkkyosshorts",
         "DollarStoreCaviar",
         "EdgeofDecember",
+        "EvD",
         "HAndJ",
         "HEARD",
         "IwillbenapoSpamDump",
@@ -104,6 +104,7 @@ class SmackJeevesUpdater(ComicListUpdater):
         "SJArtCollab",
         "SlightlyDifferent",
         "TheAttackoftheRecoloursSeason1",
+        "ThroughTheWonkyEye",
         "TotallyKotor",
         "WinterMelody",
         "ZonowTheHedgehog",
@@ -117,53 +118,41 @@ class SmackJeevesUpdater(ComicListUpdater):
 
     def __init__(self, name):
         super(SmackJeevesUpdater, self).__init__(name)
-        self.sleep = 2
+        self.sleep = 1.5
 
     def handle_url(self, url):
         """Parse one search result page."""
         data = self.get_url(url)
 
         num = 999
-        for comicdiv in data.cssselect(
-                'div#webcomic_search_results div.full_banner_div'):
-            page_url = comicdiv.cssselect('a:first-child')[0].attrib['href']
-            name = comicdiv.cssselect('img.banny')
-            if name:
-                name = name[0].attrib['title']
-            else:
-                name = comicdiv.cssselect('h2')[0].text
-            # find out how many images this comic has
-            mo = comicdiv.cssselect('span.small-meter')
-            if not mo:
-                print("ERROR matching number of comics", file=sys.stderr)
-                continue
-            num = int(mo[0].text.strip())
+        for comictag in data.cssselect('a.card'):
+            page_url = comictag.attrib['href']
+            name = comictag.cssselect('div.title')[0].text
             # search for url in extra page
             data2 = self.get_url(page_url)
-            mo = data2.cssselect('div#quick_reading_links a:last-child')
-            if not mo:
-                print("ERROR matching comic URL", file=sys.stderr)
-                continue
+
+            # find out how many images this comic has
+            mo = data2.cssselect('div.num-pages div.value')
+            num = int(mo[0].text.strip().replace(',', ''))
+
+            mo = data2.cssselect('div.buttons a:last-child')
             comic_url = mo[0].attrib['href']
             # search for adult flag
-            adult = data2.xpath('//img[@src="' + self.ADULT_IMG + '"]')
-            self.add_comic(name, (comic_url, bool(adult)), num)
+            adult = data2.cssselect('div.mature')
+            updates = data2.cssselect('div.updates div.value')[0].text_content()
+            self.add_comic(name, (comic_url, len(adult) > 0, updates), num)
 
-        next_url = data.cssselect(
-            "div.search_nav td:last-child a")[0].attrib['href']
+        next_url = data.cssselect("a.next")[0].attrib['href']
         return (next_url, num)
 
     def collect_results(self):
         """Parse all search result pages."""
         # Sort by number of comics, so we can abort when we get under some
         # threshold.
-        next_url = (
-            "http://www.smackjeeves.com/search.php?submit=1" +
-            "&search_mode=webcomics&comic_title=&sort_by=4&special=all" +
-            "&last_update=6&style_all=on&genre_all=on&format_all=on")
+        next_url = "http://www.smackjeeves.com/search.php?last_update=6&sort_by=5"
         last_count = 999
         while last_count >= self.MIN_COMICS:
-            print(last_count, file=sys.stderr, end=" ")
+            print(last_count, file=sys.stderr)
             next_url, last_count = self.handle_url(next_url)
 
     def get_entry(self, name, data):
@@ -174,6 +163,8 @@ class SmackJeevesUpdater(ComicListUpdater):
             opt = "host='%s.%s'" % (sub, top)
         if data[1]:
             opt += ", adult=True"
+        if data[2] == 'Completed':
+            opt += ", endOfLife=True"
         return u"cls('%s', %s)," % (name, opt)
 
 if __name__ == '__main__':
