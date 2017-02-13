@@ -1,61 +1,46 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
-from re import compile
+from ..helpers import indirectStarter, xpath_class
+from ..scraper import _ParserScraper
+from ..util import getQueryParams
 
-from ..scraper import _BasicScraper
-from ..util import tagre, getQueryParams
 
-
-class CloneManga(_BasicScraper):
-    _linkTag = tagre("a", "href", r'([^"]+)')
-    prevSearch = compile(_linkTag + tagre("img", "src", r"previous\.gif"))
-    nextSearch = compile(_linkTag + tagre("img", "src", r"next\.gif"))
-    latestSearch = compile(_linkTag + tagre("img", "src", r"last\.gif"))
+class CloneManga(_ParserScraper):
+    baseUrl = 'http://manga.clone-army.org'
+    imageSearch = '//div[%s]//img' % xpath_class('subsectionContainer')
+    prevSearch = '//a[span[text()="<<"]]'
+    latestSearch = '//a[span[text()=">|"]]'
+    starter = indirectStarter
     help = 'Index format: n'
 
-    def __init__(self, name, shortName, imageFolder=None, lastStrip=None):
+    def __init__(self, name, shortName, endOfLife=False):
         super(CloneManga, self).__init__('CloneManga/' + name)
-
-        _url = 'http://manga.clone-army.org'
-        self.url = '%s/%s.php' % (_url, shortName)
-        if imageFolder is None:
-            imageFolder = shortName
-        self.stripUrl = self.url + '?page=%s'
-        self.imageSearch = compile(tagre("img", "src", r'((?:%s/)?%s/[^"]+)' % (_url, imageFolder), after="center"))
-
-        if lastStrip is None:
-            self.starter = self._starter
-        else:
-            self.url = self.stripUrl % lastStrip
+        self.stripUrl = '%s/viewer.php?page=%%s&lang=&series=%s&HUDoff=' % (
+            self.baseUrl, shortName)
+        self.url = self.stripUrl % '1'
+        self.endOfLife = endOfLife
 
     def namer(self, image_url, page_url):
         return '%03d' % int(getQueryParams(page_url)['page'][0])
 
-    def _starter(self):
-        # first, try hopping to previous and next comic
-        data = self.getPage(self.url)
-        try:
-            url = self.fetchUrl(self.url, data, self.prevSearch)
-        except ValueError:
-            # no previous link found, try hopping to last comic
-            return self.fetchUrl(self.url, data, self.latestSearch)
-        else:
-            data = self.getPage(url)
-            return self.fetchUrl(url, data, self.nextSearch)
-
     @classmethod
     def getmodules(cls):
-        return [
-            cls('AprilAndMay', 'anm', imageFolder='AAM'),
-            cls('Kanami', 'kanami'),
-            cls('MomokaCorner', 'momoka'),
-            cls('NanasEverydayLife', 'nana', lastStrip='78'),
-            cls('PaperEleven', 'pxi', imageFolder='papereleven', lastStrip='311'),
+        return (
+            cls('ACaptainsWorries', 'captains_worries'),
+            cls('AHimehornsDailyLife', 'himehorn'),
+            cls('AprilAndMay', 'anm', endOfLife=True),
+            cls('DollAndMaker', 'maria_doll', endOfLife=True),
+            cls('Kanami', 'kanami', endOfLife=True),
+            cls('MomokaCorner', 'momoka', endOfLife=True),
+            cls('MyShutInVampirePrincess', 'snax'),
+            cls('NanasEverydayLife', 'nana', endOfLife=True),
+            cls('NNN', 'nnn', endOfLife=True),
+            cls('PaperEleven', 'pxi', endOfLife=True),
+            cls('PennyTribute', 'penny', endOfLife=True),
             cls('Tomoyo42sRoom', 't42r'),
-            cls('PennyTribute', 'penny'),
-        ]
+        )
