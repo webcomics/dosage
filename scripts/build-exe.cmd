@@ -1,1 +1,1 @@
-pyinstaller -y --onefile --additional-hooks-dir=. ../dosage
+py -m PyInstaller -y dosage.spec
