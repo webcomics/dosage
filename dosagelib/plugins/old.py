@@ -191,6 +191,7 @@ class Removed(Scraper):
             cls('ComicFury/Wowwithatwistdamaclesandkejallcomic'),
             cls('ComicFury/YouAreNowEnteringAshburg'),
             cls('ComicGenesis/CryHavoc'),
+            cls('ComicGenesis/IBlameDanny'),
             cls('ComicGenesis/SueosdelSur'),
             cls('Commissioned'),
             cls('CowboyJedi', 'brk'),

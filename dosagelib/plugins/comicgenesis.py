@@ -1,37 +1,26 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
-from re import compile
-
-from ..scraper import _BasicScraper
-from ..util import tagre
+from ..scraper import _ParserScraper
 
 # Comicgenesis has a lot of comics, but most of them are disallowed by
 # robots.txt
 
 
-class ComicGenesis(_BasicScraper):
-    imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]*/d/\d{8}\.html)') +
-                         '(?:Previous comic' + '|' +
-                         tagre("img", "alt", "Previous comic") + '|' +
-                         tagre("img", "src", "images/back\.gif") +
-                         ')')
+class ComicGenesis(_ParserScraper):
     multipleImagesPerStrip = True
+    imageSearch = '//img[contains(@src, "/comics/")]'
+    prevSearch = (
+        '//a[img/@alt="Previous comic"]',
+        '//a[text()="Previous comic"]',
+    )
     help = 'Index format: yyyymmdd'
 
-    def link_modifier(self, fromurl, tourl):
-        return tourl.replace(
-            "keenspace.com", "comicgenesis.com").replace(
-            "keenspot.com", "comicgenesis.com").replace(
-            "toonspace.com", "comicgenesis.com").replace(
-            "comicgen.com", "comicgenesis.com")
-
-    def __init__(self, name, sub=None, last=None, baseUrl=None):
+    def __init__(self, name, sub=None, last=None, baseUrl=None, lang=None):
         super(ComicGenesis, self).__init__('ComicGenesis/' + name)
 
         if sub:
@@ -44,12 +33,12 @@ class ComicGenesis(_BasicScraper):
         else:
             self.url = baseUrl
 
+        if lang:
+            self.lang = lang
+
     @classmethod
     def getmodules(cls):
-        return [
-            # do not edit anything below since these entries are generated from
-            # scripts/update_plugins.sh
-            # START AUTOUPDATE
+        return (
             cls('AAAAA', 'aaaaa'),
             cls('AdventuresofKiltman', 'kiltman'),
             cls('AmorModerno', 'amormoderno'),
@@ -61,9 +50,12 @@ class ComicGenesis(_BasicScraper):
             cls('BendyStrawVampires', 'bsvampires'),
             cls('BlindSight', 'blindsight'),
             cls('BreakingtheDoldrum', 'breakingthedoldrum'),
+            cls('BrotherSwan', 'warlordofnoodles'),
             cls('Candi', baseUrl='http://candicomics.com/'),
+            cls('Cerintha', 'cerintha'),
             cls('CorporateLife', 'corporatelife'),
             cls('DarkWelkin', 'darkwelkin'),
+            cls('DeepBlue', 'gjbivin', last='20131109'),
             cls('DemonEater', 'demoneater'),
             cls('DoodleDiaries', 'doodlediaries'),
             cls('DormSweetDorm', 'dormsweetdorm'),
@@ -78,7 +70,6 @@ class ComicGenesis(_BasicScraper):
             cls('Flounderville', 'flounderville'),
             cls('GEM', 'keltzy'),
             cls('Gonefor300days', 'g4300d'),
-            cls('IBlameDanny', 'vileterror'),
             cls('ImpendingDoom', 'impending'),
             cls('InANutshell', 'nutshellcomics'),
             cls('KernyMantisComics', 'kernymantis'),
@@ -91,12 +82,14 @@ class ComicGenesis(_BasicScraper):
             cls('LumiasKingdom', 'lumia'),
             cls('Majestic7', 'majestic7'),
             cls('MaximumWhimsy', 'maximumwhimsy'),
-            cls('MenschunsererZeitGerman', 'muz'),
+            cls('MenschUnsererZeitGerman', 'muz', lang='de', last='20090630'),
+            cls('MenschUnsererZeit', 'rabe', last='20090630'),
             cls('MoonCrest24', 'mooncrest', last='20121117'),
             cls('Mushian', 'tentoumushi'),
             cls('NightwolfCentral', 'nightwolfcentral'),
-            cls('NoTimeForLife', 'randyraven'),
             cls('NoneMoreComic', 'nonemore'),
+            cls('NoTimeForLife', 'randyraven', last='20100510'),
+            cls('OcculTango', 'occultango'),
             cls('ODCKS', 'odcks'),
             cls('OfDoom', 'ofdoom'),
             cls('OpportunityofaLifetime', 'carpathia'),
@@ -119,12 +112,11 @@ class ComicGenesis(_BasicScraper):
             cls('TheAdventuresofVindibuddSuperheroInTraining', 'vindibudd', last='20070720'),
             cls('TheEasyBreather', 'easybreather'),
             cls('TheMisadventuresofOkk', 'okk'),
-            cls('ThePath', 'thepath'),
+            cls('ThePath', 'thepath', '20081226'),
             cls('TheTalesofKalduras', 'kalduras'),
             cls('Unconventional', 'unconventional'),
             cls('WarMageNC17', 'warmage'),
             cls('WebcomicTheWebcomicWebcomicWebcomicWebcomic', 'dannormnsanidey'),
             cls('WhatYouDontSee', 'phantomlady4'),
             cls('Wierdman', 'asa'),
-            # END AUTOUPDATE
-        ]
+        )
