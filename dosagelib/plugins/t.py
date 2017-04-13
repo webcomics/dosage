@@ -147,6 +147,12 @@ class TracyAndTristan(_BasicScraper):
     help = 'Index format: number'
 
 
+class TumbleDryComics(_WordPressScraper):
+    url = 'http://tumbledrycomics.com/'
+    firstStripUrl = url + 'comic/we-need-to-get-high-jpg/'
+    adult = True
+
+
 class TwoGuysAndGuy(_BasicScraper):
     url = 'http://www.twogag.com/'
     rurl = escape(url)
