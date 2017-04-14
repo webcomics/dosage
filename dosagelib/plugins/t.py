@@ -154,6 +154,17 @@ class TumbleDryComics(_WordPressScraper):
     multipleImagesPerStrip = True
     adult = True
 
+    def namer(self, image_url, page_url):
+        # Most images have the date they were posted in the filename
+        # For those that don't we can get the month and year from the image url
+        parts = image_url.split('/')
+        year = parts[5]
+        month = parts[6]
+        filename = parts[7]
+        if not filename.startswith(year):
+            filename = year + "-" + month + "-" + filename
+        return filename
+
 
 class TwoGuysAndGuy(_BasicScraper):
     url = 'http://www.twogag.com/'
