@@ -153,6 +153,10 @@ class TumbleDryComics(_WordPressScraper):
     textSearch = '//div[@id="comic"]//img/@alt'
     multipleImagesPerStrip = True
     adult = True
+    help = 'Index format: name'
+
+    def getIndexStripUrl(self, index):
+        return self.url + "comics/" + index
 
     def namer(self, image_url, page_url):
         # Most images have the date they were posted in the filename
