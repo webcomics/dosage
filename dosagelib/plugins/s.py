@@ -508,3 +508,7 @@ class SurvivingTheWorld(_ParserScraper):
         '//td/a'                        # Special case for Lesson1296.html
     ]
     multipleImagesPerStrip = True
+    help = 'Index format: name'
+
+    def getIndexStripUrl(self, index):
+        return self.stripUrl % index + ".html"
