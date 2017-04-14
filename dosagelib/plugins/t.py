@@ -150,6 +150,8 @@ class TracyAndTristan(_BasicScraper):
 class TumbleDryComics(_WordPressScraper):
     url = 'http://tumbledrycomics.com/'
     firstStripUrl = url + 'comic/we-need-to-get-high-jpg/'
+    textSearch = '//div[@id="comic"]//img/@alt'
+    multipleImagesPerStrip = True
     adult = True
 
 
