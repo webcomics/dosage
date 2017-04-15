@@ -20,9 +20,11 @@ class ComicSherpaUpdater(ComicListUpdater):
         'Rufus',
 
         # too short
+        'BeneathTheFerns',
         'BillyAndCo',
         'BuffaloChips',
         'Crawdiddy',
+        'Gravy',
         'NewFeature',
     )
 

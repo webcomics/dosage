@@ -10,7 +10,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter, xpath_class
 from ..util import tagre
-from .common import _WordPressScraper
+from .common import _WPNaviIn
 
 
 class DamnLol(_ParserScraper):
@@ -56,10 +56,9 @@ class DarthsAndDroids(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(/comics/darths\d\d\d\d\.jpg)'))
 
 
-class DasLebenIstKeinPonyhof(_WordPressScraper):
+class DasLebenIstKeinPonyhof(_WPNaviIn):
     url = 'http://sarahburrini.com/wordpress/'
     firstStripUrl = url + 'comic/mein-erster-webcomic/'
-    multipleImagesPerStrip = True
     lang = 'de'
 
 

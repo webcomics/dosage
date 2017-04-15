@@ -113,6 +113,7 @@ class Meiosis(_WordPressScraper):
 
 class Melonpool(_WordPressScraper):
     url = 'http://www.melonpool.com/'
+    allow_errors = (500,)
 
 
 class MenageA3(_BasicScraper):

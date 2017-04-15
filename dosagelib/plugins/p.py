@@ -182,15 +182,11 @@ class PokeyThePenguin(_ParserScraper):
         return "%s/index%d.html" % (prefix, num)
 
 
-class PoorlyDrawnLines(_BasicScraper):
+class PoorlyDrawnLines(_ParserScraper):
     url = 'http://poorlydrawnlines.com/comic/'
-    rurl = escape(url)
-    stripUrl = url + '%s'
-    firstStripUrl = stripUrl % 'campus-characters/'
-    imageSearch = compile(tagre("img", "src", r'(http://poorlydrawnlines\.com/wp-content/uploads/\d+/\d+/[^"]+)'))
-    prevSearch = compile(tagre("li", "class", r'previous') +
-                         tagre("a", "href", r'(%s[^"]+)' % rurl))
-    help = 'Index Format: name'
+    firstStripUrl = url + 'campus-characters/'
+    imageSearch = '//div[%s]//img' % xpath_class('comic')
+    prevSearch = '//a[@rel="prev"]'
 
 
 class Precocious(_ParserScraper):

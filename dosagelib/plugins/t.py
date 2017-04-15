@@ -161,10 +161,11 @@ class TwoGuysAndGuy(_BasicScraper):
 
 class Twokinds(_ParserScraper):
     url = 'http://twokinds.keenspot.com/'
-    imageSearch = ('//p[@id="cg_img"]//img',
-                   '//article/p//img')
-    prevSearch = ('//a[@id="cg_back"]',
-                  '//a[%s]' % xpath_class('navprev'))
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//article[%s]//img' % xpath_class('comic')
+    prevSearch = '//a[%s]' % xpath_class('navprev')
+    help = 'Index format: n (unpadded)'
 
 
 class TwoLumps(_BasicScraper):

@@ -102,12 +102,10 @@ class CatVersusHuman(_ParserScraper):
     starter = indirectStarter
 
 
-class ChainsawSuit(_ParserScraper):
-    url = 'http://chainsawsuit.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
+class ChainsawSuit(_WordPressScraper):
+    url = 'http://chainsawsuit.com/comic/'
+    stripUrl = url + 'archive/%s/'
     firstStripUrl = stripUrl % '2008/03/12/strip-338'
-    imageSearch = '//div[@id="comic"]//img'
     prevSearch = '//img[@alt="previous"]/..'
     help = 'Index format: yyyy/mm/dd/stripname'
 
