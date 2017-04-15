@@ -496,19 +496,16 @@ class SupernormalStep(_ComicControlScraper):
 
 class SurvivingTheWorld(_ParserScraper):
     url = 'http://survivingtheworld.net/'
-    stripUrl = url + '%s'
-    firstStripUrl = stripUrl % 'Lesson1.html'
-    imageSearch = [
+    stripUrl = url + '%s.html'
+    firstStripUrl = stripUrl % 'Lesson1'
+    imageSearch = (
         '//div[@class="img"]/img',      # When there's one image per strip
         '//div[@class="img"]/p/img',    # When there's multiple images per strip
         '//td/img'                      # Special case for Lesson1296.html
-    ]
-    prevSearch = [
+    )
+    prevSearch = (
         '//li[@class="previous"]/a',
         '//td/a'                        # Special case for Lesson1296.html
-    ]
+    )
     multipleImagesPerStrip = True
     help = 'Index format: name'
-
-    def getIndexStripUrl(self, index):
-        return self.stripUrl % index + ".html"

@@ -149,22 +149,20 @@ class TracyAndTristan(_BasicScraper):
 
 class TumbleDryComics(_WordPressScraper):
     url = 'http://tumbledrycomics.com/'
-    firstStripUrl = url + 'comic/we-need-to-get-high-jpg/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'we-need-to-get-high-jpg'
     textSearch = '//div[@id="comic"]//img/@alt'
     multipleImagesPerStrip = True
     adult = True
     help = 'Index format: name'
 
-    def getIndexStripUrl(self, index):
-        return self.url + "comics/" + index
-
     def namer(self, image_url, page_url):
         # Most images have the date they were posted in the filename
         # For those that don't we can get the month and year from the image url
-        parts = image_url.split('/')
-        year = parts[5]
-        month = parts[6]
-        filename = parts[7]
+        parts = image_url.rsplit('/', 3)
+        year = parts[1]
+        month = parts[2]
+        filename = parts[3]
         if not filename.startswith(year):
             filename = year + "-" + month + "-" + filename
         return filename
