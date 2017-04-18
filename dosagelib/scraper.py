@@ -142,7 +142,7 @@ class Scraper(object):
             out.warn(
                 u"Found %d images instead of 1 at %s with expressions %s" %
                 (len(imageUrls), url, prettyMatcherList(self.imageSearch)))
-            image = sorted(imageUrls)[0]
+            image = imageUrls[0]
             out.warn(u"Choosing image %s" % image)
             imageUrls = (image,)
         elif not imageUrls:
