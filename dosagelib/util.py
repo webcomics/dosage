@@ -522,3 +522,12 @@ def strlimit(s, length=72):
     if length == 0:
         return ""
     return "%s..." % s[:length]
+
+
+def uniq(input):
+    """Remove duplicates from a list while preserving the list order"""
+    output = []
+    for item in input:
+        if item not in output:
+            output.append(item)
+    return output
