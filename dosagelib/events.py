@@ -287,6 +287,13 @@ class JSONEventHandler(EventHandler):
     def comicDownloaded(self, comic, filename):
         """Add URL-to-filename mapping into JSON."""
         pageInfo = self.getPageInfo(comic.scraper, comic.referrer)
+
+        # If there's already an image for this page start keeping track of their order
+        if len(pageInfo['images'].keys()) == 1:
+            pageInfo['imagesOrder'] = [pageInfo['images'].keys()[0]]
+        if 'imagesOrder' in pageInfo.keys():
+            pageInfo['imagesOrder'].append(comic.url)
+
         pageInfo['images'][comic.url] = os.path.basename(filename)
 
     def comicPageLink(self, scraper, url, prevUrl):
