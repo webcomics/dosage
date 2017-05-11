@@ -22,10 +22,11 @@ class SmackJeeves(_ParserScraper):
     prevSearch = (
         '//a[@class="nav-prev"]' + ONLY_COMICS,
         '//a[img[@id="sj_nav_prev_img"]]' + ONLY_COMICS,
-        '//a[img[re:test(@alt, "prev", "i")]]' + ONLY_COMICS,
+        '//a[img[re:test(@alt, "prev", "i") and not(@id="comic_image")]]' + ONLY_COMICS,
         '//a[img[re:test(@src, "/(prev|back|Yun2lVQ)")]]' + ONLY_COMICS,
         '//a[re:test(@title, "previous", "i")]' + ONLY_COMICS,
         '//a[re:test(text(), "prev|back|atras", "i")]' + ONLY_COMICS,
+        '//a[div[@class="prev"]]' + ONLY_COMICS,
         '//select[@class="jumpbox"]/preceding::a[1]' + ONLY_COMICS,
         '//form[@name="jumpbox"]/preceding::a[1]' + ONLY_COMICS,
     )
@@ -33,10 +34,11 @@ class SmackJeeves(_ParserScraper):
     nextSearch = (
         '//a[@class="nav-next"]' + ONLY_COMICS,
         '//a[img[@id="sj_nav_next_img"]]' + ONLY_COMICS,
-        '//a[img[re:test(@alt, "next", "i")]]' + ONLY_COMICS,
+        '//a[img[re:test(@alt, "next", "i") and not(@id="comic_image")]]' + ONLY_COMICS,
         '//a[img[re:test(@src, "/(next|wJkQA07)", "i")]]' + ONLY_COMICS,
         '//a[re:test(@title, "next", "i")]' + ONLY_COMICS,
         '//a[re:test(text(), "next|siguiente", "i")]' + ONLY_COMICS,
+        '//a[div[@class="next"]]' + ONLY_COMICS,
         '//select[@class="jumpbox"]/following::a[1]' + ONLY_COMICS,
         '//form[@name="jumpbox"]/following::a[1]' + ONLY_COMICS,
     )
@@ -88,7 +90,8 @@ class SmackJeeves(_ParserScraper):
 
     def shouldSkipUrl(self, url, data):
         return (data.xpath('//img[contains(@src, "/images/image_na.gif")]') or
-                '/851756/175-final-story-15-paradise' in url)
+                '/851756/175-final-story-15-paradise' in url or
+                '/2422158/hedgehog-piece-grand-voyage' in url)
 
     @classmethod
     def getmodules(cls):
@@ -131,7 +134,6 @@ class SmackJeeves(_ParserScraper):
             cls('AnythingAboutNothing', host='www.anythingcomic.com'),
             cls('APTComic', sub='aptcomic'),
             cls('AQuestionOfCharacter', sub='aqoc'),
-            cls('ArchportCityChronicles', sub='tjs'),
             cls('Area9', sub='area-9'),
             cls('AroundTheBlock', sub='aroundtheblock'),
             cls('ArtOfAFantasy', sub='artofafantasy', adult=True),
@@ -174,14 +176,12 @@ class SmackJeeves(_ParserScraper):
             cls('BloodhuntersBirthOfAVampire', sub='bloodhunters', endOfLife=True),
             cls('BloomAPokemonConquestComic', sub='bloomconquest'),
             cls('BlueHair', sub='bluehair'),
-            cls('BlueWell', host='www.bluewellcomic.com'),
             cls('BoilingPointofBrain', sub='bpob'),
             cls('BoogeyDancingMonkeyPot', sub='monkeypot'),
             cls('BreachOfAgency', sub='breachofagency', endOfLife=True),
             cls('BreakfastOnACliff', sub='boac'),
             cls('Burn', sub='burn'),
             cls('ByTheBook', sub='bythebook', adult=True),
-            cls('CafeAmargo', sub='cafeamargo'),
             cls('CafeSuada', sub='cafesuada'),
             cls('Cambion', sub='cambion', adult=True),
             cls('CaptiveSoul', sub='captive-soul'),
@@ -217,7 +217,6 @@ class SmackJeeves(_ParserScraper):
             cls('CrocodileTears', sub='crocodile-tears', adult=True),
             cls('CupOfOlea', sub='cupofolea'),
             cls('CurseLineage', sub='curselineage'),
-            cls('DaddysGirl', sub='daddysgirl'),
             cls('DanielleDark', sub='danielledark'),
             cls('Dasien', sub='dasien', adult=True),
             cls('DavidDoesntGetIt', sub='daviddoesntgetit'),
@@ -465,7 +464,7 @@ class SmackJeeves(_ParserScraper):
             cls('NotyoursamI', sub='notyoursami', adult=True),
             cls('ObnoxiousHerokun', sub='hero-kun', adult=True),
             cls('ObsidianHeart', sub='obsidianheart'),
-            cls('October20th', host='www.october20comic.com'),
+            cls('October20th', sub='october20th'),
             cls('OddPlaceOddTime', sub='oddplaceoddtime'),
             cls('Ohman', sub='ohman'),
             cls('OldElastikid', sub='oldelastikid'),
@@ -517,7 +516,7 @@ class SmackJeeves(_ParserScraper):
             cls('RainLGBT', sub='rainlgbt'),
             cls('RainxSasori', sub='rainxsasori', adult=True, endOfLife=True),
             cls('RANDOM', sub='randomthecomic'),
-            cls('RareCandyTreatment', host='www.rarecandytreatment.com'),
+            cls('RareCandyTreatment', sub='rarecandytreatment'),
             cls('RavenWolf', sub='ravenwolf'),
             cls('RedVelvetRequiem', sub='rvr'),
             cls('Regina', sub='regina'),
@@ -591,7 +590,7 @@ class SmackJeeves(_ParserScraper):
             cls('SPRITEDHeroesofDobalia', sub='spritedhod'),
             cls('Spriterschaos', sub='spriterschaos'),
             cls('Sprytts', sub='sprytts'),
-            cls('SpursAndStripes', sub='spursandstripes', adult=True),
+            cls('SpursAndStripes', host='www.spursandstripescomic.com', adult=True),
             cls('StarTrip', sub='startrip'),
             cls('Stay', sub='stay-comic', adult=True),
             cls('StellaInChrome', sub='stellainchrome'),
@@ -677,7 +676,6 @@ class SmackJeeves(_ParserScraper):
             cls('Theswordsmanandtheamnesiac', sub='tsata', adult=True),
             cls('TheTimeDog', sub='timedog'),
             cls('TheTytonNuzlockeChallengeEmeraldEdition', sub='tytonnuzlockeemerald'),
-            cls('TheWastelands', sub='wastelands'),
             cls('TheWhiteTower', sub='thewhitetower', endOfLife=True),
             cls('TheWinterCampaign', sub='winterc'),
             cls('TheYoshiHerd', sub='theyoshiherd'),

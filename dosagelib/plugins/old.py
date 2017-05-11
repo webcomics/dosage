@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -29,7 +29,7 @@ class Removed(Scraper):
 
     @classmethod
     def getmodules(cls):
-        return [
+        return (
             # Removed in 2.16
             cls('AbleAndBaker'),
             cls('AlsoBagels'),
@@ -403,13 +403,17 @@ class Removed(Scraper):
             cls('SmackJeeves/Allthatglitters'),
             cls('SmackJeeves/Anathemacomics'),
             cls('SmackJeeves/AngelBeast'),
+            cls('SmackJeeves/ArchportCityChronicles'),
             cls('SmackJeeves/AwesomeSauce'),
             cls('SmackJeeves/BetweenWorlds'),
             cls('SmackJeeves/BeyondTemptation'),
             cls('SmackJeeves/Bloodyfairytale'),
             cls('SmackJeeves/BLOT'),
+            cls('SmackJeeves/BlueWell'),
+            cls('SmackJeeves/CafeAmargo'),
             cls('SmackJeeves/Captor'),
             cls('SmackJeeves/ChaosTheory2005'),
+            cls('SmackJeeves/DaddysGirl'),
             cls('SmackJeeves/Debtsettlement'),
             cls('SmackJeeves/DebtSettlement2OperationExtinction'),
             cls('SmackJeeves/Destinationunknown'),
@@ -468,6 +472,7 @@ class Removed(Scraper):
             cls('SmackJeeves/TheMewExperiment'),
             cls('SmackJeeves/TheRandomObscureFairyTaleNoOnesEverReallyHeardOf'),
             cls('SmackJeeves/TheSomewhereOther'),
+            cls('SmackJeeves/TheWastelands', 'mis'),
             cls('SmackJeeves/ThroughTheWonkyEye'),
             cls('SmackJeeves/TitleUnrelated'),
             cls('SmackJeeves/TotalPokemonIsland'),
@@ -491,7 +496,7 @@ class Removed(Scraper):
             cls('WhiteNinja'),
             cls('WLP/ShadowChasers'),
             cls('WotNow'),
-        ]
+        )
 
 
 class Renamed(Scraper):
