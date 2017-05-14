@@ -10,7 +10,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter, xpath_class
 from ..util import tagre
-from .common import _WPNaviIn
+from .common import _ComicControlScraper, _WPNaviIn
 
 
 class DamnLol(_ParserScraper):
@@ -38,13 +38,9 @@ class Damonk(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
-class DangerouslyChloe(_BasicScraper):
+class DangerouslyChloe(_ComicControlScraper):
     url = 'http://www.dangerouslychloe.com/'
-    stripUrl = url + 'strips-dc/%s'
-    firstStripUrl = stripUrl % 'chapter_1_-_that_damned_girl'
-    imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]*/strips-dc/[^"]+)', before="cn[id]prevt"))
-    help = 'Index format: name'
+    firstStripUrl = url + 'strips-dc/Chapter_1_-_That_damned_girl'
 
 
 class DarthsAndDroids(_BasicScraper):
@@ -222,8 +218,9 @@ class DresdenCodak(_ParserScraper):
     url = 'http://dresdencodak.com/'
     startUrl = url + 'cat/comic/'
     firstStripUrl = url + '2007/02/08/pom/'
-    imageSearch = '//section[%s]//img' % xpath_class('entry-content')
-    prevSearch = '//a[@rel="prev"]'
+    imageSearch = '//section[%s]//img[%s]' % (
+            xpath_class('entry-content'), xpath_class('aligncenter'))
+    prevSearch = '//a[img[contains(@src, "prev")]]'
     latestSearch = '//a[%s]' % xpath_class('tc-grid-bg-link')
     starter = indirectStarter
 
@@ -271,7 +268,7 @@ class Drowtales(_BasicScraper):
     stripUrl = url + '?sid=%s'
     firstStripUrl = stripUrl % '4192'
     imageSearch = (
-        compile(tagre("img", "src", r'(%smainarchive/[^"]+)' % rurl)),
+        compile(tagre("img", "src", r'((%s)?mainarchive/[^"]+)' % rurl)),
         compile(r'background-image:url\((mainarchive/[^\)]+center\.jpg)'),
     )
     prevSearch = compile(tagre("a", "href", r'(\?sid=\d+)', before="link_prev_top"))

@@ -70,20 +70,10 @@ class Catalyst(_BasicScraper):
     help = 'Index format: number'
 
 
-class CatAndGirl(_BasicScraper):
+class CatAndGirl(_ParserScraper):
     url = 'http://catandgirl.com/'
-    rurl = escape(url)
-    stripUrl = url + '?p=%s'
-    firstStripUrl = stripUrl % '1602'
-    imageSearch = compile(tagre("img", "src", r'(%sarchive/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)') + r"[^<]+Previous</a>")
-    help = 'Index format: n (unpadded)'
-
-    def shouldSkipUrl(self, url, data):
-        """Skip pages without images."""
-        return url in (
-            self.stripUrl % '4299',
-        )
+    imageSearch = '//div[@id="comic"]//img'
+    prevSearch = '//a[@rel="prev"]'
 
 
 class Catena(_WordPressScraper):
@@ -207,27 +197,11 @@ class Concession(_BasicScraper):
     help = 'Index format: number'
 
 
-class CoolCatStudio(_BasicScraper):
-    url = 'http://www.coolcatstudio.com/'
-    rurl = escape(url)
-    stripUrl = url + 'strips-cat/%s'
-    firstStripUrl = stripUrl % 'first'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%sstrips-cat/[^"]+)' % rurl, before="prev"))
-    help = 'Index format: ccsyyyymmdd'
-
-
 class CorydonCafe(_ParserScraper):
     url = 'http://corydoncafe.com/'
-    starter = indirectStarter
-    stripUrl = url + '%s.php'
     imageSearch = "//center[2]//img"
     prevSearch = '//a[@title="prev"]'
-    latestSearch = '//ul//a'
-    help = 'Index format: yyyy/stripname'
-
-    def namer(self, image_url, page_url):
-        return page_url.split('/')[-1].split('.')[0]
+    multipleImagesPerStrip = True
 
 
 class CourtingDisaster(_WordPressScraper):
@@ -278,6 +252,10 @@ class CucumberQuest(_BasicScraper):
 class Curtailed(_WordPressScraper):
     url = 'http://curtailedcomic.com/'
     firstStripUrl = url + 'comic/001-sneeze/'
+
+    def shouldSkipUrl(self, url, data):
+        """Skip pages without images."""
+        return 'comic/sitrep-1' in url
 
 
 class Curvy(_ParserScraper):

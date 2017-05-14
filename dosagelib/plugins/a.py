@@ -237,12 +237,6 @@ class Annyseed(_ParserScraper):
         return self.FIX_RE.sub('', image_url)
 
 
-class AoiHouse(_ParserScraper):
-    url = 'http://www.aoihouse.net/'
-    imageSearch = '//div[@id="comic"]/a[2]/img'
-    prevSearch = '//a[@id="cndprev"]'
-
-
 class AppleGeeks(_BasicScraper):
     url = 'http://www.applegeeks.com/'
     stripUrl = url + 'comics/viewcomic.php?issue=%s'

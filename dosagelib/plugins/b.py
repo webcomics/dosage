@@ -122,14 +122,13 @@ class BillyTheDunce(_ParserScraper):
     starter = indirectStarter
 
 
-class BlankIt(_BasicScraper):
+class BlankIt(_ParserScraper):
     url = 'http://blankitcomics.com/'
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '0001'
-    imageSearch = compile(tagre("img", "src",
-                                r'(http://blankitcomics\.com/bicomics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)', after='rel="prev"'))
-    help = 'Index format: stripname'
+    firstStripUrl = url + 'comic/well-what-would-you-do'
+    imageSearch = '//div[@id="comic"]//img'
+    prevSearch = '//a[%s]' % xpath_class('comic-nav-previous')
+    latestSearch = '//a[%s]' % xpath_class('comic-nav-last')
+    starter = indirectStarter
 
 
 class BloodBound(_WordPressScraper):

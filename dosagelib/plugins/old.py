@@ -194,6 +194,7 @@ class Removed(Scraper):
             cls('ComicGenesis/IBlameDanny'),
             cls('ComicGenesis/SueosdelSur'),
             cls('Commissioned'),
+            cls('CoolCatStudio'),
             cls('CowboyJedi', 'brk'),
             cls('Creators/BCinSpanish'),
             cls('Creators/GirlsandSportsinSpanish'),
