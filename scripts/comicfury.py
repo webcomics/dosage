@@ -116,9 +116,10 @@ class ComicFuryUpdater(ComicListUpdater):
         "KindergardenCrisIs",
         "NoSongsForTheDead",
         "RequiemShadowbornPariah",
-        "STICKFODDER",
         "SandboxDrama",
+        "STICKFODDER",
         "TezzleAndZeek",
+        "TheRealmOfKaerwyn",
 
         # broken HTML
         "CrossingOver",

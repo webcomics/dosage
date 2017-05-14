@@ -16,7 +16,8 @@ XPATH_IMG = '//a[%s][img[contains(@alt, "%s")]]'
 
 class ComicFury(_ParserScraper):
     imageSearch = ('//img[@id="comicimage"]',
-                   '//div[@id="comicimagewrap"]//embed')
+                   '//div[@id="comicimagewrap"]//embed',
+                   '//div[@id="comicimagewrap"]//img')
     prevSearch = (
         '//a[contains(@title, "previous")]',  # 137
         '//a[@rel="prev"]',
@@ -242,7 +243,6 @@ class ComicFury(_ParserScraper):
             cls('CactusCanyon', 'cactuscanyon'),
             cls('CAFEGRUESOME', 'cafegruesome'),
             cls('Cagegirl', 'cagegirl'),
-            cls('CarrionDreams20TheHagetakatanVersionTheSeverelyAbr', 'hagetakatanrules'),
             cls('CastOfMadness', 'castofmadness'),
             # Cataclysm has a duplicate in SmackJeeves/Cataclysm
             cls('CatHerosEpicCatventuresAsAnHero', 'cathero'),
@@ -394,7 +394,6 @@ class ComicFury(_ParserScraper):
             cls('ElementsOfEve', 'elementsofeve'),
             cls('Elf', 'elf-comic'),
             cls('Elsewhere', 'elsewhere'),
-            cls('ElzeronChronicles', 'elzeronchronicles'),
             cls('EmpiresOfSteam', 'empiresofsteam'),
             cls('Energize', 'energize'),
             cls('enoZone', 'xenozone'),
@@ -511,7 +510,6 @@ class ComicFury(_ParserScraper):
             cls('HolyCowComics', 'holycowcomics'),
             cls('HomeOfTheSpaceWalnut', 'hotsw'),
             cls('HoodzAndCaperz', 'hoodzandcaperz'),
-            cls('HopesAndAshes', 'hopeandashes'),
             cls('HorizonGakuen', 'horizongakuen'),
             cls('HourlyKelly', 'hourlykelly'),
             cls('HouseOnWritersBlock', 'houseonwritersblock'),
@@ -626,7 +624,6 @@ class ComicFury(_ParserScraper):
             cls('LegendOfZeldaOcarinaOfTim', 'ocarinaoftim'),
             cls('LethargicMisanthropy', 'lethargicmisanthropy'),
             cls('LetsCelebrate', 'letscelebrate'),
-            cls('LettersToVolraneEtAl', 'coi-love'),
             cls('Level30Psychiatry', 'lvl30psy'),
             cls('LifeExplained', 'lifeexplained'),
             cls('LightBulbs', 'lightbulbs'),
@@ -647,7 +644,6 @@ class ComicFury(_ParserScraper):
             cls('LongDistanceChargesApply', 'zacharybinks'),
             cls('Longhike', 'longhike'),
             cls('LookStraightAhead', 'lookstraightahead'),
-            cls('LooneyTunesReborn', 'ltr'),
             cls('LOSTLOVE', 'lostlove'),
             cls('LoveIsConplicated', 'conplicated'),
             cls('LoveKillsSlowly', 'lovekillsslowly'),
@@ -696,7 +692,6 @@ class ComicFury(_ParserScraper):
             cls('MissionMars', 'missionmars'),
             cls('MithrilRavens', 'mithril-ravens'),
             cls('MiVidaSinUnJetpack', 'sinjetpack', 'es'),
-            cls('MnemosyneXPowerhouse', 'mnemosyne-x-powerhouse'),
             cls('MobiusAdventures', 'mobiusadventures'),
             cls('Mohyla', 'mohyla'),
             cls('Molasses', 'molasses'),
@@ -738,7 +733,6 @@ class ComicFury(_ParserScraper):
             cls('NeverMindTheGap', 'nmg'),
             cls('Newheimburg', 'newheimburg'),
             cls('NEXGEN', 'nexgentheseries'),
-            cls('NextRevery', 'nextrevery'),
             cls('NightmareNauts', 'nightmarenauts'),
             cls('NightshadeTheMerryWidow', 'lorddarke'),
             cls('NinthLife', 'ninthlife'),
@@ -811,7 +805,6 @@ class ComicFury(_ParserScraper):
             cls('PrimalWarsAftermath', 'primalwars'),
             cls('PrinceOfCats', 'princeofcats'),
             # PrincessChroma has a duplicate in SmackJeeves/PrincessChroma
-            cls('PrismaticStar', 'prismaticstar'),
             cls('ProfessorAstonishing', 'professorastonishing'),
             cls('ProjectArc', 'projectarc'),
             cls('ProjectGTH', 'projectgth'),
@@ -1062,7 +1055,6 @@ class ComicFury(_ParserScraper):
             cls('TheQuantumKid', 'thequantumkid'),
             cls('TheQuestForCoitus', 'acomicstudios'),
             cls('TheRathNexus', 'rath'),
-            cls('TheRealmOfKaerwyn', 'kaerwyn'),
             cls('TheRebels', 'rebels'),
             cls('TheRedeemers', 'theredeemers'),
             cls('TheRestlessDead', 'therestlessdead'),
@@ -1072,7 +1064,6 @@ class ComicFury(_ParserScraper):
             cls('TheScienceOfCookies', 'cookiescience', 'fr'),
             cls('TheSecondCrimeanWar', 'secondcrimeanwar'),
             cls('TheSettlers', 'thesettlers'),
-            cls('TheSimpsons', 'simps'),
             cls('TheSketchyAdventuresOfKyoAndMatt', 'kyoandmatt'),
             cls('TheSkybox', 'skybox'),
             cls('TheSpecialCASE', 'thespecialcase'),
