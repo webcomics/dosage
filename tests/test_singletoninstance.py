@@ -4,6 +4,8 @@
 # Author: Sorin Sbarnea
 # Changes: changed logging and formatting
 
+from __future__ import absolute_import, division, print_function
+
 from dosagelib import singleton
 from multiprocessing import Process
 

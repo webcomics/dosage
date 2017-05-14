@@ -1,8 +1,10 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copied from: https://github.com/pycontribs/tendo
 # License: PYTHON SOFTWARE FOUNDATION LICENSE VERSION 2
 # Author: Sorin Sbarnea
 # Changes: changed logging and formatting
+
+from __future__ import absolute_import, division, print_function
 
 import sys
 import os
@@ -49,7 +51,7 @@ class SingleInstance(object):
                 self.fd = os.open(self.lockfile, os.O_CREAT | os.O_EXCL | os.O_RDWR)
             except OSError:
                 type, e, tb = sys.exc_info()
-                if e.errno == errno.EACCES: # EACCES == 13
+                if e.errno == errno.EACCES:  # EACCES == 13
                     self.exit(exit_code)
                 raise
         else:  # non Windows

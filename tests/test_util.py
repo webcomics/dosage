@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
 
 import pytest
 import re
@@ -30,9 +32,9 @@ class TestRegex(object):
     ValuePrefix = '/bla/'
 
     @pytest.mark.parametrize("tag,value,domatch", [
-        ('<img src="%s">', ValuePrefix+'foo', True),
+        ('<img src="%s">', ValuePrefix + 'foo', True),
         ('< img  src = "%s" >', ValuePrefix, True),
-        ('<img class="prev" src="%s">', ValuePrefix+'...', True),
+        ('<img class="prev" src="%s">', ValuePrefix + '...', True),
         ('<img origsrc="%s">', ValuePrefix, False),
         ('<Img src="%s">', ValuePrefix, True),
         ('<img SrC="%s">', ValuePrefix, True),

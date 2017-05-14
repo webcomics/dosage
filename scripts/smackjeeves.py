@@ -167,5 +167,6 @@ class SmackJeevesUpdater(ComicListUpdater):
             opt += ", endOfLife=True"
         return u"cls('%s', %s)," % (name, opt)
 
+
 if __name__ == '__main__':
     SmackJeevesUpdater(__file__).run()

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -21,6 +21,7 @@ class ArgumentParser(argparse.ArgumentParser):
         """Paginate help message on TTYs."""
         with out.pager():
             out.info(self.format_help())
+
 
 Examples = """\
 EXAMPLES
@@ -292,6 +293,7 @@ def do_column_list(scrapers):
                  names[:names_per_line]))
         del names[:names_per_line]
     return num, disabled
+
 
 TAG_ADULT = "adult"
 TAG_LANG = "lang"

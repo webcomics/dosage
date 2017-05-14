@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 """
 Define basic configuration data like version or application name.
 """
 
-from __future__ import print_function
+from __future__ import absolute_import, division, print_function
+
 from . import AppName, AppVersion
 
 App = AppName + u' ' + AppVersion
@@ -18,7 +19,7 @@ UserAgent = u"Mozilla/5.0 (compatible; %s/%s; +%s)" % (AppName, AppVersion,
                                                        Url)
 Copyright = u"""Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 Copyright (C) 2012-2014 Bastian Kleineidam
-Copyright (C) 2015-2016 Tobias Gruetzmacher
+Copyright (C) 2015-2017 Tobias Gruetzmacher
 """
 Freeware = AppName + u""" comes with ABSOLUTELY NO WARRANTY!
 This is free software, and you are welcome to redistribute it

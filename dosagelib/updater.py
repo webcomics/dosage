@@ -1,7 +1,10 @@
-# -*- coding: iso-8859-1 -*-
-"""
-Function to check for updates.
-"""
+# -*- coding: utf-8 -*-
+# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
+# Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
+
 import os
 import dosagelib
 from dosagelib import configuration
@@ -9,10 +12,10 @@ from .util import urlopen
 from distutils.version import StrictVersion
 import requests
 
-
 UPDATE_URL = "https://api.github.com/repos/webcomics/dosage/releases/latest"
 
-def check_update ():
+
+def check_update():
     """Return the following values:
        (False, errmsg) - online version could not be determined
        (True, None) - user has newest version
@@ -33,7 +36,7 @@ def check_update ():
     return True, (version, None)
 
 
-def get_online_version ():
+def get_online_version():
     """Download update info and parse it."""
     session = requests.session()
     page = urlopen(UPDATE_URL, session).json()
@@ -47,6 +50,6 @@ def get_online_version ():
     return version, url
 
 
-def is_newer_version (version):
+def is_newer_version(version):
     """Check if given version is newer than current version."""
     return StrictVersion(version) > StrictVersion(dosagelib.__version__)

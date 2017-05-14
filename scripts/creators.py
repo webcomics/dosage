@@ -40,5 +40,6 @@ class CreatorsUpdater(ComicListUpdater):
         langopt = ", 'es'" if name.lower().endswith('spanish') else ''
         return u"cls('%s', '%s'%s)," % (name, path, langopt)
 
+
 if __name__ == '__main__':
     CreatorsUpdater(__file__).run()

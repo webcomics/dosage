@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2013-2014 Bastian Kleineidam
-# Copyright (C) 2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
 
 import os
 import subprocess

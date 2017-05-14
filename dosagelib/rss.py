@@ -1,11 +1,16 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# TODO: Not sure if this RSS output is "valid", should be though.
-#       Might also be nice categorise Comics under one Item
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
+
+from __future__ import absolute_import, division, print_function
 
 import xml.dom.minidom
 import time
 from .configuration import App
+
+# TODO: Not sure if this RSS output is "valid", should be though.
+#       Might also be nice categorise Comics under one Item
+
 
 class Feed(object):
     """Write an RSS feed with comic strip images."""
@@ -62,10 +67,13 @@ def parseFeed(filename, yesterday):
     """Parse an RSS feed and filter only entries that are newer than yesterday."""
     dom = xml.dom.minidom.parse(filename)
 
-    getText = lambda node, tag: node.getElementsByTagName(tag)[0].childNodes[0].data
-    getNode = lambda tag: dom.getElementsByTagName(tag)
+    def getText(node, tag):
+        node.getElementsByTagName(tag)[0].childNodes[0].data
 
-    content = getNode('channel')[0] # Only one channel node
+    def getNode(tag):
+        dom.getElementsByTagName(tag)
+
+    content = getNode('channel')[0]  # Only one channel node
 
     feedTitle = getText(content, 'title')
     feedLink = getText(content, 'link')
@@ -75,7 +83,7 @@ def parseFeed(filename, yesterday):
 
     for item in getNode('item'):
         itemDate = time.strptime(getText(item, 'pubDate'), '%a, %d %b %Y %H:%M:%S GMT')
-        if (itemDate > yesterday): # If newer than yesterday
+        if (itemDate > yesterday):  # If newer than yesterday
             feed.addItem(getText(item, 'title'),
                          getText(item, 'link'),
                          getText(item, 'description'),

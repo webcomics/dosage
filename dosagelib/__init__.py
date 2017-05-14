@@ -15,8 +15,6 @@ Comic modules for each comic are located in L{dosagelib.plugins}.
 """
 from __future__ import absolute_import, division, print_function
 
-import sys
-import os
 from pbr.version import VersionInfo
 
 AppName = u'dosage'
