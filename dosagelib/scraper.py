@@ -27,7 +27,7 @@ except ImportError:
 from . import loader, configuration, languages
 from .util import (get_page, makeSequence, get_system_uid, urlopen,
                    unescape, tagre, normaliseURL, prettyMatcherList,
-                   requests_session)
+                   requests_session, uniq)
 from .comic import ComicStrip
 from .output import out
 from .events import getHandler
@@ -137,12 +137,12 @@ class Scraper(object):
         # map modifier function on image URLs
         imageUrls = [self.imageUrlModifier(x, data) for x in imageUrls]
         # remove duplicate URLs
-        imageUrls = set(imageUrls)
+        imageUrls = uniq(imageUrls)
         if len(imageUrls) > 1 and not self.multipleImagesPerStrip:
             out.warn(
                 u"Found %d images instead of 1 at %s with expressions %s" %
                 (len(imageUrls), url, prettyMatcherList(self.imageSearch)))
-            image = sorted(imageUrls)[0]
+            image = imageUrls[0]
             out.warn(u"Choosing image %s" % image)
             imageUrls = (image,)
         elif not imageUrls:

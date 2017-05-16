@@ -57,7 +57,11 @@ def create_symlinks(d):
     order = []
     work = latest
     while work in data["pages"]:
-        order.extend(data["pages"][work]["images"].values())
+        if "imagesOrder" in data["pages"][work].keys():
+            for url in reversed(data["pages"][work]["imagesOrder"]):
+                order.append(data["pages"][work]["images"][url])
+        else:
+            order.extend(data["pages"][work]["images"].values())
         if "prev" in data["pages"][work]:
             work = data["pages"][work]["prev"]
         else:
