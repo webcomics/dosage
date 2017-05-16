@@ -56,18 +56,6 @@ class Krakow(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
-class Kukuburi(_BasicScraper):
-    baseUrl = 'http://www.kukuburi.com/'
-    url = baseUrl + 'current/'
-    stripUrl = baseUrl + 'v2/%s/'
-    firstStripUrl = stripUrl % '2007/08/09/one'
-    imageSearch = compile(
-        tagre("img", "src", r'(http://www\.kukuburi\.com/v2/comics/[^"]+)',
-              after='alt="[^"]'))
-    prevSearch = compile(r'nav-previous.+?"(http.+?)"')
-    help = 'Index format: yyyy/mm/dd/stripname'
-
-
 class KuroShouri(_BasicScraper):
     url = 'http://kuroshouri.com/'
     rurl = escape(url)

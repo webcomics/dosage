@@ -15,16 +15,10 @@ from .common import _WordPressScraper, WP_LATEST_SEARCH
 
 
 class EarthsongSaga(_ParserScraper):
-    url = 'http://earthsongsaga.com/index.php'
-    starter = indirectStarter
+    url = 'http://earthsongsaga.com/vol5/epilogue5.php'
     imageSearch = '//div[@id="comic"]//img'
     prevSearch = '//a[@title="Previous"]'
-    latestSearch = '//div[@id="leftmenu"]/span[1]/a[1]'
-
-    def fetchUrls(self, url, data, urlSearch):
-        urls = super(EarthsongSaga, self).fetchUrls(url, data, urlSearch)
-        return [x.replace('earthsongsaga.com/../',
-                          'earthsongsaga.com/') for x in urls]
+    endOfLife = True
 
     def namer(self, image_url, page_url):
         imgmatch = compile(r'images/vol(\d+)/ch(\d+)/(.*)\.\w+$',
@@ -69,14 +63,6 @@ class EdmundFinney(_WordPressScraper):
     url = 'http://eqcomics.com/'
     firstStripUrl = url + '2009/03/08/sunday-aliens/'
     prevSearch = '//a[%s]' % xpath_class('navi-prev')
-
-
-class EerieCuties(_BasicScraper):
-    url = 'http://www.eeriecuties.com/'
-    stripUrl = url + 'strips-ec/%s'
-    imageSearch = compile(tagre("img", "src", r'(http://ace\.eeriecuties\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)', before="prev"))
-    help = 'Index format: stripname'
 
 
 class ElfOnlyInn(_BasicScraper):
@@ -139,23 +125,17 @@ class Eryl(_WordPressScraper):
     starter = indirectStarter
 
 
-class EverybodyLovesEricRaymond(_BasicScraper):
+class EverybodyLovesEricRaymond(_ParserScraper):
     url = 'http://geekz.co.uk/lovesraymond/'
-    stripUrl = url + 'archive/%s'
-    firstStripUrl = stripUrl % 'slashdotted'
-    imageSearch = compile(r'<img src="((?:http://geekz.co.uk)?/lovesraymond/wp-content(?:/images)/ep\d+\w?\.jpg)"', IGNORECASE)
-    prevSearch = compile(r'&laquo; <a href="(http://geekz.co.uk/lovesraymond/archive/[^/"]*)">')
-    help = 'Index format: name-of-old-comic'
+    firstStripUrl = url + 'archive/slashdotted'
+    imageSearch = '//div[%s]//img' % xpath_class('entry-content')
+    prevSearch = '//a[@rel="prev"]'
 
 
-# Seems to be GeoBlocked from Europe?
-class EvilDiva(_BasicScraper):
+# Seems to be GeoBlocked from Germany?
+class EvilDiva(_WordPressScraper):
     url = 'http://www.evildivacomics.com/'
-    stripUrl = url + '?p=%s'
-    firstStripUrl = stripUrl % '145'
-    imageSearch = compile(r'(/comics/.+?)"')
-    prevSearch = compile(r'http.+?com/(.+?)".+?"prev')
-    help = 'Index format: n (unpadded)'
+    firstStripUrl = url + 'comic/evil-diva-issue-1-cover/'
 
 
 class EvilInc(_WordPressScraper):
@@ -173,14 +153,12 @@ class Evilish(_ParserScraper):
     help = 'Index format: yyyymmdd'
 
 
-class Exiern(_BasicScraper):
+class Exiern(_WordPressScraper):
     url = 'http://www.exiern.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2005/09/06/so-far'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
-    help = 'Index format: yyyy/mm/dd/stripname'
+    firstStripUrl = url + '2005/09/06/so-far/'
+    imageSearch = ('//div[@id="comic"]//img',
+                   '//div[%s]//img' % xpath_class('entry'))
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
 class ExploitationNow(_WordPressScraper):
