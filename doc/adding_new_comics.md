@@ -1,5 +1,4 @@
-How to add a new comic to Dosage
-=================================
+# Adding a comic to Dosage
 
 To add a new comic, add a new class in one of the *.py files
 in the dosagelib/plugins module.
