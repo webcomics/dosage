@@ -10,8 +10,7 @@ from re import compile, escape
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, xpath_class
-from .common import (_ComicControlScraper, _WordPressScraper, _WPNaviIn,
-                     WP_PREV_SEARCH)
+from .common import _ComicControlScraper, _WordPressScraper, _WPNaviIn
 
 
 class BadassMuthas(_BasicScraper):
@@ -136,12 +135,10 @@ class BloodBound(_WordPressScraper):
     firstStripUrl = 'http://bloodboundcomic.com/comic/06112006/'
 
 
-class BloomingFaeries(_ParserScraper):
+class BloomingFaeries(_WordPressScraper):
     adult = True
     url = 'http://www.bloomingfaeries.com/'
     firstStripUrl = url + 'comic/public/pit-stop/'
-    imageSearch = '//div[@id="comic"]//img'
-    prevSearch = WP_PREV_SEARCH
 
     def namer(self, image_url, page_url):
         return "_".join(image_url.rsplit('/', 3)[1:])

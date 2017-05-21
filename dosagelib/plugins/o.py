@@ -7,10 +7,9 @@ from __future__ import absolute_import, division, print_function
 
 from re import compile, escape
 
-from ..helpers import xpath_class
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import _WordPressScraper
+from .common import _WordPressScraper, _WPNavi
 
 
 class OctopusPie(_ParserScraper):
@@ -50,10 +49,9 @@ class Oglaf(_ParserScraper):
         return urls
 
 
-class OhJoySexToy(_WordPressScraper):
+class OhJoySexToy(_WPNavi):
     url = 'http://www.ohjoysextoy.com/'
     firstStripUrl = url + 'introduction/'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
     textSearch = '//div[@id="comic"]//img/@alt'
     adult = True
 
@@ -106,10 +104,9 @@ class OopsComicAdventure(_WordPressScraper):
     url = 'http://oopscomicadventure.com/'
 
 
-class Optipess(_WordPressScraper):
+class Optipess(_WPNavi):
     url = 'http://www.optipess.com/'
     firstStripUrl = url + '2008/12/01/jason-friend-of-the-butterflies/'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
     textSearch = '//div[@id="comic"]//img/@alt'
     textOptional = True
 

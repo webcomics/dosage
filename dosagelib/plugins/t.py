@@ -10,7 +10,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, xpath_class
 from ..util import tagre
-from .common import _ComicControlScraper, _TumblrScraper, _WordPressScraper
+from .common import _ComicControlScraper, _TumblrScraper, _WordPressScraper, _WPNavi
 
 
 class TheBrads(_ParserScraper):
@@ -20,11 +20,10 @@ class TheBrads(_ParserScraper):
     multipleImagesPerStrip = True
 
 
-class TheDevilsPanties(_WordPressScraper):
+class TheDevilsPanties(_WPNavi):
     url = 'http://thedevilspanties.com/'
     stripUrl = url + 'archives/%s'
     firstStripUrl = stripUrl % '300'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
     help = 'Index format: number'
 
 

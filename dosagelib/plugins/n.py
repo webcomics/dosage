@@ -8,9 +8,9 @@ from __future__ import absolute_import, division, print_function
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter, xpath_class
+from ..helpers import indirectStarter
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, WP_LATEST_SEARCH
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, WP_LATEST_SEARCH
 
 
 class Namesake(_ComicControlScraper):
@@ -82,9 +82,8 @@ class NichtLustig(_BasicScraper):
     starter = indirectStarter
 
 
-class Nicky510(_WordPressScraper):
+class Nicky510(_WPNavi):
     url = 'http://www.nickyitis.com/'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
 class Nimona(_BasicScraper):

@@ -8,15 +8,14 @@ from __future__ import absolute_import, division, print_function
 from re import compile, escape
 
 from ..scraper import _BasicScraper
-from ..helpers import indirectStarter, xpath_class
+from ..helpers import indirectStarter
 from ..util import tagre
-from .common import _WordPressScraper
+from .common import _WordPressScraper, _WPNavi
 
 
-class Underling(_WordPressScraper):
+class Underling(_WPNavi):
     url = 'http://underlingcomic.com/'
     firstStripUrl = url + 'page-one/'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
 class Undertow(_BasicScraper):

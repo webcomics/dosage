@@ -11,7 +11,7 @@ from re import compile, escape, IGNORECASE
 from ..helpers import indirectStarter, xpath_class
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import _WordPressScraper, WP_LATEST_SEARCH
+from .common import _WordPressScraper, _WPNavi, WP_LATEST_SEARCH
 
 
 class EarthsongSaga(_ParserScraper):
@@ -59,10 +59,9 @@ class EdibleDirt(_BasicScraper):
     help = 'Index format: number'
 
 
-class EdmundFinney(_WordPressScraper):
+class EdmundFinney(_WPNavi):
     url = 'http://eqcomics.com/'
     firstStripUrl = url + '2009/03/08/sunday-aliens/'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
 class ElfOnlyInn(_BasicScraper):
@@ -112,9 +111,8 @@ class ErrantStory(_BasicScraper):
     help = 'Index format: yyyy-mm-dd/num'
 
 
-class Erstwhile(_WordPressScraper):
+class Erstwhile(_WPNavi):
     url = 'http://www.erstwhiletales.com/'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
     endOfLife = True
 
 
@@ -153,18 +151,16 @@ class Evilish(_ParserScraper):
     help = 'Index format: yyyymmdd'
 
 
-class Exiern(_WordPressScraper):
+class Exiern(_WPNavi):
     url = 'http://www.exiern.com/'
     firstStripUrl = url + '2005/09/06/so-far/'
     imageSearch = ('//div[@id="comic"]//img',
                    '//div[%s]//img' % xpath_class('entry'))
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
-class ExploitationNow(_WordPressScraper):
+class ExploitationNow(_WPNavi):
     url = 'http://www.exploitationnow.com/'
     firstStripUrl = url + '2000-07-07/9'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
     endOfLife = True
 
 

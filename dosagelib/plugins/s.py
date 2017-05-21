@@ -12,7 +12,7 @@ import datetime
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter, xpath_class
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, WP_LATEST_SEARCH
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, WP_LATEST_SEARCH
 
 
 class SabrinaOnline(_BasicScraper):
@@ -35,10 +35,9 @@ class SabrinaOnline(_BasicScraper):
         return archivepages[-1]
 
 
-class SafelyEndangered(_WordPressScraper):
+class SafelyEndangered(_WPNavi):
     url = 'http://www.safelyendangered.com/'
     firstStripUrl = url + 'comic/ignored/'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
 class SailorsunOrg(_WordPressScraper):
@@ -202,6 +201,14 @@ class ShermansLagoon(_BasicScraper):
         # name is monthname-day-year
         month, day, year = name.split('-')
         return "%s-%s-%s" % (year, month, day)
+
+
+class ShipInABottle(_WPNavi):
+    url = 'http://shipinbottle.pepsaga.com/'
+    stripUrl = url + '?p=%s'
+    firstStripUrl = stripUrl % '281'
+    adult = True
+    help = 'Index format: number'
 
 
 class Shivae(_WordPressScraper):
@@ -425,10 +432,9 @@ class StreetFighter(_ComicControlScraper):
     url = 'http://www.streetfightercomics.com'
 
 
-class StringTheory(_WordPressScraper):
+class StringTheory(_WPNavi):
     url = 'http://www.stringtheorycomic.com/'
     firstStripUrl = url + 'comics/chapterone/chapterone/'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
 class StrongFemaleProtagonist(_ParserScraper):

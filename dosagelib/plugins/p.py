@@ -10,7 +10,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, queryNamer, indirectStarter, xpath_class
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
 
 
 class PandyLand(_WordPressScraper):
@@ -92,14 +92,18 @@ class PennyArcade(_ParserScraper):
         return '%04d%02d%02d' % (int(p[4]), int(p[5]), int(p[6]))
 
 
-class PeppermintSaga(_BasicScraper):
+class PeppermintSaga(_WPNavi):
     url = 'http://www.pepsaga.com/'
-    rurl = escape(url)
     stripUrl = url + '?p=%s'
     firstStripUrl = stripUrl % '3'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\?p=\d+)' % rurl,
-                               after="prev"))
+    help = 'Index format: number'
+    adult = True
+
+
+class PeppermintSagaBGR(_WPNavi):
+    url = 'http://bgr.pepsaga.com/'
+    stripUrl = url + '?p=%s'
+    firstStripUrl = stripUrl % '4'
     help = 'Index format: number'
     adult = True
 
@@ -198,13 +202,11 @@ class Precocious(_ParserScraper):
     help = 'Index format: yyyy/mm/dd'
 
 
-class PrinceOfSartar(_WordPressScraper):
+class PrinceOfSartar(_WPNavi):
     url = 'http://www.princeofsartar.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'introduction-chapter-1'
-    imageSearch = '//div[@id="comic"]//img'
-    prevSearch = '//a[@class="navi comic-nav-previous navi-prev"]'
-    nextSearch = '//a[@class="navi comic-nav-next navi-next"]'
+    nextSearch = '//a[%s]' % xpath_class('navi-next')
     starter = bounceStarter
     help = 'Index format: name'
 

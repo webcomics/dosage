@@ -8,9 +8,9 @@ from __future__ import absolute_import, division, print_function
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter, xpath_class
+from ..helpers import indirectStarter
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
 
 
 class Galaxion(_BasicScraper):
@@ -154,10 +154,9 @@ class GoneWithTheBlastwave(_BasicScraper):
         return '%02d' % int(compile(r'nro=(\d+)').search(page_url).group(1))
 
 
-class GrrlPower(_WordPressScraper):
+class GrrlPower(_WPNavi):
     url = 'http://grrlpowercomic.com/'
     firstStripUrl = url + 'archives/48'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
 class GUComics(_BasicScraper):

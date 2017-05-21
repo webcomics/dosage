@@ -1,20 +1,14 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
-from re import compile
-
-from ..scraper import _BasicScraper
-from ..util import tagre
-from .common import _WordPressScraper
+from .common import _WordPressScraper, _WPNavi
 
 
-class PetiteSymphony(_BasicScraper):
-    imageSearch = compile(tagre("img", "src", r'(http://[a-z0-9]+\.petitesymphony\.com/files/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://[a-z0-9]+\.petitesymphony\.com/comic/[^"]+)', after="navi-prev"))
+class PetiteSymphony(_WPNavi):
     multipleImagesPerStrip = True
     help = 'Index format: named number'
 

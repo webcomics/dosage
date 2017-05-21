@@ -10,7 +10,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from ..helpers import bounceStarter, xpath_class
-from .common import _WordPressScraper
+from .common import _WPNavi
 
 
 class ZapComic(_ParserScraper):
@@ -32,11 +32,10 @@ class Zapiro(_ParserScraper):
         return parts[1]
 
 
-class ZenPencils(_WordPressScraper):
+class ZenPencils(_WPNavi):
     url = 'http://zenpencils.com/'
     multipleImagesPerStrip = True
     firstStripUrl = url + 'comic/1-ralph-waldo-emerson-make-them-cry/'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
 class ZombieHunters(_BasicScraper):

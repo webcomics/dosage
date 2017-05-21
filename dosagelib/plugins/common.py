@@ -15,12 +15,15 @@ from ..helpers import indirectStarter, xpath_class
 
 
 WP_LATEST_SEARCH = '//a[%s]' % xpath_class('comic-nav-last')
-WP_PREV_SEARCH = '//a[%s]' % xpath_class('comic-nav-previous')
 
 
 class _WordPressScraper(_ParserScraper):
     imageSearch = '//div[@id="comic"]//img'
-    prevSearch = WP_PREV_SEARCH
+    prevSearch = '//a[%s]' % xpath_class('comic-nav-previous')
+
+
+class _WPNavi(_WordPressScraper):
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
 class _WPNaviIn(_WordPressScraper):

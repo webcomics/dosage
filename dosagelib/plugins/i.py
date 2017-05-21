@@ -7,10 +7,9 @@ from __future__ import absolute_import, division, print_function
 
 from re import compile, escape
 
-from ..helpers import xpath_class
 from ..scraper import _BasicScraper
 from ..util import tagre
-from .common import _WordPressScraper
+from .common import _WordPressScraper, _WPNavi
 
 
 class IAmArg(_BasicScraper):
@@ -37,11 +36,10 @@ class IDreamOfAJeanieBottle(_WordPressScraper):
     url = 'http://jeaniebottle.com/'
 
 
-class InternetWebcomic(_WordPressScraper):
+class InternetWebcomic(_WPNavi):
     url = 'http://www.internet-webcomic.com/'
     stripUrl = url + '?p=%s'
     firstStripUrl = stripUrl % '30'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
     help = 'Index format: n'
 
 

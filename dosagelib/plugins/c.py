@@ -8,9 +8,9 @@ from __future__ import absolute_import, division, print_function
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import bounceStarter, indirectStarter, xpath_class
+from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
-from .common import _TumblrScraper, _WordPressScraper
+from .common import _TumblrScraper, _WordPressScraper, _WPNavi
 
 
 class CampComic(_BasicScraper):
@@ -113,9 +113,8 @@ class Champ2010(_BasicScraper):
     help = 'Index format: yy-dd-mm'
 
 
-class ChannelAte(_WordPressScraper):
+class ChannelAte(_WPNavi):
     url = 'http://www.channelate.com/'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
 class ChasingTheSunset(_BasicScraper):

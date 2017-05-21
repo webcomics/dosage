@@ -7,10 +7,9 @@ from __future__ import absolute_import, division, print_function
 
 from re import compile, escape, IGNORECASE
 
-from ..helpers import xpath_class
 from ..scraper import _BasicScraper
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper
+from .common import _ComicControlScraper, _WPNavi
 
 
 class KevinAndKell(_BasicScraper):
@@ -28,16 +27,14 @@ class KevinAndKell(_BasicScraper):
         return self.stripUrl % tuple(map(int, index.split('-')))
 
 
-class KickInTheHead(_WordPressScraper):
+class KickInTheHead(_WPNavi):
     url = 'http://www.kickinthehead.org/'
     firstStripUrl = url + '2003/03/20/ipod-envy/'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
-class KillSixBillionDemons(_WordPressScraper):
+class KillSixBillionDemons(_WPNavi):
     url = 'http://killsixbilliondemons.com/'
     firstStripUrl = url + 'comic/kill-six-billion-demons-chapter-1/'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
     multipleImagesPerStrip = True
     adult = True
 

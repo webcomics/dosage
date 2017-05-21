@@ -9,8 +9,8 @@ from re import compile, escape, MULTILINE
 
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import regexNamer, bounceStarter, indirectStarter, xpath_class
-from .common import _WordPressScraper, WP_LATEST_SEARCH
+from ..helpers import regexNamer, bounceStarter, indirectStarter
+from .common import _WordPressScraper, _WPNavi, WP_LATEST_SEARCH
 
 
 class AbstruseGoose(_BasicScraper):
@@ -67,12 +67,11 @@ class Achewood(_BasicScraper):
     namer = regexNamer(compile(r'date=(\d+)'))
 
 
-class AfterStrife(_WordPressScraper):
+class AfterStrife(_WPNavi):
     baseUrl = 'http://afterstrife.com/'
     stripUrl = baseUrl + '?p=%s'
     url = stripUrl % '262'
     firstStripUrl = stripUrl % '1'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
     help = 'Index format: nnn'
     endOfLife = True
 
@@ -97,9 +96,8 @@ class AhoiPolloi(_ParserScraper):
     help = 'Index format: yyyymmdd'
 
 
-class AhoyEarth(_WordPressScraper):
+class AhoyEarth(_WPNavi):
     url = 'http://www.ahoyearth.com/'
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
 
 
 class AirForceBlues(_WordPressScraper):
