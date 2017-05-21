@@ -83,5 +83,5 @@ class SingleInstance(object):
                 fcntl.lockf(self.fp, fcntl.LOCK_UN)
                 if os.path.isfile(self.lockfile):
                     os.unlink(self.lockfile)
-        except StandardError as e:
+        except Exception as e:
             out.exception("could not remove lockfile: %s" % e)
