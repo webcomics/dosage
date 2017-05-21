@@ -28,23 +28,15 @@ class WastedTalent(_BasicScraper):
     help = 'Index format: stripname'
 
 
-class WebDesignerCOTW(_BasicScraper):
-    url = 'http://www.webdesignerdepot.com/'
-    rurl = escape(url)
+class WebDesignerCOTW(_ParserScraper):
+    baseUrl = 'https://www.webdesignerdepot.com/'
+    url = baseUrl + 'category/comics/'
     starter = indirectStarter
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2009/11/comics-of-the-week-1'
-    imageSearch = (
-        compile(tagre("img", "src", r'(http://netdna\.webdesignerdepot\.com/uploads/\d+/\d+/\d+s?\.[^"]+)')),
-        compile(tagre("img", "src", r'(http://netdna\.webdesignerdepot\.com/uploads/\d+/\d+/Christmas\d+\.[^"]+)')),
-        compile(tagre("img", "src", r'(http://netdna\.webdesignerdepot\.com/uploads/comics\d+[a-z0-9]*/\d+a?\.[^"]+)')),
-        compile(tagre("img", "src", r'(http://netdna\.webdesignerdepot\.com/uploads/comics/\d+\.[^"]+)')),
-    )
+    firstStripUrl = baseUrl + '2009/11/comics-of-the-week-1/'
+    imageSearch = '//article[%s]//img' % xpath_class('article-content')
     multipleImagesPerStrip = True
-    prevSearch = compile(tagre("link", "href", r"(%s\d+/\d+/[^']+)" % rurl,
-                               before='prev', quote="'"))
-    latestSearch = compile(tagre("a", "href", r'(%s\d+/\d+/[^"]+/)' % rurl))
-    help = 'Index format: yyyy/mm/stripname'
+    prevSearch = '//a[span[%s]]' % xpath_class('icon-right-small')
+    latestSearch = '//a[%s]' % xpath_class('anim-link')
 
     def shouldSkipUrl(self, url, data):
         """Skip non-comic URLs."""

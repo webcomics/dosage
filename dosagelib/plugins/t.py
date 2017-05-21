@@ -5,7 +5,7 @@
 
 from __future__ import absolute_import, division, print_function
 
-from re import compile, escape, IGNORECASE
+from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, xpath_class
@@ -20,13 +20,11 @@ class TheBrads(_ParserScraper):
     multipleImagesPerStrip = True
 
 
-class TheDevilsPanties(_BasicScraper):
+class TheDevilsPanties(_WordPressScraper):
     url = 'http://thedevilspanties.com/'
     stripUrl = url + 'archives/%s'
     firstStripUrl = stripUrl % '300'
-    imageSearch = compile(tagre("img", "src", r'(http://origin\.thedevilspanties\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/archives/\d+)',
-                               after="Previous"))
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
     help = 'Index format: number'
 
 
@@ -101,12 +99,16 @@ class TheThinHLine(_TumblrScraper):
         return super(TheThinHLine, self).getComicStrip(subPage, pageData)
 
 
-class TheWhiteboard(_BasicScraper):
+class TheWhiteboard(_ParserScraper):
+    BROKEN_PAGE_MIDDLE = compile(r'</body></html><')
     url = 'http://www.the-whiteboard.com/'
-    stripUrl = url + 'auto%s.html'
-    imageSearch = compile(r'<img SRC="(autotwb\d{1,4}.+?|autowb\d{1,4}.+?)">', IGNORECASE)
-    prevSearch = compile(r'&nbsp<a href="(.+?)">previous</a>', IGNORECASE)
-    help = 'Index format: twb or wb + n wg. twb1000'
+    imageSearch = '//center/img'
+    prevSearch = '//a[text()="previous"]'
+
+    # Another ugly hack :(
+    def _parse_page(self, data):
+        data = self.BROKEN_PAGE_MIDDLE.sub('<', data)
+        return super(TheWhiteboard, self)._parse_page(data)
 
 
 class TheWotch(_WordPressScraper):

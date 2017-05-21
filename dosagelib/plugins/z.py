@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -23,7 +23,7 @@ class ZapComic(_ParserScraper):
 class Zapiro(_ParserScraper):
     url = 'http://mg.co.za/zapiro/'
     starter = bounceStarter
-    imageSearch = '//img[%s]' % xpath_class('img-fluid')
+    imageSearch = '//div[@id="cartoon"]/img'
     prevSearch = '//a[%s]' % xpath_class('left')
     nextSearch = '//a[%s]' % xpath_class('right')
 

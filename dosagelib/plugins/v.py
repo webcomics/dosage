@@ -11,15 +11,6 @@ from ..helpers import indirectStarter, xpath_class
 from ..util import tagre
 
 
-class VampireCheerleaders(_BasicScraper):
-    url = 'http://www.vampirecheerleaders.net/'
-    stripUrl = url + 'strips-vc/%s'
-    firstStripUrl = stripUrl % 'fang_service'
-    imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.vampirecheerleaders\.net/strips-vc/[^"]+)', before="cndprev"))
-    help = 'Index format: name'
-
-
 class VGCats(_BasicScraper):
     url = 'http://www.vgcats.com/comics/'
     stripUrl = url + '?strip_id=%s'
