@@ -79,6 +79,8 @@ class LoadingArtist(_ParserScraper):
     url = 'http://www.loadingartist.com/latest'
     imageSearch = '//div[@class="comic"]//img'
     prevSearch = "//a[contains(concat(' ', @class, ' '), ' prev ')]"
+    nextSearch = "//a[contains(concat(' ', @class, ' '), ' next ')]"
+    starter = bounceStarter
 
 
 class LoFiJinks(_WPNaviIn):
