@@ -121,7 +121,7 @@ class MenageA3(_BasicScraper):
     url = 'http://www.ma3comic.com/'
     stripUrl = url + 'strips-ma3/%s'
     imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]*/strips-ma3/[^"]+)',
+    prevSearch = compile(tagre("a", "href", r'([^"]*/comics/[^"]+)',
                                before="cn[id]prev"))
     help = 'Index format: name'
 
