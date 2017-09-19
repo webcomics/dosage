@@ -67,6 +67,17 @@ class DeadWinter(_BasicScraper):
     help = 'Index format: number'
 
 
+class Deathbulge(_BasicScraper):
+    url = 'http://www.deathbulge.com/api/comics'
+    imageSearch = compile(r"(/images/comics/\d+\.jpg)")
+    prevSearch = compile(r'"previous":(\d+),')
+    firstStripUrl = url + '/1'
+    def getPrevUrl(self, url, data):
+        if data[1] == self.url:
+            data = (data[0], data[1] + '/')
+        return _BasicScraper.getPrevUrl(self, url, data)
+
+
 class DeepFried(_BasicScraper):
     url = 'http://www.whatisdeepfried.com/'
     rurl = escape(url)
