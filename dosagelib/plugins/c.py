@@ -175,6 +175,31 @@ class Comedity(_BasicScraper):
     help = 'Index format: n (no padding)'
 
 
+class CommitStrip(_ParserScraper):
+    baseUrl = 'https://www.commitstrip.com/en/'
+    url = baseUrl + '?setLocale=1' # ensure the language cookie is set
+    stripUrl = baseUrl + '%s/'
+    firstStripUrl = 'http://www.commitstrip.com/en/2012/02/22/interview/' # non-TLS!
+
+    latestSearch = '//section//a'
+    starter = indirectStarter
+    imageSearch = '//article/div//img'
+    prevSearch = '//span[@class="nav-previous"]/a'
+    help = 'Index format: yyyy/mm/dd/strip-name'
+
+    def namer(self, image_url, page_url):
+        parts = page_url.rstrip('/').rsplit('/')[-4:]
+        return '-'.join(parts)
+
+
+class CommitStripFr(CommitStrip):
+    baseUrl = 'https://www.commitstrip.com/fr/'
+    url = baseUrl + '?setLocale=1' # ensure the language cookie is set
+    stripUrl = baseUrl + '%s/'
+    firstStripUrl = 'http://www.commitstrip.com/fr/2012/02/22/interview/' # non-TLS!
+    lang = 'fr'
+
+
 class CompanyY(_BasicScraper):
     url = 'http://company-y.com/'
     rurl = escape(url)
