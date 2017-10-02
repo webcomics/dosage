@@ -116,14 +116,11 @@ class Melonpool(_WordPressScraper):
     allow_errors = (500,)
 
 
-class MenageA3(_BasicScraper):
+class MenageA3(_ParserScraper):
     adult = True
     url = 'http://www.ma3comic.com/'
-    stripUrl = url + 'strips-ma3/%s'
-    imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]*/comics/[^"]+)',
-                               before="cn[id]prev"))
-    help = 'Index format: name'
+    imageSearch = '//*[@id="cc-comic"]'
+    prevSearch = '//a[@class="prev"]'
 
 
 class Metacarpolis(_ComicControlScraper):
