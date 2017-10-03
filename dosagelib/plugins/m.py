@@ -116,11 +116,9 @@ class Melonpool(_WordPressScraper):
     allow_errors = (500,)
 
 
-class MenageA3(_ParserScraper):
+class MenageA3(_ComicControlScraper):
     adult = True
     url = 'http://www.ma3comic.com/'
-    imageSearch = '//*[@id="cc-comic"]'
-    prevSearch = '//a[@class="prev"]'
 
 
 class Metacarpolis(_ComicControlScraper):
