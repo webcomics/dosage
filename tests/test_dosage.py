@@ -6,19 +6,24 @@
 from __future__ import absolute_import, division, print_function
 
 import pytest
-import sys
+import responses
 
 import dosagelib.cmd
+import httpmocks
+
 
 def cmd(*options):
     """'Fake' run dosage with given options."""
     return dosagelib.cmd.main(('--allow-multiple',) + options)
 
+
 def cmd_ok(*options):
     assert cmd(*options) == 0
 
+
 def cmd_err(*options):
     assert cmd(*options) == 1
+
 
 class TestDosage(object):
     """Test the dosage commandline client."""
@@ -48,14 +53,20 @@ class TestDosage(object):
     def test_multiple_comics_match(self):
         cmd_err('Garfield')
 
+    @responses.activate
     def test_fetch_html_and_rss_json(self, tmpdir):
+        httpmocks.xkcd()
         cmd_ok("-n", "2", "-v", "-b", str(tmpdir), "-o", "html", "-o", "rss",
-                "-o", "json", "xkcd")
+               "-o", "json", "xkcd")
 
+    @responses.activate
     def test_fetch_html_and_rss_2(self, tmpdir):
+        httpmocks.bloomingfaeries()
         cmd_ok("--numstrips", "2", "--baseurl", "bla", "--basepath",
-                str(tmpdir), "--output", "rss", "--output", "html", "--adult",
-                "BloomingFaeries")
+               str(tmpdir), "--output", "rss", "--output", "html", "--adult",
+               "BloomingFaeries")
 
+    @responses.activate
     def test_fetch_indexed(self, tmpdir):
+        httpmocks.xkcd()
         cmd_ok("-n", "2", "-v", "-b", str(tmpdir), "xkcd:303")
