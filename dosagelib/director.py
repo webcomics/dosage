@@ -177,6 +177,7 @@ def getComics(options):
         finish()
     finally:
         events.getHandler().end()
+        events.clear_handlers()
     return errors
 
 
