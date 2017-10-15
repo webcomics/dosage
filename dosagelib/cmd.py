@@ -322,10 +322,10 @@ def get_tagged_scraper_name(scraperobj, limit=None, reasons=None):
     return name + suffix
 
 
-def main():
+def main(args=None):
     """Parse options and execute commands."""
     try:
-        options = setup_options().parse_args()
+        options = setup_options().parse_args(args=args)
         options.basepath = os.path.expanduser(options.basepath)
         res = run(options)
     except KeyboardInterrupt:

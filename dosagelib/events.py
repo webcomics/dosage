@@ -328,6 +328,7 @@ def getHandlerNames():
     return sorted(_handler_classes.keys())
 
 
+# FIXME: Hidden singleton :(
 _handlers = []
 
 
@@ -336,6 +337,10 @@ def addHandler(name, basepath=None, baseurl=None, allowDownscale=False):
     if basepath is None:
         basepath = '.'
     _handlers.append(_handler_classes[name](basepath, baseurl, allowDownscale))
+
+
+def clear_handlers():
+    del _handlers[:]
 
 
 class MultiHandler(object):

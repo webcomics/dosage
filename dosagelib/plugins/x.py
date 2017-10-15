@@ -11,7 +11,7 @@ from ..helpers import bounceStarter
 
 class Xkcd(_ParserScraper):
     name = 'xkcd'
-    url = 'http://xkcd.com/'
+    url = 'https://xkcd.com/'
     starter = bounceStarter
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '1'

@@ -1,19 +1,28 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2017 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
 import pytest
-import sys
+import responses
 
-from . import dosage_cmd, run_checked
+import dosagelib.cmd
+import httpmocks
 
 
-def run_with_options(options, cmd=dosage_cmd):
-    """Run dosage with given options."""
-    run_checked([sys.executable, cmd, '--allow-multiple'] + options)
+def cmd(*options):
+    """'Fake' run dosage with given options."""
+    return dosagelib.cmd.main(('--allow-multiple',) + options)
+
+
+def cmd_ok(*options):
+    assert cmd(*options) == 0
+
+
+def cmd_err(*options):
+    assert cmd(*options) == 1
 
 
 class TestDosage(object):
@@ -21,38 +30,43 @@ class TestDosage(object):
 
     def test_list_comics(self):
         for option in ("-l", "--list", "--singlelist"):
-            run_with_options([option])
+            cmd_ok(option)
 
     def test_display_version(self):
-        run_with_options(["--version"])
+        cmd_ok("--version")
 
     def test_display_help(self):
         for option in ("-h", "--help"):
-            run_with_options([option])
+            with pytest.raises(SystemExit):
+                cmd(option)
 
     def test_module_help(self):
-        run_with_options(["-m", "xkcd"])
+        cmd_ok("-m", "xkcd")
 
     def test_no_comics_specified(self):
-        with pytest.raises(OSError):
-            run_with_options([])
+        cmd_err()
 
     def test_unknown_option(self):
-        with pytest.raises(OSError):
-            run_with_options(['--imadoofus'])
+        with pytest.raises(SystemExit):
+            cmd('--imadoofus')
 
     def test_multiple_comics_match(self):
-        with pytest.raises(OSError):
-            run_with_options(['Garfield'])
+        cmd_err('Garfield')
 
+    @responses.activate
     def test_fetch_html_and_rss_json(self, tmpdir):
-        run_with_options(["-n", "2", "-v", "-b", str(tmpdir), "-o", "html",
-                          "-o", "rss", "-o", "json", "xkcd"])
+        httpmocks.xkcd()
+        cmd_ok("-n", "2", "-v", "-b", str(tmpdir), "-o", "html", "-o", "rss",
+               "-o", "json", "xkcd")
 
+    @responses.activate
     def test_fetch_html_and_rss_2(self, tmpdir):
-        run_with_options(["--numstrips", "2", "--baseurl", "bla",
-                          "--basepath", str(tmpdir), "--output", "rss",
-                          "--output", "html", "--adult", "BloomingFaeries"])
+        httpmocks.bloomingfaeries()
+        cmd_ok("--numstrips", "2", "--baseurl", "bla", "--basepath",
+               str(tmpdir), "--output", "rss", "--output", "html", "--adult",
+               "BloomingFaeries")
 
+    @responses.activate
     def test_fetch_indexed(self, tmpdir):
-        run_with_options(["-n", "2", "-v", "-b", str(tmpdir), "xkcd:303"])
+        httpmocks.xkcd()
+        cmd_ok("-n", "2", "-v", "-b", str(tmpdir), "xkcd:303")
