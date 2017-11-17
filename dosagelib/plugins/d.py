@@ -69,7 +69,7 @@ class DeadWinter(_BasicScraper):
 
 class Deathbulge(_BasicScraper):
     url = 'http://www.deathbulge.com/api/comics'
-    imageSearch = compile(r"(/images/comics/\d+\.jpg)")
+    imageSearch = compile(r"(/images/comics/[^\.]+\.jpg)")
     prevSearch = compile(r'"previous":(\d+),')
     firstStripUrl = url + '/1'
     def getPrevUrl(self, url, data):
