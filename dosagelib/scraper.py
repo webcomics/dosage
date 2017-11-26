@@ -343,11 +343,10 @@ class Scraper(object):
                 lang = languages.Languages[self.lang]
         else:
             try:
-                lang = pycountry.languages.get(alpha2=self.lang).name
+                lang = pycountry.languages.get(alpha_2=self.lang).name
             except KeyError:
                 try:
-                    lang = pycountry.languages.get(
-                        iso639_1_code=self.lang).name
+                    lang = pycountry.languages.get(alpha2=self.lang).name
                 except KeyError:
                     pass
         return lang

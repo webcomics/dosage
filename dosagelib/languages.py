@@ -5,7 +5,7 @@ from __future__ import absolute_import, division, print_function
 Languages = {
     'de': 'German',
     'en': 'English',
-    'es': 'Spanish; Castilian',
+    'es': 'Spanish',
     'fi': 'Finnish',
     'fr': 'French',
     'it': 'Italian',
