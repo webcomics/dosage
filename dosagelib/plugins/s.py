@@ -261,13 +261,20 @@ class SlightlyDamned(_ComicControlScraper):
     firstStripUrl = url + 'comic/part-one-to-hell-and-back'
 
 
-class SluggyFreelance(_BasicScraper):
-    url = 'http://www.sluggy.com/'
-    stripUrl = url + 'comics/archives/daily/%s'
-    imageSearch = compile(r'<img src="(/images/comics/.+?)"')
-    prevSearch = compile(r'<a href="(.+?)"[^>]+?><span class="ui-icon ui-icon-seek-prev">')
+class SluggyFreelance(_ParserScraper):
+    url = 'http://sluggy.com/'
+    stripUrl = 'http://archives.sluggy.com/book.php?chapter=%s'
+    imageSearch = '//div[%s]/img/@data-src' % xpath_class('comic_content')
+    prevSearch = '//div[%s]/a' % xpath_class('previous')
+    latestSearch = '//a[%s]' % xpath_class('archives_link')
+    starter = indirectStarter
     multipleImagesPerStrip = True
-    help = 'Index format: yymmdd'
+    help = 'Index format: chapter'
+
+    def namer(self, imageurl, pageurl):
+        """Remove random noise from name."""
+        fn = imageurl.rsplit('/', 1)[-1]
+        return sub(r'\.(png|gif|jpg).*\.\1', '', fn)
 
 
 class SMBC(_ComicControlScraper):
