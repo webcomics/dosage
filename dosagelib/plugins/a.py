@@ -234,6 +234,11 @@ class Annyseed(_ParserScraper):
     def imageUrlModifier(self, image_url, data):
         return self.FIX_RE.sub('', image_url)
 
+    def link_modifier(self, fromurl, tourl):
+        """Fix circular link."""
+        if 'Annyseed150' in fromurl and 'Annyseed150' in tourl:
+            return self.stripUrl % '149'
+        return tourl
 
 class AppleGeeks(_BasicScraper):
     url = 'http://www.applegeeks.com/'
@@ -257,7 +262,7 @@ class ARedTailsDream(_BasicScraper):
 
 
 class Ashes(_WordPressScraper):
-    url = 'http://www.flowerlarkstudios.com/comic/prologue/10232009/'
+    url = 'http://www.flowerlarkstudios.com/comicpage/prologue/10232009/'
     firstStripUrl = url
     latestSearch = WP_LATEST_SEARCH
     starter = indirectStarter

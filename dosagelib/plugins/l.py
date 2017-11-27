@@ -35,7 +35,7 @@ class Lackadaisy(_BasicScraper):
 
 
 class Laiyu(_WordPressScraper):
-    url = 'http://www.flowerlarkstudios.com/comic/preliminary-concepts/welcome/'
+    url = 'http://www.flowerlarkstudios.com/comicpage/preliminary-concepts/welcome/'
     firstStripUrl = url
     latestSearch = WP_LATEST_SEARCH
     starter = indirectStarter

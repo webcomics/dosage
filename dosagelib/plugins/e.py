@@ -28,7 +28,7 @@ class EarthsongSaga(_ParserScraper):
 
 
 class EasilyAmused(_WordPressScraper):
-    url = 'http://www.flowerlarkstudios.com/comic/college-daze/ea01/'
+    url = 'http://www.flowerlarkstudios.com/comicpage/college-daze/ea01/'
     firstStripUrl = url
     latestSearch = WP_LATEST_SEARCH
     starter = indirectStarter
@@ -117,7 +117,7 @@ class Erstwhile(_WPNavi):
 
 
 class Eryl(_WordPressScraper):
-    url = 'http://www.flowerlarkstudios.com/comic/prologue-migration/page-i/'
+    url = 'http://www.flowerlarkstudios.com/comicpage/prologue-migration/page-i/'
     firstStripUrl = url
     latestSearch = WP_LATEST_SEARCH
     starter = indirectStarter

@@ -54,9 +54,9 @@ class Baroquen(_BasicScraper):
 
 
 class Bearmageddon(_WordPressScraper):
-    url = 'http://bearmageddon.com/'
-    firstStripUrl = url + '2011/08/01/page-1/'
-    latestSearch = '//a[div[%s]]' % xpath_class('latest-page')
+    url = 'http://bearmageddon.com/bearmo/page-1/'
+    firstStripUrl = url
+    latestSearch = '//a[%s]' % xpath_class('comic-nav-last')
     starter = indirectStarter
 
 

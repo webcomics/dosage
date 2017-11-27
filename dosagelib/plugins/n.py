@@ -108,7 +108,7 @@ class NobodyScores(_BasicScraper):
 
 
 class NoMoreSavePoints(_WordPressScraper):
-    url = 'http://www.flowerlarkstudios.com/comic/no-more-save-points/mushroom-hopping/'
+    url = 'http://www.flowerlarkstudios.com/comicpage/no-more-save-points/mushroom-hopping/'
     firstStripUrl = url
     latestSearch = WP_LATEST_SEARCH
     starter = indirectStarter
