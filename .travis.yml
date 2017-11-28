@@ -15,11 +15,11 @@ addons:
       - libjpeg-dev
 # command to install dependencies
 install:
-  - pip install -U tox-travis coveralls setuptools
+  - pip install -U tox-travis setuptools codecov
 # command to run tests
 script: tox
 after_success:
-      coveralls
+    codecov --file .tox/cov-*.xml
 notifications:
   irc:
     channels:
