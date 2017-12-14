@@ -51,16 +51,13 @@ class LasLindas(_BasicScraper):
     help = 'Index format: stripname'
 
 
-class LeastICouldDo(_BasicScraper):
+class LeastICouldDo(_ParserScraper):
     url = 'http://www.leasticoulddo.com/'
-    rurl = escape(url)
     stripUrl = url + 'comic/%s'
-    firstStripUrl = stripUrl % '20130109'
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/\d{8,9}\.\w{1,4})' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%scomic/\d+/)' % rurl,
-                               after="Previous"))
-    latestSearch = compile(tagre("a", "href", r'(%scomic/\d+/)' % rurl,
-                                 after="feature-comic"))
+    firstStripUrl = stripUrl % '20030210'
+    imageSearch = '//div[@id="content-comic"]//img'
+    prevSearch = '//a[@rel="prev"]'
+    latestSearch = '//a[@id="latest-comic"]'
     starter = indirectStarter
     help = 'Index format: yyyymmdd'
 
