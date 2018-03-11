@@ -32,3 +32,4 @@ deploy:
     script: .github/deploy.sh
     on:
       branch: master
+      python: 3.6
