@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<!--
+    Design based on "Prologue" by HTML5 UP
+    html5up.net | @ajlkn
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+    Botched and adapted to StaticSite by @TobiX
+-->
+<html>
+<head>
+    <title>{% block title %}{{SITE_NAME}}{{ " - " + title if page.src_relpath != "README.md"}}{% endblock %}</title>
+    {% block favicon %}<link rel="shortcut icon" href="{{ url_for('/images/favicon.ico') }}">{% endblock %}
+    {% block head %}
+    {% endblock %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{ url_for('/css/main.css') }}" />
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div id="header">
+    <div class="top">
+
+        <!-- Logo -->
+        <div id="logo">
+            {% if page.src_relpath == "README.md" %}
+            <h1 id="title">{{SITE_NAME}}</h1>
+            {% else %}
+            <h1 id="title"><a href="{{SITE_ROOT}}">{{SITE_NAME}}</a></h1>
+            {% endif %}
+            <p>{{SITE_SUB}}</p>
+        </div>
+
+        <!-- Nav -->
+        <nav id="nav">
+            <ul>
+                {% for link in SITE_LINKS %}
+                <li><a href="{{link.url}}"><span class="icon fa-{{link.icon}}">{{link.name}}</span></a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+
+    <div class="bottom">
+        <!-- Social Icons -->
+        <ul class="icons">
+            {% for link in SITE_ICONS %}
+            <li><a href="{{link.url}}" class="icon fa-{{link.icon}}"><span class="label">{{link.name}}</span></a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    </div>
+
+    <!-- Main -->
+    <div id="main">
+
+
+    <!-- Intro -->
+    <section class="one cover">
+        <div class="container">
+            <header>
+            {% if page.src_relpath == "README.md" %}
+            <h2>{{SITE_NAME}}</h2>
+            <h3>{{SITE_SUB}}</h3>
+            {% else %}
+            <h3>{{title}}</h3>
+            {% endif %}
+            </header>
+        </div>
+    </section>
+
+
+
+    <section id="content" class="two dark">
+        <div class="container">
+            {% block content %}
+            {{content|safe}}
+            {% endblock %}
+        </div>
+    </section>
+
+    </div>
+
+    {% block footer %}
+    <!-- Footer -->
+    <div id="footer">
+        <ul class="copyright">
+            <li>Generated with <a
+                href="https://github.com/spanezz/staticsite">staticsite</a>,
+                last change: {{page.meta.date|datetime_format}}</li>
+            <li>&copy; Tobias Gruetzmacher. Some rights reserved.</li>
+            <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+    </div>
+    {% endblock %}
+
+    <script src="{{ url_for('/js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('/js/jquery.scrolly.min.js') }}"></script>
+    <script src="{{ url_for('/js/jquery.scrollzer.min.js') }}"></script>
+    <script src="{{ url_for('/js/skel.min.js') }}"></script>
+    <script src="{{ url_for('/js/util.js') }}"></script>
+    <script src="{{ url_for('/js/main.js') }}"></script>
+
+</body>
+</html>

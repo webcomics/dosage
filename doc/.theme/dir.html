@@ -1,0 +1,35 @@
+{% extends "page.html" %}
+{% block title %}{{page.meta.title}}{% endblock %}
+{% block content %}
+<h2>{{page.meta.title}}</h2>
+
+<div class="table-wrapper">
+<table class="alt">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Page</th>
+      <th>Title</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% if parent_page %}
+  <tr>
+    <td class="col-md-2"><a href="{{url_for(parent_page)}}">{{parent_page.meta.date.strftime("%Y-%m-%d")}}</a></td>
+    <td class="col-md-3"><a href="{{url_for(parent_page)}}">.. {% if parent_page.dst_link|basename %}({{parent_page.dst_link|basename}}){% endif %}</a></td>
+    <td class="col-md-6"><a href="{{url_for(parent_page)}}">{{parent_page.meta.title}}</a></td>
+  </tr>
+  {% endif %}
+  {% for page in pages %}
+  <tr>
+    <td class="col-md-2"><a href="{{url_for(page)}}">{{page.meta.date.strftime("%Y-%m-%d")}}</a></td>
+    <td class="col-md-3"><a href="{{url_for(page)}}">{{page.dst_link|basename}}</a></td>
+    <td class="col-md-6"><a href="{{url_for(page)}}">{{page.meta.title}}</a></td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+
+{% endblock %}
+
