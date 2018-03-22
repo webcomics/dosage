@@ -40,6 +40,27 @@ class SafelyEndangered(_WPNavi):
     firstStripUrl = url + 'comic/ignored/'
 
 
+class SallyForth(_BasicScraper):
+    url = 'http://sallyforth.com/'
+    stripUrl = url + 'comics/%s'
+    firstStripUrl = stripUrl % 'january-7-1996'
+    starter = bounceStarter
+    imageSearch = compile(r'(https://safr\.kingfeatures\.com/idn/cnfeed/zone/js/content\.php\?file=.+)"')
+    prevSearch = compile(r'id="previouscomic" class="button white"><a href="(%scomics/[a-z0-9-]+/)"' % url)
+    nextSearch = compile(tagre('a', 'href', r'(%scomics/[a-z0-9-]+/)' % url, after='next'))
+
+    help = 'Index format: monthname-dd-yyyy'
+
+    def namer(self, image_url, page_url):
+        name = page_url.rsplit('/', 3)[2]
+        if name == "sallyforth.com":
+                import datetime
+                name = datetime.date.today().strftime("%B-%-d-%Y").lower()
+        # name.title ensures that the comics are named the same
+        # as in the previous scraper
+        return "%s.gif" % name.title()
+
+
 class SailorsunOrg(_WordPressScraper):
     url = 'http://sailorsun.org/'
 
