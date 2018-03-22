@@ -12,9 +12,8 @@ from ..helpers import bounceStarter, xpath_class
 class GoComics(_ParserScraper):
     url = 'http://www.gocomics.com/'
     imageSearch = '//picture[%s]/img' % xpath_class('item-comic-image')
-    navSearch = '//div[@class="button-icon-group"]//a[%s]'
-    prevSearch = navSearch % xpath_class('fa-caret-left')
-    nextSearch = navSearch % xpath_class('fa-caret-right')
+    prevSearch = '//div[@class="gc-calendar-nav__previous"]//a[%s]' % xpath_class('fa-caret-left')
+    nextSearch = '//div[@class="gc-calendar-nav__next"]//a[%s]' % xpath_class('fa-caret-right')
     starter = bounceStarter
     help = 'Index format: yyyy/mm/dd'
 
