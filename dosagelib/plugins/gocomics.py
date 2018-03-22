@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2018 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -11,10 +11,10 @@ from ..helpers import bounceStarter, xpath_class
 
 class GoComics(_ParserScraper):
     url = 'http://www.gocomics.com/'
-    imageSearch = '//picture[%s]/img' % xpath_class('item-comic-image')
-    navSearch = '//div[@class="button-icon-group"]//a[%s]'
-    prevSearch = navSearch % xpath_class('fa-caret-left')
-    nextSearch = navSearch % xpath_class('fa-caret-right')
+    imageSearch = '//picture[{0}]/img'.format(xpath_class('item-comic-image'))
+    navSearch = '//div[{0}]//a[{1}]'
+    prevSearch = navSearch.format(xpath_class('comic'), xpath_class('fa-caret-left'))
+    nextSearch = navSearch.format(xpath_class('comic'), xpath_class('fa-caret-right'))
     starter = bounceStarter
     help = 'Index format: yyyy/mm/dd'
 
