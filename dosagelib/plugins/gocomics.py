@@ -6,7 +6,7 @@
 from __future__ import absolute_import, division, print_function
 
 from ..scraper import _ParserScraper
-from ..helpers import bounceStarter, xpath_class
+from ..helpers import indirectStarter, xpath_class
 
 
 class GoComics(_ParserScraper):
@@ -15,7 +15,8 @@ class GoComics(_ParserScraper):
     navSearch = '//div[{0}]//a[{1}]'
     prevSearch = navSearch.format(xpath_class('comic'), xpath_class('fa-caret-left'))
     nextSearch = navSearch.format(xpath_class('comic'), xpath_class('fa-caret-right'))
-    starter = bounceStarter
+    latestSearch = navSearch.format(xpath_class('gc-deck--cta-0'), xpath_class(''))
+    starter = indirectStarter
     help = 'Index format: yyyy/mm/dd'
 
     def __init__(self, name, path, lang=None):
