@@ -290,7 +290,7 @@ class JSONEventHandler(EventHandler):
 
         # If there's already an image for this page start keeping track of their order
         if len(pageInfo['images'].keys()) == 1:
-            pageInfo['imagesOrder'] = [pageInfo['images'].keys()[0]]
+            pageInfo['imagesOrder'] = [list(pageInfo['images'].keys())[0]]
         if 'imagesOrder' in pageInfo.keys():
             pageInfo['imagesOrder'].append(comic.url)
 
