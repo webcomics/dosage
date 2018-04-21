@@ -127,7 +127,10 @@ class Output(object):
         if not self.is_tty:
             return self.DEFAULT_WIDTH
         try:
-            return get_terminal_size().columns
+            w = get_terminal_size().columns
+            if w <= 0:
+                return self.DEFAULT_WIDTH
+            return w
         except ValueError:
             return self.DEFAULT_WIDTH
 
