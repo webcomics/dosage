@@ -19,7 +19,7 @@ class SabrinaOnline(_BasicScraper):
     url = 'http://sabrina-online.com/'
     stripUrl = url + '%s.html'
     firstStripUrl = stripUrl % '1996-01'
-    imageSearch = compile(tagre("a", "href", r'(strips/[^"]*)'))
+    imageSearch = compile(tagre("img", "src", r'(pages/[^"]*)'))
     prevSearch = compile(tagre("a", "href", r"(\d\d\d\d-\d\d.html)") +
                          tagre("img", "src", "b_back.gif"))
     help = 'Index format: yyyy-qq'
@@ -33,7 +33,6 @@ class SabrinaOnline(_BasicScraper):
         search = compile(tagre("a", "href", r"(\d\d\d\d-\d\d.html)"))
         archivepages = self.fetchUrls(archive, data, search)
         return archivepages[-1]
-
 
 class SafelyEndangered(_WPNavi):
     url = 'http://www.safelyendangered.com/'
@@ -282,6 +281,8 @@ class SMBC(_ComicControlScraper):
     firstStripUrl = url + 'comic/2002-09-05'
     multipleImagesPerStrip = True
     imageSearch = ['//img[@id="cc-comic"]', '//div[@id="aftercomic"]/img']
+    prevSearch = '//a[@class="prev"]'
+    help = 'Index format: nnnn'
     textSearch = '//img[@id="cc-comic"]/@title'
 
     def namer(self, image_url, page_url):
