@@ -247,6 +247,24 @@ class CrapIDrewOnMyLunchBreak(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/name'
 
 
+class CtrlAltDel(_BasicScraper):
+    url = 'http://cad-comic.com/'
+    stripUrl = url + '%s'
+    startUrl='http://cad-comic.com/'
+    latestSearch = compile('"url": *"([^"]*)')
+    imageSearch = compile(tagre("img", "src", r'(https://cad-comic\.com/wp-content/uploads/[^"]+png)'))
+    prevSearch = compile(tagre("a", "href", r'(https:[^"]+)', after="prev"))
+    help = 'Index format: yyyymmdd'
+   
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        """Remove random junk from image names."""
+        imgname = imageUrl.split('/')[-1]
+        imgbase = imgname.rsplit('_', 1)[1]
+        parts = imgbase.split('.')
+        return 'cad-%s.%s' % (parts[0], parts[-1])
+
+
 class CrimsonDark(_BasicScraper):
     url = 'http://www.davidcsimon.com/crimsondark/'
     stripUrl = url + 'index.php?view=comic&strip_id=%s'
