@@ -6,7 +6,7 @@
 from __future__ import absolute_import, division, print_function
 
 from six.moves.urllib.parse import (
-    quote as url_quote, unquote as url_unquote, urlparse, urlunparse, urlsplit)
+    quote as url_quote, unquote as url_unquote, urlparse, urlunparse, urlsplit, urlunsplit)
 from six.moves.urllib_robotparser import RobotFileParser
 import requests
 from requests.adapters import HTTPAdapter
@@ -180,6 +180,18 @@ def get_page(url, session, **kwargs):
     # read page data
     page = urlopen(url, session, max_content_bytes=MaxContentBytes, **kwargs)
     out.debug(u"Got page content %r" % page.content, level=3)
+    p = page.content
+    if 'meta http-equiv="refresh"' in p or "meta http-equiv='refresh'" in p:
+        m = re.search("<\\s*[mM][eE][tT][aA]\\s+(?:[^>]*\\s+)?[hH][tT][tT][pP][--][eE][qQ][uU][iI][vV]\\s*=\\s*\"refresh\"(?:[^>]*\\s+)?[cC][oO][nN][tT][eE][nN][tT]\\s*=\\s*\"[0-9]*;[uU][rR][lL]=([^\"]*)[^>]*>", p)
+        if not m:
+            return page
+        redirect = m.group(1)
+        out.debug(u"Page redirects to %r" % redirect, level=3)
+        page = urlopen(redirect, session, max_content_bytes=MaxContentBytes, **kwargs)
+        out.debug(u"Got page content %r" % page.content, level=3)
+        # HACK: Need to tell calling functions that base url has changed
+        splits = urlsplit(redirect)
+        page._content += '\n<base href="%s">\n' % urlunsplit((splits.scheme, splits.netloc, splits.path.rsplit('/', 1)[0] + '/', "", ""))
     return page
 
 
