@@ -43,9 +43,11 @@ class Unsounded(_BasicScraper):
     rurl = escape(url)
     imageSearch = compile(tagre("img", "src", r'(pageart/[^"]*)'))
     prevSearch = compile(tagre("a", "href", r'([^"]*)', after='class="back'))
-    latestSearch = compile(tagre("a", "href", r'(%scomic/[^"]*)' % rurl) +
+    latestSearch = compile(tagre("a", "href", r'(.*)') +
                            tagre("img", "src",
                                  r"%simages/newpages\.png" % rurl))
+                                 
+    startUrl = 'https://unsoundedupdates.tumblr.com/'
     starter = indirectStarter
     help = 'Index format: chapter-number'
 
