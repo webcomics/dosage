@@ -292,13 +292,12 @@ class Curvy(_ParserScraper):
 
 
 class CyanideAndHappiness(_BasicScraper):
-    url = 'http://www.explosm.net/comics/'
-    starter = bounceStarter
+    url = 'http://www.explosm.net/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '15'
     imageSearch = compile(tagre("img", "src", r'(//files.explosm.net/comics/[^"]+)', before="main-comic"))
-    prevSearch = compile(tagre("a", "href", r'(/comics/\d+/)', after="previous-comic"))
-    nextSearch = compile(tagre("a", "href", r"(/comics/\d+/)", after="next-comic"))
+    prevSearch = compile(tagre("a", "href", r'(/comics/\d+/)', after="nav-previous"))
+    nextSearch = compile(tagre("a", "href", r"(/comics/\d+/)", after="nav-next"))
     help = 'Index format: n (unpadded)'
 
     def shouldSkipUrl(self, url, data):
