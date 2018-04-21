@@ -66,6 +66,12 @@ class LetsSpeakEnglish(_ComicControlScraper):
     url = 'http://www.marycagle.com'
 
 
+class LifeAintNoPonyFarm(_WordPressScraper):
+    url = 'http://sarahburrini.com/en/'
+    firstStripUrl = url + 'comic/my-first-webcomic/'
+    multipleImagesPerStrip = True
+
+
 class LittleGamers(_BasicScraper):
     url = 'http://www.little-gamers.com/'
     stripUrl = url + '%s/'
