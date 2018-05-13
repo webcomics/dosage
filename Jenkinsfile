@@ -51,6 +51,7 @@ pys.each { py ->
                 archiveArtifacts artifacts: '.tox/dist/*.zip', fingerprint: true
                 if (py.main) {
                     archiveArtifacts artifacts: 'dist/*', fingerprint: true
+                    stash includes: 'dist/*.tar.gz', name: 'bin'
                     def buildVer = findFiles(glob: 'dist/*.tar.gz')[0].name.replaceFirst(/\.tar\.gz$/, '')
                     currentBuild.description = buildVer
 
@@ -73,6 +74,7 @@ pys.each { py ->
 timestamps {
     ansiColor('xterm') {
         parallel(tasks)
+        windowsBuild()
     }
 }
 
@@ -88,6 +90,26 @@ def buildDockerfile(image) {
     RUN $toxInst
     RUN useradd -mu $uid dockerjenkins
     """
+}
+
+def windowsBuild() {
+    node {
+        deleteDir()
+        unstash 'bin'
+        docker.image('tobix/pywine').inside {
+            sh '''
+                . /opt/mkuserwineprefix
+                tar xvf dist/dosage-*.tar.gz
+                cd dosage-*
+                xvfb-run sh -c "
+                    wine py -m pip install -e .[css] &&
+                    cd scripts &&
+                    wine py -m PyInstaller -y dosage.spec;
+                    wineserver -w" | tee log.txt
+            '''
+            archiveArtifacts '*/scripts/dist/*'
+        }
+    }
 }
 
 // vim: set ft=groovy:
