@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2018 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -42,7 +42,7 @@ class AbsurdNotions(_BasicScraper):
     imageSearch = compile(tagre('img', 'src', r'(an[^"]+)'))
     multipleImagesPerStrip = True
     prevSearch = compile(tagre('a', 'href', r'([^"]+)') +
-                         tagre('img', 'src', 'nprev\.gif'))
+                         tagre('img', 'src', r'nprev\.gif'))
     help = 'Index format: n (unpadded)'
 
 
@@ -52,7 +52,7 @@ class AcademyVale(_BasicScraper):
     firstStripUrl = stripUrl % '001'
     imageSearch = compile(tagre('img', 'src', r'(avale\d{4}-\d{2}\.gif)'))
     prevSearch = compile(tagre('a', 'href', r'(avarch[^">]+)', quote="") +
-                         tagre('img', 'src', 'AVNavBack\.gif'))
+                         tagre('img', 'src', r'AVNavBack\.gif'))
     help = 'Index format: nnn'
 
 
@@ -239,6 +239,7 @@ class Annyseed(_ParserScraper):
         if 'Annyseed150' in fromurl and 'Annyseed150' in tourl:
             return self.stripUrl % '149'
         return tourl
+
 
 class AppleGeeks(_BasicScraper):
     url = 'http://www.applegeeks.com/'

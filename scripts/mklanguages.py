@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2018 Tobias Gruetzmacher
 '''update languages.py from pycountry'''
 from __future__ import absolute_import, division, print_function
 
@@ -30,12 +30,12 @@ def main():
 
 
 def get_used_languages():
-    lang = {}
+    languages = {}
     for scraperobj in get_scrapers():
-        l = scraperobj.lang
-        if l not in lang:
-            lang[l] = scraperobj.language()
-    return lang
+        lang = scraperobj.lang
+        if lang not in languages:
+            languages[lang] = scraperobj.language()
+    return languages
 
 
 def write_languages(f, l):

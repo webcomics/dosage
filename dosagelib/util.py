@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2018 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -19,7 +19,12 @@ import traceback
 import time
 import subprocess
 
-from six.moves.html_parser import HTMLParser
+try:
+    import html
+except ImportError:
+    # Python 2.7
+    from HTMLParser import HTMLParser
+    html = HTMLParser()
 from six.moves import range
 import six
 
@@ -203,12 +208,9 @@ def prettyMatcherList(things):
     return "('%s')" % "', '".join(norm)
 
 
-_htmlparser = HTMLParser()
-
-
 def unescape(text):
     """Replace HTML entities and character references."""
-    return _htmlparser.unescape(text)
+    return html.unescape(text)
 
 
 _nopathquote_chars = "-;/=,~*+()@!"
