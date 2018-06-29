@@ -24,12 +24,12 @@ def get_test_scrapers():
             # Get limited number of scraper tests on Travis builds to make it
             # faster
             testscrapernames = [
-                    # "classic" _BasicScraper
-                    'AbstruseGoose',
-                    # complex _ParserScraper
-                    'GoComics/CalvinAndHobbes',
-                    # _WordPressScraper
-                    'GrrlPower'
+                # "classic" _BasicScraper
+                'AbstruseGoose',
+                # complex _ParserScraper
+                'GoComics/CalvinAndHobbes',
+                # _WordPressScraper
+                'GrrlPower'
             ]
             scraper_pattern = re.compile('^(' + '|'.join(testscrapernames) +
                                          ')$')

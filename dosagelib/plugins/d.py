@@ -231,7 +231,7 @@ class DresdenCodak(_ParserScraper):
     startUrl = url + 'cat/comic/'
     firstStripUrl = url + '2007/02/08/pom/'
     imageSearch = '//section[%s]//img[%s]' % (
-            xpath_class('entry-content'), xpath_class('aligncenter'))
+        xpath_class('entry-content'), xpath_class('aligncenter'))
     prevSearch = '//a[img[contains(@src, "prev")]]'
     latestSearch = '//a[%s]' % xpath_class('tc-grid-bg-link')
     starter = indirectStarter

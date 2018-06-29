@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2018 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -90,13 +90,13 @@ class ScenesFromAMultiverse(_BasicScraper):
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2010/06/14/parenthood'
     imageSearch = (
-      compile(tagre("div", "id", "comic") + r"\s*" +
-              tagre("img", "src",
-                    r'(.*amultiverse.com/wp-content/uploads/\d+/\d+/[^"]+)')),
-      compile(tagre("div", "id", "comic") + r"\s*" +
-              tagre("a", "href", r'[^"]*') +
-              tagre("img", "src",
-                    r'(.*amultiverse.com/wp-content/uploads/\d+/\d+/[^"]+)')),
+        compile(tagre("div", "id", "comic") + r"\s*" +
+            tagre("img", "src",
+                r'(.*amultiverse.com/wp-content/uploads/\d+/\d+/[^"]+)')),
+        compile(tagre("div", "id", "comic") + r"\s*" +
+            tagre("a", "href", r'[^"]*') +
+            tagre("img", "src",
+                r'(.*amultiverse.com/wp-content/uploads/\d+/\d+/[^"]+)')),
     )
     prevSearch = compile(tagre("a", "href", r'(%scomic/\d+\d+/\d+/\d+/[^"]+)' % rurl, after="prev"))
     help = 'Index format: yyyy/mm/dd/stripname'
