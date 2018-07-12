@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2018 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -85,8 +85,8 @@ def _check_strip(outdir, strip, multipleImagesPerStrip):
         files.append(fn)
     assert images, 'failed to find images at %s' % strip.strip_url
     if not multipleImagesPerStrip:
-        assert len(images) == 1, 'found more than 1 image at %s: %s' % (
-                strip.strip_url, images)
+        assert len(images) == 1, 'found more than 1 image at {}: {}'.format(
+            strip.strip_url, images)
     return files
 
 
@@ -114,6 +114,6 @@ def _check_stripurl(strip, scraperobj):
     urlmatch = "^%s$" % urlmatch
     ro = re.compile(urlmatch)
     mo = ro.search(strip.strip_url)
-    err = 'strip URL %r does not match stripUrl pattern %s' % (
-            strip.strip_url, urlmatch)
+    err = 'strip URL {!r} does not match stripUrl pattern {}'.format(
+        strip.strip_url, urlmatch)
     assert mo is not None, err

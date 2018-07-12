@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2018 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -24,7 +24,7 @@ class EarthsongSaga(_ParserScraper):
         imgmatch = compile(r'images/vol(\d+)/ch(\d+)/(.*)\.\w+$',
                            IGNORECASE).search(image_url)
         return 'vol%02d_ch%02d_%s' % (
-          int(imgmatch.group(1)), int(imgmatch.group(2)), imgmatch.group(3))
+            int(imgmatch.group(1)), int(imgmatch.group(2)), imgmatch.group(3))
 
 
 class EasilyAmused(_WordPressScraper):

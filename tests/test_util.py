@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2018 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -23,8 +23,8 @@ class TestURL(object):
 
     def test_normalisation(self):
         # Test URL normalisation.
-        assert normaliseURL('http://example.com//bar/baz&amp;baz') == \
-                u'http://example.com/bar/baz&baz'
+        assert (normaliseURL('http://example.com//bar/baz&amp;baz') ==
+            u'http://example.com/bar/baz&baz')
 
 
 class TestRegex(object):

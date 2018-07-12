@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2018 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import bounceStarter, indirectStarter
+from ..helpers import indirectStarter
 from ..util import tagre
 from .common import _TumblrScraper, _WordPressScraper, _WPNavi
 
@@ -177,9 +177,9 @@ class Comedity(_BasicScraper):
 
 class CommitStrip(_ParserScraper):
     baseUrl = 'https://www.commitstrip.com/en/'
-    url = baseUrl + '?setLocale=1' # ensure the language cookie is set
+    url = baseUrl + '?setLocale=1'  # ensure the language cookie is set
     stripUrl = baseUrl + '%s/'
-    firstStripUrl = 'http://www.commitstrip.com/en/2012/02/22/interview/' # non-TLS!
+    firstStripUrl = 'http://www.commitstrip.com/en/2012/02/22/interview/'  # non-TLS!
 
     latestSearch = '//section//a'
     starter = indirectStarter
@@ -194,9 +194,9 @@ class CommitStrip(_ParserScraper):
 
 class CommitStripFr(CommitStrip):
     baseUrl = 'https://www.commitstrip.com/fr/'
-    url = baseUrl + '?setLocale=1' # ensure the language cookie is set
+    url = baseUrl + '?setLocale=1'  # ensure the language cookie is set
     stripUrl = baseUrl + '%s/'
-    firstStripUrl = 'http://www.commitstrip.com/fr/2012/02/22/interview/' # non-TLS!
+    firstStripUrl = 'http://www.commitstrip.com/fr/2012/02/22/interview/'  # non-TLS!
     lang = 'fr'
 
 

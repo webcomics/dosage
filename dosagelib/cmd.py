@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2018 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -49,54 +49,54 @@ def setup_options():
         formatter_class=argparse.RawDescriptionHelpFormatter)
 
     parser.add_argument('-v', '--verbose', action='count', default=0,
-                        help='provides verbose output, use multiple times for more verbosity')
+        help='provides verbose output, use multiple times for more verbosity')
     parser.add_argument('-n', '--numstrips', action='store', type=int, default=0,
-                        help='traverse and retrieve the given number of comic strips; use --all to retrieve all comic strips')
+        help='traverse and retrieve the given number of comic strips; use --all to retrieve all comic strips')
     parser.add_argument('-a', '--all', action='store_true',
-                        help='traverse and retrieve all comic strips')
+        help='traverse and retrieve all comic strips')
     parser.add_argument('-c', '--continue', action='store_true', dest='cont',
-                        help='traverse and retrieve comic strips until an existing one is found')
+        help='traverse and retrieve comic strips until an existing one is found')
     parser.add_argument('-b', '--basepath', action='store', default='Comics',
-                        metavar='PATH',
-                        help='set the path to create invidivual comic directories in, default is Comics')
+        metavar='PATH',
+        help='set the path to create invidivual comic directories in, default is Comics')
     parser.add_argument('--baseurl', action='store', metavar='PATH',
-                        help='the base URL of your comics directory (for RSS, HTML, etc.); this should correspond to --base-path')
+        help='the base URL of your comics directory (for RSS, HTML, etc.); this should correspond to --base-path')
     parser.add_argument('-l', '--list', action='store_true',
-                        help='list available comic modules')
+        help='list available comic modules')
     parser.add_argument('--singlelist', action='store_true',
-                        help='list available comic modules in a single column list')
+        help='list available comic modules in a single column list')
     parser.add_argument('--version', action='store_true',
-                        help='display the version number')
+        help='display the version number')
     parser.add_argument('--vote', action='store_true',
-                        help='vote for the selected comics')
+        help='vote for the selected comics')
     parser.add_argument('-m', '--modulehelp', action='store_true',
-                        help='display help for comic modules')
+        help='display help for comic modules')
     parser.add_argument('-t', '--timestamps', action='store_true',
-                        help='print timestamps for all output at any info level')
+        help='print timestamps for all output at any info level')
     parser.add_argument('-o', '--output', action='append', dest='handler',
-                        choices=events.getHandlerNames(),
-                        help='sets output handlers for downloaded comics')
+        choices=events.getHandlerNames(),
+        help='sets output handlers for downloaded comics')
     parser.add_argument('--no-downscale', action='store_false',
-                        dest='allowdownscale',
-                        help='prevent downscaling when using html or rss handler')
+        dest='allowdownscale',
+        help='prevent downscaling when using html or rss handler')
     parser.add_argument('-p', '--parallel', action='store', type=int, default=1,
-                        help='fetch comics in parallel. Specify the number of connections')
+        help='fetch comics in parallel. Specify the number of connections')
     parser.add_argument('--adult', action='store_true',
-                        help='confirms that you are old enough to view adult content')
+        help='confirms that you are old enough to view adult content')
     parser.add_argument('--allow-multiple', action='store_true',
-                        help='allows multiple instances to run at the same time. Use if you know what you are doing.')
+        help='allows multiple instances to run at the same time. Use if you know what you are doing.')
     # used for development testing prev/next matching
     parser.add_argument('--dry-run', action='store_true',
-                        help=argparse.SUPPRESS)
+        help=argparse.SUPPRESS)
     # multimatch is only used for development, eg. testing if all comics of a scripted plugin are working
     parser.add_argument('--multimatch', action='store_true',
-                        help=argparse.SUPPRESS)
+        help=argparse.SUPPRESS)
     # List all comic modules, even those normally suppressed, because they
     # are not "real" (moved & removed)
     parser.add_argument('--list-all', action='store_true',
-                        help=argparse.SUPPRESS)
+        help=argparse.SUPPRESS)
     parser.add_argument('comic', nargs='*',
-                        help='comic module name (including case insensitive substrings)')
+        help='comic module name (including case insensitive substrings)')
     try:
         import argcomplete
         argcomplete.autocomplete(parser)
@@ -249,7 +249,8 @@ def do_list(column_list=True, verbose=False, listall=False):
     """List available comics."""
     with out.pager():
         out.info(u'Available comic scrapers:')
-        out.info(u'Comics tagged with [%s] require age confirmation with the --adult option.' % TAG_ADULT)
+        out.info(u'Comics tagged with [{}] require age confirmation'
+            ' with the --adult option.'.format(TAG_ADULT))
         out.info(u'Non-english comics are tagged with [%s].' % TAG_LANG)
         scrapers = sorted(scraper.get_scrapers(listall),
                           key=lambda s: s.name.lower())
@@ -260,7 +261,8 @@ def do_list(column_list=True, verbose=False, listall=False):
         out.info(u'%d supported comics.' % num)
         if disabled:
             out.info('')
-            out.info(u'Some comics are disabled, they are tagged with [%s:REASON], where REASON is one of:' % TAG_DISABLED)
+            out.info(u'Some comics are disabled, they are tagged with'
+                ' [{}:REASON], where REASON is one of:'.format(TAG_DISABLED))
             for k in disabled:
                 out.info(u'  %-10s %s' % (k, disabled[k]))
     return 0

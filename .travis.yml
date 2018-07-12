@@ -5,13 +5,8 @@ python:
   - "3.5"
   - "3.6"
 cache: pip
-# install libjpeg-dev for Pillow to handle JPEGs
 dist: trusty
 sudo: false
-addons:
-  apt:
-    packages:
-      - libjpeg-dev
 # command to install dependencies
 install:
   - pip install -U tox-travis setuptools codecov

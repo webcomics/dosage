@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2018 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -72,6 +72,7 @@ class Deathbulge(_BasicScraper):
     imageSearch = compile(r"(/images/comics/[^\.]+\.jpg)")
     prevSearch = compile(r'"previous":(\d+),')
     firstStripUrl = url + '/1'
+
     def getPrevUrl(self, url, data):
         if data[1] == self.url:
             data = (data[0], data[1] + '/')
@@ -230,7 +231,7 @@ class DresdenCodak(_ParserScraper):
     startUrl = url + 'cat/comic/'
     firstStripUrl = url + '2007/02/08/pom/'
     imageSearch = '//section[%s]//img[%s]' % (
-            xpath_class('entry-content'), xpath_class('aligncenter'))
+        xpath_class('entry-content'), xpath_class('aligncenter'))
     prevSearch = '//a[img[contains(@src, "prev")]]'
     latestSearch = '//a[%s]' % xpath_class('tc-grid-bg-link')
     starter = indirectStarter
