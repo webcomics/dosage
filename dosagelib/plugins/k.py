@@ -12,6 +12,12 @@ from ..util import tagre
 from .common import _ComicControlScraper, _WPNavi
 
 
+class Katzenfuttergeleespritzer(_WPNavi):
+    url = 'http://www.katzenfuttergeleespritzer.de/'
+    multipleImagesPerStrip = True
+    lang = 'de'
+
+
 class KevinAndKell(_BasicScraper):
     url = 'http://www.kevinandkell.com/'
     stripUrl = url + '%s/kk%s%s.html'
