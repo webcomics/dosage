@@ -184,7 +184,7 @@ class GunnerkriggCourt(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
     prevSearch = compile(
         tagre("a", "href", r'(\?p=\d+)') +
-        tagre("img", "src", "http://www\.gunnerkrigg\.com/images/prev_a\.jpg"))
+        tagre("img", "src", "/images/prev_a\.jpg"))
     help = 'Index format: number'
 
 
