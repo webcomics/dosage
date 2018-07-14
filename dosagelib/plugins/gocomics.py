@@ -11,11 +11,9 @@ from ..helpers import indirectStarter, xpath_class
 
 class GoComics(_ParserScraper):
     url = 'http://www.gocomics.com/'
-    imageSearch = '//picture[{0}]/img'.format(xpath_class('item-comic-image'))
-    navSearch = '//div[{0}]//a[{1}]'
-    prevSearch = navSearch.format(xpath_class('comic'), xpath_class('fa-caret-left'))
-    nextSearch = navSearch.format(xpath_class('comic'), xpath_class('fa-caret-right'))
-    latestSearch = navSearch.format(xpath_class('gc-deck--cta-0'), xpath_class(''))
+    imageSearch = '//picture[{}]/img'.format(xpath_class('item-comic-image'))
+    prevSearch = '//a[{}]'.format(xpath_class('js-previous-comic'))
+    latestSearch = '//div[{}]//a'.format(xpath_class('gc-deck--cta-0'))
     starter = indirectStarter
     help = 'Index format: yyyy/mm/dd'
 
