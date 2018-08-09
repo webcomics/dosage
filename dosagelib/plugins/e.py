@@ -73,15 +73,12 @@ class ElfOnlyInn(_BasicScraper):
                          tagre("img", "src", r'/images/previous_day\.gif'))
     help = 'Index format: yyyymmdd'
 
-
-class ElGoonishShive(_BasicScraper):
+    
+class ElGoonishShive(_ParserScraper):
     url = 'http://www.egscomics.com/'
-    stripUrl = url + 'index.php?id=%s'
-    imageSearch = compile(tagre("img", "src", r'(comics/[^"]+)',
-                                after="comic"))
-    prevSearch = compile(tagre("a", "href", r'(/index\.php\?id=\d+)',
-                               after="prev"))
-    help = 'Index format: number'
+    firstStripUrl = url + 'comic/2002-01-21'
+    imageSearch = '//img[@id="cc-comic"]'
+    prevSearch = '//a[@rel="prev"]'
 
 
 class ElGoonishShiveNP(_BasicScraper):
