@@ -8,7 +8,7 @@ from __future__ import absolute_import, division, print_function
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import bounceStarter, indirectStarter
+from ..helpers import bounceStarter, indirectStarter, xpath_class
 from ..util import tagre
 from .common import (_ComicControlScraper, _WordPressScraper, _WPNaviIn,
                      WP_LATEST_SEARCH)
@@ -94,12 +94,9 @@ class LoFiJinks(_WPNaviIn):
 
 
 class LookingForGroup(_ParserScraper):
-    url = 'http://www.lfg.co/'
-    stripUrl = url + 'page/%s/'
+    url = 'http://www.lfg.co/latest-comic/'
+    stripUrl = 'http://www.lfg.co/page/%s/'
     firstStripUrl = stripUrl % '1'
-    css = True
-    imageSearch = '#comic img'
-    prevSearch = '#comic-left > a'
-    latestSearch = '#header-dropdown-comic-lfg > a:nth-of-type(2)'
-    starter = indirectStarter
+    imageSearch = '//div[@id="comic-img"]//img'
+    prevSearch = '//a[%s]' % xpath_class('comic-nav-prev')
     help = 'Index format: nnn'
