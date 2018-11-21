@@ -15,7 +15,7 @@ class GoComics(_ParserScraper):
     navSearch = '//div[{0}]//a[{1}]'
     prevSearch = navSearch.format(xpath_class('comic'), xpath_class('fa-caret-left'))
     nextSearch = navSearch.format(xpath_class('comic'), xpath_class('fa-caret-right'))
-    latestSearch = navSearch.format(xpath_class('gc-deck--cta-0'), xpath_class(''))
+    latestSearch = navSearch.format(xpath_class('gc-deck--cta-0'), xpath_class('gc-blended-link'))
     starter = indirectStarter
     help = 'Index format: yyyy/mm/dd'
 
