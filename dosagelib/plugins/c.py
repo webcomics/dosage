@@ -36,6 +36,19 @@ class CaptainSNES(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/nnn-stripname'
 
 
+class Carciphona(_BasicScraper):
+    url = 'http://carciphona.com/'
+    multipleImagesPerStrip = True
+    imageSearch = compile(tagre("div", "style", r'background-image:url\((_pages[^)]*)\)'))
+    prevSearch = compile(tagre("a", "href", r'(view\.php\?[^"]*)', after="prevarea"))
+    latestSearch = compile(tagre("a", "href", r'(read\.php\#chapter=[^"]*&page=[0-9]*[^"]*)'))
+    starter = indirectStarter
+
+    def namer(self, image_url, page_url):
+        ip = image_url.split('/')
+        return "volume_%s_page_%s" % (ip[-2], ip[-1])
+
+
 class CaseyAndAndy(_BasicScraper):
     url = 'http://www.galactanet.com/comic/'
     stripUrl = url + 'view.php?strip=%s'
@@ -289,6 +302,24 @@ class Curvy(_ParserScraper):
     imageSearch = '//div[@id="theActualComic"]//img'
     prevSearch = '//div[@class="aNavbar"]//p[2]/a'
     help = 'Index format: yyyymmdd'
+
+
+class CtrlAltDel(_BasicScraper):
+    url = 'http://cad-comic.com/'
+    stripUrl = url + '%s'
+    startUrl='http://cad-comic.com/'
+    latestSearch = compile('"url": *"([^"]*)')
+    imageSearch = compile(tagre("img", "src", r'(https://cad-comic\.com/wp-content/uploads/[^"]+png)'))
+    prevSearch = compile(tagre("a", "href", r'(https:[^"]+)', after="prev"))
+    help = 'Index format: yyyymmdd'
+   
+    @classmethod
+    def namer(cls, imageUrl, pageUrl):
+        """Remove random junk from image names."""
+        imgname = imageUrl.split('/')[-1]
+        imgbase = imgname.rsplit('_', 1)[1]
+        parts = imgbase.split('.')
+        return 'cad-%s.%s' % (parts[0], parts[-1])
 
 
 class CyanideAndHappiness(_BasicScraper):
