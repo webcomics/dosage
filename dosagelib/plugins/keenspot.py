@@ -51,7 +51,8 @@ class KeenSpot(_ParserScraper):
             # Not on frontpage...
             cls('Buzzboy', 'buzzboy'),
             cls('EveryoneLovesAdis', 'adis'),
-
+            cls('Flipside', 'flipside'),
+ 
             # do not edit anything below since these entries are generated from
             # scripts/update_plugins.sh
             # START AUTOUPDATE
