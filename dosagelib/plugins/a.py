@@ -14,17 +14,17 @@ from .common import _WordPressScraper, _WPNavi, WP_LATEST_SEARCH
 
 
 class AbstruseGoose(_BasicScraper):
-    url = 'http://abstrusegoose.com/'
+    url = 'https://abstrusegoose.com/'
     rurl = escape(url)
     starter = bounceStarter
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre('img', 'src',
-                                r'(http://abstrusegoose\.com/strips/[^<>"]+)'))
+                                r'(https://abstrusegoose\.com/strips/[^<>"]+)'))
     prevSearch = compile(tagre('a', 'href', r'(%s\d+)' % rurl) +
-                         r'&laquo; Previous')
+                         r'(?:&laquo;|«) Previous')
     nextSearch = compile(tagre('a', 'href', r'(%s\d+)' % rurl) +
-                         r'Next &raquo;')
+                         r'(?:Next &raquo;|»)')
     help = 'Index format: n (unpadded)'
     textSearch = compile(tagre("img", "title", r'([^"]+)'))
 
