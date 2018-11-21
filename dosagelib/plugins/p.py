@@ -225,6 +225,9 @@ class PS238(_ParserScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
+class Puck(_WordPressScraper):
+    url = 'http://www.puckcomics.com/'
+
 class PvPonline(_BasicScraper):
     url = 'http://pvponline.com/comic'
     stripUrl = url + '%s'
