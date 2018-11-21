@@ -20,6 +20,11 @@ class TheBrads(_ParserScraper):
     multipleImagesPerStrip = True
 
 
+class TheCummoner(_WordPressScraper):
+    adult = True
+    url = 'http://www.totempole666.com'
+    
+
 class TheDevilsPanties(_WPNavi):
     url = 'http://thedevilspanties.com/'
     stripUrl = url + 'archives/%s'
@@ -59,6 +64,9 @@ class TheLandscaper(_BasicScraper):
 class TheMelvinChronicles(_WordPressScraper):
     url = 'http://melvin.jeaniebottle.com/'
 
+
+class TheMonsterUnderTheBed(_WordPressScraper):
+    url = 'http://themonsterunderthebed.net/'
 
 class TheNoob(_WordPressScraper):
     url = 'http://thenoobcomic.com/'
