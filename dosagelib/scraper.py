@@ -388,7 +388,7 @@ class _BasicScraper(Scraper):
                     raise ValueError("Pattern %s matched empty URL at %s." %
                                      (search.pattern, url))
                 out.debug(u'matched URL %r with pattern %s' %
-                          (searchUrl, search.pattern))
+                          (searchUrl, unicode(search.pattern, errors="replace")))
                 searchUrls.append(normaliseURL(urljoin(data[1], searchUrl)))
             if searchUrls:
                 # do not search other links if one pattern matched
