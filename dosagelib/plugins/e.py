@@ -11,7 +11,7 @@ from re import compile, escape, IGNORECASE
 from ..helpers import indirectStarter, xpath_class
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import _WordPressScraper, _WPNavi, WP_LATEST_SEARCH
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, WP_LATEST_SEARCH
 
 
 class EarthsongSaga(_ParserScraper):
@@ -74,24 +74,12 @@ class ElfOnlyInn(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
-class ElGoonishShive(_BasicScraper):
+class ElGoonishShive(_ComicControlScraper):
     url = 'http://www.egscomics.com/'
-    stripUrl = url + 'index.php?id=%s'
-    imageSearch = compile(tagre("img", "src", r'(comics/[^"]+)',
-                                after="comic"))
-    prevSearch = compile(tagre("a", "href", r'(/index\.php\?id=\d+)',
-                               after="prev"))
-    help = 'Index format: number'
 
 
-class ElGoonishShiveNP(_BasicScraper):
+class ElGoonishShiveNP(_ComicControlScraper):
     url = 'http://www.egscomics.com/egsnp.php'
-    stripUrl = url + '?id=%s'
-    imageSearch = compile(tagre("img", "src", r'(comics/[^"]+)',
-                                after="comic"))
-    prevSearch = compile(tagre("a", "href", r'(/egsnp\.php\?id=\d+)',
-                               after="prev"))
-    help = 'Index format: number'
 
 
 class EmergencyExit(_BasicScraper):

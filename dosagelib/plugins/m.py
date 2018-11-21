@@ -150,6 +150,12 @@ class MistyTheMouse(_WordPressScraper):
     firstStripUrl = 'http://www.mistythemouse.com/?p=12'
 
 
+class MonkeyUser(_ParserScraper):
+    url = 'https://www.monkeyuser.com/'
+    prevSearch = '//div[@title="previous"]/a'
+    imageSearch = '//div[@class="content"]/p/img'
+
+
 class MonsieurLeChien(_BasicScraper):
     url = 'http://www.monsieur-le-chien.fr/'
     stripUrl = url + 'index.php?planche=%s'
