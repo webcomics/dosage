@@ -1,5 +1,6 @@
 def pys = [
-    [name: 'Python 3.6', docker:'python:3.6-stretch', tox:'py36,flake8', main: true],
+    [name: 'Python 3.7', docker:'python:3.7-stretch', tox:'py37,flake8', main: true],
+    [name: 'Python 3.6', docker:'python:3.6-stretch', tox:'py36', main: false],
     [name: 'Python 3.5', docker:'python:3.5-jessie', tox:'py35', main: false],
     [name: 'Python 2.7', docker:'python:2.7-stretch', tox:'py27', main: false]
 ]
