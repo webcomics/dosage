@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2016 Tobias Gruetzmacher
+# Copyright (C) 2016-2019 Tobias Gruetzmacher
 
 """
 Functions to load plugin modules.
@@ -11,8 +11,8 @@ Example usage:
 """
 
 from __future__ import absolute_import, division, print_function
-import pkgutil
 import importlib
+import pkgutil
 from .output import out
 
 
@@ -25,13 +25,7 @@ def get_modules(folder):
     prefix = mod.__name__ + "."
     modules = [m[1] for m in pkgutil.iter_modules(mod.__path__, prefix)]
 
-    # special handling for PyInstaller
-    importers = map(pkgutil.get_importer, mod.__path__)
-    toc = set()
-    for i in importers:
-        if hasattr(i, 'toc'):
-            toc |= i.toc
-    for elm in toc:
+    for elm in _get_all_modules_pyinstaller():
         if elm.startswith(prefix):
             modules.append(elm)
 
@@ -40,6 +34,16 @@ def get_modules(folder):
             yield importlib.import_module(name)
         except ImportError as msg:
             out.error("could not load module %s: %s" % (name, msg))
+
+
+def _get_all_modules_pyinstaller():
+    # Special handling for PyInstaller
+    toc = set()
+    importers = pkgutil.iter_importers(__package__)
+    for i in importers:
+        if hasattr(i, 'toc'):
+            toc |= i.toc
+    return toc
 
 
 def get_plugins(modules, classobj):
