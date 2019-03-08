@@ -25,7 +25,7 @@ Additionally, Dosage respects the robots.txt exclusion protocol. This makes
 sure no content is accessed in an automatic way without consent by the
 publishers.
 
-In any case you should support the authors of the comics you are downloading,
+In any case, you should support the authors of the comics you are downloading,
 either by buying some of their products or even donating them some money since
 they provide the comics you like and read.
 
@@ -75,7 +75,7 @@ at least Python 3.3. Dosage requires the following Python modules:
 - requests
 - six
 
-For certain modules you need th `cssselect` module, for bash argument
+For certain modules, you need the `cssselect` module, for bash argument
 completion you need the `argcomplete` module.
 
 ## Installation
