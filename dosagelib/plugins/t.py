@@ -147,6 +147,13 @@ class TracyAndTristan(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(/comics/\d+)', after="prev"))
     help = 'Index format: number'
 
+class TrippingOverYou(_BasicScraper):
+    url = 'http://www.trippingoveryou.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'wiggle-room'
+    imageSearch = compile(tagre("img", "src", r'([^"]+/comics/[^"]+)'))
+    prevSearch = compile(r'<a class="cc-prev" rel="prev" href="(.+?)">')
+    help = 'Index format: stripname'
 
 class TumbleDryComics(_WordPressScraper):
     url = 'http://tumbledrycomics.com/'
