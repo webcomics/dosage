@@ -11,7 +11,6 @@ import responses
 import dosagelib.cmd
 import httpmocks
 import json
-import os
 
 def cmd(*options):
     """'Fake' run dosage with given options."""
@@ -77,17 +76,20 @@ class TestDosage(object):
         httpmocks.zenpencils()
         print(tmpdir)
         cmd_ok("-v", "-b", str(tmpdir), "-o", "json", "ZenPencils")
-        with open(tmpdir + '/ZenPencils/dosage.json', 'r', encoding='utf-8') as f:
-            data = json.load(f)
-            
-            pages = data['pages']
-            assert len(pages) == 1
-            
-            page = list(pages.keys())[0]
-            assert page == 'https://zenpencils.com/comic/missing/'
-            
-            images = data['pages'][page]['images']
-            assert len(images) == 2
+        
+        directory = tmpdir.join('ZenPencils')
+        f = directory.join('dosage.json').open(encoding='utf-8')
+        data = json.load(f)
+        f.close()
+        
+        pages = data['pages']
+        assert len(pages) == 1
+        
+        page = list(pages.keys())[0]
+        assert page == 'https://zenpencils.com/comic/missing/'
+        
+        images = data['pages'][page]['images']
+        assert len(images) == 2
 
-            for imgurl, imgfile in images.items():
-                assert os.path.exists(tmpdir + '/ZenPencils/%s' % imgfile)
+        for imgurl, imgfile in images.items():
+            assert directory.join(imgfile).check(file=1)
