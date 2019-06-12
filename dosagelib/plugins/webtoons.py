@@ -46,16 +46,6 @@ class WebToons(_ParserScraper):
     @classmethod
     def getmodules(cls):
         return (
-            # WebToons Canvas comics
-            cls('Anthronauts', 'challenge/anthronauts', 358917),
-            cls('Debunkers', 'challenge/debunkers', 148475),
-            cls('InternetExplorer', 'challenge/internet-explorer', 219164),
-            cls('PinchPoint', 'challenge/pinch-point-reborn', 334640),
-            cls('SpaceVixen', 'challenge/space-vixen-deep-space-k9', 207049),
-
-            # Unicode title
-            cls('Lozolz', 'tiptoon/lozolz', 1268),
-
             # START AUTOUPDATE
             cls('1000', 'action/one-thousand', 1217),
             cls('10thDimensionBoys', 'comedy/10th-dimension-boys', 71),
@@ -78,6 +68,7 @@ class WebToons(_ParserScraper):
             cls('AllThatYouAre', 'drama/all-that-you-are', 403),
             cls('AlwaysHuman', 'romance/always-human', 557),
             cls('Annarasumanara', 'drama/annarasumanara', 77),
+            cls('Anthronauts', 'challenge/anthronauts', 358917),
             cls('AphroditeIX', 'sf/aphroditeix', 1451),
             cls('ApocalypticHorseplay', 'fantasy/apocalyptic-horseplay', 635),
             cls('AprilFlowers', 'fantasy/april-flowers', 1363),
@@ -130,6 +121,7 @@ class WebToons(_ParserScraper):
             cls('DaYomanvilleGang', 'drama/da-yomanville-gang', 1578),
             cls('DaysOfHana', 'romance/days-of-hana', 1246),
             cls('DEADDAYS', 'thriller/dead-days', 293),
+            cls('Debunkers', 'challenge/debunkers', 148475),
             cls('DEEP', 'thriller/deep', 364),
             cls('Denma', 'sf/denma', 921),
             cls('Dents', 'sf/dents', 671),
@@ -158,8 +150,8 @@ class WebToons(_ParserScraper):
             cls('FantasySketchTheGame', 'fantasy/fantasy-sketch', 1020),
             cls('Faust', 'fantasy/faust', 522),
             cls('FINALITY', 'thriller/finality', 1457),
-            cls('FisheyePlacebo', 'challenge/fisheye-placebo', 101841),
             cls('Firebrand', 'fantasy/firebrand', 877),
+            cls('FisheyePlacebo', 'challenge/fisheye-placebo', 101841),
             cls('Flow', 'fantasy/flow', 101),
             cls('FluffyBoyfriend', 'drama/fluffy-boyfriend', 1164),
             cls('ForTheSakeOfSita', 'romance/for-the-sake-of-sita', 349),
@@ -198,6 +190,7 @@ class WebToons(_ParserScraper):
             cls('ImmortalNerd', 'comedy/immortal-nerd', 579),
             cls('ImTheGrimReaper', 'thriller/im-the-grim-reaper', 1697),
             cls('Inarime', 'fantasy/inarime', 675),
+            cls('InternetExplorer', 'challenge/internet-explorer', 219164),
             cls('JackieRose', 'action/jackie-rose', 613),
             cls('JingleJungle', 'slice-of-life/jingle-jungle', 282),
             cls('JustAskYuli', 'slice-of-life/just-ask-yuli', 402),
@@ -223,6 +216,7 @@ class WebToons(_ParserScraper):
             cls('LoreOlympus', 'romance/lore-olympus', 1320),
             cls('Lorna', 'slice-of-life/lorna', 1284),
             cls('LoveAdviceFromTheGreatDukeOfHell', 'comedy/love-advice', 1498),
+            cls('Lozolz', 'tiptoon/lozolz', 1268),
             cls('LUFF', 'romance/luff', 1489),
             cls('Luggage', 'fantasy/luggage', 1642),
             cls('LUMINE', 'drama/lumine', 1022),
@@ -270,6 +264,7 @@ class WebToons(_ParserScraper):
             cls('PenguinLovesMev', 'slice-of-life/penguin-loves-mev', 86),
             cls('PhantomParadise', 'fantasy/phantom-paradise', 1250),
             cls('Pigminted', 'slice-of-life/pigminted', 482),
+            cls('PinchPoint', 'challenge/pinch-point-reborn', 334640),
             cls('Plum', 'sports/plum', 1605),
             cls('Polidiocy', 'comedy/polidiocy', 676),
             cls('Pound', 'action/pound', 1496),
@@ -309,6 +304,7 @@ class WebToons(_ParserScraper):
             cls('SOULCARTEL', 'fantasy/soul-cartel', 72),
             cls('SoulOnHold', 'fantasy/soul-on-hold', 1701),
             cls('SpaceBoy', 'drama/space-boy', 400),
+            cls('SpaceVixen', 'challenge/space-vixen-deep-space-k9', 207049),
             cls('SpiritFingers', 'drama/spirit-fingers', 1577),
             cls('Spirits', 'fantasy/spirits-re', 1348),
             cls('STARCROSS', 'super-hero/star-cross', 1599),
