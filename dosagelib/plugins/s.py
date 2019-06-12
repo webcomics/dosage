@@ -254,7 +254,16 @@ class SleeplessDomain(_ComicControlScraper):
 
 class SlightlyDamned(_ComicControlScraper):
     url = 'http://www.sdamned.com/'
-    firstStripUrl = url + 'comic/part-one-to-hell-and-back'
+    firstStripUrl = url + 'comic/prologue'
+
+    def namer(self, imageurl, pageurl):
+        """Clean up mixed filename formats."""
+        filename = pageurl.rsplit('/', 1)[-1]
+        if filename == '':
+            filename = imageurl.rsplit('-', 1)[-1]
+        else:
+            filename = 'SD' + filename + '.' + imageurl.rsplit('.', 1)[-1]
+        return filename
 
 
 class SluggyFreelance(_ParserScraper):
