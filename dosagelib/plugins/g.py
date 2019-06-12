@@ -183,13 +183,12 @@ class GUComics(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
-class GunnerkriggCourt(_BasicScraper):
-    url = 'https://www.gunnerkrigg.com/'
+class GunnerkriggCourt(_ParserScraper):
+    url = 'http://www.gunnerkrigg.com/'
     stripUrl = url + '?p=%s'
-    imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
-    prevSearch = compile(
-        tagre("a", "href", r'(\?p=\d+)') +
-        tagre("img", "src", r'/images/prev_a\.jpg'))
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//img[@class="comic_image"]'
+    prevSearch = '//a[./img[contains(@src, "prev")]]'
     help = 'Index format: number'
 
 
