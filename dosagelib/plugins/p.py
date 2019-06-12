@@ -220,6 +220,7 @@ class PrinceOfSartar(_WPNavi):
 class PS238(_ParserScraper):
     url = 'http://ps238.nodwick.com/'
     stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % '12072006'
     imageSearch = '//div[@id="comic"]//img'
     prevSearch = '//a[@class="comic-nav-base comic-nav-previous"]'
     help = 'Index format: yyyy-mm-dd'
