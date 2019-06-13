@@ -154,9 +154,10 @@ class GoneWithTheBlastwave(_BasicScraper):
         return '%02d' % int(compile(r'nro=(\d+)').search(page_url).group(1))
 
 
-class GrrlPower(_WPNavi):
+class GrrlPower(_WordPressScraper):
     url = 'http://grrlpowercomic.com/'
-    firstStripUrl = url + 'archives/48'
+    stripUrl = url + 'archives/comic/%s/'
+    firstStripUrl = stripUrl % 'gp0001'
 
 
 class GUComics(_BasicScraper):
