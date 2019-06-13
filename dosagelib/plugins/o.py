@@ -111,6 +111,15 @@ class Optipess(_WPNavi):
     textOptional = True
 
 
+class OriginalLife(_ParserScraper):
+    url = 'http://jaynaylor.com/originallife/'
+    stripUrl = url + 'archives/%s.html'
+    firstStripUrl = stripUrl % '2009/06/001'
+    imageSearch = '//img[contains(@src, "/originallife/comic/")]'
+    prevSearch = '//a[contains(text(), "Previous")]'
+    help = 'Index format: yyyy/mm/<your guess>'
+
+
 class OurHomePlanet(_ParserScraper):
     url = 'http://www.ourhomeplanet.net/'
     stripUrl = url + 'comic/%s'
