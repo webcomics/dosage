@@ -193,13 +193,14 @@ class DogHouseDiaries(_BasicScraper):
     help = 'Index format: number'
 
 
-class DominicDeegan(_BasicScraper):
+class DominicDeegan(_ParserScraper):
     url = 'http://www.dominic-deegan.com/'
-    stripUrl = url + 'view.php?date=%s'
-    firstStripUrl = stripUrl % '2002-05-21'
-    imageSearch = compile(tagre("img", "src", r'(comics/[^"]+)'))
-    prevSearch = compile(r'"(view.php\?date=[^"]+)".+?prev21')
-    help = 'Index format: yyyy-mm-dd'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % '0001-20020521'
+    imageSearch = '//img[contains(@class, "wp-post-image")]'
+    prevSearch = '//a[@title="Prev"]'
+    endOfLife = True
+    help = 'Index format: ####-yyyymmdd'
 
 
 class DorkTower(_ParserScraper):
