@@ -16,25 +16,26 @@ from dosagelib.util import check_robotstxt
 
 
 class KeenSpotUpdater(ComicListUpdater):
-    dup_templates = ('Creators/%s', "GoComics/%s", "ComicGenesis/%s")
+    dup_templates = ('Creators/%s', 'GoComics/%s', 'ComicGenesis/%s')
 
     # names of comics to exclude
     excluded_comics = (
         # non-standard navigation
-        "BrawlInTheFamily",
-        "Flipside",
-        "LastBlood",
-        "TheGodChild",
-        "Twokinds",
-        "Yirmumah",
+        'BrawlInTheFamily',
+        'Flipside',
+        'LastBlood',
+        'TheGodChild',
+        'Twokinds',
+        'Yirmumah',
     )
 
     extra = {
-        'CrowScare': 'last="20111031"',
-        'Dreamless': 'last="20100726"',
-        'MysticRevolution': 'path="?cid=%s"',
-        'PunchAnPie': 'path="daily/%s.html"',
-        'ShockwaveDarkside': 'path="2d/%s.html"',
+        'CrowScare': "last='20111031'",
+        'Dreamless': "last='20100726'",
+        'GeneCatlow': "last='20170412'",
+        'MysticRevolution': "path='?cid=%s'",
+        'PunchAnPie': "path='daily/%s.html'",
+        'ShockwaveDarkside': "path='2d/%s.html'",
     }
 
     def collect_results(self):
@@ -43,14 +44,14 @@ class KeenSpotUpdater(ComicListUpdater):
 
         for comiclink in data.xpath('//td[@id]/a'):
             comicurl = comiclink.attrib['href']
-            name = comiclink.xpath("string()")
+            name = comiclink.xpath('string()')
             try:
-                if "/d/" not in comicurl:
-                    check_robotstxt(comicurl + "d/", self.session)
+                if '/d/' not in comicurl:
+                    check_robotstxt(comicurl + 'd/', self.session)
                 else:
                     check_robotstxt(comicurl, self.session)
             except IOError as e:
-                print("[%s] INFO: robots.txt denied: %s" % (name, e))
+                print('[%s] INFO: robots.txt denied: %s' % (name, e))
                 continue
 
             self.add_comic(name, comicurl)
