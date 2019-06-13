@@ -392,6 +392,53 @@ class SPQRBlues(_WordPressScraper):
     url = 'http://spqrblues.com/IV/'
 
 
+class SSDD(_ParserScraper):
+    url = 'http://www.poisonedminds.com/'
+    stripUrl = url + 'd/%s.html'
+    firstStripUrl = stripUrl % '19980927'
+    imageSearch = ('//img[contains(@src, "/comics/")]',
+                   '//source[contains(@src, "/video/")]')
+    prevSearch = '//a[@rel="prev"]'
+    multipleImagesPerStrip = True
+    adult = True
+    help = 'Index format: yyyymmdd'
+
+    def shouldSkipUrl(self, url, data):
+        # Skip news, flash animation, and non-comic pages.
+        return url in (
+            # News post
+            self.stripUrl % '20060712',
+            self.stripUrl % '20060719',
+            self.stripUrl % '20071225',
+            self.stripUrl % '20110321',
+            self.stripUrl % '20110830',
+            self.stripUrl % '20110929',
+            self.stripUrl % '20180927',
+
+            # Flash animation
+            self.stripUrl % '20180401',
+            self.stripUrl % '20170429',
+            self.stripUrl % '20041203',
+
+            # Comic missing
+            self.stripUrl % '20070402',
+            self.stripUrl % '20060413',
+            self.stripUrl % '20060412',
+            self.stripUrl % '20060202',
+            self.stripUrl % '20051026',
+            self.stripUrl % '20050805',
+            self.stripUrl % '20050530',
+            self.stripUrl % '20050526',
+            self.stripUrl % '20050525',
+            self.stripUrl % '20050524',
+            self.stripUrl % '20050523',
+            self.stripUrl % '20050504',
+            self.stripUrl % '20040705',
+            self.stripUrl % '20030418',
+            self.stripUrl % '20030214'
+        )
+
+
 class StandStillStaySilent(_ParserScraper):
     url = 'http://www.sssscomic.com/comic.php'
     stripUrl = url + '?page=%s'
