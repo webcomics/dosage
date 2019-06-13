@@ -109,13 +109,15 @@ class TheThinHLine(_TumblrScraper):
 
 
 class TheWhiteboard(_ParserScraper):
-    BROKEN_PAGE_MIDDLE = compile(r'</body></html><')
+    BROKEN_PAGE_MIDDLE = compile(r'</body></html>\n<')
     url = 'http://www.the-whiteboard.com/'
-    imageSearch = '//center/img'
-    prevSearch = '//a[text()="previous"]'
+    stripUrl = url + 'auto%s.html'
+    firstStripUrl = stripUrl % 'wb001'
+    imageSearch = '//img[contains(@src, "auto")]'
+    prevSearch = '//a[.//img[contains(@src, "previous")]]'
 
-    # Another ugly hack :(
     def _parse_page(self, data):
+        # Ugly hack to fix broken HTML
         data = self.BROKEN_PAGE_MIDDLE.sub('<', data)
         return super(TheWhiteboard, self)._parse_page(data)
 
