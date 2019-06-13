@@ -274,12 +274,13 @@ class CucumberQuest(_BasicScraper):
 
 
 class Curtailed(_WordPressScraper):
-    url = 'http://curtailedcomic.com/'
-    firstStripUrl = url + 'comic/001-sneeze/'
+    url = 'https://www.curtailedcomic.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % '001-sneeze'
 
     def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
-        return 'comic/sitrep-1' in url
+        return 'comic/sitrep-1' in url or 'comic/be-right-back' in url
 
 
 class Curvy(_ParserScraper):
