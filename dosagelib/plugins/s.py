@@ -19,7 +19,8 @@ class SabrinaOnline(_BasicScraper):
     url = 'http://sabrina-online.com/'
     stripUrl = url + '%s.html'
     firstStripUrl = stripUrl % '1996-01'
-    imageSearch = compile(tagre("a", "href", r'(strips/[^"]*)'))
+    imageSearch = (compile(tagre("a", "href", r'(strips/[^"]*)')),
+                   compile(tagre("img", "src", r'(pages/[^"]*)')))
     prevSearch = compile(tagre("a", "href", r"(\d\d\d\d-\d\d.html)") +
                          tagre("img", "src", "b_back.gif"))
     help = 'Index format: yyyy-qq'
