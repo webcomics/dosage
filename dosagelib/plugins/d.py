@@ -163,17 +163,6 @@ class Dilbert(_ParserScraper):
         return "%s" % name
 
 
-class DMFA(_BasicScraper):
-    url = 'http://www.missmab.com/'
-    stripUrl = url + 'Comics/Vol_%s.php'
-    firstStripUrl = stripUrl % '001'
-    imageSearch = compile(tagre("img", "src", r'((?:Comics/|Vol)[^"]+)'))
-    multipleImagesPerStrip = True
-    prevSearch = compile(tagre("a", "href", r'((?:Comics/)?Vol[^"]+)') +
-                         tagre("img", "src", r'(?:../)?Images/comicprev\.gif'))
-    help = 'Index format: nnn (normally, some specials)'
-
-
 class DoemainOfOurOwn(_ParserScraper):
     url = 'http://www.doemain.com/'
     stripUrl = url + 'index.cgi/%s'
