@@ -76,12 +76,12 @@ class AfterStrife(_WPNavi):
     endOfLife = True
 
 
-class AGirlAndHerFed(_BasicScraper):
-    url = 'http://www.agirlandherfed.com/'
+class AGirlAndHerFed(_ParserScraper):
+    url = 'https://agirlandherfed.com/'
     stripUrl = url + '1.%s.html'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(img/strip/[^"]+\.jpg)'))
-    prevSearch = compile(r'<a href="([^"]+)">[^>]+Back')
+    imageSearch = '//div[@id="comic-image"]/img'
+    prevSearch = '//div[@id="comic-nav"]/a[.//img[contains(@src, "back")]]'
     help = 'Index format: nnn'
 
 
