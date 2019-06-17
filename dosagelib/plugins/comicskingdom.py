@@ -13,7 +13,9 @@ import re
 
 
 class ComicsKingdom(_BasicScraper):
-    imageSearch = re.compile(r' image-url="(https://safr\.kingfeatures\.com/api/img\.php\?e=...&amp;s=.&amp;file=[^"]+)"')
+    # changed mid-June 2019
+    # imageSearch = re.compile(r' image-url="(https://safr\.kingfeatures\.com/api/img\.php\?e=...&amp;s=.&amp;file=[^"]+)"')
+    imageSearch = re.compile(r'property="og:image" content="(https://safr\.kingfeatures\.com/api/img\.php\?e=...&s=.&file=[^"]+)"')
     prevSearch = re.compile(r' :is-left-arrow="true" .*date-slug="(\d\d\d\d-\d\d-\d\d)"')
     help = 'Index format: yyyy-mm-dd'
 
