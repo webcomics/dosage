@@ -7,7 +7,7 @@ from __future__ import absolute_import, division, print_function
 
 from re import compile, escape
 
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from .common import _WordPressScraper, _WPNavi
 
@@ -50,6 +50,29 @@ class IrregularWebcomic(_BasicScraper):
     imageSearch = compile(r'<img .*src="(.*comics/.*(png|jpg|gif))".*>')
     prevSearch = compile(r'<a href="(/\d+\.html|/cgi-bin/comic\.pl\?comic=\d+)">Previous ')
     help = 'Index format: nnn'
+
+
+class IslaAukate(_ParserScraper):
+    url = 'https://overlordcomic.com/archive/default/latest'
+    stripUrl = 'https://overlordcomic.com/archive/default/pages/%s'
+    firstStripUrl = stripUrl % '001'
+    imageSearch = '//div[@id="comicpage"]/img'
+    prevSearch = '//nav[@class="comicnav"]/a[text()="Prev"]'
+
+
+class IslaAukateColor(_ParserScraper):
+    url = 'https://overlordcomic.com/archive/color/latest'
+    stripUrl = 'https://overlordcomic.com/archive/color/pages/%s'
+    firstStripUrl = stripUrl % '001'
+    imageSearch = '//div[@id="comicpage"]/img'
+    prevSearch = '//nav[@class="comicnav"]/a[text()="Prev"]'
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix filenames of early comics
+        filename = imageUrl.rsplit('/', 1)[-1]
+        if filename[0].isdigit():
+            filename = 'Aukate' + filename
+        return filename
 
 
 class ItsWalky(_WordPressScraper):
