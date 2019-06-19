@@ -92,6 +92,15 @@ class CatVersusHuman(_ParserScraper):
     starter = indirectStarter
 
 
+class CavesAndCritters(_ParserScraper):
+    url = 'https://cavesandcritters.com/?ao_confirm'
+    stripUrl = url + 'https://cavesandcritters.com/cnc_webcomic/%s/'
+    firstStripUrl = stripUrl % '01_000'
+    imageSearch = '//div[@class="webcomic-image"]//img'
+    prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
+    adult = True
+
+
 class ChainsawSuit(_WordPressScraper):
     url = 'http://chainsawsuit.com/comic/'
     stripUrl = url + 'archive/%s/'
