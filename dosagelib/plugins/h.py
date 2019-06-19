@@ -7,10 +7,10 @@ from __future__ import absolute_import, division, print_function
 
 from re import compile, escape
 
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from ..helpers import bounceStarter, indirectStarter
-from .common import _WordPressScraper, _WPNaviIn
+from .common import _ComicControlScraper, _WordPressScraper, _WPNaviIn
 
 
 class HagarTheHorrible(_BasicScraper):
@@ -86,3 +86,15 @@ class HijinksEnsuePhoto(_WPNaviIn):
     url = 'http://hijinksensue.com/comic/emerald-city-comicon-2015-fancy-photo-comic-part-2/'
     firstStripUrl = 'http://hijinksensue.com/comic/san-diego-comic-con-fancy-picto-comic-pt-1/'
     endOfLife = True
+
+
+class HowToBeAWerewolf(_ComicControlScraper):
+    url = 'http://howtobeawerewolf.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'coming-february-3rd'
+
+    def namer(self, imageUrl, pageUrl):
+        filename = imageUrl.rsplit('/', 1)[-1]
+        if filename[0].isdigit():
+            filename = filename.split('-', 1)[1]
+        return filename
