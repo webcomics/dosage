@@ -17,6 +17,7 @@ fi
 [ -d $P ] && rm -Rfv $P
 git clone --depth=10 --branch=gh-pages git@github.com:${TRAVIS_REPO_SLUG}.git $P
 
+rm -Rfv dosage.egg-info
 ssite build
 
 rsync -r --del --verbose --exclude tests \
