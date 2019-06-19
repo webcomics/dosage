@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2018 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -34,7 +34,8 @@ except ImportError:
     from backports.functools_lru_cache import lru_cache
 
 from .output import out
-from .configuration import UserAgent, AppName, App, SupportUrl
+from .configuration import UserAgent, App, SupportUrl
+from . import AppName
 
 # Maximum content size for HTML pages
 MaxContentBytes = 1024 * 1024 * 3  # 3 MB

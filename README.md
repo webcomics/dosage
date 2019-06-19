@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/webcomics/dosage.svg?branch=master)](https://travis-ci.org/webcomics/dosage)
 [![Code Climate](https://codeclimate.com/github/webcomics/dosage/badges/gpa.svg)](https://codeclimate.com/github/webcomics/dosage)
 [![codecov](https://codecov.io/gh/webcomics/dosage/branch/master/graph/badge.svg)](https://codecov.io/gh/webcomics/dosage)
-[![Maintenance](https://img.shields.io/maintenance/yes/2018.svg)]()
+[![Maintenance](https://img.shields.io/maintenance/yes/2019.svg)]()
 
 Dosage is designed to keep a local copy of specific webcomics and other
 picture-based content such as Picture of the Day sites. With the dosage
@@ -67,11 +67,10 @@ For advanced options and features execute `dosage --help`.
 ## Dependencies
 
 [Python](http://www.python.org/): for Python 2.x at least 2.7.0, for Python 3.x
-at least Python 3.3. Dosage requires the following Python modules:
+at least Python 3.4. Dosage requires the following Python modules:
 
 - colorama
 - lxml
-- pbr
 - requests
 - six
 

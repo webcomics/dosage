@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2018 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -9,7 +9,8 @@ import os
 import argparse
 import six
 
-from . import events, configuration, singleton, director, scraper, __version__
+from . import events, configuration, singleton, director, scraper
+from . import AppName, __version__
 from .output import out
 from .util import internal_error, strlimit
 
@@ -126,7 +127,7 @@ def display_version(verbose):
                     # display update link
                     text = ('A new version %(version)s of %(app)s is '
                             'available at %(url)s.')
-                attrs = dict(version=version, app=configuration.AppName,
+                attrs = dict(version=version, app=AppName,
                              url=url, currentversion=__version__)
                 print(text % attrs)
         else:
@@ -134,7 +135,7 @@ def display_version(verbose):
                 value = 'invalid update file syntax'
             text = ('An error occured while checking for an '
                     'update of %(app)s: %(error)s.')
-            attrs = dict(error=value, app=configuration.AppName)
+            attrs = dict(error=value, app=AppName)
             print(text % attrs)
     return 0
 

@@ -1,25 +1,25 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 """
 Define basic configuration data like version or application name.
 """
 
 from __future__ import absolute_import, division, print_function
 
-from . import AppName, AppVersion
+from . import AppName, __version__
 
-App = AppName + u' ' + AppVersion
+App = AppName + u' ' + __version__
 
 Maintainer = u'Tobias Gruetzmacher'
 MaintainerEmail = u'tobias-dosage@23.gs'
 Url = u'http://dosage.rocks/'
 SupportUrl = u'https://github.com/webcomics/dosage/issues'
-UserAgent = u"Mozilla/5.0 (compatible; %s/%s; +%s)" % (AppName, AppVersion,
+UserAgent = u"Mozilla/5.0 (compatible; %s/%s; +%s)" % (AppName, __version__,
                                                        Url)
 Copyright = u"""Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 Copyright (C) 2012-2014 Bastian Kleineidam
-Copyright (C) 2015-2017 Tobias Gruetzmacher
+Copyright (C) 2015-2019 Tobias Gruetzmacher
 """
 Freeware = AppName + u""" comes with ABSOLUTELY NO WARRANTY!
 This is free software, and you are welcome to redistribute it
