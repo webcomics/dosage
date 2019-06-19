@@ -10,7 +10,7 @@ import responses
 
 import dosagelib.cmd
 import httpmocks
-
+import json
 
 def cmd(*options):
     """'Fake' run dosage with given options."""
@@ -70,3 +70,26 @@ class TestDosage(object):
     def test_fetch_indexed(self, tmpdir):
         httpmocks.xkcd()
         cmd_ok("-n", "2", "-v", "-b", str(tmpdir), "xkcd:303")
+
+    @responses.activate
+    def test_json_page_key_bounce_and_multi_image(self, tmpdir):
+        httpmocks.zenpencils()
+        print(tmpdir)
+        cmd_ok("-v", "-b", str(tmpdir), "-o", "json", "ZenPencils")
+        
+        directory = tmpdir.join('ZenPencils')
+        f = directory.join('dosage.json').open(encoding='utf-8')
+        data = json.load(f)
+        f.close()
+        
+        pages = data['pages']
+        assert len(pages) == 1
+        
+        page = list(pages.keys())[0]
+        assert page == 'https://zenpencils.com/comic/missing/'
+        
+        images = data['pages'][page]['images']
+        assert len(images) == 2
+
+        for imgurl, imgfile in images.items():
+            assert directory.join(imgfile).check(file=1)

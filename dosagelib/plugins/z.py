@@ -33,9 +33,12 @@ class Zapiro(_ParserScraper):
 
 
 class ZenPencils(_WPNavi):
-    url = 'http://zenpencils.com/'
+    url = 'https://zenpencils.com/'
     multipleImagesPerStrip = True
     firstStripUrl = url + 'comic/1-ralph-waldo-emerson-make-them-cry/'
+    starter = bounceStarter
+    prevSearch = '//a[%s]' % xpath_class('navi-prev')
+    nextSearch = '//a[%s]' % xpath_class('navi-next')
 
 
 class ZombieHunters(_BasicScraper):

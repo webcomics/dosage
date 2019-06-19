@@ -47,6 +47,11 @@ def bloomingfaeries():
 
     add(GET, re.compile(r'http://www\.bloomingfaeries\.com/.*\.jpg'), _img(), content_type='image/jpeg')
 
+def zenpencils():
+    add(GET, 'https://zenpencils.com/', _content('zp-home'))
+    add(GET, 'https://zenpencils.com/comic/missing/', _content('zp-223'))
+    add(GET, 'https://zenpencils.com/comic/lifejacket/', _content('zp-222'))
+    add(GET, re.compile(r'https://cdn-zenpencils\.netdna-ssl\.com/wp-content/uploads/.*\.jpg'), _img(), content_type='image/jpeg')
 
 def vote():
     add(POST, 'http://gaecounter.appspot.com/count/', 'no')
