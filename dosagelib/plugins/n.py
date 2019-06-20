@@ -96,6 +96,15 @@ class Nimona(_BasicScraper):
     endOfLife = True
 
 
+class NineToNine(_ParserScraper):
+    url = 'https://www.tigerknight.com/99'
+    stripUrl = url + '/%s'
+    firstStripUrl = stripUrl % '2014-01-01'
+    imageSearch = '//img[@class="comic-image"]'
+    prevSearch = '//a[@class="prev"]'
+    multipleImagesPerStrip = True
+
+
 class NobodyScores(_BasicScraper):
     url = 'http://nobodyscores.loosenutstudio.com/'
     rurl = escape(url)
