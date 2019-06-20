@@ -191,6 +191,16 @@ class Collar6(_TumblrScraper):
     adult = True
 
 
+class CollegeCatastrophe(_ParserScraper):
+    url = 'https://www.tigerknight.com/cc'
+    stripUrl = url + '/%s'
+    firstStripUrl = stripUrl % '2000-11-10'
+    imageSearch = '//img[@class="comic-image"]'
+    prevSearch = '//a[@class="prev"]'
+    endOfLife = True
+    multipleImagesPerStrip = True
+
+
 class Comedity(_BasicScraper):
     url = 'http://www.comedity.com/'
     stripUrl = url + 'index.php?strip_id=%s'
