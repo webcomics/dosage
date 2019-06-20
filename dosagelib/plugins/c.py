@@ -36,6 +36,22 @@ class CaptainSNES(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/nnn-stripname'
 
 
+class CarryOn(_ParserScraper):
+    url = 'http://www.hirezfox.com/km/co/'
+    stripUrl = url + 'd/%s.html'
+    firstStripUrl = stripUrl % '20040701'
+    imageSearch = '//div[@class="strip"]/img'
+    prevSearch = '//a[text()="Previous Day"]'
+    multipleImagesPerStrip = True
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix filenames of early comics
+        filename = imageUrl.rsplit('/', 1)[-1]
+        if filename[0].isdigit():
+            filename = 'co' + filename
+        return filename
+
+
 class CaseyAndAndy(_BasicScraper):
     url = 'http://www.galactanet.com/comic/'
     stripUrl = url + 'view.php?strip=%s'
