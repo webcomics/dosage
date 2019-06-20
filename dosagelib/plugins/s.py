@@ -564,6 +564,12 @@ class SuburbanJungle(_ParserScraper):
     prevSearch = '//div[@class="nav-previous"]/a'
 
 
+class SuburbanJungleRoughHousing(_WordPressScraper):
+    url = 'http://roughhouse.suburbanjungle.com/'
+    stripUrl = url + '/comic/%s/'
+    firstStripUrl = stripUrl % 'rough-housing-issue-1-cover'
+
+
 class SupernormalStep(_ComicControlScraper):
     url = 'http://supernormalstep.com/'
 
