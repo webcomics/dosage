@@ -570,6 +570,14 @@ class SuburbanJungleRoughHousing(_WordPressScraper):
     firstStripUrl = stripUrl % 'rough-housing-issue-1-cover'
 
 
+class Supercell(_ParserScraper):
+    url = 'https://www.supercellcomic.com/'
+    stripUrl = url + '/pages/%s.html'
+    firstStripUrl = stripUrl % '0001'
+    imageSearch = '//div[@class="comicpage"]//img'
+    prevSearch = '//div[@class="comicnav"]/a[./img[contains(@src, "comnav_02")]]'
+
+
 class SupernormalStep(_ComicControlScraper):
     url = 'http://supernormalstep.com/'
 
