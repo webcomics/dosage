@@ -556,6 +556,14 @@ class StuffNoOneToldMe(_BasicScraper):
         )
 
 
+class SuburbanJungle(_ParserScraper):
+    url = 'http://suburbanjungleclassic.com/'
+    stripUrl = url + '?p=%s'
+    firstStripUrl = stripUrl % '10'
+    imageSearch = '//div[@id="comic"]/img'
+    prevSearch = '//div[@class="nav-previous"]/a'
+
+
 class SupernormalStep(_ComicControlScraper):
     url = 'http://supernormalstep.com/'
 
