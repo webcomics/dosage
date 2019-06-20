@@ -290,5 +290,12 @@ class AstronomyPOTD(_ParserScraper):
                           image_url.split('/')[-1].split('.')[0])
 
 
+class ATaleOfTails(_WordPressScraper):
+    url = 'http://www.feretta.net/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'a-tale-of-tails-1-0'
+    adult = True
+
+
 class AxeCop(_WordPressScraper):
     url = 'http://axecop.com/comic/season-two/'
