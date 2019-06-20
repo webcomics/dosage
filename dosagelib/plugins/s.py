@@ -180,6 +180,20 @@ class SexyLosers(_ParserScraper):
     namer = joinPathPartsNamer((-2,), (-1,), '-')
 
 
+class ShadesOfGray(_ParserScraper):
+    url = 'https://www.theduckwebcomics.com/Shades_of_Gray/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '4820502'
+    imageSearch = '//div[@id="comic"]/img'
+    prevSearch = '//a[img[@class="arrow_prev"]]'
+    nextSearch = '//a[img[@class="arrow_next"]]'
+    starter = bounceStarter
+    endOfLife = True
+
+    def namer(self, imageUrl, pageUrl):
+        return pageUrl.rstrip('/').rsplit('/', 1)[-1]
+
+
 class Sharksplode(_WordPressScraper):
     url = 'http://sharksplode.com/'
     textSearch = '//div[@id="comic"]//img/@alt'
