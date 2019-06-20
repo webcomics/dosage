@@ -589,3 +589,12 @@ class SurvivingTheWorld(_ParserScraper):
     )
     multipleImagesPerStrip = True
     help = 'Index format: name'
+
+
+class SwordsAndSausages(_ParserScraper):
+    url = 'https://www.tigerknight.com/ss'
+    stripUrl = url + '/%s'
+    firstStripUrl = stripUrl % '1-1'
+    imageSearch = '//img[@class="comic-image"]'
+    prevSearch = '//a[@class="prev"]'
+    multipleImagesPerStrip = True
