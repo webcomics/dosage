@@ -219,9 +219,19 @@ class Dracula(_BasicScraper):
     help = 'Index format: nnn'
 
 
+class DreamKeepers(_ParserScraper):
+    url = 'http://www.dreamkeeperscomic.com/GNSaga.php'
+    stripUrl = url + '?pg=%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//img[contains(@src, "GNSagapages")]'
+    prevSearch = '//a[@id="prev"]'
+    help = 'Index format: n'
+
+
 class DreamKeepersPrelude(_ParserScraper):
     url = 'http://www.dreamkeeperscomic.com/Prelude.php'
     stripUrl = url + '?pg=%s'
+    firstStripUrl = stripUrl % '0001'
     imageSearch = '//div[@class="Preludecomic"]/table//a/img'
     prevSearch = '//a[@id="prev"]'
     help = 'Index format: n'
