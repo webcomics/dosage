@@ -210,6 +210,11 @@ class BusinessCat(_WPNaviIn):
     url = 'http://www.businesscat.happyjar.com/'
 
 
+class ButImACatPerson(_WordPressScraper):
+    url = 'http://www.bicatperson.com/'
+    stripUrl = 'comic/%s/'
+    firstStripUrl = 'sketches-1'
+
 class ButtercupFestival(_ParserScraper):
     url = 'http://www.buttercupfestival.com/'
     stripUrl = url + '%s.htm'
