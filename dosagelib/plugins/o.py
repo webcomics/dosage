@@ -7,9 +7,10 @@ from __future__ import absolute_import, division, print_function
 
 from re import compile, escape
 
+from ..helpers import bounceStarter
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import _WordPressScraper, _WPNavi
+from .common import _WordPressScraper, _WPNavi, WP_LATEST_SEARCH
 
 
 class OctopusPie(_ParserScraper):
@@ -109,6 +110,18 @@ class Optipess(_WPNavi):
     firstStripUrl = url + '2008/12/01/jason-friend-of-the-butterflies/'
     textSearch = '//div[@id="comic"]//img/@alt'
     textOptional = True
+
+
+class OrderOfTheBlackDog(_WordPressScraper):
+    url = 'http://orderoftheblackdog.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'issue-1-cover'
+    nextSearch = WP_LATEST_SEARCH
+    starter = bounceStarter
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix inconsistent filenames
+        return '%s.%s' % (pageUrl.rsplit('/', 2)[-2], imageUrl.rsplit('.', 1)[-1])
 
 
 class OriginalLife(_ParserScraper):
