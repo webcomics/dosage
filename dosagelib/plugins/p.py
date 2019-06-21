@@ -168,6 +168,14 @@ class PlanescapeSurvival(_BasicScraper):
     help = 'Index format: nnn'
 
 
+class PlushAndBlood(_ParserScraper):
+    url = 'http://www.plushandblood.com/Comic.php'
+    stripUrl = url + '?strip_id=%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//img[contains(@src, "comics/")]'
+    prevSearch = '//a[./img[contains(@src, "Nav/Prev")]]'
+
+
 class PokeyThePenguin(_ParserScraper):
     url = 'http://www.yellow5.com/pokey/archive/'
     stripUrl = url + 'index%s.html'
