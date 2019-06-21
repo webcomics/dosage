@@ -63,6 +63,12 @@ class SandraOnTheRocks(_BasicScraper):
     help = 'Index format: name'
 
 
+class Savestate(_WPNavi):
+    url = 'http://www.savestatecomic.com/'
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '2014/02/pokemon-bank'
+
+
 class ScandinaviaAndTheWorld(_ParserScraper):
     url = 'https://satwcomic.com/'
     stripUrl = url + '%s'
