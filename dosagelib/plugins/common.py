@@ -33,6 +33,8 @@ class _WPNaviIn(_WordPressScraper):
 class _ComicControlScraper(_ParserScraper):
     imageSearch = '//img[@id="cc-comic"]'
     prevSearch = '//a[@rel="prev"]'
+    nextSearch = '//a[@rel="next"]'
+    latestSearch = '//a[@rel="last"]'
 
 
 class _TumblrScraper(_ParserScraper):

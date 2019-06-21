@@ -9,7 +9,7 @@ from re import compile, escape, IGNORECASE
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from ..helpers import indirectStarter, xpath_class
+from ..helpers import bounceStarter, indirectStarter, xpath_class
 from .common import _ComicControlScraper, _WordPressScraper
 
 
@@ -73,6 +73,16 @@ class WhiteNoise(_WordPressScraper):
     url = 'http://whitenoisecomic.com/'
     firstStripUrl = url + 'comic/book-one/'
     prevSearch = '//a[%s]' % xpath_class('previous-webcomic-link')
+
+
+class WhiteNoiseLee(_ComicControlScraper):
+    url = 'http://www.white-noise-comic.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % '1-0'
+    starter = bounceStarter
+
+    def namer(self, imageUrl, pageUrl):
+        return pageUrl.rsplit('/', 1)[-1] + '.' + imageUrl.rsplit('.', 1)[-1]
 
 
 class Whomp(_ComicControlScraper):
