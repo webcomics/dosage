@@ -131,6 +131,25 @@ class NoNeedForBushido(_ParserScraper):
     help = 'Index format: nnn'
 
 
+class NotAVillain(_ParserScraper):
+    url = 'http://navcomic.com/'
+    stripUrl = url + 'not-a-villain/%s/'
+    firstStripUrl = stripUrl % 'v1-001'
+    imageSearch = '//div[@class="webcomic-image"]//img'
+    prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
+
+    def namer(self, imageUrl, pageUrl):
+        filename = imageUrl.rsplit('/', 1)[-1]
+        # Fix filenames missing "Page"
+        if filename[2].isdigit():
+            filename = filename[0] + '-Page' + filename[2:]
+        # Fix filenames of early comics
+        filename = filename.replace('Page-', '1-Page')
+        if filename.startswith('0-Page'):
+            filename = '1' + filename[1:]
+        return filename
+
+
 class NotInventedHere(_ParserScraper):
     url = 'http://notinventedhe.re/'
     stripUrl = url + 'on/%s'
