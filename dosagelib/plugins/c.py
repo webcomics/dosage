@@ -291,6 +291,14 @@ class CrimsonDark(_BasicScraper):
     help = 'Index format: n (unpadded)'
 
 
+class CrimsonFlag(_ParserScraper):
+    url = 'http://crimsonflagcomic.com/'
+    stripUrl = url + 'comic.php?comicID=%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//img[@class="comicimage"]'
+    prevSearch = '//a[contains(@class, "prev")]'
+
+
 class CucumberQuest(_BasicScraper):
     url = 'http://cucumber.gigidigi.com/'
     rurl = escape(url)
