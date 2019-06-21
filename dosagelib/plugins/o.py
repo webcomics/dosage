@@ -142,6 +142,12 @@ class OurHomePlanet(_ParserScraper):
     help = 'Index format: n (unpadded)'
 
 
+class OutOfPlacers(_WordPressScraper):
+    url = 'http://www.valsalia.com/'
+    stripUrl = 'comic/%s/'
+    firstStripUrl = stripUrl % 'prologue/01'
+
+
 class OverCompensating(_BasicScraper):
     url = 'http://www.overcompensating.com/'
     stripUrl = url + 'oc/index.php?comic=%s'
