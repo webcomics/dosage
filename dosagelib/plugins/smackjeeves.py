@@ -288,6 +288,7 @@ class SmackJeeves(_ParserScraper):
             cls('FromnowonImagirl', sub='fromnowonimagirl'),
             cls('FruitloopAndMrDownbeat', sub='fruitbeat'),
             cls('FullSpectrumTherapy', sub='fst'),
+            cls('FurryExperience', sub='furryexperience'),
             cls('GamerCafe', sub='gamercafe'),
             cls('GamesPeoplePlayUpdatedWeekly', sub='gamespeopleplay'),
             cls('GardenofHearts', sub='gardenofhearts'),
