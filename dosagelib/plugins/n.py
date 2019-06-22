@@ -86,6 +86,15 @@ class Nicky510(_WPNavi):
     url = 'http://www.nickyitis.com/'
 
 
+class NicoleAndDerek(_ParserScraper):
+    url = 'https://www.nicoleandderek.com/'
+    stripUrl = url + 'comics/index.php?date=%s'
+    firstStripUrl = url + 'comics/'
+    imageSearch = '//a/img[contains(@src, "comics/")]'
+    prevSearch = '//a[./img[contains(@src, "previous")]]'
+    help = 'Index format: yyyymmdd'
+
+
 class Nimona(_BasicScraper):
     url = 'http://gingerhaze.com/nimona/'
     stripUrl = url + 'comic/%s'
