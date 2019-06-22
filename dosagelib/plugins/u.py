@@ -7,7 +7,7 @@ from __future__ import absolute_import, division, print_function
 
 from re import compile, escape
 
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
 from .common import _WordPressScraper, _WPNavi
@@ -34,6 +34,18 @@ class UnicornJelly(_BasicScraper):
     imageSearch = compile(r'</TABLE>(?:<FONT COLOR="BLACK">)?<IMG SRC="(images/[^"]+)" WIDTH=')
     prevSearch = compile(r'<A HREF="(uni\d{3}[bcs]?\.html)">(<FONT COLOR="BLACK">)?<IMG SRC="images/back00\.gif"')
     help = 'Index format: nnn'
+
+
+class UnlikeMinerva(_ParserScraper):
+    baseUrl = 'https://www.unlikeminerva.com/archive/index.php'
+    stripUrl = baseUrl + '?week=%s'
+    url = stripUrl % '127'
+    firstStripUrl = stripUrl % '26'
+    imageSearch = '//img[contains(@src, "archive/")]'
+    prevSearch = '//a[./img[contains(@src, "previous")]]'
+    multipleImagesPerStrip = True
+    endOfLife = True
+    help = 'Index format: number'
 
 
 class Unsounded(_BasicScraper):
