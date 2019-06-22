@@ -58,6 +58,12 @@ class HarkAVagrant(_BasicScraper):
         return '%s-%s' % (num, filename)
 
 
+class HavocInc(_WordPressScraper):
+    url = 'http://www.radiocomix.com/havoc-inc/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'havoc-cover'
+
+
 class Hipsters(_WordPressScraper):
     url = 'http://www.hipsters-comic.com/'
     firstStripUrl = 'http://www.hipsters-comic.com/comic/hip01/'
