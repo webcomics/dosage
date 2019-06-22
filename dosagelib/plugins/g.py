@@ -8,7 +8,7 @@ from __future__ import absolute_import, division, print_function
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter
+from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
 from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
 
@@ -158,6 +158,19 @@ class GrrlPower(_WordPressScraper):
     url = 'http://grrlpowercomic.com/'
     stripUrl = url + 'archives/comic/%s/'
     firstStripUrl = stripUrl % 'gp0001'
+
+
+class Guardia(_ParserScraper):
+    url = 'https://ssp-comics.com/comics/Guardia/'
+    stripUrl = url + '?page=%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//img[contains(@src, "comics/Guardia/")]'
+    prevSearch = '//a[./button[@id="prevButton"]]'
+    nextSearch = '//a[./button[@id="nextButton"]]'
+    starter = bounceStarter
+
+    def namer(self, imageUrl, pageUrl):
+        return pageUrl.rsplit('=', 1)[-1] + '.' + imageUrl.rsplit('.', 1)[-1]
 
 
 class GUComics(_BasicScraper):
