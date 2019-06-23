@@ -7,9 +7,18 @@ from __future__ import absolute_import, division, print_function
 
 from re import compile, escape, IGNORECASE
 
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from .common import _ComicControlScraper, _WPNavi
+
+
+class Kaspall(_ParserScraper):
+    stripUrl = 'http://www.kaspall.com/comic/%s'
+    url = stripUrl % '2015/10/11'
+    firstStripUrl = '2004/08/05'
+    imageSearch = '//img[contains(@src, "comics/")]'
+    prevSearch = '//a[./img[contains(@src, "prev_comic")]]'
+    endOfLife = True
 
 
 class KevinAndKell(_BasicScraper):
