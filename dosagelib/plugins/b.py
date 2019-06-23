@@ -143,6 +143,17 @@ class BloodBound(_WordPressScraper):
     firstStripUrl = 'http://bloodboundcomic.com/comic/06112006/'
 
 
+class Bloodline(_WordPressScraper):
+    url = 'http://w0lfmare.xepher.net/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'pg-1-2'
+    imageSearch = '//div[@id="comic"]//img[not(contains(@src, "TWC-vote-image"))]'
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix filenames of early comics
+        return imageUrl.rsplit('/', 1)[-1].replace('gen-6', 'Bloodline')
+
+
 class BloomingFaeries(_WordPressScraper):
     adult = True
     url = 'http://www.bloomingfaeries.com/'
