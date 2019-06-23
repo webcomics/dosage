@@ -139,6 +139,13 @@ class Evilish(_ParserScraper):
     help = 'Index format: yyyymmdd'
 
 
+class Evon(_WordPressScraper):
+    url = 'http://evoncomics.com/'
+    stripUrl = url + '?comic=%s'
+    firstStripUrl = stripUrl % 'chapter-1'
+    adult = True
+
+
 class Exiern(_WPNavi):
     url = 'http://www.exiern.com/'
     firstStripUrl = url + '2005/09/06/so-far/'
