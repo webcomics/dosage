@@ -250,6 +250,14 @@ class Sithrah(_ParserScraper):
     prevSearch = '//a[%s]' % xpath_class('previous-webcomic-link')
 
 
+class SixPackOfOtters(_ParserScraper):
+    url = 'http://sixpackofotters.com/'
+    stripUrl = url + 'pages/%s/'
+    firstStripUrl = stripUrl % 'chapter-01-tandem'
+    imageSearch = '//div[contains(@class, "webcomic-image")]//img'
+    prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
+
+
 class SkinDeep(_ParserScraper):
     url = 'http://www.skindeepcomic.com/'
     imageSearch = '//a[%s]/img' % xpath_class('webcomic-link')
