@@ -51,6 +51,12 @@ class LasLindas(_BasicScraper):
     help = 'Index format: stripname'
 
 
+class LastResort(_WordPressScraper):
+    url = 'http://www.lastres0rt.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'that-sound-you-hear-is-a-shattered-stereotype'
+
+
 class LeastICouldDo(_ParserScraper):
     url = 'http://www.leasticoulddo.com/'
     stripUrl = url + 'comic/%s'
