@@ -24,6 +24,16 @@ class TheBrads(_ParserScraper):
     multipleImagesPerStrip = True
 
 
+class TheClassMenagerie(_ParserScraper):
+    stripUrl = 'http://www.theclassm.com/d/%s.html'
+    url = stripUrl % '20050717'
+    firstStripUrl = stripUrl % '19990322'
+    imageSearch = '//img[@class="ksc"]'
+    prevSearch = '//a[@rel="prev"]'
+    multipleImagesPerStrip = True
+    endOfLife = True
+
+
 class TheDevilsPanties(_WPNavi):
     url = 'http://thedevilspanties.com/'
     stripUrl = url + 'archives/%s'
