@@ -17,6 +17,14 @@ from ..util import tagre
 from .common import _ComicControlScraper, _TumblrScraper, _WordPressScraper, _WPNavi
 
 
+class TalesOfTheQuestor(_ParserScraper):
+    stripUrl = 'http://www.rhjunior.com/%s/'
+    firstStripUrl = stripUrl % 'tales-of-the-questor-cover'
+    url = stripUrl % 'comics/tales-of-the-questor'
+    imageSearch = '//div[contains(@class, "entry-content")]//img'
+    prevSearch = ('//a[@rel="prev"]', '//a[@title="Tales of the Questor"]')
+
+
 class TheBrads(_ParserScraper):
     url = 'http://bradcolbow.com/archive/'
     imageSearch = '//div[%s]//img' % xpath_class('entry')
