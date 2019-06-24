@@ -166,14 +166,18 @@ class AlphaLunaSpanish(AlphaLuna):
     firstStripUrl = stripUrl % '1/portada'
 
 
-class Altermeta(_BasicScraper):
+class Altermeta(_ParserScraper):
     url = 'http://altermeta.net/'
-    rurl = escape(url)
     stripUrl = url + 'archive.php?comic=%s'
     firstStripUrl = stripUrl % '0'
-    imageSearch = compile(r'<img src="(comics/[^"]+)" />')
-    prevSearch = compile(r'<a href="([^"]+)"><img src="%stemplate/default/images/sasha/back\.png' % rurl)
+    imageSearch = '//img[contains(@src, "comics/")]'
+    prevSearch = '//a[./img[contains(@src, "back")]]'
+    nextSearch = '//a[./img[contains(@src, "forward")]]'
+    starter = bounceStarter
     help = 'Index format: n (unpadded)'
+
+    def namer(self, imageUrl, pageUrl):
+        return pageUrl.rsplit('=', 1)[-1] + '_' + imageUrl.rsplit('/', 1)[-1]
 
 
 class AltermetaOld(Altermeta):
