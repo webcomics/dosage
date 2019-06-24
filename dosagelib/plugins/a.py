@@ -241,6 +241,15 @@ class Annyseed(_ParserScraper):
         return tourl
 
 
+class ApartmentForTwo(_ParserScraper):
+    url = 'http://www.apartmentfor2.com/'
+    stripUrl = url + 'index.php?date=%s'
+    firstStripUrl = url + 'comics/'
+    imageSearch = '//a/img[contains(@src, "comics/")]'
+    prevSearch = '//a[./img[contains(@src, "previous")]]'
+    help = 'Index format: yyyymmdd'
+
+
 class AppleGeeks(_BasicScraper):
     url = 'http://www.applegeeks.com/'
     stripUrl = url + 'comics/viewcomic.php?issue=%s'
