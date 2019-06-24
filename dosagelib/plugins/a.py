@@ -146,24 +146,22 @@ class AllTheGrowingThings(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/strip-name'
 
 
-class AlphaLuna(_BasicScraper):
-    url = 'http://www.alphaluna.net/'
-    stripUrl = url + 'issue-%s/'
-    firstStripUrl = stripUrl % '1/cover'
-    imageSearch = compile(tagre("a", "href",
-                                r'[^"]*/(?:issue-|support/upcoming)[^"]+') +
-                          tagre("img", "src", r'([^"]*/PAGINAS/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)') +
-                         tagre("img", "alt", "Prev"))
-    help = 'Index format: issue/page (e.g. 4/05)'
+class AlphaLuna(_ParserScraper):
+    url = 'https://alphaluna.net/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'issue-1-cover'
+    imageSearch = '//main[@id="comic"]//img'
+    prevSearch = '//a[@rel="prev"]'
 
 
-class AlphaLunaSpanish(AlphaLuna):
+class AlphaLunaSpanish(_ParserScraper):
     name = 'AlphaLuna/Spanish'
     lang = 'es'
-    url = 'http://alphaluna.net/spanish/'
-    stripUrl = url + 'issue-%s/'
-    firstStripUrl = stripUrl % '1/portada'
+    url = 'https://alphaluna.net/spanish/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'issue-1-cover'
+    imageSearch = '//main[@id="comic"]//img'
+    prevSearch = '//a[@rel="prev"]'
 
 
 class Altermeta(_ParserScraper):
