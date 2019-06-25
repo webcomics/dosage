@@ -492,6 +492,7 @@ class SmackJeeves(_ParserScraper):
             cls('Stay', 102560, adult=True),
             cls('StellaInChrome', 70107),
             cls('Stereophonic', 129406),
+            cls('StolenGeneration', 20901, adult=True, endOfLife=True),
             cls('Storyofadamnedlove', 107702),
             cls('StrangersandFriends', 94050),
             cls('Striped', 79896, adult=True),
