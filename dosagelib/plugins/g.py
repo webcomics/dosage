@@ -83,7 +83,7 @@ class GirlGenius(_BasicScraper):
 
 
 class GirlsWithSlingshots(_BasicScraper):
-    url = 'http://www.girlswithslingshots.com/'
+    url = 'https://girlswithslingshots.com/'
     rurl = escape(url)
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % 'gws1'
@@ -93,7 +93,7 @@ class GirlsWithSlingshots(_BasicScraper):
                       r'(http://cdn\.girlswithslingshots\.com/comics/[^"]+)')),
     )
     prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl,
-                               after="prev"))
+                               before='rel="prev"'))
     help = 'Index format: stripname'
 
 
