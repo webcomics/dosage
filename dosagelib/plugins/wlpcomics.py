@@ -64,6 +64,13 @@ class PeterIsTheWolfAdult(_WLPComics):
     multipleImagesPerStrip = True
     adult = True
 
+    def namer(self, imageUrl, pageUrl):
+        name = pageUrl.rsplit('/', 1)[-1].split('.')[0] + '_' + imageUrl.rsplit('/', 1)[-1]
+        if 'adult' in imageUrl:
+            name = name.split('.')
+            return name[0] + '_adult.' + name[1]
+        return name
+
     def getPrevUrl(self, url, data):
         # Fix loop in site navigation
         if url == self.stripUrl % '194':
