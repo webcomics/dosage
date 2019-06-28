@@ -8,7 +8,7 @@ from __future__ import absolute_import, division, print_function
 from re import compile
 from six.moves.urllib.parse import urljoin
 
-from ..helpers import xpath_class
+from ..helpers import bounceStarter, xpath_class
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from .common import _WordPressScraper
@@ -72,6 +72,40 @@ class RedString(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(comics/[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/index\.php\?id=\d+)', after="prev"))
     help = 'Index format: nnn'
+
+
+class Replay(_ParserScraper):
+    url = 'http://replaycomic.com/'
+    stripUrl = url + 'comic/%s/'
+    url = stripUrl % 'trying-it-out'
+    firstStripUrl = stripUrl % 'red-desert'
+    imageSearch = '//div[@id="comic"]//img'
+    prevSearch = '//a[contains(@class, "comic-nav-previous")]'
+    nextSearch = '//a[contains(@class, "comic-nav-next")]'
+
+    def starter(self):
+        # Retrieve archive page to identify chapters
+        archivePage = self.getPage(self.url + 'archive')
+        archive = archivePage.xpath('//div[@class="comic-archive-chapter-wrap"]')
+        self.chapter = len(archive) - 1
+        self.startOfChapter = []
+        for archiveChapter in archive:
+            self.startOfChapter.append(archiveChapter.xpath('.//a')[0].get('href'))
+        return bounceStarter(self)
+
+    def namer(self, imageUrl, pageUrl):
+        # Name pages based on chapter, index, and post title
+        name = pageUrl.rstrip('/').rsplit('/', 1)[-1]
+        page = imageUrl.rsplit('/', 1)[-1].rsplit('.', 1)
+
+        # Fix inconsistent page number formatting
+        if page[0].isdigit() and len(page[0]) > 2 and self.chapter == 1 and name != 'through-the-woods':
+            page[0] = page[0][:2] + '-' + page[0][2:]
+
+        name = '%d-%s-%s.%s' % (self.chapter, page[0], name, page[1])
+        if pageUrl in self.startOfChapter:
+            self.chapter -= 1
+        return name
 
 
 class RomanticallyApocalyptic(_ParserScraper):
