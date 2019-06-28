@@ -14,23 +14,20 @@ from .common import (_ComicControlScraper, _WordPressScraper, _WPNaviIn,
                      WP_LATEST_SEARCH)
 
 
-class Lackadaisy(_BasicScraper):
-    baseUrl = 'http://lackadaisy.foxprints.com/'
-    url = baseUrl + 'comic.php'
-    stripUrl = baseUrl + 'comic.php?comicid=%s'
+class Lackadaisy(_ParserScraper):
+    url = 'https://www.lackadaisy.com/comic.php'
+    stripUrl = url + '?comicid=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.lackadaisycats\.com/comic/[^"]*)'))
-    prevSearch = compile(tagre("a", "href", r"(/comic\.php\?comicid=[0-9]+)") +
-                         "&lt; Previous")
-    nextSearch = compile(tagre("a", "href", r"(/comic.php\?comicid=[0-9]+)") +
-                         "Next")
+    imageSearch = '//div[@id="content"]/img'
+    prevSearch = '//div[@class="prev"]/a'
+    nextSearch = '//div[@class="next"]/a'
     help = 'Index format: n'
     starter = bounceStarter
 
-    def namer(self, image_url, page_url):
-        """Use comic id for filename."""
-        num = page_url.rsplit('=', 1)[-1]
-        ext = image_url.rsplit('.', 1)[-1]
+    def namer(self, imageUrl, pageUrl):
+        # Use comic id for filename
+        num = pageUrl.rsplit('=', 1)[-1]
+        ext = imageUrl.rsplit('.', 1)[-1]
         return 'lackadaisy_%s.%s' % (num, ext)
 
 
