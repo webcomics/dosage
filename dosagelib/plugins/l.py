@@ -65,6 +65,64 @@ class LifeAintNoPonyFarm(_WordPressScraper):
     endOfLife = True
 
 
+class LifeAsRendered(_ParserScraper):
+    # Reverse navigation doesn't work properly, so search forward instead
+    stripUrl = 'https://kittyredden.com/LAR/%s/'
+    url = stripUrl % '0100'
+    firstStripUrl = stripUrl % '05extra'
+    imageSearch = '//figure[@class="wp-block-image"]//img'
+    prevSearch = '//a[img[@alt="Next"]]'
+    textSearch = '//div[@class="entry-content"]//text()'
+    adult = True
+    endOfLife = True
+    nav = {
+        '0140': '0200',
+        '0272': '02ss00',
+        '02SS14': '0300',
+        '0367': '03ss00',
+        '03ss10': '0400',
+        '0408': '0409',
+        '0409': '0410',
+        '0421': '0422',
+        '0449': '0450',
+        '0458': '0460',
+        '0460': '04ss00',
+        '04ss00': '04ss01',
+        '04ss10': '0500',
+        '0500': '0501',
+        '0508': '0509',
+        '0558': '0559',
+        '0577': '05extra'
+    }
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix inconsistent filenames
+        filename = imageUrl.rsplit('/', 1)[-1]
+        filename = filename.replace('ReN', 'N').replace('N01P', 'A02S')
+        return filename
+
+    def fetchUrls(self, url, data, urlSearch):
+        # Fix missing image link
+        if 'LAR/0403' in url and urlSearch == self.imageSearch:
+            return [self.stripUrl.rstrip('/') % 'A04/A04P03.png']
+        return super(LifeAsRendered, self).fetchUrls(url, data, urlSearch)
+
+    def getPrevUrl(self, url, data):
+        # Fix broken navigation links
+        page = url.rstrip('/').rsplit('/', 1)[-1]
+        if self.nav and page in self.nav:
+            return self.stripUrl % self.nav[page]
+        return super(LifeAsRendered, self).getPrevUrl(url, data)
+
+    def fetchText(self, url, data, textSearch, optional):
+        # Save final summary text
+        if url == self.firstStripUrl:
+            url = self.stripUrl % 'the-end'
+            data = self.getPage(url)
+            return super(LifeAsRendered, self).fetchText(url, data, textSearch, optional)
+        return None
+
+
 class LilithsWord(_ComicControlScraper):
     url = 'http://www.lilithword.com/'
     stripUrl = url + 'comic/%s'
