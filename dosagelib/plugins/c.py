@@ -8,7 +8,7 @@ from __future__ import absolute_import, division, print_function
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter
+from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
 from .common import _TumblrScraper, _WordPressScraper, _WPNavi
 
@@ -333,6 +333,22 @@ class Curvy(_ParserScraper):
     imageSearch = '//div[@id="theActualComic"]//img'
     prevSearch = '//div[@class="aNavbar"]//p[2]/a'
     help = 'Index format: yyyymmdd'
+
+
+class CutLoose(_ParserScraper):
+    url = 'https://www.cutloosecomic.com/'
+    stripUrl = url + 'archive/comic/%s'
+    firstStripUrl = stripUrl % '2016/02/02'
+    imageSearch = '//img[@id="comic-container"]'
+    prevSearch = '//a[@title="Previous Comic"]'
+    nextSearch = '//a[@title="Next Comic"]'
+    starter = bounceStarter
+    adult = True
+
+    def namer(self, imageUrl, pageUrl):
+        postDate = pageUrl.rsplit('/', 3)
+        filename = imageUrl.rsplit('/', 1)[-1]
+        return '%s-%s-%s_%s' % (postDate[1], postDate[2], postDate[3], filename)
 
 
 class CyanideAndHappiness(_BasicScraper):
