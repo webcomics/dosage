@@ -7,7 +7,7 @@ from __future__ import absolute_import, division, print_function
 
 from re import compile, escape, IGNORECASE
 
-from ..helpers import xpath_class
+from ..helpers import indirectStarter, xpath_class
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from .common import _ComicControlScraper, _WordPressScraper
@@ -165,6 +165,30 @@ class MonsieurLeChien(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'([^"]+)') +
                          tagre("img", "src", "i/precedent.gif"))
     help = 'Index format: n'
+
+
+class Moonlace(_ParserScraper):
+    stripUrl = 'http://dbcomics.darkblueworkshop.com/moonlace/%s/'
+    firstStripUrl = stripUrl % 'prologue/page-1'
+    url = firstStripUrl
+    imageSearch = '//div[@class="webcomic-image"]//img'
+    prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
+    latestSearch = '//a[contains(@class, "last-webcomic-link")]'
+    adult = True
+
+    def starter(self):
+        # Set age-gate cookie
+        self.session.get(self.firstStripUrl + '?webcomic_birthday=1')
+        return indirectStarter(self)
+
+    def namer(self, imageUrl, pageUrl):
+        # Prepend chapter title to page filenames
+        chapter = pageUrl.rstrip('/').rsplit('/', 3)[-2]
+        chapter = chapter.replace('prologue', 'chapter-0-prologue')
+        chapter = chapter.replace('chapter-1', 'chapter-1-heritage')
+        chapter = chapter.replace('chapter2', 'chapter-2')
+        page = imageUrl.rsplit('/', 1)[-1]
+        return chapter + '_' + page
 
 
 class Moonsticks(_ParserScraper):
