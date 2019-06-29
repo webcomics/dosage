@@ -84,6 +84,23 @@ class Beetlebum(_BasicScraper):
         return name
 
 
+class Bethellium(_ParserScraper):
+    stripUrl = 'http://dbcomics.darkblueworkshop.com/bethellium/%s/'
+    firstStripUrl = stripUrl % 'chapter-1/webcomic-bethellium-chapter-1-cover'
+    url = firstStripUrl
+    imageSearch = '//div[@class="webcomic-image"]//img'
+    prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
+    latestSearch = '//a[contains(@class, "last-webcomic-link")]'
+    starter = indirectStarter
+
+    def namer(self, imageUrl, pageUrl):
+        # Prepend chapter title to page filenames
+        chapter = pageUrl.rstrip('/').rsplit('/', 3)[-2]
+        chapter = chapter.replace('chapter-1', 'chapter-1-the-magic-city')
+        page = imageUrl.rsplit('/', 1)[-1]
+        return chapter + '_' + page
+
+
 class BetterDays(_ParserScraper):
     url = 'http://jaynaylor.com/betterdays/'
     stripUrl = url + 'archives/%s.html'
