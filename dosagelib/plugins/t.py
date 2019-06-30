@@ -14,7 +14,7 @@ except ImportError:
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, xpath_class
 from ..util import tagre
-from .common import _ComicControlScraper, _TumblrScraper, _WordPressScraper, _WPNavi
+from .common import _ComicControlScraper, _TumblrScraper, _WordPressScraper, _WPNavi, _WPNaviIn
 
 
 class TalesOfTheQuestor(_ParserScraper):
@@ -171,6 +171,26 @@ class ToonHole(_WordPressScraper):
 
     def shouldSkipUrl(self, url, data):
         return url in (self.url + "comic/if-game-of-thrones-was-animated/",)
+
+
+class TracesOfThePast(_WPNaviIn):
+    baseUrl = 'http://rickgriffinstudios.com/'
+    url = baseUrl + 'in-the-new-age/'
+    stripUrl = baseUrl + 'comic-post/%s/'
+    firstStripUrl = stripUrl % 'totp-page-1'
+    latestSearch = '//a[contains(@title, "Permanent Link")]'
+    starter = indirectStarter
+
+
+class TracesOfThePastNSFW(_WPNaviIn):
+    name = 'TracesOfThePast/NSFW'
+    baseUrl = 'http://rickgriffinstudios.com/'
+    url = baseUrl + 'in-the-new-age/'
+    stripUrl = baseUrl + 'comic-post/%s/'
+    firstStripUrl = stripUrl % 'totp-page-1-nsfw'
+    latestSearch = '//a[contains(@title, "NSFW")]'
+    starter = indirectStarter
+    adult = True
 
 
 class TracyAndTristan(_BasicScraper):
