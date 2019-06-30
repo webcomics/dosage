@@ -10,7 +10,7 @@ from re import compile, escape, IGNORECASE
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from ..helpers import bounceStarter, indirectStarter, xpath_class
-from .common import _ComicControlScraper, _WordPressScraper
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
 
 
 class WapsiSquare(_WordPressScraper):
@@ -209,3 +209,9 @@ class WormWorldSagaGerman(WormWorldSaga):
 
 class WormWorldSagaSpanish(WormWorldSaga):
     lang = 'es'
+
+
+class Wrongside(_WPNavi):
+    url = 'http://www.ayzewi.com/comic/'
+    stripUrl = url + '?comic=%s'
+    firstStripUrl = stripUrl % 'intro-2'
