@@ -95,6 +95,25 @@ class NicoleAndDerek(_ParserScraper):
     help = 'Index format: yyyymmdd'
 
 
+class Nightshift(_ParserScraper):
+    url = 'http://www.poecatcomix.com/comics/nightshift/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % 'nightshift-volume1/ns-chapter-1'
+    imageSearch = '//div[@id="gallery-1"]//img'
+    prevSearch = ('//a[./span[text()="PAST CHAPTER"]]',
+                  '//a[./span[text()="LAST CHAPTER"]]')
+    latestSearch = '//a[./img[contains(@src, "Latest-Page")]]'
+    starter = indirectStarter
+    multipleImagesPerStrip = True
+    adult = True
+
+    def namer(self, imageUrl, pageUrl):
+        # Prepend chapter title to page filenames
+        chapter = pageUrl.rstrip('/').rsplit('/', 1)[-1].replace('ns-', 'ns1-')
+        page = imageUrl.rsplit('/', 1)[-1]
+        return chapter + '_' + page
+
+
 class Nimona(_BasicScraper):
     url = 'http://gingerhaze.com/nimona/'
     stripUrl = url + 'comic/%s'
