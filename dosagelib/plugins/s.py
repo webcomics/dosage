@@ -10,7 +10,7 @@ from os.path import splitext
 import datetime
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter, bounceStarter, xpath_class
+from ..helpers import indirectStarter, bounceStarter, joinPathPartsNamer, xpath_class
 from ..util import tagre
 from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, WP_LATEST_SEARCH
 
@@ -162,11 +162,7 @@ class SexyLosers(_ParserScraper):
     latestSearch = '//a[@rel="bookmark"]'
     help = 'Index format: nnn'
     starter = indirectStarter
-
-    def namer(self, image_url, page_url):
-        index = page_url.rsplit('/', 2)[1]
-        title = image_url.rsplit('/', 1)[1]
-        return index + '-' + title
+    namer = joinPathPartsNamer((-2,), (-1,), '-')
 
 
 class Sharksplode(_WordPressScraper):

@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 from re import compile, escape, IGNORECASE
 
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter, xpath_class
+from ..helpers import indirectStarter, joinPathPartsNamer, xpath_class
 from .common import _WPNaviIn, _WordPressScraper
 
 
@@ -135,7 +135,7 @@ class FredoAndPidjin(_ParserScraper):
     prevSearch = '//span[%s]/a' % xpath_class("prev")
     latestSearch = '//section[%s]//a' % xpath_class("latest")
     starter = indirectStarter
-
+    namer = joinPathPartsNamer((0, 1, 2))
 
 class Freefall(_BasicScraper):
     url = 'http://freefall.purrsia.com/default.htm'

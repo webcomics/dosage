@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -9,7 +9,7 @@ from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from ..helpers import bounceStarter, xpath_class
+from ..helpers import bounceStarter, joinPathPartsNamer, xpath_class
 from .common import _WPNavi
 
 
@@ -26,10 +26,7 @@ class Zapiro(_ParserScraper):
     imageSearch = '//div[@id="cartoon"]/img'
     prevSearch = '//a[%s]' % xpath_class('left')
     nextSearch = '//a[%s]' % xpath_class('right')
-
-    def namer(self, image_url, page_url):
-        parts = page_url.rsplit('/', 1)
-        return parts[1]
+    namer = joinPathPartsNamer((-1,), ())
 
 
 class ZenPencils(_WPNavi):
@@ -65,6 +62,7 @@ class Zwarwald(_BasicScraper):
                          tagre("img", "src",
                                r'http://zwarwald\.de/images/prev\.jpg',
                                quote="'"))
+    namer = joinPathPartsNamer((), (-3, -2, -1))
     help = 'Index format: number'
 
     def shouldSkipUrl(self, url, data):
@@ -77,7 +75,3 @@ class Zwarwald(_BasicScraper):
             self.stripUrl % "368",
             self.stripUrl % '495',
         )
-
-    def namer(self, image_url, page_url):
-        prefix, year, month, name = image_url.rsplit('/', 3)
-        return "%s_%s_%s" % (year, month, name)
