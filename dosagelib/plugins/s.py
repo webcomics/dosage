@@ -484,6 +484,27 @@ class StarCrossdDestiny(_ParserScraper):
         return directory + '-' + filename
 
 
+class StarfireAgency(_WordPressScraper):
+    url = 'http://starfire.poecatcomix.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'sfa-issue-1'
+
+    def namer(self, imageUrl, pageUrl):
+        # Prepend chapter title to page filenames
+        page = self.getPage(pageUrl)
+        chapter = page.xpath('//div[@class="comic-chapter"]/a')
+        if len(chapter) > 0:
+            chapter = chapter[0].text.replace(' ', '-').lower()
+        else:
+            chapter = 'chapter-1'
+
+        # Fix inconsistent filenames
+        filename = imageUrl.rsplit('/', 1)[-1]
+        if 'cover' not in filename.lower():
+            filename = filename.replace('SFA', 'Page')
+        return chapter + '_' + filename
+
+
 class StationV3(_ParserScraper):
     url = 'http://www.stationv3.com/'
     stripUrl = url + 'd3/%s.html'
