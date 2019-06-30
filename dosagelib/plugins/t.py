@@ -81,6 +81,16 @@ class TheOrderOfTheStick(_BasicScraper):
         return page_url.rsplit('/', 1)[-1][:-5]
 
 
+class TheRockCocks(_BasicScraper):
+    url = 'http://rockcocks.slipshine.net/'
+    rurl = escape(url)
+    stripUrl = url + 'comics/%s'
+    firstStripUrl = stripUrl % "page-1-nsfw-track-1-start"
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl, after='id="cc-comic"'))
+    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl, after='rel="prev"'))
+    adult = True
+
+
 class TheThinHLine(_TumblrScraper):
     url = 'http://thinhline.tumblr.com/'
     firstStripUrl = url + 'post/4177372348/thl-1-a-cats-got-his-tongue-click-on-the'
