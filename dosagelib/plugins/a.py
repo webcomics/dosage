@@ -10,7 +10,7 @@ from re import compile, escape, MULTILINE
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import regexNamer, bounceStarter, indirectStarter
-from .common import _WordPressScraper, _WPNavi, WP_LATEST_SEARCH
+from .common import _WordPressScraper, _WPNavi, _WPNaviIn, WP_LATEST_SEARCH
 
 
 class AbstruseGoose(_BasicScraper):
@@ -83,6 +83,27 @@ class AGirlAndHerFed(_ParserScraper):
     imageSearch = '//div[@id="comic-image"]/img'
     prevSearch = '//div[@id="comic-nav"]/a[.//img[contains(@src, "back")]]'
     help = 'Index format: nnn'
+
+
+class AHClub(_WPNaviIn):
+    baseUrl = 'http://rickgriffinstudios.com/'
+    url = baseUrl + 'ah-club/'
+    stripUrl = baseUrl + 'comic-post/%s/'
+    firstStripUrl = stripUrl % 'cover'
+    latestSearch = '//a[contains(@title, "Permanent Link")]'
+    starter = indirectStarter
+    nav = {
+        'ah-club-2-cover': 'ah-club-1-page-24',
+        'ah-club-3-cover': 'ah-club-2-page-28',
+        'ah-club-4-cover': 'ah-club-3-page-22'
+    }
+
+    def getPrevUrl(self, url, data):
+        # Links between chapters
+        url = url.rstrip('/').rsplit('/', 1)[-1]
+        if self.nav and url in self.nav:
+            return self.stripUrl % self.nav[url]
+        return super(AHClub, self).getPrevUrl(url, data)
 
 
 class AhoiPolloi(_ParserScraper):
