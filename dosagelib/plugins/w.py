@@ -114,6 +114,12 @@ class Wigu(_ParserScraper):
     help = 'Index format: n'
 
 
+class WildeLife(_ComicControlScraper):
+    url = 'http://www.wildelifecomic.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % '1'
+
+
 class Wonderella(_BasicScraper):
     url = 'http://nonadventures.com/'
     rurl = escape(url)
