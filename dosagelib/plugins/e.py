@@ -127,6 +127,14 @@ class Eryl(_WordPressScraper):
     starter = indirectStarter
 
 
+class Everblue(_ParserScraper):
+    url = 'http://www.everblue-comic.com/comic/'
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//article[@id="comic"]//img'
+    prevSearch = '//a[contains(@class, "prev")]'
+
+
 class EverybodyLovesEricRaymond(_ParserScraper):
     url = 'http://geekz.co.uk/lovesraymond/'
     firstStripUrl = url + 'archive/slashdotted'
