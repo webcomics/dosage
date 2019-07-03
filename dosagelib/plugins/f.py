@@ -121,6 +121,21 @@ class ForLackOfABetterComic(_BasicScraper):
     help = 'Index format: number'
 
 
+class FoxTails(_ParserScraper):
+    stripUrl = 'http://foxtails.magickitsune.com/strips/%s.html'
+    url = stripUrl % 'current'
+    firstStripUrl = stripUrl % '20041024'
+    imageSearch = '//img[contains(@src, "img/2")]'
+    prevSearch = '//a[./img[contains(@src, "prev")]]'
+    endOfLife = True
+
+    def getPrevUrl(self, url, data):
+        # Include pre-reboot archive
+        if url == self.stripUrl % '20090906':
+            return self.stripUrl % '20090704'
+        return super(FoxTails, self).getPrevUrl(url, data)
+
+
 class Fragile(_ParserScraper):
     url = 'http://www.fragilestory.com/'
     imageSearch = '//div[@id="comic_strip"]/a[@class="nobg"]/img'
