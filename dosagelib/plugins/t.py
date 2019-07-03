@@ -54,12 +54,11 @@ class TheDreamlandChronicles(_WordPressScraper):
 
 
 class TheGamerCat(_ParserScraper):
-    url = "http://www.thegamercat.com/"
-    stripUrl = url + "comic/%s/"
-    firstStripUrl = stripUrl % "06102011"
-    css = True
-    imageSearch = '#comic img'
-    prevSearch = '.comic-nav-previous'
+    url = 'https://thegamercat.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % '06102011'
+    imageSearch = '//div[@id="comic"]//img'
+    prevSearch = '//a[contains(@class, "comic-nav-previous")]'
     help = 'Index format: stripname'
 
 
