@@ -134,13 +134,19 @@ class Metacarpolis(_ComicControlScraper):
     url = 'http://www.metacarpolis.com'
 
 
-class Misfile(_BasicScraper):
-    url = 'http://www.misfile.com/'
-    stripUrl = url + '?date=%s'
+class Misfile(_ComicControlScraper):
+    url = 'http://www.misfile.com/misfile/'
+    stripUrl = url + '%s'
     firstStripUrl = stripUrl % '2004-02-22'
-    imageSearch = compile(tagre("img", "src", r"(comics/[^']+)", quote="'"))
-    prevSearch = compile(tagre("link", "href", r"([^']+)", quote="'",
-                               before="Previous"))
+    endOfLife = True
+    help = 'Index format: yyyy-mm-dd'
+
+
+class MisfileHellHigh(Misfile):
+    name = 'Misfile/HellHigh'
+    url = 'http://www.misfile.com/hell-high/'
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '2019-08-29'
     help = 'Index format: yyyy-mm-dd'
 
 
