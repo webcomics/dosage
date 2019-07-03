@@ -91,6 +91,22 @@ class EmergencyExit(_BasicScraper):
     help = 'Index format: n'
 
 
+class ErmaFelnaEDF(_ParserScraper):
+    stripUrl = 'https://www.stevegallacci.com/archive/edf/%s'
+    firstStripUrl = stripUrl % '0000/00/00'
+    url = firstStripUrl
+    imageSearch = '//img[@id="comic-container"]'
+    prevSearch = '//a[@title="Previous Comic"]'
+    latestSearch = '//a[@title="Current Comic"]'
+    starter = indirectStarter
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix inconsistent filenames
+        postDate = pageUrl.rsplit('/', 3)
+        filename = imageUrl.rsplit('/', 1)[-1]
+        return '%s-%s-%s_%s' % (postDate[1], postDate[2], postDate[3], filename)
+
+
 class ErrantStory(_BasicScraper):
     url = 'http://www.errantstory.com/'
     stripUrl = url + '%s'
