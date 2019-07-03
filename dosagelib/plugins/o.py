@@ -7,7 +7,7 @@ from __future__ import absolute_import, division, print_function
 
 from re import compile, escape
 
-from ..helpers import bounceStarter
+from ..helpers import bounceStarter, indirectStarter
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from .common import _WordPressScraper, _WPNavi, WP_LATEST_SEARCH
@@ -21,6 +21,29 @@ class OctopusPie(_ParserScraper):
     imageSearch = '//img[@title]'
     prevSearch = '//a[@rel="prev"]'
     help = 'Index format: yyyy-mm-dd/nnn-strip-name'
+
+
+class OffWhite(_ParserScraper):
+    stripUrl = 'http://off-white.eu/comic/%s/'
+    firstStripUrl = stripUrl % 'prologue-page-1-2'
+    url = firstStripUrl
+    imageSearch = '//img[@class="comic-page"]'
+    prevSearch = '//a[@rel="prev"]'
+    latestSearch = '//a[text()="A"]'
+    starter = indirectStarter
+    endOfLife = True
+
+    def fetchUrls(self, url, data, urlSearch):
+        # Fix missing page
+        if url == self.stripUrl % 'page-37':
+            return ['http://off-white.eu/ow_v2/wp-content/uploads/2011/01/new-037.jpg']
+        return super(OffWhite, self).fetchUrls(url, data, urlSearch)
+
+    def getPrevUrl(self, url, data):
+        # Fix missing page
+        if url == self.stripUrl % 'page-37':
+            return self.stripUrl % 'page-36'
+        return super(OffWhite, self).getPrevUrl(url, data)
 
 
 class Oglaf(_ParserScraper):
