@@ -806,6 +806,7 @@ class ComicFury(_ParserScraper):
             cls('PrinceOfCats', 'princeofcats'),
             # PrincessChroma has a duplicate in SmackJeeves/PrincessChroma
             cls('ProfessorAstonishing', 'professorastonishing'),
+            cls('ProfessorAmazingAndTheIncredibleGoldenFox', 'paigf'),
             cls('ProjectArc', 'projectarc'),
             cls('ProjectGTH', 'projectgth'),
             cls('ProjectJikoku', 'projectjikoku'),
