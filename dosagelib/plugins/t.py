@@ -88,6 +88,23 @@ class TheNoob(_WordPressScraper):
     help = 'Index format: n (unpadded)'
 
 
+class TheOldVictorian(_ParserScraper):
+    url = 'http://theoldvictorianwebcomic.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'the-old-victorian-cover'
+    imageSearch = '//div[@id="comic"]//img'
+    prevSearch = '//a[contains(@class, "comic-nav-previous")]'
+
+    def namer(self, imageUrl, pageUrl):
+        filename = imageUrl.rsplit('/', 1)[-1].replace('_', '-')
+        filename = filename.replace('TOV00', 'TOV-00')
+        if filename.replace('oldvic', '')[0].isdigit():
+            filename = filename.replace('oldvic', 'TOV-00')
+        if 'TOV-000' in filename and len(filename) > 12:
+            filename = filename[:8] + '-' + filename[8:]
+        return filename
+
+
 class TheOrderOfTheStick(_BasicScraper):
     url = 'http://www.giantitp.com/'
     stripUrl = url + 'comics/oots%s.html'
