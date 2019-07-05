@@ -27,6 +27,8 @@ class ComicFury(_ParserScraper):
         XPATH_IMG % ('Previous'),
         # Art, ConsolersDLC, etc.
         u'//nav//a[contains(text(), "\u2039")]',
+        # LatchkeyKingdom
+        '//a[%s and img[contains(@src, "Previous")]]' % xpath_class('navi'),
         # RedSpot
         '//a[contains(text(), "Back")]',
         # KATRAN
@@ -41,6 +43,8 @@ class ComicFury(_ParserScraper):
         XPATH_IMG % ('Next'),
         # Art, ConsolersDLC, etc.
         u'//nav//a[contains(text(), "\u203A")]',
+        # LatchkeyKingdom
+        '//a[%s and img[contains(@src, "Next")]]' % xpath_class('navi'),
         # RedSpot, KATRAN
         '//a[contains(text(), "Next")]',
     )
@@ -604,6 +608,7 @@ class ComicFury(_ParserScraper):
             cls('LastTaxi', 'lasttaxi'),
             cls('LaszloAndEdgar', 'laszloedgar'),
             cls('Latchkey', 'latchkey'),
+            cls('LatchkeyKingdom', 'latchkeykingdom'),
             cls('Lately', 'lately'),
             cls('Lauras24HourComics', 'lauras24hourcomics'),
             # LavenderLegend has a duplicate in SmackJeeves/LavenderLegend
