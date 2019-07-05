@@ -82,14 +82,12 @@ class Flemcomics(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
-class Flipside(_BasicScraper):
+class Flipside(_ParserScraper):
     url = 'http://flipside.keenspot.com/comic.php'
-    rurl = escape(url)
     stripUrl = url + '?i=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(http://cdn\.flipside\.keenspot\.com/comic/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(%s\?i=\d+)' % rurl,
-                               after="prev"))
+    imageSearch = '//img[contains(@src, "comic/")]'
+    prevSearch = '//a[@rel="prev"]'
     help = 'Index format: nnnn'
 
 
