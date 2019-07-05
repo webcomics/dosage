@@ -119,6 +119,15 @@ class TheOrderOfTheStick(_BasicScraper):
         return page_url.rsplit('/', 1)[-1][:-5]
 
 
+class TheProbabilityBomb(_ParserScraper):
+    stripUrl = 'http://www.rhjunior.com/%s/'
+    firstStripUrl = stripUrl % 'the-probability-bomb'
+    url = stripUrl % 'comics/the-probability-bomb'
+    imageSearch = '//div[contains(@class, "entry-content")]//img'
+    prevSearch = ('//a[@rel="prev"]', '//a[contains(@title, "Probability Bomb")]')
+    multipleImagesPerStrip = True
+
+
 class TheRockCocks(_BasicScraper):
     url = 'http://rockcocks.slipshine.net/'
     rurl = escape(url)
