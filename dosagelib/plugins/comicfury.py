@@ -1112,6 +1112,7 @@ class ComicFury(_ParserScraper):
             cls('TotallyKaimeraBackgroundStory2', 'totallykaimerabackgroundstory2'),
             cls('TotallyKaimeraPart2', 'totallykaimerapart2'),
             cls('TotallyKaimeraPart3', 'totallykaimerapart3'),
+            cls('TracyAndTristan', 'tandt'),
             cls('TradScribbles', 'tradscribbles'),
             cls('TrAgEdY', 'tragedy'),
             cls('TransdimensionalBrainChip', 'brainchip'),

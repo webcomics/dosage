@@ -625,6 +625,7 @@ class Renamed(Scraper):
             cls('KeenSpot/TheGodChild', 'GodChild'),
             cls('PetiteSymphony/Djandora', 'ComicsBreak/Djandora'),
             cls('PetiteSymphony/Generation17', 'ComicsBreak/Generation17'),
+            cls('TracyAndTristan', 'ComicFury/TracyAndTristan'),
             cls('Wulffmorgenthaler', 'WuMo'),
             cls('ZebraGirl', 'ComicFury/ZebraGirl'),
         )

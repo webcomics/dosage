@@ -218,15 +218,6 @@ class TracesOfThePastNSFW(_WPNaviIn):
     adult = True
 
 
-class TracyAndTristan(_BasicScraper):
-    url = 'http://tandt.thecomicseries.com/'
-    rurl = escape(url)
-    stripUrl = url + 'comics/%s'
-    imageSearch = compile(tagre("img", "src", r'(%simages/comics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(/comics/\d+)', after="prev"))
-    help = 'Index format: number'
-
-
 class TrippingOverYou(_BasicScraper):
     url = 'http://www.trippingoveryou.com/'
     stripUrl = url + 'comic/%s'
