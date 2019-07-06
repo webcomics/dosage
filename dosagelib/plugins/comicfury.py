@@ -402,6 +402,7 @@ class ComicFury(_ParserScraper):
             cls('Equilibrium', 'equilibrists'),
             # Equsopia has a duplicate in SmackJeeves/Equsopia
             cls('Ergosphere', 'ergosphereworld'),
+            cls('Eros', 'eros'),
             cls('ErraticElegance', 'erratice'),
             cls('EscapeVelocity', 'escapevelocity'),
             cls('EternalNight', 'eternalnight'),
