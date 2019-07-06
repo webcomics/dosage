@@ -260,6 +260,8 @@ class SixPackOfOtters(_ParserScraper):
 
 class SkinDeep(_ParserScraper):
     url = 'http://www.skindeepcomic.com/'
+    stripUrl = url + 'archive/%s/'
+    firstStripUrl = stripUrl % 'issue-1-cover'
     imageSearch = '//a[%s]/img' % xpath_class('webcomic-link')
     prevSearch = '//a[%s]' % xpath_class('previous-webcomic-link')
 
