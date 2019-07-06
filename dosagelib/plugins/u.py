@@ -70,3 +70,8 @@ class Unsounded(_BasicScraper):
 class UrgentTransformationCrisis(_WordPressScraper):
     url = 'http://www.catomix.com/utc/'
     firstStripUrl = url + 'comic/cover1'
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix inconsistent filenames
+        filename = imageUrl.rsplit('/', 1)[-1].rsplit('?', 1)[0]
+        return filename.replace('FVLYHD', 'LYHDpage').replace('UTC084web', '20091218c')
