@@ -66,6 +66,19 @@ class TheGentlemansArmchair(_WordPressScraper):
     url = 'http://thegentlemansarmchair.com/'
 
 
+class TheGentleWolf(_WordPressScraper):
+    url = 'https://thegentlewolf.net/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'tgw-001'
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix duplicate filename
+        filename = imageUrl.rsplit('/', 1)[-1]
+        if pageUrl == self.stripUrl % 'tgw-271':
+            filename = filename.replace('272', '271')
+        return filename
+
+
 class TheLandscaper(_BasicScraper):
     stripUrl = 'http://landscaper.visual-assault.net/comic/%s'
     url = stripUrl % 'latest'
