@@ -84,6 +84,33 @@ class LittleGamers(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/name'
 
 
+class LittleTales(_ParserScraper):
+    url = 'http://www.little-tales.com/'
+    stripUrl = url + 'index.php?Strip=%s'
+    firstStripUrl = stripUrl % '1'
+    url = stripUrl % '450'
+    imageSearch = '//img[contains(@src, "strips/")]'
+    prevSearch = '//a[./img[@alt="BACK"]]'
+    nextSearch = '//a[./img[@alt="FORWARD"]]'
+    starter = bounceStarter
+    nav = {
+        '517': '515',
+        '449': '447'
+    }
+
+    def namer(self, imageUrl, pageUrl):
+        page = pageUrl.rsplit('=', 1)[-1]
+        ext = imageUrl.rsplit('.', 1)[-1]
+        return page + '.' + ext
+
+    def getPrevUrl(self, url, data):
+        # Skip missing pages with broken navigation links
+        page = url.rsplit('=', 1)[1]
+        if page in self.nav:
+            return self.stripUrl % self.nav[page]
+        return super(LittleTales, self).getPrevUrl(url, data)
+
+
 class LoadingArtist(_ParserScraper):
     url = 'http://www.loadingartist.com/latest'
     imageSearch = '//div[@class="comic"]//img'
