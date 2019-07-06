@@ -161,6 +161,16 @@ class Freefall(_BasicScraper):
     help = 'Index format: nnnn/nnnnn'
 
 
+class FreighterTails(_ParserScraper):
+    url = 'http://www.mzzkiti.com/'
+    stripUrl = url + 'log%s.htm'
+    firstStripUrl = stripUrl % '001'
+    imageSearch = ('//img[contains(@src, "Strip")]',
+                   '//img[contains(@src, "Caption")]')
+    prevSearch = '//a[./img[contains(@src, "prev")]]'
+    endOfLife = True
+
+
 class FullFrontalNerdity(_BasicScraper):
     url = 'http://ffn.nodwick.com/'
     rurl = escape(url)
