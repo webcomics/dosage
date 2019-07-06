@@ -163,6 +163,21 @@ class Dilbert(_ParserScraper):
         return "%s" % name
 
 
+class DocRat(_ParserScraper):
+    url = 'http://www.docrat.com.au/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'begin-with-eye-contact'
+    imageSearch = '//div[@class="webcomic-image"]//img'
+    prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix inconsistent filenames
+        filename = imageUrl.rsplit('/', 1)[-1].rsplit('?', 1)[0]
+        filename = filename.replace('2006-08-01', 'DR0027')
+        filename = filename.replace('2006-07-31', 'DR0026')
+        return filename
+
+
 class DoemainOfOurOwn(_ParserScraper):
     url = 'http://www.doemain.com/'
     stripUrl = url + 'index.cgi/%s'
