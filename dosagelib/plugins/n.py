@@ -48,6 +48,15 @@ class Nedroid(_WordPressScraper):
     prevSearch = '//a[@rel="prev"]'
 
 
+class NeoCTC(_ParserScraper):
+    url = 'http://www.hirezfox.com/neoctc/'
+    stripUrl = url + 'd/%s.html'
+    firstStripUrl = stripUrl % '20071205'
+    imageSearch = '//img[contains(@src, "neoctc/comics")]'
+    prevSearch = '//a[./img[@alt="Previous Day"]]'
+    multipleImagesPerStrip = True
+
+
 class NeoEarth(_BasicScraper):
     url = 'http://www.neo-earth.com/NE/'
     stripUrl = url + 'index.php?date=%s'
