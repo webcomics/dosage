@@ -136,3 +136,24 @@ class Ruthe(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(/cartoon/\d+/datum/asc/)') +
                          'vorheriger')
     help = 'Index format: number'
+
+
+class Ryugou(_ParserScraper):
+    url = 'http://ryugou.swashbuckledcomics.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = 'ryugou-chapter-1-cover'
+    imageSearch = '//div[@class="webcomic-image"]//img'
+    prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
+    nextSearch = '//a[contains(@class, "next-webcomic-link")]'
+    starter = bounceStarter
+
+    def namer(self, imageUrl, pageUrl):
+        title = pageUrl.rstrip('/').rsplit('/', 1)[-1]
+        ext = imageUrl.rsplit('.', 1)[-1]
+        return title + '.' + ext
+
+    def fetchUrls(self, url, data, urlSearch):
+        imageUrls = super(Ryugou, self).fetchUrls(url, data, urlSearch)
+        if url == self.stripUrl % '1-3':
+            imageUrls = [imageUrls[1]]
+        return imageUrls
