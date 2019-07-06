@@ -227,6 +227,18 @@ class Amya(_WordPressScraper):
     url = 'http://www.amyachronicles.com/'
 
 
+class Anaria(_ParserScraper):
+    url = 'https://www.leahbriere.com/anaria-the-witchs-dream/'
+    firstStripUrl = url
+    imageSearch = '//div[contains(@class, "gallery")]//a'
+    multipleImagesPerStrip = True
+    endOfLife = True
+
+    def namer(self, imageUrl, pageUrl):
+        filename = imageUrl.rsplit('/', 1)[-1]
+        return filename.replace('00.jpg', 'new00.jpg').replace('new', '1')
+
+
 class Angband(_BasicScraper):
     url = 'http://angband.calamarain.net/'
     stripUrl = url + 'view.php?date=%s'
