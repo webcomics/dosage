@@ -25,6 +25,20 @@ class TalesOfTheQuestor(_ParserScraper):
     prevSearch = ('//a[@rel="prev"]', '//a[@title="Tales of the Questor"]')
 
 
+class Tamberlane(_ParserScraper):
+    baseUrl = 'https://www.tamberlanecomic.com/'
+    url = baseUrl + 'latest/'
+    stripUrl = baseUrl + 'tamberlane/%s/'
+    firstStripUrl = stripUrl % 'page-1'
+    imageSearch = '//div[@class="webcomic-image"]//img'
+    prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix inconsistent filenames
+        filename = imageUrl.rsplit('/', 1)[-1]
+        return filename.replace('ai4zCWaA', 'Page_152')
+
+
 class TheBrads(_ParserScraper):
     url = 'http://bradcolbow.com/archive/'
     imageSearch = '//div[%s]//img' % xpath_class('entry')
