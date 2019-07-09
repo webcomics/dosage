@@ -142,6 +142,29 @@ class Alice(_WordPressScraper):
     starter = indirectStarter
 
 
+class AlienDice(_WordPressScraper):
+    url = 'http://aliendice.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % '05162001'
+
+    def getPrevUrl(self, url, data):
+        # Fix broken navigation
+        if url == self.stripUrl % 'day-29-part-2-page-3-4':
+            return self.stripUrl % 'day-29-part-2-page-3-2'
+        return super(AlienDice, self).getPrevUrl(url, data)
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix inconsistent filename
+        return imageUrl.rsplit('/', 1)[-1].replace('20010831', '2001-08-31')
+
+
+class AlienDiceLegacy(_WordPressScraper):
+    name = 'AlienDice/Legacy'
+    stripUrl = 'http://aliendice.com/comic/%s/'
+    url = stripUrl % 'legacy-2-15'
+    firstStripUrl = stripUrl % 'legacy-1'
+
+
 class AlienLovesPredator(_BasicScraper):
     url = 'http://alienlovespredator.com/'
     stripUrl = url + '%s/'
