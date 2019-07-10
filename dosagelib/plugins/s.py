@@ -215,11 +215,6 @@ class ShipInABottle(_WPNavi):
     help = 'Index format: number'
 
 
-class Shivae(_WordPressScraper):
-    url = 'http://shivae.com/'
-    firstStripUrl = url + 'gnip/ck-chapter-01/caidenkoel-title-01/'
-
-
 class Shortpacked(_ParserScraper):
     url = 'http://www.shortpacked.com/index.php'
     stripUrl = url + '?id=%s'

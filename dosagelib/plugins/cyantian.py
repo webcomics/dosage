@@ -50,3 +50,44 @@ class TheCyantianChronicles(_WordPressScraper):
             cls('RandomRamblings', 'random-ramblings', 'darrik'),
             cls('SinkOrSwim', 'sos', 'sink-or-swim', last='ricochete-and-seraphim')
         )
+
+
+class Shivae(_WordPressScraper):
+    url = 'http://shivae.com/'
+    stripUrl = url + 'gnip/%s/'
+    firstStripUrl = stripUrl % 'cler/09202001'
+
+
+class ShivaeComics(_WordPressScraper):
+    baseUrl = 'http://shivae.net/'
+
+    def __init__(self, name, story, first, last=None, nav=None):
+        super(ShivaeComics, self).__init__('Shivae/' + name)
+
+        self.url = self.baseUrl + story + '/'
+        self.stripUrl = self.url + 'comic/%s/'
+        self.firstStripUrl = self.stripUrl % first
+
+        self.nav = nav
+
+        if last:
+            self.url = self.stripUrl % last
+            self.endOfLife = True
+
+    def getPrevUrl(self, url, data):
+        # Missing/broken navigation links
+        url = url.rstrip('/').rsplit('/', 1)[-1]
+        if self.nav and url in self.nav:
+            return self.stripUrl % self.nav[url]
+        return super(ShivaeComics, self).getPrevUrl(url, data)
+
+    @classmethod
+    def getmodules(cls):
+        return (
+            cls('BlackRose', 'blackrose', '11012004'),
+            cls('CafeAnime', 'cafeanime', '08172004', last='09192009'),
+            cls('Extras', 'extras', '01012012', nav={'12302012': '08152013'}),
+            cls('Pure', 'pure', '04082002', last='chapter-6-page-1'),
+            cls('SerinFairyHunter', 'serin', 'character-serin'),
+            cls('SivineBlades', 'sivine', '06302002', last='10242008')
+        )
