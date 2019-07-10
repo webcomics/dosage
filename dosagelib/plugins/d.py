@@ -217,11 +217,22 @@ class DocRat(_WPWebcomic):
 
 class DoemainOfOurOwn(_ParserScraper):
     url = 'http://www.doemain.com/'
-    stripUrl = url + 'index.cgi/%s'
-    imageSearch = '//td/img[contains(@src, "/strips/")]'
+    stripUrl = url + 'html/%s.html'
+    firstStripUrl = stripUrl % '1999/1999-04-24'
+    imageSearch = '//img[contains(@src, "strips/")]'
     prevSearch = '//a[img[@alt="Previous Strip"]]'
     endOfLife = True
     help = 'Index format: yyyy-mm-dd'
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix date formatting
+        filename = imageUrl.rsplit('/', 1)[-1]
+        if len(filename) > 6 and filename[0:6].isdigit():
+            month = filename[0:2]
+            day = filename[2:4]
+            year = ('19' if filename[4] == '9' else '20') + filename[4:6]
+            filename = '%s-%s-%s%s' % (year, month, day, filename[6:])
+        return filename
 
 
 class DoghouseDiaries(_ParserScraper):
