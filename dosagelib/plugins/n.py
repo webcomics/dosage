@@ -73,6 +73,21 @@ class NerfNow(_WordPressScraper):
     prevSearch = '//li[@id="nav_previous"]/a'
 
 
+class Newshounds(_ParserScraper):
+    stripUrl = 'http://www.newshounds.com/%s.html'
+    url = stripUrl % 'nh2/20140929'
+    firstStripUrl = stripUrl % 'nh1/19971101'
+    imageSearch = '//img[@class="ksc"]'
+    prevSearch = '//a[./img[@alt="Previous comic"]]'
+    endOfLife = True
+
+    def getPrevUrl(self, url, data):
+        # Add navigation link between comic and graphic novel
+        if url == self.stripUrl % 'nh2/20070201':
+            return self.stripUrl % 'nh1/20061208'
+        return super().getPrevUrl(url, data)
+
+
 class NewWorld(_BasicScraper):
     url = 'http://www.tfsnewworld.com/'
     stripUrl = url + '%s/'

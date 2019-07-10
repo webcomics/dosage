@@ -706,7 +706,7 @@ class Renamed(Scraper):
             cls('KeenSpot/AntiheroForHire', 'AntiheroForHire'),
             cls('KeenSpot/ElGoonishShive', 'ElGoonishShive'),
             cls('KeenSpot/ElGoonishShiveNP', 'ElGoonishShiveNP'),
-            cls('KeenSpot/Newshounds', 'KeenSpot/InfinityRefugees'),
+            cls('KeenSpot/Newshounds', 'Newshounds'),
             cls('KeenSpot/SinFest', 'SinFest'),
             cls('KeenSpot/TheGodChild', 'GodChild'),
             cls('PetiteSymphony/Djandora', 'ComicsBreak/Djandora'),
