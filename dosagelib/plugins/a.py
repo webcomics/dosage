@@ -13,6 +13,12 @@ from ..helpers import regexNamer, bounceStarter, indirectStarter
 from .common import _WordPressScraper, _WPNavi, _WPNaviIn, WP_LATEST_SEARCH
 
 
+class AbbysAgency(_WordPressScraper):
+    url = 'https://abbysagency.us/'
+    stripUrl = url + 'blog/comic/%s/'
+    firstStripUrl = stripUrl % 'a'
+
+
 class AbstruseGoose(_BasicScraper):
     url = 'http://abstrusegoose.com/'
     rurl = escape(url)
