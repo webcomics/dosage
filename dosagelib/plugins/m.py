@@ -236,6 +236,16 @@ class MyCartoons(_BasicScraper):
     lang = 'de'
 
 
+class MynarskiForest(_ParserScraper):
+    stripUrl = 'http://mynarskiforest.purrsia.com/xsl%s.htm'
+    url = stripUrl % '09_36'
+    firstStripUrl = stripUrl % '97_01'
+    imageSearch = '//img[not(contains(@src, "arrow"))]'
+    prevSearch = '//a[./img[contains(@src, "arrowbk")]]'
+    multipleImagesPerStrip = True
+    endOfLife = True
+
+
 class MysteriesOfTheArcana(_ParserScraper):
     url = 'http://mysteriesofthearcana.com/'
     imageSearch = '//div[@id="comic"]//img'
