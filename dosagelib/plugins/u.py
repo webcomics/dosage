@@ -45,8 +45,8 @@ class Unsounded(_ParserScraper):
     startUrl = url + 'comic+index/'
     stripUrl = url + 'comic/ch%s/ch%s_%s.html'
     firstStripUrl = stripUrl % ('01', '01', '01')
-    imageSearch = '//img[contains(@src, "/pageart/ch")]'
-    prevSearch = '//a[{}]'.format(xpath_class('back'))
+    imageSearch = '//img[contains(@src, "pageart/")]'
+    prevSearch = '//a[contains(@class, "back")]'
     latestSearch = '//div[@id="chapter_box"][1]//a[last()]'
     multipleImagesPerStrip = True
     starter = indirectStarter
@@ -59,7 +59,7 @@ class Unsounded(_ParserScraper):
         return super(Unsounded, self).getPrevUrl(url, data)
 
     def getIndexStripUrl(self, index):
-        """Get comic strip URL from index."""
+        # Get comic strip URL from index
         chapter, num = index.split('-')
         return self.stripUrl % (chapter, chapter, num)
 
