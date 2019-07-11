@@ -220,6 +220,13 @@ class Comedity(_BasicScraper):
     help = 'Index format: n (no padding)'
 
 
+class CommanderKitty(_WPNavi):
+    url = 'http://www.commanderkitty.com/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2009/01/03/good-to-be-back'
+    endOfLife = True
+
+
 class CommitStrip(_ParserScraper):
     baseUrl = 'https://www.commitstrip.com/en/'
     url = baseUrl + '?setLocale=1'  # ensure the language cookie is set
