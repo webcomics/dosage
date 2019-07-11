@@ -387,3 +387,13 @@ class CyanideAndHappiness(_BasicScraper):
         imgname = imgname[:100]
         imgnum = page_url.split('/')[-2]
         return '%s_%s' % (imgnum, imgname)
+
+
+class CynWolf(_ParserScraper):
+    url = 'https://cynwolf.net/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2008/because'
+    imageSearch = '//section[contains(@class, "comic")]//img'
+    prevSearch = '//a[text()="\u2190"]'
+    multipleImagesPerStrip = True
+    endOfLife = True
