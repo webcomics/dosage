@@ -201,6 +201,13 @@ class PoorlyDrawnLines(_ParserScraper):
     prevSearch = '//a[@rel="prev"]'
 
 
+class PoppyOPossum(_WordPressScraper):
+    baseUrl = 'https://www.poppy-opossum.com/'
+    url = baseUrl + '?latest'
+    stripUrl = baseUrl + 'comic/%s'
+    firstStripUrl = stripUrl % 'a-story'
+
+
 class Precocious(_ParserScraper):
     url = 'http://www.precociouscomic.com/'
     stripUrl = url + 'archive/comic/%s'
