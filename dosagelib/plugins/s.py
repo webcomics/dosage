@@ -452,12 +452,16 @@ class SSDD(_ParserScraper):
 
 
 class StandStillStaySilent(_ParserScraper):
-    url = 'http://www.sssscomic.com/comic.php'
-    stripUrl = url + '?page=%s'
-    firstStripUrl = stripUrl % '1'
+    baseUrl = 'http://sssscomic.com/'
+    url = baseUrl + 'comic2.php'
+    stripUrl = baseUrl + 'comic%s.php?page=%s'
+    firstStripUrl = stripUrl % ('', '1')
     imageSearch = '//img[@class="comicnormal"]'
-    prevSearch = '//a[div[@id="navprev"]]'
-    help = 'Index Format: number'
+    prevSearch = '//a[./img[contains(@src, "nav_prev")]]'
+
+    def namer(self, imageUrl, pageUrl):
+        chapter = '2' if ('adv2_comicpages' in imageUrl) else '1'
+        return '%s-%s' % (chapter, imageUrl.rsplit('/', 1)[-1].replace('page_', ''))
 
 
 class StarCrossdDestiny(_ParserScraper):
