@@ -139,6 +139,18 @@ class BillyTheDunce(_ParserScraper):
     starter = indirectStarter
 
 
+class BittersweetCandyBowl(_ParserScraper):
+    url = 'https://www.bittersweetcandybowl.com/'
+    stripUrl = url + '%s.html'
+    firstStripUrl = stripUrl % 'c1/p1'
+    imageSearch = '//img[@id="page_img"]'
+    prevSearch = '//a[@rel="prev"]'
+
+    def namer(self, imageUrl, pageUrl):
+        filename = imageUrl.rsplit('/', 2)
+        return filename[1] + '_' + filename[2]
+
+
 class BlankIt(_ParserScraper):
     url = 'http://blankitcomics.com/'
     firstStripUrl = url + 'comic/well-what-would-you-do'
