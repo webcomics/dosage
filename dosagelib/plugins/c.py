@@ -92,8 +92,40 @@ class CatAndGirl(_ParserScraper):
     prevSearch = '//a[@rel="prev"]'
 
 
-class Catena(_WordPressScraper):
-    url = 'http://catenamanor.com/'
+class CatenaCafe(_WordPressScraper):
+    name = 'CatenaManor/CatenaCafe'
+    url = 'https://catenamanor.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'reboot-book1cover-small'
+
+
+class CatenaManor(_ParserScraper):
+    # Retrieve comic from the Internet Archive
+    baseUrl = 'https://web.archive.org/web/20141027141116/http://catenamanor.com/'
+    url = baseUrl + 'archives'
+    stripUrl = baseUrl + '%s/'
+    firstStripUrl = stripUrl % '2003/07'
+    imageSearch = '//img[@class="comicthumbnail"]'
+    multipleImagesPerStrip = True
+    endOfLife = True
+    strips = []
+
+    def starter(self):
+        # Retrieve archive links and select valid range
+        archivePage = self.getPage(self.url)
+        archiveStrips = archivePage.xpath('//div[@id="archivepage"]//a')
+        valid = False
+        for link in archiveStrips:
+            if self.stripUrl % '2012/01' in link.get('href'):
+                valid = True
+            elif self.stripUrl % '2003/06' in link.get('href'):
+                valid = False
+            if valid:
+                self.strips.append(link.get('href'))
+        return self.strips.pop(0)
+
+    def getPrevUrl(self, url, data):
+        return self.strips.pop(0)
 
 
 class CatsAndCameras(_WordPressScraper):
