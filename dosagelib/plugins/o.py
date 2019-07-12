@@ -179,3 +179,10 @@ class OverCompensating(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(/oc/index\.php\?comic=\d+)',
                                after="go back"))
     help = 'Index format: number'
+
+
+class OzyAndMillie(_WordPressScraper):
+    stripUrl = 'https://ozyandmillie.org/comic/%s/'
+    url = stripUrl % 'ozy-and-millie-2131'
+    firstStripUrl = stripUrl % 'ozy-and-millie-2'
+    endOfLife = True
