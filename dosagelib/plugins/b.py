@@ -37,6 +37,17 @@ class BalderDash(_ComicControlScraper):
     url = 'http://www.balderdashcomic.com/'
 
 
+class BallerinaMafia(_ParserScraper):
+    url = 'http://www.ballerinamafia.net/'
+    stripUrl = url + 'index.php?pid=%s'
+    firstStripUrl = stripUrl % '20100906'
+    imageSearch = ('//img[contains(@alt, "Comic")]',
+                   '//a[contains(@href, "comics/")]')
+    prevSearch = '//a[@class="prev"]'
+    adult = True
+    endOfLife = True
+
+
 class Bardsworth(_WordPressScraper):
     url = 'http://www.bardsworth.com/'
     latestSearch = '//a[@rel="bookmark"]'
