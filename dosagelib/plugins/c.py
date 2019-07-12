@@ -295,14 +295,14 @@ class CompanyY(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/strip-name'
 
 
-class Concession(_BasicScraper):
+class Concession(_ParserScraper):
     url = 'http://concessioncomic.com/'
-    rurl = escape(url)
     stripUrl = url + 'index.php?pid=%s'
     firstStripUrl = stripUrl % '20060701'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl, after="Comic"))
-    prevSearch = compile(tagre("a", "href", r'(%sindex\.php\?pid=\d+)' % rurl, after="nav-prev"))
-    help = 'Index format: number'
+    imageSearch = '//div[@id="comic"]/img[not(@class="preload")]'
+    prevSearch = '//a[@class="nav-prev"]'
+    adult = True
+    endOfLife = True
 
 
 class CorydonCafe(_ParserScraper):
