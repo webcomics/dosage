@@ -53,3 +53,15 @@ class ViiviJaWagner(_ParserScraper):
 
     def namer(self, image_url, page_url):
         return page_url.rsplit('-', 1)[1].split('.')[0]
+
+
+class VirmirWorld(_ParserScraper):
+    url = 'http://world.virmir.com/'
+    stripUrl = url + 'comic.php?story=%s&page=%s'
+    firstStripUrl = stripUrl % ('1', '1')
+    imageSearch = '//div[@class="comic"]//img'
+    prevSearch = '//a[contains(@class, "prev")]'
+
+    def getIndexStripUrl(self, index):
+        index = index.split('-')
+        return self.stripUrl % (index[0], index[1])
