@@ -347,15 +347,6 @@ class Annyseed(_ParserScraper):
         return tourl
 
 
-class ApartmentForTwo(_ParserScraper):
-    url = 'https://apartmentfor2.com/'
-    stripUrl = url + 'comics/index.php?date=%s'
-    firstStripUrl = url + 'comics/'
-    imageSearch = '//a/img[contains(@src, "comics/")]'
-    prevSearch = '//a[./img[contains(@src, "previous")]]'
-    help = 'Index format: yyyymmdd'
-
-
 class AntiheroForHire(_ParserScraper):
     stripUrl = 'https://www.giantrobot.club/antihero-for-hire/%s'
     firstStripUrl = stripUrl % '2016/6/8/entrance-vigil'

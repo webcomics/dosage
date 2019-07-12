@@ -635,6 +635,7 @@ class Renamed(Scraper):
         return (
             # Renamed in 2.16
             cls('1997', '1977'),
+            cls('ApartmentForTwo', 'NamirDeiter/ApartmentForTwo'),
             cls('Catena', 'CatenaManor/CatenaCafe'),
             cls('ComicFury/Alya', 'ComicFury/AlyaTheLastChildOfLight'),
             cls('ComicFury/Boatcrash', 'ComicFury/BoatcrashChronicles'),
@@ -726,6 +727,7 @@ class Renamed(Scraper):
             cls('KeenSpot/Newshounds', 'Newshounds'),
             cls('KeenSpot/SinFest', 'SinFest'),
             cls('KeenSpot/TheGodChild', 'GodChild'),
+            cls('NicoleAndDerek', 'NamirDeiter/NicoleAndDerek'),
             cls('OnTheFasttrack', 'ComicsKingdom/OnTheFastrack'),
             cls('PetiteSymphony/Djandora', 'ComicsBreak/Djandora'),
             cls('PetiteSymphony/Generation17', 'ComicsBreak/Generation17'),
@@ -739,6 +741,8 @@ class Renamed(Scraper):
             cls('SmackJeeves/RiversideExtras', 'RiversideExtras'),
             cls('SmackJeeves/StarTrip', 'StarTrip'),
             cls('TracyAndTristan', 'ComicFury/TracyAndTristan'),
+            cls('UnlikeMinerva', 'NamirDeiter/UnlikeMinerva'),
             cls('Wulffmorgenthaler', 'WuMo'),
+            cls('YouSayItFirst', 'NamirDeiter/YouSayItFirst'),
             cls('ZebraGirl', 'ComicFury/ZebraGirl'),
         )

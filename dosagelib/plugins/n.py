@@ -19,17 +19,6 @@ class Namesake(_ComicControlScraper):
     firstStripUrl = stripUrl % 'the-journey-begins'
 
 
-class NamirDeiter(_ParserScraper):
-    baseUrl = 'https://www.namirdeiter.com/comics/'
-    stripUrl = baseUrl + 'index.php?date=%s'
-    url = stripUrl % '20150410'
-    firstStripUrl = baseUrl
-    imageSearch = '//a/img'
-    prevSearch = '//a[text()="Previous"]'
-    endOfLife = True
-    help = 'Index format: yyyymmdd'
-
-
 class NatalieDee(_BasicScraper):
     url = 'http://www.nataliedee.com/'
     rurl = escape(url)
@@ -113,15 +102,6 @@ class Nicky510(_WPNavi):
     url = ('https://web.archive.org/web/20160510215718/'
         'http://www.nickyitis.com/')
     endOfLife = True
-
-
-class NicoleAndDerek(_ParserScraper):
-    url = 'https://nicoleandderek.com/'
-    stripUrl = url + 'comics/index.php?date=%s'
-    firstStripUrl = url + 'comics/'
-    imageSearch = '//a/img[contains(@src, "comics/")]'
-    prevSearch = '//a[./img[contains(@src, "previous")]]'
-    help = 'Index format: yyyymmdd'
 
 
 class Nightshift(_ParserScraper):

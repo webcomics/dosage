@@ -42,18 +42,6 @@ class UnicornJelly(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class UnlikeMinerva(_ParserScraper):
-    baseUrl = 'https://unlikeminerva.com/archive/index.php'
-    stripUrl = baseUrl + '?week=%s'
-    url = stripUrl % '127'
-    firstStripUrl = stripUrl % '26'
-    imageSearch = '//img[contains(@src, "archive/")]'
-    prevSearch = '//a[./img[contains(@src, "previous")]]'
-    multipleImagesPerStrip = True
-    endOfLife = True
-    help = 'Index format: number'
-
-
 class Unsounded(_ParserScraper):
     url = 'http://www.casualvillain.com/Unsounded/'
     startUrl = url + 'comic+index/'
