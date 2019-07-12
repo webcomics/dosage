@@ -192,3 +192,12 @@ class FunInJammies(_BasicScraper):
     imageSearch = compile(r'(/comics/.+?)"')
     prevSearch = compile(r'(/comic.php.+?)" id.+?prev')
     help = 'Index format: n (unpadded)'
+
+
+class FurthiaHigh(_ParserScraper):
+    url = 'http://furthiahigh.concessioncomic.com/'
+    stripUrl = url + 'index.php?pid=%s'
+    firstStripUrl = stripUrl % '20080128'
+    imageSearch = '//img[contains(@alt, "Comic")]'
+    prevSearch = '//a[./img[@alt="Previous"]]'
+    multipleImagesPerStrip = True
