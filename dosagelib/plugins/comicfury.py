@@ -831,6 +831,7 @@ class ComicFury(_ParserScraper):
             cls('RunningRiot', 'runningriot'),
             cls('SailorMoonTheEnemyNextDoor', 'sailormoontheenemynextdoor'),
             # SakuraDAY has a duplicate in SmackJeeves/SakuraDAY
+            cls('Saluna', 'saluna'),
             cls('SanctaTerra', 'sanctaterra'),
             cls('SanityProtectionFactor', 'spf1337'),
             cls('SaraAndKleeyo', 'sarakleeyo'),
