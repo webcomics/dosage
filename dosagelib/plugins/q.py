@@ -26,12 +26,12 @@ class QuentynQuinnSpaceRanger(_ParserScraper):
     prevSearch = ('//a[@rel="prev"]', '//a[@title="Quentyn Quinn, Space Ranger"]')
 
 
-class QuestionableContent(_BasicScraper):
+class QuestionableContent(_ParserScraper):
     url = 'http://www.questionablecontent.net/'
     stripUrl = url + 'view.php?comic=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'([^"]+/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(view\.php\?comic=\d+)') + 'Previous')
+    imageSearch = '//img[contains(@src, "comics/")]'
+    prevSearch = '//a[text()="Previous"]'
     help = 'Index format: n (unpadded)'
 
 
