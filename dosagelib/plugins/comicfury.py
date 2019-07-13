@@ -27,6 +27,8 @@ class ComicFury(_ParserScraper):
         XPATH_IMG % ('Previous'),
         # Art, ConsolersDLC, etc.
         u'//nav//a[contains(text(), "\u2039")]',
+        # RedSpot
+        '//a[contains(text(), "Back")]',
     )
     nextSearch = (
         '//link[@rel="next"]',
@@ -37,6 +39,8 @@ class ComicFury(_ParserScraper):
         XPATH_IMG % ('Next'),
         # Art, ConsolersDLC, etc.
         u'//nav//a[contains(text(), "\u203A")]',
+        # RedSpot
+        '//a[contains(text(), "Next")]',
     )
     help = 'Index format: n'
     starter = bounceStarter
@@ -806,6 +810,7 @@ class ComicFury(_ParserScraper):
             cls('RebuildOfGenericMangaShippuden', 'rebuildofgenericmanga'),
             cls('RecklessComix', 'recklesscomix'),
             cls('RED', 'redthecomic'),
+            cls('RedSpot', 'redspot'),
             # RedVelvetRequiem has a duplicate in SmackJeeves/RedVelvetRequiem
             cls('RegardingDandelions', 'regardingdandelions'),
             cls('Remedy', 'remedy'),
