@@ -193,14 +193,19 @@ class DoemainOfOurOwn(_ParserScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
-class DogHouseDiaries(_BasicScraper):
+class DoghouseDiaries(_ParserScraper):
     url = 'http://thedoghousediaries.com/'
-    rurl = escape(url)
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '34'
-    prevSearch = compile(r"<a id='previouslink' href='(http://thedoghousediaries.com/\d+)'")
-    imageSearch = compile(r"<img src='(dhdcomics/[^']+)'")
+    imageSearch = '//img[@class="imgcomic"]'
+    textSearch = imageSearch + '/@title'
+    prevSearch = '//a[@id="previouslink"]'
+    nextSearch = '//a[@id="nextlink"]'
+    starter = bounceStarter
     help = 'Index format: number'
+
+    def namer(self, imageUrl, pageUrl):
+        return pageUrl.rsplit('/', 1)[-1] + '.' + imageUrl.rsplit('.', 1)[-1]
 
 
 class DominicDeegan(_ParserScraper):
