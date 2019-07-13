@@ -25,14 +25,6 @@ class TailsAndTactics(_ParserScraper):
     prevSearch = '//a[text()=" Back"]'
 
 
-class TalesOfTheQuestor(_ParserScraper):
-    stripUrl = 'http://www.rhjunior.com/%s/'
-    firstStripUrl = stripUrl % 'tales-of-the-questor-cover'
-    url = stripUrl % 'comics/tales-of-the-questor'
-    imageSearch = '//div[contains(@class, "entry-content")]//img'
-    prevSearch = ('//a[@rel="prev"]', '//a[@title="Tales of the Questor"]')
-
-
 class Tamberlane(_ParserScraper):
     baseUrl = 'https://www.tamberlanecomic.com/'
     url = baseUrl + 'latest/'
@@ -161,15 +153,6 @@ class TheOrderOfTheStick(_BasicScraper):
 
     def namer(self, image_url, page_url):
         return page_url.rsplit('/', 1)[-1][:-5]
-
-
-class TheProbabilityBomb(_ParserScraper):
-    stripUrl = 'http://www.rhjunior.com/%s/'
-    firstStripUrl = stripUrl % 'the-probability-bomb'
-    url = stripUrl % 'comics/the-probability-bomb'
-    imageSearch = '//div[contains(@class, "entry-content")]//img'
-    prevSearch = ('//a[@rel="prev"]', '//a[contains(@title, "Probability Bomb")]')
-    multipleImagesPerStrip = True
 
 
 class TheRockCocks(_BasicScraper):

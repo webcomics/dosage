@@ -17,14 +17,6 @@ class QuantumVibe(_ParserScraper):
     prevSearch = '//a[./img[contains(@src, "nav/prevstrip")]]'
 
 
-class QuentynQuinnSpaceRanger(_ParserScraper):
-    stripUrl = 'http://www.rhjunior.com/%s/'
-    firstStripUrl = stripUrl % 'quentyn-quinn-space-ranger-0001'
-    url = stripUrl % 'comics/quentyn-quinn-space-ranger'
-    imageSearch = '//div[contains(@class, "entry-content")]//img'
-    prevSearch = ('//a[@rel="prev"]', '//a[@title="Quentyn Quinn, Space Ranger"]')
-
-
 class QuestionableContent(_ParserScraper):
     url = 'http://www.questionablecontent.net/'
     stripUrl = url + 'view.php?comic=%s'
