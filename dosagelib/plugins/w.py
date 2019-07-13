@@ -69,6 +69,42 @@ class Weregeek(_BasicScraper):
     help = 'Index format: yyyy/mm/dd'
 
 
+class WereIWolf(_ParserScraper):
+    stripUrl = 'https://wolfwares.ca/comics/Were I wolf/strip2.php?name=%s&start=%s'
+    url = stripUrl % ('4 Black and White - part 3', 'latest')
+    firstStripUrl = stripUrl % ('1 Sirens', '0')
+    imageSearch = '//img[contains(@src, "ROW")]'
+    prevSearch = '//a[./img[contains(@src, "previous")]]'
+    multipleImagesPerStrip = True
+    endOfLife = True
+    chapters = ('1 Sirens',
+                '2 Black and White',
+                '3 Black and White - Princess and Knight',
+                '4 Black and White - part 3')
+
+    def namer(self, imageUrl, pageUrl):
+        # Prepend chapter number to image filename
+        for chapter in self.chapters:
+            if chapter in pageUrl:
+                chapterNum = chapter[0]
+        return chapterNum + '_' + imageUrl.rsplit('/', 1)[-1]
+
+    def getPrevUrl(self, url, data):
+        # Fix missing navigation links between chapters
+        if url == self.stripUrl % (self.chapters[3], '0'):
+            return self.stripUrl % (self.chapters[2], 'latest')
+        if url == self.stripUrl % (self.chapters[2], '0'):
+            return self.stripUrl % (self.chapters[1], 'latest')
+        if url == self.stripUrl % (self.chapters[1], '0'):
+            return self.stripUrl % (self.chapters[0], 'latest')
+        return super(WereIWolf, self).getPrevUrl(url, data)
+
+    def getIndexStripUrl(self, index):
+        # Get comic strip URL from index
+        index = index.split('-')
+        return self.stripUrl % (index[0], index[1])
+
+
 class WhiteNoise(_WordPressScraper):
     url = 'http://whitenoisecomic.com/'
     firstStripUrl = url + 'comic/book-one/'
