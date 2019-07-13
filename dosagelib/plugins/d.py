@@ -10,7 +10,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter, xpath_class
 from ..util import tagre
-from .common import _ComicControlScraper, _WPNaviIn
+from .common import _ComicControlScraper, _WordPressScraper, _WPNaviIn
 
 
 class DamnLol(_ParserScraper):
@@ -41,6 +41,12 @@ class Damonk(_BasicScraper):
 class DangerouslyChloe(_ComicControlScraper):
     url = 'http://www.dangerouslychloe.com/'
     firstStripUrl = url + 'strips-dc/Chapter_1_-_That_damned_girl'
+
+
+class DarkWhite(_WordPressScraper):
+    url = 'https://www.darkwhitecomic.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'chapter-1-sleep'
 
 
 class DarthsAndDroids(_BasicScraper):
