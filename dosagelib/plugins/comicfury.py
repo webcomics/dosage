@@ -921,6 +921,7 @@ class ComicFury(_ParserScraper):
             cls('SuperShashi', 'supershashi'),
             cls('Supervillainous', 'supervillainous'),
             cls('SurrealScience', 'surrealscience'),
+            cls('Swashbuckled', 'swashbuckled'),
             cls('Swazzyknocks', 'swazzyknocks'),
             cls('Synapticisms', 'synapticisms'),
             cls('TalesFromRiota', 'ganold'),
