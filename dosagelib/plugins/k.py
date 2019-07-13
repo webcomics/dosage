@@ -9,7 +9,7 @@ from re import compile, escape, IGNORECASE
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import _ComicControlScraper, _WPNavi
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
 
 
 class Kaspall(_ParserScraper):
@@ -46,6 +46,12 @@ class KillSixBillionDemons(_WPNavi):
     firstStripUrl = url + 'comic/kill-six-billion-demons-chapter-1/'
     multipleImagesPerStrip = True
     adult = True
+
+
+class Kitfox(_WordPressScraper):
+    url = 'http://www.kitfox.com/wordpress/'
+    stripUrl = url + '?comic=%s'
+    firstStripUrl = stripUrl % 'the-adventure-begins-almost'
 
 
 class KiwiBlitz(_ComicControlScraper):
