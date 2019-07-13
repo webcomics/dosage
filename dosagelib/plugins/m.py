@@ -57,10 +57,9 @@ class ManlyGuysDoingManlyThings(_ParserScraper):
 
 
 class MareInternum(_WordPressScraper):
-    url = 'http://www.marecomic.com/'
+    url = 'https://www.marecomic.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'intro-page-1'
-    help = 'Index format: ch<chapter>-page-<pagenum> (most of the time)'
 
 
 class Marilith(_BasicScraper):
