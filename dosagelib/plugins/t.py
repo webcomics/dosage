@@ -302,6 +302,13 @@ class Turnoff(_ParserScraper):
         return "%03d-%s" % (index, file_name)
 
 
+class TwinDragons(_WordPressScraper):
+    url = 'http://www.twindragonscomic.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'the-beginning'
+    multipleImagesPerStrip = True
+
+
 class TwoGuysAndGuy(_BasicScraper):
     url = 'http://www.twogag.com/'
     rurl = escape(url)
