@@ -349,6 +349,7 @@ class ComicFury(_ParserScraper):
             cls('DieRabbitDie', 'dierabbitdie'),
             cls('DimensioNoir', 'dimensionoir'),
             cls('DivinaFortuna', 'divinafortuna'),
+            cls('DNA', 'd-n-a'),
             cls('DnDDumbAndDumber', 'dnddumbanddumber'),
             cls('DoffeEllende', 'doffeellende'),
             cls('Dogstar', 'dogstar'),
