@@ -73,6 +73,33 @@ class Achewood(_BasicScraper):
     namer = regexNamer(compile(r'date=(\d+)'))
 
 
+class AdventuresOfFifne(_ParserScraper):
+    stripUrl = 'http://fifine.purrsia.com/%s.html'
+    url = stripUrl % 'COMICS'
+    firstStripUrl = stripUrl % 'Fifine01'
+    imageSearch = '//img[contains(@src, "jpg")]'
+    prevSearch = '//a[text()="PREVIOUS"]'
+    multipleImagesPerStrip = True
+    endOfLife = True
+
+    def namer(self, imageUrl, pageUrl):
+        # Prepend chapter number to image filename
+        filename = imageUrl.rsplit('/', 1)[-1]
+        if filename[0] == 'p':
+            filename = filename.replace('p', '1_p')
+        filename = filename.replace('TIL', '2_TIL')
+        filename = filename.replace('NS', '3_NS')
+        filename = filename.replace('LG', '4_LG')
+        filename = filename.replace('WM', '5_WM')
+        return filename
+
+    def getPrevUrl(self, url, data):
+        # Fix broken navigation links
+        if url == self.stripUrl % 'lg06':
+            return self.stripUrl % 'lg05'
+        return super(AdventuresOfFifne, self).getPrevUrl(url, data)
+
+
 class AfterStrife(_WPNavi):
     baseUrl = 'http://afterstrife.com/'
     stripUrl = baseUrl + '?p=%s'
