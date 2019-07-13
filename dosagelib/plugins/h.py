@@ -71,6 +71,12 @@ class HeyFox(_WordPressScraper):
     adult = True
 
 
+class HeyKitty(_WordPressScraper):
+    url = 'http://heykittycomic.com/'
+    stripUrl = url + '?comic=%s'
+    firstStripUrl = stripUrl % 'it-begins'
+
+
 class Hipsters(_WordPressScraper):
     url = 'http://www.hipsters-comic.com/'
     firstStripUrl = 'http://www.hipsters-comic.com/comic/hip01/'
