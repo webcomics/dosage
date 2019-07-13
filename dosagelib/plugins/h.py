@@ -64,6 +64,13 @@ class HavocInc(_WordPressScraper):
     firstStripUrl = stripUrl % 'havoc-cover'
 
 
+class HeyFox(_WordPressScraper):
+    url = 'http://www.steamclaw.com/heyfox/'
+    stripUrl = url + 'archives/comic/%s'
+    firstStripUrl = stripUrl % '11092004'
+    adult = True
+
+
 class Hipsters(_WordPressScraper):
     url = 'http://www.hipsters-comic.com/'
     firstStripUrl = 'http://www.hipsters-comic.com/comic/hip01/'
