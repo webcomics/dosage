@@ -95,6 +95,26 @@ class DeepFried(_BasicScraper):
     help = 'Index format: none'
 
 
+class Delve(_WordPressScraper):
+    url = 'http://thisis.delvecomic.com/NewWP/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'in-too-deep'
+    adult = True
+    maxLen = len('episode999')
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix inconsistent filenames
+        filename = imageUrl.rsplit('/', 1)[-1].rsplit('?', 1)[0]
+        if (pageUrl == self.stripUrl % 'engagement' or
+                pageUrl == self.stripUrl % 'losing-it'):
+            self.maxLen = self.maxLen - 1
+        if ('episode' in filename and
+                len(filename) - len('.jpg') > self.maxLen and
+                filename[self.maxLen] != '-'):
+            filename = filename[:self.maxLen] + '-' + filename[self.maxLen:]
+        return filename
+
+
 class DemolitionSquad(_ParserScraper):
     url = 'http://www.demolitionsquad.de/'
     stripUrl = url + '?comicbeitrag=%s'
