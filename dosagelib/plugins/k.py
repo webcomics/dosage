@@ -49,7 +49,9 @@ class KillSixBillionDemons(_WPNavi):
 
 
 class KiwiBlitz(_ComicControlScraper):
-    url = 'http://www.kiwiblitz.com'
+    url = 'http://www.kiwiblitz.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'welcome-to-kb'
 
 
 class Krakow(_BasicScraper):
