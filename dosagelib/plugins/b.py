@@ -132,6 +132,20 @@ class BetweenFailures(_BasicScraper):
     help = 'Index format: stripname'
 
 
+class BeyondTheVeil(_WordPressScraper):
+    url = 'http://beyondtheveilcomic.com/'
+    stripUrl = url + '?comic=%s'
+    firstStripUrl = stripUrl % '01252010'
+    endOfLife = True
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix inconsistent filenames
+        filename = imageUrl.rsplit('/', 1)[-1]
+        filename = filename.replace('BtV_pg43_bw', '2014-04-25-BtV_pg43_bw')
+        filename = filename.replace('BtVpg28Ch7b', '2014-07-04-BtVpg28Ch7b')
+        return filename
+
+
 class BiggerThanCheeses(_BasicScraper):
     url = 'http://www.biggercheese.com/'
     stripUrl = url + 'index.php?comic=%s'
