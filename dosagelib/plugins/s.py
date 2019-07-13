@@ -369,6 +369,22 @@ class Sorcery101(_ParserScraper):
     help = 'Index format: stripname'
 
 
+class SpaceFurries(_ParserScraper):
+    url = 'http://www.spacefurrs.org/'
+    firstStripUrl = url
+    multipleImagesPerStrip = True
+    adult = True
+    endOfLife = True
+
+    def fetchUrls(self, url, data, urlSearch):
+        # Website requires JS, so build the list of image URLs manually
+        imageUrls = []
+        currentPage = int(data.xpath('//input[@name="pagnum"]')[0].get('value'))
+        for page in reversed(range(1, currentPage + 1)):
+            imageUrls.append(self.url + 'comics/' + str(page) + '.jpg')
+        return imageUrls
+
+
 class SpaceJunkArlia(_ParserScraper):
     url = 'http://spacejunkarlia.com/'
     stripUrl = url + '?strip_id=%s'
