@@ -149,6 +149,20 @@ class CavesAndCritters(_ParserScraper):
     adult = True
 
 
+class Centralia2050(_WordPressScraper):
+    url = 'http://centralia2050.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'ch1cover'
+    starter = bounceStarter
+
+    def namer(self, imageUrl, pageUrl):
+        page = pageUrl.rstrip('/').rsplit('/', 1)[-1].replace('chapter', 'ch')
+        if 'page-' in page and 'ch-' not in page:
+            page = 'ch-1-' + page
+        ext = imageUrl.rsplit('.', 1)[-1]
+        return page + '.' + ext
+
+
 class ChainsawSuit(_WordPressScraper):
     url = 'http://chainsawsuit.com/comic/'
     stripUrl = url + 'archive/%s/'
