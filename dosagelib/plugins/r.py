@@ -37,6 +37,16 @@ class RealLife(_WordPressScraper):
     firstStripUrl = stripUrl % 'title-1'
     help = 'Index format: monthname-dd-yyyy'
 
+    def namer(self, imageUrl, pageUrl):
+        # Fix inconsisntent filenames
+        filename = imageUrl.rsplit('/', 1)[-1]
+        if pageUrl.rsplit('=', 1)[-1] == 'may-27-2014':
+            filename = filename.replace('20140219_3121', '20140527')
+        filename = filename.replace('5-Finished', '20140623_3161')
+        filename = filename.replace('520140722', '20140722')
+        filename = filename.replace('520140724', '20140724')
+        return filename
+
     def getPrevUrl(self, url, data):
         # "Parse" JavaScript
         prevtag = data.find_class('comic-nav-previous')
