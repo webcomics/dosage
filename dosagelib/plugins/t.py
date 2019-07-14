@@ -188,6 +188,16 @@ class TumbleDryComics(_WordPressScraper):
         return filename
 
 
+class Turnoff(_ParserScraper):
+    name = 'turnoff'
+    url = 'https://turnoff.us/'
+    imageSearch = '//article[%s]//img' % xpath_class('post-content')
+    prevSearch = '//div[%s]//a' % xpath_class('prev')
+    stripUrl = url + 'geek/%s'
+    firstStripUrl = stripUrl % 'tcp-buddies'
+    multipleImagesPerStrip = True
+
+
 class TwoGuysAndGuy(_BasicScraper):
     url = 'http://www.twogag.com/'
     rurl = escape(url)
