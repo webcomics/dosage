@@ -5,12 +5,13 @@
 
 from __future__ import absolute_import, division, print_function
 
-from re import compile, escape
+from re import compile, escape, MULTILINE
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, xpath_class
 from ..util import tagre
 from .common import _ComicControlScraper, _TumblrScraper, _WordPressScraper, _WPNavi
+import requests
 
 
 class TheBrads(_ParserScraper):
@@ -196,6 +197,23 @@ class Turnoff(_ParserScraper):
     stripUrl = url + 'geek/%s'
     firstStripUrl = stripUrl % 'tcp-buddies'
     multipleImagesPerStrip = True
+
+    def __init__(self, *args, **kwargs):
+        super(Turnoff, self).__init__(*args, **kwargs)
+        # Neither the images nor the pages contain information about dates or indices.
+        # However we can extract the order of the images from the JavaScript.
+        html = requests.get(self.url).text
+        list_regex = compile(r"""^\s*"/geek/(.*)",\s*$""", flags=MULTILINE)
+        self.comics_order = list(reversed(list_regex.findall(html)))
+
+    def namer(self, image_url, page_url):
+        comic_name = page_url.split('/')[-1]
+        try:
+            index = self.comics_order.index(comic_name) + 1
+        except ValueError:
+            index = len(self.comics_order)
+        file_name = image_url.split('/')[-1]
+        return "%03d-%s" % (index, file_name)
 
 
 class TwoGuysAndGuy(_BasicScraper):
