@@ -279,6 +279,21 @@ class AmazingSuperPowers(_BasicScraper):
         )
 
 
+class AmbersNoBrainers(_ParserScraper):
+    baseUrl = 'https://foxyverse.com/'
+    url = baseUrl + 'comics/'
+    stripUrl = baseUrl + 'ambers-no-brainers-%s/'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//img[contains(@src, "Page")]'
+    latestSearch = '//a[contains(@href, "ambers-no-brainers")]'
+    starter = indirectStarter
+
+    def getPrevUrl(self, url, data):
+        # Replace missing navigation links
+        pageNum = int(url.rstrip('/').rsplit('-', 1)[-1])
+        return self.stripUrl % str(pageNum - 1)
+
+
 class Amya(_WordPressScraper):
     url = 'http://www.amyachronicles.com/'
 
