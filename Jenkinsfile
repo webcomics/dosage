@@ -43,9 +43,7 @@ pys.each { py ->
                         """
                     }
                 }
-            }
 
-            stage ("Archive $py.name") {
                 archiveArtifacts artifacts: '.tox/dist/*.zip', fingerprint: true
                 if (py.main) {
                     archiveArtifacts artifacts: 'dist/*', fingerprint: true
