@@ -33,11 +33,8 @@ pys.each { py ->
                         git fetch --tags
                     '''
 
-                    try {
+                    warnError('tox failed') {
                         sh "tox -e $py.tox"
-                    } catch (err) {
-                        echo "tox failed: ${err}"
-                        currentBuild.result = 'UNSTABLE'
                     }
 
                     if (py.main) {
