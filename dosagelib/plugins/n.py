@@ -168,6 +168,19 @@ class NoNeedForBushido(_ParserScraper):
     help = 'Index format: nnn'
 
 
+class NonPlayerCharacter(_ParserScraper):
+    url = 'https://www.lfg.co/'
+    stripUrl = url + 'npc/tale/%s/'
+    firstStripUrl = stripUrl % '1-1'
+    imageSearch = '//div[@id="comic-img"]//img'
+    prevSearch = '//a[@class="comic-nav-prev"]'
+    latestSearch = '//div[@id="feature-npc-footer"]/a[contains(@href, "npc/tale/")]'
+    starter = indirectStarter
+
+    def namer(self, imageUrl, pageUrl):
+        return pageUrl.rstrip('/').rsplit('/', 1)[-1]
+
+
 class NotAVillain(_ParserScraper):
     url = 'http://navcomic.com/'
     stripUrl = url + 'not-a-villain/%s/'
