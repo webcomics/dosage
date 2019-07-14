@@ -110,7 +110,7 @@ def windowsBuildCommands() {
                 wine py -m pip install -e .[css] &&
                 cd scripts &&
                 wine py -m PyInstaller -y dosage.spec;
-                wineserver -w" | tee log.txt
+                wineserver -w" 2>&1 | tee log.txt
         '''
         archiveArtifacts '*/scripts/dist/*'
     }
