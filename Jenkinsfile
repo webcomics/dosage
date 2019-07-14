@@ -94,22 +94,30 @@ def buildDockerfile(image) {
 }
 
 def windowsBuild() {
-    node {
-        deleteDir()
-        unstash 'bin'
-        docker.image('tobix/pywine').inside {
-            sh '''
-                . /opt/mkuserwineprefix
-                tar xvf dist/dosage-*.tar.gz
-                cd dosage-*
-                xvfb-run sh -c "
-                    wine py -m pip install -e .[css] &&
-                    cd scripts &&
-                    wine py -m PyInstaller -y dosage.spec;
-                    wineserver -w" | tee log.txt
-            '''
-            archiveArtifacts '*/scripts/dist/*'
+    stage('Windows binary') {
+        warnError('windows build failed') {
+            node {
+                windowsBuildCommands()
+            }
         }
+    }
+}
+
+def windowsBuildCommands() {
+    deleteDir()
+    unstash 'bin'
+    docker.image('tobix/pywine').inside {
+        sh '''
+            . /opt/mkuserwineprefix
+            tar xvf dist/dosage-*.tar.gz
+            cd dosage-*
+            xvfb-run sh -c "
+                wine py -m pip install -e .[css] &&
+                cd scripts &&
+                wine py -m PyInstaller -y dosage.spec;
+                wineserver -w" | tee log.txt
+        '''
+        archiveArtifacts '*/scripts/dist/*'
     }
 }
 
