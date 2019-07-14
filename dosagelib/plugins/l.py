@@ -8,7 +8,7 @@ from __future__ import absolute_import, division, print_function
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import bounceStarter, indirectStarter, xpath_class
+from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
 from .common import (_ComicControlScraper, _WordPressScraper, _WPNaviIn,
                      WP_LATEST_SEARCH)
@@ -124,9 +124,15 @@ class LoFiJinks(_WPNaviIn):
 
 
 class LookingForGroup(_ParserScraper):
-    url = 'http://www.lfg.co/latest-comic/'
-    stripUrl = 'http://www.lfg.co/page/%s/'
+    url = 'https://www.lfg.co/'
+    stripUrl = url + 'page/%s/'
     firstStripUrl = stripUrl % '1'
     imageSearch = '//div[@id="comic-img"]//img'
-    prevSearch = '//a[%s]' % xpath_class('comic-nav-prev')
+    prevSearch = '//a[@class="comic-nav-prev"]'
+    latestSearch = '//div[@id="feature-lfg-footer"]/a[contains(@href, "page/")]'
+    starter = indirectStarter
     help = 'Index format: nnn'
+
+    def namer(self, imageUrl, pageUrl):
+        page = pageUrl.rstrip('/').rsplit('/', 1)[-1]
+        return page.replace('2967', '647')
