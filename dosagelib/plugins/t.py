@@ -217,6 +217,21 @@ class ThreePanelSoul(_ComicControlScraper):
     firstStripUrl = url + 'comic/a-test-comic'
 
 
+class TinyDickAdventures(_ParserScraper):
+    url = 'https://www.lfg.co/'
+    stripUrl = url + 'tda/strip/%s/'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//div[@id="comic-img"]//img'
+    prevSearch = '//a[@class="comic-nav-prev"]'
+    latestSearch = '//div[@id="feature-tda-footer"]/a[contains(@href, "tda/strip/")]'
+    starter = indirectStarter
+
+    def namer(self, imageUrl, pageUrl):
+        page = pageUrl.rstrip('/').rsplit('/', 1)[-1]
+        ext = imageUrl.rsplit('.', 1)[-1]
+        return page + '.' + ext
+
+
 class ToonHole(_WordPressScraper):
     url = 'http://toonhole.com/'
     firstStripUrl = url + 'comic/toon-hole-coming-soon-2010/'
