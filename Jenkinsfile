@@ -1,8 +1,8 @@
 def pys = [
-    [name: 'Python 3.7', docker:'python:3.7-stretch', tox:'py37,flake8', main: true],
-    [name: 'Python 3.6', docker:'python:3.6-stretch', tox:'py36', main: false],
-    [name: 'Python 3.5', docker:'python:3.5-jessie', tox:'py35', main: false],
-    [name: 'Python 2.7', docker:'python:2.7-stretch', tox:'py27', main: false]
+    [name: 'Python 3.7', docker:'python:3.7-buster', tox:'py37,flake8', main: true],
+    [name: 'Python 3.6', docker:'python:3.6-buster', tox:'py36', main: false],
+    [name: 'Python 3.5', docker:'python:3.5-buster', tox:'py35', main: false],
+    [name: 'Python 2.7', docker:'python:2.7-buster', tox:'py27', main: false]
 ]
 
 properties([
@@ -79,10 +79,6 @@ timestamps {
 def buildDockerfile(image) {
     def uid = sh(returnStdout: true, script: 'id -u').trim()
     def toxInst = 'apt-get update && apt-get -y install tox'
-    if (image.contains('jessie')) {
-        toxInst = 'pip install tox' // Dirty!
-    }
-
     writeFile file: 'Dockerfile', text: """
     FROM $image
     RUN $toxInst
