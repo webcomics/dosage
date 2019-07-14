@@ -5,7 +5,11 @@
 
 from __future__ import absolute_import, division, print_function
 
-from re import compile, escape
+from re import compile, escape, MULTILINE
+try:
+    from functools import cached_property
+except ImportError:
+    from cached_property import cached_property
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, xpath_class
@@ -188,6 +192,33 @@ class TumbleDryComics(_WordPressScraper):
         if not filename.startswith(year):
             filename = year + "-" + month + "-" + filename
         return filename
+
+
+class Turnoff(_ParserScraper):
+    name = 'turnoff'
+    url = 'https://turnoff.us/'
+    imageSearch = '//article[%s]//img' % xpath_class('post-content')
+    prevSearch = '//div[%s]//a' % xpath_class('prev')
+    stripUrl = url + 'geek/%s'
+    firstStripUrl = stripUrl % 'tcp-buddies'
+    multipleImagesPerStrip = True
+
+    @cached_property
+    def comics_order(self):
+        # Neither the images nor the pages contain information about dates or indices.
+        # However we can extract the order of the images from the JavaScript.
+        html = self.session.get(self.url).text
+        list_regex = compile(r"""^\s*"/geek/(.*)",\s*$""", flags=MULTILINE)
+        return list(reversed(list_regex.findall(html)))
+
+    def namer(self, image_url, page_url):
+        comic_name = page_url.split('/')[-1]
+        try:
+            index = self.comics_order.index(comic_name) + 1
+        except ValueError:
+            index = len(self.comics_order)
+        file_name = image_url.split('/')[-1]
+        return "%03d-%s" % (index, file_name)
 
 
 class TwoGuysAndGuy(_BasicScraper):
