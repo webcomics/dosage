@@ -58,6 +58,23 @@ class PastelDefender(_BasicScraper):
     help = 'Index format: nnn'
 
 
+class PeanutBerrySundae(_ParserScraper):
+    baseUrl = 'https://foxyverse.com/'
+    url = baseUrl + 'comics/'
+    stripUrl = baseUrl + 'peanut-berry-sundae-%s/'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = ('//img[contains(@src, "Page")]',
+                   '//img[contains(@src, "page")]')
+    latestSearch = '//a[contains(@href, "peanut-berry-sundae")]'
+    starter = indirectStarter
+
+    def getPrevUrl(self, url, data):
+        # Replace missing navigation links
+        pageNum = int(url.replace('-70-2', '-71').rstrip('/').rsplit('-', 1)[-1])
+        url = self.stripUrl % str(pageNum - 1)
+        return url.replace('-71', '-70-2')
+
+
 class PebbleVersion(_ParserScraper):
     url = 'http://www.pebbleversion.com/'
     stripUrl = url + 'Archives/Strip%s.html'
