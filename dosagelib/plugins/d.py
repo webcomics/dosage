@@ -95,6 +95,19 @@ class DeepFried(_BasicScraper):
     help = 'Index format: none'
 
 
+class DeerMe(_ParserScraper):
+    url = 'http://deerme.net/'
+    stripUrl = url + 'comics/%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = ('//img[@id="comicimage"]', '//img[@id="latestcomicimage"]')
+    prevSearch = '//a[@rel="prev"]'
+    nextSearch = '//a[@rel="next"]'
+    starter = bounceStarter
+
+    def namer(self, imageUrl, pageUrl):
+        return pageUrl.rsplit('/', 1)[-1] + '.' + imageUrl.rsplit('.', 1)[-1]
+
+
 class Delve(_WordPressScraper):
     url = 'http://thisis.delvecomic.com/NewWP/'
     stripUrl = url + 'comic/%s/'
