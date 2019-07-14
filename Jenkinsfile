@@ -59,7 +59,8 @@ pys.each { py ->
                         maxNumberOfBuilds: 0,
                         onlyStable: false,
                         zoomCoverageChart: false
-                    warnings consoleParsers: [[parserName: 'flake8']]
+                    recordIssues sourceCodeEncoding: 'UTF-8',
+                        tool: flake8(pattern: '.tox/flake8.log', reportEncoding: 'UTF-8')
                 }
                 junit '.tox/junit-*.xml'
             }
