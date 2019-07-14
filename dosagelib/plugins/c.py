@@ -362,6 +362,12 @@ class CrimsonFlag(_ParserScraper):
     prevSearch = '//a[contains(@class, "prev")]'
 
 
+class CritterCoven(_WordPressScraper):
+    url = 'http://crittercoven.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'critter-coven'
+
+
 class CucumberQuest(_BasicScraper):
     url = 'http://cucumber.gigidigi.com/'
     rurl = escape(url)
