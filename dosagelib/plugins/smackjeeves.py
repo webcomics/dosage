@@ -622,6 +622,7 @@ class SmackJeeves(_ParserScraper):
             cls('WhatAboutLove', 74057, adult=True),
             cls('WHATAboutSHADOWS', 109321, endOfLife=True),
             cls('WhatIsDeepInOnesHeart', 130798),
+            cls('WhatWeRememberTheMost', 162746),
             cls('WhenSheWasBad', 12859),
             cls('Whenweweresilent', 156839),
             cls('WhereaboutsOfTime', 133530),
