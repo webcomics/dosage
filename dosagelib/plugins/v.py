@@ -7,8 +7,23 @@ from __future__ import absolute_import, division, print_function
 from re import compile
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter, xpath_class
+from ..helpers import bounceStarter, indirectStarter, xpath_class
 from ..util import tagre
+
+
+class Vexxarr(_ParserScraper):
+    baseUrl = 'http://www.vexxarr.com/'
+    url = baseUrl + 'Index.php'
+    stripUrl = baseUrl + 'archive.php?seldate=%s'
+    firstStripUrl = stripUrl % '010105'
+    imageSearch = '//p/img'
+    prevSearch = '//a[./img[contains(@src, "previous")]]'
+    nextSearch = '//a[./img[contains(@src, "next")]]'
+    starter = bounceStarter
+
+    def namer(self, imageUrl, pageUrl):
+        page = pageUrl.rsplit('=', 1)[-1]
+        return '20%s-%s-%s' % (page[4:6], page[0:2], page[2:4])
 
 
 class VGCats(_BasicScraper):
