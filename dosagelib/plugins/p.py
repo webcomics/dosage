@@ -225,6 +225,20 @@ class PoppyOPossum(_WordPressScraper):
     firstStripUrl = stripUrl % 'a-story'
 
 
+class PowerNap(_ParserScraper):
+    url = 'http://www.powernapcomic.com/'
+    stripUrl = url + 'd/%s.html'
+    firstStripUrl = stripUrl % '20110617'
+    imageSearch = '//img[contains(@src, "/pnap")]'
+    prevSearch = '//a[./img[contains(@src, "previous")]]'
+
+    def imageUrlModifier(self, url, data):
+        return url.replace('\n', '').strip()
+
+    def link_modifier(self, fromurl, tourl):
+        return tourl.replace('\n', '').strip()
+
+
 class Precocious(_ParserScraper):
     url = 'http://www.precociouscomic.com/'
     stripUrl = url + 'archive/comic/%s'
