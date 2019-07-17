@@ -157,12 +157,20 @@ class FredoAndPidjin(_ParserScraper):
     namer = joinPathPartsNamer((0, 1, 2))
 
 
-class Freefall(_BasicScraper):
-    url = 'http://freefall.purrsia.com/default.htm'
-    stripUrl = 'http://freefall.purrsia.com/ff%s/fc%s.htm'
-    imageSearch = compile(r'<img src="(/ff\d+/.+?.\w{3,4})"')
-    prevSearch = compile(r'<A HREF="(/ff\d+/.+?.htm)">Previous</A>')
-    help = 'Index format: nnnn/nnnnn'
+class Freefall(_ParserScraper):
+    url = 'http://freefall.purrsia.com/'
+    stripUrl = url + 'ff%d/%s%05d.htm'
+    firstStripUrl = stripUrl % (100, 'fv', 1)
+    imageSearch = '//img[contains(@src, "/ff")]'
+    prevSearch = '//a[text()="Previous"]'
+    multipleImagesPerStrip = True
+
+    def getIndexStripUrl(self, index):
+        # Get comic strip URL from index
+        index = int(index)
+        chapter = index + 100 - (index % 100)
+        color = 'fc' if index > 1252 else 'fv'
+        return self.stripUrl % (chapter, color, index)
 
 
 class FreighterTails(_ParserScraper):
