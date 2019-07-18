@@ -11,7 +11,7 @@ from re import compile, escape, IGNORECASE
 from ..helpers import bounceStarter, indirectStarter, xpath_class
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, WP_LATEST_SEARCH
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
 
 
 class EarthsongSaga(_ParserScraper):
@@ -30,7 +30,6 @@ class EarthsongSaga(_ParserScraper):
 class EasilyAmused(_WordPressScraper):
     url = 'http://www.flowerlarkstudios.com/comicpage/college-daze/ea01/'
     firstStripUrl = url
-    latestSearch = WP_LATEST_SEARCH
     starter = indirectStarter
 
 
@@ -123,7 +122,6 @@ class Erstwhile(_WPNavi):
 class Eryl(_WordPressScraper):
     url = 'http://www.flowerlarkstudios.com/comicpage/prologue-migration/page-i/'
     firstStripUrl = url
-    latestSearch = WP_LATEST_SEARCH
     starter = indirectStarter
 
 

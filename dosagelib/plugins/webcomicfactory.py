@@ -5,13 +5,12 @@
 
 from __future__ import absolute_import, division, print_function
 
-from .common import _WordPressScraper, WP_LATEST_SEARCH
+from .common import _WordPressScraper
 from ..helpers import indirectStarter
 
 
 class WebcomicFactory(_WordPressScraper):
     starter = indirectStarter
-    latestSearch = WP_LATEST_SEARCH
 
     def __init__(self, name, url):
         super(WebcomicFactory, self).__init__(name)

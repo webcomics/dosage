@@ -10,7 +10,7 @@ from re import compile, escape, MULTILINE
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import regexNamer, bounceStarter, indirectStarter
-from .common import _WordPressScraper, _WPNavi, _WPNaviIn, WP_LATEST_SEARCH
+from .common import _WordPressScraper, _WPNavi, _WPNaviIn
 
 
 class AbbysAgency(_WordPressScraper):
@@ -380,7 +380,6 @@ class ARedTailsDream(_BasicScraper):
 class Ashes(_WordPressScraper):
     url = 'http://www.flowerlarkstudios.com/comicpage/prologue/10232009/'
     firstStripUrl = url
-    latestSearch = WP_LATEST_SEARCH
     starter = indirectStarter
 
 

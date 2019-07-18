@@ -12,7 +12,7 @@ import datetime
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter, joinPathPartsNamer, xpath_class
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, WP_LATEST_SEARCH
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
 
 
 class SabrinaOnline(_BasicScraper):
@@ -312,7 +312,6 @@ class SnowFlame(_WordPressScraper):
     stripUrl = url + '?comic=snowflame-%s-%s'
     firstStripUrl = stripUrl % ('01', '01')
     starter = bounceStarter
-    nextSearch = WP_LATEST_SEARCH
     help = 'Index format: chapter-page'
 
     def getIndexStripUrl(self, index):

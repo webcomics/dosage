@@ -10,7 +10,7 @@ from re import compile, escape
 from ..helpers import bounceStarter, indirectStarter
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import _WordPressScraper, _WPNavi, WP_LATEST_SEARCH
+from .common import _WordPressScraper, _WPNavi
 
 
 class OctopusPie(_ParserScraper):
@@ -139,7 +139,6 @@ class OrderOfTheBlackDog(_WordPressScraper):
     url = 'http://orderoftheblackdog.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'issue-1-cover'
-    nextSearch = WP_LATEST_SEARCH
     starter = bounceStarter
 
     def namer(self, imageUrl, pageUrl):

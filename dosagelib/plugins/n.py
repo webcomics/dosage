@@ -10,7 +10,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, WP_LATEST_SEARCH
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
 
 
 class Namesake(_ComicControlScraper):
@@ -156,7 +156,6 @@ class NobodyScores(_BasicScraper):
 class NoMoreSavePoints(_WordPressScraper):
     url = 'http://www.flowerlarkstudios.com/comicpage/no-more-save-points/mushroom-hopping/'
     firstStripUrl = url
-    latestSearch = WP_LATEST_SEARCH
     starter = indirectStarter
 
 

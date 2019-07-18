@@ -10,8 +10,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
-from .common import (_ComicControlScraper, _WordPressScraper, _WPNaviIn,
-                     WP_LATEST_SEARCH)
+from .common import _ComicControlScraper, _WordPressScraper, _WPNaviIn
 
 
 class Lackadaisy(_ParserScraper):
@@ -34,7 +33,6 @@ class Lackadaisy(_ParserScraper):
 class Laiyu(_WordPressScraper):
     url = 'http://www.flowerlarkstudios.com/comicpage/preliminary-concepts/welcome/'
     firstStripUrl = url
-    latestSearch = WP_LATEST_SEARCH
     starter = indirectStarter
 
 
