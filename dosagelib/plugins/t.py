@@ -93,6 +93,12 @@ class TheGentleWolf(_WordPressScraper):
         return filename
 
 
+class TheJunkHyenasDiner(_WordPressScraper):
+    url = 'http://junkhyenasdiner.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'intro'
+
+
 class TheLandscaper(_BasicScraper):
     stripUrl = 'http://landscaper.visual-assault.net/comic/%s'
     url = stripUrl % 'latest'
