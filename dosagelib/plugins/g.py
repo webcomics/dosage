@@ -10,7 +10,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
 
 
 class Galaxion(_BasicScraper):
@@ -66,6 +66,16 @@ class GeeksNextDoor(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(\d+-\d+-\d+\.html)') +
                          tagre("img", "src", r'images/nav_prev\.png'))
     help = 'Index format: yyyy-mm-dd'
+
+
+class Ginpu(_WPNavi):
+    url = 'http://www.ginpu.us/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'filler-2'
+
+    def namer(self, imageUrl, pageUrl):
+        filename = imageUrl.rsplit('/', 3)
+        return '%s-%s_%s' % (filename[1], filename[2], filename[3])
 
 
 class GirlGenius(_BasicScraper):
