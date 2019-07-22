@@ -12,7 +12,7 @@ import datetime
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter, joinPathPartsNamer, xpath_class
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPNaviIn
 
 
 class SabrinaOnline(_BasicScraper):
@@ -147,6 +147,13 @@ class Science(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(%s[^"]+/)' % rurl, after="prev"))
     imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
     help = 'Index format: stripname'
+
+
+class SeelPeel(_WPNaviIn):
+    url = 'https://seelpeel.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'seelpeel-goes-live'
+    multipleImagesPerStrip = True
 
 
 class SequentialArt(_BasicScraper):
