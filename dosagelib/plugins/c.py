@@ -368,6 +368,16 @@ class CritterCoven(_WordPressScraper):
     firstStripUrl = stripUrl % 'critter-coven'
 
 
+class CrossTimeCafe(_ParserScraper):
+    stripUrl = 'http://www.whiteponyproductions.com/ctc/%s.htm'
+    url = stripUrl % 'present'
+    firstStripUrl = stripUrl % 'ctc0001'
+    imageSearch = '//img[not(contains(@src, "graphics/"))]'
+    prevSearch = '//a[.//text()="Back"]'
+    multipleImagesPerStrip = True
+    endOfLife = True
+
+
 class CucumberQuest(_BasicScraper):
     url = 'http://cucumber.gigidigi.com/'
     rurl = escape(url)
