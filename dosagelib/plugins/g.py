@@ -13,13 +13,11 @@ from ..util import tagre
 from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
 
 
-class Galaxion(_BasicScraper):
+class Galaxion(_WPNavi):
     url = 'http://galaxioncomics.com/'
-    rurl = escape(url)
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '1-comic/the-story-so-far/the-story-so-far'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
+    multipleImagesPerStrip = True
     help = 'Index format: n-comic/book-n/chapter-n/title-nnn'
 
 
