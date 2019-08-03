@@ -272,10 +272,9 @@ class PS238(_ParserScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
-class PvPonline(_BasicScraper):
-    url = 'http://pvponline.com/comic'
+class PvPOnline(_ParserScraper):
+    url = 'http://pvponline.com/comic/'
     stripUrl = url + '%s'
-    imageSearch = compile(tagre("img", "src", r'(http://s3[^"]+\.amazonaws\.com/pvponlinenew/img/comic/\d+/\d+/pvp[^"]+\.jpg)'))
-    prevSearch = compile(tagre("a", "href", r'(/comic/[^"]+)',
-                               after="left divider"))
-    help = 'Index format: yyyy/mm/dd/stripname'
+    firstStripUrl = stripUrl % 'mon-may-04'
+    imageSearch = '//section[@class="comic-art"]/img'
+    prevSearch = '//div[contains(@class, "comic-nav")]/a[contains(text(), "Prev")]'
