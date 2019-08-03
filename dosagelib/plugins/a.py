@@ -356,6 +356,29 @@ class ApartmentForTwo(_ParserScraper):
     help = 'Index format: yyyymmdd'
 
 
+class AntiheroForHire(_ParserScraper):
+    stripUrl = 'https://www.giantrobot.club/antihero-for-hire/%s'
+    firstStripUrl = stripUrl % '2016/6/8/entrance-vigil'
+    url = firstStripUrl
+    imageSearch = '//div[@class="image-wrapper"]//img[not(@class="thumb-image")]'
+    multipleImagesPerStrip = True
+    endOfLife = True
+    archive = []
+
+    def starter(self):
+        # Build list of chapters for navigation
+        page = self.getPage(self.url)
+        archiveLinks = page.xpath('//ul[@class="archive-group-list"]//a[contains(@class, "archive-item-link")]')
+        for link in archiveLinks:
+            self.archive.append(link.get('href'))
+        return self.archive[0]
+
+    def getPrevUrl(self, url, data):
+        # Retrieve previous chapter from list
+        index = self.archive.index(url) + 1
+        return self.archive[index] if index < len(self.archive) else None
+
+
 class AppleGeeks(_BasicScraper):
     url = 'http://www.applegeeks.com/'
     stripUrl = url + 'comics/viewcomic.php?issue=%s'
