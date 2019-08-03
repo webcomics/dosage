@@ -5,6 +5,7 @@
 
 from __future__ import absolute_import, division, print_function
 
+import json
 from re import compile, escape, IGNORECASE
 
 from ..helpers import indirectStarter, xpath_class
@@ -233,6 +234,29 @@ class MyCartoons(_BasicScraper):
                          "&laquo;")
     help = 'Index format: number'
     lang = 'de'
+
+
+class MyLifeWithFel(_ParserScraper):
+    baseUrl = 'https://www.mylifewithfel.com/'
+    stripUrl = baseUrl + 'api/posts/%s'
+    firstStripUrl = stripUrl % '1'
+    url = firstStripUrl
+    adult = True
+
+    def starter(self):
+        # Retrieve comic metadata from API
+        data = self.session.get(self.url)
+        data.raise_for_status()
+        return self.stripUrl % data.json()['last']['id']
+
+    def getPrevUrl(self, url, data):
+        return self.stripUrl % json.loads(data.text_content())['previous']['id']
+
+    def fetchUrls(self, url, data, urlSearch):
+        return [self.baseUrl + json.loads(data.text_content())['post']['image']]
+
+    def namer(self, imageUrl, pageUrl):
+        return pageUrl.rsplit('/', 1)[-1]
 
 
 class MynarskiForest(_ParserScraper):
