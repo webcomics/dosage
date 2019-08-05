@@ -90,6 +90,47 @@ class EmergencyExit(_BasicScraper):
     help = 'Index format: n'
 
 
+class Erfworld(_ParserScraper):
+    stripUrl = 'https://archives.erfworld.com/%s'
+    url = stripUrl % 'getLatestPage.php'
+    firstStripUrl = stripUrl % 'Book+0/1'
+    imageSearch = '//div[@class="page_content"]//img'
+    textSearch = '//div[@class="page_content"]'
+    prevSearch = '//li[@class="previous"]/a'
+    nextSearch = '//li[@class="next"]/a'
+    multipleImagesPerStrip = True
+    textOptional = True
+    starter = bounceStarter
+
+    def fetchUrls(self, url, data, urlSearch):
+        # Return the main logo for text-only pages
+        try:
+            imageUrls = super(Erfworld, self).fetchUrls(url, data, urlSearch)
+        except ValueError:
+            imageUrls = super(Erfworld, self).fetchUrls(url, data, '//li[@class="erf-logo"]//img')
+        return imageUrls
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix inconsistent filenames
+        filename = imageUrl.rsplit('/', 1)[-1]
+        page = pageUrl.replace('+', '-').rsplit('/', 2)
+        return '%s_%s_%s' % (page[1], page[2], filename)
+
+    def getPrevUrl(self, url, data):
+        # Fix missing navigation links between books
+        if url == self.stripUrl % 'Book+5/1':
+            return self.stripUrl % 'Book+4/203'
+        elif url == self.stripUrl % 'Book+4/1':
+            return self.stripUrl % 'Book+3/145'
+        elif url == self.stripUrl % 'Book+3/1':
+            return self.stripUrl % 'Book+2/231'
+        elif url == self.stripUrl % 'Book+2/1':
+            return self.stripUrl % 'Book+1/184'
+        if url == self.stripUrl % 'Book+1/1':
+            return self.stripUrl % 'Book+0/81'
+        return super(Erfworld, self).getPrevUrl(url, data)
+
+
 class ErmaFelnaEDF(_ParserScraper):
     stripUrl = 'https://www.stevegallacci.com/archive/edf/%s'
     firstStripUrl = stripUrl % '0000/00/00'
