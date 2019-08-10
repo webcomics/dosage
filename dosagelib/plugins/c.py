@@ -63,6 +63,20 @@ class CarryOnAliceBlueAndTheGardensOfQ(CarryOn):
         return 'abgq' + imageUrl.rsplit('/', 1)[-1]
 
 
+class CarryOnLegendOfAnneBunny(CarryOn):
+    name = 'CarryOn/LegendOfAnneBunny'
+    url = 'http://www.hirezfox.com/km/loab/loab1024/'
+    stripUrl = url + 'd/%s.html'
+    firstStripUrl = stripUrl % '20040701'
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix filenames of early comics
+        filename = imageUrl.rsplit('/', 1)[-1]
+        if filename[0].isdigit():
+            filename = 'ab' + filename
+        return filename
+
+
 class CaseyAndAndy(_BasicScraper):
     url = 'http://www.galactanet.com/comic/'
     stripUrl = url + 'view.php?strip=%s'
