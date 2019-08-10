@@ -52,6 +52,17 @@ class CarryOn(_ParserScraper):
         return filename
 
 
+class CarryOnAliceBlueAndTheGardensOfQ(CarryOn):
+    name = 'CarryOn/AliceBlueAndTheGardensOfQ'
+    url = 'http://www.hirezfox.com/km/abgq/abgq1024/'
+    stripUrl = url + 'd/%s.html'
+    firstStripUrl = stripUrl % '20050401'
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix filenames
+        return 'abgq' + imageUrl.rsplit('/', 1)[-1]
+
+
 class CaseyAndAndy(_BasicScraper):
     url = 'http://www.galactanet.com/comic/'
     stripUrl = url + 'view.php?strip=%s'
