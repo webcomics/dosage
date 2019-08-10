@@ -253,6 +253,16 @@ class CigarroAndCerveja(_ParserScraper):
     prevSearch = '//a[contains(text()," Prev")]',
 
 
+class ClanOfTheCats(_WordPressScraper):
+    url = 'http://www.cotclassic.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'coming-home-2'
+
+    def link_modifier(self, fromurl, tourl):
+        # Fix broken navigation link
+        return tourl.replace('/2954/', '/2002-06-22/')
+
+
 class Cloudscratcher(_ParserScraper):
     url = 'http://www.cloudscratcher.com/'
     stripUrl = url + 'comic.php?page=%s'
