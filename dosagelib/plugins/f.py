@@ -129,6 +129,21 @@ class ForLackOfABetterComic(_BasicScraper):
     help = 'Index format: number'
 
 
+class FoxDad(_ParserScraper):
+    url = 'https://foxdad.com/'
+    stripUrl = url + 'post/%s'
+    firstStripUrl = stripUrl % '149683014997/some-people-are-just-different-support-the-comic'
+    imageSearch = '//figure[@class="photo-hires-item"]//img'
+    prevSearch = '//a[@class="previous-button"]'
+
+    def namer(self, imageUrl, pageUrl):
+        page = self.getPage(pageUrl)
+        post = page.xpath('//link[@type="application/json+oembed"]')[0].get('href')
+        post = post.replace('https://www.tumblr.com/oembed/1.0?url=https://foxdad.com/post', '')
+        post = post.replace('-support-me-on-patreon', '')
+        return post.replace('/', '-')
+
+
 class FoxTails(_ParserScraper):
     stripUrl = 'http://foxtails.magickitsune.com/strips/%s.html'
     url = stripUrl % 'current'
