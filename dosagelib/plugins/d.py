@@ -247,7 +247,6 @@ class DominicDeegan(_ParserScraper):
     firstStripUrl = stripUrl % '0001-20020521'
     imageSearch = '//img[contains(@class, "wp-post-image")]'
     prevSearch = '//a[@title="Prev"]'
-    endOfLife = True
     help = 'Index format: ####-yyyymmdd'
 
 
