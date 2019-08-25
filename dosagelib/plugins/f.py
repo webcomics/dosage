@@ -202,6 +202,23 @@ class FunInJammies(_BasicScraper):
     help = 'Index format: n (unpadded)'
 
 
+class FurPiled(_ParserScraper):
+    stripUrl = 'https://web.archive.org/web/20160404074145/http://www.liondogworks.com/images/fp-%03d.jpg'
+    url = stripUrl % 427
+    firstStripUrl = stripUrl % 1
+
+    def getPrevUrl(self, url, data):
+        # Skip missing pages
+        nextStrip = int(url.rsplit('/', 1)[-1].split('.', 1)[0].replace('fp-', '')) - 1
+        if nextStrip in [407, 258, 131, 110, 97, 31]:
+            nextStrip = nextStrip - 1
+        return self.stripUrl % nextStrip
+
+    def fetchUrls(self, url, data, urlSearch):
+        # URLs are direct links to images
+        return [url]
+
+
 class FurthiaHigh(_ParserScraper):
     url = 'http://furthiahigh.concessioncomic.com/'
     stripUrl = url + 'index.php?pid=%s'
