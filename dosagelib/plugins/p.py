@@ -126,6 +126,15 @@ class PeppermintSagaBGR(_WPNavi):
     adult = True
 
 
+class PeterAndCompany(_ParserScraper):
+    url = 'http://peterandcompany.com/'
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '20050101'
+    imageSearch = ('//div[@id="page"]//img',
+                   '//div[@id="strip"]//img[contains(@src, "strips/")]')
+    prevSearch = '//a[./img[contains(@src, "nav_previous")]]'
+
+
 class PHDComics(_ParserScraper):
     BROKEN_COMMENT_END = compile(r'--!>')
 
