@@ -135,6 +135,14 @@ class PeterAndCompany(_ParserScraper):
     prevSearch = '//a[./img[contains(@src, "nav_previous")]]'
 
 
+class PeterAndWhitney(_ParserScraper):
+    url = 'http://peterandwhitney.com/'
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '20160502'
+    imageSearch = '//div[@id="page"]//img'
+    prevSearch = '//a[./img[contains(@src, "nav_previous")]]'
+
+
 class PHDComics(_ParserScraper):
     BROKEN_COMMENT_END = compile(r'--!>')
 
