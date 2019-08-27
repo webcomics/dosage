@@ -391,6 +391,14 @@ class ARedTailsDream(_BasicScraper):
     help = 'Index format: nn'
 
 
+class ArtificialIncident(_ParserScraper):
+    url = 'https://www.artificialincident.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'issue-one-life-changing'
+    imageSearch = '//div[@class="webcomic-image"]//img'
+    prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
+
+
 class Ashes(_WordPressScraper):
     url = 'http://www.flowerlarkstudios.com/comicpage/prologue/10232009/'
     firstStripUrl = url
