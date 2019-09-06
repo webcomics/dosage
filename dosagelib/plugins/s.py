@@ -270,6 +270,12 @@ class SkinDeep(_ParserScraper):
 
 class SleeplessDomain(_ComicControlScraper):
     url = 'http://www.sleeplessdomain.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'chapter-1-cover'
+    starter = bounceStarter
+
+    def namer(self, imageUrl, pageUrl):
+        return pageUrl.rsplit('/', 1)[-1] + '.' + imageUrl.rsplit('.', 1)[-1]
 
 
 class SlightlyDamned(_ComicControlScraper):
