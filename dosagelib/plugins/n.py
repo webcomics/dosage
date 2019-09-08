@@ -15,6 +15,8 @@ from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
 
 class Namesake(_ComicControlScraper):
     url = 'http://namesakecomic.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'the-journey-begins'
 
 
 class NamirDeiter(_ParserScraper):
