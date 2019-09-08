@@ -5,7 +5,7 @@
 
 from __future__ import absolute_import, division, print_function
 
-from re import compile, escape
+from re import compile
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
@@ -34,16 +34,6 @@ class Laiyu(_WordPressScraper):
     url = 'http://www.flowerlarkstudios.com/comicpage/preliminary-concepts/welcome/'
     firstStripUrl = url
     starter = indirectStarter
-
-
-class LasLindas(_BasicScraper):
-    url = 'http://laslindas.katbox.net/'
-    rurl = escape(url)
-    stripUrl = url + 'comic/%s/'
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/[^"]+)' % rurl, after="attachment-full"))
-    multipleImagesPerStrip = True
-    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl, after="previous"))
-    help = 'Index format: stripname'
 
 
 class LastResort(_WordPressScraper):
