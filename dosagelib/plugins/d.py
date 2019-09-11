@@ -134,6 +134,22 @@ class DerTodUndDasMaedchen(_ParserScraper):
     lang = 'de'
 
 
+class DesertFox(_ParserScraper):
+    url = 'https://www.desertfoxcomics.net/'
+    stripUrl = url + 'desertfox/comic/%s/'
+    firstStripUrl = stripUrl % 'origins-1'
+    imageSearch = '//div[@class="webcomic-image"]//img'
+    prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix inconsistent filenames
+        filename = imageUrl.rsplit('/', 1)[-1]
+        filename = filename.replace('Pg', 'Page').replace('Desert-Fox', '')
+        if 'origins' in pageUrl:
+            filename = filename.replace('Page-', 'Page-0-')
+        return filename
+
+
 class DieFruehreifen(_BasicScraper):
     url = 'http://www.die-fruehreifen.de/index.php'
     stripUrl = url + '?id=%s&order=DESC'
