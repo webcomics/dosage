@@ -738,6 +738,7 @@ class ComicFury(_ParserScraper):
             cls('NyxInTheOverworld', 'nyx'),
             cls('OceanLabyrinth', 'oceanlabyrinth'),
             cls('Oeight', 'oeight'),
+            cls('OffCentaured', 'offcentaured'),
             cls('OfficeLogic', 'office-logic'),
             cls('OffSeason', 'offseasoncomic'),
             cls('OffWorldTheCrease', 'thecrease'),
