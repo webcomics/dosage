@@ -38,11 +38,17 @@ class KemonoCafe(_ParserScraper):
             filename = filename.replace('89', '90')
         elif 'rascals' in pageUrl and '133-2' in pageUrl:
             filename = filename.replace('133', '134')
+        # Fix unordered filenames
+        if 'addictivescience' in pageUrl:
+            page = self.getPage(pageUrl)
+            num = int(page.xpath('//div[@id="comic-wrap"]/@class')[0].replace('comic-id-', ''))
+            filename = '%04d_%s' % (num, filename)
         return filename
 
     @classmethod
     def getmodules(cls):
         return (
+            cls('AddictiveScience', 'addictivescience', 'page0001'),
             cls('CaribbeanBlue', 'cb', 'page000', last='page325'),
             cls('IMew', 'imew', 'imew00', last='imew50'),
             cls('Knighthood', 'knighthood', 'kh0001'),

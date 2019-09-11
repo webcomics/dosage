@@ -734,6 +734,7 @@ class Renamed(Scraper):
             cls('PetiteSymphony/Rascals', 'KemonoCafe/Rascals'),
             cls('QuentynQuinnSpaceRanger', 'RHJunior/QuentynQuinnSpaceRanger'),
             cls('ShermansLagoon', 'ComicsKingdom/ShermansLagoon'),
+            cls('SmackJeeves/AddictiveScience', 'KemonoCafe/AddictiveScience'),
             cls('SmackJeeves/CityFolk', 'ComicFury/CityFolk'),
             cls('SmackJeeves/DoomsdayMyDear', 'DoomsdayMyDear'),
             cls('SmackJeeves/ForestHill', 'ForestHill'),

@@ -64,7 +64,6 @@ class SmackJeeves(_ParserScraper):
             cls('AceOfHearts', 155154),
             cls('AcidMonday', 30447, adult=True),
             cls('Adalsysla', 96496, endOfLife=True),
-            cls('AddictiveScience', 130684),
             cls('ADoodleADay', 141301),
             cls('AdventuresOfLumAndFriends', 122193),
             cls('AdventuresoftheWeird', 4430),
