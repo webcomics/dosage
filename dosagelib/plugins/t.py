@@ -17,6 +17,14 @@ from ..util import tagre
 from .common import _ComicControlScraper, _TumblrScraper, _WordPressScraper, _WPNavi, _WPNaviIn
 
 
+class TailsAndTactics(_ParserScraper):
+    url = 'http://tailsandtactics.com/comic/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//div[@class="comic-image"]/img'
+    prevSearch = '//a[text()=" Back"]'
+
+
 class TalesOfTheQuestor(_ParserScraper):
     stripUrl = 'http://www.rhjunior.com/%s/'
     firstStripUrl = stripUrl % 'tales-of-the-questor-cover'
