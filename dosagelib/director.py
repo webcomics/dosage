@@ -115,9 +115,10 @@ class ComicGetter(threading.Thread):
                     break
                 if self.stopped:
                     break
-            if self.options.all and not (self.errors or self.options.dry_run or
-                                         self.options.cont or
-                                         scraperobj.indexes):
+            if (self.options.all or
+                self.options.cont) and not (self.errors or
+                                            self.options.dry_run or
+                                            scraperobj.indexes):
                 scraperobj.setComplete(self.options.basepath)
         except Exception as msg:
             out.exception(msg)
