@@ -11,7 +11,7 @@ from six.moves.urllib.parse import urljoin
 from ..helpers import bounceStarter, xpath_class
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import _WordPressScraper
+from .common import _WordPressScraper, _WPWebcomic
 
 
 class RalfTheDestroyer(_WordPressScraper):
@@ -101,10 +101,8 @@ class Replay(_ParserScraper):
         return name
 
 
-class RiversideExtras(_ParserScraper):
+class RiversideExtras(_WPWebcomic):
     url = 'https://riversidecomics.com/'
-    imageSearch = '//div[{}]//img'.format(xpath_class('webcomic-image'))
-    prevSearch = '//a[{}]'.format(xpath_class('previous-webcomic-link'))
 
 
 class RomanticallyApocalyptic(_ParserScraper):
@@ -137,13 +135,10 @@ class Ruthe(_BasicScraper):
     help = 'Index format: number'
 
 
-class Ryugou(_ParserScraper):
+class Ryugou(_WPWebcomic):
     url = 'http://ryugou.swashbuckledcomics.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = 'ryugou-chapter-1-cover'
-    imageSearch = '//div[@class="webcomic-image"]//img'
-    prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
-    nextSearch = '//a[contains(@class, "next-webcomic-link")]'
     starter = bounceStarter
 
     def namer(self, imageUrl, pageUrl):

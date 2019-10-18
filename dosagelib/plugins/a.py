@@ -10,7 +10,7 @@ from re import compile, escape, MULTILINE
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import regexNamer, bounceStarter, indirectStarter
-from .common import _WordPressScraper, _WPNavi, _WPNaviIn
+from .common import _WordPressScraper, _WPNavi, _WPNaviIn, _WPWebcomic
 
 
 class AbbysAgency(_WordPressScraper):
@@ -391,12 +391,10 @@ class ARedTailsDream(_BasicScraper):
     help = 'Index format: nn'
 
 
-class ArtificialIncident(_ParserScraper):
+class ArtificialIncident(_WPWebcomic):
     url = 'https://www.artificialincident.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'issue-one-life-changing'
-    imageSearch = '//div[@class="webcomic-image"]//img'
-    prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
 
 
 class Ashes(_WordPressScraper):

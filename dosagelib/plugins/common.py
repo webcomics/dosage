@@ -29,6 +29,13 @@ class _WPNaviIn(_WordPressScraper):
     prevSearch = '//a[%s]' % xpath_class('navi-prev-in')
 
 
+class _WPWebcomic(_WordPressScraper):
+    imageSearch = '//div[{}]//img'.format(xpath_class('webcomic-image'))
+    prevSearch = '//a[{}]'.format(xpath_class('previous-webcomic-link'))
+    nextSearch = '///a[{}]'.format(xpath_class('next-webcomic-link'))
+    latestSearch = '//a[{}]'.format(xpath_class('last-webcomic-link'))
+
+
 class _ComicControlScraper(_ParserScraper):
     imageSearch = '//img[@id="cc-comic"]'
     prevSearch = '//a[@rel="prev"]'

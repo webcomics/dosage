@@ -10,7 +10,7 @@ from re import compile, escape
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, xpath_class
-from .common import _ComicControlScraper, _WordPressScraper, _WPNaviIn
+from .common import _ComicControlScraper, _WordPressScraper, _WPNaviIn, _WPWebcomic
 
 
 class BadassMuthas(_BasicScraper):
@@ -95,13 +95,10 @@ class Beetlebum(_BasicScraper):
         return name
 
 
-class Bethellium(_ParserScraper):
+class Bethellium(_WPWebcomic):
     stripUrl = 'http://dbcomics.darkblueworkshop.com/bethellium/%s/'
     firstStripUrl = stripUrl % 'chapter-1/webcomic-bethellium-chapter-1-cover'
     url = firstStripUrl
-    imageSearch = '//div[@class="webcomic-image"]//img'
-    prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
-    latestSearch = '//a[contains(@class, "last-webcomic-link")]'
     starter = indirectStarter
 
     def namer(self, imageUrl, pageUrl):

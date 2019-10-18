@@ -10,7 +10,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter, xpath_class
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, _WPNaviIn
+from .common import _ComicControlScraper, _WordPressScraper, _WPNaviIn, _WPWebcomic
 
 
 class Damonk(_BasicScraper):
@@ -134,12 +134,10 @@ class DerTodUndDasMaedchen(_ParserScraper):
     lang = 'de'
 
 
-class DesertFox(_ParserScraper):
+class DesertFox(_WPWebcomic):
     url = 'https://www.desertfoxcomics.net/'
     stripUrl = url + 'desertfox/comic/%s/'
     firstStripUrl = stripUrl % 'origins-1'
-    imageSearch = '//div[@class="webcomic-image"]//img'
-    prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
 
     def namer(self, imageUrl, pageUrl):
         # Fix inconsistent filenames
@@ -204,12 +202,10 @@ class Dilbert(_ParserScraper):
         return "%s" % name
 
 
-class DocRat(_ParserScraper):
+class DocRat(_WPWebcomic):
     url = 'https://www.docrat.com.au/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'begin-with-eye-contact'
-    imageSearch = '//div[@class="webcomic-image"]//img'
-    prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
 
     def namer(self, imageUrl, pageUrl):
         # Fix inconsistent filenames

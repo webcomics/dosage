@@ -10,7 +10,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
-from .common import _WordPressScraper, _WPNavi
+from .common import _WordPressScraper, _WPNavi, _WPWebcomic
 
 
 class CampComic(_BasicScraper):
@@ -179,12 +179,10 @@ class CatVersusHuman(_ParserScraper):
     starter = indirectStarter
 
 
-class CavesAndCritters(_ParserScraper):
+class CavesAndCritters(_WPWebcomic):
     url = 'https://cavesandcritters.com/?ao_confirm'
     stripUrl = 'https://cavesandcritters.com/cnc_webcomic/%s/'
     firstStripUrl = stripUrl % '01_000'
-    imageSearch = '//div[@class="webcomic-image"]//img'
-    prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
     adult = True
 
 

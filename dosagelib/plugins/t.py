@@ -14,7 +14,7 @@ except ImportError:
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, xpath_class
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPNaviIn
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPNaviIn, _WPWebcomic
 
 
 class TailsAndTactics(_ParserScraper):
@@ -25,13 +25,11 @@ class TailsAndTactics(_ParserScraper):
     prevSearch = '//a[text()=" Back"]'
 
 
-class Tamberlane(_ParserScraper):
+class Tamberlane(_WPWebcomic):
     baseUrl = 'https://www.tamberlanecomic.com/'
     url = baseUrl + 'latest/'
     stripUrl = baseUrl + 'tamberlane/%s/'
     firstStripUrl = stripUrl % 'page-1'
-    imageSearch = '//div[@class="webcomic-image"]//img'
-    prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
 
     def namer(self, imageUrl, pageUrl):
         # Fix inconsistent filenames

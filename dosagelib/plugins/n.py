@@ -10,7 +10,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, xpath_class
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPWebcomic
 
 
 class Namesake(_ComicControlScraper):
@@ -180,12 +180,10 @@ class NonPlayerCharacter(_ParserScraper):
         return pageUrl.rstrip('/').rsplit('/', 1)[-1]
 
 
-class NotAVillain(_ParserScraper):
+class NotAVillain(_WPWebcomic):
     url = 'http://navcomic.com/'
     stripUrl = url + 'not-a-villain/%s/'
     firstStripUrl = stripUrl % 'v1-001'
-    imageSearch = '//div[@class="webcomic-image"]//img'
-    prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
 
     def namer(self, imageUrl, pageUrl):
         filename = imageUrl.rsplit('/', 1)[-1]
