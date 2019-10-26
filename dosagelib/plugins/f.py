@@ -9,7 +9,7 @@ from re import compile, escape, IGNORECASE
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, joinPathPartsNamer, xpath_class
-from .common import _WPNaviIn, _WordPressScraper
+from .common import _ComicControlScraper, _WPNaviIn, _WordPressScraper
 
 
 class FalconTwin(_BasicScraper):
@@ -35,6 +35,12 @@ class FantasyRealms(_BasicScraper):
     latestSearch = compile(r'<a href="(manga/.+?)"><img src="preview.jpg"', IGNORECASE)
     help = 'Index format: nnn'
     starter = indirectStarter
+
+
+class FarToTheNorth(_ComicControlScraper):
+    url = 'http://www.farnorthcomic.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'don39t-tell'
 
 
 class FauxPas(_ParserScraper):
