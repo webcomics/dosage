@@ -9,7 +9,5 @@ from __future__ import absolute_import, division, print_function
 from setuptools import setup
 
 setup(
-    setup_requires=['pbr>=1.9', 'setuptools>=17.1'],
-    python_requires='>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*',
-    pbr=True,
+    use_scm_version=True,
 )
