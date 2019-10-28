@@ -74,7 +74,7 @@ class Newshounds(_ParserScraper):
         # Add navigation link between comic and graphic novel
         if url == self.stripUrl % 'nh2/20070201':
             return self.stripUrl % 'nh1/20061208'
-        return super().getPrevUrl(url, data)
+        return super(Newshounds, self).getPrevUrl(url, data)
 
 
 class NewWorld(_WordPressScraper):
