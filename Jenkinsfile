@@ -53,14 +53,12 @@ pys.each { py ->
                     def buildVer = findFiles(glob: 'dist/*.tar.gz')[0].name.replaceFirst(/\.tar\.gz$/, '')
                     currentBuild.description = buildVer
 
-                    cobertura autoUpdateHealth: false,
-                        autoUpdateStability: false,
-                        coberturaReportFile: '.tox/cov-*.xml',
-                        failUnhealthy: false,
-                        failUnstable: false,
-                        maxNumberOfBuilds: 0,
-                        onlyStable: false,
-                        zoomCoverageChart: false
+                    publishCoverage calculateDiffForChangeRequests: true,
+                        sourceFileResolver: sourceFiles('STORE_LAST_BUILD'),
+                        adapters: [
+                            coberturaAdapter('.tox/cov-*.xml')
+                        ]
+
                     recordIssues sourceCodeEncoding: 'UTF-8',
                         tool: flake8(pattern: '.tox/flake8.log', reportEncoding: 'UTF-8')
                 }
