@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Daily Dosage</title>
+    <link>http://dosage.rocks/</link>
+    <language>en-us</language>
+    <description>Comics for 2919/06/27</description>
+    <generator>dosage 13.37</generator>
+    <item>
+      <title>PlumedDotage - 4034.png</title>
+      <link>https://example.net/dosage/PlumedDotage/4034.png</link>
+      <description>&lt;img src=&quot;https://example.net/dosage/PlumedDotage/4034.png&quot;/&gt;&lt;br/&gt;&lt;a href=&quot;http://www.PlumedDotage.net/&quot;&gt;View Comic Online&lt;/a&gt;</description>
+      <guid>https://example.net/dosage/PlumedDotage/4034.png</guid>
+      <pubDate>Thu, 27 Jun 2919 17:36:51 GMT</pubDate>
+    </item>
+    <item>
+      <title>PachinkoParlor - 20190626.jpg</title>
+      <link>https://example.net/dosage/PachinkoParlor/20190626.jpg</link>
+      <description>&lt;img src=&quot;https://example.net/dosage/PachinkoParlor/20190626.jpg&quot;/&gt;&lt;br/&gt;&lt;a href=&quot;http://www.penny-arcade.com/comic/2019/06/26/pokemon-no&quot;&gt;View Comic Online&lt;/a&gt;</description>
+      <guid>https://example.net/dosage/PachinkoParlor/20190626.jpg</guid>
+      <pubDate>Thu, 27 Jun 2017 17:36:50 GMT</pubDate>
+    </item>
+    <item>
+      <title>GurneysWithSurvivors - 1560462175-GWS1123.jpg</title>
+      <link>https://example.net/dosage/GurneysWithSurvivors/1560462175-GWS1123.jpg</link>
+      <description>&lt;img src=&quot;https://example.net/dosage/GurneysWithSurvivors/1560462175-GWS1123.jpg&quot;/&gt;&lt;br/&gt;&lt;a href=&quot;https://GurneysWithSurvivors.com/&quot;&gt;View Comic Online&lt;/a&gt;</description>
+      <guid>https://example.net/dosage/GurneysWithSurvivors/1560462175-GWS1123.jpg</guid>
+      <pubDate>Thu, 27 Jun 2919 17:36:47 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

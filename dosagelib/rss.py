@@ -68,10 +68,10 @@ def parseFeed(filename, yesterday):
     dom = xml.dom.minidom.parse(filename)
 
     def getText(node, tag):
-        node.getElementsByTagName(tag)[0].childNodes[0].data
+        return node.getElementsByTagName(tag)[0].childNodes[0].data
 
     def getNode(tag):
-        dom.getElementsByTagName(tag)
+        return dom.getElementsByTagName(tag)
 
     content = getNode('channel')[0]  # Only one channel node
 
