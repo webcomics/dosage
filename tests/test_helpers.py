@@ -3,8 +3,6 @@
 
 from __future__ import absolute_import, division, print_function
 
-import pytest
-import re
 from dosagelib.helpers import joinPathPartsNamer
 
 

@@ -202,7 +202,6 @@ def vote_comic(scraperobj):
     orig_context = out.context
     out.context = scraperobj.name
     try:
-        name = scraperobj.name
         scraperobj.vote()
         out.info(u'Vote submitted.')
     except Exception as msg:

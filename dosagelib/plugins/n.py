@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -75,7 +75,7 @@ class NichtLustig(_BasicScraper):
     url = 'http://www.nichtlustig.de/main.html'
     stripUrl = 'http://static.nichtlustig.de/toondb/%s.html'
     lang = 'de'
-    imageSearch = compile('background-image:url\((http://static\.nichtlustig\.de/comics/full/\d+\.jpg)')
+    imageSearch = compile(r'background-image:url\((http://static\.nichtlustig\.de/comics/full/\d+\.jpg)')
     prevSearch = compile(tagre("a", "href", r'(http://static\.nichtlustig\.de/toondb/\d+\.html)'))
     latestSearch = compile(tagre("a", "href", r'([^"]*toondb/\d+\.html)'))
     help = 'Index format: yymmdd'

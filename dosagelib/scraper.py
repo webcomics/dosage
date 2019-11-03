@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -25,9 +25,8 @@ except ImportError:
     pycountry = None
 
 from . import loader, configuration, languages
-from .util import (get_page, makeSequence, get_system_uid, urlopen,
-                   unescape, tagre, normaliseURL, prettyMatcherList,
-                   requests_session, uniq)
+from .util import (get_page, makeSequence, get_system_uid, unescape, tagre,
+    normaliseURL, prettyMatcherList, requests_session, uniq)
 from .comic import ComicStrip
 from .output import out
 from .events import getHandler
@@ -111,17 +110,6 @@ class Scraper(object):
         self._indexes = tuple()
         self.skippedUrls = set()
         self.hitFirstStripUrl = False
-
-    def __cmp__(self, other):
-        """Compare scraper by name and index list."""
-        if not isinstance(other, Scraper):
-            return 1
-        # first, order by name
-        d = cmp(self.name, other.name)
-        if d != 0:
-            return d
-        # then by indexes
-        return cmp(self.indexes, other.indexes)
 
     def __hash__(self):
         """Get hash value from name and index list."""

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -10,7 +10,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
+from .common import _ComicControlScraper, _WordPressScraper
 
 
 class Galaxion(_BasicScraper):
@@ -189,7 +189,7 @@ class GunnerkriggCourt(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(/comics/[^"]+)'))
     prevSearch = compile(
         tagre("a", "href", r'(\?p=\d+)') +
-        tagre("img", "src", "/images/prev_a\.jpg"))
+        tagre("img", "src", r'/images/prev_a\.jpg'))
     help = 'Index format: number'
 
 

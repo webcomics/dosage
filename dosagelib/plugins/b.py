@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -214,6 +214,7 @@ class ButImACatPerson(_WordPressScraper):
     url = 'http://www.bicatperson.com/'
     stripUrl = 'comic/%s/'
     firstStripUrl = 'sketches-1'
+
 
 class ButtercupFestival(_ParserScraper):
     url = 'http://www.buttercupfestival.com/'

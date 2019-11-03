@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2018 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -155,7 +155,7 @@ class SequentialArt(_BasicScraper):
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r'([^"]+)', before="strip"))
     prevSearch = compile(tagre("a", "href", r'(/sequentialart\.php\?s=\d+)') +
-                         tagre("img", "src", "Nav_BackOne\.gif"))
+                         tagre("img", "src", r'Nav_BackOne\.gif'))
     help = 'Index format: name'
 
 
@@ -193,7 +193,8 @@ class ShermansLagoon(_BasicScraper):
     url = 'http://shermanslagoon.com/'
     stripUrl = url + 'comics/%s'
     firstStripUrl = stripUrl % '/december-29-2003/'
-    imageSearch = compile(tagre("img", "src", r'(https://safr\.kingfeatures\.com/idn/cnfeed/zone/js/content\.php\?file=.+?)'))
+    imageSearch = compile(tagre("img", "src",
+        r'(https://safr\.kingfeatures\.com/idn/cnfeed/zone/js/content\.php\?file=.+?)'))
     prevSearch = compile(r'id="previouscomic" class="button white"><a href="(%scomics/[a-z0-9-]+/)"' % url)
     help = 'Index format: monthname-day-year'
 

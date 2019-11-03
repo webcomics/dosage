@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -94,8 +94,8 @@ class OnTheFastrack(_BasicScraper):
     def namer(self, image_url, page_url):
         name = page_url.rsplit('/', 3)[2]
         if name == "onthefastrack.com":
-                import datetime
-                name = datetime.date.today().strftime("%B-%d-%Y")
+            import datetime
+            name = datetime.date.today().strftime("%B-%d-%Y")
         # name.title ensures that the comics are named the same
         # as in the previous scraper
         return "%s.gif" % name.title()

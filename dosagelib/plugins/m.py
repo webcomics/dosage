@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -179,8 +179,8 @@ class MrLovenstein(_BasicScraper):
     firstStripUrl = stripUrl % '1'
     imageSearch = (
         # captures rollover comic
-        compile(tagre("div", "class", r'comic_image') + "\s*.*\s*" +
-                tagre("div", "style", r'display: none;') + "\s*.*\s*" +
+        compile(tagre("div", "class", r'comic_image') + r'\s*.*\s*' +
+                tagre("div", "style", r'display: none;') + r'\s*.*\s' +
                 tagre("img", "src", r'(/images/comics/[^"]+)')),
         # captures standard comic
         compile(tagre("img", "src", r'(/images/comics/[^"]+)',

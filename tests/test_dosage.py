@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -11,6 +11,7 @@ import responses
 import dosagelib.cmd
 import httpmocks
 import json
+
 
 def cmd(*options):
     """'Fake' run dosage with given options."""
@@ -76,18 +77,18 @@ class TestDosage(object):
         httpmocks.zenpencils()
         print(tmpdir)
         cmd_ok("-v", "-b", str(tmpdir), "-o", "json", "ZenPencils")
-        
+
         directory = tmpdir.join('ZenPencils')
         f = directory.join('dosage.json').open(encoding='utf-8')
         data = json.load(f)
         f.close()
-        
+
         pages = data['pages']
         assert len(pages) == 1
-        
+
         page = list(pages.keys())[0]
         assert page == 'https://zenpencils.com/comic/missing/'
-        
+
         images = data['pages'][page]['images']
         assert len(images) == 2
 

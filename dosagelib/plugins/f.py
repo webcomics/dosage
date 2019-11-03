@@ -55,8 +55,10 @@ class FirstWorldProblems(_BasicScraper):
     url = 'http://bradcolbow.com/archive/C5/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % 'P10'
-    imageSearch = compile(tagre("img", "src", r'(http://(?:fwpcomics\.s3\.amazonaws\.com|s3\.amazonaws\.com/fwpcomics)/s1-[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://bradcolbow\.com/archive/C5/[^"]+)', before="prev"))
+    imageSearch = compile(tagre("img", "src",
+        r'(http://(?:fwpcomics\.s3\.amazonaws\.com|s3\.amazonaws\.com/fwpcomics)/s1-[^"]+)'))
+    prevSearch = compile(tagre("a", "href",
+        r'(http://bradcolbow\.com/archive/C5/[^"]+)', before="prev"))
     multipleImagesPerStrip = True
     help = 'Index format: a letter and a number'
 
@@ -136,6 +138,7 @@ class FredoAndPidjin(_ParserScraper):
     latestSearch = '//section[%s]//a' % xpath_class("latest")
     starter = indirectStarter
     namer = joinPathPartsNamer((0, 1, 2))
+
 
 class Freefall(_BasicScraper):
     url = 'http://freefall.purrsia.com/default.htm'

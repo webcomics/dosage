@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -63,9 +63,9 @@ class Weregeek(_BasicScraper):
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2006/11/27/'
     imageSearch = compile(tagre("img", "src",
-                                r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
+        r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'((%s)?/?\d+/\d+/\d+/)' % rurl) +
-                         '\s*' + tagre('img', 'src', '[^"]*previous_day.gif'))
+        r'\s*' + tagre('img', 'src', '[^"]*previous_day.gif'))
     help = 'Index format: yyyy/mm/dd'
 
 

@@ -84,7 +84,7 @@ def get_system_uid():
 
 
 def get_nt_system_uid():
-    """Get the MachineGuid from
+    r"""Get the MachineGuid from
     HKEY_LOCAL_MACHINE\Software\Microsoft\Cryptography\MachineGuid
     """
     try:
