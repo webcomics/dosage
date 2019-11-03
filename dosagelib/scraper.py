@@ -259,11 +259,10 @@ class Scraper(object):
 
     def vote(self):
         """Cast a public vote for this comic."""
-        url = configuration.VoteUrl + 'count/'
         uid = get_system_uid()
         data = {"name": self.name.replace('/', '_'), "uid": uid}
-        page = urlopen(url, self.session, data=data)
-        return page.text
+        response = self.session.post(configuration.VoteUrl, data=data)
+        response.raise_for_status()
 
     def get_download_dir(self, basepath):
         """Try to find the corect download directory, ignoring case

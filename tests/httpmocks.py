@@ -54,4 +54,4 @@ def zenpencils():
     add(GET, re.compile(r'https://cdn-zenpencils\.netdna-ssl\.com/wp-content/uploads/.*\.jpg'), _img(), content_type='image/jpeg')
 
 def vote():
-    add(POST, 'http://gaecounter.appspot.com/count/', 'no')
+    add(POST, 'https://buildbox.23.gs/count/', '')

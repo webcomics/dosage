@@ -20,5 +20,4 @@ class TestVote(object):
     @responses.activate
     def test_vote(self):
         httpmocks.vote()
-        answer = ATestScraper('Test_Test').vote()
-        assert answer in ('counted', 'no'), 'invalid answer %r' % answer
+        ATestScraper('Test_Test').vote()

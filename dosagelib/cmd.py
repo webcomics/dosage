@@ -203,17 +203,8 @@ def vote_comic(scraperobj):
     out.context = scraperobj.name
     try:
         name = scraperobj.name
-        answer = scraperobj.vote()
-        out.debug(u'Vote answer %r' % answer)
-        if answer == 'counted':
-            url = configuration.Url + 'comics/%s.html' % name.replace('/', '_')
-            out.info(u'Vote submitted. Votes are updated regularly at %s.' % url)
-        elif answer == 'no':
-            out.info(u'Vote not submitted - your vote has already been submitted before.')
-        elif answer == 'noname':
-            out.warn(u'The comic %s cannot be voted.' % name)
-        else:
-            out.warn(u'Error submitting vote parameters: %r' % answer)
+        scraperobj.vote()
+        out.info(u'Vote submitted.')
     except Exception as msg:
         out.exception(msg)
         errors += 1

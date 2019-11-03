@@ -13,7 +13,7 @@ App = AppName + u' ' + __version__
 
 Maintainer = u'Tobias Gruetzmacher'
 MaintainerEmail = u'tobias-dosage@23.gs'
-Url = u'http://dosage.rocks/'
+Url = u'https://dosage.rocks/'
 SupportUrl = u'https://github.com/webcomics/dosage/issues'
 UserAgent = u"Mozilla/5.0 (compatible; %s/%s; +%s)" % (AppName, __version__,
                                                        Url)
@@ -25,4 +25,4 @@ Freeware = AppName + u""" comes with ABSOLUTELY NO WARRANTY!
 This is free software, and you are welcome to redistribute it
 under certain conditions. Look at the file `COPYING' within this
 distribution."""
-VoteUrl = "http://gaecounter.appspot.com/"
+VoteUrl = "https://buildbox.23.gs/count/"
