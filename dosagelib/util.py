@@ -64,6 +64,7 @@ def requests_session():
     retry = Retry(MaxRetries, backoff_factor=RetryBackoffFactor)
     s.mount('http://', HTTPAdapter(max_retries=retry))
     s.mount('https://', HTTPAdapter(max_retries=retry))
+    s.headers.update({'User-Agent': UserAgent})
     return s
 
 
@@ -275,12 +276,11 @@ def get_robotstxt_parser(url, session=None):
 
 
 def urlopen(url, session, referrer=None, max_content_bytes=None,
-            allow_errors=(), useragent=UserAgent, **kwargs):
+            allow_errors=(), **kwargs):
     """Open an URL and return the response object."""
     out.debug(u'Open URL %s' % url)
     if 'headers' not in kwargs:
         kwargs['headers'] = {}
-    kwargs['headers']['User-Agent'] = useragent
     if referrer:
         kwargs['headers']['Referer'] = referrer
     out.debug(u'Sending headers %s' % kwargs['headers'], level=3)
