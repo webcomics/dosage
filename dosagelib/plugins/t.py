@@ -359,6 +359,11 @@ class Twokinds(_ParserScraper):
     help = 'Index format: n (unpadded)'
 
 
+class TwokindsSketches(Twokinds):
+    name = 'Twokinds/Sketches'
+    imageSearch = '//article[contains(@class, "comic")]/a'
+
+
 class TwoLumps(_BasicScraper):
     url = 'http://www.twolumps.net/'
     stripUrl = url + 'd/%s.html'
