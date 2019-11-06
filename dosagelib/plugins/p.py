@@ -263,6 +263,16 @@ class PrinceOfSartar(_WPNavi):
         return '%s.%s' % (title, image_ext)
 
 
+class Prototype(_ParserScraper):
+    stripUrl = 'http://planetprototype.com/%s/'
+    firstStripUrl = stripUrl % '2018/03/30/vol-1-ch-1-front-cover'
+    url = firstStripUrl
+    imageSearch = '//img[contains(@class, "wp-post-image")]'
+    prevSearch = '//a[.//text()="Previous"]'
+    latestSearch = '//a[.//text()="Latest"]'
+    starter = indirectStarter
+
+
 class PS238(_ParserScraper):
     url = 'http://ps238.nodwick.com/'
     stripUrl = url + 'comic/%s/'
