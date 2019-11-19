@@ -28,9 +28,9 @@ class Oglaf(_ParserScraper):
     stripUrl = url + '%s/'
     imageSearch = '//img[@id="strip"]'
     # search for "previous story" only
-    prevSearch = '//a[div[@id="pvs"]]'
+    prevSearch = '//link[@rel="prev"]'
     # search for "next page"
-    nextSearch = '//a[div[@id="nx"]]'
+    nextSearch = '//link[@rel="next"]'
     multipleImagesPerStrip = True
     adult = True
 
