@@ -397,6 +397,8 @@ The format is based on
 - Fix all comics!
 - Don't add empty URLs to the list of found URLs.
 
+### Removed
+- Download progress bars
 
 ## 1.6.0
 
