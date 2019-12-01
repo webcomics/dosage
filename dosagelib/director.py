@@ -95,10 +95,10 @@ class ComicGetter(threading.Thread):
 
     def _getStrips(self, scraperobj):
         """Get all strips from a scraper."""
-        if self.options.all or self.options.cont:
-            numstrips = None
-        elif self.options.numstrips:
+        if self.options.numstrips:
             numstrips = self.options.numstrips
+        elif self.options.cont or self.options.all:
+            numstrips = None
         else:
             # get current strip
             numstrips = 1
