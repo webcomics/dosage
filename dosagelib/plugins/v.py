@@ -48,6 +48,17 @@ class VGCatsSuper(VGCats):
     stripUrl = url + '?strip_id=%s'
 
 
+class VickiFox(_ParserScraper):
+    url = 'http://www.vickifox.com/comic/strip'
+    stripUrl = url + '?id=%s'
+    firstStripUrl = stripUrl % '001'
+    imageSearch = '//img[contains(@src, "comic/")]'
+    prevSearch = '//button[@id="btnPrev"]/@value'
+
+    def getPrevUrl(self, url, data):
+        return self.stripUrl % self.getPage(url).xpath(self.prevSearch)[0]
+
+
 class VictimsOfTheSystem(_BasicScraper):
     url = 'http://www.votscomic.com/'
     stripUrl = url + '?id=%s.jpg'
