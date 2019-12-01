@@ -5,12 +5,14 @@
 
 from __future__ import absolute_import, division, print_function
 
+import json
+import re
+
 import pytest
 import responses
 
 import dosagelib.cmd
 import httpmocks
-import json
 
 
 def cmd(*options):
@@ -29,6 +31,9 @@ def cmd_err(*options):
 class TestDosage(object):
     """Test the dosage commandline client."""
 
+    # This shouldn't hit the network at all, so add responses without mocks to
+    # make sure it doesn't do that
+    @responses.activate
     def test_list_comics(self):
         for option in ("-l", "--list", "--singlelist"):
             cmd_ok(option)
@@ -62,10 +67,13 @@ class TestDosage(object):
 
     @responses.activate
     def test_fetch_html_and_rss_2(self, tmpdir):
-        httpmocks.bloomingfaeries()
+        httpmocks.page('http://www.bloomingfaeries.com/', 'bf-home')
+        httpmocks.page(re.compile('http://www.*faeries-405/'), 'bf-405')
+        httpmocks.png(re.compile(r'http://www\.bloomingfaeries\.com/.*\.jpg'))
+
         cmd_ok("--numstrips", "2", "--baseurl", "bla", "--basepath",
-               str(tmpdir), "--output", "rss", "--output", "html", "--adult",
-               "BloomingFaeries")
+            str(tmpdir), "--output", "rss", "--output", "html", "--adult",
+            "BloomingFaeries")
 
     @responses.activate
     def test_fetch_indexed(self, tmpdir):
@@ -74,8 +82,11 @@ class TestDosage(object):
 
     @responses.activate
     def test_json_page_key_bounce_and_multi_image(self, tmpdir):
-        httpmocks.zenpencils()
-        print(tmpdir)
+        httpmocks.page('https://zenpencils.com/', 'zp-home')
+        httpmocks.page('https://zenpencils.com/comic/missing/', 'zp-223')
+        httpmocks.page('https://zenpencils.com/comic/lifejacket/', 'zp-222')
+        httpmocks.jpeg(re.compile(r'https://cdn-.*\.jpg'))
+
         cmd_ok("-v", "-b", str(tmpdir), "-o", "json", "ZenPencils")
 
         directory = tmpdir.join('ZenPencils')

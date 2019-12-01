@@ -12,14 +12,11 @@ try:
 except ImportError:
     from backports.functools_lru_cache import lru_cache
 
-from responses import add, GET, POST
-
-
-_basedir = os.path.dirname(__file__)
+from responses import add, GET
 
 
 def _file(name):
-    return os.path.join(_basedir, 'responses', name)
+    return os.path.join(os.path.dirname(__file__), 'responses', name)
 
 
 @lru_cache()
@@ -34,27 +31,20 @@ def _img():
         return f.read()
 
 
+def page(url, pagename):
+    add(GET, url, _content(pagename))
+
+
+def png(url):
+    add(GET, url, _img(), content_type='image/jpeg')
+
+
+def jpeg(url):
+    add(GET, url, _img(), content_type='image/jpeg')
+
+
 def xkcd():
-    add(GET, 'https://xkcd.com/', _content('xkcd-1899'))
-    for page in (302, 303, 1898, 1899):
-        add(GET, 'https://xkcd.com/%i/' % page, _content('xkcd-%i' % page))
-    add(GET, re.compile(r'https://imgs\.xkcd\.com/.*\.png'), _img(), content_type='image/png')
-
-
-def bloomingfaeries():
-    add(GET, 'http://www.bloomingfaeries.com/', _content('bf-home'))
-    add(GET, 'http://www.bloomingfaeries.com/comic/public/bloomin-faeries-405/', _content('bf-405'))
-
-    add(GET, re.compile(r'http://www\.bloomingfaeries\.com/.*\.jpg'), _img(), content_type='image/jpeg')
-
-
-def zenpencils():
-    add(GET, 'https://zenpencils.com/', _content('zp-home'))
-    add(GET, 'https://zenpencils.com/comic/missing/', _content('zp-223'))
-    add(GET, 'https://zenpencils.com/comic/lifejacket/', _content('zp-222'))
-    add(GET, re.compile(r'https://cdn-zenpencils\.netdna-ssl\.com/wp-content/uploads/.*\.jpg'), _img(),
-        content_type='image/jpeg')
-
-
-def vote():
-    add(POST, 'https://buildbox.23.gs/count/', '')
+    page('https://xkcd.com/', 'xkcd-1899')
+    for num in (302, 303, 1898, 1899):
+        page('https://xkcd.com/%i/' % num, 'xkcd-%i' % num)
+    png(re.compile(r'https://imgs\.xkcd\.com/.*\.png'))
