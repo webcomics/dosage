@@ -131,6 +131,13 @@ class BlankIt(_ParserScraper):
     starter = indirectStarter
 
 
+class BlondeSunrise(_ParserScraper):
+    url = 'https://blondesunrise.com/comic.php?page=latest'
+    firstStripUrl = 'https://blondesunrise.com/comic/comic.php?page=1'
+    imageSearch = '//img[contains(@src, "comic_imgs/")]'
+    prevSearch = '//a[img[contains(@src, "previous")]]'
+
+
 class BloodBound(_WordPressScraper):
     url = 'http://bloodboundcomic.com/'
     firstStripUrl = 'http://bloodboundcomic.com/comic/06112006/'
