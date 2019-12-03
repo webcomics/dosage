@@ -28,6 +28,7 @@ def cmd_err(*options):
     assert cmd(*options) == 1
 
 
+@pytest.mark.usefixtures("nosleep")
 class TestDosage(object):
     """Test the dosage commandline client."""
 

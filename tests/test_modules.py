@@ -5,6 +5,7 @@ from __future__ import absolute_import, division, print_function
 
 import re
 
+import pytest
 import responses
 
 import dosagelib.cmd
@@ -16,6 +17,7 @@ def cmd(*options):
     assert dosagelib.cmd.main(("--allow-multiple",) + options) == 0
 
 
+@pytest.mark.usefixtures("nosleep")
 class TestModules(object):
     """Test that specific comic modules work correctly."""
 
