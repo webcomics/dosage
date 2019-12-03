@@ -24,9 +24,9 @@ try:
 except ImportError:
     pycountry = None
 
-from . import loader, configuration, languages
+from . import configuration, http, languages, loader
 from .util import (get_page, makeSequence, get_system_uid, unescape, tagre,
-    normaliseURL, prettyMatcherList, requests_session, uniq)
+    normaliseURL, prettyMatcherList, uniq)
 from .comic import ComicStrip
 from .output import out
 from .events import getHandler
@@ -85,7 +85,7 @@ class Scraper(object):
     allow_errors = ()
 
     # HTTP session for configuration & cookies
-    session = requests_session()
+    session = http.default_session
 
     @classmethod
     def getmodules(cls):

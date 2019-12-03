@@ -9,8 +9,6 @@ from six.moves.urllib.parse import (
     quote as url_quote, unquote as url_unquote, urlparse, urlunparse, urlsplit)
 from six.moves.urllib_robotparser import RobotFileParser
 import requests
-from requests.adapters import HTTPAdapter
-from requests.packages.urllib3.util.retry import Retry
 import sys
 import os
 import cgi
@@ -40,16 +38,6 @@ from . import AppName
 # Maximum content size for HTML pages
 MaxContentBytes = 1024 * 1024 * 3  # 3 MB
 
-# Default number of retries
-MaxRetries = 3
-
-# Factor for retry backoff (see urllib3.util.retry, this default means
-# 2s, 4s, 8s)
-RetryBackoffFactor = 2
-
-# Default connection timeout
-ConnectionTimeoutSecs = 60
-
 # The character set to encode non-ASCII characters in a URL. See also
 # http://tools.ietf.org/html/rfc2396#section-2.1
 # Note that the encoding is not really specified, but most browsers
@@ -57,15 +45,6 @@ ConnectionTimeoutSecs = 60
 # else they use the page encoding for followed link. See als
 # http://code.google.com/p/browsersec/wiki/Part1#Unicode_in_URLs
 UrlEncoding = "utf-8"
-
-
-def requests_session():
-    s = requests.Session()
-    retry = Retry(MaxRetries, backoff_factor=RetryBackoffFactor)
-    s.mount('http://', HTTPAdapter(max_retries=retry))
-    s.mount('https://', HTTPAdapter(max_retries=retry))
-    s.headers.update({'User-Agent': UserAgent})
-    return s
 
 
 def get_system_uid():
@@ -285,8 +264,6 @@ def urlopen(url, session, referrer=None, max_content_bytes=None,
         kwargs['headers']['Referer'] = referrer
     out.debug(u'Sending headers %s' % kwargs['headers'], level=3)
     out.debug(u'Sending cookies %s' % session.cookies)
-    if 'timeout' not in kwargs:
-        kwargs['timeout'] = ConnectionTimeoutSecs
     if 'data' not in kwargs:
         method = 'GET'
     else:
