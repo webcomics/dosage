@@ -20,6 +20,7 @@ WP_LATEST_SEARCH = '//a[%s]' % xpath_class('comic-nav-last')
 class _WordPressScraper(_ParserScraper):
     imageSearch = '//div[@id="comic"]//img'
     prevSearch = '//a[%s]' % xpath_class('comic-nav-previous')
+    nextSearch = '//a[%s]' % xpath_class('comic-nav-next')
 
 
 class _WPNavi(_WordPressScraper):

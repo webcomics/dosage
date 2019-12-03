@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2018 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
 import os
 from re import compile, escape, IGNORECASE
 
-from ..helpers import indirectStarter, xpath_class
+from ..helpers import bounceStarter, indirectStarter, xpath_class
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, WP_LATEST_SEARCH
@@ -160,10 +160,9 @@ class ExploitationNow(_WPNavi):
 
 
 class ExtraFabulousComics(_WordPressScraper):
-    url = 'http://extrafabulouscomics.com/comic/buttfly/'
-    firstStripUrl = url
-    latestSearch = '//a[%s]' % xpath_class('navi-last')
-    starter = indirectStarter
+    url = 'https://extrafabulouscomics.com/'
+    firstStripUrl = url + 'comic/buttfly/'
+    starter = bounceStarter
     multipleImagesPerStrip = True
 
     def namer(self, image_url, page_url):
