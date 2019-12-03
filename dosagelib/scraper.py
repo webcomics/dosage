@@ -5,8 +5,6 @@
 
 from __future__ import absolute_import, division, print_function
 
-import time
-import random
 import os
 import re
 from six.moves.urllib.parse import urljoin
@@ -200,9 +198,6 @@ class Scraper(object):
                 out.warn(u"Already seen previous URL %r" % prevUrl)
                 break
             url = prevUrl
-            if url:
-                # wait up to 2 seconds for next URL
-                time.sleep(1.0 + random.random())
 
     def getPrevUrl(self, url, data):
         """Find previous URL."""
