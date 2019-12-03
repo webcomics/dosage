@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
 import re
 import operator
 import os
+
+import pytest
+from xdist.dsession import LoadScopeScheduling
 
 from dosagelib import scraper
 
@@ -45,3 +48,16 @@ def pytest_generate_tests(metafunc):
     if 'scraperobj' in metafunc.fixturenames:
         metafunc.parametrize('scraperobj', get_test_scrapers(),
                              ids=operator.attrgetter('name'))
+
+
+class LoadModScheduling(LoadScopeScheduling):
+    """Implement load scheduling for comic modules. See xdist for details."""
+
+    def _split_scope(self, nodeid):
+        mod, test = nodeid.split("::", 1)
+        return mod + "::" + test.split("/", 1)[0]
+
+
+@pytest.mark.trylast
+def pytest_xdist_make_scheduler(config, log):
+    return LoadModScheduling(config, log)

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2018 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -10,7 +10,7 @@ from ..helpers import indirectStarter, xpath_class
 
 
 class GoComics(_ParserScraper):
-    url = 'http://www.gocomics.com/'
+    url = 'https://www.gocomics.com/'
     imageSearch = '//picture[{}]/img'.format(xpath_class('item-comic-image'))
     prevSearch = '//a[{}]'.format(xpath_class('js-previous-comic'))
     latestSearch = '//div[{}]//a'.format(xpath_class('gc-deck--cta-0'))
@@ -19,7 +19,8 @@ class GoComics(_ParserScraper):
 
     def __init__(self, name, path, lang=None):
         super(GoComics, self).__init__('GoComics/' + name)
-        self.url = 'http://www.gocomics.com/' + path
+        self.session.add_throttle('www.gocomics.com', 1.0, 2.0)
+        self.url = 'https://www.gocomics.com/' + path
         self.shortname = name
         if lang:
             self.lang = lang

@@ -5,8 +5,6 @@
 
 from __future__ import absolute_import, division, print_function
 
-import time
-import random
 import os
 import re
 from six.moves.urllib.parse import urljoin
@@ -24,9 +22,9 @@ try:
 except ImportError:
     pycountry = None
 
-from . import loader, configuration, languages
+from . import configuration, http, languages, loader
 from .util import (get_page, makeSequence, get_system_uid, unescape, tagre,
-    normaliseURL, prettyMatcherList, requests_session, uniq)
+    normaliseURL, prettyMatcherList, uniq)
 from .comic import ComicStrip
 from .output import out
 from .events import getHandler
@@ -85,7 +83,7 @@ class Scraper(object):
     allow_errors = ()
 
     # HTTP session for configuration & cookies
-    session = requests_session()
+    session = http.default_session
 
     @classmethod
     def getmodules(cls):
@@ -200,9 +198,6 @@ class Scraper(object):
                 out.warn(u"Already seen previous URL %r" % prevUrl)
                 break
             url = prevUrl
-            if url:
-                # wait up to 2 seconds for next URL
-                time.sleep(1.0 + random.random())
 
     def getPrevUrl(self, url, data):
         """Find previous URL."""

@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
 import os
+
+from distutils.version import StrictVersion
+
 import dosagelib
 from dosagelib import configuration
-from .util import urlopen
-from distutils.version import StrictVersion
-import requests
+from . import http
+
 
 UPDATE_URL = "https://api.github.com/repos/webcomics/dosage/releases/latest"
 
@@ -38,13 +40,14 @@ def check_update():
 
 def get_online_version():
     """Download update info and parse it."""
-    session = requests.session()
-    page = urlopen(UPDATE_URL, session).json()
+    page = http.default_session.get(UPDATE_URL).json()
     version, url = None, None
     version = page['tag_name']
 
     if os.name == 'nt':
-        url = next((x['browser_download_url'] for x in page['assets'] if x['content_type'] == 'application/x-msdos-program'), configuration.Url)
+        url = next((x['browser_download_url'] for x in page['assets'] if
+            x['content_type'] == 'application/x-msdos-program'),
+            configuration.Url)
     else:
         url = page['tarball_url']
     return version, url

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -17,13 +17,12 @@ try:
 except ImportError:
     from os import rename
 
-import requests
 from lxml import html
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))  # noqa
 
 from dosagelib.util import unescape, get_page
-from dosagelib import scraper
+from dosagelib import scraper, http
 
 
 def first_lower(x):
@@ -39,7 +38,7 @@ class ComicListUpdater(object):
 
     def __init__(self, name):
         self.json = name.replace(".py", ".json")
-        self.session = requests.Session()
+        self.session = http.default_session
         self.sleep = 0
 
     def get_url(self, url, expand=True):
