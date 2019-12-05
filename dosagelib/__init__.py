@@ -27,4 +27,7 @@ try:
     __version__ = version(AppName)  # PEP 396
 except PackageNotFoundError:
     # package is not installed
-    pass
+    out.warn('{} is not installed, no version available.'
+        ' Use at least {!r} or {!r} to fix this.'.format(
+            AppName, 'pip install -e .', 'setup.py egg_info'))
+    __version__ = 'ERR.NOT.INSTALLED'
