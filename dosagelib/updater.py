@@ -7,7 +7,7 @@ from __future__ import absolute_import, division, print_function
 
 import os
 
-from distutils.version import StrictVersion
+from distutils.version import LooseVersion
 
 import dosagelib
 from dosagelib import configuration
@@ -41,18 +41,20 @@ def check_update():
 def get_online_version():
     """Download update info and parse it."""
     page = http.default_session.get(UPDATE_URL).json()
-    version, url = None, None
-    version = page['tag_name']
+    version = page.get('tag_name', None)
 
     if os.name == 'nt':
-        url = next((x['browser_download_url'] for x in page['assets'] if
-            x['content_type'] == 'application/x-msdos-program'),
-            configuration.Url)
+        try:
+            url = next((x['browser_download_url'] for x in page['assets'] if
+                x['content_type'] == 'application/x-msdos-program'),
+                configuration.Url)
+        except KeyError:
+            url = None
     else:
-        url = page['tarball_url']
+        url = page.get('tarball_url', None)
     return version, url
 
 
 def is_newer_version(version):
     """Check if given version is newer than current version."""
-    return StrictVersion(version) > StrictVersion(dosagelib.__version__)
+    return LooseVersion(version) > LooseVersion(dosagelib.__version__)

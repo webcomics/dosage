@@ -39,8 +39,33 @@ class TestDosage(object):
         for option in ("-l", "--list", "--singlelist"):
             cmd_ok(option)
 
+    @responses.activate
     def test_display_version(self):
         cmd_ok("--version")
+
+    @responses.activate
+    def test_update_available(self, capsys):
+        responses.add(responses.GET, re.compile(r'https://api\.github\.com/'),
+            json={'tag_name': '9999.0', 'tarball_url': 'NOWHERE'})
+        cmd_ok('--version', '-v')
+        captured = capsys.readouterr()
+        assert 'A new version' in captured.out
+
+    @responses.activate
+    def test_no_update_available(self, capsys):
+        responses.add(responses.GET, re.compile(r'https://api\.github\.com/'),
+            json={'tag_name': '1.0', 'tarball_url': 'NOWHERE'})
+        cmd_ok('--version', '-v')
+        captured = capsys.readouterr()
+        assert 'Detected local or development' in captured.out
+
+    @responses.activate
+    def test_update_broken(self, capsys):
+        responses.add(responses.GET, re.compile(r'https://api\.github\.com/'),
+            json={})
+        cmd_ok('--version', '-v')
+        captured = capsys.readouterr()
+        assert 'invalid update file' in captured.out
 
     def test_display_help(self):
         for option in ("-h", "--help"):
