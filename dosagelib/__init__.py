@@ -15,12 +15,16 @@ Comic modules for each comic are located in L{dosagelib.plugins}.
 """
 from __future__ import absolute_import, division, print_function
 
-AppName = u'dosage'
-
-from pkg_resources import get_distribution, DistributionNotFound
 try:
-    version_info = get_distribution(AppName)
-    __version__ = version_info.version  # PEP 396
-except DistributionNotFound:
+    from importlib.metadata import version, PackageNotFoundError
+except ImportError:
+    from importlib_metadata import version, PackageNotFoundError
+
+from .output import out
+
+AppName = u'dosage'
+try:
+    __version__ = version(AppName)  # PEP 396
+except PackageNotFoundError:
     # package is not installed
     pass
