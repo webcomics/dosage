@@ -34,7 +34,7 @@ git config push.default simple
 git add -A .
 if [ "$TRAVIS_COMMIT" ]
 then
-	git commit -a -m "Update website from commit $TRAVIS_COMMIT"
+	git commit -a -m "Update website from commit $TRAVIS_COMMIT" || true
 	git push origin HEAD:gh-pages
 fi
 
