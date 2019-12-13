@@ -153,6 +153,13 @@ class CatenaManor(_ParserScraper):
         return self.strips.pop(0)
 
 
+class CatNine(_WordPressScraper):
+    url = 'http://classic.cat-nine.net/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'day-first'
+    endOfLife = True
+
+
 class CatsAndCameras(_WordPressScraper):
     url = 'http://catsncameras.com/'
 
