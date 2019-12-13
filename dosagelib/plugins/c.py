@@ -160,6 +160,13 @@ class CatNine(_WordPressScraper):
     endOfLife = True
 
 
+class CatNineTakeTwo(CatNine):
+    name = 'CatNine/TakeTwo'
+    url = 'http://cat-nine.net/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'episode-1/1-first-day-for-everything'
+
+
 class CatsAndCameras(_WordPressScraper):
     url = 'http://catsncameras.com/'
 
