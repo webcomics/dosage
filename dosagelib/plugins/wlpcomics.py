@@ -58,12 +58,35 @@ class MaidAttack(_WLPComics):
 
 
 class PeterIsTheWolfAdult(_WLPComics):
-    url = 'http://www.peteristhewolf.com/adult/home.html'
+    stripUrl = 'http://www.peteristhewolf.com/adult/%s.html'
+    url = stripUrl % 'home'
+    firstStripUrl = stripUrl % '001'
+    multipleImagesPerStrip = True
     adult = True
+
+    def getPrevUrl(self, url, data):
+        # Fix loop in site navigation
+        if url == self.stripUrl % '194':
+            return self.stripUrl % '193'
+        return super(PeterIsTheWolfAdult, self).getPrevUrl(url, data)
 
 
 class PeterIsTheWolfGeneral(_WLPComics):
     url = 'http://www.peteristhewolf.com/general/'
+    stripUrl = url + '%s.html'
+    firstStripUrl = stripUrl % '001'
+
+    def getPrevUrl(self, url, data):
+        # Fix loops in site navigation
+        if url == self.stripUrl % '406':
+            return self.stripUrl % '405'
+        if url == self.stripUrl % '230':
+            return self.stripUrl % '229'
+        if url == self.stripUrl % '229':
+            return self.stripUrl % '228'
+        if url == self.stripUrl % '153':
+            return self.stripUrl % '152'
+        return super(PeterIsTheWolfGeneral, self).getPrevUrl(url, data)
 
 
 class Stellar(_WLPComics):
