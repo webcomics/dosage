@@ -1,5 +1,6 @@
 #!/bin/sh
 # Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 set -e
 set -u
 
@@ -14,5 +15,5 @@ fi
 for script in $list; do
   target="${d}/../dosagelib/plugins/${script}.py"
   echo "Upating $target"
-  "${d}/${script}.py" $mincomics "$target"
+  python3 "${d}/${script}.py" $mincomics "$target"
 done

@@ -1,4 +1,6 @@
 #!/bin/sh
+# Copyright (C) 2012-2014 Bastian Kleineidam
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 set -e
 set -u
 
@@ -10,5 +12,5 @@ else
 fi
 for script in $list; do
   echo "Executing ${script}.py"
-  "${d}/${script}.py"
+  python3 "${d}/${script}.py"
 done
