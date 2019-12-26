@@ -33,6 +33,19 @@ class ComicsBreak(_WordPressScraper):
         if archive:
             self.url = 'https://web.archive.org/web/{}/{}'.format(
                 archive, self.url)
+            self.endOfLife = True
+
+    def namer(self, imageUrl, pageUrl):
+        if self.name == 'ComicsBreak/Djandora':
+            # Fix inconsistent filenames
+            filename = imageUrl.rsplit('/', 1)[-1]
+            filename = filename.replace('2014-10-31-Page70', 'Page70')
+            filename = filename.replace('a3p69eng', 'Page69')
+            if '2015/08/a4p57eng' in imageUrl:
+                filename = filename.replace('p57', 'p56')
+            return filename
+        else:
+            return super(ComicsBreak, self).namer(imageUrl, pageUrl)
 
     @classmethod
     def getmodules(cls):
