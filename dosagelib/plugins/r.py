@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -106,6 +106,12 @@ class Replay(_ParserScraper):
         if pageUrl in self.startOfChapter:
             self.chapter -= 1
         return name
+
+
+class RiversideExtras(_ParserScraper):
+    url = 'https://riversidecomics.com/'
+    imageSearch = '//div[{}]//img'.format(xpath_class('webcomic-image'))
+    prevSearch = '//a[{}]'.format(xpath_class('previous-webcomic-link'))
 
 
 class RomanticallyApocalyptic(_ParserScraper):

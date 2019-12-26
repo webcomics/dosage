@@ -634,6 +634,7 @@ class ComicFury(_ParserScraper):
             cls('MadGirl', 'madgirl'),
             cls('MagicElDesencuentro', 'magiceldesencuentro', 'es'),
             cls('MagicTheScattering', 'magicthescattering'),
+            cls('Magience', 'magience'),
             cls('MAGISAPARASAYOupdatesMonFri', 'mag-isa'),
             cls('MagnaComica', 'magnacomica'),
             cls('Maluk', 'maluk'),

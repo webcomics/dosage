@@ -507,6 +507,10 @@ class StarfireAgency(_WordPressScraper):
         return chapter + '_' + filename
 
 
+class StarTrip(_ComicControlScraper):
+    url = 'https://www.startripcomic.com/'
+
+
 class StationV3(_ParserScraper):
     url = 'http://www.stationv3.com/'
     stripUrl = url + 'd3/%s.html'

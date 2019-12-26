@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2018 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -212,6 +212,12 @@ class DorkTower(_ParserScraper):
     firstStripUrl = url + '1997/01/01/shadis-magazine-strip-1/'
     imageSearch = '//div[%s]//a/img' % xpath_class('entry-content')
     prevSearch = '//a[%s][text()="Previous"]' % xpath_class('btn')
+
+
+class DoomsdayMyDear(_ParserScraper):
+    url = 'http://doomsdaymydear.com/'
+    imageSearch = '//img[{}]'.format(xpath_class('attachment-full'))
+    prevSearch = '//a[{}]'.format(xpath_class('previous-webcomic-link'))
 
 
 class Dracula(_BasicScraper):

@@ -109,6 +109,10 @@ class FonFlatter(_ParserScraper):
         )
 
 
+class ForestHill(_WordPressScraper):
+    url = 'https://www.foresthillcomic.org/'
+
+
 class ForLackOfABetterComic(_BasicScraper):
     url = 'http://forlackofabettercomic.com/'
     rurl = r'http://(?:www\.)?forlackofabettercomic\.com/'

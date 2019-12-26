@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 """
 Script to get ComicFury comics and save the info in a JSON file for further
 processing.
@@ -20,7 +20,7 @@ class ComicFuryUpdater(ComicListUpdater):
     MIN_COMICS = 90
 
     dup_templates = ('ComicSherpa/%s', 'Creators/%s', 'GoComics/%s',
-                     'KeenSpot/%s', 'SmackJeeves/%s', 'Arcamax/%s')
+                     'KeenSpot/%s', 'Arcamax/%s')
 
     langmap = {
         'german': 'de',
@@ -158,8 +158,8 @@ class ComicFuryUpdater(ComicListUpdater):
     def collect_results(self):
         """Parse all search result pages."""
         # Sort by page count, so we can abort when we get under some threshold.
-        baseUrl = ('http://comicfury.com/search.php?search=1&webcomics=1&' +
-                   'query=&worder=1&asc=0&incvi=1&incse=1&incnu=1&incla=1&' +
+        baseUrl = ('https://comicfury.com/search.php?search=1&webcomics=1&' +
+                   'query=&worder=1&asc=0&incvi=2&incnu=2&incla=2&incse=2&' +
                    'all_ge=1&all_st=1&all_la=1&page=%d')
         last_count = 999
         page = 1
