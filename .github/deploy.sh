@@ -13,7 +13,7 @@ then
     chmod 600 .github/deploy_key
     ssh-add .github/deploy_key
 
-    pip install git+https://github.com/spanezz/staticsite.git
+    pip install git+https://github.com/spanezz/staticsite.git@v1.2
 fi
 
 git clone --depth=10 --branch=gh-pages "git@github.com:${TRAVIS_REPO_SLUG}.git" "$P/git"

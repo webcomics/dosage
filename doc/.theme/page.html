@@ -7,7 +7,7 @@
 -->
 <html>
 <head>
-    <title>{% block title %}{{SITE_NAME}}{{ " - " + title if page.src_relpath != "README.md"}}{% endblock %}</title>
+    <title>{% block title %}{{SITE_NAME}}{{ " - " + page.meta.title if page.src.relpath != "README.md"}}{% endblock %}</title>
     {% block favicon %}<link rel="shortcut icon" href="{{ url_for('/images/favicon.ico') }}">{% endblock %}
     {% block head %}
     {% endblock %}
@@ -24,7 +24,7 @@
 
         <!-- Logo -->
         <div id="logo">
-            {% if page.src_relpath == "README.md" %}
+            {% if page.src.relpath == "README.md" %}
             <h1 id="title">{{SITE_NAME}}</h1>
             {% else %}
             <h1 id="title"><a href="{{SITE_ROOT}}">{{SITE_NAME}}</a></h1>
@@ -60,11 +60,11 @@
     <section class="one cover">
         <div class="container">
             <header>
-            {% if page.src_relpath == "README.md" %}
+            {% if page.src.relpath == "README.md" %}
             <h2>{{SITE_NAME}}</h2>
             <h3>{{SITE_SUB}}</h3>
             {% else %}
-            <h3>{{title}}</h3>
+            <h3>{{page.meta.title}}</h3>
             {% endif %}
             </header>
         </div>
@@ -75,7 +75,7 @@
     <section id="content" class="two dark">
         <div class="container">
             {% block content %}
-            {{content|safe}}
+            {{page.content|safe}}
             {% endblock %}
         </div>
     </section>
