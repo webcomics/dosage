@@ -262,6 +262,28 @@ class PrinceOfSartar(_WPNavi):
         return '%s.%s' % (title, image_ext)
 
 
+class ProphecyOfTheCircle(_WPNavi):
+    url = 'https://www.prophecyofthecircle.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'prologue'
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix duplicate filenames
+        filename = imageUrl.rsplit('/', 1)[-1]
+        if '2015/12/jamet101' in imageUrl:
+            filename = filename.replace('101', '10')
+        elif '2012-02-20-jahrd156' in imageUrl:
+            filename = filename.replace('156', '157')
+        elif '2011-10-02-jahrd137' in imageUrl:
+            filename = filename.replace('137', '137-1')
+        # Fix inconsistent filenames
+        if filename[0] == '2':
+            filename = filename[11:]
+        if len(filename) >= 9 and filename[8].isdigit():
+            filename = filename[:8] + '-' + filename[8:]
+        return filename
+
+
 class Prototype(_ParserScraper):
     stripUrl = 'http://planetprototype.com/%s/'
     firstStripUrl = stripUrl % '2018/03/30/vol-1-ch-1-front-cover'
