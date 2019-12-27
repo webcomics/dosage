@@ -101,10 +101,9 @@ def _check_stripurl(strip, scraperobj):
         return
     # test that the stripUrl regex matches the retrieved strip URL
     urlmatch = re.escape(scraperobj.stripUrl)
-    urlmatch = urlmatch.replace(r"%s", r".+")
-    urlmatch = "^%s$" % urlmatch
+    urlmatch = urlmatch.replace('\\%', '%').replace(r"%s", r".+")
     ro = re.compile(urlmatch)
-    mo = ro.search(strip.strip_url)
+    mo = ro.match(strip.strip_url)
     err = 'strip URL {!r} does not match stripUrl pattern {}'.format(
         strip.strip_url, urlmatch)
     assert mo is not None, err
