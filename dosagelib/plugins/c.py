@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2018 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -333,7 +333,7 @@ class CommitStrip(_ParserScraper):
     baseUrl = 'https://www.commitstrip.com/en/'
     url = baseUrl + '?setLocale=1'  # ensure the language cookie is set
     stripUrl = baseUrl + '%s/'
-    firstStripUrl = 'http://www.commitstrip.com/en/2012/02/22/interview/'  # non-TLS!
+    firstStripUrl = stripUrl % '2012/02/22/interview'
 
     latestSearch = '//section//a'
     starter = indirectStarter
@@ -345,12 +345,15 @@ class CommitStrip(_ParserScraper):
         parts = page_url.rstrip('/').rsplit('/')[-4:]
         return '-'.join(parts)
 
+    def link_modifier(self, fromurl, tourl):
+        return tourl.replace('http:', 'https:')
+
 
 class CommitStripFr(CommitStrip):
     baseUrl = 'https://www.commitstrip.com/fr/'
     url = baseUrl + '?setLocale=1'  # ensure the language cookie is set
     stripUrl = baseUrl + '%s/'
-    firstStripUrl = 'http://www.commitstrip.com/fr/2012/02/22/interview/'  # non-TLS!
+    firstStripUrl = stripUrl % '2012/02/22/interview'
     lang = 'fr'
 
 
