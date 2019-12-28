@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -50,7 +50,6 @@ class Arcamax(_ParserScraper):
             cls('Curtis', 'curtis'),
             # DaddysHome has a duplicate in GoComics/DaddysHome
             # DarrinBell has a duplicate in GoComics/DarrinBell
-            cls('DeFlocked', 'deflocked'),
             cls('DennisTheMenace', 'dennisthemenace'),
             # DiamondLil has a duplicate in GoComics/DiamondLil
             cls('DinetteSet', 'thedinetteset'),
@@ -69,7 +68,6 @@ class Arcamax(_ParserScraper):
             # Heathcliff has a duplicate in GoComics/Heathcliff
             # HerbAndJamaal has a duplicate in GoComics/HerbAndJamaal
             cls('HiAndLois', 'hiandlois'),
-            cls('IntelligentLife', 'intelligentlife'),
             cls('JerryKingCartoons', 'humorcartoon'),
             # LisaBenson has a duplicate in GoComics/LisaBenson
             # LittleDogLost has a duplicate in GoComics/LittleDogLost
@@ -111,7 +109,6 @@ class Arcamax(_ParserScraper):
             # TheBarn has a duplicate in GoComics/TheBarn
             cls('TheLockhorns', 'thelockhorns'),
             # TheOtherCoast has a duplicate in GoComics/TheOtherCoast
-            cls('TinasGroove', 'tinasgroove'),
             # WeePals has a duplicate in GoComics/WeePals
             # WizardOfId has a duplicate in GoComics/WizardOfId
             # WorkingItOut has a duplicate in GoComics/WorkingItOut

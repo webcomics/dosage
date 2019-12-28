@@ -35,6 +35,8 @@ class Removed(Scraper):
             cls('AlsoBagels'),
             cls('Antics'),
             cls('Arcamax/BleekerTheRechargeableDog'),
+            cls('Arcamax/DeFlocked'),
+            cls('Arcamax/TinasGroove'),
             cls('ASkeweredParadise'),
             cls('ASofterWorld', 'block'),
             cls('BackwaterPlanet'),
