@@ -66,32 +66,37 @@ For advanced options and features execute `dosage --help`.
 
 ## Dependencies
 
-[Python](http://www.python.org/): for Python 2.x at least 2.7.0, for Python 3.x
-at least Python 3.5. Dosage requires the following Python modules:
-
-- colorama
-- lxml
-- requests
-- six
-
-For certain modules, you need the `cssselect` module, for bash argument
-completion you need the `argcomplete` module.
+Since dosage is written in [Python](http://www.python.org/), a Python
+installation is required: for Python 2.x at least 2.7.0, for Python 3.x at
+least Python 3.5. Dosage requires some Python modules from PyPI, so
+installation with `pip` is recommended.
 
 ## Installation
 
-The easy way with pip:
+The simplest way to install and upgrade dosage is with [pipx]. To install the
+newest stable version with all optional features use:
 
-    pip install --user dosage
+    pipx install --spec dosage[css,dimensions,bash] dosage
 
-You can invoke Dosage directly from the source code as `./dosage`.
-Alternatively, you can install Dosage using setuptools by invoking `setup.py`
-in the root of the distribution. For example:
+To install the newest development version, use:
 
-    python setup.py install
+    pipx install --spec "dosage[css,dimensions,bash] @ git+https://github.com/webcomics/dosage.git" dosage
 
-or if you do not have root permissions:
+To upgrade such installations, just run:
 
-    python setup.py install --home=$HOME
+    pipx upgrade dosage
+
+If you want to run dosage directly from the source code, you should install
+it in "[editable]" mode, preferable in a [virtual environment]:
+
+    pip install -e .[css,dimensions,bash]
+
+You can invoke Dosage directly from the source code as `./dosage`, but this
+mode of operation is discouraged, since dependencies might be missing.
+
+[pipx]: https://github.com/pipxproject/pipx
+[editable]: https://pip.pypa.io/en/stable/reference/pip_install/#editable-installs
+[virtual environment]: https://docs.python.org/3/library/venv.html
 
 ## Reporting Bugs
 
