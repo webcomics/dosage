@@ -16,6 +16,7 @@ class ComicSherpa(_ParserScraper):
 
     def __init__(self, name, path):
         super(ComicSherpa, self).__init__('ComicSherpa/' + name)
+        self.session.add_throttle('www.comicssherpa.com', 1.0, 2.0)
         self.url = 'http://www.comicssherpa.com/site/feature?uc_comic=' + path
 
     def getIndexStripUrl(self, index):
@@ -35,7 +36,6 @@ class ComicSherpa(_ParserScraper):
             cls('ACMEINKD', 'csmwt'),
             cls('AcornPark', 'csdfe'),
             cls('Adulting', 'cskky'),
-            cls('AJAndMagnus', 'csrxy'),
             cls('AllInGoodTime', 'csjhr'),
             cls('AmandaTheGreat', 'cssyr'),
             cls('AndNow', 'csnxr'),
@@ -65,7 +65,6 @@ class ComicSherpa(_ParserScraper):
             cls('CourageousManAdventures', 'csgkn'),
             cls('DadsDay', 'cswly'),
             cls('DBCartoons', 'csnvt'),
-            cls('DevinCraneComicStripGhostwriter', 'csadf'),
             cls('DoghouseInYourSoul', 'cstwx'),
             cls('DoingTime', 'csvuk'),
             cls('DontPickTheFlowers', 'cswfs'),
@@ -74,17 +73,14 @@ class ComicSherpa(_ParserScraper):
             cls('DungeonHordes', 'csnlo'),
             cls('DustSpecks', 'csqgq'),
             cls('DutchnPals', 'cskqc'),
-            cls('Dysconnected', 'csxbc'),
             cls('Econogirl', 'csxoj'),
             cls('EightballEyeball', 'csnfh'),
             cls('Elmo', 'csvff'),
             cls('Endangered', 'cshii'),
-            cls('Experiment42', 'csbjr'),
             cls('FamousAndNotSoFamousQuotes', 'csdgz'),
             cls('FarOut', 'csaem'),
             cls('FatherOfTheBrood', 'csuul'),
-            cls('FloydAndTony', 'cszgj'),
-            cls('FoolsParadise', 'csvnw'),
+            cls('FoxTheCat', 'csxbc'),
             cls('FrankAndSteinway', 'cseui'),
             cls('FriedCritter', 'cshtp'),
             cls('GarciaCartoonCo', 'csyuw'),
@@ -114,7 +110,6 @@ class ComicSherpa(_ParserScraper):
             cls('LilleysSillies', 'cstka'),
             cls('LimboRoad', 'csfpp'),
             cls('LumAndAbner', 'cscji'),
-            cls('MadDogGhettoCop', 'cskwp'),
             cls('MarysNature', 'csogt'),
             cls('Millennialville', 'csxrl'),
             cls('Milton50', 'csmof'),
@@ -127,7 +122,6 @@ class ComicSherpa(_ParserScraper):
             cls('Mongrels', 'csbjo'),
             cls('MortsIsland', 'csfyq'),
             cls('MySonIsADog', 'csfec'),
-            cls('NavyBean', 'csfiq'),
             cls('NoAmbiguity', 'csryw'),
             cls('NoBusinessIKnow', 'csmfg'),
             cls('NoOrdinaryLife', 'csicr'),
@@ -184,7 +178,6 @@ class ComicSherpa(_ParserScraper):
             cls('TheBoobiehatch', 'csoev'),
             cls('TheCardinal', 'csfjg'),
             cls('TheDinkledorfs', 'cszhp'),
-            cls('TheEntrepiranha', 'cslml'),
             cls('TheFabulousBushPigs', 'cscqi'),
             cls('TheGrayZone', 'csmue'),
             cls('TheGreenMonkeys', 'cscue'),
@@ -198,7 +191,6 @@ class ComicSherpa(_ParserScraper):
             cls('TheQuinnAndFinnShow', 'csynn'),
             cls('TheRocks', 'cswky'),
             cls('TheUnemployed', 'csanx'),
-            cls('TheWagesOfSindy', 'cszff'),
             cls('Thingsesque', 'cstsq'),
             cls('TodaysTrump', 'csbrj'),
             cls('TopicToons', 'csgly'),
