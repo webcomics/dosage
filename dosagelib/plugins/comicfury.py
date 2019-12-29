@@ -29,6 +29,8 @@ class ComicFury(_ParserScraper):
         u'//nav//a[contains(text(), "\u2039")]',
         # RedSpot
         '//a[contains(text(), "Back")]',
+        # KATRAN
+        '//a[contains(text(), "Previous")]',
     )
     nextSearch = (
         '//link[@rel="next"]',
@@ -39,7 +41,7 @@ class ComicFury(_ParserScraper):
         XPATH_IMG % ('Next'),
         # Art, ConsolersDLC, etc.
         u'//nav//a[contains(text(), "\u203A")]',
-        # RedSpot
+        # RedSpot, KATRAN
         '//a[contains(text(), "Next")]',
     )
     help = 'Index format: n'
@@ -569,6 +571,7 @@ class ComicFury(_ParserScraper):
             cls('JustPeachy', 'justpeachy'),
             cls('KarensEdge', 'karensedge'),
             cls('Katastrophe', 'katastrophe'),
+            cls('KATRAN', 'katran'),
             cls('KayAndP', 'kayandp'),
             cls('KazasMateGwenna', 'kaza-and-gwenna'),
             cls('KAZE', 'kaze'),
