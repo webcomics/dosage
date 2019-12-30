@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -26,7 +26,12 @@ class CloneManga(_ParserScraper):
         self.endOfLife = endOfLife
 
     def namer(self, image_url, page_url):
-        return '%03d' % int(getQueryParams(page_url)['page'][0])
+        origname = image_url.rsplit('/', 1)[1]
+        params = getQueryParams(page_url)
+        if 'page' in params:
+            return '{:03}_{}'.format(int(params['page'][0]), origname)
+        else:
+            return origname
 
     @classmethod
     def getmodules(cls):
