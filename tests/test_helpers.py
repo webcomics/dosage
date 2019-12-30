@@ -3,13 +3,18 @@
 
 from __future__ import absolute_import, division, print_function
 
-from dosagelib.helpers import joinPathPartsNamer
+from dosagelib.helpers import joinPathPartsNamer, queryNamer
 
 
 class TestNamer(object):
     """
     Tests for comic namer.
     """
+
+    def test_queryNamer(self):
+        testurl = 'http://FOO?page=result&page2=result2'
+        assert queryNamer('page')(self, testurl, "") == 'result'
+        assert queryNamer('page2', True)(self, "", testurl) == 'result2'
 
     def test_joinPathPartsNamer(self):
         imgurl = 'https://HOST/wp-content/uploads/2019/02/tennis5wp-1.png'

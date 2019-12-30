@@ -5,13 +5,12 @@
 
 from __future__ import absolute_import, division, print_function
 
-from six.moves.urllib.parse import (
+from six.moves.urllib.parse import (parse_qs,
     quote as url_quote, unquote as url_unquote, urlparse, urlunparse, urlsplit)
 from six.moves.urllib_robotparser import RobotFileParser
 import requests
 import sys
 import os
-import cgi
 import re
 import traceback
 import time
@@ -321,9 +320,9 @@ def getRelativePath(basepath, path):
 
 def getQueryParams(url):
     """Get URL query parameters."""
-    query = urlsplit(url)[3]
+    query = urlsplit(url).query
     out.debug(u'Extracting query parameters from %r (%r)...' % (url, query))
-    return cgi.parse_qs(query)
+    return parse_qs(query)
 
 
 def internal_error(out=sys.stderr, etype=None, evalue=None, tb=None):
