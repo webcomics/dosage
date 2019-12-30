@@ -95,7 +95,9 @@ class MaxOveracts(_ParserScraper):
 
 
 class Meek(_WordPressScraper):
-    url = 'http://www.meekcomic.com/'
+    url = 'https://www.meekcomic.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'chapter-1-cover'
 
 
 class MegaTokyo(_BasicScraper):
