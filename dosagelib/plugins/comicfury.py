@@ -55,6 +55,8 @@ class ComicFury(_ParserScraper):
         super(ComicFury, self).__init__('ComicFury/' + name)
         self.prefix = name
         self.url = 'http://%s.webcomic.ws/comics/' % sub
+        self.stripUrl = self.url + '%s'
+        self.firstStripUrl = self.stripUrl % '1'
         if lang:
             self.lang = lang
 
@@ -63,9 +65,6 @@ class ComicFury(_ParserScraper):
         path, ext = os.path.splitext(image_url)
         num = parts[-1]
         return "%s_%s%s" % (self.prefix, num, ext)
-
-    def getIndexStripUrl(self, index):
-        return self.url + 'comics/%s' % index
 
     @classmethod
     def getmodules(cls):
