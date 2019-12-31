@@ -1,21 +1,29 @@
 language: python
-python:
-  - "2.7"
-  - "3.5"
-  - "3.6"
-  - "3.7"
-  - "3.8"
+matrix:
+  include:
+    - python: "2.7"
+    - python: "3.5"
+    - python: "3.6"
+    - python: "3.7"
+    - python: "3.8"
+      env: "CC_TEST_REPORTER_ID=2a411f596959fc32f5d73f3ba7cef8cc4d5733299d742dbfc97fd6c190b9010c"
 cache: pip
 git:
   depth: false
 dist: xenial
+before_script:
+  - "curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > cc-test-reporter"
+  - "chmod +x cc-test-reporter"
+  - "if [ -n \"$CC_TEST_REPORTER_ID\" ]; then ./cc-test-reporter before-build; fi"
 # command to install dependencies
 install:
   - pip install -U tox-travis setuptools codecov
 # command to run tests
 script: tox
 after_success:
-    codecov --file .tox/cov-*.xml
+  - codecov --file .tox/cov-*.xml
+  - "if [ -n \"$CC_TEST_REPORTER_ID\" ]; then ./cc-test-reporter format-coverage --input-type coverage.py .tox/cov-*.xml; fi"
+  - "if [ -n \"$CC_TEST_REPORTER_ID\" ]; then ./cc-test-reporter upload-coverage; fi"
 notifications:
   irc:
     channels:
