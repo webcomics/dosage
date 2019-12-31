@@ -166,7 +166,7 @@ class OurHomePlanet(_ParserScraper):
 
 class OutOfPlacers(_WordPressScraper):
     url = 'http://www.valsalia.com/'
-    stripUrl = 'comic/%s/'
+    stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'prologue/01'
 
 

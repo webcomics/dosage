@@ -348,8 +348,8 @@ class Annyseed(_ParserScraper):
 
 
 class ApartmentForTwo(_ParserScraper):
-    url = 'http://www.apartmentfor2.com/'
-    stripUrl = url + 'index.php?date=%s'
+    url = 'https://apartmentfor2.com/'
+    stripUrl = url + 'comics/index.php?date=%s'
     firstStripUrl = url + 'comics/'
     imageSearch = '//a/img[contains(@src, "comics/")]'
     prevSearch = '//a[./img[contains(@src, "previous")]]'

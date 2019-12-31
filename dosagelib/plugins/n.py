@@ -20,7 +20,7 @@ class Namesake(_ComicControlScraper):
 
 
 class NamirDeiter(_ParserScraper):
-    baseUrl = 'http://www.namirdeiter.com/comics/'
+    baseUrl = 'https://www.namirdeiter.com/comics/'
     stripUrl = baseUrl + 'index.php?date=%s'
     url = stripUrl % '20150410'
     firstStripUrl = baseUrl
@@ -98,7 +98,7 @@ class Nicky510(_WPNavi):
 
 
 class NicoleAndDerek(_ParserScraper):
-    url = 'https://www.nicoleandderek.com/'
+    url = 'https://nicoleandderek.com/'
     stripUrl = url + 'comics/index.php?date=%s'
     firstStripUrl = url + 'comics/'
     imageSearch = '//a/img[contains(@src, "comics/")]'

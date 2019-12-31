@@ -32,7 +32,7 @@ class RaynaOnTheRiver(_WordPressScraper):
 
 
 class RealLife(_WordPressScraper):
-    url = 'http://reallifecomics.com/'
+    url = 'https://reallifecomics.com/'
     stripUrl = url + 'comic.php?comic=%s'
     firstStripUrl = stripUrl % 'title-1'
     help = 'Index format: monthname-dd-yyyy'

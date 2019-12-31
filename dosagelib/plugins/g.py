@@ -67,7 +67,7 @@ class GeeksNextDoor(_BasicScraper):
 
 
 class Ginpu(_WPNavi):
-    url = 'http://www.ginpu.us/'
+    url = 'https://www.ginpu.us/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'filler-2'
 
@@ -163,7 +163,7 @@ class GoneWithTheBlastwave(_BasicScraper):
 
 
 class GrrlPower(_WordPressScraper):
-    url = 'http://grrlpowercomic.com/'
+    url = 'https://grrlpowercomic.com/'
     stripUrl = url + 'archives/comic/%s/'
     firstStripUrl = stripUrl % 'gp0001'
 

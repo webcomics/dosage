@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -94,8 +94,7 @@ class PennyAndAggie(_BasicScraper):
 
 
 class PennyArcade(_ParserScraper):
-    url = 'http://www.penny-arcade.com/comic/'
-    rurl = escape(url)
+    url = 'https://www.penny-arcade.com/comic/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1998/11/18'
     imageSearch = '//div[@id="comicFrame"]//img'

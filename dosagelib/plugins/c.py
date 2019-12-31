@@ -181,7 +181,7 @@ class CatVersusHuman(_ParserScraper):
 
 class CavesAndCritters(_ParserScraper):
     url = 'https://cavesandcritters.com/?ao_confirm'
-    stripUrl = url + 'https://cavesandcritters.com/cnc_webcomic/%s/'
+    stripUrl = 'https://cavesandcritters.com/cnc_webcomic/%s/'
     firstStripUrl = stripUrl % '01_000'
     imageSearch = '//div[@class="webcomic-image"]//img'
     prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
@@ -204,7 +204,7 @@ class Centralia2050(_WordPressScraper):
 
 class ChainsawSuit(_WordPressScraper):
     url = 'http://chainsawsuit.com/comic/'
-    stripUrl = url + 'archive/%s/'
+    stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2008/03/12/strip-338'
     prevSearch = '//img[@alt="previous"]/..'
     help = 'Index format: yyyy/mm/dd/stripname'
@@ -229,8 +229,8 @@ class ChannelAte(_WPNavi):
 
 class ChasingTheSunset(_BasicScraper):
     url = 'http://www.fantasycomic.com/'
-    stripUrl = url + 'index.php?p=c%s'
-    firstStripUrl = stripUrl % '1'
+    stripUrl = url + 'index.php?p=%s'
+    firstStripUrl = stripUrl % 'c1'
     imageSearch = compile(r'(/cmsimg/.+?)".+?comic-img')
     prevSearch = compile(r'<a href="(.+?)" title="" ><img src="(images/eye-prev.png|images/cn-prev.png)"')
     help = 'Index format: n'

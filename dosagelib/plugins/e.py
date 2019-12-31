@@ -246,7 +246,7 @@ class ExtraLife(_BasicScraper):
 
 
 class ExtraOrdinary(_ParserScraper):
-    url = 'http://www.exocomics.com/'
+    url = 'https://www.exocomics.com/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '01'
     prevSearch = '//a[%s]' % xpath_class('prev')

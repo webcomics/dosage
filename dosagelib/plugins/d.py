@@ -109,7 +109,7 @@ class DeerMe(_ParserScraper):
 
 
 class Delve(_WordPressScraper):
-    url = 'http://thisis.delvecomic.com/NewWP/'
+    url = 'https://thisis.delvecomic.com/NewWP/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'in-too-deep'
     adult = True
@@ -203,7 +203,7 @@ class Dilbert(_ParserScraper):
 
 
 class DocRat(_ParserScraper):
-    url = 'http://www.docrat.com.au/'
+    url = 'https://www.docrat.com.au/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'begin-with-eye-contact'
     imageSearch = '//div[@class="webcomic-image"]//img'
@@ -242,7 +242,7 @@ class DoghouseDiaries(_ParserScraper):
 
 
 class DominicDeegan(_ParserScraper):
-    url = 'http://www.dominic-deegan.com/'
+    url = 'https://www.dominic-deegan.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '0001-20020521'
     imageSearch = '//img[contains(@class, "wp-post-image")]'

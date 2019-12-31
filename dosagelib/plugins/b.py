@@ -283,8 +283,8 @@ class BusinessCat(_WPNaviIn):
 
 
 class ButImACatPerson(_WordPressScraper):
-    url = 'http://www.bicatperson.com/'
-    stripUrl = 'comic/%s/'
+    url = 'https://www.bicatperson.com/'
+    stripUrl = url + 'comic/%s/'
     firstStripUrl = 'sketches-1'
 
 

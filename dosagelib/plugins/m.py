@@ -98,7 +98,7 @@ class Meek(_WordPressScraper):
 
 
 class MegaTokyo(_BasicScraper):
-    url = 'http://megatokyo.com/'
+    url = 'https://megatokyo.com/'
     stripUrl = url + 'strip/%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(r'"(strips/.+?)"', IGNORECASE)

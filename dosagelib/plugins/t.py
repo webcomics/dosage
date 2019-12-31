@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -172,7 +172,7 @@ class TheProbabilityBomb(_ParserScraper):
 class TheRockCocks(_BasicScraper):
     url = 'http://rockcocks.slipshine.net/'
     rurl = escape(url)
-    stripUrl = url + 'comics/%s'
+    stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % "page-1-nsfw-track-1-start"
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl, after='id="cc-comic"'))
     prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl, after='rel="prev"'))
@@ -284,7 +284,7 @@ class TrippingOverYou(_BasicScraper):
 
 
 class TumbleDryComics(_WordPressScraper):
-    url = 'http://tumbledrycomics.com/'
+    url = 'https://www.tumbledrycomics.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'we-need-to-get-high-jpg'
     textSearch = '//div[@id="comic"]//img/@alt'

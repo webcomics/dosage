@@ -152,7 +152,7 @@ class Fragile(_ParserScraper):
 
 
 class FredoAndPidjin(_ParserScraper):
-    url = 'http://www.pidjin.net/'
+    url = 'https://www.pidjin.net/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2006/02/19/goofy-monday'
     imageSearch = '//div[%s]//img' % xpath_class("episode")

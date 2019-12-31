@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2019 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -37,7 +37,7 @@ class UnicornJelly(_BasicScraper):
 
 
 class UnlikeMinerva(_ParserScraper):
-    baseUrl = 'https://www.unlikeminerva.com/archive/index.php'
+    baseUrl = 'https://unlikeminerva.com/archive/index.php'
     stripUrl = baseUrl + '?week=%s'
     url = stripUrl % '127'
     firstStripUrl = stripUrl % '26'
