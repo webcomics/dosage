@@ -25,6 +25,8 @@ class SmackJeeves(_ParserScraper):
         self.adult = adult
         self.endOfLife = endOfLife or last
         self.lastid = (last or 0) - 1
+        if name == 'VerloreGeleentheid':
+            self.textSearch = True
 
     def starter(self):
         response = self.session.post(self.apiBase + 'articleList',
@@ -52,6 +54,23 @@ class SmackJeeves(_ParserScraper):
     def namer(self, image_url, page_url):
         articleNo = int(page_url.rsplit('=', 1)[1])
         return '{:04}'.format(articleNo)
+
+    def fetchText(self, url, data, textSearch, optional):
+        if 'VerloreGeleentheid' in self.name:
+            response = self.session.post('https://www.smackjeeves.com/api/comments/get', params={
+                'titleNo': self._comicid,
+                'articleNo': url.rsplit('=', 1)[1],
+                'page': 1,
+                'order': 'new'
+            })
+            response.raise_for_status()
+            comments = response.json()['result']['list']
+            for comment in reversed(comments):
+                if comment['nickname'] == 'Wolfie_Inu':
+                    return comment['commentText']
+            return None
+        else:
+            super(SmackJeeves, self).fetchText(url, data, textSearch, optional)
 
     @classmethod
     def getmodules(cls):
