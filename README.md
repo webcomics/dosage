@@ -35,12 +35,6 @@ add the following entry to your robots.txt file:
     User-agent: Dosage
     Allow: *
 
-## Adult content
-
-Some comics contain adult content and require age confirmation. These comics
-can only be downloaded by using the `--adult` option, which confirms that you
-are old enough to view them.
-
 ## Usage
 
 List available comics (ca. 3000 at the moment):
@@ -64,14 +58,29 @@ To help others find good comics, you can vote for your favourite ones:
 
 For advanced options and features execute `dosage --help`.
 
-## Dependencies
+### Adult content
+
+Some comics contain adult content and require age confirmation. These comics
+can only be downloaded by using the `--adult` option, which confirms that you
+are old enough to view them.
+
+## Installation
+
+### Dependencies
 
 Since dosage is written in [Python](http://www.python.org/), a Python
 installation is required: for Python 2.x at least 2.7.0, for Python 3.x at
 least Python 3.5. Dosage requires some Python modules from PyPI, so
 installation with `pip` is recommended.
 
-## Installation
+### Using the Windows binary
+
+Windows users can download a complete binary (including Python) from the
+[release page].
+
+[release page]: https://github.com/webcomics/dosage/releases/latest
+
+### Install with pipx
 
 The simplest way to install and upgrade dosage is with [pipx]. To install the
 newest stable version with all optional features use:
@@ -85,6 +94,8 @@ To install the newest development version, use:
 To upgrade such installations, just run:
 
     pipx upgrade dosage
+
+### Installation for development
 
 If you want to run dosage directly from the source code, you should install
 it in "[editable]" mode, preferable in a [virtual environment]:
