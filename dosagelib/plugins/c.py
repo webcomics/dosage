@@ -168,7 +168,10 @@ class CatNineTakeTwo(CatNine):
 
 
 class CatsAndCameras(_WordPressScraper):
-    url = 'http://catsncameras.com/'
+    url = 'https://catsncameras.com/cnc/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'cnc-begins'
+    adult = True
 
 
 class CatVersusHuman(_ParserScraper):
