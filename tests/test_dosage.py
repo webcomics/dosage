@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -89,17 +89,34 @@ class TestDosage(object):
     def test_fetch_html_and_rss_json(self, tmpdir):
         httpmocks.xkcd()
         cmd_ok("-n", "2", "-v", "-b", str(tmpdir), "-o", "html", "-o", "rss",
-               "-o", "json", "xkcd")
+               "-o", "json", "--no-downscale", "xkcd")
 
     @responses.activate
-    def test_fetch_html_and_rss_2(self, tmpdir):
+    def test_fetch_html_and_rss_2(self, tmp_path):
         httpmocks.page('http://www.bloomingfaeries.com/', 'bf-home')
         httpmocks.page(re.compile('http://www.*faeries-405/'), 'bf-405')
-        httpmocks.png(re.compile(r'http://www\.bloomingfaeries\.com/.*\.jpg'))
+        httpmocks.png(re.compile(r'http://www\.blooming.*405.*jpg'))
+        httpmocks.png(re.compile(r'http://www\.blooming.*406.*jpg'), 'tall')
 
         cmd_ok("--numstrips", "2", "--baseurl", "bla", "--basepath",
-            str(tmpdir), "--output", "rss", "--output", "html", "--adult",
+            str(tmp_path), "--output", "rss", "--output", "html", "--adult",
             "BloomingFaeries")
+
+        html = next((tmp_path / 'html').glob('*.html')).read_text()
+        assert "width=" in html
+
+    @responses.activate
+    def test_fetch_html_broken_img(self, tmp_path):
+        httpmocks.page('http://www.bloomingfaeries.com/', 'bf-home')
+        httpmocks.page(re.compile('http://www.*faeries-405/'), 'bf-405')
+        responses.add(responses.GET, re.compile(r'.*\.jpg'), body=b'\377\330',
+            content_type='image/jpeg')
+
+        cmd_ok("--numstrips", "2", "--baseurl", "bla", "--basepath",
+            str(tmp_path), "--output", "html", "--adult", "BloomingFaeries")
+
+        html = next((tmp_path / 'html').glob('*.html')).read_text()
+        assert "width=" not in html
 
     @responses.activate
     def test_fetch_indexed(self, tmpdir):

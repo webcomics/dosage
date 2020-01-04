@@ -26,8 +26,8 @@ def _content(name):
 
 
 @lru_cache()
-def _img():
-    with open(_file('empty.png'), 'rb') as f:
+def _img(name):
+    with open(_file(name + '.png'), 'rb') as f:
         return f.read()
 
 
@@ -35,12 +35,12 @@ def page(url, pagename):
     add(GET, url, _content(pagename))
 
 
-def png(url):
-    add(GET, url, _img(), content_type='image/jpeg')
+def png(url, name='empty'):
+    add(GET, url, _img(name), content_type='image/jpeg')
 
 
-def jpeg(url):
-    add(GET, url, _img(), content_type='image/jpeg')
+def jpeg(url, name='empty'):
+    add(GET, url, _img(name), content_type='image/jpeg')
 
 
 def xkcd():
