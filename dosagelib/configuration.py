@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 """
 Define basic configuration data like version or application name.
 """
@@ -19,7 +19,7 @@ UserAgent = u"Mozilla/5.0 (compatible; %s/%s; +%s)" % (AppName, __version__,
                                                        Url)
 Copyright = u"""Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 Copyright (C) 2012-2014 Bastian Kleineidam
-Copyright (C) 2015-2019 Tobias Gruetzmacher
+Copyright (C) 2015-2020 Tobias Gruetzmacher
 """
 Freeware = AppName + u""" comes with ABSOLUTELY NO WARRANTY!
 This is free software, and you are welcome to redistribute it
