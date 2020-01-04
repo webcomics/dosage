@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -10,6 +10,8 @@ import time
 from six.moves.urllib.parse import quote as url_quote
 import codecs
 import json
+
+import imagesize
 
 from . import rss, util, configuration
 from .output import out
@@ -134,18 +136,24 @@ class RSSEventHandler(EventHandler):
 
 def getDimensionForImage(filename, maxsize):
     """Return scaled image size in (width, height) format.
-    The scaling preserves the aspect ratio.
-    If PIL is not found returns None."""
+    The scaling preserves the aspect ratio."""
     try:
-        from PIL import Image
-    except ImportError:
+        origsize = imagesize.get(filename)
+    except Exception as e:
+        out.warn("Could not get image size of {}: {}".format(os.path.basename(filename), e))
         return None
-    img = Image.open(filename)
-    width, height = img.size
-    if width > maxsize[0] or height > maxsize[1]:
-        img.thumbnail(maxsize)
-        out.info("Downscaled display size from %s to %s" % ((width, height), img.size))
-    return img.size
+
+    width, height = origsize
+    if width > maxsize[0]:
+        height = max(round(height * maxsize[0] / width), 1)
+        width = round(maxsize[0])
+    if height > maxsize[1]:
+        width = max(round(width * maxsize[1] / height), 1)
+        height = round(maxsize[1])
+
+    if width < origsize[0] or height < origsize[1]:
+        out.info("Downscaled display size from %s to %s" % (origsize, (width, height)))
+    return (width, height)
 
 
 class HtmlEventHandler(EventHandler):

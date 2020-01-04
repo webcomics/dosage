@@ -1,4 +1,5 @@
 colorama
+imagesize
 lxml
 requests>=2.0
 six
