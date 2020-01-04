@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -62,10 +62,11 @@ def get_host_lock(url):
 class ComicGetter(threading.Thread):
     """Get all strips of a comic in a thread."""
 
-    def __init__(self, options):
+    def __init__(self, options, jobs):
         """Store options."""
         super(ComicGetter, self).__init__()
         self.options = options
+        self.jobs = jobs
         self.origname = self.name
         self.stopped = False
         self.errors = 0
@@ -74,12 +75,12 @@ class ComicGetter(threading.Thread):
         """Process from queue until it is empty."""
         try:
             while not self.stopped:
-                scraperobj = jobs.get(False)
+                scraperobj = self.jobs.get(False)
                 self.name = scraperobj.name
                 try:
                     self.getStrips(scraperobj)
                 finally:
-                    jobs.task_done()
+                    self.jobs.task_done()
                     self.name = self.origname
         except Empty:
             pass
@@ -145,12 +146,11 @@ class ComicGetter(threading.Thread):
         self.stopped = True
 
 
-jobs = ComicQueue()
-threads = []
-
-
 def getComics(options):
     """Retrieve comics."""
+    threads = []
+    jobs = ComicQueue()
+
     if options.handler:
         for name in set(options.handler):
             events.addHandler(name, options.basepath, options.baseurl, options.allowdownscale)
@@ -163,7 +163,7 @@ def getComics(options):
         # start threads
         num_threads = min(options.parallel, jobs.qsize())
         for i in range(num_threads):
-            t = ComicGetter(options)
+            t = ComicGetter(options, jobs)
             threads.append(t)
             t.start()
         # wait for threads to finish
@@ -174,20 +174,14 @@ def getComics(options):
         out.exception(msg)
         errors += 1
     except KeyboardInterrupt:
-        finish()
+        out.warn("Interrupted! Waiting for download threads to finish.")
     finally:
+        for t in threads:
+            t.stop()
+        jobs.clear()
         events.getHandler().end()
         events.clear_handlers()
     return errors
-
-
-def finish():
-    """Print warning about interrupt and empty the job queue."""
-    out.warn("Interrupted!")
-    for t in threads:
-        t.stop()
-    jobs.clear()
-    out.warn("Waiting for download threads to finish.")
 
 
 def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False, listing=False):
