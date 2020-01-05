@@ -853,6 +853,7 @@ class ComicFury(_ParserScraper):
             cls('ScottieRoad', 'scottieroad'),
             cls('Scoundrels', 'scoundrels'),
             cls('ScrubDiving', 'scrubdiving'),
+            cls('Scuvener', 'scuvener'),
             cls('SEAAOMSagaArchive', 'seaaom'),
             cls('SECRETLOVE', 'secretlove'),
             cls('SecretSanta2013', 'secretsanta2013'),
