@@ -10,7 +10,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
-from .common import _WordPressScraper, _WPNavi
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
 
 
 class Underling(_WPNavi):
@@ -24,6 +24,10 @@ class Undertow(_BasicScraper):
     prevSearch = compile(r'href="(.+?)".+?teynpoint')
     latestSearch = compile(r'href="(.+?)".+?Most recent page')
     starter = indirectStarter
+
+
+class unDivine(_ComicControlScraper):
+    url = 'http://undivinecomic.com/'
 
 
 class UnicornJelly(_BasicScraper):
