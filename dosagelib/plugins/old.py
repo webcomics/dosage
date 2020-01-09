@@ -207,6 +207,7 @@ class Removed(Scraper):
             cls('CowboyJedi', 'brk'),
             cls('Creators/BCinSpanish'),
             cls('Creators/GirlsandSportsinSpanish'),
+            cls('Creators/Recess'),
             cls('Creators/RugratsinSpanish'),
             cls('CtrlAltDel', 'block'),
             cls('CtrlAltDel/Sillies', 'block'),
