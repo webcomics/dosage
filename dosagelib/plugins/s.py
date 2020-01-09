@@ -7,7 +7,6 @@ from __future__ import absolute_import, division, print_function
 
 from re import compile, escape, IGNORECASE, sub
 from os.path import splitext
-import datetime
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter, joinPathPartsNamer, xpath_class
@@ -198,24 +197,6 @@ class Sheldon(_BasicScraper):
     help = 'Index format: yymmdd'
 
 
-class ShermansLagoon(_BasicScraper):
-    url = 'http://shermanslagoon.com/'
-    stripUrl = url + 'comics/%s'
-    firstStripUrl = stripUrl % '/december-29-2003/'
-    imageSearch = compile(tagre("img", "src",
-        r'(https://safr\.kingfeatures\.com/idn/cnfeed/zone/js/content\.php\?file=.+?)'))
-    prevSearch = compile(r'id="previouscomic" class="button white"><a href="(%scomics/[a-z0-9-]+/)"' % url)
-    help = 'Index format: monthname-day-year'
-
-    def namer(self, image_url, page_url):
-        name = page_url.rsplit('/', 3)[2]
-        if name == "shermanslagoon.com":
-            name = datetime.date.today().strftime("%B-%d-%Y").lower()
-        # name is monthname-day-year
-        month, day, year = name.split('-')
-        return "%s-%s-%s" % (year, month, day)
-
-
 class ShipInABottle(_WPNavi):
     url = 'http://shipinbottle.pepsaga.com/'
     stripUrl = url + '?p=%s'
@@ -246,12 +227,6 @@ class SinFest(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(view\.php\?date=.+)') + '\\s*' +
                          tagre("img", "src", r'\.\./images/prev\.gif'))
     help = 'Index format: yyyy-mm-dd'
-
-
-class Sithrah(_ParserScraper):
-    url = 'http://sithrah.com/'
-    imageSearch = '//div[@class="webcomic-image"]/img'
-    prevSearch = '//a[%s]' % xpath_class('previous-webcomic-link')
 
 
 class SixPackOfOtters(_ParserScraper):

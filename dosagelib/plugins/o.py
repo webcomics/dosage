@@ -106,24 +106,6 @@ class OnTheEdge(_WordPressScraper):
     firstStripUrl = 'http://ontheedgecomics.com/comic/ote0001/'
 
 
-class OnTheFastrack(_BasicScraper):
-    url = 'http://onthefastrack.com/'
-    stripUrl = url + 'comics/%s'
-    firstStripUrl = stripUrl % 'november-13-2000'
-    imageSearch = compile(r'(https://safr\.kingfeatures\.com/idn/cnfeed/zone/js/content\.php\?file=.+)"')
-    prevSearch = compile(r'id="previouscomic" class="button white"><a href="(%scomics/[a-z0-9-]+/)"' % url)
-    help = 'Index format: monthname-dd-yyyy'
-
-    def namer(self, image_url, page_url):
-        name = page_url.rsplit('/', 3)[2]
-        if name == "onthefastrack.com":
-            import datetime
-            name = datetime.date.today().strftime("%B-%d-%Y")
-        # name.title ensures that the comics are named the same
-        # as in the previous scraper
-        return "%s.gif" % name.title()
-
-
 class OopsComicAdventure(_WordPressScraper):
     url = ('https://web.archive.org/web/20190102215141/'
         'http://oopscomicadventure.com/')

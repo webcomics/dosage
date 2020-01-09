@@ -14,7 +14,7 @@ except ImportError:
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, xpath_class
 from ..util import tagre
-from .common import _ComicControlScraper, _TumblrScraper, _WordPressScraper, _WPNavi, _WPNaviIn
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPNaviIn
 
 
 class TailsAndTactics(_ParserScraper):
@@ -180,23 +180,6 @@ class TheRockCocks(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl, after='id="cc-comic"'))
     prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl, after='rel="prev"'))
     adult = True
-
-
-class TheThinHLine(_TumblrScraper):
-    url = 'http://thinhline.tumblr.com/'
-    firstStripUrl = url + 'post/4177372348/thl-1-a-cats-got-his-tongue-click-on-the'
-    imageSearch = '//img[@id="content-image"]/@data-src'
-    prevSearch = '//div[@id="pagination"]/a[text()=">"]'
-    latestSearch = '//a[@class="timestamp"]'
-    adult = True
-
-    indirectImageSearch = '//div[@id="post"]//a[not(@rel) and img]'
-
-    def getComicStrip(self, url, data):
-        """The comic strip image is in a separate page."""
-        subPage = self.fetchUrl(url, data, self.indirectImageSearch)
-        pageData = self.getPage(subPage)
-        return super(TheThinHLine, self).getComicStrip(subPage, pageData)
 
 
 class TheWhiteboard(_ParserScraper):

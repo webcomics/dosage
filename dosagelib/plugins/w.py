@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -46,15 +46,6 @@ class WebDesignerCOTW(_ParserScraper):
         imagename = image_url.rsplit('/', 1)[1]
         week = compile(r'week-(\d+)').search(page_url).group(1)
         return "%s-%s" % (week, imagename)
-
-
-class WeCanSleepTomorrow(_BasicScraper):
-    url = 'http://wecansleeptomorrow.com/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
-    help = 'Index format: yyyy/mm/dd/stripname'
 
 
 class Weregeek(_ParserScraper):
@@ -207,10 +198,6 @@ class WorldOfMrToast(_BasicScraper):
             return self.prevurls[idx + 1]
         except IndexError:
             return None
-
-
-class WorldOfWarcraftEh(_WordPressScraper):
-    url = 'http://woweh.com/'
 
 
 class WormWorldSaga(_BasicScraper):

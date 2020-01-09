@@ -14,14 +14,6 @@ from ..util import tagre
 from .common import _WordPressScraper
 
 
-class RadioactivePanda(_BasicScraper):
-    url = 'http://www.radioactivepanda.com/'
-    stripUrl = url + 'comic/%s'
-    imageSearch = compile(r'<img src="(/Assets/.*?)".+?"comicimg"')
-    prevSearch = compile(r'<a href="(/comic/.*?)".+?previous_btn')
-    help = 'Index format: n (no padding)'
-
-
 class RalfTheDestroyer(_WordPressScraper):
     url = 'http://ralfthedestroyer.com/'
 
@@ -73,15 +65,6 @@ class RedMeat(_ParserScraper):
     def namer(self, image_url, page_url):
         parts = image_url.rsplit('/', 2)
         return '_'.join(parts[1:3])
-
-
-class RedString(_BasicScraper):
-    url = 'http://www.redstring.strawberrycomics.com/'
-    stripUrl = url + 'index.php?id=%s'
-    firstStripUrl = stripUrl % '434'
-    imageSearch = compile(tagre("img", "src", r'(comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/index\.php\?id=\d+)', after="prev"))
-    help = 'Index format: nnn'
 
 
 class Replay(_ParserScraper):

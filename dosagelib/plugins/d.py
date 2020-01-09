@@ -13,21 +13,6 @@ from ..util import tagre
 from .common import _ComicControlScraper, _WordPressScraper, _WPNaviIn
 
 
-class DamnLol(_ParserScraper):
-    url = 'http://www.damnlol.com/'
-    # Classes for next and previous seem to be swapped...
-    prevSearch = '//a[%s]' % xpath_class("next")
-    nextSearch = '//a[%s]' % xpath_class("previous")
-    imageSearch = '//img[@id="post-image"]'
-    starter = bounceStarter
-
-    def namer(self, image_url, page_url):
-        ext = image_url.rsplit('.', 1)[1]
-        path = page_url.rsplit('/', 1)[1][:-5]
-        stripname, number = path.rsplit('-', 1)
-        return '%s-%s.%s' % (number, stripname, ext)
-
-
 class Damonk(_BasicScraper):
     url = 'http://www.damonk.com/'
     stripUrl = url + 'd/%s.html'

@@ -98,17 +98,6 @@ class GirlsWithSlingshots(_BasicScraper):
     help = 'Index format: stripname'
 
 
-class GlassHalfEmpty(_BasicScraper):
-    url = 'http://www.defectivity.com/ghe/index.php'
-    stripUrl = url + '?strip_id=%s'
-    firstStripUrl = stripUrl % '0'
-    imageSearch = compile(r'src="(comics/.+?)"')
-    prevSearch = compile(
-        tagre("a", "href", r'(\?strip_id=\d+)') +
-        tagre("img", "src", r'\.\./images/arrowbuttons/onback\.jpg'))
-    help = 'Index format: nnn'
-
-
 class GleefulNihilism(_WordPressScraper):
     url = ('https://web.archive.org/web/20170911203122/'
         'http://gleefulnihilism.com/')

@@ -10,7 +10,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
-from .common import _TumblrScraper, _WordPressScraper, _WPNavi
+from .common import _WordPressScraper, _WPNavi
 
 
 class CampComic(_BasicScraper):
@@ -210,19 +210,6 @@ class ChainsawSuit(_WordPressScraper):
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
-class Champ2010(_BasicScraper):
-    baseUrl = 'http://jedcollins.com/champ2010/'
-    rurl = escape(baseUrl)
-    # the latest URL is hard coded since the comic is discontinued
-    url = baseUrl + 'champ-12-30-10.html'
-    stripUrl = baseUrl + '%s.html'
-    firstStripUrl = stripUrl % 'champ1-1-10-fuck'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl,
-                               after="Previous"))
-    help = 'Index format: yy-dd-mm'
-
-
 class ChannelAte(_WPNavi):
     url = 'http://www.channelate.com/'
 
@@ -292,15 +279,6 @@ class Cloudscratcher(_ParserScraper):
     prevSearch = '//a[./img[contains(@src, "previous-page")]]'
     latestSearch = '//a[@alt="Newest_Page"]'
     starter = indirectStarter
-
-
-class Collar6(_TumblrScraper):
-    url = 'http://collar6.tumblr.com/'
-    firstStripUrl = url + 'post/138117470810/the-very-first-strip-from-when-i-thought-it-was'
-    imageSearch = '//figure[@class="photo-hires-item"]//img'
-    prevSearch = '//a[@class="previous-button"]'
-    latestSearch = '//li[@class="timestamp"]/a'
-    adult = True
 
 
 class CollegeCatastrophe(_ParserScraper):
