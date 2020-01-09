@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -52,7 +52,6 @@ class ComicGenesis(_ParserScraper):
             cls('BreakingtheDoldrum', 'breakingthedoldrum'),
             cls('BrotherSwan', 'warlordofnoodles'),
             cls('Candi', baseUrl='http://candicomics.com/'),
-            cls('Cerintha', 'cerintha'),
             cls('CorporateLife', 'corporatelife'),
             cls('DarkWelkin', 'darkwelkin'),
             cls('DeepBlue', 'gjbivin', last='20131109'),
