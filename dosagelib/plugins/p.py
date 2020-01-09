@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -44,8 +44,10 @@ class ParallelUniversum(_BasicScraper):
 
 
 class PartiallyClips(_WordPressScraper):
-    url = 'http://partiallyclips.com/'
+    url = ('https://web.archive.org/web/20180509161332/'
+        'http://partiallyclips.com/')
     firstStripUrl = url + 'comic/screaming-woman/'
+    endOfLife = True
 
 
 class PastelDefender(_BasicScraper):

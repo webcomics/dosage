@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter
+from ..helpers import indirectStarter, xpath_class
 from ..util import tagre
 from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
 
@@ -88,12 +88,13 @@ class Newshounds(_ParserScraper):
         return super().getPrevUrl(url, data)
 
 
-class NewWorld(_BasicScraper):
-    url = 'http://www.tfsnewworld.com/'
+class NewWorld(_WordPressScraper):
+    url = ('https://web.archive.org/web/20190718012133/'
+        'http://www.tfsnewworld.com/')
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2007/08/30/63'
-    imageSearch = compile(r'<img src="(http://www.tfsnewworld.com/comics/.+?)"')
-    prevSearch = compile(r'<div class="nav-previous"><a href="([^"]+)" rel="prev">')
+    prevSearch = '//a[@rel="prev"]'
+    endOfLife = True
     help = 'Index format: yyyy/mm/dd/stripn'
 
 
@@ -109,7 +110,9 @@ class NichtLustig(_BasicScraper):
 
 
 class Nicky510(_WPNavi):
-    url = 'http://www.nickyitis.com/'
+    url = ('https://web.archive.org/web/20160510215718/'
+        'http://www.nickyitis.com/')
+    endOfLife = True
 
 
 class NicoleAndDerek(_ParserScraper):
@@ -140,13 +143,13 @@ class Nightshift(_ParserScraper):
         return chapter + '_' + page
 
 
-class Nimona(_BasicScraper):
-    url = 'http://gingerhaze.com/nimona/'
+class Nimona(_ParserScraper):
+    url = ('https://web.archive.org/web/20141008095502/'
+        'http://gingerhaze.com/nimona/')
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % "page-1"
-    imageSearch = compile(tagre("img", "src", r'(http://gingerhaze\.com/sites/default/files/nimona-pages/.+?)'))
-    prevSearch = compile(r'<a href="(/nimona/comic/[^"]+)"><img src="http://gingerhaze\.com/sites/default/files/comicdrop/comicdrop_prev_label_file\.png"')
-    help = 'Index format: stripname'
+    imageSearch = '//div[{}]//img'.format(xpath_class('field-name-field-comic-page'))
+    prevSearch = '//a[img[contains(@src, "/comicdrop_prev_label")]]'
     endOfLife = True
 
 

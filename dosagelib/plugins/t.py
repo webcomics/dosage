@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -48,10 +48,14 @@ class Tamberlane(_ParserScraper):
 
 
 class TheBrads(_ParserScraper):
-    url = 'http://bradcolbow.com/archive/'
-    imageSearch = '//div[%s]//img' % xpath_class('entry')
-    prevSearch = '//a[%s]' % xpath_class('prev')
+    url = ('https://web.archive.org/web/20171211154809/'
+        'http://bradcolbow.com/archive/C4/')
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % 'P125'
+    imageSearch = '//div[{}]//img'.format(xpath_class('entry'))
+    prevSearch = '//a[{}]'.format(xpath_class('prev'))
     multipleImagesPerStrip = True
+    endOfLife = True
 
 
 class TheClassMenagerie(_ParserScraper):
@@ -107,15 +111,14 @@ class TheJunkHyenasDiner(_WordPressScraper):
     firstStripUrl = stripUrl % 'intro'
 
 
-class TheLandscaper(_BasicScraper):
-    stripUrl = 'http://landscaper.visual-assault.net/comic/%s'
+class TheLandscaper(_ParserScraper):
+    stripUrl = ('https://web.archive.org/web/20171129163510/'
+        'http://landscaper.visual-assault.net/comic/%s')
     url = stripUrl % 'latest'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src",
-                                r'(/comics/comic/comic_page/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/comic/[^"]+)') +
-                         '&lsaquo; Previous')
-    help = 'Index format: name'
+    imageSearch = '//article[{}]//img[1]'.format(xpath_class('comic'))
+    prevSearch = '//a[contains(text(), "Previous")]'
+    endOfLife = True
 
 
 class TheMelvinChronicles(_WordPressScraper):

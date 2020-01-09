@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2018 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -213,14 +213,12 @@ class AlienShores(_WordPressScraper):
     firstStripUrl = url + 'AScomic/updated-cover/'
 
 
-class AllTheGrowingThings(_BasicScraper):
-    url = 'http://growingthings.typodmary.com/'
-    rurl = escape(url)
+class AllTheGrowingThings(_WordPressScraper):
+    url = ('https://web.archive.org/web/20160611212229/'
+        'http://growingthings.typodmary.com/')
     stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2009/04/21/all-the-growing-things'
-    imageSearch = compile(tagre("img", "src", r'(%sfiles/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
-    help = 'Index format: yyyy/mm/dd/strip-name'
+    firstStripUrl = stripUrl % 'all-the-growing-things'
+    endOfLife = True
 
 
 class AlphaLuna(_ParserScraper):
@@ -329,11 +327,14 @@ class Angels2200(_BasicScraper):
 
 
 class Annyseed(_ParserScraper):
-    baseUrl = 'http://www.mirrorwoodcomics.com/'
-    url = baseUrl + 'AnnyseedLatest.htm'
+    baseUrl = ('https://web.archive.org/web/20190511031451/'
+        'http://www.mirrorwoodcomics.com/')
     stripUrl = baseUrl + 'Annyseed%s.htm'
+    url = stripUrl % 'Latest'
+    firstStripUrl = stripUrl % '000'
     imageSearch = '//div/img[contains(@src, "Annyseed")]'
     prevSearch = '//a[img[@name="Previousbtn"]]'
+    endOfLife = True
     help = 'Index format: nnn'
     FIX_RE = compile(r'Annyseed/Finished%20For%20Print/')
 

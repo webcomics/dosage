@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -139,7 +139,8 @@ class DemolitionSquad(_ParserScraper):
 
 
 class DerTodUndDasMaedchen(_ParserScraper):
-    url = 'http://www.cartoontomb.de/deutsch/tod2.php'
+    url = ('https://web.archive.org/web/20180106180134/'
+        'http://www.cartoontomb.de/deutsch/tod2.php')
     stripUrl = url + '?bild=%s.jpg'
     firstStripUrl = stripUrl % '00_01_01'
     imageSearch = '//img[contains(@src, "images/tod/teil2")]'
@@ -305,16 +306,17 @@ class DresdenCodak(_ParserScraper):
         return not data.xpath(self.imageSearch)
 
 
-class DrFun(_BasicScraper):
-    baseUrl = 'http://www.ibiblio.org/Dave/'
-    url = baseUrl + 'ar00502.htm'
+class DrFun(_ParserScraper):
+    baseUrl = ('https://web.archive.org/web/20180726145737/'
+        'http://www.ibiblio.org/Dave/')
     stripUrl = baseUrl + 'ar%s.htm'
+    url = stripUrl % '00502'
     firstStripUrl = stripUrl % '00001'
-    imageSearch = compile(tagre("a", "href", r'(Dr-Fun/df\d+/df[^"]+)'))
+    imageSearch = '//a[contains(@href, "Dr-Fun/df")]'
     multipleImagesPerStrip = True
-    prevSearch = compile(tagre("a", "href", r'([^"]+)') + 'Previous Week,')
-    help = 'Index format: nnnnn'
+    prevSearch = '//a[contains(text(), "Previous Week")]'
     endOfLife = True
+    help = 'Index format: nnnnn'
 
 
 class Drive(_BasicScraper):

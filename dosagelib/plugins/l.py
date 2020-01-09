@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -68,9 +68,11 @@ class LetsSpeakEnglish(_ComicControlScraper):
 
 
 class LifeAintNoPonyFarm(_WordPressScraper):
-    url = 'http://sarahburrini.com/en/'
+    url = ('https://web.archive.org/web/20181221154155/'
+        'http://sarahburrini.com/en/')
     firstStripUrl = url + 'comic/my-first-webcomic/'
     multipleImagesPerStrip = True
+    endOfLife = True
 
 
 class LilithsWord(_ComicControlScraper):

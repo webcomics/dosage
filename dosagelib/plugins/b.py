@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -156,12 +156,13 @@ class BiggerThanCheeses(_BasicScraper):
 
 
 class BillyTheDunce(_ParserScraper):
-    url = 'http://www.duncepress.com/'
-    firstStripUrl = url + '2009/06/an-introduction-of-sorts'
+    stripUrl = ('https://web.archive.org/web/20180404142544/'
+        'http://www.duncepress.com/%s/')
+    url = stripUrl % '2012/02/losing-more'
+    firstStripUrl = stripUrl % '2009/06/an-introduction-of-sorts'
     imageSearch = '//div[@class="entry"]/p[1]/a'
     prevSearch = '//a[@rel="prev"]'
-    latestSearch = '//h2[@class="post-title"]/a'
-    starter = indirectStarter
+    endOfLife = True
 
 
 class BittersweetCandyBowl(_ParserScraper):

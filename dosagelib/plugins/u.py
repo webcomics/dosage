@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -14,8 +14,10 @@ from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
 
 
 class Underling(_WPNavi):
-    url = 'http://underlingcomic.com/'
+    url = ('https://web.archive.org/web/20190806120425/'
+        'http://underlingcomic.com/')
     firstStripUrl = url + 'page-one/'
+    endOfLife = True
 
 
 class Undertow(_BasicScraper):

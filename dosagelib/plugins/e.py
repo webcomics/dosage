@@ -181,10 +181,11 @@ class EverybodyLovesEricRaymond(_ParserScraper):
     prevSearch = '//a[@rel="prev"]'
 
 
-# Seems to be GeoBlocked from Germany?
 class EvilDiva(_WordPressScraper):
-    url = 'http://www.evildivacomics.com/'
+    url = ('https://web.archive.org/web/20190221223751/'
+        'https://www.evildivacomics.com/')
     firstStripUrl = url + 'comic/evil-diva-issue-1-cover/'
+    endOfLife = True
 
 
 class EvilInc(_WordPressScraper):

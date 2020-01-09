@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -28,6 +28,9 @@ from .util import (get_page, makeSequence, get_system_uid, unescape, tagre,
 from .comic import ComicStrip
 from .output import out
 from .events import getHandler
+
+
+ARCHIVE_ORG_URL = re.compile(r'https?://web\.archive\.org/web/[^/]*/')
 
 
 class Scraper(object):
@@ -183,7 +186,7 @@ class Scraper(object):
                 except ValueError as msg:
                     # image not found
                     out.exception(msg)
-            if self.firstStripUrl == url:
+            if self.isfirststrip(url):
                 out.debug(u"Stop at first URL %s" % url)
                 self.hitFirstStripUrl = True
                 break
@@ -198,6 +201,17 @@ class Scraper(object):
                 out.warn(u"Already seen previous URL %r" % prevUrl)
                 break
             url = prevUrl
+
+    def isfirststrip(self, url):
+        """Check if the specified URL is the first strip of a comic. This is
+        specially for comics taken from archive.org, since the base URL of
+        archive.org changes whenever pages are taken from a different
+        snapshot."""
+        if not self.firstStripUrl:
+            return False
+        firsturl = ARCHIVE_ORG_URL.sub('', self.firstStripUrl)
+        currenturl = ARCHIVE_ORG_URL.sub('', url)
+        return firsturl == currenturl
 
     def getPrevUrl(self, url, data):
         """Find previous URL."""
