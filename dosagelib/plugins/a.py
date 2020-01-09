@@ -253,11 +253,13 @@ class Altermeta(_ParserScraper):
         return pageUrl.rsplit('=', 1)[-1] + '_' + imageUrl.rsplit('/', 1)[-1]
 
 
-class AltermetaOld(Altermeta):
+class AltermetaOld(_ParserScraper):
     url = Altermeta.url + 'oldarchive/index.php'
     stripUrl = Altermeta.url + 'oldarchive/archive.php?comic=%s'
     firstStripUrl = stripUrl % '0'
-    prevSearch = compile(r'<a href="([^"]+)">Back')
+    imageSearch = '//img[contains(@src, "comics/")]'
+    prevSearch = '//a[text()="Back"]'
+    help = 'Index format: n (unpadded)'
 
 
 class AmazingSuperPowers(_BasicScraper):
