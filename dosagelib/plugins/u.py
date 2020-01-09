@@ -8,7 +8,7 @@ from __future__ import absolute_import, division, print_function
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter
+from ..helpers import indirectStarter, xpath_class
 from ..util import tagre
 from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
 
@@ -54,18 +54,23 @@ class UnlikeMinerva(_ParserScraper):
     help = 'Index format: number'
 
 
-class Unsounded(_BasicScraper):
+class Unsounded(_ParserScraper):
     url = 'http://www.casualvillain.com/Unsounded/'
+    startUrl = url + 'comic+index/'
     stripUrl = url + 'comic/ch%s/ch%s_%s.html'
     firstStripUrl = stripUrl % ('01', '01', '01')
-    rurl = escape(url)
-    imageSearch = compile(tagre("img", "src", r'(pageart/[^"]*)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]*)', after='class="back'))
-    latestSearch = compile(tagre("a", "href", r'(%scomic/[^"]*)' % rurl) +
-                           tagre("img", "src",
-                                 r"%simages/newpages\.png" % rurl))
+    imageSearch = '//img[contains(@src, "/pageart/ch")]'
+    prevSearch = '//a[{}]'.format(xpath_class('back'))
+    latestSearch = '//div[@id="chapter_box"][1]//a[last()]'
+    multipleImagesPerStrip = True
     starter = indirectStarter
-    help = 'Index format: chapter-number'
+    help = 'Index format: chapter-page'
+
+    def getPrevUrl(self, url, data):
+        # Fix missing navigation links between chapters
+        if 'ch13/you_let_me_fall' in url:
+            return self.stripUrl % ('13', '13', '85')
+        return super(Unsounded, self).getPrevUrl(url, data)
 
     def getIndexStripUrl(self, index):
         """Get comic strip URL from index."""
