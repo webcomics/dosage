@@ -475,6 +475,7 @@ class Removed(Scraper):
             cls('SmackJeeves/DevilTrainee'),
             cls('SmackJeeves/DevilTraineeSpanish'),
             cls('SmackJeeves/Diexemor'),
+            cls('SmackJeeves/DigisRandomSpriteshack'),
             cls('SmackJeeves/DontDie'),
             cls('SmackJeeves/ElfenLiedDifferences'),
             cls('SmackJeeves/Entuthrie'),
