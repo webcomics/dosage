@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -60,7 +60,6 @@ class ComicSherpa(_ParserScraper):
             cls('CandacenCompany', 'csvpd'),
             cls('CarteBlanche', 'csnwk'),
             cls('CharmysArmy', 'cswrl'),
-            cls('CleoAndCompany', 'cscwy'),
             cls('Complex', 'csusy'),
             cls('CourageousManAdventures', 'csgkn'),
             cls('DadsDay', 'cswly'),
@@ -90,7 +89,6 @@ class ComicSherpa(_ParserScraper):
             cls('GreenPieces', 'csnwy'),
             cls('GunstonStreet', 'csgru'),
             cls('HallEditorialCartoons', 'csgzx'),
-            cls('HaloAndHorns', 'csgub'),
             cls('HaphazardHumor', 'cspsa'),
             cls('Headcheese', 'cspku'),
             cls('Hogwashed', 'csbnf'),
