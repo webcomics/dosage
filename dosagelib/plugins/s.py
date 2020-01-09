@@ -322,16 +322,13 @@ class SodiumEyes(_WordPressScraper):
     url = 'http://sodiumeyes.com/'
 
 
-class SomethingPositive(_BasicScraper):
-    url = 'http://www.somethingpositive.net/'
+class SomethingPositive(_ParserScraper):
+    url = 'https://www.somethingpositive.net/'
     stripUrl = url + 'sp%s.shtml'
-    imageSearch = (
-        compile(tagre("img", "src", r'(sp\d+\.png)')),
-        compile(tagre("img", "src", r'(twither\.gif)')),
-    )
-    prevSearch = compile(tagre("a", "href", r'(sp\d+\.shtml)') + "(?:" +
-                         tagre("img", "src", r'images/previous\.gif') +
-                         "|Previous)")
+    imageSearch = r'//img[re:test(@src, "/sp\d+")]'
+    prevSearch = ('//a[contains(text(), "Previous")]',
+        '//a[img[contains(@src, "previous")]]')
+    multipleImagesPerStrip = True
     help = 'Index format: mmddyyyy'
 
 
