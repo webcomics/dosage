@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -27,14 +27,16 @@ class PetiteSymphony(_WPNavi):
 
 
 class ComicsBreak(_WordPressScraper):
-
-    def __init__(self, name):
+    def __init__(self, name, archive=None):
         super(ComicsBreak, self).__init__('ComicsBreak/' + name)
         self.url = 'http://%s.comicsbreak.com/' % name.lower()
+        if archive:
+            self.url = 'https://web.archive.org/web/{}/{}'.format(
+                archive, self.url)
 
     @classmethod
     def getmodules(cls):
         return (
-            cls("Djandora"),
+            cls('Djandora', archive='20170923062433'),
             cls("Generation17"),
         )
