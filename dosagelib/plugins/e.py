@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -210,11 +210,9 @@ class Evon(_WordPressScraper):
     adult = True
 
 
-class Exiern(_WPNavi):
+class Exiern(_WordPressScraper):
     url = 'http://www.exiern.com/'
     firstStripUrl = url + '2005/09/06/so-far/'
-    imageSearch = ('//div[@id="comic"]//img',
-                   '//div[%s]//img' % xpath_class('entry'))
 
 
 class ExploitationNow(_WPNavi):
