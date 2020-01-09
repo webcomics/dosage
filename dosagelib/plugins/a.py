@@ -19,24 +19,21 @@ class AbbysAgency(_WordPressScraper):
     firstStripUrl = stripUrl % 'a'
 
 
-class AbstruseGoose(_BasicScraper):
-    url = 'http://abstrusegoose.com/'
-    rurl = escape(url)
+class AbstruseGoose(_ParserScraper):
+    url = 'https://abstrusegoose.com/'
     starter = bounceStarter
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre('img', 'src',
-                                r'(http://abstrusegoose\.com/strips/[^<>"]+)'))
-    prevSearch = compile(tagre('a', 'href', r'(%s\d+)' % rurl) +
-                         r'&laquo; Previous')
-    nextSearch = compile(tagre('a', 'href', r'(%s\d+)' % rurl) +
-                         r'Next &raquo;')
+    imageSearch = '//img[contains(@src, "/strips/")]'
+    textSearch = imageSearch + '/@title'
+    textOptional = True
+    prevSearch = '//a[contains(text(), "Previous")]'
+    nextSearch = '//a[contains(text(), "Next")]'
     help = 'Index format: n (unpadded)'
-    textSearch = compile(tagre("img", "title", r'([^"]+)'))
 
-    def namer(self, image_url, page_url):
-        index = int(page_url.rstrip('/').split('/')[-1])
-        name = image_url.split('/')[-1].split('.')[0]
+    def namer(self, imageurl, pageurl):
+        index = int(pageurl.rsplit('/', 1)[1])
+        name = imageurl.rsplit('/', 1)[1]
         return 'c%03d-%s' % (index, name)
 
 
