@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -16,6 +16,10 @@ _locks = {}
 MaxConnections = 2
 # Maximum number of strips to get to test a comic
 MaxStrips = 5
+# Match (already-escaped) archive.org URL
+ARCHIVE_ORG_MATCH = re.compile(r'(?<=web\\.archive\\.org/web)/\d+/')
+# Matches some (maybe-escaped - because Python 2) printf-style format specifiers
+PRINTF_MATCH = re.compile(r'\\?%[0-9]*[sd]')
 
 
 def get_lock(host):
@@ -101,7 +105,8 @@ def _check_stripurl(strip, scraperobj):
         return
     # test that the stripUrl regex matches the retrieved strip URL
     urlmatch = re.escape(scraperobj.stripUrl)
-    urlmatch = urlmatch.replace('\\%', '%').replace(r"%s", r".+")
+    urlmatch = PRINTF_MATCH.sub('.+', urlmatch)
+    urlmatch = ARCHIVE_ORG_MATCH.sub(r'/\\d+/', urlmatch)
     ro = re.compile(urlmatch)
     mo = ro.match(strip.strip_url)
     err = 'strip URL {!r} does not match stripUrl pattern {}'.format(
