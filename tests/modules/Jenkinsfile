@@ -1,0 +1,46 @@
+#!groovy
+
+def prepareDocker () {
+    def img
+    stage('Prepare environment') {
+        def uid = sh returnStdout: true, script: 'id -u'
+        writeFile file: 'Dockerfile', text: """
+        FROM python:3.8-buster
+        RUN pip install pytest-cov && \\
+        useradd -m -u ${uid.trim()} jenkins
+        """
+        img = docker.build('local:test-all-comics')
+    }
+    return img
+}
+
+def runTests() {
+    stage('Checkout') {
+        checkout scm
+    }
+    stage ('Install lib') {
+        sh "pip install --user -e .[css,test]"
+    }
+    stage ('Run tests') {
+        sh "TESTALL=1 py.test -v --cov=dosagelib --cov-report xml --tb=short -n10 --junitxml=junit.xml tests/modules/check_comics.py || true"
+    }
+    stage('Report') {
+        junit 'junit.xml'
+        publishCoverage calculateDiffForChangeRequests: true,
+            sourceFileResolver: sourceFiles('STORE_LAST_BUILD'),
+            adapters: [
+                coberturaAdapter('coverage.xml')
+            ]
+    }
+}
+
+ansiColor('xterm') {
+    node {
+        def img = prepareDocker()
+
+        img.inside {
+            runTests()
+        }
+    }
+}
+
