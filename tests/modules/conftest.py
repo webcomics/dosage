@@ -46,8 +46,9 @@ def get_test_scrapers():
 
 def pytest_generate_tests(metafunc):
     if 'scraperobj' in metafunc.fixturenames:
-        metafunc.parametrize('scraperobj', get_test_scrapers(),
-                             ids=operator.attrgetter('name'))
+        scrapers = get_test_scrapers()
+        scraperids = list(x.name for x in scrapers)
+        metafunc.parametrize('scraperobj', scrapers, ids=scraperids)
 
 
 class LoadModScheduling(LoadScopeScheduling):
