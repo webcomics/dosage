@@ -609,6 +609,8 @@ class Removed(Scraper):
             cls('WhiteNinja'),
             cls('WLP/ShadowChasers'),
             cls('WotNow'),
+
+            # Removed in 3.0
         )
 
 
@@ -751,4 +753,6 @@ class Renamed(Scraper):
             cls('Wulffmorgenthaler', 'WuMo'),
             cls('YouSayItFirst', 'NamirDeiter/YouSayItFirst'),
             cls('ZebraGirl', 'ComicFury/ZebraGirl'),
+
+            # Renamed in 3.0
         )
