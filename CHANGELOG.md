@@ -6,6 +6,8 @@ The format is based on
 
 ## [Unreleased]
 
+This will be the last release with Python 2 support.
+
 ### Added
 - Many, many comics :D
 - Comic modules can now use a proper HTML parser (based on [lxml]) with XPath
@@ -34,9 +36,17 @@ The format is based on
   "virtual" modules covering multiple comics can now be written much more
   concise. See issue #42 for details.
 - Windows build is now one standalone EXE file (thanks to [PyInstaller]).
+- Allow combining -n with -c or -a (related to #90). This allows to set an
+  upper bound to normally "unconstrained" fetch modes.
+- Replace forced "sleep" between requests with a simple host-based throttling
+  mechanism.
+- Uses [imagesize] instead of Pillow to get image sizes. (Pillow is a very big
+  libary with many binary dependencies and we were using only this feature from
+  it)
 
 [website]: https://dosage.rocks/
 [PyInstaller]: https://www.pyinstaller.org/
+[imagesize]: https://pypi.org/project/imagesize/
 
 ### Removed
 - Many, many broken/disappered comics :(
