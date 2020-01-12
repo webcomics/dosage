@@ -6,7 +6,7 @@
 from __future__ import absolute_import, division, print_function
 
 import os
-from re import compile, escape, IGNORECASE
+from re import compile, IGNORECASE
 
 from ..helpers import bounceStarter, indirectStarter, xpath_class
 from ..scraper import _BasicScraper, _ParserScraper
@@ -251,12 +251,3 @@ class ExtraOrdinary(_ParserScraper):
     prevSearch = '//a[%s]' % xpath_class('prev')
     imageSearch = '//img[%s]' % xpath_class('image-style-main-comic')
     help = 'Index format: number'
-
-
-class EyeOfRamalach(_BasicScraper):
-    url = 'http://theeye.katbox.net/'
-    rurl = escape(url)
-    stripUrl = url + 'comic/%s/'
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/[^"]+)' % rurl, after="data-webcomic-parent"))
-    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl, after="previous"))
-    help = 'Index format: stripname'

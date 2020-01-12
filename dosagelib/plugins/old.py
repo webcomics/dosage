@@ -650,6 +650,7 @@ class Renamed(Scraper):
             cls('Creators/HeathcliffinSpanish', 'Creators/HeathcliffSpanish'),
             cls('Creators/TheWizardofIdinSpanish', 'Creators/WizardOfIdSpanish'),
             cls('DarkWings', 'Eryl'),
+            cls('EyeOfRamalach', 'KemonoCafe/TheEyeOfRamalach'),
             cls('FoulLanguage', 'GoComics/FowlLanguage'),
             cls('GoComics/060', 'ComicSherpa/060'),
             cls('GoComics/ABitSketch', 'ComicSherpa/ABitSketch'),
