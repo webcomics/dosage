@@ -99,7 +99,8 @@ class RSSEventHandler(EventHandler):
             self.rss = rss.parseFeed(self.rssfn, yesterday)
         else:
             self.newfile = True
-            self.rss = rss.Feed('Daily Dosage', link, 'Comics for %s' % time.strftime('%Y/%m/%d', today))
+            self.rss = rss.Feed('Daily Dosage', link,
+                'Comics for %s' % time.strftime('%Y/%m/%d', today))
 
     def comicDownloaded(self, comic, filename):
         """Write RSS entry for downloaded comic."""
@@ -365,7 +366,8 @@ class MultiHandler(object):
             handler.comicDownloaded(comic, filename)
 
     def comicPageLink(self, scraper, url, prevUrl):
-        """Emit an event to inform the handler about links between comic pages. Should be overridden in subclass."""
+        """Emit an event to inform the handler about links between comic pages.
+        Should be overridden in subclass."""
         for handler in _handlers:
             handler.comicPageLink(scraper, url, prevUrl)
 

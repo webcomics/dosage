@@ -52,7 +52,8 @@ def setup_options():
     parser.add_argument('-v', '--verbose', action='count', default=0,
         help='provides verbose output, use multiple times for more verbosity')
     parser.add_argument('-n', '--numstrips', action='store', type=int, default=0,
-        help='traverse and retrieve the given number of comic strips; use --all to retrieve all comic strips')
+        help='traverse and retrieve the given number of comic strips;'
+        ' use --all to retrieve all comic strips')
     parser.add_argument('-a', '--all', action='store_true',
         help='traverse and retrieve all comic strips')
     parser.add_argument('-c', '--continue', action='store_true', dest='cont',
@@ -61,7 +62,8 @@ def setup_options():
         metavar='PATH',
         help='set the path to create invidivual comic directories in, default is Comics')
     parser.add_argument('--baseurl', action='store', metavar='PATH',
-        help='the base URL of your comics directory (for RSS, HTML, etc.); this should correspond to --base-path')
+        help='the base URL of your comics directory (for RSS, HTML, etc.);'
+        ' this should correspond to --base-path')
     parser.add_argument('-l', '--list', action='store_true',
         help='list available comic modules')
     parser.add_argument('--singlelist', action='store_true',
@@ -85,11 +87,13 @@ def setup_options():
     parser.add_argument('--adult', action='store_true',
         help='confirms that you are old enough to view adult content')
     parser.add_argument('--allow-multiple', action='store_true',
-        help='allows multiple instances to run at the same time. Use if you know what you are doing.')
+        help='allows multiple instances to run at the same time.'
+        ' Use if you know what you are doing.')
     # used for development testing prev/next matching
     parser.add_argument('--dry-run', action='store_true',
         help=argparse.SUPPRESS)
-    # multimatch is only used for development, eg. testing if all comics of a scripted plugin are working
+    # multimatch is only used for development, eg. testing if all comics of
+    # a scripted plugin are working
     parser.add_argument('--multimatch', action='store_true',
         help=argparse.SUPPRESS)
     # List all comic modules, even those normally suppressed, because they
