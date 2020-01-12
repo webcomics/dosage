@@ -59,7 +59,7 @@ class TheClassMenagerie(_ParserScraper):
 
 
 class TheDevilsPanties(_WPNavi):
-    url = 'http://thedevilspanties.com/'
+    url = 'https://thedevilspanties.com/'
     stripUrl = url + 'archives/%s'
     firstStripUrl = stripUrl % '300'
     help = 'Index format: number'

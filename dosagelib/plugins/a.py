@@ -173,7 +173,7 @@ class Alice(_WordPressScraper):
 
 
 class AlienDice(_WordPressScraper):
-    url = 'http://aliendice.com/'
+    url = 'https://aliendice.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '05162001'
 
@@ -190,7 +190,7 @@ class AlienDice(_WordPressScraper):
 
 class AlienDiceLegacy(_WordPressScraper):
     name = 'AlienDice/Legacy'
-    stripUrl = 'http://aliendice.com/comic/%s/'
+    stripUrl = 'https://aliendice.com/comic/%s/'
     url = stripUrl % 'legacy-2-15'
     firstStripUrl = stripUrl % 'legacy-1'
 

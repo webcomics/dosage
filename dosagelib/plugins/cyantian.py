@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2019-2020 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -9,7 +7,7 @@ from .common import _WordPressScraper
 
 
 class TheCyantianChronicles(_WordPressScraper):
-    baseUrl = 'http://cyantian.net/'
+    baseUrl = 'https://cyantian.net/'
     stripUrl = baseUrl + 'comic/%s/'
 
     def __init__(self, name, story, first, last=None, nav=None):
@@ -53,13 +51,13 @@ class TheCyantianChronicles(_WordPressScraper):
 
 
 class Shivae(_WordPressScraper):
-    url = 'http://shivae.com/'
+    url = 'https://shivae.com/'
     stripUrl = url + 'gnip/%s/'
     firstStripUrl = stripUrl % 'cler/09202001'
 
 
 class ShivaeComics(_WordPressScraper):
-    baseUrl = 'http://shivae.net/'
+    baseUrl = 'https://shivae.net/'
 
     def __init__(self, name, story, first, last=None, nav=None):
         super(ShivaeComics, self).__init__('Shivae/' + name)

@@ -343,12 +343,11 @@ class SomethingPositive(_ParserScraper):
 
 
 class Sorcery101(_WPWebcomic):
-    baseUrl = 'http://www.sorcery101.net/sorcery-101/'
+    baseUrl = 'https://kelmcdonald.com/sorcery-101/'
     stripUrl = baseUrl + '%s/'
     url = stripUrl % 'sorcery101-ch-01'
     firstStripUrl = url
     starter = indirectStarter
-    allow_errors = (500,)
     help = 'Index format: stripname'
 
 

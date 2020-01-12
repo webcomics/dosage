@@ -220,7 +220,7 @@ class FullFrontalNerdity(_BasicScraper):
 
 class FunInJammies(_WordPressScraper):
     url = ('https://web.archive.org/web/20170205105241/'
-        'http://www.funinjammies.com/')
+        'http://funinjammies.com/')
     stripUrl = url + 'comic.php?issue=%s'
     firstStripUrl = stripUrl % '1'
     prevSearch = '//a[text()="< Prev"]'

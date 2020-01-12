@@ -188,7 +188,7 @@ class DieselSweetiesOld(_ParserScraper):
 
 
 class Dilbert(_ParserScraper):
-    url = 'http://dilbert.com/'
+    url = 'https://dilbert.com/'
     stripUrl = url + 'strip/%s'
     firstStripUrl = stripUrl % '1989-04-16'
     starter = indirectStarter
