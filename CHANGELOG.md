@@ -6,6 +6,9 @@ The format is based on
 
 ## [Unreleased]
 
+
+## [2.16] - 2020-01-12
+
 This will be the last release with Python 2 support.
 
 ### Added
@@ -807,7 +810,8 @@ This will be the last release with Python 2 support.
 - Initial public release
 
 
-[Unreleased]: https://github.com/webcomics/dosage/compare/2.15...HEAD
+[Unreleased]: https://github.com/webcomics/dosage/compare/2.16...HEAD
+[2.16]: https://github.com/webcomics/dosage/compare/2.15...2.16
 [2.15]: https://github.com/webcomics/dosage/compare/2.14...2.15
 [2.14]: https://github.com/webcomics/dosage/compare/2.13...2.14
 [2.13]: https://github.com/webcomics/dosage/compare/2.12...2.13
