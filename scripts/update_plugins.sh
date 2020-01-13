@@ -1,6 +1,7 @@
 #!/bin/sh
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# Copyright (C) 2019-2020 Daniel Ring
 set -e
 set -u
 

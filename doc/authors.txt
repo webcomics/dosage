@@ -7,4 +7,5 @@ Bastian Kleineidam
 Tobias Gruetzmacher
 
 # Patches and other contributions
+Daniel Ring
 Dirk Reiners

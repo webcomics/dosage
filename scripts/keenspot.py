@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# Copyright (C) 2019-2020 Daniel Ring
 """
 Script to get a list of KeenSpot comics and save the info in a
 JSON file for further processing.

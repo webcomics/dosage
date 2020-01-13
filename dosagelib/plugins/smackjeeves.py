@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# Copyright (C) 2019-2020 Daniel Ring
 
 from __future__ import absolute_import, division, print_function
 
