@@ -6,6 +6,9 @@ The format is based on
 
 ## [Unreleased]
 
+### Fixed
+- Update check now always shows assets instead of the repo tarball.
+
 
 ## [2.16] - 2020-01-12
 

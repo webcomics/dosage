@@ -6,6 +6,7 @@
 from __future__ import absolute_import, division, print_function
 
 import json
+import os
 import re
 
 import pytest
@@ -46,18 +47,31 @@ class TestDosage(object):
     @responses.activate
     def test_update_available(self, capsys):
         responses.add(responses.GET, re.compile(r'https://api\.github\.com/'),
-            json={'tag_name': '9999.0', 'tarball_url': 'NOWHERE'})
+            json={'tag_name': '9999.0', 'assets': [
+                {'browser_download_url': 'TEST.whl'},
+                {'browser_download_url': 'TEST.exe'},
+            ]})
         cmd_ok('--version', '-v')
         captured = capsys.readouterr()
+        best = 'TEST.exe' if os.name == 'nt' else 'TEST.whl'
+        assert best in captured.out
         assert 'A new version' in captured.out
 
     @responses.activate
     def test_no_update_available(self, capsys):
         responses.add(responses.GET, re.compile(r'https://api\.github\.com/'),
-            json={'tag_name': '1.0', 'tarball_url': 'NOWHERE'})
+            json={'tag_name': '1.0'})
         cmd_ok('--version', '-v')
         captured = capsys.readouterr()
         assert 'Detected local or development' in captured.out
+
+    @responses.activate
+    def test_current(self, capsys):
+        responses.add(responses.GET, re.compile(r'https://api\.github\.com/'),
+            json={'tag_name': dosagelib.__version__})
+        cmd_ok('--version', '-v')
+        captured = capsys.readouterr()
+        assert captured.out.endswith('issues\n')
 
     @responses.activate
     def test_update_broken(self, capsys):

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
@@ -10,11 +10,15 @@ import os
 from distutils.version import LooseVersion
 
 import dosagelib
-from dosagelib import configuration
 from . import http
 
 
-UPDATE_URL = "https://api.github.com/repos/webcomics/dosage/releases/latest"
+UPDATE_URL = 'https://api.github.com/repos/webcomics/dosage/releases/latest'
+EXTPRIO = {
+    '.exe': 1 if os.name == 'nt' else 9,
+    '.whl': 2,
+    '.gz': 3,
+}
 
 
 def check_update():
@@ -38,20 +42,22 @@ def check_update():
     return True, (version, None)
 
 
+def asset_key(asset):
+    return EXTPRIO.get(os.path.splitext(asset['browser_download_url'])[1], 99)
+
+
 def get_online_version():
     """Download update info and parse it."""
     page = http.default_session.get(UPDATE_URL).json()
     version = page.get('tag_name', None)
 
-    if os.name == 'nt':
-        try:
-            url = next((x['browser_download_url'] for x in page['assets'] if
-                x['content_type'] == 'application/x-msdos-program'),
-                configuration.Url)
-        except KeyError:
-            url = None
-    else:
-        url = page.get('tarball_url', None)
+    url = None
+    try:
+        assets = sorted(page['assets'], key=asset_key)
+        if len(assets) > 0:
+            url = assets[0]['browser_download_url']
+    except KeyError:
+        pass
     return version, url
 
 
