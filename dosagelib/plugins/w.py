@@ -10,10 +10,10 @@ from re import compile, escape, IGNORECASE
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from ..helpers import bounceStarter, indirectStarter, xpath_class
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPWebcomic
+from .common import _ComicControlScraper, _WPNavi, _WPNaviIn, _WPWebcomic
 
 
-class WapsiSquare(_WordPressScraper):
+class WapsiSquare(_WPNaviIn):
     url = 'http://wapsisquare.com/'
     firstStripUrl = url + 'comic/09092001/'
 
