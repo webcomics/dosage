@@ -273,6 +273,12 @@ class DoomsdayMyDear(_ParserScraper):
     prevSearch = '//a[{}]'.format(xpath_class('previous-webcomic-link'))
 
 
+class Draconia(_WPWebcomic):
+    url = 'https://www.draconiachronicles.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'chapter-1-page-1'
+
+
 class Dracula(_BasicScraper):
     url = 'http://draculacomic.net/'
     stripUrl = url + 'comic.php?comicID=%s'

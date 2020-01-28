@@ -55,7 +55,6 @@ class StudioKhimera(_ParserScraper):
     @classmethod
     def getmodules(cls):
         return (
-            cls('Draconia', 'thedraconiachronicles', adult=True),
             cls('Eorah', 'eorah'),
             cls('Mousechievous', 'mousechievous'),
             cls('UberQuest', 'uberquest'),
