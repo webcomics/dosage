@@ -22,6 +22,8 @@ class WebToons(_ParserScraper):
         self.firstStripUrl = self.stripUrl % '1'
 
     def starter(self):
+        # Set age-check cookie
+        self.session.cookies.set('ageGatePass', 'true', domain='webtoons.com')
         # Find current episode number
         listPage = self.getPage(self.listUrl)
         currentEpisode = listPage.xpath('//div[@class="detail_lst"]/ul/li')[0].attrib['data-episode-no']
