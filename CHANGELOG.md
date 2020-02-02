@@ -6,13 +6,20 @@ The format is based on
 
 ## [Unreleased]
 
+## [2.17] - 2020-02-02
+
+This will be the last release with Python 2 support. This comes shortly after
+the 2.16 release to fix the broken update check in that release.
+
+### Added
+- Comic SmackJeeves/WhatWeRememberTheMost
+- Engine for WebToons (big thanks to Daniel Ring)
+
 ### Fixed
 - Update check now always shows assets instead of the repo tarball.
-
+- Fixes Wapsi Square (#149).
 
 ## [2.16] - 2020-01-12
-
-This will be the last release with Python 2 support.
 
 ### Added
 - Many, many comics :D
@@ -813,7 +820,8 @@ This will be the last release with Python 2 support.
 - Initial public release
 
 
-[Unreleased]: https://github.com/webcomics/dosage/compare/2.16...HEAD
+[Unreleased]: https://github.com/webcomics/dosage/compare/2.17...HEAD
+[2.17]: https://github.com/webcomics/dosage/compare/2.16...2.17
 [2.16]: https://github.com/webcomics/dosage/compare/2.15...2.16
 [2.15]: https://github.com/webcomics/dosage/compare/2.14...2.15
 [2.14]: https://github.com/webcomics/dosage/compare/2.13...2.14
