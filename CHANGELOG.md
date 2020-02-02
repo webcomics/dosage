@@ -6,6 +6,9 @@ The format is based on
 
 ## [Unreleased]
 
+### Removed
+- Python 2 support
+
 ## [2.17] - 2020-02-02
 
 This will be the last release with Python 2 support. This comes shortly after

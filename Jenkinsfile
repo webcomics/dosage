@@ -3,7 +3,6 @@ def pys = [
     [name: 'Python 3.7', docker:'python:3.7-buster', tox:'py37', main: false],
     [name: 'Python 3.6', docker:'python:3.6-buster', tox:'py36', main: false],
     [name: 'Python 3.5', docker:'python:3.5-buster', tox:'py35', main: false],
-    [name: 'Python 2.7', docker:'python:2.7-buster', tox:'py27', main: false]
 ]
 
 properties([
