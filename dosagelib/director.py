@@ -8,9 +8,9 @@ from __future__ import absolute_import, division, print_function
 
 import os
 import threading
-from six.moves import _thread
-from six.moves.queue import Queue, Empty
-from six.moves.urllib.parse import urlparse
+import _thread
+from queue import Queue, Empty
+from urllib.parse import urlparse
 
 from .output import out
 from . import events, scraper

@@ -7,7 +7,7 @@ from __future__ import absolute_import, division, print_function
 
 import os
 import time
-from six.moves.urllib.parse import quote as url_quote
+from urllib.parse import quote as url_quote
 import codecs
 import json
 

@@ -7,7 +7,7 @@
 from __future__ import absolute_import, division, print_function
 
 from re import compile
-from six.moves.urllib.parse import urljoin
+from urllib.parse import urljoin
 
 from ..helpers import bounceStarter, xpath_class
 from ..scraper import _BasicScraper, _ParserScraper

@@ -2,6 +2,5 @@ colorama
 imagesize
 lxml
 requests>=2.0
-six
 cached_property; python_version<'3.8'
 importlib_metadata; python_version<'3.8'

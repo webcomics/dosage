@@ -10,7 +10,7 @@ from time import time, sleep
 import requests
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
-from six.moves.urllib.parse import urlparse
+from urllib.parse import urlparse
 
 from .configuration import UserAgent
 

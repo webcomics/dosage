@@ -8,7 +8,7 @@ JSON file for further processing.
 """
 from __future__ import absolute_import, division, print_function
 
-from six.moves.urllib.parse import urlsplit, parse_qs
+from urllib.parse import urlsplit, parse_qs
 
 from scriptutil import ComicListUpdater
 from dosagelib.util import check_robotstxt

@@ -5,9 +5,8 @@
 
 from __future__ import absolute_import, division, print_function
 
-import os
 import argparse
-import six
+import os
 
 from . import events, configuration, singleton, director, scraper
 from . import AppName, __version__
@@ -168,8 +167,8 @@ def display_comic_help(scraperobj):
     orig_context = out.context
     out.context = scraperobj.name
     try:
-        out.info(u"URL: " + six.text_type(scraperobj.url))
-        out.info(u"Language: " + scraperobj.language())
+        out.info('URL: {}'.format(scraperobj.url))
+        out.info('Language: {}'.format(scraperobj.language()))
         if scraperobj.adult:
             out.info(u"Adult comic, use option --adult to fetch.")
         disabled = scraperobj.getDisabledReasons()

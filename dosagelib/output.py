@@ -1,25 +1,21 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
-import time
-import sys
-import os
-import threading
-import traceback
 import codecs
 import contextlib
-import pydoc
 import io
-import six
+import os
+import pydoc
+import sys
+import threading
+import time
+import traceback
 
-try:
-    from shutil import get_terminal_size
-except ImportError:
-    from backports.shutil_get_terminal_size import get_terminal_size
+from shutil import get_terminal_size
 
 import colorama
 from colorama import Fore, Style
@@ -111,8 +107,8 @@ class Output(object):
                 self.stream.write(u'%s%s> ' % (timestamp, get_threadname()))
             if color and self.is_tty:
                 s = u'%s%s%s' % (color, s, Style.RESET_ALL)
-            self.stream.write(six.text_type(s))
-            self.stream.write(six.text_type(os.linesep))
+            self.stream.write(str(s))
+            self.stream.write(str(os.linesep))
             self.stream.flush()
 
     def writelines(self, lines, level=0):

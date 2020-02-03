@@ -5,30 +5,20 @@
 
 from __future__ import absolute_import, division, print_function
 
-from six.moves.urllib.parse import (parse_qs,
-    quote as url_quote, unquote as url_unquote, urlparse, urlunparse, urlsplit)
-from six.moves.urllib_robotparser import RobotFileParser
-import requests
-import sys
+import html
 import os
 import re
-import traceback
-import time
 import subprocess
+import sys
+import time
+import traceback
 
-try:
-    import html
-except ImportError:
-    # Python 2.7
-    from HTMLParser import HTMLParser
-    html = HTMLParser()
-from six.moves import range
-import six
+from functools import lru_cache
+from urllib.parse import (parse_qs, quote as url_quote, unquote as url_unquote,
+        urlparse, urlunparse, urlsplit)
+from urllib.robotparser import RobotFileParser
 
-try:
-    from functools import lru_cache
-except ImportError:
-    from backports.functools_lru_cache import lru_cache
+import requests
 
 from .output import out
 from .configuration import UserAgent, App, SupportUrl
@@ -65,10 +55,7 @@ def get_nt_system_uid():
     r"""Get the MachineGuid from
     HKEY_LOCAL_MACHINE\Software\Microsoft\Cryptography\MachineGuid
     """
-    try:
-        import _winreg as winreg
-    except ImportError:
-        import winreg
+    import winreg
     lm = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
     try:
         key = winreg.OpenKey(lm, r"Software\Microsoft\Cryptography")
@@ -106,7 +93,7 @@ def backtick(cmd, encoding='utf-8'):
 
 def unicode_safe(text, encoding=UrlEncoding, errors='ignore'):
     """Decode text to Unicode if not already done."""
-    if isinstance(text, six.text_type):
+    if isinstance(text, str):
         return text
     return text.decode(encoding, errors)
 

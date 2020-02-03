@@ -7,10 +7,7 @@ import gzip
 import os.path
 import re
 
-try:
-    from functools import lru_cache
-except ImportError:
-    from backports.functools_lru_cache import lru_cache
+from functools import lru_cache
 
 from responses import add, GET
 

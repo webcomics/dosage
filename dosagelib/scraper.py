@@ -7,7 +7,7 @@ from __future__ import absolute_import, division, print_function
 
 import os
 import re
-from six.moves.urllib.parse import urljoin
+from urllib.parse import urljoin
 
 from lxml import html, etree
 from lxml.html.defs import link_attrs as html_link_attrs

@@ -1,21 +1,16 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 
 from __future__ import absolute_import, division, print_function
 
+import codecs
+import json
 import os
 import re
 import sys
 import time
-import json
-import codecs
-
-try:
-    from os import replace as rename
-except ImportError:
-    from os import rename
 
 from lxml import html
 
@@ -99,7 +94,7 @@ class ComicListUpdater(object):
             for name, entry in sorted(data.items(), key=first_lower):
                 self.write_entry(newf, name, entry, min_comics, indent)
             self.copy_after_end(oldf, newf)
-        rename(filename + '.new', filename)
+        os.replace(filename + '.new', filename)
 
     def copy_until_start(self, src, dest):
         for line in src:
