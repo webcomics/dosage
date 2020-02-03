@@ -161,6 +161,7 @@ class WebToons(_ParserScraper):
             cls('FantasySketchTheGame', 'fantasy/fantasy-sketch', 1020),
             cls('Faust', 'fantasy/faust', 522),
             cls('FINALITY', 'thriller/finality', 1457),
+            cls('FisheyePlacebo', 'challenge/fisheye-placebo', 101841),
             cls('Firebrand', 'fantasy/firebrand', 877),
             cls('Flow', 'fantasy/flow', 101),
             cls('FluffyBoyfriend', 'drama/fluffy-boyfriend', 1164),
@@ -288,6 +289,7 @@ class WebToons(_ParserScraper):
             cls('SaltyStudio', 'romance/salty-studio', 74),
             cls('SaphieTheOneEyedCat', 'slice-of-life/saphie-one-eyed-cat', 670),
             cls('SAVEME', 'drama/bts-save-me', 1514),
+            cls('ScoobandShag', 'challenge/scoob-and-shag', 210827),
             cls('ScorchingRomance', 'drama/scorching-romance', 1662),
             cls('Seed', 'sf/seed', 1480),
             cls('SHADOW', 'fantasy/shadow', 281),
@@ -382,5 +384,6 @@ class WebToons(_ParserScraper):
             cls('YourLetter', 'drama/your-letter', 1540),
             cls('YumisCells', 'romance/yumi-cell', 478),
             cls('ZeroGame', 'action/zero-game', 1704),
+            cls('ZomCom', 'challenge/zomcom', 70195),
             # END AUTOUPDATE
         )
