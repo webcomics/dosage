@@ -5,9 +5,6 @@
 """
 Define basic configuration data like version or application name.
 """
-
-from __future__ import absolute_import, division, print_function
-
 from . import AppName, __version__
 
 App = AppName + u' ' + __version__

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2016-2019 Tobias Gruetzmacher
-
 """
 Functions to load plugin modules.
 
@@ -9,8 +8,6 @@ Example usage:
     modules = loader.get_modules('plugins')
     plugins = loader.get_plugins(modules, PluginClass)
 """
-
-from __future__ import absolute_import, division, print_function
 import importlib
 import pkgutil
 from .output import out

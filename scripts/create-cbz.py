@@ -8,7 +8,6 @@ Creates a CBZ file in the comic directory.
 Uses an ordered symlink directory (see order-symlinks.py) if it exists,
 else the plain files are used.
 """
-from __future__ import absolute_import, division, print_function
 
 import sys
 import os

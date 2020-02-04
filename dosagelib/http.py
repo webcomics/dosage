@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2019 Tobias Gruetzmacher
-
-from __future__ import absolute_import, division, print_function
-
 from collections import defaultdict
 from random import uniform
 from time import time, sleep

@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2015-2017 Tobias Gruetzmacher
-
-from __future__ import absolute_import, division, print_function
-
 import xml.dom.minidom
 import time
 from .configuration import App

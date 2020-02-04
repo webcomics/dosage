@@ -8,8 +8,6 @@ This script takes the JSON file created by 'dosage -o json' and uses the
 metadata to build a symlink farm in the deduced order of the comic. It created
 those in a subdirectory called 'inorder'.
 """
-from __future__ import absolute_import, division, print_function
-
 import sys
 import os
 import codecs

@@ -13,7 +13,6 @@ your intentions, and received permission to distribute.
 The primary interface is the 'dosage' commandline script.
 Comic modules for each comic are located in L{dosagelib.plugins}.
 """
-from __future__ import absolute_import, division, print_function
 
 try:
     from importlib.metadata import version, PackageNotFoundError

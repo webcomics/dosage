@@ -7,7 +7,6 @@
 Script to get a list of ComicSherpa and save the info in a JSON file for
 further processing.
 """
-from __future__ import absolute_import, division, print_function
 
 from scriptutil import ComicListUpdater
 

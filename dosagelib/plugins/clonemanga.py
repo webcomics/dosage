@@ -2,9 +2,6 @@
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2019 Tobias Gruetzmacher
-
-from __future__ import absolute_import, division, print_function
-
 from ..helpers import indirectStarter, xpath_class
 from ..scraper import _ParserScraper
 from ..util import getQueryParams

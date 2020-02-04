@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2019 Tobias Gruetzmacher
 # Copyright (C) 2019 Thomas W. Littauer
-
-from __future__ import absolute_import, division, print_function
-
 from ..scraper import _BasicScraper
 from ..helpers import bounceStarter, joinPathPartsNamer
 

@@ -7,7 +7,6 @@
 Script to get ComicFury comics and save the info in a JSON file for further
 processing.
 """
-from __future__ import absolute_import, division, print_function
 
 import sys
 from urllib.parse import urlsplit

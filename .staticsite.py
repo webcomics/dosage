@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import, division, print_function
-
 SITE_NAME = "dosage"
 SITE_SUB = "a comic downloader and archiver"
 SITE_AUTHOR = "Tobias Gruetzmacher"
