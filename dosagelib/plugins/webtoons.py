@@ -277,6 +277,7 @@ class WebToons(_ParserScraper):
             cls('Pound', 'action/pound', 1496),
             cls('PowerBallad', 'drama/power-ballad', 987),
             cls('PurpleHyacinth', 'drama/purple-hyacinth', 1621),
+            cls('Punderworld', 'challenge/punderworld', 312584),
             cls('RandomChat', 'drama/random-chat', 1669),
             cls('RANDOMPHILIA', 'comedy/randomphilia', 386),
             cls('Rebirth', 'fantasy/rebirth', 1412),
