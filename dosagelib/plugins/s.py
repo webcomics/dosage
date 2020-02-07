@@ -241,6 +241,12 @@ class SinFest(_BasicScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
+class SixGunMage(_ComicControlScraper):
+    url = 'http://www.6gunmage.com/comic/'
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '6-gun-mage-kickoff'
+
+
 class SixPackOfOtters(_WPWebcomic):
     url = 'http://sixpackofotters.com/'
     stripUrl = url + 'pages/%s/'
