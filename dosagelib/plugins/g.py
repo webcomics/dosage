@@ -105,14 +105,8 @@ class GleefulNihilism(_WordPressScraper):
     help = 'Index format: stripname'
 
 
-class GoblinsComic(_ParserScraper):
+class GoblinsComic(_ComicControlScraper):
     url = 'http://www.goblinscomic.org/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
-    css = True
-    imageSearch = '#comic img'
-    prevSearch = '.nav-previous > a'
-    help = 'Index format: ddmmyyyy'
 
 
 class GodChild(_WordPressScraper):
