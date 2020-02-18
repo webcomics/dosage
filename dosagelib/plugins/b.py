@@ -8,7 +8,13 @@ from re import compile, escape
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, xpath_class
-from .common import _ComicControlScraper, _WordPressScraper, _WPNaviIn, _WPWebcomic
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPNaviIn, _WPWebcomic
+
+
+class BackOffice(_WPNavi):
+    url = 'https://rawrtacular.com/bo/'
+    stripUrl = url + '?comic=%s'
+    firstStripUrl = stripUrl % 'back-office'
 
 
 class BadassMuthas(_BasicScraper):
