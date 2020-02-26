@@ -366,6 +366,7 @@ class ComicFury(_ParserScraper):
             cls('DragonballZElsewhere', 'dbzelsewhere'),
             cls('DragonCity', 'dragoncity'),
             # Dragonet has a duplicate in SmackJeeves/Dragonet
+            cls('DragonsAndSilk', 'dragonsandsilk'),
             cls('DragonsOfAzuma', 'dragonsofazuma'),
             cls('DrApocalyptosSurvivorama', 'docapoc'),
             cls('DressedForSuccess', 'dressedforsuccess'),
@@ -1138,6 +1139,7 @@ class ComicFury(_ParserScraper):
             cls('VeldaGirlDetective', 'veldagirldetective'),
             cls('Verboten', 'verboten'),
             cls('Victory', 'victoryadventures'),
+            cls('ViewHub', 'viewhub'),
             cls('ViolentBlue', 'violentblue'),
             cls('Virtrena', 'virtrena'),
             cls('VisualDiaryOfMyLife', 'visualdiary'),
