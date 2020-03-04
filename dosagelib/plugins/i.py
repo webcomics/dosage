@@ -5,9 +5,10 @@
 # Copyright (C) 2019-2020 Daniel Ring
 from re import compile, escape
 
+from ..helpers import indirectStarter
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import _WordPressScraper, _WPNavi
+from .common import _WordPressScraper, _WPNavi, _WPWebcomic
 
 
 class IAmArg(_BasicScraper):
@@ -32,6 +33,14 @@ class ICanBarelyDraw(_BasicScraper):
 
 class IDreamOfAJeanieBottle(_WordPressScraper):
     url = 'http://jeaniebottle.com/'
+
+
+class InsignificantOtters(_WPWebcomic):
+    stripUrl = 'https://www.thedepthscomic.com/i-otters/%s/'
+    firstStripUrl = stripUrl % 'page-1'
+    url = firstStripUrl
+    imageSearch = '//div[contains(@class, "webcomic-media")]//img'
+    starter = indirectStarter
 
 
 class InternetWebcomic(_WPNavi):
