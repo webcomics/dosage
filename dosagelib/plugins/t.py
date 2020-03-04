@@ -56,6 +56,22 @@ class TheClassMenagerie(_ParserScraper):
     endOfLife = True
 
 
+class TheDepths(_WPWebcomic):
+    url = 'https://www.thedepthscomic.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'page-01'
+    imageSearch = '//div[contains(@class, "webcomic-media")]//img'
+    adult = True
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix inconsistent filenames
+        filename = imageUrl.rsplit('/', 1)[-1]
+        filename = filename.replace('pg', 'page_')
+        filename = filename.replace('page_', 'the_depths_')
+        filename = filename.replace('-web', '')
+        return filename
+
+
 class TheDevilsPanties(_WPNavi):
     url = 'https://thedevilspanties.com/'
     stripUrl = url + 'archives/%s'
