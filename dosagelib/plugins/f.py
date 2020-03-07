@@ -207,6 +207,17 @@ class FreighterTails(_ParserScraper):
     endOfLife = True
 
 
+class FriendsYouAreStuckWith(_WordPressScraper):
+    url = 'http://friendsyasw.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'wanted'
+
+    def namer(self, imageUrl, pageUrl):
+        page = self.getPage(pageUrl)
+        strip = page.xpath('//div[@id="comic-wrap"]/@class')[0].replace('comic-id-', '')
+        return strip + '_' + imageUrl.rstrip('/').rsplit('/', 1)[-1]
+
+
 class FullFrontalNerdity(_BasicScraper):
     url = 'http://ffn.nodwick.com/'
     rurl = escape(url)
