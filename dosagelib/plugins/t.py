@@ -190,6 +190,12 @@ class TheWhiteboard(_ParserScraper):
         data = self.BROKEN_PAGE_MIDDLE.sub('<', data)
         return super(TheWhiteboard, self)._parse_page(data)
 
+    def imageUrlModifier(self, url, data):
+        return self.url + url
+
+    def link_modifier(self, fromurl, tourl):
+        return self.url + tourl
+
 
 class TheWotch(_WordPressScraper):
     url = 'http://www.thewotch.com/'
