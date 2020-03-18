@@ -103,7 +103,7 @@ class Nicky510(_WPNavi):
 
 
 class Nightshift(_ParserScraper):
-    url = 'http://www.poecatcomix.com/comics/nightshift/'
+    url = 'http://poecatcomix.com/comic-titles/nightshift/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % 'nightshift-volume1/ns-chapter-1'
     imageSearch = '//div[@id="gallery-1"]//img'
