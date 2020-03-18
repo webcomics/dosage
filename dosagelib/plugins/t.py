@@ -153,13 +153,13 @@ class TheOldVictorian(_ParserScraper):
         return filename
 
 
-class TheOrderOfTheStick(_BasicScraper):
-    url = 'http://www.giantitp.com/'
+class TheOrderOfTheStick(_ParserScraper):
+    url = 'https://www.giantitp.com/'
     stripUrl = url + 'comics/oots%s.html'
     firstStripUrl = stripUrl % '0001'
-    imageSearch = compile(r'<IMG src="(/comics/images/[^"]+)">')
-    prevSearch = compile(r'<A href="(/comics/oots\d{4}\.html)"><IMG src="/Images/redesign/ComicNav_Back.gif"')
-    latestSearch = compile(r'<A href="(/comics/oots\d{4}\.html)"')
+    imageSearch = '//img[contains(@src, "/comics/oots/")]'
+    prevSearch = '//a[./img[@alt="Previous Comic"]]'
+    latestSearch = '//a[@class="SideBar" and contains(@href, "/comics/oots")]'
     help = 'Index format: n (unpadded)'
     starter = indirectStarter
 
