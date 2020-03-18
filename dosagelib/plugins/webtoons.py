@@ -41,7 +41,7 @@ class WebToons(_ParserScraper):
         episodeNum = pageUrl.rsplit('=', 1)[-1]
         imageNum = self.imageUrls.index(imageUrl)
         imageExt = pageUrl.rsplit('.', 1)[-1].split('?', 1)[0]
-        return "%s-%02d.%s" % (episodeNum, imageNum, imageExt)
+        return "%s-%03d.%s" % (episodeNum, imageNum, imageExt)
 
     @classmethod
     def getmodules(cls):
