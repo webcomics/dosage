@@ -287,9 +287,9 @@ class SluggyFreelance(_ParserScraper):
     url = 'http://sluggy.com/'
     stripUrl = 'http://archives.sluggy.com/book.php?chapter=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = '//div[contains(@class, "comic_content")]/img/@data-src'
-    prevSearch = '//div[@class="previous"]/a'
-    latestSearch = '//a[@class="archives_link"]'
+    imageSearch = '//div[%s]/img/@data-src' % xpath_class('comic_content')
+    prevSearch = '//div[%s]/a' % xpath_class('previous')
+    latestSearch = '//a[%s]' % xpath_class('archives_link')
     starter = indirectStarter
     multipleImagesPerStrip = True
     help = 'Index format: chapter'

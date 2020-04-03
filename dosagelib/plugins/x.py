@@ -22,7 +22,7 @@ class XKCD(_ParserScraper):
     def namer(self, image_url, page_url):
         index = int(page_url.rstrip('/').rsplit('/', 1)[-1])
         name = image_url.rsplit('/', 1)[-1].split('.')[0]
-        return '%03d-%s' % (index, name)
+        return '%04d-%s' % (index, name)
 
     def imageUrlModifier(self, url, data):
         if url and '/large/' in data:
