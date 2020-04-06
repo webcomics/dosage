@@ -286,6 +286,7 @@ class SlightlyDamned(_ComicControlScraper):
 class SluggyFreelance(_ParserScraper):
     url = 'http://sluggy.com/'
     stripUrl = 'http://archives.sluggy.com/book.php?chapter=%s'
+    firstStripUrl = stripUrl % '1'
     imageSearch = '//div[%s]/img/@data-src' % xpath_class('comic_content')
     prevSearch = '//div[%s]/a' % xpath_class('previous')
     latestSearch = '//a[%s]' % xpath_class('archives_link')
@@ -294,9 +295,8 @@ class SluggyFreelance(_ParserScraper):
     help = 'Index format: chapter'
 
     def namer(self, imageurl, pageurl):
-        """Remove random noise from name."""
-        fn = imageurl.rsplit('/', 1)[-1]
-        return sub(r'\.(png|gif|jpg).*\.\1', '', fn)
+        # Remove random noise from filename
+        return imageurl.rsplit('/', 1)[-1].split('.pagespeed', 1)[0]
 
 
 class SMBC(_ComicControlScraper):

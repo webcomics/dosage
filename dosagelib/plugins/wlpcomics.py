@@ -10,7 +10,7 @@ from ..helpers import bounceStarter
 
 
 class _WLPComics(_ParserScraper):
-    imageSearch = '//center/*/img[contains(@alt, " Comic")]'
+    imageSearch = '//img[contains(@alt, " Comic")]'
     prevSearch = '//a[contains(text(), "Previous ")]'
     nextSearch = '//a[contains(text(), "Next ")]'
     starter = bounceStarter
@@ -23,23 +23,18 @@ class _WLPComics(_ParserScraper):
         return (page_url.rsplit('/', 1)[-1].split('.')[0] + '_' +
                 image_url.rsplit('/', 1)[-1])
 
-    def getIndexStripUrl(self, index):
-        return self.url + '%s.html' % index
-
 
 class ChichiChan(_WLPComics):
     url = 'http://www.wlpcomics.com/adult/chichi/'
+    stripUrl = url + '%s.html'
     adult = True
 
 
 class ChocolateMilkMaid(_WLPComics):
     # Newer pages seem to be broken
-    baseurl = 'http://www.wlpcomics.com/adult/cm/'
-    url = baseurl + '264.html'
+    stripUrl = 'http://www.wlpcomics.com/adult/cm/%s.html'
+    url = stripUrl % '264'
     adult = True
-
-    def getIndexStripUrl(self, index):
-        return self.baseurl + '%s.html' % index
 
     def link_modifier(self, fromurl, tourl):
         """Bugfix for self-referencing pages..."""
@@ -53,6 +48,7 @@ class ChocolateMilkMaid(_WLPComics):
 
 class MaidAttack(_WLPComics):
     url = 'http://www.wlpcomics.com/general/maidattack/'
+    stripUrl = url + '%s.html'
 
 
 class PeterIsTheWolfAdult(_WLPComics):
@@ -96,6 +92,7 @@ class PeterIsTheWolfGeneral(_WLPComics):
 
 class Stellar(_WLPComics):
     url = 'http://www.wlpcomics.com/adult/stellar/'
+    stripUrl = url + '%s.html'
     adult = True
 
     def link_modifier(self, fromurl, tourl):
