@@ -5,13 +5,15 @@ import json
 import re
 
 from ..scraper import _ParserScraper
+from ..helpers import indirectStarter
 
 
 class Tapastic(_ParserScraper):
     baseUrl = 'https://tapas.io/'
-    imageSearch = '//article[@class="ep-contents"]//img'
-    episodeIdSearch = re.compile(r'episodeId : (\d+),')
-    episodeListSearch = re.compile(r'episodeList : (.*),')
+    imageSearch = '//article[contains(@class, "js-episode-article")]//img/@data-src'
+    prevSearch = '//a[contains(@class, "js-prev-ep-btn")]'
+    latestSearch = '//ul[contains(@class, "js-episode-list")]//a'
+    starter = indirectStarter
     multipleImagesPerStrip = True
 
     def __init__(self, name, url):
@@ -19,29 +21,10 @@ class Tapastic(_ParserScraper):
         self.url = self.baseUrl + 'series/' + url
         self.stripUrl = self.baseUrl + 'episode/%s'
 
-    def starter(self):
-        # Retrieve series data object
-        seriesPage = self.getPage(self.url)
-        dataScript = seriesPage.xpath('//script[contains(text(), "var _data")]')[0].text
-        # Extract episode list
-        currentEpisode = self.episodeIdSearch.findall(dataScript)[0]
-        self.episodeList = json.loads(self.episodeListSearch.findall(dataScript)[0])
-        return self.stripUrl % currentEpisode
-
     def fetchUrls(self, url, data, urlSearch):
         # Save link order for position-based filenames
         self.imageUrls = super().fetchUrls(url, data, urlSearch)
-        # Update firstStripUrl with the correct episode title
-        if int(url.rsplit('/', 1)[-1]) == self.episodeList[0]['id']:
-            self.firstStripUrl = url
         return self.imageUrls
-
-    def getPrevUrl(self, url, data):
-        episodeId = int(url.rsplit('/', 1)[-1])
-        index = [i for i, ep in enumerate(self.episodeList) if ep['id'] == episodeId][0]
-        if index == 0:
-            return None
-        return self.stripUrl % str(self.episodeList[index - 1]['id'])
 
     def namer(self, imageUrl, pageUrl):
         # Construct filename from episode number and image position on page
