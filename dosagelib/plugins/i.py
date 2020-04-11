@@ -66,6 +66,10 @@ class IslaAukate(_ParserScraper):
     imageSearch = '//div[@id="comicpage"]/img'
     prevSearch = '//nav[@class="comicnav"]/a[text()="Prev"]'
 
+    def namer(self, imageUrl, pageUrl):
+        filename = imageUrl.rsplit('/', 1)[-1]
+        return filename.rsplit('_', 1)[0] + '.' + filename.rsplit('.', 1)[-1]
+
 
 class IslaAukateColor(_ParserScraper):
     url = 'https://overlordcomic.com/archive/color/latest'
@@ -79,7 +83,7 @@ class IslaAukateColor(_ParserScraper):
         filename = imageUrl.rsplit('/', 1)[-1]
         if filename[0].isdigit():
             filename = 'Aukate' + filename
-        return filename
+        return filename.rsplit('_', 1)[0] + '.' + filename.rsplit('.', 1)[-1]
 
 
 class ItsWalky(_WordPressScraper):
