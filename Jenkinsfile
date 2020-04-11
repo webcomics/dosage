@@ -7,7 +7,7 @@ def pys = [
 
 properties([
     durabilityHint('PERFORMANCE_OPTIMIZED'),
-    buildDiscarder(logRotator(numToKeepStr: '5')),
+    buildDiscarder(logRotator(numToKeepStr: '100')),
 ])
 
 Map tasks = [failFast: true]
