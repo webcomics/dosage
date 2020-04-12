@@ -3,17 +3,18 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 import codecs
+import html
 import json
 import os
 import re
 import sys
 import time
 
-from lxml import html
+import lxml
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))  # noqa
 
-from dosagelib.util import unescape, get_page
+from dosagelib.util import get_page
 from dosagelib import scraper, http
 
 
@@ -37,7 +38,8 @@ class ComicListUpdater(object):
         """Get an HTML page and parse it with LXML."""
         print("Parsing", url, file=sys.stderr)
         try:
-            data = html.document_fromstring(get_page(url, self.session).text)
+            pagetext = get_page(url, self.session).text
+            data = lxml.html.document_fromstring(pagetext)
             if expand:
                 data.make_links_absolute(url)
             if self.sleep > 0:
@@ -185,7 +187,7 @@ def asciify(name):
 
 def format_name(text):
     """Format a comic name."""
-    name = unescape(text)
+    name = html.unescape(text)
     name = "".join(capfirst(x) for x in name.split(" "))
     name = asciify(name.replace(u'&', u'And').replace(u'@', u'At').replace('ñ', 'n'))
     return name

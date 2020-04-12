@@ -2,11 +2,12 @@
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
+import html
 import os
 import re
 from urllib.parse import urljoin
 
-from lxml import html, etree
+import lxml
 from lxml.html.defs import link_attrs as html_link_attrs
 
 try:
@@ -20,8 +21,8 @@ except ImportError:
     pycountry = None
 
 from . import configuration, http, languages, loader
-from .util import (get_page, makeSequence, get_system_uid, unescape, tagre,
-    normaliseURL, prettyMatcherList, uniq)
+from .util import (get_page, makeSequence, get_system_uid, tagre, normaliseURL,
+        prettyMatcherList, uniq)
 from .comic import ComicStrip
 from .output import out
 from .events import getHandler
@@ -400,7 +401,7 @@ class _BasicScraper(Scraper):
                 text = match.group(1)
                 out.debug(u'matched text %r with pattern %s' %
                           (text, textSearch.pattern))
-                return unescape(text).strip()
+                return html.unescape(text).strip()
             if optional:
                 return None
             else:
@@ -462,7 +463,7 @@ class _ParserScraper(Scraper):
         return tree
 
     def _parse_page(self, data):
-        if self.broken_html_bugfix and etree.LIBXML_VERSION < (2, 9, 3):
+        if self.broken_html_bugfix and lxml.etree.LIBXML_VERSION < (2, 9, 3):
             def fix_not_open_tags(match):
                 fix = (len(match.group(1)) * '&lt;') + match.group(2)
                 out.warn("Found possibly broken HTML '%s', fixing as '%s'" % (
@@ -470,7 +471,7 @@ class _ParserScraper(Scraper):
                 return fix
             data = self.BROKEN_NOT_OPEN_TAGS.sub(fix_not_open_tags, data)
 
-        tree = html.document_fromstring(data)
+        tree = lxml.html.document_fromstring(data)
         return tree
 
     def fetchUrls(self, url, data, urlSearch):

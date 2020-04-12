@@ -1,22 +1,16 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2018 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 import pytest
 import re
-from dosagelib.util import normaliseURL, unescape, tagre, get_system_uid
+from dosagelib.util import normaliseURL, tagre, get_system_uid
 
 
 class TestURL(object):
     """
     Tests for URL utility functions.
     """
-
-    def test_unescape(self):
-        # Test HTML replacement.
-        assert unescape(u'foo&amp;bar') == u'foo&bar'
-        assert unescape(u'foo&#160;bar') == u'foo\xa0bar'
-        assert unescape(u'&quot;foo&quot;') == u'"foo"'
 
     def test_normalisation(self):
         # Test URL normalisation.
