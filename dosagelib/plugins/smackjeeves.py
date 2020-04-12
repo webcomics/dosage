@@ -254,7 +254,6 @@ class SmackJeeves(_ParserScraper):
             cls('GoodGame', 48048, endOfLife=True),
             cls('GoodnightMrsGoose', 73655),
             cls('Grayscale', 100295, adult=True),
-            cls('GrowingTroubles', 176934),
             cls('GuardiansoftheGalaxialSpaceways', 70286),
             cls('Habibahssong', 137453),
             cls('HarvestMoonParadiseFound', 105422, endOfLife=True),
