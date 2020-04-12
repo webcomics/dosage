@@ -472,6 +472,7 @@ class ComicFury(_ParserScraper):
             cls('GrimReaperSchool', 'grimreaperschool'),
             cls('GrippsBrain', 'grippsbrain'),
             cls('GrokBoop', 'grokboop'),
+            cls('GrowingTroubles', 'growingtroubles'),
             cls('GUS', 'gus'),
             cls('HalloweenCameoCaper2012', 'halloween2012'),
             cls('HalloweenCameoCaper2013', 'halloween2013'),
