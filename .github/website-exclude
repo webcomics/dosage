@@ -1,0 +1,11 @@
+Jenkinsfile
+build
+cc-test-reporter
+coverage
+dist
+dosage
+dosagelib
+scripts
+setup.cfg
+setup.py
+tests

@@ -21,9 +21,8 @@ git clone --depth=10 --branch=gh-pages "git@github.com:${TRAVIS_REPO_SLUG}.git" 
 rm -Rfv dosage.egg-info
 ssite build --output "$P/out"
 
-rsync -r --del --verbose --exclude tests \
-    --exclude dosagelib --exclude dist --exclude build --exclude scripts \
-    "$P/out/"* "$P/git"
+rsync -r --del --verbose --cvs-exclude --exclude-from .github/website-exclude \
+    "$P/out/" "$P/git"
 
 cd "$P/git"
 
