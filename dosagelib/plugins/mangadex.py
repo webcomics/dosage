@@ -76,6 +76,7 @@ class MangaDex(_ParserScraper):
             cls('DragonDrive', 5165),
             cls('HeavensDesignTeam', 27811),
             cls('HoriMiya', 6770),
+            cls('InterspeciesReviewers', 20796),
             cls('JingaiNoYomeToIchaIchaSuru', 22651),
             cls('KanojoOkarishimasu', 22151),
             cls('ModernMoGal', 30308),
