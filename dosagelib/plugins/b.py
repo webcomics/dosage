@@ -105,6 +105,10 @@ class Bethellium(_WPWebcomic):
     url = firstStripUrl
     starter = indirectStarter
 
+    def getPrevUrl(self, url, data):
+        prevUrl = super(Bethellium, self).getPrevUrl(url, data)
+        return prevUrl.replace('%webcomic2_storyline%', 'chapter-2-the-hemlocks-scar')
+
     def namer(self, imageUrl, pageUrl):
         # Prepend chapter title to page filenames
         chapter = pageUrl.rstrip('/').rsplit('/', 3)[-2]
