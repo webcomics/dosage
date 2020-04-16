@@ -40,6 +40,14 @@ class LastResort(_WordPressScraper):
     firstStripUrl = stripUrl % 'that-sound-you-hear-is-a-shattered-stereotype'
 
 
+class LazJonesAndTheMayfieldRegulators(_ParserScraper):
+    url = 'https://www.lazjones.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'chapter1_00'
+    imageSearch = '//img[contains(@src, "comic/pages/")]'
+    prevSearch = '//a[contains(text(), "Previous")]'
+
+
 class LeastICouldDo(_ParserScraper):
     url = 'https://leasticoulddo.com/'
     stripUrl = url + 'comic/%s'
