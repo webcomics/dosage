@@ -143,6 +143,14 @@ class WildeLife(_ComicControlScraper):
     firstStripUrl = stripUrl % '1'
 
 
+class WintersLight(_ParserScraper):
+    url = 'https://winterslight.anaria.net/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'winterslight00'
+    imageSearch = '//img[contains(@src, "comic/pages/")]'
+    prevSearch = '//a[contains(text(), "Previous")]'
+
+
 class Wonderella(_BasicScraper):
     url = 'http://nonadventures.com/'
     rurl = escape(url)
