@@ -87,11 +87,11 @@ Windows users can download a complete binary (including Python) from the
 The simplest way to install and upgrade dosage is with [pipx]. To install the
 newest stable version with all optional features use:
 
-    pipx install --spec dosage[css,bash] dosage
+    pipx install dosage[css,bash]
 
 To install the newest development version, use:
 
-    pipx install --spec "dosage[css,bash] @ git+https://github.com/webcomics/dosage.git" dosage
+    pipx install "dosage[css,bash] @ git+https://github.com/webcomics/dosage.git"
 
 To upgrade such installations, just run:
 
