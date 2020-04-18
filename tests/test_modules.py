@@ -14,7 +14,7 @@ def cmd(*options):
     assert dosagelib.cmd.main(("--allow-multiple",) + options) == 0
 
 
-@pytest.mark.usefixtures("nosleep")
+@pytest.mark.usefixtures("_nosleep")
 class TestModules(object):
     """Test that specific comic modules work correctly."""
 

@@ -22,7 +22,7 @@ class TestRegex(object):
 
     ValuePrefix = '/bla/'
 
-    @pytest.mark.parametrize("tag,value,domatch", [
+    @pytest.mark.parametrize(('tag', 'value', 'domatch'), [
         ('<img src="%s">', ValuePrefix + 'foo', True),
         ('< img  src = "%s" >', ValuePrefix, True),
         ('<img class="prev" src="%s">', ValuePrefix + '...', True),

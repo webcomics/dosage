@@ -15,29 +15,25 @@ def get_test_scrapers():
     """Return scrapers that should be tested."""
     if "TESTALL" in os.environ:
         # test all comics (this will take some time)
-        scrapers = scraper.get_scrapers()
+        return scraper.get_scrapers()
+    if 'TESTCOMICS' in os.environ:
+        scraper_pattern = re.compile(os.environ['TESTCOMICS'])
     else:
-        if 'TESTCOMICS' in os.environ:
-            scraper_pattern = re.compile(os.environ['TESTCOMICS'])
-        else:
-            # Get limited number of scraper tests on Travis builds to make it
-            # faster
-            testscrapernames = [
-                # "classic" _BasicScraper
-                'AbstruseGoose',
-                # complex _ParserScraper
-                'GoComics/CalvinAndHobbes',
-                # _WordPressScraper
-                'GrrlPower'
-            ]
-            scraper_pattern = re.compile('^(' + '|'.join(testscrapernames) +
-                                         ')$')
-
-        scrapers = [
-            scraperobj for scraperobj in scraper.get_scrapers()
-            if scraper_pattern.match(scraperobj.name)
+        # Get limited number of scraper tests as default
+        testscrapernames = [
+            # "classic" _BasicScraper
+            'AbstruseGoose',
+            # complex _ParserScraper
+            'GoComics/CalvinAndHobbes',
+            # _WordPressScraper
+            'GrrlPower'
         ]
-    return scrapers
+        scraper_pattern = re.compile('^(' + '|'.join(testscrapernames) + ')$')
+
+    return [
+        scraperobj for scraperobj in scraper.get_scrapers()
+        if scraper_pattern.match(scraperobj.name)
+    ]
 
 
 def pytest_generate_tests(metafunc):

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2019 Tobias Gruetzmacher
-from collections import defaultdict
-from random import uniform
-from time import time, sleep
+# Copyright (C) 2019-2020 Tobias Gruetzmacher
+import collections
+import random
+import time
 
 import requests
 from requests.adapters import HTTPAdapter
@@ -38,7 +38,7 @@ class Session(requests.Session):
         self.mount('https://', HTTPAdapter(max_retries=retry))
         self.headers.update({'User-Agent': UserAgent})
 
-        self.throttles = defaultdict(lambda: RandomThrottle(0.0, 0.3))
+        self.throttles = collections.defaultdict(lambda: RandomThrottle())
 
     def send(self, request, **kwargs):
         if 'timeout' not in kwargs:
@@ -56,16 +56,16 @@ class Session(requests.Session):
 
 
 class RandomThrottle(object):
-    def __init__(self, th_min, th_max):
+    def __init__(self, th_min=0.0, th_max=0.3):
         self.th_min = th_min
         self.th_max = th_max
-        self.next = time()
+        self.next = time.time()
 
     def delay(self):
-        d = self.next - time()
+        d = self.next - time.time()
         if d > 0:
-            sleep(d)
-        self.next = time() + uniform(self.th_min, self.th_max)
+            time.sleep(d)
+        self.next = time.time() + random.uniform(self.th_min, self.th_max)
 
 
 # A default session for cookie and connection sharing
