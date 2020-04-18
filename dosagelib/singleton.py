@@ -1,6 +1,5 @@
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: PSF-2.0
 # Copied from: https://github.com/pycontribs/tendo
-# License: PYTHON SOFTWARE FOUNDATION LICENSE VERSION 2
 # Author: Sorin Sbarnea
 # Changes: changed logging and formatting
 import sys
