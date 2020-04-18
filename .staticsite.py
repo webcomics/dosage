@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# SPDX-License-Identifier: MIT
 SITE_NAME = "dosage"
 SITE_SUB = "a comic downloader and archiver"
 SITE_AUTHOR = "Tobias Gruetzmacher"

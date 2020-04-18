@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# SPDX-License-Identifier: MIT
 # Copied from: https://github.com/pycontribs/tendo
 # License: PYTHON SOFTWARE FOUNDATION LICENSE VERSION 2
 # Author: Sorin Sbarnea

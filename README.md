@@ -3,7 +3,8 @@
 [![Build Status](https://travis-ci.com/webcomics/dosage.svg?branch=master)](https://travis-ci.com/webcomics/dosage)
 [![Code Climate](https://codeclimate.com/github/webcomics/dosage/badges/gpa.svg)](https://codeclimate.com/github/webcomics/dosage)
 [![codecov](https://codecov.io/gh/webcomics/dosage/branch/master/graph/badge.svg)](https://codecov.io/gh/webcomics/dosage)
-[![Maintenance](https://img.shields.io/maintenance/yes/2020.svg)]()
+![Maintenance](https://img.shields.io/maintenance/yes/2020.svg)
+![License](https://img.shields.io/github/license/webcomics/dosage)
 
 Dosage is designed to keep a local copy of specific webcomics and other
 picture-based content such as Picture of the Day sites. With the dosage
@@ -13,6 +14,8 @@ the webcomic's site layout allows this).
 
 Multiple webcomics can be downloaded in parallel, making the update of comic
 strips faster.
+
+Dosage is licensed under the [MIT license](COPYING)
 
 ## Notice
 

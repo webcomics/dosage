@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# SPDX-License-Identifier: MIT
 # Copyright (C) 2017-2019 Tobias Gruetzmacher
 import gzip
 import os.path

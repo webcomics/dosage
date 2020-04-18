@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# SPDX-License-Identifier: MIT
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2016-2019 Tobias Gruetzmacher
 """

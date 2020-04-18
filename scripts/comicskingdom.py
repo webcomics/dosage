@@ -1,5 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Tobias Gruetzmacher
 # Copyright (C) 2019 Thomas W. Littauer
 """

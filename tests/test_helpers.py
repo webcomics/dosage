@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# SPDX-License-Identifier: MIT
 # Copyright (C) 2019 Tobias Gruetzmacher
 from dosagelib.helpers import joinPathPartsNamer, queryNamer
 
