@@ -19,19 +19,21 @@ class PetiteSymphony(_WPNavi):
     @classmethod
     def getmodules(cls):
         return (
-            cls("knuckleup"),
-            cls("sangria"),
+            cls('knuckleup'),
+            cls('sangria'),
         )
 
 
 class ComicsBreak(_WordPressScraper):
-    def __init__(self, name, archive=None):
+    def __init__(self, name, archive=None, adult=False):
         super(ComicsBreak, self).__init__('ComicsBreak/' + name)
         self.url = 'http://%s.comicsbreak.com/' % name.lower()
         if archive:
             self.url = 'https://web.archive.org/web/{}/{}'.format(
                 archive, self.url)
             self.endOfLife = True
+        if adult:
+            self.adult = adult
 
     def namer(self, imageUrl, pageUrl):
         if self.name == 'ComicsBreak/Djandora':
@@ -49,5 +51,5 @@ class ComicsBreak(_WordPressScraper):
     def getmodules(cls):
         return (
             cls('Djandora', archive='20170923062433'),
-            cls("Generation17"),
+            cls('Generation17', adult=True),
         )

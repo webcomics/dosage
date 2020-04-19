@@ -95,6 +95,7 @@ class Flipside(_ParserScraper):
     firstStripUrl = stripUrl % '1'
     imageSearch = '//img[contains(@src, "comic/")]'
     prevSearch = '//a[@rel="prev"]'
+    adult = True
     help = 'Index format: nnnn'
 
 

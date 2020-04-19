@@ -49,7 +49,7 @@ class ComicFury(_ParserScraper):
     help = 'Index format: n'
     starter = bounceStarter
 
-    def __init__(self, name, sub, lang=None):
+    def __init__(self, name, sub, lang=None, adult=False):
         super(ComicFury, self).__init__('ComicFury/' + name)
         self.prefix = name
         self.url = 'http://%s.webcomic.ws/comics/' % sub
@@ -57,6 +57,8 @@ class ComicFury(_ParserScraper):
         self.firstStripUrl = self.stripUrl % '1'
         if lang:
             self.lang = lang
+        if adult:
+            self.adult = adult
 
     def namer(self, image_url, page_url):
         parts = page_url.split('/')
@@ -376,7 +378,7 @@ class ComicFury(_ParserScraper):
             cls('Droned', 'droned'),
             cls('DRouggs', 'drouggs'),
             cls('DrugsAndKisses', 'd-and-k'),
-            cls('Druids', 'druids'),
+            cls('Druids', 'druids', adult=True),
             cls('DubCity', 'dubcity'),
             cls('DueEast', 'dueeast'),
             cls('DuelingHeroes', 'duelingheroes'),

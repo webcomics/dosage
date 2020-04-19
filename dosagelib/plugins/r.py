@@ -138,6 +138,7 @@ class Ryugou(_WPWebcomic):
     stripUrl = url + 'comic/%s/'
     firstStripUrl = 'ryugou-chapter-1-cover'
     starter = bounceStarter
+    adult = True
 
     def namer(self, imageUrl, pageUrl):
         title = pageUrl.rstrip('/').rsplit('/', 1)[-1]

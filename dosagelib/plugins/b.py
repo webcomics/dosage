@@ -123,6 +123,7 @@ class BetterDays(_ParserScraper):
     firstStripUrl = stripUrl % '2003/04/post-2'
     imageSearch = '//img[contains(@src, "/betterdays/comic/")]'
     prevSearch = '//a[contains(text(), "Previous")]'
+    adult = True
     endOfLife = True
     help = 'Index format: yyyy/mm/<your guess>'
 
