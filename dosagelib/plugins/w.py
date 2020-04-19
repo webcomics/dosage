@@ -26,6 +26,13 @@ class WastedTalent(_BasicScraper):
     help = 'Index format: stripname'
 
 
+class WebcomicName(_ParserScraper):
+    url = 'https://webcomicname.com/'
+    imageSearch = '//figure[{}]//img'.format(xpath_class('tmblr-full'))
+    prevSearch = '//a[{}]'.format(xpath_class('next'))
+    multipleImagesPerStrip = True
+
+
 class WebDesignerCOTW(_ParserScraper):
     baseUrl = 'https://www.webdesignerdepot.com/'
     url = baseUrl + 'category/comics/'
