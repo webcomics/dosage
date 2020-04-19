@@ -39,20 +39,3 @@ class _ComicControlScraper(_ParserScraper):
     prevSearch = '//a[@rel="prev"]'
     nextSearch = '//a[@rel="next"]'
     latestSearch = '//a[@rel="last"]'
-
-
-class _TumblrScraper(_ParserScraper):
-    starter = indirectStarter
-
-    def namer(self, image_url, page_url):
-        # tumblr URLs: http://host/post/num/name
-        #              0    1 2    3    4   5
-        parts = page_url.split('/')
-        if len(parts) > 5:
-            return '%s_%s' % (parts[4], parts[5])
-        else:
-            return parts[4]
-
-    def shouldSkipUrl(self, url, data):
-        """Reblogged stuff is iframed"""
-        return data.xpath('//div[@id="post"]//iframe')
