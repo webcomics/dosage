@@ -10,6 +10,8 @@ class KeenSpot(_ParserScraper):
     multipleImagesPerStrip = True
     imageSearch = (
         '//img[contains(@src, "/comics/")]',
+        # Gene Catlow Alternate
+        '//img[contains(@src, "/altcomics/")]',
         # Shockwave Darkside
         '//img[contains(@src, "/comics2D/")]',
         '//img[contains(@src, "com/shockwave")]',
@@ -34,7 +36,7 @@ class KeenSpot(_ParserScraper):
     )
     help = 'Index format: yyyymmdd'
 
-    def __init__(self, name, sub, last=None, path='d/%s.html'):
+    def __init__(self, name, sub, last=None, adult=False, path='d/%s.html'):
         super(KeenSpot, self).__init__('KeenSpot/' + name)
         self.url = 'http://%s.keenspot.com/' % sub
         self.stripUrl = self.url + path
@@ -43,12 +45,16 @@ class KeenSpot(_ParserScraper):
             self.url = self.stripUrl % last
             self.endOfLife = True
 
+        if adult:
+            self.adult = adult
+
     @classmethod
     def getmodules(cls):
         return (
             # Not on frontpage...
             cls('Buzzboy', 'buzzboy'),
             cls('EveryoneLovesAdis', 'adis'),
+            cls('GeneCatlowAlternate', 'genecatlow', last='20170302', adult=True, path='altd/%s.html'),
 
             # do not edit anything below since these entries are generated from
             # scripts/update_plugins.sh
