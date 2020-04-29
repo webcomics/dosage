@@ -67,6 +67,7 @@ class PeanutBerrySundae(_ParserScraper):
                    '//img[contains(@src, "page")]')
     latestSearch = '//a[contains(@href, "peanut-berry-sundae")]'
     starter = indirectStarter
+    adult = True
 
     def getPrevUrl(self, url, data):
         # Replace missing navigation links

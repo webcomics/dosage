@@ -103,22 +103,30 @@ class Nicky510(_WPNavi):
 
 
 class Nightshift(_ParserScraper):
-    url = 'http://poecatcomix.com/comic-titles/nightshift/'
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % 'nightshift-volume1/ns-chapter-1'
-    imageSearch = '//div[@id="gallery-1"]//img'
-    prevSearch = ('//a[./span[text()="PAST CHAPTER"]]',
-                  '//a[./span[text()="LAST CHAPTER"]]')
-    latestSearch = '//a[./img[contains(@src, "Latest-Page")]]'
-    starter = indirectStarter
-    multipleImagesPerStrip = True
+    url = 'https://poecatcomix.com/nightshift-static/'
+    stripUrl = 'https://poecatcomix.com/comic/%s/'
+    firstStripUrl = stripUrl % 'ns1-page-cover'
+    imageSearch = '//div[@class="mangapress-media-img"]/img'
+    prevSearch = '//li[@class="link-prev"]/a'
+    latestSearch = '//li[@class="link-last"]/a/@href'
     adult = True
 
+    def starter(self):
+        # Build list of chapters for navigation
+        indexPage = self.getPage(self.url)
+        self.chapters = indexPage.xpath('//a[./img[contains(@class, "attachment-large")]]/@href')
+        chapterPage = self.getPage(self.chapters[-1])
+        return chapterPage.xpath(self.latestSearch)[0]
+
+    def getPrevUrl(self, url, data):
+        # Retrieve previous chapter from list
+        if url in self.chapters:
+            chapterPage = self.getPage(self.chapters[self.chapters.index(url) - 1])
+            return chapterPage.xpath(self.latestSearch)[0]
+        return super(Nightshift, self).getPrevUrl(url, data)
+
     def namer(self, imageUrl, pageUrl):
-        # Prepend chapter title to page filenames
-        chapter = pageUrl.rstrip('/').rsplit('/', 1)[-1].replace('ns-', 'ns1-')
-        page = imageUrl.rsplit('/', 1)[-1]
-        return chapter + '_' + page
+        return pageUrl.rstrip('/').rsplit('/', 1)[-1] + '.' + imageUrl.rsplit('.', 1)[-1]
 
 
 class Nimona(_ParserScraper):

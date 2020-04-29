@@ -133,6 +133,7 @@ class OriginalLife(_ParserScraper):
     firstStripUrl = stripUrl % '2009/06/001'
     imageSearch = '//img[contains(@src, "/originallife/comic/")]'
     prevSearch = '//a[contains(text(), "Previous")]'
+    adult = True
     help = 'Index format: yyyy/mm/<your guess>'
 
 
@@ -149,6 +150,7 @@ class OutOfPlacers(_WordPressScraper):
     url = 'http://www.valsalia.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'prologue/01'
+    adult = True
 
 
 class OverCompensating(_BasicScraper):
