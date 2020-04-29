@@ -352,20 +352,17 @@ class AntiheroForHire(_ParserScraper):
     imageSearch = '//div[@class="image-wrapper"]//img[not(@class="thumb-image")]'
     multipleImagesPerStrip = True
     endOfLife = True
-    archive = []
 
     def starter(self):
         # Build list of chapters for navigation
         page = self.getPage(self.url)
-        archiveLinks = page.xpath('//ul[@class="archive-group-list"]//a[contains(@class, "archive-item-link")]')
-        for link in archiveLinks:
-            self.archive.append(link.get('href'))
-        return self.archive[0]
+        self.chapters = page.xpath('//ul[@class="archive-group-list"]//a[contains(@class, "archive-item-link")]/@href')
+        return self.chapters[0]
 
     def getPrevUrl(self, url, data):
         # Retrieve previous chapter from list
-        index = self.archive.index(url) + 1
-        return self.archive[index] if index < len(self.archive) else None
+        index = self.chapters.index(url) + 1
+        return self.chapters[index] if index < len(self.chapters) else None
 
 
 class AppleGeeks(_BasicScraper):
