@@ -445,6 +445,7 @@ class ComicFury(_ParserScraper):
             cls('FrostFire', 'frostfire'),
             cls('FullmetalBrothers', 'fullmetalbrothers', 'es'),
             cls('FurAndN3rdy', 'furnerdy'),
+            cls('FurryExperience', 'furryexperience'),
             cls('Fusion', 'fusion'),
             cls('FutureRegrets', 'futureregrets'),
             cls('FuzzballAndScuzzball', 'fuzzballandscuzzball'),
