@@ -101,8 +101,9 @@ class Beetlebum(_BasicScraper):
 
 class Bethellium(_WPWebcomic):
     stripUrl = 'http://dbcomics.darkblueworkshop.com/bethellium/%s/'
-    firstStripUrl = stripUrl % 'chapter-1/webcomic-bethellium-chapter-1-cover'
+    firstStripUrl = stripUrl % 'chapter-1/cover'
     url = firstStripUrl
+    latestSearch = '//main' + _WPWebcomic.latestSearch
     starter = indirectStarter
 
     def getPrevUrl(self, url, data):
