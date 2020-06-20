@@ -1,9 +1,6 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-import json
-import re
-
 from ..scraper import _ParserScraper
 from ..helpers import indirectStarter
 
@@ -18,8 +15,17 @@ class Tapastic(_ParserScraper):
 
     def __init__(self, name, url):
         super(Tapastic, self).__init__('Tapastic/' + name)
-        self.url = self.baseUrl + 'series/' + url
+        self.url = self.baseUrl + 'series/' + url + '/info'
         self.stripUrl = self.baseUrl + 'episode/%s'
+
+    def getPrevUrl(self, url, data):
+        # Retrieve comic metadata from API
+        data = self.session.get(url + '/info')
+        data.raise_for_status()
+        apiData = data.json()['data']
+        if apiData['scene'] == 2:
+            self.firstStripUrl = self.stripUrl % apiData['prev_ep_id']
+        return self.stripUrl % apiData['prev_ep_id']
 
     def fetchUrls(self, url, data, urlSearch):
         # Save link order for position-based filenames
