@@ -102,31 +102,29 @@ class Nicky510(_WPNavi):
     endOfLife = True
 
 
-class Nightshift(_ParserScraper):
+class Nightshift(_WPWebcomic):
     url = 'https://poecatcomix.com/nightshift-static/'
-    stripUrl = 'https://poecatcomix.com/comic/%s/'
-    firstStripUrl = stripUrl % 'ns1-page-cover'
-    imageSearch = '//div[@class="mangapress-media-img"]/img'
-    prevSearch = '//li[@class="link-prev"]/a'
-    latestSearch = '//li[@class="link-last"]/a/@href'
+    stripUrl = 'https://poecatcomix.com/nightshift/%s/'
+    firstStripUrl = stripUrl % 'ns-cover'
+    imageSearch = '//div[contains(@class, "webcomic-media")]//img'
     adult = True
 
     def starter(self):
-        # Build list of chapters for navigation
+        # Build list of chapters for naming
         indexPage = self.getPage(self.url)
         self.chapters = indexPage.xpath('//a[./img[contains(@class, "attachment-large")]]/@href')
-        chapterPage = self.getPage(self.chapters[-1])
-        return chapterPage.xpath(self.latestSearch)[0]
-
-    def getPrevUrl(self, url, data):
-        # Retrieve previous chapter from list
-        if url in self.chapters:
-            chapterPage = self.getPage(self.chapters[self.chapters.index(url) - 1])
-            return chapterPage.xpath(self.latestSearch)[0]
-        return super(Nightshift, self).getPrevUrl(url, data)
+        latestPage = self.chapters[0]
+        self.chapters = self.chapters[1:]
+        self.currentChapter = len(self.chapters)
+        return latestPage
 
     def namer(self, imageUrl, pageUrl):
-        return pageUrl.rstrip('/').rsplit('/', 1)[-1] + '.' + imageUrl.rsplit('.', 1)[-1]
+        page = pageUrl.rstrip('/').rsplit('/', 1)[-1]
+        page = page.replace('blood-brothers', 'bloodbrothers').replace('bb-2', 'bb2').replace('ns7-', 'page-')
+        filename = 'ns%d-%s.%s' % (self.currentChapter, page, imageUrl.rsplit('.', 1)[-1])
+        if pageUrl in self.chapters:
+            self.currentChapter = self.currentChapter - 1
+        return filename
 
 
 class Nimona(_ParserScraper):
