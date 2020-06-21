@@ -129,6 +129,17 @@ class TheMelvinChronicles(_WordPressScraper):
     url = 'http://melvin.jeaniebottle.com/'
 
 
+class TheNightBelongsToUs(_ParserScraper):
+    url = 'https://tnbtu.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % '01-00'
+    imageSearch = '//div[@id="spliced-comic"]//img'
+    prevSearch = '//a[./img[contains(@src, "nav-prev")]]'
+    latestSearch = '//a[contains(@class, "main-link")]'
+    starter = indirectStarter
+    adult = True
+
+
 class TheNoob(_WordPressScraper):
     url = 'http://thenoobcomic.com/'
     stripUrl = url + 'comic/%s/'
