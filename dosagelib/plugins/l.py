@@ -116,7 +116,7 @@ class LifeAsRendered(_ParserScraper):
     def getPrevUrl(self, url, data):
         # Fix broken navigation links
         page = url.rstrip('/').rsplit('/', 1)[-1]
-        if self.nav and page in self.nav:
+        if page in self.nav:
             return self.stripUrl % self.nav[page]
         return super(LifeAsRendered, self).getPrevUrl(url, data)
 
