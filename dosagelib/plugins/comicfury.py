@@ -645,6 +645,7 @@ class ComicFury(_ParserScraper):
             cls('LuckyHazard', 'luckyhazard'),
             cls('Lukewarm', 'lukewarm'),
             cls('LunaStar', 'lunastar'),
+            cls('LustAndIre', 'lustandire', adult=True),
             cls('MadGirl', 'madgirl'),
             cls('MagicElDesencuentro', 'magiceldesencuentro', 'es'),
             cls('MagicTheScattering', 'magicthescattering'),
