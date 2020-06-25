@@ -2,6 +2,7 @@
 # Copyright (C) 2019-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 from ..scraper import _ParserScraper
+from .common import _WordPressScraper
 
 
 class StudioKhimera(_ParserScraper):
@@ -39,20 +40,25 @@ class StudioKhimera(_ParserScraper):
             return None
         return self.chapters[index - 1]
 
-    def namer(self, imageUrl, pageUrl):
-        # Fix inconsistent filenames
-        filename = imageUrl.rsplit('/', 1)[-1]
-        if 'uberquest' in pageUrl:
-            filename = filename.replace('Page', 'UberQuest')
-            filename = filename.replace('UberQuest01.', 'UberQuest001.')
-            filename = filename.replace('UberQuest98.', 'UberQuest098.')
-            filename = filename.replace('UberQuest99.', 'UberQuest099.')
-        return filename
-
     @classmethod
     def getmodules(cls):
         return (
             cls('Eorah', 'eorah'),
             cls('Mousechievous', 'mousechievous'),
-            cls('UberQuest', 'uberquest'),
         )
+
+
+class UberQuest(_WordPressScraper):
+    name = 'StudioKhimera/UberQuest'
+    url = 'https://uberquest.studiokhimera.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'chapter-1-cover'
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix inconsistent filenames
+        filename = imageUrl.rsplit('/', 1)[-1]
+        filename = filename.replace('Page', 'UberQuest')
+        filename = filename.replace('UberQuest01.', 'UberQuest001.')
+        filename = filename.replace('UberQuest98.', 'UberQuest098.')
+        filename = filename.replace('UberQuest99.', 'UberQuest099.')
+        return filename
