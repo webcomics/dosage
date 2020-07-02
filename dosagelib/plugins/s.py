@@ -231,13 +231,13 @@ class ShotgunShuffle(_WordPressScraper):
     firstStripUrl = url + 'comic/pilot/'
 
 
-class SinFest(_BasicScraper):
-    url = 'http://www.sinfest.net/'
+class SinFest(_ParserScraper):
+    url = 'https://www.sinfest.net/'
     stripUrl = url + 'view.php?date=%s'
-    imageSearch = compile(tagre("img", "src", r'(btphp/comics/.+)',
-                                after="alt"))
-    prevSearch = compile(tagre("a", "href", r'(view\.php\?date=.+)') + '\\s*' +
-                         tagre("img", "src", r'\.\./images/prev\.gif'))
+    firstStripUrl = stripUrl % '2000-01-17'
+    imageSearch = '//img[contains(@src, "btphp/comics/")]'
+    textSearch = imageSearch + '/@alt'
+    prevSearch = '//a[./img[contains(@src, "images/prev")]]'
     help = 'Index format: yyyy-mm-dd'
 
 
