@@ -134,6 +134,7 @@ class OriginalLife(_ParserScraper):
     imageSearch = '//img[contains(@src, "/originallife/comic/")]'
     prevSearch = '//a[contains(text(), "Previous")]'
     adult = True
+    endOfLife = True
     help = 'Index format: yyyy/mm/<your guess>'
 
 
