@@ -28,11 +28,8 @@ class Tamberlane(_WPWebcomic):
     url = baseUrl + 'latest/'
     stripUrl = baseUrl + 'tamberlane/%s/'
     firstStripUrl = stripUrl % 'page-1'
-
-    def namer(self, imageUrl, pageUrl):
-        # Fix inconsistent filenames
-        filename = imageUrl.rsplit('/', 1)[-1]
-        return filename.replace('ai4zCWaA', 'Page_152')
+    imageSearch = '//div[@id="comic-page"]/img/@src'
+    prevSearch = '//a[@class="previous-link"]'
 
 
 class TheBrads(_ParserScraper):
