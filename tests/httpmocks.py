@@ -14,7 +14,7 @@ def _file(name):
 
 
 @lru_cache()
-def _content(name):
+def content(name):
     with gzip.open(_file(name + '.html.gz'), 'r') as f:
         return f.read()
 
@@ -26,7 +26,7 @@ def _img(name):
 
 
 def page(url, pagename):
-    add(GET, url, _content(pagename))
+    add(GET, url, content(pagename))
 
 
 def png(url, name='empty'):
