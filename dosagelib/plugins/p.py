@@ -6,7 +6,7 @@
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import bounceStarter, queryNamer, indirectStarter, xpath_class
+from ..helpers import bounceStarter, queryNamer, indirectStarter
 from ..util import tagre
 from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
 
@@ -99,8 +99,8 @@ class PennyArcade(_ParserScraper):
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1998/11/18'
     imageSearch = '//div[@id="comicFrame"]//img'
-    prevSearch = '//a[%s]' % xpath_class('btnPrev')
-    nextSearch = '//a[%s]' % xpath_class('btnNext')
+    prevSearch = '//a[d:class("btnPrev")]'
+    nextSearch = '//a[d:class("btnNext")]'
     starter = bounceStarter
     help = 'Index format: yyyy/mm/dd'
 
@@ -231,7 +231,7 @@ class PokeyThePenguin(_ParserScraper):
 class PoorlyDrawnLines(_ParserScraper):
     url = 'http://poorlydrawnlines.com/comic/'
     firstStripUrl = url + 'campus-characters/'
-    imageSearch = '//div[%s]//img' % xpath_class('comic')
+    imageSearch = '//div[d:class("comic")]//img'
     prevSearch = '//a[@rel="prev"]'
 
 
@@ -269,7 +269,7 @@ class PrinceOfSartar(_WPNavi):
     url = 'http://www.princeofsartar.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'introduction-chapter-1'
-    nextSearch = '//a[%s]' % xpath_class('navi-next')
+    nextSearch = '//a[d:class("navi-next")]'
     starter = bounceStarter
     help = 'Index format: name'
 

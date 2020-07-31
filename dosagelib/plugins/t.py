@@ -10,7 +10,7 @@ except ImportError:
     from cached_property import cached_property
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter, xpath_class
+from ..helpers import indirectStarter
 from ..util import tagre
 from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPNaviIn, _WPWebcomic
 
@@ -40,8 +40,8 @@ class TheBrads(_ParserScraper):
         'http://bradcolbow.com/archive/C4/')
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % 'P125'
-    imageSearch = '//div[{}]//img'.format(xpath_class('entry'))
-    prevSearch = '//a[{}]'.format(xpath_class('prev'))
+    imageSearch = '//div[d:class("entry")]//img'
+    prevSearch = '//a[d:class("prev")]'
     multipleImagesPerStrip = True
     endOfLife = True
 
@@ -120,7 +120,7 @@ class TheLandscaper(_ParserScraper):
         'http://landscaper.visual-assault.net/comic/%s')
     url = stripUrl % 'latest'
     firstStripUrl = stripUrl % '1'
-    imageSearch = '//article[{}]//img[1]'.format(xpath_class('comic'))
+    imageSearch = '//article[d:class("comic")]//img[1]'
     prevSearch = '//a[contains(text(), "Previous")]'
     endOfLife = True
 
@@ -294,8 +294,8 @@ class TumbleDryComics(_WordPressScraper):
 class Turnoff(_ParserScraper):
     name = 'turnoff'
     url = 'https://turnoff.us/'
-    imageSearch = '//article[%s]//img' % xpath_class('post-content')
-    prevSearch = '//div[%s]//a' % xpath_class('prev')
+    imageSearch = '//article[d:class("post-content")]//img'
+    prevSearch = '//div[d:class("prev")]//a'
     stripUrl = url + 'geek/%s'
     firstStripUrl = stripUrl % 'tcp-buddies'
     multipleImagesPerStrip = True
@@ -341,8 +341,8 @@ class Twokinds(_ParserScraper):
     url = 'http://twokinds.keenspot.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '1'
-    imageSearch = '//article[%s]//img' % xpath_class('comic')
-    prevSearch = '//a[%s]' % xpath_class('navprev')
+    imageSearch = '//article[d:class("comic")]//img'
+    prevSearch = '//a[d:class("navprev")]'
     help = 'Index format: n (unpadded)'
 
 

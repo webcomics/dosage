@@ -6,7 +6,7 @@
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter, xpath_class
+from ..helpers import indirectStarter
 from ..util import tagre
 from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPWebcomic
 
@@ -134,7 +134,7 @@ class Nimona(_ParserScraper):
         'http://gingerhaze.com/nimona/')
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % "page-1"
-    imageSearch = '//div[{}]//img'.format(xpath_class('field-name-field-comic-page'))
+    imageSearch = '//div[d:class("field-name-field-comic-page")]//img'
     prevSearch = '//a[img[contains(@src, "/comicdrop_prev_label")]]'
     endOfLife = True
 

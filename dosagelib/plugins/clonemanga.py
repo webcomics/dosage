@@ -1,15 +1,15 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
-from ..helpers import indirectStarter, xpath_class
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
+from ..helpers import indirectStarter
 from ..scraper import _ParserScraper
 from ..util import getQueryParams
 
 
 class CloneManga(_ParserScraper):
     baseUrl = 'http://manga.clone-army.org'
-    imageSearch = '//div[%s]//img' % xpath_class('subsectionContainer')
+    imageSearch = '//div[d:class("subsectionContainer")]//img'
     prevSearch = '//a[span[text()="<<"]]'
     latestSearch = '//a[span[text()=">|"]]'
     starter = indirectStarter

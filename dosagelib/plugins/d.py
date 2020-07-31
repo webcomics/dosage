@@ -6,7 +6,7 @@
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter, bounceStarter, xpath_class
+from ..helpers import indirectStarter, bounceStarter
 from ..util import tagre
 from .common import _ComicControlScraper, _WordPressScraper, _WPNaviIn, _WPWebcomic
 
@@ -190,8 +190,8 @@ class Dilbert(_ParserScraper):
     stripUrl = url + 'strip/%s'
     firstStripUrl = stripUrl % '1989-04-16'
     starter = indirectStarter
-    prevSearch = '//div[%s]/a' % xpath_class('nav-left')
-    imageSearch = '//img[%s]' % xpath_class('img-comic')
+    prevSearch = '//div[d:class("nav-left")]/a'
+    imageSearch = '//img[d:class("img-comic")]'
     latestSearch = '//a[@class="img-comic-link"]'
     help = 'Index format: yyyy-mm-dd'
 
@@ -260,14 +260,14 @@ class DominicDeegan(_ParserScraper):
 class DorkTower(_ParserScraper):
     url = 'http://www.dorktower.com/'
     firstStripUrl = url + '1997/01/01/shadis-magazine-strip-1/'
-    imageSearch = '//div[%s]//a/img' % xpath_class('entry-content')
-    prevSearch = '//a[%s][text()="Previous"]' % xpath_class('btn')
+    imageSearch = '//div[d:class("entry-content")]//a/img'
+    prevSearch = '//a[d:class("btn")][text()="Previous"]'
 
 
 class DoomsdayMyDear(_ParserScraper):
     url = 'http://doomsdaymydear.com/'
-    imageSearch = '//img[{}]'.format(xpath_class('attachment-full'))
-    prevSearch = '//a[{}]'.format(xpath_class('previous-webcomic-link'))
+    imageSearch = '//img[d:class("attachment-full")]'
+    prevSearch = '//a[d:class("previous-webcomic-link")]'
 
 
 class Draconia(_WPWebcomic):
@@ -307,10 +307,9 @@ class DresdenCodak(_ParserScraper):
     url = 'http://dresdencodak.com/'
     startUrl = url + 'cat/comic/'
     firstStripUrl = url + '2007/02/08/pom/'
-    imageSearch = '//section[%s]//img[%s]' % (
-        xpath_class('entry-content'), xpath_class('aligncenter'))
+    imageSearch = '//section[d:class("entry-content")]//img[d:class("aligncenter")]'
     prevSearch = '//a[img[contains(@src, "prev")]]'
-    latestSearch = '//a[%s]' % xpath_class('tc-grid-bg-link')
+    latestSearch = '//a[d:class("tc-grid-bg-link")]'
     starter = indirectStarter
 
     # Blog and comic are mixed...

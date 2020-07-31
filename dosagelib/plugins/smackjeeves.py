@@ -3,14 +3,13 @@
 # Copyright (C) 2019-2020 Daniel Ring
 import re
 
-from ..helpers import xpath_class
 from ..scraper import _ParserScraper
 
 
 class SmackJeeves(_ParserScraper):
     baseUrl = 'https://www.smackjeeves.com/discover/'
     apiBase = 'https://www.smackjeeves.com/api/discover/'
-    prevSearch = '//a[i[{}]]'.format(xpath_class('i-arrow-double-left-black'))
+    prevSearch = '//a[i[d:class("i-arrow-double-left-black")]]'
     imageSearch = re.compile("comicData:[^']*'([^']*)'", re.DOTALL)
     help = 'Index format: n'
 

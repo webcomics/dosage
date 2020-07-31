@@ -4,7 +4,6 @@
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 from ..scraper import _ParserScraper
-from ..helpers import xpath_class
 
 
 class QuantumVibe(_ParserScraper):
@@ -28,6 +27,6 @@ class Qwantz(_ParserScraper):
     url = 'http://www.qwantz.com/index.php'
     stripUrl = url + '?comic=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = '//img[{}]'.format(xpath_class('comic'))
+    imageSearch = '//img[d:class("comic")]'
     prevSearch = '//a[@rel="prev"]'
     help = 'Index format: n'

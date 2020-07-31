@@ -7,7 +7,7 @@ from re import compile, escape
 
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter, joinPathPartsNamer, xpath_class
+from ..helpers import indirectStarter, joinPathPartsNamer
 from .common import _ComicControlScraper, _WPNaviIn, _WordPressScraper
 
 
@@ -62,8 +62,8 @@ class FirstWorldProblems(_ParserScraper):
         'http://bradcolbow.com/archive/C5/')
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % 'P10'
-    imageSearch = '//div[{}]//img'.format(xpath_class('entry'))
-    prevSearch = '//a[{}]'.format(xpath_class('prev'))
+    imageSearch = '//div[d:class("entry")]//img'
+    prevSearch = '//a[d:class("prev")]'
     multipleImagesPerStrip = True
     endOfLife = True
 
@@ -83,7 +83,7 @@ class Flemcomics(_ParserScraper):
         'http://www.flemcomics.com/')
     stripUrl = url + 'd/%s.html'
     firstStripUrl = stripUrl % '19980101'
-    imageSearch = '//img[{}]'.format(xpath_class('ksc'))
+    imageSearch = '//img[d:class("ksc")]'
     prevSearch = '//a[@rel="prev"]'
     endOfLife = True
     help = 'Index format: yyyymmdd'
@@ -174,10 +174,10 @@ class FredoAndPidjin(_ParserScraper):
     url = 'https://www.pidjin.net/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2006/02/19/goofy-monday'
-    imageSearch = '//div[%s]//img' % xpath_class("episode")
+    imageSearch = '//div[d:class("episode")]//img'
     multipleImagesPerStrip = True
-    prevSearch = '//span[%s]/a' % xpath_class("prev")
-    latestSearch = '//section[%s]//a' % xpath_class("latest")
+    prevSearch = '//span[d:class("prev")]/a'
+    latestSearch = '//section[d:class("latest")]//a'
     starter = indirectStarter
     namer = joinPathPartsNamer((0, 1, 2))
 

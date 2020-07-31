@@ -6,7 +6,7 @@
 from re import compile
 from urllib.parse import urljoin
 
-from ..helpers import bounceStarter, xpath_class
+from ..helpers import bounceStarter
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from .common import _WordPressScraper, _WPWebcomic
@@ -107,7 +107,7 @@ class RomanticallyApocalyptic(_ParserScraper):
     url = 'http://romanticallyapocalyptic.com/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '0'
-    imageSearch = '//div[%s]/center//img' % xpath_class('comicpanel')
+    imageSearch = '//div[d:class("comicpanel")]/center//img'
     prevSearch = '//a[@accesskey="p"]'
     help = 'Index format: n'
     adult = True
