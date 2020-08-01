@@ -41,11 +41,20 @@ class LastResort(_WordPressScraper):
 
 
 class LazJonesAndTheMayfieldRegulators(_ParserScraper):
-    url = 'https://www.lazjones.com/'
-    stripUrl = url + 'comic/%s'
+    baseUrl = 'https://www.lazjones.com/'
+    url = baseUrl + 'regulators'
+    stripUrl = baseUrl + 'comic/%s'
     firstStripUrl = stripUrl % 'chapter1_00'
     imageSearch = '//img[contains(@src, "comic/pages/")]'
     prevSearch = '//a[contains(text(), "Previous")]'
+
+
+class LazJonesAndTheMayfieldRegulatorsSideStories(LazJonesAndTheMayfieldRegulators):
+    name = 'LazJonesAndTheMayfieldRegulators/SideStories'
+    baseUrl = 'https://www.lazjones.com/'
+    url = baseUrl + 'sidestories'
+    stripUrl = baseUrl + 'comic/%s'
+    firstStripUrl = stripUrl % 'journal01'
 
 
 class LeastICouldDo(_ParserScraper):
