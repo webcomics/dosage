@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from ..helpers import bounceStarter, joinPathPartsNamer, xpath_class
+from ..helpers import bounceStarter, joinPathPartsNamer
 from .common import _WPNavi
 
 
@@ -21,8 +21,8 @@ class Zapiro(_ParserScraper):
     url = 'http://mg.co.za/zapiro/'
     starter = bounceStarter
     imageSearch = '//div[@id="cartoon"]/img'
-    prevSearch = '//a[%s]' % xpath_class('left')
-    nextSearch = '//a[%s]' % xpath_class('right')
+    prevSearch = '//a[d:class("left")]'
+    nextSearch = '//a[d:class("right")]'
     namer = joinPathPartsNamer((-1,), ())
 
 
@@ -31,8 +31,8 @@ class ZenPencils(_WPNavi):
     multipleImagesPerStrip = True
     firstStripUrl = url + 'comic/1-ralph-waldo-emerson-make-them-cry/'
     starter = bounceStarter
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
-    nextSearch = '//a[%s]' % xpath_class('navi-next')
+    prevSearch = '//a[d:class("navi-prev")]'
+    nextSearch = '//a[d:class("navi-next")]'
 
 
 class ZombieHunters(_BasicScraper):

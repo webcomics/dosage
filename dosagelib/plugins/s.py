@@ -7,7 +7,7 @@ from re import compile, escape, IGNORECASE, sub
 from os.path import splitext
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter, bounceStarter, joinPathPartsNamer, xpath_class
+from ..helpers import indirectStarter, bounceStarter, joinPathPartsNamer
 from ..util import tagre
 from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPNaviIn, _WPWebcomic
 
@@ -120,7 +120,7 @@ class SchoolBites(_ParserScraper):
     url = ('https://web.archive.org/web/20170215065523/'
         'http://schoolbites.net/')
     stripUrl = url + 'd/%s.html'
-    imageSearch = '//img[{}]'.format(xpath_class('ksc'))
+    imageSearch = '//img[d:class("ksc")]'
     prevSearch = '//a[@rel="prev"]'
     endOfLife = True
     help = 'Index format: yyyymmdd'
@@ -132,7 +132,7 @@ class Schuelert(_ParserScraper):
     stripUrl = url + 'index.php?paged=%s'
     firstStripUrl = stripUrl % '3'
     imageSearch = '//img[contains(@src, "wp-content")]'
-    prevSearch = '//span[{}]/a'.format(xpath_class('prevlink'))
+    prevSearch = '//span[d:class("prevlink")]/a'
     multipleImagesPerStrip = True
     endOfLife = True
     lang = 'de'
@@ -143,7 +143,7 @@ class Science(_ParserScraper):
         'http://sci-ence.org/%s/')
     url = stripUrl % 'new-york-comic-con-2013'
     firstStripUrl = stripUrl % 'periodic-table-element-ass'
-    prevSearch = '//a[{}]'.format(xpath_class('navi-prev'))
+    prevSearch = '//a[d:class("navi-prev")]'
     imageSearch = '//div[@class="comicpane"]//img'
     endOfLife = True
 
@@ -159,7 +159,7 @@ class SequentialArt(_ParserScraper):
     url = 'https://www.collectedcurios.com/sequentialart.php'
     stripUrl = url + '?s=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = '//img[{}]'.format(xpath_class('w3-image'))
+    imageSearch = '//img[d:class("w3-image")]'
     prevSearch = '//a[@id="backOne"]'
     help = 'Index format: name'
 
@@ -286,9 +286,9 @@ class SluggyFreelance(_ParserScraper):
     url = 'http://sluggy.com/'
     stripUrl = 'http://archives.sluggy.com/book.php?chapter=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = '//div[%s]/img/@data-src' % xpath_class('comic_content')
-    prevSearch = '//div[%s]/a' % xpath_class('previous')
-    latestSearch = '//a[%s]' % xpath_class('archives_link')
+    imageSearch = '//div[d:class("comic_content")]/img/@data-src'
+    prevSearch = '//div[d:class("previous")]/a'
+    latestSearch = '//a[d:class("archives_link")]'
     starter = indirectStarter
     multipleImagesPerStrip = True
     help = 'Index format: chapter'
@@ -374,7 +374,7 @@ class SpaceJunkArlia(_ParserScraper):
     url = 'http://spacejunkarlia.com/'
     stripUrl = url + '?strip_id=%s'
     firstStripUrl = stripUrl % '0'
-    imageSearch = '//div[%s]/img' % xpath_class('content')
+    imageSearch = '//div[d:class("content")]/img'
     prevSearch = '//a[text()="<"]'
     help = 'Index format: number'
 
@@ -382,7 +382,7 @@ class SpaceJunkArlia(_ParserScraper):
 class SpaceTrawler(_ParserScraper):
     url = 'https://www.baldwinpage.com/spacetrawler/'
     firstStripUrl = url + '2010/01/01/spacetrawler-4/'
-    imageSearch = '//img[%s]' % xpath_class('size-full')
+    imageSearch = '//img[d:class("size-full")]'
     prevSearch = '//a[@rel="prev"]'
 
 

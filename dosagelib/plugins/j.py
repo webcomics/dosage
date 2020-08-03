@@ -6,7 +6,7 @@ from re import compile, escape
 
 from ..scraper import _BasicScraper
 from ..util import tagre
-from ..helpers import indirectStarter, xpath_class
+from ..helpers import indirectStarter
 from .common import _ComicControlScraper
 
 
@@ -41,7 +41,7 @@ class JoeAndMonkey(_BasicScraper):
 
 
 class JohnnyWander(_ComicControlScraper):
-    imageSearch = ('//ul[%s]/li/@data-src' % xpath_class('cc-showbig'),
+    imageSearch = ('//ul[d:class("cc-showbig")]/li/@data-src',
                    _ComicControlScraper.imageSearch)
     url = 'http://www.johnnywander.com/'
 

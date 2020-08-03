@@ -7,7 +7,7 @@ from re import compile, escape, IGNORECASE
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from ..helpers import bounceStarter, indirectStarter, xpath_class
+from ..helpers import bounceStarter, indirectStarter
 from .common import _ComicControlScraper, _WPNavi, _WPNaviIn, _WPWebcomic
 
 
@@ -28,8 +28,8 @@ class WastedTalent(_BasicScraper):
 
 class WebcomicName(_ParserScraper):
     url = 'https://webcomicname.com/'
-    imageSearch = '//figure[{}]//img'.format(xpath_class('tmblr-full'))
-    prevSearch = '//a[{}]'.format(xpath_class('next'))
+    imageSearch = '//figure[d:class("tmblr-full")]//img'
+    prevSearch = '//a[d:class("next")]'
     multipleImagesPerStrip = True
 
 
@@ -38,10 +38,10 @@ class WebDesignerCOTW(_ParserScraper):
     url = baseUrl + 'category/comics/'
     starter = indirectStarter
     firstStripUrl = baseUrl + '2009/11/comics-of-the-week-1/'
-    imageSearch = '//article[%s]//img' % xpath_class('article-content')
+    imageSearch = '//article[d:class("article-content")]//img'
     multipleImagesPerStrip = True
-    prevSearch = '//a[span[%s]]' % xpath_class('icon-right-small')
-    latestSearch = '//a[%s]' % xpath_class('anim-link')
+    prevSearch = '//a[span[d:class("icon-right-small")]]'
+    latestSearch = '//a[d:class("anim-link")]'
 
     def shouldSkipUrl(self, url, data):
         """Skip non-comic URLs."""

@@ -62,9 +62,3 @@ def indirectStarter(self):
     data = self.getPage(url)
     newurl = self.fetchUrl(url, data, self.latestSearch)
     return self.link_modifier(url, newurl)
-
-
-def xpath_class(name):
-    """Returns an XPath expressions which finds a tag which has a specified
-    class."""
-    return 'contains(concat(" ", @class, " "), " %s ")' % name

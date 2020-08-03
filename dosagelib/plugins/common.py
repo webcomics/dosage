@@ -4,7 +4,6 @@
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 from ..scraper import _ParserScraper
-from ..helpers import indirectStarter, xpath_class
 
 # Common base classes for comics with the same structure (same hosting
 # software, for example) go here. Since those are shared by many modules,
@@ -14,24 +13,24 @@ from ..helpers import indirectStarter, xpath_class
 
 class _WordPressScraper(_ParserScraper):
     imageSearch = '//div[@id="comic"]//img'
-    prevSearch = '//a[%s]' % xpath_class('comic-nav-previous')
-    nextSearch = '//a[%s]' % xpath_class('comic-nav-next')
-    latestSearch = '//a[%s]' % xpath_class('comic-nav-last')
+    prevSearch = '//a[d:class("comic-nav-previous")]'
+    nextSearch = '//a[d:class("comic-nav-next")]'
+    latestSearch = '//a[d:class("comic-nav-last")]'
 
 
 class _WPNavi(_WordPressScraper):
-    prevSearch = '//a[%s]' % xpath_class('navi-prev')
+    prevSearch = '//a[d:class("navi-prev")]'
 
 
 class _WPNaviIn(_WordPressScraper):
-    prevSearch = '//a[%s]' % xpath_class('navi-prev-in')
+    prevSearch = '//a[d:class("navi-prev-in")]'
 
 
 class _WPWebcomic(_WordPressScraper):
-    imageSearch = '//div[{}]//img'.format(xpath_class('webcomic-image'))
-    prevSearch = '//a[{}]'.format(xpath_class('previous-webcomic-link'))
-    nextSearch = '///a[{}]'.format(xpath_class('next-webcomic-link'))
-    latestSearch = '//a[{}]'.format(xpath_class('last-webcomic-link'))
+    imageSearch = '//div[d:class("webcomic-image")]//img'
+    prevSearch = '//a[d:class("previous-webcomic-link")]'
+    nextSearch = '///a[d:class("next-webcomic-link")]'
+    latestSearch = '//a[d:class("last-webcomic-link")]'
 
 
 class _ComicControlScraper(_ParserScraper):

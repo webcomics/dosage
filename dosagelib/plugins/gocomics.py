@@ -3,14 +3,14 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 from ..scraper import _ParserScraper
-from ..helpers import indirectStarter, xpath_class
+from ..helpers import indirectStarter
 
 
 class GoComics(_ParserScraper):
     url = 'https://www.gocomics.com/'
-    imageSearch = '//picture[{}]/img'.format(xpath_class('item-comic-image'))
-    prevSearch = '//a[{}]'.format(xpath_class('js-previous-comic'))
-    latestSearch = '//div[{}]//a'.format(xpath_class('gc-deck--cta-0'))
+    imageSearch = '//picture[d:class("item-comic-image")]/img'
+    prevSearch = '//a[d:class("js-previous-comic")]'
+    latestSearch = '//div[d:class("gc-deck--cta-0")]//a'
     starter = indirectStarter
     help = 'Index format: yyyy/mm/dd'
 

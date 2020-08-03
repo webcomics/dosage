@@ -26,6 +26,7 @@ from .util import (get_page, makeSequence, get_system_uid, tagre, normaliseURL,
 from .comic import ComicStrip
 from .output import out
 from .events import getHandler
+from .xml import NS
 
 
 ARCHIVE_ORG_URL = re.compile(r'https?://web\.archive\.org/web/[^/]*/')
@@ -434,10 +435,6 @@ class _ParserScraper(Scraper):
     XML_DECL = re.compile(
         r'^(<\?xml[^>]+)\s+encoding\s*=\s*["\'][^"\']*["\'](\s*\?>|)', re.U)
 
-    NS = {
-        "re": "http://exslt.org/regular-expressions"
-    }
-
     # Switch between CSS and XPath selectors for this class. Since CSS needs
     # another Python module, XPath is the default for now.
     css = False
@@ -519,7 +516,7 @@ class _ParserScraper(Scraper):
             searchFun = data.cssselect
         else:
             def searchFun(s):
-                return data.xpath(s, namespaces=self.NS)
+                return data.xpath(s, namespaces=NS)
         patterns = makeSequence(patterns)
         for search in patterns:
             matched = False

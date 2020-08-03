@@ -6,7 +6,7 @@
 from re import compile
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import bounceStarter, indirectStarter, xpath_class
+from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
 
 
@@ -71,8 +71,8 @@ class VictimsOfTheSystem(_BasicScraper):
 class ViiviJaWagner(_ParserScraper):
     url = 'http://www.hs.fi/viivijawagner/'
     imageSearch = '//meta[@property="og:image"]/@content'
-    prevSearch = '//a[%s]' % xpath_class('prev')
-    latestSearch = '//div[%s]//a' % xpath_class('cartoon-content')
+    prevSearch = '//a[d:class("prev")]'
+    latestSearch = '//div[d:class("cartoon-content")]//a'
     starter = indirectStarter
     lang = 'fi'
 

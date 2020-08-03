@@ -6,7 +6,7 @@
 from re import compile
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter, xpath_class
+from ..helpers import indirectStarter
 from ..util import tagre
 from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
 
@@ -46,7 +46,7 @@ class Unsounded(_ParserScraper):
     stripUrl = url + 'comic/ch%s/ch%s_%s.html'
     firstStripUrl = stripUrl % ('01', '01', '01')
     imageSearch = '//img[contains(@src, "pageart/")]'
-    prevSearch = '//a[%s]' % xpath_class('back')
+    prevSearch = '//a[d:class("back")]'
     latestSearch = '//div[@id="chapter_box"][1]//a[last()]'
     multipleImagesPerStrip = True
     starter = indirectStarter

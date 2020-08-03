@@ -6,7 +6,7 @@
 import os
 from re import compile, IGNORECASE
 
-from ..helpers import bounceStarter, indirectStarter, xpath_class
+from ..helpers import bounceStarter, indirectStarter
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
@@ -35,7 +35,7 @@ class EatLiver(_ParserScraper):
     url = 'http://www.eatliver.com/'
     starter = indirectStarter
     multipleImagesPerStrip = True
-    imageSearch = '//div[%s]//img' % xpath_class('post-content')
+    imageSearch = '//div[d:class("post-content")]//img'
     prevSearch = '//a[@rel="prev"]'
     latestSearch = '//a[@rel="bookmark"]'
 
@@ -175,7 +175,7 @@ class Everblue(_ParserScraper):
 class EverybodyLovesEricRaymond(_ParserScraper):
     url = 'http://geekz.co.uk/lovesraymond/'
     firstStripUrl = url + 'archive/slashdotted'
-    imageSearch = '//div[%s]//img' % xpath_class('entry-content')
+    imageSearch = '//div[d:class("entry-content")]//img'
     prevSearch = '//a[@rel="prev"]'
 
 
@@ -255,6 +255,6 @@ class ExtraOrdinary(_ParserScraper):
     url = 'https://www.exocomics.com/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '01'
-    prevSearch = '//a[%s]' % xpath_class('prev')
-    imageSearch = '//img[%s]' % xpath_class('image-style-main-comic')
+    prevSearch = '//a[d:class("prev")]'
+    imageSearch = '//img[d:class("image-style-main-comic")]'
     help = 'Index format: number'

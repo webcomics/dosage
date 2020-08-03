@@ -6,7 +6,7 @@
 import json
 from re import compile, escape, IGNORECASE
 
-from ..helpers import indirectStarter, xpath_class
+from ..helpers import indirectStarter
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from .common import _ComicControlScraper, _WordPressScraper, _WPWebcomic
@@ -74,7 +74,7 @@ class MarriedToTheSea(_ParserScraper):
     url = 'http://marriedtothesea.com/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '022806'
-    imageSearch = '//div[%s]//p/img' % xpath_class('jumbotron')
+    imageSearch = '//div[d:class("jumbotron")]//p/img'
     prevSearch = '//a[contains(text(), "Yesterday")]'
     help = 'Index format: mmddyy'
 
