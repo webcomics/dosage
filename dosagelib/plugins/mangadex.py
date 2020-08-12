@@ -78,6 +78,7 @@ class MangaDex(_ParserScraper):
             cls('HoriMiya', 6770),
             cls('InterspeciesReviewers', 20796),
             cls('JingaiNoYomeToIchaIchaSuru', 22651),
+            cls('KawaiiJoushiWoKomarasetai', 17910),
             cls('KanojoOkarishimasu', 22151),
             cls('ModernMoGal', 30308),
             cls('OMaidensinYourSavageSeason', 22030),
