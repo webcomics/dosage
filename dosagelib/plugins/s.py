@@ -111,8 +111,9 @@ class SchlockMercenary(_ParserScraper):
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '2000-06-12'
     imageSearch = '//div[@class="strip-image-wrapper"]/img'
-    multipleImagesPerStrip = True
     prevSearch = '//a[@class="previous-strip"]'
+    multipleImagesPerStrip = True
+    endOfLife = True
     help = 'Index format: yyyy-mm-dd'
 
 
