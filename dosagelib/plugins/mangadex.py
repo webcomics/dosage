@@ -74,6 +74,7 @@ class MangaDex(_ParserScraper):
             cls('DeliciousinDungeon', 13871),
             cls('DrStone', 20882),
             cls('DragonDrive', 5165),
+            cls('HangingOutWithAGamerGirl', 42490),
             cls('HeavensDesignTeam', 27811),
             cls('HoriMiya', 6770),
             cls('InterspeciesReviewers', 20796),
