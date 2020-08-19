@@ -77,10 +77,9 @@ timestamps {
 
 def buildDockerfile(image) {
     def uid = sh(returnStdout: true, script: 'id -u').trim()
-    def toxInst = 'apt-get update && apt-get -y install tox'
     writeFile file: 'Dockerfile', text: """
     FROM $image
-    RUN $toxInst
+    RUN pip install tox
     RUN useradd -mu $uid dockerjenkins
     """
 }
