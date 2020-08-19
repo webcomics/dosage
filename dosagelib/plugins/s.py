@@ -111,8 +111,9 @@ class SchlockMercenary(_ParserScraper):
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '2000-06-12'
     imageSearch = '//div[@class="strip-image-wrapper"]/img'
-    multipleImagesPerStrip = True
     prevSearch = '//a[@class="previous-strip"]'
+    multipleImagesPerStrip = True
+    endOfLife = True
     help = 'Index format: yyyy-mm-dd'
 
 
@@ -335,6 +336,56 @@ class SodiumEyes(_WordPressScraper):
     url = 'http://sodiumeyes.com/'
 
 
+class SoloLeveling(_ParserScraper):
+    url = 'https://w1.sololeveling.net/'
+    stripUrl = url + 'manga/solo-leveling-chapter-%s/'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//div[@class="img_container"]//img'
+    prevSearch = '//a[@rel="prev"]'
+    latestSearch = '//table[@class="chap_tab"]//a'
+    starter = indirectStarter
+    multipleImagesPerStrip = True
+    imageUrlFixes = {
+        '94-0_5dd574efda419/28.': '94-0_5dd574efda419/28a.',
+        '92-0_5dc2fcb9ed562/22.': '92-0_5dc2fcb9ed562/22s.',
+        '91-0_5db9b881ac2f0/20k.': '91-0_5db9b881ac2f0/20l.',
+        '91-0_5db9b881ac2f0/23.': '91-0_5db9b881ac2f0/23a.',
+        '90-0_5db08467ca2b1/07.': '90-0_5db08467ca2b1/07a.',
+        '90-0_5db08467ca2b1/09.': '90-0_5db08467ca2b1/09a.',
+        '90-0_5db08467ca2b1/13.': '90-0_5db08467ca2b1/13a.',
+        '90-0_5db08467ca2b1/14.': '90-0_5db08467ca2b1/14a.',
+        '90-0_5db08467ca2b1/21.': '90-0_5db08467ca2b1/21a.',
+        '90-0_5db08467ca2b1/22.': '90-0_5db08467ca2b1/22a.',
+        '88-0_5d9e0dedb942e/03.': '88-0_5d9e0dedb942e/03b.',
+        '88-0_5d9e0dedb942e/05.': '88-0_5d9e0dedb942e/05a.',
+        '88-0_5d9e0dedb942e/30.': '88-0_5d9e0dedb942e/30a.',
+        '87-0_5d94cdebd9df7/01a.': '87-0_5d94cdebd9df7/01c.'
+    }
+
+    def imageUrlModifier(self, imageUrl, data):
+        if 'url=' in imageUrl:
+            imageUrl = imageUrl.split('url=')[1].split('&')[0]
+        for fix in self.imageUrlFixes:
+            imageUrl = imageUrl.replace(fix, self.imageUrlFixes[fix])
+        return imageUrl
+
+    def fetchUrls(self, url, data, urlSearch):
+        # Save link order for position-based filenames
+        self.imageUrls = super(SoloLeveling, self).fetchUrls(url, data, urlSearch)
+        self.imageUrls = [self.imageUrlModifier(x, data) for x in self.imageUrls]
+        return self.imageUrls
+
+    def getPrevUrl(self, url, data):
+        return self.stripUrl % str(int(url.strip('/').rsplit('-', 1)[-1]) - 1)
+
+    def namer(self, imageUrl, pageUrl):
+        # Construct filename from episode number and image position on page
+        episodeNum = pageUrl.strip('/').rsplit('-', 1)[-1]
+        imageNum = self.imageUrls.index(imageUrl)
+        imageExt = imageUrl.rsplit('.', 1)[-1]
+        return "%s-%03d.%s" % (episodeNum, imageNum, imageExt)
+
+
 class SomethingPositive(_ParserScraper):
     url = 'https://www.somethingpositive.net/'
     stripUrl = url + 'sp%s.shtml'
@@ -500,26 +551,30 @@ class StarCrossdDestiny(_ParserScraper):
         return directory + '-' + filename
 
 
-class StarfireAgency(_WordPressScraper):
-    url = 'http://starfire.poecatcomix.com/'
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = stripUrl % 'sfa-issue-1'
+class StarfireAgency(_WPWebcomic):
+    url = 'https://poecatcomix.com/starfire-agency-static/'
+    stripUrl = 'https://poecatcomix.com/starfire-agency/%s/'
+    firstStripUrl = stripUrl % '2005-09-201'
+    imageSearch = '//div[contains(@class, "webcomic-media")]//img'
+
+    def starter(self):
+        # Build list of chapters for naming
+        indexPage = self.getPage(self.url)
+        self.chapters = indexPage.xpath('//a[./img[contains(@class, "attachment-large")]]/@href')
+        latestPage = self.chapters[0]
+        self.chapters = self.chapters[1:]
+        self.currentChapter = len(self.chapters)
+        return latestPage
 
     def namer(self, imageUrl, pageUrl):
-        # Prepend chapter title to page filenames
-        page = self.getPage(pageUrl)
-        chapter = page.xpath('//div[@class="comic-chapter"]/a')
-        if len(chapter) > 0:
-            chapter = chapter[0].text.replace(' ', '-').lower()
-        else:
-            chapter = 'chapter-1'
-
-        # Fix inconsistent filenames
-        filename = imageUrl.rsplit('/', 1)[-1]
-        if 'cover' not in filename.lower():
-            filename = filename.replace('SFA', 'Page')
-        return chapter + '_' + filename
-
+        page = pageUrl.rstrip('/').rsplit('/', 1)[-1]
+        page = page.replace('3page00', 'cover3').replace('6429', 'cover7').replace('sfa-6-5-cover', 'cover6')
+        page = page.replace('sfa01', 'page01').replace('sfa03', 'page03').replace('sfa04', 'page04')
+        page = page.replace('sfa24', 'page24').replace('sfa07', 'page')
+        filename = 'sfa%d-%s.%s' % (self.currentChapter, page, imageUrl.rsplit('.', 1)[-1])
+        if pageUrl in self.chapters:
+            self.currentChapter = self.currentChapter - 1
+        return filename
 
 class StarTrip(_ComicControlScraper):
     url = 'https://www.startripcomic.com/'

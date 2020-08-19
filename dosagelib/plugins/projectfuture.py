@@ -30,6 +30,7 @@ class ProjectFuture(_ParserScraper):
             cls('BookOfTenets', 'tenets', '01', last='45'),
             cls('CriticalMass', 'criticalmass', 'cover', last='26'),
             cls('DarkLordRising', 'darklord', '01-00', last='10-10'),
+            cls('Emily', 'emily', '01-00'),
             cls('FishingTrip', 'fishing', '01-00'),
             cls('HeadsYouLose', 'heads', '00-01', last='07-12'),
             cls('NiallsStory', 'niall', '00'),

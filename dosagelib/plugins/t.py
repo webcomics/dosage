@@ -28,11 +28,8 @@ class Tamberlane(_WPWebcomic):
     url = baseUrl + 'latest/'
     stripUrl = baseUrl + 'tamberlane/%s/'
     firstStripUrl = stripUrl % 'page-1'
-
-    def namer(self, imageUrl, pageUrl):
-        # Fix inconsistent filenames
-        filename = imageUrl.rsplit('/', 1)[-1]
-        return filename.replace('ai4zCWaA', 'Page_152')
+    imageSearch = '//div[@id="comic-page"]/img/@src'
+    prevSearch = '//a[@class="previous-link"]'
 
 
 class TheBrads(_ParserScraper):
@@ -127,6 +124,17 @@ class TheLandscaper(_ParserScraper):
 
 class TheMelvinChronicles(_WordPressScraper):
     url = 'http://melvin.jeaniebottle.com/'
+
+
+class TheNightBelongsToUs(_ParserScraper):
+    url = 'https://tnbtu.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % '01-00'
+    imageSearch = '//div[@id="spliced-comic"]//img'
+    prevSearch = '//a[./img[contains(@src, "nav-prev")]]'
+    latestSearch = '//a[contains(@class, "main-link")]'
+    starter = indirectStarter
+    adult = True
 
 
 class TheNoob(_WordPressScraper):

@@ -133,8 +133,8 @@ class DerTodUndDasMaedchen(_ParserScraper):
 
 
 class DesertFox(_WPWebcomic):
-    url = 'https://www.desertfoxcomics.net/'
-    stripUrl = url + 'desertfox/comic/%s/'
+    url = 'https://desertfoxcomics.net/'
+    stripUrl = url + 'comics/%s/'
     firstStripUrl = stripUrl % 'origins-1'
 
     def namer(self, imageUrl, pageUrl):

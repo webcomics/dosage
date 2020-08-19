@@ -177,11 +177,12 @@ class Moonlace(_WPWebcomic):
     stripUrl = 'http://dbcomics.darkblueworkshop.com/moonlace/%s/'
     firstStripUrl = stripUrl % 'prologue/page-1'
     url = firstStripUrl
+    latestSearch = '//main' + _WPWebcomic.latestSearch
     adult = True
 
     def starter(self):
         # Set age-gate cookie
-        self.session.get(self.firstStripUrl + '?webcomic_birthday=1')
+        self.session.cookies.set('age_gate', '1', domain='darkblueworkshop.com')
         return indirectStarter(self)
 
     def namer(self, imageUrl, pageUrl):
