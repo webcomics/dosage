@@ -85,8 +85,8 @@ class DeepFried(_BasicScraper):
 
 
 class DeerMe(_ParserScraper):
-    url = 'http://deerme.net/'
-    stripUrl = url + 'comics/%s'
+    url = 'http://deerme.net/comics/'
+    stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = ('//img[@id="comicimage"]', '//img[@id="latestcomicimage"]')
     prevSearch = '//a[@rel="prev"]'
