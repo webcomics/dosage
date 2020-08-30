@@ -1134,6 +1134,7 @@ class ComicFury(_ParserScraper):
             cls('UltimateSwordsSummoner', 'uss'),
             cls('UltraViresEnglish', 'ultravires-eng'),
             cls('UltraViresesky', 'ultravires'),
+            cls('Unconventional', 'unconventional', adult=True),
             cls('Underverse', 'underverse'),
             cls('UnfortunateCircumstances', 'unfortunatecircumstances'),
             cls('UniversityOfSpeed', 'u-speed'),
