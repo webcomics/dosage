@@ -283,6 +283,7 @@ class WebToons(_ParserScraper):
             cls('OhHoly', 'romance/oh-holy', 809),
             cls('ORANGEMARMALADE', 'romance/orange-marmalade', 97),
             cls('Outrage', 'super-hero/outrage', 1450),
+            cls('OVERPOWERED', 'challenge/overpowered', 85292),
             cls('PacificRimAmara', 'sf/pacific-rim-amara', 1327),
             cls('PenguinLovesMev', 'slice-of-life/penguin-loves-mev', 86),
             cls('PhantomParadise', 'fantasy/phantom-paradise', 1250),
