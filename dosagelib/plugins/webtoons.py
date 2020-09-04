@@ -25,7 +25,7 @@ class WebToons(_ParserScraper):
         listPage = self.getPage(self.listUrl)
         currentEpisode = listPage.xpath('//div[@class="detail_lst"]/ul/li')[0].attrib['data-episode-no']
         # Check for completed tag
-        self.endOfLife = (listPage.xpath('//span[@class="txt_ico_completed2"]') != [])
+        self.endOfLife = (listPage.xpath('//div[@id="_asideDetail"]//span[@class="txt_ico_completed2"]') != [])
         return self.stripUrl % currentEpisode
 
     def fetchUrls(self, url, data, urlSearch):
