@@ -246,6 +246,11 @@ class SinFest(_ParserScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
+class SisterClaire(_ComicControlScraper):
+    url = 'https://www.sisterclaire.com/comic/'
+    firstStripUrl = url + 'book-one'
+
+
 class SixGunMage(_ComicControlScraper):
     url = 'http://www.6gunmage.com/comic/'
     stripUrl = url + '%s'
