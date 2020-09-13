@@ -32,6 +32,11 @@ class Tamberlane(_WPWebcomic):
     prevSearch = '//a[@class="previous-link"]'
 
 
+class TheBoyWhoFell(_ComicControlScraper):
+    url = 'https://www.boywhofell.com/'
+    firstStripUrl = url + 'comic/ch00p00'
+
+
 class TheBrads(_ParserScraper):
     url = ('https://web.archive.org/web/20171211154809/'
         'http://bradcolbow.com/archive/C4/')
