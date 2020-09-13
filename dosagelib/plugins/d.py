@@ -47,6 +47,11 @@ class DasLebenIstKeinPonyhof(_WPNaviIn):
     lang = 'de'
 
 
+class DaughterOfTheLilies(_ComicControlScraper):
+    url = 'https://www.daughterofthelilies.com/'
+    firstStripUrl = url + 'dotl/part-1-a-girl-with-no-face'
+
+
 class DeadWinter(_BasicScraper):
     url = 'http://deadwinter.cc/'
     stripUrl = url + 'page/%s'
