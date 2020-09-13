@@ -38,6 +38,11 @@ class SafelyEndangered(_WPNavi):
     firstStripUrl = url + 'comic/ignored/'
 
 
+class SaffronAndSage(_WordPressScraper):
+    url = 'https://www.saffroncomic.com/'
+    firstStripUrl = url + 'comic/p0001/'
+
+
 class SailorsunOrg(_WordPressScraper):
     url = 'http://sailorsun.org/'
 
