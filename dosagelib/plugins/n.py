@@ -85,6 +85,12 @@ class NewWorld(_WordPressScraper):
     help = 'Index format: yyyy/mm/dd/stripn'
 
 
+class NeverSatisfied(_ComicControlScraper):
+    url = 'https://www.neversatisfiedcomic.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'never-satisfied'
+
+
 class NichtLustig(_BasicScraper):
     url = 'http://www.nichtlustig.de/main.html'
     stripUrl = 'http://static.nichtlustig.de/toondb/%s.html'
