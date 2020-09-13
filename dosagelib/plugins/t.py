@@ -80,6 +80,11 @@ class TheDreamlandChronicles(_WordPressScraper):
     url = 'http://www.thedreamlandchronicles.com/'
 
 
+class TheForgottenOrder(_ComicControlScraper):
+    url = 'http://www.forgottenordercomic.com/'
+    firstStripUrl = url + 'comic/prolouge-01-book-1'
+
+
 class TheGamerCat(_ParserScraper):
     url = 'https://thegamercat.com/'
     stripUrl = url + 'comic/%s/'
