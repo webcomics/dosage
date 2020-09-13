@@ -116,6 +116,11 @@ class TheGentleWolf(_WordPressScraper):
         return filename
 
 
+class TheGlassScientists(_ComicControlScraper):
+    url = 'https://www.theglassscientists.com/'
+    firstStripUrl = url + 'comic/chapter-i'
+
+
 class TheJunkHyenasDiner(_WordPressScraper):
     url = 'http://junkhyenasdiner.com/'
     stripUrl = url + 'comic/%s/'
