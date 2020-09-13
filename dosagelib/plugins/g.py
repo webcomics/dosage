@@ -152,6 +152,11 @@ class Guardia(_ParserScraper):
         return pageUrl.rsplit('=', 1)[-1] + '.' + imageUrl.rsplit('.', 1)[-1]
 
 
+class GuildedAge(_WordPressScraper):
+    url = 'http://guildedage.net/'
+    firstStripUrl = url + 'comic/chapter-1-cover/'
+
+
 class GUComics(_BasicScraper):
     url = 'http://www.gucomics.com/'
     stripUrl = url + '%s'
