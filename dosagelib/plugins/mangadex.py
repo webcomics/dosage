@@ -93,6 +93,7 @@ class MangaDex(_ParserScraper):
             cls('PleaseTellMeGalkochan', 12702),
             cls('SaekiSanWaNemutteru', 28834),
             cls('SewayakiKitsuneNoSenkoSan', 22723),
+            cls('SousouNoFrieren', 48045),
             cls('SPYxFAMILY', 35705),
             cls('SwordArtOnline', 1360),
             cls('SwordArtOnlineProgressive', 9604),
