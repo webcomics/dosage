@@ -38,6 +38,11 @@ class SafelyEndangered(_WPNavi):
     firstStripUrl = url + 'comic/ignored/'
 
 
+class SaffronAndSage(_WordPressScraper):
+    url = 'https://www.saffroncomic.com/'
+    firstStripUrl = url + 'comic/p0001/'
+
+
 class SailorsunOrg(_WordPressScraper):
     url = 'http://sailorsun.org/'
 
@@ -239,6 +244,11 @@ class SinFest(_ParserScraper):
     textSearch = imageSearch + '/@alt'
     prevSearch = '//a[./img[contains(@src, "images/prev")]]'
     help = 'Index format: yyyy-mm-dd'
+
+
+class SisterClaire(_ComicControlScraper):
+    url = 'https://www.sisterclaire.com/comic/'
+    firstStripUrl = url + 'book-one'
 
 
 class SixGunMage(_ComicControlScraper):
