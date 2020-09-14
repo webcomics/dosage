@@ -77,6 +77,7 @@ class MangaDex(_ParserScraper):
             cls('HangingOutWithAGamerGirl', 42490),
             cls('HeavensDesignTeam', 27811),
             cls('HoriMiya', 6770),
+            cls('HowToOpenATriangularRiceball', 19305),
             cls('InterspeciesReviewers', 20796),
             cls('JingaiNoYomeToIchaIchaSuru', 22651),
             cls('KawaiiJoushiWoKomarasetai', 17910),
