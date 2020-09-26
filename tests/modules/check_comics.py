@@ -4,6 +4,7 @@
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 import re
 import multiprocessing
+import warnings
 from urllib.parse import urlsplit
 
 
@@ -106,6 +107,6 @@ def _check_stripurl(strip, scraperobj):
     urlmatch = ARCHIVE_ORG_MATCH.sub(r'/\\d+/', urlmatch)
     ro = re.compile(urlmatch)
     mo = ro.match(strip.strip_url)
-    err = 'strip URL {!r} does not match stripUrl pattern {}'.format(
-        strip.strip_url, urlmatch)
-    assert mo is not None, err
+    if not mo:
+        warnings.warn('strip URL {!r} does not match stripUrl pattern {}'.format(
+            strip.strip_url, urlmatch))
