@@ -82,6 +82,7 @@ class MangaDex(_ParserScraper):
             cls('JingaiNoYomeToIchaIchaSuru', 22651),
             cls('KawaiiJoushiWoKomarasetai', 17910),
             cls('KanojoOkarishimasu', 22151),
+            cls('MaouNoOreGaDoreiElfWoYomeNiShitandaGaDouMederebaIi', 25495),
             cls('ModernMoGal', 30308),
             cls('OMaidensinYourSavageSeason', 22030),
             cls('OokamiShounenWaKyouMoUsoOKasaneru', 14569),
