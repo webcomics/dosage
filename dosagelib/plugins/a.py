@@ -60,7 +60,7 @@ class AcademyVale(_BasicScraper):
 class Achewood(_BasicScraper):
     url = 'http://www.achewood.com/'
     stripUrl = url + 'index.php?date=%s'
-    firstStripUrl = stripUrl % '00000000'
+    firstStripUrl = stripUrl % '10012001'
     imageSearch = compile(tagre("img", "src", r'(/comic\.php\?date=\d+)'))
     prevSearch = compile(tagre("a", "href", r'(index\.php\?date=\d+)',
                                after="Previous"))
