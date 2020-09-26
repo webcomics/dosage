@@ -380,6 +380,7 @@ class WebToons(_ParserScraper):
             cls('Thornstone', 'fantasy/thornstone', 1612),
             cls('TickleTown', 'comedy/tickle-town', 428),
             cls('ToasterDude', 'comedy/toaster-dude', 1983),
+            cls('TokyoThreatDocumentationProject', 'challenge/tokyo-threat-documentation-project', 417973),
             cls('TowerOfGod', 'fantasy/tower-of-god', 95),
             cls('TrailerParkWarlock', 'comedy/trailer-park-warlock', 1512),
             cls('TrashBird', 'comedy/trash-bird', 473),
