@@ -13,16 +13,33 @@ from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
 
 
 class EarthsongSaga(_ParserScraper):
-    url = 'http://earthsongsaga.com/vol5/epilogue5.php'
-    imageSearch = '//div[@id="comic"]//img'
-    prevSearch = '//a[@title="Previous"]'
+    stripUrl = 'http://earthsongsaga.com/vol%s'
+    url = stripUrl % '5/epilogue5.php'
+    firstStripUrl = stripUrl % '1/vol1cover.php'
+    imageSearch = '//img[contains(@src, "images/vol")]'
+    prevSearch = ('//a[@title="Previous"]', '//td[@width=98]//a')
     endOfLife = True
 
     def namer(self, image_url, page_url):
-        imgmatch = compile(r'images/vol(\d+)/ch(\d+)/(.*)\.\w+$',
+        imgmatch = compile(r'images/vol(\d+)/ch(?:apter)?(\d+)/(.*)\.\w+$',
                            IGNORECASE).search(image_url)
-        return 'vol%02d_ch%02d_%s' % (
-            int(imgmatch.group(1)), int(imgmatch.group(2)), imgmatch.group(3))
+        if imgmatch:
+            return 'vol%02d_ch%02d_%s' % (int(imgmatch.group(1)),
+                int(imgmatch.group(2)), imgmatch.group(3))
+        imgmatch = compile(r'images/vol(\d+)/[^/]*cover[^/]*$',
+                           IGNORECASE).search(image_url)
+        return 'vol%02dcover' % (int(imgmatch.group(1)))
+
+    def getPrevUrl(self, url, data):
+        # Fix wrong navigation links
+        if url == self.stripUrl % '1/63.php':
+            return self.stripUrl % '1/62.php'
+        elif url == self.stripUrl % '2/vol2cover.html':
+            return self.stripUrl % '1/121.php'
+        elif url == self.stripUrl % '3/1.html':
+            return self.stripUrl % '3/ch7cover.html'
+
+        return super().getPrevUrl(url, data)
 
 
 class EasilyAmused(_WordPressScraper):
