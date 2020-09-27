@@ -329,6 +329,7 @@ class WebToons(_ParserScraper):
             cls('SpaceVixen', 'challenge/space-vixen-deep-space-k9', 207049),
             cls('SpiritFingers', 'drama/spirit-fingers', 1577),
             cls('Spirits', 'fantasy/spirits-re', 1348),
+            cls('StalkerXStalker', 'challenge/stalker-x-stalker', 245662),
             cls('STARCROSS', 'super-hero/star-cross', 1599),
             cls('StayingHealthyTogether', 'tiptoon/staying-healthy-together', 1963),
             cls('StrawberrySeafoam', 'fantasy/strawberry-seafoam', 1248),
