@@ -609,6 +609,7 @@ class Removed(Scraper):
             cls('WotNow'),
 
             # Removed in 3.0
+            cls('StuffNoOneToldMe'),
         )
 
 

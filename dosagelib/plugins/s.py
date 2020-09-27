@@ -639,44 +639,6 @@ class StrongFemaleProtagonist(_ParserScraper):
         )
 
 
-class StuffNoOneToldMe(_BasicScraper):
-    url = 'http://www.snotm.com/'
-    stripUrl = url + '%s.html'
-    firstStripUrl = stripUrl % '2010/05/01'
-    olderHref = r"(http://www\.snotm\.com/\d+/\d+/[^']+\.html)"
-    starter = indirectStarter
-    imageSearch = (
-        compile(tagre("img", "src", r'(http://i\.imgur\.com/[^"]+)') +
-                r"(?:</a>|<br />)"),
-        compile(tagre("img", "src", r'(http://\d+\.bp\.blogspot\.com/[^"]+)') +
-                r"(?:(?:&nbsp;)?</a>|<span |<br />)"),
-        compile(tagre("img", "src", r'(https://lh\d+\.googleusercontent\.com/[^"]+)') + r"</a>"),
-    )
-    prevSearch = compile(tagre("a", "href", olderHref, quote="'",
-                               before="older-link"))
-    latestSearch = compile(tagre("a", "href", olderHref, quote="'"))
-    multipleImagesPerStrip = True
-    help = 'Index format: yyyy/mm/stripname'
-
-    def namer(self, image_url, page_url):
-        """Use page URL to construct meaningful image name."""
-        parts, year, month, stripname = page_url.rsplit('/', 3)
-        stripname = stripname.rsplit('.', 1)[0]
-        parts, imagename = image_url.rsplit('/', 1)
-        return '%s-%s-%s-%s' % (year, month, stripname, imagename)
-
-    def shouldSkipUrl(self, url, data):
-        """Skip pages without images."""
-        return url in (
-            self.stripUrl % '2016/05/so-you-would-like-to-share-my-comics',  # no comic
-            self.stripUrl % '2012/08/self-rant',  # no comic
-            self.stripUrl % '2012/06/if-you-wonder-where-ive-been',  # video
-            self.stripUrl % '2011/10/i-didnt-make-this-nor-have-anything-to',  # video
-            self.stripUrl % '2010/12/first-snotm-fans-in-sao-paulo',  # no comic
-            self.stripUrl % '2010/11/ear-infection',  # no comic
-        )
-
-
 class SuburbanJungle(_ParserScraper):
     url = 'http://suburbanjungleclassic.com/'
     stripUrl = url + '?p=%s'
