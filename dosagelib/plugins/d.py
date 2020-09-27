@@ -8,7 +8,8 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, _WPNaviIn, _WPWebcomic
+from .common import (_ComicControlScraper, _WordPressScraper, _WPNavi,
+    _WPNaviIn, _WPWebcomic)
 
 
 class Damonk(_BasicScraper):
@@ -369,10 +370,7 @@ class Drowtales(_BasicScraper):
     help = 'Index format: number'
 
 
-class DumbingOfAge(_BasicScraper):
+class DumbingOfAge(_WPNavi):
     url = 'http://www.dumbingofage.com/'
-    rurl = escape(url)
     stripUrl = url + '%s/'
-    prevSearch = compile(tagre("a", "href", r'(%s\d+/[^"]+)' % rurl, after="prev"))
-    imageSearch = compile(tagre("img", "src", r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
     help = 'Index format: yyyy/comic/book-num/seriesname/stripname'
