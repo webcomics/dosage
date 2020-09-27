@@ -495,3 +495,6 @@ class CynWolf(_ParserScraper):
     prevSearch = '//a[text()="\u2190"]'
     multipleImagesPerStrip = True
     endOfLife = True
+
+    def shouldSkipUrl(self, url, data):
+        return '2016/the-end' in url # video
