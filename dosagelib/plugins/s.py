@@ -214,7 +214,7 @@ class Sheldon(_BasicScraper):
     help = 'Index format: yymmdd'
 
 
-class ShipInABottle(_WPNavi):
+class ShipInABottle(_WordPressScraper):
     url = 'http://shipinbottle.pepsaga.com/'
     stripUrl = url + '?p=%s'
     firstStripUrl = stripUrl % '281'
