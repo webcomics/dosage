@@ -356,17 +356,12 @@ class DrMcNinja(_ParserScraper):
     help = 'Index format: {episode}p{page}'
 
 
-class Drowtales(_BasicScraper):
-    baseUrl = 'http://www.drowtales.com/'
-    rurl = escape(baseUrl)
-    url = baseUrl + 'mainarchive.php'
+class Drowtales(_ParserScraper):
+    url = 'http://www.drowtales.com/mainarchive.php'
     stripUrl = url + '?sid=%s'
     firstStripUrl = stripUrl % '4192'
-    imageSearch = (
-        compile(tagre("img", "src", r'((%s)?mainarchive/[^"]+)' % rurl)),
-        compile(r'background-image:url\((mainarchive/[^\)]+center\.jpg)'),
-    )
-    prevSearch = compile(tagre("a", "href", r'(\?sid=\d+)', before="link_prev_top"))
+    imageSearch = '//div[@id="content_middle"]//img'
+    prevSearch = '//a[@id="link_prev_top"]'
     help = 'Index format: number'
 
 
