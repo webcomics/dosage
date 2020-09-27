@@ -754,6 +754,7 @@ class Renamed(Scraper):
             cls('ZebraGirl', 'ComicFury/ZebraGirl'),
 
             # Renamed in 3.0
+            cls('CrapIDrewOnMyLunchBreak', 'WebToons/CrapIDrewOnMyLunchBreak'),
             cls('SmackJeeves/BlackTapestries', 'ComicFury/BlackTapestries'),
             cls('SmackJeeves/FurryExperience', 'ComicFury/FurryExperience'),
             cls('SmackJeeves/GrowingTroubles', 'ComicFury/GrowingTroubles'),

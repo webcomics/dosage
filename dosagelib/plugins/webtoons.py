@@ -112,6 +112,7 @@ class WebToons(_ParserScraper):
             cls('ClusterFudge', 'slice-of-life/cluster-fudge', 355),
             cls('CodeAdam', 'action/code-adam', 1657),
             cls('CookingComically', 'tiptoon/cooking-comically', 622),
+            cls('CrapIDrewOnMyLunchBreak', 'challenge/crap-i-drew-on-my-lunch-break', 124756),
             cls('Crumbs', 'romance/crumbs', 1648),
             cls('CupidsArrows', 'romance/cupids-arrows', 1538),
             cls('CursedPrincessClub', 'comedy/cursed-princess-club', 1537),

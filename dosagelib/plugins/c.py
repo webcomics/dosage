@@ -372,15 +372,6 @@ class CraftedFables(_WordPressScraper):
     prevSearch = '//a[@rel="prev"]'
 
 
-class CrapIDrewOnMyLunchBreak(_BasicScraper):
-    url = 'http://crap.jinwicked.com/'
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2003/07/30/jin-and-josh-decide-to-move'
-    imageSearch = compile(tagre("img", "src", r'(http://crap\.jinwicked\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)', after="prev"))
-    help = 'Index format: yyyy/mm/dd/name'
-
-
 class CrimsonDark(_BasicScraper):
     url = 'http://www.davidcsimon.com/crimsondark/'
     stripUrl = url + 'index.php?view=comic&strip_id=%s'
