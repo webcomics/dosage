@@ -185,9 +185,17 @@ def asciify(name):
     return re.sub("[^0-9a-zA-Z_]", "", name)
 
 
+TRANS = str.maketrans({
+    '&': 'And',
+    '@': 'At',
+    'ñ': 'n',
+    'á': 'a',
+})
+
+
 def format_name(text):
     """Format a comic name."""
     name = html.unescape(text)
     name = "".join(capfirst(x) for x in name.split(" "))
-    name = asciify(name.replace(u'&', u'And').replace(u'@', u'At').replace('ñ', 'n'))
+    name = asciify(name.translate(TRANS))
     return name

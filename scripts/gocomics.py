@@ -23,7 +23,7 @@ class GoComicsUpdater(ComicListUpdater):
         data = self.get_url(url, expand=False)
 
         for comiclink in data.cssselect(outercss):
-            link = comiclink.attrib['href'].split('/')[1]
+            link = comiclink.attrib['href'].split('/')[1].strip()
             name = comiclink.cssselect('h4')[0].text
             self.add_comic(name, (link, lang))
 
