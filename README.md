@@ -102,7 +102,7 @@ To upgrade such installations, just run:
 If you want to run dosage directly from the source code, you should install
 it in "[editable]" mode, preferable in a [virtual environment]:
 
-    pip install -e .[css,bash]
+    pip install -e .[css,bash,dev]
 
 You can invoke Dosage directly from the source code as `./dosage`, but this
 mode of operation is discouraged, since dependencies might be missing.

@@ -19,7 +19,7 @@ def runTests() {
         checkout scm
     }
     stage ('Install lib') {
-        sh "pip install --user -e .[css,test]"
+        sh "pip install --user -e .[css,dev]"
     }
     stage ('Run tests') {
         sh "TESTALL=1 py.test -v --cov=dosagelib --cov-report xml --tb=short -n10 --junitxml=junit.xml tests/modules/check_comics.py || true"
