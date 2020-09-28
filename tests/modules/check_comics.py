@@ -2,8 +2,10 @@
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
-import re
+import json
 import multiprocessing
+import os
+import re
 import warnings
 from urllib.parse import urlsplit
 
@@ -40,6 +42,7 @@ def _test_comic(outdir, scraperobj):
     num_strips = 0
     strip = None
     files = []
+    PROXYMAP.apply(scraperobj.name)
     for strip in scraperobj.getStrips(MaxStrips):
         files.append(_check_strip(outdir, strip,
                                   scraperobj.multipleImagesPerStrip))
@@ -110,3 +113,25 @@ def _check_stripurl(strip, scraperobj):
     if not mo:
         warnings.warn('strip URL {!r} does not match stripUrl pattern {}'.format(
             strip.strip_url, urlmatch))
+
+
+class ProxyConfig:
+    """Loads proxy config from an environment variable and applies it for each test."""
+    def __init__(self):
+        self.config = {}
+        if 'PROXYMAP' in os.environ:
+            for regex, server in json.loads(os.environ['PROXYMAP']).items():
+                self.config[re.compile(regex)] = server
+
+    def apply(self, name):
+        useserver = ''
+        for regex, server in self.config.items():
+            if regex.match(name):
+                useserver = server
+                break
+        os.environ['http_proxy'] = useserver
+        os.environ['https_proxy'] = useserver
+
+
+# External proxy config to fetch some modules via proxies
+PROXYMAP = ProxyConfig()

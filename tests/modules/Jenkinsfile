@@ -6,7 +6,7 @@ def prepareDocker () {
         def uid = sh returnStdout: true, script: 'id -u'
         writeFile file: 'Dockerfile', text: """
         FROM python:3.8-buster
-        RUN pip install pytest-cov && \\
+        RUN pip install pytest-cov PySocks && \\
         useradd -m -u ${uid.trim()} jenkins
         """
         img = docker.build('local:test-all-comics')
@@ -22,7 +22,9 @@ def runTests() {
         sh "pip install --user -e .[css,dev]"
     }
     stage ('Run tests') {
-        sh "TESTALL=1 py.test -v --cov=dosagelib --cov-report xml --tb=short -n10 --junitxml=junit.xml tests/modules/check_comics.py || true"
+        withCredentials([string(credentialsId: 'proxymap', variable: 'PROXYMAP')]) {
+            sh "TESTALL=1 py.test -v --cov=dosagelib --cov-report xml --tb=short -n10 --junitxml=junit.xml tests/modules/check_comics.py || true"
+        }
     }
     stage('Report') {
         junit 'junit.xml'
