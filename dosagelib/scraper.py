@@ -34,7 +34,7 @@ ARCHIVE_ORG_URL = re.compile(r'https?://web\.archive\.org/web/[^/]*/')
 
 class GeoblockedException(IOError):
     def __init__(self):
-        super().__init__(f'It seems your current location is geo-blocked.')
+        super().__init__('It seems your current location is geo-blocked.')
 
 
 class Scraper(object):
