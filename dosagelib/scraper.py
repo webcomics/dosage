@@ -32,6 +32,11 @@ from .xml import NS
 ARCHIVE_ORG_URL = re.compile(r'https?://web\.archive\.org/web/[^/]*/')
 
 
+class GeoblockedException(IOError):
+    def __init__(self):
+        super().__init__(f'It seems your current location is geo-blocked.')
+
+
 class Scraper(object):
     '''Base class for all comic scraper, but without a specific scrape
     implementation.'''
@@ -345,6 +350,10 @@ class Scraper(object):
                 except KeyError:
                     pass
         return lang
+
+    def geoblocked(self):
+        """Helper method to indicate that the user is most probably geo-blocked."""
+        raise GeoblockedException()
 
 
 class _BasicScraper(Scraper):

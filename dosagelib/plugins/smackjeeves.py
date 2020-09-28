@@ -29,6 +29,9 @@ class SmackJeeves(_ParserScraper):
         response = self.session.post(self.apiBase + 'articleList',
             params={'titleNo': self._comicid})
         response.raise_for_status()
+        if ('text/html' in response.headers['content-type'] and
+                'available in your area' in response.text):
+            self.geoblocked()
         return response.json()['result']['list'][self.lastid]['articleUrl']
 
     def fetchUrls(self, url, data, urlsearch):

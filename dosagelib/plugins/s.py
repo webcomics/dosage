@@ -6,6 +6,8 @@
 from re import compile, escape, IGNORECASE, sub
 from os.path import splitext
 
+from requests.exceptions import HTTPError
+
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter, joinPathPartsNamer
 from ..util import tagre
@@ -384,6 +386,16 @@ class SoloLeveling(_ParserScraper):
         self.imageUrls = super(SoloLeveling, self).fetchUrls(url, data, urlSearch)
         self.imageUrls = [self.imageUrlModifier(x, data) for x in self.imageUrls]
         return self.imageUrls
+
+    def getPage(self, url):
+        try:
+            return super().getPage(url)
+        except HTTPError as e:
+            # CloudFlare WAF
+            if e.response.status_code == 403 and '1020' in e.response.text:
+                self.geoblocked()
+            else:
+                raise e
 
     def getPrevUrl(self, url, data):
         return self.stripUrl % str(int(url.strip('/').rsplit('-', 1)[-1]) - 1)
