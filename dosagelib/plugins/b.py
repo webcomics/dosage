@@ -257,14 +257,11 @@ class BratHalla(_WordPressScraper):
     url = 'http://brat-halla.com/'
 
 
-class Brink(_BasicScraper):
-    url = 'http://paperfangs.com/brink/'
-    rurl = escape(url)
-    stripUrl = url + '?p=%s'
-    firstStripUrl = stripUrl % '5'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
-    help = 'Index format: number'
+class Brink(_WordPressScraper):
+    stripUrl = 'https://paperfangs.com/brink/?comic=%s'
+    firstStripUrl = stripUrl % 'chapter1coversmall'
+    url = stripUrl % 'brink639small'
+    endOfLife = True
 
 
 class BroodHollow(_WordPressScraper):
