@@ -276,8 +276,11 @@ class Buni(_WordPressScraper):
     url = 'http://www.bunicomic.com/'
 
 
-class BusinessCat(_WPNaviIn):
-    url = 'http://www.businesscat.happyjar.com/'
+class BusinessCat(_ParserScraper):
+    url = 'https://www.businesscatcomic.com/'
+    imageSearch = '//div[d:class("comic-image")]//img'
+    prevSearch = '//a[@rel="prev"]'
+    endOfLife = True
 
 
 class ButImACatPerson(_WordPressScraper):
