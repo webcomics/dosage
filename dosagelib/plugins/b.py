@@ -237,13 +237,10 @@ class BobWhite(_ParserScraper):
     prevSearch = '//a[@rel="previous"]'
 
 
-class BookOfBiff(_BasicScraper):
-    url = 'http://thebookofbiff.com/'
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2006/01/02/4'
-    imageSearch = compile(tagre("img", "src", r'([^"]+/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)', after="Previous"))
-    help = 'Index format: yyyy/mm/dd/stripnum-stripname'
+class BookOfBiff(_WordPressScraper):
+    url = 'https://thebookofbiff.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % '4'
 
 
 class BoredAndEvil(_BasicScraper):
