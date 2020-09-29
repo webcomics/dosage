@@ -28,12 +28,13 @@ class BadassMuthas(_BasicScraper):
 
 
 class BadMachinery(_ParserScraper):
-    url = 'http://scarygoround.com/'
+    url = 'https://scarygoround.com/badmachinery/index.php'
     stripUrl = url + '?date=%s'
-    firstStripUrl = stripUrl % '20090918'
+    firstStripUrl = stripUrl % '20090921'
     imageSearch = '//img[@class="comicimg"]'
     prevSearch = '//a[contains(text(), "Previous")]'
     broken_html_bugfix = True
+    endOfLife = True
     help = 'Index format: yyyymmdd'
 
 
