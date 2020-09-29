@@ -309,12 +309,10 @@ class ButternutSquash(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/strip-name-author-name'
 
 
-class ButterSafe(_BasicScraper):
-    url = 'http://buttersafe.com/'
-    rurl = escape(url)
+class ButterSafe(_ParserScraper):
+    url = 'https://www.buttersafe.com/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2007/04/03/breakfast-sad-turtle'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s\d+\d+/\d+/\d+/[^"]+)' % rurl,
-                               after="prev"))
+    imageSearch = '//div[@id="comic"]/img'
+    prevSearch = '//a[@rel="prev"]'
     help = 'Index format: yyyy/mm/dd/stripname'
