@@ -225,13 +225,14 @@ class BloomingFaeries(_WordPressScraper):
         return "_".join(image_url.rsplit('/', 3)[1:])
 
 
-class BMovieComic(_BasicScraper):
-    url = 'http://www.bmoviecomic.com/'
-    stripUrl = url + '?cid=%s'
-    firstStripUrl = stripUrl % '8'
-    imageSearch = compile(r'"(comics/.+?)"')
-    prevSearch = compile(r'(\?cid=.+?)".+?Prev')
-    help = 'Index format: n'
+class BMovieComic(_ParserScraper):
+    url = 'https://bmoviecomic.com/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % 'chapter-1-strip-1'
+    multipleImagesPerStrip = True
+    imageSearch = '//div[d:class("entry-content")]//img'
+    prevSearch = '//a[@rel="prev"]'
+    help = 'Index format: pagename'
 
 
 class BobWhite(_ParserScraper):
