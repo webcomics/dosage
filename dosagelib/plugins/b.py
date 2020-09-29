@@ -128,13 +128,10 @@ class BetterDays(_ParserScraper):
     endOfLife = True
 
 
-class BetweenFailures(_BasicScraper):
-    url = 'http://betweenfailures.com/'
-    rurl = escape(url)
+class BetweenFailures(_WPWebcomic):
+    url = 'https://betweenfailures.com/'
     stripUrl = url + 'comics1/%s'
-    imageSearch = compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/\d+-\d+-\d+[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%scomics1/[^"]+)' % rurl,
-                               after="previous"))
+    firstStripUrl = stripUrl % 'every-story-has-to-start-somewhere'
     help = 'Index format: stripname'
 
 
