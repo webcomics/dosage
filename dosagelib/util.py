@@ -15,6 +15,8 @@ from urllib.parse import (parse_qs, quote as url_quote, unquote as url_unquote,
         urlparse, urlunparse, urlsplit)
 from urllib.robotparser import RobotFileParser
 
+import lxml
+
 from .output import out
 from .configuration import UserAgent, App, SupportUrl
 from . import AppName
@@ -347,6 +349,7 @@ def print_app_info(out=sys.stderr):
     print(App, file=out)
     print("Python %(version)s on %(platform)s" %
           {"version": sys.version, "platform": sys.platform}, file=out)
+    print("libxml2 version: %i.%i.%i" % lxml.etree.LIBXML_VERSION, file=out)
     stime = strtime(time.time())
     print("Local time:", stime, file=out)
     print("sys.argv", sys.argv, file=out)
