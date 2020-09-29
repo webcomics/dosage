@@ -119,14 +119,13 @@ class Bethellium(_WPWebcomic):
 
 
 class BetterDays(_ParserScraper):
-    url = 'http://jaynaylor.com/betterdays/'
+    url = 'https://web.archive.org/web/20200201203404/http://jaynaylor.com/betterdays/'
     stripUrl = url + 'archives/%s.html'
     firstStripUrl = stripUrl % '2003/04/post-2'
     imageSearch = '//img[contains(@src, "/betterdays/comic/")]'
     prevSearch = '//a[contains(text(), "Previous")]'
     adult = True
     endOfLife = True
-    help = 'Index format: yyyy/mm/<your guess>'
 
 
 class BetweenFailures(_BasicScraper):
