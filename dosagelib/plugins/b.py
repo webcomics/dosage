@@ -243,14 +243,13 @@ class BookOfBiff(_WordPressScraper):
     firstStripUrl = stripUrl % '4'
 
 
-class BoredAndEvil(_BasicScraper):
-    url = 'http://www.boredandevil.com/'
-    stripUrl = url + '?date=%s'
+class BoredAndEvil(_ParserScraper):
+    url = 'http://orphanedcomics.com/boredandevil/'
+    stripUrl = url + 'webcomic-%s.html'
     firstStripUrl = stripUrl % '2004-06-07'
-    imageSearch = compile(tagre("img", "src", r'(strips/[^"]+)'))
-    prevSearch = compile(r'First Comic.+<a href="(.+?)".+previous-on.gif')
-    latestSearch = prevSearch
-    starter = indirectStarter
+    imageSearch = '//img[d:class("webcomic")]'
+    prevSearch = '//a[img[@title="Previous"]]'
+    endOfLife = True
     help = 'Index format: yyyy-mm-dd'
 
 
