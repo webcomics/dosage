@@ -295,8 +295,10 @@ class ButtercupFestival(_ParserScraper):
     stripUrl = url + '%s.htm'
     firstStripUrl = stripUrl % '2-1'
     imageSearch = '//center/img'
-    prevSearch = '//a[text()="previous"]'
-    help = 'Index format: 2-number'
+    prevSearch = (
+        '//a[img[contains(@src, "previous")]]',  # 3-x
+        '//a[text()="previous"]'  # 2-x
+    )
 
 
 class ButternutSquash(_BasicScraper):
