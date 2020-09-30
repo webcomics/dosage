@@ -58,16 +58,6 @@ class VickiFox(_ParserScraper):
         return self.stripUrl % self.getPage(url).xpath(self.prevSearch)[0]
 
 
-class VictimsOfTheSystem(_BasicScraper):
-    url = 'http://www.votscomic.com/'
-    stripUrl = url + '?id=%s.jpg'
-    firstStripUrl = stripUrl % '070103-002452'
-    imageSearch = compile(tagre("img", "src", r'(comicpro/strips/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(\?id=\d+-\d+\.jpg)') +
-                         "Previous")
-    help = 'Index format: nnn-nnn'
-
-
 class ViiviJaWagner(_ParserScraper):
     url = 'http://www.hs.fi/viivijawagner/'
     imageSearch = '//meta[@property="og:image"]/@content'
