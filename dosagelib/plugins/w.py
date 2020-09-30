@@ -20,14 +20,13 @@ class WapsiSquare(_WPNaviIn):
         return data.xpath('//iframe')  # videos
 
 
-class WastedTalent(_BasicScraper):
+class WastedTalent(_ParserScraper):
     url = 'http://www.wastedtalent.ca/'
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % 'anime-crack'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.wastedtalent\.ca/sites/default/files/imagecache/comic_full/comics/\d+/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/comic/[^"]+)',
-                               after="comic_prev"))
-    help = 'Index format: stripname'
+    imageSearch = '//div[d:class("comic_content")]/img'
+    prevSearch = '//li[d:class("previous")]/a'
+    multipleImagesPerStrip = True
 
 
 class WebcomicName(_ParserScraper):
