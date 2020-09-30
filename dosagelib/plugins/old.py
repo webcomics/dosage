@@ -652,7 +652,7 @@ class Removed(Scraper):
             cls('GoComics/USAcres'),
             cls('GoComics/WorldOfWonder'),
             cls('StuffNoOneToldMe'),
-
+            cls('WebDesignerCOTW'),
         )
 
 

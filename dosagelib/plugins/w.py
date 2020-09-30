@@ -7,7 +7,7 @@ from re import compile, escape, IGNORECASE
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from ..helpers import bounceStarter, indirectStarter
+from ..helpers import bounceStarter
 from .common import _ComicControlScraper, _WPNavi, _WPNaviIn, _WPWebcomic
 
 
@@ -31,26 +31,6 @@ class WebcomicName(_ParserScraper):
     imageSearch = '//figure[d:class("tmblr-full")]//img'
     prevSearch = '//a[d:class("next")]'
     multipleImagesPerStrip = True
-
-
-class WebDesignerCOTW(_ParserScraper):
-    baseUrl = 'https://www.webdesignerdepot.com/'
-    url = baseUrl + 'category/comics/'
-    starter = indirectStarter
-    firstStripUrl = baseUrl + '2009/11/comics-of-the-week-1/'
-    imageSearch = '//article[d:class("article-content")]//img'
-    multipleImagesPerStrip = True
-    prevSearch = '//a[span[d:class("icon-right-small")]]'
-    latestSearch = '//a[d:class("anim-link")]'
-
-    def shouldSkipUrl(self, url, data):
-        """Skip non-comic URLs."""
-        return 'comics-of-the-week' not in url
-
-    def namer(self, image_url, page_url):
-        imagename = image_url.rsplit('/', 1)[1]
-        week = compile(r'week-(\d+)').search(page_url).group(1)
-        return "%s-%s" % (week, imagename)
 
 
 class Weregeek(_ParserScraper):
