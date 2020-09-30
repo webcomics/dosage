@@ -15,6 +15,10 @@ class WapsiSquare(_WPNaviIn):
     url = 'http://wapsisquare.com/'
     firstStripUrl = url + 'comic/09092001/'
 
+    def shouldSkipUrl(self, url, data):
+        """Skip pages without images."""
+        return data.xpath('//iframe')  # videos
+
 
 class WastedTalent(_BasicScraper):
     url = 'http://www.wastedtalent.ca/'
