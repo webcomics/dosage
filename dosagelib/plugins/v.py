@@ -3,11 +3,8 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-from re import compile
-
-from ..scraper import _BasicScraper, _ParserScraper
+from ..scraper import _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
-from ..util import tagre
 
 
 class Vexxarr(_ParserScraper):
@@ -25,13 +22,12 @@ class Vexxarr(_ParserScraper):
         return '20%s-%s-%s' % (page[4:6], page[0:2], page[2:4])
 
 
-class VGCats(_BasicScraper):
-    url = 'http://www.vgcats.com/comics/'
+class VGCats(_ParserScraper):
+    url = 'https://www.vgcats.com/comics/'
     stripUrl = url + '?strip_id=%s'
     firstStripUrl = stripUrl % '0'
-    imageSearch = compile(tagre("img", "src", r'(images/\d{6}\.[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(\?strip_id=\d+)') +
-                         tagre("img", "src", r"back\.gif"))
+    imageSearch = '//td/img[contains(@src, "/images/")]'
+    prevSearch = '//a[img[contains(@src, "back.")]]'
     help = 'Index format: n (unpadded)'
 
 
