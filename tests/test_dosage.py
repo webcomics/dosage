@@ -135,6 +135,17 @@ class TestDosage(object):
         cmd_ok("-n", "2", "-v", "-b", str(tmpdir), "xkcd:303")
 
     @responses.activate
+    def test_fetch_all_existing(self, tmp_path):
+        httpmocks.xkcd()
+        xkcd = tmp_path / 'xkcd'
+        xkcd.mkdir()
+        other = tmp_path / 'randomdir'
+        other.mkdir()
+        cmd_ok('-v', '-b', str(tmp_path), '@')
+        assert len(list(xkcd.glob('*'))) == 2
+        assert len(list(other.glob('*'))) == 0
+
+    @responses.activate
     def test_json_page_key_bounce_and_multi_image(self, tmpdir):
         httpmocks.page('https://zenpencils.com/', 'zp-home')
         httpmocks.page('https://zenpencils.com/comic/missing/', 'zp-223')
