@@ -574,7 +574,7 @@ class Cache:
 
     def load(self):
         out.debug("Loading comic modules...")
-        modules = loader.get_modules('plugins')
+        modules = loader.get_plugin_modules()
         plugins = list(loader.get_plugins(modules, Scraper))
         self.data = list([m for x in plugins for m in x.getmodules()])
         self.validate()

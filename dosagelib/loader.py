@@ -1,26 +1,27 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2016-2019 Tobias Gruetzmacher
+# Copyright (C) 2016-2020 Tobias Gruetzmacher
 """
 Functions to load plugin modules.
 
 Example usage:
-    modules = loader.get_modules('plugins')
+    modules = loader.get_plugin_modules()
     plugins = loader.get_plugins(modules, PluginClass)
 """
 import importlib
 import pkgutil
+
+from .plugins import (__name__ as plugin_package, __path__ as plugin_path)
 from .output import out
 
 
-def get_modules(folder):
-    """Find (and import) all valid modules in the given submodule of this file.
+def get_plugin_modules():
+    """Find (and import) all valid modules in the "plugins" package.
     @return: all loaded valid modules
     @rtype: iterator of module
     """
-    mod = importlib.import_module(".." + folder, __name__)
-    prefix = mod.__name__ + "."
-    modules = [m[1] for m in pkgutil.iter_modules(mod.__path__, prefix)]
+    prefix = plugin_package + "."
+    modules = [m[1] for m in pkgutil.iter_modules(plugin_path, prefix)]
 
     for elm in _get_all_modules_pyinstaller():
         if elm.startswith(prefix):
