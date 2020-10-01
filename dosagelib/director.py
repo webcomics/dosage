@@ -10,7 +10,8 @@ from queue import Queue, Empty
 from urllib.parse import urlparse
 
 from .output import out
-from . import events, scraper
+from .scraper import scrapers as allscrapers
+from . import events
 
 
 class ComicQueue(Queue):
@@ -209,7 +210,7 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False, listi
             else:
                 name = comic
                 indexes = None
-            found_scrapers = scraper.find_scrapers(name, multiple_allowed=multiple_allowed)
+            found_scrapers = allscrapers.find(name, multiple_allowed=multiple_allowed)
             for scraperobj in found_scrapers:
                 if shouldRunScraper(scraperobj, adult, listing):
                     # FIXME: Find a better way to work with indexes
@@ -220,7 +221,7 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False, listi
 
 
 def get_existing_comics(basepath=None, adult=True, listing=False):
-    for scraperobj in scraper.get_scrapers(include_removed=True):
+    for scraperobj in allscrapers.get(include_removed=True):
         dirname = scraperobj.get_download_dir(basepath)
         if os.path.isdir(dirname):
             if shouldRunScraper(scraperobj, adult, listing):

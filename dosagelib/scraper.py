@@ -536,68 +536,74 @@ class _ParserScraper(Scraper):
         return res
 
 
-def find_scrapers(comic, multiple_allowed=False):
-    """Get a list comic scraper objects.
-
-    Can return more than one entry if multiple_allowed is True, else it raises
-    a ValueError if multiple modules match. The match is a case insensitive
-    substring search.
+class Cache:
+    """Cache for comic scraper objects. The cache is initialized on first use.
+    This is cached, since iterating & loading a complete package might be quite
+    slow.
     """
-    if not comic:
-        raise ValueError("empty comic name")
-    candidates = []
-    cname = comic.lower()
-    for scrapers in get_scrapers(include_removed=True):
-        lname = scrapers.name.lower()
-        if lname == cname:
-            # perfect match
-            if not multiple_allowed:
-                return [scrapers]
-            else:
+    def __init__(self):
+        self.data = None
+
+    def find(self, comic, multiple_allowed=False):
+        """Get a list comic scraper objects.
+
+        Can return more than one entry if multiple_allowed is True, else it raises
+        a ValueError if multiple modules match. The match is a case insensitive
+        substring search.
+        """
+        if not comic:
+            raise ValueError("empty comic name")
+        candidates = []
+        cname = comic.lower()
+        for scrapers in self.get(include_removed=True):
+            lname = scrapers.name.lower()
+            if lname == cname:
+                # perfect match
+                if not multiple_allowed:
+                    return [scrapers]
+                else:
+                    candidates.append(scrapers)
+            elif cname in lname and scrapers.url:
                 candidates.append(scrapers)
-        elif cname in lname and scrapers.url:
-            candidates.append(scrapers)
-    if len(candidates) > 1 and not multiple_allowed:
-        comics = ", ".join(x.name for x in candidates)
-        raise ValueError('multiple comics found: %s' % comics)
-    elif not candidates:
-        raise ValueError('comic %r not found' % comic)
-    return candidates
+        if len(candidates) > 1 and not multiple_allowed:
+            comics = ", ".join(x.name for x in candidates)
+            raise ValueError('multiple comics found: %s' % comics)
+        elif not candidates:
+            raise ValueError('comic %r not found' % comic)
+        return candidates
 
-
-_scrapers = None
-
-
-def get_scrapers(include_removed=False):
-    """Find all comic scraper classes in the plugins directory.
-    The result is cached.
-    @return: list of Scraper classes
-    @rtype: list of Scraper
-    """
-    global _scrapers
-    if _scrapers is None:
-        out.debug(u"Loading comic modules...")
+    def load(self):
+        out.debug("Loading comic modules...")
         modules = loader.get_modules('plugins')
         plugins = list(loader.get_plugins(modules, Scraper))
-        _scrapers = sorted([m for x in plugins for m in x.getmodules()],
-                           key=lambda p: p.name)
-        check_scrapers()
-        out.debug(u"... %d modules loaded from %d classes." % (
-            len(_scrapers), len(plugins)))
-    if include_removed:
-        return _scrapers
-    else:
-        return [x for x in _scrapers if x.url]
+        self.data = list([m for x in plugins for m in x.getmodules()])
+        self.validate()
+        out.debug("... %d modules loaded from %d classes." % (
+            len(self.data), len(plugins)))
+
+    def get(self, include_removed=False):
+        """Find all comic scraper classes in the plugins directory.
+        @return: list of Scraper classes
+        @rtype: list of Scraper
+        """
+        if not self.data:
+            self.load()
+        if include_removed:
+            return self.data
+        else:
+            return [x for x in self.data if x.url]
+
+    def validate(self):
+        """Check for duplicate scraper names."""
+        d = {}
+        for scraper in self.data:
+            name = scraper.name.lower()
+            if name in d:
+                name1 = scraper.name
+                name2 = d[name].name
+                raise ValueError('duplicate scrapers %s and %s found' %
+                                 (name1, name2))
+                d[name] = scraper
 
 
-def check_scrapers():
-    """Check for duplicate scraper names."""
-    d = {}
-    for scraper in _scrapers:
-        name = scraper.name.lower()
-        if name in d:
-            name1 = scraper.name
-            name2 = d[name].name
-            raise ValueError('duplicate scrapers %s and %s found' %
-                             (name1, name2))
-        d[name] = scraper
+scrapers = Cache()

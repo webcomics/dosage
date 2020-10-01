@@ -12,8 +12,9 @@ import time
 
 import lxml
 
+from dosagelib.scraper import scrapers
 from dosagelib.util import get_page
-from dosagelib import scraper, http
+from dosagelib import http
 
 
 def first_lower(x):
@@ -129,7 +130,7 @@ class ComicListUpdater(object):
         """Check if comic name already exists."""
         names = [(tmpl % name).lower() for tmpl in self.dup_templates]
         if names:
-            for scraperobj in scraper.get_scrapers():
+            for scraperobj in scrapers.get():
                 lname = scraperobj.name.lower()
                 if lname in names:
                     return scraperobj.name

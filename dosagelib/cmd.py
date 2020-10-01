@@ -1,13 +1,14 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 import argparse
 import os
 
-from . import events, configuration, singleton, director, scraper
+from . import events, configuration, singleton, director
 from . import AppName, __version__
 from .output import out
+from .scraper import scrapers as allscrapers
 from .util import internal_error, strlimit
 
 
@@ -243,7 +244,7 @@ def do_list(column_list=True, verbose=False, listall=False):
         out.info(u'Comics tagged with [{}] require age confirmation'
             ' with the --adult option.'.format(TAG_ADULT))
         out.info(u'Non-english comics are tagged with [%s].' % TAG_LANG)
-        scrapers = sorted(scraper.get_scrapers(listall),
+        scrapers = sorted(allscrapers.get(listall),
                           key=lambda s: s.name.lower())
         if column_list:
             num, disabled = do_column_list(scrapers)

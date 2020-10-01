@@ -1,26 +1,26 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2013-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 import pytest
-from dosagelib import scraper
+from dosagelib.scraper import scrapers
 
 
 class TestScraper(object):
     """Test scraper module functions."""
 
     def test_get_scrapers(self):
-        for scraperobj in scraper.get_scrapers():
+        for scraperobj in scrapers.get():
             scraperobj.indexes = ["bla"]
             assert scraperobj.url, "missing url in %s" % scraperobj.name
 
     def test_find_scrapers_single(self):
-        result = scraper.find_scrapers("xkcd")
+        result = scrapers.find("xkcd")
         assert len(result) == 1
 
     def test_find_scrapers_multi(self):
-        result = scraper.find_scrapers("a", multiple_allowed=True)
+        result = scrapers.find("a", multiple_allowed=True)
         assert len(result) > 1
 
     def test_find_scrapers_error(self):
         with pytest.raises(ValueError, match='empty comic name'):
-            scraper.find_scrapers('')
+            scrapers.find('')

@@ -7,7 +7,7 @@
 import os
 import codecs
 
-from dosagelib.scraper import get_scrapers
+from dosagelib.scraper import scrapers
 
 
 def main():
@@ -24,7 +24,7 @@ def main():
 
 def get_used_languages():
     languages = {}
-    for scraperobj in get_scrapers():
+    for scraperobj in scrapers.get():
         lang = scraperobj.lang
         if lang not in languages:
             languages[lang] = scraperobj.language()
