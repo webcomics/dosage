@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2020 Tobias Gruetzmacher
 """
 Creates a CBZ file in the comic directory.
 Uses an ordered symlink directory (see order-symlinks.py) if it exists,
@@ -13,7 +13,6 @@ import sys
 import os
 import zipfile
 
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))  # noqa
 from dosagelib.configuration import App
 
 
