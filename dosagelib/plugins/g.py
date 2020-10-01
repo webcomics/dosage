@@ -133,6 +133,15 @@ class GoneWithTheBlastwave(_BasicScraper):
         return '%02d' % int(compile(r'nro=(\d+)').search(page_url).group(1))
 
 
+class GpfComics(_ParserScraper):
+    url = 'https://www.gpf-comics.com/'
+    stripUrl = url + 'archive/%s'
+    firstStripUrl = stripUrl % '1998/11/02'
+    imageSearch = '//img[contains(@alt, "[Comic for")]'
+    prevSearch = '//a[img[contains(@src, "/nav_previous.gif")]]'
+    help = 'Index format: yyyy/mm/dd'
+
+
 class GrrlPower(_WordPressScraper):
     url = 'https://grrlpowercomic.com/'
     stripUrl = url + 'archives/comic/%s/'
