@@ -31,11 +31,11 @@ def get_used_languages():
     return languages
 
 
-def write_languages(f, lang):
+def write_languages(f, langs):
     """Write language information."""
     f.write("Languages = {%s" % os.linesep)
-    for lang in sorted(lang):
-        f.write("    %r: %r,%s" % (lang, lang[lang], os.linesep))
+    for lang in sorted(langs):
+        f.write("    %r: %r,%s" % (lang, langs[lang], os.linesep))
     f.write("}%s" % os.linesep)
 
 
