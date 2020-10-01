@@ -5,11 +5,12 @@
 Functions to load plugin modules.
 
 Example usage:
-    modules = loader.get_plugin_modules()
-    plugins = loader.get_plugins(modules, PluginClass)
+    for module in loader.get_plugin_modules():
+        plugins.extend(loader.get_module_plugins(module, PluginClass))
 """
 import importlib
 import pkgutil
+import sys
 
 from .plugins import (__name__ as plugin_package, __path__ as plugin_path)
 from .output import out
@@ -44,16 +45,21 @@ def _get_all_modules_pyinstaller():
     return toc
 
 
-def get_plugins(modules, classobj):
-    """Find all class objects in all modules.
-    @param modules: the modules to search
-    @ptype modules: iterator of modules
-    @return: found classes
-    @rytpe: iterator of class objects
+def get_plugin_modules_from_dir(path, prefix='user_'):
+    """Load and import a directory of python files as if they were part of the
+    "plugins" package. (Mostly "stolen" from
+    https://docs.python.org/3/library/importlib.html#importing-a-source-file-directly)
     """
-    for module in modules:
-        for plugin in get_module_plugins(module, classobj):
-            yield plugin
+    modules = []
+    for f in path.glob('*.py'):
+        name = plugin_package + "." + prefix + f.stem
+        # FIXME: Drop str() when this is Python 3.6+
+        spec = importlib.util.spec_from_file_location(name, str(f))
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[name] = module
+        spec.loader.exec_module(module)
+        modules.append(module)
+    return modules
 
 
 def get_module_plugins(module, classobj):

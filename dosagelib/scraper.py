@@ -542,7 +542,7 @@ class Cache:
     slow.
     """
     def __init__(self):
-        self.data = None
+        self.data = []
 
     def find(self, comic, multiple_allowed=False):
         """Get a list comic scraper objects.
@@ -574,12 +574,41 @@ class Cache:
 
     def load(self):
         out.debug("Loading comic modules...")
-        modules = loader.get_plugin_modules()
-        plugins = list(loader.get_plugins(modules, Scraper))
-        self.data = list([m for x in plugins for m in x.getmodules()])
+        modules = 0
+        classes = 0
+        for module in loader.get_plugin_modules():
+            modules += 1
+            classes += self.addmodule(module)
         self.validate()
-        out.debug("... %d modules loaded from %d classes." % (
-            len(self.data), len(plugins)))
+        out.debug("... %d scrapers loaded from %d classes in %d modules." % (
+            len(self.data), classes, modules))
+
+    def adddir(self, path):
+        """Add an additional directory with python modules to the scraper list.
+        These are handled as if the were part of the plugins package.
+        """
+        if not self.data:
+            self.load()
+        modules = 0
+        classes = 0
+        out.debug("Loading user scrapers from '{}'...".format(path))
+        for module in loader.get_plugin_modules_from_dir(path):
+            modules += 1
+            classes += self.addmodule(module)
+        self.validate()
+        if classes > 0:
+            out.debug("Added %d user classes from %d modules." % (
+                classes, modules))
+
+    def addmodule(self, module):
+        """Adds all valid plugin classes from the specified module to the cache.
+        @return: number of classes added
+        """
+        classes = 0
+        for plugin in loader.get_module_plugins(module, Scraper):
+            classes += 1
+            self.data.extend(plugin.getmodules())
+        return classes
 
     def get(self, include_removed=False):
         """Find all comic scraper classes in the plugins directory.
