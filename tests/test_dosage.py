@@ -83,8 +83,10 @@ class TestDosage(object):
             with pytest.raises(SystemExit):
                 cmd(option)
 
-    def test_module_help(self):
-        cmd_ok("-m", "xkcd")
+    def test_module_help(self, capfd):
+        cmd_ok("-m", "-t", "xkcd")
+        out, err = capfd.readouterr()
+        assert re.match(r'([0-9][0-9]:){2}.. xkcd>', out)
 
     def test_no_comics_specified(self):
         cmd_err()
