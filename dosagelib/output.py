@@ -50,18 +50,7 @@ class Output(object):
             if os.name == 'nt':
                 stream = colorama.AnsiToWin32(stream).stream
         self.stream = stream
-
-    @property
-    def stream(self):
-        """The underlaying stream."""
-        return self._stream
-
-    @stream.setter
-    def stream(self, attr):
-        """Change stream and base stream. base_stream is used for terminal
-        interaction when _stream is redirected to a pager."""
-        self._stream = attr
-        self._base_stream = attr
+        self.base_stream = stream
 
     def info(self, s, level=0):
         """Write an informational message."""
@@ -98,14 +87,17 @@ class Output(object):
         else:
             timestamp = u''
         with lock:
+            # FIXME: context is some kind of magic tri-state:
+            # - non-empty string
+            # - explicit None
+            # - anything falsy (empty string is used elsewhere)
             if self.context:
                 self.stream.write(u'%s%s> ' % (timestamp, self.context))
             elif self.context is None:
                 self.stream.write(u'%s%s> ' % (timestamp, get_threadname()))
             if color and self.is_tty:
                 s = u'%s%s%s' % (color, s, Style.RESET_ALL)
-            self.stream.write(str(s))
-            self.stream.write(str(os.linesep))
+            self.stream.write(str(s) + os.linesep)
             self.stream.flush()
 
     def writelines(self, lines, level=0):
@@ -130,7 +122,7 @@ class Output(object):
     @property
     def is_tty(self):
         """Is this output stream a terminal?"""
-        return getattr(self._base_stream, "isatty", lambda: False)()
+        return getattr(self.base_stream, "isatty", lambda: False)()
 
     @contextlib.contextmanager
     def temporary_context(self, context):
@@ -148,13 +140,13 @@ class Output(object):
         try:
             if self.is_tty:
                 fd = io.StringIO()
-                self._stream = fd
+                self.stream = fd
             with self.temporary_context(u''):
                 yield
             if self.is_tty:
                 pydoc.pager(fd.getvalue())
         finally:
-            self._stream = self._base_stream
+            self.stream = self.base_stream
 
 
 out = Output()
