@@ -11,12 +11,13 @@ from dosagelib.plugins.s import SoloLeveling
 from dosagelib.plugins.smackjeeves import SmackJeeves
 from dosagelib.scraper import GeoblockedException
 
+
 def cmd(*options):
     """'Fake' run dosage with given options."""
     assert dosagelib.cmd.main(("--allow-multiple",) + options) == 0
 
 
-@pytest.mark.usefixtures("_nosleep")
+@pytest.mark.usefixtures('_nosleep', '_noappdirs')
 class TestModules(object):
     """Test that specific comic modules work correctly."""
 

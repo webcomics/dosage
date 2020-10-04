@@ -26,16 +26,22 @@ def cmd_err(*options):
     assert cmd(*options) == 1
 
 
-@pytest.mark.usefixtures("_nosleep")
+@pytest.mark.usefixtures('_nosleep', '_noappdirs')
 class TestDosage(object):
     """Test the dosage commandline client."""
 
     # This shouldn't hit the network at all, so add responses without mocks to
     # make sure it doesn't do that
     @responses.activate
-    def test_list_comics(self):
-        for option in ("-l", "--list", "--singlelist"):
-            cmd_ok(option)
+    @pytest.mark.parametrize(('option'), [
+        ('-l'),
+        ('--list'),
+        ('--singlelist'),
+    ])
+    def test_list_comics(self, option, capfd):
+        cmd_ok(option)
+        out, err = capfd.readouterr()
+        assert 'ADummyTestScraper' in out
 
     @responses.activate
     def test_display_version(self):

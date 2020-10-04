@@ -1,3 +1,4 @@
+appdirs
 colorama
 imagesize
 lxml>=4.0.0

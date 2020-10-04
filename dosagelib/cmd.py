@@ -3,7 +3,11 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 import argparse
+import contextlib
 import os
+from pathlib import Path
+
+import appdirs
 
 from . import events, configuration, singleton, director
 from . import AppName, __version__
@@ -34,6 +38,10 @@ If you already have downloaded several comics and want to get the latest
 strips of all of them:
   dosage --continue @
 """
+
+
+# Making our config roaming seems sensible
+userdirs = appdirs.AppDirs(appname=AppName, appauthor=False, roaming=True)
 
 
 def setup_options():
@@ -230,6 +238,7 @@ def run(options):
     if not options.comic:
         out.warn(u'No comics specified, bailing out!')
         return 1
+    add_user_scrapers()
     if options.modulehelp:
         return display_help(options)
     if options.vote:
@@ -237,8 +246,37 @@ def run(options):
     return director.getComics(options)
 
 
+def add_user_scrapers():
+    """Add extra comic modules from the user data directory. This uses two
+    different locations: The "system-native" location and paths matching the
+    XDG basedir spec. While XDG isn't a thing on macOS and Windows, some users
+    (and developers) like to use these paths cross-plattform, therefore we
+    support both."""
+    dirs = set()
+    dirs.add(userdirs.user_data_dir)
+    with xdg_system():
+        dirs.add(userdirs.user_data_dir)
+    dirs = (Path(x) / 'plugins' for x in dirs)
+    for d in dirs:
+        allscrapers.adddir(d)
+
+
+@contextlib.contextmanager
+def xdg_system():
+    """context manager to do something with appdirs while forcing the system to
+    be "linux2", which implements the XDG base dir spec.
+    """
+    oldsys = appdirs.system
+    appdirs.system = 'linux2'
+    try:
+        yield
+    finally:
+        appdirs.system = oldsys
+
+
 def do_list(column_list=True, verbose=False, listall=False):
     """List available comics."""
+    add_user_scrapers()
     with out.pager():
         out.info(u'Available comic scrapers:')
         out.info(u'Comics tagged with [{}] require age confirmation'
