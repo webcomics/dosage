@@ -86,6 +86,7 @@ class MangaDex(_ParserScraper):
             cls('OokamiShounenWaKyouMoUsoOKasaneru', 14569),
             cls('OokamiToKoshinryou', 1168),
             cls('OtomeYoukaiZakuro', 4533),
+            cls('OversimplifiedSCP', 32834),
             cls('PleaseDontBullyMeNagatoro', 22631),
             cls('PleaseDontBullyMeNagatoroComicAnthology', 31004),
             cls('PleaseTellMeGalkochan', 12702),
