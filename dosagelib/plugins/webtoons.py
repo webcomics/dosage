@@ -89,7 +89,7 @@ class WebToons(_ParserScraper):
             cls('Blessed', 'drama/blessed', 1193),
             cls('BloodInk', 'action/blood-ink', 1490),
             cls('BloodlessWars', 'sf/bloodless-wars', 1622),
-            cls('BloopBloopRelationshipComic', 'slice-of-life/comedy', 239970),
+            cls('BloopBloopRelationshipComic', 'challenge/bloop-bloop-relationship-comic', 239970),
             cls('Bluechair', 'slice-of-life/bluechair', 199),
             cls('BOOItsSex', 'slice-of-life/boo-its-sex', 1413),
             cls('BoyfriendOfTheDead', 'comedy/boyfriend-of-the-dead', 1102),
