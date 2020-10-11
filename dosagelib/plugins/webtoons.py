@@ -44,7 +44,7 @@ class WebToons(_ParserScraper):
         return "%s-%03d.%s" % (episodeNum, imageNum, imageExt)
 
     @classmethod
-    def getmodules(cls):
+    def getmodules(cls):  # noqa: Allowed to be long
         return (
             # START AUTOUPDATE
             cls('1000', 'action/one-thousand', 1217),

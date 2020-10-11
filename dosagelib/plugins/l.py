@@ -107,14 +107,13 @@ class LifeAsRendered(_ParserScraper):
         '0500': '0501',
         '0508': '0509',
         '0558': '0559',
-        '0577': '05extra'
+        '0577': '05extra',
     }
 
     def namer(self, imageUrl, pageUrl):
         # Fix inconsistent filenames
         filename = imageUrl.rsplit('/', 1)[-1]
-        filename = filename.replace('ReN', 'N').replace('N01P', 'A02S')
-        return filename
+        return filename.replace('ReN', 'N').replace('N01P', 'A02S')
 
     def fetchUrls(self, url, data, urlSearch):
         # Fix missing image link
@@ -167,7 +166,7 @@ class LittleTales(_ParserScraper):
     starter = bounceStarter
     nav = {
         '517': '515',
-        '449': '447'
+        '449': '447',
     }
 
     def namer(self, imageUrl, pageUrl):
@@ -190,8 +189,9 @@ class LoadingArtist(_ParserScraper):
 
 
 class LoFiJinks(_WPNaviIn):
-    url = 'http://hijinksensue.com/comic/learning-to-love-again/'
-    firstStripUrl = 'http://hijinksensue.com/comic/lo-fijinks-everything-i-know-anout-james-camerons-avatar-movie/'
+    baseUrl = 'https://hijinksensue.com/comic/'
+    url = baseUrl + 'learning-to-love-again/'
+    firstStripUrl = baseUrl + 'lo-fijinks-everything-i-know-anout-james-camerons-avatar-movie/'
     endOfLife = True
 
 

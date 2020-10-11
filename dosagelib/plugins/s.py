@@ -371,7 +371,7 @@ class SoloLeveling(_ParserScraper):
         '88-0_5d9e0dedb942e/03.': '88-0_5d9e0dedb942e/03b.',
         '88-0_5d9e0dedb942e/05.': '88-0_5d9e0dedb942e/05a.',
         '88-0_5d9e0dedb942e/30.': '88-0_5d9e0dedb942e/30a.',
-        '87-0_5d94cdebd9df7/01a.': '87-0_5d94cdebd9df7/01c.'
+        '87-0_5d94cdebd9df7/01a.': '87-0_5d94cdebd9df7/01c.',
     }
 
     def imageUrlModifier(self, imageUrl, data):
@@ -533,7 +533,7 @@ class SSDD(_ParserScraper):
             self.stripUrl % '20050504',
             self.stripUrl % '20040705',
             self.stripUrl % '20030418',
-            self.stripUrl % '20030214'
+            self.stripUrl % '20030214',
         )
 
 
@@ -597,6 +597,7 @@ class StarfireAgency(_WPWebcomic):
         if pageUrl in self.chapters:
             self.currentChapter = self.currentChapter - 1
         return filename
+
 
 class StarTrip(_ComicControlScraper):
     url = 'https://www.startripcomic.com/'
@@ -684,11 +685,11 @@ class SurvivingTheWorld(_ParserScraper):
     imageSearch = (
         '//div[@class="img"]/img',      # When there's one image per strip
         '//div[@class="img"]/p/img',    # When there's multiple images per strip
-        '//td/img'                      # Special case for Lesson1296.html
+        '//td/img',                     # Special case for Lesson1296.html
     )
     prevSearch = (
         '//li[@class="previous"]/a',
-        '//td/a'                        # Special case for Lesson1296.html
+        '//td/a',                       # Special case for Lesson1296.html
     )
     multipleImagesPerStrip = True
     help = 'Index format: name'

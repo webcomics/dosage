@@ -301,12 +301,12 @@ def do_list(column_list=True, verbose=False, listall=False):
 def do_single_list(scrapers, verbose=False):
     """Get list of scraper names, one per line."""
     disabled = {}
-    for num, scraperobj in enumerate(scrapers):
+    for scraperobj in scrapers:
         if verbose:
             display_comic_help(scraperobj)
         else:
             out.info(get_tagged_scraper_name(scraperobj, reasons=disabled))
-    return num + 1, disabled
+    return len(scrapers) + 1, disabled
 
 
 def do_column_list(scrapers):
@@ -359,11 +359,10 @@ def main(args=None):
     try:
         options = setup_options().parse_args(args=args)
         options.basepath = os.path.expanduser(options.basepath)
-        res = run(options)
+        return run(options)
     except KeyboardInterrupt:
         print("Aborted.")
-        res = 1
+        return 1
     except Exception:
         internal_error()
-        res = 2
-    return res
+        return 2

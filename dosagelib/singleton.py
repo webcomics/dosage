@@ -56,7 +56,7 @@ class SingleInstance(object):
             try:
                 fcntl.lockf(self.fp, fcntl.LOCK_EX | fcntl.LOCK_NB)
                 # raises IOError on Python << 3.3, else OSError
-            except (IOError, OSError):
+            except OSError:
                 self.exit(exit_code)
         self.initialized = True
 

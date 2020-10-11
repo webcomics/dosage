@@ -120,10 +120,9 @@ class Erfworld(_ParserScraper):
     def fetchUrls(self, url, data, urlSearch):
         # Return the main logo for text-only pages
         try:
-            imageUrls = super(Erfworld, self).fetchUrls(url, data, urlSearch)
+            return super().fetchUrls(url, data, urlSearch)
         except ValueError:
-            imageUrls = super(Erfworld, self).fetchUrls(url, data, '//li[@class="erf-logo"]//img')
-        return imageUrls
+            return super().fetchUrls(url, data, '//li[@class="erf-logo"]//img')
 
     def namer(self, imageUrl, pageUrl):
         # Fix inconsistent filenames

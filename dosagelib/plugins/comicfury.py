@@ -67,7 +67,7 @@ class ComicFury(_ParserScraper):
         return "%s_%s%s" % (self.prefix, num, ext)
 
     @classmethod
-    def getmodules(cls):
+    def getmodules(cls):  # noqa: Allowed to be long
         return (
             # These were once in the list below, but fell out from the index...
             cls('BadassologyByMichaelBay', 'strudelology'),

@@ -118,7 +118,7 @@ class RSSEventHandler(EventHandler):
             title,
             imageUrl,
             description,
-            util.rfc822date(time.time())
+            util.rfc822date(time.time()),
         )
 
         if self.newfile:
@@ -164,8 +164,7 @@ class HtmlEventHandler(EventHandler):
         """Get filename from date."""
         fn = time.strftime('comics-%Y%m%d', date)
         fn = os.path.join(self.basepath, 'html', fn + ".html")
-        fn = os.path.abspath(fn)
-        return fn
+        return os.path.abspath(fn)
 
     def addNavLinks(self):
         if self.yesterdayUrl:
@@ -270,8 +269,7 @@ class JSONEventHandler(EventHandler):
     def jsonFn(self, scraper):
         """Get filename for the JSON file for a comic."""
         fn = os.path.join(scraper.get_download_dir(self.basepath), 'dosage.json')
-        fn = os.path.abspath(fn)
-        return fn
+        return os.path.abspath(fn)
 
     def getComicData(self, scraper):
         """Return dictionary with comic info."""

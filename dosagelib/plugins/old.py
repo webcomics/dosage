@@ -27,7 +27,7 @@ class Removed(Scraper):
         return {'rem-' + self.reason: self.REASONS[self.reason]}
 
     @classmethod
-    def getmodules(cls):
+    def getmodules(cls):  # noqa: Allowed to be long
         return (
             # Removed in 2.16
             cls('AbleAndBaker'),
@@ -675,7 +675,7 @@ class Renamed(Scraper):
         return {'ren-%i' % self.i: self.MSG % self.newname}
 
     @classmethod
-    def getmodules(cls):
+    def getmodules(cls):  # noqa: Allowed to be long
         return (
             # Renamed in 2.16
             cls('1997', '1977'),

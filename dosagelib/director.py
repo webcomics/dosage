@@ -163,7 +163,7 @@ def getComics(options):
             jobs.put(scraperobj)
         # start threads
         num_threads = min(options.parallel, jobs.qsize())
-        for i in range(num_threads):
+        for _i in range(num_threads):
             t = ComicGetter(options, jobs)
             threads.append(t)
             t.start()

@@ -52,5 +52,5 @@ class Derideal(_ParserScraper):
             cls('LRE', 'RLE', 'the-leyend-of-the-rose-cover'),
             cls('ProjectPrime', 'project-prime', 'custus-part-i-cover'),
             cls('PurpurinaEffect', 'purpurina-effect', 'purpurina-effect-cover'),
-            cls('TheVoid', 'the-void', 'the-void-cover')
+            cls('TheVoid', 'the-void', 'the-void-cover'),
         )

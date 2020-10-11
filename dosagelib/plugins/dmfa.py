@@ -38,5 +38,5 @@ class DMFA(_ParserScraper):
             cls('Matilda', 'Ma_001', last='Ma_060'),
             cls('PerfectDate', 'PD_01', last='PD_18'),
             cls('TakePride', 'P_01', last='P_08'),
-            cls('Valentines', 'Vol_VDay001', last='Vol_VDaylast')
+            cls('Valentines', 'Vol_VDay001', last='Vol_VDaylast'),
         )

@@ -26,7 +26,7 @@ class ComicsKingdom(_BasicScraper):
         return tourl
 
     @classmethod
-    def getmodules(cls):
+    def getmodules(cls):  # noqa: Allowed to be long
         return (
             # Some comics are not listed on the "all" page (too old?)
 

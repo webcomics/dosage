@@ -176,5 +176,5 @@ class TestDosage(object):
         images = data['pages'][page]['images']
         assert len(images) == 2
 
-        for imgurl, imgfile in images.items():
+        for imgfile in images.values():
             assert directory.join(imgfile).check(file=1)

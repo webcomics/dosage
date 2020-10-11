@@ -196,5 +196,4 @@ def format_name(text):
     """Format a comic name."""
     name = html.unescape(text)
     name = "".join(capfirst(x) for x in name.split(" "))
-    name = asciify(name.translate(TRANS))
-    return name
+    return asciify(name.translate(TRANS))

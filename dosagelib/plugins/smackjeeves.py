@@ -61,7 +61,7 @@ class SmackJeeves(_ParserScraper):
                 'titleNo': self._comicid,
                 'articleNo': url.rsplit('=', 1)[1],
                 'page': 1,
-                'order': 'new'
+                'order': 'new',
             })
             response.raise_for_status()
             comments = response.json()['result']['list']
@@ -70,10 +70,10 @@ class SmackJeeves(_ParserScraper):
                     return comment['commentText']
             return None
         else:
-            super(SmackJeeves, self).fetchText(url, data, textSearch, optional)
+            return super().fetchText(url, data, textSearch, optional)
 
     @classmethod
-    def getmodules(cls):
+    def getmodules(cls):  # noqa: Allowed to be long
         return (
             cls('20TimesKirby', 91583),
             cls('2Kingdoms', 112096, endOfLife=True),

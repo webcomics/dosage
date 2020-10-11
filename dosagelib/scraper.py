@@ -117,7 +117,7 @@ class Scraper(object):
         """Initialize internal variables."""
         self.name = name
         self.urls = set()
-        self._indexes = tuple()
+        self._indexes = ()
         self.skippedUrls = set()
         self.hitFirstStripUrl = False
 
@@ -247,7 +247,7 @@ class Scraper(object):
 
     def namer(self, image_url, page_url):
         """Return filename for given image and page URL."""
-        return None
+        return
 
     def link_modifier(self, fromurl, tourl):
         """Optional modification of parsed link (previous/back/latest) URLs.
@@ -342,19 +342,18 @@ class Scraper(object):
         Return language of the comic as a human-readable language name instead
         of a 2-character ISO639-1 code.
         """
-        lang = 'Unknown (%s)' % self.lang
         if pycountry is None:
             if self.lang in languages.Languages:
-                lang = languages.Languages[self.lang]
+                return languages.Languages[self.lang]
         else:
             try:
-                lang = pycountry.languages.get(alpha_2=self.lang).name
+                return pycountry.languages.get(alpha_2=self.lang).name
             except KeyError:
                 try:
-                    lang = pycountry.languages.get(alpha2=self.lang).name
+                    return pycountry.languages.get(alpha2=self.lang).name
                 except KeyError:
                     pass
-        return lang
+        return 'Unknown (%s)' % self.lang
 
     def geoblocked(self):
         """Helper method to indicate that the user is most probably geo-blocked."""
@@ -467,8 +466,7 @@ class _ParserScraper(Scraper):
         return tree
 
     def _parse_page(self, data):
-        tree = lxml.html.document_fromstring(data)
-        return tree
+        return lxml.html.document_fromstring(data)
 
     def fetchUrls(self, url, data, urlSearch):
         """Search all entries for given XPath in a HTML page."""

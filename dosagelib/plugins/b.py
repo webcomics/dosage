@@ -8,7 +8,7 @@ from re import compile, escape
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPNaviIn, _WPWebcomic
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPWebcomic
 
 
 class BackOffice(_WPNavi):
@@ -95,8 +95,7 @@ class Beetlebum(_BasicScraper):
     def namer(self, image_url, page_url):
         indexes = tuple(page_url.rstrip('/').split('/')[-4:])
         name = '%s-%s-%s-%s' % indexes
-        name = name + '_' + image_url.split('/')[-1]
-        return name
+        return name + '_' + image_url.split('/')[-1]
 
 
 class Bethellium(_WPWebcomic):
@@ -265,8 +264,8 @@ class Brink(_WordPressScraper):
 
 
 class BroodHollow(_WordPressScraper):
-    url = 'http://broodhollow.chainsawsuit.com/'
-    firstStripUrl = 'http://broodhollow.chainsawsuit.com/page/2012/10/06/book-1-curious-little-thing'
+    url = 'https://broodhollow.chainsawsuit.com/'
+    firstStripUrl = url + 'page/2012/10/06/book-1-curious-little-thing'
 
     def shouldSkipUrl(self, url, data):
         return data.xpath('//div[@id="comic"]//iframe')
@@ -297,7 +296,7 @@ class ButtercupFestival(_ParserScraper):
     imageSearch = '//center/img'
     prevSearch = (
         '//a[img[contains(@src, "previous")]]',  # 3-x
-        '//a[text()="previous"]'  # 2-x
+        '//a[text()="previous"]',  # 2-x
     )
 
 

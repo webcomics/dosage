@@ -42,7 +42,7 @@ class NamirDeiter(_ParserScraper):
             cls('SpareParts', 'sparepartscomics.com', first='20031022', last='20080331'),
             cls('TheNDU', 'thendu.com'),
             cls('WonderKittens', 'wonderkittens.com'),
-            cls('YouSayItFirst', 'yousayitfirst.com', first='20040220', last='20130125')
+            cls('YouSayItFirst', 'yousayitfirst.com', first='20040220', last='20130125'),
         )
 
 

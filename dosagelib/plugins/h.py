@@ -26,9 +26,7 @@ class HagarTheHorrible(_BasicScraper):
         url = 'http://www.hagardunor.net/comics.php'
         data = self.getPage(url)
         pattern = compile(tagre("a", "href", self.prevUrl))
-        for starturl in self.fetchUrls(url, data, pattern):
-            pass
-        return starturl
+        return self.fetchUrls(url, data, pattern)[-1]
 
 
 # "Hiatus", navigation missing

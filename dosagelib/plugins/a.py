@@ -122,7 +122,7 @@ class AHClub(_WPNaviIn):
     nav = {
         'ah-club-2-cover': 'ah-club-1-page-24',
         'ah-club-3-cover': 'ah-club-2-page-28',
-        'ah-club-4-cover': 'ah-club-3-page-22'
+        'ah-club-4-cover': 'ah-club-3-page-22',
     }
 
     def getPrevUrl(self, url, data):

@@ -54,7 +54,8 @@ class KeenSpot(_ParserScraper):
             # Not on frontpage...
             cls('Buzzboy', 'buzzboy'),
             cls('EveryoneLovesAdis', 'adis'),
-            cls('GeneCatlowAlternate', 'genecatlow', last='20170302', adult=True, path='altd/%s.html'),
+            cls('GeneCatlowAlternate', 'genecatlow', last='20170302',
+                adult=True, path='altd/%s.html'),
 
             # do not edit anything below since these entries are generated from
             # scripts/update_plugins.sh

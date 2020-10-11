@@ -26,7 +26,7 @@ def get_test_scrapers():
             # complex _ParserScraper
             'GoComics/CalvinAndHobbes',
             # _WordPressScraper
-            'GrrlPower'
+            'GrrlPower',
         ]
         scraper_pattern = re.compile('^(' + '|'.join(testscrapernames) + ')$')
 
@@ -39,7 +39,7 @@ def get_test_scrapers():
 def pytest_generate_tests(metafunc):
     if 'scraperobj' in metafunc.fixturenames:
         scrapers = get_test_scrapers()
-        scraperids = list(x.name for x in scrapers)
+        scraperids = [x.name for x in scrapers]
         metafunc.parametrize('scraperobj', scrapers, ids=scraperids)
 
 

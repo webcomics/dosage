@@ -39,12 +39,13 @@ class TheCyantianChronicles(_WordPressScraper):
             cls('Darius', 'dbook-01', '03102010', last='darius-end'),
             cls('DracoVulpes', 'draco-vulpes', 'draco-vulpes'),
             cls('GenoworksSaga', 'genoworks-saga', '07012004'),
-            cls('GralenCraggHall', 'gchall', '07152002', last='chapter-6-05', nav={'chapter-5': '02152005'}),
+            cls('GralenCraggHall', 'gchall', '07152002', last='chapter-6-05',
+                nav={'chapter-5': '02152005'}),
             cls('Kiet', 'kiet', 'kiet-c01'),
             cls('NoAngel', 'no-angel', '08112001', last='12142006'),
             cls('Pawprints', 'pawprints', 'airboard-page-1', last='pawprints-sheana-10'),
             cls('RandomRamblings', 'random-ramblings', 'darrik'),
-            cls('SinkOrSwim', 'sos', 'sink-or-swim', last='ricochete-and-seraphim')
+            cls('SinkOrSwim', 'sos', 'sink-or-swim', last='ricochete-and-seraphim'),
         )
 
 
@@ -85,5 +86,5 @@ class ShivaeComics(_WordPressScraper):
             cls('Extras', 'extras', '01012012', nav={'12302012': '08152013'}),
             cls('Pure', 'pure', '04082002', last='chapter-6-page-1'),
             cls('SerinFairyHunter', 'serin', 'character-serin'),
-            cls('SivineBlades', 'sivine', '06302002', last='10242008')
+            cls('SivineBlades', 'sivine', '06302002', last='10242008'),
         )

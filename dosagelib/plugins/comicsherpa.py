@@ -20,7 +20,7 @@ class ComicSherpa(_ParserScraper):
         return self.url + '&uc_full_date=%s' % index
 
     @classmethod
-    def getmodules(cls):
+    def getmodules(cls):  # noqa: Allowed to be long
         return (
             # do not edit anything below since these entries are generated from
             # scripts/comicsherpa.py

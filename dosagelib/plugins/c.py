@@ -249,8 +249,8 @@ class CigarroAndCerveja(_ParserScraper):
     url = 'http://www.cigarro.ca/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'reacquaintance'
-    imageSearch = '//div[@id="comic"]//img',
-    prevSearch = '//a[contains(text()," Prev")]',
+    imageSearch = '//div[@id="comic"]//img'
+    prevSearch = '//a[contains(text()," Prev")]'
 
 
 class ClanOfTheCats(_WordPressScraper):
@@ -488,4 +488,4 @@ class CynWolf(_ParserScraper):
     endOfLife = True
 
     def shouldSkipUrl(self, url, data):
-        return '2016/the-end' in url # video
+        return '2016/the-end' in url  # video

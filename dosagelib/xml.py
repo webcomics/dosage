@@ -5,7 +5,7 @@ from lxml import etree
 
 NS = {
     'd': 'https://dosage.rocks/xpath',
-    're': 'http://exslt.org/regular-expressions'
+    're': 'http://exslt.org/regular-expressions',
 }
 
 
