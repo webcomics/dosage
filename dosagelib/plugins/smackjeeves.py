@@ -589,6 +589,7 @@ class SmackJeeves(_ParserScraper):
             cls('ThornsComic', 131578),
             cls('ThornTopia', 54482),
             cls('TLAAOK', 92316, adult=True),
+            cls('ToddAllisonAndThePetuniaViolet', 50018),
             cls('TosiHuonoYaoiSarjis', 141725, adult=True),
             cls('TotallyCrossover', 73445),
             cls('TPTruePower', 13199),
