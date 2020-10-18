@@ -47,13 +47,15 @@ class Geeks(_ParserScraper):
     help = 'Index format: nnn'
 
 
-class GeeksNextDoor(_BasicScraper):
+class GeeksNextDoor(_ParserScraper):
     url = 'http://www.geeksnextcomic.com/'
     stripUrl = url + '%s.html'
-    firstStripUrl = stripUrl % '2010-10-04'
-    imageSearch = compile(tagre("img", "src", r'(images/GND\d+[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(\d+-\d+-\d+\.html)') +
-                         tagre("img", "src", r'images/nav_prev\.png'))
+    firstStripUrl = stripUrl % '2007-03-27'  # '2010-10-04'
+    imageSearch = '//p/img'
+    prevSearch = (
+        '//a[img[contains(@src, "/nav_prev")]]',
+        '//a[contains(text(), "< prev")]',  # start page is different
+    )
     help = 'Index format: yyyy-mm-dd'
 
 
