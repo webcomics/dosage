@@ -3,11 +3,10 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-from re import compile, escape, IGNORECASE
+from re import compile, IGNORECASE
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPWebcomic
 
 
 class Kaspall(_ParserScraper):
@@ -68,15 +67,7 @@ class Krakow(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
-class KuroShouri(_BasicScraper):
+class KuroShouri(_WPWebcomic):
     url = 'http://kuroshouri.com/'
-    rurl = escape(url)
-    stripUrl = url + '?webcomic_post=%s'
-    imageSearch = compile(
-        tagre("img", "src",
-              r"(%swp-content/webcomic/kuroshouri/[^'\"]+)" % rurl,
-              quote="['\"]"))
-    prevSearch = compile(
-        tagre("a", "href", r'(%s\?webcomic_post\=[^"]+)' % rurl,
-              after="previous"))
-    help = 'Index format: chapter-n-page-m'
+    stripUrl = url + 'kuroshouri/%s/'
+    firstStripUrl = stripUrl % 'kuro-shouri'
