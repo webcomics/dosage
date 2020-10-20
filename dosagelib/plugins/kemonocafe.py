@@ -50,6 +50,7 @@ class KemonoCafe(_ParserScraper):
             cls('CaribbeanBlue', 'cb', 'page000', last='page325'),
             cls('IMew', 'imew', 'imew00', last='imew50'),
             cls('Knighthood', 'knighthood', 'kh0001'),
+            cls('KnuckleUp', 'knuckle-up', 'page001', adult=True),
             cls('LasLindas', 'laslindas', 'll0001', adult=True),
             cls('Paprika', 'paprika', 'page000'),
             cls('PracticeMakesPerfect', 'pmp', 'title-001'),
