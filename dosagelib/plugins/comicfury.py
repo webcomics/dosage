@@ -550,6 +550,7 @@ class ComicFury(_ParserScraper):
             cls('ItsComplicated', 'itscomplicated'),
             cls('ItsJustAnotherDay', 'itsjustanotherday'),
             cls('ItsNEWDAY', 'itsnewday'),
+            cls('Jack', 'jackrabbit', adult=True),
             cls('JackAndTheBeanstalk', 'jackandthebeanstalk'),
             cls('JackFrostDoujin', 'jfdoujin'),
             cls('JackitAndFriends', 'jackitandfriends'),
