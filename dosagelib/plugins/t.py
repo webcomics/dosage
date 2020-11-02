@@ -23,6 +23,12 @@ class TailsAndTactics(_ParserScraper):
     prevSearch = '//a[text()=" Back"]'
 
 
+class TekMage(_WPNavi):
+    url = 'https://tekmagecomic.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'chapter-1-page-1'
+
+
 class Tamberlane(_WPWebcomic):
     baseUrl = 'https://www.tamberlanecomic.com/'
     url = baseUrl + 'latest/'
