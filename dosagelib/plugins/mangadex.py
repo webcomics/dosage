@@ -79,6 +79,7 @@ class MangaDex(_ParserScraper):
             cls('HoriMiya', 6770),
             cls('HowToOpenATriangularRiceball', 19305),
             cls('InterspeciesReviewers', 20796),
+            cls('JahySamaWaKujikenai', 22369),
             cls('JingaiNoYomeToIchaIchaSuru', 22651),
             cls('KawaiiJoushiWoKomarasetai', 17910),
             cls('KanojoOkarishimasu', 22151),
