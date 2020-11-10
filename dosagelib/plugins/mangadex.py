@@ -84,6 +84,7 @@ class MangaDex(_ParserScraper):
             cls('Lv2KaraCheatDattaMotoYuushaKouhoNoMattariIsekaiLife', 33797),
             cls('MaouNoOreGaDoreiElfWoYomeNiShitandaGaDouMederebaIi', 25495),
             cls('ModernMoGal', 30308),
+            cls('MyTinySenpaiFromWork', 43610),
             cls('OMaidensinYourSavageSeason', 22030),
             cls('OokamiShounenWaKyouMoUsoOKasaneru', 14569),
             cls('OokamiToKoshinryou', 1168),
