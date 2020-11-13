@@ -122,6 +122,7 @@ class WebToons(_ParserScraper):
             cls('Cyberforce', 'super-hero/cyberforce', 531),
             cls('CykoKO', 'super-hero/cyko-ko', 560),
             cls('Darbi', 'action/darbi', 1098),
+            cls('DatingWithATail', 'romance/dating-with-a-tail', 1263),
             cls('Davinchibi', 'fantasy/davinchibi', 1190),
             cls('DaYomanvilleGang', 'drama/da-yomanville-gang', 1578),
             cls('DaysOfHana', 'drama/days-of-hana', 1246),
