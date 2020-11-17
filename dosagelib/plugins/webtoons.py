@@ -291,6 +291,7 @@ class WebToons(_ParserScraper):
             cls('OVERPOWERED', 'challenge/overpowered', 85292),
             cls('PacificRimAmara', 'sf/pacific-rim-amara', 1327),
             cls('PenguinLovesMev', 'slice-of-life/penguin-loves-mev', 86),
+            cls('Petrichor', 'challenge/petrichor', 100835),
             cls('PhantomParadise', 'fantasy/phantom-paradise', 1250),
             cls('Pigminted', 'slice-of-life/pigminted', 482),
             cls('PinchPoint', 'challenge/pinch-point-reborn', 334640),
