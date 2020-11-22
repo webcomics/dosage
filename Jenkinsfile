@@ -46,10 +46,12 @@ pys.each { py ->
                     }
                 }
 
-                archiveArtifacts artifacts: '.tox/dist/*.zip', fingerprint: true
                 if (py.main) {
                     archiveArtifacts artifacts: 'dist/*', fingerprint: true
                     stash includes: 'dist/*.tar.gz', name: 'bin'
+                    dir('.tox') {
+                        stash includes: 'allure-*/**', name: 'allure'
+                    }
                     def buildVer = findFiles(glob: 'dist/*.tar.gz')[0].name.replaceFirst(/\.tar\.gz$/, '')
                     currentBuild.description = buildVer
 
@@ -72,7 +74,12 @@ pys.each { py ->
 timestamps {
     ansiColor('xterm') {
         parallel(tasks)
-        windowsBuild()
+        stage('Windows binary') {
+            windowsBuild()
+        }
+        stage('Allure report') {
+            processAllure()
+        }
     }
 }
 
@@ -86,11 +93,9 @@ def buildDockerfile(image) {
 }
 
 def windowsBuild() {
-    stage('Windows binary') {
-        warnError('windows build failed') {
-            node {
-                windowsBuildCommands()
-            }
+    warnError('windows build failed') {
+        node {
+            windowsBuildCommands()
         }
     }
 }
@@ -112,6 +117,17 @@ def windowsBuildCommands() {
                 wineserver -w" 2>&1 | tee log.txt
         '''
         archiveArtifacts '*/scripts/dist/*'
+    }
+}
+
+def processAllure() {
+    warnError('allure report failed') {
+        node {
+            deleteDir()
+            unstash 'allure'
+            sh 'docker run --rm -v $PWD:/work tobix/allure-cli generate allure-*'
+            publishHTML reportDir: 'allure-report', reportFiles: 'index.html', reportName: 'Allure Report'
+        }
     }
 }
 
