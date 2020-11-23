@@ -125,7 +125,7 @@ def processAllure() {
         node {
             deleteDir()
             unstash 'allure'
-            sh 'docker run --rm -v $PWD:/work tobix/allure-cli generate allure-*'
+            sh 'docker run --rm -v $PWD:/work -u $(id -u) tobix/allure-cli generate allure-*'
             publishHTML reportDir: 'allure-report', reportFiles: 'index.html', reportName: 'Allure Report'
         }
     }

@@ -50,7 +50,7 @@ ansiColor('xterm') {
         }
 
         stage('Allure Report') {
-            sh 'docker run --rm -v $PWD:/work tobix/allure-cli generate allure-data'
+            sh 'docker run --rm -v $PWD:/work -u $(id -u) tobix/allure-cli generate allure-data'
             publishHTML reportDir: 'allure-report', reportFiles: 'index.html', reportName: 'Allure Report'
         }
     }
