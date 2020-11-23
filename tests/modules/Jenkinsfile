@@ -23,7 +23,12 @@ def runTests() {
     }
     stage ('Run tests') {
         withCredentials([string(credentialsId: 'proxymap', variable: 'PROXYMAP')]) {
-            sh "TESTALL=1 py.test -v --cov=dosagelib --cov-report xml --tb=short -n10 --junitxml=junit.xml tests/modules/check_comics.py || true"
+            sh '''
+                TESTALL=1 py.test -v --cov=dosagelib --cov-report xml \
+                     --alluredir=allure-data \
+                     --tb=short -n10 --junitxml=junit.xml \
+                     tests/modules/check_comics.py || true
+            '''
         }
     }
     stage('Report') {
@@ -42,6 +47,11 @@ ansiColor('xterm') {
 
         img.inside {
             runTests()
+        }
+
+        stage('Allure Report') {
+            sh 'docker run --rm -v $PWD:/work tobix/allure-cli generate allure-data'
+            publishHTML reportDir: 'allure-report', reportFiles: 'index.html', reportName: 'Allure Report'
         }
     }
 }
