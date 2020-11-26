@@ -15,9 +15,6 @@ def prepareDocker () {
 }
 
 def runTests() {
-    stage('Checkout') {
-        checkout scm
-    }
     stage ('Install lib') {
         sh "pip install --user -e .[css,dev]"
     }
@@ -44,6 +41,10 @@ def runTests() {
 ansiColor('xterm') {
     node {
         def img = prepareDocker()
+
+        stage('Checkout') {
+            checkout scm
+        }
 
         img.inside {
             runTests()
