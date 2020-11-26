@@ -3,13 +3,15 @@
 def prepareDocker () {
     def img
     stage('Prepare environment') {
-        def uid = sh returnStdout: true, script: 'id -u'
-        writeFile file: 'Dockerfile', text: """
-        FROM python:3.8-buster
-        RUN pip install pytest-cov PySocks && \\
-        useradd -m -u ${uid.trim()} jenkins
-        """
-        img = docker.build('local:test-all-comics')
+        dir('.imagebuild') {
+            def uid = sh returnStdout: true, script: 'id -u'
+            writeFile file: 'Dockerfile', text: """
+            FROM python:3.8-buster
+            RUN pip install pytest-cov PySocks && \\
+            useradd -m -u ${uid.trim()} jenkins
+            """
+            img = docker.build('local:test-all-comics')
+        }
     }
     return img
 }
