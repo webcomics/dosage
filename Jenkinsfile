@@ -125,7 +125,13 @@ def processAllure() {
         node {
             deleteDir()
             unstash 'allure'
-            sh 'docker run --rm -v $PWD:/work -u $(id -u) tobix/allure-cli generate allure-*'
+            sh 'mv allure-* allure-data'
+            copyArtifacts filter: 'allure-history.zip', optional: true, projectName: JOB_NAME
+            if (fileExists('allure-history.zip')) {
+                unzip dir: 'allure-data', quiet: true, zipFile: 'allure-history.zip'
+                sh 'rm -f allure-history.zip'
+            }
+            sh 'docker run --rm -v $PWD:/work -u $(id -u) tobix/allure-cli generate allure-data'
             zip archive: true, dir: 'allure-report', glob: 'history/**', zipFile: 'allure-history.zip'
             publishHTML reportDir: 'allure-report', reportFiles: 'index.html', reportName: 'Allure Report'
         }
