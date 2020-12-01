@@ -6,7 +6,7 @@
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter
+from ..helpers import indirectStarter, bounceStarter
 from ..util import tagre
 from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPWebcomic
 
@@ -92,14 +92,19 @@ class NeverSatisfied(_ComicControlScraper):
 
 
 class NichtLustig(_BasicScraper):
-    url = 'http://www.nichtlustig.de/main.html'
-    stripUrl = 'http://static.nichtlustig.de/toondb/%s.html'
+    url = 'https://joscha.com/'
+    starter = bounceStarter
+    stripUrl = url + 'nichtlustig/%s/'
+    firstStripUrl = stripUrl % '000501'
     lang = 'de'
-    imageSearch = compile(r'background-image:url\((http://static\.nichtlustig\.de/comics/full/\d+\.jpg)')
-    prevSearch = compile(tagre("a", "href", r'(http://static\.nichtlustig\.de/toondb/\d+\.html)'))
-    latestSearch = compile(tagre("a", "href", r'([^"]*toondb/\d+\.html)'))
+    imageSearch = compile(tagre("img", "src", r'(https://joscha.com/data/media/cartoons/[0-9a-f-_]+.png)'))
+    prevSearch = compile(tagre("a", "href", r'(https://joscha.com/nichtlustig/\d+/)', after="next"))
+    nextSearch = compile(tagre("a", "href", r'(https://joscha.com/nichtlustig/\d+/)', after="prev"))
     help = 'Index format: yymmdd'
-    starter = indirectStarter
+
+    def namer(self, image_url, page_url):
+        unused, filename, unused2 = page_url.rsplit('/', 2)
+        return '%s' % (filename)
 
 
 class Nicky510(_WPNavi):
