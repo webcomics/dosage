@@ -26,7 +26,7 @@ class VGCats(_ParserScraper):
     url = 'https://www.vgcats.com/comics/'
     stripUrl = url + '?strip_id=%s'
     firstStripUrl = stripUrl % '0'
-    imageSearch = '//td/img[contains(@src, "/images/")]'
+    imageSearch = '//td/img[contains(@src, "images/")]'
     prevSearch = '//a[img[contains(@src, "back.")]]'
     help = 'Index format: n (unpadded)'
 
@@ -35,12 +35,14 @@ class VGCatsAdventure(VGCats):
     name = 'VGCats/Adventure'
     url = 'http://www.vgcats.com/ffxi/'
     stripUrl = url + '?strip_id=%s'
+    imageSearch = '//p/img[contains(@src, "images/")]'
 
 
 class VGCatsSuper(VGCats):
     name = 'VGCats/Super'
     url = 'http://www.vgcats.com/super/'
     stripUrl = url + '?strip_id=%s'
+    imageSearch = '//p/img[contains(@src, "images/")]'
 
 
 class VickiFox(_ParserScraper):
