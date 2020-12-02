@@ -151,8 +151,7 @@ class Ruthe(_BasicScraper):
     firstStripUrl = stripUrl % '1'
     lang = 'de'
     imageSearch = compile(tagre("img", "src", r'(/?cartoons/strip_\d+[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/cartoon/\d+/datum/asc/)') +
-                         'vorheriger')
+    prevSearch = compile(tagre("a", "href", r'(/cartoon/\d+/datum/asc/)'))
     help = 'Index format: number'
 
 
