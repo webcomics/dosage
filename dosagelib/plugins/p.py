@@ -248,11 +248,12 @@ class PoppyOPossum(_WordPressScraper):
 
 
 class PowerNap(_ParserScraper):
-    url = 'http://www.powernapcomic.com/'
+    url = 'https://www.powernapcomic.com/powernap/'
     stripUrl = url + 'd/%s.html'
     firstStripUrl = stripUrl % '20110617'
-    imageSearch = '//img[contains(@src, "/pnap")]'
+    imageSearch = '//center/img'
     prevSearch = '//a[./img[contains(@src, "previous")]]'
+    endOfLife = True
 
     def imageUrlModifier(self, url, data):
         return url.replace('\n', '').strip()
