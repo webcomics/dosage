@@ -74,6 +74,7 @@ class MangaDex(_ParserScraper):
             cls('BokuNoKokoroNoYabaiYatsu', 23811),
             cls('DeliciousinDungeon', 13871),
             cls('DragonDrive', 5165),
+            cls('FuguushokuKajishiDakedoSaikyouDesu', 56319),
             cls('HangingOutWithAGamerGirl', 42490),
             cls('HoriMiya', 6770),
             cls('HowToOpenATriangularRiceball', 19305),
