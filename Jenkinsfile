@@ -103,7 +103,8 @@ def windowsBuild() {
 def windowsBuildCommands() {
     deleteDir()
     unstash 'bin'
-    def img = docker.image('tobix/pywine')
+    // Keep 3.8 for now, so we are still compatible with Windows 7
+    def img = docker.image('tobix/pywine:3.8')
     img.pull()
     img.inside {
         sh '''
