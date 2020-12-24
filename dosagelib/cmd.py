@@ -5,6 +5,7 @@
 import argparse
 import contextlib
 import os
+import platform
 from pathlib import Path
 
 import appdirs
@@ -118,6 +119,8 @@ def setup_options():
 def display_version(verbose):
     """Display application name, version, copyright and license."""
     print(configuration.App)
+    print("Using Python {} ({}) on {}".format(platform.python_version(),
+        platform.python_implementation(), platform.platform()))
     print(configuration.Copyright)
     print(configuration.Freeware)
     print("For support see", configuration.SupportUrl)
