@@ -239,6 +239,7 @@ class WebToons(_ParserScraper):
             cls('Lorna', 'slice-of-life/lorna', 1284),
             cls('LostInTranslation', 'drama/lost-in-translation', 1882),
             cls('LoveAdviceFromTheGreatDukeOfHell', 'comedy/love-advice', 1498),
+            cls('LoveMeKnot', 'romance/love-me-knot', 2224),
             cls('Lozolz', 'tiptoon/lozolz', 1268),
             cls('LUFF', 'romance/luff', 1489),
             cls('Luggage', 'fantasy/luggage', 1642),
