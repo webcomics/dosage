@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2020 Tobias Gruetzmacher
+# Copyright (C) 2019-2021 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 from ..scraper import _ParserScraper
 
@@ -19,8 +19,9 @@ class WebToons(_ParserScraper):
         self.firstStripUrl = self.stripUrl % '1'
 
     def starter(self):
-        # Set age-check cookie
-        self.session.cookies.set('ageGatePass', 'true', domain='webtoons.com')
+        # Avoid age/GDPR gate
+        for cookie in ('needGDPR', 'needCCPA', 'needCOPPA'):
+            self.session.cookies.set(cookie, 'false', domain='webtoons.com')
         # Find current episode number
         listPage = self.getPage(self.listUrl)
         currentEpisode = listPage.xpath('//div[@class="detail_lst"]/ul/li')[0].attrib['data-episode-no']
