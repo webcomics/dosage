@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2020 Tobias Gruetzmacher
+# Copyright (C) 2019-2021 Tobias Gruetzmacher
 import re
 
 import pytest
@@ -8,7 +8,6 @@ import responses
 import dosagelib.cmd
 import httpmocks
 from dosagelib.plugins.s import SoloLeveling
-from dosagelib.plugins.smackjeeves import SmackJeeves
 from dosagelib.scraper import GeoblockedException
 
 
@@ -42,14 +41,6 @@ class TestModules(object):
 
         cmd('--basepath', str(tmpdir), 'CalvinAndHobbesEnEspanol')
         cmd('--basepath', str(tmpdir), 'CalvinAndHobbesEnEspanol:2012/07/22')
-
-    @responses.activate
-    def test_smackjeeves_geoblock(self, tmpdir):
-        responses.add(responses.POST, re.compile('https://www.smackjeeves.com/api/.*'),
-            'is not currently available in your area', content_type='text/html')
-
-        with pytest.raises(GeoblockedException):
-            next(SmackJeeves.getmodules()[0].getStrips(1))
 
     @responses.activate
     def test_sololeveling_geoblock(self, tmpdir):
