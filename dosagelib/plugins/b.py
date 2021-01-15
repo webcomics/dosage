@@ -167,6 +167,24 @@ class BillyTheDunce(_ParserScraper):
     endOfLife = True
 
 
+class BirdBoy(_ParserScraper):
+    url = 'http://bird-boy.com/'
+    rurl = escape(url)
+    stripUrl = url + 'comic/volume-{0}-{1}/'
+    firstStripUrl = stripUrl.format('i', 'the-sword-of-mali-mani')
+    imageSearch = '//div[@id="comic"]/a/img'
+    prevSearch = '//link[@rel="prev"]'
+    help = '(volume,page) # Examples: (i,the-sword-of-mali-mani), (iii,7)'
+
+    def getIndexStripUrl(self, index):
+        volume = index[0]
+        strip = index[1]
+        try:
+            pageNr = int(strip)
+            strip = 'page-{0}'.format(pageNr)
+        return self.stripUrl.format(volume, strip)
+
+
 class BittersweetCandyBowl(_ParserScraper):
     url = 'https://www.bittersweetcandybowl.com/'
     stripUrl = url + '%s.html'
