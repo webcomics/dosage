@@ -172,8 +172,8 @@ class BirdBoy(_ParserScraper):
     rurl = escape(url)
     stripUrl = url + 'comic/volume-{0}-{1}/'
     firstStripUrl = stripUrl.format('i', 'the-sword-of-mali-mani')
-    imageSearch = '//div[@id="comic"]/a/img'
-    prevSearch = '//link[@rel="prev"]'
+    imageSearch = '//div[@id="comic"]//img'
+    prevSearch = '//a[contains(concat(" ",normalize-space(@class)," ")," comic-nav-previous ")]'
     help = '(volume,page) # Examples: (i,the-sword-of-mali-mani), (iii,7)'
 
     def getIndexStripUrl(self, index):
