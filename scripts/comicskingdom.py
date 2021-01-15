@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019 Tobias Gruetzmacher
+# Copyright (C) 2019-2021 Tobias Gruetzmacher
 # Copyright (C) 2019 Thomas W. Littauer
 """
 Script to get a list of comicskingdom.com comics and save the info in a JSON
@@ -12,7 +12,7 @@ from scriptutil import ComicListUpdater
 
 class ComicsKingdomUpdater(ComicListUpdater):
     dup_templates = ("Creators/%s", "DrunkDuck/%s", "GoComics/%s",
-                    "KeenSpot/%s", "ComicGenesis/%s", "SmackJeeves/%s")
+                    "KeenSpot/%s", "ComicGenesis/%s")
 
     # names of comics to exclude
     excluded_comics = (
