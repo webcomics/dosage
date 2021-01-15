@@ -170,18 +170,24 @@ class BillyTheDunce(_ParserScraper):
 class BirdBoy(_ParserScraper):
     url = 'http://bird-boy.com/'
     rurl = escape(url)
-    stripUrl = url + 'comic/volume-{0}-{1}/'
+    stripUrl = url + 'comic/{0}-{1}/'
     firstStripUrl = stripUrl.format('i', 'the-sword-of-mali-mani')
     imageSearch = '//div[@id="comic"]//img'
     prevSearch = '//a[contains(concat(" ",normalize-space(@class)," ")," comic-nav-previous ")]'
-    help = '(volume,page) # Examples: (i,the-sword-of-mali-mani), (iii,7)'
+    help = 'volume-page # Examples: i-the-sword-of-mali-mani, iii-7, synopsis-2'
 
     def getIndexStripUrl(self, index):
-        volume = index[0]
-        strip = index[1]
+        (volume, strip) = index.split('-', maxsplit=1)
         try:
             pageNr = int(strip)
-            strip = 'page-{0}'.format(pageNr)
+        except ValueError:
+            pageNr = None # Use the string to fetch a cover page
+        if volume == 'synopsis':
+            strip = '{0}{1}'.format(pageNr, '-02' if strip in [1,3] else '')
+        else:
+            volume = 'volume-' + volume
+            if pageNr is not None:
+                strip = 'page-{0}'.format(pageNr)
         return self.stripUrl.format(volume, strip)
 
 
