@@ -167,13 +167,10 @@ class BillyTheDunce(_ParserScraper):
     endOfLife = True
 
 
-class BirdBoy(_ParserScraper):
-    url = 'http://bird-boy.com/'
-    rurl = escape(url)
+class BirdBoy(_WordPressScraper):
+    url = 'https://bird-boy.com/'
     stripUrl = url + 'comic/{0}-{1}/'
-    firstStripUrl = stripUrl.format('i', 'the-sword-of-mali-mani')
-    imageSearch = '//div[@id="comic"]//img'
-    prevSearch = '//a[contains(concat(" ",normalize-space(@class)," ")," comic-nav-previous ")]'
+    firstStripUrl = stripUrl.format('volume-i', 'the-sword-of-mali-mani')
     help = 'volume-page # Examples: i-the-sword-of-mali-mani, iii-7, synopsis-2'
 
     def getIndexStripUrl(self, index):
