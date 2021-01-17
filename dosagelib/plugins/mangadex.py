@@ -97,6 +97,7 @@ class MangaDex(_ParserScraper):
             cls('PleaseDontBullyMeNagatoroComicAnthology', 31004),
             cls('PleaseTellMeGalkochan', 12702),
             cls('SaekiSanWaNemutteru', 28834),
+            cls('SenpaiGaUzaiKouhaiNoHanashi', 23825),
             cls('SewayakiKitsuneNoSenkoSan', 22723),
             cls('SousouNoFrieren', 48045),
             cls('SwordArtOnline', 1360),
