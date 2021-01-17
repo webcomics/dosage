@@ -651,6 +651,7 @@ class Removed(Scraper):
             cls('GoComics/UncleArtsFunland'),
             cls('GoComics/USAcres'),
             cls('GoComics/WorldOfWonder'),
+            cls('Laiyu', 'brk'),
             cls('SmackJeeves/20TimesKirby'),
             cls('SmackJeeves/2Kingdoms'),
             cls('SmackJeeves/355Days'),

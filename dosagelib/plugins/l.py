@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# Copyright (C) 2015-2021 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 from re import compile
 
@@ -26,12 +26,6 @@ class Lackadaisy(_ParserScraper):
         num = pageUrl.rsplit('=', 1)[-1]
         ext = imageUrl.rsplit('.', 1)[-1]
         return 'lackadaisy_%s.%s' % (num, ext)
-
-
-class Laiyu(_WordPressScraper):
-    url = 'http://www.flowerlarkstudios.com/comicpage/preliminary-concepts/welcome/'
-    firstStripUrl = url
-    starter = indirectStarter
 
 
 class LastResort(_WordPressScraper):
