@@ -167,6 +167,38 @@ class BillyTheDunce(_ParserScraper):
     endOfLife = True
 
 
+class BirdBoy(_WordPressScraper):
+    url = 'https://bird-boy.com/'
+    stripUrl = url + 'comic/{0}-{1}/'
+    firstStripUrl = stripUrl.format('volume-i', 'the-sword-of-mali-mani')
+    help = 'volume-page # Examples: i-the-sword-of-mali-mani, iii-7, synopsis-2'
+
+    def getIndexStripUrl(self, index):
+        (volume, strip) = index.split('-', maxsplit=1)
+        try:
+            pageNr = int(strip)
+        except ValueError:
+            pageNr = None # Use the string to fetch a cover page
+        if volume == 'synopsis':
+            strip = '{0}{1}'.format(pageNr, '-02' if strip in [1,3] else '')
+        else:
+            volume = 'volume-' + volume
+            if pageNr is not None:
+                strip = 'page-{0}'.format(pageNr)
+        return self.stripUrl.format(volume, strip)
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix inconsistent filenames
+        filename = imageUrl.rsplit('/', 1)[-1]
+        if filename == 'image.jpg':
+            [year, month] = imageUrl.rsplit('/', 3)[-3:-1]
+            pageNr = int(pageUrl.rsplit('/', 1)[-2].rsplit('-', 1)[-1])
+            filename = '{0}-{1}-Vol2-pg{2}.jpg'.format(year, month, pageNr)
+        elif filename == '27637.jpg':
+            filename = 'BB_Vol2_Cover.jpg'
+        return filename
+
+
 class BittersweetCandyBowl(_ParserScraper):
     url = 'https://www.bittersweetcandybowl.com/'
     stripUrl = url + '%s.html'
