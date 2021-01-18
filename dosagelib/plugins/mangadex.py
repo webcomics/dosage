@@ -102,6 +102,7 @@ class MangaDex(_ParserScraper):
             cls('SousouNoFrieren', 48045),
             cls('SwordArtOnline', 1360),
             cls('SwordArtOnlineProgressive', 9604),
+            cls('TamenDeGushi', 13939),
             cls('TheWolfAndRedRidingHood', 31079),
             cls('TomoChanWaOnnanoko', 15722),
             cls('TonikakuKawaii', 23439),
