@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# Copyright (C) 2015-2021 Tobias Gruetzmacher
 import json
 import multiprocessing
 import os
@@ -20,6 +20,17 @@ MaxStrips = 5
 ARCHIVE_ORG_MATCH = re.compile(r'(?<=web\\.archive\\.org/web)/\d+/')
 # Matches some (maybe-escaped - because Python 2) printf-style format specifiers
 PRINTF_MATCH = re.compile(r'\\?%[0-9]*[sd]')
+# Classes where the modules are very similar, so that testing the history of
+# each modules doesn't make much sense
+standarized_modules = {
+    'ComicSherpa',
+    'ComicsKingdom',
+    'GoComics',
+    'MangaDex',
+    'WebToons',
+}
+# Already seen classes
+seen_modules = set()
 
 
 def get_lock(host):
@@ -35,15 +46,23 @@ def test_comicmodule(tmpdir, scraperobj, worker_id):
     # Limit number of connections to one host.
     host = urlsplit(scraperobj.url).hostname
     with get_lock(host):
-        _test_comic(str(tmpdir), scraperobj)
+        maxstrips = MaxStrips
+        parts = scraperobj.name.split('/', maxsplit=1)
+        if len(parts) > 1 and parts[0] in standarized_modules:
+            if parts[0] in seen_modules:
+                maxstrips = 1
+            else:
+                seen_modules.add(parts[0])
+
+        _test_comic(str(tmpdir), scraperobj, maxstrips)
 
 
-def _test_comic(outdir, scraperobj):
+def _test_comic(outdir, scraperobj, maxstrips):
     num_strips = 0
     strip = None
     files = []
     PROXYMAP.apply(scraperobj.name)
-    for strip in scraperobj.getStrips(MaxStrips):
+    for strip in scraperobj.getStrips(maxstrips):
         files.append(_check_strip(outdir, strip,
                                   scraperobj.multipleImagesPerStrip))
 
@@ -54,7 +73,7 @@ def _test_comic(outdir, scraperobj):
     if scraperobj.prevSearch and not scraperobj.hitFirstStripUrl:
         # subtract the number of skipped URLs with no image from the expected
         # image number
-        num_strips_expected = MaxStrips - len(scraperobj.skippedUrls)
+        num_strips_expected = maxstrips - len(scraperobj.skippedUrls)
         msg = 'Traversed %d strips instead of %d.' % (num_strips,
                                                       num_strips_expected)
         if strip:
