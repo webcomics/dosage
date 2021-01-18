@@ -42,7 +42,7 @@ class BalderDash(_ComicControlScraper):
 
 
 class BallerinaMafia(_ParserScraper):
-    url = 'http://www.ballerinamafia.net/'
+    url = 'https://web.archive.org/web/20200115230012/http://ballerinamafia.net/'
     stripUrl = url + 'index.php?pid=%s'
     firstStripUrl = stripUrl % '20100906'
     imageSearch = ('//img[contains(@alt, "Comic")]',
@@ -135,7 +135,7 @@ class BetweenFailures(_WPWebcomic):
 
 
 class BeyondTheVeil(_WordPressScraper):
-    url = 'http://beyondtheveilcomic.com/'
+    url = 'https://web.archive.org/web/20201009235642/http://beyondtheveilcomic.com/'
     stripUrl = url + '?comic=%s'
     firstStripUrl = stripUrl % '01252010'
     endOfLife = True
@@ -178,9 +178,9 @@ class BirdBoy(_WordPressScraper):
         try:
             pageNr = int(strip)
         except ValueError:
-            pageNr = None # Use the string to fetch a cover page
+            pageNr = None  # Use the string to fetch a cover page
         if volume == 'synopsis':
-            strip = '{0}{1}'.format(pageNr, '-02' if strip in [1,3] else '')
+            strip = '{0}{1}'.format(pageNr, '-02' if strip in [1, 3] else '')
         else:
             volume = 'volume-' + volume
             if pageNr is not None:

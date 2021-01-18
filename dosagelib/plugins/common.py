@@ -18,6 +18,11 @@ class _WordPressScraper(_ParserScraper):
     latestSearch = '//a[d:class("comic-nav-last")]'
 
 
+class _WordPressSpliced(_ParserScraper):
+    imageSearch = '//div[@id="spliced-comic"]//img'
+    prevSearch = '//a[d:class("previous-comic")]'
+
+
 class _WPNavi(_WordPressScraper):
     prevSearch = '//a[d:class("navi-prev")]'
 
@@ -26,7 +31,7 @@ class _WPNaviIn(_WordPressScraper):
     prevSearch = '//a[d:class("navi-prev-in")]'
 
 
-class _WPWebcomic(_WordPressScraper):
+class _WPWebcomic(_ParserScraper):
     imageSearch = '//div[d:class("webcomic-image")]//img'
     prevSearch = '//a[d:class("previous-webcomic-link")]'
     nextSearch = '///a[d:class("next-webcomic-link")]'

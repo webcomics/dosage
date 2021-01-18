@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# Copyright (C) 2015-2021 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 from re import compile, escape
 
@@ -11,13 +11,12 @@ from ..util import tagre
 from .common import _WordPressScraper, _WPNavi, _WPWebcomic
 
 
-class CampComic(_BasicScraper):
+class CampComic(_ParserScraper):
     url = 'http://campcomic.com/comic/'
-    rurl = escape(url)
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '6'
-    imageSearch = compile(tagre("img", "src", r'(http://hw1\.pa-cdn\.com/camp/assets/img/katie/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, before="btn btnPrev"))
+    imageSearch = '//div[@id="comic"]/img'
+    prevSearch = '//a[d:class("btnPrev")]'
     help = 'Index Format: number'
 
 
@@ -112,9 +111,9 @@ class Catalyst(_BasicScraper):
 
 
 class CatAndGirl(_ParserScraper):
-    url = 'http://catandgirl.com/'
+    url = 'https://catandgirl.com/'
     imageSearch = '//div[@id="comic"]//img'
-    prevSearch = '//a[@rel="prev"]'
+    prevSearch = '//a[d:class("pager--prev")]'
 
 
 class CatenaCafe(_WordPressScraper):
@@ -287,7 +286,7 @@ class CollegeCatastrophe(_ParserScraper):
     stripUrl = url + '/%s'
     firstStripUrl = stripUrl % '2000-11-10'
     imageSearch = '//img[@class="comic-image"]'
-    prevSearch = '//a[@class="prev"]'
+    prevSearch = '//a[span[contains(text(),"Previous")]]'
     endOfLife = True
     multipleImagesPerStrip = True
 
@@ -365,13 +364,15 @@ class CorydonCafe(_ParserScraper):
 
 
 class CourtingDisaster(_WordPressScraper):
-    url = 'http://www.courting-disaster.com/'
+    url = 'https://web.archive.org/web/20201127150157/http://www.courting-disaster.com/'
     firstStripUrl = 'http://www.courting-disaster.com/comic/courting-disaster-17/'
+    endOfLife = True
 
 
 class CraftedFables(_WordPressScraper):
-    url = 'http://www.caf-fiends.net/comicpress/'
+    url = 'https://web.archive.org/web/20191126025641/http://www.caf-fiends.net/comicpress/'
     prevSearch = '//a[@rel="prev"]'
+    endOfLife = True
 
 
 class CrimsonDark(_BasicScraper):
@@ -407,20 +408,12 @@ class CrossTimeCafe(_ParserScraper):
     endOfLife = True
 
 
-class CucumberQuest(_BasicScraper):
-    url = 'http://cucumber.gigidigi.com/'
-    rurl = escape(url)
-    stripUrl = url + 'cq/%s/'
+class CucumberQuest(_WPWebcomic):
+    baseUrl = 'http://cucumber.gigidigi.com/'
+    stripUrl = baseUrl + 'cq/%s/'
     firstStripUrl = stripUrl % 'page-1'
-    startUrl = url + 'recent.html'
+    url = firstStripUrl
     starter = indirectStarter
-    imageSearch = (
-        compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/\d+[^"]+)' % rurl)),
-        compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/ch\d+[^"]+)' % rurl)),
-        compile(tagre("img", "src", r'(%swp-content/uploads/\d+/\d+/bonus[^"]+)' % rurl)),
-    )
-    prevSearch = compile(tagre("a", "href", r'(%scq/[^"]+/)' % rurl, after="previous"))
-    latestSearch = compile(r'window\.location="(/cq/[^"]+/)"')
     help = 'Index format: stripname'
 
 
