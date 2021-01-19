@@ -30,6 +30,6 @@ class TestScraper(object):
 
     def test_user_dir(self):
         oldlen = len(scrapers.get())
-        scrapers.adddir(Path(__file__).parent / 'mocks' / 'plugins')
+        scrapers.adddir(Path(__file__).parent / 'mocks' / 'extra')
         assert len(scrapers.get()) == oldlen + 1
-        assert len(scrapers.find('ADummyTestScraper')) == 1
+        assert len(scrapers.find('AnotherDummyTestScraper')) == 1
