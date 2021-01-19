@@ -127,7 +127,7 @@ def processAllure() {
             deleteDir()
             unstash 'allure'
             sh 'mv allure-* allure-data'
-            copyArtifacts filter: 'allure-history.zip', optional: true, projectName: JOB_NAME
+            copyArtifacts filter: 'allure-history.zip', optional: true, projectName: JOB_NAME, selector: lastWithArtifacts()
             if (fileExists('allure-history.zip')) {
                 unzip dir: 'allure-data', quiet: true, zipFile: 'allure-history.zip'
                 sh 'rm -f allure-history.zip'
