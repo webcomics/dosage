@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2020 Tobias Gruetzmacher
+# Copyright (C) 2019-2021 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 import json
 
@@ -72,10 +72,8 @@ class MangaDex(_ParserScraper):
             cls('AttackonTitan', 429),
             cls('Beastars', 20523),
             cls('DeliciousinDungeon', 13871),
-            cls('DrStone', 20882),
             cls('DragonDrive', 5165),
             cls('HangingOutWithAGamerGirl', 42490),
-            cls('HeavensDesignTeam', 27811),
             cls('HoriMiya', 6770),
             cls('HowToOpenATriangularRiceball', 19305),
             cls('InterspeciesReviewers', 20796),
@@ -97,7 +95,6 @@ class MangaDex(_ParserScraper):
             cls('SaekiSanWaNemutteru', 28834),
             cls('SewayakiKitsuneNoSenkoSan', 22723),
             cls('SousouNoFrieren', 48045),
-            cls('SPYxFAMILY', 35705),
             cls('SwordArtOnline', 1360),
             cls('SwordArtOnlineProgressive', 9604),
             cls('TheWolfAndRedRidingHood', 31079),

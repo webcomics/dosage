@@ -17,6 +17,7 @@ class Removed(Scraper):
         'mov': 'Comic moved to a new hoster and no new module was written.',
         'mis': 'Pages are missing from the comic.',
         'acc': 'Account is needed to access site.',
+        'legal': 'Comic was removed for legal reasons (fanrip, scanlation, etc.).',
     }
 
     def __init__(self, name, reason='del'):
@@ -673,6 +674,9 @@ class Removed(Scraper):
             cls('GoComics/USAcres'),
             cls('GoComics/WorldOfWonder'),
             cls('Laiyu', 'brk'),
+            cls('MangaDex/DrStone', 'legal'),
+            cls('MangaDex/HeavensDesignTeam', 'legal'),
+            cls('MangaDex/SPYxFAMILY', 'legal'),
             cls('SmackJeeves/20TimesKirby'),
             cls('SmackJeeves/2Kingdoms'),
             cls('SmackJeeves/355Days'),
