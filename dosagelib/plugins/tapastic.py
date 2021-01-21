@@ -10,13 +10,22 @@ class Tapastic(_ParserScraper):
     imageSearch = '//article[contains(@class, "js-episode-article")]//img/@data-src'
     prevSearch = '//a[contains(@class, "js-prev-ep-btn")]'
     latestSearch = '//ul[contains(@class, "js-episode-list")]//a'
-    starter = indirectStarter
     multipleImagesPerStrip = True
 
     def __init__(self, name, url):
         super(Tapastic, self).__init__('Tapastic/' + name)
         self.url = self.baseUrl + 'series/' + url + '/info'
         self.stripUrl = self.baseUrl + 'episode/%s'
+
+    def starter(self):
+        # Retrieve comic metadata from info page
+        info = self.getPage(self.url)
+        series = info.xpath('//@data-series-id')[0]
+        # Retrieve comic metadata from API
+        data = self.session.get(self.baseUrl + 'series/' + series + '/episodes?sort=NEWEST')
+        data.raise_for_status()
+        episodes = data.json()['data']['body']
+        return self.stripUrl % episodes.split('data-id="')[1].split('"')[0]
 
     def getPrevUrl(self, url, data):
         # Retrieve comic metadata from API
