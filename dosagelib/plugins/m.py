@@ -179,25 +179,15 @@ class MonsieurLeChien(_BasicScraper):
 
 
 class Moonlace(_WPWebcomic):
-    stripUrl = 'http://dbcomics.darkblueworkshop.com/moonlace/%s/'
-    firstStripUrl = stripUrl % 'prologue/page-1'
-    url = firstStripUrl
-    latestSearch = '//main' + _WPWebcomic.latestSearch
+    url = 'https://moonlace.darkbluecomics.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'page-0-1'
     adult = True
 
     def starter(self):
         # Set age-gate cookie
-        self.session.cookies.set('age_gate', '1', domain='darkblueworkshop.com')
+        self.session.cookies.set('age_gate', '1', domain='moonlace.darkblueworkshop.com')
         return indirectStarter(self)
-
-    def namer(self, imageUrl, pageUrl):
-        # Prepend chapter title to page filenames
-        chapter = pageUrl.rstrip('/').rsplit('/', 3)[-2]
-        chapter = chapter.replace('prologue', 'chapter-0-prologue')
-        chapter = chapter.replace('chapter-1', 'chapter-1-heritage')
-        chapter = chapter.replace('chapter2', 'chapter-2')
-        page = imageUrl.rsplit('/', 1)[-1]
-        return chapter + '_' + page
 
 
 class Moonsticks(_ParserScraper):
