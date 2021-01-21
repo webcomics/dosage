@@ -25,7 +25,9 @@ class MangaDex(_ParserScraper):
         mangaData = manga.json()
         # Determine if manga is complete and/or adult
         if mangaData['manga']['last_chapter'] != '0':
-            self.endOfLife = True
+            for ch in mangaData['chapter']:
+                if mangaData['chapter'][ch]['chapter'] == mangaData['manga']['last_chapter']:
+                    self.endOfLife = True
         if mangaData['manga']['hentai'] != '0':
             self.adult = True
         # Prepare chapter list
