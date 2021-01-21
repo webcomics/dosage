@@ -57,6 +57,7 @@ class Tapastic(_ParserScraper):
         return (
             # Manually-added comics
             cls('AmpleTime', 'Ample-Time'),
+            cls('InsignificantOtters', 'IOtters'),
             cls('NoFuture', 'NoFuture'),
             cls('OrensForge', 'OrensForge'),
             cls('RavenWolf', 'RavenWolf'),
