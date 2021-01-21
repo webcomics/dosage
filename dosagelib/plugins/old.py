@@ -630,8 +630,6 @@ class Removed(Scraper):
             cls('ComicFury/TheUnthinkableHybrid'),
             cls('ComicFury/TwentyFourSeven'),
             cls('ComicFury/TwentyFourSevenFans'),
-            cls('TheCyantianChronicles/CookieCaper'),
-            cls('TheCyantianChronicles/Pawprints'),
             cls('GoComics/2CowsAndAChicken'),
             cls('GoComics/AskAPortlySyndicatePerson'),
             cls('GoComics/Bewley'),
@@ -1270,6 +1268,8 @@ class Removed(Scraper):
             cls('Shivae/Extras'),
             cls('SnafuComics/Titan'),
             cls('StuffNoOneToldMe'),
+            cls('TheCyantianChronicles/CookieCaper'),
+            cls('TheCyantianChronicles/Pawprints'),
             cls('VictimsOfTheSystem'),
             cls('WebDesignerCOTW'),
         )
