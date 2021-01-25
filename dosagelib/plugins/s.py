@@ -702,5 +702,5 @@ class SwordsAndSausages(_ParserScraper):
     stripUrl = url + '/%s'
     firstStripUrl = stripUrl % '1-1'
     imageSearch = '//img[@class="comic-image"]'
-    prevSearch = '//a[@class="prev"]'
+    prevSearch = '//a[./span[contains(text(), "Previous")]]'
     multipleImagesPerStrip = True
