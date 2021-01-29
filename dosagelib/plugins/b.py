@@ -336,3 +336,10 @@ class ButterSafe(_ParserScraper):
     imageSearch = '//div[@id="comic"]/img'
     prevSearch = '//a[@rel="prev"]'
     help = 'Index format: yyyy/mm/dd/stripname'
+
+
+class ByTheBook(_WordPressScraper):
+    url = 'http://www.btbcomic.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'chapter-1-page-0'
+    adult = True
