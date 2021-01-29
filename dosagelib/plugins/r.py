@@ -78,6 +78,23 @@ class RealmOfAtland(_BasicScraper):
     help = 'Index format: nnn'
 
 
+class Recursion(_ParserScraper):
+    url = 'https://recursioncomic.com/'
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '0001'
+    imageSearch = '//div[@class="content"]//img'
+    prevSearch = '//link[@rel="prev"]'
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix inconsistent filenames
+        filename = imageUrl.rsplit('/', 1)[-1]
+        filename = filename.replace('0bf62e92-2c98-4fb2-8ed7-4584980beb17', 'page0005')
+        filename = filename.replace('76112837-c5cd-4df7-8c53-3ed5c25194cf', 'page0003')
+        filename = filename.replace('ed271080-6b1b-4d7a-8509-b2d8a15da805', 'page0002')
+        filename = filename.replace('7b194ef7-ac77-4b5c-aed0-826901d13d04', 'page0001')
+        return filename
+
+
 class RedMeat(_ParserScraper):
     url = 'http://www.redmeat.com/max-cannon/FreshMeat'
     imageSearch = '//div[@class="comicStrip"]//img'
