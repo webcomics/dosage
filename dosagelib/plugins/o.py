@@ -22,7 +22,8 @@ class OctopusPie(_ParserScraper):
 
 
 class OffWhite(_ParserScraper):
-    stripUrl = 'http://off-white.eu/comic/%s/'
+    baseUrl = 'https://web.archive.org/web/20200627222318/http://off-white.eu/'
+    stripUrl = baseUrl + 'comic/%s/'
     firstStripUrl = stripUrl % 'prologue-page-1-2'
     url = firstStripUrl
     imageSearch = '//img[@class="comic-page"]'
@@ -34,7 +35,7 @@ class OffWhite(_ParserScraper):
     def fetchUrls(self, url, data, urlSearch):
         # Fix missing page
         if url == self.stripUrl % 'page-37':
-            return ['http://off-white.eu/ow_v2/wp-content/uploads/2011/01/new-037.jpg']
+            return [self.baseUrl + 'ow_v2/wp-content/uploads/2011/01/new-037.jpg']
         return super(OffWhite, self).fetchUrls(url, data, urlSearch)
 
     def getPrevUrl(self, url, data):

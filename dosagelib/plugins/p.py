@@ -308,13 +308,14 @@ class ProphecyOfTheCircle(_WPNavi):
 
 
 class Prototype(_ParserScraper):
-    stripUrl = 'http://planetprototype.com/%s/'
+    stripUrl = 'https://web.archive.org/web/20201030035444/http://planetprototype.com/%s/'
     firstStripUrl = stripUrl % '2018/03/30/vol-1-ch-1-front-cover'
     url = firstStripUrl
     imageSearch = '//img[contains(@class, "wp-post-image")]'
     prevSearch = '//a[.//text()="Previous"]'
     latestSearch = '//a[.//text()="Latest"]'
     starter = indirectStarter
+    endOfLife = True
 
 
 class PS238(_ParserScraper):
