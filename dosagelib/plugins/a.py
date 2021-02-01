@@ -8,13 +8,7 @@ from re import compile, escape, MULTILINE
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import regexNamer, bounceStarter, indirectStarter
-from .common import _WordPressScraper, _WordPressSpliced, _WPNavi, _WPNaviIn, _WPWebcomic
-
-
-class AbbysAgency(_WordPressSpliced):
-    url = 'https://abbysagency.us/'
-    stripUrl = url + 'blog/comic/%s/'
-    firstStripUrl = stripUrl % 'a'
+from .common import _WordPressScraper, _WPNavi, _WPNaviIn, _WPWebcomic
 
 
 class AbstruseGoose(_ParserScraper):
@@ -167,29 +161,6 @@ class Alice(_WordPressScraper):
     url = 'http://www.alicecomics.com/'
     latestSearch = '//a[text()="Latest Alice!"]'
     starter = indirectStarter
-
-
-class AlienDice(_WordPressSpliced):
-    url = 'https://aliendice.com/'
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = stripUrl % '05162001'
-
-    def getPrevUrl(self, url, data):
-        # Fix broken navigation
-        if url == self.stripUrl % 'day-29-part-2-page-3-4':
-            return self.stripUrl % 'day-29-part-2-page-3-2'
-        return super(AlienDice, self).getPrevUrl(url, data)
-
-    def namer(self, imageUrl, pageUrl):
-        # Fix inconsistent filename
-        return imageUrl.rsplit('/', 1)[-1].replace('20010831', '2001-08-31')
-
-
-class AlienDiceLegacy(_WordPressSpliced):
-    name = 'AlienDice/Legacy'
-    stripUrl = 'https://aliendice.com/comic/%s/'
-    url = stripUrl % 'legacy-2-15'
-    firstStripUrl = stripUrl % 'legacy-1'
 
 
 class AlienLovesPredator(_BasicScraper):
