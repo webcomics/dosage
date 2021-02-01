@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# Copyright (C) 2015-2021 Tobias Gruetzmacher
 from ..scraper import _ParserScraper
 from ..helpers import indirectStarter
 
@@ -23,21 +23,21 @@ class Snafu(_ParserScraper):
 
     @classmethod
     def getmodules(cls):
-        return [
+        return (
             cls('Braindead', 'braindead'),
             cls('Bunnywith', 'bunnywith'),
             cls('DeliverUsEvil', 'deliverusevil'),
             cls('EA', 'ea'),
             cls('FT', 'ft'),
+            cls('GG', 'gg'),
             cls('GrimTalesFromDownBelow', 'grimtales'),
-            cls('KOF', 'kof'),
+            cls('HalfboundBlade', 'hbp'),
+            cls('KayosGaiden', 'titan-kayos'),
             cls('MyPanda', 'mypanda'),
             cls('NarutoHeroesPath', 'naruto'),
             cls('NewSuperMarioAdventures', 'nsma'),
             cls('PowerPuffGirls', 'powerpuffgirls'),
-            # cls('PSG2', 'psg2'), -- Strangely broken
             cls('SatansExcrement', 'satansexcrement'),
-            cls('SF', 'sf'),
             cls('SkullBoy', 'skullboy'),
             cls('Snafu', 'snafu'),
             cls('Soul', 'soul'),
@@ -45,8 +45,7 @@ class Snafu(_ParserScraper):
             cls('SureToBeBanD', 'stbb'),
             cls('TheLeague', 'league'),
             cls('Tin', 'tin'),
-            cls('Titan', 'titan'),
             cls('TrunksAndSoto', 'trunks-and-soto'),
             cls('TW', 'tw'),
             cls('Zim', 'zim'),
-        ]
+        )
