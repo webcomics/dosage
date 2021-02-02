@@ -214,7 +214,6 @@ class Removed(Scraper):
             cls('DamnLol'),
             cls('DeathToTheExtremist'),
             cls('DoctorCat', 'brk'),
-            cls('DungeonsAndDenizens'),
             cls('EerieCuties'),
             cls('Ellerbisms'),
             cls('Eriadan'),
