@@ -84,6 +84,15 @@ class MarriedToTheSea(_ParserScraper):
         return '%s-%s' % (date, filename)
 
 
+class MarryMe(_ParserScraper):
+    url = 'http://marryme.keenspot.com/'
+    stripUrl = url + 'd/%s.html'
+    firstStripUrl = stripUrl % '20120730'
+    imageSearch = '//img[@class="ksc"]'
+    prevSearch = '//a[@rel="prev"]'
+    endOfLife = True
+
+
 class MaxOveracts(_ParserScraper):
     url = 'http://occasionalcomics.com/'
     stripUrl = url + '%s/'
