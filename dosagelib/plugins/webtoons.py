@@ -341,6 +341,7 @@ class WebToons(_ParserScraper):
             cls('SoulOnHold', 'supernatural/soul-on-hold', 1701),
             cls('SpaceBoy', 'sf/space-boy', 400),
             cls('SpaceVixen', 'challenge/space-vixen-deep-space-k9', 207049),
+            cls('SpellsFromHell', 'fantasy/spells-from-hell', 2431),
             cls('SpiritFingers', 'drama/spirit-fingers', 1577),
             cls('Spirits', 'fantasy/spirits-re', 1348),
             cls('StalkerXStalker', 'challenge/stalker-x-stalker', 245662),
