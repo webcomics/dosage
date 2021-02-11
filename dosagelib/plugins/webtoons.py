@@ -110,6 +110,7 @@ class WebToons(_ParserScraper):
             cls('CherryBlossoms', 'romance/cherry-blossoms', 1005),
             cls('Chiller', 'thriller/chiller', 536),
             cls('ChocoLatte', 'romance/choco-latte', 1691),
+            cls('CChansACatgirl', 'challenge/c-chans-a-catgirl', 263430),
             cls('CityOfBlank', 'sf/city-of-blank', 1895),
             cls('CityOfWalls', 'drama/city-of-wall', 505),
             cls('CityVamps', 'challenge/city-vamps-', 119224),
