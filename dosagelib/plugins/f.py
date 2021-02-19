@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# Copyright (C) 2015-2021 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 from re import compile, escape
 
@@ -121,14 +121,14 @@ class ForestHill(_WordPressScraper):
     url = 'https://www.foresthillcomic.org/'
 
 
-class ForLackOfABetterComic(_BasicScraper):
-    url = 'http://forlackofabettercomic.com/'
-    rurl = r'http://(?:www\.)?forlackofabettercomic\.com/'
+class ForLackOfABetterComic(_ParserScraper):
+    url = 'https://web.archive.org/web/20200224010115/http://forlackofabettercomic.com/'
     stripUrl = url + '?id=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(%simg/comic/\d+[^"]+)' % rurl, after="comicimg"))
-    prevSearch = compile(tagre("a", "href", r'(%s\?id\=\d+)' % rurl) + r'Prev')
+    imageSearch = '//img[@id="comicimg"]'
+    prevSearch = '//a[text()="Prev"]'
     help = 'Index format: number'
+    endOfLife = True
 
 
 class FoxDad(_ParserScraper):

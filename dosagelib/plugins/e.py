@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# Copyright (C) 2015-2021 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 import os
 from re import compile, IGNORECASE
@@ -40,12 +40,6 @@ class EarthsongSaga(_ParserScraper):
             return self.stripUrl % '3/ch7cover.html'
 
         return super().getPrevUrl(url, data)
-
-
-class EasilyAmused(_WordPressScraper):
-    url = 'http://www.flowerlarkstudios.com/comicpage/college-daze/ea01/'
-    firstStripUrl = url
-    starter = indirectStarter
 
 
 class EatLiver(_ParserScraper):
@@ -172,12 +166,6 @@ class ErrantStory(_BasicScraper):
 class Erstwhile(_WPNavi):
     url = 'http://www.erstwhiletales.com/'
     endOfLife = True
-
-
-class Eryl(_WordPressScraper):
-    url = 'http://www.flowerlarkstudios.com/comicpage/prologue-migration/page-i/'
-    firstStripUrl = url
-    starter = indirectStarter
 
 
 class Everblue(_ParserScraper):

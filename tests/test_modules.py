@@ -44,7 +44,7 @@ class TestModules(object):
 
     @responses.activate
     def test_sololeveling_geoblock(self, tmpdir):
-        responses.add(responses.GET, 'https://w1.sololeveling.net/',
+        responses.add(responses.GET, 'https://w3.sololeveling.net/',
             '<span>1020</span>', status=403)
 
         with pytest.raises(GeoblockedException):

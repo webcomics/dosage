@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# Copyright (C) 2015-2021 Tobias Gruetzmacher
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
@@ -27,12 +27,13 @@ class Zapiro(_ParserScraper):
 
 
 class ZenPencils(_WPNavi):
-    url = 'https://zenpencils.com/'
+    url = 'https://web.archive.org/web/20200723091741/https://zenpencils.com/'
     multipleImagesPerStrip = True
     firstStripUrl = url + 'comic/1-ralph-waldo-emerson-make-them-cry/'
     starter = bounceStarter
     prevSearch = '//a[d:class("navi-prev")]'
     nextSearch = '//a[d:class("navi-next")]'
+    endOfLife = True
 
 
 class ZombieHunters(_BasicScraper):

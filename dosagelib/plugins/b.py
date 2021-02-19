@@ -42,7 +42,7 @@ class BalderDash(_ComicControlScraper):
 
 
 class BallerinaMafia(_ParserScraper):
-    url = 'http://www.ballerinamafia.net/'
+    url = 'https://web.archive.org/web/20200115230012/http://ballerinamafia.net/'
     stripUrl = url + 'index.php?pid=%s'
     firstStripUrl = stripUrl % '20100906'
     imageSearch = ('//img[contains(@alt, "Comic")]',
@@ -135,7 +135,7 @@ class BetweenFailures(_WPWebcomic):
 
 
 class BeyondTheVeil(_WordPressScraper):
-    url = 'http://beyondtheveilcomic.com/'
+    url = 'https://web.archive.org/web/20201009235642/http://beyondtheveilcomic.com/'
     stripUrl = url + '?comic=%s'
     firstStripUrl = stripUrl % '01252010'
     endOfLife = True
@@ -165,6 +165,38 @@ class BillyTheDunce(_ParserScraper):
     imageSearch = '//div[@class="entry"]/p[1]/a'
     prevSearch = '//a[@rel="prev"]'
     endOfLife = True
+
+
+class BirdBoy(_WordPressScraper):
+    url = 'https://bird-boy.com/'
+    stripUrl = url + 'comic/{0}-{1}/'
+    firstStripUrl = stripUrl.format('volume-i', 'the-sword-of-mali-mani')
+    help = 'volume-page # Examples: i-the-sword-of-mali-mani, iii-7, synopsis-2'
+
+    def getIndexStripUrl(self, index):
+        (volume, strip) = index.split('-', maxsplit=1)
+        try:
+            pageNr = int(strip)
+        except ValueError:
+            pageNr = None  # Use the string to fetch a cover page
+        if volume == 'synopsis':
+            strip = '{0}{1}'.format(pageNr, '-02' if strip in [1, 3] else '')
+        else:
+            volume = 'volume-' + volume
+            if pageNr is not None:
+                strip = 'page-{0}'.format(pageNr)
+        return self.stripUrl.format(volume, strip)
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix inconsistent filenames
+        filename = imageUrl.rsplit('/', 1)[-1]
+        if filename == 'image.jpg':
+            [year, month] = imageUrl.rsplit('/', 3)[-3:-1]
+            pageNr = int(pageUrl.rsplit('/', 1)[-2].rsplit('-', 1)[-1])
+            filename = '{0}-{1}-Vol2-pg{2}.jpg'.format(year, month, pageNr)
+        elif filename == '27637.jpg':
+            filename = 'BB_Vol2_Cover.jpg'
+        return filename
 
 
 class BittersweetCandyBowl(_ParserScraper):

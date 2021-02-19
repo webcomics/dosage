@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# Copyright (C) 2015-2021 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 from re import compile, escape, IGNORECASE, sub
 from os.path import splitext
@@ -345,11 +345,13 @@ class SnowFlame(_WordPressScraper):
 
 
 class SodiumEyes(_WordPressScraper):
-    url = 'http://sodiumeyes.com/'
+    url = 'https://web.archive.org/web/20200220041406/http://sodiumeyes.com/'
+    starter = indirectStarter
+    endOfLife = True
 
 
 class SoloLeveling(_ParserScraper):
-    url = 'https://w1.sololeveling.net/'
+    url = 'https://w3.sololeveling.net/'
     stripUrl = url + 'manga/solo-leveling-chapter-%s/'
     firstStripUrl = stripUrl % '1'
     imageSearch = '//div[@class="img_container"]//img'

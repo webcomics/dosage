@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# Copyright (C) 2015-2021 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 from re import compile
 from urllib.parse import urljoin
@@ -153,22 +153,3 @@ class Ruthe(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(/?cartoons/strip_\d+[^"]+)'))
     prevSearch = compile(tagre("a", "href", r'(/cartoon/\d+/datum/asc/)'))
     help = 'Index format: number'
-
-
-class Ryugou(_WPWebcomic):
-    url = 'http://ryugou.swashbuckledcomics.com/'
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = 'ryugou-chapter-1-cover'
-    starter = bounceStarter
-    adult = True
-
-    def namer(self, imageUrl, pageUrl):
-        title = pageUrl.rstrip('/').rsplit('/', 1)[-1]
-        ext = imageUrl.rsplit('.', 1)[-1]
-        return title + '.' + ext
-
-    def fetchUrls(self, url, data, urlSearch):
-        imageUrls = super(Ryugou, self).fetchUrls(url, data, urlSearch)
-        if url == self.stripUrl % '1-3':
-            imageUrls = [imageUrls[1]]
-        return imageUrls

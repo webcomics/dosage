@@ -155,9 +155,9 @@ class TestDosage(object):
 
     @responses.activate
     def test_json_page_key_bounce_and_multi_image(self, tmpdir):
-        httpmocks.page('https://zenpencils.com/', 'zp-home')
-        httpmocks.page('https://zenpencils.com/comic/missing/', 'zp-223')
-        httpmocks.page('https://zenpencils.com/comic/lifejacket/', 'zp-222')
+        httpmocks.page(re.compile(r'.*com/$'), 'zp-home')
+        httpmocks.page(re.compile(r'.*com/comic/missing/$'), 'zp-223')
+        httpmocks.page(re.compile(r'.*com/comic/lifejacket/$'), 'zp-222')
         httpmocks.jpeg(re.compile(r'https://cdn-.*\.jpg'))
 
         cmd_ok("-v", "-b", str(tmpdir), "-o", "json", "ZenPencils")

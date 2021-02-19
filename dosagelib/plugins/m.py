@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# Copyright (C) 2015-2021 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 import json
 from re import compile, escape, IGNORECASE
@@ -9,6 +9,7 @@ from re import compile, escape, IGNORECASE
 from ..helpers import indirectStarter
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
+from ..xml import NS
 from .common import _ComicControlScraper, _WordPressScraper, _WPWebcomic
 
 
@@ -159,7 +160,11 @@ class MistyTheMouse(_WordPressScraper):
 class MonkeyUser(_ParserScraper):
     url = 'https://www.monkeyuser.com/'
     prevSearch = '//div[@title="previous"]/a'
-    imageSearch = '//div[@class="content"]/p/img'
+    imageSearch = '//div[d:class("content")]/p/img'
+
+    def shouldSkipUrl(self, url, data):
+        # videos
+        return data.xpath('//div[d:class("video-container")]', namespaces=NS)
 
 
 class MonsieurLeChien(_BasicScraper):
