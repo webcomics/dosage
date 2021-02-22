@@ -270,6 +270,7 @@ class WebToons(_ParserScraper):
             cls('Murrz', 'slice-of-life/murrz', 1281),
             cls('Muted', 'supernatural/muted', 1566),
             cls('MyBoo', 'supernatural/my-boo', 1185),
+            cls('MyAssassinGirlfriend', 'challenge/my-assassin-girlfriend', 249007),
             cls('MyDearColdBloodedKing', 'romance/my-dear-cold-blooded-king', 961),
             cls('MyDeepestSecret', 'thriller/my-deepest-secret', 1580),
             cls('MyDictatorBoyfriend', 'comedy/my-dictator-boyfriend', 1391),
