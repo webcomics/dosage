@@ -272,6 +272,7 @@ class WebToons(_ParserScraper):
             cls('MyDearColdBloodedKing', 'romance/my-dear-cold-blooded-king', 961),
             cls('MyDeepestSecret', 'thriller/my-deepest-secret', 1580),
             cls('MyDictatorBoyfriend', 'comedy/my-dictator-boyfriend', 1391),
+            cls('MyDragonGirlfriend', 'challenge/my-dragon-girlfriend', 162918),
             cls('MyGiantNerdBoyfriend', 'slice-of-life/my-giant-nerd-boyfriend', 958),
             cls('MyKittyAndOldDog', 'slice-of-life/my-kitty-and-old-dog', 184),
             cls('MyNameIsBenny', 'slice-of-life/my-name-is-benny', 1279),
