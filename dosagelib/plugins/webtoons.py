@@ -219,6 +219,7 @@ class WebToons(_ParserScraper):
             cls('JingleJungle', 'slice-of-life/jingle-jungle', 282),
             cls('JustAskYuli', 'slice-of-life/just-ask-yuli', 402),
             cls('JustForKicks', 'slice-of-life/just-for-kicks', 1152),
+            cls('JustFriends', 'challenge/just-friends', 190722),
             cls('JustPancakes', 'comedy/just-pancakes', 1651),
             cls('KidsAreAllRight', 'drama/kids-are-all-right', 283),
             cls('Killstagram', 'thriller/killstagram', 1971),
