@@ -433,6 +433,7 @@ class WebToons(_ParserScraper):
             cls('XINK3R', 'super-hero/xinker', 541),
             cls('YourAdventure', 'comedy/your-adventure', 506),
             cls('YourLetter', 'drama/your-letter', 1540),
+            cls('YouveGottaBeKittenMe', 'challenge/youve-gotta-be-kitten-me', 383661),
             cls('YumisCells', 'slice-of-life/yumi-cell', 478),
             cls('YunaAndKawachan', 'drama/yuna-and-kawachan', 1840),
             cls('ZeroGame', 'fantasy/zero-game', 1704),
