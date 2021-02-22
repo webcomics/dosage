@@ -298,6 +298,7 @@ class WebToons(_ParserScraper):
             cls('PenguinLovesMev', 'slice-of-life/penguin-loves-mev', 86),
             cls('Petrichor', 'challenge/petrichor', 100835),
             cls('PhantomParadise', 'fantasy/phantom-paradise', 1250),
+            cls('Phase', 'romance/phase', 2117),
             cls('Pigminted', 'slice-of-life/pigminted', 482),
             cls('PinchPoint', 'challenge/pinch-point-reborn', 334640),
             cls('Plum', 'sports/plum', 1605),
