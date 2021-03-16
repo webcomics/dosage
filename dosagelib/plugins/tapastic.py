@@ -61,6 +61,7 @@ class Tapastic(_ParserScraper):
             cls('NoFuture', 'NoFuture'),
             cls('OrensForge', 'OrensForge'),
             cls('RavenWolf', 'RavenWolf'),
+            cls('SyntheticInstinct', 'Synthetic-Instinct'),
             cls('TheCatTheVineAndTheVictory', 'The-Cat-The-Vine-and-The-Victory'),
             cls('TheGodsPack', 'The-Gods-Pack'),
 
