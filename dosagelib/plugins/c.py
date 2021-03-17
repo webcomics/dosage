@@ -453,7 +453,7 @@ class CutLoose(_ParserScraper):
 
 
 class CyanideAndHappiness(_BasicScraper):
-    url = 'http://www.explosm.net/'
+    url = 'http://explosm.net/comics/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '15'
     imageSearch = compile(tagre("img", "src", r'(//files.explosm.net/comics/[^"]+)', before="main-comic"))
