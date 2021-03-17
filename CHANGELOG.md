@@ -33,7 +33,7 @@ the 2.16 release to fix the broken update check in that release.
 - Use [CodeClimate] to analyse source code quality and [CodeCov] to track test
   coverage.
 
-[lxml]: https://FIXME
+[lxml]: https://lxml.de/
 [CodeClimate]: https://codeclimate.com/github/webcomics/dosage
 [CodeCov]: https://codecov.io/gh/webcomics/dosage
 
