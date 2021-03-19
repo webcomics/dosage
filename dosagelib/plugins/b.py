@@ -99,22 +99,9 @@ class Beetlebum(_BasicScraper):
 
 
 class Bethellium(_WPWebcomic):
-    stripUrl = 'http://dbcomics.darkblueworkshop.com/bethellium/%s/'
-    firstStripUrl = stripUrl % 'chapter-1/cover'
-    url = firstStripUrl
-    latestSearch = '//main' + _WPWebcomic.latestSearch
-    starter = indirectStarter
-
-    def getPrevUrl(self, url, data):
-        prevUrl = super(Bethellium, self).getPrevUrl(url, data)
-        return prevUrl.replace('%webcomic2_storyline%', 'chapter-2-the-hemlocks-scar')
-
-    def namer(self, imageUrl, pageUrl):
-        # Prepend chapter title to page filenames
-        chapter = pageUrl.rstrip('/').rsplit('/', 3)[-2]
-        chapter = chapter.replace('chapter-1', 'chapter-1-the-magic-city')
-        page = imageUrl.rsplit('/', 1)[-1]
-        return chapter + '_' + page
+    url = 'https://bethellium.darkbluecomics.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'cover'
 
 
 class BetterDays(_ParserScraper):
@@ -349,3 +336,10 @@ class ButterSafe(_ParserScraper):
     imageSearch = '//div[@id="comic"]/img'
     prevSearch = '//a[@rel="prev"]'
     help = 'Index format: yyyy/mm/dd/stripname'
+
+
+class ByTheBook(_WordPressScraper):
+    url = 'http://www.btbcomic.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'chapter-1-page-0'
+    adult = True

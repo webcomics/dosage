@@ -19,7 +19,7 @@ class _WordPressScraper(_ParserScraper):
 
 
 class _WordPressSpliced(_ParserScraper):
-    imageSearch = '//div[@id="spliced-comic"]//img'
+    imageSearch = '//div[@id="one-comic-option"]//img'
     prevSearch = '//a[d:class("previous-comic")]'
 
 

@@ -46,9 +46,15 @@ class LazJonesAndTheMayfieldRegulators(_ParserScraper):
 class LazJonesAndTheMayfieldRegulatorsSideStories(LazJonesAndTheMayfieldRegulators):
     name = 'LazJonesAndTheMayfieldRegulators/SideStories'
     baseUrl = 'https://www.lazjones.com/'
-    url = baseUrl + 'sidestories'
+    url = baseUrl + 'comics'
     stripUrl = baseUrl + 'comic/%s'
     firstStripUrl = stripUrl % 'journal01'
+
+    def getPrevUrl(self, url, data):
+        # Fix broken navigation links
+        if url == self.url and data.xpath(self.prevSearch + '/@href')[0] == self.stripUrl % 'summer00':
+            return self.stripUrl % 'summer21'
+        return super(LazJonesAndTheMayfieldRegulators, self).getPrevUrl(url, data)
 
 
 class LeastICouldDo(_ParserScraper):

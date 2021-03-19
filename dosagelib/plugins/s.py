@@ -312,15 +312,21 @@ class SluggyFreelance(_ParserScraper):
 
 
 class SMBC(_ComicControlScraper):
-    url = 'http://www.smbc-comics.com/'
-    firstStripUrl = url + 'comic/2002-09-05'
-    multipleImagesPerStrip = True
+    url = 'https://www.smbc-comics.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % '2002-09-05'
     imageSearch = ['//img[@id="cc-comic"]', '//div[@id="aftercomic"]/img']
     textSearch = '//img[@id="cc-comic"]/@title'
+    multipleImagesPerStrip = True
 
-    def namer(self, image_url, page_url):
-        """Remove random noise from name."""
-        return image_url.rsplit('-', 1)[-1]
+    def namer(self, imageUrl, pageUrl):
+        # Remove random noise from filename
+        filename = imageUrl.rsplit('/', 1)[-1]
+        if '-' in filename and len(filename.rsplit('-', 1)[-1]) > 12:
+            filename = filename.rsplit('-', 1)[-1]
+        elif len(filename) > 22 and filename[0] == '1':
+            filename = filename[10:]
+        return filename
 
 
 class SnowFlame(_WordPressScraper):
@@ -672,7 +678,7 @@ class Supercell(_ParserScraper):
     url = 'https://www.supercellcomic.com/'
     stripUrl = url + 'pages/%s.html'
     firstStripUrl = stripUrl % '0001'
-    imageSearch = '//div[@class="comicpage"]//img'
+    imageSearch = '//img[@class="comicStretch"]'
     prevSearch = '//div[@class="comicnav"]/a[./img[contains(@src, "comnav_02")]]'
 
 
@@ -702,5 +708,5 @@ class SwordsAndSausages(_ParserScraper):
     stripUrl = url + '/%s'
     firstStripUrl = stripUrl % '1-1'
     imageSearch = '//img[@class="comic-image"]'
-    prevSearch = '//a[@class="prev"]'
+    prevSearch = '//a[./span[contains(text(), "Previous")]]'
     multipleImagesPerStrip = True

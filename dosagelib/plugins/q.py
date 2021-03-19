@@ -11,7 +11,7 @@ class QuantumVibe(_ParserScraper):
     stripUrl = url + 'strip?page=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = '//img[contains(@src, "disppageV3?story=qv")]'
-    prevSearch = '//a[./img[contains(@src, "nav/prevstrip")]]'
+    prevSearch = '//a[./img[@alt="Previous Strip"]]'
 
 
 class QuestionableContent(_ParserScraper):

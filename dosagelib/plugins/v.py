@@ -7,6 +7,15 @@ from ..scraper import _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
 
 
+class VampireHunterBoyfriends(_ParserScraper):
+    url = 'https://boneitiscomics.com/vhb.php'
+    stripUrl = url + '?pg=%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//div[@class="page"]//img'
+    prevSearch = '//a[@id="prev"]'
+    adult = True
+
+
 class Vexxarr(_ParserScraper):
     baseUrl = 'http://www.vexxarr.com/'
     url = baseUrl + 'Index.php'
