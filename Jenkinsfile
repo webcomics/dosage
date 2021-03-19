@@ -71,16 +71,14 @@ pys.each { py ->
     }
 }
 
-timestamps {
-    ansiColor('xterm') {
-        parallel(tasks)
-        stage('Windows binary') {
-            windowsBuild()
-        }
-        stage('Allure report') {
-            processAllure()
-        }
-    }
+// MAIN //
+
+parallel(tasks)
+stage('Windows binary') {
+    windowsBuild()
+}
+stage('Allure report') {
+    processAllure()
 }
 
 def buildDockerfile(image) {
