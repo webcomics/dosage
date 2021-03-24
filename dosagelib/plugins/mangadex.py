@@ -25,7 +25,9 @@ class MangaDex(_ParserScraper):
         mangaData = manga.json()
         # Determine if manga is complete and/or adult
         if mangaData['manga']['last_chapter'] != '0':
-            self.endOfLife = True
+            for ch in mangaData['chapter']:
+                if mangaData['chapter'][ch]['chapter'] == mangaData['manga']['last_chapter']:
+                    self.endOfLife = True
         if mangaData['manga']['hentai'] != '0':
             self.adult = True
         # Prepare chapter list
@@ -71,8 +73,11 @@ class MangaDex(_ParserScraper):
         return (
             cls('AttackonTitan', 429),
             cls('Beastars', 20523),
+            cls('BokuNoKokoroNoYabaiYatsu', 23811),
             cls('DeliciousinDungeon', 13871),
             cls('DragonDrive', 5165),
+            cls('FuguushokuKajishiDakedoSaikyouDesu', 56319),
+            cls('GanbareDoukiChan', 46585),
             cls('HangingOutWithAGamerGirl', 42490),
             cls('HoriMiya', 6770),
             cls('HowToOpenATriangularRiceball', 19305),
@@ -84,19 +89,23 @@ class MangaDex(_ParserScraper):
             cls('Lv2KaraCheatDattaMotoYuushaKouhoNoMattariIsekaiLife', 33797),
             cls('MaouNoOreGaDoreiElfWoYomeNiShitandaGaDouMederebaIi', 25495),
             cls('ModernMoGal', 30308),
+            cls('MyTinySenpaiFromWork', 43610),
             cls('OMaidensinYourSavageSeason', 22030),
             cls('OokamiShounenWaKyouMoUsoOKasaneru', 14569),
             cls('OokamiToKoshinryou', 1168),
             cls('OtomeYoukaiZakuro', 4533),
             cls('OversimplifiedSCP', 32834),
+            cls('PashiriNaBokuToKoisuruBanchouSan', 25862),
             cls('PleaseDontBullyMeNagatoro', 22631),
             cls('PleaseDontBullyMeNagatoroComicAnthology', 31004),
             cls('PleaseTellMeGalkochan', 12702),
             cls('SaekiSanWaNemutteru', 28834),
+            cls('SenpaiGaUzaiKouhaiNoHanashi', 23825),
             cls('SewayakiKitsuneNoSenkoSan', 22723),
             cls('SousouNoFrieren', 48045),
             cls('SwordArtOnline', 1360),
             cls('SwordArtOnlineProgressive', 9604),
+            cls('TamenDeGushi', 13939),
             cls('TheWolfAndRedRidingHood', 31079),
             cls('TomoChanWaOnnanoko', 15722),
             cls('TonikakuKawaii', 23439),

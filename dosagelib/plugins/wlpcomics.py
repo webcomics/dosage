@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# Copyright (C) 2015-2021 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 import re
 
@@ -42,7 +42,7 @@ class ChocolateMilkMaid(_WLPComics):
             return re.sub(r'/(\d+)\.ht',
                           lambda m: '/%03i.ht' % (int(m.group(1)) - 1), tourl)
         if '263.html' in fromurl and '265.html' in tourl:
-            return self.baseurl + '264.html'
+            return self.stripUrl % '264'
         return tourl
 
 
@@ -53,10 +53,12 @@ class MaidAttack(_WLPComics):
 
 class PeterIsTheWolfAdult(_WLPComics):
     stripUrl = 'http://www.peteristhewolf.com/adult/%s.html'
-    url = stripUrl % 'home'
+    # navigation to newest page is broken
+    url = stripUrl % '427'
     firstStripUrl = stripUrl % '001'
     multipleImagesPerStrip = True
     adult = True
+    endOfLife = True
 
     def namer(self, imageUrl, pageUrl):
         name = pageUrl.rsplit('/', 1)[-1].split('.')[0] + '_' + imageUrl.rsplit('/', 1)[-1]
@@ -73,9 +75,11 @@ class PeterIsTheWolfAdult(_WLPComics):
 
 
 class PeterIsTheWolfGeneral(_WLPComics):
-    url = 'http://www.peteristhewolf.com/general/'
-    stripUrl = url + '%s.html'
+    stripUrl = 'http://www.peteristhewolf.com/general/%s.html'
+    # navigation to newest page is broken
+    url = stripUrl % '427'
     firstStripUrl = stripUrl % '001'
+    endOfLife = True
 
     def getPrevUrl(self, url, data):
         # Fix loops in site navigation

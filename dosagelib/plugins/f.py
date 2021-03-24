@@ -20,6 +20,15 @@ class FalconTwin(_BasicScraper):
     help = 'Index format: nnn'
 
 
+class FalseStart(_ParserScraper):
+    url = 'https://boneitiscomics.com/falsestart.php'
+    stripUrl = url + '?pg=%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//div[@class="page"]//img'
+    prevSearch = '//a[@id="prev"]'
+    adult = True
+
+
 class Faneurysm(_WPNaviIn):
     url = 'http://hijinksensue.com/comic/think-only-tree/'
     firstStripUrl = 'http://hijinksensue.com/comic/captains-prerogative/'

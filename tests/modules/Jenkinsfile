@@ -21,13 +21,15 @@ def runTests() {
         sh "pip install --user -e .[css,dev]"
     }
     stage ('Run tests') {
-        withCredentials([string(credentialsId: 'proxymap', variable: 'PROXYMAP')]) {
-            sh '''
-                TESTALL=1 py.test -v --cov=dosagelib --cov-report xml \
-                     --alluredir=allure-data \
-                     --tb=short -n10 --junitxml=junit.xml \
-                     tests/modules/check_comics.py || true
-            '''
+        timeout(time: 12, unit: 'HOURS') {
+            withCredentials([string(credentialsId: 'proxymap', variable: 'PROXYMAP')]) {
+                sh '''
+                    TESTALL=1 py.test -v --cov=dosagelib --cov-report xml \
+                        --alluredir=allure-data \
+                        --tb=short -n10 --junitxml=junit.xml \
+                        tests/modules/check_comics.py || true
+                '''
+            }
         }
     }
     stage('Report') {
@@ -40,28 +42,28 @@ def runTests() {
     }
 }
 
-ansiColor('xterm') {
-    node {
-        def img = prepareDocker()
+// MAIN //
+node {
+    def img = prepareDocker()
 
-        stage('Checkout') {
-            checkout scm
-        }
+    stage('Checkout') {
+        checkout scm
+    }
 
-        img.inside {
-            runTests()
-        }
+    img.inside {
+        runTests()
+    }
 
-        stage('Allure Report') {
-            copyArtifacts filter: 'allure-history.zip', optional: true, projectName: JOB_NAME, selector: lastWithArtifacts()
-            if (fileExists('allure-history.zip')) {
-                unzip dir: 'allure-data', quiet: true, zipFile: 'allure-history.zip'
-                sh 'rm -f allure-history.zip'
-            }
-            sh 'docker run --rm -v $PWD:/work -u $(id -u) tobix/allure-cli generate allure-data'
-            zip archive: true, dir: 'allure-report', glob: 'history/**', zipFile: 'allure-history.zip'
-            publishHTML reportDir: 'allure-report', reportFiles: 'index.html', reportName: 'Allure Report'
+    stage('Allure Report') {
+        copyArtifacts filter: 'allure-history.zip', optional: true,
+            projectName: JOB_NAME, selector: lastWithArtifacts()
+        if (fileExists('allure-history.zip')) {
+            unzip dir: 'allure-data', quiet: true, zipFile: 'allure-history.zip'
+            sh 'rm -f allure-history.zip'
         }
+        sh 'docker run --rm -v $PWD:/work -u $(id -u) tobix/allure-cli generate allure-data'
+        zip archive: true, dir: 'allure-report', glob: 'history/**', zipFile: 'allure-history.zip'
+        publishHTML reportDir: 'allure-report', reportFiles: 'index.html', reportName: 'Allure Report'
     }
 }
 

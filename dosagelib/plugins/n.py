@@ -153,7 +153,7 @@ class NineToNine(_ParserScraper):
     stripUrl = url + '/%s'
     firstStripUrl = stripUrl % '2014-01-01'
     imageSearch = '//img[@class="comic-image"]'
-    prevSearch = '//a[@class="prev"]'
+    prevSearch = '//a[./span[contains(text(), "Previous")]]'
     multipleImagesPerStrip = True
 
 

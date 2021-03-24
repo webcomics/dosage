@@ -365,6 +365,14 @@ class Drowtales(_ParserScraper):
     help = 'Index format: number'
 
 
+class DungeonsAndDenizens(_WPNavi):
+    url = ('https://web.archive.org/web/20160308001834/'
+        'http://dungeond.com/')
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2005/08/23/08232005'
+    endOfLife = True
+
+
 class DumbingOfAge(_WPNavi):
     url = 'http://www.dumbingofage.com/'
     stripUrl = url + '%s/'

@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019-2021 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# Copyright (C) 2019-2021 Daniel Ring
 from .common import _WordPressSpliced
 
 
@@ -21,6 +21,12 @@ class AlienDice(_WordPressSpliced):
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '05162001'
 
+    def getPrevUrl(self, url, data):
+        # Fix broken navigation
+        if url == self.stripUrl % 'day-29-part-2-page-3-4':
+            return self.stripUrl % 'day-29-part-2-page-3-2'
+        return super(AlienDice, self).getPrevUrl(url, data)
+
     def namer(self, imageUrl, pageUrl):
         # Fix inconsistent filename
         return imageUrl.rsplit('/', 1)[-1].replace('20010831', '2001-08-31')
@@ -28,11 +34,15 @@ class AlienDice(_WordPressSpliced):
 
 class AlienDiceLegacy(_WordPressSpliced):
     name = 'AlienDice/Legacy'
-    url = 'https://aliendice.com/chapter/legacy/'
-    stripUrl = url + 'page/%s/'
-    firstStripUrl = stripUrl % '45'
-    prevSearch = '//div[d:class("nav-previous")]/a'
+    baseUrl = 'https://aliendice.com/'
+    url = baseUrl + 'series/legacy/'
+    stripUrl = baseUrl + 'comic/%s/'
+    firstStripUrl = stripUrl % 'legacy-1'
     endOfLife = True
+
+    def isfirststrip(self, url):
+        # Strip series identifier
+        return super(AlienDiceLegacy, self).isfirststrip(url.rsplit('?', 1)[0])
 
 
 class BlackRose(_WordPressSpliced):
@@ -60,9 +70,9 @@ class TheCyantianChronicles(_WithSid):
             cls('CesileesDiary', 'cesilees-diary', '12062001-2', 16726, eol=True),
             cls('Darius', 'darius', '03102010', 14353, eol=True),
             cls('DracoVulpes', 'draco-vulpes', 'draco-vulpes', 13788),
-            cls('GenoworksSaga', 'genoworks-saga', '07012004', 13794, eol=True),
+            cls('GenoworksSaga', 'genoworks-saga', '07012004', 13794),
             cls('GralenCraggHall', 'kiet', '07152002', 13798, eol=True),
-            cls('Kiet', 'kiet-2', 'kiet-c01', 14351, eol=True),
+            cls('Kiet', 'kiet-2', 'kiet-c01', 14351),
             cls('NoAngel', 'no-angel', '08112001', 16644, eol=True),
             cls('RandomRamblings', 'gallery', 'cookie-war', 13801),
             cls('SinkOrSwim', 'sink-or-swim', '05112001', 13796, eol=True),
@@ -77,7 +87,7 @@ class Shivae(_WordPressSpliced):
 
 
 class ShivaeComics(_WithSid):
-    baseUrl = 'https://shivae.net/index.php/'
+    baseUrl = 'https://shivae.net/'
 
     def __init__(self, name, path, first, sid, eol=False):
         super().__init__('Shivae/' + name, sid)
