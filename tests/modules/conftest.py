@@ -13,11 +13,12 @@ from dosagelib.scraper import scrapers
 
 def get_test_scrapers():
     """Return scrapers that should be tested."""
-    if "TESTALL" in os.environ:
+    if 'TESTALL' in os.environ:
         # test all comics (this will take some time)
-        return scrapers.get()
-    if 'TESTCOMICS' in os.environ:
-        scraper_pattern = re.compile(os.environ['TESTCOMICS'])
+        # ignore mangadex for now (site is temporary down)
+        scraper_pattern = '^(?!MangaDex)'
+    elif 'TESTCOMICS' in os.environ:
+        scraper_pattern = os.environ['TESTCOMICS']
     else:
         # Get limited number of scraper tests as default
         testscrapernames = [
@@ -28,11 +29,12 @@ def get_test_scrapers():
             # _WordPressScraper
             'GrrlPower',
         ]
-        scraper_pattern = re.compile('^(' + '|'.join(testscrapernames) + ')$')
+        scraper_pattern = '^(' + '|'.join(testscrapernames) + ')$'
 
+    matcher = re.compile(scraper_pattern)
     return [
         scraperobj for scraperobj in scrapers.get()
-        if scraper_pattern.match(scraperobj.name)
+        if matcher.match(scraperobj.name)
     ]
 
 
