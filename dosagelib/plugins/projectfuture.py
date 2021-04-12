@@ -34,7 +34,7 @@ class ProjectFuture(_ParserScraper):
             cls('FishingTrip', 'fishing', '01-00'),
             cls('HeadsYouLose', 'heads', '00-01', last='07-12'),
             cls('NiallsStory', 'niall', '00'),
-            cls('ProjectFuture', 'strip', '0'),
+            cls('ProjectFuture', 'strip', '0', last='664'),
             cls('RedValentine', 'redvalentine', '1', last='6'),
             cls('ShortStories', 'shorts', '01-00'),
             cls('StrangeBedfellows', 'bedfellows', '1', last='6'),
