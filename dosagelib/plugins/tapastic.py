@@ -63,7 +63,6 @@ class Tapastic(_ParserScraper):
             cls('RavenWolf', 'RavenWolf'),
             cls('SyntheticInstinct', 'Synthetic-Instinct'),
             cls('TheCatTheVineAndTheVictory', 'The-Cat-The-Vine-and-The-Victory'),
-            cls('TheGodsPack', 'The-Gods-Pack'),
 
             # START AUTOUPDATE
             # END AUTOUPDATE
