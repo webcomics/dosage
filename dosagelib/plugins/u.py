@@ -27,7 +27,21 @@ class Undertow(_BasicScraper):
 
 
 class unDivine(_ComicControlScraper):
-    url = 'http://undivinecomic.com/'
+    url = 'https://www.undivinecomic.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'page-1'
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix inconsistent filenames
+        filename = imageUrl.rsplit('/', 1)[-1].replace(' ', '-')
+        filename = filename.replace('10B311D9-0992-4D74-AEB8-DAB714DA67C6', 'UD-322')
+        filename = filename.replace('99266624-7EF7-4E99-9EC9-DDB5F59CBDFD', 'UD-311')
+        filename = filename.replace('33C6A5A1-F703-4A0A-BCD5-DE1A09359D8E', 'UD-310')
+        filename = filename.replace('6CE01E81-C299-43C7-A221-8DE0670EFA30', 'ch4endbonusq4')
+        filename = filename.replace('DB66D93B-1FE5-49C7-90E0-FFF981DCD6B3', 'bipolar')
+        if len(filename) > 15 and filename[0].isdigit() and filename[10] == '-':
+            filename = filename[11:]
+        return filename
 
 
 class UnicornJelly(_BasicScraper):
