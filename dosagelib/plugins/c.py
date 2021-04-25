@@ -188,10 +188,13 @@ class CavesAndCritters(_WPWebcomic):
     adult = True
 
 
-class Centralia2050(_WordPressScraper):
-    url = 'http://centralia2050.com/'
+class Centralia2050(_ParserScraper):
+    url = 'https://centralia2050.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'ch1cover'
+    imageSearch = '//div[@id="spliced-comic"]//img'
+    prevSearch = '//a[@class="previous-comic"]'
+    nextSearch = '//a[@class="next-comic"]'
     starter = bounceStarter
 
     def namer(self, imageUrl, pageUrl):
