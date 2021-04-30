@@ -2,12 +2,11 @@ os: linux
 language: python
 jobs:
   include:
-    - python: "3.5"
     - python: "3.6"
     - python: "3.7"
     - python: "3.8"
-      env: "CC_TEST_REPORTER_ID=2a411f596959fc32f5d73f3ba7cef8cc4d5733299d742dbfc97fd6c190b9010c"
     - python: "3.9"
+      env: "CC_TEST_REPORTER_ID=2a411f596959fc32f5d73f3ba7cef8cc4d5733299d742dbfc97fd6c190b9010c"
 cache: pip
 git:
   depth: false
@@ -38,4 +37,4 @@ deploy:
     script: .github/deploy.sh
     on:
       branch: master
-      python: 3.8
+      python: 3.9
