@@ -30,11 +30,3 @@ notifications:
       - "chat.freenode.net#dosage"
     use_notice: true
     skip_join: true
-# Push site to gh-pages branch
-deploy:
-  - provider: script
-    skip_cleanup: true
-    script: .github/deploy.sh
-    on:
-      branch: master
-      python: 3.9
