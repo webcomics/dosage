@@ -25,6 +25,18 @@ jobs:
 
       - name: Test with tox
         run: tox
+        if: ${{ matrix.python-version != '3.9' }}
+
+      - name: Test with tox (and upload coverage)
+        uses: paambaati/codeclimate-action@v2.7.5
+        if: ${{ matrix.python-version == '3.9' }}
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageCommand: tox
+          coverageLocations: |
+            ${{ github.workspace }}/.tox/reports/*/coverage.xml:coverage.py
+          prefix: ${{ github.workspace }}/.tox/py39/lib/python3.9/site-packages
 
       - uses: codecov/codecov-action@v1
         with:
