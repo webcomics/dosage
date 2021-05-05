@@ -1,9 +1,8 @@
 def pys = [
-    [name: 'Python 3.9', docker:'python:3.9-buster', tox:'py39', main: false],
-    [name: 'Python 3.8', docker:'python:3.8-buster', tox:'py38,flake8', main: true],
+    [name: 'Python 3.9', docker:'python:3.9-buster', tox:'py39,flake8', main: true],
+    [name: 'Python 3.8', docker:'python:3.8-buster', tox:'py38', main: false],
     [name: 'Python 3.7', docker:'python:3.7-buster', tox:'py37', main: false],
     [name: 'Python 3.6', docker:'python:3.6-buster', tox:'py36', main: false],
-    [name: 'Python 3.5', docker:'python:3.5-buster', tox:'py35', main: false],
 ]
 
 properties([
@@ -49,8 +48,8 @@ pys.each { py ->
                 if (py.main) {
                     archiveArtifacts artifacts: 'dist/*', fingerprint: true
                     stash includes: 'dist/*.tar.gz', name: 'bin'
-                    dir('.tox') {
-                        stash includes: 'allure-*/**', name: 'allure'
+                    dir('.tox/reports') {
+                        stash includes: '*/allure-data/**', name: 'allure-data'
                     }
                     def buildVer = findFiles(glob: 'dist/*.tar.gz')[0].name.replaceFirst(/\.tar\.gz$/, '')
                     currentBuild.description = buildVer
@@ -58,14 +57,14 @@ pys.each { py ->
                     publishCoverage calculateDiffForChangeRequests: true,
                         sourceFileResolver: sourceFiles('STORE_LAST_BUILD'),
                         adapters: [
-                            coberturaAdapter('.tox/cov-*.xml')
+                            coberturaAdapter('.tox/reports/*/coverage.xml')
                         ]
 
                     recordIssues sourceCodeEncoding: 'UTF-8',
                         referenceJobName: 'dosage/master',
                         tool: flake8(pattern: '.tox/flake8.log', reportEncoding: 'UTF-8')
                 }
-                junit '.tox/junit-*.xml'
+                junit '.tox/reports/*/junit.xml'
             }
         }
     }
@@ -123,8 +122,8 @@ def processAllure() {
     warnError('allure report failed') {
         node {
             deleteDir()
-            unstash 'allure'
-            sh 'mv allure-* allure-data'
+            unstash 'allure-data'
+            sh 'mv */allure-data .'
             copyArtifacts filter: 'allure-history.zip', optional: true, projectName: JOB_NAME, selector: lastWithArtifacts()
             if (fileExists('allure-history.zip')) {
                 unzip dir: 'allure-data', quiet: true, zipFile: 'allure-history.zip'

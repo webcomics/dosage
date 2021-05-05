@@ -1,6 +1,6 @@
 # Dosage
 
-[![Build Status](https://travis-ci.com/webcomics/dosage.svg?branch=master)](https://travis-ci.com/webcomics/dosage)
+[![Tests](https://github.com/webcomics/dosage/actions/workflows/test.yml/badge.svg)](https://github.com/webcomics/dosage/actions/workflows/test.yml)
 [![Code Climate](https://codeclimate.com/github/webcomics/dosage/badges/gpa.svg)](https://codeclimate.com/github/webcomics/dosage)
 [![codecov](https://codecov.io/gh/webcomics/dosage/branch/master/graph/badge.svg)](https://codecov.io/gh/webcomics/dosage)
 ![Maintenance](https://img.shields.io/maintenance/yes/2021.svg)
@@ -72,7 +72,7 @@ are old enough to view them.
 ### Dependencies
 
 Since dosage is written in [Python](http://www.python.org/), a Python
-installation is required: Dosage needs at least Python 3.5. Dosage requires
+installation is required: Dosage needs at least Python 3.6. Dosage requires
 some Python modules from PyPI, so installation with `pip` is recommended.
 
 ### Using the Windows binary
@@ -128,6 +128,6 @@ existing module classes for examples.
 
 ### Test suite status
 
-Dosage has extensive unit tests to ensure the code quality.
-[Travis-CI](https://travis-ci.org/) is used for continuous build and test
-integration. See the badges at the top of this page for the current status.
+Dosage has unit tests to ensure code quality. GitHub Actions are used for
+continuous build and test integration. See the badges at the top of this page
+for the current status.
