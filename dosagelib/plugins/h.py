@@ -5,10 +5,19 @@
 # Copyright (C) 2019-2020 Daniel Ring
 from re import compile, escape
 
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from ..helpers import bounceStarter, indirectStarter
 from .common import _ComicControlScraper, _WordPressScraper, _WPNaviIn
+
+
+class Hackles(_ParserScraper):
+    url = 'http://hackles.org/'
+    stripUrl = url + 'cgi-bin/archives.pl?request=%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//img[contains(@src, "strips/")]'
+    prevSearch = '//a[text()="< previous"]'
+    endOfLife = True
 
 
 class HagarTheHorrible(_BasicScraper):
