@@ -660,6 +660,19 @@ class StrongFemaleProtagonist(_ParserScraper):
         )
 
 
+class StupidFox(_ParserScraper):
+    url = 'http://stupidfox.net/'
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % 'hello'
+    imageSearch = '//div[@class="comicmid"]//img'
+    prevSearch = '//a[@accesskey="p"]'
+
+    def namer(self, imageUrl, pageUrl):
+        page = self.getPage(pageUrl)
+        title = page.xpath(self.imageSearch + '/@title')[0].replace(' - ', '-').replace(' ', '-')
+        return title + '.' + imageUrl.rsplit('.', 1)[-1]
+
+
 class SuburbanJungle(_ParserScraper):
     url = 'http://suburbanjungleclassic.com/'
     stripUrl = url + '?p=%s'
