@@ -123,6 +123,7 @@ class ComicFury(_ParserScraper):
             cls('AgentBishop', 'agentbishop'),
             cls('AHappierKindOfSad', 'ahappierkindofsad'),
             cls('AlbinoBrothers', 'albinobros'),
+            cls('Alderwood', 'alderwood'),
             cls('AlexanderAndLucasRebooted', 'alexanderandlucas'),
             cls('AliaTerra', 'alia-terra'),
             cls('AlienIrony', 'alien-irony'),
