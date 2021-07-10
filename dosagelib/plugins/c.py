@@ -270,9 +270,9 @@ class Cloudscratcher(_ParserScraper):
     url = 'http://www.cloudscratcher.com/'
     stripUrl = url + 'comic.php?page=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = '//div[@id="main_content"]//img[contains(@src, "comic")]'
-    prevSearch = '//a[./img[contains(@src, "previous-page")]]'
-    latestSearch = '//a[@alt="Newest_Page"]'
+    imageSearch = '//img[contains(@src, "pages/")]'
+    prevSearch = '//a[./img[@alt="Previous Page"]]'
+    latestSearch = '//a[./img[@alt="Comic"]]'
     starter = indirectStarter
 
 
