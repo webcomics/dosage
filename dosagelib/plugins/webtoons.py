@@ -115,6 +115,7 @@ class WebToons(_ParserScraper):
             cls('CityOfBlank', 'sf/city-of-blank', 1895),
             cls('CityOfWalls', 'drama/city-of-wall', 505),
             cls('CityVamps', 'challenge/city-vamps-', 119224),
+            cls('ClawShot', 'challenge/clawshot', 621465),
             cls('ClusterFudge', 'slice-of-life/cluster-fudge', 355),
             cls('CodeAdam', 'action/code-adam', 1657),
             cls('CookingComically', 'tiptoon/cooking-comically', 622),
