@@ -224,6 +224,7 @@ class WebToons(_ParserScraper):
             cls('JustPancakes', 'comedy/just-pancakes', 1651),
             cls('KidsAreAllRight', 'drama/kids-are-all-right', 283),
             cls('Killstagram', 'thriller/killstagram', 1971),
+            cls('KissItGoodbye', 'challenge/kiss-it-goodbye', 443703),
             cls('KindOfConfidential', 'romance/kind-of-confidential', 663),
             cls('KindOfLove', 'slice-of-life/kind-of-love', 1850),
             cls('KnightRun', 'sf/knight-run', 67),
