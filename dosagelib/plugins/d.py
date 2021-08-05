@@ -226,6 +226,13 @@ class DoemainOfOurOwn(_ParserScraper):
         return filename
 
 
+class DoesNotPlayWellWithOthers(_WPNavi):
+    url = 'http://www.doesnotplaywellwithothers.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'pwc-0001'
+    adult = True
+
+
 class DoghouseDiaries(_ParserScraper):
     url = 'http://thedoghousediaries.com/'
     stripUrl = url + '%s'
