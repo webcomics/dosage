@@ -216,6 +216,12 @@ class Sheldon(_BasicScraper):
     help = 'Index format: yymmdd'
 
 
+class Shifters(_WPNavi):
+    url = 'http://shiftersonline.com/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % 'shifters-redux-promo'
+
+
 class ShipInABottle(_WordPressScraper):
     url = 'http://shipinbottle.pepsaga.com/'
     stripUrl = url + '?p=%s'
