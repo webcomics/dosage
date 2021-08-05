@@ -12,6 +12,16 @@ from ..util import tagre
 from .common import _WordPressScraper, _WPNavi, _WPWebcomic
 
 
+class RaineDog(_ParserScraper):
+    baseUrl = 'http://stuff.dvd3000.ca/dir/rainedog/mirror/'
+    stripUrl = baseUrl + 'd/%s.html'
+    url = stripUrl % '20091128'
+    firstStripUrl = stripUrl % '20090116'
+    imageSearch = '//img[contains(@src, "imgs/rd")]'
+    prevSearch = '//a[./img[@id="previous_day1"]]'
+    endOfLife = True
+
+
 class RalfTheDestroyer(_WordPressScraper):
     url = 'http://ralfthedestroyer.com/'
 
