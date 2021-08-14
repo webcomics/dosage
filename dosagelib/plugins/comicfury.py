@@ -27,10 +27,12 @@ class ComicFury(_ParserScraper):
         u'//nav//a[contains(text(), "\u2039")]',
         # LatchkeyKingdom
         '//a[d:class("navi") and img[contains(@src, "Previous")]]',
-        # RedSpot
-        '//a[contains(text(), "Back")]',
         # KATRAN
         '//a[contains(text(), "Previous")]',
+        # MansionofE
+        '//a[img[contains(@alt, "PREVIOUS")]]',
+        # RedSpot
+        '//a[contains(text(), "Back")]',
     )
     nextSearch = (
         '//link[@rel="next"]',
@@ -45,6 +47,8 @@ class ComicFury(_ParserScraper):
         '//a[d:class("navi") and img[contains(@src, "Next")]]',
         # RedSpot, KATRAN
         '//a[contains(text(), "Next")]',
+        # MansionofE
+        '//a[img[contains(@alt, "NEXT")]]',
     )
     help = 'Index format: n'
     starter = bounceStarter
@@ -969,6 +973,7 @@ class ComicFury(_ParserScraper):
             cls('TheLegendaryPixelCrew', 'thelegendarypixelcrew'),
             cls('TheLegendOfLink', 'legendoflink'),
             cls('TheLozoyas', 'thelozoyas'),
+            cls('TheMansionofE', 'mansionofe'),
             cls('TheMates', 'themates'),
             cls('TheMatesPortugus', 'matespt', 'pt'),
             cls('TheMeaningOfLife', 'themeaningoflife'),

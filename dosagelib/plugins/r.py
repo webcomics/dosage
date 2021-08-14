@@ -105,6 +105,13 @@ class RedMeat(_ParserScraper):
         return '_'.join(parts[1:3])
 
 
+class Requiem(_WordPressScraper):
+    baseUrl = 'http://requiem.spiderforest.com/'
+    url = baseUrl + '?latest'
+    stripUrl = baseUrl + 'comic/%s'
+    firstStripUrl = stripUrl % '2004-06-07-3'
+
+
 class Replay(_ParserScraper):
     url = 'http://replaycomic.com/'
     stripUrl = url + 'comic/%s/'
