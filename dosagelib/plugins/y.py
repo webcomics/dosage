@@ -7,8 +7,14 @@ from .common import _WordPressScraper, _WPWebcomic
 
 
 class YAFGC(_WordPressScraper):
-    url = 'http://yafgc.net/'
+    baseUrl = 'https://www.yafgc.net/'
+    url = baseUrl + '?latest'
+    stripUrl = baseUrl + 'comic/%s'
+    firstStripUrl = stripUrl % 'bob-meets-gren'
 
+    def __init__(self, name):
+        super().__init__(name)
+        self.session.add_throttle('www.yafgc.net', 3.0, 15.5)
 
 class YoshSaga(_WPWebcomic):
     url = 'https://www.yoshsaga.com/'
