@@ -102,7 +102,7 @@ class EmergencyExit(_BasicScraper):
 class Erfworld(_ParserScraper):
     stripUrl = 'https://archives.erfworld.com/%s'
     url = stripUrl % 'getLatestPage.php'
-    firstStripUrl = stripUrl % 'Book+0/1'
+    firstStripUrl = stripUrl % 'Kickstarter+Stories/1'
     imageSearch = '//div[@class="page_content"]//img'
     textSearch = '//div[@class="page_content"]'
     prevSearch = '//li[@class="previous"]/a'
@@ -134,8 +134,10 @@ class Erfworld(_ParserScraper):
             return self.stripUrl % 'Book+2/231'
         elif url == self.stripUrl % 'Book+2/1':
             return self.stripUrl % 'Book+1/184'
-        if url == self.stripUrl % 'Book+1/1':
+        elif url == self.stripUrl % 'Book+1/1':
             return self.stripUrl % 'Book+0/81'
+        elif url == self.stripUrl % 'Book+0/1':
+            return self.stripUrl % 'Kickstarter+Stories/54'
         return super(Erfworld, self).getPrevUrl(url, data)
 
 
