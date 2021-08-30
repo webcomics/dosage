@@ -156,7 +156,7 @@ class FoxDad(_ParserScraper):
 
 
 class FoxTails(_ParserScraper):
-    stripUrl = 'http://foxtails.magickitsune.com/strips/%s.html'
+    stripUrl = 'https://web.archive.org/web/20200920134555/http:/foxtails.magickitsune.com/strips/%s.html'
     url = stripUrl % 'current'
     firstStripUrl = stripUrl % '20041024'
     imageSearch = '//img[contains(@src, "img/2")]'
@@ -167,7 +167,7 @@ class FoxTails(_ParserScraper):
         # Include pre-reboot archive
         if url == self.stripUrl % '20090906':
             return self.stripUrl % '20090704'
-        return super(FoxTails, self).getPrevUrl(url, data)
+        return super().getPrevUrl(url, data)
 
 
 class Fragile(_ParserScraper):
