@@ -69,12 +69,13 @@ class RealLife(_WordPressScraper):
         return urljoin(url, target)
 
 
-class RealmOfAtland(_BasicScraper):
-    url = 'http://www.realmofatland.com/'
+class RealmOfAtland(_ParserScraper):
+    url = 'https://web.archive.org/web/20201225151926/http://www.realmofatland.com/'
     stripUrl = url + '?p=%s'
     firstStripUrl = stripUrl % '1'
-    prevSearch = compile(tagre("a", "href", r'(\?p=\d+)', after="cg_back"))
-    imageSearch = compile(tagre("img", "src", r'(images/strips/atland\d+.[^"]+)'))
+    prevSearch = '//a[@id="cg_back"]'
+    imageSearch = '//p[@id="cg_img"]//img'
+    endOfLife = True
     help = 'Index format: nnn'
 
 
@@ -103,6 +104,13 @@ class RedMeat(_ParserScraper):
     def namer(self, image_url, page_url):
         parts = image_url.rsplit('/', 2)
         return '_'.join(parts[1:3])
+
+
+class Requiem(_WordPressScraper):
+    baseUrl = 'http://requiem.spiderforest.com/'
+    url = baseUrl + '?latest'
+    stripUrl = baseUrl + 'comic/%s'
+    firstStripUrl = stripUrl % '2004-06-07-3'
 
 
 class Replay(_ParserScraper):

@@ -158,9 +158,10 @@ class ALessonIsLearned(_BasicScraper):
 
 
 class Alice(_WordPressScraper):
-    url = 'http://www.alicecomics.com/'
+    url = 'https://web.archive.org/web/20210115132313/http://www.alicecomics.com/'
     latestSearch = '//a[text()="Latest Alice!"]'
     starter = indirectStarter
+    endOfLife = True
 
 
 class AlienLovesPredator(_BasicScraper):

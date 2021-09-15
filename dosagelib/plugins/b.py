@@ -282,14 +282,6 @@ class Brink(_WordPressScraper):
     endOfLife = True
 
 
-class BroodHollow(_WordPressScraper):
-    url = 'https://broodhollow.chainsawsuit.com/'
-    firstStripUrl = url + 'page/2012/10/06/book-1-curious-little-thing'
-
-    def shouldSkipUrl(self, url, data):
-        return data.xpath('//div[@id="comic"]//iframe')
-
-
 class Buni(_WordPressScraper):
     url = 'http://www.bunicomic.com/'
 

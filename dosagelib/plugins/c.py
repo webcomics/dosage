@@ -202,14 +202,6 @@ class Centralia2050(_WordPressScraper):
         return page + '.' + ext
 
 
-class ChainsawSuit(_WordPressScraper):
-    url = 'http://chainsawsuit.com/comic/'
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2008/03/12/strip-338'
-    prevSearch = '//img[@alt="previous"]/..'
-    help = 'Index format: yyyy/mm/dd/stripname'
-
-
 class ChannelAte(_WPNavi):
     url = 'http://www.channelate.com/'
 

@@ -12,10 +12,10 @@ jobs:
         python-version: [3.6, 3.7, 3.8, 3.9]
 
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v2
 
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2.2.2
+        uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -38,6 +38,6 @@ jobs:
             ${{ github.workspace }}/.tox/reports/*/coverage.xml:coverage.py
           prefix: ${{ github.workspace }}/.tox/py39/lib/python3.9/site-packages
 
-      - uses: codecov/codecov-action@v2.0.2
+      - uses: codecov/codecov-action@v2
         with:
           directory: '.tox/reports'
