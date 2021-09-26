@@ -34,7 +34,7 @@ class MangaDex(_ParserScraper):
             chapterBlock = chapterData.json()
             chapterTotal = chapterBlock['total']
             chapterOffset = chapterBlock['offset'] + chapterBlock['limit']
-            chapterList.extend(map(lambda c: c['data'], chapterBlock['results']))
+            chapterList.extend(chapterBlock['data'])
 
         # Determine if manga is complete and/or adult
         if manga['attributes']['lastChapter'] != '0':
