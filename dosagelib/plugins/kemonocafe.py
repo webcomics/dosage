@@ -47,6 +47,7 @@ class KemonoCafe(_ParserScraper):
     def getmodules(cls):
         return (
             cls('AddictiveScience', 'addictivescience', 'page0001'),
+            cls('Bethellium', 'bethellium', 'c01p00'),
             cls('CaribbeanBlue', 'cb', 'page000', last='page325'),
             cls('IMew', 'imew', 'imew00', last='imew50'),
             cls('Knighthood', 'knighthood', 'kh0001'),
