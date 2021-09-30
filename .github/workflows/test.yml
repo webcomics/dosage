@@ -28,7 +28,7 @@ jobs:
         if: ${{ matrix.python-version != '3.9' }}
 
       - name: Test with tox (and upload coverage)
-        uses: paambaati/codeclimate-action@v2.7.5
+        uses: paambaati/codeclimate-action@v3.0.0
         if: ${{ matrix.python-version == '3.9' }}
         env:
           CC_TEST_REPORTER_ID: 2a411f596959fc32f5d73f3ba7cef8cc4d5733299d742dbfc97fd6c190b9010c
