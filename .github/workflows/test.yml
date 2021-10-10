@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8, 3.9]
+        python-version: ["3.6", "3.7", "3.8", "3.9", "3.10"]
 
     steps:
       - uses: actions/checkout@v2
@@ -25,11 +25,11 @@ jobs:
 
       - name: Test with tox
         run: tox
-        if: ${{ matrix.python-version != '3.9' }}
+        if: ${{ matrix.python-version != '3.10' }}
 
       - name: Test with tox (and upload coverage)
         uses: paambaati/codeclimate-action@v3.0.0
-        if: ${{ matrix.python-version == '3.9' }}
+        if: ${{ matrix.python-version == '3.10' }}
         env:
           CC_TEST_REPORTER_ID: 2a411f596959fc32f5d73f3ba7cef8cc4d5733299d742dbfc97fd6c190b9010c
         with:

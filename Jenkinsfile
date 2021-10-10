@@ -1,8 +1,9 @@
 def pys = [
-    [name: 'Python 3.9', docker:'python:3.9-buster', tox:'py39,flake8', main: true],
-    [name: 'Python 3.8', docker:'python:3.8-buster', tox:'py38', main: false],
-    [name: 'Python 3.7', docker:'python:3.7-buster', tox:'py37', main: false],
-    [name: 'Python 3.6', docker:'python:3.6-buster', tox:'py36', main: false],
+    [name: 'Python 3.10', docker: 'python:3.10-buster', tox:'py310,flake8', main: true],
+    [name: 'Python 3.9',  docker: 'python:3.9-buster',  tox:'py39', main: false],
+    [name: 'Python 3.8',  docker: 'python:3.8-buster',  tox:'py38', main: false],
+    [name: 'Python 3.7',  docker: 'python:3.7-buster',  tox:'py37', main: false],
+    [name: 'Python 3.6',  docker: 'python:3.6-buster',  tox:'py36', main: false],
 ]
 
 properties([
