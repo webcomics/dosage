@@ -4,6 +4,8 @@
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 from re import compile
+from urllib.parse import urljoin
+from lxml import etree
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
@@ -59,12 +61,28 @@ class Unsounded(_ParserScraper):
     startUrl = url + 'comic+index/'
     stripUrl = url + 'comic/ch%s/ch%s_%s.html'
     firstStripUrl = stripUrl % ('01', '01', '01')
-    imageSearch = '//img[contains(@src, "pageart/")]'
+    imageSearch = '//div[@id="comic"]//img'
     prevSearch = '//a[d:class("back")]'
     latestSearch = '//div[@id="chapter_box"][1]//a[last()]'
     multipleImagesPerStrip = True
     starter = indirectStarter
     help = 'Index format: chapter-page'
+
+    def fetchUrls(self, url, data, urlSearch):
+        imageUrls = super(Unsounded, self).fetchUrls(url, data, urlSearch)
+        # Include background for multi-image pages
+        imageRegex = compile(r'background-image: url\((pageart/.*)\)')
+        for match in imageRegex.finditer(str(etree.tostring(data))):
+            print(match)
+            searchUrls.append(normaliseURL(urljoin(data[1], match.group(1))))
+        return imageUrls
+
+    def namer(self, imageUrl, pageUrl):
+        filename = imageUrl.rsplit('/', 1)[-1]
+        pagename = pageUrl.rsplit('/', 1)[-1]
+        if pagename.split('.', 1)[0] != filename.split('.', 1)[0]:
+            filename = pagename.split('_', 1)[0] + '_' + filename
+        return filename
 
     def getPrevUrl(self, url, data):
         # Fix missing navigation links between chapters
