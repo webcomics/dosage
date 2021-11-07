@@ -56,7 +56,7 @@ jobs:
       # https://github.com/docker/metadata-action
       - name: Extract Docker metadata
         id: meta
-        uses: docker/metadata-action@8b842e721d38d18bea23b57f4c040e53331f4ca2
+        uses: docker/metadata-action@548e2346a9987b56d8a4104fe776321ff8e23440
         with:
           images: |
             davralin/dosage
