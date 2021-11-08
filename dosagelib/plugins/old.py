@@ -1560,6 +1560,7 @@ class Renamed(Scraper):
             cls('ComicFury/Elektroanthology', 'ComicFury/ElektrosComicAnthology'),
             cls('ComicFury/ICanSeeYourFeels', 'ComicFury/SeeYourFeels'),
             cls('ComicFury/MAGISAupdatesMonWedFri', 'ComicFury/MAGISAPARASAYOupdatesMonFri'),
+            cls('ComicFury/MonsterSoup', 'MonsterSoup'),
             cls('ComicFury/OopsComicAdventure', 'OopsComicAdventure'),
             cls('ComicFury/ThomasAndZachary', 'ComicFury/ThomasAndZacharyArchives'),
             cls('ComicGenesis/TheLounge', 'KeenSpot/TheLounge'),

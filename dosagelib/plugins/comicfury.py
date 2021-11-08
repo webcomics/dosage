@@ -674,7 +674,6 @@ class ComicFury(_ParserScraper):
             cls('MonochromeRainbow', 'monobow'),
             cls('MonsterBait', 'deadnight'),
             cls('MonsterInTheKingdom', 'monster'),
-            cls('MonsterSoup', 'monstersoup'),
             cls('MonstersWithBenefits', 'failmonsters'),
             cls('MonstroniverseAdventures', 'monstroniverse'),
             cls('MoonlitBrew', 'moonlitbrew'),
