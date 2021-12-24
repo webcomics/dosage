@@ -361,7 +361,7 @@ class SoloLeveling(_ParserScraper):
     firstStripUrl = stripUrl % '1'
     imageSearch = '//div[@class="img_container"]//img'
     prevSearch = '//a[@rel="prev"]'
-    latestSearch = '//table[@class="chap_tab"]//a'
+    latestSearch = '//div[@id="latestChapters"]//a'
     starter = indirectStarter
     multipleImagesPerStrip = True
     imageUrlFixes = {
