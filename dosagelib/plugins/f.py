@@ -144,7 +144,7 @@ class FoxDad(_ParserScraper):
     url = 'https://foxdad.com/'
     stripUrl = url + 'post/%s'
     firstStripUrl = stripUrl % '149683014997/some-people-are-just-different-support-the-comic'
-    imageSearch = '//figure[@class="photo-hires-item"]//img'
+    imageSearch = ('//figure[@class="photo-hires-item"]//img', '//figure[@class="tmblr-full"]//img')
     prevSearch = '//a[@class="previous-button"]'
 
     def namer(self, imageUrl, pageUrl):
