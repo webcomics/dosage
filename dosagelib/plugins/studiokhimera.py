@@ -43,7 +43,6 @@ class StudioKhimera(_ParserScraper):
     @classmethod
     def getmodules(cls):
         return (
-            cls('Eorah', 'eorah'),
             cls('Mousechievous', 'mousechievous'),
         )
 

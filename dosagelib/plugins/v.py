@@ -40,20 +40,6 @@ class VGCats(_ParserScraper):
     help = 'Index format: n (unpadded)'
 
 
-class VGCatsAdventure(VGCats):
-    name = 'VGCats/Adventure'
-    url = 'http://www.vgcats.com/ffxi/'
-    stripUrl = url + '?strip_id=%s'
-    imageSearch = '//p/img[contains(@src, "images/")]'
-
-
-class VGCatsSuper(VGCats):
-    name = 'VGCats/Super'
-    url = 'http://www.vgcats.com/super/'
-    stripUrl = url + '?strip_id=%s'
-    imageSearch = '//p/img[contains(@src, "images/")]'
-
-
 class VickiFox(_ParserScraper):
     url = 'http://www.vickifox.com/comic/strip'
     stripUrl = url + '?id=%s'

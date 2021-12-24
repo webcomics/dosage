@@ -156,13 +156,6 @@ class Science(_ParserScraper):
     endOfLife = True
 
 
-class SeelPeel(_WPNaviIn):
-    url = 'https://seelpeel.com/'
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = stripUrl % 'seelpeel-goes-live'
-    multipleImagesPerStrip = True
-
-
 class SequentialArt(_ParserScraper):
     url = 'https://www.collectedcurios.com/sequentialart.php'
     stripUrl = url + '?s=%s'

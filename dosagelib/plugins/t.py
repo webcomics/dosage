@@ -23,14 +23,6 @@ class TailsAndTactics(_ParserScraper):
     prevSearch = '//a[text()=" Back"]'
 
 
-class TaleOfTenThousand(_ParserScraper):
-    url = 'http://www.t10k.club/'
-    stripUrl = url + 'comic/%s'
-    firstStripUrl = stripUrl % '1-01_00'
-    imageSearch = '//article[@id="comic"]//img'
-    prevSearch = '//a[d:class("prev")]'
-
-
 class TekMage(_WPNavi):
     url = 'https://tekmagecomic.com/'
     stripUrl = url + 'comic/%s/'
