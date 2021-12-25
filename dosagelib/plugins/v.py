@@ -8,12 +8,21 @@ from ..helpers import bounceStarter, indirectStarter
 
 
 class VampireHunterBoyfriends(_ParserScraper):
-    url = 'https://boneitiscomics.com/vhb.php'
-    stripUrl = url + '?pg=%s'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = '//div[@class="page"]//img'
-    prevSearch = '//a[@id="prev"]'
+    baseUrl = 'https://boneitisindustries.com/'
+    url = baseUrl + 'comics/vampire-hunter-boyfriends/'
+    stripUrl = baseUrl + 'comic/%s/'
+    firstStripUrl = stripUrl % 'vampire-hunter-boyfriends-chapter-1-cover'
+    imageSearch = '//div[@id="content"]//img[d:class("size-full")]'
+    prevSearch = '//a[./span[d:class("ticon-chevron-left")]]'
     adult = True
+
+    def starter(self):
+        archivePage = self.getPage(self.url)
+        self.archive = archivePage.xpath('//div[contains(@class, "vcex-portfolio-grid")]//a/@href')
+        return self.archive[-1]
+
+    def getPrevUrl(self, url, data):
+        return self.archive[self.archive.index(url) - 1]
 
 
 class Vexxarr(_ParserScraper):
