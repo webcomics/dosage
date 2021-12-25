@@ -53,6 +53,26 @@ class TheBrads(_ParserScraper):
     multipleImagesPerStrip = True
     endOfLife = True
 
+class TheChroniclesOfHuxcyn(_WordPressScraper):
+    url = 'https://huxcyn.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'opening-001'
+
+    def namer(self, imageUrl, pageUrl):
+        # Fix inconsistent filenames
+        filename = imageUrl.rsplit('/', 1)[-1]
+        filename = filename.replace('IMG_0504', 'TCoH109')
+        filename = filename.replace('tcoh', 'TCoH')
+        filename = filename.replace('1599151639.xizana_f3a6458e-8d94-4259-bec3-5a92706fe493_jpeg', 'october.2020.cover')
+        filename = filename.replace('huxonsword', 'october.2020.huxonsword')
+        filename = filename.replace('New_Canvas100pageswebimage', 'TCoH100')
+        if filename[0] == '0':
+            filename = 'TCoH' + filename
+        elif filename[0] == '3':
+            pagenum = int(filename.rsplit('.', 1)[0].split('_', 1)[1].split('_', 1)[0])
+            filename = 'TCoH' + str(40 + pagenum) + filename.rsplit('.', 1)[-1]
+        return filename
+
 
 class TheClassMenagerie(_ParserScraper):
     stripUrl = 'http://www.theclassm.com/d/%s.html'
