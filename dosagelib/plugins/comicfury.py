@@ -1094,6 +1094,7 @@ class ComicFury(_ParserScraper):
             cls('VampireCatgirlPart2', 'vampirecatgirl2'),
             cls('VeldaGirlDetective', 'veldagirldetective'),
             cls('Verboten', 'verboten'),
+            cls('VHV', 'vhv'),
             cls('Victory', 'victoryadventures'),
             cls('ViewHub', 'viewhub'),
             cls('ViolentBlue', 'violentblue'),
