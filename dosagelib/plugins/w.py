@@ -224,9 +224,3 @@ class WormWorldSagaGerman(WormWorldSaga):
 
 class WormWorldSagaSpanish(WormWorldSaga):
     lang = 'es'
-
-
-class Wrongside(_WPNavi):
-    url = 'http://www.ayzewi.com/comic/'
-    stripUrl = url + '?comic=%s'
-    firstStripUrl = stripUrl % 'intro-2'
