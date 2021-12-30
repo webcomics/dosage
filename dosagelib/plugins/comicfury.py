@@ -854,6 +854,7 @@ class ComicFury(_ParserScraper):
             cls('SixteenCandlesHuntersAgency', 'sixteencandles'),
             cls('Skeeter', 'herecomesskeeter'),
             cls('Sketchy', 'sketchy'),
+            cls('Skylords', 'skylords'),
             cls('SlugMan', 'slug-man'),
             cls('SmallTownValues', 'smalltownvalues'),
             cls('SmitheeZombieHunter', 'smitheezombiehunter'),
