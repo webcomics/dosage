@@ -122,6 +122,7 @@ class MangaDex(_ParserScraper):
             cls('PleaseDontBullyMeNagatoro', 'd86cf65b-5f6c-437d-a0af-19a31f94ec55'),
             cls('PleaseDontBullyMeNagatoroComicAnthology', '2a4bc9ec-2d70-428a-8b46-27f6218ed267'),
             cls('PleaseTellMeGalkochan', '7a2f2f6b-a6a6-4149-879b-3fc2f6916549'),
+            cls('RebuildWorld', '99182618-ae92-4aec-a5df-518659b7b613'),
             cls('SaekiSanWaNemutteru', 'd9aecdab-8aef-4b90-98d5-32e86faffb28'),
             cls('SenpaiGaUzaiKouhaiNoHanashi', 'af38f328-8df1-4b4c-a272-e737625c3ddc'),
             cls('SewayakiKitsuneNoSenkoSan', 'c26269c7-0f5d-4966-8cd5-b79acb86fb7a'),
