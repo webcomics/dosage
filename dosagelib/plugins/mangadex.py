@@ -108,6 +108,7 @@ class MangaDex(_ParserScraper):
             cls('JingaiNoYomeToIchaIchaSuru', '809d2493-df3c-4e72-a57e-3e0026cae9fb'),
             cls('KawaiiJoushiWoKomarasetai', '23b7cc7a-df89-4049-af28-1fa78f88713e'),
             cls('KanojoOkarishimasu', '32fdfe9b-6e11-4a13-9e36-dcd8ea77b4e4'),
+            cls('KoiToUtatane', 'f7d40a27-e289-45b3-9c68-d1cb251897e6'),
             cls('Lv2KaraCheatDattaMotoYuushaKouhoNoMattariIsekaiLife', '58bc83a0-1808-484e-88b9-17e167469e23'),
             cls('MaouNoOreGaDoreiElfWoYomeNiShitandaGaDouMederebaIi', '55ace2fb-e157-4d76-9e72-67c6bd762a39'),
             cls('ModernMoGal', 'b1953f80-36f7-492c-b0f8-e9dd0ad01752'),
