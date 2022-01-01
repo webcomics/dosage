@@ -103,6 +103,7 @@ class MangaDex(_ParserScraper):
             cls('HangingOutWithAGamerGirl', 'de9e3b62-eac5-4c0a-917d-ffccad694381'),
             cls('HoriMiya', 'a25e46ec-30f7-4db6-89df-cacbc1d9a900'),
             cls('HowToOpenATriangularRiceball', '6ebd90ce-d5e8-49c0-a4bc-e02e0f8ecb93'),
+            cls('IchaichasuruToOkaneGaWaichauFutariNoHanashi', '8eaaec7d-7aa7-490e-8d52-5a3d0a28e78b'),
             cls('InterspeciesReviewers', '1b2fddf9-1385-4f3c-b37a-cf86a9428b1a'),
             cls('JahySamaWaKujikenai', '2f4e5f5b-d930-4266-8c8a-c4cf9a81e51f'),
             cls('JingaiNoYomeToIchaIchaSuru', '809d2493-df3c-4e72-a57e-3e0026cae9fb'),
