@@ -83,7 +83,7 @@ class MangaDex(_ParserScraper):
 
     def namer(self, imageUrl, pageUrl):
         # Construct filename from episode number and page index in array
-        chapterNum = self.chapter['attributes']['chapter']
+        chapterNum = self.chapter['attributes']['chapter'] if self.chapter['attributes']['chapter'] != None else 0
         pageNum = self.imageUrls.index(imageUrl)
         pageExt = imageUrl.rsplit('.')[-1]
         return '%s-%02d.%s' % (chapterNum, pageNum, pageExt)
@@ -135,6 +135,7 @@ class MangaDex(_ParserScraper):
             cls('TheWolfAndRedRidingHood', 'a7d1283b-ed38-4659-b8bc-47bfca5ccb8a'),
             cls('TomoChanWaOnnanoko', '76ee7069-23b4-493c-bc44-34ccbf3051a8'),
             cls('TonikakuKawaii', '30f3ac69-21b6-45ad-a110-d011b7aaadaa'),
+            cls('UramikoiKoiUramikoi', '009b6788-48f3-4e78-975c-097f54def7ab'),
             cls('YotsubaAnd', '58be6aa6-06cb-4ca5-bd20-f1392ce451fb'),
             cls('YuYuHakusho', '44a5cbe1-0204-4cc7-a1ff-0fda2ac004b6'),
         )
