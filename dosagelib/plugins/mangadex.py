@@ -94,6 +94,7 @@ class MangaDex(_ParserScraper):
             cls('AttackOnTitan', '304ceac3-8cdb-4fe7-acf7-2b6ff7a60613'),
             cls('Beastars', 'f5e3baad-3cd4-427c-a2ec-ad7d776b370d'),
             cls('BokuNoKokoroNoYabaiYatsu', '3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac'),
+            cls('CheerfulAmnesia', 'f9448f90-c068-4b6a-8c85-03d739aef255'),
             cls('DoChokkyuuKareshiXKanojo', 'efb62763-c940-4495-aba5-69c192a999a4'),
             cls('DeliciousinDungeon', 'd90ea6cb-7bc3-4d80-8af0-28557e6c4e17'),
             cls('DragonDrive', '5c06ae70-b5cf-431a-bcd5-262a411de527'),
