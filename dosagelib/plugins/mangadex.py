@@ -16,6 +16,7 @@ class MangaDex(_ParserScraper):
         self.url = baseUrl + 'manga/%s' % mangaId
         self.chaptersUrl = baseUrl + 'manga/%s/feed?translatedLanguage[]=en&order[chapter]=desc&limit=500' % mangaId
         self.stripUrl = baseUrl + 'chapter/%s'
+        self.cdnUrl = baseUrl + 'at-home/server/%s'
         self.imageUrl = 'https://s5.mangadex.org/data/%s/%%s'
 
     def starter(self):
@@ -75,10 +76,13 @@ class MangaDex(_ParserScraper):
         # Retrieve chapter metadata from API
         chapterData = json.loads(data.text_content())
         self.chapter = chapterData['data']
+        cdnData = self.session.get(self.cdnUrl % self.chapter['id'])
+        cdnData.raise_for_status()
+        cdnBlock = cdnData.json()
 
         # Save link order for position-based filenames
-        imageUrl = self.imageUrl % self.chapter['attributes']['hash']
-        self.imageUrls = [imageUrl % page for page in self.chapter['attributes']['data']]
+        imageUrl = self.imageUrl % cdnBlock['chapter']['hash']
+        self.imageUrls = [imageUrl % page for page in cdnBlock['chapter']['data']]
         return self.imageUrls
 
     def namer(self, imageUrl, pageUrl):
