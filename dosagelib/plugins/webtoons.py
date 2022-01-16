@@ -382,6 +382,7 @@ class WebToons(_ParserScraper):
             cls('TheGirlDownstairs', 'romance/the-girl-downstairs', 1809),
             cls('THEGIRLFROMCLASS', 'drama/the-girl-from-class', 73),
             cls('TheGodOfHighSchool', 'action/the-god-of-high-school', 66),
+            cls('TheGreenhouse', 'challenge/the-greenhouse-gl', 278312),
             cls('TheKissBet', 'romance/the-kiss-bet', 1617),
             cls('TheLifeOfTheThreeBears', 'slice-of-life/the-life-of-the-three-bears', 390),
             cls('ThePurpleHeart', 'super-hero/the-purple-heart', 723),
