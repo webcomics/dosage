@@ -111,6 +111,7 @@ class MangaDex(_ParserScraper):
             cls('InterspeciesReviewers', '1b2fddf9-1385-4f3c-b37a-cf86a9428b1a'),
             cls('JahySamaWaKujikenai', '2f4e5f5b-d930-4266-8c8a-c4cf9a81e51f'),
             cls('JingaiNoYomeToIchaIchaSuru', '809d2493-df3c-4e72-a57e-3e0026cae9fb'),
+            cls('KaetteKudasaiAkutsuSan', '737a846b-2e67-4d63-9f7e-f54b3beebac4'),
             cls('KawaiiJoushiWoKomarasetai', '23b7cc7a-df89-4049-af28-1fa78f88713e'),
             cls('KanojoOkarishimasu', '32fdfe9b-6e11-4a13-9e36-dcd8ea77b4e4'),
             cls('KoiToUtatane', 'f7d40a27-e289-45b3-9c68-d1cb251897e6'),
