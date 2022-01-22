@@ -25,10 +25,11 @@ class KemonoCafe(_ParserScraper):
     def namer(self, imageUrl, pageUrl):
         # Strip date from filenames
         filename = imageUrl.rsplit('/', 1)[-1]
-        if filename[4] == '-' and filename[7] == '-':
-            filename = filename[10:]
-        if filename[0] == '-' or filename[0] == '_':
-            filename = filename[1:]
+        if not 'ultrarosa' in pageUrl:
+            if filename[4] == '-' and filename[7] == '-':
+                filename = filename[10:]
+            if filename[0] == '-' or filename[0] == '_':
+                filename = filename[1:]
         # Fix duplicate filenames
         if 'paprika' in pageUrl and '69-2' in pageUrl:
             filename = filename.replace('69', '69-2')
@@ -59,4 +60,5 @@ class KemonoCafe(_ParserScraper):
             cls('Rascals', 'rascals', 'rascals-pg-0', adult=True),
             cls('TheEyeOfRamalach', 'theeye', 'theeye-page01'),
             cls('TinaOfTheSouth', 'tots', 'tos-01-01'),
+            cls('UltraRosa', 'ultrarosa', 'pg001'),
         )
