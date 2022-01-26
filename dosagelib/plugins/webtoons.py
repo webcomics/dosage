@@ -319,6 +319,7 @@ class WebToons(_ParserScraper):
             cls('RANDOMPHILIA', 'comedy/randomphilia', 386),
             cls('Rebirth', 'sf/rebirth', 1412),
             cls('RefundHighSchool', 'fantasy/refundhighschool', 1360),
+            cls('ReturnToPlayer', 'action/return-to-player', 2574),
             cls('RiseFromAshes', 'supernatural/rise-from-ashes', 959),
             cls('RoarStreetJournal', 'slice-of-life/roar-street-journal', 397),
             cls('RoomOfSwords', 'sf/room-of-swords', 1261),
