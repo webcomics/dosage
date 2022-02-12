@@ -138,6 +138,7 @@ class MangaDex(_ParserScraper):
             cls('SwordArtOnlineProgressive', '22ea3f54-11e4-4932-a527-89d63d3a62d9'),
             cls('TadokoroSan', '8ffbfa2f-23fa-4490-848e-942581a4d873'),
             cls('TamenDeGushi', '3f1453fb-9dac-4aca-a2ea-69613856c952'),
+            cls('TenseiShitaraSlimeDattaKen', 'e78a489b-6632-4d61-b00b-5206f5b8b22b'),
             cls('TheNewGate', 'b41bef1e-7df9-4255-bd82-ecf570fec566'),
             cls('TheWolfAndRedRidingHood', 'a7d1283b-ed38-4659-b8bc-47bfca5ccb8a'),
             cls('TomoChanWaOnnanoko', '76ee7069-23b4-493c-bc44-34ccbf3051a8'),
