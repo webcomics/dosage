@@ -136,6 +136,7 @@ class MangaDex(_ParserScraper):
             cls('SousouNoFrieren', 'b0b721ff-c388-4486-aa0f-c2b0bb321512'),
             cls('SwordArtOnline', '3dd0b814-23f4-4342-b75b-f206598534f6'),
             cls('SwordArtOnlineProgressive', '22ea3f54-11e4-4932-a527-89d63d3a62d9'),
+            cls('TadokoroSan', '8ffbfa2f-23fa-4490-848e-942581a4d873'),
             cls('TamenDeGushi', '3f1453fb-9dac-4aca-a2ea-69613856c952'),
             cls('TheNewGate', 'b41bef1e-7df9-4255-bd82-ecf570fec566'),
             cls('TheWolfAndRedRidingHood', 'a7d1283b-ed38-4659-b8bc-47bfca5ccb8a'),
