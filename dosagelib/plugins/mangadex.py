@@ -50,12 +50,11 @@ class MangaDex(_ParserScraper):
         # Prepare chapter list
         self.chapters = []
         for chapter in chapterList:
-            if len(self.chapters) < 1:
-                self.chapters.append(chapter)
-                continue
-            if chapter['attributes']['chapter'] == self.chapters[-1]['attributes']['chapter']:
-                continue
             if chapter['attributes']['chapter'] == '':
+                continue
+            if chapter['attributes']['pages'] == 0:
+                continue
+            if len(self.chapters) >= 1 and chapter['attributes']['chapter'] == self.chapters[-1]['attributes']['chapter']:
                 continue
             self.chapters.append(chapter)
         self.chapters.reverse()
@@ -107,6 +106,7 @@ class MangaDex(_ParserScraper):
             cls('HangingOutWithAGamerGirl', 'de9e3b62-eac5-4c0a-917d-ffccad694381'),
             cls('HoriMiya', 'a25e46ec-30f7-4db6-89df-cacbc1d9a900'),
             cls('HowToOpenATriangularRiceball', '6ebd90ce-d5e8-49c0-a4bc-e02e0f8ecb93'),
+            cls('HunterXHunter', 'db692d58-4b13-4174-ae8c-30c515c0689c'),
             cls('IchaichasuruToOkaneGaWaichauFutariNoHanashi', '8eaaec7d-7aa7-490e-8d52-5a3d0a28e78b'),
             cls('InterspeciesReviewers', '1b2fddf9-1385-4f3c-b37a-cf86a9428b1a'),
             cls('JahySamaWaKujikenai', '2f4e5f5b-d930-4266-8c8a-c4cf9a81e51f'),
