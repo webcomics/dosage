@@ -1,24 +1,22 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019-2022 Tobias Gruetzmacher
 # Copyright (C) 2019 Thomas W. Littauer
-import re
-
 from importlib.resources import path as get_path
 
-from ..scraper import _BasicScraper
 from ..helpers import bounceStarter, joinPathPartsNamer
+from ..scraper import _ParserScraper
 
 
-class ComicsKingdom(_BasicScraper):
-    imageSearch = re.compile(r'property="og:image" content="(https://[^"]*img\.php\?[^"]+)"')
-    prevSearch = re.compile(r':is-left-arrow="true"[^>]*date-slug="(\d\d\d\d-\d\d-\d\d)"')
-    nextSearch = re.compile(r':is-left-arrow="false"[^>]*date-slug="(\d\d\d\d-\d\d-\d\d)"')
+class ComicsKingdom(_ParserScraper):
+    imageSearch = '//img[@id="theComicImage"]/@data-wpfc-original-src'
+    prevSearch = '//a[./img[contains(@alt, "Previous")]]'
+    nextSearch = '//a[./img[contains(@alt, "Next")]]'
     starter = bounceStarter
     namer = joinPathPartsNamer((-2, -1), ())
     help = 'Index format: yyyy-mm-dd'
 
     def __init__(self, name, path):
-        super(ComicsKingdom, self).__init__('ComicsKingdom/' + name)
+        super().__init__('ComicsKingdom/' + name)
         self.url = 'https://comicskingdom.com/' + path
         self.stripUrl = self.url + '/%s'
 
@@ -29,11 +27,6 @@ class ComicsKingdom(_BasicScraper):
         self.session.add_host_options('comicskingdom.com', {
             'verify': str(self.cert_ctx.__enter__()),
         })
-
-    def link_modifier(self, url, tourl):
-        if self.url not in tourl:
-            tourl = self.url + '/' + tourl.rsplit("/", 1)[1]
-        return tourl
 
     @classmethod
     def getmodules(cls):  # noqa: Allowed to be long
