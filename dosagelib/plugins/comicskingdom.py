@@ -1,10 +1,17 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019 Tobias Gruetzmacher
+# Copyright (C) 2019-2022 Tobias Gruetzmacher
 # Copyright (C) 2019 Thomas W. Littauer
+import re
+
+try:
+    from functools import cached_property
+except ImportError:
+    from cached_property import cached_property
+from importlib.resources import path as get_path
+
 from ..scraper import _BasicScraper
 from ..helpers import bounceStarter, joinPathPartsNamer
-
-import re
+from ..http import Session
 
 
 class ComicsKingdom(_BasicScraper):
@@ -15,9 +22,19 @@ class ComicsKingdom(_BasicScraper):
     namer = joinPathPartsNamer((-2, -1), ())
     help = 'Index format: yyyy-mm-dd'
 
+    @cached_property
+    def session(self):
+        '''Use our own isolated session (ComicsKingdom screws up their TLS setup
+        from time to time, this should "fix" it)'''
+        s = Session()
+        # slightly iffy hack taken from certifi
+        self.cert_ctx = get_path("dosagelib.data", "godaddy-bundle-g2-2031.pem")
+        s.verify = str(self.cert_ctx.__enter__())
+        return s
+
     def __init__(self, name, path):
         super(ComicsKingdom, self).__init__('ComicsKingdom/' + name)
-        self.url = 'https://www.comicskingdom.com/' + path
+        self.url = 'https://comicskingdom.com/' + path
         self.stripUrl = self.url + '/%s'
 
     def link_modifier(self, url, tourl):
