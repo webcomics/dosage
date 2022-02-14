@@ -3,7 +3,7 @@
 [![Tests](https://github.com/webcomics/dosage/actions/workflows/test.yml/badge.svg)](https://github.com/webcomics/dosage/actions/workflows/test.yml)
 [![Code Climate](https://codeclimate.com/github/webcomics/dosage/badges/gpa.svg)](https://codeclimate.com/github/webcomics/dosage)
 [![codecov](https://codecov.io/gh/webcomics/dosage/branch/master/graph/badge.svg)](https://codecov.io/gh/webcomics/dosage)
-![Maintenance](https://img.shields.io/maintenance/yes/2021.svg)
+![Maintenance](https://img.shields.io/maintenance/yes/2022.svg)
 ![License](https://img.shields.io/github/license/webcomics/dosage)
 
 Dosage is designed to keep a local copy of specific webcomics and other
