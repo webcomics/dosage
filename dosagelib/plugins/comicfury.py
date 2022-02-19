@@ -464,6 +464,7 @@ class ComicFury(_ParserScraper):
             cls('GrippsBrain', 'grippsbrain'),
             cls('GrokBoop', 'grokboop'),
             cls('GrowingTroubles', 'growingtroubles'),
+            cls('Guardia', 'guardia-tales-of-halgeis'),
             cls('GUS', 'gus'),
             cls('HalloweenCameoCaper2012', 'halloween2012'),
             cls('HalloweenCameoCaper2013', 'halloween2013'),

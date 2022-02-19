@@ -1619,6 +1619,7 @@ class Renamed(Scraper):
             cls('GoComics/PeanutsEnEspanol', 'GoComics/SnoopyEnEspanol'),
             cls('GoComics/RipleysBelieveItOrNotSpanish', 'GoComics/RipleysAunqueUstedNoLoCrea'),
             cls('GoComics/WebcomicName', 'WebcomicName'),
+            cls('Guardia', 'ComicFury/Guardia'),
             cls('Shivae/BlackRose', 'BlackRose'),
             cls('SmackJeeves/BlackTapestries', 'ComicFury/BlackTapestries'),
             cls('SmackJeeves/ByTheBook', 'ByTheBook'),
