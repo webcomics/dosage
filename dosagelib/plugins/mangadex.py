@@ -17,7 +17,7 @@ class MangaDex(_ParserScraper):
         self.chaptersUrl = baseUrl + 'manga/%s/feed?translatedLanguage[]=en&order[chapter]=desc&limit=500' % mangaId
         self.stripUrl = baseUrl + 'chapter/%s'
         self.cdnUrl = baseUrl + 'at-home/server/%s'
-        self.imageUrl = 'https://s5.mangadex.org/data/%s/%%s'
+        self.imageUrl = 'https://uploads.mangadex.org/data/%s/%%s'
 
     def starter(self):
         # Retrieve manga metadata from API
