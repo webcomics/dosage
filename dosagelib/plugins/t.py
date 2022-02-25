@@ -290,26 +290,6 @@ class ToonHole(_WordPressScraper):
         return url in (self.url + "comic/if-game-of-thrones-was-animated/",)
 
 
-class TracesOfThePast(_WPNaviIn):
-    baseUrl = 'http://rickgriffinstudios.com/'
-    url = baseUrl + 'in-the-new-age/'
-    stripUrl = baseUrl + 'comic-post/%s/'
-    firstStripUrl = stripUrl % 'totp-page-1'
-    latestSearch = '//a[contains(@title, "Permanent Link")]'
-    starter = indirectStarter
-
-
-class TracesOfThePastNSFW(_WPNaviIn):
-    name = 'TracesOfThePast/NSFW'
-    baseUrl = 'http://rickgriffinstudios.com/'
-    url = baseUrl + 'in-the-new-age/'
-    stripUrl = baseUrl + 'comic-post/%s/'
-    firstStripUrl = stripUrl % 'totp-page-1-nsfw'
-    latestSearch = '//a[contains(@title, "NSFW")]'
-    starter = indirectStarter
-    adult = True
-
-
 class TrippingOverYou(_BasicScraper):
     url = 'http://www.trippingoveryou.com/'
     stripUrl = url + 'comic/%s'

@@ -116,12 +116,6 @@ class HijinksEnsuePhoto(_WPNaviIn):
     endOfLife = True
 
 
-class Housepets(_WordPressScraper):
-    url = 'http://www.housepetscomic.com/'
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = '2008/06/02/when-boredom-strikes'
-
-
 class HowToBeAWerewolf(_ComicControlScraper):
     url = 'http://howtobeawerewolf.com/'
     stripUrl = url + 'comic/%s'
