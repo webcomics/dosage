@@ -6,8 +6,6 @@ name: Build container image, publish as Github-package
 # documentation.
 
 on:
-  schedule:
-    - cron: '13 02 * * 5'
   push:
     branches: [ master ]
     # Publish semver tags as releases.
