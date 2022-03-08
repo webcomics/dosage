@@ -4,14 +4,14 @@ WORKDIR /data
 
 COPY . .
 
-RUN apt-get update && apt-get install -y            \
-    git-core                                        \
-    libxml2-dev                                     \
-    libxslt1-dev                                    \
-    python3-setuptools                              \
-    &&						    \
+RUN apt-get update && apt-get install -y         \
+    git-core                                     \
+    libxml2-dev                                  \
+    libxslt1-dev                                 \
+    python3-pip                                  \
+    &&						 \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN python3 setup.py install
+RUN pip install -e .[css,bash,dev]
 
 CMD dosage
