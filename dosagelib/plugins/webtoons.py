@@ -390,6 +390,7 @@ class WebToons(_ParserScraper):
             cls('TheRedBook', 'horror/the-red-book', 467),
             cls('TheRedHook', 'super-hero/the-red-hook', 643),
             cls('TheRedKing', 'supernatural/the-red-king', 1687),
+            cls('TheRoomies', 'challenge/the-roomies-archive', 513669),
             cls('TheShadowProphet', 'drama/the-shadow-prophet', 1881),
             cls('TheSoundOfYourHeart', 'comedy/the-sound-of-your-heart', 269),
             cls('TheSteamDragonExpress', 'fantasy/steam-dragon-express', 1270),
