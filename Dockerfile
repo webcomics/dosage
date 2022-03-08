@@ -5,6 +5,7 @@ WORKDIR /data
 COPY . .
 
 RUN apt-get update && apt-get install -y         \
+    git-core                                     \
     libxml2-dev                                  \
     libxslt1-dev                                 \
     python3-pip                                  \
