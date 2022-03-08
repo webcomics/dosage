@@ -31,7 +31,7 @@ class Session(requests.Session):
     longer delays.
     """
     def __init__(self):
-        super(Session, self).__init__()
+        super().__init__()
 
         retry = Retry(MaxRetries, backoff_factor=RetryBackoffFactor)
         self.mount('http://', HTTPAdapter(max_retries=retry))
@@ -39,6 +39,7 @@ class Session(requests.Session):
         self.headers.update({'User-Agent': UserAgent})
 
         self.throttles = collections.defaultdict(lambda: RandomThrottle())
+        self.host_options = {}
 
     def send(self, request, **kwargs):
         if 'timeout' not in kwargs:
@@ -46,6 +47,8 @@ class Session(requests.Session):
 
         hostname = urlparse(request.url).hostname
         self.throttles[hostname].delay()
+        if hostname in self.host_options:
+            kwargs.update(self.host_options[hostname])
 
         return super(Session, self).send(request, **kwargs)
 
@@ -53,6 +56,11 @@ class Session(requests.Session):
         """Adds a new throttle for a host: Might overwrite the existing one.
         """
         self.throttles[hostname] = RandomThrottle(th_min, th_max)
+
+    def add_host_options(self, hostname, options):
+        """Adds custom options for a specific host: Might overwrite the existing one.
+        """
+        self.host_options[hostname] = options
 
 
 class RandomThrottle(object):
