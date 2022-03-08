@@ -10,7 +10,8 @@ RUN apt-get update && apt-get install -y            \
     libxslt1-dev                                    \
     python3-setuptools                              \
     &&						    \
-    apt-get clean && rm -rf /var/lib/apt/lists/* && \
-    python3 setup.py install
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN python3 setup.py install
 
 CMD dosage
