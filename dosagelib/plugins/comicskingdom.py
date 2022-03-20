@@ -8,7 +8,7 @@ from ..scraper import _ParserScraper
 
 
 class ComicsKingdom(_ParserScraper):
-    imageSearch = '//img[@id="theComicImage"]/@data-wpfc-original-src'
+    imageSearch = '//img[@id="theComicImage"]'
     prevSearch = '//a[./img[contains(@alt, "Previous")]]'
     nextSearch = '//a[./img[contains(@alt, "Next")]]'
     starter = bounceStarter
