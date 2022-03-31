@@ -844,6 +844,7 @@ class ComicFury(_ParserScraper):
             cls('ShakingOffSorceryPL', 'shakingoffsorcery-pl'),
             cls('ShamanQuest', 'shamanquest'),
             cls('ShatteredSkies', 'shatteredskies'),
+            cls('Sharak', 'sharak'),
             cls('Shenanigans', 's'),
             cls('ShenaniganSquares', 'ss-comic'),
             cls('ShikuTheFirstAndFinal', 'shiku'),
