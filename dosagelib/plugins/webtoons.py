@@ -135,7 +135,7 @@ class WebToons(_ParserScraper):
             cls('DEADDAYS', 'horror/dead-days', 293),
             cls('Debunkers', 'challenge/debunkers', 148475),
             cls('DEEP', 'thriller/deep', 364),
-            cls('Defects', 'challenge/defects', 221106),
+            cls('Defects', 'fantasy/defects', 2731),
             cls('Denma', 'sf/denma', 921),
             cls('Dents', 'sf/dents', 671),
             cls('Deor', 'fantasy/deor', 1663),
