@@ -1627,6 +1627,7 @@ class Renamed(Scraper):
             cls('SmackJeeves/FurryExperience', 'ComicFury/FurryExperience'),
             cls('SmackJeeves/GrowingTroubles', 'ComicFury/GrowingTroubles'),
             cls('SmackJeeves/TheRealmOfKaerwyn', 'ComicFury/TheRealmOfKaerwyn'),
+            cls('SoloLeveling', 'MangaDex/SoloLeveling'),
             cls('StudioKhimera/Draconia', 'Draconia'),
             cls('TracesOfThePast', 'RickGriffinStudios/TracesOfThePast'),
             cls('TracesOfThePast/NSFW', 'RickGriffinStudios/TracesOfThePastNSFW'),

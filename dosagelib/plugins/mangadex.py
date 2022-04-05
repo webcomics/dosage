@@ -134,6 +134,7 @@ class MangaDex(_ParserScraper):
             cls('SenpaiGaUzaiKouhaiNoHanashi', 'af38f328-8df1-4b4c-a272-e737625c3ddc'),
             cls('SewayakiKitsuneNoSenkoSan', 'c26269c7-0f5d-4966-8cd5-b79acb86fb7a'),
             cls('ShinNoJitsuryokuWaGirigiriMadeKakushiteIyouToOmou', '22fda941-e603-4601-a536-c3ad6d004ba8'),
+            cls('SoloLeveling', '32d76d19-8a05-4db0-9fc2-e0b0648fe9d0'),
             cls('SousouNoFrieren', 'b0b721ff-c388-4486-aa0f-c2b0bb321512'),
             cls('SwordArtOnline', '3dd0b814-23f4-4342-b75b-f206598534f6'),
             cls('SwordArtOnlineProgressive', '22ea3f54-11e4-4932-a527-89d63d3a62d9'),

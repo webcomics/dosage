@@ -355,66 +355,6 @@ class SodiumEyes(_WordPressScraper):
     endOfLife = True
 
 
-class SoloLeveling(_ParserScraper):
-    url = 'https://w3.sololeveling.net/'
-    stripUrl = url + 'manga/solo-leveling-chapter-%s/'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = '//div[@class="img_container"]//img'
-    prevSearch = '//a[@rel="prev"]'
-    latestSearch = '//div[@id="latestChapters"]//a'
-    starter = indirectStarter
-    multipleImagesPerStrip = True
-    imageUrlFixes = {
-        '94-0_5dd574efda419/28.': '94-0_5dd574efda419/28a.',
-        '92-0_5dc2fcb9ed562/22.': '92-0_5dc2fcb9ed562/22s.',
-        '91-0_5db9b881ac2f0/20k.': '91-0_5db9b881ac2f0/20l.',
-        '91-0_5db9b881ac2f0/23.': '91-0_5db9b881ac2f0/23a.',
-        '90-0_5db08467ca2b1/07.': '90-0_5db08467ca2b1/07a.',
-        '90-0_5db08467ca2b1/09.': '90-0_5db08467ca2b1/09a.',
-        '90-0_5db08467ca2b1/13.': '90-0_5db08467ca2b1/13a.',
-        '90-0_5db08467ca2b1/14.': '90-0_5db08467ca2b1/14a.',
-        '90-0_5db08467ca2b1/21.': '90-0_5db08467ca2b1/21a.',
-        '90-0_5db08467ca2b1/22.': '90-0_5db08467ca2b1/22a.',
-        '88-0_5d9e0dedb942e/03.': '88-0_5d9e0dedb942e/03b.',
-        '88-0_5d9e0dedb942e/05.': '88-0_5d9e0dedb942e/05a.',
-        '88-0_5d9e0dedb942e/30.': '88-0_5d9e0dedb942e/30a.',
-        '87-0_5d94cdebd9df7/01a.': '87-0_5d94cdebd9df7/01c.',
-    }
-
-    def imageUrlModifier(self, imageUrl, data):
-        if 'url=' in imageUrl:
-            imageUrl = imageUrl.split('url=')[1].split('&')[0]
-        for fix in self.imageUrlFixes:
-            imageUrl = imageUrl.replace(fix, self.imageUrlFixes[fix])
-        return imageUrl
-
-    def fetchUrls(self, url, data, urlSearch):
-        # Save link order for position-based filenames
-        self.imageUrls = super(SoloLeveling, self).fetchUrls(url, data, urlSearch)
-        self.imageUrls = [self.imageUrlModifier(x, data) for x in self.imageUrls]
-        return self.imageUrls
-
-    def getPage(self, url):
-        try:
-            return super().getPage(url)
-        except HTTPError as e:
-            # CloudFlare WAF
-            if e.response.status_code == 403 and '1020' in e.response.text:
-                self.geoblocked()
-            else:
-                raise e
-
-    def getPrevUrl(self, url, data):
-        return self.stripUrl % str(int(url.strip('/').rsplit('-', 1)[-1]) - 1)
-
-    def namer(self, imageUrl, pageUrl):
-        # Construct filename from episode number and image position on page
-        episodeNum = pageUrl.strip('/').rsplit('-', 1)[-1]
-        imageNum = self.imageUrls.index(imageUrl)
-        imageExt = imageUrl.rsplit('.', 1)[-1]
-        return "%s-%03d.%s" % (episodeNum, imageNum, imageExt)
-
-
 class SomethingPositive(_ParserScraper):
     url = 'https://www.somethingpositive.net/'
     stripUrl = url + 'sp%s.shtml'
