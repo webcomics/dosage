@@ -116,9 +116,8 @@ class Requiem(_WordPressScraper):
 class Replay(_ParserScraper):
     url = 'http://replaycomic.com/'
     stripUrl = url + 'comic/%s/'
-    url = stripUrl % 'trying-it-out'
     firstStripUrl = stripUrl % 'red-desert'
-    imageSearch = '//div[@id="comic"]//img'
+    imageSearch = '//div[@id="comic"]//img[@alt]'
     prevSearch = '//a[contains(@class, "comic-nav-previous")]'
     nextSearch = '//a[contains(@class, "comic-nav-next")]'
 
