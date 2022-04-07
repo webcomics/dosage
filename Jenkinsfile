@@ -1,8 +1,8 @@
 def pys = [
-    [name: 'Python 3.10', docker: 'python:3.10-buster', tox:'py310,flake8', main: true],
-    [name: 'Python 3.9',  docker: 'python:3.9-buster',  tox:'py39', main: false],
-    [name: 'Python 3.8',  docker: 'python:3.8-buster',  tox:'py38', main: false],
-    [name: 'Python 3.7',  docker: 'python:3.7-buster',  tox:'py37', main: false],
+    [name: 'Python 3.10', docker: 'python:3.10-bullseye', tox:'py310,flake8', main: true],
+    [name: 'Python 3.9',  docker: 'python:3.9-bullseye',  tox:'py39', main: false],
+    [name: 'Python 3.8',  docker: 'python:3.8-bullseye',  tox:'py38', main: false],
+    [name: 'Python 3.7',  docker: 'python:3.7-bullseye',  tox:'py37', main: false],
 ]
 
 properties([
@@ -15,33 +15,32 @@ Map tasks = [failFast: true]
 pys.each { py ->
     tasks[py.name] = {
         node {
-            def image
-
-            stage("Prepare docker $py.name") {
-                dir('dockerbuild') {
-                    deleteDir()
-                    docker.image(py.docker).pull()
-                    buildDockerfile(py.docker)
-                    image = docker.build("dosage-$py.docker")
-                }
+            stage("Checkout $py.name") {
+                checkout scm
+                sh '''
+                    git clean -fdx
+                    git fetch --tags
+                '''
             }
 
             stage("Build $py.name") {
+                def image = docker.image(py.docker)
+                image.pull()
                 image.inside {
-                    checkout scm
-                    sh '''
-                        git clean -fdx
-                        git fetch --tags
-                    '''
+                    withEnv(['HOME=' + pwd(tmp: true)]) {
+                        warnError('tox failed') {
+                            sh """
+                                pip install --no-warn-script-location tox
+                                python -m tox -e $py.tox
+                            """
+                        }
 
-                    warnError('tox failed') {
-                        sh "tox -e $py.tox"
-                    }
-
-                    if (py.main) {
-                        sh """
-                            python setup.py sdist bdist_wheel
-                        """
+                        if (py.main) {
+                            sh """
+                                pip install --no-warn-script-location build
+                                python -m build
+                            """
+                        }
                     }
                 }
 
@@ -78,15 +77,6 @@ stage('Windows binary') {
 }
 stage('Allure report') {
     processAllure()
-}
-
-def buildDockerfile(image) {
-    def uid = sh(returnStdout: true, script: 'id -u').trim()
-    writeFile file: 'Dockerfile', text: """
-    FROM $image
-    RUN pip install tox
-    RUN useradd -mu $uid dockerjenkins
-    """
 }
 
 def windowsBuild() {
