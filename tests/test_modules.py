@@ -7,8 +7,6 @@ import responses
 
 import dosagelib.cmd
 import httpmocks
-from dosagelib.plugins.s import SoloLeveling
-from dosagelib.scraper import GeoblockedException
 
 
 def cmd(*options):
@@ -43,7 +41,11 @@ class TestModules(object):
         cmd('--basepath', str(tmpdir), 'CalvinAndHobbesEnEspanol:2012/07/22')
 
     @responses.activate
+    @pytest.mark.skip(reason="SoloeLeveling was removed, so we have no way to test this...")
     def test_sololeveling_geoblock(self, tmpdir):
+        from dosagelib.plugins.s import SoloLeveling
+        from dosagelib.scraper import GeoblockedException
+
         responses.add(responses.GET, 'https://w3.sololeveling.net/',
             '<span>1020</span>', status=403)
 
