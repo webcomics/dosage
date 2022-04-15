@@ -84,19 +84,6 @@ class DeepFried(_BasicScraper):
     help = 'Index format: none'
 
 
-class DeerMe(_ParserScraper):
-    url = 'http://deerme.net/comics/'
-    stripUrl = url + '%s'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = ('//img[@id="comicimage"]', '//img[@id="latestcomicimage"]')
-    prevSearch = '//a[@rel="prev"]'
-    nextSearch = '//a[@rel="next"]'
-    starter = bounceStarter
-
-    def namer(self, imageUrl, pageUrl):
-        return pageUrl.rsplit('/', 1)[-1] + '.' + imageUrl.rsplit('.', 1)[-1]
-
-
 class Delve(_WordPressScraper):
     url = 'https://thisis.delvecomic.com/NewWP/'
     stripUrl = url + 'comic/%s/'
@@ -237,6 +224,13 @@ class DoemainOfOurOwn(_ParserScraper):
             year = ('19' if filename[4] == '9' else '20') + filename[4:6]
             filename = '%s-%s-%s%s' % (year, month, day, filename[6:])
         return filename
+
+
+class DoesNotPlayWellWithOthers(_WPNavi):
+    url = 'http://www.doesnotplaywellwithothers.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'pwc-0001'
+    adult = True
 
 
 class DoghouseDiaries(_ParserScraper):

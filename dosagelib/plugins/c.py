@@ -188,10 +188,13 @@ class CavesAndCritters(_WPWebcomic):
     adult = True
 
 
-class Centralia2050(_WordPressScraper):
-    url = 'http://centralia2050.com/'
+class Centralia2050(_ParserScraper):
+    url = 'https://centralia2050.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'ch1cover'
+    imageSearch = '//div[@id="spliced-comic"]//img'
+    prevSearch = '//a[@class="previous-comic"]'
+    nextSearch = '//a[@class="next-comic"]'
     starter = bounceStarter
 
     def namer(self, imageUrl, pageUrl):
@@ -267,9 +270,9 @@ class Cloudscratcher(_ParserScraper):
     url = 'http://www.cloudscratcher.com/'
     stripUrl = url + 'comic.php?page=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = '//div[@id="main_content"]//img[contains(@src, "comic")]'
-    prevSearch = '//a[./img[contains(@src, "previous-page")]]'
-    latestSearch = '//a[@alt="Newest_Page"]'
+    imageSearch = '//img[contains(@src, "pages/")]'
+    prevSearch = '//a[./img[@alt="Previous Page"]]'
+    latestSearch = '//a[./img[@alt="Comic"]]'
     starter = indirectStarter
 
 
@@ -277,7 +280,7 @@ class CollegeCatastrophe(_ParserScraper):
     url = 'https://www.tigerknight.com/cc'
     stripUrl = url + '/%s'
     firstStripUrl = stripUrl % '2000-11-10'
-    imageSearch = '//img[@class="comic-image"]'
+    imageSearch = '//img[d:class("comic-image")]'
     prevSearch = '//a[./span[contains(text(), "Previous")]]'
     endOfLife = True
     multipleImagesPerStrip = True

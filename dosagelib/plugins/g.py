@@ -145,19 +145,6 @@ class GrrlPower(_WordPressScraper):
         self.session.add_throttle('grrlpowercomic.com', 1.0, 1.5)
 
 
-class Guardia(_ParserScraper):
-    url = 'https://ssp-comics.com/comics/Guardia/'
-    stripUrl = url + '?page=%s'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = '//img[contains(@src, "comics/Guardia/")]'
-    prevSearch = '//a[./button[@id="prevButton"]]'
-    nextSearch = '//a[./button[@id="nextButton"]]'
-    starter = bounceStarter
-
-    def namer(self, imageUrl, pageUrl):
-        return pageUrl.rsplit('=', 1)[-1] + '.' + imageUrl.rsplit('.', 1)[-1]
-
-
 class GuildedAge(_WordPressScraper):
     url = 'http://guildedage.net/'
     firstStripUrl = url + 'comic/chapter-1-cover/'

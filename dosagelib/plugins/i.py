@@ -35,14 +35,6 @@ class IDreamOfAJeanieBottle(_WordPressScraper):
     url = 'http://jeaniebottle.com/'
 
 
-class InsignificantOtters(_WPWebcomic):
-    stripUrl = 'https://www.thedepthscomic.com/i-otters/%s/'
-    firstStripUrl = stripUrl % 'page-1'
-    url = firstStripUrl
-    imageSearch = '//div[contains(@class, "webcomic-media")]//img'
-    starter = indirectStarter
-
-
 class InternetWebcomic(_WPNavi):
     url = 'http://www.internet-webcomic.com/'
     stripUrl = url + '?p=%s'

@@ -33,8 +33,9 @@ class ProjectFuture(_ParserScraper):
             cls('Emily', 'emily', '01-00'),
             cls('FishingTrip', 'fishing', '01-00'),
             cls('HeadsYouLose', 'heads', '00-01', last='07-12'),
+            cls('IPanther', 'panther', '00'),
             cls('NiallsStory', 'niall', '00'),
-            cls('ProjectFuture', 'strip', '0'),
+            cls('ProjectFuture', 'strip', '0', last='664'),
             cls('RedValentine', 'redvalentine', '1', last='6'),
             cls('ShortStories', 'shorts', '01-00'),
             cls('StrangeBedfellows', 'bedfellows', '1', last='6'),
@@ -46,4 +47,5 @@ class ProjectFuture(_ParserScraper):
             cls('TheSierraChronicles', 'sierra', '0', last='29'),
             cls('TheTuppenyMan', 'tuppenny', '00', last='16'),
             cls('TurningANewPage', 'azrael', '1', last='54'),
+            cls('Xerian', 'xerian', '01-00'),
         )

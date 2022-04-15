@@ -170,12 +170,13 @@ class Erstwhile(_WPNavi):
     endOfLife = True
 
 
-class Everblue(_ParserScraper):
+class Everblue(_ComicControlScraper):
     url = 'http://www.everblue-comic.com/comic/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = '//article[@id="comic"]//img'
-    prevSearch = '//a[contains(@class, "prev")]'
+
+    def namer(self, imageUrl, pageUrl):
+        return imageUrl.rsplit('/', 1)[-1].split('-', 1)[1]
 
 
 class EverybodyLovesEricRaymond(_ParserScraper):
