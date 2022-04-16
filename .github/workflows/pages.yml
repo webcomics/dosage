@@ -23,7 +23,7 @@ jobs:
 
       - name: Build
         run: |
-          pip install git+https://github.com/spanezz/staticsite.git@v1.2
+          pip install git+https://github.com/spanezz/staticsite.git@dcf41e4a2b2d3610f2561b08bee16088fbbd1b04 'jinja2<3.1'
           ssite build --output public
 
       - name: Deploy

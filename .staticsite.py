@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: MIT
 SITE_NAME = "dosage"
 SITE_SUB = "a comic downloader and archiver"
+SITE_URL = 'https://dosage.rocks/'
 SITE_AUTHOR = "Tobias Gruetzmacher"
 SITE_LINKS = (
     {'name': 'Downloads', 'icon': 'download',
@@ -14,4 +15,5 @@ SITE_ICONS = (
         'url': 'https://github.com/webcomics/dosage'},
 )
 
+THEME_PATHS = ['.']
 THEME = "doc/.theme"
