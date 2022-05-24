@@ -1,8 +1,8 @@
 def pys = [
-    [name: 'Python 3.10', docker: 'python:3.10-bullseye', tox:'py310,flake8', main: true],
-    [name: 'Python 3.9',  docker: 'python:3.9-bullseye',  tox:'py39', main: false],
-    [name: 'Python 3.8',  docker: 'python:3.8-bullseye',  tox:'py38', main: false],
-    [name: 'Python 3.7',  docker: 'python:3.7-bullseye',  tox:'py37', main: false],
+    [name: 'Python 3.10', docker: '3.10-bullseye', tox:'py310,flake8', main: true],
+    [name: 'Python 3.9',  docker: '3.9-bullseye',  tox:'py39', main: false],
+    [name: 'Python 3.8',  docker: '3.8-bullseye',  tox:'py38', main: false],
+    [name: 'Python 3.7',  docker: '3.7-bullseye',  tox:'py37', main: false],
 ]
 
 properties([
@@ -24,7 +24,7 @@ pys.each { py ->
             }
 
             stage("Build $py.name") {
-                def image = docker.image(py.docker)
+                def image = docker.image('docker.io/python:' + py.docker)
                 image.pull()
                 image.inside {
                     withEnv(['HOME=' + pwd(tmp: true)]) {
@@ -91,7 +91,7 @@ def windowsBuildCommands() {
     deleteDir()
     unstash 'bin'
     // Keep 3.8 for now, so we are still compatible with Windows 7
-    def img = docker.image('tobix/pywine:3.8')
+    def img = docker.image('docker.io/tobix/pywine:3.8')
     img.pull()
     img.inside {
         sh '''
@@ -119,7 +119,7 @@ def processAllure() {
                 unzip dir: 'allure-data', quiet: true, zipFile: 'allure-history.zip'
                 sh 'rm -f allure-history.zip'
             }
-            sh 'docker run --rm -v $PWD:/work -u $(id -u) tobix/allure-cli generate allure-data'
+            sh 'docker run --rm -v $PWD:/work -u $(id -u) docker.io/tobix/allure-cli generate allure-data'
             zip archive: true, dir: 'allure-report', glob: 'history/**', zipFile: 'allure-history.zip'
             publishHTML reportDir: 'allure-report', reportFiles: 'index.html', reportName: 'Allure Report'
         }
