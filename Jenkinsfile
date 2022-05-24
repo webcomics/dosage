@@ -119,7 +119,7 @@ def processAllure() {
                 unzip dir: 'allure-data', quiet: true, zipFile: 'allure-history.zip'
                 sh 'rm -f allure-history.zip'
             }
-            sh 'docker run --rm -v $PWD:/work -u $(id -u) docker.io/tobix/allure-cli generate allure-data'
+            sh 'podman run --rm -v $PWD:/work --userns=keep-id docker.io/tobix/allure-cli generate allure-data'
             zip archive: true, dir: 'allure-report', glob: 'history/**', zipFile: 'allure-history.zip'
             publishHTML reportDir: 'allure-report', reportFiles: 'index.html', reportName: 'Allure Report'
         }
