@@ -27,20 +27,21 @@ pys.each { py ->
                 def image = docker.image('docker.io/python:' + py.docker)
                 image.pull()
                 image.inside {
-                    withEnv(['HOME=' + pwd(tmp: true)]) {
-                        warnError('tox failed') {
-                            sh """
-                                pip install --no-warn-script-location tox
-                                python -m tox -e $py.tox
-                            """
-                        }
+                    def tmpDir = pwd(tmp: true)
+                    warnError('tox failed') {
+                        sh """
+                            HOME='$tmpDir'
+                            pip install --no-warn-script-location tox
+                            python -m tox -e $py.tox
+                        """
+                    }
 
-                        if (py.main) {
-                            sh """
-                                pip install --no-warn-script-location build
-                                python -m build
-                            """
-                        }
+                    if (py.main) {
+                        sh """
+                            HOME='$tmpDir'
+                            pip install --no-warn-script-location build
+                            python -m build
+                        """
                     }
                 }
 
