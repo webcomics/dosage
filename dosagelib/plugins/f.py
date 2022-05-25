@@ -21,12 +21,21 @@ class FalconTwin(_BasicScraper):
 
 
 class FalseStart(_ParserScraper):
-    url = 'https://boneitiscomics.com/falsestart.php'
-    stripUrl = url + '?pg=%s'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = '//div[@class="page"]//img'
-    prevSearch = '//a[@id="prev"]'
+    baseUrl = 'https://boneitisindustries.com/'
+    url = baseUrl + 'comics/false-start/'
+    stripUrl = baseUrl + 'comic/%s/'
+    firstStripUrl = stripUrl % 'false-start-chapter-zero-page-1'
+    imageSearch = '//div[@id="content"]//img[d:class("size-full")]'
+    prevSearch = '//a[./span[d:class("ticon-chevron-left")]]'
     adult = True
+
+    def starter(self):
+        archivePage = self.getPage(self.url)
+        self.archive = archivePage.xpath('//div[contains(@class, "vcex-portfolio-grid")]//a/@href')
+        return self.archive[-1]
+
+    def getPrevUrl(self, url, data):
+        return self.archive[self.archive.index(url) - 1]
 
 
 class Faneurysm(_WPNaviIn):
@@ -144,7 +153,7 @@ class FoxDad(_ParserScraper):
     url = 'https://foxdad.com/'
     stripUrl = url + 'post/%s'
     firstStripUrl = stripUrl % '149683014997/some-people-are-just-different-support-the-comic'
-    imageSearch = '//figure[@class="photo-hires-item"]//img'
+    imageSearch = ('//figure[@class="photo-hires-item"]//img', '//figure[@class="tmblr-full"]//img')
     prevSearch = '//a[@class="previous-button"]'
 
     def namer(self, imageUrl, pageUrl):

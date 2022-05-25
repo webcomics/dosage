@@ -1,8 +1,8 @@
 def pys = [
-    [name: 'Python 3.10', docker: 'python:3.10-buster', tox:'py310,flake8', main: true],
-    [name: 'Python 3.9',  docker: 'python:3.9-buster',  tox:'py39', main: false],
-    [name: 'Python 3.8',  docker: 'python:3.8-buster',  tox:'py38', main: false],
-    [name: 'Python 3.7',  docker: 'python:3.7-buster',  tox:'py37', main: false],
+    [name: 'Python 3.10', docker: '3.10-bullseye', tox:'py310,flake8', main: true],
+    [name: 'Python 3.9',  docker: '3.9-bullseye',  tox:'py39', main: false],
+    [name: 'Python 3.8',  docker: '3.8-bullseye',  tox:'py38', main: false],
+    [name: 'Python 3.7',  docker: '3.7-bullseye',  tox:'py37', main: false],
 ]
 
 properties([
@@ -15,32 +15,32 @@ Map tasks = [failFast: true]
 pys.each { py ->
     tasks[py.name] = {
         node {
-            def image
-
-            stage("Prepare docker $py.name") {
-                dir('dockerbuild') {
-                    deleteDir()
-                    docker.image(py.docker).pull()
-                    buildDockerfile(py.docker)
-                    image = docker.build("dosage-$py.docker")
-                }
+            stage("Checkout $py.name") {
+                checkout scm
+                sh '''
+                    git clean -fdx
+                    git fetch --tags
+                '''
             }
 
             stage("Build $py.name") {
+                def image = docker.image('docker.io/python:' + py.docker)
+                image.pull()
                 image.inside {
-                    checkout scm
-                    sh '''
-                        git clean -fdx
-                        git fetch --tags
-                    '''
-
+                    def tmpDir = pwd(tmp: true)
                     warnError('tox failed') {
-                        sh "tox -e $py.tox"
+                        sh """
+                            HOME='$tmpDir'
+                            pip install --no-warn-script-location tox
+                            python -m tox -e $py.tox
+                        """
                     }
 
                     if (py.main) {
                         sh """
-                            python setup.py sdist bdist_wheel
+                            HOME='$tmpDir'
+                            pip install --no-warn-script-location build
+                            python -m build
                         """
                     }
                 }
@@ -80,15 +80,6 @@ stage('Allure report') {
     processAllure()
 }
 
-def buildDockerfile(image) {
-    def uid = sh(returnStdout: true, script: 'id -u').trim()
-    writeFile file: 'Dockerfile', text: """
-    FROM $image
-    RUN pip install tox
-    RUN useradd -mu $uid dockerjenkins
-    """
-}
-
 def windowsBuild() {
     warnError('windows build failed') {
         node {
@@ -101,7 +92,7 @@ def windowsBuildCommands() {
     deleteDir()
     unstash 'bin'
     // Keep 3.8 for now, so we are still compatible with Windows 7
-    def img = docker.image('tobix/pywine:3.8')
+    def img = docker.image('docker.io/tobix/pywine:3.8')
     img.pull()
     img.inside {
         sh '''
@@ -129,7 +120,7 @@ def processAllure() {
                 unzip dir: 'allure-data', quiet: true, zipFile: 'allure-history.zip'
                 sh 'rm -f allure-history.zip'
             }
-            sh 'docker run --rm -v $PWD:/work -u $(id -u) tobix/allure-cli generate allure-data'
+            sh 'podman run --rm -v $PWD:/work --userns=keep-id docker.io/tobix/allure-cli generate allure-data'
             zip archive: true, dir: 'allure-report', glob: 'history/**', zipFile: 'allure-history.zip'
             publishHTML reportDir: 'allure-report', reportFiles: 'index.html', reportName: 'Allure Report'
         }

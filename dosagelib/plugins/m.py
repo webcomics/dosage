@@ -187,6 +187,12 @@ class MonsieurLeChien(_BasicScraper):
     help = 'Index format: n'
 
 
+class MonsterSoup(_WordPressScraper):
+    url = 'https://monstersoupcomic.com/'
+    stripUrl = url + '?comic=%s'
+    firstStripUrl = stripUrl % 'chapter-1-cover'
+
+
 class Moonlace(_WPWebcomic):
     url = 'https://moonlace.darkbluecomics.com/'
     stripUrl = url + 'comic/%s/'

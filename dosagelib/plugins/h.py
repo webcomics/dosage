@@ -5,10 +5,19 @@
 # Copyright (C) 2019-2020 Daniel Ring
 from re import compile, escape
 
-from ..scraper import _BasicScraper
+from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from ..helpers import bounceStarter, indirectStarter
 from .common import _ComicControlScraper, _WordPressScraper, _WPNaviIn
+
+
+class Hackles(_ParserScraper):
+    url = 'http://hackles.org/'
+    stripUrl = url + 'cgi-bin/archives.pl?request=%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//img[contains(@src, "strips/")]'
+    prevSearch = '//a[text()="< previous"]'
+    endOfLife = True
 
 
 class HagarTheHorrible(_BasicScraper):
@@ -105,12 +114,6 @@ class HijinksEnsuePhoto(_WPNaviIn):
     url = 'http://hijinksensue.com/comic/emerald-city-comicon-2015-fancy-photo-comic-part-2/'
     firstStripUrl = 'http://hijinksensue.com/comic/san-diego-comic-con-fancy-picto-comic-pt-1/'
     endOfLife = True
-
-
-class Housepets(_WordPressScraper):
-    url = 'http://www.housepetscomic.com/'
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = '2008/06/02/when-boredom-strikes'
 
 
 class HowToBeAWerewolf(_ComicControlScraper):

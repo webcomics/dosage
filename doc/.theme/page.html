@@ -74,8 +74,8 @@
 
     <section id="content" class="two dark">
         <div class="container">
-            {% block content %}
-            {{page.content|safe}}
+            {% block page_content %}
+            {{ page.html_body() | safe }}
             {% endblock %}
         </div>
     </section>

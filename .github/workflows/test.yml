@@ -38,6 +38,6 @@ jobs:
             ${{ github.workspace }}/.tox/reports/*/coverage.xml:coverage.py
           prefix: ${{ github.workspace }}/.tox/py39/lib/python3.9/site-packages
 
-      - uses: codecov/codecov-action@v2
+      - uses: codecov/codecov-action@v3
         with:
           directory: '.tox/reports'
