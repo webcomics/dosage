@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2021 Tobias Gruetzmacher
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 import json
 from re import compile, escape, IGNORECASE
@@ -36,14 +36,12 @@ class Magellan(_ParserScraper):
     prevSearch = '.nav-previous > a'
 
 
-class MagickChicks(_BasicScraper):
-    url = 'http://www.magickchicks.com/'
-    stripUrl = url + 'strips-mc/%s'
-    firstStripUrl = stripUrl % 'tis_but_a_trifle'
-    imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]*/strips-mc/[^"]+)',
-                               before="cn[id]prevt"))
+class MagickChicks(_ComicControlScraper):
+    url = 'https://pixietrixcomix.com/magick-chicks/'
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % 'tis-but-a-trifle-2'
     help = 'Index format: name'
+    endOfLife = True
 
 
 class ManlyGuysDoingManlyThings(_ParserScraper):
