@@ -29,11 +29,9 @@ class MadamAndEve(_BasicScraper):
     multipleImagesPerStrip = True
 
 
-class Magellan(_ParserScraper):
-    url = 'http://magellanverse.com/'
-    css = True
-    imageSearch = '#comic-1 > a:first-child img'
-    prevSearch = '.nav-previous > a'
+class Magellan(_WordPressScraper):
+    url = 'https://magellanverse.com/'
+    firstStripUrl = url + 'comic/20040307wannabe/'
 
 
 class MagickChicks(_ComicControlScraper):
