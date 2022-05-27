@@ -126,16 +126,9 @@ class Melonpool(_WordPressScraper):
 
 class MenageA3(_ComicControlScraper):
     adult = True
-    url = 'http://www.ma3comic.com/'
-
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        """Remove random junk from image names."""
-        imgname = imageUrl.split('/')[-1]
-        imgbase = imgname.rsplit('-', 1)[1]
-        return '%s' % (imgbase)
-
-    help = 'Index format: name'
+    url = 'https://pixietrixcomix.com/menage-a-3/'
+    firstStripUrl = url + 'for-new-readers'
+    endOfLife = True
 
 
 class Metacarpolis(_ComicControlScraper):
