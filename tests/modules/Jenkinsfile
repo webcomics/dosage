@@ -9,7 +9,7 @@ node {
     stage ('Run tests') {
         timeout(time: 12, unit: 'HOURS') {
             withCredentials([string(credentialsId: 'proxymap', variable: 'PROXYMAP')]) {
-                sh 'podman run --rm -v $PWD:/work --userns=keep-id docker.io/python:3.10-bullseye tests/modules/testall.sh'
+                sh 'podman run --rm -v $PWD:/work --userns=keep-id docker.io/python:3.10-bullseye /work/tests/modules/testall.sh'
             }
         }
     }
