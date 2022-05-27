@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2021 Tobias Gruetzmacher
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 from re import compile, escape, IGNORECASE, sub
 from os.path import splitext
@@ -58,12 +58,11 @@ class SamAndFuzzy(_ParserScraper):
     help = 'Index format: n (unpadded)'
 
 
-class SandraOnTheRocks(_BasicScraper):
-    url = 'http://www.sandraontherocks.com/'
-    stripUrl = url + 'strips-sotr/%s'
-    firstStripUrl = stripUrl % 'start_by_running'
-    imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]*/strips-sotr/[^"]+)', before="cn[id]prev"))
+class SandraOnTheRocks(_ComicControlScraper):
+    url = 'https://pixietrixcomix.com/sandra-on-the-rocks/'
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % 'start-by-running'
+    endOfLife = True
     help = 'Index format: name'
 
 
