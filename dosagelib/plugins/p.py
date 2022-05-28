@@ -11,9 +11,15 @@ from ..util import tagre
 from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
 
 
-class PandyLand(_WordPressScraper):
-    url = 'http://pandyland.net/'
-    firstStripUrl = 'http://pandyland.net/1/'
+class PandyLand(_ParserScraper):
+    url = ('https://web.archive.org/web/20200122163307/'
+        'http:/pandyland.net/')
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//div[d:class("comic")]/img'
+    prevSearch = '//a[contains(text(), "previous")]'
+    help = 'Index format: number'
+    endOfLife = True
 
 
 class ParadigmShift(_BasicScraper):
