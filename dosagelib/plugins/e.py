@@ -193,8 +193,10 @@ class EvilDiva(_WordPressScraper):
     endOfLife = True
 
 
-class EvilInc(_WordPressScraper):
-    url = 'http://evil-inc.com/'
+class EvilInc(_ParserScraper):
+    url = 'https://www.evil-inc.com/'
+    imageSearch = '//div[@id="unspliced-comic"]/img/@data-src'
+    prevSearch = '//a[./i[d:class("fa-chevron-left")]]'
     firstStripUrl = url + 'comic/monday-3/'
 
 

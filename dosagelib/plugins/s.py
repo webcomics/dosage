@@ -1,17 +1,15 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2021 Tobias Gruetzmacher
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 from re import compile, escape, IGNORECASE, sub
 from os.path import splitext
 
-from requests.exceptions import HTTPError
-
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter, joinPathPartsNamer
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPNaviIn, _WPWebcomic
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPWebcomic
 
 
 class SabrinaOnline(_BasicScraper):
@@ -58,12 +56,11 @@ class SamAndFuzzy(_ParserScraper):
     help = 'Index format: n (unpadded)'
 
 
-class SandraOnTheRocks(_BasicScraper):
-    url = 'http://www.sandraontherocks.com/'
-    stripUrl = url + 'strips-sotr/%s'
-    firstStripUrl = stripUrl % 'start_by_running'
-    imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]*/strips-sotr/[^"]+)', before="cn[id]prev"))
+class SandraOnTheRocks(_ComicControlScraper):
+    url = 'https://pixietrixcomix.com/sandra-on-the-rocks/'
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % 'start-by-running'
+    endOfLife = True
     help = 'Index format: name'
 
 
@@ -314,7 +311,7 @@ class SMBC(_ComicControlScraper):
     url = 'https://www.smbc-comics.com/'
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % '2002-09-05'
-    imageSearch = ['//img[@id="cc-comic"]', '//div[@id="aftercomic"]/img']
+    imageSearch = ('//img[@id="cc-comic"]', '//div[@id="aftercomic"]/img')
     textSearch = '//img[@id="cc-comic"]/@title'
     multipleImagesPerStrip = True
 

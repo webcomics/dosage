@@ -86,7 +86,8 @@ class MangaDex(_ParserScraper):
 
     def namer(self, imageUrl, pageUrl):
         # Construct filename from episode number and page index in array
-        chapterNum = self.chapter['attributes']['chapter'] if self.chapter['attributes']['chapter'] != None else 0
+        chapter = self.chapter['attributes']['chapter']
+        chapterNum = chapter if chapter is not None else 0
         pageNum = self.imageUrls.index(imageUrl)
         pageExt = imageUrl.rsplit('.')[-1]
         return '%s-%02d.%s' % (chapterNum, pageNum, pageExt)

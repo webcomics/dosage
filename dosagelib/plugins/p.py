@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 from re import compile, escape
 
@@ -11,9 +11,15 @@ from ..util import tagre
 from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
 
 
-class PandyLand(_WordPressScraper):
-    url = 'http://pandyland.net/'
-    firstStripUrl = 'http://pandyland.net/1/'
+class PandyLand(_ParserScraper):
+    url = ('https://web.archive.org/web/20200122163307/'
+        'http:/pandyland.net/')
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//div[d:class("comic")]/img'
+    prevSearch = '//a[contains(text(), "previous")]'
+    help = 'Index format: number'
+    endOfLife = True
 
 
 class ParadigmShift(_BasicScraper):
@@ -102,16 +108,13 @@ class PennyAndAggie(_BasicScraper):
 class PennyArcade(_ParserScraper):
     url = 'https://www.penny-arcade.com/comic/'
     stripUrl = url + '%s'
-    firstStripUrl = stripUrl % '1998/11/18'
-    imageSearch = '//div[@id="comicFrame"]//img'
-    prevSearch = '//a[d:class("btnPrev")]'
-    nextSearch = '//a[d:class("btnNext")]'
+    firstStripUrl = stripUrl % '1998/11/18/the-sin-of-long-load-times'
+    imageSearch = '//div[d:class("comic-panel")]//img'
+    prevSearch = '//a[d:class("older")]'
+    nextSearch = '//a[d:class("newer")]'
+    multipleImagesPerStrip = True
     starter = bounceStarter
     help = 'Index format: yyyy/mm/dd'
-
-    def namer(self, image_url, page_url):
-        p = page_url.split('/')
-        return '%04d%02d%02d' % (int(p[4]), int(p[5]), int(p[6]))
 
 
 class PeppermintSaga(_WPNavi):

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
 import re
 import os
 
@@ -15,8 +15,7 @@ def get_test_scrapers():
     """Return scrapers that should be tested."""
     if 'TESTALL' in os.environ:
         # test all comics (this will take some time)
-        # ignore mangadex for now (site is temporary down)
-        scraper_pattern = '^(?!MangaDex)'
+        return scrapers.get()
     elif 'TESTCOMICS' in os.environ:
         scraper_pattern = os.environ['TESTCOMICS']
     else:
@@ -53,6 +52,6 @@ class LoadModScheduling(LoadScopeScheduling):
         return mod + "::" + test.split("/", 1)[0]
 
 
-@pytest.mark.trylast
+@pytest.mark.trylast()
 def pytest_xdist_make_scheduler(config, log):
     return LoadModScheduling(config, log)

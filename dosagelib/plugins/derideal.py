@@ -10,7 +10,6 @@ class Derideal(_ParserScraper):
     imageSearch = '//img[contains(@class, "comic-page")]'
     prevSearch = '//a[i[contains(@class, "fa-angle-left")]]'
     latestSearch = '//a[i[contains(@class, "fa-angle-double-right")]]'
-    starter = indirectStarter
 
     def __init__(self, name, sub, first, last=None):
         if name == 'Derideal':

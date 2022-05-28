@@ -1,9 +1,10 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2021 Tobias Gruetzmacher
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 from re import compile, escape
+from typing import List
 
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
@@ -132,7 +133,7 @@ class CatenaManor(_ParserScraper):
     imageSearch = '//img[@class="comicthumbnail"]'
     multipleImagesPerStrip = True
     endOfLife = True
-    strips = []
+    strips: List[str] = []
 
     def starter(self):
         # Retrieve archive links and select valid range

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2021 Tobias Gruetzmacher
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 import json
 from re import compile, escape, IGNORECASE
@@ -29,21 +29,17 @@ class MadamAndEve(_BasicScraper):
     multipleImagesPerStrip = True
 
 
-class Magellan(_ParserScraper):
-    url = 'http://magellanverse.com/'
-    css = True
-    imageSearch = '#comic-1 > a:first-child img'
-    prevSearch = '.nav-previous > a'
+class Magellan(_WordPressScraper):
+    url = 'https://magellanverse.com/'
+    firstStripUrl = url + 'comic/20040307wannabe/'
 
 
-class MagickChicks(_BasicScraper):
-    url = 'http://www.magickchicks.com/'
-    stripUrl = url + 'strips-mc/%s'
-    firstStripUrl = stripUrl % 'tis_but_a_trifle'
-    imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]*/strips-mc/[^"]+)',
-                               before="cn[id]prevt"))
+class MagickChicks(_ComicControlScraper):
+    url = 'https://pixietrixcomix.com/magick-chicks/'
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % 'tis-but-a-trifle-2'
     help = 'Index format: name'
+    endOfLife = True
 
 
 class ManlyGuysDoingManlyThings(_ParserScraper):
@@ -128,16 +124,9 @@ class Melonpool(_WordPressScraper):
 
 class MenageA3(_ComicControlScraper):
     adult = True
-    url = 'http://www.ma3comic.com/'
-
-    @classmethod
-    def namer(cls, imageUrl, pageUrl):
-        """Remove random junk from image names."""
-        imgname = imageUrl.split('/')[-1]
-        imgbase = imgname.rsplit('-', 1)[1]
-        return '%s' % (imgbase)
-
-    help = 'Index format: name'
+    url = 'https://pixietrixcomix.com/menage-a-3/'
+    firstStripUrl = url + 'for-new-readers'
+    endOfLife = True
 
 
 class Metacarpolis(_ComicControlScraper):

@@ -22,11 +22,11 @@ def get_plugin_modules():
     @rtype: iterator of module
     """
     prefix = plugin_package + "."
-    modules = [m[1] for m in pkgutil.iter_modules(plugin_path, prefix)]
+    modules = {m[1] for m in pkgutil.iter_modules(plugin_path, prefix)}
 
     for elm in _get_all_modules_pyinstaller():
         if elm.startswith(prefix):
-            modules.append(elm)
+            modules.add(elm)
 
     for name in modules:
         try:

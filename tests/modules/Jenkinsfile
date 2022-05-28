@@ -1,37 +1,19 @@
 #!groovy
 
-def prepareDocker () {
-    def img
-    stage('Prepare environment') {
-        dir('.imagebuild') {
-            def uid = sh returnStdout: true, script: 'id -u'
-            writeFile file: 'Dockerfile', text: """
-            FROM python:3.8-buster
-            RUN pip install pytest-cov PySocks && \\
-            useradd -m -u ${uid.trim()} jenkins
-            """
-            img = docker.build('local:test-all-comics')
-        }
+node {
+    stage('Checkout') {
+        deleteDir()
+        checkout scm
     }
-    return img
-}
 
-def runTests() {
-    stage ('Install lib') {
-        sh "pip install --user -e .[css,dev]"
-    }
     stage ('Run tests') {
         timeout(time: 12, unit: 'HOURS') {
             withCredentials([string(credentialsId: 'proxymap', variable: 'PROXYMAP')]) {
-                sh '''
-                    TESTALL=1 py.test -v --cov=dosagelib --cov-report xml \
-                        --alluredir=allure-data \
-                        --tb=short -n10 --junitxml=junit.xml \
-                        tests/modules/check_comics.py || true
-                '''
+                sh 'podman run --rm -v $PWD:/work --userns=keep-id docker.io/python:3.10-bullseye /work/tests/modules/testall.sh'
             }
         }
     }
+
     stage('Report') {
         junit 'junit.xml'
         publishCoverage calculateDiffForChangeRequests: true,
@@ -39,19 +21,6 @@ def runTests() {
             adapters: [
                 coberturaAdapter('coverage.xml')
             ]
-    }
-}
-
-// MAIN //
-node {
-    def img = prepareDocker()
-
-    stage('Checkout') {
-        checkout scm
-    }
-
-    img.inside {
-        runTests()
     }
 
     stage('Allure Report') {
@@ -61,9 +30,8 @@ node {
             unzip dir: 'allure-data', quiet: true, zipFile: 'allure-history.zip'
             sh 'rm -f allure-history.zip'
         }
-        sh 'docker run --rm -v $PWD:/work -u $(id -u) tobix/allure-cli generate allure-data'
+        sh 'podman run --rm -v $PWD:/work --userns=keep-id docker.io/tobix/allure-cli generate allure-data'
         zip archive: true, dir: 'allure-report', glob: 'history/**', zipFile: 'allure-history.zip'
         publishHTML reportDir: 'allure-report', reportFiles: 'index.html', reportName: 'Allure Report'
     }
 }
-

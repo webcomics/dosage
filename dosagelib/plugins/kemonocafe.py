@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2020 Tobias Gruetzmacher
+# Copyright (C) 2019-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 from ..scraper import _ParserScraper
 
@@ -25,7 +25,7 @@ class KemonoCafe(_ParserScraper):
     def namer(self, imageUrl, pageUrl):
         # Strip date from filenames
         filename = imageUrl.rsplit('/', 1)[-1]
-        if not 'ultrarosa' in pageUrl:
+        if 'ultrarosa' not in pageUrl:
             if filename[4] == '-' and filename[7] == '-':
                 filename = filename[10:]
             if filename[0] == '-' or filename[0] == '_':
