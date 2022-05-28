@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2020 Tobias Gruetzmacher
+# Copyright (C) 2019-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 """
 Script to get a list of Tapastic comics and save the info in a
@@ -9,7 +9,6 @@ JSON file for further processing.
 from urllib.parse import urlsplit, parse_qs
 
 from scriptutil import ComicListUpdater
-from dosagelib.util import check_robotstxt
 
 
 class TapasticUpdater(ComicListUpdater):

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
 import argparse
 import contextlib
 import os
@@ -139,15 +139,15 @@ def display_version(verbose):
                     # display update link
                     text = ('A new version %(version)s of %(app)s is '
                             'available at %(url)s.')
-                attrs = dict(version=version, app=AppName,
-                             url=url, currentversion=__version__)
+                attrs = {'version': version, 'app': AppName,
+                    'url': url, 'currentversion': __version__}
                 print(text % attrs)
         else:
             if value is None:
                 value = 'invalid update file syntax'
             text = ('An error occured while checking for an '
                     'update of %(app)s: %(error)s.')
-            attrs = dict(error=value, app=AppName)
+            attrs = {'error': value, 'app': AppName}
             print(text % attrs)
     return 0
 

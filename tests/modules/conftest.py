@@ -52,6 +52,6 @@ class LoadModScheduling(LoadScopeScheduling):
         return mod + "::" + test.split("/", 1)[0]
 
 
-@pytest.mark.trylast
+@pytest.mark.trylast()
 def pytest_xdist_make_scheduler(config, log):
     return LoadModScheduling(config, log)

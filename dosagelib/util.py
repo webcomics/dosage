@@ -118,14 +118,14 @@ def tagre(tag, attribute, value, quote='"', before="", after=""):
         prefix = r"[^>]*%s[^>]*\s+" % before
     else:
         prefix = r"(?:[^>]*\s+)?"
-    attrs = dict(
-        tag=case_insensitive_re(tag),
-        attribute=case_insensitive_re(attribute),
-        value=value,
-        quote=quote,
-        prefix=prefix,
-        after=after,
-    )
+    attrs = {
+        'tag': case_insensitive_re(tag),
+        'attribute': case_insensitive_re(attribute),
+        'value': value,
+        'quote': quote,
+        'prefix': prefix,
+        'after': after,
+    }
     return (r'<\s*%(tag)s\s+%(prefix)s' +
             r'%(attribute)s\s*=\s*%(quote)s%(value)s%(quote)' +
             r's[^>]*%(after)s[^>]*>') % attrs
@@ -308,7 +308,7 @@ at %(url)s and include at least the information below:
 Not disclosing some of the information below due to privacy reasons is ok.
 I will try to help you nonetheless, but you have to give me something
 I can work with ;) .
-""" % dict(app=AppName, url=SupportUrl), file=out)
+""" % {'app': AppName, 'url': SupportUrl}, file=out)
     if etype is None:
         etype = sys.exc_info()[0]
     if evalue is None:

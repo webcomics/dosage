@@ -49,11 +49,12 @@ class RickGriffinStudios(_WPNaviIn):
                 'ah-club-2-cover': 'ah-club-1-page-24',
                 'ah-club-3-cover': 'ah-club-2-page-28',
                 'ah-club-4-cover': 'ah-club-3-page-22',
-                'ah-club-5-cover': 'ah-club-4-page-24'
+                'ah-club-5-cover': 'ah-club-4-page-24',
             }),
             cls('HayvenCelestia', 'hayven-celestia', 'skinchange-p1'),
             cls('TheStoryboard', 'the-storyboard', 'the-storyboard-001'),
             cls('TracesOfThePast', 'in-the-new-age', 'totp-page-1'),
             cls('TracesOfThePastNSFW', 'in-the-new-age', 'totp-page-1-nsfw', adult=True),
-            cls('ZootopiaNightTerrors', 'zootopia-night-terrors', 'zootopia-night-terrors-p1', 'zootopia-night-terrors-p7'),
+            cls('ZootopiaNightTerrors', 'zootopia-night-terrors',
+                'zootopia-night-terrors-p1', 'zootopia-night-terrors-p7'),
         )

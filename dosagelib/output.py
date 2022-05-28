@@ -103,8 +103,8 @@ class Output(object):
     def writelines(self, lines, level=0):
         """Write multiple messages."""
         for line in lines:
-            for line in line.rstrip(u'\n').split(u'\n'):
-                self.write(line.rstrip(u'\n'), level=level)
+            for sline in line.rstrip(u'\n').split(u'\n'):
+                self.write(sline.rstrip(u'\n'), level=level)
 
     @property
     def width(self):

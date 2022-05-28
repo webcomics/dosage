@@ -6,12 +6,10 @@
 from re import compile, escape, IGNORECASE, sub
 from os.path import splitext
 
-from requests.exceptions import HTTPError
-
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter, joinPathPartsNamer
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPNaviIn, _WPWebcomic
+from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPWebcomic
 
 
 class SabrinaOnline(_BasicScraper):
@@ -313,7 +311,7 @@ class SMBC(_ComicControlScraper):
     url = 'https://www.smbc-comics.com/'
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % '2002-09-05'
-    imageSearch = ['//img[@id="cc-comic"]', '//div[@id="aftercomic"]/img']
+    imageSearch = ('//img[@id="cc-comic"]', '//div[@id="aftercomic"]/img')
     textSearch = '//img[@id="cc-comic"]/@title'
     multipleImagesPerStrip = True
 
