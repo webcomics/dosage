@@ -1,12 +1,13 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 import os
 import threading
 import _thread
 from queue import Queue, Empty
+from typing import Dict
 from urllib.parse import urlparse
 
 from .output import out
@@ -41,7 +42,7 @@ class ComicQueue(Queue):
 
 
 # ensure threads download only from one host at a time
-host_locks = {}
+host_locks: Dict[str, threading.Lock] = {}
 
 
 def get_hostname(url):

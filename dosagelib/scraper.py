@@ -1,12 +1,13 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2021 Tobias Gruetzmacher
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
 import html
 import os
 import re
 import warnings
 from urllib.parse import urljoin
+from typing import Optional, Union, Pattern, Sequence
 
 import lxml
 from lxml.html.defs import link_attrs as html_link_attrs
@@ -42,60 +43,60 @@ class GeoblockedException(IOError):
         super().__init__('It seems your current location is geo-blocked.')
 
 
-class Scraper(object):
+class Scraper:
     '''Base class for all comic scraper, but without a specific scrape
     implementation.'''
 
     # The URL for the comic strip
-    url = None
+    url: Optional[str] = None
 
     # A string that is interpolated with the strip index to yield the URL for a
     # particular strip.
-    stripUrl = None
+    stripUrl: Optional[str] = None
 
     # Stop search for previous URLs at this URL
-    firstStripUrl = None
+    firstStripUrl: Optional[str] = None
 
     # if more than one image per URL is expected
-    multipleImagesPerStrip = False
+    multipleImagesPerStrip: bool = False
 
     # set to True if this comic contains adult content
-    adult = False
+    adult: bool = False
 
     # set to True if this comic will not get updated anymore
-    endOfLife = False
+    endOfLife: bool = False
 
     # langauge of the comic (two-letter ISO 639-1 code)
-    lang = 'en'
+    lang: str = 'en'
 
     # an expression that will locate the URL for the previous strip in a page
     # this can also be a list or tuple
-    prevSearch = None
+    prevSearch: Optional[Union[Sequence[Union[str, Pattern]], str, Pattern]] = None
 
     # an expression that will locate the strip image URLs strip in a page
     # this can also be a list or tuple
-    imageSearch = None
+    imageSearch: Optional[Union[Sequence[Union[str, Pattern]], str, Pattern]] = None
 
     # an expression to store a text together with the image
     # sometimes comic strips have additional text info for each comic
-    textSearch = None
+    textSearch: Optional[Union[Sequence[Union[str, Pattern]], str, Pattern]] = None
 
     # Is the additional text required or optional?  When it is required (the
     # default), you see an error message whenever a comic page is encountered
     # that does not have the text
-    textOptional = False
+    textOptional: bool = False
 
     # usually the index format help
-    help = ''
+    help: str = ''
 
     # Specifing a list of HTTP error codes which should be handled as a
     # successful request.  This is a workaround for some comics which return
     # regular pages with strange HTTP codes. By default, all HTTP errors raise
     # exceptions.
-    allow_errors = ()
+    allow_errors: Sequence[int] = ()
 
     # HTTP session for configuration & cookies
-    session = http.default_session
+    session: http.Session = http.default_session
 
     @classmethod
     def getmodules(cls):
