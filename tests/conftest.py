@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2020 Tobias Gruetzmacher
+# Copyright (C) 2019-2022 Tobias Gruetzmacher
 import time
 from pathlib import Path
 
@@ -15,12 +15,6 @@ def _nosleep(monkeypatch):
     monkeypatch.setattr(time, 'sleep', sleep)
 
 
-class FakeAppdirs:
-    @property
-    def user_data_dir(self):
-        return str(Path(__file__).parent / 'mocks')
-
-
 @pytest.fixture()
 def _noappdirs(monkeypatch):
-    monkeypatch.setattr('dosagelib.cmd.userdirs', FakeAppdirs())
+    monkeypatch.setattr('dosagelib.cmd.user_plugin_path', Path(__file__).parent / 'mocks' / 'plugins')
