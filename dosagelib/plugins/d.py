@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 from re import compile, escape
 
@@ -9,7 +9,7 @@ from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter
 from ..util import tagre
 from .common import (_ComicControlScraper, _WordPressScraper, _WPNavi,
-    _WPNaviIn, _WPWebcomic)
+    _WPWebcomic)
 
 
 class Damonk(_BasicScraper):
@@ -42,9 +42,13 @@ class DarthsAndDroids(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(/comics/darths\d\d\d\d\.jpg)'))
 
 
-class DasLebenIstKeinPonyhof(_WPNaviIn):
-    url = 'http://sarahburrini.com/wordpress/'
-    firstStripUrl = url + 'comic/mein-erster-webcomic/'
+class DasLebenIstKeinPonyhof(_ParserScraper):
+    baseUrl = 'https://sarahburrini.com/comic/das-leben-ist-kein-ponyhof/'
+    url = baseUrl + 'und-nu/'
+    firstStripUrl = url + 'mein-erster-webcomic/'
+    imageSearch = '//img[d:class("attachment-full")]'
+    prevSearch = '//a[@rel="prev"]'
+    endOfLife = True
     lang = 'de'
 
 
