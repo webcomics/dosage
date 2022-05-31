@@ -41,7 +41,7 @@ def pytest_generate_tests(metafunc):
     if 'scraperobj' in metafunc.fixturenames:
         scrapers = get_test_scrapers()
         scraperids = [x.name for x in scrapers]
-        metafunc.parametrize('scraperobj', scrapers, ids=scraperids)
+        metafunc.parametrize('scraperobj', scrapers, ids=sorted(scraperids))
 
 
 class LoadModScheduling(LoadScopeScheduling):
