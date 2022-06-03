@@ -7,7 +7,7 @@ from re import compile, escape
 from typing import List
 
 from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import bounceStarter, indirectStarter
+from ..helpers import bounceStarter, indirectStarter, joinPathPartsNamer
 from ..util import tagre
 from .common import _WordPressScraper, _WPNavi, _WPWebcomic
 
@@ -402,6 +402,13 @@ class CrossTimeCafe(_ParserScraper):
     prevSearch = '//a[.//text()="Back"]'
     multipleImagesPerStrip = True
     endOfLife = True
+
+
+class CSectionComics(_WordPressScraper):
+    url = 'https://www.csectioncomics.com/'
+    firstStripUrl = url + 'comics/one-day-in-country'
+    namer = joinPathPartsNamer((), (-3, -2, -1))
+    multipleImagesPerStrip = True
 
 
 class CucumberQuest(_WPWebcomic):
