@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2021 Tobias Gruetzmacher
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 from ..scraper import Scraper
 
@@ -609,26 +609,41 @@ class Removed(Scraper):
 
             # Removed in 3.0
             cls('ComicFury/AWAKENING'),
+            cls('ComicFury/AdventuresOftheGreatCaptainMaggieandCrew'),
             cls('ComicFury/Beebleville'),
+            cls('ComicFury/BloodLegaciesEternity'),
             cls('ComicFury/CharlesAndViktor'),
+            cls('ComicFury/DemonWings'),
+            cls('ComicFury/DnDDumbAndDumber'),
             cls('ComicFury/DoodlelandComics'),
             cls('ComicFury/Elements'),
             cls('ComicFury/FairyDust'),
+            cls('ComicFury/FandomMisadventures'),
             cls('ComicFury/GreenerGrass'),
+            cls('ComicFury/HINATATheDemonSlayer'),
             cls('ComicFury/HelloWanderingStar'),
             cls('ComicFury/Hodgemosh'),
+            cls('ComicFury/Imp'),
             cls('ComicFury/Kitsune'),
             cls('ComicFury/LaszloAndEdgar'),
+            cls('ComicFury/Maluk'),
             cls('ComicFury/MegamanComic'),
+            cls('ComicFury/Mischeif'),
+            cls('ComicFury/OceanLabyrinth'),
             cls('ComicFury/PatchworkPeople'),
+            cls('ComicFury/PlanetChaser'),
             cls('ComicFury/PornographyInFiveActs'),
             cls('ComicFury/PoussireDeFe'),
             cls('ComicFury/RED'),
+            cls('ComicFury/RadioMustard'),
+            cls('ComicFury/RaytoonsKids'),
             cls('ComicFury/ResNullius'),
             cls('ComicFury/ResNulliusCS'),
             cls('ComicFury/Seed'),
+            cls('ComicFury/SixteenCandlesHuntersAgency'),
             cls('ComicFury/TheAcryden'),
             cls('ComicFury/TheHourlyComic'),
+            cls('ComicFury/TheKAMics'),
             cls('ComicFury/TheUnthinkableHybrid'),
             cls('ComicFury/TwentyFourSeven'),
             cls('ComicFury/TwentyFourSevenFans'),
@@ -1612,6 +1627,7 @@ class Renamed(Scraper):
 
             # Renamed in 3.0
             cls('AHClub', 'RickGriffinStudios/AHClub'),
+            cls('ComicFury/MuddlemarchMudCompany', 'ComicFury/MudCompany'),
             cls('CrapIDrewOnMyLunchBreak', 'WebToons/CrapIDrewOnMyLunchBreak'),
             cls('GoComics/BloomCounty2017', 'GoComics/BloomCounty2019'),
             cls('GoComics/Cathy', 'GoComics/CathyClassics'),
