@@ -16,7 +16,7 @@ def get_test_scrapers():
     """Return scrapers that should be tested."""
     if 'TESTALL' in os.environ:
         # test all comics (this will take some time)
-        return scrapers.get()
+        return scrapers.all()
     elif 'TESTCOMICS' in os.environ:
         scraper_pattern = os.environ['TESTCOMICS']
     else:
@@ -33,7 +33,7 @@ def get_test_scrapers():
 
     matcher = re.compile(scraper_pattern)
     return [
-        scraperobj for scraperobj in scrapers.get()
+        scraperobj for scraperobj in scrapers.all()
         if matcher.match(scraperobj.name)
     ]
 

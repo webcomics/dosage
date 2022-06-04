@@ -11,7 +11,7 @@ from platformdirs import PlatformDirs
 from . import events, configuration, singleton, director
 from . import AppName, __version__
 from .output import out
-from .scraper import scrapers as allscrapers
+from .scraper import scrapers as scrapercache
 from .util import internal_error, strlimit
 
 
@@ -98,10 +98,6 @@ def setup_options():
         ' Use if you know what you are doing.')
     # used for development testing prev/next matching
     parser.add_argument('--dry-run', action='store_true',
-        help=argparse.SUPPRESS)
-    # multimatch is only used for development, eg. testing if all comics of
-    # a scripted plugin are working
-    parser.add_argument('--multimatch', action='store_true',
         help=argparse.SUPPRESS)
     # List all comic modules, even those normally suppressed, because they
     # are not "real" (moved & removed)
@@ -200,8 +196,7 @@ def vote_comics(options):
     errors = 0
     try:
         for scraperobj in director.getScrapers(options.comic, options.basepath,
-                                               options.adult,
-                                               options.multimatch):
+                options.adult):
             errors += vote_comic(scraperobj)
     except ValueError as msg:
         out.exception(msg)
@@ -228,7 +223,7 @@ def vote_comic(scraperobj):
 def run(options):
     """Execute comic commands."""
     set_output_info(options)
-    allscrapers.adddir(user_plugin_path)
+    scrapercache.adddir(user_plugin_path)
     # ensure only one instance of dosage is running
     if not options.allow_multiple:
         singleton.SingleInstance()
@@ -257,7 +252,7 @@ def do_list(column_list=True, verbose=False, listall=False):
         out.info(u'Comics tagged with [{}] require age confirmation'
             ' with the --adult option.'.format(TAG_ADULT))
         out.info(u'Non-english comics are tagged with [%s].' % TAG_LANG)
-        scrapers = sorted(allscrapers.get(listall),
+        scrapers = sorted(scrapercache.all(listall),
                           key=lambda s: s.name.lower())
         if column_list:
             num, disabled = do_column_list(scrapers)

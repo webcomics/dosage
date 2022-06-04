@@ -7,7 +7,7 @@ import os
 import re
 import warnings
 from urllib.parse import urljoin
-from typing import Optional, Union, Pattern, Sequence
+from typing import Dict, List, Optional, Union, Pattern, Sequence
 
 import lxml
 from lxml.html.defs import link_attrs as html_link_attrs
@@ -541,38 +541,33 @@ class Cache:
     slow.
     """
     def __init__(self):
-        self.data = []
+        self.data: List[Scraper] = []
         self.userdirs = set()
 
-    def find(self, comic, multiple_allowed=False):
-        """Get a list comic scraper objects.
-
-        Can return more than one entry if multiple_allowed is True, else it raises
-        a ValueError if multiple modules match. The match is a case insensitive
-        substring search.
+    def find(self, comic: str) -> Scraper:
+        """Find a comic scraper object based on its name. This prefers a
+        perfect match, but falls back to a substring match, if that is unique.
+        Otharwise a ValueError is thrown.
         """
         if not comic:
             raise ValueError("empty comic name")
         candidates = []
         cname = comic.lower()
-        for scrapers in self.get(include_removed=True):
-            lname = scrapers.name.lower()
+        for scraper in self.all(include_removed=True):
+            lname = scraper.name.lower()
             if lname == cname:
                 # perfect match
-                if not multiple_allowed:
-                    return [scrapers]
-                else:
-                    candidates.append(scrapers)
-            elif cname in lname and scrapers.url:
-                candidates.append(scrapers)
-        if len(candidates) > 1 and not multiple_allowed:
+                return scraper
+            elif cname in lname and scraper.url:
+                candidates.append(scraper)
+        if len(candidates) > 1:
             comics = ", ".join(x.name for x in candidates)
             raise ValueError('multiple comics found: %s' % comics)
         elif not candidates:
             raise ValueError('comic %r not found' % comic)
-        return candidates
+        return candidates[0]
 
-    def load(self):
+    def load(self) -> None:
         out.debug("Loading comic modules...")
         modules = 0
         classes = 0
@@ -583,7 +578,7 @@ class Cache:
         out.debug("... %d scrapers loaded from %d classes in %d modules." % (
             len(self.data), classes, modules))
 
-    def adddir(self, path):
+    def adddir(self, path) -> None:
         """Add an additional directory with python modules to the scraper list.
         These are handled as if the were part of the plugins package.
         """
@@ -603,7 +598,7 @@ class Cache:
             out.debug("Added %d user classes from %d modules." % (
                 classes, modules))
 
-    def addmodule(self, module):
+    def addmodule(self, module) -> int:
         """Adds all valid plugin classes from the specified module to the cache.
         @return: number of classes added
         """
@@ -613,8 +608,8 @@ class Cache:
             self.data.extend(plugin.getmodules())
         return classes
 
-    def get(self, include_removed=False):
-        """Find all comic scraper classes in the plugins directory.
+    def all(self, include_removed=False) -> List[Scraper]:
+        """Return all comic scraper classes in the plugins directory.
         @return: list of Scraper classes
         @rtype: list of Scraper
         """
@@ -625,9 +620,9 @@ class Cache:
         else:
             return [x for x in self.data if x.url]
 
-    def validate(self):
+    def validate(self) -> None:
         """Check for duplicate scraper names."""
-        d = {}
+        d: Dict[str, Scraper] = {}
         for scraper in self.data:
             name = scraper.name.lower()
             if name in d:

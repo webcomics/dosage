@@ -11,7 +11,7 @@ from typing import Dict
 from urllib.parse import urlparse
 
 from .output import out
-from .scraper import scrapers as allscrapers
+from .scraper import scrapers as scrapercache
 from . import events
 
 
@@ -160,7 +160,7 @@ def getComics(options):
     errors = 0
     try:
         for scraperobj in getScrapers(options.comic, options.basepath,
-                                      options.adult, options.multimatch):
+                options.adult):
             jobs.put(scraperobj)
         # start threads
         num_threads = min(options.parallel, jobs.qsize())
@@ -186,7 +186,7 @@ def getComics(options):
     return errors
 
 
-def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False, listing=False):
+def getScrapers(comics, basepath=None, adult=True, listing=False):
     """Get scraper objects for the given comics."""
     if '@' in comics:
         # only scrapers whose directory already exists
@@ -211,18 +211,17 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False, listi
             else:
                 name = comic
                 indexes = None
-            found_scrapers = allscrapers.find(name, multiple_allowed=multiple_allowed)
-            for scraperobj in found_scrapers:
-                if shouldRunScraper(scraperobj, adult, listing):
-                    # FIXME: Find a better way to work with indexes
-                    scraperobj.indexes = indexes
-                    if scraperobj not in scrapers:
-                        scrapers.add(scraperobj)
-                        yield scraperobj
+            scraper = scrapercache.find(name)
+            if shouldRunScraper(scraper, adult, listing):
+                # FIXME: Find a better way to work with indexes
+                scraper.indexes = indexes
+                if scraper not in scrapers:
+                    scrapers.add(scraper)
+                    yield scraper
 
 
 def get_existing_comics(basepath=None, adult=True, listing=False):
-    for scraperobj in allscrapers.get(include_removed=True):
+    for scraperobj in scrapercache.all(include_removed=True):
         dirname = scraperobj.get_download_dir(basepath)
         if os.path.isdir(dirname):
             if shouldRunScraper(scraperobj, adult, listing):
