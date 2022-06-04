@@ -1613,7 +1613,6 @@ class Renamed(Scraper):
             # Renamed in 3.0
             cls('AHClub', 'RickGriffinStudios/AHClub'),
             cls('CrapIDrewOnMyLunchBreak', 'WebToons/CrapIDrewOnMyLunchBreak'),
-            cls('DeerMe', 'ComicFury/DeerMe'),
             cls('GoComics/BloomCounty2017', 'GoComics/BloomCounty2019'),
             cls('GoComics/Cathy', 'GoComics/CathyClassics'),
             cls('GoComics/Owlturd', 'GoComics/ShenComix'),

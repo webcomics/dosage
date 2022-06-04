@@ -88,6 +88,15 @@ class DeepFried(_BasicScraper):
     help = 'Index format: none'
 
 
+class DeerMe(_ParserScraper):
+    url = 'https://www.deerme.net/'
+    firstStripUrl = url + 'a.php?b=comic/c001-image/dm-20031121-001-0001'
+    imageSearch = '//div[d:class("ComicImage")]/img'
+    prevSearch = '//a[@rel="prev"]'
+    nextSearch = '//a[@rel="next"]'
+    starter = bounceStarter
+
+
 class Delve(_WordPressScraper):
     url = 'https://thisis.delvecomic.com/NewWP/'
     stripUrl = url + 'comic/%s/'

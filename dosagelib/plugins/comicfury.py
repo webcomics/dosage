@@ -337,7 +337,6 @@ class ComicFury(_ParserScraper):
             cls('DeadFingers', 'deadfingers'),
             cls('DeadRabbitCa', 'afairtrade'),
             cls('DeepBlue', 'deepblue'),
-            cls('DeerMe', 'deerme'),
             cls('DefineHero', 'definehero'),
             cls('DELIA', 'delia'),
             cls('DemasPokmonAdventure', 'nuzlocke-dema'),
