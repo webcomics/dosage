@@ -4,6 +4,7 @@
 # Copyright (C) 2015-2022 Tobias Gruetzmacher
 import re
 import os
+from operator import attrgetter
 
 import pytest
 from xdist.dsession import LoadScopeScheduling
@@ -39,9 +40,8 @@ def get_test_scrapers():
 
 def pytest_generate_tests(metafunc):
     if 'scraperobj' in metafunc.fixturenames:
-        scrapers = get_test_scrapers()
-        scraperids = [x.name for x in scrapers]
-        metafunc.parametrize('scraperobj', scrapers, ids=sorted(scraperids))
+        scrapers = sorted(get_test_scrapers(), key=attrgetter('name'))
+        metafunc.parametrize('scraperobj', scrapers, ids=attrgetter('name'))
 
 
 class LoadModScheduling(LoadScopeScheduling):
