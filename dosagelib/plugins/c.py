@@ -154,17 +154,16 @@ class CatenaManor(_ParserScraper):
 
 
 class CatNine(_WordPressScraper):
-    url = 'http://classic.cat-nine.net/'
-    stripUrl = url + 'comic/%s'
-    firstStripUrl = stripUrl % 'day-first'
+    url = 'https://classic.cat-nine.net/'
+    firstStripUrl = url + 'comic/day-first'
+    imageSearch = '//div[@id="comic"]//img/@data-src-img'
     endOfLife = True
 
 
-class CatNineTakeTwo(CatNine):
+class CatNineTakeTwo(_WordPressScraper):
     name = 'CatNine/TakeTwo'
-    url = 'http://cat-nine.net/'
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = stripUrl % 'episode-1/1-first-day-for-everything'
+    url = 'https://cat-nine.net/'
+    firstStripUrl = url + 'comic/episode-1/1-first-day-for-everything/'
 
 
 class CatsAndCameras(_WordPressScraper):
