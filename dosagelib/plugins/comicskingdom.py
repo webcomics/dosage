@@ -120,7 +120,6 @@ class ComicsKingdom(_ParserScraper):
             cls('SallyForth', 'sally-forth'),
             cls('SamAndSilo', 'sam-and-silo'),
             cls('SecretAgentX9', 'secret-agent-x-9'),
-            cls('ShermansLagoon', 'sherman-s-lagoon'),
             # Shoe has a duplicate in GoComics/Shoe
             cls('SixChix', 'six-chix'),
             cls('SlylockFoxAndComicsForKids', 'slylock-fox-and-comics-for-kids'),

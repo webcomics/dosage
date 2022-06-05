@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
 import codecs
 import html
 import json
@@ -22,18 +22,18 @@ def first_lower(x):
 
 
 class ComicListUpdater(object):
-    dup_templates = ()
-    excluded_comics = ()
+    dup_templates: tuple[str, ...] = ()
+    excluded_comics: tuple[str, ...] = ()
 
     START = "# START AUTOUPDATE"
     END = "# END AUTOUPDATE"
 
-    def __init__(self, name):
+    def __init__(self, name: str):
         self.json = name.replace(".py", ".json")
         self.session = http.default_session
         self.sleep = 0
 
-    def get_url(self, url, expand=True):
+    def get_url(self, url: str, expand=True):
         """Get an HTML page and parse it with LXML."""
         print("Parsing", url, file=sys.stderr)
         try:
@@ -48,7 +48,7 @@ class ComicListUpdater(object):
             print("ERROR:", msg, file=sys.stderr)
             raise
 
-    def should_skip(self, name):
+    def should_skip(self, name: str):
         if contains_case_insensitive(self.res, name):
             # we cannot handle two comics that only differ in case
             print("INFO: skipping possible duplicate", repr(name),
@@ -69,7 +69,7 @@ class ComicListUpdater(object):
             json.dump(self.res, f, sort_keys=True, indent=2,
                       separators=(',', ': '))
 
-    def add_comic(self, name, data, count=None):
+    def add_comic(self, name: str, data: tuple[str, ...], count=None):
         """Add a collected comic with a specific number of comics."""
         name = format_name(name)
         if not self.should_skip(name):
