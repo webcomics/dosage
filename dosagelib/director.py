@@ -4,10 +4,11 @@
 # Copyright (C) 2015-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 import os
+import re
 import threading
 import _thread
 from queue import Queue, Empty
-from typing import Dict
+from typing import Collection, Dict
 from urllib.parse import urlparse
 
 from .output import out
@@ -186,7 +187,7 @@ def getComics(options):
     return errors
 
 
-def getScrapers(comics, basepath=None, adult=True, listing=False):
+def getScrapers(comics: Collection[str], basepath: str, adult=True, listing=False):
     """Get scraper objects for the given comics."""
     if '@' in comics:
         # only scrapers whose directory already exists
@@ -198,13 +199,14 @@ def getScrapers(comics, basepath=None, adult=True, listing=False):
         # get only selected comic scrapers
         # store them in a set to eliminate duplicates
         scrapers = set()
+        basere = re.compile(r'^' + re.escape(basepath) + r'[/\\]')
         for comic in comics:
             # Helpful when using shell completion to pick comics to get
             comic = comic.rstrip(os.path.sep)
-            if basepath and comic.startswith(basepath):
+            if basere.match(comic):
                 # make the following command work:
                 # find Comics -type d | xargs -n1 -P10 dosage -b Comics
-                comic = comic[len(basepath):].lstrip(os.sep)
+                comic = comic[len(basepath) + 1:].lstrip(os.sep)
             if ':' in comic:
                 name, index = comic.split(':', 1)
                 indexes = index.split(',')
