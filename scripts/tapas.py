@@ -11,7 +11,7 @@ from urllib.parse import urlsplit, parse_qs
 from scriptutil import ComicListUpdater
 
 
-class TapasticUpdater(ComicListUpdater):
+class TapasUpdater(ComicListUpdater):
     def collect_results(self):
         # Retrieve the first 10 top comics list pages
         url = 'https://tapas.io/comics?browse=ALL&sort_type=LIKE&pageNumber='
@@ -32,4 +32,4 @@ class TapasticUpdater(ComicListUpdater):
 
 
 if __name__ == '__main__':
-    TapasticUpdater(__file__).run()
+    TapasUpdater(__file__).run()

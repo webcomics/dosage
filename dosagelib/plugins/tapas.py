@@ -4,7 +4,7 @@
 from ..scraper import _ParserScraper
 
 
-class Tapastic(_ParserScraper):
+class Tapas(_ParserScraper):
     baseUrl = 'https://tapas.io/'
     imageSearch = '//article[contains(@class, "js-episode-article")]//img/@data-src'
     prevSearch = '//a[contains(@class, "js-prev-ep-btn")]'
@@ -12,7 +12,7 @@ class Tapastic(_ParserScraper):
     multipleImagesPerStrip = True
 
     def __init__(self, name, url):
-        super(Tapastic, self).__init__('Tapastic/' + name)
+        super().__init__('Tapas/' + name)
         self.url = self.baseUrl + 'series/' + url + '/info'
         self.stripUrl = self.baseUrl + 'episode/%s'
 

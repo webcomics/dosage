@@ -11,7 +11,7 @@ d=$(dirname $0)
 if [ $# -ge 1 ]; then
     list="$*"
 else
-    list="arcamax comicfury comicgenesis comicskingdom creators gocomics keenspot tapastic webcomicfactory"
+    list="arcamax comicfury comicgenesis comicskingdom creators gocomics keenspot tapas webcomicfactory"
 fi
 for script in $list; do
     target="${d}/../dosagelib/plugins/${script}.py"
