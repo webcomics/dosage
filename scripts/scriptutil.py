@@ -69,11 +69,13 @@ class ComicListUpdater(object):
             json.dump(self.res, f, sort_keys=True, indent=2,
                       separators=(',', ': '))
 
-    def add_comic(self, name: str, data: tuple[str, ...], count=None):
+    def add_comic(self, name: str, data, count=None):
         """Add a collected comic with a specific number of comics."""
         name = format_name(name)
         if not self.should_skip(name):
             self.res[name] = {'count': count, 'data': data}
+            return True
+        return False
 
     def collect_results(self):
         raise NotImplementedError
@@ -130,10 +132,10 @@ class ComicListUpdater(object):
         """Check if comic name already exists."""
         names = [(tmpl % name).lower() for tmpl in self.dup_templates]
         if names:
-            for scraperobj in scrapers.get():
-                lname = scraperobj.name.lower()
+            for scraper in scrapers.all():
+                lname = scraper.name.lower()
                 if lname in names:
-                    return scraperobj.name
+                    return scraper.name
         return None
 
     def get_entry(self, name, data):

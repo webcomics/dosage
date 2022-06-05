@@ -12,6 +12,10 @@ from scriptutil import ComicListUpdater
 
 
 class GoComicsUpdater(ComicListUpdater):
+    dup_templates = (
+        "ComicsKingdom/%s",
+    )
+
     # names of comics to exclude
     excluded_comics = (
         # too short
