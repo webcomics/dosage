@@ -1575,6 +1575,8 @@ class Removed(Scraper):
             cls('VGCats/Super'),
             cls('VictimsOfTheSystem'),
             cls('WebDesignerCOTW'),
+            cls('WebToons/Adamsville'),
+            cls('WebToons/CrapIDrewOnMyLunchBreak'),
             cls('WintersLight'),
         )
 
