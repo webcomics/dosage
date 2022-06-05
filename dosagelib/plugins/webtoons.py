@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2021 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# Copyright (C) 2019-2022 Tobias Gruetzmacher
+# Copyright (C) 2019-2022 Daniel Ring
 from ..scraper import _ParserScraper
 
 
@@ -47,7 +47,6 @@ class WebToons(_ParserScraper):
     @classmethod
     def getmodules(cls):  # noqa: Allowed to be long
         return (
-            # START AUTOUPDATE
             cls('1000', 'action/one-thousand', 1217),
             cls('10thDimensionBoys', 'comedy/10th-dimension-boys', 71),
             cls('1111Animals', 'comedy/1111-animals', 437),
@@ -450,5 +449,4 @@ class WebToons(_ParserScraper):
             cls('YunaAndKawachan', 'drama/yuna-and-kawachan', 1840),
             cls('ZeroGame', 'fantasy/zero-game', 1704),
             cls('ZomCom', 'challenge/zomcom', 70195),
-            # END AUTOUPDATE
         )
