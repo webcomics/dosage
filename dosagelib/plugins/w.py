@@ -117,6 +117,16 @@ class WhyTheLongFace(_BasicScraper):
     help = 'Index format: yyyymm'
 
 
+class Widdershins(_ComicControlScraper):
+    url = 'https://widdershinscomic.com/'
+    stripUrl = url + 'wdshn/%s'
+    firstStripUrl = stripUrl % 'sleight-of-hand-cover'
+    starter = bounceStarter
+
+    def namer(self, imageUrl, pageUrl):
+        return pageUrl.rsplit('/', 1)[-1] + '.' + imageUrl.rsplit('.', 1)[-1]
+
+
 class Wigu(_ParserScraper):
     stripUrl = 'http://www.wigucomics.com/adventures/index.php?comic=%s'
     url = stripUrl % '-1'
