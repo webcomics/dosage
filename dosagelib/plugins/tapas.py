@@ -1,7 +1,9 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# Copyright (C) 2019-2022 Daniel Ring
+from ..output import out
 from ..scraper import _ParserScraper
+from ..xml import NS
 
 
 class Tapas(_ParserScraper):
@@ -39,6 +41,12 @@ class Tapas(_ParserScraper):
         # Save link order for position-based filenames
         self.imageUrls = super().fetchUrls(url, data, urlSearch)
         return self.imageUrls
+
+    def shouldSkipUrl(self, url, data):
+        if data.xpath('//button[d:class("js-have-to-sign")]', namespaces=NS):
+            out.warn(f'Nothing to download on "{url}", because a login is required.')
+            return True
+        return False
 
     def namer(self, imageUrl, pageUrl):
         # Construct filename from episode number and image position on page
