@@ -117,7 +117,7 @@ class WhyTheLongFace(_BasicScraper):
     help = 'Index format: yyyymm'
 
 
-class Widdershins(_ComicControlScraper):
+class Widdershins(ComicControlScraper):
     url = 'https://widdershinscomic.com/'
     stripUrl = url + 'wdshn/%s'
     firstStripUrl = stripUrl % 'sleight-of-hand-cover'

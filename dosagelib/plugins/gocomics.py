@@ -492,7 +492,6 @@ class GoComics(ParserScraper):
             cls('Wawawiwa', 'wawawiwa'),
             cls('WaynoVision', 'waynovision'),
             cls('WeePals', 'weepals'),
-            cls('Widdershins', 'widdershins'),
             cls('WideOpen', 'wide-open'),
             cls('WinLoseDrew', 'drewlitton'),
             cls('WizardOfId', 'wizardofid'),

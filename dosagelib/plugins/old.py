@@ -1669,6 +1669,7 @@ class Renamed(Scraper):
             cls('GoComics/PeanutsEnEspanol', 'GoComics/SnoopyEnEspanol'),
             cls('GoComics/RipleysBelieveItOrNotSpanish', 'GoComics/RipleysAunqueUstedNoLoCrea'),
             cls('GoComics/WebcomicName', 'WebcomicName'),
+            cls('GoComics/Widdershins', 'Widdershins'),
             cls('Guardia', 'ComicFury/Guardia'),
             cls('RadioactivePanda', 'Tapas/RadioactivePanda'),
             cls('Shivae/BlackRose', 'BlackRose'),
