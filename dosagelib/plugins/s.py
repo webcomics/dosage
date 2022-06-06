@@ -44,7 +44,10 @@ class SaffronAndSage(WordPressScraper):
 
 
 class SailorsunOrg(WordPressScraper):
-    url = 'http://sailorsun.org/'
+    url = 'https://sailorsun.org/'
+
+    def shouldSkipUrl(self, url, data):
+        return 'sailorsun-org-credits' in url  # video
 
 
 class SamAndFuzzy(_ParserScraper):
