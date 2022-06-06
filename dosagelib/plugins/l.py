@@ -183,9 +183,12 @@ class LittleTales(_ParserScraper):
 
 
 class LoadingArtist(_ParserScraper):
-    url = 'http://www.loadingartist.com/latest'
-    imageSearch = '//div[@class="comic"]//img'
-    prevSearch = "//a[contains(concat(' ', @class, ' '), ' prev ')]"
+    url = 'https://loadingartist.com/'
+    firstStripUrl = url + 'comic/born/'
+    imageSearch = '//div[d:class("main-image-container")]//img'
+    prevSearch = '//div[d:class("left-nav")]//a'
+    latestSearch = '//nav//a[text()="Comic"]'
+    starter = indirectStarter
 
 
 class LoFiJinks(WordPressNaviIn):
