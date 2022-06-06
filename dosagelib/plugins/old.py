@@ -435,8 +435,6 @@ class Removed(Scraper):
             cls('Pimpette'),
             cls('PunksAndNerds', 'mis'),
             cls('PunksAndNerdsOld'),
-            # Moved to tapas.io, which blocks us
-            cls('RadioactivePanda', 'block'),
             cls('RedsPlanet'),
             cls('RedString'),
             cls('SmackJeeves/Aarrevaara'),
@@ -1669,6 +1667,7 @@ class Renamed(Scraper):
             cls('GoComics/RipleysBelieveItOrNotSpanish', 'GoComics/RipleysAunqueUstedNoLoCrea'),
             cls('GoComics/WebcomicName', 'WebcomicName'),
             cls('Guardia', 'ComicFury/Guardia'),
+            cls('RadioactivePanda', 'Tapas/RadioactivePanda'),
             cls('Shivae/BlackRose', 'BlackRose'),
             cls('SmackJeeves/BlackTapestries', 'ComicFury/BlackTapestries'),
             cls('SmackJeeves/ByTheBook', 'ByTheBook'),

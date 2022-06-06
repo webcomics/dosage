@@ -64,12 +64,21 @@ class Tapas(_ParserScraper):
         return (
             # Manually-added comics
             cls('AmpleTime', 'Ample-Time'),
+            cls('FANGS', 'fangscomic'),
+            cls('FishNuggets', 'Fish-Nuggets'),
+            cls('HoneyAndTheMoon', 'Honey-and-the-Moon'),
             cls('InsignificantOtters', 'IOtters'),
+            cls('MagicalBoy', 'magicalboy'),
             cls('NoFuture', 'NoFuture'),
             cls('OrensForge', 'OrensForge'),
+            cls('RadioactivePanda', 'Radioactive-Panda'),
             cls('RavenWolf', 'RavenWolf'),
             cls('SyntheticInstinct', 'Synthetic-Instinct'),
             cls('TheCatTheVineAndTheVictory', 'The-Cat-The-Vine-and-The-Victory'),
+            cls('TheInkApprentice', 'The-Ink-Apprentice'),
+            cls('TheSeaInYou', 'theseainyou'),
+            cls('TheSelkiesSkin', 'theselkiesskincomic'),
+            cls('TheWitchsThrone', 'thewitchsthrone'),
             cls('VenturaCityDrifters', 'Ventura-City-Drifters'),
 
             # START AUTOUPDATE
