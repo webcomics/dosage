@@ -12,7 +12,7 @@ from urllib.parse import urljoin
 from typing import Collection, Dict, List, Optional, Type, Union, Pattern, Sequence
 
 import lxml
-from lxml.html.defs import link_attrs as html_link_attrs
+from lxml.html.defs import link_attrs as lxml_link_attrs
 
 try:
     import cssselect
@@ -34,6 +34,7 @@ from .xml import NS
 
 
 ARCHIVE_ORG_URL = re.compile(r'https?://web\.archive\.org/web/[^/]*/')
+html_link_attrs = lxml_link_attrs - {'usemap'}
 
 
 if lxml.etree.LIBXML_VERSION < (2, 9, 3):
