@@ -151,13 +151,12 @@ class Wonderella(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/name'
 
 
-class Wondermark(_BasicScraper):
+class Wondermark(WordPressScraper):
     url = 'http://wondermark.com/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '001'
-    imageSearch = compile(r'<img src="(http://wondermark.com/c/.+?)"')
-    prevSearch = compile(r'<a href="(.+?)" rel="prev">')
-    help = 'Index format: nnn'
+    prevSearch = '//a[@rel="prev"]'
+    help = 'Index format: nnn (001-999), 1knn (1000-1099), cnnnn (1100-)'
 
 
 class WorldOfMrToast(_BasicScraper):
