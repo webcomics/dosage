@@ -12,7 +12,8 @@ except ImportError:
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
-from .common import ComicControlScraper, WordPressScraper, WordPressNavi, WordPressWebcomic
+from .common import (ComicControlScraper, WordPressScraper, WordPressSpliced,
+        WordPressNavi, WordPressWebcomic)
 
 
 class TailsAndTactics(_ParserScraper):
@@ -117,13 +118,9 @@ class TheForgottenOrder(ComicControlScraper):
     firstStripUrl = url + 'comic/prolouge-01-book-1'
 
 
-class TheGamerCat(_ParserScraper):
+class TheGamerCat(WordPressSpliced):
     url = 'https://thegamercat.com/'
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = stripUrl % '06102011'
-    imageSearch = '//div[@id="comic"]//img'
-    prevSearch = '//a[contains(@class, "comic-nav-previous")]'
-    help = 'Index format: stripname'
+    firstStripUrl = url +  'comic/06102011/'
 
 
 class TheGentlemansArmchair(WordPressScraper):
