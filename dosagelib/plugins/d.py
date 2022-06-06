@@ -8,8 +8,8 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter
 from ..util import tagre
-from .common import (_ComicControlScraper, _WordPressScraper, _WPNavi,
-    _WPWebcomic)
+from .common import (ComicControlScraper, WordPressScraper, WordPressNavi,
+    WordPressWebcomic)
 
 
 class Damonk(_BasicScraper):
@@ -22,12 +22,12 @@ class Damonk(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
-class DangerouslyChloe(_ComicControlScraper):
+class DangerouslyChloe(ComicControlScraper):
     url = 'http://www.dangerouslychloe.com/'
     firstStripUrl = url + 'strips-dc/Chapter_1_-_That_damned_girl'
 
 
-class DarkWhite(_WordPressScraper):
+class DarkWhite(WordPressScraper):
     url = 'https://www.darkwhitecomic.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'chapter-1-sleep'
@@ -52,7 +52,7 @@ class DasLebenIstKeinPonyhof(_ParserScraper):
     lang = 'de'
 
 
-class DaughterOfTheLilies(_ComicControlScraper):
+class DaughterOfTheLilies(ComicControlScraper):
     url = 'https://www.daughterofthelilies.com/'
     firstStripUrl = url + 'dotl/part-1-a-girl-with-no-face'
 
@@ -97,7 +97,7 @@ class DeerMe(_ParserScraper):
     starter = bounceStarter
 
 
-class Delve(_WordPressScraper):
+class Delve(WordPressScraper):
     url = 'https://thisis.delvecomic.com/NewWP/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'in-too-deep'
@@ -138,7 +138,7 @@ class DerTodUndDasMaedchen(_ParserScraper):
     lang = 'de'
 
 
-class DesertFox(_WPWebcomic):
+class DesertFox(WordPressWebcomic):
     url = 'https://desertfoxcomics.net/'
     stripUrl = url + 'comics/%s/'
     firstStripUrl = stripUrl % 'origins-1'
@@ -206,7 +206,7 @@ class Dilbert(_ParserScraper):
         return "%s" % name
 
 
-class DocRat(_WPWebcomic):
+class DocRat(WordPressWebcomic):
     url = 'https://www.docrat.com.au/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'begin-with-eye-contact'
@@ -239,7 +239,7 @@ class DoemainOfOurOwn(_ParserScraper):
         return filename
 
 
-class DoesNotPlayWellWithOthers(_WPNavi):
+class DoesNotPlayWellWithOthers(WordPressNavi):
     url = 'http://www.doesnotplaywellwithothers.com/'
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % 'pwc-0001'
@@ -283,7 +283,7 @@ class DoomsdayMyDear(_ParserScraper):
     prevSearch = '//a[d:class("previous-webcomic-link")]'
 
 
-class Draconia(_WPWebcomic):
+class Draconia(WordPressWebcomic):
     url = 'https://www.draconiachronicles.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'chapter-1-page-1'
@@ -372,7 +372,7 @@ class Drowtales(_ParserScraper):
     help = 'Index format: number'
 
 
-class DungeonsAndDenizens(_WPNavi):
+class DungeonsAndDenizens(WordPressNavi):
     url = ('https://web.archive.org/web/20160308001834/'
         'http://dungeond.com/')
     stripUrl = url + '%s/'
@@ -380,7 +380,7 @@ class DungeonsAndDenizens(_WPNavi):
     endOfLife = True
 
 
-class DumbingOfAge(_WPNavi):
+class DumbingOfAge(WordPressNavi):
     url = 'http://www.dumbingofage.com/'
     stripUrl = url + '%s/'
     help = 'Index format: yyyy/comic/book-num/seriesname/stripname'

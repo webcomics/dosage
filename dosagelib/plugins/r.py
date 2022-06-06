@@ -9,14 +9,14 @@ from urllib.parse import urljoin
 from ..helpers import bounceStarter
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import _WordPressScraper, _WPNavi, _WPWebcomic
+from .common import WordPressScraper, WordPressNavi, WordPressWebcomic
 
 
-class RalfTheDestroyer(_WordPressScraper):
+class RalfTheDestroyer(WordPressScraper):
     url = 'http://ralfthedestroyer.com/'
 
 
-class RayFox(_WPNavi):
+class RayFox(WordPressNavi):
     url = 'https://www.rayfoxthecomic.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'not-a-super-hero/it-begins'
@@ -39,12 +39,12 @@ class RayFox(_WPNavi):
         return filename + '.' + ext
 
 
-class RaynaOnTheRiver(_WordPressScraper):
+class RaynaOnTheRiver(WordPressScraper):
     url = 'http://www.catomix.com/rayna/'
     firstStripUrl = url + 'archives/comic/teaser-poster'
 
 
-class RealLife(_WordPressScraper):
+class RealLife(WordPressScraper):
     url = 'https://reallifecomics.com/'
     stripUrl = url + 'comic.php?comic=%s'
     firstStripUrl = stripUrl % 'title-1'
@@ -106,7 +106,7 @@ class RedMeat(_ParserScraper):
         return '_'.join(parts[1:3])
 
 
-class Requiem(_WordPressScraper):
+class Requiem(WordPressScraper):
     baseUrl = 'http://requiem.spiderforest.com/'
     url = baseUrl + '?latest'
     stripUrl = baseUrl + 'comic/%s'
@@ -146,7 +146,7 @@ class Replay(_ParserScraper):
         return name
 
 
-class RiversideExtras(_WPWebcomic):
+class RiversideExtras(WordPressWebcomic):
     url = 'https://riversidecomics.com/'
 
 

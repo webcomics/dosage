@@ -1,38 +1,28 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
-from ..scraper import _ParserScraper
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
+from ..scraper import ParserScraper
+from .common import ComicControlScraper
 
 
-class _NuklearPower(_ParserScraper):
+class NuklearPower(ParserScraper):
     prevSearch = '//a[@rel="prev"]'
     imageSearch = '//div[@id="comic"]/img'
 
-    def __init__(self, name):
-        super(_NuklearPower, self).__init__('NuklearPower/' + name[2:])
+    def __init__(self, name, path):
+        super().__init__('NuklearPower/' + name)
+        self.url = 'http://www.nuklearpower.com/' + path + '/'
 
-    @property
-    def url(self):
-        return 'http://www.nuklearpower.com/' + self.path + '/'
+    @classmethod
+    def getmodules(cls):
+        return (
+            cls('8BitTheater', '8-bit-theater'),
+            cls('HowIKilledYourMaster', 'hikym'),
+            cls('TheDreadful', 'dreadful'),
+            cls('Warbot', 'warbot'),
+        )
 
-
-class NP8BitTheater(_NuklearPower):
-    path = '8-bit-theater'
-
-
-class NPAtomicRobo(_NuklearPower):
+class NPAtomicRobo(ComicControlScraper):
+    name = 'NuklearPower/AtomicRobo'
     url = 'http://www.atomic-robo.com/'
-    imageSearch = '//img[@id="cc-comic"]'
-
-
-class NPHowIKilledYourMaster(_NuklearPower):
-    path = 'hikym'
-
-
-class NPTheDreadful(_NuklearPower):
-    path = 'dreadful'
-
-
-class NPWarbot(_NuklearPower):
-    path = 'warbot'

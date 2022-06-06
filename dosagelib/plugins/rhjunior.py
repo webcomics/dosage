@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2020 Tobias Gruetzmacher
+# Copyright (C) 2019-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-from ..scraper import _ParserScraper
+from ..scraper import ParserScraper
 
 
-class RHJunior(_ParserScraper):
+class RHJunior(ParserScraper):
     stripUrl = 'https://www.rhjunior.com/%s/'
     imageSearch = '//div[contains(@class, "entry-content")]//img'
     multipleImagesPerStrip = True

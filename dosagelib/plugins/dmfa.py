@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2020 Tobias Gruetzmacher
+# Copyright (C) 2019-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 from ..helpers import bounceStarter
-from .common import _ParserScraper
+from ..scraper import ParserScraper
 
 
-class DMFA(_ParserScraper):
+class DMFA(ParserScraper):
     url = 'http://www.missmab.com/'
     stripUrl = url + 'Comics/%s.php'
     imageSearch = '//center//img'

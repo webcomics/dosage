@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2021 Tobias Gruetzmacher
-from .common import _WordPressScraper
+from .common import WordPressScraper
 
 
-class KrisStraub(_WordPressScraper):
+class KrisStraub(WordPressScraper):
     prevSearch = '//a[text()="Previous"]'
     endOfLife = True
     help = 'Index format: yyyymmdd'

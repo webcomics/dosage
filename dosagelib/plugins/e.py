@@ -9,7 +9,7 @@ from re import compile, IGNORECASE
 from ..helpers import bounceStarter, indirectStarter
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
+from .common import ComicControlScraper, WordPressScraper, WordPressNavi
 
 
 class EarthsongSaga(_ParserScraper):
@@ -51,10 +51,10 @@ class EatLiver(_ParserScraper):
     latestSearch = '//a[@rel="bookmark"]'
 
 
-class EatThatToast(_WordPressScraper):
+class EatThatToast(WordPressScraper):
     url = 'http://eatthattoast.com/'
     firstStripUrl = url + 'comic/thewizard/'
-    textSearch = _WordPressScraper.imageSearch + '/@alt'
+    textSearch = WordPressScraper.imageSearch + '/@alt'
 
 
 class EdibleDirt(_BasicScraper):
@@ -67,7 +67,7 @@ class EdibleDirt(_BasicScraper):
     help = 'Index format: number'
 
 
-class EdmundFinney(_WPNavi):
+class EdmundFinney(WordPressNavi):
     url = 'http://eqcomics.com/'
     firstStripUrl = url + '2009/03/08/sunday-aliens/'
 
@@ -82,11 +82,11 @@ class ElfOnlyInn(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
-class ElGoonishShive(_ComicControlScraper):
+class ElGoonishShive(ComicControlScraper):
     url = 'http://www.egscomics.com/'
 
 
-class ElGoonishShiveNP(_ComicControlScraper):
+class ElGoonishShiveNP(ComicControlScraper):
     url = 'http://www.egscomics.com/egsnp.php'
 
 
@@ -165,12 +165,12 @@ class ErrantStory(_BasicScraper):
     help = 'Index format: yyyy-mm-dd/num'
 
 
-class Erstwhile(_WPNavi):
+class Erstwhile(WordPressNavi):
     url = 'http://www.erstwhiletales.com/'
     endOfLife = True
 
 
-class Everblue(_ComicControlScraper):
+class Everblue(ComicControlScraper):
     url = 'http://www.everblue-comic.com/comic/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1'
@@ -186,7 +186,7 @@ class EverybodyLovesEricRaymond(_ParserScraper):
     prevSearch = '//a[@rel="prev"]'
 
 
-class EvilDiva(_WordPressScraper):
+class EvilDiva(WordPressScraper):
     url = ('https://web.archive.org/web/20190221223751/'
         'https://www.evildivacomics.com/')
     firstStripUrl = url + 'comic/evil-diva-issue-1-cover/'
@@ -210,19 +210,19 @@ class Evilish(_ParserScraper):
     help = 'Index format: yyyymmdd'
 
 
-class Evon(_WordPressScraper):
+class Evon(WordPressScraper):
     url = 'http://evoncomics.com/'
     stripUrl = url + '?comic=%s'
     firstStripUrl = stripUrl % 'chapter-1'
     adult = True
 
 
-class Exiern(_WordPressScraper):
+class Exiern(WordPressScraper):
     url = 'http://www.exiern.com/'
     firstStripUrl = url + '2005/09/06/so-far/'
 
 
-class ExploitationNow(_WPNavi):
+class ExploitationNow(WordPressNavi):
     url = 'http://www.exploitationnow.com/'
     firstStripUrl = url + '2000-07-07/9'
     endOfLife = True
@@ -237,7 +237,7 @@ class Exvulnerum(_ParserScraper):
     prevSearch = '//a[./img[contains(@src, "nav_prev")]]'
 
 
-class ExtraFabulousComics(_WordPressScraper):
+class ExtraFabulousComics(WordPressScraper):
     url = 'https://extrafabulouscomics.com/'
     firstStripUrl = url + 'comic/buttfly/'
     starter = bounceStarter

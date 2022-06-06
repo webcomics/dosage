@@ -12,7 +12,7 @@ except ImportError:
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPWebcomic
+from .common import ComicControlScraper, WordPressScraper, WordPressNavi, WordPressWebcomic
 
 
 class TailsAndTactics(_ParserScraper):
@@ -23,13 +23,13 @@ class TailsAndTactics(_ParserScraper):
     prevSearch = '//a[text()=" Back"]'
 
 
-class TekMage(_WPNavi):
+class TekMage(WordPressNavi):
     url = 'https://tekmagecomic.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'chapter-1-page-1'
 
 
-class Tamberlane(_WPWebcomic):
+class Tamberlane(WordPressWebcomic):
     baseUrl = 'https://www.tamberlanecomic.com/'
     url = baseUrl + 'latest/'
     stripUrl = baseUrl + 'tamberlane/%s/'
@@ -38,7 +38,7 @@ class Tamberlane(_WPWebcomic):
     prevSearch = '//a[@class="previous-link"]'
 
 
-class TheBoyWhoFell(_ComicControlScraper):
+class TheBoyWhoFell(ComicControlScraper):
     url = 'https://www.boywhofell.com/'
     firstStripUrl = url + 'comic/ch00p00'
 
@@ -54,7 +54,7 @@ class TheBrads(_ParserScraper):
     endOfLife = True
 
 
-class TheChroniclesOfHuxcyn(_WordPressScraper):
+class TheChroniclesOfHuxcyn(WordPressScraper):
     url = 'https://huxcyn.com/'
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % 'opening-001'
@@ -85,7 +85,7 @@ class TheClassMenagerie(_ParserScraper):
     endOfLife = True
 
 
-class TheDepths(_WPWebcomic):
+class TheDepths(WordPressWebcomic):
     url = 'https://www.thedepthscomic.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'page-01'
@@ -101,18 +101,18 @@ class TheDepths(_WPWebcomic):
         return filename
 
 
-class TheDevilsPanties(_WPNavi):
+class TheDevilsPanties(WordPressNavi):
     url = 'https://thedevilspanties.com/'
     stripUrl = url + 'archives/%s'
     firstStripUrl = stripUrl % '300'
     help = 'Index format: number'
 
 
-class TheDreamlandChronicles(_WordPressScraper):
+class TheDreamlandChronicles(WordPressScraper):
     url = 'http://www.thedreamlandchronicles.com/'
 
 
-class TheForgottenOrder(_ComicControlScraper):
+class TheForgottenOrder(ComicControlScraper):
     url = 'http://www.forgottenordercomic.com/'
     firstStripUrl = url + 'comic/prolouge-01-book-1'
 
@@ -126,11 +126,11 @@ class TheGamerCat(_ParserScraper):
     help = 'Index format: stripname'
 
 
-class TheGentlemansArmchair(_WordPressScraper):
+class TheGentlemansArmchair(WordPressScraper):
     url = 'http://thegentlemansarmchair.com/'
 
 
-class TheGentleWolf(_WordPressScraper):
+class TheGentleWolf(WordPressScraper):
     url = 'https://thegentlewolf.net/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'tgw-001'
@@ -143,12 +143,12 @@ class TheGentleWolf(_WordPressScraper):
         return filename
 
 
-class TheGlassScientists(_ComicControlScraper):
+class TheGlassScientists(ComicControlScraper):
     url = 'https://www.theglassscientists.com/'
     firstStripUrl = url + 'comic/chapter-i'
 
 
-class TheJunkHyenasDiner(_WordPressScraper):
+class TheJunkHyenasDiner(WordPressScraper):
     url = 'http://junkhyenasdiner.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'intro'
@@ -164,7 +164,7 @@ class TheLandscaper(_ParserScraper):
     endOfLife = True
 
 
-class TheMelvinChronicles(_WordPressScraper):
+class TheMelvinChronicles(WordPressScraper):
     url = 'http://melvin.jeaniebottle.com/'
 
 
@@ -179,7 +179,7 @@ class TheNightBelongsToUs(_ParserScraper):
     adult = True
 
 
-class TheNoob(_WordPressScraper):
+class TheNoob(WordPressScraper):
     url = 'http://thenoobcomic.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '1'
@@ -247,7 +247,7 @@ class TheWhiteboard(_ParserScraper):
         return self.url + tourl
 
 
-class TheWotch(_WordPressScraper):
+class TheWotch(WordPressScraper):
     url = 'http://www.thewotch.com/'
     firstStripUrl = url + '?comic=enter-the-wotch'
 
@@ -263,7 +263,7 @@ class ThisIsIndexed(_BasicScraper):
     help = 'Index format: number'
 
 
-class ThreePanelSoul(_ComicControlScraper):
+class ThreePanelSoul(ComicControlScraper):
     url = 'http://threepanelsoul.com/'
     firstStripUrl = url + 'comic/a-test-comic'
 
@@ -283,7 +283,7 @@ class TinyDickAdventures(_ParserScraper):
         return page + '.' + ext
 
 
-class ToonHole(_WordPressScraper):
+class ToonHole(WordPressScraper):
     url = 'http://toonhole.com/'
     firstStripUrl = url + 'comic/toon-hole-coming-soon-2010/'
 
@@ -300,7 +300,7 @@ class TrippingOverYou(_BasicScraper):
     help = 'Index format: stripname'
 
 
-class TumbleDryComics(_WordPressScraper):
+class TumbleDryComics(WordPressScraper):
     url = 'https://www.tumbledrycomics.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'we-need-to-get-high-jpg'
@@ -348,7 +348,7 @@ class Turnoff(_ParserScraper):
         return "%03d-%s" % (index, file_name)
 
 
-class TwinDragons(_WordPressScraper):
+class TwinDragons(WordPressScraper):
     url = 'http://www.twindragonscomic.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'the-beginning'

@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
-from ..scraper import _ParserScraper
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
+from ..scraper import ParserScraper
 from ..helpers import indirectStarter
 
 
-class Creators(_ParserScraper):
+class Creators(ParserScraper):
     imageSearch = '//a[contains(@class,"fancybox")]/img'
     prevSearch = '//a[@id="nav_prev"]'
     latestSearch = '//div[contains(@class,"caption")]/a'

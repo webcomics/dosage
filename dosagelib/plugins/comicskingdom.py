@@ -4,10 +4,10 @@
 from importlib.resources import path as get_path
 
 from ..helpers import bounceStarter, joinPathPartsNamer
-from ..scraper import _ParserScraper
+from ..scraper import ParserScraper
 
 
-class ComicsKingdom(_ParserScraper):
+class ComicsKingdom(ParserScraper):
     imageSearch = '//img[@id="theComicImage"]'
     prevSearch = '//a[./img[contains(@alt, "Previous")]]'
     nextSearch = '//a[./img[contains(@alt, "Next")]]'

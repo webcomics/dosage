@@ -8,7 +8,7 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, queryNamer, indirectStarter
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
+from .common import ComicControlScraper, WordPressScraper, WordPressNavi
 
 
 class PandyLand(_ParserScraper):
@@ -47,12 +47,12 @@ class ParallelUniversum(_BasicScraper):
     lang = 'de'
 
 
-class ParaNatural(_ComicControlScraper):
+class ParaNatural(ComicControlScraper):
     url = 'https://www.paranatural.net/'
     firstStripUrl = url + 'comic/chapter-1'
 
 
-class PartiallyClips(_WordPressScraper):
+class PartiallyClips(WordPressScraper):
     url = ('https://web.archive.org/web/20180509161332/'
         'http://partiallyclips.com/')
     firstStripUrl = url + 'comic/screaming-woman/'
@@ -117,7 +117,7 @@ class PennyArcade(_ParserScraper):
     help = 'Index format: yyyy/mm/dd'
 
 
-class PeppermintSaga(_WPNavi):
+class PeppermintSaga(WordPressNavi):
     url = 'http://www.pepsaga.com/'
     stripUrl = url + '?p=%s'
     firstStripUrl = stripUrl % '3'
@@ -125,7 +125,7 @@ class PeppermintSaga(_WPNavi):
     adult = True
 
 
-class PeppermintSagaBGR(_WPNavi):
+class PeppermintSagaBGR(WordPressNavi):
     url = 'http://bgr.pepsaga.com/'
     stripUrl = url + '?p=%s'
     firstStripUrl = stripUrl % '4'
@@ -176,11 +176,11 @@ class PHDComics(_ParserScraper):
         )
 
 
-class Picklewhistle(_ComicControlScraper):
+class Picklewhistle(ComicControlScraper):
     url = 'http://www.picklewhistle.com/'
 
 
-class PicPakDog(_WordPressScraper):
+class PicPakDog(WordPressScraper):
     url = 'http://www.picpak.net/'
     firstStripUrl = url + 'comic/dogs-cant-spell/'
 
@@ -243,7 +243,7 @@ class PoorlyDrawnLines(_ParserScraper):
     prevSearch = '//a[@rel="prev"]'
 
 
-class PoppyOPossum(_WordPressScraper):
+class PoppyOPossum(WordPressScraper):
     baseUrl = 'https://www.poppy-opossum.com/'
     url = baseUrl + '?latest'
     stripUrl = baseUrl + 'comic/%s'
@@ -274,7 +274,7 @@ class Precocious(_ParserScraper):
     help = 'Index format: yyyy/mm/dd'
 
 
-class PrinceOfSartar(_WPNavi):
+class PrinceOfSartar(WordPressNavi):
     url = 'http://www.princeofsartar.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'introduction-chapter-1'
@@ -289,7 +289,7 @@ class PrinceOfSartar(_WPNavi):
         return '%s.%s' % (title, image_ext)
 
 
-class ProphecyOfTheCircle(_WPNavi):
+class ProphecyOfTheCircle(WordPressNavi):
     url = 'https://www.prophecyofthecircle.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'prologue'

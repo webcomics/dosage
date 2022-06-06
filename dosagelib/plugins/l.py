@@ -8,7 +8,7 @@ from re import compile
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, _WPNaviIn
+from .common import ComicControlScraper, WordPressScraper, WordPressNaviIn
 
 
 class Lackadaisy(_ParserScraper):
@@ -28,7 +28,7 @@ class Lackadaisy(_ParserScraper):
         return 'lackadaisy_%s.%s' % (num, ext)
 
 
-class LastResort(_WordPressScraper):
+class LastResort(WordPressScraper):
     url = 'http://www.lastres0rt.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'that-sound-you-hear-is-a-shattered-stereotype'
@@ -68,11 +68,11 @@ class LeastICouldDo(_ParserScraper):
     help = 'Index format: yyyymmdd'
 
 
-class LetsSpeakEnglish(_ComicControlScraper):
+class LetsSpeakEnglish(ComicControlScraper):
     url = 'http://www.marycagle.com'
 
 
-class LifeAintNoPonyFarm(_WordPressScraper):
+class LifeAintNoPonyFarm(WordPressScraper):
     url = ('https://web.archive.org/web/20181221154155/'
         'http://sarahburrini.com/en/')
     firstStripUrl = url + 'comic/my-first-webcomic/'
@@ -137,7 +137,7 @@ class LifeAsRendered(_ParserScraper):
         return None
 
 
-class LilithsWord(_ComicControlScraper):
+class LilithsWord(ComicControlScraper):
     url = 'http://www.lilithword.com/'
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % 'prologue-page-00'
@@ -188,7 +188,7 @@ class LoadingArtist(_ParserScraper):
     prevSearch = "//a[contains(concat(' ', @class, ' '), ' prev ')]"
 
 
-class LoFiJinks(_WPNaviIn):
+class LoFiJinks(WordPressNaviIn):
     baseUrl = 'https://hijinksensue.com/comic/'
     url = baseUrl + 'learning-to-love-again/'
     firstStripUrl = baseUrl + 'lo-fijinks-everything-i-know-anout-james-camerons-avatar-movie/'

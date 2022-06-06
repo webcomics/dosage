@@ -8,7 +8,7 @@ from re import compile, escape
 from ..helpers import bounceStarter, indirectStarter
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import _WordPressScraper, _WPNavi
+from .common import WordPressScraper, WordPressNavi
 
 
 class OctopusPie(_ParserScraper):
@@ -71,7 +71,7 @@ class Oglaf(_ParserScraper):
         return urls
 
 
-class OhJoySexToy(_WPNavi):
+class OhJoySexToy(WordPressNavi):
     url = 'http://www.ohjoysextoy.com/'
     firstStripUrl = url + 'introduction/'
     textSearch = '//div[@id="comic"]//img/@alt'
@@ -99,25 +99,25 @@ class OmakeTheater(_ParserScraper):
     help = 'Index format: number (unpadded)'
 
 
-class OnTheEdge(_WordPressScraper):
+class OnTheEdge(WordPressScraper):
     url = 'http://ontheedgecomics.com/'
     firstStripUrl = 'http://ontheedgecomics.com/comic/ote0001/'
 
 
-class OopsComicAdventure(_WordPressScraper):
+class OopsComicAdventure(WordPressScraper):
     url = ('https://web.archive.org/web/20190102215141/'
         'http://oopscomicadventure.com/')
     endOfLife = True
 
 
-class Optipess(_WPNavi):
+class Optipess(WordPressNavi):
     url = 'http://www.optipess.com/'
     firstStripUrl = url + '2008/12/01/jason-friend-of-the-butterflies/'
     textSearch = '//div[@id="comic"]//img/@alt'
     textOptional = True
 
 
-class OrderOfTheBlackDog(_WordPressScraper):
+class OrderOfTheBlackDog(WordPressScraper):
     url = 'http://orderoftheblackdog.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'issue-1-cover'
@@ -147,7 +147,7 @@ class OurHomePlanet(_ParserScraper):
     help = 'Index format: n (unpadded)'
 
 
-class OutOfPlacers(_WordPressScraper):
+class OutOfPlacers(WordPressScraper):
     url = 'http://www.valsalia.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'prologue/01'
@@ -164,7 +164,7 @@ class OverCompensating(_BasicScraper):
     help = 'Index format: number'
 
 
-class OzyAndMillie(_WordPressScraper):
+class OzyAndMillie(WordPressScraper):
     stripUrl = 'https://ozyandmillie.org/comic/%s/'
     url = stripUrl % 'ozy-and-millie-2131'
     firstStripUrl = stripUrl % 'ozy-and-millie-2'

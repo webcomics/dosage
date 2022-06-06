@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2022 Daniel Ring
-from ..scraper import _ParserScraper
+from ..scraper import ParserScraper
 
 
-class WebToons(_ParserScraper):
+class WebToons(ParserScraper):
     imageSearch = '//img[contains(@class, "_images")]/@data-url'
     prevSearch = '//a[contains(@class, "_prevEpisode")]'
     multipleImagesPerStrip = True

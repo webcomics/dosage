@@ -22,11 +22,11 @@ def get_test_scrapers():
     else:
         # Get limited number of scraper tests as default
         testscrapernames = [
-            # "classic" _BasicScraper
+            # "classic" BasicScraper
             'AbstruseGoose',
-            # complex _ParserScraper
+            # complex ParserScraper
             'GoComics/CalvinAndHobbes',
-            # _WordPressScraper
+            # WordPressScraper
             'GrrlPower',
         ]
         scraper_pattern = '^(' + '|'.join(testscrapernames) + ')$'

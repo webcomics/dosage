@@ -2,11 +2,11 @@
 # Copyright (C) 2019-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2022 Daniel Ring
 from ..output import out
-from ..scraper import _ParserScraper
+from ..scraper import ParserScraper
 from ..xml import NS
 
 
-class Tapas(_ParserScraper):
+class Tapas(ParserScraper):
     baseUrl = 'https://tapas.io/'
     imageSearch = '//article[contains(@class, "js-episode-article")]//img/@data-src'
     prevSearch = '//a[contains(@class, "js-prev-ep-btn")]'

@@ -1,22 +1,22 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019-2021 Tobias Gruetzmacher
 # Copyright (C) 2019-2021 Daniel Ring
-from .common import _WordPressSpliced
+from .common import WordPressSpliced
 
 
-class _WithSid(_WordPressSpliced):
+class _WithSid(WordPressSpliced):
     def __init__(self, name, sid, eol=False):
         super().__init__(name)
         self.stripUrl = self.baseUrl + 'comic/%s/?sid={}'.format(sid)
 
 
-class AbbysAgency(_WordPressSpliced):
+class AbbysAgency(WordPressSpliced):
     url = 'https://abbysagency.us/'
     stripUrl = url + 'blog/comic/%s/'
     firstStripUrl = stripUrl % 'a'
 
 
-class AlienDice(_WordPressSpliced):
+class AlienDice(WordPressSpliced):
     url = 'https://aliendice.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '05162001'
@@ -32,7 +32,7 @@ class AlienDice(_WordPressSpliced):
         return imageUrl.rsplit('/', 1)[-1].replace('20010831', '2001-08-31')
 
 
-class AlienDiceLegacy(_WordPressSpliced):
+class AlienDiceLegacy(WordPressSpliced):
     name = 'AlienDice/Legacy'
     baseUrl = 'https://aliendice.com/'
     url = baseUrl + 'series/legacy/'
@@ -45,7 +45,7 @@ class AlienDiceLegacy(_WordPressSpliced):
         return super(AlienDiceLegacy, self).isfirststrip(url.rsplit('?', 1)[0])
 
 
-class BlackRose(_WordPressSpliced):
+class BlackRose(WordPressSpliced):
     url = 'https://www.blackrose.monster/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '2004-11-01'
@@ -80,7 +80,7 @@ class TheCyantianChronicles(_WithSid):
         )
 
 
-class Shivae(_WordPressSpliced):
+class Shivae(WordPressSpliced):
     url = 'https://shivae.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '09202001'

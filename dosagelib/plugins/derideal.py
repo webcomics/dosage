@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2020 Tobias Gruetzmacher
+# Copyright (C) 2019-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-from ..scraper import _ParserScraper
+from ..scraper import ParserScraper
 from ..helpers import indirectStarter
 
 
-class Derideal(_ParserScraper):
+class Derideal(ParserScraper):
     baseUrl = 'https://www.derideal.com/'
     imageSearch = '//img[contains(@class, "comic-page")]'
     prevSearch = '//a[i[contains(@class, "fa-angle-left")]]'
@@ -13,9 +13,9 @@ class Derideal(_ParserScraper):
 
     def __init__(self, name, sub, first, last=None):
         if name == 'Derideal':
-            super(Derideal, self).__init__(name)
+            super().__init__(name)
         else:
-            super(Derideal, self).__init__('Derideal/' + name)
+            super().__init__('Derideal/' + name)
 
         self.url = self.baseUrl + sub
         self.stripUrl = self.url + '/%s/'

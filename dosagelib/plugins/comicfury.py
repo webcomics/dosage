@@ -5,14 +5,14 @@
 # Copyright (C) 2019-2020 Daniel Ring
 import os
 
-from ..scraper import _ParserScraper
+from ..scraper import ParserScraper
 from ..helpers import bounceStarter
 
 XPATH_LINK = '//a[d:class("%s") and contains(text(), "%s")]'
 XPATH_IMG = '//div[d:class("comicnav")]//a[img[contains(@alt, "%s")]]'
 
 
-class ComicFury(_ParserScraper):
+class ComicFury(ParserScraper):
     imageSearch = (
         '//img[@id="comicimage"]',
         '//div[@id="comicimagewrap"]//embed',
@@ -56,7 +56,7 @@ class ComicFury(_ParserScraper):
     starter = bounceStarter
 
     def __init__(self, name, sub, lang=None, adult=False, endOfLife=False, segmented=False):
-        super(ComicFury, self).__init__('ComicFury/' + name)
+        super().__init__('ComicFury/' + name)
         self.prefix = name
         self.url = 'https://%s.webcomic.ws/comics/' % sub
         self.stripUrl = self.url + '%s'

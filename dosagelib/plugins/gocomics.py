@@ -2,11 +2,11 @@
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2022 Tobias Gruetzmacher
-from ..scraper import _ParserScraper
+from ..scraper import ParserScraper
 from ..helpers import indirectStarter
 
 
-class GoComics(_ParserScraper):
+class GoComics(ParserScraper):
     url = 'https://www.gocomics.com/'
     imageSearch = '//picture[d:class("item-comic-image")]/img'
     prevSearch = '//a[d:class("js-previous-comic")]'

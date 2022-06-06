@@ -4,13 +4,13 @@
 # Copyright (C) 2015-2022 Tobias Gruetzmacher
 from re import compile, escape
 
-from ..scraper import _BasicScraper
+from ..scraper import BasicScraper
 from ..util import tagre
 from ..helpers import indirectStarter
-from .common import _ComicControlScraper
+from .common import ComicControlScraper
 
 
-class JackCannon(_BasicScraper):
+class JackCannon(BasicScraper):
     url = 'http://fancyadventures.com/'
     rurl = escape(url)
     stripUrl = url + '%s/'
@@ -20,7 +20,7 @@ class JackCannon(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/page-nnn'
 
 
-class JimBenton(_BasicScraper):
+class JimBenton(BasicScraper):
     url = 'http://www.jimbenton.com/page14/page14.html'
     stripUrl = 'http://www.jimbenton.com/page14/files/JimBentonComic-%s.html'
     starter = indirectStarter
@@ -32,7 +32,7 @@ class JimBenton(_BasicScraper):
     help = 'Index format: stripname'
 
 
-class JoeAndMonkey(_BasicScraper):
+class JoeAndMonkey(BasicScraper):
     url = 'http://www.joeandmonkey.com/'
     stripUrl = url + '%s'
     imageSearch = compile(r'"(/comic/[^"]+)"')
@@ -40,7 +40,7 @@ class JoeAndMonkey(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class JohnnyWander(_ComicControlScraper):
+class JohnnyWander(ComicControlScraper):
     imageSearch = ('//ul[d:class("cc-showbig")]/li/@data-src',
         '//img[@id="cc-comic"]')
     url = 'http://www.johnnywander.com/'

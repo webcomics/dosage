@@ -3,10 +3,10 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-from .common import _WordPressScraper, _WPNavi
+from .common import WordPressScraper, WordPressNavi
 
 
-class PetiteSymphony(_WPNavi):
+class PetiteSymphony(WordPressNavi):
     multipleImagesPerStrip = True
     help = 'Index format: named number'
 
@@ -24,7 +24,7 @@ class PetiteSymphony(_WPNavi):
         )
 
 
-class ComicsBreak(_WordPressScraper):
+class ComicsBreak(WordPressScraper):
     def __init__(self, name, archive=None, adult=False):
         super(ComicsBreak, self).__init__('ComicsBreak/' + name)
         self.url = 'http://%s.comicsbreak.com/' % name.lower()

@@ -8,10 +8,10 @@ from re import compile, escape, IGNORECASE
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from ..helpers import bounceStarter
-from .common import _ComicControlScraper, _WPNaviIn, _WPWebcomic
+from .common import ComicControlScraper, WordPressNaviIn, WordPressWebcomic
 
 
-class WapsiSquare(_WPNaviIn):
+class WapsiSquare(WordPressNaviIn):
     url = 'http://wapsisquare.com/'
     firstStripUrl = url + 'comic/09092001/'
 
@@ -81,14 +81,14 @@ class WereIWolf(_ParserScraper):
         return self.stripUrl % (index[0], index[1])
 
 
-class WhiteNoise(_WPWebcomic):
+class WhiteNoise(WordPressWebcomic):
     url = 'http://whitenoisecomic.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'book-one'
     imageSearch = '//div[@id="comic"]//img'
 
 
-class WhiteNoiseLee(_ComicControlScraper):
+class WhiteNoiseLee(ComicControlScraper):
     url = 'http://www.white-noise-comic.com/'
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % '1-0'
@@ -98,7 +98,7 @@ class WhiteNoiseLee(_ComicControlScraper):
         return pageUrl.rsplit('/', 1)[-1] + '.' + imageUrl.rsplit('.', 1)[-1]
 
 
-class Whomp(_ComicControlScraper):
+class Whomp(ComicControlScraper):
     url = 'http://www.whompcomic.com/'
     firstStripUrl = url + 'comic/06152010'
     textSearch = '//img[@id="cc-comic"]/@title'
@@ -127,7 +127,7 @@ class Wigu(_ParserScraper):
     help = 'Index format: n'
 
 
-class WildeLife(_ComicControlScraper):
+class WildeLife(ComicControlScraper):
     url = 'http://www.wildelifecomic.com/'
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % '1'

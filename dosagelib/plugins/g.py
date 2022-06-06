@@ -8,10 +8,10 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
+from .common import ComicControlScraper, WordPressScraper, WordPressNavi
 
 
-class Galaxion(_WPNavi):
+class Galaxion(WordPressNavi):
     url = 'http://galaxioncomics.com/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '1-comic/the-story-so-far/the-story-so-far'
@@ -19,7 +19,7 @@ class Galaxion(_WPNavi):
     help = 'Index format: n-comic/book-n/chapter-n/title-nnn'
 
 
-class Garanos(_WordPressScraper):
+class Garanos(WordPressScraper):
     stripUrl = ('https://web.archive.org/web/20180314181433/'
         'http://garanos.alexheberling.com/pages/%s/')
     url = stripUrl % 'page-487'
@@ -59,7 +59,7 @@ class GeeksNextDoor(_ParserScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
-class Ginpu(_WPNavi):
+class Ginpu(WordPressNavi):
     url = 'https://www.ginpu.us/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'filler-2'
@@ -98,7 +98,7 @@ class GirlsWithSlingshots(_BasicScraper):
     help = 'Index format: stripname'
 
 
-class GleefulNihilism(_WordPressScraper):
+class GleefulNihilism(WordPressScraper):
     url = ('https://web.archive.org/web/20170911203122/'
         'http://gleefulnihilism.com/')
     stripUrl = url + 'comic/%s/'
@@ -107,15 +107,15 @@ class GleefulNihilism(_WordPressScraper):
     help = 'Index format: stripname'
 
 
-class GoblinsComic(_ComicControlScraper):
+class GoblinsComic(ComicControlScraper):
     url = 'http://www.goblinscomic.org/'
 
 
-class GodChild(_WordPressScraper):
+class GodChild(WordPressScraper):
     url = 'http://godchild.keenspot.com/'
 
 
-class GoGetARoomie(_ComicControlScraper):
+class GoGetARoomie(ComicControlScraper):
     url = 'http://www.gogetaroomie.com'
 
 
@@ -135,7 +135,7 @@ class GoneWithTheBlastwave(_BasicScraper):
         return '%02d' % int(compile(r'nro=(\d+)').search(page_url).group(1))
 
 
-class GrrlPower(_WordPressScraper):
+class GrrlPower(WordPressScraper):
     url = 'https://grrlpowercomic.com/'
     stripUrl = url + 'archives/comic/%s/'
     firstStripUrl = stripUrl % 'gp0001'
@@ -145,7 +145,7 @@ class GrrlPower(_WordPressScraper):
         self.session.add_throttle('grrlpowercomic.com', 1.0, 1.5)
 
 
-class GuildedAge(_WordPressScraper):
+class GuildedAge(WordPressScraper):
     url = 'http://guildedage.net/'
     firstStripUrl = url + 'comic/chapter-1-cover/'
 

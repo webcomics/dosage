@@ -8,10 +8,10 @@ from re import compile, escape
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPWebcomic
+from .common import ComicControlScraper, WordPressScraper, WordPressNavi, WordPressWebcomic
 
 
-class BackOffice(_WPNavi):
+class BackOffice(WordPressNavi):
     url = 'https://rawrtacular.com/bo/'
     stripUrl = url + '?comic=%s'
     firstStripUrl = stripUrl % 'back-office'
@@ -37,7 +37,7 @@ class BadMachinery(_ParserScraper):
     help = 'Index format: yyyymmdd'
 
 
-class BalderDash(_ComicControlScraper):
+class BalderDash(ComicControlScraper):
     url = 'http://www.balderdashcomic.com/'
 
 
@@ -52,7 +52,7 @@ class BallerinaMafia(_ParserScraper):
     endOfLife = True
 
 
-class Bardsworth(_WordPressScraper):
+class Bardsworth(WordPressScraper):
     url = 'http://www.bardsworth.com/'
     latestSearch = '//a[@rel="bookmark"]'
     starter = indirectStarter
@@ -68,7 +68,7 @@ class Baroquen(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/strip-name'
 
 
-class Bearmageddon(_WordPressScraper):
+class Bearmageddon(WordPressScraper):
     url = 'http://bearmageddon.com/bearmo/page-1/'
     firstStripUrl = url
     latestSearch = '//a[d:class("comic-nav-last")]'
@@ -98,7 +98,7 @@ class Beetlebum(_BasicScraper):
         return name + '_' + image_url.split('/')[-1]
 
 
-class Bethellium(_WPWebcomic):
+class Bethellium(WordPressWebcomic):
     url = 'https://bethellium.darkbluecomics.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'cover'
@@ -114,14 +114,14 @@ class BetterDays(_ParserScraper):
     endOfLife = True
 
 
-class BetweenFailures(_WPWebcomic):
+class BetweenFailures(WordPressWebcomic):
     url = 'https://betweenfailures.com/'
     stripUrl = url + 'comics1/%s'
     firstStripUrl = stripUrl % 'every-story-has-to-start-somewhere'
     help = 'Index format: stripname'
 
 
-class BeyondTheVeil(_WordPressScraper):
+class BeyondTheVeil(WordPressScraper):
     url = 'https://web.archive.org/web/20201009235642/http://beyondtheveilcomic.com/'
     stripUrl = url + '?comic=%s'
     firstStripUrl = stripUrl % '01252010'
@@ -154,7 +154,7 @@ class BillyTheDunce(_ParserScraper):
     endOfLife = True
 
 
-class BirdBoy(_WordPressScraper):
+class BirdBoy(WordPressScraper):
     url = 'https://bird-boy.com/'
     stripUrl = url + 'comic/{0}-{1}/'
     firstStripUrl = stripUrl.format('volume-i', 'the-sword-of-mali-mani')
@@ -214,12 +214,12 @@ class BlondeSunrise(_ParserScraper):
     prevSearch = '//a[img[contains(@src, "previous")]]'
 
 
-class BloodBound(_WordPressScraper):
+class BloodBound(WordPressScraper):
     url = 'http://bloodboundcomic.com/'
     firstStripUrl = 'http://bloodboundcomic.com/comic/06112006/'
 
 
-class Bloodline(_WordPressScraper):
+class Bloodline(WordPressScraper):
     url = 'http://w0lfmare.xepher.net/'
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % 'pg-1-2'
@@ -230,7 +230,7 @@ class Bloodline(_WordPressScraper):
         return imageUrl.rsplit('/', 1)[-1].replace('gen-6', 'Bloodline')
 
 
-class BloomingFaeries(_WordPressScraper):
+class BloomingFaeries(WordPressScraper):
     adult = True
     url = 'http://www.bloomingfaeries.com/'
     firstStripUrl = url + 'comic/public/pit-stop/'
@@ -255,7 +255,7 @@ class BobWhite(_ParserScraper):
     prevSearch = '//a[@rel="previous"]'
 
 
-class BookOfBiff(_WordPressScraper):
+class BookOfBiff(WordPressScraper):
     url = 'https://thebookofbiff.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '4'
@@ -271,18 +271,18 @@ class BoredAndEvil(_ParserScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
-class BratHalla(_WordPressScraper):
+class BratHalla(WordPressScraper):
     url = 'http://brat-halla.com/'
 
 
-class Brink(_WordPressScraper):
+class Brink(WordPressScraper):
     stripUrl = 'https://paperfangs.com/brink/?comic=%s'
     firstStripUrl = stripUrl % 'chapter1coversmall'
     url = stripUrl % 'brink639small'
     endOfLife = True
 
 
-class Buni(_WordPressScraper):
+class Buni(WordPressScraper):
     url = 'http://www.bunicomic.com/'
 
 
@@ -293,7 +293,7 @@ class BusinessCat(_ParserScraper):
     endOfLife = True
 
 
-class ButImACatPerson(_WordPressScraper):
+class ButImACatPerson(WordPressScraper):
     url = 'https://www.bicatperson.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = 'sketches-1'
@@ -330,7 +330,7 @@ class ButterSafe(_ParserScraper):
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
-class ByTheBook(_WordPressScraper):
+class ByTheBook(WordPressScraper):
     url = 'http://www.btbcomic.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'chapter-1-page-0'

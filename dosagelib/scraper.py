@@ -2,12 +2,14 @@
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2022 Tobias Gruetzmacher
+from __future__ import annotations
+
 import html
 import os
 import re
 import warnings
 from urllib.parse import urljoin
-from typing import Dict, List, Optional, Union, Pattern, Sequence
+from typing import Collection, Dict, List, Optional, Type, Union, Pattern, Sequence
 
 import lxml
 from lxml.html.defs import link_attrs as html_link_attrs
@@ -99,11 +101,13 @@ class Scraper:
     session: http.Session = http.default_session
 
     @classmethod
-    def getmodules(cls):
+    def getmodules(cls) -> Collection[Scraper]:
+        if cls.url is None:
+            return ()
         name = cls.__name__
         if hasattr(cls, 'name'):
             name = cls.name
-        return [cls(name)]
+        return (cls(name),)
 
     @property
     def indexes(self):
@@ -361,7 +365,7 @@ class Scraper:
         raise GeoblockedException()
 
 
-class _BasicScraper(Scraper):
+class BasicScraper(Scraper):
     """
     Scraper base class that matches regular expressions against HTML pages.
 
@@ -376,7 +380,7 @@ class _BasicScraper(Scraper):
     BASE_SEARCH = re.compile(tagre("base", "href", '([^"]*)'))
 
     def getPage(self, url):
-        content = super(_BasicScraper, self).getPage(url).text
+        content = super().getPage(url).text
         # determine base URL
         baseUrl = None
         match = self.BASE_SEARCH.search(content)
@@ -426,7 +430,7 @@ class _BasicScraper(Scraper):
             return None
 
 
-class _ParserScraper(Scraper):
+class ParserScraper(Scraper):
     """
     Scraper base class that uses a HTML parser and XPath expressions.
 
@@ -452,7 +456,7 @@ class _ParserScraper(Scraper):
     css = False
 
     def getPage(self, url):
-        page = super(_ParserScraper, self).getPage(url)
+        page = super().getPage(url)
         if page.encoding:
             # Requests figured out the encoding, so we can deliver Unicode to
             # LXML. Unfortunatly, LXML feels betrayed if there is still an XML
@@ -533,6 +537,11 @@ class _ParserScraper(Scraper):
                           u"(python-cssselect) python module which is " +
                           u"not installed.")
         return res
+
+
+# Legacy aliases
+_BasicScraper = BasicScraper
+_ParserScraper = ParserScraper
 
 
 class Cache:

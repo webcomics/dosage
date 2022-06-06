@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2021 Tobias Gruetzmacher
-from ..scraper import _ParserScraper
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
+from ..scraper import ParserScraper
 from ..helpers import indirectStarter
 
 
-class Snafu(_ParserScraper):
+class Snafu(ParserScraper):
     # Next and Previous are swapped...
     prevSearch = '//a[@class="next"]'
     imageSearch = '//div[@class="comicpage"]/img'
@@ -14,7 +14,7 @@ class Snafu(_ParserScraper):
     starter = indirectStarter
 
     def __init__(self, name, path):
-        super(Snafu, self).__init__('SnafuComics/' + name)
+        super().__init__('SnafuComics/' + name)
         self.url = 'http://snafu-comics.com/swmseries/' + path
 
     def namer(self, image_url, page_url):
