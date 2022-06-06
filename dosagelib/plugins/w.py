@@ -8,7 +8,7 @@ from re import compile, escape, IGNORECASE
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from ..helpers import bounceStarter
-from .common import ComicControlScraper, WordPressNaviIn, WordPressWebcomic
+from .common import ComicControlScraper, WordPressScraper, WordPressNaviIn, WordPressWebcomic
 
 
 class WapsiSquare(WordPressNaviIn):
@@ -131,6 +131,11 @@ class WildeLife(ComicControlScraper):
     url = 'http://www.wildelifecomic.com/'
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % '1'
+
+
+class Wolfpac(WordPressScraper):
+    url = 'https://wolfpac.ca/'
+    firstStripUrl = url + 'archives/comic/wolfpac-title'
 
 
 class Wonderella(_BasicScraper):
