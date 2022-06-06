@@ -566,14 +566,10 @@ class StationV3(_ParserScraper):
     help = 'Index format: yyyymmdd'
 
 
-class StickyDillyBuns(_BasicScraper):
-    url = 'http://www.stickydillybuns.com/'
-    stripUrl = url + 'strips-sdb/%s'
-    firstStripUrl = stripUrl % 'awesome_leading_man'
-    imageSearch = compile(tagre("img", "src", r'([^"]*/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]*/strips-sdb/[^"]+)',
-                               before="cn[id]prev"))
-    help = 'Index format: name'
+class StickyDillyBuns(ComicControlScraper):
+    url = 'https://pixietrixcomix.com/sticky-dilly-buns/'
+    firstStripUrl = url + 'awesome-leading-man'
+    endOfLife = True
 
 
 class StreetFighter(ComicControlScraper):
