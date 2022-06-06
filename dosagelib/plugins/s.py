@@ -6,7 +6,7 @@
 from re import compile, escape, IGNORECASE, sub
 from os.path import splitext
 
-from ..scraper import _BasicScraper, _ParserScraper
+from ..scraper import _BasicScraper, _ParserScraper, ParserScraper
 from ..helpers import indirectStarter, bounceStarter, joinPathPartsNamer
 from ..util import tagre
 from .common import ComicControlScraper, WordPressScraper, WordPressNavi, WordPressWebcomic
@@ -237,14 +237,21 @@ class ShotgunShuffle(WordPressScraper):
     firstStripUrl = url + 'comic/pilot/'
 
 
-class SinFest(_ParserScraper):
-    url = 'https://www.sinfest.net/'
+class SinFest(ParserScraper):
+    END_HTML_TAG = compile(r'</html>')
+
+    url = 'https://sinfest.xyz/'
     stripUrl = url + 'view.php?date=%s'
     firstStripUrl = stripUrl % '2000-01-17'
     imageSearch = '//img[contains(@src, "btphp/comics/")]'
     textSearch = imageSearch + '/@alt'
-    prevSearch = '//a[./img[contains(@src, "images/prev")]]'
+    prevSearch = '//a[d:class("prev")]'
     help = 'Index format: yyyy-mm-dd'
+
+    # Remove HTML end tag confusing our parser
+    def _parse_page(self, data):
+        data = self.END_HTML_TAG.sub('', data)
+        return super()._parse_page(data)
 
 
 class SisterClaire(ComicControlScraper):
