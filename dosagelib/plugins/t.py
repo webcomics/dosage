@@ -9,8 +9,8 @@ try:
 except ImportError:
     from cached_property import cached_property
 
-from ..scraper import _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter
+from ..scraper import _BasicScraper, _ParserScraper, ParserScraper
+from ..helpers import indirectStarter, joinPathPartsNamer
 from ..util import tagre
 from .common import (ComicControlScraper, WordPressScraper, WordPressSpliced,
         WordPressNavi, WordPressWebcomic)
@@ -280,12 +280,14 @@ class TinyDickAdventures(_ParserScraper):
         return page + '.' + ext
 
 
-class ToonHole(WordPressScraper):
-    url = 'http://toonhole.com/'
-    firstStripUrl = url + 'comic/toon-hole-coming-soon-2010/'
-
-    def shouldSkipUrl(self, url, data):
-        return url in (self.url + "comic/if-game-of-thrones-was-animated/",)
+class ToonHole(ParserScraper):
+    url = 'https://toonhole.com/'
+    firstStripUrl = url + '2010/01/smart-questions-get-smart-answers/'
+    imageSearch = '//img[d:class("wp-post-image")]'
+    prevSearch = '//a[@rel="prev"]'
+    latestSearch = '//a[@rel="bookmark"]'
+    starter = indirectStarter
+    namer = joinPathPartsNamer((), (-3, -2, -1))
 
 
 class TrippingOverYou(_BasicScraper):
