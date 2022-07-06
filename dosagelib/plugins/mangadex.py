@@ -104,6 +104,7 @@ class MangaDex(ParserScraper):
             cls('DragonDrive', '5c06ae70-b5cf-431a-bcd5-262a411de527'),
             cls('FuguushokuKajishiDakedoSaikyouDesu', '17b3b648-fd89-4a69-9a42-6068ffbfa7a7'),
             cls('GanbareDoukiChan', '190616bc-7da6-45fd-abd4-dd2ca656c183'),
+            cls('GijiHarem', 'd8f9afe2-aa44-4bc6-9145-eebb1f282372'),
             cls('HangingOutWithAGamerGirl', 'de9e3b62-eac5-4c0a-917d-ffccad694381'),
             cls('HoriMiya', 'a25e46ec-30f7-4db6-89df-cacbc1d9a900'),
             cls('HowToOpenATriangularRiceball', '6ebd90ce-d5e8-49c0-a4bc-e02e0f8ecb93'),
