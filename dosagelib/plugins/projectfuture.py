@@ -42,6 +42,7 @@ class ProjectFuture(ParserScraper):
             cls('TheAxemanCometh', 'axeman', '01-01', last='02-18'),
             cls('ToCatchADemon', 'daxxon', '01-00', last='03-14'),
             cls('TheDarkAngel', 'darkangel', 'cover', last='54'),
+            cls('TheBountyProject', 'bounty', '00-00'),
             cls('TheEpsilonProject', 'epsilon', '00-01'),
             cls('TheHarvest', 'harvest', '01-00'),
             cls('TheSierraChronicles', 'sierra', '0', last='29'),
