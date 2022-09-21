@@ -144,7 +144,10 @@ class ComicImage(object):
     def _fnbase(self, basepath):
         '''Determine the target base name of this comic file and make sure the
         directory exists.'''
-        comicdir = self.scraper.get_download_dir(basepath)
+        comicpath = os.path.join(
+            self.scraper.get_download_dir(basepath), self.filename
+        )
+        comicdir = os.path.dirname(comicpath)
         if not os.path.isdir(comicdir):
             os.makedirs(comicdir)
-        return os.path.join(comicdir, self.filename)
+        return comicpath
