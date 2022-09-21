@@ -415,7 +415,7 @@ def getFilename(name):
     """Get a filename from given name without dangerous or incompatible
     characters."""
     # first replace all illegal chars
-    name = re.sub(r"[^0-9a-zA-Z_\-\.]", "_", name)
+    name = re.sub(r"[^0-9a-zA-Z_ /\-\.\\]", "_", name)
     # then remove double dots and underscores
     while ".." in name:
         name = name.replace('..', '.')
