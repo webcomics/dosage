@@ -401,6 +401,7 @@ class WebToons(ParserScraper):
             cls('TheRoomies', 'challenge/the-roomies-archive', 513669),
             cls('TheShadowProphet', 'drama/the-shadow-prophet', 1881),
             cls('TheSoundOfYourHeart', 'comedy/the-sound-of-your-heart', 269),
+            cls('TheSpectrumOfUs', 'challenge/the-spectrum-of-us', 334525),
             cls('TheSteamDragonExpress', 'fantasy/steam-dragon-express', 1270),
             cls('TheStoriesOfThoseAroundMe', 'romance/the-stories-of-those-around-me', 96),
             cls('TheStrangeTalesOfOscarZahn', 'fantasy/the-strange-tales-of-oscar-zahn', 685),
