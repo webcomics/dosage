@@ -302,6 +302,7 @@ class WebToons(ParserScraper):
             cls('NoScope', 'sports/no-scope', 1572),
             cls('NotEvenBones', 'thriller/not-even-bones', 1756),
             cls('NothingSpecial', 'fantasy/nothing-special', 1188),
+            cls('NotSoLucky', 'challenge/not-so-lucky', 673387),
             cls('OddGirlOut', 'drama/odd-girl-out', 1420),
             cls('OhHoly', 'romance/oh-holy', 809),
             cls('OmniscientReader', 'action/omniscient-reader', 2154),
