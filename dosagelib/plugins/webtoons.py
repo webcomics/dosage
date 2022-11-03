@@ -87,6 +87,7 @@ class WebToons(ParserScraper):
             cls('BehindTheGIFs', 'comedy/behind-the-gifs', 658),
             cls('BigJo', 'romance/big-jo', 854),
             cls('BiteMe', 'thriller/bite-me', 1019),
+            cls('BitterSweetCoffee', 'challenge/bitter-sweet-coffee', 797203),
             cls('Blackened', 'challenge/blackened', 363805),
             cls('BladesOfFurry', 'romance/blades-of-furry', 2383),
             cls('Blessed', 'drama/blessed', 1193),
