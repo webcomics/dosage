@@ -106,6 +106,7 @@ class WebToons(ParserScraper):
             cls('CARL', 'slice-of-life/carl', 1216),
             cls('Caster', 'action/caster', 1461),
             cls('CastleSwimmer', 'fantasy/castle-swimmer', 1499),
+            cls('CatchMeIfYouCan', 'challenge/catch-me-if-you-can-', 434808),
             cls('Catharsis', 'fantasy/catharsis', 396),
             cls('CatLoafAdventures', 'slice-of-life/cat-loaf-adventures', 1381),
             cls('CChansACatgirl', 'challenge/c-chans-a-catgirl', 263430),
