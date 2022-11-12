@@ -20,12 +20,12 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.9
+          python-version: '3.11'
 
       - name: Build
         run: |
           sudo apt-get --yes install --no-install-recommends libimage-exiftool-perl
-          pip install git+https://github.com/spanezz/staticsite.git@dcf41e4a2b2d3610f2561b08bee16088fbbd1b04 'jinja2<3.1'
+          pip install git+https://github.com/spanezz/staticsite.git@a55caca1cd599d343ed454296317edd6e0539926
           ssite build --output public
 
       - name: Deploy
