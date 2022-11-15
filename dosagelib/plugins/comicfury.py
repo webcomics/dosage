@@ -73,10 +73,16 @@ class ComicFury(ParserScraper):
                 '//img[d:class("comicsegmentimage")]',
             )
 
-    def namer(self, image_url, page_url):
-        parts = page_url.split('/')
-        path, ext = os.path.splitext(image_url)
+    def namer(self, imageUrl, pageUrl):
+        parts = pageUrl.split('/')
+        path, ext = os.path.splitext(imageUrl)
         num = parts[-1]
+        if self.multipleImagesPerStrip:
+            page = self.getPage(pageUrl)
+            images = page.xpath('//img[@class="comicsegmentimage"]/@src')
+            if len(images) > 1:
+                imageIndex = images.index(imageUrl) + 1
+                return "%s_%s-%d%s" % (self.prefix, num, imageIndex, ext)
         return "%s_%s%s" % (self.prefix, num, ext)
 
     def shouldSkipUrl(self, url, data):
@@ -136,7 +142,7 @@ class ComicFury(ParserScraper):
             cls('AgentBishop', 'agentbishop'),
             cls('AHappierKindOfSad', 'ahappierkindofsad'),
             cls('AlbinoBrothers', 'albinobros'),
-            cls('Alderwood', 'alderwood'),
+            cls('Alderwood', 'alderwood', segmented=True),
             cls('AlexanderAndLucasRebooted', 'alexanderandlucas'),
             cls('AliaTerra', 'alia-terra'),
             cls('AlienIrony', 'alien-irony'),
