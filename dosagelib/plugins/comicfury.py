@@ -791,6 +791,7 @@ class ComicFury(ParserScraper):
             cls('Pulse', 'pulse'),
             cls('PureHavoc', 'pure-havoc'),
             cls('Queenie', 'queenie'),
+            cls('QueenieAdventure', 'queenieadventure', adult=True, segmented=True),
             cls('QuestCorporeal', 'questcorporeal'),
             cls('Rain', 'rain'),
             cls('RandomlyAssembled', 'randomlyassembled'),
