@@ -68,6 +68,14 @@ class Baroquen(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/strip-name'
 
 
+class BeachWzrd(WordPressScraper):
+    url = 'https://mcnostril.com/comic/chapter-1-cover/'
+    firstStripUrl = url
+    imageSearch = '//div[@id="comic"]//noscript/img'
+    latestSearch = '//a[d:class("comic-nav-last")]'
+    starter = indirectStarter
+
+
 class Bearmageddon(WordPressScraper):
     url = 'http://bearmageddon.com/bearmo/page-1/'
     firstStripUrl = url
