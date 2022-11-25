@@ -217,9 +217,12 @@ class Evon(WordPressScraper):
     adult = True
 
 
-class Exiern(WordPressScraper):
-    url = 'http://www.exiern.com/'
-    firstStripUrl = url + '2005/09/06/so-far/'
+class Exiern(_ParserScraper):
+    url = 'https://exiern.thecomicseries.com/'
+    stripUrl = url + 'comics/%s'
+    firstStripUrl = stripUrl + 'comics/1'
+    imageSearch = '//div[@id="comicimagewrap"]//img[@id="comicimage"]'
+    prevSearch = '//div[@class="comicnav"]//a[@title="Previous Comic"]'
 
 
 class ExploitationNow(WordPressNavi):
