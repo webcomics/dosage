@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2021 Tobias Gruetzmacher
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 import os
 from re import compile, IGNORECASE
@@ -215,11 +215,6 @@ class Evon(WordPressScraper):
     stripUrl = url + '?comic=%s'
     firstStripUrl = stripUrl % 'chapter-1'
     adult = True
-
-
-class Exiern(WordPressScraper):
-    url = 'http://www.exiern.com/'
-    firstStripUrl = url + '2005/09/06/so-far/'
 
 
 class ExploitationNow(WordPressNavi):

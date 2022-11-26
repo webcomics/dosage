@@ -88,10 +88,11 @@ class ComicFury(ParserScraper):
     @classmethod
     def getmodules(cls):  # noqa: Allowed to be long
         return (
-            # These were once in the list below, but fell out from the index...
+            # Cannot be found via search?!?
             cls('BadassologyByMichaelBay', 'strudelology'),
             cls('DandyAndCompany', 'dandyandcompany'),
             cls('DeadAtNight', 'deadnight'),
+            cls('Exiern', 'exiern'),
             cls('Shatterrealm', 'shatterrealm'),
 
             # do not edit anything below since these entries are generated from

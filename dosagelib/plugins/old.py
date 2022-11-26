@@ -1681,4 +1681,7 @@ class Renamed(Scraper):
             cls('StudioKhimera/Draconia', 'Draconia'),
             cls('TracesOfThePast', 'RickGriffinStudios/TracesOfThePast'),
             cls('TracesOfThePast/NSFW', 'RickGriffinStudios/TracesOfThePastNSFW'),
+
+            # Renamed in 3.1
+            cls('Exiern', 'ComicFury/Exiern'),
         )
