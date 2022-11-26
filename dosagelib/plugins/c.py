@@ -12,14 +12,6 @@ from ..util import tagre
 from .common import WordPressScraper, WordPressNavi, WordPressWebcomic
 
 
-class CadComic(WordPressWebcomic):
-    url = 'https://cad-comic.com/'
-    stripUrl = url + 'comic/%s'
-    firstStripUrl = stripUrl + 'comic/nice-melon'
-    imageSearch = '//div[@class="comicpage"]//img[contains (@src,"/uploads/")]'
-    prevSearch = '//div[@class="arrowleft"]//a[@rel="prev"]'
-
-
 class CampComic(_ParserScraper):
     url = 'http://campcomic.com/comic/'
     stripUrl = url + '%s'
@@ -416,6 +408,14 @@ class CSectionComics(WordPressScraper):
     firstStripUrl = url + 'comics/one-day-in-country'
     namer = joinPathPartsNamer((), (-3, -2, -1))
     multipleImagesPerStrip = True
+
+
+class CtrlAltDel(WordPressWebcomic):
+    url = 'https://cad-comic.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'nice-melon'
+    imageSearch = '//div[@class="comicpage"]//img[contains (@src,"/uploads/")]'
+    prevSearch = '//a[@rel="prev"]'
 
 
 class CucumberQuest(WordPressWebcomic):
