@@ -302,8 +302,8 @@ class SlightlyDamned(ComicControlScraper):
 
 
 class SluggyFreelance(_ParserScraper):
-    url = 'http://sluggy.com/'
-    stripUrl = 'http://archives.sluggy.com/book.php?chapter=%s'
+    url = 'https://sluggy.com/'
+    stripUrl = 'https://archives.sluggy.com/book.php?chapter=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = '//div[d:class("comic_content")]/img/@data-src'
     prevSearch = '//div[d:class("previous")]/a'
