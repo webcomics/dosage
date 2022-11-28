@@ -332,8 +332,8 @@ class PS238(_ParserScraper):
 
 
 class PvPOnline(_ParserScraper):
-    url = 'http://pvponline.com/comic/'
+    url = 'www.toonhoundstudios.com/pvp/comic/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % 'mon-may-04'
-    imageSearch = '//section[@class="comic-art"]/img'
-    prevSearch = '//div[contains(@class, "comic-nav")]/a[contains(text(), "Prev")]'
+    imageSearch = '//div[@id="spliced-comic"]//img[contains (@src,"/uploads/")]'
+    prevSearch = '//div[contains(@class, "comic-nav")]//a[contains(@class, "prev")]'
