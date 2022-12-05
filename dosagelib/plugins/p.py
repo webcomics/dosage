@@ -5,7 +5,7 @@
 # Copyright (C) 2019-2020 Daniel Ring
 from re import compile, escape
 
-from ..scraper import _BasicScraper, _ParserScraper
+from ..scraper import _BasicScraper, _ParserScraper, ParserScraper
 from ..helpers import bounceStarter, queryNamer, indirectStarter
 from ..util import tagre
 from .common import ComicControlScraper, WordPressScraper, WordPressNavi
@@ -331,9 +331,11 @@ class PS238(_ParserScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
-class PvPOnline(_ParserScraper):
-    url = 'http://pvponline.com/comic/'
-    stripUrl = url + '%s'
-    firstStripUrl = stripUrl % 'mon-may-04'
-    imageSearch = '//section[@class="comic-art"]/img'
-    prevSearch = '//div[contains(@class, "comic-nav")]/a[contains(text(), "Prev")]'
+class PvPOnline(ParserScraper):
+    baseUrl = 'https://www.toonhoundstudios.com/'
+    url = baseUrl + 'pvp/'
+    stripUrl = baseUrl + 'comic/%s/?sid=372'
+    firstStripUrl = stripUrl % '19980504'
+    imageSearch = '//div[@id="spliced-comic"]//img/@data-src-img'
+    prevSearch = '//div[d:class("comic-nav")]//a[d:class("prev")]'
+    help = 'Older pages need a Patreon subscription'
