@@ -1,13 +1,15 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2021 Tobias Gruetzmacher
+# Copyright (C) 2019-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2021 Daniel Ring
 from .common import WordPressSpliced
 
 
-class _WithSid(WordPressSpliced):
-    def __init__(self, name, sid, eol=False):
+class _CommonMulti(WordPressSpliced):
+    def __init__(self, name, path, first, eol=False):
         super().__init__(name)
-        self.stripUrl = self.baseUrl + 'comic/%s/?sid={}'.format(sid)
+        self.url = self.baseUrl + 'series/' + path + '/'
+        self.firstStripUrl = self.stripUrl % first
+        self.endOfLife = eol
 
 
 class AbbysAgency(WordPressSpliced):
@@ -42,7 +44,7 @@ class AlienDiceLegacy(WordPressSpliced):
 
     def isfirststrip(self, url):
         # Strip series identifier
-        return super(AlienDiceLegacy, self).isfirststrip(url.rsplit('?', 1)[0])
+        return super().isfirststrip(url.rsplit('?', 1)[0])
 
 
 class BlackRose(WordPressSpliced):
@@ -51,14 +53,12 @@ class BlackRose(WordPressSpliced):
     firstStripUrl = stripUrl % '2004-11-01'
 
 
-class TheCyantianChronicles(_WithSid):
+class TheCyantianChronicles(_CommonMulti):
     baseUrl = 'https://cyantian.net/'
 
     def __init__(self, name, path, first, sid, eol=False):
-        super().__init__('TheCyantianChronicles/' + name, sid)
-        self.url = self.baseUrl + 'series/' + path + '/'
-        self.firstStripUrl = self.stripUrl % first
-        self.endOfLife = eol
+        self.stripUrl = self.baseUrl + f'%s/?sid={sid}'
+        super().__init__('TheCyantianChronicles/' + name, path, first, eol)
 
     @classmethod
     def getmodules(cls):
@@ -86,14 +86,12 @@ class Shivae(WordPressSpliced):
     firstStripUrl = stripUrl % '09202001'
 
 
-class ShivaeComics(_WithSid):
+class ShivaeComics(_CommonMulti):
     baseUrl = 'https://shivae.net/'
 
     def __init__(self, name, path, first, sid, eol=False):
-        super().__init__('Shivae/' + name, sid)
-        self.url = self.baseUrl + 'series/' + path + '/'
-        self.firstStripUrl = self.stripUrl % first
-        self.endOfLife = eol
+        self.stripUrl = self.baseUrl + f'comic/%s/?sid={sid}'
+        super().__init__('Shivae/' + name, path, first, eol)
 
     @classmethod
     def getmodules(cls):
