@@ -31,7 +31,7 @@ class ComicsKingdom(ParserScraper):
         })
 
     @classmethod
-    def getmodules(cls):  # noqa: Allowed to be long
+    def getmodules(cls):  # noqa: CFQ001
         return (
             # Some comics are not listed on the "all" page (too old?)
             cls('Retail', 'retail'),

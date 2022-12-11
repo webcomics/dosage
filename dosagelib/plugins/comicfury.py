@@ -86,7 +86,7 @@ class ComicFury(ParserScraper):
             not data.xpath('//div[@id="comicimagewrap"]//img'))
 
     @classmethod
-    def getmodules(cls):  # noqa: Allowed to be long
+    def getmodules(cls):  # noqa: CFQ001
         return (
             # Cannot be found via search?!?
             cls('BadassologyByMichaelBay', 'strudelology'),

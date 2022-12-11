@@ -5,6 +5,7 @@
 /.coverage
 /.eggs
 /.tox
+/.venv
 /Comics
 /build
 /dist

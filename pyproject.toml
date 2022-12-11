@@ -3,3 +3,18 @@ requires = ["setuptools>=45", "wheel", "setuptools_scm>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
+
+[tool.flake8]
+max_line_length = 100
+ignore = [
+    'E127', 'E128',  # hanging instead of visual indent
+    'FI18', 'FI58',  # ignore __future__ "annotations" for now
+    'W504'  # line breaks after binary operator
+]
+noqa-require-code = true
+no-accept-encodings = true
+min-version = "3.7"
+extend-exclude = [
+    '.venv',
+    'build',
+]
