@@ -34,7 +34,7 @@ class GoComics(ParserScraper):
         return data.xpath('//img[contains(@src, "content-error-missing")]')
 
     @classmethod
-    def getmodules(cls):  # noqa: Allowed to be long
+    def getmodules(cls):  # noqa: CFQ001
         return (
             # old comics removed from the listing
             cls('HeavenlyNostrils', 'heavenly-nostrils'),
