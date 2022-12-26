@@ -3,7 +3,7 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-from ..scraper import _ParserScraper
+from ..scraper import ParserScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
 
 
@@ -82,3 +82,11 @@ class VirmirWorld(_ParserScraper):
     def getIndexStripUrl(self, index):
         index = index.split('-')
         return self.stripUrl % (index[0], index[1])
+
+
+class Vreakerz(ParserScraper):
+    url = 'http://vreakerz.angrykitten.nl/'
+    stripUrl = url + 'stories/read/%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//img[contains(@src, "storypages")]'
+    prevSearch = '//a[@class="btn-prior"]'
