@@ -198,12 +198,12 @@ class LoFiJinks(WordPressNaviIn):
     endOfLife = True
 
 
-class LookingForGroup(_ParserScraper):
+class LookingForGroup(ParserScraper):
     url = 'https://www.lfg.co/'
     stripUrl = url + 'page/%s/'
     firstStripUrl = stripUrl % '1'
-    imageSearch = '//div[@id="comic-img"]//img'
-    prevSearch = '//a[@class="comic-nav-prev"]'
+    imageSearch = '//div[@id="comic-img"]//img/@data-src'
+    prevSearch = '//a[d:class("comic-nav-prev")]'
     latestSearch = '//div[@id="feature-lfg-footer"]/a[contains(@href, "page/")]'
     starter = indirectStarter
     help = 'Index format: nnn'
