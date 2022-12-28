@@ -346,7 +346,9 @@ class DresdenCodak(_ParserScraper):
     hob_start = datetime.strptime("2007-02-08", date_format)
     hob_end = datetime.strptime("2008-10-22", date_format)
 
-    pagenumber_re = compile("(?:[0-9]+-)*[^0-9]+_([0-9]+)(?:a|-1|_001)?\.jpg$")
+    pagenumber_re = compile(
+        "(?:[0-9]+-)*[^0-9]+_([0-9]+)(?:a|b|-1|_001|-[0-9]+x[0-9]+)?\.jpg$"
+    )
 
     def getPrevUrl(self, url, data):
         # Fix skipping newest One-Off
