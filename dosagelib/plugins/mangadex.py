@@ -95,6 +95,7 @@ class MangaDex(ParserScraper):
     @classmethod
     def getmodules(cls):
         return (
+            cls('AniTomo', '920c22e7-49c9-4bb4-b394-0c964b6037fc'),
             cls('ArcaneSniper', 'cbf53f02-9594-42e7-9dbf-8ae1c783466f'),
             cls('AttackOnTitan', '304ceac3-8cdb-4fe7-acf7-2b6ff7a60613'),
             cls('Beastars', 'f5e3baad-3cd4-427c-a2ec-ad7d776b370d'),
