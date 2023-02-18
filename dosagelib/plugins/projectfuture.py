@@ -50,4 +50,5 @@ class ProjectFuture(ParserScraper):
             cls('TheTuppenyMan', 'tuppenny', '00', last='16'),
             cls('TurningANewPage', 'azrael', '1', last='54'),
             cls('Xerian', 'xerian', '01-00'),
+            cls('ZetaTakesATrip', 'zeta', '0-00'),
         )
