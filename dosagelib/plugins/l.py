@@ -202,7 +202,7 @@ class LookingForGroup(ParserScraper):
     url = 'https://www.lfg.co/'
     stripUrl = url + 'page/%s/'
     firstStripUrl = stripUrl % '1'
-    imageSearch = '//div[@id="comic-img"]//img/@data-src'
+    imageSearch = '//div[@id="comic-img"]//img/@src'
     prevSearch = '//a[d:class("comic-nav-prev")]'
     latestSearch = '//div[@id="feature-lfg-footer"]/a[contains(@href, "page/")]'
     starter = indirectStarter
