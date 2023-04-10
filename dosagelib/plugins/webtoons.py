@@ -56,6 +56,7 @@ class WebToons(ParserScraper):
             cls('AboutDeath', 'drama/about-death', 82),
             cls('ABudgiesLife', 'slice-of-life/its-a-budgies-life', 985),
             cls('Acception', 'drama/acception', 1513),
+            cls('AcesWild', 'challenge/aces-wild', 689025),
             cls('Acursian', 'supernatural/acursian', 1452),
             cls('AdventuresOfGod', 'comedy/adventures-of-god', 853),
             cls('AerialMagic', 'fantasy/aerial-magic', 1358),
