@@ -122,6 +122,7 @@ class MangaDex(ParserScraper):
             cls('KanojoOkarishimasu', '32fdfe9b-6e11-4a13-9e36-dcd8ea77b4e4'),
             cls('KoiToUtatane', 'f7d40a27-e289-45b3-9c68-d1cb251897e6'),
             cls('KonoKaishaNiSukiNaHitoGaImasu', '3e8cf40f-ba17-480a-b60b-a675db032ee2'),
+            cls('LonelyGirlNiSakaraenai', 'd7576e72-0301-4ed3-9137-722ed768bfda'),
             cls('Lv2KaraCheatDattaMotoYuushaKouhoNoMattariIsekaiLife', '58bc83a0-1808-484e-88b9-17e167469e23'),
             cls('MaouNoOreGaDoreiElfWoYomeNiShitandaGaDouMederebaIi', '55ace2fb-e157-4d76-9e72-67c6bd762a39'),
             cls('ModernMoGal', 'b1953f80-36f7-492c-b0f8-e9dd0ad01752'),
