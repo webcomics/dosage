@@ -126,6 +126,7 @@ class MangaDex(ParserScraper):
             cls('Lv2KaraCheatDattaMotoYuushaKouhoNoMattariIsekaiLife', '58bc83a0-1808-484e-88b9-17e167469e23'),
             cls('MaouNoOreGaDoreiElfWoYomeNiShitandaGaDouMederebaIi', '55ace2fb-e157-4d76-9e72-67c6bd762a39'),
             cls('ModernMoGal', 'b1953f80-36f7-492c-b0f8-e9dd0ad01752'),
+            cls('MousouTelepathy', '3d25d7da-893f-400e-9aeb-6163773c671a'),
             cls('MyTinySenpaiFromWork', '28ed63af-61f8-43af-bac3-762030c72963'),
             cls('OMaidensinYourSavageSeason', 'c4613b7d-7a6e-48f9-82f0-bce3dd33383a'),
             cls('OokamiShounenWaKyouMoUsoOKasaneru', '5e77d9e2-2e44-431a-a995-5fefd411e55e'),
