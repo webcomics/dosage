@@ -128,6 +128,7 @@ class MangaDex(ParserScraper):
             cls('ModernMoGal', 'b1953f80-36f7-492c-b0f8-e9dd0ad01752'),
             cls('MousouTelepathy', '3d25d7da-893f-400e-9aeb-6163773c671a'),
             cls('MyTinySenpaiFromWork', '28ed63af-61f8-43af-bac3-762030c72963'),
+            cls('MyWifeIsFromAThousandYearsAgo', '17a56d33-9443-433a-9e0d-70459893ed8f'),
             cls('OMaidensinYourSavageSeason', 'c4613b7d-7a6e-48f9-82f0-bce3dd33383a'),
             cls('OokamiShounenWaKyouMoUsoOKasaneru', '5e77d9e2-2e44-431a-a995-5fefd411e55e'),
             cls('OokamiToKoshinryou', 'de900fd3-c94c-4148-bbcb-ca56eaeb57a4'),
