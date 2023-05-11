@@ -8,7 +8,7 @@ from re import compile, escape, MULTILINE
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import regexNamer, bounceStarter, indirectStarter
-from .common import _WordPressScraper, _WPNavi, _WPWebcomic
+from .common import WordPressScraper, WordPressNavi, WordPressWebcomic
 
 
 class AbstruseGoose(_ParserScraper):
@@ -88,7 +88,7 @@ class AdventuresOfFifne(_ParserScraper):
         return super(AdventuresOfFifne, self).getPrevUrl(url, data)
 
 
-class AfterStrife(_WPNavi):
+class AfterStrife(WordPressNavi):
     baseUrl = 'http://afterstrife.com/'
     stripUrl = baseUrl + '?p=%s'
     url = stripUrl % '262'
@@ -117,11 +117,11 @@ class AhoiPolloi(_ParserScraper):
     help = 'Index format: yyyymmdd'
 
 
-class AhoyEarth(_WPNavi):
+class AhoyEarth(WordPressNavi):
     url = 'http://www.ahoyearth.com/'
 
 
-class AirForceBlues(_WordPressScraper):
+class AirForceBlues(WordPressScraper):
     url = 'http://farvatoons.com/'
     firstStripUrl = url + 'comic/in-texas-there-are-texans/'
 
@@ -136,7 +136,7 @@ class ALessonIsLearned(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class Alice(_WordPressScraper):
+class Alice(WordPressScraper):
     url = 'https://web.archive.org/web/20210115132313/http://www.alicecomics.com/'
     latestSearch = '//a[text()="Latest Alice!"]'
     starter = indirectStarter
@@ -153,12 +153,12 @@ class AlienLovesPredator(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/name'
 
 
-class AlienShores(_WordPressScraper):
+class AlienShores(WordPressScraper):
     url = 'http://alienshores.com/alienshores_band/'
     firstStripUrl = url + 'AScomic/updated-cover/'
 
 
-class AllTheGrowingThings(_WordPressScraper):
+class AllTheGrowingThings(WordPressScraper):
     url = ('https://web.archive.org/web/20160611212229/'
         'http://growingthings.typodmary.com/')
     stripUrl = url + '%s/'
@@ -239,7 +239,7 @@ class AmbersNoBrainers(_ParserScraper):
         return self.stripUrl % str(pageNum - 1)
 
 
-class Amya(_WordPressScraper):
+class Amya(WordPressScraper):
     url = 'http://www.amyachronicles.com/'
 
 
@@ -343,7 +343,7 @@ class ARedTailsDream(_BasicScraper):
     help = 'Index format: nn'
 
 
-class ArtificialIncident(_WPWebcomic):
+class ArtificialIncident(WordPressWebcomic):
     url = 'https://www.artificialincident.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'issue-one-life-changing'
@@ -370,12 +370,12 @@ class AstronomyPOTD(_ParserScraper):
                           image_url.split('/')[-1].split('.')[0])
 
 
-class ATaleOfTails(_WordPressScraper):
+class ATaleOfTails(WordPressScraper):
     url = 'http://www.feretta.net/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'a-tale-of-tails-1-0'
     adult = True
 
 
-class AxeCop(_WordPressScraper):
+class AxeCop(WordPressScraper):
     url = 'http://axecop.com/comic/season-two/'

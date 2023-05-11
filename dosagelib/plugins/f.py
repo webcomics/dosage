@@ -8,7 +8,7 @@ from re import compile, escape
 from ..util import tagre
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, joinPathPartsNamer
-from .common import _ComicControlScraper, _WPNaviIn, _WordPressScraper
+from .common import ComicControlScraper, WordPressNaviIn, WordPressScraper
 
 
 class FalconTwin(_BasicScraper):
@@ -38,7 +38,7 @@ class FalseStart(_ParserScraper):
         return self.archive[self.archive.index(url) - 1]
 
 
-class Faneurysm(_WPNaviIn):
+class Faneurysm(WordPressNaviIn):
     url = 'http://hijinksensue.com/comic/think-only-tree/'
     firstStripUrl = 'http://hijinksensue.com/comic/captains-prerogative/'
     endOfLife = True
@@ -55,7 +55,7 @@ class FantasyRealms(_ParserScraper):
     help = 'Index format: nnn'
 
 
-class FarToTheNorth(_ComicControlScraper):
+class FarToTheNorth(ComicControlScraper):
     url = 'http://www.farnorthcomic.com/'
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % 'don39t-tell'
@@ -70,7 +70,7 @@ class FauxPas(_ParserScraper):
     help = 'Index format: nnn'
 
 
-class FireflyCross(_WordPressScraper):
+class FireflyCross(WordPressScraper):
     url = 'http://www.fireflycross.pensandtales.com/'
     firstStripUrl = url + '?comic=05062002'
 
@@ -135,7 +135,7 @@ class FonFlatter(_ParserScraper):
         )
 
 
-class ForestHill(_WordPressScraper):
+class ForestHill(WordPressScraper):
     url = 'https://www.foresthillcomic.org/'
 
 
@@ -226,7 +226,7 @@ class FreighterTails(_ParserScraper):
     endOfLife = True
 
 
-class FriendsYouAreStuckWith(_WordPressScraper):
+class FriendsYouAreStuckWith(WordPressScraper):
     url = 'http://friendsyasw.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'wanted'
@@ -247,7 +247,7 @@ class FullFrontalNerdity(_BasicScraper):
     help = 'Index format: number'
 
 
-class FunInJammies(_WordPressScraper):
+class FunInJammies(WordPressScraper):
     url = ('https://web.archive.org/web/20170205105241/'
         'http://funinjammies.com/')
     stripUrl = url + 'comic.php?issue=%s'

@@ -10,7 +10,7 @@ from ..helpers import indirectStarter
 from ..scraper import _BasicScraper, _ParserScraper
 from ..util import tagre
 from ..xml import NS
-from .common import _ComicControlScraper, _WordPressScraper, _WPWebcomic
+from .common import ComicControlScraper, WordPressScraper, WordPressWebcomic
 
 
 class MacHall(_BasicScraper):
@@ -29,12 +29,12 @@ class MadamAndEve(_BasicScraper):
     multipleImagesPerStrip = True
 
 
-class Magellan(_WordPressScraper):
+class Magellan(WordPressScraper):
     url = 'https://magellanverse.com/'
     firstStripUrl = url + 'comic/20040307wannabe/'
 
 
-class MagickChicks(_ComicControlScraper):
+class MagickChicks(ComicControlScraper):
     url = 'https://pixietrixcomix.com/magick-chicks/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % 'tis-but-a-trifle-2'
@@ -52,7 +52,7 @@ class ManlyGuysDoingManlyThings(_ParserScraper):
     help = 'Index format: ddmmyyyy'
 
 
-class MareInternum(_WordPressScraper):
+class MareInternum(WordPressScraper):
     url = 'https://www.marecomic.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'intro-page-1'
@@ -98,7 +98,7 @@ class MaxOveracts(_ParserScraper):
     help = 'Index format: nnn'
 
 
-class Meek(_WordPressScraper):
+class Meek(WordPressScraper):
     url = 'https://www.meekcomic.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'chapter-1-cover'
@@ -113,27 +113,27 @@ class MegaTokyo(_BasicScraper):
     help = 'Index format: nnnn'
 
 
-class Meiosis(_WordPressScraper):
+class Meiosis(WordPressScraper):
     url = 'http://meiosiswebcomic.com/'
 
 
-class Melonpool(_WordPressScraper):
+class Melonpool(WordPressScraper):
     url = 'http://www.melonpool.com/'
     allow_errors = (500,)
 
 
-class MenageA3(_ComicControlScraper):
+class MenageA3(ComicControlScraper):
     adult = True
     url = 'https://pixietrixcomix.com/menage-a-3/'
     firstStripUrl = url + 'for-new-readers'
     endOfLife = True
 
 
-class Metacarpolis(_ComicControlScraper):
+class Metacarpolis(ComicControlScraper):
     url = 'http://www.metacarpolis.com'
 
 
-class Misfile(_ComicControlScraper):
+class Misfile(ComicControlScraper):
     url = 'http://www.misfile.com/misfile/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '2004-02-22'
@@ -149,7 +149,7 @@ class MisfileHellHigh(Misfile):
     help = 'Index format: yyyy-mm-dd'
 
 
-class MistyTheMouse(_WordPressScraper):
+class MistyTheMouse(WordPressScraper):
     url = 'http://www.mistythemouse.com/'
     prevSearch = '//a[@rel="prev"]'
     firstStripUrl = 'http://www.mistythemouse.com/?p=12'
@@ -176,13 +176,13 @@ class MonsieurLeChien(_BasicScraper):
     help = 'Index format: n'
 
 
-class MonsterSoup(_WordPressScraper):
+class MonsterSoup(WordPressScraper):
     url = 'https://monstersoupcomic.com/'
     stripUrl = url + '?comic=%s'
     firstStripUrl = stripUrl % 'chapter-1-cover'
 
 
-class Moonlace(_WPWebcomic):
+class Moonlace(WordPressWebcomic):
     url = 'https://moonlace.darkbluecomics.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'page-0-1'
@@ -272,7 +272,7 @@ class MysteriesOfTheArcana(_ParserScraper):
     prevSearch = '//a[@class="navprevious"]'
 
 
-class MonsterUnderTheBed(_WordPressScraper):
+class MonsterUnderTheBed(WordPressScraper):
     url = 'http://themonsterunderthebed.net/'
     stripUrl = url + '?comic=%s'
     firstStripUrl = stripUrl % 'test-post'

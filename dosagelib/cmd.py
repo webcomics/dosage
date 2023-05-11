@@ -3,17 +3,15 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2022 Tobias Gruetzmacher
 import argparse
-import contextlib
 import os
 import platform
-from pathlib import Path
 
-import appdirs
+from platformdirs import PlatformDirs
 
 from . import events, configuration, singleton, director
 from . import AppName, __version__
 from .output import out
-from .scraper import scrapers as allscrapers
+from .scraper import scrapers as scrapercache
 from .util import internal_error, strlimit
 
 
@@ -26,7 +24,12 @@ class ArgumentParser(argparse.ArgumentParser):
             out.info(self.format_help())
 
 
-Examples = """\
+# Making our config roaming seems sensible
+platformdirs = PlatformDirs(appname=AppName, appauthor=False, roaming=True, opinion=True)
+user_plugin_path = platformdirs.user_data_path / 'plugins'
+
+
+ExtraHelp = f"""\
 EXAMPLES
 List available comics:
   dosage -l
@@ -38,11 +41,9 @@ directory:
 If you already have downloaded several comics and want to get the latest
 strips of all of them:
   dosage --continue @
+
+User plugin directory: {user_plugin_path}
 """
-
-
-# Making our config roaming seems sensible
-userdirs = appdirs.AppDirs(appname=AppName, appauthor=False, roaming=True)
 
 
 def setup_options():
@@ -52,7 +53,7 @@ def setup_options():
     """
     parser = ArgumentParser(
         description="A comic downloader and archiver.",
-        epilog=Examples,
+        epilog=ExtraHelp,
         formatter_class=argparse.RawDescriptionHelpFormatter)
 
     parser.add_argument('-v', '--verbose', action='count', default=0,
@@ -97,10 +98,6 @@ def setup_options():
         ' Use if you know what you are doing.')
     # used for development testing prev/next matching
     parser.add_argument('--dry-run', action='store_true',
-        help=argparse.SUPPRESS)
-    # multimatch is only used for development, eg. testing if all comics of
-    # a scripted plugin are working
-    parser.add_argument('--multimatch', action='store_true',
         help=argparse.SUPPRESS)
     # List all comic modules, even those normally suppressed, because they
     # are not "real" (moved & removed)
@@ -199,8 +196,7 @@ def vote_comics(options):
     errors = 0
     try:
         for scraperobj in director.getScrapers(options.comic, options.basepath,
-                                               options.adult,
-                                               options.multimatch):
+                options.adult):
             errors += vote_comic(scraperobj)
     except ValueError as msg:
         out.exception(msg)
@@ -227,6 +223,7 @@ def vote_comic(scraperobj):
 def run(options):
     """Execute comic commands."""
     set_output_info(options)
+    scrapercache.adddir(user_plugin_path)
     # ensure only one instance of dosage is running
     if not options.allow_multiple:
         singleton.SingleInstance()
@@ -241,7 +238,6 @@ def run(options):
     if not options.comic:
         out.warn(u'No comics specified, bailing out!')
         return 1
-    add_user_scrapers()
     if options.modulehelp:
         return display_help(options)
     if options.vote:
@@ -249,43 +245,14 @@ def run(options):
     return director.getComics(options)
 
 
-def add_user_scrapers():
-    """Add extra comic modules from the user data directory. This uses two
-    different locations: The "system-native" location and paths matching the
-    XDG basedir spec. While XDG isn't a thing on macOS and Windows, some users
-    (and developers) like to use these paths cross-plattform, therefore we
-    support both."""
-    dirs = set()
-    dirs.add(userdirs.user_data_dir)
-    with xdg_system():
-        dirs.add(userdirs.user_data_dir)
-    dirs = (Path(x) / 'plugins' for x in dirs)
-    for d in dirs:
-        allscrapers.adddir(d)
-
-
-@contextlib.contextmanager
-def xdg_system():
-    """context manager to do something with appdirs while forcing the system to
-    be "linux2", which implements the XDG base dir spec.
-    """
-    oldsys = appdirs.system
-    appdirs.system = 'linux2'
-    try:
-        yield
-    finally:
-        appdirs.system = oldsys
-
-
 def do_list(column_list=True, verbose=False, listall=False):
     """List available comics."""
-    add_user_scrapers()
     with out.pager():
         out.info(u'Available comic scrapers:')
         out.info(u'Comics tagged with [{}] require age confirmation'
             ' with the --adult option.'.format(TAG_ADULT))
         out.info(u'Non-english comics are tagged with [%s].' % TAG_LANG)
-        scrapers = sorted(allscrapers.get(listall),
+        scrapers = sorted(scrapercache.all(listall),
                           key=lambda s: s.name.lower())
         if column_list:
             num, disabled = do_column_list(scrapers)

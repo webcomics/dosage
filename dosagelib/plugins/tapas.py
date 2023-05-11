@@ -1,10 +1,12 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
-from ..scraper import _ParserScraper
+# Copyright (C) 2019-2022 Daniel Ring
+from ..output import out
+from ..scraper import ParserScraper
+from ..xml import NS
 
 
-class Tapastic(_ParserScraper):
+class Tapas(ParserScraper):
     baseUrl = 'https://tapas.io/'
     imageSearch = '//article[contains(@class, "js-episode-article")]//img/@data-src'
     prevSearch = '//a[contains(@class, "js-prev-ep-btn")]'
@@ -12,7 +14,7 @@ class Tapastic(_ParserScraper):
     multipleImagesPerStrip = True
 
     def __init__(self, name, url):
-        super(Tapastic, self).__init__('Tapastic/' + name)
+        super().__init__('Tapas/' + name)
         self.url = self.baseUrl + 'series/' + url + '/info'
         self.stripUrl = self.baseUrl + 'episode/%s'
 
@@ -40,6 +42,12 @@ class Tapastic(_ParserScraper):
         self.imageUrls = super().fetchUrls(url, data, urlSearch)
         return self.imageUrls
 
+    def shouldSkipUrl(self, url, data):
+        if data.xpath('//button[d:class("js-have-to-sign")]', namespaces=NS):
+            out.warn(f'Nothing to download on "{url}", because a login is required.')
+            return True
+        return False
+
     def namer(self, imageUrl, pageUrl):
         # Construct filename from episode number and image position on page
         episodeNum = pageUrl.rsplit('/', 1)[-1]
@@ -56,12 +64,21 @@ class Tapastic(_ParserScraper):
         return (
             # Manually-added comics
             cls('AmpleTime', 'Ample-Time'),
+            cls('FANGS', 'fangscomic'),
+            cls('FishNuggets', 'Fish-Nuggets'),
+            cls('HoneyAndTheMoon', 'Honey-and-the-Moon'),
             cls('InsignificantOtters', 'IOtters'),
+            cls('MagicalBoy', 'magicalboy'),
             cls('NoFuture', 'NoFuture'),
             cls('OrensForge', 'OrensForge'),
+            cls('RadioactivePanda', 'Radioactive-Panda'),
             cls('RavenWolf', 'RavenWolf'),
             cls('SyntheticInstinct', 'Synthetic-Instinct'),
             cls('TheCatTheVineAndTheVictory', 'The-Cat-The-Vine-and-The-Victory'),
+            cls('TheInkApprentice', 'The-Ink-Apprentice'),
+            cls('TheSeaInYou', 'theseainyou'),
+            cls('TheSelkiesSkin', 'theselkiesskincomic'),
+            cls('TheWitchsThrone', 'thewitchsthrone'),
             cls('VenturaCityDrifters', 'Ventura-City-Drifters'),
 
             # START AUTOUPDATE

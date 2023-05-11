@@ -73,26 +73,37 @@ pys.each { py ->
 // MAIN //
 
 parallel(tasks)
-stage('Windows binary') {
-    windowsBuild()
-}
-stage('Allure report') {
-    processAllure()
-}
+parallel modern: {
+        stage('Modern Windows binary') {
+            windowsBuild('3.10', 'dosage.exe')
+        }
+    },
+    legacy: {
+        stage('Legacy Windows binary') {
+            // Still compatible with Windows 7
+            windowsBuild('3.8', 'dosage-legacy.exe')
+        }
+    },
+    report: {
+        stage('Allure report') {
+            processAllure()
+        }
+    }, failFast: true
 
-def windowsBuild() {
+
+def windowsBuild(pyver, exename) {
     warnError('windows build failed') {
         node {
-            windowsBuildCommands()
+            windowsBuildCommands(pyver, exename)
         }
     }
 }
 
-def windowsBuildCommands() {
+def windowsBuildCommands(pyver, exename) {
     deleteDir()
     unstash 'bin'
-    // Keep 3.8 for now, so we are still compatible with Windows 7
-    def img = docker.image('docker.io/tobix/pywine:3.8')
+
+    def img = docker.image('docker.io/tobix/pywine:' + pyver)
     img.pull()
     img.inside {
         sh '''
@@ -105,7 +116,8 @@ def windowsBuildCommands() {
                 wine py -m PyInstaller -y dosage.spec;
                 wineserver -w" 2>&1 | tee log.txt
         '''
-        archiveArtifacts '*/scripts/dist/*'
+        sh "mv */scripts/dist/*.exe $exename"
+        archiveArtifacts '*.exe'
     }
 }
 

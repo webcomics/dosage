@@ -4,14 +4,15 @@
 # Copyright (C) 2015-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 import os
+import re
 import threading
 import _thread
 from queue import Queue, Empty
-from typing import Dict
+from typing import Collection, Dict
 from urllib.parse import urlparse
 
 from .output import out
-from .scraper import scrapers as allscrapers
+from .scraper import scrapers as scrapercache
 from . import events
 
 
@@ -160,7 +161,7 @@ def getComics(options):
     errors = 0
     try:
         for scraperobj in getScrapers(options.comic, options.basepath,
-                                      options.adult, options.multimatch):
+                options.adult):
             jobs.put(scraperobj)
         # start threads
         num_threads = min(options.parallel, jobs.qsize())
@@ -186,7 +187,7 @@ def getComics(options):
     return errors
 
 
-def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False, listing=False):
+def getScrapers(comics: Collection[str], basepath: str, adult=True, listing=False):
     """Get scraper objects for the given comics."""
     if '@' in comics:
         # only scrapers whose directory already exists
@@ -198,31 +199,31 @@ def getScrapers(comics, basepath=None, adult=True, multiple_allowed=False, listi
         # get only selected comic scrapers
         # store them in a set to eliminate duplicates
         scrapers = set()
+        basere = re.compile(r'^' + re.escape(basepath) + r'[/\\]')
         for comic in comics:
             # Helpful when using shell completion to pick comics to get
             comic = comic.rstrip(os.path.sep)
-            if basepath and comic.startswith(basepath):
+            if basere.match(comic):
                 # make the following command work:
                 # find Comics -type d | xargs -n1 -P10 dosage -b Comics
-                comic = comic[len(basepath):].lstrip(os.sep)
+                comic = comic[len(basepath) + 1:].lstrip(os.sep)
             if ':' in comic:
                 name, index = comic.split(':', 1)
                 indexes = index.split(',')
             else:
                 name = comic
                 indexes = None
-            found_scrapers = allscrapers.find(name, multiple_allowed=multiple_allowed)
-            for scraperobj in found_scrapers:
-                if shouldRunScraper(scraperobj, adult, listing):
-                    # FIXME: Find a better way to work with indexes
-                    scraperobj.indexes = indexes
-                    if scraperobj not in scrapers:
-                        scrapers.add(scraperobj)
-                        yield scraperobj
+            scraper = scrapercache.find(name)
+            if shouldRunScraper(scraper, adult, listing):
+                # FIXME: Find a better way to work with indexes
+                scraper.indexes = indexes
+                if scraper not in scrapers:
+                    scrapers.add(scraper)
+                    yield scraper
 
 
 def get_existing_comics(basepath=None, adult=True, listing=False):
-    for scraperobj in allscrapers.get(include_removed=True):
+    for scraperobj in scrapercache.all(include_removed=True):
         dirname = scraperobj.get_download_dir(basepath)
         if os.path.isdir(dirname):
             if shouldRunScraper(scraperobj, adult, listing):

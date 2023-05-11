@@ -7,20 +7,20 @@ from re import compile
 from urllib.parse import urljoin
 from lxml import etree
 
-from ..scraper import _BasicScraper, _ParserScraper
+from ..scraper import BasicScraper, ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi
+from .common import ComicControlScraper, WordPressScraper, WordPressNavi
 
 
-class Underling(_WPNavi):
+class Underling(WordPressNavi):
     url = ('https://web.archive.org/web/20190806120425/'
         'http://underlingcomic.com/')
     firstStripUrl = url + 'page-one/'
     endOfLife = True
 
 
-class Undertow(_BasicScraper):
+class Undertow(BasicScraper):
     url = 'http://undertow.dreamshards.org/'
     imageSearch = compile(tagre("img", "src", r'([^"]+\.jpg)'))
     prevSearch = compile(r'href="(.+?)".+?teynpoint')
@@ -28,7 +28,7 @@ class Undertow(_BasicScraper):
     starter = indirectStarter
 
 
-class unDivine(_ComicControlScraper):
+class unDivine(ComicControlScraper):
     url = 'https://www.undivinecomic.com/'
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % 'page-1'
@@ -46,7 +46,7 @@ class unDivine(_ComicControlScraper):
         return filename
 
 
-class UnicornJelly(_BasicScraper):
+class UnicornJelly(BasicScraper):
     baseUrl = 'http://unicornjelly.com/'
     url = baseUrl + 'uni666.html'
     stripUrl = baseUrl + 'uni%s.html'
@@ -56,7 +56,7 @@ class UnicornJelly(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class Unsounded(_ParserScraper):
+class Unsounded(ParserScraper):
     url = 'http://www.casualvillain.com/Unsounded/'
     startUrl = url + 'comic+index/'
     stripUrl = url + 'comic/ch%s/ch%s_%s.html'
@@ -95,7 +95,7 @@ class Unsounded(_ParserScraper):
         return self.stripUrl % (chapter, chapter, num)
 
 
-class UrgentTransformationCrisis(_WordPressScraper):
+class UrgentTransformationCrisis(WordPressScraper):
     url = 'http://www.catomix.com/utc/'
     firstStripUrl = url + 'comic/cover1'
 

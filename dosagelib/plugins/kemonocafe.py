@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2019-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-from ..scraper import _ParserScraper
+from ..scraper import ParserScraper
 
 
-class KemonoCafe(_ParserScraper):
+class KemonoCafe(ParserScraper):
     imageSearch = '//div[@id="comic"]//img'
     prevSearch = '//a[contains(@class, "comic-nav-previous")]'
 

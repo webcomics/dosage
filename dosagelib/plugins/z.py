@@ -1,23 +1,23 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2021 Tobias Gruetzmacher
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
 from re import compile, escape
 
-from ..scraper import _BasicScraper, _ParserScraper
+from ..scraper import BasicScraper, ParserScraper
 from ..util import tagre
 from ..helpers import bounceStarter, joinPathPartsNamer
-from .common import _WPNavi
+from .common import WordPressNavi
 
 
-class ZapComic(_ParserScraper):
+class ZapComic(ParserScraper):
     url = 'http://www.zapcomic.com/'
     css = True
     imageSearch = 'img.comic-item'
     prevSearch = 'a.previous-comic-link'
 
 
-class Zapiro(_ParserScraper):
+class Zapiro(ParserScraper):
     url = 'http://mg.co.za/zapiro/'
     starter = bounceStarter
     imageSearch = '//div[@id="cartoon"]/img'
@@ -26,7 +26,7 @@ class Zapiro(_ParserScraper):
     namer = joinPathPartsNamer((-1,), ())
 
 
-class ZenPencils(_WPNavi):
+class ZenPencils(WordPressNavi):
     url = 'https://web.archive.org/web/20200723091741/https://zenpencils.com/'
     multipleImagesPerStrip = True
     firstStripUrl = url + 'comic/1-ralph-waldo-emerson-make-them-cry/'
@@ -36,7 +36,7 @@ class ZenPencils(_WPNavi):
     endOfLife = True
 
 
-class ZombieHunters(_BasicScraper):
+class ZombieHunters(BasicScraper):
     url = 'http://www.thezombiehunters.com/'
     stripUrl = url + '?strip_id=%s'
     firstStripUrl = stripUrl % '1'
@@ -45,7 +45,7 @@ class ZombieHunters(_BasicScraper):
     help = 'Index format: n(unpadded)'
 
 
-class Zwarwald(_BasicScraper):
+class Zwarwald(BasicScraper):
     url = "http://www.zwarwald.de/"
     rurl = escape(url)
     stripUrl = url + 'index.php/page/%s/'

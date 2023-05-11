@@ -1,15 +1,15 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2021 Tobias Gruetzmacher
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 import re
 
-from ..scraper import _ParserScraper
+from ..scraper import ParserScraper
 from ..helpers import bounceStarter
 
 
-class _WLPComics(_ParserScraper):
+class WLPComics(ParserScraper):
     imageSearch = '//img[contains(@alt, " Comic")]'
     prevSearch = '//a[contains(text(), "Previous ")]'
     nextSearch = '//a[contains(text(), "Next ")]'
@@ -17,20 +17,20 @@ class _WLPComics(_ParserScraper):
     help = 'Index format: nnn'
 
     def __init__(self, name):
-        super(_WLPComics, self).__init__('WLP/' + name)
+        super().__init__('WLP/' + name)
 
     def namer(self, image_url, page_url):
         return (page_url.rsplit('/', 1)[-1].split('.')[0] + '_' +
                 image_url.rsplit('/', 1)[-1])
 
 
-class ChichiChan(_WLPComics):
+class ChichiChan(WLPComics):
     url = 'http://www.wlpcomics.com/adult/chichi/'
     stripUrl = url + '%s.html'
     adult = True
 
 
-class ChocolateMilkMaid(_WLPComics):
+class ChocolateMilkMaid(WLPComics):
     # Newer pages seem to be broken
     stripUrl = 'http://www.wlpcomics.com/adult/cm/%s.html'
     url = stripUrl % '264'
@@ -46,12 +46,12 @@ class ChocolateMilkMaid(_WLPComics):
         return tourl
 
 
-class MaidAttack(_WLPComics):
+class MaidAttack(WLPComics):
     url = 'http://www.wlpcomics.com/general/maidattack/'
     stripUrl = url + '%s.html'
 
 
-class PeterIsTheWolfAdult(_WLPComics):
+class PeterIsTheWolfAdult(WLPComics):
     stripUrl = 'http://www.peteristhewolf.com/adult/%s.html'
     # navigation to newest page is broken
     url = stripUrl % '427'
@@ -74,7 +74,7 @@ class PeterIsTheWolfAdult(_WLPComics):
         return super(PeterIsTheWolfAdult, self).getPrevUrl(url, data)
 
 
-class PeterIsTheWolfGeneral(_WLPComics):
+class PeterIsTheWolfGeneral(WLPComics):
     stripUrl = 'http://www.peteristhewolf.com/general/%s.html'
     # navigation to newest page is broken
     url = stripUrl % '427'
@@ -94,7 +94,7 @@ class PeterIsTheWolfGeneral(_WLPComics):
         return super(PeterIsTheWolfGeneral, self).getPrevUrl(url, data)
 
 
-class Stellar(_WLPComics):
+class Stellar(WLPComics):
     url = 'http://www.wlpcomics.com/adult/stellar/'
     stripUrl = url + '%s.html'
     adult = True

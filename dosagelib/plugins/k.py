@@ -5,11 +5,11 @@
 # Copyright (C) 2019-2020 Daniel Ring
 from re import compile, IGNORECASE
 
-from ..scraper import _BasicScraper, _ParserScraper
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPWebcomic
+from ..scraper import BasicScraper, ParserScraper
+from .common import ComicControlScraper, WordPressScraper, WordPressNavi, WordPressWebcomic
 
 
-class Kaspall(_ParserScraper):
+class Kaspall(ParserScraper):
     stripUrl = 'http://www.kaspall.com/comic/%s'
     url = stripUrl % '2015/10/11'
     firstStripUrl = '2004/08/05'
@@ -18,7 +18,7 @@ class Kaspall(_ParserScraper):
     endOfLife = True
 
 
-class KevinAndKell(_BasicScraper):
+class KevinAndKell(BasicScraper):
     url = 'http://www.kevinandkell.com/'
     stripUrl = url + '%s/kk%s%s.html'
     firstStripUrl = stripUrl % ('1995', '09', '03')
@@ -33,31 +33,31 @@ class KevinAndKell(_BasicScraper):
         return self.stripUrl % tuple(map(int, index.split('-')))
 
 
-class KickInTheHead(_WPNavi):
+class KickInTheHead(WordPressNavi):
     url = 'http://www.kickinthehead.org/'
     firstStripUrl = url + '2003/03/20/ipod-envy/'
 
 
-class KillSixBillionDemons(_WPNavi):
+class KillSixBillionDemons(WordPressNavi):
     url = 'http://killsixbilliondemons.com/'
     firstStripUrl = url + 'comic/kill-six-billion-demons-chapter-1/'
     multipleImagesPerStrip = True
     adult = True
 
 
-class Kitfox(_WordPressScraper):
+class Kitfox(WordPressScraper):
     url = 'http://www.kitfox.com/wordpress/'
     stripUrl = url + '?comic=%s'
     firstStripUrl = stripUrl % 'the-adventure-begins-almost'
 
 
-class KiwiBlitz(_ComicControlScraper):
+class KiwiBlitz(ComicControlScraper):
     url = 'http://www.kiwiblitz.com/'
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % 'welcome-to-kb'
 
 
-class Krakow(_BasicScraper):
+class Krakow(BasicScraper):
     url = 'http://www.krakow.krakowstudios.com/'
     stripUrl = url + 'archive.php?date=%s'
     firstStripUrl = stripUrl % '20081111'
@@ -67,7 +67,7 @@ class Krakow(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
-class KuroShouri(_WPWebcomic):
+class KuroShouri(WordPressWebcomic):
     url = 'http://kuroshouri.com/'
     stripUrl = url + 'kuroshouri/%s/'
     firstStripUrl = stripUrl % 'kuro-shouri'

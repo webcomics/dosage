@@ -1,15 +1,15 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-from ..scraper import _ParserScraper
+from ..scraper import ParserScraper
 
 # Comicgenesis has a lot of comics, but most of them are disallowed by
 # robots.txt
 
 
-class ComicGenesis(_ParserScraper):
+class ComicGenesis(ParserScraper):
     multipleImagesPerStrip = True
     imageSearch = '//img[contains(@src, "/comics/")]'
     prevSearch = (
@@ -19,7 +19,7 @@ class ComicGenesis(_ParserScraper):
     help = 'Index format: yyyymmdd'
 
     def __init__(self, name, sub=None, last=None, baseUrl=None, lang=None):
-        super(ComicGenesis, self).__init__('ComicGenesis/' + name)
+        super().__init__('ComicGenesis/' + name)
 
         if sub:
             baseUrl = 'http://%s.comicgenesis.com/' % sub

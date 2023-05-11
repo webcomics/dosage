@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2020 Tobias Gruetzmacher
+# Copyright (C) 2019-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-from .common import _ParserScraper
+from ..scraper import ParserScraper
 
 
-class ProjectFuture(_ParserScraper):
+class ProjectFuture(ParserScraper):
     imageSearch = '//td[@class="tamid"]/img'
     prevSearch = '//a[./img[@alt="Previous"]]'
 

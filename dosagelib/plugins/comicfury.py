@@ -1,21 +1,23 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2021 Tobias Gruetzmacher
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 import os
 
-from ..scraper import _ParserScraper
+from ..scraper import ParserScraper
 from ..helpers import bounceStarter
 
 XPATH_LINK = '//a[d:class("%s") and contains(text(), "%s")]'
 XPATH_IMG = '//div[d:class("comicnav")]//a[img[contains(@alt, "%s")]]'
 
 
-class ComicFury(_ParserScraper):
-    imageSearch = ('//img[@id="comicimage"]',
-                   '//div[@id="comicimagewrap"]//embed',
-                   '//div[@id="comicimagewrap"]//img')
+class ComicFury(ParserScraper):
+    imageSearch = (
+        '//img[@id="comicimage"]',
+        '//div[@id="comicimagewrap"]//embed',
+        '//div[@id="comicimagewrap"]//img',
+    )
     prevSearch = (
         '//link[@rel="prev"]',
         # 137 (needs to be before the generic a@rel, because layout is wrong)
@@ -53,10 +55,10 @@ class ComicFury(_ParserScraper):
     help = 'Index format: n'
     starter = bounceStarter
 
-    def __init__(self, name, sub, lang=None, adult=False, endOfLife=False):
-        super(ComicFury, self).__init__('ComicFury/' + name)
+    def __init__(self, name, sub, lang=None, adult=False, endOfLife=False, segmented=False):
+        super().__init__('ComicFury/' + name)
         self.prefix = name
-        self.url = 'http://%s.webcomic.ws/comics/' % sub
+        self.url = 'https://%s.webcomic.ws/comics/' % sub
         self.stripUrl = self.url + '%s'
         self.firstStripUrl = self.stripUrl % '1'
         if lang:
@@ -65,6 +67,11 @@ class ComicFury(_ParserScraper):
             self.adult = adult
         if endOfLife:
             self.endOfLife = endOfLife
+        if segmented:
+            self.multipleImagesPerStrip = True
+            self.imageSearch = self.imageSearch + (
+                '//img[d:class("comicsegmentimage")]',
+            )
 
     def namer(self, image_url, page_url):
         parts = page_url.split('/')
@@ -72,13 +79,20 @@ class ComicFury(_ParserScraper):
         num = parts[-1]
         return "%s_%s%s" % (self.prefix, num, ext)
 
+    def shouldSkipUrl(self, url, data):
+        """Skip pages without images."""
+        # Videos on Underverse
+        return (data.xpath('//div[@id="comicimagewrap"]//video') and
+            not data.xpath('//div[@id="comicimagewrap"]//img'))
+
     @classmethod
-    def getmodules(cls):  # noqa: Allowed to be long
+    def getmodules(cls):  # noqa: CFQ001
         return (
-            # These were once in the list below, but fell out from the index...
+            # Cannot be found via search?!?
             cls('BadassologyByMichaelBay', 'strudelology'),
             cls('DandyAndCompany', 'dandyandcompany'),
             cls('DeadAtNight', 'deadnight'),
+            cls('Exiern', 'exiern'),
             cls('Shatterrealm', 'shatterrealm'),
 
             # do not edit anything below since these entries are generated from
@@ -113,7 +127,6 @@ class ComicFury(_ParserScraper):
             cls('AdventuresInJetpacks', 'adventuresinjetpacks'),
             cls('AdventuresInTanoshii', 'adventuresintanoshii'),
             cls('AdventuresInTrueLove', 'advtl'),
-            cls('AdventuresOftheGreatCaptainMaggieandCrew', 'adventuresofmaggie'),
             cls('Aerosol', 'aerosol'),
             cls('AetherEarthAndSun', 'aether'),
             cls('AForeverQuest', 'aforeverquest'),
@@ -218,7 +231,6 @@ class ComicFury(_ParserScraper):
             cls('BlackTapestries', 'blacktapestries', adult=True),
             cls('BlitzPhoenix', 'blinix'),
             cls('BlobWorld', 'blobworld'),
-            cls('BloodLegaciesEternity', 'bloodlegacieseternity'),
             cls('BlueBloodHeroes', 'bluebloodheroes'),
             cls('BoatcrashChronicles', 'boatcrash'),
             cls('BobbyTheFetus', 'bobbythefetus'),
@@ -268,7 +280,7 @@ class ComicFury(_ParserScraper):
             cls('ChristmasWithMadDog', 'christmas-with-maddog'),
             cls('ChronoRedux', 'chronoredux'),
             cls('Cinder', 'cinder'),
-            cls('CircusJaxs', 'circusjaxs'),
+            cls('CircusJaxs', 'circusjaxs', segmented=True),
             cls('CityFolk', 'cityfolkwebcomics'),
             cls('CityOfDream', 'cityofdream'),
             cls('CKarrus', 'ckarrus'),
@@ -337,11 +349,9 @@ class ComicFury(_ParserScraper):
             cls('DeadFingers', 'deadfingers'),
             cls('DeadRabbitCa', 'afairtrade'),
             cls('DeepBlue', 'deepblue'),
-            cls('DeerMe', 'deerme'),
             cls('DefineHero', 'definehero'),
             cls('DELIA', 'delia'),
             cls('DemasPokmonAdventure', 'nuzlocke-dema'),
-            cls('DemonWings', 'demonwings'),
             cls('DesertGrey', 'desertgrey'),
             cls('DesertShark', 'desertshark'),
             cls('Dictatorship', 'dictatorship'),
@@ -349,7 +359,6 @@ class ComicFury(_ParserScraper):
             cls('DimensioNoir', 'dimensionoir'),
             cls('DivinaFortuna', 'divinafortuna'),
             cls('DNA', 'd-n-a'),
-            cls('DnDDumbAndDumber', 'dnddumbanddumber'),
             cls('DoffeEllende', 'doffeellende'),
             cls('Dogstar', 'dogstar'),
             cls('Domain', 'domain'),
@@ -403,7 +412,6 @@ class ComicFury(_ParserScraper):
             cls('ExperiMentalTheatre', 'emt'),
             cls('FacesOfFire', 'facesofire'),
             cls('Fallacy', 'fallacy-harha'),
-            cls('FandomMisadventures', 'eatabaguette'),
             cls('Fannicklas', 'fannicklas'),
             cls('FatalExpression', 'fexpression'),
             cls('FBHNKAG', 'fbhnk-ag'),
@@ -476,7 +484,7 @@ class ComicFury(_ParserScraper):
             cls('HazyDaze', 'hazydaze'),
             cls('HeadRoom', 'headroom'),
             cls('HeadWound', 'headwound'),
-            cls('HeartOfKeol', 'keol'),
+            cls('HeartOfKeol', 'keol', segmented=True),
             cls('HeavyLittlePeople', 'heavylittlepeople'),
             cls('HeavyMetalSailorMoon', 'hmsm'),
             cls('Hellbent', 'hellbent'),
@@ -486,7 +494,6 @@ class ComicFury(_ParserScraper):
             cls('HeraclesKnot', 'heraclesknot'),
             cls('HeroesAtWork', 'heroesatwork'),
             cls('HeroesOfPower', 'myhorriblesite'),
-            cls('HINATATheDemonSlayer', 'hinatax'),
             cls('HitmanPiranha', 'hitmanpiranha'),
             cls('HitmenForDestiny', 'hitmen'),
             cls('HobGoblinAdventure', 'hobgoblin'),
@@ -513,7 +520,6 @@ class ComicFury(_ParserScraper):
             cls('IlusionOfTime', 'illusionoftime'),
             cls('Immigrant', 'immigrant'),
             cls('ImNotYourFriend', 'imnotyourfriend'),
-            cls('Imp', 'imp'),
             cls('ImperialEntanglements', 'imperialentanglements'),
             cls('Imperium', 'imperium'),
             cls('IMPERIVM', 'imperivmgalactica'),
@@ -635,7 +641,6 @@ class ComicFury(_ParserScraper):
             cls('Magience', 'magience'),
             cls('MAGISAPARASAYOupdatesMonFri', 'mag-isa'),
             cls('MagnaComica', 'magnacomica'),
-            cls('Maluk', 'maluk'),
             cls('ManChildren', 'manchildren'),
             cls('MariosCastleTales', 'mariocastletales', 'it'),
             cls('MarriedToATransformersFan', 'marriedtoatransformersfan'),
@@ -662,7 +667,6 @@ class ComicFury(_ParserScraper):
             cls('MiraclesOfNeksenziPoint', 'neksenzi-miracles'),
             cls('MirroredConversations', 'mirroredconversations'),
             cls('MiscellaneousMadness', 'rangerrandom'),
-            cls('Mischeif', 'mischeif'),
             cls('MissingDream', 'missingdream'),
             cls('MissionMars', 'missionmars'),
             cls('MithrilRavens', 'mithril-ravens'),
@@ -683,7 +687,7 @@ class ComicFury(_ParserScraper):
             cls('MousebearComedy', 'mousebearcomedy'),
             cls('MrCow', 'mrcow'),
             cls('MrPunchAndProfRatbaggyEmeritus', 'punch'),
-            cls('MuddlemarchMudCompany', 'muddlemarch'),
+            cls('MudCompany', 'mudcompany'),
             cls('Mudskipper', 'mudskipper'),
             cls('Muscleheart', 'muscleheart'),
             cls('MushroomGo', 'mushroomgo'),
@@ -716,7 +720,6 @@ class ComicFury(_ParserScraper):
             cls('NoTitleRequired', 'ntr'),
             cls('NotSinceYou', 'notsinceyou'),
             cls('NyxInTheOverworld', 'nyx'),
-            cls('OceanLabyrinth', 'oceanlabyrinth'),
             cls('Oeight', 'oeight'),
             cls('OffCentaured', 'offcentaured'),
             cls('OfficeLogic', 'office-logic'),
@@ -741,7 +744,7 @@ class ComicFury(_ParserScraper):
             cls('ParaFrenic', 'parafrenic'),
             cls('ParasiteGalaxy', 'parasitegalaxy'),
             cls('Parisel313', 'parisel313'),
-            cls('PARKER', 'parker'),
+            cls('PARKER', 'parker', segmented=True),
             cls('Parmeshen', 'parmeshen'),
             cls('ParoxysmTemporal', 'pt'),
             cls('PateEmpire', 'pateempire'),
@@ -758,7 +761,6 @@ class ComicFury(_ParserScraper):
             cls('Pilgrim', 'pilgrimsprogress'),
             cls('PilgrimEnEspanol', 'pilgrimenespanol', 'es'),
             cls('PITCHBLACK', 'pitchblack'),
-            cls('PlanetChaser', 'planetchaser'),
             cls('PlasticBulletsMayhemUnloaded', 'plasticbulletsmayhemunloaded'),
             cls('Poharex', 'poharex'),
             cls('PokemonWarpers', 'pokemonwarpers'),
@@ -783,13 +785,11 @@ class ComicFury(_ParserScraper):
             cls('PureHavoc', 'pure-havoc'),
             cls('Queenie', 'queenie'),
             cls('QuestCorporeal', 'questcorporeal'),
-            cls('RadioMustard', 'radiomustard'),
             cls('Rain', 'rain'),
             cls('RandomlyAssembled', 'randomlyassembled'),
             cls('RandomThoughts', 'randomthoughts'),
             cls('RapturousArcane', 'rapturousarcane'),
             cls('RawLatex', 'rawlatex'),
-            cls('RaytoonsKids', 'raytoonskids'),
             cls('ReadershipOfOne', 'readershipofone'),
             cls('RebelYell', 'rebelyell'),
             cls('RebuildOfGenericMangaShippuden', 'rebuildofgenericmanga'),
@@ -853,7 +853,6 @@ class ComicFury(_ParserScraper):
             cls('Sigh', 'sigh'),
             cls('Silver', 'sil-ver'),
             cls('SilverNights', 'silvernights'),
-            cls('SixteenCandlesHuntersAgency', 'sixteencandles'),
             cls('Skeeter', 'herecomesskeeter'),
             cls('Sketchy', 'sketchy'),
             cls('Skylords', 'skylords'),
@@ -887,7 +886,7 @@ class ComicFury(_ParserScraper):
             cls('StickMisadventures', 'stick-misadventures'),
             cls('StinkomanFatChickenQuest', 'stinkoman'),
             cls('StonedHeroes', 'stonedheroes'),
-            cls('StrangeAttractors', 'strangeattractors'),
+            cls('StrangeAttractors', 'strangeattractors', segmented=True),
             cls('Streamo', 'streamo'),
             cls('SundaySmash', 'sundaysmash'),
             cls('Sunray', 'sunray'),
@@ -906,7 +905,7 @@ class ComicFury(_ParserScraper):
             cls('TalesOfTheGalli', 'totg-mirror'),
             cls('TamTeamAdventures', 'tamteam'),
             cls('TangledMessTheGirlyNerdyTerriblyStrangeJournalComi', 'tangledmess'),
-            cls('TangledRiver', 'tangled-river'),
+            cls('TangledRiver', 'tangled-river', segmented=True),
             cls('TBA', 'tba'),
             cls('TBAold', 'tba-old'),
             cls('TerwilligersCafe', 'terwilligers'),
@@ -927,7 +926,7 @@ class ComicFury(_ParserScraper):
             cls('THEBIGSCIFIMISHMASH', 'thebigsci-fimish-mash'),
             cls('TheBlackPrincess', 'theblackprincess'),
             cls('THEBOOKOFLIES', 'bookofliescomic'),
-            cls('TheBookOfThree', 'thebookofthree'),
+            cls('TheBookOfThree', 'thebookofthree', segmented=True),
             cls('TheChanterelleAndMayLife', 'chanterelleandmay'),
             cls('TheChroniclesOfBuckyONeill', 'buckyoneill'),
             cls('TheChroniclesOfDrew', 'thechroniclesofdrew'),
@@ -964,7 +963,6 @@ class ComicFury(_ParserScraper):
             cls('TheILL', 'theill'),
             cls('TheIntrovertManifesto', 'introvert'),
             cls('TheJabbercrow', 'jabbercrow'),
-            cls('TheKAMics', 'thekamics'),
             cls('TheKeepOnTheBorderlands', 'thekeepontheborderlands'),
             cls('TheLamp', 'thelamp'),
             cls('TheLastHope', 'tlhcomic'),

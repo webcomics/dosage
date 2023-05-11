@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2020 Tobias Gruetzmacher
+# Copyright (C) 2019-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-from .common import _ParserScraper
+from ..scraper import ParserScraper
 
 
-class NamirDeiter(_ParserScraper):
+class NamirDeiter(ParserScraper):
     imageSearch = '//img[contains(@src, "comics/")]'
     prevSearch = ('//a[@rel="prev"]',
                   '//a[./img[contains(@src, "previous")]]',
@@ -46,7 +46,7 @@ class NamirDeiter(_ParserScraper):
         )
 
 
-class UnlikeMinerva(_ParserScraper):
+class UnlikeMinerva(ParserScraper):
     name = 'NamirDeiter/UnlikeMinerva'
     baseUrl = 'https://unlikeminerva.com/archive/index.php'
     stripUrl = baseUrl + '?week=%s'

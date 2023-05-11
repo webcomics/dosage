@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2021 Tobias Gruetzmacher
 from ..helpers import indirectStarter
-from .common import _WordPressScraper
+from .common import WordPressScraper
 
 
-class FlowerlarkStudios(_WordPressScraper):
+class FlowerlarkStudios(WordPressScraper):
     starter = indirectStarter
 
     def __init__(self, name, sub):

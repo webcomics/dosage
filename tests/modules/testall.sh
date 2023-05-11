@@ -12,7 +12,7 @@ cd /work
 pip install --no-warn-script-location --user pytest-cov PySocks
 pip install --no-warn-script-location --user -e '.[css,dev]'
 
-TESTALL=1 python3 -m py.test -v --cov=. --cov-report xml \
+TESTALL=1 python3 -m pytest -v --cov=. --cov-report xml \
     --alluredir=allure-data \
     --tb=short -n10 --junitxml=junit.xml \
     tests/modules/check_comics.py || true

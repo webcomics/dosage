@@ -3,10 +3,10 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-from .common import _WordPressScraper, _WPWebcomic
+from .common import WordPressScraper, WordPressWebcomic
 
 
-class YAFGC(_WordPressScraper):
+class YAFGC(WordPressScraper):
     baseUrl = 'https://www.yafgc.net/'
     url = baseUrl + '?latest'
     stripUrl = baseUrl + 'comic/%s'
@@ -17,7 +17,7 @@ class YAFGC(_WordPressScraper):
         self.session.add_throttle('www.yafgc.net', 3.0, 15.5)
 
 
-class YoshSaga(_WPWebcomic):
+class YoshSaga(WordPressWebcomic):
     url = 'https://www.yoshsaga.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'introduction'

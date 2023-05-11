@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
 """
 Script to get ComicFury comics and save the info in a JSON file for further
 processing.
@@ -138,47 +138,36 @@ class ComicFuryUpdater(ComicListUpdater):
         """Parse one search result page."""
         data = self.get_url(url)
 
-        count = 999
-        for comicdiv in data.cssselect('div.searchresult'):
-            comiclink = comicdiv.cssselect('h3 a')[0]
+        for comicdiv in data.cssselect('div.webcomic-result'):
+            comiclink = comicdiv.cssselect('div.webcomic-result-title a')[0]
             comicurl = comiclink.attrib['href']
             name = comiclink.text
 
-            info = comicdiv.cssselect('span.comicinfo')
+            info = comicdiv.cssselect('span.stat-value')
             # find out how many images this comic has
-            count = int(info[1].text.strip())
-            # find activity
-            active = info[6].text.strip().lower() == "active"
-            lang = info[7].text.strip().lower()
-            self.add_comic(name, (comicurl, active, lang), count)
+            count = int(info[0].text.strip())
+            self.add_comic(name, comicurl, count)
 
-        return count
+        nextlink = data.cssselect('div.search-next-page a')
+        if nextlink:
+            return nextlink[0].attrib['href']
+        else:
+            return None
 
     def collect_results(self):
         """Parse all search result pages."""
         # Sort by page count, so we can abort when we get under some threshold.
-        baseUrl = ('https://comicfury.com/search.php?search=1&webcomics=1&' +
-                   'query=&worder=1&asc=0&incvi=2&incnu=2&incla=2&incse=2&' +
-                   'all_ge=1&all_st=1&all_la=1&page=%d')
-        last_count = 999
-        page = 1
+        url = ('https://comicfury.com/search.php?query=&lastupdate=0&' +
+          'completed=1&fn=2&fv=2&fs=2&fl=2&sort=0')
+
         print("Parsing search result pages...", file=sys.stderr)
-        while last_count >= self.MIN_COMICS:
-            last_count = self.handle_url(baseUrl % page)
-            page += 1
-            print(last_count, file=sys.stderr, end=" ")
+        while url:
+            url = self.handle_url(url)
 
     def get_entry(self, name, entry):
-        url, active, lang = entry
-        langopt = ''
-        if lang != "english":
-            if lang in self.langmap:
-                langopt = ", '%s'" % self.langmap[lang]
-            else:
-                print("WARNING:", "Unknown language:", lang)
-
+        url = entry
         sub = urlsplit(url).hostname.split('.', 1)[0]
-        return u"cls('%s', '%s'%s)," % (name, sub, langopt)
+        return f"cls('{name}', '{sub}'),"
 
 
 if __name__ == '__main__':

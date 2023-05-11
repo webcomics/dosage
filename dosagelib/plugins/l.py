@@ -1,14 +1,14 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2021 Tobias Gruetzmacher
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 from re import compile
 
-from ..scraper import _BasicScraper, _ParserScraper
+from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, _WPNaviIn
+from .common import ComicControlScraper, WordPressScraper, WordPressNaviIn
 
 
 class Lackadaisy(_ParserScraper):
@@ -28,7 +28,7 @@ class Lackadaisy(_ParserScraper):
         return 'lackadaisy_%s.%s' % (num, ext)
 
 
-class LastResort(_WordPressScraper):
+class LastResort(WordPressScraper):
     url = 'http://www.lastres0rt.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'that-sound-you-hear-is-a-shattered-stereotype'
@@ -57,22 +57,22 @@ class LazJonesAndTheMayfieldRegulatorsSideStories(LazJonesAndTheMayfieldRegulato
         return super(LazJonesAndTheMayfieldRegulators, self).getPrevUrl(url, data)
 
 
-class LeastICouldDo(_ParserScraper):
+class LeastICouldDo(ParserScraper):
     url = 'https://leasticoulddo.com/'
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % '20030210'
-    imageSearch = '//div[@id="content-comic"]//img'
+    imageSearch = '//img[d:class("comic")]'
     prevSearch = '//a[@rel="prev"]'
     latestSearch = '//a[@id="latest-comic"]'
     starter = indirectStarter
     help = 'Index format: yyyymmdd'
 
 
-class LetsSpeakEnglish(_ComicControlScraper):
+class LetsSpeakEnglish(ComicControlScraper):
     url = 'http://www.marycagle.com'
 
 
-class LifeAintNoPonyFarm(_WordPressScraper):
+class LifeAintNoPonyFarm(WordPressScraper):
     url = ('https://web.archive.org/web/20181221154155/'
         'http://sarahburrini.com/en/')
     firstStripUrl = url + 'comic/my-first-webcomic/'
@@ -137,7 +137,7 @@ class LifeAsRendered(_ParserScraper):
         return None
 
 
-class LilithsWord(_ComicControlScraper):
+class LilithsWord(ComicControlScraper):
     url = 'http://www.lilithword.com/'
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % 'prologue-page-00'
@@ -183,24 +183,27 @@ class LittleTales(_ParserScraper):
 
 
 class LoadingArtist(_ParserScraper):
-    url = 'http://www.loadingartist.com/latest'
-    imageSearch = '//div[@class="comic"]//img'
-    prevSearch = "//a[contains(concat(' ', @class, ' '), ' prev ')]"
+    url = 'https://loadingartist.com/'
+    firstStripUrl = url + 'comic/born/'
+    imageSearch = '//div[d:class("main-image-container")]//img'
+    prevSearch = '//div[d:class("left-nav")]//a'
+    latestSearch = '//nav//a[text()="Comic"]'
+    starter = indirectStarter
 
 
-class LoFiJinks(_WPNaviIn):
+class LoFiJinks(WordPressNaviIn):
     baseUrl = 'https://hijinksensue.com/comic/'
     url = baseUrl + 'learning-to-love-again/'
     firstStripUrl = baseUrl + 'lo-fijinks-everything-i-know-anout-james-camerons-avatar-movie/'
     endOfLife = True
 
 
-class LookingForGroup(_ParserScraper):
+class LookingForGroup(ParserScraper):
     url = 'https://www.lfg.co/'
     stripUrl = url + 'page/%s/'
     firstStripUrl = stripUrl % '1'
     imageSearch = '//div[@id="comic-img"]//img'
-    prevSearch = '//a[@class="comic-nav-prev"]'
+    prevSearch = '//a[d:class("comic-nav-prev")]'
     latestSearch = '//div[@id="feature-lfg-footer"]/a[contains(@href, "page/")]'
     starter = indirectStarter
     help = 'Index format: nnn'

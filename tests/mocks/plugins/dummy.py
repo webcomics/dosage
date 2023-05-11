@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2020 Tobias Gruetzmacher
-from ..scraper import _ParserScraper
+from ..scraper import ParserScraper
 
 
-class ADummyTestScraper(_ParserScraper):
+class ADummyTestScraper(ParserScraper):
     url = 'https://dummy.example/'

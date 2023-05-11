@@ -3,7 +3,7 @@
 To add a new comic, add a new class in one of the *.py files
 in the dosagelib/plugins module.
 
-The files in dosagelib/plugin and the classes inside those files are
+The files in dosagelib/plugins and the classes inside those files are
 sorted alphabetically. Add your comic to the appropriate filename.
 For example if the comic name is "Super duper comic", the new class
 should be added to dosagelib/plugins/s.py.
@@ -14,10 +14,10 @@ Here is a complete example which is explained in detail below.
 class SuperDuperComic(_BasicScraper):
     url = 'http://superdupercomic.com/'
     rurl = escape(url)
-    stripUrl = url + 'comic/%s'
+    stripUrl = url + 'comics/%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(%scomicimg/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%scomic/\d+)' % rurl, after="prev"))
+    imageSearch = compile(tagre("img", "src", r'(%simg/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%scomics/\d+)' % rurl, after="prev"))
     help = 'Index format: n (unpadded)'
 ```
 
@@ -42,7 +42,7 @@ This defines a variable ``rurl`` which is used in the search patterns
 below. It properly escapes all regular expression special characters
 like dots or question marks.
 
-```stripUrl = url + 'comic/%s'```
+```stripUrl = url + 'comics/%s'```
 
 This defines how a comic strip URL looks like. In our example, all
 comic strip URLs look like ``http://superdupercomic.com/comics/NNN``
@@ -65,14 +65,14 @@ name and the third the attribute value. So in our example the given
 pattern whould match a tag like
 ``<img src="http://superdupercomic.com/img/comic1.jpg" />``` .
 
-```prevSearch = compile(tagre("a", "href", r'(%scomic/\d+)' % rurl, after="prev"))```
+```prevSearch = compile(tagre("a", "href", r'(%scomics/\d+)' % rurl, after="prev"))```
 
 To search for more comics, Dosage has to look for the previous comic URL.
 The ``after=`` value in ``tagre()`` matches anything between the
 attribute value and the end of the tag.
 So this pattern assumes each comic page URL has a link to the previous
-comic, for example ``http://superdupercomic.com/comic/100`` has a
-link ``<a href="http://superdupercomic.com/comic/99" class="prev">``.
+comic, for example ``http://superdupercomic.com/comics/100`` has a
+link ``<a href="http://superdupercomic.com/comics/99" class="prev">``.
 
 ``help = 'Index format: n (unpadded)'``
 

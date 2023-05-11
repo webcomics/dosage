@@ -1,16 +1,16 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2020 Tobias Gruetzmacher
+# Copyright (C) 2019-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-from ..scraper import _ParserScraper
-from .common import _WordPressScraper
+from ..scraper import ParserScraper
+from .common import WordPressScraper
 
 
-class StudioKhimera(_ParserScraper):
+class StudioKhimera(ParserScraper):
     imageSearch = '//figure[@class="gallery-item"]//img/@data-src'
     prevSearch = '//a[@rel="prev"]'
 
     def __init__(self, name, sub, last=None, adult=False, fixNames=False):
-        super(StudioKhimera, self).__init__('StudioKhimera/' + name)
+        super().__init__('StudioKhimera/' + name)
 
         self.baseUrl = 'https://%s.studiokhimera.com/' % sub
         self.stripUrl = self.baseUrl + '%s/'
@@ -47,7 +47,7 @@ class StudioKhimera(_ParserScraper):
         )
 
 
-class UberQuest(_WordPressScraper):
+class UberQuest(WordPressScraper):
     name = 'StudioKhimera/UberQuest'
     stripUrl = 'https://uberquest.studiokhimera.com/comic/page/%s/'
     url = stripUrl % 'latest'

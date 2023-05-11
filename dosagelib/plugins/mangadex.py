@@ -1,16 +1,16 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2021 Tobias Gruetzmacher
+# Copyright (C) 2019-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
 import json
 
-from ..scraper import _ParserScraper
+from ..scraper import ParserScraper
 
 
-class MangaDex(_ParserScraper):
+class MangaDex(ParserScraper):
     multipleImagesPerStrip = True
 
     def __init__(self, name, mangaId):
-        super(MangaDex, self).__init__('MangaDex/' + name)
+        super().__init__('MangaDex/' + name)
 
         baseUrl = 'https://api.mangadex.org/'
         self.url = baseUrl + 'manga/%s' % mangaId

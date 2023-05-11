@@ -2,16 +2,16 @@
 # Copyright (C) 2019-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2022 Daniel Ring
 from ..helpers import indirectStarter
-from .common import _WordPressScraper, _WPNaviIn
+from .common import WordPressScraper, WordPressNaviIn
 
 
-class Housepets(_WordPressScraper):
+class Housepets(WordPressScraper):
     url = 'http://www.housepetscomic.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = '2008/06/02/when-boredom-strikes'
 
 
-class RickGriffinStudios(_WPNaviIn):
+class RickGriffinStudios(WordPressNaviIn):
     baseUrl = 'http://rickgriffinstudios.com/'
     stripUrl = baseUrl + 'comic-post/%s/'
     latestSearch = '//a[contains(@title, "Permanent Link")]'

@@ -8,10 +8,10 @@ from re import compile, escape
 from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter
 from ..util import tagre
-from .common import _ComicControlScraper, _WordPressScraper, _WPNavi, _WPWebcomic
+from .common import ComicControlScraper, WordPressScraper, WordPressNavi, WordPressWebcomic
 
 
-class Namesake(_ComicControlScraper):
+class Namesake(ComicControlScraper):
     url = 'http://namesakecomic.com/'
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % 'the-journey-begins'
@@ -32,7 +32,7 @@ class NatalieDee(_BasicScraper):
         return '%s-%s' % (date, filename)
 
 
-class Nedroid(_WordPressScraper):
+class Nedroid(WordPressScraper):
     url = 'http://nedroid.com/'
     prevSearch = '//a[@rel="prev"]'
 
@@ -55,7 +55,7 @@ class NeoEarth(_BasicScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
-class NerfNow(_WordPressScraper):
+class NerfNow(WordPressScraper):
     url = 'https://www.nerfnow.com/'
     prevSearch = '//li[@id="nav_previous"]/a'
 
@@ -75,7 +75,7 @@ class Newshounds(_ParserScraper):
         return super(Newshounds, self).getPrevUrl(url, data)
 
 
-class NewWorld(_WordPressScraper):
+class NewWorld(WordPressScraper):
     url = ('https://web.archive.org/web/20190718012133/'
         'http://www.tfsnewworld.com/')
     stripUrl = url + '%s/'
@@ -85,7 +85,7 @@ class NewWorld(_WordPressScraper):
     help = 'Index format: yyyy/mm/dd/stripn'
 
 
-class NeverSatisfied(_ComicControlScraper):
+class NeverSatisfied(ComicControlScraper):
     url = 'https://www.neversatisfiedcomic.com/'
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % 'never-satisfied'
@@ -107,13 +107,13 @@ class NichtLustig(_BasicScraper):
         return '%s' % (filename)
 
 
-class Nicky510(_WPNavi):
+class Nicky510(WordPressNavi):
     url = ('https://web.archive.org/web/20160510215718/'
         'http://www.nickyitis.com/')
     endOfLife = True
 
 
-class Nightshift(_WPWebcomic):
+class Nightshift(WordPressWebcomic):
     url = 'https://poecatcomix.com/nightshift-static/'
     stripUrl = 'https://poecatcomix.com/nightshift/%s/'
     firstStripUrl = stripUrl % 'ns-cover'
@@ -189,7 +189,7 @@ class NonPlayerCharacter(_ParserScraper):
         return pageUrl.rstrip('/').rsplit('/', 1)[-1]
 
 
-class NotAVillain(_WPWebcomic):
+class NotAVillain(WordPressWebcomic):
     url = 'http://navcomic.com/'
     stripUrl = url + 'not-a-villain/%s/'
     firstStripUrl = stripUrl % 'v1-001'

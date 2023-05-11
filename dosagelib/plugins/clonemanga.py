@@ -1,13 +1,13 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# Copyright (C) 2015-2022 Tobias Gruetzmacher
 from ..helpers import indirectStarter
-from ..scraper import _ParserScraper
+from ..scraper import ParserScraper
 from ..util import getQueryParams
 
 
-class CloneManga(_ParserScraper):
+class CloneManga(ParserScraper):
     baseUrl = 'http://manga.clone-army.org'
     imageSearch = '//div[d:class("subsectionContainer")]//img'
     prevSearch = '//a[span[text()="<<"]]'
@@ -16,7 +16,7 @@ class CloneManga(_ParserScraper):
     help = 'Index format: n'
 
     def __init__(self, name, shortName, endOfLife=False):
-        super(CloneManga, self).__init__('CloneManga/' + name)
+        super().__init__('CloneManga/' + name)
         self.stripUrl = '%s/viewer.php?page=%%s&lang=&series=%s&HUDoff=' % (
             self.baseUrl, shortName)
         self.url = self.stripUrl % '1'

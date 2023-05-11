@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2020 Tobias Gruetzmacher
+# Copyright (C) 2019-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2022 Daniel Ring
-from ..scraper import _ParserScraper
+from ..scraper import ParserScraper
 from ..helpers import indirectStarter
 
 
-class Wrongside(_ParserScraper):
+class Wrongside(ParserScraper):
     baseUrl = 'http://ayzewi.com/maingallery3/'
     url = baseUrl + 'index.php?/category/5'
     stripUrl = baseUrl + 'picture.php?%s'
@@ -41,7 +41,7 @@ class WrongsideBeginnings(Wrongside):
     firstStripUrl = stripUrl % '/2/category/18'
 
 
-class WrongsideSideStories(_ParserScraper):
+class WrongsideSideStories(ParserScraper):
     baseUrl = 'http://ayzewi.com/maingallery3/'
     stripUrl = baseUrl + 'picture.php?%s'
     imageSearch = '//img[@id="theMainImage"]/@src'

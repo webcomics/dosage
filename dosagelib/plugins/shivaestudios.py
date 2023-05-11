@@ -1,22 +1,24 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2021 Tobias Gruetzmacher
+# Copyright (C) 2019-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2021 Daniel Ring
-from .common import _WordPressSpliced
+from .common import WordPressSpliced
 
 
-class _WithSid(_WordPressSpliced):
-    def __init__(self, name, sid, eol=False):
+class _CommonMulti(WordPressSpliced):
+    def __init__(self, name, path, first, eol=False):
         super().__init__(name)
-        self.stripUrl = self.baseUrl + 'comic/%s/?sid={}'.format(sid)
+        self.url = self.baseUrl + 'series/' + path + '/'
+        self.firstStripUrl = self.stripUrl % first
+        self.endOfLife = eol
 
 
-class AbbysAgency(_WordPressSpliced):
+class AbbysAgency(WordPressSpliced):
     url = 'https://abbysagency.us/'
     stripUrl = url + 'blog/comic/%s/'
     firstStripUrl = stripUrl % 'a'
 
 
-class AlienDice(_WordPressSpliced):
+class AlienDice(WordPressSpliced):
     url = 'https://aliendice.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '05162001'
@@ -32,7 +34,7 @@ class AlienDice(_WordPressSpliced):
         return imageUrl.rsplit('/', 1)[-1].replace('20010831', '2001-08-31')
 
 
-class AlienDiceLegacy(_WordPressSpliced):
+class AlienDiceLegacy(WordPressSpliced):
     name = 'AlienDice/Legacy'
     baseUrl = 'https://aliendice.com/'
     url = baseUrl + 'series/legacy/'
@@ -42,23 +44,21 @@ class AlienDiceLegacy(_WordPressSpliced):
 
     def isfirststrip(self, url):
         # Strip series identifier
-        return super(AlienDiceLegacy, self).isfirststrip(url.rsplit('?', 1)[0])
+        return super().isfirststrip(url.rsplit('?', 1)[0])
 
 
-class BlackRose(_WordPressSpliced):
+class BlackRose(WordPressSpliced):
     url = 'https://www.blackrose.monster/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '2004-11-01'
 
 
-class TheCyantianChronicles(_WithSid):
+class TheCyantianChronicles(_CommonMulti):
     baseUrl = 'https://cyantian.net/'
 
     def __init__(self, name, path, first, sid, eol=False):
-        super().__init__('TheCyantianChronicles/' + name, sid)
-        self.url = self.baseUrl + 'series/' + path + '/'
-        self.firstStripUrl = self.stripUrl % first
-        self.endOfLife = eol
+        self.stripUrl = self.baseUrl + f'%s/?sid={sid}'
+        super().__init__('TheCyantianChronicles/' + name, path, first, eol)
 
     @classmethod
     def getmodules(cls):
@@ -80,20 +80,18 @@ class TheCyantianChronicles(_WithSid):
         )
 
 
-class Shivae(_WordPressSpliced):
+class Shivae(WordPressSpliced):
     url = 'https://shivae.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '09202001'
 
 
-class ShivaeComics(_WithSid):
+class ShivaeComics(_CommonMulti):
     baseUrl = 'https://shivae.net/'
 
     def __init__(self, name, path, first, sid, eol=False):
-        super().__init__('Shivae/' + name, sid)
-        self.url = self.baseUrl + 'series/' + path + '/'
-        self.firstStripUrl = self.stripUrl % first
-        self.endOfLife = eol
+        self.stripUrl = self.baseUrl + f'comic/%s/?sid={sid}'
+        super().__init__('Shivae/' + name, path, first, eol)
 
     @classmethod
     def getmodules(cls):

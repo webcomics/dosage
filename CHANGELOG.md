@@ -6,8 +6,20 @@ The format is based on
 
 ## [Unreleased]
 
+## [3.0] - 2022-06-06
+
+### Added
+- Support for Python 3.9 & 3.10
+- Custom XPath function (d:class("foo")) instead of substring match
+- Support for user plugins
+- Many comics
+
 ### Removed
-- Python 2 support
+- Python 2 & 3.5-3.6 support
+- Some comics
+
+### Fixed
+- Many comics
 
 ## [2.17] - 2020-02-02
 
@@ -823,7 +835,8 @@ the 2.16 release to fix the broken update check in that release.
 - Initial public release
 
 
-[Unreleased]: https://github.com/webcomics/dosage/compare/2.17...HEAD
+[Unreleased]: https://github.com/webcomics/dosage/compare/3.0...HEAD
+[3.0]: https://github.com/webcomics/dosage/compare/2.17...3.0
 [2.17]: https://github.com/webcomics/dosage/compare/2.16...2.17
 [2.16]: https://github.com/webcomics/dosage/compare/2.15...2.16
 [2.15]: https://github.com/webcomics/dosage/compare/2.14...2.15

@@ -2,15 +2,17 @@
 # Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2022 Tobias Gruetzmacher
+from __future__ import annotations
+
 import html
 import os
 import re
 import warnings
 from urllib.parse import urljoin
-from typing import Optional, Union, Pattern, Sequence
+from typing import Collection, Dict, List, Optional, Type, Union, Pattern, Sequence
 
 import lxml
-from lxml.html.defs import link_attrs as html_link_attrs
+from lxml.html.defs import link_attrs as lxml_link_attrs
 
 try:
     import cssselect
@@ -32,6 +34,7 @@ from .xml import NS
 
 
 ARCHIVE_ORG_URL = re.compile(r'https?://web\.archive\.org/web/[^/]*/')
+html_link_attrs = lxml_link_attrs - {'usemap'}
 
 
 if lxml.etree.LIBXML_VERSION < (2, 9, 3):
@@ -99,11 +102,13 @@ class Scraper:
     session: http.Session = http.default_session
 
     @classmethod
-    def getmodules(cls):
+    def getmodules(cls) -> Collection[Scraper]:
+        if cls.url is None:
+            return ()
         name = cls.__name__
         if hasattr(cls, 'name'):
             name = cls.name
-        return [cls(name)]
+        return (cls(name),)
 
     @property
     def indexes(self):
@@ -361,7 +366,7 @@ class Scraper:
         raise GeoblockedException()
 
 
-class _BasicScraper(Scraper):
+class BasicScraper(Scraper):
     """
     Scraper base class that matches regular expressions against HTML pages.
 
@@ -376,7 +381,7 @@ class _BasicScraper(Scraper):
     BASE_SEARCH = re.compile(tagre("base", "href", '([^"]*)'))
 
     def getPage(self, url):
-        content = super(_BasicScraper, self).getPage(url).text
+        content = super().getPage(url).text
         # determine base URL
         baseUrl = None
         match = self.BASE_SEARCH.search(content)
@@ -426,7 +431,7 @@ class _BasicScraper(Scraper):
             return None
 
 
-class _ParserScraper(Scraper):
+class ParserScraper(Scraper):
     """
     Scraper base class that uses a HTML parser and XPath expressions.
 
@@ -452,7 +457,7 @@ class _ParserScraper(Scraper):
     css = False
 
     def getPage(self, url):
-        page = super(_ParserScraper, self).getPage(url)
+        page = super().getPage(url)
         if page.encoding:
             # Requests figured out the encoding, so we can deliver Unicode to
             # LXML. Unfortunatly, LXML feels betrayed if there is still an XML
@@ -535,44 +540,44 @@ class _ParserScraper(Scraper):
         return res
 
 
+# Legacy aliases
+_BasicScraper = BasicScraper
+_ParserScraper = ParserScraper
+
+
 class Cache:
     """Cache for comic scraper objects. The cache is initialized on first use.
     This is cached, since iterating & loading a complete package might be quite
     slow.
     """
     def __init__(self):
-        self.data = []
+        self.data: List[Scraper] = []
         self.userdirs = set()
 
-    def find(self, comic, multiple_allowed=False):
-        """Get a list comic scraper objects.
-
-        Can return more than one entry if multiple_allowed is True, else it raises
-        a ValueError if multiple modules match. The match is a case insensitive
-        substring search.
+    def find(self, comic: str) -> Scraper:
+        """Find a comic scraper object based on its name. This prefers a
+        perfect match, but falls back to a substring match, if that is unique.
+        Otharwise a ValueError is thrown.
         """
         if not comic:
             raise ValueError("empty comic name")
         candidates = []
         cname = comic.lower()
-        for scrapers in self.get(include_removed=True):
-            lname = scrapers.name.lower()
+        for scraper in self.all(include_removed=True):
+            lname = scraper.name.lower()
             if lname == cname:
                 # perfect match
-                if not multiple_allowed:
-                    return [scrapers]
-                else:
-                    candidates.append(scrapers)
-            elif cname in lname and scrapers.url:
-                candidates.append(scrapers)
-        if len(candidates) > 1 and not multiple_allowed:
+                return scraper
+            elif cname in lname and scraper.url:
+                candidates.append(scraper)
+        if len(candidates) > 1:
             comics = ", ".join(x.name for x in candidates)
             raise ValueError('multiple comics found: %s' % comics)
         elif not candidates:
             raise ValueError('comic %r not found' % comic)
-        return candidates
+        return candidates[0]
 
-    def load(self):
+    def load(self) -> None:
         out.debug("Loading comic modules...")
         modules = 0
         classes = 0
@@ -583,7 +588,7 @@ class Cache:
         out.debug("... %d scrapers loaded from %d classes in %d modules." % (
             len(self.data), classes, modules))
 
-    def adddir(self, path):
+    def adddir(self, path) -> None:
         """Add an additional directory with python modules to the scraper list.
         These are handled as if the were part of the plugins package.
         """
@@ -603,7 +608,7 @@ class Cache:
             out.debug("Added %d user classes from %d modules." % (
                 classes, modules))
 
-    def addmodule(self, module):
+    def addmodule(self, module) -> int:
         """Adds all valid plugin classes from the specified module to the cache.
         @return: number of classes added
         """
@@ -613,8 +618,8 @@ class Cache:
             self.data.extend(plugin.getmodules())
         return classes
 
-    def get(self, include_removed=False):
-        """Find all comic scraper classes in the plugins directory.
+    def all(self, include_removed=False) -> List[Scraper]:
+        """Return all comic scraper classes in the plugins directory.
         @return: list of Scraper classes
         @rtype: list of Scraper
         """
@@ -625,9 +630,9 @@ class Cache:
         else:
             return [x for x in self.data if x.url]
 
-    def validate(self):
+    def validate(self) -> None:
         """Check for duplicate scraper names."""
-        d = {}
+        d: Dict[str, Scraper] = {}
         for scraper in self.data:
             name = scraper.name.lower()
             if name in d:

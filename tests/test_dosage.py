@@ -94,6 +94,13 @@ class TestDosage(object):
         out, err = capfd.readouterr()
         assert re.match(r'([0-9][0-9]:){2}.. xkcd>', out)
 
+    def test_broken_basepath_removal(self):
+        assert cmd('-m', 'Comicsxkcd') == 2
+
+    def test_working_basepath_removal(self):
+        cmd_ok('-m', 'Comics/xkcd')
+        cmd_ok('-m', 'Comics\\xkcd')
+
     def test_no_comics_specified(self):
         cmd_err()
 
