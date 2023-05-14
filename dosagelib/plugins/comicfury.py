@@ -762,6 +762,7 @@ class ComicFury(ParserScraper):
             cls('PilgrimEnEspanol', 'pilgrimenespanol', 'es'),
             cls('PITCHBLACK', 'pitchblack'),
             cls('PlasticBulletsMayhemUnloaded', 'plasticbulletsmayhemunloaded'),
+            cls('PMDOnBorrowedTime','onborrowedtime'),
             cls('Poharex', 'poharex'),
             cls('PokemonWarpers', 'pokemonwarpers'),
             cls('PokmonOurStory', 'pokemonos'),
