@@ -1140,6 +1140,7 @@ class ComicFury(ParserScraper):
             cls('Xibalba', 'xibalba'),
             cls('Xit', 'x-it'),
             cls('YesterdayBound', 'yesterdaybound'),
+            cls('YetAnotherPMDComic','yapc'),
             cls('YouAreNow', 'yan'),
             cls('YOURCHOICE', 'yourchoice'),
             cls('ZackDragonbladeAndTheExcalites', 'zackdragonblade'),
