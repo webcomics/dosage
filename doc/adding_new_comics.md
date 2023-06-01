@@ -1,82 +1,98 @@
 # Adding a comic to Dosage
 
-To add a new comic, add a new class in one of the *.py files
-in the dosagelib/plugins module.
+To add a new comic to a local dosage installation, drop a python file into
+Dosage's "user plugin directory" - If you don't know where that is, run `dosage
+--help`, the directory will be shown at the end.
 
-The files in dosagelib/plugins and the classes inside those files are
-sorted alphabetically. Add your comic to the appropriate filename.
-For example if the comic name is "Super duper comic", the new class
-should be added to dosagelib/plugins/s.py.
+Here is a complete example which is explained in detail below. Dosage provides
+different base classes for parsing comic pages, but this tutorial only covers
+the modern `ParserScraper` base class, which uses an HTML parser (LXML/libxml)
+to find  on each pages's DOM.
 
-Here is a complete example which is explained in detail below.
+```python
+from ..scraper import ParserScraper
 
-```
-class SuperDuperComic(_BasicScraper):
-    url = 'http://superdupercomic.com/'
-    rurl = escape(url)
+class SuperDuperComic(ParserScraper):
+    url = 'https://superdupercomic.com/'
     stripUrl = url + 'comics/%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(%simg/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%scomics/\d+)' % rurl, after="prev"))
+    imageSearch = '//div[d:class("comicpane")]//img'
+    prevSearch = '//a[@rel="prev"]'
     help = 'Index format: n (unpadded)'
 ```
 
 Let's look at each line in detail.
 
-```class SuperDuperComic(_BasicScraper):```
+```python
+class SuperDuperComic(ParserScraper):
+```
 
-All comic plugin classes inherit from ``_BasicScraper``.
-The classname (``SuperDuperComic`` in our example) must be unique,
-regardless of upper/lower characters.
-The user finds comics with this classname, so be sure to select
+All comic plugin classes inherit from `ParserScraper`. The class name
+(`SuperDuperComic` in our example) must be unique, regardless of upper/lower
+characters. The user finds comics with this class name, so be sure to select
 something descriptive and easy to remember.
 
-```url = 'http://superdupercomic.com/'```
+```python
+url = 'https://superdupercomic.com/'
+```
 
-The URL must display the latest comic picture. This is where the
-comic image search will start. See below for some special cases.
+The URL must display the latest comic picture. This is where the comic image
+search will start. See below for some special cases.
 
-```rurl = escape(url)```
+```python
+stripUrl = url + 'comics/%s'
+```
 
-This defines a variable ``rurl`` which is used in the search patterns
-below. It properly escapes all regular expression special characters
-like dots or question marks.
+This defines how a comic strip URL looks like. In our example, all comic strip
+URLs look like `https://superdupercomic.com/comics/NNN` where NNN is the
+increasing comic number.
 
-```stripUrl = url + 'comics/%s'```
+```python
+firstStripUrl = stripUrl % '1'
+```
 
-This defines how a comic strip URL looks like. In our example, all
-comic strip URLs look like ``http://superdupercomic.com/comics/NNN``
-where NNN is the increasing comic number.
+This tells Dosage what the earliest comic strip URL looks like. Dosage stops
+searching for more comics when it is encounterd. In our example comic numbering
+starts with `1`, so the oldest comic URL is
+`https://superdupercomic.com/comics/1`
 
-```firstStripUrl = stripUrl % '1'```
+```python
+imageSearch = '//div[d:class("comicpane")]//img'
+```
 
-This tells Dosage what the earliest comic strip URL looks like. Dosage
-stops searching for more comics when it is encounterd. In our example
-comic numbering starts with ``1``, so the oldest comic URL is
-``http://superdupercomic.com/comics/1``
+Each comic page URL has one or more comic strip images. The `imageSearch`
+defines an [XPath](https://quickref.me/xpath) expression to find the comic
+strip image inside each page. Most of the time you can use your browser's
+console (Open with `F12`) to experiment on the real page. Dosage adds a custom
+XPath function (`d:class`) to make it easier to match HTML classes.
 
-```imageSearch = compile(tagre("img", "src", r'(%simg/[^"]+)' % rurl))```
+```python
+prevSearch = '//a[@rel="prev"]'
+```
 
-Each comic page URL has one or more comic strip images. The imageSearch
-pattern must match those images in the HTML content of the page URL.
-To make it easy to match HTML tags, the ``tagre()`` function is
-helpful. The first parameter is the tag name, the second the attribute
-name and the third the attribute value. So in our example the given
-pattern whould match a tag like
-``<img src="http://superdupercomic.com/img/comic1.jpg" />``` .
+To search for more comics, Dosage has to look for the previous comic URL. This
+property defines an XPath expression to find a link to the previous comic page.
 
-```prevSearch = compile(tagre("a", "href", r'(%scomics/\d+)' % rurl, after="prev"))```
+```python
+help = 'Index format: n (unpadded)'
+```
 
-To search for more comics, Dosage has to look for the previous comic URL.
-The ``after=`` value in ``tagre()`` matches anything between the
-attribute value and the end of the tag.
-So this pattern assumes each comic page URL has a link to the previous
-comic, for example ``http://superdupercomic.com/comics/100`` has a
-link ``<a href="http://superdupercomic.com/comics/99" class="prev">``.
+Since the user can search comics from a given start point, the help can
+describe how the comic is numbered. Running `dosage superdupercomic:100` would
+start getting comics from number 100 and earlier.
 
-``help = 'Index format: n (unpadded)'``
+## Contribute a module to dosage
 
-Since the user can search comics from a given start point, the help
-must describe how the comic is numbered. Running
-``dosage superdupercomic:100`` would start getting comics from number
-100 and earlier.
+If you don't know how to use git and/or setup a Python development environment,
+that's fine! You can [create an
+issue](https://github.com/webcomics/dosage/issues/new) on GitHub and paste the
+source of your new module into it and a Dosage developer will take care of
+integrating the module into Dosage.
+
+Otherwise, integrate your new comic module into in one of the `*.py` files in
+the dosagelib/plugins module.
+
+The files in dosagelib/plugins and the classes inside those files are sorted
+alphabetically. Add your comic to the appropriate filename. For example if the
+comic name is "Super duper comic", the new class should be added to
+dosagelib/plugins/s.py.
