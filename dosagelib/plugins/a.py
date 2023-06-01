@@ -376,6 +376,14 @@ class ATaleOfTails(WordPressScraper):
     firstStripUrl = stripUrl % 'a-tale-of-tails-1-0'
     adult = True
 
+class AwkwardZombie(_BasicScraper):
+    url = 'https://www.awkwardzombie.com/'
+    rurl = escape(url)
+    stripUrl = url + 'awkward-zombie/%s'
+    firstStripUrl = stripUrl % 'coin-battle'
+    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
+    prevSearch = compile(tagre("a", "href", r'(%sawkward-zombie/[a-zA-Z-]+)' % rurl, before="prev"))
+    help = 'Index format: variable :('
 
 class AxeCop(WordPressScraper):
     url = 'http://axecop.com/comic/season-two/'
