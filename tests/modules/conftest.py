@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 import re
 import os
 from operator import attrgetter
@@ -52,6 +52,6 @@ class LoadModScheduling(LoadScopeScheduling):
         return mod + "::" + test.split("/", 1)[0]
 
 
-@pytest.mark.trylast()
+@pytest.hookimpl(trylast=True)
 def pytest_xdist_make_scheduler(config, log):
     return LoadModScheduling(config, log)
