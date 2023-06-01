@@ -6,7 +6,7 @@
 from re import compile, escape, MULTILINE
 
 from ..util import tagre
-from ..scraper import _BasicScraper, _ParserScraper
+from ..scraper import BasicScraper, _BasicScraper, _ParserScraper
 from ..helpers import regexNamer, bounceStarter, indirectStarter
 from .common import WordPressScraper, WordPressNavi, WordPressWebcomic
 
@@ -376,7 +376,8 @@ class ATaleOfTails(WordPressScraper):
     firstStripUrl = stripUrl % 'a-tale-of-tails-1-0'
     adult = True
 
-class AwkwardZombie(_BasicScraper):
+
+class AwkwardZombie(BasicScraper):
     url = 'https://www.awkwardzombie.com/'
     rurl = escape(url)
     stripUrl = url + 'awkward-zombie/%s'
@@ -384,6 +385,7 @@ class AwkwardZombie(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
     prevSearch = compile(tagre("a", "href", r'(%sawkward-zombie/[a-zA-Z-]+)' % rurl, before="prev"))
     help = 'Index format: variable :('
+
 
 class AxeCop(WordPressScraper):
     url = 'http://axecop.com/comic/season-two/'
