@@ -8,12 +8,12 @@
 <html>
 <head>
     <title>{% block title %}{{SITE_NAME}}{{ " - " + page.meta.title if page.src.relpath != "README.md"}}{% endblock %}</title>
-    {% block favicon %}<link rel="shortcut icon" href="{{ url_for('/images/favicon.ico') }}">{% endblock %}
+    {% block favicon %}<link rel="shortcut icon" href="{{ url_for('/images/favicon.ico', static=True) }}">{% endblock %}
     {% block head %}
     {% endblock %}
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="{{ url_for('/css/main.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('/css/main.css', static=True) }}" />
 </head>
 
 <body>
@@ -94,13 +94,6 @@
         </ul>
     </div>
     {% endblock %}
-
-    <script src="{{ url_for('/js/jquery.min.js') }}"></script>
-    <script src="{{ url_for('/js/jquery.scrolly.min.js') }}"></script>
-    <script src="{{ url_for('/js/jquery.scrollzer.min.js') }}"></script>
-    <script src="{{ url_for('/js/skel.min.js') }}"></script>
-    <script src="{{ url_for('/js/util.js') }}"></script>
-    <script src="{{ url_for('/js/main.js') }}"></script>
 
 </body>
 </html>

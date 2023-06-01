@@ -26,7 +26,7 @@ jobs:
         run: |
           sudo apt-get --yes install --no-install-recommends libimage-exiftool-perl
           pip install wheel
-          pip install git+https://github.com/spanezz/staticsite.git@a55caca1cd599d343ed454296317edd6e0539926
+          pip install git+https://github.com/spanezz/staticsite.git@v2.3
           ssite build --output public
 
       - name: Deploy
