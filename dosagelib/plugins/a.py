@@ -376,6 +376,13 @@ class ATaleOfTails(WordPressScraper):
     firstStripUrl = stripUrl % 'a-tale-of-tails-1-0'
     adult = True
 
+class Awaken(ParserScraper):
+    url = "https://www.awakencomic.com/"   
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'comic-cover'
+    imageSearch = '//div[@id="cc-comicbody"]//img'
+    prevSearch = '//a[@rel="prev"]'
+    help = 'Index format: chapter-n-page-n (unpadded)'
 
 class AwkwardZombie(BasicScraper):
     url = 'https://www.awkwardzombie.com/'
