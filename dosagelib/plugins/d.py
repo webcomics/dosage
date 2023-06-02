@@ -26,6 +26,21 @@ class DangerouslyChloe(ComicControlScraper):
     url = 'http://www.dangerouslychloe.com/'
     firstStripUrl = url + 'strips-dc/Chapter_1_-_That_damned_girl'
 
+class DarkLegacy(ParserScraper):
+    #it is a bit more complicated due how the site is setup
+    import requests
+    import re
+    base_url = 'https://www.darklegacycomics.com'
+    response = requests.get(base_url + "/newest", allow_redirects=False)
+    content = response.text
+    match = re.search(r'URL=([^\s]+)', content)
+    mid_url = match.group(1).strip("'\"")
+    url = base_url + mid_url    
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//div[@class="comic narrow"]//img'
+    prevSearch = '//a[@title="Previous - A"]'
+    help = 'Index format: n (unpadded)'
 
 class DarkWhite(WordPressScraper):
     url = 'https://www.darkwhitecomic.com/'
