@@ -386,13 +386,12 @@ class Awaken(ParserScraper):
     help = 'Index format: chapter-n-page-n (unpadded)'
 
 
-class AwkwardZombie(BasicScraper):
+class AwkwardZombie(ParserScraper):
     url = 'https://www.awkwardzombie.com/'
-    rurl = escape(url)
     stripUrl = url + 'awkward-zombie/%s'
     firstStripUrl = stripUrl % 'coin-battle'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%sawkward-zombie/[a-zA-Z-]+)' % rurl, before="prev"))
+    imageSearch = '//div[@id="cc-comicbody"]//img'
+    prevSearch = '//a[@rel="prev"]'
     help = 'Index format: variable :('
 
 
