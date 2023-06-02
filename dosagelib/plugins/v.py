@@ -3,7 +3,7 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-from ..scraper import _ParserScraper
+from ..scraper import _ParserScraper, ParserScraper
 from ..helpers import bounceStarter, indirectStarter
 
 
@@ -48,6 +48,7 @@ class VGCats(_ParserScraper):
     prevSearch = '//a[img[contains(@src, "back.")]]'
     help = 'Index format: n (unpadded)'
 
+
 class vibe(ParserScraper):
     import requests
     import re
@@ -62,6 +63,7 @@ class vibe(ParserScraper):
     prevSearch = '//a[@rel="prev"]'
     nextSearch = '//a[@rel="next"]'
     help = 'Index format: VIBEnnn (padded)'
+
 
 class VickiFox(_ParserScraper):
     url = 'http://www.vickifox.com/comic/strip'
