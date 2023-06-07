@@ -123,6 +123,7 @@ class WebToons(ParserScraper):
             cls('CookingComically', 'tiptoon/cooking-comically', 622),
             cls('Crumbs', 'romance/crumbs', 1648),
             cls('CrystalVirus', 'challenge/crystal-virus', 347038),
+            cls('CrystalVirusOtherStory', 'challenge/crystal-virus-other-story', 837028),
             cls('CupidsArrows', 'romance/cupids-arrows', 1538),
             cls('CursedPrincessClub', 'comedy/cursed-princess-club', 1537),
             cls('Cyberbunk', 'sf/cyberbunk', 466),
