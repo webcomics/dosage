@@ -223,6 +223,14 @@ class Shifters(ParserScraper):
         return pageUrl.rsplit('/', 2)[1] + '.' + imageUrl.rsplit('.', 1)[-1]
 
 
+class ShiftersOnGossamerWings(Shifters):
+    name = 'Shifters/OnGossamerWings'
+    baseUrl = 'https://shiftersonline.com/'
+    url = baseUrl + 'series/shifters-on-gossamer-wings/'
+    stripUrl = baseUrl + 'comic/%s/'
+    firstStripUrl = stripUrl % 'on-gossamer-wings-cover'
+
+
 class ShipInABottle(WordPressScraper):
     url = 'http://shipinbottle.pepsaga.com/'
     stripUrl = url + '?p=%s'
