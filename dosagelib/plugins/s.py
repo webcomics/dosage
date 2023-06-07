@@ -527,30 +527,18 @@ class StarCrossdDestiny(_ParserScraper):
         return directory + '-' + filename
 
 
-class StarfireAgency(WordPressWebcomic):
-    url = 'https://poecatcomix.com/starfire-agency-static/'
-    stripUrl = 'https://poecatcomix.com/starfire-agency/%s/'
-    firstStripUrl = stripUrl % '2005-09-201'
-    imageSearch = '//div[contains(@class, "webcomic-media")]//img'
-
-    def starter(self):
-        # Build list of chapters for naming
-        indexPage = self.getPage(self.url)
-        self.chapters = indexPage.xpath('//a[./img[contains(@class, "attachment-large")]]/@href')
-        latestPage = self.chapters[0]
-        self.chapters = self.chapters[1:]
-        self.currentChapter = len(self.chapters)
-        return latestPage
+class StarfireAgency(ParserScraper):
+    url = 'https://poecatcomix.com/starfirecomic/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % 'sfa-issue-1-cover'
+    imageSearch = '//img[@class="scale-with-grid wp-post-image"]'
+    prevSearch = '//a[d:class("fixed-nav-prev")]'
+    latestSearch = '//div[@class="post-title"]//a'
+    starter = indirectStarter
+    adult = True
 
     def namer(self, imageUrl, pageUrl):
-        page = pageUrl.rstrip('/').rsplit('/', 1)[-1]
-        page = page.replace('3page00', 'cover3').replace('6429', 'cover7').replace('sfa-6-5-cover', 'cover6')
-        page = page.replace('sfa01', 'page01').replace('sfa03', 'page03').replace('sfa04', 'page04')
-        page = page.replace('sfa24', 'page24').replace('sfa07', 'page')
-        filename = 'sfa%d-%s.%s' % (self.currentChapter, page, imageUrl.rsplit('.', 1)[-1])
-        if pageUrl in self.chapters:
-            self.currentChapter = self.currentChapter - 1
-        return filename
+        return pageUrl.rsplit('/', 2)[1] + '.' + imageUrl.rsplit('.', 1)[-1]
 
 
 class StarTrip(ComicControlScraper):
