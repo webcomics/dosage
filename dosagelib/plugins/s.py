@@ -209,10 +209,18 @@ class Sheldon(_BasicScraper):
     help = 'Index format: yymmdd'
 
 
-class Shifters(WordPressNavi):
-    url = 'http://shiftersonline.com/'
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % 'shifters-redux-promo'
+class Shifters(ParserScraper):
+    baseUrl = 'https://shiftersonline.com/'
+    url = baseUrl + 'series/shifters-redux/'
+    stripUrl = baseUrl + 'comic/%s/'
+    firstStripUrl = stripUrl % 'chapter-1-pg-1'
+    imageSearch = '//div[@id="spliced-comic"]//span[@class="default-lang"]//img'
+    prevSearch = '//a[@class="previous-comic"]'
+    latestSearch = '//div[@id="comic-archive-list"]//a'
+    starter = indirectStarter
+
+    def namer(self, imageUrl, pageUrl):
+        return pageUrl.rsplit('/', 2)[1] + '.' + imageUrl.rsplit('.', 1)[-1]
 
 
 class ShipInABottle(WordPressScraper):
