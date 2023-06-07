@@ -6,7 +6,7 @@
 from re import compile, escape
 
 from ..util import tagre
-from ..scraper import _BasicScraper, _ParserScraper
+from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, joinPathPartsNamer
 from .common import ComicControlScraper, WordPressNaviIn, WordPressScraper
 
@@ -149,18 +149,19 @@ class ForLackOfABetterComic(_ParserScraper):
     endOfLife = True
 
 
-class FoxDad(_ParserScraper):
+class FoxDad(ParserScraper):
     url = 'https://foxdad.com/'
     stripUrl = url + 'post/%s'
     firstStripUrl = stripUrl % '149683014997/some-people-are-just-different-support-the-comic'
-    imageSearch = ('//figure[@class="photo-hires-item"]//img', '//figure[@class="tmblr-full"]//img')
+    imageSearch = '//figure[@class="photo-hires-item"]//img'
     prevSearch = '//a[@class="previous-button"]'
 
     def namer(self, imageUrl, pageUrl):
         page = self.getPage(pageUrl)
-        post = page.xpath('//link[@type="application/json+oembed"]')[0].get('href')
-        post = post.replace('https://www.tumblr.com/oembed/1.0?url=https://foxdad.com/post', '')
-        post = post.replace('-support-me-on-patreon', '')
+        post = page.xpath('//li[@class="timestamp"]/a/@href')[0]
+        post = post.replace('https://foxdad.com/post/', '')
+        if '-consider-support' in post:
+            post = post.split('-consider-support')[0]
         return post.replace('/', '-')
 
 
