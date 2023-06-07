@@ -210,12 +210,12 @@ class PlanescapeSurvival(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class PlushAndBlood(_ParserScraper):
+class PlushAndBlood(ParserScraper):
     url = 'http://www.plushandblood.com/Comic.php'
     stripUrl = url + '?strip_id=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = '//img[contains(@src, "comics/")]'
-    prevSearch = '//a[./img[contains(@src, "Nav/Prev")]]'
+    prevSearch = '//a[contains(text(), "PREV")]'
 
 
 class PokeyThePenguin(_ParserScraper):
