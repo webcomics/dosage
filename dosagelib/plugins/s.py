@@ -231,6 +231,45 @@ class ShiftersOnGossamerWings(Shifters):
     firstStripUrl = stripUrl % 'on-gossamer-wings-cover'
 
 
+class ShiftersTheBeastWithin(Shifters):
+    name = 'Shifters/TheBeastWithin'
+    baseUrl = 'https://shiftersonline.com/'
+    url = baseUrl + 'series/shifters-the-beast-within/'
+    stripUrl = baseUrl + 'comic/%s/'
+    firstStripUrl = stripUrl % 'awakenings-pg-1'
+    endOfLife = True
+
+    def namer(self, imageUrl, pageUrl):
+        filename = pageUrl.rsplit('/', 2)[1] + '.' + imageUrl.rsplit('.', 1)[-1]
+        if filename.startswith('the-company-of-dragons'):
+            filename = 'in-' + filename
+        # Prepend chapter number to filename
+        chapters = [
+            'awakenings',
+            'lifting-the-veil',
+            'tears-of-blood',
+            'on-the-lam',
+            'shades-of-intrigue',
+            'catfight',
+            'out-of-control',
+            'damage-control',
+            'wolfs-clothing',
+            'strange-dreams',
+            'blood-bonds',
+            'the-other-team',
+            'get-ferrah',
+            'the-price-of-power',
+            'dogfight',
+            'surfacing',
+            'in-the-company-of-dragons',
+            'filler',
+        ]
+        for chapter in chapters:
+            if filename.startswith(chapter):
+                filename = 'chapter-' + str(chapters.index(chapter) + 1) + '-' + filename
+        return filename
+
+
 class ShipInABottle(WordPressScraper):
     url = 'http://shipinbottle.pepsaga.com/'
     stripUrl = url + '?p=%s'
