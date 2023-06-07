@@ -20,24 +20,6 @@ class FalconTwin(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class FalseStart(_ParserScraper):
-    baseUrl = 'https://boneitisindustries.com/'
-    url = baseUrl + 'comics/false-start/'
-    stripUrl = baseUrl + 'comic/%s/'
-    firstStripUrl = stripUrl % 'false-start-chapter-zero-page-1'
-    imageSearch = '//div[@id="content"]//img[d:class("size-full")]'
-    prevSearch = '//a[./span[d:class("ticon-chevron-left")]]'
-    adult = True
-
-    def starter(self):
-        archivePage = self.getPage(self.url)
-        self.archive = archivePage.xpath('//div[contains(@class, "vcex-portfolio-grid")]//a/@href')
-        return self.archive[-1]
-
-    def getPrevUrl(self, url, data):
-        return self.archive[self.archive.index(url) - 1]
-
-
 class Faneurysm(WordPressNaviIn):
     url = 'http://hijinksensue.com/comic/think-only-tree/'
     firstStripUrl = 'http://hijinksensue.com/comic/captains-prerogative/'

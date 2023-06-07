@@ -117,13 +117,6 @@ class CatAndGirl(_ParserScraper):
     prevSearch = '//a[d:class("pager--prev")]'
 
 
-class CatenaCafe(WordPressScraper):
-    name = 'CatenaManor/CatenaCafe'
-    url = 'https://catenamanor.com/'
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = stripUrl % 'reboot-book1cover-small'
-
-
 class CatenaManor(_ParserScraper):
     baseUrl = ('https://web.archive.org/web/20141027141116/'
         'http://catenamanor.com/')
