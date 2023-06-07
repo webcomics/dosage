@@ -458,6 +458,7 @@ class WebToons(ParserScraper):
             cls('WitchCreekRoad', 'horror/witch-creek-road', 1453),
             cls('WitchHunt', 'supernatural/witch-hunt', 363),
             cls('Wolfsbane', 'horror/wolfsbane', 1826),
+            cls('WorldsStrongestTroll', 'fantasy/worlds-strongest-troll', 5315),
             cls('XINK3R', 'super-hero/xinker', 541),
             cls('YourAdventure', 'comedy/your-adventure', 506),
             cls('YourLetter', 'drama/your-letter', 1540),
