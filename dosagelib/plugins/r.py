@@ -7,9 +7,17 @@ from re import compile
 from urllib.parse import urljoin
 
 from ..helpers import bounceStarter
-from ..scraper import _BasicScraper, _ParserScraper
+from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
 from .common import WordPressScraper, WordPressNavi, WordPressWebcomic
+
+
+class Rainburn(ParserScraper):
+    url = 'https://rainburn.virmir.com/'
+    stripUrl = url + 'comic.php?page=%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//div[@class="comic"]//img'
+    prevSearch = '//a[contains(@class, "prev")]'
 
 
 class RalfTheDestroyer(WordPressScraper):
