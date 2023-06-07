@@ -5,7 +5,7 @@
 # Copyright (C) 2019-2020 Daniel Ring
 from re import compile, escape
 
-from ..scraper import _BasicScraper, _ParserScraper
+from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter
 from ..util import tagre
 from .common import ComicControlScraper, WordPressScraper, WordPressNavi, WordPressWebcomic
@@ -176,13 +176,13 @@ class NoNeedForBushido(_ParserScraper):
     help = 'Index format: nnn'
 
 
-class NonPlayerCharacter(_ParserScraper):
+class NonPlayerCharacter(ParserScraper):
     url = 'https://www.lfg.co/'
-    stripUrl = url + 'npc/tale/%s/'
+    stripUrl = url + 'npc/comic/%s/'
     firstStripUrl = stripUrl % '1-1'
     imageSearch = '//div[@id="comic-img"]//img'
     prevSearch = '//a[@class="comic-nav-prev"]'
-    latestSearch = '//div[@id="feature-npc-footer"]/a[contains(@href, "npc/tale/")]'
+    latestSearch = '//div[@id="feature-npc-footer"]/a[contains(@href, "npc/comic/")]'
     starter = indirectStarter
 
     def namer(self, imageUrl, pageUrl):
