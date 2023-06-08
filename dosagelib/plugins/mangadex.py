@@ -158,6 +158,7 @@ class MangaDex(ParserScraper):
             cls('TomoChanWaOnnanoko', '76ee7069-23b4-493c-bc44-34ccbf3051a8'),
             cls('TonikakuKawaii', '30f3ac69-21b6-45ad-a110-d011b7aaadaa'),
             cls('UramikoiKoiUramikoi', '009b6788-48f3-4e78-975c-097f54def7ab'),
+            cls('UzakiChanWaAsobitai', '5a90308a-8b12-4a4d-9c6d-2487028fe319'),
             cls('YotsubaAnd', '58be6aa6-06cb-4ca5-bd20-f1392ce451fb'),
             cls('YuYuHakusho', '44a5cbe1-0204-4cc7-a1ff-0fda2ac004b6'),
         )
