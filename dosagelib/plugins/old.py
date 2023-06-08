@@ -1679,6 +1679,7 @@ class Renamed(Scraper):
             cls('SmackJeeves/TheRealmOfKaerwyn', 'ComicFury/TheRealmOfKaerwyn'),
             cls('SoloLeveling', 'MangaDex/SoloLeveling'),
             cls('StudioKhimera/Draconia', 'Draconia'),
+            cls('StudioKhimera/UberQuest', 'UberQuest'),
             cls('TracesOfThePast', 'RickGriffinStudios/TracesOfThePast'),
             cls('TracesOfThePast/NSFW', 'RickGriffinStudios/TracesOfThePastNSFW'),
 

@@ -3,6 +3,7 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
+import json
 from re import compile
 from urllib.parse import urljoin
 from lxml import etree
@@ -11,6 +12,28 @@ from ..scraper import BasicScraper, ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
 from .common import ComicControlScraper, WordPressScraper, WordPressNavi
+
+
+class UberQuest(ParserScraper):
+    baseUrl = 'https://uberquest.studiokhimera.com/'
+    url = baseUrl + 'wp-json/keeros_comics/v1/chapters'
+    stripUrl = baseUrl + 'wp-json/wp/v2/cfx_comic_page?page_number=%s'
+    firstStripUrl = stripUrl % 'cover'
+
+    def starter(self):
+        # Retrieve comic metadata from API
+        data = self.session.get(self.url)
+        data.raise_for_status()
+        return self.stripUrl % data.json()[-1]['pages'][-1]['page_number']
+
+    def getPrevUrl(self, url, data):
+        return self.stripUrl % json.loads(data.text_content())[0]['prev_id']
+
+    def fetchUrls(self, url, data, urlSearch):
+        return [json.loads(data.text_content())[0]['attachment']]
+
+    def namer(self, imageUrl, pageUrl):
+        return 'UberQuest-' + pageUrl.rsplit('=', 1)[-1]
 
 
 class Underling(WordPressNavi):

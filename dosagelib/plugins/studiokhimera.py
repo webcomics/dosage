@@ -45,21 +45,3 @@ class StudioKhimera(ParserScraper):
         return (
             cls('Mousechievous', 'mousechievous'),
         )
-
-
-class UberQuest(WordPressScraper):
-    name = 'StudioKhimera/UberQuest'
-    stripUrl = 'https://uberquest.studiokhimera.com/comic/page/%s/'
-    url = stripUrl % 'latest'
-    firstStripUrl = stripUrl % 'cover'
-    imageSearch = '//div[@class="prj--comic-image"]/img'
-    prevSearch = '//uq-image-button[d:class("prj--comic-control-prev")]'
-
-    def namer(self, imageUrl, pageUrl):
-        # Fix inconsistent filenames
-        filename = imageUrl.rsplit('/', 1)[-1]
-        filename = filename.replace('Page', 'UberQuest')
-        filename = filename.replace('UberQuest01.', 'UberQuest001.')
-        filename = filename.replace('UberQuest98.', 'UberQuest098.')
-        filename = filename.replace('UberQuest99.', 'UberQuest099.')
-        return filename
