@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 import json
 import os
 import re
@@ -27,7 +27,7 @@ def cmd_err(*options):
 
 
 @pytest.mark.usefixtures('_nosleep', '_noappdirs')
-class TestDosage(object):
+class TestDosage:
     """Test the dosage commandline client."""
 
     # This shouldn't hit the network at all, so add responses without mocks to
@@ -40,7 +40,7 @@ class TestDosage(object):
     ])
     def test_list_comics(self, option, capfd):
         cmd_ok(option)
-        out, err = capfd.readouterr()
+        out = capfd.readouterr().out
         assert 'ADummyTestScraper' in out
 
     @responses.activate
@@ -48,41 +48,41 @@ class TestDosage(object):
         cmd_ok("--version")
 
     @responses.activate
-    def test_update_available(self, capsys):
+    def test_update_available(self, capfd):
         responses.add(responses.GET, re.compile(r'https://api\.github\.com/'),
             json={'tag_name': '9999.0', 'assets': [
                 {'browser_download_url': 'TEST.whl'},
                 {'browser_download_url': 'TEST.exe'},
             ]})
         cmd_ok('--version', '-v')
-        captured = capsys.readouterr()
+        out = capfd.readouterr().out
         best = 'TEST.exe' if os.name == 'nt' else 'TEST.whl'
-        assert best in captured.out
-        assert 'A new version' in captured.out
+        assert best in out
+        assert 'A new version' in out
 
     @responses.activate
-    def test_no_update_available(self, capsys):
+    def test_no_update_available(self, capfd):
         responses.add(responses.GET, re.compile(r'https://api\.github\.com/'),
             json={'tag_name': '1.0'})
         cmd_ok('--version', '-v')
-        captured = capsys.readouterr()
-        assert 'Detected local or development' in captured.out
+        out = capfd.readouterr().out
+        assert 'Detected local or development' in out
 
     @responses.activate
-    def test_current(self, capsys):
+    def test_current(self, capfd):
         responses.add(responses.GET, re.compile(r'https://api\.github\.com/'),
             json={'tag_name': dosagelib.__version__})
         cmd_ok('--version', '-v')
-        captured = capsys.readouterr()
-        assert captured.out.endswith('issues\n')
+        out = capfd.readouterr().out
+        assert out.endswith('issues\n')
 
     @responses.activate
-    def test_update_broken(self, capsys):
+    def test_update_broken(self, capfd):
         responses.add(responses.GET, re.compile(r'https://api\.github\.com/'),
             json={})
         cmd_ok('--version', '-v')
-        captured = capsys.readouterr()
-        assert 'invalid update file' in captured.out
+        out = capfd.readouterr().out
+        assert 'invalid update file' in out
 
     def test_display_help(self):
         for option in ("-h", "--help"):
@@ -91,7 +91,7 @@ class TestDosage(object):
 
     def test_module_help(self, capfd):
         cmd_ok("-m", "-t", "xkcd")
-        out, err = capfd.readouterr()
+        out = capfd.readouterr().out
         assert re.match(r'([0-9][0-9]:){2}.. xkcd>', out)
 
     def test_broken_basepath_removal(self):
