@@ -6,7 +6,7 @@
 from re import compile, escape
 
 from ..util import tagre
-from ..scraper import _BasicScraper, _ParserScraper
+from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, joinPathPartsNamer
 from .common import ComicControlScraper, WordPressNaviIn, WordPressScraper
 
@@ -18,24 +18,6 @@ class FalconTwin(_BasicScraper):
     imageSearch = compile(r'"(strips/.+?)"')
     prevSearch = compile(r'"prev"><a href="(index.+?)"')
     help = 'Index format: nnn'
-
-
-class FalseStart(_ParserScraper):
-    baseUrl = 'https://boneitisindustries.com/'
-    url = baseUrl + 'comics/false-start/'
-    stripUrl = baseUrl + 'comic/%s/'
-    firstStripUrl = stripUrl % 'false-start-chapter-zero-page-1'
-    imageSearch = '//div[@id="content"]//img[d:class("size-full")]'
-    prevSearch = '//a[./span[d:class("ticon-chevron-left")]]'
-    adult = True
-
-    def starter(self):
-        archivePage = self.getPage(self.url)
-        self.archive = archivePage.xpath('//div[contains(@class, "vcex-portfolio-grid")]//a/@href')
-        return self.archive[-1]
-
-    def getPrevUrl(self, url, data):
-        return self.archive[self.archive.index(url) - 1]
 
 
 class Faneurysm(WordPressNaviIn):
@@ -149,18 +131,19 @@ class ForLackOfABetterComic(_ParserScraper):
     endOfLife = True
 
 
-class FoxDad(_ParserScraper):
+class FoxDad(ParserScraper):
     url = 'https://foxdad.com/'
     stripUrl = url + 'post/%s'
     firstStripUrl = stripUrl % '149683014997/some-people-are-just-different-support-the-comic'
-    imageSearch = ('//figure[@class="photo-hires-item"]//img', '//figure[@class="tmblr-full"]//img')
+    imageSearch = '//figure[@class="photo-hires-item"]//img'
     prevSearch = '//a[@class="previous-button"]'
 
     def namer(self, imageUrl, pageUrl):
         page = self.getPage(pageUrl)
-        post = page.xpath('//link[@type="application/json+oembed"]')[0].get('href')
-        post = post.replace('https://www.tumblr.com/oembed/1.0?url=https://foxdad.com/post', '')
-        post = post.replace('-support-me-on-patreon', '')
+        post = page.xpath('//li[@class="timestamp"]/a/@href')[0]
+        post = post.replace('https://foxdad.com/post/', '')
+        if '-consider-support' in post:
+            post = post.split('-consider-support')[0]
         return post.replace('/', '-')
 
 

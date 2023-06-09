@@ -75,6 +75,7 @@ class OhJoySexToy(WordPressNavi):
     url = 'http://www.ohjoysextoy.com/'
     firstStripUrl = url + 'introduction/'
     textSearch = '//div[@id="comic"]//img/@alt'
+    multipleImagesPerStrip = True
     adult = True
 
 

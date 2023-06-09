@@ -66,6 +66,7 @@ class Tapas(ParserScraper):
             cls('AmpleTime', 'Ample-Time'),
             cls('FANGS', 'fangscomic'),
             cls('FishNuggets', 'Fish-Nuggets'),
+            cls('Ginpu', 'Ginpu-Studios-Comics'),
             cls('HoneyAndTheMoon', 'Honey-and-the-Moon'),
             cls('InsignificantOtters', 'IOtters'),
             cls('MagicalBoy', 'magicalboy'),

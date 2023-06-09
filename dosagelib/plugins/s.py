@@ -209,10 +209,65 @@ class Sheldon(_BasicScraper):
     help = 'Index format: yymmdd'
 
 
-class Shifters(WordPressNavi):
-    url = 'http://shiftersonline.com/'
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % 'shifters-redux-promo'
+class Shifters(ParserScraper):
+    baseUrl = 'https://shiftersonline.com/'
+    url = baseUrl + 'series/shifters-redux/'
+    stripUrl = baseUrl + 'comic/%s/'
+    firstStripUrl = stripUrl % 'chapter-1-pg-1'
+    imageSearch = '//div[@id="spliced-comic"]//span[@class="default-lang"]//img'
+    prevSearch = '//a[@class="previous-comic"]'
+    latestSearch = '//div[@id="comic-archive-list"]//a'
+    starter = indirectStarter
+
+    def namer(self, imageUrl, pageUrl):
+        return pageUrl.rsplit('/', 2)[1] + '.' + imageUrl.rsplit('.', 1)[-1]
+
+
+class ShiftersOnGossamerWings(Shifters):
+    name = 'Shifters/OnGossamerWings'
+    baseUrl = 'https://shiftersonline.com/'
+    url = baseUrl + 'series/shifters-on-gossamer-wings/'
+    stripUrl = baseUrl + 'comic/%s/'
+    firstStripUrl = stripUrl % 'on-gossamer-wings-cover'
+
+
+class ShiftersTheBeastWithin(Shifters):
+    name = 'Shifters/TheBeastWithin'
+    baseUrl = 'https://shiftersonline.com/'
+    url = baseUrl + 'series/shifters-the-beast-within/'
+    stripUrl = baseUrl + 'comic/%s/'
+    firstStripUrl = stripUrl % 'awakenings-pg-1'
+    endOfLife = True
+
+    def namer(self, imageUrl, pageUrl):
+        filename = pageUrl.rsplit('/', 2)[1] + '.' + imageUrl.rsplit('.', 1)[-1]
+        if filename.startswith('the-company-of-dragons'):
+            filename = 'in-' + filename
+        # Prepend chapter number to filename
+        chapters = [
+            'awakenings',
+            'lifting-the-veil',
+            'tears-of-blood',
+            'on-the-lam',
+            'shades-of-intrigue',
+            'catfight',
+            'out-of-control',
+            'damage-control',
+            'wolfs-clothing',
+            'strange-dreams',
+            'blood-bonds',
+            'the-other-team',
+            'get-ferrah',
+            'the-price-of-power',
+            'dogfight',
+            'surfacing',
+            'in-the-company-of-dragons',
+            'filler',
+        ]
+        for chapter in chapters:
+            if filename.startswith(chapter):
+                filename = 'chapter-' + str(chapters.index(chapter) + 1) + '-' + filename
+        return filename
 
 
 class ShipInABottle(WordPressScraper):
@@ -527,30 +582,18 @@ class StarCrossdDestiny(_ParserScraper):
         return directory + '-' + filename
 
 
-class StarfireAgency(WordPressWebcomic):
-    url = 'https://poecatcomix.com/starfire-agency-static/'
-    stripUrl = 'https://poecatcomix.com/starfire-agency/%s/'
-    firstStripUrl = stripUrl % '2005-09-201'
-    imageSearch = '//div[contains(@class, "webcomic-media")]//img'
-
-    def starter(self):
-        # Build list of chapters for naming
-        indexPage = self.getPage(self.url)
-        self.chapters = indexPage.xpath('//a[./img[contains(@class, "attachment-large")]]/@href')
-        latestPage = self.chapters[0]
-        self.chapters = self.chapters[1:]
-        self.currentChapter = len(self.chapters)
-        return latestPage
+class StarfireAgency(ParserScraper):
+    url = 'https://poecatcomix.com/starfirecomic/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % 'sfa-issue-1-cover'
+    imageSearch = '//img[@class="scale-with-grid wp-post-image"]'
+    prevSearch = '//a[d:class("fixed-nav-prev")]'
+    latestSearch = '//div[@class="post-title"]//a'
+    starter = indirectStarter
+    adult = True
 
     def namer(self, imageUrl, pageUrl):
-        page = pageUrl.rstrip('/').rsplit('/', 1)[-1]
-        page = page.replace('3page00', 'cover3').replace('6429', 'cover7').replace('sfa-6-5-cover', 'cover6')
-        page = page.replace('sfa01', 'page01').replace('sfa03', 'page03').replace('sfa04', 'page04')
-        page = page.replace('sfa24', 'page24').replace('sfa07', 'page')
-        filename = 'sfa%d-%s.%s' % (self.currentChapter, page, imageUrl.rsplit('.', 1)[-1])
-        if pageUrl in self.chapters:
-            self.currentChapter = self.currentChapter - 1
-        return filename
+        return pageUrl.rsplit('/', 2)[1] + '.' + imageUrl.rsplit('.', 1)[-1]
 
 
 class StarTrip(ComicControlScraper):

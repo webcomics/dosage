@@ -11,11 +11,11 @@ from ..util import tagre
 from .common import ComicControlScraper, WordPressScraper, WordPressNaviIn
 
 
-class Lackadaisy(_ParserScraper):
+class Lackadaisy(ParserScraper):
     url = 'https://www.lackadaisy.com/comic.php'
     stripUrl = url + '?comicid=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = '//div[@id="content"]/img'
+    imageSearch = '//div[@id="exhibit"]/img[contains(@src, "comic/")]'
     prevSearch = '//div[@class="prev"]/a'
     nextSearch = '//div[@class="next"]/a'
     help = 'Index format: n'
@@ -26,6 +26,12 @@ class Lackadaisy(_ParserScraper):
         num = pageUrl.rsplit('=', 1)[-1]
         ext = imageUrl.rsplit('.', 1)[-1]
         return 'lackadaisy_%s.%s' % (num, ext)
+
+
+class Lancer(WordPressScraper):
+    url = 'https://lancercomic.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'chapter-1-cover'
 
 
 class LastResort(WordPressScraper):

@@ -3,26 +3,8 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-from ..scraper import _ParserScraper
+from ..scraper import ParserScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
-
-
-class VampireHunterBoyfriends(_ParserScraper):
-    baseUrl = 'https://boneitisindustries.com/'
-    url = baseUrl + 'comics/vampire-hunter-boyfriends/'
-    stripUrl = baseUrl + 'comic/%s/'
-    firstStripUrl = stripUrl % 'vampire-hunter-boyfriends-chapter-1-cover'
-    imageSearch = '//div[@id="content"]//img[d:class("size-full")]'
-    prevSearch = '//a[./span[d:class("ticon-chevron-left")]]'
-    adult = True
-
-    def starter(self):
-        archivePage = self.getPage(self.url)
-        self.archive = archivePage.xpath('//div[contains(@class, "vcex-portfolio-grid")]//a/@href')
-        return self.archive[-1]
-
-    def getPrevUrl(self, url, data):
-        return self.archive[self.archive.index(url) - 1]
 
 
 class Vexxarr(_ParserScraper):
@@ -82,3 +64,11 @@ class VirmirWorld(_ParserScraper):
     def getIndexStripUrl(self, index):
         index = index.split('-')
         return self.stripUrl % (index[0], index[1])
+
+
+class Vreakerz(ParserScraper):
+    url = 'http://vreakerz.angrykitten.nl/'
+    stripUrl = url + 'stories/read/%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//img[contains(@src, "storypages")]'
+    prevSearch = '//a[@class="btn-prior"]'
