@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2022 Daniel Ring
+# SPDX-FileCopyrightText: © 2019 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 from ..output import out
 from ..scraper import ParserScraper
 from ..xml import NS
@@ -37,10 +37,10 @@ class Tapas(ParserScraper):
             self.firstStripUrl = self.stripUrl % apiData['prev_ep_id']
         return self.stripUrl % apiData['prev_ep_id']
 
-    def fetchUrls(self, url, data, urlSearch):
+    def extract_image_urls(self, url, data):
         # Save link order for position-based filenames
-        self.imageUrls = super().fetchUrls(url, data, urlSearch)
-        return self.imageUrls
+        self._cached_image_urls = super().extract_image_urls(url, data)
+        return self._cached_image_urls
 
     def shouldSkipUrl(self, url, data):
         if data.xpath('//button[d:class("js-have-to-sign")]', namespaces=NS):
@@ -51,9 +51,9 @@ class Tapas(ParserScraper):
     def namer(self, imageUrl, pageUrl):
         # Construct filename from episode number and image position on page
         episodeNum = pageUrl.rsplit('/', 1)[-1]
-        imageNum = self.imageUrls.index(imageUrl)
+        imageNum = self._cached_image_urls.index(imageUrl)
         imageExt = pageUrl.rsplit('.', 1)[-1]
-        if len(self.imageUrls) > 1:
+        if len(self._cached_image_urls) > 1:
             filename = "%s-%d.%s" % (episodeNum, imageNum, imageExt)
         else:
             filename = "%s.%s" % (episodeNum, imageExt)

@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2019 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 import json
 
 from ..scraper import ParserScraper
@@ -71,24 +71,24 @@ class MangaDex(ParserScraper):
             return None
         return self.stripUrl % self.chapters[self.chapters.index(chapter[0]) - 1]['id']
 
-    def fetchUrls(self, url, data, urlSearch):
+    def extract_image_urls(self, url, data):
         # Retrieve chapter metadata from API
-        chapterData = json.loads(data.text_content())
-        self.chapter = chapterData['data']
-        cdnData = self.session.get(self.cdnUrl % self.chapter['id'])
-        cdnData.raise_for_status()
-        cdnBlock = cdnData.json()
+        chapters = json.loads(data.text_content())
+        self.chapter = chapters['data']
+        cdnresponse = self.session.get(self.cdnUrl % self.chapter['id'])
+        cdnresponse.raise_for_status()
+        cdnblock = cdnresponse.json()
 
         # Save link order for position-based filenames
-        imageUrl = self.imageUrl % cdnBlock['chapter']['hash']
-        self.imageUrls = [imageUrl % page for page in cdnBlock['chapter']['data']]
-        return self.imageUrls
+        urltemplate = self.imageUrl % cdnblock['chapter']['hash']
+        self._cached_image_urls = [urltemplate % page for page in cdnblock['chapter']['data']]
+        return self._cached_image_urls
 
     def namer(self, imageUrl, pageUrl):
         # Construct filename from episode number and page index in array
         chapter = self.chapter['attributes']['chapter']
         chapterNum = chapter if chapter is not None else 0
-        pageNum = self.imageUrls.index(imageUrl)
+        pageNum = self._cached_image_urls.index(imageUrl)
         pageExt = imageUrl.rsplit('.')[-1]
         return '%s-%02d.%s' % (chapterNum, pageNum, pageExt)
 

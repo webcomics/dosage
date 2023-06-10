@@ -1,13 +1,13 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 import os
 from re import compile, IGNORECASE
 
 from ..helpers import bounceStarter, indirectStarter
-from ..scraper import _BasicScraper, _ParserScraper
+from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
 from .common import ComicControlScraper, WordPressScraper, WordPressNavi
 
@@ -99,7 +99,7 @@ class EmergencyExit(_BasicScraper):
     help = 'Index format: n'
 
 
-class Erfworld(_ParserScraper):
+class Erfworld(ParserScraper):
     stripUrl = 'https://archives.erfworld.com/%s'
     url = stripUrl % 'getLatestPage.php'
     firstStripUrl = stripUrl % 'Kickstarter+Stories/1'
@@ -111,12 +111,9 @@ class Erfworld(_ParserScraper):
     textOptional = True
     starter = bounceStarter
 
-    def fetchUrls(self, url, data, urlSearch):
-        # Return the main logo for text-only pages
-        try:
-            return super().fetchUrls(url, data, urlSearch)
-        except ValueError:
-            return super().fetchUrls(url, data, '//li[@class="erf-logo"]//img')
+    def shouldSkipUrl(self, url, data):
+        """Skip pages without images."""
+        return not data.xpath(self.imageSearch)
 
     def namer(self, imageUrl, pageUrl):
         # Fix inconsistent filenames
@@ -138,7 +135,7 @@ class Erfworld(_ParserScraper):
             return self.stripUrl % 'Book+0/81'
         elif url == self.stripUrl % 'Book+0/1':
             return self.stripUrl % 'Kickstarter+Stories/54'
-        return super(Erfworld, self).getPrevUrl(url, data)
+        return super().getPrevUrl(url, data)
 
 
 class ErmaFelnaEDF(_ParserScraper):

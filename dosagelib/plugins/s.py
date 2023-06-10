@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile, escape, IGNORECASE, sub
 from os.path import splitext
 
@@ -436,20 +436,20 @@ class Sorcery101(WordPressWebcomic):
     help = 'Index format: stripname'
 
 
-class SpaceFurries(_ParserScraper):
-    url = 'http://www.spacefurrs.org/'
+class SpaceFurries(ParserScraper):
+    url = 'https://www.spacefurrs.org/'
     firstStripUrl = url
     multipleImagesPerStrip = True
     adult = True
     endOfLife = True
 
-    def fetchUrls(self, url, data, urlSearch):
+    def extract_image_urls(self, url, data):
         # Website requires JS, so build the list of image URLs manually
-        imageUrls = []
-        currentPage = int(data.xpath('//input[@name="pagnum"]')[0].get('value'))
-        for page in reversed(range(1, currentPage + 1)):
-            imageUrls.append(self.url + 'comics/' + str(page) + '.jpg')
-        return imageUrls
+        imageurls = []
+        current = int(data.xpath('//input[@name="pagnum"]')[0].get('value'))
+        for page in reversed(range(1, current + 1)):
+            imageurls.append(self.url + 'comics/' + str(page) + '.jpg')
+        return imageurls
 
 
 class SpaceJunkArlia(_ParserScraper):

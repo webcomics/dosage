@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2022 Daniel Ring
+# SPDX-FileCopyrightText: © 2019 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 from ..scraper import ParserScraper
 
 
@@ -29,18 +29,18 @@ class WebToons(ParserScraper):
         self.endOfLife = (listPage.xpath('//div[@id="_asideDetail"]//span[@class="txt_ico_completed2"]') != [])
         return self.stripUrl % currentEpisode
 
-    def fetchUrls(self, url, data, urlSearch):
+    def extract_image_urls(self, url, data):
         # Save link order for position-based filenames
-        self.imageUrls = super().fetchUrls(url, data, urlSearch)
+        self._cached_image_urls = super().extract_image_urls(url, data)
         # Update firstStripUrl with the correct episode title
         if url.rsplit('=', 1)[-1] == '1':
             self.firstStripUrl = url
-        return self.imageUrls
+        return self._cached_image_urls
 
     def namer(self, imageUrl, pageUrl):
         # Construct filename from episode number and image position on page
         episodeNum = pageUrl.rsplit('=', 1)[-1]
-        imageNum = self.imageUrls.index(imageUrl)
+        imageNum = self._cached_image_urls.index(imageUrl)
         imageExt = pageUrl.rsplit('.', 1)[-1].split('?', 1)[0]
         return "%s-%03d.%s" % (episodeNum, imageNum, imageExt)
 

@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 import json
 from re import compile
 from urllib.parse import urljoin
@@ -29,7 +29,7 @@ class UberQuest(ParserScraper):
     def getPrevUrl(self, url, data):
         return self.stripUrl % json.loads(data.text_content())[0]['prev_id']
 
-    def fetchUrls(self, url, data, urlSearch):
+    def extract_image_urls(self, url, data):
         return [json.loads(data.text_content())[0]['attachment']]
 
     def namer(self, imageUrl, pageUrl):
@@ -80,7 +80,7 @@ class UnicornJelly(BasicScraper):
 
 
 class Unsounded(ParserScraper):
-    url = 'http://www.casualvillain.com/Unsounded/'
+    url = 'https://www.casualvillain.com/Unsounded/'
     startUrl = url + 'comic+index/'
     stripUrl = url + 'comic/ch%s/ch%s_%s.html'
     firstStripUrl = stripUrl % ('01', '01', '01')
@@ -91,18 +91,17 @@ class Unsounded(ParserScraper):
     starter = indirectStarter
     help = 'Index format: chapter-page'
 
-    def fetchUrls(self, url, data, urlSearch):
-        imageUrls = super(Unsounded, self).fetchUrls(url, data, urlSearch)
+    def extract_image_urls(self, url, data):
+        imageUrls = super().extract_image_urls(url, data)
         # Include background for multi-image pages
         imageRegex = compile(r'background-image: url\((pageart/.*)\)')
         for match in imageRegex.finditer(str(etree.tostring(data))):
-            print(match)
-            searchUrls.append(normaliseURL(urljoin(data[1], match.group(1))))
+            imageUrls.append(normaliseURL(urljoin(data[1], match.group(1))))
         return imageUrls
 
-    def namer(self, imageUrl, pageUrl):
-        filename = imageUrl.rsplit('/', 1)[-1]
-        pagename = pageUrl.rsplit('/', 1)[-1]
+    def namer(self, image_url, page_url):
+        filename = image_url.rsplit('/', 1)[-1]
+        pagename = page_url.rsplit('/', 1)[-1]
         if pagename.split('.', 1)[0] != filename.split('.', 1)[0]:
             filename = pagename.split('_', 1)[0] + '_' + filename
         return filename
@@ -111,7 +110,7 @@ class Unsounded(ParserScraper):
         # Fix missing navigation links between chapters
         if 'ch13/you_let_me_fall' in url:
             return self.stripUrl % ('13', '13', '85')
-        return super(Unsounded, self).getPrevUrl(url, data)
+        return super().getPrevUrl(url, data)
 
     def getIndexStripUrl(self, index):
         chapter, num = index.split('-')
