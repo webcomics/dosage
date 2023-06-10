@@ -3,6 +3,8 @@
 # SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
+from __future__ import annotations
+
 import json
 import re
 from contextlib import suppress
