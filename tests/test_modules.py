@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2021 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Tobias Gruetzmacher
 import re
 
 import pytest
@@ -15,7 +15,7 @@ def cmd(*options):
 
 
 @pytest.mark.usefixtures('_nosleep', '_noappdirs')
-class TestModules(object):
+class TestModules:
     """Test that specific comic modules work correctly."""
 
     @responses.activate
@@ -41,8 +41,24 @@ class TestModules(object):
         cmd('--basepath', str(tmpdir), 'CalvinAndHobbesEnEspanol:2012/07/22')
 
     @responses.activate
+    def test_unsounded(self, tmpdir, capfd):
+        httpmocks.page('https://www.casualvillain.com/Unsounded/comic+index/',
+            'unsounded-root')
+        httpmocks.page('https://www.casualvillain.com/Unsounded/comic/ch17/ch17_92.html',
+            'unsounded-17-92')
+        httpmocks.page('https://www.casualvillain.com/Unsounded/comic/ch17/ch17_137.html',
+            'unsounded-17-137')
+        httpmocks.jpeg(re.compile(r'.*/pageart/ch\d+_\d+.jpg'))
+
+        cmd('--basepath', str(tmpdir), 'Unsounded')
+        cmd('--basepath', str(tmpdir), 'Unsounded:17-92')
+
+        out = capfd.readouterr().out
+        assert 'ERROR' not in out
+
+    @responses.activate
     @pytest.mark.skip(reason="SoloeLeveling was removed, so we have no way to test this...")
-    def test_sololeveling_geoblock(self, tmpdir):
+    def test_sololeveling_geoblock(self):
         from dosagelib.plugins.s import SoloLeveling
         from dosagelib.scraper import GeoblockedException
 

@@ -4,9 +4,9 @@
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
 import json
+import re
+from contextlib import suppress
 from re import compile
-from urllib.parse import urljoin
-from lxml import etree
 
 from ..scraper import BasicScraper, ParserScraper
 from ..helpers import indirectStarter
@@ -89,15 +89,30 @@ class Unsounded(ParserScraper):
     latestSearch = '//div[@id="chapter_box"][1]//a[last()]'
     multipleImagesPerStrip = True
     starter = indirectStarter
+    style_bg_regex = re.compile(r'background-image: url\((.*pageart/.*)\)')
     help = 'Index format: chapter-page'
 
     def extract_image_urls(self, url, data):
-        imageUrls = super().extract_image_urls(url, data)
+        urls = []
+        with suppress(ValueError):
+            urls.extend(super().extract_image_urls(url, data))
         # Include background for multi-image pages
-        imageRegex = compile(r'background-image: url\((pageart/.*)\)')
-        for match in imageRegex.finditer(str(etree.tostring(data))):
-            imageUrls.append(normaliseURL(urljoin(data[1], match.group(1))))
-        return imageUrls
+        cssbg = self.extract_css_bg(data)
+        if cssbg:
+            urls.append(cssbg)
+        if not urls:
+            raise ValueError(f'No comic found at {url!r}')
+        return urls
+
+    def extract_css_bg(self, page) -> str | None:
+        comicdivs = page.xpath('//div[@id="comic"]')
+        if comicdivs:
+            style = comicdivs[0].attrib.get('style')
+            if style:
+                hit = self.style_bg_regex.search(style)
+                if hit:
+                    return hit.group(1)
+        return None
 
     def namer(self, image_url, page_url):
         filename = image_url.rsplit('/', 1)[-1]
