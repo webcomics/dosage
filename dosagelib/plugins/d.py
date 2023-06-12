@@ -28,19 +28,14 @@ class DangerouslyChloe(ComicControlScraper):
 
 
 class DarkLegacy(ParserScraper):
-    # it is a bit more complicated due how the site is setup
-    import requests
-    import re
-    base_url = 'https://www.darklegacycomics.com'
-    response = requests.get(base_url + "/newest", allow_redirects=False)
-    content = response.text
-    match = re.search(r'URL=([^\s]+)', content)
-    mid_url = match.group(1).strip("'\"")
-    url = base_url + mid_url
+    starter = indirectStarter
+    url = "https://www.darklegacycomics.com"
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = '//div[@class="comic narrow"]//img'
-    prevSearch = '//a[@title="Previous - A"]'
+    prevSearch = ('//a[@title="Previous - A"]',
+                  '//a[@title="Previous"]')
+    latestSearch = '//div[@class="comic narrow feed"]//a'
     help = 'Index format: n (unpadded)'
 
 

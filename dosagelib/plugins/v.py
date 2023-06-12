@@ -49,19 +49,15 @@ class VGCats(_ParserScraper):
     help = 'Index format: n (unpadded)'
 
 
-class vibe(ParserScraper):
-    import requests
-    import re
-    base_url = 'http://www.vibecomic.com/vibe/'
-    response = requests.get(base_url)
-    page_text = response.text
-    match = re.search(r'<a\s+href="([^"]+)"\s+class="last"\s+rel="index">', page_text)
-    url = match.group(1)
-    stripUrl = base_url + '%s'
+class Vibe(ParserScraper):
+    starter = indirectStarter
+    url = 'http://www.vibecomic.com/vibe/'
+    stripUrl = url + '%s'
     firstStripUrl = stripUrl % ''
     imageSearch = '//div[@id="cc-comicbody"]//img'
     prevSearch = '//a[@rel="prev"]'
     nextSearch = '//a[@rel="next"]'
+    latestSearch = '//a[@class="last"]'
     help = 'Index format: VIBEnnn (padded)'
 
 
