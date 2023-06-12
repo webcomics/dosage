@@ -59,16 +59,6 @@ class GeeksNextDoor(_ParserScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
-class Ginpu(WordPressNavi):
-    url = 'https://www.ginpu.us/'
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = stripUrl % 'filler-2'
-
-    def namer(self, imageUrl, pageUrl):
-        filename = imageUrl.rsplit('/', 3)
-        return '%s-%s_%s' % (filename[1], filename[2], filename[3])
-
-
 class GirlGenius(_BasicScraper):
     baseUrl = 'http://www.girlgeniusonline.com/'
     rurl = escape(baseUrl)

@@ -35,6 +35,7 @@ dependencies = [
     "requests>=2.0",
     "cached_property;python_version<'3.8'",
     "importlib_metadata;python_version<'3.8'",
+    "importlib_resources>=5.0.0;python_version<'3.9'",
 ]
 dynamic = ["version"]
 

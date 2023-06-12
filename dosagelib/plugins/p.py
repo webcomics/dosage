@@ -210,12 +210,12 @@ class PlanescapeSurvival(_BasicScraper):
     help = 'Index format: nnn'
 
 
-class PlushAndBlood(_ParserScraper):
+class PlushAndBlood(ParserScraper):
     url = 'http://www.plushandblood.com/Comic.php'
     stripUrl = url + '?strip_id=%s'
     firstStripUrl = stripUrl % '1'
     imageSearch = '//img[contains(@src, "comics/")]'
-    prevSearch = '//a[./img[contains(@src, "Nav/Prev")]]'
+    prevSearch = '//a[contains(text(), "PREV")]'
 
 
 class PokeyThePenguin(_ParserScraper):
@@ -334,8 +334,10 @@ class PS238(_ParserScraper):
 class PvPOnline(ParserScraper):
     baseUrl = 'https://www.toonhoundstudios.com/'
     url = baseUrl + 'pvp/'
-    stripUrl = baseUrl + 'comic/%s/?sid=372'
+    stripUrl = baseUrl + 'comic/%s/'
     firstStripUrl = stripUrl % '19980504'
     imageSearch = '//div[@id="spliced-comic"]//img/@data-src-img'
-    prevSearch = '//div[d:class("comic-nav")]//a[d:class("prev")]'
-    help = 'Older pages need a Patreon subscription'
+    prevSearch = '//a[d:class("prev")]'
+
+    def namer(self, imageUrl, pageUrl):
+        return 'pvp' + imageUrl.rsplit('/', 1)[-1]

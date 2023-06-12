@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2022 Daniel Ring
+# SPDX-FileCopyrightText: © 2019 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 from ..scraper import ParserScraper
 
 
@@ -29,18 +29,18 @@ class WebToons(ParserScraper):
         self.endOfLife = (listPage.xpath('//div[@id="_asideDetail"]//span[@class="txt_ico_completed2"]') != [])
         return self.stripUrl % currentEpisode
 
-    def fetchUrls(self, url, data, urlSearch):
+    def extract_image_urls(self, url, data):
         # Save link order for position-based filenames
-        self.imageUrls = super().fetchUrls(url, data, urlSearch)
+        self._cached_image_urls = super().extract_image_urls(url, data)
         # Update firstStripUrl with the correct episode title
         if url.rsplit('=', 1)[-1] == '1':
             self.firstStripUrl = url
-        return self.imageUrls
+        return self._cached_image_urls
 
     def namer(self, imageUrl, pageUrl):
         # Construct filename from episode number and image position on page
         episodeNum = pageUrl.rsplit('=', 1)[-1]
-        imageNum = self.imageUrls.index(imageUrl)
+        imageNum = self._cached_image_urls.index(imageUrl)
         imageExt = pageUrl.rsplit('.', 1)[-1].split('?', 1)[0]
         return "%s-%03d.%s" % (episodeNum, imageNum, imageExt)
 
@@ -87,6 +87,7 @@ class WebToons(ParserScraper):
             cls('BehindTheGIFs', 'comedy/behind-the-gifs', 658),
             cls('BigJo', 'romance/big-jo', 854),
             cls('BiteMe', 'thriller/bite-me', 1019),
+            cls('BitterSweetCoffee', 'challenge/bitter-sweet-coffee', 797203),
             cls('Blackened', 'challenge/blackened', 363805),
             cls('BladesOfFurry', 'romance/blades-of-furry', 2383),
             cls('Blessed', 'drama/blessed', 1193),
@@ -105,6 +106,7 @@ class WebToons(ParserScraper):
             cls('CARL', 'slice-of-life/carl', 1216),
             cls('Caster', 'action/caster', 1461),
             cls('CastleSwimmer', 'fantasy/castle-swimmer', 1499),
+            cls('CatchMeIfYouCan', 'challenge/catch-me-if-you-can-', 434808),
             cls('Catharsis', 'fantasy/catharsis', 396),
             cls('CatLoafAdventures', 'slice-of-life/cat-loaf-adventures', 1381),
             cls('CChansACatgirl', 'challenge/c-chans-a-catgirl', 263430),
@@ -120,7 +122,7 @@ class WebToons(ParserScraper):
             cls('CodeAdam', 'action/code-adam', 1657),
             cls('CookingComically', 'tiptoon/cooking-comically', 622),
             cls('Crumbs', 'romance/crumbs', 1648),
-            cls('CrystalVirus', 'challenge/crystal-virus', 347038),
+            cls('CrystalVirusOtherStory', 'challenge/crystal-virus-other-story', 837028),
             cls('CupidsArrows', 'romance/cupids-arrows', 1538),
             cls('CursedPrincessClub', 'comedy/cursed-princess-club', 1537),
             cls('Cyberbunk', 'sf/cyberbunk', 466),
@@ -273,6 +275,7 @@ class WebToons(ParserScraper):
             cls('MidnightRain', 'drama/midnight-rain', 1797),
             cls('MidnightRhapsody', 'slice-of-life/midnight-rhapsody', 116),
             cls('MidnightRhapsodySeason2', 'slice-of-life/midnight-rhapsody-season2', 365),
+            cls('Miez', 'sf/miez', 2719),
             cls('MissAbbottAndTheDoctor', 'romance/miss-abbott-and-the-doctor', 707),
             cls('MonsterIsle', 'challenge/monster-isle', 531999),
             cls('MOONBEARD', 'comedy/moon-beard', 471),
@@ -301,12 +304,12 @@ class WebToons(ParserScraper):
             cls('NoScope', 'sports/no-scope', 1572),
             cls('NotEvenBones', 'thriller/not-even-bones', 1756),
             cls('NothingSpecial', 'fantasy/nothing-special', 1188),
+            cls('NotSoLucky', 'challenge/not-so-lucky', 673387),
             cls('OddGirlOut', 'drama/odd-girl-out', 1420),
             cls('OhHoly', 'romance/oh-holy', 809),
             cls('OmniscientReader', 'action/omniscient-reader', 2154),
             cls('ORANGEMARMALADE', 'romance/orange-marmalade', 97),
             cls('Outrage', 'super-hero/outrage', 1450),
-            cls('OVERPOWERED', 'challenge/overpowered', 85292),
             cls('PacificRimAmara', 'sf/pacific-rim-amara', 1327),
             cls('PandorasBlogs', 'challenge/pandoras-blogs', 532007),
             cls('PaperRoses', 'challenge/paper-roses', 39736),
@@ -401,6 +404,7 @@ class WebToons(ParserScraper):
             cls('TheRoomies', 'challenge/the-roomies-archive', 513669),
             cls('TheShadowProphet', 'drama/the-shadow-prophet', 1881),
             cls('TheSoundOfYourHeart', 'comedy/the-sound-of-your-heart', 269),
+            cls('TheSpectrumOfUs', 'challenge/the-spectrum-of-us', 334525),
             cls('TheSteamDragonExpress', 'fantasy/steam-dragon-express', 1270),
             cls('TheStoriesOfThoseAroundMe', 'romance/the-stories-of-those-around-me', 96),
             cls('TheStrangeTalesOfOscarZahn', 'fantasy/the-strange-tales-of-oscar-zahn', 685),
@@ -453,6 +457,7 @@ class WebToons(ParserScraper):
             cls('WitchCreekRoad', 'horror/witch-creek-road', 1453),
             cls('WitchHunt', 'supernatural/witch-hunt', 363),
             cls('Wolfsbane', 'horror/wolfsbane', 1826),
+            cls('WorldsStrongestTroll', 'fantasy/worlds-strongest-troll', 5315),
             cls('XINK3R', 'super-hero/xinker', 541),
             cls('YourAdventure', 'comedy/your-adventure', 506),
             cls('YourLetter', 'drama/your-letter', 1540),

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 from __future__ import annotations
 
 import html
@@ -137,7 +137,7 @@ class Scraper:
 
     def getComicStrip(self, url, data):
         """Get comic strip downloader for given URL and data."""
-        imageUrls = self.fetchUrls(url, data, self.imageSearch)
+        imageUrls = self.extract_image_urls(url, data)
         # map modifier function on image URLs
         imageUrls = [self.imageUrlModifier(x, data) for x in imageUrls]
         # remove duplicate URLs
@@ -324,6 +324,12 @@ class Scraper:
         methods: shouldSkipUrl, imageUrlModifier)
         """
         return get_page(url, self.session, allow_errors=self.allow_errors)
+
+    def extract_image_urls(self, url, data):
+        """
+        Extract image URLs from page data using the classes imageSearch attribute.
+        """
+        return self.fetchUrls(url, data, self.imageSearch)
 
     def fetchUrls(self, url, data, urlsearch):
         raise ValueError("No implementation for fetchUrls!")

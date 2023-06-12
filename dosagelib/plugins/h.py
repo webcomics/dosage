@@ -68,6 +68,20 @@ class HeadlessBliss(ComicControlScraper):
     url = 'http://headlessbliss.com/'
 
 
+class Hellkats(ParserScraper):
+    url = 'https://poecatcomix.com/hellkatscomic/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % 'hellkats-issue-1-cover'
+    imageSearch = '//img[@class="scale-with-grid wp-post-image"]'
+    prevSearch = '//a[d:class("fixed-nav-prev")]'
+    latestSearch = '//div[@class="post-title"]//a'
+    starter = indirectStarter
+    adult = True
+
+    def namer(self, imageUrl, pageUrl):
+        return pageUrl.rsplit('/', 2)[1] + '.' + imageUrl.rsplit('.', 1)[-1]
+
+
 class HeyFox(WordPressScraper):
     url = 'http://www.steamclaw.com/heyfox/'
     stripUrl = url + 'archives/comic/%s'

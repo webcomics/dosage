@@ -37,11 +37,17 @@ class KemonoCafe(ParserScraper):
             filename = filename.replace('89', '90')
         elif 'rascals' in pageUrl and '133-2' in pageUrl:
             filename = filename.replace('133', '134')
+        elif 'caughtinorbit' in pageUrl and '26gs' in filename:
+            filename = filename.replace('026gs', '021')
+        elif 'caughtinorbit' in pageUrl and '27gs' in filename:
+            filename = filename.replace('027gs', '022')
         # Fix unordered filenames
         if 'addictivescience' in pageUrl:
             page = self.getPage(pageUrl)
             num = int(page.xpath('//div[@id="comic-wrap"]/@class')[0].replace('comic-id-', ''))
             filename = '%04d_%s' % (num, filename)
+        elif 'CaughtInOrbit' in filename:
+            filename = filename.replace('CaughtInOrbit', 'CIO')
         return filename
 
     @classmethod
@@ -50,13 +56,13 @@ class KemonoCafe(ParserScraper):
             cls('AddictiveScience', 'addictivescience', 'page0001'),
             cls('Bethellium', 'bethellium', 'c01p00'),
             cls('CaribbeanBlue', 'cb', 'page000', last='page325'),
+            cls('CaughtInOrbit', 'caughtinorbit', 'comic-cover'),
             cls('IMew', 'imew', 'imew00', last='imew50'),
             cls('Knighthood', 'knighthood', 'kh0001'),
             cls('KnuckleUp', 'knuckle-up', 'page001', adult=True),
             cls('LasLindas', 'laslindas', 'll0001', adult=True),
             cls('Paprika', 'paprika', 'page000'),
             cls('PracticeMakesPerfect', 'pmp', 'title-001'),
-            cls('PrincessBunny', 'princessbunny', 'pg001'),
             cls('Rascals', 'rascals', 'rascals-pg-0', adult=True),
             cls('TheEyeOfRamalach', 'theeye', 'theeye-page01'),
             cls('TinaOfTheSouth', 'tots', 'tos-01-01'),

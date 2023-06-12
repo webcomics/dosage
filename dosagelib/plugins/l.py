@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile
 
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
@@ -11,11 +11,11 @@ from ..util import tagre
 from .common import ComicControlScraper, WordPressScraper, WordPressNaviIn
 
 
-class Lackadaisy(_ParserScraper):
+class Lackadaisy(ParserScraper):
     url = 'https://www.lackadaisy.com/comic.php'
     stripUrl = url + '?comicid=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = '//div[@id="content"]/img'
+    imageSearch = '//div[@id="exhibit"]/img[contains(@src, "comic/")]'
     prevSearch = '//div[@class="prev"]/a'
     nextSearch = '//div[@class="next"]/a'
     help = 'Index format: n'
@@ -26,6 +26,12 @@ class Lackadaisy(_ParserScraper):
         num = pageUrl.rsplit('=', 1)[-1]
         ext = imageUrl.rsplit('.', 1)[-1]
         return 'lackadaisy_%s.%s' % (num, ext)
+
+
+class Lancer(WordPressScraper):
+    url = 'https://lancercomic.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'chapter-1-cover'
 
 
 class LastResort(WordPressScraper):
@@ -80,7 +86,7 @@ class LifeAintNoPonyFarm(WordPressScraper):
     endOfLife = True
 
 
-class LifeAsRendered(_ParserScraper):
+class LifeAsRendered(ParserScraper):
     # Reverse navigation doesn't work properly, so search forward instead
     stripUrl = 'https://kittyredden.com/LAR/%s/'
     url = stripUrl % '0100'
@@ -115,11 +121,11 @@ class LifeAsRendered(_ParserScraper):
         filename = imageUrl.rsplit('/', 1)[-1]
         return filename.replace('ReN', 'N').replace('N01P', 'A02S')
 
-    def fetchUrls(self, url, data, urlSearch):
+    def extract_image_urls(self, url, data):
         # Fix missing image link
-        if 'LAR/0403' in url and urlSearch == self.imageSearch:
+        if 'LAR/0403' in url:
             return [self.stripUrl.rstrip('/') % 'A04/A04P03.png']
-        return super(LifeAsRendered, self).fetchUrls(url, data, urlSearch)
+        return super().extract_image_urls(url, data)
 
     def getPrevUrl(self, url, data):
         # Fix broken navigation links

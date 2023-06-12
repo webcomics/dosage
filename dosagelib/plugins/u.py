@@ -1,16 +1,41 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
+from __future__ import annotations
+
+import json
+import re
+from contextlib import suppress
 from re import compile
-from urllib.parse import urljoin
-from lxml import etree
 
 from ..scraper import BasicScraper, ParserScraper
 from ..helpers import indirectStarter
 from ..util import tagre
 from .common import ComicControlScraper, WordPressScraper, WordPressNavi
+
+
+class UberQuest(ParserScraper):
+    baseUrl = 'https://uberquest.studiokhimera.com/'
+    url = baseUrl + 'wp-json/keeros_comics/v1/chapters'
+    stripUrl = baseUrl + 'wp-json/wp/v2/cfx_comic_page?page_number=%s'
+    firstStripUrl = stripUrl % 'cover'
+
+    def starter(self):
+        # Retrieve comic metadata from API
+        data = self.session.get(self.url)
+        data.raise_for_status()
+        return self.stripUrl % data.json()[-1]['pages'][-1]['page_number']
+
+    def getPrevUrl(self, url, data):
+        return self.stripUrl % json.loads(data.text_content())[0]['prev_id']
+
+    def extract_image_urls(self, url, data):
+        return [json.loads(data.text_content())[0]['attachment']]
+
+    def namer(self, imageUrl, pageUrl):
+        return 'UberQuest-' + pageUrl.rsplit('=', 1)[-1]
 
 
 class Underling(WordPressNavi):
@@ -57,7 +82,7 @@ class UnicornJelly(BasicScraper):
 
 
 class Unsounded(ParserScraper):
-    url = 'http://www.casualvillain.com/Unsounded/'
+    url = 'https://www.casualvillain.com/Unsounded/'
     startUrl = url + 'comic+index/'
     stripUrl = url + 'comic/ch%s/ch%s_%s.html'
     firstStripUrl = stripUrl % ('01', '01', '01')
@@ -66,20 +91,34 @@ class Unsounded(ParserScraper):
     latestSearch = '//div[@id="chapter_box"][1]//a[last()]'
     multipleImagesPerStrip = True
     starter = indirectStarter
+    style_bg_regex = re.compile(r'background-image: url\((.*pageart/.*)\)')
     help = 'Index format: chapter-page'
 
-    def fetchUrls(self, url, data, urlSearch):
-        imageUrls = super(Unsounded, self).fetchUrls(url, data, urlSearch)
+    def extract_image_urls(self, url, data):
+        urls = []
+        with suppress(ValueError):
+            urls.extend(super().extract_image_urls(url, data))
         # Include background for multi-image pages
-        imageRegex = compile(r'background-image: url\((pageart/.*)\)')
-        for match in imageRegex.finditer(str(etree.tostring(data))):
-            print(match)
-            searchUrls.append(normaliseURL(urljoin(data[1], match.group(1))))
-        return imageUrls
+        cssbg = self.extract_css_bg(data)
+        if cssbg:
+            urls.append(cssbg)
+        if not urls:
+            raise ValueError(f'No comic found at {url!r}')
+        return urls
 
-    def namer(self, imageUrl, pageUrl):
-        filename = imageUrl.rsplit('/', 1)[-1]
-        pagename = pageUrl.rsplit('/', 1)[-1]
+    def extract_css_bg(self, page) -> str | None:
+        comicdivs = page.xpath('//div[@id="comic"]')
+        if comicdivs:
+            style = comicdivs[0].attrib.get('style')
+            if style:
+                hit = self.style_bg_regex.search(style)
+                if hit:
+                    return hit.group(1)
+        return None
+
+    def namer(self, image_url, page_url):
+        filename = image_url.rsplit('/', 1)[-1]
+        pagename = page_url.rsplit('/', 1)[-1]
         if pagename.split('.', 1)[0] != filename.split('.', 1)[0]:
             filename = pagename.split('_', 1)[0] + '_' + filename
         return filename
@@ -88,7 +127,7 @@ class Unsounded(ParserScraper):
         # Fix missing navigation links between chapters
         if 'ch13/you_let_me_fall' in url:
             return self.stripUrl % ('13', '13', '85')
-        return super(Unsounded, self).getPrevUrl(url, data)
+        return super().getPrevUrl(url, data)
 
     def getIndexStripUrl(self, index):
         chapter, num = index.split('-')

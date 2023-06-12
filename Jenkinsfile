@@ -112,7 +112,7 @@ def windowsBuildCommands(pyver, exename) {
             tar xvf dist/dosage-*.tar.gz
             cd dosage-*
             xvfb-run sh -c "
-                wine python -m pip install -e .[css] &&
+                wine python -m pip install .[css] &&
                 cd scripts &&
                 wine python -m PyInstaller -y dosage.spec;
                 wineserver -w" 2>&1 | tee log.txt

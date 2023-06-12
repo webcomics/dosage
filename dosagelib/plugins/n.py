@@ -5,7 +5,7 @@
 # Copyright (C) 2019-2020 Daniel Ring
 from re import compile, escape
 
-from ..scraper import _BasicScraper, _ParserScraper
+from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, bounceStarter
 from ..util import tagre
 from .common import ComicControlScraper, WordPressScraper, WordPressNavi, WordPressWebcomic
@@ -113,29 +113,18 @@ class Nicky510(WordPressNavi):
     endOfLife = True
 
 
-class Nightshift(WordPressWebcomic):
-    url = 'https://poecatcomix.com/nightshift-static/'
-    stripUrl = 'https://poecatcomix.com/nightshift/%s/'
-    firstStripUrl = stripUrl % 'ns-cover'
-    imageSearch = '//div[contains(@class, "webcomic-media")]//img'
+class Nightshift(ParserScraper):
+    url = 'https://poecatcomix.com/nightshiftcomic/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % 'ns-issue-1-cover'
+    imageSearch = '//img[@class="scale-with-grid wp-post-image"]'
+    prevSearch = '//a[d:class("fixed-nav-prev")]'
+    latestSearch = '//div[@class="post-title"]//a'
+    starter = indirectStarter
     adult = True
 
-    def starter(self):
-        # Build list of chapters for naming
-        indexPage = self.getPage(self.url)
-        self.chapters = indexPage.xpath('//a[./img[contains(@class, "attachment-large")]]/@href')
-        latestPage = self.chapters[0]
-        self.chapters = self.chapters[1:]
-        self.currentChapter = len(self.chapters)
-        return latestPage
-
     def namer(self, imageUrl, pageUrl):
-        page = pageUrl.rstrip('/').rsplit('/', 1)[-1]
-        page = page.replace('blood-brothers', 'bloodbrothers').replace('bb-2', 'bb2').replace('ns7-', 'page-')
-        filename = 'ns%d-%s.%s' % (self.currentChapter, page, imageUrl.rsplit('.', 1)[-1])
-        if pageUrl in self.chapters:
-            self.currentChapter = self.currentChapter - 1
-        return filename
+        return pageUrl.rsplit('/', 2)[1] + '.' + imageUrl.rsplit('.', 1)[-1]
 
 
 class Nimona(_ParserScraper):
@@ -176,13 +165,13 @@ class NoNeedForBushido(_ParserScraper):
     help = 'Index format: nnn'
 
 
-class NonPlayerCharacter(_ParserScraper):
+class NonPlayerCharacter(ParserScraper):
     url = 'https://www.lfg.co/'
-    stripUrl = url + 'npc/tale/%s/'
+    stripUrl = url + 'npc/comic/%s/'
     firstStripUrl = stripUrl % '1-1'
     imageSearch = '//div[@id="comic-img"]//img'
     prevSearch = '//a[@class="comic-nav-prev"]'
-    latestSearch = '//div[@id="feature-npc-footer"]/a[contains(@href, "npc/tale/")]'
+    latestSearch = '//div[@id="feature-npc-footer"]/a[contains(@href, "npc/comic/")]'
     starter = indirectStarter
 
     def namer(self, imageUrl, pageUrl):

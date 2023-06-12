@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile, escape
 
 from ..helpers import bounceStarter, indirectStarter
-from ..scraper import _BasicScraper, _ParserScraper
+from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
 from .common import WordPressScraper, WordPressNavi
 
@@ -21,7 +21,7 @@ class OctopusPie(_ParserScraper):
     help = 'Index format: yyyy-mm-dd/nnn-strip-name'
 
 
-class OffWhite(_ParserScraper):
+class OffWhite(ParserScraper):
     baseUrl = 'https://web.archive.org/web/20200627222318/http://off-white.eu/'
     stripUrl = baseUrl + 'comic/%s/'
     firstStripUrl = stripUrl % 'prologue-page-1-2'
@@ -31,18 +31,6 @@ class OffWhite(_ParserScraper):
     latestSearch = '//a[text()="A"]'
     starter = indirectStarter
     endOfLife = True
-
-    def fetchUrls(self, url, data, urlSearch):
-        # Fix missing page
-        if url == self.stripUrl % 'page-37':
-            return [self.baseUrl + 'ow_v2/wp-content/uploads/2011/01/new-037.jpg']
-        return super(OffWhite, self).fetchUrls(url, data, urlSearch)
-
-    def getPrevUrl(self, url, data):
-        # Fix missing page
-        if url == self.stripUrl % 'page-37':
-            return self.stripUrl % 'page-36'
-        return super(OffWhite, self).getPrevUrl(url, data)
 
 
 class Oglaf(_ParserScraper):
@@ -55,19 +43,16 @@ class Oglaf(_ParserScraper):
     multipleImagesPerStrip = True
     adult = True
 
-    def fetchUrls(self, url, data, search):
-        urls = []
-        urls.extend(super(Oglaf, self).fetchUrls(url, data, search))
-        if search == self.imageSearch:
-            try:
-                nexturls = self.fetchUrls(url, data, self.nextSearch)
-            except ValueError:
-                pass
-            else:
-                while nexturls and nexturls[0].startswith(url):
-                    data = self.getPage(nexturls[0])
-                    urls.extend(super(Oglaf, self).fetchUrls(nexturls, data, search))
-                    nexturls = self.fetchUrls(url, data, self.nextSearch)
+    def extract_image_urls(self, url, data):
+        urls = super().extract_image_urls(url, data)
+        try:
+            nexturl = self.fetchUrls(url, data, self.nextSearch)[0]
+            while nexturl.startswith(url):
+                data = self.getPage(nexturl)
+                urls.extend(super().extract_image_urls(url, data))
+                nexturl = self.fetchUrls(url, data, self.nextSearch)[0]
+        except ValueError:
+            pass
         return urls
 
 
@@ -75,6 +60,7 @@ class OhJoySexToy(WordPressNavi):
     url = 'http://www.ohjoysextoy.com/'
     firstStripUrl = url + 'introduction/'
     textSearch = '//div[@id="comic"]//img/@alt'
+    multipleImagesPerStrip = True
     adult = True
 
 

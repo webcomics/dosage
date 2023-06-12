@@ -6,7 +6,7 @@
 from re import compile, escape, MULTILINE
 
 from ..util import tagre
-from ..scraper import BasicScraper, _BasicScraper, _ParserScraper, ParserScraper
+from ..scraper import BasicScraper, ParserScraper, _BasicScraper, _ParserScraper
 from ..helpers import regexNamer, bounceStarter, indirectStarter
 from .common import WordPressScraper, WordPressNavi, WordPressWebcomic
 
@@ -166,18 +166,18 @@ class AllTheGrowingThings(WordPressScraper):
     endOfLife = True
 
 
-class AlphaLuna(_ParserScraper):
-    url = 'https://alphaluna.net/'
+class AlphaLuna(ParserScraper):
+    url = 'https://alphalunacomic.net/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'issue-1-cover'
     imageSearch = '//main[@id="comic"]//img'
     prevSearch = '//a[@rel="prev"]'
 
 
-class AlphaLunaSpanish(_ParserScraper):
+class AlphaLunaSpanish(ParserScraper):
     name = 'AlphaLuna/Spanish'
     lang = 'es'
-    url = 'https://alphaluna.net/spanish/'
+    url = 'https://alphalunacomic.net/spanish/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'issue-1-cover'
     imageSearch = '//main[@id="comic"]//img'
