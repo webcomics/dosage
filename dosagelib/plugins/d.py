@@ -5,7 +5,7 @@
 # Copyright (C) 2019-2020 Daniel Ring
 from re import compile, escape
 
-from ..scraper import _BasicScraper, _ParserScraper
+from ..scraper import _BasicScraper, _ParserScraper, ParserScraper
 from ..helpers import indirectStarter, bounceStarter
 from ..util import tagre
 from .common import (ComicControlScraper, WordPressScraper, WordPressNavi,
@@ -25,6 +25,18 @@ class Damonk(_BasicScraper):
 class DangerouslyChloe(ComicControlScraper):
     url = 'http://www.dangerouslychloe.com/'
     firstStripUrl = url + 'strips-dc/Chapter_1_-_That_damned_girl'
+
+
+class DarkLegacy(ParserScraper):
+    starter = indirectStarter
+    url = "https://www.darklegacycomics.com"
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//div[@class="comic narrow"]//img'
+    prevSearch = ('//a[@title="Previous - A"]',
+                  '//a[@title="Previous"]')
+    latestSearch = '//div[@class="comic narrow feed"]//a'
+    help = 'Index format: n (unpadded)'
 
 
 class DarkWhite(WordPressScraper):

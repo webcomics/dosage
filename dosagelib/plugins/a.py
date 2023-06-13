@@ -377,13 +377,21 @@ class ATaleOfTails(WordPressScraper):
     adult = True
 
 
-class AwkwardZombie(BasicScraper):
+class Awaken(ParserScraper):
+    url = "https://www.awakencomic.com/"
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'comic-cover'
+    imageSearch = '//div[@id="cc-comicbody"]//img'
+    prevSearch = '//a[@rel="prev"]'
+    help = 'Index format: chapter-n-page-n (unpadded)'
+
+
+class AwkwardZombie(ParserScraper):
     url = 'https://www.awkwardzombie.com/'
-    rurl = escape(url)
     stripUrl = url + 'awkward-zombie/%s'
     firstStripUrl = stripUrl % 'coin-battle'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%sawkward-zombie/[a-zA-Z-]+)' % rurl, before="prev"))
+    imageSearch = '//div[@id="cc-comicbody"]//img'
+    prevSearch = '//a[@rel="prev"]'
     help = 'Index format: variable :('
 
 

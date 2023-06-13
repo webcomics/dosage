@@ -709,3 +709,12 @@ class SwordsAndSausages(_ParserScraper):
     imageSearch = '//img[d:class("comic-image")]'
     prevSearch = '//a[./span[contains(text(), "Previous")]]'
     multipleImagesPerStrip = True
+
+
+class SwordsComic(ParserScraper):
+    url = 'https://swordscomic.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'cover'
+    imageSearch = '//div[@class="page-image-wrapper"]//img'
+    prevSearch = '//a[@class="navigation-button navigation-previous"]'
+    help = 'Index format: Swordsnnn (unpadded)'

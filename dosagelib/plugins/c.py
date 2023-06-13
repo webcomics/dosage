@@ -6,7 +6,7 @@
 from re import compile, escape
 from typing import List
 
-from ..scraper import _BasicScraper, _ParserScraper
+from ..scraper import _BasicScraper, _ParserScraper, ParserScraper
 from ..helpers import bounceStarter, indirectStarter, joinPathPartsNamer
 from ..util import tagre
 from .common import WordPressScraper, WordPressNavi, WordPressWebcomic

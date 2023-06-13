@@ -3,6 +3,7 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
+
 from ..scraper import ParserScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
 
@@ -29,6 +30,18 @@ class VGCats(_ParserScraper):
     imageSearch = '//td/img[contains(@src, "images/")]'
     prevSearch = '//a[img[contains(@src, "back.")]]'
     help = 'Index format: n (unpadded)'
+
+
+class Vibe(ParserScraper):
+    starter = indirectStarter
+    url = 'http://www.vibecomic.com/vibe/'
+    stripUrl = url + '%s'
+    firstStripUrl = stripUrl % ''
+    imageSearch = '//div[@id="cc-comicbody"]//img'
+    prevSearch = '//a[@rel="prev"]'
+    nextSearch = '//a[@rel="next"]'
+    latestSearch = '//a[@class="last"]'
+    help = 'Index format: VIBEnnn (padded)'
 
 
 class VickiFox(_ParserScraper):
