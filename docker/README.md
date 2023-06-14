@@ -1,8 +1,11 @@
+//BUild
+
 To build this image, simply be in this subdirectory and execute the following command:
 
 ```docker build --pull --no-cache -t dosage:latest .```
 
 
+//Run
 Example usage:
 
 ```docker run --rm -v /home/Webcomics:/webcomics dosage:latest -b /webcomics IncredibleWebcomic```
@@ -14,4 +17,9 @@ Additionally you may also set custom scraper classes by adding an additional mou
 
 ```docker run --rm -v /home/Webcomics:/webcomics -v /home/Webcomics/custom_scrapers.py:/dosage/dosagelib/plugins/custom.py dosage:latest IncredibleWebcomic```
 
-Make sure the custom_scrapers.py file exists at the specified location
+Make sure the custom_scrapers.py file exists at the specified location.
+
+//Alias
+Alias can be define in .bashrc for ease of usage, by adding to it the line:
+
+```alias dosage="docker run --rm -v /home/Webcomics:/webcomics dosage:latest -b /webcomics"```
