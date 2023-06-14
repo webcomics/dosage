@@ -23,3 +23,7 @@ Make sure the custom_scrapers.py file exists at the specified location.
 Alias can be define in .bashrc for ease of usage, by adding to it the line:
 
 ```alias dosage="docker run --rm -v /home/Webcomics:/webcomics dosage:latest -b /webcomics"```
+
+## Updating
+
+To update, simply remove the old image (ie. ```docker image rm dosage:latest```) and run the build again.
