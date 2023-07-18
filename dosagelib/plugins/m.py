@@ -165,14 +165,15 @@ class MonkeyUser(_ParserScraper):
         return data.xpath('//div[d:class("video-container")]', namespaces=NS)
 
 
-class MonsieurLeChien(_BasicScraper):
-    url = 'http://www.monsieur-le-chien.fr/'
+class MonsieurLeChien(ParserScraper):
+    url = ('https://web.archive.org/web/20210311002403/'
+        'http:/www.monsieur-le-chien.fr/')
     stripUrl = url + 'index.php?planche=%s'
     firstStripUrl = stripUrl % '2'
     lang = 'fr'
-    imageSearch = compile(tagre("img", "src", r'(i/planches/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)') +
-                         tagre("img", "src", "i/precedent.gif"))
+    imageSearch = '//img[contains(@src,"i/planches/")]'
+    prevSearch = '//a[img[contains(@src,"i/precedent.gif")]]'
+    endOfLife = True
     help = 'Index format: n'
 
 
