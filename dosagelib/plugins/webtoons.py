@@ -121,6 +121,7 @@ class WebToons(ParserScraper):
             cls('ClusterFudge', 'slice-of-life/cluster-fudge', 355),
             cls('CodeAdam', 'action/code-adam', 1657),
             cls('CookingComically', 'tiptoon/cooking-comically', 622),
+            cls('CrowTime', 'challenge/crow-time', 693372),
             cls('Crumbs', 'romance/crumbs', 1648),
             cls('CrystalVirusOtherStory', 'challenge/crystal-virus-other-story', 837028),
             cls('CupidsArrows', 'romance/cupids-arrows', 1538),
