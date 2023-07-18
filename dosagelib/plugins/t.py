@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile, escape, MULTILINE
 try:
     from functools import cached_property
@@ -346,15 +346,11 @@ class TwinDragons(WordPressScraper):
     multipleImagesPerStrip = True
 
 
-class TwoGuysAndGuy(_BasicScraper):
-    url = 'http://www.twogag.com/'
-    rurl = escape(url)
+class TwoGuysAndGuy(ComicControlScraper):
+    url = 'https://twogag.com/'
     stripUrl = url + 'archives/%s'
     firstStripUrl = stripUrl % '4'
-    imageSearch = compile(tagre('img', 'src', r'(%scomics/\d{4}-\d{2}-\d{2}[^"]*)' % rurl))
-    prevSearch = compile(tagre('a', 'href', r'(%sarchives/\d+)' % rurl,
-                               after='title="Previous"'))
-    help = 'Index format: number'
+    help = 'Index format: number[-name]'
     adult = True
 
 
