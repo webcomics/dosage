@@ -16,7 +16,8 @@ def get_test_scrapers():
     """Return scrapers that should be tested."""
     if 'TESTALL' in os.environ:
         # test all comics (this will take some time)
-        return scrapers.all()
+        # Ignore known-broken (and never-to-be-fixed) modules
+        scraper_pattern = '^(?!Schuelert)'
     elif 'TESTCOMICS' in os.environ:
         scraper_pattern = os.environ['TESTCOMICS']
     else:
