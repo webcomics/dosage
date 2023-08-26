@@ -206,13 +206,9 @@ class TheOrderOfTheStick(_ParserScraper):
         return page_url.rsplit('/', 1)[-1][:-5]
 
 
-class TheRockCocks(_BasicScraper):
-    url = 'http://rockcocks.slipshine.net/'
-    rurl = escape(url)
-    stripUrl = url + 'comic/%s'
-    firstStripUrl = stripUrl % "page-1-nsfw-track-1-start"
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl, after='id="cc-comic"'))
-    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl, after='rel="prev"'))
+class TheRockCocks(ComicControlScraper):
+    url = 'https://rockcocks.slipshine.net/'
+    firstStripUrl = url + 'the-rock-cocks/page-1'
     adult = True
 
 
