@@ -3,11 +3,8 @@
 # SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
-from re import compile
-
-from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
+from ..scraper import ParserScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
-from ..util import tagre
 from .common import ComicControlScraper, WordPressScraper, WordPressNaviIn
 
 
@@ -152,13 +149,12 @@ class LilithsWord(ComicControlScraper):
         return imageUrl.rsplit('/', 1)[-1].split('-', 1)[1]
 
 
-class LittleGamers(_BasicScraper):
-    url = 'http://www.little-gamers.com/'
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '2000/12/01/99'
-    imageSearch = compile(tagre("img", "src", r'(http://little-gamers\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(http://www\.little-gamers\.com/[^"]+)', before="comic-nav-prev-link"))
-    help = 'Index format: yyyy/mm/dd/name'
+class LittleGamers(ParserScraper):
+    url = 'https://www.little-gamers.com/'
+    firstStripUrl = url + '2000/12/01/99'
+    imageSearch = '//div[d:class("comic")]//img'
+    prevSearch = ('//a[@id="previous"]',
+        '//div[d:class("comic-navigation")]//a[text()="previous"]')
 
 
 class LittleTales(_ParserScraper):
@@ -197,7 +193,7 @@ class LoadingArtist(_ParserScraper):
     starter = indirectStarter
 
 
-class LoFiJinks(WordPressNaviIn):
+class LoFiJinks(WordPressScraper):
     baseUrl = 'https://hijinksensue.com/comic/'
     url = baseUrl + 'learning-to-love-again/'
     firstStripUrl = baseUrl + 'lo-fijinks-everything-i-know-anout-james-camerons-avatar-movie/'

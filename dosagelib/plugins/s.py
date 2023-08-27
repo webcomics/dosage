@@ -9,7 +9,8 @@ from os.path import splitext
 from ..scraper import _BasicScraper, _ParserScraper, ParserScraper
 from ..helpers import indirectStarter, bounceStarter, joinPathPartsNamer
 from ..util import tagre
-from .common import ComicControlScraper, WordPressScraper, WordPressNavi, WordPressWebcomic
+from .common import (ComicControlScraper, WordPressScraper, WordPressSpliced,
+    WordPressNavi, WordPressWebcomic)
 
 
 class SabrinaOnline(_BasicScraper):
@@ -31,11 +32,6 @@ class SabrinaOnline(_BasicScraper):
         search = compile(tagre("a", "href", r"(\d\d\d\d-\d\d.html)"))
         archivepages = self.fetchUrls(archive, data, search)
         return archivepages[-1]
-
-
-class SafelyEndangered(WordPressNavi):
-    url = 'http://www.safelyendangered.com/'
-    firstStripUrl = url + 'comic/ignored/'
 
 
 class SaffronAndSage(WordPressScraper):
@@ -74,19 +70,18 @@ class Savestate(WordPressNavi):
 
 
 class ScandinaviaAndTheWorld(_ParserScraper):
-    url = 'https://satwcomic.com/'
-    stripUrl = url + '%s'
-    firstStripUrl = stripUrl % 'sweden-denmark-and-norway'
+    url = 'https://satwcomic.com/sweden-denmark-and-norway'
+    firstStripUrl = url
     starter = indirectStarter
     imageSearch = '//img[@itemprop="image"]'
     prevSearch = '//a[@accesskey="p"]'
-    latestSearch = '//a[text()="View latest comic"]'
+    latestSearch = '//a[contains(@title, "Latest")]'
     textSearch = '//span[@itemprop="articleBody"]'
-    help = 'Index format: stripname'
 
 
 class ScaryGoRound(_ParserScraper):
-    url = 'http://www.scarygoround.com/sgr/ar.php'
+    url = ('https://web.archive.org/web/20190327203330/'
+        'https://www.scarygoround.com/sgr/ar.php')
     stripUrl = url + '?date=%s'
     firstStripUrl = stripUrl % '20020604'
     imageSearch = '//img[contains(@src, "/strips/")]'
@@ -198,15 +193,11 @@ class Sharksplode(WordPressScraper):
     allow_errors = (403,)
 
 
-class Sheldon(_BasicScraper):
-    url = 'http://www.sheldoncomics.com/'
-    rurl = escape(url)
-    stripUrl = url + 'archive/%s.html'
-    firstStripUrl = stripUrl % '011130'
-    imageSearch = compile(tagre("img", "src", r'(http://cdn\.sheldoncomics\.com/strips/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(%sarchive/\d+\.html)' % rurl,
-                               after="sidenav-prev"))
-    help = 'Index format: yymmdd'
+class Sheldon(ParserScraper):
+    url = 'https://www.sheldoncomics.com/'
+    firstStripUrl = url + 'comic/well-who-is-this/'
+    imageSearch = '//div[@id="comic"]//img'
+    prevSearch = '//a[img[d:class("left")]]'
 
 
 class Shifters(ParserScraper):
@@ -278,17 +269,15 @@ class ShipInABottle(WordPressScraper):
     help = 'Index format: number'
 
 
-class Shortpacked(_ParserScraper):
-    url = 'http://www.shortpacked.com/index.php'
-    stripUrl = url + '?id=%s'
-    css = True
-    imageSearch = 'img#comic'
-    prevSearch = 'a.prev'
-    help = 'Index format: nnn'
+class Shortpacked(ComicControlScraper):
+    url = 'https://www.shortpacked.com/comic/'
+    firstStripUrl = url + 'just-a-toy-store'
 
 
-class ShotgunShuffle(WordPressScraper):
-    url = 'http://shotgunshuffle.com/'
+class ShotgunShuffle(WordPressSpliced):
+    # Currently down, use archive.org in the meantime (08-2023)
+    url = ('https://web.archive.org/web/20230131163842/'
+        'https://shotgunshuffle.com/')
     firstStripUrl = url + 'comic/pilot/'
 
 
@@ -452,12 +441,14 @@ class SpaceFurries(ParserScraper):
         return imageurls
 
 
-class SpaceJunkArlia(_ParserScraper):
-    url = 'http://spacejunkarlia.com/'
+class SpaceJunkArlia(ParserScraper):
+    url = ('https://web.archive.org/web/20220121133701/'
+        'http://spacejunkarlia.com/')
     stripUrl = url + '?strip_id=%s'
     firstStripUrl = stripUrl % '0'
     imageSearch = '//div[d:class("content")]/img'
     prevSearch = '//a[text()="<"]'
+    endOfLife = True
     help = 'Index format: number'
 
 

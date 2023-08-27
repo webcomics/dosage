@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper
@@ -73,19 +73,9 @@ class GirlGenius(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
-class GirlsWithSlingshots(_BasicScraper):
+class GirlsWithSlingshots(ComicControlScraper):
     url = 'https://girlswithslingshots.com/'
-    rurl = escape(url)
-    stripUrl = url + 'comic/%s'
-    firstStripUrl = stripUrl % 'gws1'
-    imageSearch = (
-        compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl)),
-        compile(tagre("img", "src",
-                      r'(http://cdn\.girlswithslingshots\.com/comics/[^"]+)')),
-    )
-    prevSearch = compile(tagre("a", "href", r'(%scomic/[^"]+)' % rurl,
-                               before='rel="prev"'))
-    help = 'Index format: stripname'
+    firstStripUrl = url + 'comic/gws1'
 
 
 class GleefulNihilism(WordPressScraper):
