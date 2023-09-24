@@ -9,7 +9,7 @@ from typing import List
 from ..scraper import _BasicScraper, _ParserScraper, ParserScraper
 from ..helpers import bounceStarter, indirectStarter, joinPathPartsNamer
 from ..util import tagre
-from .common import WordPressScraper, WordPressNavi, WordPressWebcomic
+from .common import ComicControlScraper, WordPressScraper, WordPressNavi, WordPressWebcomic
 
 
 class CampComic(_ParserScraper):
@@ -85,6 +85,11 @@ class CaseyAndAndy(_BasicScraper):
     prevSearch = compile(tagre("a", "href", r'(view\.php\?strip=\d+)') +
                          tagre("img", "src", r'previous\.gif'))
     help = 'Index format: number'
+
+
+class CassiopeiaQuinn(ComicControlScraper):
+    url = 'https://www.cassiopeiaquinn.com/'
+    firstStripUrl = url + 'comic/the-prize-cover'
 
 
 class CasuallyKayla(_BasicScraper):
