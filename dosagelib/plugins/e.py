@@ -4,7 +4,7 @@
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
 import os
-from re import compile, IGNORECASE
+from re import compile, sub, IGNORECASE
 
 from ..helpers import bounceStarter, indirectStarter
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
@@ -212,6 +212,28 @@ class Evon(WordPressScraper):
     stripUrl = url + '?comic=%s'
     firstStripUrl = stripUrl % 'chapter-1'
     adult = True
+
+
+class ExorcismAcademy(ParserScraper):
+    url = 'https://ea.asmodrawscomics.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'title-page'
+    imageSearch = '//div[contains(@class, "webcomic-image")]//img[contains(@class, "size-full")]'
+    prevSearch = '//a[contains(@class, "previous-webcomic-link")]'
+    multipleImagesPerStrip = True
+    adult = True
+
+    def namer(self, image_url, page_url):
+        def repl(m):
+            return "{0}-{1}".format(m.group(2).zfill(4), m.group(1))
+
+        indexes = tuple(image_url.rstrip('/').split('/')[-3:])
+        day = sub(r'^(.+?)-?(?:Pg-(\d+))', repl, indexes[2])
+        name = "{year}-{month}-{day}".format(
+            year = indexes[0],
+            month = indexes[1],
+            day = day)
+        return name
 
 
 class ExploitationNow(WordPressNavi):
