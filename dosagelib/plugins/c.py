@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile, escape
 from typing import List
 
@@ -460,25 +460,13 @@ class CutLoose(_ParserScraper):
         return '%s-%s-%s_%s' % (postDate[1], postDate[2], postDate[3], filename)
 
 
-class CyanideAndHappiness(_BasicScraper):
-    url = 'https://explosm.net/comics/'
-    stripUrl = url + '%s/'
-    firstStripUrl = stripUrl % '15'
-    imageSearch = compile(tagre("img", "src", r'(.*files.explosm.net/[^/]+/[^"]+)', before="main-comic"))
-    prevSearch = compile(tagre("a", "href", r'(/comics/\d+/)', after="nav-previous"))
-    nextSearch = compile(tagre("a", "href", r"(/comics/\d+/)", after="nav-next"))
-    help = 'Index format: n (unpadded)'
-
-    def shouldSkipUrl(self, url, data):
-        """Skip pages without images."""
-        return "/comics/play-button.png" in data[0]
-
-    def namer(self, image_url, page_url):
-        imgname = image_url.split('/')[-1]
-        # only get the first 100 chars for the image name
-        imgname = imgname[:100]
-        imgnum = page_url.split('/')[-2]
-        return '%s_%s' % (imgnum, imgname)
+class CyanideAndHappiness(ParserScraper):
+    url = 'https://explosm.net/'
+    imageSearch = '//div[@id="comic"]//div[contains(@class,"ComicImage")]/span//img'
+    prevSearch = '//div[@type="comic"]//a[*[local-name()="svg" and @rotate="180deg"]]'
+    nextSearch = '//div[@type="comic"]//a[*[local-name()="svg" and @rotate="0deg"]]'
+    starter = bounceStarter
+    namer = joinPathPartsNamer((), range(-4, 0))
 
 
 class CynWolf(_ParserScraper):
