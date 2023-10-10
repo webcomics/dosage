@@ -25,14 +25,6 @@ class ComicsKingdom(ParserScraper):
         if lang:
             self.lang = lang
 
-        # slightly iffy hack taken from certifi
-        # We need or own certificate bundle since ComicsKingdom screws up their
-        # TLS setup from time to time, this should "fix" it)
-        self.cert_ctx = as_file(files('dosagelib.data') / 'godaddy-bundle-g2-2031.pem')
-        self.session.add_host_options('comicskingdom.com', {
-            'verify': str(self.cert_ctx.__enter__()),
-        })
-
     @classmethod
     def getmodules(cls):  # noqa: CFQ001
         return (
