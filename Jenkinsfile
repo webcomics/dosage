@@ -1,9 +1,10 @@
 def pys = [
-    [name: 'Python 3.11', docker: '3.11-bookworm', tox:'py311,flake8', main: true],
+    [name: 'Python 3.12', docker: '3.12-bookworm', tox:'py312,flake8', main: true],
+    [name: 'Python 3.11', docker: '3.11-bookworm', tox:'py311', main: false],
     [name: 'Python 3.10', docker: '3.10-bookworm', tox:'py310', main: false],
-    [name: 'Python 3.9',  docker: '3.9-bookworm',  tox:'py39', main: false],
-    [name: 'Python 3.8',  docker: '3.8-bookworm',  tox:'py38', main: false],
-    [name: 'Python 3.7',  docker: '3.7-bookworm',  tox:'py37', main: false],
+    [name: 'Python 3.9',  docker: '3.9-bookworm',  tox:'py39',  main: false],
+    [name: 'Python 3.8',  docker: '3.8-bookworm',  tox:'py38',  main: false],
+    [name: 'Python 3.7',  docker: '3.7-bookworm',  tox:'py37',  main: false],
 ]
 
 properties([
