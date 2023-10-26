@@ -55,11 +55,9 @@ pys.each { py ->
                     def buildVer = findFiles(glob: 'dist/*.tar.gz')[0].name.replaceFirst(/\.tar\.gz$/, '')
                     currentBuild.description = buildVer
 
-                    publishCoverage calculateDiffForChangeRequests: true,
-                        sourceFileResolver: sourceFiles('STORE_LAST_BUILD'),
-                        adapters: [
-                            coberturaAdapter('.tox/reports/*/coverage.xml')
-                        ]
+                    recordCoverage sourceCodeEncoding: 'UTF-8', tools: [
+                        [parser: 'COBERTURA', pattern: '.tox/reports/*/coverage.xml']
+                    ]
 
                     recordIssues sourceCodeEncoding: 'UTF-8',
                         referenceJobName: 'dosage/master',

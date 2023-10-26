@@ -16,11 +16,9 @@ node {
 
     stage('Report') {
         junit 'junit.xml'
-        publishCoverage calculateDiffForChangeRequests: true,
-            sourceFileResolver: sourceFiles('STORE_LAST_BUILD'),
-            adapters: [
-                coberturaAdapter('coverage.xml')
-            ]
+        recordCoverage sourceCodeEncoding: 'UTF-8', tools: [
+            [parser: 'COBERTURA', pattern: 'coverage.xml']
+        ]
     }
 
     stage('Allure Report') {
