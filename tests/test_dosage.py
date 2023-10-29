@@ -82,7 +82,15 @@ class TestDosage:
             json={})
         cmd_ok('--version', '-v')
         out = capfd.readouterr().out
-        assert 'invalid update file' in out
+        assert 'KeyError' in out
+
+    @responses.activate
+    def test_update_rate_limit(self, capfd):
+        responses.add(responses.GET, re.compile(r'https://api\.github\.com/'),
+            status=403)
+        cmd_ok('--version', '-v')
+        out = capfd.readouterr().out
+        assert 'HTTPError' in out
 
     def test_display_help(self):
         for option in ("-h", "--help"):

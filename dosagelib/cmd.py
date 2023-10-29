@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 import argparse
 import os
 import platform
@@ -124,8 +124,8 @@ def display_version(verbose):
     if verbose:
         # search for updates
         from .updater import check_update
-        result, value = check_update()
-        if result:
+        try:
+            value = check_update()
             if value:
                 version, url = value
                 if url is None:
@@ -139,13 +139,8 @@ def display_version(verbose):
                 attrs = {'version': version, 'app': AppName,
                     'url': url, 'currentversion': __version__}
                 print(text % attrs)
-        else:
-            if value is None:
-                value = 'invalid update file syntax'
-            text = ('An error occured while checking for an '
-                    'update of %(app)s: %(error)s.')
-            attrs = {'error': value, 'app': AppName}
-            print(text % attrs)
+        except (IOError, KeyError) as err:
+            print(f'An error occured while checking for an update of {AppName}: {err!r}')
     return 0
 
 

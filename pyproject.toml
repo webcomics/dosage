@@ -52,16 +52,16 @@ dev = [
     "pytest-cov",
     "pytest-xdist",
     "responses",
-    "setup-cfg-fmt",
 ]
 lint = [
-    "flake8<6",
+    "flake8~=6.0",
     "flake8-2020",
     "flake8-breakpoint",
     "flake8-bugbear",
     "flake8-coding",
     "flake8-commas",
     "flake8-comprehensions",
+    "flake8-deprecated",
     "flake8-eradicate",
     "flake8-fixme",
     "flake8-functions",
