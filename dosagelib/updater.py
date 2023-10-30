@@ -4,7 +4,7 @@
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 import os
 import re
-from typing import Any
+from typing import Any, Dict, Optional, Tuple
 
 import dosagelib
 from . import http
@@ -18,7 +18,7 @@ EXTPRIO = {
 }
 
 
-def check_update() -> None | tuple[str, None | str]:
+def check_update() -> Optional[Tuple[str, Optional[str]]]:
     """Return the following values:
        throws exception - online version could not be determined
        None - user has newest version
@@ -36,11 +36,11 @@ def check_update() -> None | tuple[str, None | str]:
     return (version, None)
 
 
-def asset_key(asset: dict[str, Any]) -> int:
+def asset_key(asset: Dict[str, Any]) -> int:
     return EXTPRIO.get(os.path.splitext(asset['browser_download_url'])[1], 99)
 
 
-def get_online_version() -> tuple[str, None | str]:
+def get_online_version() -> Tuple[str, Optional[str]]:
     """Download update info and parse it."""
     response = http.default_session.get(UPDATE_URL)
     response.raise_for_status()
@@ -57,7 +57,7 @@ def get_online_version() -> tuple[str, None | str]:
     return version, url
 
 
-def version_nums(ver: str) -> tuple[int, ...]:
+def version_nums(ver: str) -> Tuple[int, ...]:
     """Extract all numeric "sub-parts" of a version string. Not very exact, but
        works for our use case."""
     return tuple(int(s) for s in re.split(r'\D+', ver + '0'))
