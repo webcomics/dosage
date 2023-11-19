@@ -2,9 +2,15 @@
 # SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
 # SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# PYTHON_ARGCOMPLETE_OK
+from __future__ import annotations
+
 import argparse
+import contextlib
+import importlib
 import os
 import platform
+from collections.abc import Iterable
 
 from platformdirs import PlatformDirs
 
@@ -18,7 +24,7 @@ from .util import internal_error, strlimit
 class ArgumentParser(argparse.ArgumentParser):
     """Custom argument parser."""
 
-    def print_help(self, file=None):
+    def print_help(self, file=None) -> None:
         """Paginate help message on TTYs."""
         with out.pager():
             out.info(self.format_help())
@@ -46,7 +52,7 @@ User plugin directory: {user_plugin_path}
 """
 
 
-def setup_options():
+def setup_options() -> ArgumentParser:
     """Construct option parser.
     @return: new option parser
     @rtype argparse.ArgumentParser
@@ -65,8 +71,8 @@ def setup_options():
         help='traverse and retrieve all comic strips')
     parser.add_argument('-c', '--continue', action='store_true', dest='cont',
         help='traverse and retrieve comic strips until an existing one is found')
-    parser.add_argument('-b', '--basepath', action='store', default='Comics',
-        metavar='PATH',
+    basepath_opt = parser.add_argument('-b', '--basepath', action='store',
+        default='Comics', metavar='PATH',
         help='set the path to create invidivual comic directories in, default is Comics')
     parser.add_argument('--baseurl', action='store', metavar='PATH',
         help='the base URL of your comics directory (for RSS, HTML, etc.);'
@@ -103,14 +109,20 @@ def setup_options():
     # are not "real" (moved & removed)
     parser.add_argument('--list-all', action='store_true',
         help=argparse.SUPPRESS)
-    parser.add_argument('comic', nargs='*',
+    comic_arg = parser.add_argument('comic', nargs='*',
         help='comic module name (including case insensitive substrings)')
-    try:
-        import argcomplete
-        argcomplete.autocomplete(parser)
-    except ImportError:
-        pass
+    comic_arg.completer = scraper_completion
+    with contextlib.suppress(ImportError):
+        completers = importlib.import_module('argcomplete.completers')
+        basepath_opt.completer = completers.DirectoriesCompleter()
+        importlib.import_module('argcomplete').autocomplete(parser)
     return parser
+
+
+def scraper_completion(**kwargs) -> Iterable[str]:
+    """Completion helper for argcomplete."""
+    scrapercache.adddir(user_plugin_path)
+    return (comic.name for comic in scrapercache.all())
 
 
 def display_version(verbose):
