@@ -3,11 +3,11 @@
 # SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
-from re import compile, escape
+from re import compile
 
-from ..scraper import _BasicScraper, _ParserScraper
+from ..scraper import _BasicScraper, _ParserScraper, ParserScraper
 from ..helpers import indirectStarter
-from ..util import tagre
+from ..util import tagre, getQueryParams
 from .common import ComicControlScraper, WordPressScraper, WordPressNavi
 
 
@@ -27,13 +27,9 @@ class Garanos(WordPressScraper):
     endOfLife = True
 
 
-class GastroPhobia(_ParserScraper):
-    url = 'http://www.gastrophobia.com/'
-    stripUrl = url + 'index.php?date=%s'
-    firstStripUrl = stripUrl % '2008-07-30'
-    imageSearch = '//div[@id="comic"]//img'
-    prevSearch = '//div[@id="prev"]/a'
-    help = 'Index format: yyyy-mm-dd'
+class GastroPhobia(ComicControlScraper):
+    url = 'https://gastrophobia.com/'
+    firstStripUrl = url + 'comix/the-mane-event'
 
 
 class Geeks(_ParserScraper):
@@ -51,7 +47,7 @@ class GeeksNextDoor(_ParserScraper):
     url = 'http://www.geeksnextcomic.com/'
     stripUrl = url + '%s.html'
     firstStripUrl = stripUrl % '2007-03-27'  # '2010-10-04'
-    imageSearch = '//p/img'
+    imageSearch = ('//p/img', '//p/span/img')
     prevSearch = (
         '//a[img[contains(@src, "/nav_prev")]]',
         '//a[contains(text(), "< prev")]',  # start page is different
@@ -59,18 +55,18 @@ class GeeksNextDoor(_ParserScraper):
     help = 'Index format: yyyy-mm-dd'
 
 
-class GirlGenius(_BasicScraper):
-    baseUrl = 'http://www.girlgeniusonline.com/'
-    rurl = escape(baseUrl)
-    url = baseUrl + 'comic.php'
+class GirlGenius(ParserScraper):
+    url = 'https://www.girlgeniusonline.com/comic.php'
     stripUrl = url + '?date=%s'
     firstStripUrl = stripUrl % '20021104'
-    imageSearch = compile(
-        tagre("img", "src", r"(%sggmain/strips/[^']*)" % rurl, quote="'"))
-    prevSearch = compile(tagre("a", "id", "topprev", quote="\"",
-                               before=r"(%s[^\"']+)" % rurl))
+    imageSearch = '//img[@alt="Comic"]'
+    prevSearch = '//a[@id="topprev"]'
     multipleImagesPerStrip = True
     help = 'Index format: yyyymmdd'
+
+    def shouldSkipUrl(self, url, data):
+        """Skip pages without images."""
+        return not data.xpath('//div[@id="comicbody"]//img[contains(@src, "comic")]')
 
 
 class GirlsWithSlingshots(ComicControlScraper):
@@ -99,20 +95,18 @@ class GoGetARoomie(ComicControlScraper):
     url = 'http://www.gogetaroomie.com'
 
 
-class GoneWithTheBlastwave(_BasicScraper):
-    url = 'http://www.blastwave-comic.com/index.php?p=comic&nro=1'
-    starter = indirectStarter
-    stripUrl = url[:-1] + '%s'
+class GoneWithTheBlastwave(ParserScraper):
+    stripUrl = 'http://www.blastwave-comic.com/index.php?p=comic&nro=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(r'<img.+src=".+(/comics/.+?)"')
-    prevSearch = compile(r'href="(index.php\?p=comic&amp;nro=\d+)">' +
-                         r'<img src="images/page/default/previous')
-    latestSearch = compile(r'href="(index.php\?p=comic&amp;nro=\d+)">' +
-                           r'<img src="images/page/default/latest')
+    url = firstStripUrl
+    starter = indirectStarter
+    imageSearch = '//*[@id="comic_ruutu"]/center/img'
+    prevSearch = '//a[img[contains(@src, "previous")]]'
+    latestSearch = '//a[img[contains(@src, "latest")]]'
     help = 'Index format: n'
 
     def namer(self, image_url, page_url):
-        return '%02d' % int(compile(r'nro=(\d+)').search(page_url).group(1))
+        return '%02d' % int(getQueryParams(page_url)['nro'][0])
 
 
 class GrrlPower(WordPressScraper):
@@ -130,13 +124,12 @@ class GuildedAge(WordPressScraper):
     firstStripUrl = url + 'comic/chapter-1-cover/'
 
 
-class GUComics(_BasicScraper):
-    url = 'http://www.gucomics.com/'
-    stripUrl = url + '%s'
+class GUComics(ParserScraper):
+    stripUrl = 'https://www.gucomics.com/%s'
+    url = stripUrl % 'comic/'
     firstStripUrl = stripUrl % '20000710'
-    imageSearch = compile(tagre("img", "src", r'(/comics/\d{4}/gu_[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/\d+)') +
-                         tagre("img", "src", r'/images/nav/prev\.png'))
+    imageSearch = '//img[contains(@src, "/comics/2")]'
+    prevSearch = '//a[img[contains(@alt, "previous")]]'
     help = 'Index format: yyyymmdd'
 
 
