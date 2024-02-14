@@ -5,24 +5,7 @@
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
 from ..scraper import ParserScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
-from .common import ComicControlScraper, WordPressScraper, WordPressNaviIn
-
-
-class Lackadaisy(ParserScraper):
-    url = 'https://www.lackadaisy.com/comic.php'
-    stripUrl = url + '?comicid=%s'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = '//div[@id="exhibit"]/img[contains(@src, "comic/")]'
-    prevSearch = '//div[@class="prev"]/a'
-    nextSearch = '//div[@class="next"]/a'
-    help = 'Index format: n'
-    starter = bounceStarter
-
-    def namer(self, imageUrl, pageUrl):
-        # Use comic id for filename
-        num = pageUrl.rsplit('=', 1)[-1]
-        ext = imageUrl.rsplit('.', 1)[-1]
-        return 'lackadaisy_%s.%s' % (num, ext)
+from .common import ComicControlScraper, WordPressScraper
 
 
 class Lancer(WordPressScraper):

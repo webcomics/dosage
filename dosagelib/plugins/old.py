@@ -1603,6 +1603,7 @@ class Removed(Scraper):
             cls('GoComics/StoneSoupClassics'),
             cls('GoComics/StuartCarlson'),
             cls('KemonoCafe/PrincessBunny'),
+            cls('Lackadaisy', 'block'),
             cls('MangaDex/ImTheMaxLevelNewbie', 'legal'),
             cls('StudioKhimera/Mousechevious'),
             cls('TalesAndTactics'),
