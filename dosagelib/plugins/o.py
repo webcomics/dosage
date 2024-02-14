@@ -11,6 +11,12 @@ from ..util import tagre
 from .common import WordPressScraper, WordPressNavi
 
 
+class OccasionalComicsDisorder(WordPressScraper):
+    url = 'https://occasionalcomics.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'latest-comic-2'
+
+
 class OctopusPie(_ParserScraper):
     url = 'http://www.octopuspie.com/'
     rurl = escape(url)

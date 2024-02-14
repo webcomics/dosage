@@ -1605,6 +1605,8 @@ class Removed(Scraper):
             cls('KemonoCafe/PrincessBunny'),
             cls('Lackadaisy', 'block'),
             cls('MangaDex/ImTheMaxLevelNewbie', 'legal'),
+            cls('MrLovenstein', 'jsh'),
+            cls('MyCartoons'),
             cls('StudioKhimera/Mousechevious'),
             cls('TalesAndTactics'),
             cls('VampireHunterBoyfriends'),
@@ -1716,5 +1718,6 @@ class Renamed(Scraper):
 
             # Renamed in 3.1
             cls('Exiern', 'ComicFury/Exiern'),
+            cls('MaxOveracts', 'OccasionalComicsDisorder'),
             cls('SafelyEndangered', 'WebToons/SafelyEndangered'),
         )

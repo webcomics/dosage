@@ -4,7 +4,7 @@
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
 import json
-from re import compile, escape, IGNORECASE
+from re import compile, IGNORECASE
 
 from ..helpers import indirectStarter
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
@@ -13,13 +13,10 @@ from ..xml import NS
 from .common import ComicControlScraper, WordPressScraper, WordPressWebcomic
 
 
-class MacHall(_BasicScraper):
-    url = 'http://www.machall.com/'
-    stripUrl = url + 'view.php?date=%s'
-    firstStripUrl = stripUrl % '2000-11-07'
-    imageSearch = compile(r'<img src="(comics/.+?)"')
-    prevSearch = compile(r'<a href="(.+?)"><img[^>]+?src=\'drop_shadow/previous.gif\'>')
-    help = 'Index format: yyyy-mm-dd'
+class MacHall(ComicControlScraper):
+    url = 'https://www.machall.com/'
+    stripUrl = url + 'comic/%s'
+    firstStripUrl = stripUrl % 'moving-in'
 
 
 class MadamAndEve(_BasicScraper):
@@ -58,12 +55,12 @@ class MareInternum(WordPressScraper):
     firstStripUrl = stripUrl % 'intro-page-1'
 
 
-class Marilith(_BasicScraper):
-    url = 'http://www.marilith.com/'
+class Marilith(ParserScraper):
+    url = 'https://web.archive.org/web/20170619193143/http://www.marilith.com/'
     stripUrl = url + 'archive.php?date=%s'
     firstStripUrl = stripUrl % '20041215'
-    imageSearch = compile(r'<img src="(comics/.+?)" border')
-    prevSearch = compile(r'<a href="(archive\.php\?date=.+?)"><img border=0 name=previous_day')
+    imageSearch = '//img[contains(@src, "comics/")]'
+    prevSearch = '//a[img[@name="previous_day"]]'
     help = 'Index format: yyyymmdd'
 
 
@@ -80,22 +77,14 @@ class MarriedToTheSea(_ParserScraper):
         return '%s-%s' % (date, filename)
 
 
-class MarryMe(_ParserScraper):
-    url = 'http://marryme.keenspot.com/'
-    stripUrl = url + 'd/%s.html'
+class MarryMe(ParserScraper):
+    stripUrl = 'http://marryme.keenspot.com/d/%s.html'
+    url = stripUrl % '20191001'
     firstStripUrl = stripUrl % '20120730'
     imageSearch = '//img[@class="ksc"]'
     prevSearch = '//a[@rel="prev"]'
     endOfLife = True
-
-
-class MaxOveracts(_ParserScraper):
-    url = 'http://occasionalcomics.com/'
-    stripUrl = url + '%s/'
-    css = True
-    imageSearch = '#comic img'
-    prevSearch = '.nav-previous > a'
-    help = 'Index format: nnn'
+    help = 'Index format: yyyymmdd'
 
 
 class Meek(WordPressScraper):
@@ -149,16 +138,18 @@ class MisfileHellHigh(Misfile):
     help = 'Index format: yyyy-mm-dd'
 
 
-class MistyTheMouse(WordPressScraper):
+class MistyTheMouse(ParserScraper):
     url = 'http://www.mistythemouse.com/'
-    prevSearch = '//a[@rel="prev"]'
-    firstStripUrl = 'http://www.mistythemouse.com/?p=12'
+    imageSearch = '//center/p/img'
+    prevSearch = '//a[img[contains(@src, "Previous")]]'
+    firstStripUrl = url + 'The_Live_In.html'
 
 
-class MonkeyUser(_ParserScraper):
+class MonkeyUser(ParserScraper):
     url = 'https://www.monkeyuser.com/'
-    prevSearch = '//div[@title="previous"]/a'
     imageSearch = '//div[d:class("content")]/p/img'
+    prevSearch = '//a[text()="Prev"]'
+    multipleImagesPerStrip = True
 
     def shouldSkipUrl(self, url, data):
         # videos
@@ -195,43 +186,10 @@ class Moonlace(WordPressWebcomic):
         return indirectStarter(self)
 
 
-class Moonsticks(_ParserScraper):
-    url = "http://moonsticks.org/"
-    imageSearch = "//div[@class='entry']//img"
-    prevSearch = u"//a[text()='\u00AB Prev']"
-
-
-class MrLovenstein(_BasicScraper):
-    url = 'http://www.mrlovenstein.com/'
-    stripUrl = url + 'comic/%s'
-    firstStripUrl = stripUrl % '1'
-    imageSearch = (
-        # captures rollover comic
-        compile(tagre("div", "class", r'comic_image') + r'\s*.*\s*' +
-                tagre("div", "style", r'display: none;') + r'\s*.*\s' +
-                tagre("img", "src", r'(/images/comics/[^"]+)')),
-        # captures standard comic
-        compile(tagre("img", "src", r'(/images/comics/[^"]+)',
-                      before="comic_main_image")),
-    )
-    prevSearch = compile(tagre("a", "href", r'([^"]+)') +
-                         tagre("img", "src", "/images/nav_left.png"))
-    textSearch = compile(r'<meta name="description" content="(.+?)" />')
-    help = 'Index Format: n'
-
-
-class MyCartoons(_BasicScraper):
-    url = 'http://mycartoons.de/'
-    rurl = escape(url)
-    stripUrl = url + 'page/%s'
-    imageSearch = (
-        compile(tagre("img", "src", r'(%swp-content/cartoons/(?:[^"]+/)?\d+-\d+-\d+[^"]+)' % rurl)),
-        compile(tagre("img", "src", r'(%scartoons/[^"]+/\d+-\d+-\d+[^"]+)' % rurl)),
-    )
-    prevSearch = compile(tagre("a", "href", r'(%spage/[^"]+)' % rurl) +
-                         "&laquo;")
-    help = 'Index format: number'
-    lang = 'de'
+class Moonsticks(ParserScraper):
+    url = "https://moonsticks.org/"
+    imageSearch = "//div[d:class('entry-content')]//img"
+    prevSearch = ('//a[@rel="prev"]', "//a[text()='\u00AB Prev']")
 
 
 class MyLifeWithFel(ParserScraper):
