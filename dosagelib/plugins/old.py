@@ -1589,6 +1589,26 @@ class Removed(Scraper):
             cls('WebToons/CrystalVirus'),
             cls('WebToons/OVERPOWERED'),
             cls('WintersLight'),
+
+            # Removed in 3.1
+            cls('GoComics/9ChickweedLaneClassics'),
+            cls('GoComics/Badlands'),
+            cls('GoComics/BigNateFirstClass'),
+            cls('GoComics/BreakOfDay'),
+            cls('GoComics/Candorville'),
+            cls('GoComics/DilbertClassics'),
+            cls('GoComics/DilbertEnEspanol'),
+            cls('GoComics/DumbwichCastle'),
+            cls('GoComics/EyebeamClassic'),
+            cls('GoComics/GarfieldClassics'),
+            cls('GoComics/MakingIt'),
+            cls('GoComics/MtPleasant'),
+            cls('GoComics/PCAndPixel'),
+            cls('GoComics/SaltNPepper'),
+            cls('GoComics/SigneWilkinson'),
+            cls('GoComics/Snowflakes'),
+            cls('GoComics/StoneSoupClassics'),
+            cls('GoComics/StuartCarlson'),
         )
 
 

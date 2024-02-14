@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 """
 Script to get a list of gocomics and save the info in a JSON file for further
 processing.
@@ -20,6 +20,8 @@ class GoComicsUpdater(ComicListUpdater):
     excluded_comics = (
         # too short
         'LukeyMcGarrysTLDR',
+        # Has its own module
+        'Widdershins',
     )
 
     def handle_gocomics(self, url, outercss='a.gc-blended-link', lang=None):
