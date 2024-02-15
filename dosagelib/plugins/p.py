@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper, ParserScraper
@@ -333,11 +333,12 @@ class PS238(_ParserScraper):
 
 class PvPOnline(ParserScraper):
     baseUrl = 'https://www.toonhoundstudios.com/'
-    url = baseUrl + 'pvp/'
-    stripUrl = baseUrl + 'comic/%s/'
+    stripUrl = baseUrl + 'comic/%s/?sid=372'
+    url = stripUrl % 'pvp-2022-09-16'
     firstStripUrl = stripUrl % '19980504'
     imageSearch = '//div[@id="spliced-comic"]//img/@data-src-img'
     prevSearch = '//a[d:class("prev")]'
+    endOfLife = True
 
-    def namer(self, imageUrl, pageUrl):
-        return 'pvp' + imageUrl.rsplit('/', 1)[-1]
+    def namer(self, image_url, page_url):
+        return 'pvp' + image_url.rsplit('/', 1)[-1]
