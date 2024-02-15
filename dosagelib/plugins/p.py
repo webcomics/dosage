@@ -150,14 +150,16 @@ class PeterAndWhitney(_ParserScraper):
     prevSearch = '//a[./img[contains(@src, "nav_previous")]]'
 
 
-class PHDComics(_ParserScraper):
+class PHDComics(ParserScraper):
     BROKEN_COMMENT_END = compile(r'--!>')
 
     baseUrl = 'http://phdcomics.com/'
     url = baseUrl + 'comics.php'
     stripUrl = baseUrl + 'comics/archive.php?comicid=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = '//img[@id="comic2"]'
+    imageSearch = ('//img[@id="comic2"]',
+        r'//img[d:class("img-responsive") and re:test(@name, "comic\d+")]')
+    multipleImagesPerStrip = True
     prevSearch = '//a[img[contains(@src, "prev_button")]]'
     nextSearch = '//a[img[contains(@src, "next_button")]]'
     help = 'Index format: n (unpadded)'
@@ -173,7 +175,7 @@ class PHDComics(_ParserScraper):
             # video
             self.stripUrl % '1880',
             self.stripUrl % '1669',
-        )
+        ) or data.xpath('//img[@id="comic" and contains(@src, "phd083123s")]')
 
 
 class Picklewhistle(ComicControlScraper):
