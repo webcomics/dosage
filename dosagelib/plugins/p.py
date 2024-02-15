@@ -34,16 +34,11 @@ class ParadigmShift(_BasicScraper):
     help = 'Index format: custom'
 
 
-class ParallelUniversum(_BasicScraper):
-    url = 'http://www.paralleluniversum.net/'
-    rurl = escape(url)
+class ParallelUniversum(WordPressScraper):
+    url = 'https://www.paralleluniversum.net/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '001-der-comic-ist-tot'
-    imageSearch = compile(tagre("img", "src",
-                                r'(%scomics/\d+-\d+-\d+[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+/)' % rurl) +
-                         tagre("span", "class", "prev"))
-    help = 'Index format: number-stripname'
+    prevSearch = '//a[@rel="prev"]'
     lang = 'de'
 
 
@@ -95,14 +90,12 @@ class PebbleVersion(_ParserScraper):
     help = 'Index format: n (unpadded)'
 
 
-class PennyAndAggie(_BasicScraper):
-    url = 'http://pennyandaggie.com/'
-    rurl = escape(url)
-    stripUrl = url + 'index.php?p=%s'
-    imageSearch = compile(tagre("img", "src", r'(http://www\.pennyandaggie\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r"(index\.php\?p\=\d+)", quote="'") +
-                         tagre("img", "src", r'%simages/previous_day\.gif' % rurl, quote=""))
-    help = 'Index format: n (unpadded)'
+class PennyAndAggie(ComicControlScraper):
+    url = 'https://pixietrixcomix.com/penny-and-aggie'
+    stripUrl = url + '/%s'
+    firstStripUrl = stripUrl % '2004-09-06'
+    endOfLife = True
+    help = 'Index format: yyyy-mm-dd'
 
 
 class PennyArcade(_ParserScraper):
@@ -117,19 +110,17 @@ class PennyArcade(_ParserScraper):
     help = 'Index format: yyyy/mm/dd'
 
 
-class PeppermintSaga(WordPressNavi):
+class PeppermintSaga(WordPressScraper):
     url = 'http://www.pepsaga.com/'
-    stripUrl = url + '?p=%s'
-    firstStripUrl = stripUrl % '3'
-    help = 'Index format: number'
+    stripUrl = url + 'comics/%s/'
+    firstStripUrl = stripUrl % 'the-sword-of-truth-vol1'
     adult = True
 
 
-class PeppermintSagaBGR(WordPressNavi):
+class PeppermintSagaBGR(WordPressScraper):
     url = 'http://bgr.pepsaga.com/'
-    stripUrl = url + '?p=%s'
-    firstStripUrl = stripUrl % '4'
-    help = 'Index format: number'
+    stripUrl = url + '?comic=%s'
+    firstStripUrl = stripUrl % '04172011'
     adult = True
 
 
