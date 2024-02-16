@@ -61,7 +61,10 @@ def create_symlinks(d):
         else:
             order.extend(data["pages"][work]["images"].values())
         if "prev" in data["pages"][work]:
-            work = data["pages"][work]["prev"]
+            if data["pages"][work]["prev"] == work:
+                work = None
+            else:
+                work = data["pages"][work]["prev"]
         else:
             work = None
     order.reverse()
