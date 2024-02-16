@@ -3,7 +3,7 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-from re import compile, escape, MULTILINE
+from re import compile, escape, sub, MULTILINE
 
 from ..util import tagre
 from ..scraper import BasicScraper, ParserScraper, _BasicScraper, _ParserScraper
@@ -134,6 +134,34 @@ class ALessonIsLearned(_BasicScraper):
     firstStripUrl = stripUrl % '1'
     imageSearch = compile(tagre("img", "src", r"(cmx/lesson\d+\.[a-z]+)"))
     help = 'Index format: nnn'
+
+
+class Alfie(WordPressScraper):
+    url = 'https://buttsmithy.com/'
+    stripUrl = url + 'archives/comic/%s'
+    firstStripUrl = stripUrl % 'p1'
+    adult = True
+    starter = bounceStarter
+
+    def namer(self, image_url, page_url):
+        def repl(m):
+            return "{0}".format(m.group(1).zfill(4))
+
+        name = sub('^p-?(\d+)', repl, page_url.split('/')[-1])
+
+        # Some of the first 1k pages were inconsistently named.
+        renames = {"/comic/p145": "0145-1", "/comic/p-145": "0145-2",
+            "/comic/268": "0268", "/comic/1132": "0313",
+            "/comic/1169": "0319", "/comic/1186": "0324",
+            "/comic/1404": "0378", "/comic/0338-2": "0339",
+            "/comic/0369-2": "0469", "/comic/2080": "0517",
+            "/comic/o-525": "0525", "/comic/p-361": "0553",
+            "/comic/p-668-2": "0678", "/comic/p-670-2": "0670",
+            "/comic/p-679-2": "0690", "/comic/3140": "0805"}
+        for rename in renames:
+            if rename in page_url:
+                name = renames[rename]
+        return name
 
 
 class Alice(WordPressScraper):
