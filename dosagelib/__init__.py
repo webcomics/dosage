@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2019 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 """
 Automated comic downloader. Dosage traverses comic websites in
 order to download each strip of the comic. The intended use is for
@@ -14,14 +14,11 @@ The primary interface is the 'dosage' commandline script.
 Comic modules for each comic are located in L{dosagelib.plugins}.
 """
 
-try:
-    from importlib.metadata import version, PackageNotFoundError
-except ImportError:
-    from importlib_metadata import version, PackageNotFoundError
+from importlib.metadata import version, PackageNotFoundError
 
 from .output import out
 
-AppName = u'dosage'
+AppName = 'dosage'
 try:
     __version__ = version(AppName)  # PEP 396
 except PackageNotFoundError:

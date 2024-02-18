@@ -17,7 +17,6 @@ classifiers = [
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
@@ -27,15 +26,13 @@ classifiers = [
     "Topic :: Multimedia :: Graphics",
 ]
 keywords = ["comic", "webcomic", "downloader", "archiver", "crawler"]
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 dependencies = [
     "colorama",
     "imagesize",
     "lxml>=4.0.0",
     "platformdirs",
     "requests>=2.0",
-    "cached_property;python_version<'3.8'",
-    "importlib_metadata;python_version<'3.8'",
     "importlib_resources>=5.0.0;python_version<'3.9'",
 ]
 dynamic = ["version"]
@@ -101,7 +98,7 @@ ignore = [
 ]
 noqa-require-code = true
 no-accept-encodings = true
-min-version = "3.7"
+min-version = "3.8"
 extend-exclude = [
     '.venv',
     'build',
