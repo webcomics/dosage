@@ -272,7 +272,7 @@ class ToonHole(ParserScraper):
     prevSearch = '//a[@rel="prev"]'
     latestSearch = '//a[@rel="bookmark"]'
     starter = indirectStarter
-    namer = joinPathPartsNamer((), (-3, -2, -1))
+    namer = joinPathPartsNamer(imageparts=(-3, -2, -1))
 
 
 class TrippingOverYou(_BasicScraper):

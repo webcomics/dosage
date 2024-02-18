@@ -1,11 +1,6 @@
 # SPDX-License-Identifier: MIT
 # SPDX-FileCopyrightText: © 2019 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Thomas W. Littauer
-try:
-    from importlib_resources import as_file, files
-except ImportError:
-    from importlib.resources import as_file, files
-
 from ..helpers import bounceStarter, joinPathPartsNamer
 from ..scraper import ParserScraper
 
@@ -15,7 +10,7 @@ class ComicsKingdom(ParserScraper):
     prevSearch = '//a[./img[contains(@alt, "Previous")]]'
     nextSearch = '//a[./img[contains(@alt, "Next")]]'
     starter = bounceStarter
-    namer = joinPathPartsNamer((-2, -1), ())
+    namer = joinPathPartsNamer(pageparts=(-2, -1))
     help = 'Index format: yyyy-mm-dd'
 
     def __init__(self, name, path, lang=None):

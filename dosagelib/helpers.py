@@ -1,39 +1,49 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
+from __future__ import annotations
+
+from typing import Protocol
+
 from .util import getQueryParams
+from .scraper import Scraper
 
 
-def queryNamer(param, use_page_url=False):
+class Namer(Protocol):
+    """A protocol for generic callbacks to name web comic images."""
+    def __call__(_, self: Scraper, image_url: str, page_url: str) -> str | None:
+        ...
+
+
+def queryNamer(param, use_page_url=False) -> Namer:
     """Get name from URL query part."""
-    def _namer(self, image_url, page_url):
+    def _namer(self, image_url: str, page_url: str) -> str | None:
         """Get URL query part."""
         url = page_url if use_page_url else image_url
         return getQueryParams(url)[param][0]
     return _namer
 
 
-def regexNamer(regex, use_page_url=False):
+def regexNamer(regex, use_page_url=False) -> Namer:
     """Get name from regular expression."""
-    def _namer(self, image_url, page_url):
+    def _namer(self, image_url: str, page_url: str) -> str | None:
         """Get first regular expression group."""
         url = page_url if use_page_url else image_url
         mo = regex.search(url)
-        if mo:
-            return mo.group(1)
+        return mo.group(1) if mo else None
     return _namer
 
 
-def joinPathPartsNamer(pageurlparts, imageurlparts=(-1,), joinchar='_'):
+def joinPathPartsNamer(pageparts=(), imageparts=(), joinchar='_') -> Namer:
     """Get name by mashing path parts together with underscores."""
-    def _namer(self, imageurl, pageurl):
+    def _namer(self: Scraper, image_url: str, page_url: str) -> str | None:
         # Split and drop host name
-        pageurlsplit = pageurl.split('/')[3:]
-        imageurlsplit = imageurl.split('/')[3:]
-        joinparts = ([pageurlsplit[i] for i in pageurlparts] +
-            [imageurlsplit[i] for i in imageurlparts])
+        pagesplit = page_url.split('/')[3:]
+        imagesplit = image_url.split('/')[3:]
+        joinparts = ([pagesplit[i] for i in pageparts] +
+            [imagesplit[i] for i in imageparts])
         return joinchar.join(joinparts)
     return _namer
 

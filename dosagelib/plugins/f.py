@@ -171,7 +171,7 @@ class Fragile(_ParserScraper):
     endOfLife = True
 
 
-class FredoAndPidjin(_ParserScraper):
+class FredoAndPidjin(ParserScraper):
     url = 'https://www.pidjin.net/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2006/02/19/goofy-monday'
@@ -180,7 +180,7 @@ class FredoAndPidjin(_ParserScraper):
     prevSearch = '//span[d:class("prev")]/a'
     latestSearch = '//section[d:class("latest")]//a'
     starter = indirectStarter
-    namer = joinPathPartsNamer((0, 1, 2))
+    namer = joinPathPartsNamer(pageparts=(0, 1, 2), imageparts=(-1,))
 
 
 class Freefall(_ParserScraper):

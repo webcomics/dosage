@@ -23,7 +23,7 @@ class Zapiro(ParserScraper):
     imageSearch = '//div[@id="cartoon"]/img'
     prevSearch = '//a[d:class("left")]'
     nextSearch = '//a[d:class("right")]'
-    namer = joinPathPartsNamer((-1,), ())
+    namer = joinPathPartsNamer(pageparts=(-1,))
 
 
 class ZenPencils(WordPressNavi):
@@ -60,7 +60,7 @@ class Zwarwald(BasicScraper):
                          tagre("img", "src",
                                r'http://zwarwald\.de/images/prev\.jpg',
                                quote="'"))
-    namer = joinPathPartsNamer((), (-3, -2, -1))
+    namer = joinPathPartsNamer(imageparts=(-3, -2, -1))
     help = 'Index format: number'
 
     def shouldSkipUrl(self, url, data):

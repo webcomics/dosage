@@ -404,7 +404,7 @@ class CrossTimeCafe(_ParserScraper):
 class CSectionComics(WordPressScraper):
     url = 'https://www.csectioncomics.com/'
     firstStripUrl = url + 'comics/one-day-in-country'
-    namer = joinPathPartsNamer((), (-3, -2, -1))
+    namer = joinPathPartsNamer(imageparts=(-3, -2, -1))
     multipleImagesPerStrip = True
 
 
@@ -466,7 +466,7 @@ class CyanideAndHappiness(ParserScraper):
     prevSearch = '//div[@type="comic"]//a[*[local-name()="svg" and @rotate="180deg"]]'
     nextSearch = '//div[@type="comic"]//a[*[local-name()="svg" and @rotate="0deg"]]'
     starter = bounceStarter
-    namer = joinPathPartsNamer((), range(-4, 0))
+    namer = joinPathPartsNamer(imageparts=range(-4, 0))
 
 
 class CynWolf(_ParserScraper):
