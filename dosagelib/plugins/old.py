@@ -1581,6 +1581,8 @@ class Removed(Scraper):
             cls('WintersLight'),
 
             # Removed in 3.1
+            cls('AbbysAgency', 'brk'),
+            cls('BlackRose', 'brk'),
             cls('CatenaManor/CatenaCafe'),
             cls('FalseStart'),
             cls('Ginpu'),
@@ -1607,6 +1609,7 @@ class Removed(Scraper):
             cls('MangaDex/ImTheMaxLevelNewbie', 'legal'),
             cls('MrLovenstein', 'jsh'),
             cls('MyCartoons'),
+            cls('Shivae/BlackRose', 'brk'),
             cls('StudioKhimera/Mousechevious'),
             cls('TalesAndTactics'),
             cls('VampireHunterBoyfriends'),
@@ -1704,7 +1707,6 @@ class Renamed(Scraper):
             cls('GoComics/Widdershins', 'Widdershins'),
             cls('Guardia', 'ComicFury/Guardia'),
             cls('RadioactivePanda', 'Tapas/RadioactivePanda'),
-            cls('Shivae/BlackRose', 'BlackRose'),
             cls('SmackJeeves/BlackTapestries', 'ComicFury/BlackTapestries'),
             cls('SmackJeeves/ByTheBook', 'ByTheBook'),
             cls('SmackJeeves/FurryExperience', 'ComicFury/FurryExperience'),

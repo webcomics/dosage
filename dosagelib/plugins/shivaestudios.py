@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2021 Daniel Ring
+# SPDX-FileCopyrightText: © 2019 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 from .common import WordPressSpliced
 
 
@@ -12,22 +12,20 @@ class _CommonMulti(WordPressSpliced):
         self.endOfLife = eol
 
 
-class AbbysAgency(WordPressSpliced):
-    url = 'https://abbysagency.us/'
-    stripUrl = url + 'blog/comic/%s/'
-    firstStripUrl = stripUrl % 'a'
-
-
 class AlienDice(WordPressSpliced):
     url = 'https://aliendice.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % '05162001'
 
+    def shouldSkipUrl(self, url, data):
+        """Skip pages without images."""
+        return not data.xpath(self.imageSearch)
+
     def getPrevUrl(self, url, data):
         # Fix broken navigation
         if url == self.stripUrl % 'day-29-part-2-page-3-4':
             return self.stripUrl % 'day-29-part-2-page-3-2'
-        return super(AlienDice, self).getPrevUrl(url, data)
+        return super().getPrevUrl(url, data)
 
     def namer(self, imageUrl, pageUrl):
         # Fix inconsistent filename
@@ -45,12 +43,6 @@ class AlienDiceLegacy(WordPressSpliced):
     def isfirststrip(self, url):
         # Strip series identifier
         return super().isfirststrip(url.rsplit('?', 1)[0])
-
-
-class BlackRose(WordPressSpliced):
-    url = 'https://www.blackrose.monster/'
-    stripUrl = url + 'comic/%s/'
-    firstStripUrl = stripUrl % '2004-11-01'
 
 
 class TheCyantianChronicles(_CommonMulti):
@@ -81,9 +73,9 @@ class TheCyantianChronicles(_CommonMulti):
 
 
 class Shivae(WordPressSpliced):
-    url = 'https://shivae.com/'
+    url = 'https://shivae.net/'
     stripUrl = url + 'comic/%s/'
-    firstStripUrl = stripUrl % '09202001'
+    firstStripUrl = stripUrl % '2002-02-27'
 
 
 class ShivaeComics(_CommonMulti):
