@@ -1,18 +1,18 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
-from re import compile, escape, MULTILINE
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
+from re import compile, MULTILINE
 
 from ..util import tagre
-from ..scraper import BasicScraper, ParserScraper, _BasicScraper, _ParserScraper
-from ..helpers import regexNamer, bounceStarter, indirectStarter
+from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
+from ..helpers import joinPathPartsNamer, bounceStarter, indirectStarter
 from .common import WordPressScraper, WordPressNavi, WordPressWebcomic
 
 
-class AbstruseGoose(_ParserScraper):
-    url = 'https://abstrusegoose.com/'
+class AbstruseGoose(ParserScraper):
+    url = 'https://web.archive.org/web/20230930172141/https://abstrusegoose.com/'
     starter = bounceStarter
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '1'
@@ -41,24 +41,16 @@ class AbsurdNotions(_BasicScraper):
     help = 'Index format: n (unpadded)'
 
 
-class AcademyVale(_BasicScraper):
-    url = 'http://www.imagerie.com/vale/'
-    stripUrl = url + 'avarch.cgi?%s'
-    firstStripUrl = stripUrl % '001'
-    imageSearch = compile(tagre('img', 'src', r'(avale\d{4}-\d{2}\.gif)'))
-    prevSearch = compile(tagre('a', 'href', r'(avarch[^">]+)', quote="") +
-                         tagre('img', 'src', r'AVNavBack\.gif'))
-    help = 'Index format: nnn'
-
-
-class Achewood(_ParserScraper):
-    url = 'https://www.achewood.com/'
-    stripUrl = url + 'index.php?date=%s'
-    firstStripUrl = stripUrl % '10012001'
-    imageSearch = '//p[@id="comic_body"]//img'
-    prevSearch = '//span[d:class("left")]/a[d:class("dateNav")]'
-    help = 'Index format: mmddyyyy'
-    namer = regexNamer(compile(r'date=(\d+)'))
+class Achewood(ParserScraper):
+    baseUrl = 'https://achewood.com/'
+    stripUrl = baseUrl + '%s/title.html'
+    url = stripUrl % '2016/12/25'
+    firstStripUrl = stripUrl % '2001/10/01'
+    imageSearch = '//img[d:class("comicImage")]'
+    prevSearch = '//a[d:class("comic_prev")]'
+    namer = joinPathPartsNamer(pageparts=range(0, 2))
+    help = 'Index format: yyyy/mm/dd'
+    endOfLife = True
 
 
 class AdventuresOfFifne(_ParserScraper):
@@ -117,12 +109,8 @@ class AhoiPolloi(_ParserScraper):
     help = 'Index format: yyyymmdd'
 
 
-class AhoyEarth(WordPressNavi):
-    url = 'http://www.ahoyearth.com/'
-
-
 class AirForceBlues(WordPressScraper):
-    url = 'http://farvatoons.com/'
+    url = 'https://web.archive.org/web/20210102113825/http://farvatoons.com/'
     firstStripUrl = url + 'comic/in-texas-there-are-texans/'
 
 
@@ -207,14 +195,11 @@ class AltermetaOld(_ParserScraper):
     help = 'Index format: n (unpadded)'
 
 
-class AmazingSuperPowers(_BasicScraper):
-    url = 'http://www.amazingsuperpowers.com/'
-    rurl = escape(url)
+class AmazingSuperPowers(WordPressNavi):
+    url = 'https://www.amazingsuperpowers.com/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2007/09/heredity'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
-    help = 'Index format: yyyy/mm/name'
+    imageSearch = '//div[d:class("comicpane")]/img'
 
     def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
@@ -243,18 +228,6 @@ class Amya(WordPressScraper):
     url = 'http://www.amyachronicles.com/'
 
 
-class Anaria(_ParserScraper):
-    url = 'https://www.leahbriere.com/anaria-the-witchs-dream/'
-    firstStripUrl = url
-    imageSearch = '//div[contains(@class, "gallery")]//a'
-    multipleImagesPerStrip = True
-    endOfLife = True
-
-    def namer(self, imageUrl, pageUrl):
-        filename = imageUrl.rsplit('/', 1)[-1]
-        return filename.replace('00.jpg', 'new00.jpg').replace('new', '1')
-
-
 class Angband(_ParserScraper):
     url = 'http://angband.calamarain.net/'
     stripUrl = url + '%s'
@@ -270,14 +243,6 @@ class Angband(_ParserScraper):
 
     def getPrevUrl(self, url, data):
         return self.pages[self.pages.index(url) - 1]
-
-
-class Angels2200(_BasicScraper):
-    url = 'http://www.janahoffmann.com/angels/'
-    stripUrl = url + '%s'
-    imageSearch = compile(tagre("img", "src", r"(http://www\.janahoffmann\.com/angels/comics/[^']+)", quote="'"))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)') + "&laquo; Previous")
-    help = 'Index format: yyyy/mm/dd/part-<n>-comic-<n>'
 
 
 class Annyseed(_ParserScraper):

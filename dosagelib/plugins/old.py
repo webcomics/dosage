@@ -1582,6 +1582,10 @@ class Removed(Scraper):
 
             # Removed in 3.1
             cls('AbbysAgency', 'brk'),
+            cls('AcademyVale'),
+            cls('AhoyEarth', 'block'),
+            cls('Anaria', 'del'),
+            cls('Angels2200', 'del'),
             cls('BlackRose', 'brk'),
             cls('CatenaManor/CatenaCafe'),
             cls('FalseStart'),
