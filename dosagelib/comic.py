@@ -1,12 +1,15 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+from __future__ import annotations
+
 import os
 import glob
 import codecs
 import contextlib
 from datetime import datetime
+from typing import Iterator
 
 from .output import out
 from .util import unquote, getFilename, urlopen, strsize
@@ -14,27 +17,27 @@ from .events import getHandler
 
 
 # Maximum content size for images
-MaxImageBytes = 1024 * 1024 * 20  # 20 MB
+MAX_IMAGE_BYTES = 1024 * 1024 * 20  # 20 MB
 # RFC 1123 format, as preferred by RFC 2616
 RFC_1123_DT_STR = "%a, %d %b %Y %H:%M:%S GMT"
 
 
-class ComicStrip(object):
+class ComicStrip:
     """A list of comic image URLs."""
 
-    def __init__(self, scraper, strip_url, image_urls, text=None):
+    def __init__(self, scraper, strip_url: str, image_urls: str, text=None) -> None:
         """Store the image URL list."""
         self.scraper = scraper
         self.strip_url = strip_url
         self.image_urls = image_urls
         self.text = text
 
-    def getImages(self):
+    def getImages(self) -> Iterator[ComicImage]:
         """Get a list of image downloaders."""
         for image_url in self.image_urls:
             yield self.getDownloader(image_url)
 
-    def getDownloader(self, url):
+    def getDownloader(self, url: str) -> ComicImage:
         """Get an image downloader."""
         filename = self.scraper.namer(url, self.strip_url)
         if filename is None:
@@ -43,7 +46,7 @@ class ComicStrip(object):
                           text=self.text)
 
 
-class ComicImage(object):
+class ComicImage:
     """A comic image downloader."""
 
     ChunkBytes = 1024 * 100  # 100KB
@@ -64,7 +67,7 @@ class ComicImage(object):
             headers['If-Modified-Since'] = lastchange.strftime(RFC_1123_DT_STR)
         self.urlobj = urlopen(self.url, self.scraper.session,
                               referrer=self.referrer,
-                              max_content_bytes=MaxImageBytes, stream=True,
+                              max_content_bytes=MAX_IMAGE_BYTES, stream=True,
                               headers=headers)
         if self.urlobj.status_code == 304:  # Not modified
             return

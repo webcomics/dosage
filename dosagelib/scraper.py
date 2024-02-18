@@ -119,45 +119,45 @@ class Scraper:
         if val:
             self._indexes = tuple(sorted(val))
 
-    def __init__(self, name):
+    def __init__(self, name: str) -> None:
         """Initialize internal variables."""
         self.name = name
-        self.urls = set()
+        self.urls: set[str] = set()
         self._indexes = ()
-        self.skippedUrls = set()
+        self.skippedUrls: set[str] = set()
         self.hitFirstStripUrl = False
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         """Get hash value from name and index list."""
         return hash((self.name, self.indexes))
 
-    def shouldSkipUrl(self, url, data):
+    def shouldSkipUrl(self, url: str, data) -> bool:
         """Determine if search for images in given URL should be skipped."""
         return False
 
-    def getComicStrip(self, url, data):
+    def getComicStrip(self, url, data) -> ComicStrip:
         """Get comic strip downloader for given URL and data."""
-        imageUrls = self.extract_image_urls(url, data)
+        urls = self.extract_image_urls(url, data)
         # map modifier function on image URLs
-        imageUrls = [self.imageUrlModifier(x, data) for x in imageUrls]
+        urls = [self.imageUrlModifier(x, data) for x in urls]
         # remove duplicate URLs
-        imageUrls = uniq(imageUrls)
-        if len(imageUrls) > 1 and not self.multipleImagesPerStrip:
+        urls = uniq(urls)
+        if len(urls) > 1 and not self.multipleImagesPerStrip:
             out.warn(
                 u"Found %d images instead of 1 at %s with expressions %s" %
-                (len(imageUrls), url, prettyMatcherList(self.imageSearch)))
-            image = imageUrls[0]
-            out.warn(u"Choosing image %s" % image)
-            imageUrls = (image,)
-        elif not imageUrls:
-            out.warn(u"Found no images at %s with expressions %s" % (url,
+                (len(urls), url, prettyMatcherList(self.imageSearch)))
+            image = urls[0]
+            out.warn("Choosing image %s" % image)
+            urls = (image,)
+        elif not urls:
+            out.warn("Found no images at %s with expressions %s" % (url,
                      prettyMatcherList(self.imageSearch)))
         if self.textSearch:
             text = self.fetchText(url, data, self.textSearch,
                                   optional=self.textOptional)
         else:
             text = None
-        return ComicStrip(self, url, imageUrls, text=text)
+        return ComicStrip(self, url, urls, text=text)
 
     def getStrips(self, maxstrips=None):
         """Get comic strips."""
@@ -217,7 +217,7 @@ class Scraper:
                 break
             url = prevUrl
 
-    def isfirststrip(self, url):
+    def isfirststrip(self, url: str) -> bool:
         """Check if the specified URL is the first strip of a comic. This is
         specially for comics taken from archive.org, since the base URL of
         archive.org changes whenever pages are taken from a different
@@ -228,7 +228,7 @@ class Scraper:
         currenturl = ARCHIVE_ORG_URL.sub('', url)
         return firsturl == currenturl
 
-    def getPrevUrl(self, url, data):
+    def getPrevUrl(self, url: str, data) -> str | None:
         """Find previous URL."""
         prevUrl = None
         if self.prevSearch:
@@ -243,40 +243,40 @@ class Scraper:
                 getHandler().comicPageLink(self, url, prevUrl)
         return prevUrl
 
-    def getIndexStripUrl(self, index):
+    def getIndexStripUrl(self, index: str) -> str:
         """Get comic strip URL from index."""
         return self.stripUrl % index
 
-    def starter(self):
+    def starter(self) -> str:
         """Get starter URL from where to scrape comic strips."""
         return self.url
 
-    def namer(self, image_url, page_url):
+    def namer(self, image_url: str, page_url: str) -> str | None:
         """Return filename for given image and page URL."""
         return
 
-    def link_modifier(self, fromurl, tourl):
+    def link_modifier(self, fromurl: str, tourl: str) -> str:
         """Optional modification of parsed link (previous/back/latest) URLs.
         Useful if there are domain redirects. The default implementation does
         not modify the URL.
         """
         return tourl
 
-    def imageUrlModifier(self, image_url, data):
+    def imageUrlModifier(self, image_url: str, data) -> str:
         """Optional modification of parsed image URLs. Useful if the URL
         needs to be fixed before usage. The default implementation does
         not modify the URL. The given data is the URL page data.
         """
         return image_url
 
-    def vote(self):
+    def vote(self) -> None:
         """Cast a public vote for this comic."""
         uid = get_system_uid()
         data = {"name": self.name.replace('/', '_'), "uid": uid}
         response = self.session.post(configuration.VoteUrl, data=data)
         response.raise_for_status()
 
-    def get_download_dir(self, basepath):
+    def get_download_dir(self, basepath: str) -> str:
         """Try to find the corect download directory, ignoring case
         differences."""
         path = basepath
@@ -294,16 +294,16 @@ class Scraper:
                 path = os.path.join(path, part)
         return path
 
-    def getCompleteFile(self, basepath):
+    def getCompleteFile(self, basepath: str) -> str:
         """Get filename indicating all comics are downloaded."""
         dirname = self.get_download_dir(basepath)
         return os.path.join(dirname, "complete.txt")
 
-    def isComplete(self, basepath):
+    def isComplete(self, basepath: str) -> bool:
         """Check if all comics are downloaded."""
         return os.path.isfile(self.getCompleteFile(basepath))
 
-    def setComplete(self, basepath):
+    def setComplete(self, basepath: str) -> None:
         """Set complete flag for this comic, ie. all comics are downloaded."""
         if self.endOfLife:
             filename = self.getCompleteFile(basepath)
