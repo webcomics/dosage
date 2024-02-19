@@ -167,15 +167,6 @@ class Erstwhile(WordPressNavi):
     endOfLife = True
 
 
-class Everblue(ComicControlScraper):
-    url = 'http://www.everblue-comic.com/comic/'
-    stripUrl = url + '%s'
-    firstStripUrl = stripUrl % '1'
-
-    def namer(self, imageUrl, pageUrl):
-        return imageUrl.rsplit('/', 1)[-1].split('-', 1)[1]
-
-
 class EverybodyLovesEricRaymond(_ParserScraper):
     url = 'http://geekz.co.uk/lovesraymond/'
     firstStripUrl = url + 'archive/slashdotted'

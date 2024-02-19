@@ -1588,6 +1588,7 @@ class Removed(Scraper):
             cls('Angels2200', 'del'),
             cls('BlackRose', 'brk'),
             cls('CatenaManor/CatenaCafe'),
+            cls('Everblue', 'block'),
             cls('FalseStart'),
             cls('Ginpu'),
             cls('GoComics/9ChickweedLaneClassics'),
