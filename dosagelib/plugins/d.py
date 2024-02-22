@@ -329,17 +329,80 @@ class DreamKeepersPrelude(_ParserScraper):
 
 
 class DresdenCodak(_ParserScraper):
-    url = 'http://dresdencodak.com/'
-    startUrl = url + 'cat/comic/'
-    firstStripUrl = url + '2007/02/08/pom/'
-    imageSearch = '//section[d:class("entry-content")]//img[d:class("aligncenter")]'
+    from datetime import datetime
+
+    url = "https://dresdencodak.com/"
+    firstStripUrl = url + "2005/06/08/the-tomorrow-man/"
+    imageSearch = '(//section[d:class("entry-content")]//img[d:class("size-full") and not (contains(@alt, "revious") or contains(@alt,"irst") or contains(@alt,"ext"))])[1]'
+    textSearch = '//section[d:class("entry-content")]//p[(4 < position()) and (position() < (last() - 1))]'
+    textOptional = True
     prevSearch = '//a[img[contains(@src, "prev")]]'
     latestSearch = '//a[d:class("tc-grid-bg-link")]'
     starter = indirectStarter
 
-    # Blog and comic are mixed...
-    def shouldSkipUrl(self, url, data):
-        return not data.xpath(self.imageSearch)
+    # Haven't found a better way to distinguish whether or not a page is part
+    # of Hob than by the date prefix.
+    date_format = "%Y-%m-%d"
+    hob_start = datetime.strptime("2007-02-08", date_format)
+    hob_end = datetime.strptime("2008-10-22", date_format)
+
+    pagenumber_re = compile(
+        "(?:[0-9]+-)*[^0-9]+_([0-9]+)(?:a|b|-1|_001|-[0-9]+x[0-9]+)?\.jpg$"
+    )
+
+    def getPrevUrl(self, url, data):
+        # Fix skipping newest One-Off
+        if url == self.url + "2010/06/03/dark-science-01/":
+            newurl = self.url + "category/oneoffs/"
+            return self.fetchUrl(
+                newurl, self.getPage(newurl), self.latestSearch
+            )
+        return super(DresdenCodak, self).getPrevUrl(url, data)
+
+    def namer(self, image_url, page_url):
+        import os.path
+
+        filename = image_url.rsplit("/", 1)[-1]
+        # The archives are divided into three parts:
+        # Dark Science, Hob and One-Offs
+        if filename.startswith("ds"):
+            filename = filename[:2] + "_" + filename[2:]
+        elif filename == "84_new.jpg":
+            # Single anomalous page
+            filename = "ds_84.jpg"
+        elif filename == "cyborg_time.jpg":
+            filename = os.path.join("Dark Science", "84b.jpg")
+        elif "act_4" in filename:
+            filename = os.path.join("Dark Science", "80b.jpg")
+        elif "act_3" in filename:
+            filename = os.path.join("Dark Science", "38b.jpg")
+        elif "act_2" in filename:
+            filename = os.path.join("Dark Science", "18b.jpg")
+
+        if filename.startswith("ds_") or "-dark_science_" in filename:
+            # Dark Science
+            import re
+
+            pagenumber = re.match(self.pagenumber_re, filename).group(1)
+            filename = os.path.join(
+                "Dark Science", "{0:0>3}".format(pagenumber)
+            )
+        elif "/" not in filename:
+            # Hob
+            from datetime import datetime
+
+            date_prefix = page_url.rsplit("/", 5)[-5:-2]
+            date = datetime(*(int(i) for i in date_prefix))
+            if self.hob_start <= date <= self.hob_end:
+                filename = os.path.join("Hob", filename)
+            else:
+                # One-Offs
+                year_day_prefix = date.strftime("%Y-%m-%d")
+                filename = os.path.join(
+                    "One-Offs", "{0}-{1}".format(year_day_prefix, filename)
+                )
+
+        return filename
 
 
 class DrFun(_ParserScraper):
