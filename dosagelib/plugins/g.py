@@ -64,10 +64,6 @@ class GirlGenius(ParserScraper):
     multipleImagesPerStrip = True
     help = 'Index format: yyyymmdd'
 
-    def shouldSkipUrl(self, url, data):
-        """Skip pages without images."""
-        return not data.xpath('//div[@id="comicbody"]//img[contains(@src, "comic")]')
-
 
 class GirlsWithSlingshots(ComicControlScraper):
     url = 'https://girlswithslingshots.com/'
