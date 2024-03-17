@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2022 Daniel Ring
+# SPDX-FileCopyrightText: © 2019 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 from ..scraper import ParserScraper
 from ..helpers import indirectStarter
 
@@ -15,21 +15,21 @@ class Wrongside(ParserScraper):
 
     def starter(self):
         archivePage = self.getPage(self.url)
-        chapterUrls = archivePage.xpath('//ul[@class="albThumbs"]//a/@href')
+        chapterUrls = self.match(archivePage, '//ul[d:class("albThumbs")]//a/@href')
         self.archive = []
         for chapterUrl in chapterUrls:
             chapterPage = self.getPage(chapterUrl)
-            self.archive.append(chapterPage.xpath('(//ul[@id="thumbnails"]//a/@href)[last()]')[0])
+            self.archive.append(self.match(chapterPage, '(//ul[@id="thumbnails"]//a/@href)[last()]')[0])
         return self.archive[0]
 
     def getPrevUrl(self, url, data):
-        if data.xpath(self.prevSearch) == [] and len(self.archive) > 0:
+        if self.match(data, self.prevSearch) == [] and len(self.archive) > 0:
             return self.archive.pop()
         return super(Wrongside, self).getPrevUrl(url, data)
 
     def namer(self, imageUrl, pageUrl):
         page = self.getPage(pageUrl)
-        title = page.xpath('//div[@class="browsePath"]/h2/text()')[0]
+        title = self.match(page, '//div[d:class("browsePath")]/h2/text()')[0]
         return title.replace('"', '') + '.' + imageUrl.rsplit('.', 1)[-1]
 
 
@@ -71,5 +71,5 @@ class WrongsideSideStories(ParserScraper):
 
     def namer(self, imageUrl, pageUrl):
         page = self.getPage(pageUrl)
-        title = page.xpath('//div[@class="browsePath"]/h2/text()')[0]
+        title = self.match(page, '//div[d:class("browsePath")]/h2/text()')[0]
         return title.replace('"', '') + '.' + imageUrl.rsplit('.', 1)[-1]

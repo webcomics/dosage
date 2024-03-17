@@ -9,7 +9,6 @@ from re import compile, IGNORECASE
 from ..helpers import indirectStarter
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
-from ..xml import NS
 from .common import ComicControlScraper, WordPressScraper, WordPressWebcomic
 
 
@@ -153,7 +152,7 @@ class MonkeyUser(ParserScraper):
 
     def shouldSkipUrl(self, url, data):
         # videos
-        return data.xpath('//div[d:class("video-container")]', namespaces=NS)
+        return self.match(data, '//div[d:class("video-container")]')
 
 
 class MonsieurLeChien(ParserScraper):

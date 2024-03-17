@@ -228,7 +228,7 @@ class Amya(WordPressScraper):
     url = 'http://www.amyachronicles.com/'
 
 
-class Angband(_ParserScraper):
+class Angband(ParserScraper):
     url = 'http://angband.calamarain.net/'
     stripUrl = url + '%s'
     imageSearch = '//img'
@@ -237,7 +237,7 @@ class Angband(_ParserScraper):
 
     def starter(self):
         page = self.getPage(self.url)
-        self.pages = page.xpath('//p/a[not(contains(@href, "cast"))]/@href')
+        self.pages = self.match(page, '//p/a[not(contains(@href, "cast"))]/@href')
         self.firstStripUrl = self.pages[0]
         return self.pages[-1]
 
@@ -267,7 +267,7 @@ class Annyseed(_ParserScraper):
         return tourl
 
 
-class AntiheroForHire(_ParserScraper):
+class AntiheroForHire(ParserScraper):
     stripUrl = 'https://www.giantrobot.club/antihero-for-hire/%s'
     firstStripUrl = stripUrl % '2016/6/8/entrance-vigil'
     url = firstStripUrl
@@ -278,7 +278,7 @@ class AntiheroForHire(_ParserScraper):
     def starter(self):
         # Build list of chapters for navigation
         page = self.getPage(self.url)
-        self.chapters = page.xpath('//ul[@class="archive-group-list"]//a[contains(@class, "archive-item-link")]/@href')
+        self.chapters = self.match(page, '//ul[d:class("archive-group-list")]//a[d:class("archive-item-link")]/@href')
         return self.chapters[0]
 
     def getPrevUrl(self, url, data):
@@ -314,7 +314,7 @@ class ArtificialIncident(WordPressWebcomic):
     firstStripUrl = stripUrl % 'issue-one-life-changing'
 
 
-class AstronomyPOTD(_ParserScraper):
+class AstronomyPOTD(ParserScraper):
     baseUrl = 'http://apod.nasa.gov/apod/'
     url = baseUrl + 'astropix.html'
     starter = bounceStarter
@@ -328,7 +328,7 @@ class AstronomyPOTD(_ParserScraper):
 
     def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
-        return data.xpath('//iframe')  # videos
+        return self.match(data, '//iframe')  # videos
 
     def namer(self, image_url, page_url):
         return '%s-%s' % (page_url.split('/')[-1].split('.')[0][2:],

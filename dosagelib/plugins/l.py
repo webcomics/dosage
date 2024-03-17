@@ -38,7 +38,7 @@ class LazJonesAndTheMayfieldRegulatorsSideStories(LazJonesAndTheMayfieldRegulato
 
     def getPrevUrl(self, url, data):
         # Fix broken navigation links
-        if url == self.url and data.xpath(self.prevSearch + '/@href')[0] == self.stripUrl % 'summer00':
+        if url == self.url and self.match(data, self.prevSearch + '/@href')[0] == self.stripUrl % 'summer00':
             return self.stripUrl % 'summer21'
         return super(LazJonesAndTheMayfieldRegulators, self).getPrevUrl(url, data)
 

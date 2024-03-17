@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 import os
 
 from ..scraper import ParserScraper
@@ -79,7 +79,7 @@ class ComicFury(ParserScraper):
         num = parts[-1]
         if self.multipleImagesPerStrip:
             page = self.getPage(pageUrl)
-            images = page.xpath('//img[@class="comicsegmentimage"]/@src')
+            images = self.match(page, '//img[d:class("comicsegmentimage")]/@src')
             if len(images) > 1:
                 imageIndex = images.index(imageUrl) + 1
                 return "%s_%s-%d%s" % (self.prefix, num, imageIndex, ext)
@@ -88,8 +88,8 @@ class ComicFury(ParserScraper):
     def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
         # Videos on Underverse
-        return (data.xpath('//div[@id="comicimagewrap"]//video') and
-            not data.xpath('//div[@id="comicimagewrap"]//img'))
+        return (self.match(data, '//div[@id="comicimagewrap"]//video') and
+            not self.match(data, '//div[@id="comicimagewrap"]//img'))
 
     @classmethod
     def getmodules(cls):  # noqa: CFQ001

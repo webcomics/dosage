@@ -521,21 +521,23 @@ class ParserScraper(Scraper):
         return text.strip()
 
     def _matchPattern(self, data, patterns):
-        if self.css:
-            searchFun = data.cssselect
-        else:
-            def searchFun(s):
-                return data.xpath(s, namespaces=NS)
         patterns = makeSequence(patterns)
         for search in patterns:
             matched = False
-            for match in searchFun(search):
+            for match in self.match(data, search):
                 matched = True
                 yield match, search
 
             if matched and not self.multipleImagesPerStrip:
                 # do not search other links if one pattern matched
                 break
+
+    def match(self, data, pattern):
+        """Match a pattern (XPath/CSS) against a page."""
+        if self.css:
+            return data.cssselect(pattern)
+        else:
+            return data.xpath(pattern, namespaces=NS)
 
     def getDisabledReasons(self):
         res = {}

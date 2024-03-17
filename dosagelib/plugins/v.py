@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 
 from ..scraper import ParserScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
@@ -44,15 +44,15 @@ class Vibe(ParserScraper):
     help = 'Index format: VIBEnnn (padded)'
 
 
-class VickiFox(_ParserScraper):
+class VickiFox(ParserScraper):
     url = 'http://www.vickifox.com/comic/strip'
     stripUrl = url + '?id=%s'
     firstStripUrl = stripUrl % '001'
     imageSearch = '//img[contains(@src, "comic/")]'
     prevSearch = '//button[@id="btnPrev"]/@value'
 
-    def getPrevUrl(self, url, data):
-        return self.stripUrl % self.getPage(url).xpath(self.prevSearch)[0]
+    def link_modifier(self, fromurl, tourl):
+        return self.stripUrl % tourl
 
 
 class ViiviJaWagner(_ParserScraper):

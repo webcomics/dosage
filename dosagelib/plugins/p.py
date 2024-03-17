@@ -166,7 +166,7 @@ class PHDComics(ParserScraper):
             # video
             self.stripUrl % '1880',
             self.stripUrl % '1669',
-        ) or data.xpath('//img[@id="comic" and contains(@src, "phd083123s")]')
+        ) or self.match(data, '//img[@id="comic" and contains(@src, "phd083123s")]')
 
 
 class Picklewhistle(ComicControlScraper):

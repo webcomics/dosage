@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2019 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 from ..scraper import ParserScraper
 
 
@@ -44,7 +44,7 @@ class KemonoCafe(ParserScraper):
         # Fix unordered filenames
         if 'addictivescience' in pageUrl:
             page = self.getPage(pageUrl)
-            num = int(page.xpath('//div[@id="comic-wrap"]/@class')[0].replace('comic-id-', ''))
+            num = int(self.match(page, '//div[@id="comic-wrap"]/@class')[0].replace('comic-id-', ''))
             filename = '%04d_%s' % (num, filename)
         elif 'CaughtInOrbit' in filename:
             filename = filename.replace('CaughtInOrbit', 'CIO')

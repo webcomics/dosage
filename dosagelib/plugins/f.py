@@ -140,7 +140,7 @@ class FoxDad(ParserScraper):
 
     def namer(self, imageUrl, pageUrl):
         page = self.getPage(pageUrl)
-        post = page.xpath('//li[@class="timestamp"]/a/@href')[0]
+        post = self.match(page, '//li[d:class("timestamp")]/a/@href')[0]
         post = post.replace('https://foxdad.com/post/', '')
         if '-consider-support' in post:
             post = post.split('-consider-support')[0]
@@ -216,7 +216,7 @@ class FriendsYouAreStuckWith(WordPressScraper):
 
     def namer(self, imageUrl, pageUrl):
         page = self.getPage(pageUrl)
-        strip = page.xpath('//div[@id="comic-wrap"]/@class')[0].replace('comic-id-', '')
+        strip = self.match(page, '//div[@id="comic-wrap"]/@class')[0].replace('comic-id-', '')
         return strip + '_' + imageUrl.rstrip('/').rsplit('/', 1)[-1]
 
 

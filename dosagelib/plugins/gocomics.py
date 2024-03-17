@@ -31,7 +31,7 @@ class GoComics(ParserScraper):
 
     def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
-        return data.xpath('//img[contains(@src, "content-error-missing")]')
+        return self.match(data, '//img[contains(@src, "content-error-missing")]')
 
     @classmethod
     def getmodules(cls):  # noqa: CFQ001

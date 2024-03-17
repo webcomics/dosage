@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile, escape
 
 from ..scraper import _BasicScraper, _ParserScraper, ParserScraper
@@ -328,18 +328,13 @@ class DreamKeepersPrelude(_ParserScraper):
     help = 'Index format: n'
 
 
-class DresdenCodak(_ParserScraper):
+class DresdenCodak(ParserScraper):
     url = 'http://dresdencodak.com/'
-    startUrl = url + 'cat/comic/'
     firstStripUrl = url + '2007/02/08/pom/'
     imageSearch = '//section[d:class("entry-content")]//img[d:class("aligncenter")]'
     prevSearch = '//a[img[contains(@src, "prev")]]'
     latestSearch = '//a[d:class("tc-grid-bg-link")]'
     starter = indirectStarter
-
-    # Blog and comic are mixed...
-    def shouldSkipUrl(self, url, data):
-        return not data.xpath(self.imageSearch)
 
 
 class DrFun(_ParserScraper):

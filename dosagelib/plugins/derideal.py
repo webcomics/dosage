@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2019 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 from ..scraper import ParserScraper
 from ..helpers import indirectStarter
 
@@ -27,7 +27,7 @@ class Derideal(ParserScraper):
 
     def starter(self):
         indexPage = self.getPage(self.url)
-        self.chapters = indexPage.xpath('//a[contains(text(), "Read this episode")]/@href')
+        self.chapters = self.match(indexPage, '//a[contains(text(), "Read this episode")]/@href')
         self.currentChapter = len(self.chapters)
         return indirectStarter(self)
 

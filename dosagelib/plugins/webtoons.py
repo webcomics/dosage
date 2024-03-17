@@ -24,9 +24,9 @@ class WebToons(ParserScraper):
             self.session.cookies.set(cookie, 'false', domain='webtoons.com')
         # Find current episode number
         listPage = self.getPage(self.listUrl)
-        currentEpisode = listPage.xpath('//div[@class="detail_lst"]/ul/li')[0].attrib['data-episode-no']
+        currentEpisode = self.match(listPage, '//div[d:class("detail_lst")]/ul/li')[0].attrib['data-episode-no']
         # Check for completed tag
-        self.endOfLife = (listPage.xpath('//div[@id="_asideDetail"]//span[@class="txt_ico_completed2"]') != [])
+        self.endOfLife = not self.match(listPage, '//div[@id="_asideDetail"]//span[d:class("txt_ico_completed2")]')
         return self.stripUrl % currentEpisode
 
     def extract_image_urls(self, url, data):

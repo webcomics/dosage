@@ -113,7 +113,7 @@ class Erfworld(ParserScraper):
 
     def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
-        return not data.xpath(self.imageSearch)
+        return not self.match(data, self.imageSearch)
 
     def namer(self, imageUrl, pageUrl):
         # Fix inconsistent filenames
@@ -232,7 +232,7 @@ class ExtraFabulousComics(WordPressScraper):
         return '_'.join((pagepart, imagename))
 
     def shouldSkipUrl(self, url, data):
-        return data.xpath('//div[@id="comic"]//iframe')
+        return self.match(data, '//div[@id="comic"]//iframe')
 
 
 class ExtraLife(_BasicScraper):

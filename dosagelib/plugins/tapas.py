@@ -3,7 +3,6 @@
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
 from ..output import out
 from ..scraper import ParserScraper
-from ..xml import NS
 
 
 class Tapas(ParserScraper):
@@ -21,7 +20,7 @@ class Tapas(ParserScraper):
     def starter(self):
         # Retrieve comic metadata from info page
         info = self.getPage(self.url)
-        series = info.xpath('//@data-series-id')[0]
+        series = self.match(info, '//@data-series-id')[0]
         # Retrieve comic metadata from API
         data = self.session.get(self.baseUrl + 'series/' + series + '/episodes?sort=NEWEST')
         data.raise_for_status()
@@ -43,7 +42,7 @@ class Tapas(ParserScraper):
         return self._cached_image_urls
 
     def shouldSkipUrl(self, url, data):
-        if data.xpath('//button[d:class("js-have-to-sign")]', namespaces=NS):
+        if self.match(data, '//button[d:class("js-have-to-sign")]'):
             out.warn(f'Nothing to download on "{url}", because a login is required.')
             return True
         return False

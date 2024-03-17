@@ -435,7 +435,7 @@ class SpaceFurries(ParserScraper):
     def extract_image_urls(self, url, data):
         # Website requires JS, so build the list of image URLs manually
         imageurls = []
-        current = int(data.xpath('//input[@name="pagnum"]')[0].get('value'))
+        current = int(self.match(data, '//input[@name="pagnum"]')[0].get('value'))
         for page in reversed(range(1, current + 1)):
             imageurls.append(self.url + 'comics/' + str(page) + '.jpg')
         return imageurls
@@ -636,16 +636,16 @@ class StrongFemaleProtagonist(_ParserScraper):
         )
 
 
-class StupidFox(_ParserScraper):
+class StupidFox(ParserScraper):
     url = 'http://stupidfox.net/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % 'hello'
-    imageSearch = '//div[@class="comicmid"]//img'
+    imageSearch = '//div[d:class("comicmid")]//img'
     prevSearch = '//a[@accesskey="p"]'
 
     def namer(self, imageUrl, pageUrl):
         page = self.getPage(pageUrl)
-        title = page.xpath(self.imageSearch + '/@title')[0].replace(' - ', '-').replace(' ', '-')
+        title = self.match(page, self.imageSearch + '/@title')[0].replace(' - ', '-').replace(' ', '-')
         return title + '.' + imageUrl.rsplit('.', 1)[-1]
 
 

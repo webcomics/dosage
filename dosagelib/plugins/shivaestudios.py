@@ -19,7 +19,7 @@ class AlienDice(WordPressSpliced):
 
     def shouldSkipUrl(self, url, data):
         """Skip pages without images."""
-        return not data.xpath(self.imageSearch)
+        return not self.match(data, self.imageSearch)
 
     def getPrevUrl(self, url, data):
         # Fix broken navigation

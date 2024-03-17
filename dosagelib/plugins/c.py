@@ -34,11 +34,11 @@ class CaptainSNES(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/nnn-stripname'
 
 
-class CarryOn(_ParserScraper):
+class CarryOn(ParserScraper):
     url = 'http://www.hirezfox.com/km/co/'
     stripUrl = url + 'd/%s.html'
     firstStripUrl = stripUrl % '20040701'
-    imageSearch = '//div[@class="strip"]/img'
+    imageSearch = '//div[d:class("strip")]/img'
     prevSearch = '//a[text()="Previous Day"]'
     multipleImagesPerStrip = True
 
@@ -122,13 +122,13 @@ class CatAndGirl(_ParserScraper):
     prevSearch = '//a[d:class("pager--prev")]'
 
 
-class CatenaManor(_ParserScraper):
+class CatenaManor(ParserScraper):
     baseUrl = ('https://web.archive.org/web/20141027141116/'
         'http://catenamanor.com/')
     url = baseUrl + 'archives'
     stripUrl = baseUrl + '%s/'
     firstStripUrl = stripUrl % '2003/07'
-    imageSearch = '//img[@class="comicthumbnail"]'
+    imageSearch = '//img[d:class("comicthumbnail")]'
     multipleImagesPerStrip = True
     endOfLife = True
     strips: List[str] = []
@@ -136,7 +136,7 @@ class CatenaManor(_ParserScraper):
     def starter(self):
         # Retrieve archive links and select valid range
         archivePage = self.getPage(self.url)
-        archiveStrips = archivePage.xpath('//div[@id="archivepage"]//a')
+        archiveStrips = self.match(archivePage, '//div[@id="archivepage"]//a')
         valid = False
         for link in archiveStrips:
             if self.stripUrl % '2012/01' in link.get('href'):

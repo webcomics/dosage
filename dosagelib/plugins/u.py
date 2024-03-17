@@ -107,7 +107,7 @@ class Unsounded(ParserScraper):
         return urls
 
     def extract_css_bg(self, page) -> str | None:
-        comicdivs = page.xpath('//div[@id="comic"]')
+        comicdivs = self.match(page, '//div[@id="comic"]')
         if comicdivs:
             style = comicdivs[0].attrib.get('style')
             if style:

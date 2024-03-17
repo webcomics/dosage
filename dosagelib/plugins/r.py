@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2021 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile
 from urllib.parse import urljoin
 
@@ -121,7 +121,7 @@ class Requiem(WordPressScraper):
     firstStripUrl = stripUrl % '2004-06-07-3'
 
 
-class Replay(_ParserScraper):
+class Replay(ParserScraper):
     url = 'http://replaycomic.com/'
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'red-desert'
@@ -132,11 +132,11 @@ class Replay(_ParserScraper):
     def starter(self):
         # Retrieve archive page to identify chapters
         archivePage = self.getPage(self.url + 'archive')
-        archive = archivePage.xpath('//div[@class="comic-archive-chapter-wrap"]')
+        archive = self.match(archivePage, '//div[d:class("comic-archive-chapter-wrap")]')
         self.chapter = len(archive) - 1
         self.startOfChapter = []
         for archiveChapter in archive:
-            self.startOfChapter.append(archiveChapter.xpath('.//a')[0].get('href'))
+            self.startOfChapter.append(self.match(archiveChapter, './/a')[0].get('href'))
         return bounceStarter(self)
 
     def namer(self, imageUrl, pageUrl):
