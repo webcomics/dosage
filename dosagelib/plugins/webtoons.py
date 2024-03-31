@@ -65,6 +65,7 @@ class WebToons(ParserScraper):
             cls('AGoodDayToBeADog', 'romance/a-good-day-tobe-a-dog', 1390),
             cls('Aisopos', 'drama/aisopos', 76),
             cls('AliceElise', 'fantasy/alice-elise', 1481),
+            cls('AlloyComics', 'canvas/alloy-comics', 747447),
             cls('AllThatWeHopeToBe', 'slice-of-life/all-that-we-hope-to-be', 470),
             cls('AllThatYouAre', 'drama/all-that-you-are', 403),
             cls('AlwaysHuman', 'romance/always-human', 557),
