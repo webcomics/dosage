@@ -27,7 +27,7 @@ class VGCats(_ParserScraper):
     url = 'https://www.vgcats.com/comics/'
     stripUrl = url + '?strip_id=%s'
     firstStripUrl = stripUrl % '0'
-    imageSearch = '//td/img[contains(@src, "images/")]'
+    imageSearch = '//td/font/img[contains(@src, "images/")]'
     prevSearch = '//a[img[contains(@src, "back.")]]'
     help = 'Index format: n (unpadded)'
 
