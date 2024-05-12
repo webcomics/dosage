@@ -11,7 +11,6 @@ class ComicsKingdom(ParserScraper):
     partDiv = '//div[d:class("comic-reader-item")]'
     imageSearch = partDiv + '[1]//a[contains(@href, "/custom-framed-print/")]'
     prevSearch = partDiv + '[2]/@data-link'
-    latestSearch = '//a[re:test(@href, "/[0-9-]+$")]'
     starter = indirectStarter
     help = 'Index format: yyyy-mm-dd'
 
@@ -19,6 +18,7 @@ class ComicsKingdom(ParserScraper):
         super().__init__('ComicsKingdom/' + name)
         self.url = 'https://comicskingdom.com/' + path
         self.stripUrl = self.url + '/%s'
+        self.latestSearch = f'//a[re:test(@href, "/{path}/[0-9-]+$")]'
         if lang:
             self.lang = lang
 
