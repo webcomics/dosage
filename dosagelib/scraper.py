@@ -143,15 +143,12 @@ class Scraper:
         # remove duplicate URLs
         urls = uniq(urls)
         if len(urls) > 1 and not self.multipleImagesPerStrip:
-            out.warn(
-                u"Found %d images instead of 1 at %s with expressions %s" %
-                (len(urls), url, prettyMatcherList(self.imageSearch)))
+            out.warn(                u"Found %d images instead of 1 at %s with expressions %s" %                (len(urls), url, prettyMatcherList(self.imageSearch)))
             image = urls[0]
             out.warn("Choosing image %s" % image)
             urls = (image,)
         elif not urls:
-            out.warn("Found no images at %s with expressions %s" % (url,
-                     prettyMatcherList(self.imageSearch)))
+            out.warn("Found no images at %s with expressions %s" % (url,                     prettyMatcherList(self.imageSearch)))
         if self.textSearch:
             text = self.fetchText(url, data, self.textSearch,
                                   optional=self.textOptional)
@@ -407,8 +404,7 @@ class BasicScraper(Scraper):
                 if not searchUrl:
                     raise ValueError("Pattern %s matched empty URL at %s." %
                                      (search.pattern, url))
-                out.debug(u'matched URL %r with pattern %s' %
-                          (searchUrl, search.pattern))
+                out.debug(u'matched URL %r with pattern %s' %                          (searchUrl, search.pattern))
                 searchUrls.append(normaliseURL(urljoin(data[1], searchUrl)))
             if searchUrls:
                 # do not search other links if one pattern matched
@@ -425,8 +421,7 @@ class BasicScraper(Scraper):
             match = textSearch.search(data[0])
             if match:
                 text = match.group(1)
-                out.debug(u'matched text %r with pattern %s' %
-                          (text, textSearch.pattern))
+                out.debug(u'matched text %r with pattern %s' %                          (text, textSearch.pattern))
                 return html.unescape(text).strip()
             if optional:
                 return None
@@ -593,8 +588,7 @@ class Cache:
             modules += 1
             classes += self.addmodule(module)
         self.validate()
-        out.debug("... %d scrapers loaded from %d classes in %d modules." % (
-            len(self.data), classes, modules))
+        out.debug("... %d scrapers loaded from %d classes in %d modules." % (            len(self.data), classes, modules))
 
     def adddir(self, path) -> None:
         """Add an additional directory with python modules to the scraper list.
@@ -613,8 +607,7 @@ class Cache:
         self.validate()
         self.userdirs.add(path)
         if classes > 0:
-            out.debug("Added %d user classes from %d modules." % (
-                classes, modules))
+            out.debug("Added %d user classes from %d modules." % (                classes, modules))
 
     def addmodule(self, module) -> int:
         """Adds all valid plugin classes from the specified module to the cache.

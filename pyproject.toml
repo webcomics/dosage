@@ -33,6 +33,7 @@ dependencies = [
     "lxml>=4.0.0",
     "platformdirs",
     "requests>=2.0",
+    "rich",
     "importlib_resources>=5.0.0;python_version<'3.9'",
 ]
 dynamic = ["version"]

@@ -139,8 +139,7 @@ class ComicGetter(threading.Thread):
                 if self.stopped:
                     break
             except Exception as msg:
-                out.exception('Could not save image at {} to {}: {!r}'.format(
-                    image.referrer, image.filename, msg))
+                out.exception('Could not save image at {} to {}: {!r}'.format(image.referrer, image.filename, msg))
                 self.errors += 1
         return allskipped
 
@@ -245,11 +244,9 @@ def shouldRunScraper(scraperobj, adult=True, listing=False):
 
 def warn_adult(scraperobj):
     """Print warning about adult content."""
-    out.warn(u"skipping adult comic {};"
-        " use the --adult option to confirm your age".format(scraperobj.name))
+    out.warn(u"skipping adult comic {};"        " use the --adult option to confirm your age".format(scraperobj.name))
 
 
 def warn_disabled(scraperobj, reasons):
     """Print warning about disabled comic modules."""
-    out.warn(u"Skipping comic {}: {}".format(
-        scraperobj.name, ' '.join(reasons.values())))
+    out.warn(u"Skipping comic {}: {}".format(        scraperobj.name, ' '.join(reasons.values())))

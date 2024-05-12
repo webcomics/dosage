@@ -1,10 +1,11 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 import codecs
 import contextlib
 import io
+import logging
 import os
 import pydoc
 import sys
@@ -18,6 +19,7 @@ import colorama
 from colorama import Fore, Style
 
 
+logger = logging.getLogger(__name__)
 lock = threading.Lock()
 
 
@@ -26,7 +28,7 @@ def get_threadname():
     return threading.current_thread().name
 
 
-class Output(object):
+class Output:
     """Print output with context, indentation and optional timestamps."""
 
     DEFAULT_WIDTH = 80
@@ -55,20 +57,24 @@ class Output(object):
     def info(self, s, level=0):
         """Write an informational message."""
         self.write(s, level=level)
+        logger.info(s)
 
     def debug(self, s, level=2):
         """Write a debug message."""
         # "white" is the default color for most terminals...
         self.write(s, level=level, color=Fore.WHITE)
+        logger.debug(s)
 
     def warn(self, s, level=0):
         """Write a warning message."""
         self.write(u"WARN: %s" % s, level=level, color=Style.BRIGHT +
                    Fore.YELLOW)
+        logger.warning(s)
 
     def error(self, s, level=0):
         """Write an error message."""
         self.write(u"ERROR: %s" % s, level=level, color=Style.DIM + Fore.RED)
+        logger.error(s)
 
     def exception(self, s):
         """Write error message with traceback info."""
@@ -77,6 +83,7 @@ class Output(object):
         self.writelines(traceback.format_stack(), 1)
         self.writelines(traceback.format_tb(tb)[1:], 1)
         self.writelines(traceback.format_exception_only(type, value), 1)
+        logger.exeception(s)
 
     def write(self, s, level=0, color=None):
         """Write message with indentation, context and optional timestamp."""

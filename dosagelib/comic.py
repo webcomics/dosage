@@ -87,8 +87,7 @@ class ComicImage:
         if maintype == 'image':
             self.ext = '.' + subtype.replace('jpeg', 'jpg')
         self.contentLength = int(self.urlobj.headers.get('content-length', 0))
-        out.debug(u'... filename = %r, ext = %r, contentLength = %d' % (
-            self.filename, self.ext, self.contentLength))
+        out.debug(u'... filename = %r, ext = %r, contentLength = %d' % (self.filename, self.ext, self.contentLength))
 
     def save(self, basepath):
         """Save comic URL to filename on disk."""

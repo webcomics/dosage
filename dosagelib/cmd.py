@@ -14,7 +14,7 @@ from collections.abc import Iterable
 
 from platformdirs import PlatformDirs
 
-from . import events, configuration, singleton, director
+from . import configuration, director, events, singleton, logging
 from . import AppName, __version__
 from .output import out
 from .scraper import scrapers as scrapercache
@@ -230,6 +230,7 @@ def vote_comic(scraperobj):
 def run(options):
     """Execute comic commands."""
     set_output_info(options)
+    logging.setup_console(options.verbose, options.timestamps)
     scrapercache.adddir(user_plugin_path)
     # ensure only one instance of dosage is running
     if not options.allow_multiple:
@@ -256,8 +257,7 @@ def do_list(column_list=True, verbose=False, listall=False):
     """List available comics."""
     with out.pager():
         out.info(u'Available comic scrapers:')
-        out.info(u'Comics tagged with [{}] require age confirmation'
-            ' with the --adult option.'.format(TAG_ADULT))
+        out.info(u'Comics tagged with [{}] require age confirmation'            ' with the --adult option.'.format(TAG_ADULT))
         out.info(u'Non-english comics are tagged with [%s].' % TAG_LANG)
         scrapers = sorted(scrapercache.all(listall),
                           key=lambda s: s.name.lower())
@@ -268,8 +268,7 @@ def do_list(column_list=True, verbose=False, listall=False):
         out.info(u'%d supported comics.' % num)
         if disabled:
             out.info('')
-            out.info(u'Some comics are disabled, they are tagged with'
-                ' [{}:REASON], where REASON is one of:'.format(TAG_DISABLED))
+            out.info(u'Some comics are disabled, they are tagged with'                ' [{}:REASON], where REASON is one of:'.format(TAG_DISABLED))
             for k in disabled:
                 out.info(u'  %-10s %s' % (k, disabled[k]))
     return 0
@@ -298,8 +297,7 @@ def do_column_list(scrapers):
     maxlen = max(len(name) for name in names)
     names_per_line = max(width // (maxlen + 1), 1)
     while names:
-        out.info(u''.join(name.ljust(maxlen) for name in
-                 names[:names_per_line]))
+        out.info(u''.join(name.ljust(maxlen) for name in names[:names_per_line]))
         del names[:names_per_line]
     return num, disabled
 
