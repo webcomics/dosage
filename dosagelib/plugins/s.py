@@ -196,7 +196,7 @@ class Sharksplode(WordPressScraper):
 class Sheldon(ParserScraper):
     url = 'https://www.sheldoncomics.com/'
     firstStripUrl = url + 'comic/well-who-is-this/'
-    imageSearch = '//div[@id="comic"]//img'
+    imageSearch = '//div[@id="comic"]//img/@data-src-img'
     prevSearch = '//a[img[d:class("left")]]'
 
 
