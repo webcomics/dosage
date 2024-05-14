@@ -214,6 +214,7 @@ class WebToons(ParserScraper):
             cls('Hooky', 'fantasy/hooky', 425),
             cls('HoovesOfDeath', 'fantasy/hooves-of-death', 1535),
             cls('HouseOfStars', 'fantasy/house-of-stars', 1620),
+            cls('HowToBeAMindReaver', 'canvas/how-to-be-a-mind-reaver', 301213),
             cls('HowToBecomeADragon', 'fantasy/how-to-become-a-dragon', 1973),
             cls('HowToLove', 'slice-of-life/how-to-love', 472),
             cls('IDontWantThisKindOfHero', 'super-hero/i-dont-want-this-kind-of-hero', 98),
