@@ -350,14 +350,12 @@ class DrFun(_ParserScraper):
     help = 'Index format: nnnnn'
 
 
-class Drive(_BasicScraper):
+class Drive(ParserScraper):
     url = 'http://www.drivecomic.com/'
-    rurl = escape(url)
-    stripUrl = url + 'archive/%s.html'
-    firstStripUrl = stripUrl % '090815'
-    imageSearch = compile(tagre("img", "src", r'(http://cdn\.drivecomic\.com/strips/main/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(%sarchive/\d+\.html)' % rurl) + "Previous")
-    help = 'Index format: yymmdd'
+    firstStripUrl = url + 'comic/act-1-pg-001/'
+    imageSearch = ('//div[@id="unspliced-comic"]//img/@data-src-img',
+        '//div[@id="unspliced-comic"]//picture//img')
+    prevSearch = '//a[d:class("previous-comic")]'
 
 
 class DrMcNinja(_ParserScraper):
