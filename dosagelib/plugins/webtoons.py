@@ -268,6 +268,7 @@ class WebToons(ParserScraper):
             cls('LUMINE', 'fantasy/lumine', 1022),
             cls('Lunarbaboon', 'slice-of-life/lunarbaboon', 523),
             cls('MageAndDemonQueen', 'comedy/mage-and-demon-queen', 1438),
+            cls('MageAndMimic', 'comedy/mage-and-mimic', 5973),
             cls('Magical12thGraders', 'super-hero/magical-12th-graders', 90),
             cls('Magician', 'fantasy/magician', 70),
             cls('MagicSodaPop', 'fantasy/magic-soda-pop', 1947),
