@@ -157,6 +157,7 @@ class WebToons(ParserScraper):
             cls('DrFrost', 'drama/dr-frost', 371),
             cls('DuelIdentity', 'challenge/duel-identity', 532064),
             cls('DungeonCleaningLife', 'action/the-dungeon-cleaning-life-of-a-once-genius-hunter', 4677),
+            cls('DungeonsAndDoodlesTalesFromTheTables', 'canvas/dungeons-doodles-tales-from-the-tables', 682646),
             cls('DungeonMinis', 'challenge/dungeonminis', 64132),
             cls('Dustinteractive', 'comedy/dustinteractive', 907),
             cls('DutyAfterSchool', 'sf/duty-after-school', 370),
