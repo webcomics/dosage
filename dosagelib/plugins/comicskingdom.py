@@ -1,15 +1,13 @@
 # SPDX-License-Identifier: MIT
 # SPDX-FileCopyrightText: © 2019 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Thomas W. Littauer
-from urllib.parse import parse_qs, urlsplit
-
 from ..helpers import indirectStarter
 from ..scraper import ParserScraper
 
 
 class ComicsKingdom(ParserScraper):
     partDiv = '//div[d:class("comic-reader-item")]'
-    imageSearch = partDiv + '[1]//a[contains(@href, "/custom-framed-print/")]'
+    imageSearch = '//meta[@property="og:image"]/@content'
     prevSearch = partDiv + '[2]/@data-link'
     starter = indirectStarter
     help = 'Index format: yyyy-mm-dd'
@@ -21,10 +19,6 @@ class ComicsKingdom(ParserScraper):
         self.latestSearch = f'//a[re:test(@href, "/{path}/[0-9-]+$")]'
         if lang:
             self.lang = lang
-
-    def imageUrlModifier(self, url, data):
-        """Extract high-quality image URL from link"""
-        return parse_qs(urlsplit(url).query)['img'][0]
 
     def link_modifier(self, fromurl, tourl):
         return tourl.replace('//wp.', '//', 1)
