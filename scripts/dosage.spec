@@ -1,28 +1,30 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2017-2020 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2017 Tobias Gruetzmacher
+
+import re
+from importlib import metadata
 
 # Idea from
 # https://github.com/pyinstaller/pyinstaller/wiki/Recipe-Setuptools-Entry-Point,
 # but with importlib
-def Entrypoint(group, name, **kwargs):
-    import re
-    try:
-        from importlib.metadata import entry_points
-    except ImportError:
-        from importlib_metadata import entry_points
-
+def entrypoint(group, name, **kwargs):
     # get the entry point
-    eps = entry_points()[group]
-    ep = next(ep for ep in eps if ep.name == name)
-    module, attr = re.split(r'\s*:\s*', ep.value, 1)
+    eps = metadata.entry_points()
+    if 'select' in dir(eps):
+        # modern
+        ep = eps.select(group=group)[name]
+    else:
+        # legacy (pre-3.10)
+        ep = next(ep for ep in eps[group] if ep.name == name)
+    module, attr = re.split(r'\s*:\s*', ep.value, maxsplit=1)
 
     # script name must not be a valid module name to avoid name clashes on import
     script_path = os.path.join(workpath, name + '-script.py')
     print("creating script for entry point", group, name)
-    with open(script_path, 'w') as fh:
+    with open(script_path, mode='w', encoding='utf-8') as fh:
         print("import sys", file=fh)
         print("import", module, file=fh)
-        print("sys.exit(%s.%s())" % (module, attr), file=fh)
+        print(f"sys.exit({module}.{attr}())", file=fh)
 
     return Analysis(
         [script_path] + kwargs.get('scripts', []),
@@ -30,7 +32,7 @@ def Entrypoint(group, name, **kwargs):
     )
 
 
-a = Entrypoint('console_scripts', 'dosage')
+a = entrypoint('console_scripts', 'dosage')
 
 a.binaries = [x for x in a.binaries if not x[1].lower().startswith(r'c:\windows')]
 
