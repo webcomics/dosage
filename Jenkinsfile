@@ -74,7 +74,7 @@ pys.each { py ->
 parallel(tasks)
 parallel modern: {
         stage('Modern Windows binary') {
-            windowsBuild('3.11', 'dosage.exe')
+            windowsBuild('3.12', 'dosage.exe')
         }
     },
     legacy: {
