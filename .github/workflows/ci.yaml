@@ -32,7 +32,7 @@ jobs:
         if: ${{ matrix.python-version != env.DEFAULT_PYTHON }}
 
       - name: Test with tox (and upload coverage)
-        uses: paambaati/codeclimate-action@v6.0.0
+        uses: paambaati/codeclimate-action@v8.0.0
         if: ${{ matrix.python-version == env.DEFAULT_PYTHON }}
         env:
           CC_TEST_REPORTER_ID: 2a411f596959fc32f5d73f3ba7cef8cc4d5733299d742dbfc97fd6c190b9010c
