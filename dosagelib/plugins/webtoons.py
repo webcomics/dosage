@@ -450,6 +450,7 @@ class WebToons(ParserScraper):
             cls('UpAndOut', 'slice-of-life/up-and-out', 488),
             cls('UrbanAnimal', 'super-hero/urban-animal', 1483),
             cls('Uriah', 'horror/uriah', 1607),
+            cls('VampireFamily', 'comedy/vampire-family', 6402),
             cls('VarsityNoir', 'mystery/varsity-noir', 1613),
             cls('VersionDayAndNight', 'drama/version-day-and-night', 1796),
             cls('WafflesAndPancakes', 'slice-of-life/waffles-and-pancakes', 1310),
