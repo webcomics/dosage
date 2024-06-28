@@ -210,6 +210,7 @@ class WebToons(ParserScraper):
             cls('HeliosFemina', 'fantasy/helios-femina', 638),
             cls('HelloWorld', 'slice-of-life/hello-world', 827),
             cls('Hellper', 'fantasy/hellper', 185),
+            cls('hence', 'canvas/hench/', 857225),
             cls('HeroineChic', 'super-hero/heroine-chic', 561),
             cls('HIVE', 'thriller/hive', 65),
             cls('Hooky', 'fantasy/hooky', 425),
