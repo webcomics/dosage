@@ -228,13 +228,36 @@ class PokeyThePenguin(_ParserScraper):
         prefix = url.rsplit('/', 1)[0]
         return "%s/index%d.html" % (prefix, num)
 
-
 class PoorlyDrawnLines(_ParserScraper):
-    url = 'http://poorlydrawnlines.com/comic/'
-    firstStripUrl = url + 'campus-characters/'
-    imageSearch = '//div[d:class("comic")]//img'
+    url = 'https://poorlydrawnlines.com/comic/'
+    stripUrl = url + '%s/'
+    multipleImagesPerStrip = True
+    firstStripUrl = stripUrl % 'hardly-essayists'
+    imageSearch = '//div[d:class("entry-content")]//img[@data-src]/@data-src'
     prevSearch = '//a[@rel="prev"]'
 
+    def shouldSkipUrl(self, url, _data):
+        """Skip pages without a comic."""
+        skipUrls = [self.stripUrl % s for s in (
+            'hope-it-all-works-out-new-book-coming-this-fall',
+            'poorly-drawn-lines-animated-series',
+            'poorly-drawn-lines-episode-two',
+            'watch-poorly-drawn-lines-on-hulu',
+        )]
+        return url in skipUrls
+
+    def getPrevUrl(self, url: str, data):
+        """Skip missing comics which redirect back to home page"""
+        if url == self.stripUrl % '8198':
+            return self.stripUrl % 'excited-2'
+        elif url == self.stripUrl % '8186':
+            return self.stripUrl % 'to-hell-2'
+        elif url == self.stripUrl % '8177':
+            return self.stripUrl % 'feel-real'
+        elif url == self.stripUrl % '2056':
+            return self.stripUrl % 'stereotype'
+
+        return super().getPrevUrl(url, data)
 
 class PoppyOPossum(WordPressScraper):
     baseUrl = 'https://www.poppy-opossum.com/'
