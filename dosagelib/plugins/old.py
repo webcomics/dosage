@@ -1748,6 +1748,7 @@ class Renamed(Scraper):
             # Renamed in 3.1
             cls('ComicsKingdom/SlylockFoxAndComicsForKids', 'ComicsKingdom/SlylockFox'),
             cls('ComicsKingdom/SlylockFoxAndComicsForKidsSpanish', 'ComicsKingdom/SlylockFoxSpanish'),
+            cls('Derideal/LRE', 'Derideal/RLE'),
             cls('Exiern', 'ComicFury/Exiern'),
             cls('MaxOveracts', 'OccasionalComicsDisorder'),
             cls('SafelyEndangered', 'WebToons/SafelyEndangered'),

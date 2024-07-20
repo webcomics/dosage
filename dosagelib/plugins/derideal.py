@@ -1,55 +1,49 @@
 # SPDX-License-Identifier: MIT
 # SPDX-FileCopyrightText: © 2019 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
+import itertools
+
 from ..scraper import ParserScraper
-from ..helpers import indirectStarter
+from ..helpers import indirectStarter, joinPathPartsNamer
 
 
 class Derideal(ParserScraper):
-    baseUrl = 'https://www.derideal.com/'
-    imageSearch = '//img[contains(@class, "comic-page")]'
-    prevSearch = '//a[i[contains(@class, "fa-angle-left")]]'
-    latestSearch = '//a[i[contains(@class, "fa-angle-double-right")]]'
+    baseUrl = 'https://derideal.com/'
+    imageSearch = '//img[d:class("comic-page") or d:class("comic-pag")]'
+    prevSearch = '//a[text()="<"]'
+    starter = indirectStarter
+    namer = joinPathPartsNamer(imageparts=range(-3, 0))
 
-    def __init__(self, name, sub, first, last=None):
-        if name == 'Derideal':
-            super().__init__(name)
+    def __init__(self, name, lang, sub, first, eol=False, multi=False):
+        if lang == 'en':
+            base = 'Derideal'
+            lateststr = 'Read latest update'
         else:
-            super().__init__('Derideal/' + name)
+            base = 'DeridealSpanish'
+            sub = f'{lang}/{sub}'
+            lateststr = 'Leer última actualización'
 
-        self.url = self.baseUrl + sub
-        self.stripUrl = self.url + '/%s/'
-        self.firstStripUrl = self.stripUrl % first
-        self.startUrl = self.firstStripUrl
+        if not name:
+            super().__init__(base)
+        else:
+            super().__init__(f'{base}/{name}')
 
-        if last:
-            self.endOfLife = True
-
-    def starter(self):
-        indexPage = self.getPage(self.url)
-        self.chapters = self.match(indexPage, '//a[contains(text(), "Read this episode")]/@href')
-        self.currentChapter = len(self.chapters)
-        return indirectStarter(self)
-
-    def namer(self, imageUrl, pageUrl):
-        filename = pageUrl.rstrip('/').rsplit('/', 1)[-1]
-        filename = filename.replace('espanol-escape-25', 'escape-26')
-        filename = filename.replace('espanol-w-a-l-l-y', 'w-a-l-l-y')
-        filename = filename.replace('hogar-prision', 'home-prison')
-        filename = filename.replace('strip', 'pe').replace('purpurina-effect', 'pe')
-        filename = filename.replace('sector-de-seguridad', 'security-sector')
-        filename = 'ch' + str(self.currentChapter) + '-' + filename
-        if pageUrl in self.chapters:
-            self.currentChapter -= 1
-        return filename
+        self.url = f'{self.baseUrl}{sub}'
+        self.firstStripUrl = f'{self.url}/{first}/'
+        self.latestSearch = f'//a[contains(text(), "{lateststr}")]'
+        self.lang = lang
+        self.endOfLife = eol
+        self.multipleImagesPerStrip = multi
 
     @classmethod
     def getmodules(cls):
-        return (
-            cls('Derideal', 'derideal', 'cover-prime'),
-            cls('Legacy', 'derideal-legacy', 'the-dream-cover', last='derideal-is-on-hiatus'),
-            cls('LRE', 'RLE', 'the-leyend-of-the-rose-cover'),
-            cls('ProjectPrime', 'project-prime', 'custus-part-i-cover'),
-            cls('PurpurinaEffect', 'purpurina-effect', 'purpurina-effect-cover'),
-            cls('TheVoid', 'the-void', 'the-void-cover'),
-        )
+        return itertools.chain.from_iterable((
+            cls('', lang, 'derideal', 'chimeras-cover'),
+            cls('Legacy', lang, 'derideal-legacy', 'the-dream-cover', eol=True),
+            cls('LostMemories', lang, 'lost-memories', 'lost-memories-pixi', multi=True),
+            cls('Nova', lang, 'nova', 'xen-prelude-cover'),
+            cls('ProjectPrime', lang, 'project-prime', 'custus-part-i-cover'),
+            cls('PurpurinaEffect', lang, 'purpurina-effect', 'purpurina-effect-cover'),
+            cls('RLE', lang, 'RLE', 'the-leyend-of-the-rose-cover'),
+            cls('TheVoid', lang, 'the-void', 'the-void-cover'),
+        ) for lang in ('en', 'es'))
