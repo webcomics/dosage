@@ -2,36 +2,42 @@
 # SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
 # SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+import datetime
+import json
+
 from ..scraper import ParserScraper
-from ..helpers import indirectStarter
 
 
 class GoComics(ParserScraper):
     url = 'https://www.gocomics.com/'
-    imageSearch = '//picture[d:class("item-comic-image")]/img'
-    prevSearch = '//a[d:class("js-previous-comic")]'
-    latestSearch = '//div[d:class("gc-deck--cta-0")]//a'
-    starter = indirectStarter
+    imageSearch = '//section[d:class_start("ShowComicViewer_showComicViewer")]//script[@type="application/ld+json"]/text()'
+    prevSearch = '//a[d:class_start("ComicNavigation_controls__button_previous__")]'
     help = 'Index format: yyyy/mm/dd'
 
     def __init__(self, name, path, lang=None):
-        super(GoComics, self).__init__('GoComics/' + name)
+        super().__init__('GoComics/' + name)
         self.session.add_throttle('www.gocomics.com', 1.0, 2.0)
         self.url = 'https://www.gocomics.com/' + path
         self.shortname = name
         if lang:
             self.lang = lang
 
+    def imageUrlModifier(self, image_url, data):
+        # we extracted a JSON object here
+        self.jsondata = json.loads(image_url)
+        return self.jsondata["url"]
+
     def namer(self, image_url, page_url):
-        prefix, year, month, day = page_url.rsplit('/', 3)
-        return "%s_%s%s%s.gif" % (self.shortname, year, month, day)
+        # We cannot use the current page URL, since even with a bounce starter,
+        # the current URL doesn't contain the current date... There is
+        # '//div/@data-post-url', but that only exists on comics which have
+        # discussions enabled...
+        datestr = self.jsondata["datePublished"]
+        date = datetime.datetime.strptime(datestr, "%B %d, %Y")
+        return f"{self.shortname}_{date.year}{date.month:02}{date.day:02}"
 
     def getIndexStripUrl(self, index):
-        return '{}/{}'.format(self.url, index)
-
-    def shouldSkipUrl(self, url, data):
-        """Skip pages without images."""
-        return self.match(data, '//img[contains(@src, "content-error-missing")]')
+        return f'{self.url}/{index}'
 
     @classmethod
     def getmodules(cls):  # noqa: CFQ001
