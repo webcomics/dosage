@@ -3,14 +3,19 @@
 # SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
-from re import compile, escape, MULTILINE
 from functools import cached_property
+from re import MULTILINE, compile, escape
 
-from ..scraper import _BasicScraper, _ParserScraper, ParserScraper
 from ..helpers import indirectStarter, joinPathPartsNamer
+from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import (ComicControlScraper, WordPressScraper, WordPressSpliced,
-        WordPressNavi, WordPressWebcomic)
+from .common import (
+    ComicControlScraper,
+    WordPressNavi,
+    WordPressScraper,
+    WordPressSpliced,
+    WordPressWebcomic,
+)
 
 
 class TekMage(WordPressNavi):
@@ -54,7 +59,8 @@ class TheChroniclesOfHuxcyn(WordPressScraper):
         filename = imageUrl.rsplit('/', 1)[-1]
         filename = filename.replace('IMG_0504', 'TCoH109')
         filename = filename.replace('tcoh', 'TCoH')
-        filename = filename.replace('1599151639.xizana_f3a6458e-8d94-4259-bec3-5a92706fe493_jpeg', 'october.2020.cover')
+        filename = filename.replace('1599151639.xizana_f3a6458e-8d94-4259-bec3-5a92706fe493_jpeg',
+            'october.2020.cover')
         filename = filename.replace('huxonsword', 'october.2020.huxonsword')
         filename = filename.replace('New_Canvas100pageswebimage', 'TCoH100')
         if filename[0] == '0':
@@ -109,7 +115,7 @@ class TheForgottenOrder(ComicControlScraper):
 
 class TheGamerCat(WordPressSpliced):
     url = 'https://thegamercat.com/'
-    firstStripUrl = url +  'comic/06102011/'
+    firstStripUrl = url + 'comic/06102011/'
 
 
 class TheGentlemansArmchair(WordPressScraper):
@@ -340,11 +346,13 @@ class TwinDragons(WordPressScraper):
 
 
 class TwoGuysAndGuy(ComicControlScraper):
-    url = 'https://twogag.com/'
+    url = ('https://web.archive.org/web/20230720180648/'
+        'https://twogag.com/')
     stripUrl = url + 'archives/%s'
     firstStripUrl = stripUrl % '4'
     help = 'Index format: number[-name]'
     adult = True
+    endOfLife = True
 
 
 class Twokinds(_ParserScraper):
