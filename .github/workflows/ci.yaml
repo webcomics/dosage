@@ -23,6 +23,11 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: Run Pre-Commit
+        uses: pre-commit/action@v3.0.1
+        if: ${{ matrix.python-version == env.DEFAULT_PYTHON }}
+        continue-on-error: true
+
       - name: Install dependencies
         run: |
           pip install tox tox-gh-actions

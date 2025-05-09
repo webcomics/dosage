@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2019 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 """
 Script to get a list of Tapastic comics and save the info in a
 JSON file for further processing.
 """
-from urllib.parse import urlsplit, parse_qs
+from urllib import parse
 
 from scriptutil import ComicListUpdater
 
@@ -26,7 +26,7 @@ class TapasUpdater(ComicListUpdater):
 
     def get_entry(self, name, url):
         shortName = name.replace(' ', '').replace('\'', '')
-        titleNum = int(parse_qs(urlsplit(url).query)['title_no'][0])
+        titleNum = int(parse.parse_qs(parse.urlsplit(url).query)['title_no'][0])
         url = url.rsplit('/', 1)[0].replace('/series/', '')
         return u"cls('%s', '%s', %d)," % (shortName, url, titleNum)
 

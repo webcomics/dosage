@@ -16,4 +16,3 @@ TESTALL=1 python3 -m pytest -v --cov=. --cov-report xml \
     --alluredir=allure-data \
     --tb=short -n10 --junitxml=junit.xml \
     tests/modules/check_comics.py || true
-

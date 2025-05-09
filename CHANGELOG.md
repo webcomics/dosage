@@ -863,4 +863,3 @@ the 2.16 release to fix the broken update check in that release.
 [1.10]: https://github.com/webcomics/dosage/compare/1.9...1.10
 [1.9]: https://github.com/webcomics/dosage/compare/1.8...1.9
 [1.8]: https://github.com/webcomics/dosage/compare/1.7...1.8
-

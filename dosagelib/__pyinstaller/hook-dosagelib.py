@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2016-2022 Tobias Gruetzmacher
-from PyInstaller.utils.hooks import collect_data_files, collect_submodules, copy_metadata
+# SPDX-FileCopyrightText: © 2016 Tobias Gruetzmacher
+from PyInstaller.utils import hooks
 
-hiddenimports = ['dosagelib.data'] + collect_submodules('dosagelib.plugins')
-datas = copy_metadata('dosage') + collect_data_files('dosagelib')
+hiddenimports = ['dosagelib.data'] + hooks.collect_submodules('dosagelib.plugins')
+datas = hooks.copy_metadata('dosage') + hooks.collect_data_files('dosagelib')
