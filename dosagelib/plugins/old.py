@@ -1614,6 +1614,7 @@ class Removed(Scraper):
             cls('ComicsKingdom/TigerVintageSundays'),
             cls('Everblue', 'block'),
             cls('FalseStart'),
+            cls('FireflyCross'),
             cls('Ginpu'),
             cls('GoComics/9ChickweedLaneClassics'),
             cls('GoComics/Badlands'),

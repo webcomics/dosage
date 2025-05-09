@@ -5,9 +5,9 @@
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile, escape
 
-from ..util import tagre
-from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter, joinPathPartsNamer
+from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
+from ..util import tagre
 from .common import ComicControlScraper, WordPressNaviIn, WordPressScraper
 
 
@@ -50,11 +50,6 @@ class FauxPas(_ParserScraper):
     imageSearch = '//img[@name]'
     prevSearch = '//a[img[@alt="Previous"]]'
     help = 'Index format: nnn'
-
-
-class FireflyCross(WordPressScraper):
-    url = 'http://www.fireflycross.pensandtales.com/'
-    firstStripUrl = url + '?comic=05062002'
 
 
 class FirstWorldProblems(_ParserScraper):
