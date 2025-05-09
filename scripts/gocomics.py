@@ -10,6 +10,8 @@ processing.
 
 from scriptutil import ComicListUpdater
 
+from dosagelib import xml
+
 
 class GoComicsUpdater(ComicListUpdater):
     dup_templates = (
@@ -22,23 +24,23 @@ class GoComicsUpdater(ComicListUpdater):
         'LukeyMcGarrysTLDR',
         # Has its own module
         'Widdershins',
+        # Moved to webtoons
+        "FalseKnees",
     )
 
-    def handle_gocomics(self, url, outercss='a.gc-blended-link', lang=None):
+    def handle_gocomics(self, url):
         """Parse one GoComics alphabetic page."""
         data = self.get_url(url, expand=False)
 
-        for comiclink in data.cssselect(outercss):
+        for comiclink in data.xpath('//a[d:class_start("ComicsAtoZ_comics__link_")]', namespaces=xml.NS):
             link = comiclink.attrib['href'].split('/')[1].strip()
-            name = comiclink.cssselect('h4')[0].text
+            name = comiclink.xpath('.//h3')[0].text
+            # Language heuristics
+            lang = "es" if "espanol" in link else None
             self.add_comic(name, (link, lang))
 
     def collect_results(self):
         """Parse all listing pages."""
-        # We add the spanish comics first since they are now also listed on the list of all
-        # comics... (Expect duplicate warnings for all spanish comics)
-        self.handle_gocomics('https://www.gocomics.com/comics/espanol', lang='es')
-        self.handle_gocomics('https://www.gocomics.com/comics/espanol?page=2', lang='es')
         self.handle_gocomics('https://www.gocomics.com/comics/a-to-z')
 
     def get_entry(self, name: str, data: tuple[str, str]):

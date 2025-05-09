@@ -172,6 +172,7 @@ class WebToons(ParserScraper):
             cls('EpicV', 'comedy/epic-v', 353),
             cls('EscapeRoom', 'thriller/escape-room', 1815),
             cls('EverywhereAndNowhere', 'comedy/everywhere-and-nowhere', 1598),
+            cls('FalseKnees', 'canvas/false-knees', 79544),
             cls('FAMILYMAN', 'drama/family-man', 85),
             cls('FantasySketchTheGame', 'sf/fantasy-sketch', 1020),
             cls('Faust', 'supernatural/faust', 522),

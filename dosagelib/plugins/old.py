@@ -1648,7 +1648,7 @@ class Removed(Scraper):
 
 
 class Renamed(Scraper):
-    MSG = 'Comic module was renamed to "%s", please rename the directory.'
+    MSG = 'Comic module was renamed/moved to "%s", please use the new name instead.'
     count = 0
 
     @classmethod
@@ -1750,6 +1750,7 @@ class Renamed(Scraper):
             cls('ComicsKingdom/SlylockFoxAndComicsForKidsSpanish', 'ComicsKingdom/SlylockFoxSpanish'),
             cls('Derideal/LRE', 'Derideal/RLE'),
             cls('Exiern', 'ComicFury/Exiern'),
+            cls("GoComics/FalseKnees", "WebToons/FalseKnees"),
             cls('MaxOveracts', 'OccasionalComicsDisorder'),
             cls('SafelyEndangered', 'WebToons/SafelyEndangered'),
         )

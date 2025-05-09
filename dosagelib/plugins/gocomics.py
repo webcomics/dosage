@@ -173,7 +173,6 @@ class GoComics(ParserScraper):
             cls('EricAllie', 'eric-allie'),
             cls('EverydayPeopleCartoons', 'everyday-people-cartoons'),
             cls('Eyebeam', 'eyebeam'),
-            cls('FalseKnees', 'false-knees'),
             cls('FamilyTree', 'familytree'),
             cls('Farcus', 'farcus'),
             cls('FatCats', 'fat-cats'),
