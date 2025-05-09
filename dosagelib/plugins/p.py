@@ -5,10 +5,10 @@
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile, escape
 
-from ..scraper import _BasicScraper, _ParserScraper, ParserScraper
-from ..helpers import bounceStarter, queryNamer, indirectStarter
+from ..helpers import bounceStarter, indirectStarter, joinPathPartsNamer, queryNamer
+from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import ComicControlScraper, WordPressScraper, WordPressNavi
+from .common import ComicControlScraper, WordPressNavi, WordPressScraper
 
 
 class PandyLand(_ParserScraper):
@@ -228,13 +228,15 @@ class PokeyThePenguin(_ParserScraper):
         prefix = url.rsplit('/', 1)[0]
         return "%s/index%d.html" % (prefix, num)
 
-class PoorlyDrawnLines(_ParserScraper):
-    url = 'https://poorlydrawnlines.com/comic/'
-    stripUrl = url + '%s/'
+
+class PoorlyDrawnLines(ParserScraper):
+    url = 'https://poorlydrawnlines.com/'
+    stripUrl = url + 'comic/%s/'
     multipleImagesPerStrip = True
     firstStripUrl = stripUrl % 'hardly-essayists'
-    imageSearch = '//div[d:class("entry-content")]//img[@data-src]/@data-src'
+    imageSearch = '//div[d:class("entry-content")]//img'
     prevSearch = '//a[@rel="prev"]'
+    namer = joinPathPartsNamer(imageparts=range(-3, 0))
 
     def shouldSkipUrl(self, url, _data):
         """Skip pages without a comic."""
@@ -258,6 +260,7 @@ class PoorlyDrawnLines(_ParserScraper):
             return self.stripUrl % 'stereotype'
 
         return super().getPrevUrl(url, data)
+
 
 class PoppyOPossum(WordPressScraper):
     baseUrl = 'https://www.poppy-opossum.com/'
