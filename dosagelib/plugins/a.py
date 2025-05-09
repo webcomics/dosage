@@ -3,12 +3,12 @@
 # SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
-from re import compile, MULTILINE
+from re import MULTILINE, compile
 
-from ..util import tagre
+from ..helpers import bounceStarter, indirectStarter, joinPathPartsNamer
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
-from ..helpers import joinPathPartsNamer, bounceStarter, indirectStarter
-from .common import WordPressScraper, WordPressNavi, WordPressWebcomic
+from ..util import tagre
+from .common import WordPressNavi, WordPressScraper, WordPressWebcomic
 
 
 class AbstruseGoose(ParserScraper):
@@ -131,14 +131,15 @@ class Alice(WordPressScraper):
     endOfLife = True
 
 
-class AlienLovesPredator(_BasicScraper):
-    url = 'http://alienlovespredator.com/'
+class AlienLovesPredator(ParserScraper):
+    url = ('https://web.archive.org/web/20161207230717/'
+        'http://alienlovespredator.com/')
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2004/10/12/unavoidable-delay'
-    imageSearch = compile(tagre("img", "src", r'([^"]+)',
-                                after='border="1" alt="" width="750"'))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)', after="prev"))
+    imageSearch = '//div[@id="comic"]//p//img'
+    prevSearch = '//a[@rel="prev"]'
     help = 'Index format: yyyy/mm/dd/name'
+    endOfLife = True
 
 
 class AlienShores(WordPressScraper):
