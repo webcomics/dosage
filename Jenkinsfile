@@ -1,5 +1,5 @@
 def pys = [
-    [name: 'Python 3.13', docker: '3.13-bookworm', tox:'py313,flake8', main: true],
+    [name: 'Python 3.13', docker: '3.13-bookworm', tox:'py313', main: true],
     [name: 'Python 3.12', docker: '3.12-bookworm', tox:'py312', main: false],
     [name: 'Python 3.11', docker: '3.11-bookworm', tox:'py311', main: false],
     [name: 'Python 3.10', docker: '3.10-bookworm', tox:'py310', main: false],
@@ -41,8 +41,9 @@ pys.each { py ->
                     if (py.main) {
                         sh """
                             HOME='$tmpDir'
-                            pip install --no-warn-script-location build
+                            pip install --no-warn-script-location build pre-commit
                             python -m build
+                            python -m pre_commit run --all-files || true
                         """
                     }
                 }
@@ -62,7 +63,7 @@ pys.each { py ->
 
                     recordIssues sourceCodeEncoding: 'UTF-8',
                         referenceJobName: 'dosage/master',
-                        tool: flake8(pattern: '.tox/flake8.log', reportEncoding: 'UTF-8')
+                        tool: flake8(reportEncoding: 'UTF-8')
                 }
                 junit '.tox/reports/*/junit.xml'
             }

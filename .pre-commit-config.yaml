@@ -1,0 +1,62 @@
+# SPDX-License-Identifier: MIT
+# SPDX-FileCopyrightText: © 2025 Tobias Gruetzmacher
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+---
+repos:
+  - repo: meta
+    hooks:
+      - id: check-useless-excludes
+      - id: check-hooks-apply
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-illegal-windows-names
+      - id: check-merge-conflict
+      - id: check-shebang-scripts-are-executable
+        exclude: Jenkinsfile
+      - id: check-toml
+      - id: check-yaml
+      - id: destroyed-symlinks
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+        exclude_types: [svg]
+
+  - repo: https://github.com/PyCQA/isort
+    rev: "6.0.1"
+    hooks:
+      - id: isort
+
+# Not yet, removes comments: https://github.com/tox-dev/tox-ini-fmt/issues/42
+#  - repo: https://github.com/tox-dev/tox-ini-fmt
+#    rev: "1.5.0"
+#    hooks:
+#      - id: tox-ini-fmt
+
+  - repo: https://github.com/PyCQA/flake8
+    rev: "6.1.0"
+    hooks:
+      - id: flake8
+        additional_dependencies:
+          - flake8-2020
+          - flake8-breakpoint
+          - flake8-bugbear
+          - flake8-coding
+          - flake8-commas
+          - flake8-comprehensions
+          - flake8-deprecated
+          - flake8-eradicate
+          - flake8-fixme
+          - flake8-functions
+          - flake8-future-import
+          - flake8-logging-format
+          - flake8-noqa
+          - Flake8-pyproject
+          - flake8-pytest
+          - flake8-pytest-style

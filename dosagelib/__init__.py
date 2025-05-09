@@ -14,14 +14,14 @@ The primary interface is the 'dosage' commandline script.
 Comic modules for each comic are located in L{dosagelib.plugins}.
 """
 
-from importlib.metadata import version, PackageNotFoundError
+from importlib import metadata
 
 from .output import out
 
 AppName = 'dosage'
 try:
-    __version__ = version(AppName)  # PEP 396
-except PackageNotFoundError:
+    __version__ = metadata.version(AppName)  # PEP 396
+except metadata.PackageNotFoundError:
     # package is not installed
     out.warn('{} is not installed, no version available.'
         ' Use at least {!r} or {!r} to fix this.'.format(

@@ -3,8 +3,9 @@
 [![CI](https://github.com/webcomics/dosage/actions/workflows/ci.yaml/badge.svg)](https://github.com/webcomics/dosage/actions/workflows/ci.yaml)
 [![Code Climate](https://codeclimate.com/github/webcomics/dosage/badges/gpa.svg)](https://codeclimate.com/github/webcomics/dosage)
 [![codecov](https://codecov.io/gh/webcomics/dosage/branch/master/graph/badge.svg)](https://codecov.io/gh/webcomics/dosage)
-![Maintenance](https://img.shields.io/maintenance/yes/2024.svg)
+![Maintenance](https://img.shields.io/maintenance/yes/2025.svg)
 ![License](https://img.shields.io/github/license/webcomics/dosage)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 
 Dosage is designed to keep a local copy of specific webcomics and other
 picture-based content such as Picture of the Day sites. With the dosage
@@ -110,6 +111,13 @@ After that, `dosage` should be available as a normal command.
 [pipx]: https://github.com/pipxproject/pipx
 [editable]: https://pip.pypa.io/en/stable/reference/pip_install/#editable-installs
 [virtual environment]: https://docs.python.org/3/library/venv.html
+
+## Code Style
+
+This project currently has a pretty "loose" code style. Please use
+[`pre-commit`](https://pre-commit.com/#install) to keep the code style
+consistent. You can ignore flake8 warnings in code you didn't touch (Set
+`SKIP=flake8` before commiting if `pre-commit` doesn't let you).
 
 ## Reporting Bugs
 
