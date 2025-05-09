@@ -5,10 +5,10 @@
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile, escape
 
-from ..scraper import _BasicScraper, _ParserScraper, ParserScraper
-from ..helpers import bounceStarter, queryNamer, indirectStarter
+from ..helpers import bounceStarter, indirectStarter, joinPathPartsNamer, queryNamer
+from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import ComicControlScraper, WordPressScraper, WordPressNavi
+from .common import ComicControlScraper, WordPressNavi, WordPressScraper
 
 
 class PandyLand(_ParserScraper):
@@ -229,11 +229,37 @@ class PokeyThePenguin(_ParserScraper):
         return "%s/index%d.html" % (prefix, num)
 
 
-class PoorlyDrawnLines(_ParserScraper):
-    url = 'http://poorlydrawnlines.com/comic/'
-    firstStripUrl = url + 'campus-characters/'
-    imageSearch = '//div[d:class("comic")]//img'
+class PoorlyDrawnLines(ParserScraper):
+    url = 'https://poorlydrawnlines.com/'
+    stripUrl = url + 'comic/%s/'
+    multipleImagesPerStrip = True
+    firstStripUrl = stripUrl % 'hardly-essayists'
+    imageSearch = '//div[d:class("entry-content")]//img'
     prevSearch = '//a[@rel="prev"]'
+    namer = joinPathPartsNamer(imageparts=range(-3, 0))
+
+    def shouldSkipUrl(self, url, _data):
+        """Skip pages without a comic."""
+        skipUrls = [self.stripUrl % s for s in (
+            'hope-it-all-works-out-new-book-coming-this-fall',
+            'poorly-drawn-lines-animated-series',
+            'poorly-drawn-lines-episode-two',
+            'watch-poorly-drawn-lines-on-hulu',
+        )]
+        return url in skipUrls
+
+    def getPrevUrl(self, url: str, data):
+        """Skip missing comics which redirect back to home page"""
+        if url == self.stripUrl % '8198':
+            return self.stripUrl % 'excited-2'
+        elif url == self.stripUrl % '8186':
+            return self.stripUrl % 'to-hell-2'
+        elif url == self.stripUrl % '8177':
+            return self.stripUrl % 'feel-real'
+        elif url == self.stripUrl % '2056':
+            return self.stripUrl % 'stereotype'
+
+        return super().getPrevUrl(url, data)
 
 
 class PoppyOPossum(WordPressScraper):
