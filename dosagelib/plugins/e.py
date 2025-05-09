@@ -4,12 +4,12 @@
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
 import os
-from re import compile, IGNORECASE
+from re import IGNORECASE, compile
 
 from ..helpers import bounceStarter, indirectStarter
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import ComicControlScraper, WordPressScraper, WordPressNavi
+from .common import ComicControlScraper, WordPressNavi, WordPressScraper
 
 
 class EarthsongSaga(_ParserScraper):
@@ -189,8 +189,9 @@ class EvilInc(ParserScraper):
     firstStripUrl = url + 'comic/monday-3/'
 
 
-class Evilish(_ParserScraper):
-    url = 'http://evilish.pensandtales.com/'
+class Evilish(ParserScraper):
+    url = ('https://web.archive.org/web/20220125053115/'
+        'http://evilish.pensandtales.com/')
     stripUrl = url + '?date=%s'
     firstStripUrl = stripUrl % '20020630'
     imageSearch = '//img[@alt="Today\'s Comics"]'
