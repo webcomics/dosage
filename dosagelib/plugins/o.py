@@ -8,7 +8,7 @@ from re import compile, escape
 from ..helpers import bounceStarter, indirectStarter
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import WordPressScraper, WordPressNavi
+from .common import WordPressNavi, WordPressScraper
 
 
 class OccasionalComicsDisorder(WordPressScraper):
@@ -146,13 +146,13 @@ class OutOfPlacers(WordPressScraper):
     adult = True
 
 
-class OverCompensating(_BasicScraper):
-    url = 'http://www.overcompensating.com/'
-    stripUrl = url + 'oc/index.php?comic=%s'
-    firstStripUrl = stripUrl % '0'
-    imageSearch = compile(tagre("img", "src", r'(/oc/comics/[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'(/oc/index\.php\?comic=\d+)',
-                               after="go back"))
+class OverCompensating(ParserScraper):
+    stripUrl = 'https://www.wigucomics.com/oc/index.php?comic=%s'
+    url = stripUrl % '-1'
+    firstStripUrl = stripUrl % '1'
+    imageSearch = '//center//img'
+    prevSearch = '//a[@alt="go back"]'
+    endOfLife = True
     help = 'Index format: number'
 
 
