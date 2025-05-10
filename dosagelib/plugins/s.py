@@ -3,14 +3,19 @@
 # SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
-from re import compile, escape, IGNORECASE, sub
 from os.path import splitext
+from re import IGNORECASE, compile, escape, sub
 
-from ..scraper import _BasicScraper, _ParserScraper, ParserScraper
-from ..helpers import indirectStarter, bounceStarter, joinPathPartsNamer
+from ..helpers import bounceStarter, indirectStarter, joinPathPartsNamer
+from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import (ComicControlScraper, WordPressScraper, WordPressSpliced,
-    WordPressNavi, WordPressWebcomic)
+from .common import (
+    ComicControlScraper,
+    WordPressNavi,
+    WordPressScraper,
+    WordPressSpliced,
+    WordPressWebcomic,
+)
 
 
 class SabrinaOnline(_BasicScraper):
@@ -316,9 +321,12 @@ class SixPackOfOtters(WordPressWebcomic):
 
 
 class SkinDeep(WordPressWebcomic):
-    url = 'http://www.skindeepcomic.com/'
+    url = 'https://www.skindeepcomic.com/'
     stripUrl = url + 'archive/%s/'
     firstStripUrl = stripUrl % 'issue-1-cover'
+    imageSearch = '//div[d:class("webcomic-image")]//noscript/img'
+    starter = bounceStarter
+    namer = joinPathPartsNamer(pageparts=(-2,))
 
 
 class SleeplessDomain(ComicControlScraper):
@@ -645,7 +653,8 @@ class StupidFox(ParserScraper):
 
     def namer(self, imageUrl, pageUrl):
         page = self.getPage(pageUrl)
-        title = self.match(page, self.imageSearch + '/@title')[0].replace(' - ', '-').replace(' ', '-')
+        title = self.match(page, self.imageSearch + '/@title')[0].replace(' - ',
+            '-').replace(' ', '-')
         return title + '.' + imageUrl.rsplit('.', 1)[-1]
 
 
