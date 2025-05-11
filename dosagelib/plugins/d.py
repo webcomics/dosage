@@ -5,11 +5,15 @@
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile, escape
 
-from ..scraper import _BasicScraper, _ParserScraper, ParserScraper
-from ..helpers import indirectStarter, bounceStarter
+from ..helpers import bounceStarter, indirectStarter
+from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import (ComicControlScraper, WordPressScraper, WordPressNavi,
-    WordPressWebcomic)
+from .common import (
+    ComicControlScraper,
+    WordPressNavi,
+    WordPressScraper,
+    WordPressWebcomic,
+)
 
 
 class Damonk(_BasicScraper):
@@ -358,13 +362,13 @@ class Drive(ParserScraper):
     prevSearch = '//a[d:class("previous-comic")]'
 
 
-class DrMcNinja(_ParserScraper):
-    url = 'http://drmcninja.com/'
+class DrMcNinja(ParserScraper):
+    url = ('https://web.archive.org/web/20210322033246/'
+        'http://drmcninja.com/')
     stripUrl = url + 'archives/comic/%s/'
     firstStripUrl = stripUrl % '0p1'
-    css = True
-    imageSearch = 'div#comic img'
-    prevSearch = 'a.prev'
+    imageSearch = '//div[@id="comic"]/img'
+    prevSearch = '//a[d:class("prev")]'
     help = 'Index format: {episode}p{page}'
 
 
