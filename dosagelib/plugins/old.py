@@ -1643,7 +1643,12 @@ class Removed(Scraper):
             cls('StudioKhimera/Mousechevious'),
             cls('TalesAndTactics'),
             cls('VampireHunterBoyfriends'),
+            cls('WebToons/ABudgiesLife'),
+            cls('WebToons/Anthronauts'),
+            cls('WebToons/AssassinRoommate'),
+            cls('WebToons/ChocoLatte'),
             cls('WebToons/CrystalVirus'),
+            cls('WebToons/NightmareFactory'),
             cls('WebToons/OVERPOWERED'),
         )
 
