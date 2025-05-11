@@ -6,10 +6,15 @@
 from re import compile, escape
 from typing import List
 
-from ..scraper import _BasicScraper, _ParserScraper, ParserScraper
 from ..helpers import bounceStarter, indirectStarter, joinPathPartsNamer
+from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import ComicControlScraper, WordPressScraper, WordPressNavi, WordPressWebcomic
+from .common import (
+    ComicControlScraper,
+    WordPressNavi,
+    WordPressScraper,
+    WordPressWebcomic,
+)
 
 
 class CampComic(_ParserScraper):
@@ -92,14 +97,14 @@ class CassiopeiaQuinn(ComicControlScraper):
     firstStripUrl = url + 'comic/the-prize-cover'
 
 
-class CasuallyKayla(_BasicScraper):
-    url = 'http://casuallykayla.com/'
+class CasuallyKayla(ParserScraper):
+    url = ('https://web.archive.org/web/20180323230312/'
+        'https://casuallykayla.com/')
     stripUrl = url + '?p=%s'
     firstStripUrl = stripUrl % '89'
-    imageSearch = compile(tagre("img", "src",
-                                r'(http://casuallykayla\.com/comics/[^"]+)'))
-    prevSearch = compile(tagre("div", "class", r'nav-previous') +
-                         tagre("a", "href", r'([^"]+)'))
+    imageSearch = '//div[@id="comic"]/img'
+    prevSearch = '//a[@rel="prev"]'
+    endOfLife = True
     help = 'Index format: nnn'
 
 
