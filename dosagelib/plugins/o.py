@@ -5,7 +5,7 @@
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile, escape
 
-from ..helpers import bounceStarter, indirectStarter
+from ..helpers import bounceStarter, indirectStarter, joinPathPartsNamer
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
 from .common import WordPressNavi, WordPressScraper
@@ -81,13 +81,15 @@ class OkCancel(_BasicScraper):
     help = 'Index format: yyyymmdd'
 
 
-class OmakeTheater(_ParserScraper):
-    url = 'http://omaketheater.com/comic/'
-    stripUrl = url + '%s'
+class OmakeTheater(ParserScraper):
+    url = 'https://omaketheater.com/comics/'
+    stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '1'
-    css = True
-    imageSearch = ".comicImage img"
-    prevSearch = ".previous a"
+    imageSearch = "//figure/img"
+    prevSearch = "//a[@id='previous']"
+    latestSearch = "//li[d:class('home')]/a"
+    starter = indirectStarter
+    namer = joinPathPartsNamer(pageparts=(-2,), imageparts=(-1,))
     help = 'Index format: number (unpadded)'
 
 
