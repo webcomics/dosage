@@ -1642,6 +1642,7 @@ class Removed(Scraper):
             cls('Shivae/BlackRose', 'brk'),
             cls('StudioKhimera/Mousechevious'),
             cls('TalesAndTactics'),
+            cls('Tapas/HoneyAndTheMoon'),
             cls('VampireHunterBoyfriends'),
             cls('WebToons/ABudgiesLife'),
             cls('WebToons/Anthronauts'),

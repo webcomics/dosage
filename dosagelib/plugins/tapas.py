@@ -66,7 +66,6 @@ class Tapas(ParserScraper):
             cls('FANGS', 'fangscomic'),
             cls('FishNuggets', 'Fish-Nuggets'),
             cls('Ginpu', 'Ginpu-Studios-Comics'),
-            cls('HoneyAndTheMoon', 'Honey-and-the-Moon'),
             cls('InsignificantOtters', 'IOtters'),
             cls('MagicalBoy', 'magicalboy'),
             cls('NoFuture', 'NoFuture'),
