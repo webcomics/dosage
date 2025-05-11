@@ -38,13 +38,10 @@ class MagickChicks(ComicControlScraper):
     endOfLife = True
 
 
-class ManlyGuysDoingManlyThings(_ParserScraper):
-    url = 'http://thepunchlineismachismo.com/'
+class ManlyGuysDoingManlyThings(WordPressScraper):
+    url = 'https://thepunchlineismachismo.com/'
     stripUrl = url + 'archives/comic/%s'
     firstStripUrl = stripUrl % '02222010'
-    css = True
-    imageSearch = "#comic img"
-    prevSearch = ".comic-nav-previous"
     help = 'Index format: ddmmyyyy'
 
 
