@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # SPDX-FileCopyrightText: © 2019 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Thomas W. Littauer
-from ..helpers import indirectStarter
+from ..helpers import indirectStarter, joinPathPartsNamer
 from ..scraper import ParserScraper
 
 
@@ -10,6 +10,7 @@ class ComicsKingdom(ParserScraper):
     imageSearch = '//meta[@property="og:image"]/@content'
     prevSearch = partDiv + '[2]/@data-link'
     starter = indirectStarter
+    namer = joinPathPartsNamer(pageparts=(-2, -1))
     help = 'Index format: yyyy-mm-dd'
 
     def __init__(self, name, path, lang=None):
