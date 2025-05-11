@@ -1639,10 +1639,12 @@ class Removed(Scraper):
             cls('MangaDex/ImTheMaxLevelNewbie', 'legal'),
             cls('MrLovenstein', 'jsh'),
             cls('MyCartoons'),
+            cls('RickGriffinStudios/TracesOfThePastNSFW'),
             cls('Shivae/BlackRose', 'brk'),
             cls('StudioKhimera/Mousechevious'),
             cls('TalesAndTactics'),
             cls('Tapas/HoneyAndTheMoon'),
+            cls('TracesOfThePast/NSFW'),
             cls('VampireHunterBoyfriends'),
             cls('WebToons/ABudgiesLife'),
             cls('WebToons/Anthronauts'),
@@ -1750,7 +1752,6 @@ class Renamed(Scraper):
             cls('StudioKhimera/Draconia', 'Draconia'),
             cls('StudioKhimera/UberQuest', 'UberQuest'),
             cls('TracesOfThePast', 'RickGriffinStudios/TracesOfThePast'),
-            cls('TracesOfThePast/NSFW', 'RickGriffinStudios/TracesOfThePastNSFW'),
 
             # Renamed in 3.1
             cls('ComicsKingdom/SlylockFoxAndComicsForKids', 'ComicsKingdom/SlylockFox'),
