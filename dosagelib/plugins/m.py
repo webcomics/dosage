@@ -4,7 +4,7 @@
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
 import json
-from re import compile, IGNORECASE
+from re import IGNORECASE, compile
 
 from ..helpers import indirectStarter
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
@@ -147,8 +147,9 @@ class MistyTheMouse(ParserScraper):
 class MonkeyUser(ParserScraper):
     url = 'https://www.monkeyuser.com/'
     imageSearch = '//div[d:class("content")]/p/img'
-    prevSearch = '//a[text()="Prev"]'
-    multipleImagesPerStrip = True
+    prevSearch = '//a[d:class("link-reverse")]'
+    latestSearch = '//div[d:class("comic")]/a'
+    starter = indirectStarter
 
     def shouldSkipUrl(self, url, data):
         # videos
