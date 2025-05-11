@@ -1,14 +1,19 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile, escape
 
-from ..util import tagre
-from ..scraper import _BasicScraper, _ParserScraper
 from ..helpers import indirectStarter
-from .common import ComicControlScraper, WordPressScraper, WordPressNavi, WordPressWebcomic
+from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
+from ..util import tagre
+from .common import (
+    ComicControlScraper,
+    WordPressNavi,
+    WordPressScraper,
+    WordPressWebcomic,
+)
 
 
 class BackOffice(WordPressNavi):
@@ -17,13 +22,13 @@ class BackOffice(WordPressNavi):
     firstStripUrl = stripUrl % 'back-office'
 
 
-class BadassMuthas(_BasicScraper):
-    url = 'http://badassmuthas.com/pages/comic.php'
+class BadassMuthas(ParserScraper):
+    url = ('https://web.archive.org/web/20200117233227/'
+        'http://badassmuthas.com/pages/comic.php')
     stripUrl = url + '?%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = compile(tagre("img", "src", r'(/images/comicsissue[^"]+)'))
-    prevSearch = compile(tagre("a", "href", r'([^"]+)') +
-                         tagre("img", "src", r'/images/comicsbuttonBack\.gif'))
+    imageSearch = '//img[contains(@src,"/comicsissue")]'
+    prevSearch = '//a[./img[contains(@src,"/comicsbuttonBack")]]'
     help = 'Index format: nnn'
 
 
