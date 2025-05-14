@@ -8,16 +8,19 @@ from __future__ import annotations
 import argparse
 import contextlib
 import importlib
+import logging
 import os
 import platform
 from collections.abc import Iterable
 
 from platformdirs import PlatformDirs
+from rich import columns, console, table, text
 
-from . import AppName, __version__, configuration, director, events, singleton
-from .output import out
+from . import AppName, __version__, configuration, director, events, output, singleton
 from .scraper import scrapers as scrapercache
-from .util import internal_error, strlimit
+from .util import internal_error
+
+logger = logging.getLogger(__name__)
 
 
 class ArgumentParser(argparse.ArgumentParser):
@@ -25,8 +28,8 @@ class ArgumentParser(argparse.ArgumentParser):
 
     def print_help(self, file=None) -> None:
         """Paginate help message on TTYs."""
-        with out.pager():
-            out.info(self.format_help())
+        with self.console.pager():
+            self.console.print(self.format_help())
 
 
 # Making our config roaming seems sensible
@@ -124,7 +127,7 @@ def scraper_completion(**kwargs) -> Iterable[str]:
     return (comic.name for comic in scrapercache.all())
 
 
-def display_version(verbose) -> None:
+def display_version(verbose: bool) -> None:
     """Display application name, version, copyright and license."""
     print(configuration.App)
     print("Using Python {} ({}) on {}".format(platform.python_version(),
@@ -154,13 +157,6 @@ def display_version(verbose) -> None:
             print(f'An error occured while checking for an update of {AppName}: {err!r}')
 
 
-def set_output_info(options):
-    """Set global output level and timestamp option."""
-    out.level = 0
-    out.level += options.verbose
-    out.timestamps = options.timestamps
-
-
 def display_help(options) -> None:
     """Print help for comic strips."""
     for scraperobj in director.getScrapers(options.comic, options.basepath, listing=True):
@@ -169,19 +165,16 @@ def display_help(options) -> None:
 
 def display_comic_help(scraperobj) -> None:
     """Print help for a comic."""
-    orig_context = out.context
-    out.context = scraperobj.name
-    out.info('URL: {}'.format(scraperobj.url))
-    out.info('Language: {}'.format(scraperobj.language()))
+    context = {"context": scraperobj.name}
+    logger.info('URL: %s', scraperobj.url, extra=context)
+    logger.info('Language: %s', scraperobj.language(), extra=context)
     if scraperobj.adult:
-        out.info(u"Adult comic, use option --adult to fetch.")
+        logger.info("Adult comic, use option --adult to fetch.", extra=context)
     disabled = scraperobj.getDisabledReasons()
     if disabled:
-        out.info(u"Disabled: " + " ".join(disabled.values()))
+        logger.info("Disabled: %s", " ".join(disabled.values()), extra=context)
     if scraperobj.help:
-        for line in scraperobj.help.splitlines():
-            out.info(line)
-    out.context = orig_context
+        logger.info(scraperobj.help, extra=context)
 
 
 def vote_comics(options) -> int:
@@ -195,23 +188,20 @@ def vote_comics(options) -> int:
 
 def vote_comic(scraperobj) -> int:
     """Vote for given comic scraper."""
-    orig_context = out.context
-    out.context = scraperobj.name
+    context = {"context": scraperobj.name}
     try:
         scraperobj.vote()
-        out.info(u'Vote submitted.')
+        logger.info('Vote submitted.', extra=context)
     except Exception as msg:
-        out.exception(msg)
+        logger.exception(msg, extra=context)  # noqa: G200
         return 1
-    finally:
-        out.context = orig_context
     return 0
 
 
-def run(options) -> int:
+def run(console: console.Console, options) -> int:
     """Execute comic commands."""
     err = 0
-    set_output_info(options)
+    output.console_logging(console, options.verbose, options.timestamps)
     scrapercache.adddir(user_plugin_path)
     # ensure only one instance of dosage is running
     if not options.allow_multiple:
@@ -220,14 +210,14 @@ def run(options) -> int:
     if options.version:
         display_version(options.verbose)
     elif options.list:
-        do_list()
+        do_list(console)
     elif options.singlelist or options.list_all:
-        do_list(column_list=False, verbose=options.verbose,
+        do_list(console, column_list=False, verbose=options.verbose,
             listall=options.list_all)
     else:
         # after this a list of comic strips is needed
         if not options.comic:
-            out.warn(u'No comics specified, bailing out!')
+            logger.warning('No comics specified, bailing out!')
             return 1
 
         if options.modulehelp:
@@ -239,55 +229,46 @@ def run(options) -> int:
     return err
 
 
-def do_list(column_list=True, verbose=False, listall=False) -> None:
+def do_list(console: console.Console, column_list=True, verbose=False, listall=False) -> None:
     """List available comics."""
-    with out.pager():
-        out.info(u'Available comic scrapers:')
-        out.info(u'Comics tagged with [{}] require age confirmation'
-            ' with the --adult option.'.format(TAG_ADULT))
-        out.info(u'Non-english comics are tagged with [%s].' % TAG_LANG)
+    with console.pager():
+        logger.info('Available comic scrapers:')
+        logger.info('Comics tagged with [%s] require age confirmation'
+            ' with the --adult option.', TAG_ADULT)
+        logger.info('Non-english comics are tagged with [%s].', TAG_LANG)
         scrapers = sorted(scrapercache.all(listall),
                           key=lambda s: s.name.lower())
         if column_list:
-            num, disabled = do_column_list(scrapers)
+            num, disabled = do_column_list(console, scrapers)
         else:
-            num, disabled = do_single_list(scrapers, verbose=verbose)
-        out.info(u'%d supported comics.' % num)
+            num, disabled = do_single_list(console, scrapers, verbose=verbose)
+        logger.info('%d supported comics.', num)
         if disabled:
-            out.info('')
-            out.info(u'Some comics are disabled, they are tagged with'
-                ' [{}:REASON], where REASON is one of:'.format(TAG_DISABLED))
+            logger.info('')
+            logger.info('Some comics are disabled, they are tagged with'
+                ' [%s:REASON], where REASON is one of:', TAG_DISABLED)
             for k in disabled:
-                out.info(u'  %-10s %s' % (k, disabled[k]))
+                logger.info('  %-10s %s', k, disabled[k])
 
 
-def do_single_list(scrapers, verbose=False):
+def do_single_list(console: console.Console, scrapers, verbose=False):
     """Get list of scraper names, one per line."""
     disabled = {}
     for scraperobj in scrapers:
         if verbose:
             display_comic_help(scraperobj)
         else:
-            out.info(get_tagged_scraper_name(scraperobj, reasons=disabled))
+            console.print(get_tagged_scraper(scraperobj, reasons=disabled))
     return len(scrapers) + 1, disabled
 
 
-def do_column_list(scrapers):
+def do_column_list(console: console.Console, scrapers):
     """Get list of scraper names with multiple names per line."""
     disabled = {}
-    width = out.width
-    # limit name length so at least two columns are there
-    limit = (width // 2) - 8
-    names = [get_tagged_scraper_name(scraperobj, limit=limit, reasons=disabled)
+    names = [get_tagged_scraper(scraperobj, reasons=disabled)
              for scraperobj in scrapers]
-    num = len(names)
-    maxlen = max(len(name) for name in names)
-    names_per_line = max(width // (maxlen + 1), 1)
-    while names:
-        out.info(u''.join(name.ljust(maxlen) for name in
-                 names[:names_per_line]))
-        del names[:names_per_line]
-    return num, disabled
+    console.print(columns.Columns(names, equal=True, expand=True))
+    return len(names), disabled
 
 
 TAG_ADULT = "adult"
@@ -295,7 +276,7 @@ TAG_LANG = "lang"
 TAG_DISABLED = "dis"
 
 
-def get_tagged_scraper_name(scraperobj, limit=None, reasons=None):
+def get_tagged_scraper(scraperobj, reasons=None) -> table.Table:
     """Get comic scraper name."""
     tags = []
     if scraperobj.adult:
@@ -307,22 +288,28 @@ def get_tagged_scraper_name(scraperobj, limit=None, reasons=None):
         reasons.update(disabled)
     for reason in disabled:
         tags.append("%s:%s" % (TAG_DISABLED, reason))
+
+    output = table.Table.grid(padding=(0, 1))
+    output.add_column()
     if tags:
-        suffix = " [" + ", ".join(tags) + "]"
+        suffix = "[" + ", ".join(tags) + "]"
+        output.add_column()
+        output.add_row(scraperobj.name, text.Text(suffix))
     else:
-        suffix = ""
-    name = scraperobj.name
-    if limit is not None:
-        name = strlimit(name, limit)
-    return name + suffix
+        output.add_row(scraperobj.name)
+
+    return output
 
 
-def main(args=None) -> int:
+def main(args=None):
     """Parse options and execute commands."""
     try:
-        options = setup_options().parse_args(args=args)
+        console = output.setup_console()
+        argparser = setup_options()
+        argparser.console = console
+        options = argparser.parse_args(args=args)
         options.basepath = os.path.expanduser(options.basepath)
-        return run(options)
+        return run(console, options)
     except KeyboardInterrupt:
         print("Aborted.")
         return 1

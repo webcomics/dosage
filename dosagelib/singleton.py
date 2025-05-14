@@ -2,14 +2,16 @@
 # Copied from: https://github.com/pycontribs/tendo
 # Author: Sorin Sbarnea
 # Changes: changed logging and formatting
-import sys
-import os
 import errno
+import logging
+import os
+import sys
 import tempfile
-from .output import out
+
+logger = logging.getLogger(__name__)
 
 
-class SingleInstance(object):
+class SingleInstance:
     """
     To prevent a script from running in parallel instantiate the
     SingleInstance() class. If is there another instance
@@ -37,7 +39,7 @@ class SingleInstance(object):
         lockname += '.lock'
         tempdir = tempfile.gettempdir()
         self.lockfile = os.path.normpath(os.path.join(tempdir, lockname))
-        out.debug("SingleInstance lockfile: " + self.lockfile)
+        logger.debug("SingleInstance lockfile: %s", self.lockfile)
         if sys.platform == 'win32':
             try:
                 # file already exists, try to remove it in case the previous
@@ -62,7 +64,7 @@ class SingleInstance(object):
 
     def exit(self, exit_code):
         """Exit with an error message and the given exit code."""
-        out.error("Another instance is already running, quitting.")
+        logger.error("Another instance is already running, quitting.")
         sys.exit(exit_code)
 
     def __del__(self):
@@ -79,5 +81,5 @@ class SingleInstance(object):
                 fcntl.lockf(self.fp, fcntl.LOCK_UN)
                 if os.path.isfile(self.lockfile):
                     os.unlink(self.lockfile)
-        except Exception as e:
-            out.exception("could not remove lockfile: %s" % e)
+        except Exception:
+            logger.exception("could not remove lockfile")

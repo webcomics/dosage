@@ -1,17 +1,19 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+import codecs
+import json
+import logging
 import os
 import time
 from urllib.parse import quote as url_quote
-import codecs
-import json
 
 import imagesize
 
-from . import rss, util, configuration
-from .output import out
+from . import configuration, rss, util
+
+logger = logging.getLogger(__name__)
 
 # Maximum width or height to display an image in exported pages.
 # Note that only the displayed size is adjusted, not the image itself.
@@ -138,7 +140,8 @@ def getDimensionForImage(filename, maxsize):
     try:
         origsize = imagesize.get(filename)
     except Exception as e:
-        out.warn("Could not get image size of {}: {}".format(os.path.basename(filename), e))
+        logger.warning("Could not get image size of %r: %s",  # noqa: G200
+            os.path.basename(filename), e)
         return None
 
     width, height = origsize
@@ -150,7 +153,7 @@ def getDimensionForImage(filename, maxsize):
         height = round(maxsize[1])
 
     if width < origsize[0] or height < origsize[1]:
-        out.info("Downscaled display size from %s to %s" % (origsize, (width, height)))
+        logger.info("Downscaled display size from %s to %s", origsize, (width, height))
     return (width, height)
 
 
@@ -182,9 +185,9 @@ class HtmlEventHandler(EventHandler):
 
         fn = self.fnFromDate(today)
         if os.path.exists(fn):
-            out.warn('HTML output file %r already exists' % fn)
-            out.warn('the page link of previous run will skip this file')
-            out.warn('try to generate HTML output only once per day')
+            logger.warning('HTML output file %r already exists', fn)
+            logger.warning('the page link of previous run will skip this file')
+            logger.warning('try to generate HTML output only once per day')
             fn = util.getNonexistingFile(fn)
 
         d = os.path.dirname(fn)

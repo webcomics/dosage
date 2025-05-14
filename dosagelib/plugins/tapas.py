@@ -1,8 +1,11 @@
 # SPDX-License-Identifier: MIT
 # SPDX-FileCopyrightText: © 2019 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
-from ..output import out
+import logging
+
 from ..scraper import ParserScraper
+
+logger = logging.getLogger(__name__)
 
 
 class Tapas(ParserScraper):
@@ -43,7 +46,7 @@ class Tapas(ParserScraper):
 
     def shouldSkipUrl(self, url, data):
         if self.match(data, '//button[d:class("js-have-to-sign")]'):
-            out.warn(f'Nothing to download on "{url}", because a login is required.')
+            logger.warning('Nothing to download on %r, because a login is required.', url)
             return True
         return False
 
