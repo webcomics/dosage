@@ -1,152 +1,151 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
-import codecs
-import contextlib
+# SPDX-FileCopyrightText: © 2025 Tobias Gruetzmacher
 import io
-import os
-import pydoc
-import sys
+import logging
 import threading
-import time
 import traceback
 
-from shutil import get_terminal_size
+from rich import console, table, text, theme
 
-import colorama
-from colorama import Fore, Style
+from . import logext
 
-
-lock = threading.Lock()
+logger = logging.getLogger(__name__)
 
 
-def get_threadname():
-    """Return name of current thread."""
-    return threading.current_thread().name
+def setup_console() -> console.Console:
+    return console.Console(theme=theme.Theme({
+        # Simulates old dosage style
+        "logging.level.error": "dim red",
+        "logging.level.warning": "bold yellow",
+        "logging.level.info": "default",
+        "logging.level.debug": "white",
+        "logging.level.trace": "dim",
+    }))
 
 
-class Output(object):
-    """Print output with context, indentation and optional timestamps."""
+def console_logging(console: console.Console, level: int, timestamps: bool) -> None:
+    """
+    Configure Python logging for simple Dosage console output. This tries to
+    emulate Dosage's legacy output style as much as possible.
 
-    DEFAULT_WIDTH = 80
+    Levels work roughly like this:
+      0 - The default, with shortened exception logging
+      1 - Enables MOREINFO and verbose exception logging
+      2 - Enables DEBUG logging
+      3 - Enables TRACE logging
+    """
+    root = logging.getLogger()
+    root.setLevel(translate_level(level))
+    handler = RichHandler(console, showtime=timestamps, stacktrace=level > 0)
+    handler.setFormatter(logging.Formatter(datefmt="%X"))
+    root.addHandler(handler)
+    # We don't want to see the low-level requests logging
+    logging.getLogger("urllib3").setLevel(logging.INFO)
 
-    def __init__(self, stream=None):
-        """Initialize context and indentation."""
-        self.context = None
-        self.level = 0
-        self.timestamps = False
-        if stream is None:
-            colorama.init(wrap=False)
-            if hasattr(sys.stdout, "encoding") and sys.stdout.encoding:
-                self.encoding = sys.stdout.encoding
-            else:
-                self.encoding = 'utf-8'
-            if hasattr(sys.stdout, 'buffer'):
-                stream = sys.stdout.buffer
-            else:
-                stream = sys.stdout
-            stream = codecs.getwriter(self.encoding)(stream, 'replace')
-            if os.name == 'nt':
-                stream = colorama.AnsiToWin32(stream).stream
-        self.stream = stream
-        self.base_stream = stream
 
-    def info(self, s, level=0):
-        """Write an informational message."""
-        self.write(s, level=level)
+def translate_level(level: int) -> int:
+    return {
+        0: logging.INFO,
+        1: logext.MOREINFO,
+        2: logging.DEBUG,
+        3: logext.TRACE,
+    }.get(level, logging.NOTSET)
 
-    def debug(self, s, level=2):
-        """Write a debug message."""
-        # "white" is the default color for most terminals...
-        self.write(s, level=level, color=Fore.WHITE)
 
-    def warn(self, s, level=0):
-        """Write a warning message."""
-        self.write(u"WARN: %s" % s, level=level, color=Style.BRIGHT +
-                   Fore.YELLOW)
+class RichHandler(logging.Handler):
+    '''Custom logging handler using rich for nice colors. This emulates the
+    legacy dosage style, while taking some inspiration from rich's own
+    logging handler.'''
 
-    def error(self, s, level=0):
-        """Write an error message."""
-        self.write(u"ERROR: %s" % s, level=level, color=Style.DIM + Fore.RED)
+    def __init__(self, console: console.Console, showtime: bool = False,
+            stacktrace: bool = True) -> None:
+        super().__init__()
 
-    def exception(self, s):
-        """Write error message with traceback info."""
-        self.error(s)
-        type, value, tb = sys.exc_info()
-        self.writelines(traceback.format_stack(), 1)
-        self.writelines(traceback.format_tb(tb)[1:], 1)
-        self.writelines(traceback.format_exception_only(type, value), 1)
+        self.console = console
+        self.showtime = showtime
+        self.stacktrace = stacktrace
+        self._lastts = text.Text("")
 
-    def write(self, s, level=0, color=None):
-        """Write message with indentation, context and optional timestamp."""
-        if level > self.level:
-            return
-        if self.timestamps:
-            timestamp = time.strftime(u'%H:%M:%S ')
+    def emit(self, record: logging.LogRecord) -> None:
+        # "Hide" exception information from formatter
+        exc_info = record.exc_info
+        record.exc_info = None
+        record.exc_text = None  # This is just a cache, so we don't need to restore it later
+
+        message = self.format(record)
+        msgstyle = f"logging.level.{record.levelname.lower()}"
+
+        context = getattr(record, "context", '')
+        if not context and threading.current_thread() != threading.main_thread():
+            context = threading.current_thread().name
+
+        output = table.Table.grid(padding=(0, 1))
+        row: list = []
+        if self.showtime:
+            output.add_column(style="log.time")
+            row.append(self.timetext(record))
+        if context:
+            output.add_column()
+            row.append(text.Text(f"{context}>"))
+        output.add_column(ratio=1, style="log.message", overflow="fold")
+
+        msgtext = text.Text(style=msgstyle)
+        if record.levelno > logging.INFO:
+            msgtext.append(f"{record.levelname.upper()}: ")
+
+        if getattr(record, "markup", False):
+            msgtext.append_text(text.Text.from_markup(message))
         else:
-            timestamp = u''
-        with lock:
-            # FIXME: context is some kind of magic tri-state:
-            # - non-empty string
-            # - explicit None
-            # - anything falsy (empty string is used elsewhere)
-            if self.context:
-                self.stream.write(u'%s%s> ' % (timestamp, self.context))
-            elif self.context is None:
-                self.stream.write(u'%s%s> ' % (timestamp, get_threadname()))
-            if color and self.is_tty:
-                s = u'%s%s%s' % (color, s, Style.RESET_ALL)
-            self.stream.write(str(s) + os.linesep)
-            self.stream.flush()
+            msgtext.append_text(text.Text(message))
+        row.append(msgtext)
 
-    def writelines(self, lines, level=0):
-        """Write multiple messages."""
-        for line in lines:
-            for sline in line.rstrip(u'\n').split(u'\n'):
-                self.write(sline.rstrip(u'\n'), level=level)
+        output.add_row(*row)
 
-    @property
-    def width(self):
-        """Get width of this output."""
-        if not self.is_tty:
-            return self.DEFAULT_WIDTH
+        # Add styled exception data
+        if self.stacktrace and exc_info:
+            extrarow = ([None] * (len(row) - 1))
+            extrarow.append(text.Text.from_ansi(self.colorexception(exc_info)))
+            output.add_row(*extrarow)
+
+            # Restore for next handler
+            record.exc_info = exc_info
+
         try:
-            w = get_terminal_size().columns
-            if w <= 0:
-                return self.DEFAULT_WIDTH
-            return w
-        except ValueError:
-            return self.DEFAULT_WIDTH
+            self.console.print(output)
+        except Exception:
+            self.handleError(record)
 
-    @property
-    def is_tty(self):
-        """Is this output stream a terminal?"""
-        return getattr(self.base_stream, "isatty", lambda: False)()
+    def usesTime(self) -> bool:
+        return self.showtime
 
-    @contextlib.contextmanager
-    def temporary_context(self, context):
-        """Run a block with a temporary output context"""
-        orig_context = self.context
-        self.context = context
-        try:
-            yield
-        finally:
-            self.context = orig_context
+    def timetext(self, record: logging.LogRecord) -> text.Text:
+        '''
+        Get formatted time text or an empty placeholder if the time would be
+        the same as for the previous log message. This should only be called
+        inside the lock taken by "emit".
+        '''
+        timestamp = text.Text(self.time(record))
+        if self._lastts == timestamp:
+            return text.Text(" " * len(timestamp))
+        else:
+            self._lastts = timestamp
+            return timestamp
 
-    @contextlib.contextmanager
-    def pager(self):
-        """Run the output of a block through a pager."""
-        try:
-            if self.is_tty:
-                fd = io.StringIO()
-                self.stream = fd
-            with self.temporary_context(u''):
-                yield
-            if self.is_tty:
-                pydoc.pager(fd.getvalue())
-        finally:
-            self.stream = self.base_stream
+    def time(self, record: logging.LogRecord) -> str:
+        if self.formatter:
+            return self.formatter.formatTime(record, self.formatter.datefmt)
+        else:
+            return ""
 
-
-out = Output()
+    def colorexception(self, ei):
+        """
+        Format and return the specified exception information as a string with ANSI
+        colors (on PYthon 3.13+).
+        """
+        sio = io.StringIO()
+        traceback.print_exception(ei[0], ei[1], ei[2], limit=None, file=sio, colorize=True)
+        s = sio.getvalue()
+        sio.close()
+        if s[-1:] == "\n":
+            s = s[:-1]
+        return s

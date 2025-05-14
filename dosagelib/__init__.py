@@ -13,17 +13,18 @@ your intentions, and received permission to distribute.
 The primary interface is the 'dosage' commandline script.
 Comic modules for each comic are located in L{dosagelib.plugins}.
 """
-
+import logging
 from importlib import metadata
 
-from .output import out
+from . import logext  # noqa: F401 - needed here to preload logging extensions
+
+logger = logging.getLogger(__name__)
 
 AppName = 'dosage'
 try:
     __version__ = metadata.version(AppName)  # PEP 396
 except metadata.PackageNotFoundError:
     # package is not installed
-    out.warn('{} is not installed, no version available.'
-        ' Use at least {!r} or {!r} to fix this.'.format(
-            AppName, 'pip install -e .', 'setup.py egg_info'))
+    logger.warning('%s is not installed, no version available.'
+        ' Use something like %r to fix this.', AppName, 'pip install -e .')
     __version__ = 'ERR.NOT.INSTALLED'
