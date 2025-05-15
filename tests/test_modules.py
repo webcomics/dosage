@@ -7,6 +7,7 @@ import responses
 
 import dosagelib.cmd
 import httpmocks
+from dosagelib import scraper
 
 
 def cmd(*options):
@@ -57,13 +58,25 @@ class TestModules:
         assert 'ERROR' not in out
 
     @responses.activate
-    @pytest.mark.skip(reason="SoloeLeveling was removed, so we have no way to test this...")
+    @pytest.mark.skip(reason="SoloLeveling was removed, so we have no way to test this...")
     def test_sololeveling_geoblock(self):
         from dosagelib.plugins.s import SoloLeveling
-        from dosagelib.scraper import GeoblockedException
 
         responses.add(responses.GET, 'https://w3.sololeveling.net/',
             '<span>1020</span>', status=403)
 
-        with pytest.raises(GeoblockedException):
+        with pytest.raises(scraper.GeoblockedException):
             next(SoloLeveling.getmodules()[0].getStrips(1))
+
+    @responses.activate
+    def test_deathbulge(self, tmpdir, capfd):
+        assert isinstance(scraper.scrapers.find("Deathbulge"), scraper.BasicScraper)
+        httpmocks.json('https://www.deathbulge.com/api/comics', 'deathbulge-root')
+        httpmocks.json('https://www.deathbulge.com/api/comics/435', 'deathbulge-435')
+        httpmocks.json('https://www.deathbulge.com/api/comics/434', 'deathbulge-434')
+        httpmocks.jpeg(re.compile(r'.*/images/comics/\d+.jpg'))
+
+        cmd('-v', '--numstrips', '2', '--basepath', str(tmpdir), 'Deathbulge')
+
+        out = capfd.readouterr().out
+        assert 'ERROR' not in out

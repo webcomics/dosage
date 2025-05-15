@@ -87,3 +87,5 @@ extend-exclude = [
 
 [tool.isort]
 profile = "black"
+src_paths = ["dosagelib", "scripts", "tests"]
+known_third_party = ["responses"]

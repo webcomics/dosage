@@ -2,8 +2,8 @@
 # SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
 # SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
-import re
 import os
+import re
 from operator import attrgetter
 
 import pytest
@@ -24,7 +24,7 @@ def get_test_scrapers():
         # Get limited number of scraper tests as default
         testscrapernames = [
             # "classic" BasicScraper
-            'AbstruseGoose',
+            'Deathbulge',
             # complex ParserScraper
             'GoComics/CalvinAndHobbes',
             # WordPressScraper

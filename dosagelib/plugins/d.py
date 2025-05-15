@@ -6,7 +6,7 @@
 from re import compile, escape
 
 from ..helpers import bounceStarter, indirectStarter
-from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
+from ..scraper import BasicScraper, ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
 from .common import (
     ComicControlScraper,
@@ -82,8 +82,8 @@ class DeadWinter(_BasicScraper):
     help = 'Index format: number'
 
 
-class Deathbulge(_BasicScraper):
-    url = 'http://www.deathbulge.com/api/comics'
+class Deathbulge(BasicScraper):
+    url = 'https://www.deathbulge.com/api/comics'
     imageSearch = compile(r"(/images/comics/[^\.]+\.jpg)")
     prevSearch = compile(r'"previous":(\d+),')
     firstStripUrl = url + '/1'
@@ -91,7 +91,7 @@ class Deathbulge(_BasicScraper):
     def getPrevUrl(self, url, data):
         if data[1] == self.url:
             data = (data[0], data[1] + '/')
-        return _BasicScraper.getPrevUrl(self, url, data)
+        return super().getPrevUrl(url, data)
 
 
 class DeepFried(_BasicScraper):

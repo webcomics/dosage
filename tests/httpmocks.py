@@ -1,12 +1,11 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2017-2019 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2017 Tobias Gruetzmacher
 import gzip
 import os.path
 import re
-
 from functools import lru_cache
 
-from responses import add, GET
+from responses import GET, add
 
 
 def _file(name):
@@ -14,8 +13,8 @@ def _file(name):
 
 
 @lru_cache()
-def content(name):
-    with gzip.open(_file(name + '.html.gz'), 'r') as f:
+def content(name, ext: str = 'html'):
+    with gzip.open(_file(f'{name}.{ext}.gz'), 'r') as f:
         return f.read()
 
 
@@ -27,6 +26,10 @@ def _img(name):
 
 def page(url, pagename):
     add(GET, url, content(pagename))
+
+
+def json(url, pagename):
+    add(GET, url, content(pagename, 'json'))
 
 
 def png(url, name='empty'):
