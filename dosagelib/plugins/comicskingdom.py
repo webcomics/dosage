@@ -141,7 +141,7 @@ class ComicsKingdom(ParserScraper):
             cls('RexMorganMDSpanish', 'rex-morgan-md-spanish', lang='es'),
             cls('RhymesWithOrange', 'rhymes-with-orange'),
             cls('RipKirby', 'rip-kirby'),
-            # Rosebuds has a duplicate in GoComics/Rosebuds
+            cls('Rosebuds', 'rosebuds'),
             cls('SafeHavens', 'safe-havens'),
             cls('SagaOfBrannBjornson', 'the-saga-of-brann-bjornson'),
             cls('Sales', 'sales'),
