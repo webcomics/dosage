@@ -315,13 +315,13 @@ class ButtercupFestival(_ParserScraper):
     )
 
 
-class ButternutSquash(_BasicScraper):
-    url = 'http://www.butternutsquash.net/'
-    rurl = escape(url)
-    stripUrl = url + '%s/'
+class ButternutSquash(ParserScraper):
+    url = ('https://web.archive.org/web/20170319023859/'
+        'http://www.butternutsquash.net/')
+    stripUrl = url + '2003/04/16/meet-da-punks/%s/'  # The website is very broken
     firstStripUrl = stripUrl % '2003/04/16/meet-da-punks'
-    imageSearch = compile(tagre("img", "src", r'(%scomics/[^"]+)' % rurl))
-    prevSearch = compile(tagre("a", "href", r'(%s[^"]+)' % rurl, after="prev"))
+    imageSearch = '//div[@id="comic"]//img'
+    prevSearch = '//a[@rel="prev"]'
     help = 'Index format: yyyy/mm/dd/strip-name-author-name'
 
 
