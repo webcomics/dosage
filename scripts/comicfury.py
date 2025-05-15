@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 """
 Script to get ComicFury comics and save the info in a JSON file for further
 processing.
@@ -11,10 +11,10 @@ processing.
 import sys
 from urllib.parse import urlsplit
 
-from scriptutil import ComicListUpdater
+import scriptutil
 
 
-class ComicFuryUpdater(ComicListUpdater):
+class ComicFuryUpdater(scriptutil.ComicListUpdater):
     # Absolute minumum number of pages a comic may have (restrict search space)
     MIN_COMICS = 90
 
@@ -138,17 +138,17 @@ class ComicFuryUpdater(ComicListUpdater):
         """Parse one search result page."""
         data = self.get_url(url)
 
-        for comicdiv in data.cssselect('div.webcomic-result'):
-            comiclink = comicdiv.cssselect('div.webcomic-result-title a')[0]
+        for comicdiv in self.xpath(data, '//div[d:class("webcomic-result")]'):
+            comiclink = self.xpath(comicdiv, './div[d:class("webcomic-result-title")]/a')[0]
             comicurl = comiclink.attrib['href']
             name = comiclink.text
 
-            info = comicdiv.cssselect('span.stat-value')
+            info = self.xpath(comicdiv, './/span[d:class("stat-value")]')
             # find out how many images this comic has
             count = int(info[0].text.strip())
             self.add_comic(name, comicurl, count)
 
-        nextlink = data.cssselect('div.search-next-page a')
+        nextlink = self.xpath(data, '//div[d:class("search-next-page")]/a')
         if nextlink:
             return nextlink[0].attrib['href']
         else:

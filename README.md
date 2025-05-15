@@ -88,11 +88,11 @@ Windows users can download a complete binary (including Python) from the
 The simplest way to install and upgrade dosage is with [pipx]. To install the
 newest stable version with all optional features use:
 
-    pipx install dosage[css,bash]
+    pipx install dosage[bash]
 
 To install the newest development version, use:
 
-    pipx install "dosage[css,bash] @ git+https://github.com/webcomics/dosage.git"
+    pipx install "dosage[bash] @ git+https://github.com/webcomics/dosage.git"
 
 To upgrade such installations, just run:
 
@@ -103,7 +103,7 @@ To upgrade such installations, just run:
 If you want to run dosage directly from the source code, you should install
 it in "[editable]" mode, preferable in a [virtual environment]:
 
-    pip install -e .[css,bash,dev]
+    pip install -e .[bash,dev]
 
 
 After that, `dosage` should be available as a normal command.

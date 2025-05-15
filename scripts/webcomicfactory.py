@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: 2015 Tobias Gruetzmacher
 """
 Script to get WebComicFactory comics and save the info in a JSON file for
 further processing.
 """
-from scriptutil import ComicListUpdater
+import scriptutil
 
 
-class WebComicFactoryUpdater(ComicListUpdater):
+class WebComicFactoryUpdater(scriptutil.ComicListUpdater):
 
     def find_first(self, url):
         data = self.get_url(url)
 
-        firstlinks = data.cssselect('a.comic-nav-first')
+        firstlinks = self.xpath(data, '//a[d:class("comic-nav-first")]')
         if not firstlinks:
             print("INFO:", "No first link on »%s«, already first page?" %
                   (url))
@@ -27,9 +27,9 @@ class WebComicFactoryUpdater(ComicListUpdater):
         url = 'http://www.thewebcomicfactory.com/'
         data = self.get_url(url)
 
-        for comicdiv in data.cssselect('div.ceo_thumbnail_widget'):
-            comicname = comicdiv.cssselect('h2')[0]
-            comiclink = comicdiv.cssselect('a')[0]
+        for comicdiv in self.xpath(data, '//div[d:class("ceo_thumbnail_widget")]'):
+            comicname = self.xpath(comicdiv, './/h2')[0]
+            comiclink = self.xpath(comicdiv, './/a')[0]
             comicurl = comiclink.attrib['href']
             name = comicname.text
             if 'comic-color-key' in comicurl:

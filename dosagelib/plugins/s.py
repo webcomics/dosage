@@ -623,12 +623,12 @@ class StringTheory(WordPressNavi):
     firstStripUrl = url + 'comics/chapterone/chapterone/'
 
 
-class StrongFemaleProtagonist(_ParserScraper):
-    url = 'http://strongfemaleprotagonist.com/'
+class StrongFemaleProtagonist(ParserScraper):
+    url = 'https://strongfemaleprotagonist.com/'
     stripUrl = url + '%s/'
-    css = True
-    imageSearch = 'article p img'
-    prevSearch = 'a.page-nav__item--left'
+    firstStripUrl = stripUrl % 'issue-1/page-0'
+    imageSearch = '//article/p/img'
+    prevSearch = '//a[d:class("page-nav__item--left")]'
     help = 'Index format: issue-?/page-??'
 
     def shouldSkipUrl(self, url, data):

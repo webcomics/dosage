@@ -8,16 +8,11 @@ import html
 import os
 import re
 import warnings
+from typing import Collection, Dict, List, Optional, Pattern, Sequence, Union
 from urllib.parse import urljoin
-from typing import Collection, Dict, List, Optional, Type, Union, Pattern, Sequence
 
 import lxml
 from lxml.html.defs import link_attrs as lxml_link_attrs
-
-try:
-    import cssselect
-except ImportError:
-    cssselect = None
 
 try:
     import pycountry
@@ -25,13 +20,19 @@ except ImportError:
     pycountry = None
 
 from . import configuration, http, languages, loader
-from .util import (get_page, makeSequence, get_system_uid, tagre, normaliseURL,
-        prettyMatcherList, uniq)
 from .comic import ComicStrip
-from .output import out
 from .events import getHandler
+from .output import out
+from .util import (
+    get_page,
+    get_system_uid,
+    makeSequence,
+    normaliseURL,
+    prettyMatcherList,
+    tagre,
+    uniq,
+)
 from .xml import NS
-
 
 ARCHIVE_ORG_URL = re.compile(r'https?://web\.archive\.org/web/[^/]*/')
 html_link_attrs = lxml_link_attrs - {'usemap'}
@@ -458,10 +459,6 @@ class ParserScraper(Scraper):
     XML_DECL = re.compile(
         r'^(<\?xml[^>]+)\s+encoding\s*=\s*["\'][^"\']*["\'](\s*\?>|)', re.U)
 
-    # Switch between CSS and XPath selectors for this class. Since CSS needs
-    # another Python module, XPath is the default for now.
-    css = False
-
     def getPage(self, url):
         page = super().getPage(url)
         if page.encoding:
@@ -533,19 +530,8 @@ class ParserScraper(Scraper):
                 break
 
     def match(self, data, pattern):
-        """Match a pattern (XPath/CSS) against a page."""
-        if self.css:
-            return data.cssselect(pattern)
-        else:
-            return data.xpath(pattern, namespaces=NS)
-
-    def getDisabledReasons(self):
-        res = {}
-        if self.css and cssselect is None:
-            res['css'] = (u"This module needs the cssselect " +
-                          u"(python-cssselect) python module which is " +
-                          u"not installed.")
-        return res
+        """Match an XPath pattern against a page."""
+        return data.xpath(pattern, namespaces=NS)
 
 
 # Legacy aliases

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 import codecs
 import html
 import json
@@ -12,16 +12,15 @@ import time
 
 import lxml
 
+from dosagelib import http, util, xml
 from dosagelib.scraper import scrapers
-from dosagelib.util import get_page
-from dosagelib import http
 
 
 def first_lower(x):
     return x[0].lower()
 
 
-class ComicListUpdater(object):
+class ComicListUpdater:
     dup_templates: tuple[str, ...] = ()
     excluded_comics: tuple[str, ...] = ()
 
@@ -37,7 +36,7 @@ class ComicListUpdater(object):
         """Get an HTML page and parse it with LXML."""
         print("Parsing", url, file=sys.stderr)
         try:
-            pagetext = get_page(url, self.session).text
+            pagetext = util.get_page(url, self.session).text
             data = lxml.html.document_fromstring(pagetext)
             if expand:
                 data.make_links_absolute(url)
@@ -147,6 +146,9 @@ class ComicListUpdater(object):
             self.print_results(sys.argv[1:])
         else:
             self.get_results()
+
+    def xpath(self, data, path: str):
+        return data.xpath(path, namespaces=xml.NS)
 
 
 def contains_case_insensitive(adict, akey):

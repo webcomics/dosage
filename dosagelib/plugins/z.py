@@ -4,17 +4,17 @@
 # Copyright (C) 2015-2022 Tobias Gruetzmacher
 from re import compile, escape
 
+from ..helpers import bounceStarter, joinPathPartsNamer
 from ..scraper import BasicScraper, ParserScraper
 from ..util import tagre
-from ..helpers import bounceStarter, joinPathPartsNamer
 from .common import WordPressNavi
 
 
 class ZapComic(ParserScraper):
     url = 'http://www.zapcomic.com/'
-    css = True
-    imageSearch = 'img.comic-item'
-    prevSearch = 'a.previous-comic-link'
+    imageSearch = '//img[d:class("comic-item")]'
+    prevSearch = '//a[d:class("previous-comic-link")]'
+    endOfLife = True
 
 
 class Zapiro(ParserScraper):

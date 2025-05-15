@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2021 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 """
 Script to get arcamax comics and save the info in a JSON file for further
 processing.
 """
 
-from scriptutil import ComicListUpdater
+import scriptutil
 
 
-class ArcamaxUpdater(ComicListUpdater):
+class ArcamaxUpdater(scriptutil.ComicListUpdater):
     dup_templates = ("Creators/%s", "DrunkDuck/%s", "GoComics/%s",
                      "KeenSpot/%s", "ComicGenesis/%s")
 
@@ -26,7 +26,7 @@ class ArcamaxUpdater(ComicListUpdater):
         """Parse one search result page."""
         data = self.get_url(url)
 
-        for comiclink in data.cssselect('a.comic-icon'):
+        for comiclink in self.xpath(data, '//a[d:class("comic-icon")]'):
             path = comiclink.attrib['href']
             name = comiclink.attrib['title']
 

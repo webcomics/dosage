@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2016 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 """
 Script to get a list of creators.com comics and save the info in a JSON file
 for further processing.
 """
 
-from scriptutil import ComicListUpdater
+import scriptutil
 
 
-class CreatorsUpdater(ComicListUpdater):
+class CreatorsUpdater(scriptutil.ComicListUpdater):
     dup_templates = ('GoComics/%s',)
 
     # names of comics to exclude
@@ -23,10 +23,10 @@ class CreatorsUpdater(ComicListUpdater):
         """Parse one listing page."""
         data = self.get_url(url)
 
-        for comicdiv in data.cssselect('ul.all-test li'):
-            comiclink = comicdiv.cssselect('a')[0]
+        for comicdiv in self.xpath(data, '//ul[d:class("all-test")]/li'):
+            comiclink = self.xpath(comicdiv, './a')[0]
             comicurl = comiclink.attrib['href']
-            name = comicdiv.cssselect('p strong')[0].text
+            name = self.xpath(comicdiv, './/p/strong')[0].text
 
             self.add_comic(name, comicurl.rsplit('/', 1)[1])
 

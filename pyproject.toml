@@ -45,7 +45,6 @@ Code = "https://github.com/webcomics/dosage"
 
 [project.optional-dependencies]
 bash = ["argcomplete"]
-css = ["cssselect"]
 dev = [
     "allure-pytest",
     "pytest-cov",
