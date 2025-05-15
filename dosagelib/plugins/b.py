@@ -5,7 +5,7 @@
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile, escape
 
-from ..helpers import indirectStarter
+from ..helpers import indirectStarter, joinPathPartsNamer
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
 from .common import (
@@ -88,27 +88,18 @@ class Bearmageddon(WordPressScraper):
     starter = indirectStarter
 
 
-class Beetlebum(_BasicScraper):
-    url = 'http://blog.beetlebum.de/'
-    rurl = escape(url)
-    stripUrl = url + '%s'
-    firstStripUrl = stripUrl % '2006/03/10/quiz-fur-ruskiphile'
+class Beetlebum(ParserScraper):
+    url = 'https://blog.beetlebum.de/'
+    stripUrl = url + '%s/'
+    firstStripUrl = stripUrl % '2005/08/12/my-first-blog'
     starter = indirectStarter
+    namer = joinPathPartsNamer(pageparts=range(-5, 0), imageparts=(-1,))
     multipleImagesPerStrip = True
-    imageSearch = compile(tagre('img', 'src', r'(http://blog\.beetlebum\.de/wp-content/uploads/[^"]+)'))
-    prevSearch = compile(tagre('a', 'href',
-                               r'(%s\d{4}/\d{2}/\d{2}/[^"]*)' % rurl,
-                               after='prev'))
-    latestSearch = compile(tagre('a', 'href',
-                                 r'(%s\d{4}/\d{2}/\d{2}/[^"]+)' % rurl,
-                                 after='bookmark'))
+    imageSearch = '//div[d:class("entry-content")]//img'
+    prevSearch = '//a[@rel="prev"]'
+    latestSearch = '//a[@rel="bookmark"]'
     help = 'Index format: yyyy/mm/dd/striptitle'
     lang = 'de'
-
-    def namer(self, image_url, page_url):
-        indexes = tuple(page_url.rstrip('/').split('/')[-4:])
-        name = '%s-%s-%s-%s' % indexes
-        return name + '_' + image_url.split('/')[-1]
 
 
 class Bethellium(WordPressWebcomic):
