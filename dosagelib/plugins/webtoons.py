@@ -116,6 +116,7 @@ class WebToons(ParserScraper):
             cls('CityOfWalls', 'drama/city-of-wall', 505),
             cls('CityVamps', 'challenge/city-vamps-', 119224),
             cls('ClawShot', 'challenge/clawshot', 621465),
+            cls('ClinicOfHorrors', 'supernatural/clinic-of-horrors', 3414),
             cls('ClusterFudge', 'slice-of-life/cluster-fudge', 355),
             cls('CodeAdam', 'action/code-adam', 1657),
             cls('CookingComically', 'tiptoon/cooking-comically', 622),
