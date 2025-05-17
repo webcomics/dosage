@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2016-2020 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2016 Tobias Gruetzmacher
 """
 Functions to load plugin modules.
 
@@ -9,11 +9,14 @@ Example usage:
         plugins.extend(loader.get_module_plugins(module, PluginClass))
 """
 import importlib
+import logging
 import pkgutil
 import sys
 
-from .plugins import (__name__ as plugin_package, __path__ as plugin_path)
-from .output import out
+from .plugins import __name__ as plugin_package
+from .plugins import __path__ as plugin_path
+
+logger = logging.getLogger(__name__)
 
 
 def get_plugin_modules():
@@ -31,8 +34,8 @@ def get_plugin_modules():
     for name in modules:
         try:
             yield importlib.import_module(name)
-        except ImportError as msg:
-            out.error("could not load module %s: %s" % (name, msg))
+        except ImportError:
+            logger.exception("could not load module %s", name)
 
 
 def _get_all_modules_pyinstaller():

@@ -29,11 +29,11 @@ classifiers = [
 keywords = ["comic", "webcomic", "downloader", "archiver", "crawler"]
 requires-python = ">=3.8"
 dependencies = [
-    "colorama",
     "imagesize",
     "lxml>=4.0.0",
     "platformdirs",
     "requests>=2.0",
+    "rich",
     "importlib_resources>=5.0.0;python_version<'3.9'",
 ]
 dynamic = ["version"]

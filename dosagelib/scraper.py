@@ -5,6 +5,7 @@
 from __future__ import annotations
 
 import html
+import logging
 import os
 import re
 import warnings
@@ -22,7 +23,6 @@ except ImportError:
 from . import configuration, http, languages, loader
 from .comic import ComicStrip
 from .events import getHandler
-from .output import out
 from .util import (
     get_page,
     get_system_uid,
@@ -34,12 +34,14 @@ from .util import (
 )
 from .xml import NS
 
+logger = logging.getLogger(__name__)
 ARCHIVE_ORG_URL = re.compile(r'https?://web\.archive\.org/web/[^/]*/')
 html_link_attrs = lxml_link_attrs - {'usemap'}
 
 
 if lxml.etree.LIBXML_VERSION < (2, 9, 3):
-    warnings.warn('Your libxml2 is very old (< 2.9.3), some dosage modules might missbehave')
+    warnings.warn(  # noqa: B028 - false positive
+        'Your libxml2 is very old (< 2.9.3), some dosage modules might missbehave')
 
 
 class GeoblockedException(IOError):
@@ -144,18 +146,17 @@ class Scraper:
         # remove duplicate URLs
         urls = uniq(urls)
         if len(urls) > 1 and not self.multipleImagesPerStrip:
-            out.warn(
-                u"Found %d images instead of 1 at %s with expressions %s" %
-                (len(urls), url, prettyMatcherList(self.imageSearch)))
+            logger.warning("Found %d images instead of 1 at %s with expressions %r",
+                len(urls), url, prettyMatcherList(self.imageSearch))
             image = urls[0]
-            out.warn("Choosing image %s" % image)
+            logger.warning("Choosing image %r", image)
             urls = (image,)
         elif not urls:
-            out.warn("Found no images at %s with expressions %s" % (url,
-                     prettyMatcherList(self.imageSearch)))
+            logger.warning("Found no images at %r with expressions %r", url,
+                prettyMatcherList(self.imageSearch))
         if self.textSearch:
             text = self.fetchText(url, data, self.textSearch,
-                                  optional=self.textOptional)
+                optional=self.textOptional)
         else:
             text = None
         return ComicStrip(self, url, urls, text=text)
@@ -180,7 +181,7 @@ class Scraper:
             urls = [self.starter()]
         if self.adult:
             msg += u" (including adult content)"
-        out.info(msg)
+        logger.info(msg)
         for url in urls:
             for strip in self.getStripsFor(url, maxstrips):
                 yield strip
@@ -191,19 +192,18 @@ class Scraper:
         self.hitFirstStripUrl = False
         seen_urls = set()
         while url:
-            out.info(u'Get strip URL %s' % url, level=1)
+            logger.moreinfo('Get strip URL %r', url)
             data = self.getPage(url)
             if self.shouldSkipUrl(url, data):
-                out.info(u'Skipping URL %s' % url)
+                logger.info('Skipping URL %r', url)
                 self.skippedUrls.add(url)
             else:
                 try:
                     yield self.getComicStrip(url, data)
                 except ValueError as msg:
-                    # image not found
-                    out.exception(msg)
+                    logger.exception(msg)  # noqa: G200
             if self.isfirststrip(url):
-                out.debug(u"Stop at first URL %s" % url)
+                logger.debug("Stop at first URL %r", url)
                 self.hitFirstStripUrl = True
                 break
             if maxstrips is not None:
@@ -214,7 +214,7 @@ class Scraper:
             seen_urls.add(url)
             if prevUrl in seen_urls:
                 # avoid recursive URL loops
-                out.warn(u"Already seen previous URL %r" % prevUrl)
+                logger.warning("Already seen previous URL %r", prevUrl)
                 break
             url = prevUrl
 
@@ -237,10 +237,10 @@ class Scraper:
                 prevUrl = self.fetchUrl(url, data, self.prevSearch)
             except ValueError as msg:
                 # assume there is no previous URL, but print a warning
-                out.warn(u"%s Assuming no previous comic strips exist." % msg)
+                logger.warning("%s Assuming no previous comic strips exist.", msg)  # noqa: G200
             else:
                 prevUrl = self.link_modifier(url, prevUrl)
-                out.debug(u"Found previous URL %s" % prevUrl)
+                logger.debug("Found previous URL %r", prevUrl)
                 getHandler().comicPageLink(self, url, prevUrl)
         return prevUrl
 
@@ -408,8 +408,7 @@ class BasicScraper(Scraper):
                 if not searchUrl:
                     raise ValueError("Pattern %s matched empty URL at %s." %
                                      (search.pattern, url))
-                out.debug(u'matched URL %r with pattern %s' %
-                          (searchUrl, search.pattern))
+                logger.debug('matched URL %r with pattern %r', searchUrl, search.pattern)
                 searchUrls.append(normaliseURL(urljoin(data[1], searchUrl)))
             if searchUrls:
                 # do not search other links if one pattern matched
@@ -426,8 +425,7 @@ class BasicScraper(Scraper):
             match = textSearch.search(data[0])
             if match:
                 text = match.group(1)
-                out.debug(u'matched text %r with pattern %s' %
-                          (text, textSearch.pattern))
+                logger.debug('matched text %r with pattern %r', text, textSearch.pattern)
                 return html.unescape(text).strip()
             if optional:
                 return None
@@ -488,7 +486,7 @@ class ParserScraper(Scraper):
                         searchUrl = match.get(attrib)
             except AttributeError:
                 searchUrl = str(match)
-            out.debug(u'Matched URL %r with pattern %s' % (searchUrl, search))
+            logger.debug('Matched URL %r with pattern %r', searchUrl, search)
             if searchUrl is not None:
                 searchUrls.append(searchUrl)
 
@@ -507,7 +505,7 @@ class ParserScraper(Scraper):
                 text.append(match.text_content())
             except AttributeError:
                 text.append(match)
-            out.debug(u'Matched text %r with XPath %s' % (text, search))
+            logger.debug('Matched text %r with XPath %r', text, search)
         text = u' '.join(text)
         if text.strip() == '':
             if optional:
@@ -572,15 +570,15 @@ class Cache:
         return candidates[0]
 
     def load(self) -> None:
-        out.debug("Loading comic modules...")
+        logger.debug("Loading comic modules...")
         modules = 0
         classes = 0
         for module in loader.get_plugin_modules():
             modules += 1
             classes += self.addmodule(module)
         self.validate()
-        out.debug("... %d scrapers loaded from %d classes in %d modules." % (
-            len(self.data), classes, modules))
+        logger.debug("... %d scrapers loaded from %d classes in %d modules.",
+            len(self.data), classes, modules)
 
     def adddir(self, path) -> None:
         """Add an additional directory with python modules to the scraper list.
@@ -592,15 +590,15 @@ class Cache:
             self.load()
         modules = 0
         classes = 0
-        out.debug("Loading user scrapers from '{}'...".format(path))
+        logger.debug("Loading user scrapers from %r...", path)
         for module in loader.get_plugin_modules_from_dir(path):
             modules += 1
             classes += self.addmodule(module)
         self.validate()
         self.userdirs.add(path)
         if classes > 0:
-            out.debug("Added %d user classes from %d modules." % (
-                classes, modules))
+            logger.debug("Added %d user classes from %d modules.",
+                classes, modules)
 
     def addmodule(self, module) -> int:
         """Adds all valid plugin classes from the specified module to the cache.
