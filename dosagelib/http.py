@@ -82,13 +82,13 @@ class RandomThrottle:
         self.next = time.time() + random.uniform(self.th_min, self.th_max)
 
 
-def check_robotstxt(url: str, session: Session):
+def check_robotstxt(url: str, session: Session) -> None:
     """Check if robots.txt allows our user agent for the given URL.
     @raises: IOError if URL is not allowed
     """
     roboturl = _get_roboturl(url)
-    rp = _get_robotstxt_parser(roboturl, session=session)
-    if not rp.can_fetch(configuration.UserAgent, str(url)):
+    rp = _get_robotstxt_parser(roboturl, session)
+    if not rp.can_fetch(configuration.App, str(url)):
         raise IOError("%s is disallowed by %s" % (url, roboturl))
 
 
@@ -99,7 +99,7 @@ def _get_roboturl(url: str) -> str:
 
 
 @functools.lru_cache()
-def _get_robotstxt_parser(url, session=None) -> robotparser.RobotFileParser:
+def _get_robotstxt_parser(url, session: Session) -> robotparser.RobotFileParser:
     """Get a RobotFileParser for the given robots.txt URL."""
     rp = robotparser.RobotFileParser()
     try:
@@ -115,6 +115,10 @@ def _get_robotstxt_parser(url, session=None) -> robotparser.RobotFileParser:
         elif req.status_code == 200:
             rp.parse(req.text.splitlines())
             logger.trace('GET %r successful, %i bytes', url, len(req.content))
+            if rp.default_entry:
+                # Filter default deny rules
+                de = rp.default_entry
+                de.rulelines = [rule for rule in de.rulelines if rule.allowance]
     return rp
 
 
