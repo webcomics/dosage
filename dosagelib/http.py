@@ -1,16 +1,18 @@
 # SPDX-License-Identifier: MIT
 # SPDX-FileCopyrightText: © 2019 Tobias Gruetzmacher
 import collections
+import functools
+import logging
 import random
 import time
 from typing import Any
-from urllib import parse
+from urllib import parse, robotparser
 
 import requests
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 
-from .configuration import UserAgent
+from . import configuration
 
 # Default number of retries
 MaxRetries = 3
@@ -21,6 +23,8 @@ RetryBackoffFactor = 2
 
 # Default connection timeout
 ConnectionTimeoutSecs = 60
+
+logger = logging.getLogger(__name__)
 
 
 class Session(requests.Session):
@@ -37,9 +41,10 @@ class Session(requests.Session):
         retry = Retry(MaxRetries, backoff_factor=RetryBackoffFactor)
         self.mount('http://', HTTPAdapter(max_retries=retry))
         self.mount('https://', HTTPAdapter(max_retries=retry))
-        self.headers.update({'User-Agent': UserAgent})
+        self.headers.update({'User-Agent': configuration.UserAgent})
 
-        self.throttles: dict[str, RandomThrottle] = collections.defaultdict(lambda: RandomThrottle())
+        self.throttles: dict[str, RandomThrottle] = collections.defaultdict(
+            lambda: RandomThrottle())
         self.host_options: dict[str, dict[Any, Any]] = {}
 
     def send(self, request, **kwargs):
@@ -51,7 +56,7 @@ class Session(requests.Session):
         if hostname in self.host_options:
             kwargs.update(self.host_options[hostname])
 
-        return super(Session, self).send(request, **kwargs)
+        return super().send(request, **kwargs)
 
     def add_throttle(self, hostname: str, th_min, th_max):
         """Adds a new throttle for a host: Might overwrite the existing one.
@@ -64,7 +69,7 @@ class Session(requests.Session):
         self.host_options[hostname] = options
 
 
-class RandomThrottle(object):
+class RandomThrottle:
     def __init__(self, th_min=0.0, th_max=0.3) -> None:
         self.th_min = th_min
         self.th_max = th_max
@@ -75,6 +80,42 @@ class RandomThrottle(object):
         if d > 0:
             time.sleep(d)
         self.next = time.time() + random.uniform(self.th_min, self.th_max)
+
+
+def check_robotstxt(url: str, session: Session):
+    """Check if robots.txt allows our user agent for the given URL.
+    @raises: IOError if URL is not allowed
+    """
+    roboturl = _get_roboturl(url)
+    rp = _get_robotstxt_parser(roboturl, session=session)
+    if not rp.can_fetch(configuration.UserAgent, str(url)):
+        raise IOError("%s is disallowed by %s" % (url, roboturl))
+
+
+def _get_roboturl(url: str) -> str:
+    """Get robots.txt URL from given URL."""
+    pu = parse.urlsplit(url)
+    return parse.urlunsplit((pu.scheme, pu.netloc, "/robots.txt", None, None))
+
+
+@functools.lru_cache()
+def _get_robotstxt_parser(url, session=None) -> robotparser.RobotFileParser:
+    """Get a RobotFileParser for the given robots.txt URL."""
+    rp = robotparser.RobotFileParser()
+    try:
+        req = session.get(url)
+    except Exception as e:
+        # connect or timeout errors are treated as an absent robots.txt
+        rp.allow_all = True
+        logger.trace('GET %r caused exception: %s', url, e)
+    else:
+        if req.status_code >= 400:
+            rp.allow_all = True
+            logger.trace('GET %r caused HTTP error %i', url, req.status_code)
+        elif req.status_code == 200:
+            rp.parse(req.text.splitlines())
+            logger.trace('GET %r successful, %i bytes', url, len(req.content))
+    return rp
 
 
 # A default session for cookie and connection sharing
