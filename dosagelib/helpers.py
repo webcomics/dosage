@@ -7,19 +7,19 @@ from __future__ import annotations
 
 from typing import Protocol
 
-from .util import getQueryParams
 from .scraper import Scraper
+from .util import getQueryParams
 
 
 class Namer(Protocol):
     """A protocol for generic callbacks to name web comic images."""
-    def __call__(_, self: Scraper, image_url: str, page_url: str) -> str | None:
+    def __call__(_, self: Scraper, image_url: str, page_url: str) -> str:
         ...
 
 
 def queryNamer(param, use_page_url=False) -> Namer:
     """Get name from URL query part."""
-    def _namer(self, image_url: str, page_url: str) -> str | None:
+    def _namer(self, image_url: str, page_url: str) -> str:
         """Get URL query part."""
         url = page_url if use_page_url else image_url
         return getQueryParams(url)[param][0]
@@ -28,17 +28,17 @@ def queryNamer(param, use_page_url=False) -> Namer:
 
 def regexNamer(regex, use_page_url=False) -> Namer:
     """Get name from regular expression."""
-    def _namer(self, image_url: str, page_url: str) -> str | None:
+    def _namer(self, image_url: str, page_url: str) -> str:
         """Get first regular expression group."""
         url = page_url if use_page_url else image_url
         mo = regex.search(url)
-        return mo.group(1) if mo else None
+        return mo.group(1) if mo else image_url.rsplit('/', 1)[1]
     return _namer
 
 
 def joinPathPartsNamer(pageparts=(), imageparts=(), joinchar='_') -> Namer:
     """Get name by mashing path parts together with underscores."""
-    def _namer(self: Scraper, image_url: str, page_url: str) -> str | None:
+    def _namer(self: Scraper, image_url: str, page_url: str) -> str:
         # Split and drop host name
         pagesplit = page_url.split('/')[3:]
         imagesplit = image_url.split('/')[3:]

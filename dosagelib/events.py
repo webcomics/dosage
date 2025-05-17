@@ -20,11 +20,11 @@ logger = logging.getLogger(__name__)
 MaxImageSize = (800, 800)
 
 
-class EventHandler(object):
+class EventHandler:
     """Base class for writing events to files. The currently defined events are
     start(), comicDownloaded() and end()."""
 
-    def __init__(self, basepath, baseurl, allowdownscale):
+    def __init__(self, basepath, baseurl, allowdownscale) -> None:
         """Initialize base path and url."""
         self.basepath = basepath
         self.baseurl = baseurl or self.getBaseUrl()

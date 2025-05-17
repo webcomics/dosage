@@ -65,7 +65,7 @@ def get_host_lock(url):
 class ComicGetter(threading.Thread):
     """Get all strips of a comic in a thread."""
 
-    def __init__(self, options, jobs):
+    def __init__(self, options, jobs) -> None:
         """Store options."""
         super(ComicGetter, self).__init__()
         self.options = options
@@ -141,8 +141,8 @@ class ComicGetter(threading.Thread):
                 if self.stopped:
                     break
             except Exception as msg:
-                logger.exception('Could not save image at %r to %r: %s',
-                    image.referrer, image.filename, msg)  # noqa: G200
+                logger.exception('Could not save image at %r to %r: %s',  # noqa: G200
+                    image.referrer, image.filename, msg)
                 self.errors += 1
         return allskipped
 

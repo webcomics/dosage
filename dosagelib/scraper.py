@@ -7,6 +7,7 @@ from __future__ import annotations
 import html
 import logging
 import os
+import pathlib
 import re
 import warnings
 from typing import Collection, Dict, List, Optional, Pattern, Sequence, Union
@@ -246,15 +247,17 @@ class Scraper:
 
     def getIndexStripUrl(self, index: str) -> str:
         """Get comic strip URL from index."""
+        if not self.stripUrl:
+            raise ValueError("Getting by index is not supported!")
         return self.stripUrl % index
 
-    def starter(self) -> str:
+    def starter(self) -> str | None:
         """Get starter URL from where to scrape comic strips."""
         return self.url
 
-    def namer(self, image_url: str, page_url: str) -> str | None:
+    def namer(self, image_url: str, page_url: str) -> str:
         """Return filename for given image and page URL."""
-        return
+        return image_url.rsplit('/', 1)[1]
 
     def link_modifier(self, fromurl: str, tourl: str) -> str:
         """Optional modification of parsed link (previous/back/latest) URLs.
@@ -542,9 +545,9 @@ class Cache:
     This is cached, since iterating & loading a complete package might be quite
     slow.
     """
-    def __init__(self):
+    def __init__(self) -> None:
         self.data: List[Scraper] = []
-        self.userdirs = set()
+        self.userdirs: set[pathlib.Path] = set()
 
     def find(self, comic: str) -> Scraper:
         """Find a comic scraper object based on its name. This prefers a
@@ -580,7 +583,7 @@ class Cache:
         logger.debug("... %d scrapers loaded from %d classes in %d modules.",
             len(self.data), classes, modules)
 
-    def adddir(self, path) -> None:
+    def adddir(self, path: pathlib.Path) -> None:
         """Add an additional directory with python modules to the scraper list.
         These are handled as if the were part of the plugins package.
         """
@@ -610,7 +613,7 @@ class Cache:
             self.data.extend(plugin.getmodules())
         return classes
 
-    def all(self, include_removed=False) -> List[Scraper]:
+    def all(self, include_removed=False) -> list[Scraper]:
         """Return all comic scraper classes in the plugins directory.
         @return: list of Scraper classes
         @rtype: list of Scraper

@@ -103,7 +103,7 @@ class RichHandler(logging.Handler):
 
         # Add styled exception data
         if self.stacktrace and exc_info:
-            extrarow = ([None] * (len(row) - 1))
+            extrarow: list[console.RenderableType] = ([""] * (len(row) - 1))
             extrarow.append(text.Text.from_ansi(self.colorexception(exc_info)))
             output.add_row(*extrarow)
 

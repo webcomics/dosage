@@ -9,7 +9,7 @@ class Arcamax(ParserScraper):
     imageSearch = '//img[@id="comic-zoom"]'
     prevSearch = '//a[@class="prev"]'
 
-    def __init__(self, name, path):
+    def __init__(self, name, path) -> None:
         super().__init__('Arcamax/' + name)
         self.url = 'http://www.arcamax.com/thefunnies/' + path + '/'
 

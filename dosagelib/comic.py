@@ -43,8 +43,6 @@ class ComicStrip:
     def getDownloader(self, url: str) -> ComicImage:
         """Get an image downloader."""
         filename = self.scraper.namer(url, self.strip_url)
-        if filename is None:
-            filename = url.rsplit('/', 1)[1]
         return ComicImage(self.scraper, url, self.strip_url, filename,
                           text=self.text)
 
@@ -54,7 +52,7 @@ class ComicImage:
 
     ChunkBytes = 1024 * 100  # 100KB
 
-    def __init__(self, scraper, url, referrer, filename, text=None):
+    def __init__(self, scraper, url, referrer, filename, text=None) -> None:
         """Set URL and filename."""
         self.scraper = scraper
         self.referrer = referrer

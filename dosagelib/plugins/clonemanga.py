@@ -15,7 +15,7 @@ class CloneManga(ParserScraper):
     starter = indirectStarter
     help = 'Index format: n'
 
-    def __init__(self, name, shortName, endOfLife=False):
+    def __init__(self, name, shortName, endOfLife=False) -> None:
         super().__init__('CloneManga/' + name)
         self.stripUrl = '%s/viewer.php?page=%%s&lang=&series=%s&HUDoff=' % (
             self.baseUrl, shortName)

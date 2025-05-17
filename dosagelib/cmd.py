@@ -25,6 +25,12 @@ logger = logging.getLogger(__name__)
 
 class ArgumentParser(argparse.ArgumentParser):
     """Custom argument parser."""
+    def __init__(self, console: console.Console) -> None:
+        super().__init__(
+            description="A comic downloader and archiver.",
+            epilog=ExtraHelp,
+            formatter_class=argparse.RawDescriptionHelpFormatter)
+        self.console = console
 
     def print_help(self, file=None) -> None:
         """Paginate help message on TTYs."""
@@ -54,15 +60,12 @@ User plugin directory: {user_plugin_path}
 """
 
 
-def setup_options() -> ArgumentParser:
+def setup_options(console: console.Console) -> ArgumentParser:
     """Construct option parser.
     @return: new option parser
     @rtype argparse.ArgumentParser
     """
-    parser = ArgumentParser(
-        description="A comic downloader and archiver.",
-        epilog=ExtraHelp,
-        formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser = ArgumentParser(console)
 
     parser.add_argument('-v', '--verbose', action='count', default=0,
         help='provides verbose output, use multiple times for more verbosity')
@@ -253,7 +256,7 @@ def do_list(console: console.Console, column_list=True, verbose=False, listall=F
 
 def do_single_list(console: console.Console, scrapers, verbose=False):
     """Get list of scraper names, one per line."""
-    disabled = {}
+    disabled: dict[str, str] = {}
     for scraperobj in scrapers:
         if verbose:
             display_comic_help(scraperobj)
@@ -265,7 +268,7 @@ def do_single_list(console: console.Console, scrapers, verbose=False):
 
 def do_column_list(console: console.Console, scrapers):
     """Get list of scraper names with multiple names per line."""
-    disabled = {}
+    disabled: dict[str, str] = {}
     tagged_names = [get_tagged_scraper(scraperobj, reasons=disabled)
              for scraperobj in scrapers]
     lengths = sorted(len(tagged[0]) + len(tagged[1]) for tagged in tagged_names)
@@ -284,7 +287,7 @@ TAG_LANG = "lang"
 TAG_DISABLED = "dis"
 
 
-def get_tagged_scraper(scraperobj, reasons: dict[str, str] = None) -> tuple[str, str]:
+def get_tagged_scraper(scraperobj, reasons: dict[str, str]) -> tuple[str, str]:
     """Get comic scraper name."""
     tags = []
     if scraperobj.adult:
@@ -316,8 +319,7 @@ def main(args=None):
     """Parse options and execute commands."""
     try:
         console = output.setup_console()
-        argparser = setup_options()
-        argparser.console = console
+        argparser = setup_options(console)
         options = argparser.parse_args(args=args)
         options.basepath = os.path.expanduser(options.basepath)
         return run(console, options)
