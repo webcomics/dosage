@@ -422,6 +422,7 @@ class WebToons(ParserScraper):
             cls('TheWeeklyRoll', 'challenge/the-weekly-roll', 358889),
             cls('TheWeightOfOurSky', 'historical/the-weight-of-our-sky', 1739),
             cls('TheWitchAndTheBull', 'fantasy/the-witch-and-the-bull', 1892),
+            cls('TheWolfAndRedRidingHood', 'comedy/wolf-and-red-riding-hood', 2142),
             cls('TheWolfmanOfWulvershire', 'mystery/the-wolfman-of-wulvershire', 1784),
             cls('TheWorldWhereIBelong', 'supernatural/the-world-where-i-belong', 1318),
             cls('TheWrathAndTheDawn', 'fantasy/the-wrath-and-the-dawn', 1772),
