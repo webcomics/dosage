@@ -59,6 +59,9 @@ class MangaDex(ParserScraper):
             self.chapters.append(chapter)
         self.chapters.reverse()
 
+        if not self.chapters:
+            raise ValueError('Comic has no chapters!')
+
         # Find first and last chapter
         self.firstStripUrl = self.stripUrl % self.chapters[0]['id']
         return self.stripUrl % self.chapters[-1]['id']
