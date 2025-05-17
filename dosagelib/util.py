@@ -1,25 +1,28 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 import html
+import logging
 import os
 import re
 import subprocess
 import sys
 import time
 import traceback
-
 from functools import lru_cache
-from urllib.parse import (parse_qs, quote as url_quote, unquote as url_unquote,
-        urlparse, urlunparse, urlsplit)
+from urllib.parse import parse_qs
+from urllib.parse import quote as url_quote
+from urllib.parse import unquote as url_unquote
+from urllib.parse import urlparse, urlsplit, urlunparse
 from urllib.robotparser import RobotFileParser
 
 import lxml
 
-from .output import out
-from .configuration import UserAgent, App, SupportUrl
 from . import AppName
+from .configuration import App, SupportUrl, UserAgent
+
+logger = logging.getLogger(__name__)
 
 # Maximum content size for HTML pages
 MaxContentBytes = 1024 * 1024 * 3  # 3 MB
@@ -148,7 +151,7 @@ def get_page(url, session, **kwargs):
     check_robotstxt(url, session)
     # read page data
     page = urlopen(url, session, max_content_bytes=MaxContentBytes, **kwargs)
-    out.debug(u"Got page content %r" % page.content, level=3)
+    logger.trace("Got page content %r", page.content)
     return page
 
 
@@ -232,20 +235,20 @@ def get_robotstxt_parser(url, session=None):
 def urlopen(url, session, referrer=None, max_content_bytes=None,
             allow_errors=(), **kwargs):
     """Open an URL and return the response object."""
-    out.debug(u'Open URL %s' % url)
+    logger.debug('Open URL %r', url)
     if 'headers' not in kwargs:
         kwargs['headers'] = {}
     if referrer:
         kwargs['headers']['Referer'] = referrer
-    out.debug(u'Sending headers %s' % kwargs['headers'], level=3)
-    out.debug(u'Sending cookies %s' % session.cookies)
+    logger.trace('Sending headers %r', kwargs['headers'])
+    logger.debug('Sending cookies %r', session.cookies)
     if 'data' not in kwargs:
         method = 'GET'
     else:
         method = 'POST'
-        out.debug(u'Sending POST data %s' % kwargs['data'], level=3)
+        logger.trace('Sending POST data %r', kwargs['data'])
     req = session.request(method, url, **kwargs)
-    out.debug(u'Response cookies: %s' % req.cookies)
+    logger.debug('Response cookies: %r', req.cookies)
     check_content_size(url, req.headers, max_content_bytes)
     if req.status_code not in allow_errors:
         req.raise_for_status()
@@ -293,22 +296,22 @@ def getRelativePath(basepath, path):
 def getQueryParams(url):
     """Get URL query parameters."""
     query = urlsplit(url).query
-    out.debug(u'Extracting query parameters from %r (%r)...' % (url, query))
+    logger.debug('Extracting query parameters from %r (%r)...', url, query)
     return parse_qs(query)
 
 
 def internal_error(out=sys.stderr, etype=None, evalue=None, tb=None):
     """Print internal error message (output defaults to stderr)."""
     print(os.linesep, file=out)
-    print("""********** Oops, I did it again. *************
+    print(f"""********** Oops, I did it again. *************
 
-You have found an internal error in %(app)s. Please write a bug report
-at %(url)s and include at least the information below:
+You have found an internal error in {AppName}. Please write a bug report
+at {SupportUrl} and include at least the information below:
 
 Not disclosing some of the information below due to privacy reasons is ok.
 I will try to help you nonetheless, but you have to give me something
 I can work with ;) .
-""" % {'app': AppName, 'url': SupportUrl}, file=out)
+""", file=out)
     if etype is None:
         etype = sys.exc_info()[0]
     if evalue is None:
@@ -321,7 +324,7 @@ I can work with ;) .
     print_proxy_info(out=out)
     print_locale_info(out=out)
     print(os.linesep,
-          "******** %s internal error, over and out ********" % AppName,
+          f"******** {AppName} internal error, over and out ********",
           file=out)
 
 
@@ -389,26 +392,6 @@ def unquote(text):
 def quote(text, safechars='/'):
     """Percent-encode given text."""
     return url_quote(text, safechars)
-
-
-def strsize(b):
-    """Return human representation of bytes b. A negative number of bytes
-    raises a value error."""
-    if b < 0:
-        raise ValueError("Invalid negative byte number")
-    if b < 1024:
-        return "%dB" % b
-    if b < 1024 * 10:
-        return "%dKB" % (b // 1024)
-    if b < 1024 * 1024:
-        return "%.2fKB" % (float(b) / 1024)
-    if b < 1024 * 1024 * 10:
-        return "%.2fMB" % (float(b) / (1024 * 1024))
-    if b < 1024 * 1024 * 1024:
-        return "%.1fMB" % (float(b) / (1024 * 1024))
-    if b < 1024 * 1024 * 1024 * 10:
-        return "%.2fGB" % (float(b) / (1024 * 1024 * 1024))
-    return "%.1fGB" % (float(b) / (1024 * 1024 * 1024))
 
 
 def getFilename(name):
