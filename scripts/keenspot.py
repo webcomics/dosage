@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 """
 Script to get a list of KeenSpot comics and save the info in a
 JSON file for further processing.
 """
 
-from urllib.parse import urlsplit
+from urllib import parse
 
 from scriptutil import ComicListUpdater
-from dosagelib.util import check_robotstxt
+from dosagelib import http
 
 
 class KeenSpotUpdater(ComicListUpdater):
@@ -47,9 +47,9 @@ class KeenSpotUpdater(ComicListUpdater):
             name = comiclink.xpath('string()')
             try:
                 if '/d/' not in comicurl:
-                    check_robotstxt(comicurl + 'd/', self.session)
+                    http.check_robotstxt(comicurl + 'd/', self.session)
                 else:
-                    check_robotstxt(comicurl, self.session)
+                    http.check_robotstxt(comicurl, self.session)
             except IOError as e:
                 print('[%s] INFO: robots.txt denied: %s' % (name, e))
                 continue
@@ -57,7 +57,7 @@ class KeenSpotUpdater(ComicListUpdater):
             self.add_comic(name, comicurl)
 
     def get_entry(self, name, url):
-        sub = urlsplit(url).hostname.split('.', 1)[0]
+        sub = parse.urlsplit(url).hostname.split('.', 1)[0]
         if name in self.extra:
             extra = ', ' + self.extra[name]
         else:

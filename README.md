@@ -25,19 +25,22 @@ is purely for personal use. Please be aware that by making downloaded strips
 publically available (without the explicit permission of the author) you may be
 infringing upon various copyrights.
 
-Additionally, Dosage respects the robots.txt exclusion protocol. This makes
-sure no content is accessed in an automatic way without consent by the
-publishers.
-
 In any case, you should support the authors of the comics you are downloading,
 either by buying some of their products or even donating them some money since
 they provide the comics you like and read.
 
-If you are a publisher of comics and want Dosage to access your files,
-add the following entry to your robots.txt file:
+Additionally, Dosage respects (part of) the `robots.txt` exclusion protocol.
+This makes it easy for publishers to disallow Dosage access to their site. On
+the other hand, Dosage is no classic "crawler" oder "bot", so global rules in
+`robots.txt` are ignored.
+
+If you are a publisher of comics and don't want Dosage to access your files,
+either open an issue and request removal (this is the preferred solution, since
+it documents your wishes to us) or add the following entry to your robots.txt
+file:
 
     User-agent: Dosage
-    Allow: *
+    Disallow: *
 
 ## Usage
 

@@ -10,17 +10,14 @@ import subprocess
 import sys
 import time
 import traceback
-from functools import lru_cache
 from urllib.parse import parse_qs
-from urllib.parse import quote as url_quote
 from urllib.parse import unquote as url_unquote
 from urllib.parse import urlparse, urlsplit, urlunparse
-from urllib.robotparser import RobotFileParser
 
 import lxml
 
-from . import AppName
-from .configuration import App, SupportUrl, UserAgent
+from . import AppName, http
+from .configuration import App, SupportUrl
 
 logger = logging.getLogger(__name__)
 
@@ -148,7 +145,7 @@ def case_insensitive_re(name):
 
 def get_page(url, session, **kwargs):
     """Get text content of given URL."""
-    check_robotstxt(url, session)
+    http.check_robotstxt(url, session)
     # read page data
     page = urlopen(url, session, max_content_bytes=MaxContentBytes, **kwargs)
     logger.trace("Got page content %r", page.content)
@@ -196,40 +193,6 @@ def normaliseURL(url):
     # remove anchor
     pu[5] = ""
     return urlunparse(pu)
-
-
-def get_roboturl(url):
-    """Get robots.txt URL from given URL."""
-    pu = urlparse(url)
-    return urlunparse((pu[0], pu[1], "/robots.txt", "", "", ""))
-
-
-def check_robotstxt(url, session):
-    """Check if robots.txt allows our user agent for the given URL.
-    @raises: IOError if URL is not allowed
-    """
-    roboturl = get_roboturl(url)
-    rp = get_robotstxt_parser(roboturl, session=session)
-    if not rp.can_fetch(UserAgent, str(url)):
-        raise IOError("%s is disallowed by %s" % (url, roboturl))
-
-
-@lru_cache()
-def get_robotstxt_parser(url, session=None):
-    """Get a RobotFileParser for the given robots.txt URL."""
-    rp = RobotFileParser()
-    try:
-        req = urlopen(url, session, max_content_bytes=MaxContentBytes,
-                      allow_errors=range(600))
-    except Exception:
-        # connect or timeout errors are treated as an absent robots.txt
-        rp.allow_all = True
-    else:
-        if req.status_code >= 400:
-            rp.allow_all = True
-        elif req.status_code == 200:
-            rp.parse(req.text.splitlines())
-    return rp
 
 
 def urlopen(url, session, referrer=None, max_content_bytes=None,
@@ -387,11 +350,6 @@ def unquote(text):
             break
         text = newtext
     return text
-
-
-def quote(text, safechars='/'):
-    """Percent-encode given text."""
-    return url_quote(text, safechars)
 
 
 def getFilename(name):
