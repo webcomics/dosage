@@ -258,17 +258,25 @@ def do_single_list(console: console.Console, scrapers, verbose=False):
         if verbose:
             display_comic_help(scraperobj)
         else:
-            console.print(get_tagged_scraper(scraperobj, reasons=disabled))
-    return len(scrapers) + 1, disabled
+            tagged = get_tagged_scraper(scraperobj, reasons=disabled)
+            console.print(text.Text(' '.join(filter(None, tagged))))
+    return len(scrapers), disabled
 
 
 def do_column_list(console: console.Console, scrapers):
     """Get list of scraper names with multiple names per line."""
     disabled = {}
-    names = [get_tagged_scraper(scraperobj, reasons=disabled)
+    tagged_names = [get_tagged_scraper(scraperobj, reasons=disabled)
              for scraperobj in scrapers]
-    console.print(columns.Columns(names, equal=True, expand=True))
-    return len(names), disabled
+    lengths = sorted(len(tagged[0]) + len(tagged[1]) for tagged in tagged_names)
+    upper_length = lengths[int(len(lengths) * 0.97) - 1]
+    expectedcols = console.width // upper_length
+    maxwidth = (console.width // expectedcols) - 3
+    logger.debug("Calculated column widths: max: %i, upper: %i, width: %i",
+        lengths[-1], upper_length, maxwidth)
+    elements = (tagged_to_table(tagged, maxwidth) for tagged in tagged_names)
+    console.print(columns.Columns(elements, equal=True, expand=True))
+    return len(tagged_names), disabled
 
 
 TAG_ADULT = "adult"
@@ -276,7 +284,7 @@ TAG_LANG = "lang"
 TAG_DISABLED = "dis"
 
 
-def get_tagged_scraper(scraperobj, reasons=None) -> table.Table:
+def get_tagged_scraper(scraperobj, reasons: dict[str, str] = None) -> tuple[str, str]:
     """Get comic scraper name."""
     tags = []
     if scraperobj.adult:
@@ -289,15 +297,18 @@ def get_tagged_scraper(scraperobj, reasons=None) -> table.Table:
     for reason in disabled:
         tags.append("%s:%s" % (TAG_DISABLED, reason))
 
-    output = table.Table.grid(padding=(0, 1))
-    output.add_column()
-    if tags:
-        suffix = "[" + ", ".join(tags) + "]"
-        output.add_column()
-        output.add_row(scraperobj.name, text.Text(suffix))
-    else:
-        output.add_row(scraperobj.name)
+    return scraperobj.name, "[" + ", ".join(tags) + "]" if tags else ""
 
+
+def tagged_to_table(tagged: tuple[str, str], limit: int) -> table.Table:
+    output = table.Table.grid(padding=(0, 1))
+    name, tags = tagged
+    output.add_column(max_width=limit - len(tags), overflow="ellipsis")
+    if tags:
+        output.add_column()
+        output.add_row(name, text.Text(tags))
+    else:
+        output.add_row(name)
     return output
 
 
