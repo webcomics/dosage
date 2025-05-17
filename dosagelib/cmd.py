@@ -14,8 +14,7 @@ from collections.abc import Iterable
 
 from platformdirs import PlatformDirs
 
-from . import events, configuration, singleton, director
-from . import AppName, __version__
+from . import AppName, __version__, configuration, director, events, singleton
 from .output import out
 from .scraper import scrapers as scrapercache
 from .util import internal_error, strlimit
@@ -125,7 +124,7 @@ def scraper_completion(**kwargs) -> Iterable[str]:
     return (comic.name for comic in scrapercache.all())
 
 
-def display_version(verbose):
+def display_version(verbose) -> None:
     """Display application name, version, copyright and license."""
     print(configuration.App)
     print("Using Python {} ({}) on {}".format(platform.python_version(),
@@ -153,7 +152,6 @@ def display_version(verbose):
                 print(text % attrs)
         except (IOError, KeyError) as err:
             print(f'An error occured while checking for an update of {AppName}: {err!r}')
-    return 0
 
 
 def set_output_info(options):
@@ -163,57 +161,40 @@ def set_output_info(options):
     out.timestamps = options.timestamps
 
 
-def display_help(options):
+def display_help(options) -> None:
     """Print help for comic strips."""
-    errors = 0
-    try:
-        for scraperobj in director.getScrapers(options.comic, options.basepath, listing=True):
-            errors += display_comic_help(scraperobj)
-    except ValueError as msg:
-        out.exception(msg)
-        return 2
-    return errors
+    for scraperobj in director.getScrapers(options.comic, options.basepath, listing=True):
+        display_comic_help(scraperobj)
 
 
-def display_comic_help(scraperobj):
+def display_comic_help(scraperobj) -> None:
     """Print help for a comic."""
     orig_context = out.context
     out.context = scraperobj.name
-    try:
-        out.info('URL: {}'.format(scraperobj.url))
-        out.info('Language: {}'.format(scraperobj.language()))
-        if scraperobj.adult:
-            out.info(u"Adult comic, use option --adult to fetch.")
-        disabled = scraperobj.getDisabledReasons()
-        if disabled:
-            out.info(u"Disabled: " + " ".join(disabled.values()))
-        if scraperobj.help:
-            for line in scraperobj.help.splitlines():
-                out.info(line)
-        return 0
-    except ValueError as msg:
-        out.exception(msg)
-        return 1
-    finally:
-        out.context = orig_context
+    out.info('URL: {}'.format(scraperobj.url))
+    out.info('Language: {}'.format(scraperobj.language()))
+    if scraperobj.adult:
+        out.info(u"Adult comic, use option --adult to fetch.")
+    disabled = scraperobj.getDisabledReasons()
+    if disabled:
+        out.info(u"Disabled: " + " ".join(disabled.values()))
+    if scraperobj.help:
+        for line in scraperobj.help.splitlines():
+            out.info(line)
+    out.context = orig_context
 
 
-def vote_comics(options):
+def vote_comics(options) -> int:
     """Vote for comics."""
     errors = 0
-    try:
-        for scraperobj in director.getScrapers(options.comic, options.basepath,
-                options.adult):
-            errors += vote_comic(scraperobj)
-    except ValueError as msg:
-        out.exception(msg)
-        errors += 1
+    for scraperobj in director.getScrapers(options.comic, options.basepath,
+            options.adult):
+        errors += vote_comic(scraperobj)
     return errors
 
 
-def vote_comic(scraperobj):
+def vote_comic(scraperobj) -> int:
     """Vote for given comic scraper."""
-    errors = 0
     orig_context = out.context
     out.context = scraperobj.name
     try:
@@ -221,38 +202,44 @@ def vote_comic(scraperobj):
         out.info(u'Vote submitted.')
     except Exception as msg:
         out.exception(msg)
-        errors += 1
+        return 1
     finally:
         out.context = orig_context
-    return errors
+    return 0
 
 
-def run(options):
+def run(options) -> int:
     """Execute comic commands."""
+    err = 0
     set_output_info(options)
     scrapercache.adddir(user_plugin_path)
     # ensure only one instance of dosage is running
     if not options.allow_multiple:
         singleton.SingleInstance()
+
     if options.version:
-        return display_version(options.verbose)
-    if options.list:
-        return do_list()
-    if options.singlelist or options.list_all:
-        return do_list(column_list=False, verbose=options.verbose,
-                       listall=options.list_all)
-    # after this a list of comic strips is needed
-    if not options.comic:
-        out.warn(u'No comics specified, bailing out!')
-        return 1
-    if options.modulehelp:
-        return display_help(options)
-    if options.vote:
-        return vote_comics(options)
-    return director.getComics(options)
+        display_version(options.verbose)
+    elif options.list:
+        do_list()
+    elif options.singlelist or options.list_all:
+        do_list(column_list=False, verbose=options.verbose,
+            listall=options.list_all)
+    else:
+        # after this a list of comic strips is needed
+        if not options.comic:
+            out.warn(u'No comics specified, bailing out!')
+            return 1
+
+        if options.modulehelp:
+            display_help(options)
+        elif options.vote:
+            err = vote_comics(options)
+        else:
+            err = director.getComics(options)
+    return err
 
 
-def do_list(column_list=True, verbose=False, listall=False):
+def do_list(column_list=True, verbose=False, listall=False) -> None:
     """List available comics."""
     with out.pager():
         out.info(u'Available comic scrapers:')
@@ -272,7 +259,6 @@ def do_list(column_list=True, verbose=False, listall=False):
                 ' [{}:REASON], where REASON is one of:'.format(TAG_DISABLED))
             for k in disabled:
                 out.info(u'  %-10s %s' % (k, disabled[k]))
-    return 0
 
 
 def do_single_list(scrapers, verbose=False):
@@ -331,7 +317,7 @@ def get_tagged_scraper_name(scraperobj, limit=None, reasons=None):
     return name + suffix
 
 
-def main(args=None):
+def main(args=None) -> int:
     """Parse options and execute commands."""
     try:
         options = setup_options().parse_args(args=args)
