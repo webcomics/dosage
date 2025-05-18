@@ -9,8 +9,11 @@ class WebToons(ParserScraper):
     prevSearch = '//a[contains(@class, "_prevEpisode")]'
     multipleImagesPerStrip = True
 
-    def __init__(self, name: str, path: str, titlenum: int):
+    def __init__(self, name: str, path: str, titlenum: int) -> None:
         super().__init__('WebToons/' + name)
+        # Since pages on WebToon are composed of many images, we can probably
+        # move a lot faster then default
+        self.session.add_throttle('webtoon-phinf.pstatic.net', 0.0, 0.05)
 
         baseUrl = 'https://www.webtoons.com/en/'
         self.url = baseUrl + path + '/episode/viewer?title_no=' + str(titlenum)
@@ -18,7 +21,7 @@ class WebToons(ParserScraper):
         self.stripUrl = self.url + '&episode_no=%s'
         self.firstStripUrl = self.stripUrl % '1'
 
-    def starter(self):
+    def starter(self) -> str:
         # Avoid age/GDPR gate
         for cookie in ('needGDPR', 'needCCPA', 'needCOPPA'):
             self.session.cookies.set(cookie, 'false', domain='webtoons.com')
