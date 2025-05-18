@@ -218,11 +218,6 @@ class BlondeSunrise(_ParserScraper):
     prevSearch = '//a[img[contains(@src, "previous")]]'
 
 
-class BloodBound(WordPressScraper):
-    url = 'http://bloodboundcomic.com/'
-    firstStripUrl = 'http://bloodboundcomic.com/comic/06112006/'
-
-
 class Bloodline(WordPressScraper):
     url = 'http://w0lfmare.xepher.net/'
     stripUrl = url + 'comic/%s'
