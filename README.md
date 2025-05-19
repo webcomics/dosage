@@ -79,6 +79,23 @@ Since dosage is written in [Python](http://www.python.org/), a Python
 installation is required: Dosage needs at least Python 3.8. Dosage requires
 some Python modules from PyPI, so installation with `pip` is recommended.
 
+### Optional dependencies
+
+Some features require optional dependencies, which can be installed by specifying them
+while installing Dosage:
+
+- `bash` - Installs shell completion support using the [argcomplete] package.
+  You still need to register support in your shell using
+  `eval "$(register-python-argcomplete dosage)"` or using `argcomplete`'s
+  global completion mode. `argcomplete` officially only supports bash & zsh, but
+  has limited support for [other shells].
+- `compression` - Enables Brotli & zstandard compression - These modern HTTP
+  compression methods can reduce transferred file size and improve performance.
+- `dev` - Dependencies only required for running Dosage's test suite.
+
+[argcomplete]: https://github.com/kislyuk/argcomplete#argcomplete---bashzsh-tab-completion-for-argparse
+[other shells]: https://github.com/kislyuk/argcomplete/blob/main/contrib/README.rst
+
 ### Using the Windows binary
 
 Windows users can download a complete binary (including Python) from the
@@ -91,11 +108,11 @@ Windows users can download a complete binary (including Python) from the
 The simplest way to install and upgrade dosage is with [pipx]. To install the
 newest stable version with all optional features use:
 
-    pipx install dosage[bash]
+    pipx install dosage[bash,compression]
 
 To install the newest development version, use:
 
-    pipx install "dosage[bash] @ git+https://github.com/webcomics/dosage.git"
+    pipx install "dosage[bash,compression] @ git+https://github.com/webcomics/dosage.git"
 
 To upgrade such installations, just run:
 
@@ -106,7 +123,7 @@ To upgrade such installations, just run:
 If you want to run dosage directly from the source code, you should install
 it in "[editable]" mode, preferable in a [virtual environment]:
 
-    pip install -e .[bash,dev]
+    pip install -e .[bash,compression,dev]
 
 
 After that, `dosage` should be available as a normal command.
