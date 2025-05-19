@@ -234,7 +234,7 @@ class PoorlyDrawnLines(ParserScraper):
     stripUrl = url + 'comic/%s/'
     multipleImagesPerStrip = True
     firstStripUrl = stripUrl % 'hardly-essayists'
-    imageSearch = '//div[d:class("entry-content")]//img'
+    imageSearch = '//div[d:class("entry-content")]//noscript/img'
     prevSearch = '//a[@rel="prev"]'
     namer = joinPathPartsNamer(imageparts=range(-3, 0))
 
