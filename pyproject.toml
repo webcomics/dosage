@@ -45,6 +45,11 @@ Code = "https://github.com/webcomics/dosage"
 
 [project.optional-dependencies]
 bash = ["argcomplete"]
+compression = [
+    "brotli; platform_python_implementation == 'CPython'",
+    "brotlicffi; platform_python_implementation != 'CPython'",
+    "zstandard",
+]
 dev = [
     "allure-pytest",
     "pytest-cov",

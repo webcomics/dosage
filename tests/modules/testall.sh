@@ -9,8 +9,8 @@ set -eu
 HOME="/tmp/home"
 mkdir -p "$HOME"
 cd /work
-pip install --no-warn-script-location --user pytest-cov PySocks
-pip install --no-warn-script-location --user -e '.[dev]'
+pip install --no-warn-script-location --user PySocks
+pip install --no-warn-script-location --user -e '.[compression,dev]'
 
 TESTALL=1 python3 -m pytest -v --cov=. --cov-report xml \
     --alluredir=allure-data \
