@@ -6,10 +6,15 @@
 import os
 from re import IGNORECASE, compile
 
-from ..helpers import bounceStarter, indirectStarter
+from ..helpers import bounceStarter, indirectStarter, joinPathPartsNamer
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import ComicControlScraper, WordPressNavi, WordPressScraper
+from .common import (
+    ComicControlScraper,
+    WordPressNavi,
+    WordPressScraper,
+    WordPressWebcomic,
+)
 
 
 class EarthsongSaga(_ParserScraper):
@@ -205,6 +210,15 @@ class Evon(WordPressScraper):
     stripUrl = url + '?comic=%s'
     firstStripUrl = stripUrl % 'chapter-1'
     adult = True
+
+
+class ExorcismAcademy(WordPressWebcomic):
+    url = 'https://ea.asmodrawscomics.com/'
+    stripUrl = url + 'comic/%s/'
+    firstStripUrl = stripUrl % 'title-page'
+    multipleImagesPerStrip = True
+    adult = True
+    namer = joinPathPartsNamer(imageparts=range(-3, 0))
 
 
 class ExploitationNow(WordPressNavi):
