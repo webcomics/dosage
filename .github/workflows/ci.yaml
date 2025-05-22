@@ -5,6 +5,10 @@ on:
   - push
   - pull_request
 
+permissions:
+  contents: read
+  id-token: write
+
 env:
   DEFAULT_PYTHON: '3.13'
 
@@ -16,7 +20,8 @@ jobs:
         python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
@@ -47,6 +52,14 @@ jobs:
             ${{ github.workspace }}/.tox/reports/*/coverage.xml:coverage.py
           prefix: ${{ github.workspace }}/.tox/py313/lib/python3.13/site-packages
 
-      - uses: codecov/codecov-action@v5
+      - name: Submit Coverage to Qlty  # New "name" of CodeClimate Quality
+        uses: qltysh/qlty-action/coverage@v1
+        if: ${{ matrix.python-version == env.DEFAULT_PYTHON }}
+        with:
+          oidc: true
+          files: '.tox/reports/*/coverage.xml'
+
+      - name: Submit Coverage to CodeCov
+        uses: codecov/codecov-action@v5
         with:
           directory: '.tox/reports'

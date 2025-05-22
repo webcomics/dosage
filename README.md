@@ -1,7 +1,7 @@
 # Dosage
 
 [![CI](https://github.com/webcomics/dosage/actions/workflows/ci.yaml/badge.svg)](https://github.com/webcomics/dosage/actions/workflows/ci.yaml)
-[![Code Climate](https://codeclimate.com/github/webcomics/dosage/badges/gpa.svg)](https://codeclimate.com/github/webcomics/dosage)
+[![Maintainability](https://qlty.sh/badges/be23128b-277b-4431-a5df-400e3648be2a/maintainability.svg)](https://qlty.sh/gh/webcomics/projects/dosage)
 [![codecov](https://codecov.io/gh/webcomics/dosage/branch/main/graph/badge.svg)](https://codecov.io/gh/webcomics/dosage)
 ![Maintenance](https://img.shields.io/maintenance/yes/2025.svg)
 ![License](https://img.shields.io/github/license/webcomics/dosage)
