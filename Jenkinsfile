@@ -62,7 +62,7 @@ pys.each { py ->
                     ]
 
                     recordIssues sourceCodeEncoding: 'UTF-8',
-                        referenceJobName: 'dosage/master',
+                        referenceJobName: 'dosage/main',
                         tool: flake8(reportEncoding: 'UTF-8')
                 }
                 junit '.tox/reports/*/junit.xml'

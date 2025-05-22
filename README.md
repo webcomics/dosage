@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/webcomics/dosage/actions/workflows/ci.yaml/badge.svg)](https://github.com/webcomics/dosage/actions/workflows/ci.yaml)
 [![Code Climate](https://codeclimate.com/github/webcomics/dosage/badges/gpa.svg)](https://codeclimate.com/github/webcomics/dosage)
-[![codecov](https://codecov.io/gh/webcomics/dosage/branch/master/graph/badge.svg)](https://codecov.io/gh/webcomics/dosage)
+[![codecov](https://codecov.io/gh/webcomics/dosage/branch/main/graph/badge.svg)](https://codecov.io/gh/webcomics/dosage)
 ![Maintenance](https://img.shields.io/maintenance/yes/2025.svg)
 ![License](https://img.shields.io/github/license/webcomics/dosage)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
