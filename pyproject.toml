@@ -94,3 +94,10 @@ extend-exclude = [
 profile = "black"
 src_paths = ["dosagelib", "scripts", "tests"]
 known_third_party = ["responses"]
+
+[tool.coverage.run]
+branch = true
+source = ["dosagelib", "tests"]
+
+[tool.coverage.html]
+show_contexts = true
