@@ -57,7 +57,7 @@ jobs:
         if: ${{ matrix.python-version == env.DEFAULT_PYTHON }}
         with:
           oidc: true
-          files: '.tox/reports/*/coverage.xml'
+          files: '.tox/reports/*/coverage.lcov'
 
       - name: Submit Coverage to CodeCov
         uses: codecov/codecov-action@v5
