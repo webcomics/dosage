@@ -1,0 +1,87 @@
+---
+name: Publish to (Test)PyPI
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["*"]
+
+env:
+  DEFAULT_PYTHON: '3.13'
+  dists-artifact-name: pypi-packages
+
+jobs:
+  build:
+    name: Build release artifacts
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '${{ env.DEFAULT_PYTHON }}'
+
+      - name: Build
+        run: |
+          # Strip PyPI-incompatible versions for test builds
+          export SETUPTOOLS_SCM_OVERRIDES_FOR_DOSAGE='{local_scheme="no-local-version"}'
+          pip install build
+          python3 -m build
+
+      - name: Store the distribution packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.dists-artifact-name }}
+          path: dist/*
+
+      - name: Prepare Release
+        uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
+        with:
+          draft: true
+          files: dist/*
+
+  publish:
+    name: Publish to PyPI
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref_type == 'tag'
+    environment:
+      name: pypi
+      url: https://pypi.org/p/dosage
+    permissions:
+      id-token: write
+    needs: [build]
+    steps:
+      - name: Retrieve build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.dists-artifact-name }}
+          path: dist/
+
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+  test-publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/dosage
+    permissions:
+      id-token: write
+    needs: [build]
+    steps:
+      - name: Retrieve build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.dists-artifact-name }}
+          path: dist/
+
+      - name: Publish package distributions to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
