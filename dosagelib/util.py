@@ -2,6 +2,8 @@
 # SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
 # SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+from __future__ import annotations
+
 import html
 import logging
 import os
@@ -10,9 +12,7 @@ import subprocess
 import sys
 import time
 import traceback
-from urllib.parse import parse_qs
-from urllib.parse import unquote as url_unquote
-from urllib.parse import urlparse, urlsplit, urlunparse
+from urllib import parse
 
 import lxml
 
@@ -182,7 +182,7 @@ def normaliseURL(url):
     # XXX: brutal hack
     url = html.unescape(url)
 
-    pu = list(urlparse(url))
+    pu = list(parse.urlparse(url))
     segments = pu[2].split('/')
     while segments and segments[0] in ('', '..'):
         del segments[0]
@@ -192,7 +192,7 @@ def normaliseURL(url):
         pu[4] = pu[4][1:]
     # remove anchor
     pu[5] = ""
-    return urlunparse(pu)
+    return parse.urlunparse(pu)
 
 
 def urlopen(url, session, referrer=None, max_content_bytes=None,
@@ -258,9 +258,9 @@ def getRelativePath(basepath, path):
 
 def getQueryParams(url):
     """Get URL query parameters."""
-    query = urlsplit(url).query
+    query = parse.urlsplit(url).query
     logger.debug('Extracting query parameters from %r (%r)...', url, query)
-    return parse_qs(query)
+    return parse.parse_qs(query)
 
 
 def internal_error(out=sys.stderr, etype=None, evalue=None, tb=None):
@@ -345,7 +345,7 @@ def rfc822date(indate):
 def unquote(text):
     """Replace all percent-encoded entities in text."""
     while '%' in text:
-        newtext = url_unquote(text)
+        newtext = parse.unquote(text)
         if newtext == text:
             break
         text = newtext
@@ -424,3 +424,16 @@ def uniq(input):
         if item not in output:
             output.append(item)
     return output
+
+
+def urlpathsplit(url: str) -> list[str]:
+    """Split the path of an URL into components, removing empty leading and
+    trailing segments. This makes URL handling more robust against added or
+    removed slashes.
+    """
+    parts = parse.urlsplit(url).path.split('/')
+    while parts and not parts[-1]:
+        del parts[-1]
+    while parts and not parts[0]:
+        del parts[0]
+    return parts

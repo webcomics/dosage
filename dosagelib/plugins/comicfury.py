@@ -3,10 +3,9 @@
 # SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
-import os
-
-from ..scraper import ParserScraper
+from .. import util
 from ..helpers import bounceStarter
+from ..scraper import ParserScraper
 
 XPATH_LINK = '//a[d:class("%s") and contains(text(), "%s")]'
 XPATH_IMG = '//div[d:class("comicnav")]//a[img[contains(@alt, "%s")]]'
@@ -58,8 +57,8 @@ class ComicFury(ParserScraper):
     def __init__(self, name, sub, lang=None, adult=False, endOfLife=False, segmented=False):
         super().__init__('ComicFury/' + name)
         self.prefix = name
-        self.url = 'https://%s.webcomic.ws/comics/' % sub
-        self.stripUrl = self.url + '%s'
+        self.url = f'https://{sub}.webcomic.ws/comics/'
+        self.stripUrl = self.url + '%s/'
         self.firstStripUrl = self.stripUrl % '1'
         if lang:
             self.lang = lang
@@ -74,16 +73,14 @@ class ComicFury(ParserScraper):
             )
 
     def namer(self, imageUrl, pageUrl):
-        parts = pageUrl.split('/')
-        path, ext = os.path.splitext(imageUrl)
-        num = parts[-1]
+        num = util.urlpathsplit(pageUrl)[-1]
         if self.multipleImagesPerStrip:
             page = self.getPage(pageUrl)
             images = self.match(page, '//img[d:class("comicsegmentimage")]/@src')
             if len(images) > 1:
                 imageIndex = images.index(imageUrl) + 1
-                return "%s_%s-%d%s" % (self.prefix, num, imageIndex, ext)
-        return "%s_%s%s" % (self.prefix, num, ext)
+                return f"{self.prefix}_{num}-{imageIndex}"
+        return f"{self.prefix}_{num}"
 
     def shouldSkipUrl(self, url, data):
         """Skip pages without images."""

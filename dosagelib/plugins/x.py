@@ -3,8 +3,9 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2022 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-from ..scraper import ParserScraper
+from .. import util
 from ..helpers import bounceStarter
+from ..scraper import ParserScraper
 
 
 class xkcd(ParserScraper):
@@ -19,8 +20,8 @@ class xkcd(ParserScraper):
     help = 'Index format: n (unpadded)'
 
     def namer(self, image_url, page_url):
-        index = int(page_url.rstrip('/').rsplit('/', 1)[-1])
-        name = image_url.rsplit('/', 1)[-1].split('.')[0]
+        index = int(util.urlpathsplit(page_url)[-1])
+        name = util.urlpathsplit(image_url)[-1]
         return '%04d-%s' % (index, name)
 
     def imageUrlModifier(self, url, data):

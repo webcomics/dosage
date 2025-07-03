@@ -299,13 +299,8 @@ class PrinceOfSartar(WordPressNavi):
     firstStripUrl = stripUrl % 'introduction-chapter-1'
     nextSearch = '//a[d:class("navi-next")]'
     starter = bounceStarter
+    namer = joinPathPartsNamer(pageparts=(-1,))
     help = 'Index format: name'
-
-    def namer(self, image_url, page_url):
-        """Use page URL to contruct a unique name."""
-        title = page_url.rsplit('/', 2)[1]
-        image_ext = image_url.rsplit('.', 1)[1]
-        return '%s.%s' % (title, image_ext)
 
 
 class ProphecyOfTheCircle(WordPressNavi):

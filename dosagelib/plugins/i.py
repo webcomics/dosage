@@ -7,7 +7,7 @@ from re import compile, escape
 
 from ..scraper import BasicScraper, ParserScraper
 from ..util import tagre
-from .common import WordPressScraper, WordPressNavi
+from .common import WordPressNavi, WordPressScraper
 
 
 class IAmArg(BasicScraper):
@@ -69,7 +69,7 @@ class IslaAukate(ParserScraper):
 
     def namer(self, imageUrl, pageUrl):
         filename = imageUrl.rsplit('/', 1)[-1]
-        return filename.rsplit('_', 1)[0] + '.' + filename.rsplit('.', 1)[-1]
+        return filename.rsplit('_', 1)[0]
 
 
 class IslaAukateColor(ParserScraper):

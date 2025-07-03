@@ -6,6 +6,7 @@
 import os
 from re import IGNORECASE, compile
 
+from .. import util
 from ..helpers import bounceStarter, indirectStarter, joinPathPartsNamer
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
@@ -123,8 +124,8 @@ class Erfworld(ParserScraper):
     def namer(self, imageUrl, pageUrl):
         # Fix inconsistent filenames
         filename = imageUrl.rsplit('/', 1)[-1]
-        page = pageUrl.replace('+', '-').rsplit('/', 2)
-        return '%s_%s_%s' % (page[1], page[2], filename)
+        page = util.urlpathsplit(pageUrl.replace('+', '-'))
+        return '_'.join(page[:1] + [filename])
 
     def getPrevUrl(self, url, data):
         # Fix missing navigation links between books
@@ -143,7 +144,7 @@ class Erfworld(ParserScraper):
         return super().getPrevUrl(url, data)
 
 
-class ErmaFelnaEDF(_ParserScraper):
+class ErmaFelnaEDF(ParserScraper):
     stripUrl = 'https://www.stevegallacci.com/archive/edf/%s'
     firstStripUrl = stripUrl % '0000/00/00'
     url = firstStripUrl
@@ -154,9 +155,9 @@ class ErmaFelnaEDF(_ParserScraper):
 
     def namer(self, imageUrl, pageUrl):
         # Fix inconsistent filenames
-        postDate = pageUrl.rsplit('/', 3)
+        postDate = '-'.join(util.urlpathsplit(pageUrl)[-3:])
         filename = imageUrl.rsplit('/', 1)[-1]
-        return '%s-%s-%s_%s' % (postDate[1], postDate[2], postDate[3], filename)
+        return f'{postDate}_{filename}'
 
 
 class ErrantStory(_BasicScraper):

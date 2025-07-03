@@ -48,7 +48,7 @@ class Achewood(ParserScraper):
     firstStripUrl = stripUrl % '2001/10/01'
     imageSearch = '//img[d:class("comicImage")]'
     prevSearch = '//a[d:class("comic_prev")]'
-    namer = joinPathPartsNamer(pageparts=range(0, 2))
+    namer = joinPathPartsNamer(pageparts=range(0, 3))
     help = 'Index format: yyyy/mm/dd'
     endOfLife = True
 

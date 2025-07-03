@@ -27,8 +27,10 @@ class TestModules:
     @responses.activate
     def test_turnoff(self, run):
         httpmocks.page('https://turnoff.us/', 'turnoff-home')
-        httpmocks.page('https://turnoff.us/geek/the-bad-design-punisher',
-            'turnoff-229')
+        httpmocks.page('https://turnoff.us/geek/dev-interviews/',
+            'turnoff-dev-interviews')
+        httpmocks.page('https://turnoff.us/geek/git-submodules/',
+            'turnoff-git-submodules')
 
         httpmocks.png(re.compile(r'https://turnoff\.us/image/en/.*\.png'))
 

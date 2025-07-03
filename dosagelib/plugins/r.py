@@ -6,10 +6,11 @@
 from re import compile
 from urllib.parse import urljoin
 
+from .. import util
 from ..helpers import bounceStarter
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
-from .common import WordPressScraper, WordPressNavi, WordPressWebcomic
+from .common import WordPressNavi, WordPressScraper, WordPressWebcomic
 
 
 class Rainburn(ParserScraper):
@@ -31,7 +32,6 @@ class RayFox(WordPressNavi):
 
     def namer(self, imageUrl, pageUrl):
         filename = imageUrl.rsplit('/', 1)[-1].split('.', 1)[0]
-        ext = imageUrl.rsplit('.', 1)[-1]
         if filename == 'j':
             filename = 'RF_E3_P52'
         elif filename == '46' or filename == '55' or filename == '61':
@@ -44,7 +44,7 @@ class RayFox(WordPressNavi):
             filename = filename.replace('Ray-Fox-Volume-1-', 'RF_E1_')
         elif filename[0] == '0':
             filename = 'RF_E1_P' + filename
-        return filename + '.' + ext
+        return filename
 
 
 class RaynaOnTheRiver(WordPressScraper):
@@ -141,14 +141,14 @@ class Replay(ParserScraper):
 
     def namer(self, imageUrl, pageUrl):
         # Name pages based on chapter, index, and post title
-        name = pageUrl.rstrip('/').rsplit('/', 1)[-1]
-        page = imageUrl.rsplit('/', 1)[-1].rsplit('.', 1)
+        name = util.urlpathsplit(pageUrl)[-1]
+        page = util.urlpathsplit(imageUrl)[-1].rsplit('.', 1)[0]
 
         # Fix inconsistent page number formatting
-        if page[0].isdigit() and len(page[0]) > 2 and self.chapter == 1 and name != 'through-the-woods':
-            page[0] = page[0][:2] + '-' + page[0][2:]
+        if page.isdigit() and len(page) > 2 and self.chapter == 1 and name != 'through-the-woods':
+            page = page[:2] + '-' + page[2:]
 
-        name = '%d-%s-%s.%s' % (self.chapter, page[0], name, page[1])
+        name = f'{self.chapter}-{page}-{name}'
         if pageUrl in self.startOfChapter:
             self.chapter -= 1
         return name

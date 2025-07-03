@@ -6,7 +6,7 @@
 import json
 from re import IGNORECASE, compile
 
-from ..helpers import indirectStarter
+from ..helpers import indirectStarter, joinPathPartsNamer
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
 from .common import ComicControlScraper, WordPressScraper, WordPressWebcomic
@@ -60,17 +60,14 @@ class Marilith(ParserScraper):
     help = 'Index format: yyyymmdd'
 
 
-class MarriedToTheSea(_ParserScraper):
+class MarriedToTheSea(ParserScraper):
     url = 'http://marriedtothesea.com/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '022806'
     imageSearch = '//div[d:class("jumbotron")]//p/img'
     prevSearch = '//a[contains(text(), "Yesterday")]'
+    namer = joinPathPartsNamer(imageparts=range(2), joinchar='-')
     help = 'Index format: mmddyy'
-
-    def namer(self, image_url, page_url):
-        unused, date, filename = image_url.rsplit('/', 2)
-        return '%s-%s' % (date, filename)
 
 
 class MarryMe(ParserScraper):
@@ -194,6 +191,7 @@ class MyLifeWithFel(ParserScraper):
     stripUrl = baseUrl + 'api/posts/%s'
     firstStripUrl = stripUrl % '1'
     url = firstStripUrl
+    namer = joinPathPartsNamer(pageparts=(-1,))
     adult = True
 
     def starter(self):
@@ -207,9 +205,6 @@ class MyLifeWithFel(ParserScraper):
 
     def extract_image_urls(self, url, data):
         return [self.baseUrl + json.loads(data.text_content())['post']['image']]
-
-    def namer(self, imageUrl, pageUrl):
-        return pageUrl.rsplit('/', 1)[-1]
 
 
 class MynarskiForest(_ParserScraper):

@@ -3,12 +3,17 @@
 # SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
-from re import compile, escape, IGNORECASE
+from re import IGNORECASE, compile, escape
 
+from ..helpers import bounceStarter, joinPathPartsNamer
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
-from ..helpers import bounceStarter
-from .common import ComicControlScraper, WordPressScraper, WordPressNaviIn, WordPressWebcomic
+from .common import (
+    ComicControlScraper,
+    WordPressNaviIn,
+    WordPressScraper,
+    WordPressWebcomic,
+)
 
 
 class WapsiSquare(WordPressNaviIn):
@@ -92,9 +97,7 @@ class WhiteNoiseLee(ComicControlScraper):
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % '1-0'
     starter = bounceStarter
-
-    def namer(self, imageUrl, pageUrl):
-        return pageUrl.rsplit('/', 1)[-1] + '.' + imageUrl.rsplit('.', 1)[-1]
+    namer = joinPathPartsNamer(pageparts=(-1,))
 
 
 class Whomp(ComicControlScraper):
@@ -121,9 +124,7 @@ class Widdershins(ComicControlScraper):
     stripUrl = url + 'wdshn/%s'
     firstStripUrl = stripUrl % 'sleight-of-hand-cover'
     starter = bounceStarter
-
-    def namer(self, imageUrl, pageUrl):
-        return pageUrl.rsplit('/', 1)[-1] + '.' + imageUrl.rsplit('.', 1)[-1]
+    namer = joinPathPartsNamer(pageparts=(-1,))
 
 
 class Wigu(_ParserScraper):

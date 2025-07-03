@@ -93,7 +93,7 @@ class Beetlebum(ParserScraper):
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '2005/08/12/my-first-blog'
     starter = indirectStarter
-    namer = joinPathPartsNamer(pageparts=range(-5, 0), imageparts=(-1,))
+    namer = joinPathPartsNamer(pageparts=range(-4, 0), imageparts=(-1,))
     multipleImagesPerStrip = True
     imageSearch = '//div[d:class("entry-content")]//img'
     prevSearch = '//a[@rel="prev"]'

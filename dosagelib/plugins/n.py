@@ -5,10 +5,15 @@
 # Copyright (C) 2019-2020 Daniel Ring
 from re import compile, escape
 
+from ..helpers import bounceStarter, indirectStarter, joinPathPartsNamer
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
-from ..helpers import indirectStarter, bounceStarter
 from ..util import tagre
-from .common import ComicControlScraper, WordPressScraper, WordPressNavi, WordPressWebcomic
+from .common import (
+    ComicControlScraper,
+    WordPressNavi,
+    WordPressScraper,
+    WordPressWebcomic,
+)
 
 
 class Namesake(ComicControlScraper):
@@ -100,11 +105,8 @@ class NichtLustig(_BasicScraper):
     imageSearch = compile(tagre("img", "src", r'(https://joscha.com/data/media/cartoons/[0-9a-f-_]+.png)'))
     prevSearch = compile(tagre("a", "href", r'(https://joscha.com/nichtlustig/\d+/)', after="next"))
     nextSearch = compile(tagre("a", "href", r'(https://joscha.com/nichtlustig/\d+/)', after="prev"))
+    namer = joinPathPartsNamer(pageparts=(-1,))
     help = 'Index format: yymmdd'
-
-    def namer(self, image_url, page_url):
-        unused, filename, unused2 = page_url.rsplit('/', 2)
-        return '%s' % (filename)
 
 
 class Nicky510(WordPressNavi):
@@ -173,9 +175,7 @@ class NonPlayerCharacter(ParserScraper):
     prevSearch = '//a[@class="comic-nav-prev"]'
     latestSearch = '//div[@id="feature-npc-footer"]/a[contains(@href, "npc/comic/")]'
     starter = indirectStarter
-
-    def namer(self, imageUrl, pageUrl):
-        return pageUrl.rstrip('/').rsplit('/', 1)[-1]
+    namer = joinPathPartsNamer(pageparts=(-1,))
 
 
 class NotAVillain(WordPressWebcomic):

@@ -3,8 +3,9 @@
 # SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
-from ..scraper import ParserScraper, _ParserScraper
+from .. import util
 from ..helpers import bounceStarter, indirectStarter
+from ..scraper import ParserScraper, _ParserScraper
 from .common import ComicControlScraper, WordPressScraper
 
 
@@ -194,5 +195,5 @@ class LookingForGroup(ParserScraper):
     help = 'Index format: nnn'
 
     def namer(self, imageUrl, pageUrl):
-        page = pageUrl.rstrip('/').rsplit('/', 1)[-1]
+        page = util.urlpathsplit(pageUrl)[-1]
         return page.replace('2967', '647')

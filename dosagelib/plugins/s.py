@@ -3,9 +3,9 @@
 # SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
-from os.path import splitext
 from re import IGNORECASE, compile, escape, sub
 
+from .. import util
 from ..helpers import bounceStarter, indirectStarter, joinPathPartsNamer
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
@@ -175,10 +175,10 @@ class SexyLosers(_ParserScraper):
     latestSearch = '//a[@rel="bookmark"]'
     help = 'Index format: nnn'
     starter = indirectStarter
-    namer = joinPathPartsNamer((-2,), (-1,), '-')
+    namer = joinPathPartsNamer(pageparts=(-1,), imageparts=(-1,), joinchar='-')
 
 
-class ShadesOfGray(_ParserScraper):
+class ShadesOfGray(ParserScraper):
     url = 'https://www.theduckwebcomics.com/Shades_of_Gray/'
     stripUrl = url + '%s/'
     firstStripUrl = stripUrl % '4820502'
@@ -186,10 +186,8 @@ class ShadesOfGray(_ParserScraper):
     prevSearch = '//a[img[@class="arrow_prev"]]'
     nextSearch = '//a[img[@class="arrow_next"]]'
     starter = bounceStarter
+    namer = joinPathPartsNamer(pageparts=(-1,))
     endOfLife = True
-
-    def namer(self, imageUrl, pageUrl):
-        return pageUrl.rstrip('/').rsplit('/', 1)[-1]
 
 
 class Sharksplode(WordPressScraper):
@@ -214,9 +212,7 @@ class Shifters(ParserScraper):
     prevSearch = '//a[@class="previous-comic"]'
     latestSearch = '//div[@id="comic-archive-list"]//a'
     starter = indirectStarter
-
-    def namer(self, imageUrl, pageUrl):
-        return pageUrl.rsplit('/', 2)[1] + '.' + imageUrl.rsplit('.', 1)[-1]
+    namer = joinPathPartsNamer(pageparts=(-1,))
 
 
 class ShiftersOnGossamerWings(Shifters):
@@ -236,7 +232,7 @@ class ShiftersTheBeastWithin(Shifters):
     endOfLife = True
 
     def namer(self, imageUrl, pageUrl):
-        filename = pageUrl.rsplit('/', 2)[1] + '.' + imageUrl.rsplit('.', 1)[-1]
+        filename = util.urlpathsplit(pageUrl)[-1]
         if filename.startswith('the-company-of-dragons'):
             filename = 'in-' + filename
         # Prepend chapter number to filename
@@ -326,7 +322,7 @@ class SkinDeep(WordPressWebcomic):
     firstStripUrl = stripUrl % 'issue-1-cover'
     imageSearch = '//div[d:class("webcomic-image")]//noscript/img'
     starter = bounceStarter
-    namer = joinPathPartsNamer(pageparts=(-2,))
+    namer = joinPathPartsNamer(pageparts=(-1,))
 
 
 class SleeplessDomain(ComicControlScraper):
@@ -334,26 +330,20 @@ class SleeplessDomain(ComicControlScraper):
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % 'chapter-1-cover'
     starter = bounceStarter
-
-    def namer(self, imageUrl, pageUrl):
-        return pageUrl.rsplit('/', 1)[-1] + '.' + imageUrl.rsplit('.', 1)[-1]
+    namer = joinPathPartsNamer(pageparts=(-1,))
 
 
 class SlightlyDamned(ComicControlScraper):
     url = 'http://www.sdamned.com/'
     firstStripUrl = url + 'comic/prologue'
+    starter = bounceStarter
 
     def namer(self, imageurl, pageurl):
         """Clean up mixed filename formats."""
-        filename = pageurl.rsplit('/', 1)[-1]
-        if filename == '':
-            filename = imageurl.rsplit('-', 1)[-1]
-        else:
-            filename = 'SD' + filename + '.' + imageurl.rsplit('.', 1)[-1]
-        return filename
+        return 'SD' + util.urlpathsplit(pageurl)[-1]
 
 
-class SluggyFreelance(_ParserScraper):
+class SluggyFreelance(ParserScraper):
     url = 'https://sluggy.com/'
     stripUrl = 'https://archives.sluggy.com/book.php?chapter=%s'
     firstStripUrl = stripUrl % '1'
@@ -366,7 +356,7 @@ class SluggyFreelance(_ParserScraper):
 
     def namer(self, imageurl, pageurl):
         # Remove random noise from filename
-        return imageurl.rsplit('/', 1)[-1].split('.pagespeed', 1)[0]
+        return util.urlpathsplit(imageurl)[-1].split('.', 1)[0]
 
 
 class SMBC(ComicControlScraper):
@@ -558,7 +548,7 @@ class StandStillStaySilent(_ParserScraper):
         return '%s-%s' % (chapter, imageUrl.rsplit('/', 1)[-1].replace('page_', ''))
 
 
-class StarCrossdDestiny(_ParserScraper):
+class StarCrossdDestiny(ParserScraper):
     baseUrl = ('https://web.archive.org/web/20190918132321/'
         'http://starcrossd.net/')
     url = baseUrl + 'comic.html'
@@ -577,7 +567,6 @@ class StarCrossdDestiny(_ParserScraper):
         elif not image_url.find('strips') == -1:
             image_url = image_url.replace('strips/', '')
         directory, filename = image_url.split('/')[-2:]
-        filename, extension = splitext(filename)
         return directory + '-' + filename
 
 
@@ -592,7 +581,7 @@ class StarfireAgency(ParserScraper):
     adult = True
 
     def namer(self, imageUrl, pageUrl):
-        return pageUrl.rsplit('/', 2)[1] + '.' + imageUrl.rsplit('.', 1)[-1]
+        return util.urlpathsplit(pageUrl)[-1]
 
 
 class StarTrip(ComicControlScraper):

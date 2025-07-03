@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
 import logging
 
+from .. import util
 from ..scraper import ParserScraper
 
 logger = logging.getLogger(__name__)
@@ -52,13 +53,12 @@ class Tapas(ParserScraper):
 
     def namer(self, imageUrl, pageUrl):
         # Construct filename from episode number and image position on page
-        episodeNum = pageUrl.rsplit('/', 1)[-1]
+        episodeNum = util.urlpathsplit(pageUrl)[-1]
         imageNum = self._cached_image_urls.index(imageUrl)
-        imageExt = pageUrl.rsplit('.', 1)[-1]
         if len(self._cached_image_urls) > 1:
-            filename = "%s-%d.%s" % (episodeNum, imageNum, imageExt)
+            filename = "%s-%d" % (episodeNum, imageNum)
         else:
-            filename = "%s.%s" % (episodeNum, imageExt)
+            filename = "%s" % (episodeNum)
         return filename
 
     @classmethod

@@ -60,7 +60,7 @@ class Zwarwald(BasicScraper):
                          tagre("img", "src",
                                r'http://zwarwald\.de/images/prev\.jpg',
                                quote="'"))
-    namer = joinPathPartsNamer(imageparts=(-3, -2, -1))
+    namer = joinPathPartsNamer(imageparts=range(-3, 0))
     help = 'Index format: number'
 
     def shouldSkipUrl(self, url, data):

@@ -5,7 +5,8 @@
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile, escape
 
-from ..helpers import bounceStarter, indirectStarter
+from .. import util
+from ..helpers import bounceStarter, indirectStarter, joinPathPartsNamer
 from ..scraper import BasicScraper, ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
 from .common import (
@@ -122,7 +123,7 @@ class Delve(WordPressScraper):
 
     def namer(self, imageUrl, pageUrl):
         # Fix inconsistent filenames
-        filename = imageUrl.rsplit('/', 1)[-1].rsplit('?', 1)[0]
+        filename = util.urlpathsplit(imageUrl)[-1]
         if (pageUrl == self.stripUrl % 'engagement' or
                 pageUrl == self.stripUrl % 'losing-it'):
             self.maxLen = self.maxLen - 1
@@ -229,7 +230,7 @@ class DocRat(WordPressWebcomic):
 
     def namer(self, imageUrl, pageUrl):
         # Fix inconsistent filenames
-        filename = imageUrl.rsplit('/', 1)[-1].rsplit('?', 1)[0]
+        filename = util.urlpathsplit(imageUrl)[-1]
         filename = filename.replace('2006-08-01', 'DR0027')
         filename = filename.replace('2006-07-31', 'DR0026')
         return filename
@@ -262,7 +263,7 @@ class DoesNotPlayWellWithOthers(WordPressNavi):
     adult = True
 
 
-class DoghouseDiaries(_ParserScraper):
+class DoghouseDiaries(ParserScraper):
     url = 'http://thedoghousediaries.com/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '34'
@@ -271,10 +272,8 @@ class DoghouseDiaries(_ParserScraper):
     prevSearch = '//a[@id="previouslink"]'
     nextSearch = '//a[@id="nextlink"]'
     starter = bounceStarter
+    namer = joinPathPartsNamer(pageparts=(-1,))
     help = 'Index format: number'
-
-    def namer(self, imageUrl, pageUrl):
-        return pageUrl.rsplit('/', 1)[-1] + '.' + imageUrl.rsplit('.', 1)[-1]
 
 
 class DominicDeegan(_ParserScraper):

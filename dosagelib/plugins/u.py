@@ -10,10 +10,11 @@ import re
 from contextlib import suppress
 from re import compile
 
-from ..scraper import BasicScraper, ParserScraper
+from .. import util
 from ..helpers import indirectStarter
+from ..scraper import BasicScraper, ParserScraper
 from ..util import tagre
-from .common import ComicControlScraper, WordPressScraper, WordPressNavi
+from .common import ComicControlScraper, WordPressNavi, WordPressScraper
 
 
 class UberQuest(ParserScraper):
@@ -117,8 +118,8 @@ class Unsounded(ParserScraper):
         return None
 
     def namer(self, image_url, page_url):
-        filename = image_url.rsplit('/', 1)[-1]
-        pagename = page_url.rsplit('/', 1)[-1]
+        filename = util.urlpathsplit(image_url)[-1]
+        pagename = util.urlpathsplit(page_url)[-1]
         if pagename.split('.', 1)[0] != filename.split('.', 1)[0]:
             filename = pagename.split('_', 1)[0] + '_' + filename
         return filename
@@ -140,5 +141,5 @@ class UrgentTransformationCrisis(WordPressScraper):
 
     def namer(self, imageUrl, pageUrl):
         # Fix inconsistent filenames
-        filename = imageUrl.rsplit('/', 1)[-1].rsplit('?', 1)[0]
+        filename = util.urlpathsplit(imageUrl)[-1]
         return filename.replace('FVLYHD', 'LYHDpage').replace('UTC084web', '20091218c')

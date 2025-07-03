@@ -10,7 +10,7 @@ class ComicsKingdom(ParserScraper):
     imageSearch = '//meta[@property="og:image"]/@content'
     prevSearch = partDiv + '[2]/@data-link'
     starter = indirectStarter
-    namer = joinPathPartsNamer(pageparts=(-2, -1))
+    namer = joinPathPartsNamer(pageparts=range(-2, 0))
     help = 'Index format: yyyy-mm-dd'
 
     def __init__(self, name, path, lang=None):

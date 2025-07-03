@@ -89,7 +89,7 @@ class OmakeTheater(ParserScraper):
     prevSearch = "//a[@id='previous']"
     latestSearch = "//li[d:class('home')]/a"
     starter = indirectStarter
-    namer = joinPathPartsNamer(pageparts=(-2,), imageparts=(-1,))
+    namer = joinPathPartsNamer(pageparts=(-1,), imageparts=(-1,))
     help = 'Index format: number (unpadded)'
 
 
@@ -116,10 +116,7 @@ class OrderOfTheBlackDog(WordPressScraper):
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'issue-1-cover'
     starter = bounceStarter
-
-    def namer(self, imageUrl, pageUrl):
-        # Fix inconsistent filenames
-        return '%s.%s' % (pageUrl.rsplit('/', 2)[-2], imageUrl.rsplit('.', 1)[-1])
+    namer = joinPathPartsNamer(pageparts=(-1,))
 
 
 class OriginalLife(_ParserScraper):

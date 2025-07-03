@@ -5,6 +5,7 @@
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile, escape
 
+from .. import util
 from ..helpers import indirectStarter, joinPathPartsNamer
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
@@ -175,7 +176,7 @@ class FredoAndPidjin(ParserScraper):
     prevSearch = '//span[d:class("prev")]/a'
     latestSearch = '//section[d:class("latest")]//a'
     starter = indirectStarter
-    namer = joinPathPartsNamer(pageparts=(0, 1, 2), imageparts=(-1,))
+    namer = joinPathPartsNamer(pageparts=range(2), imageparts=(-1,))
 
 
 class Freefall(_ParserScraper):
@@ -212,7 +213,7 @@ class FriendsYouAreStuckWith(WordPressScraper):
     def namer(self, imageUrl, pageUrl):
         page = self.getPage(pageUrl)
         strip = self.match(page, '//div[@id="comic-wrap"]/@class')[0].replace('comic-id-', '')
-        return strip + '_' + imageUrl.rstrip('/').rsplit('/', 1)[-1]
+        return strip + '_' + util.urlpathsplit(imageUrl)[-1]
 
 
 class FullFrontalNerdity(_BasicScraper):

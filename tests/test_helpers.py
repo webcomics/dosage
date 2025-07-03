@@ -20,4 +20,4 @@ class TestNamer:
             imgurl, pageurl) == '2019_03_11_tennis5wp-1.png'
         assert joinPathPartsNamer(pageparts=(0, 1, 2), imageparts=(-1,), joinchar='-')(self,
             imgurl, pageurl) == '2019-03-11-tennis5wp-1.png'
-        assert joinPathPartsNamer(pageparts=(0, -2))(self, imgurl, pageurl) == '2019_12450'
+        assert joinPathPartsNamer(pageparts=(0, -1))(self, imgurl, pageurl) == '2019_12450'

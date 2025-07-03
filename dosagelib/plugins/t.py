@@ -6,7 +6,8 @@
 from functools import cached_property
 from re import MULTILINE, compile, escape
 
-from ..helpers import indirectStarter, joinPathPartsNamer
+from .. import util
+from ..helpers import bounceStarter, indirectStarter, joinPathPartsNamer
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
 from .common import (
@@ -275,10 +276,10 @@ class ToonHole(ParserScraper):
     url = 'https://toonhole.com/'
     firstStripUrl = url + '2010/01/smart-questions-get-smart-answers/'
     imageSearch = '//img[d:class("wp-post-image")]'
-    prevSearch = '//a[@rel="prev"]'
-    latestSearch = '//a[@rel="bookmark"]'
+    prevSearch = '//a[d:class("previous-post")]'
+    latestSearch = '//h2[d:class("entry-title")]/a'
     starter = indirectStarter
-    namer = joinPathPartsNamer(imageparts=(-3, -2, -1))
+    namer = joinPathPartsNamer(imageparts=range(-3, 0))
 
 
 class TrippingOverYou(_BasicScraper):
@@ -311,30 +312,29 @@ class TumbleDryComics(WordPressScraper):
         return filename
 
 
-class Turnoff(_ParserScraper):
+class Turnoff(ParserScraper):
     name = 'turnoff'
     url = 'https://turnoff.us/'
     imageSearch = '//article[d:class("post-content")]//img'
     prevSearch = '//div[d:class("prev")]//a'
+    nextSearch = '//a[text()="next"]'
     stripUrl = url + 'geek/%s'
     firstStripUrl = stripUrl % 'tcp-buddies'
     multipleImagesPerStrip = True
+    starter = bounceStarter
 
     @cached_property
     def comics_order(self):
         # Neither the images nor the pages contain information about dates or indices.
         # However we can extract the order of the images from the JavaScript.
         html = self.session.get(self.url).text
-        list_regex = compile(r"""^\s*"/geek/(.*)",\s*$""", flags=MULTILINE)
+        list_regex = compile(r"""^\s*"/geek/(.*?)/?",\s*$""", flags=MULTILINE)
         return list(reversed(list_regex.findall(html)))
 
     def namer(self, image_url, page_url):
-        comic_name = page_url.split('/')[-1]
-        try:
-            index = self.comics_order.index(comic_name) + 1
-        except ValueError:
-            index = len(self.comics_order)
-        file_name = image_url.split('/')[-1]
+        comic_name = util.urlpathsplit(page_url)[-1]
+        index = self.comics_order.index(comic_name) + 1
+        file_name = util.urlpathsplit(image_url)[-1]
         return "%03d-%s" % (index, file_name)
 
 
