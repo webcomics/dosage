@@ -7,8 +7,8 @@ Script to get a list of comicskingdom.com comics and save the info in a JSON
 file for further processing.
 """
 
+from dosagelib import util
 from scriptutil import ComicListUpdater
-from dosagelib.xml import NS
 
 
 class ComicsKingdomUpdater(ComicListUpdater):
@@ -20,7 +20,7 @@ class ComicsKingdomUpdater(ComicListUpdater):
     )
 
     def handle_listing(self, page):
-        for link in page.xpath('//ul[d:class("index")]//a', namespaces=NS):
+        for link in self.xpath(page, '//ul[d:class("index")]//a'):
             name = link.text_content().removeprefix('The ')
             url = link.attrib['href']
             lang = 'es' if ' (Spanish)' in name else None
@@ -33,7 +33,9 @@ class ComicsKingdomUpdater(ComicListUpdater):
 
     def get_entry(self, name: str, data: tuple[str, str]):
         opt = f", lang='{data[1]}'" if data[1] else ''
-        return f"cls('{name}', '{data[0].split('/')[3]}'{opt}),"
+        pathparts = util.urlpathsplit(data[0])
+        path = pathparts[1] if pathparts[0] == 'vintage' else pathparts[0]
+        return f"cls('{name}', '{path}'{opt}),"
 
 
 if __name__ == '__main__':

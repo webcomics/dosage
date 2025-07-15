@@ -1605,15 +1605,12 @@ class Removed(Scraper):
             cls('ComicsKingdom/KatzenjammerKidsSundays'),
             cls('ComicsKingdom/Lockhorns'),
             cls('ComicsKingdom/MandrakeTheMagicianSundays'),
-            cls('ComicsKingdom/MarkTrailVintage'),
             cls('ComicsKingdom/MikePeters'),
             cls('ComicsKingdom/MotherGooseAndGrimm'),
             cls('ComicsKingdom/PhantomSundays'),
             cls('ComicsKingdom/PrinceValiantSundays'),
             cls('ComicsKingdom/Retail'),
             cls('ComicsKingdom/TigerSundays'),
-            cls('ComicsKingdom/TigerVintage'),
-            cls('ComicsKingdom/TigerVintageSundays'),
             cls('Everblue', 'block'),
             cls('FalseStart'),
             cls('FireflyCross'),
@@ -1676,6 +1673,17 @@ class Removed(Scraper):
             cls('WebToons/CrystalVirus'),
             cls('WebToons/NightmareFactory'),
             cls('WebToons/OVERPOWERED'),
+
+            # Removed in 3.2
+            cls('ComicsKingdom/BeetleMoses'),
+            cls('ComicsKingdom/BobMankoffPresentsShowMeTheFunny'),
+            cls('ComicsKingdom/BobMankoffPresentsShowMeTheFunnyAnimalEdition'),
+            cls('ComicsKingdom/Candorville'),
+            cls('ComicsKingdom/DarrinBell'),
+            cls('ComicsKingdom/FunnyOnlineAnimals'),
+            cls('ComicsKingdom/GodsHands'),
+            cls('ComicsKingdom/MaraLlaveKeeperOfTime'),
+            cls('GoComics/DarrinBell'),
         )
 
 
@@ -1758,7 +1766,6 @@ class Renamed(Scraper):
             cls('ComicsKingdom/TheLittleKing', 'ComicsKingdom/LittleKing'),
             cls('GoComics/BloomCounty2017', 'GoComics/BloomCounty2019'),
             cls('GoComics/Cathy', 'GoComics/CathyClassics'),
-            cls('GoComics/DarrinBell', 'ComicsKingdom/DarrinBell'),
             cls('GoComics/Owlturd', 'GoComics/ShenComix'),
             cls('GoComics/PeanutsEnEspanol', 'GoComics/SnoopyEnEspanol'),
             cls('GoComics/RipleysBelieveItOrNotSpanish', 'GoComics/RipleysAunqueUstedNoLoCrea'),
@@ -1777,7 +1784,8 @@ class Renamed(Scraper):
 
             # Renamed in 3.1
             cls('ComicsKingdom/SlylockFoxAndComicsForKids', 'ComicsKingdom/SlylockFox'),
-            cls('ComicsKingdom/SlylockFoxAndComicsForKidsSpanish', 'ComicsKingdom/SlylockFoxSpanish'),
+            cls('ComicsKingdom/SlylockFoxAndComicsForKidsSpanish',
+                'ComicsKingdom/SlylockFoxSpanish'),
             cls('Derideal/LRE', 'Derideal/RLE'),
             cls('Exiern', 'ComicFury/Exiern'),
             cls('GoComics/FalseKnees', 'WebToons/FalseKnees'),
@@ -1786,4 +1794,7 @@ class Renamed(Scraper):
             cls('MangaDex/TheWolfAndRedRidingHood', 'WebToons/TheWolfAndRedRidingHood'),
             cls('MaxOveracts', 'OccasionalComicsDisorder'),
             cls('SafelyEndangered', 'WebToons/SafelyEndangered'),
+
+            # Renamed in 3.2
+            cls('ComicsKingdom/WillyBlacksSpanish', 'ComicsKingdom/WillyBlackSpanish'),
         )
