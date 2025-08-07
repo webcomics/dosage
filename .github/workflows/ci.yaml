@@ -53,7 +53,7 @@ jobs:
           prefix: ${{ github.workspace }}/.tox/py313/lib/python3.13/site-packages
 
       - name: Submit Coverage to Qlty  # New "name" of CodeClimate Quality
-        uses: qltysh/qlty-action/coverage@v1
+        uses: qltysh/qlty-action/coverage@v2
         if: ${{ matrix.python-version == env.DEFAULT_PYTHON }}
         with:
           oidc: true
