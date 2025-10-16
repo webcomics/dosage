@@ -42,7 +42,8 @@ jobs:
 
       - name: Submit Coverage to Qlty  # New "name" of CodeClimate Quality
         uses: qltysh/qlty-action/coverage@v2
-        if: ${{ matrix.python-version == env.DEFAULT_PYTHON }}
+        # OIDC on "external" pull requests doesn't work
+        if: ${{ matrix.python-version == env.DEFAULT_PYTHON && github.event.pull_request.head.repo.full_name == github.repository }}
         with:
           oidc: true
           files: '.tox/reports/*/coverage.lcov'
