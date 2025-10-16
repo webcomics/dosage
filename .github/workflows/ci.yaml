@@ -33,6 +33,11 @@ jobs:
         if: ${{ matrix.python-version == env.DEFAULT_PYTHON }}
         continue-on-error: true
 
+      - name: Debug OIDC Claims
+        uses: steve-todorov/oidc-debugger-action@v1
+        with:
+          audience: '${{ github.server_url }}/${{ github.repository }}'
+
       - name: Install dependencies
         run: |
           pip install tox tox-gh-actions
