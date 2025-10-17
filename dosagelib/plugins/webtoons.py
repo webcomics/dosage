@@ -233,6 +233,7 @@ class WebToons(ParserScraper):
             cls('ItsMine', 'drama/its-mine', 2010),
             cls('JackieRose', 'supernatural/jackie-rose', 613),
             cls('JingleJungle', 'slice-of-life/jingle-jungle', 282),
+            cls('JustACat', 'fantasy/just-a-cat', 7633),
             cls('JustAskYuli', 'slice-of-life/just-ask-yuli', 402),
             cls('JustForKicks', 'slice-of-life/just-for-kicks', 1152),
             cls('JustFriends', 'challenge/just-friends', 190722),
