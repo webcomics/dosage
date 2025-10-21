@@ -45,13 +45,23 @@ class LazJonesAndTheMayfieldRegulatorsSideStories(LazJonesAndTheMayfieldRegulato
 
 
 class LeastICouldDo(ParserScraper):
-    url = 'https://leasticoulddo.com/'
-    stripUrl = url + 'comic/%s'
+    @property
+    def url(self):
+        """Find today's strip (or most recent non-Sunday)"""
+        import datetime
+        today = datetime.date.today()
+        
+        # If today is Sunday, go back to Saturday
+        if today.weekday() == 6:  # Sunday
+            today = today - datetime.timedelta(days=1)
+        
+        today_str = today.strftime('%Y%m%d')
+        return f'https://leasticoulddo.com/comic/{today_str}'
+    
+    stripUrl = 'https://leasticoulddo.com/comic/%s'
     firstStripUrl = stripUrl % '20030210'
-    imageSearch = '//img[d:class("comic")]'
+    imageSearch = '//div[contains(@class, "elementor-widget-image")]//img[contains(@src, "licd") and contains(@src, "desktop-scaled")]'
     prevSearch = '//a[@rel="prev"]'
-    latestSearch = '//a[@id="latest-comic"]'
-    starter = indirectStarter
     help = 'Index format: yyyymmdd'
 
 class LeastICouldDoBeginnings(_ParserScraper):
@@ -60,22 +70,23 @@ class LeastICouldDoBeginnings(_ParserScraper):
         """Find the most recent Sunday for Beginnings strips"""
         import datetime
         today = datetime.date.today()
-
+        
         # Find the most recent Sunday (0=Monday, 6=Sunday)
         days_since_sunday = (today.weekday() + 1) % 7
         if days_since_sunday == 0:  # Today is Sunday
             most_recent_sunday = today
         else:
             most_recent_sunday = today - datetime.timedelta(days=days_since_sunday)
-
+        
         sunday_str = most_recent_sunday.strftime('%Y%m%d')
         return f'https://leasticoulddo.com/comic/{sunday_str}'
-
+    
     stripUrl = 'https://leasticoulddo.com/comic/%s'
-    firstStripUrl = stripUrl % '20081109'  # First Sunday Beginnings strip
-    imageSearch = '//img[@class="comic-beginnings"]'  # Only Sunday strips
+    firstStripUrl = stripUrl % '20081109'  # First Sunday Beginnings strip  
+    imageSearch = '//div[contains(@class, "elementor-widget-image")]//img[contains(@src, "beg") and contains(@src, "desktop-scaled")]'
     prevSearch = '//a[@rel="prev"]'
     help = 'Index format: yyyymmdd (Sunday "Beginnings" strips)'
+
 
 class LetsSpeakEnglish(ComicControlScraper):
     url = 'http://www.marycagle.com'
