@@ -48,9 +48,9 @@ class LeastICouldDo(ParserScraper):
     url = 'https://leasticoulddo.com/'
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % '20030210'
-    imageSearch = '//img[d:class("comic")]'
+    imageSearch = '//div[d:class("single-post-comic")]//img'
     prevSearch = '//a[@rel="prev"]'
-    latestSearch = '//a[@id="latest-comic"]'
+    latestSearch = '//a[contains(@href, "/comic/")]'
     starter = indirectStarter
     help = 'Index format: yyyymmdd'
 
