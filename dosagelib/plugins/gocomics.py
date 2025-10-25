@@ -30,7 +30,6 @@ class GoComics(ParserScraper):
         if lang:
             self.lang = lang
 
-
     def imageUrlModifier(self, image_url, data):
         # we extracted a JSON object here
         self.jsondata = json.loads(image_url)
