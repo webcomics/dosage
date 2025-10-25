@@ -53,7 +53,7 @@ repos:
           - flake8-deprecated
           - flake8-eradicate
           - flake8-fixme
-          - flake8-functions
+          # - flake8-functions  TODO: Find alternative
           - flake8-future-annotations
           - flake8-logging-format
           - flake8-noqa
