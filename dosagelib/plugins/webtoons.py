@@ -307,6 +307,7 @@ class WebToons(ParserScraper):
             cls('MySClassHunter', 'action/my-s-class-hunters', 3963),
             cls('MythicItemObtained', 'fantasy/mythic-item-obtained', 4582),
             cls('MyWallflowerKiss', 'challenge/my-wallflower-kiss', 151869),
+            cls('MyWifeIsAHalfDragon', 'canvas/my-wife-is-a-half-dragon', 1013669),
             cls('NanoList', 'sf/nano-list', 700),
             cls('NationalDogDay2016', 'slice-of-life/national-dog-day', 747),
             cls('NewLifeProject', 'comedy/new-life-project', 279),
