@@ -79,7 +79,6 @@ universal = true
 max_line_length = 100
 ignore = [
     'E127', 'E128',  # hanging instead of visual indent
-    'FI18', 'FI58',  # ignore __future__ "annotations" for now
     'W504'  # line breaks after binary operator
 ]
 noqa-require-code = true

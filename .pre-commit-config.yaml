@@ -10,7 +10,7 @@ repos:
       - id: check-hooks-apply
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-added-large-files
       - id: check-case-conflict
@@ -29,7 +29,7 @@ repos:
         exclude_types: [svg]
 
   - repo: https://github.com/PyCQA/isort
-    rev: "6.0.1"
+    rev: "7.0.0"
     hooks:
       - id: isort
 
@@ -40,7 +40,7 @@ repos:
 #      - id: tox-ini-fmt
 
   - repo: https://github.com/PyCQA/flake8
-    rev: "7.2.0"
+    rev: "7.3.0"
     hooks:
       - id: flake8
         additional_dependencies:
@@ -54,7 +54,7 @@ repos:
           - flake8-eradicate
           - flake8-fixme
           - flake8-functions
-          - flake8-future-import
+          - flake8-future-annotations
           - flake8-logging-format
           - flake8-noqa
           - Flake8-pyproject
