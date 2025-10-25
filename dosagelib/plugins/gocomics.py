@@ -4,6 +4,7 @@
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 import datetime
 import json
+import cloudscraper
 
 from ..scraper import ParserScraper
 
@@ -16,11 +17,19 @@ class GoComics(ParserScraper):
 
     def __init__(self, name, path, lang=None):
         super().__init__('GoComics/' + name)
-        self.session.add_throttle('www.gocomics.com', 1.0, 2.0)
+        self.session = cloudscraper.create_scraper(
+            delay=10,  # Recommended delay to allow challenge solving
+            browser={
+                'browser': 'firefox',  # Match the user agent you were using
+                'platform': 'linux',
+                'desktop': True
+            }
+        )
         self.url = 'https://www.gocomics.com/' + path
         self.shortname = name
         if lang:
             self.lang = lang
+
 
     def imageUrlModifier(self, image_url, data):
         # we extracted a JSON object here
