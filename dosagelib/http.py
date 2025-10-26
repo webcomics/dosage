@@ -41,7 +41,10 @@ class Session(requests.Session):
         retry = Retry(MaxRetries, backoff_factor=RetryBackoffFactor)
         self.mount('http://', HTTPAdapter(max_retries=retry))
         self.mount('https://', HTTPAdapter(max_retries=retry))
-        self.headers.update({'User-Agent': configuration.UserAgent})
+        self.headers.update({
+            'Accept-Language': 'en',
+            'User-Agent': configuration.UserAgent,
+        })
 
         self.throttles: dict[str, RandomThrottle] = collections.defaultdict(
             lambda: RandomThrottle())
