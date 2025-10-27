@@ -1,7 +1,7 @@
 def pys = [
     [name: 'Python 3.13', docker: '3.13-bookworm', tox:'py313', main: true],
     [name: 'Python 3.12', docker: '3.12-bookworm', tox:'py312', main: false],
-    [name: 'Python 3.8',  docker: '3.8-bookworm',  tox:'py38',  main: false],
+    [name: 'Python 3.9',  docker: '3.9-bookworm',  tox:'py39',  main: false],
 ]
 
 properties([
@@ -74,12 +74,6 @@ parallel(tasks)
 parallel modern: {
         stage('Modern Windows binary') {
             windowsBuild('3.13', 'dosage.exe')
-        }
-    },
-    legacy: {
-        stage('Legacy Windows binary') {
-            // Still compatible with Windows 7
-            windowsBuild('3.8', 'dosage-legacy.exe')
         }
     },
     report: {

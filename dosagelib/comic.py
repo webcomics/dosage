@@ -9,8 +9,8 @@ import contextlib
 import glob
 import logging
 import os
+from collections.abc import Iterator
 from datetime import datetime
-from typing import Iterator
 
 from rich import filesize
 
@@ -82,7 +82,7 @@ class ComicImage:
             subtype = None
         if maintype != 'image' and content_type not in (
                 'application/octet-stream', 'application/x-shockwave-flash'):
-            raise IOError('content type %r is not an image at %s' % (
+            raise OSError('content type {!r} is not an image at {}'.format(
                 content_type, self.url))
         # Always use mime type for file extension if it is sane.
         if maintype == 'image':

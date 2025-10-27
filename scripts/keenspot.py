@@ -11,8 +11,8 @@ JSON file for further processing.
 
 from urllib import parse
 
-from scriptutil import ComicListUpdater
 from dosagelib import http
+from scriptutil import ComicListUpdater
 
 
 class KeenSpotUpdater(ComicListUpdater):
@@ -50,8 +50,8 @@ class KeenSpotUpdater(ComicListUpdater):
                     http.check_robotstxt(comicurl + 'd/', self.session)
                 else:
                     http.check_robotstxt(comicurl, self.session)
-            except IOError as e:
-                print('[%s] INFO: robots.txt denied: %s' % (name, e))
+            except OSError as e:
+                print(f'[{name}] INFO: robots.txt denied: {e}')
                 continue
 
             self.add_comic(name, comicurl)
@@ -62,7 +62,7 @@ class KeenSpotUpdater(ComicListUpdater):
             extra = ', ' + self.extra[name]
         else:
             extra = ''
-        return u"cls('%s', '%s'%s)," % (name, sub, extra)
+        return f"cls('{name}', '{sub}'{extra}),"
 
 
 if __name__ == '__main__':

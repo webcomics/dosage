@@ -12,13 +12,13 @@ def _file(name):
     return os.path.join(os.path.dirname(__file__), 'responses', name)
 
 
-@lru_cache()
+@lru_cache
 def content(name, ext: str = 'html'):
     with gzip.open(_file(f'{name}.{ext}.gz'), 'r') as f:
         return f.read()
 
 
-@lru_cache()
+@lru_cache
 def _img(name):
     with open(_file(name + '.png'), 'rb') as f:
         return f.read()
@@ -43,5 +43,5 @@ def jpeg(url, name='empty'):
 def xkcd():
     page('https://xkcd.com/', 'xkcd-1899')
     for num in (302, 303, 1898, 1899):
-        page('https://xkcd.com/%i/' % num, 'xkcd-%i' % num)
+        page(f'https://xkcd.com/{num}/', f'xkcd-{num}')
     png(re.compile(r'https://imgs\.xkcd\.com/.*\.png'))

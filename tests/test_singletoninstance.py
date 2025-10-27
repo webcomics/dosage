@@ -3,15 +3,16 @@
 # License: PYTHON SOFTWARE FOUNDATION LICENSE VERSION 2
 # Author: Sorin Sbarnea
 # Changes: changed logging and formatting
-from dosagelib import singleton
 from multiprocessing import Process
+
+from dosagelib import singleton
 
 
 def f(flavor_id):
     return singleton.SingleInstance(flavor_id=flavor_id, exit_code=1)
 
 
-class TestSingleton(object):
+class TestSingleton:
     def test_1(self):
         # test in current process
         me = singleton.SingleInstance(flavor_id="test-1")

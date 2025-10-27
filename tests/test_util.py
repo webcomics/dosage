@@ -1,13 +1,15 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
-import pytest
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 import re
-from dosagelib.util import normaliseURL, tagre, get_system_uid
+
+import pytest
+
+from dosagelib.util import get_system_uid, normaliseURL, tagre
 
 
-class TestURL(object):
+class TestURL:
     """
     Tests for URL utility functions.
     """
@@ -15,10 +17,10 @@ class TestURL(object):
     def test_normalisation(self):
         # Test URL normalisation.
         assert (normaliseURL('http://example.com//bar/baz&amp;baz') ==
-            u'http://example.com/bar/baz&baz')
+            'http://example.com/bar/baz&baz')
 
 
-class TestRegex(object):
+class TestRegex:
 
     ValuePrefix = '/bla/'
 
@@ -41,14 +43,13 @@ class TestRegex(object):
         text = tag % value
         match = matcher.search(text)
         if domatch:
-            assert match, "%s should match %s" % (matcher.pattern, text)
+            assert match, f"{matcher.pattern!r} should match {text!r}"
             assert match.group(1) == value
         else:
-            assert not match, "%s should not match %s" % (matcher.pattern,
-                                                          text)
+            assert not match, f"{matcher.pattern!r} should not match {text!r}"
 
 
-class TestUid(object):
+class TestUid:
     """
     Tests for unique system IDs.
     """

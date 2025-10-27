@@ -77,7 +77,7 @@ class AdventuresOfFifne(_ParserScraper):
         # Fix broken navigation links
         if url == self.stripUrl % 'lg06':
             return self.stripUrl % 'lg05'
-        return super(AdventuresOfFifne, self).getPrevUrl(url, data)
+        return super().getPrevUrl(url, data)
 
 
 class AfterStrife(WordPressNavi):

@@ -1,10 +1,11 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Tobias Gruetzmacher
 import time
+
 from dosagelib.rss import parseFeed
 
 
-class TestFeed(object):
+class TestFeed:
     """
     Tests for rss.py
     """
@@ -15,5 +16,5 @@ class TestFeed(object):
 
         xmlBlob = feed.getXML()
 
-        assert u'PlumedDotage - 4034.png'.encode() in xmlBlob
-        assert u'PachinkoParlor - 20190626.jpg'.encode() not in xmlBlob
+        assert b'PlumedDotage - 4034.png' in xmlBlob
+        assert b'PachinkoParlor - 20190626.jpg' not in xmlBlob

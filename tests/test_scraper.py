@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2013-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2013 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 from pathlib import Path
 
 import pytest
@@ -8,13 +8,13 @@ import pytest
 from dosagelib.scraper import scrapers
 
 
-class TestScraper(object):
+class TestScraper:
     """Test scraper module functions."""
 
     def test_get_scrapers(self):
         for scraperobj in scrapers.all():
             scraperobj.indexes = ["bla"]
-            assert scraperobj.url, "missing url in %s" % scraperobj.name
+            assert scraperobj.url, f"missing url in {scraperobj.name}"
 
     def test_find_scrapers_single(self):
         assert scrapers.find("xkcd")

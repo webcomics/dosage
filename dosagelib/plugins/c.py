@@ -4,7 +4,6 @@
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile, escape
-from typing import List
 
 from .. import util
 from ..helpers import bounceStarter, indirectStarter, joinPathPartsNamer
@@ -137,7 +136,7 @@ class CatenaManor(ParserScraper):
     imageSearch = '//img[d:class("comicthumbnail")]'
     multipleImagesPerStrip = True
     endOfLife = True
-    strips: List[str] = []
+    strips: list[str] = []
 
     def starter(self):
         # Retrieve archive links and select valid range

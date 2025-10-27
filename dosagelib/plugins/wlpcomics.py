@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 import re
 
-from ..scraper import ParserScraper
 from ..helpers import bounceStarter
+from ..scraper import ParserScraper
 
 
 class WLPComics(ParserScraper):
@@ -71,7 +71,7 @@ class PeterIsTheWolfAdult(WLPComics):
         # Fix loop in site navigation
         if url == self.stripUrl % '194':
             return self.stripUrl % '193'
-        return super(PeterIsTheWolfAdult, self).getPrevUrl(url, data)
+        return super().getPrevUrl(url, data)
 
 
 class PeterIsTheWolfGeneral(WLPComics):
@@ -91,7 +91,7 @@ class PeterIsTheWolfGeneral(WLPComics):
             return self.stripUrl % '228'
         if url == self.stripUrl % '153':
             return self.stripUrl % '152'
-        return super(PeterIsTheWolfGeneral, self).getPrevUrl(url, data)
+        return super().getPrevUrl(url, data)
 
 
 class Stellar(WLPComics):

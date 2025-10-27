@@ -10,9 +10,9 @@ class ProjectFuture(ParserScraper):
 
     def __init__(self, name, comic, first, last=None):
         if name == 'ProjectFuture':
-            super(ProjectFuture, self).__init__(name)
+            super().__init__(name)
         else:
-            super(ProjectFuture, self).__init__('ProjectFuture/' + name)
+            super().__init__('ProjectFuture/' + name)
 
         self.url = 'http://www.projectfuturecomic.com/' + comic + '.php'
         self.stripUrl = self.url + '?strip=%s'

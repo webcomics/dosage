@@ -9,7 +9,7 @@ class KemonoCafe(ParserScraper):
     prevSearch = '//a[contains(@class, "comic-nav-previous")]'
 
     def __init__(self, name, sub, first, last=None, adult=False):
-        super(KemonoCafe, self).__init__('KemonoCafe/' + name)
+        super().__init__('KemonoCafe/' + name)
 
         self.url = 'https://%s.kemono.cafe/' % sub
         self.stripUrl = self.url + 'comic/%s/'

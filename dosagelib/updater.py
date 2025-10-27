@@ -2,13 +2,15 @@
 # SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
 # SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+from __future__ import annotations
+
 import os
 import re
-from typing import Any, Dict, Optional, Tuple
+from typing import Any
 
 import dosagelib
-from . import http
 
+from . import http
 
 UPDATE_URL = 'https://api.github.com/repos/webcomics/dosage/releases/latest'
 EXTPRIO = {
@@ -18,7 +20,7 @@ EXTPRIO = {
 }
 
 
-def check_update() -> Optional[Tuple[str, Optional[str]]]:
+def check_update() -> tuple[str, str | None] | None:
     """Return the following values:
        throws exception - online version could not be determined
        None - user has newest version
@@ -36,11 +38,11 @@ def check_update() -> Optional[Tuple[str, Optional[str]]]:
     return (version, None)
 
 
-def asset_key(asset: Dict[str, Any]) -> int:
+def asset_key(asset: dict[str, Any]) -> int:
     return EXTPRIO.get(os.path.splitext(asset['browser_download_url'])[1], 99)
 
 
-def get_online_version() -> Tuple[str, Optional[str]]:
+def get_online_version() -> tuple[str, str | None]:
     """Download update info and parse it."""
     response = http.default_session.get(UPDATE_URL)
     response.raise_for_status()
@@ -57,7 +59,7 @@ def get_online_version() -> Tuple[str, Optional[str]]:
     return version, url
 
 
-def version_nums(ver: str) -> Tuple[int, ...]:
+def version_nums(ver: str) -> tuple[int, ...]:
     """Extract all numeric "sub-parts" of a version string. Not very exact, but
        works for our use case."""
     return tuple(int(s) for s in re.split(r'\D+', ver + '0'))

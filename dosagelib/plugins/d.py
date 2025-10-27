@@ -150,7 +150,7 @@ class DerTodUndDasMaedchen(_ParserScraper):
     stripUrl = url + '?bild=%s.jpg'
     firstStripUrl = stripUrl % '00_01_01'
     imageSearch = '//img[contains(@src, "images/tod/teil2")]'
-    prevSearch = u'//a[text()="zur\u00FCck"]'
+    prevSearch = '//a[text()="zur\u00FCck"]'
     help = 'Index format: nn_nn_nn'
     lang = 'de'
 

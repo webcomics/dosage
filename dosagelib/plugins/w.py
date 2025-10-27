@@ -77,7 +77,7 @@ class WereIWolf(_ParserScraper):
             return self.stripUrl % (self.chapters[1], 'latest')
         if url == self.stripUrl % (self.chapters[1], '0'):
             return self.stripUrl % (self.chapters[0], 'latest')
-        return super(WereIWolf, self).getPrevUrl(url, data)
+        return super().getPrevUrl(url, data)
 
     def getIndexStripUrl(self, index):
         # Get comic strip URL from index

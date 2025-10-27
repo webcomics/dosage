@@ -25,7 +25,7 @@ class ComicFury(ParserScraper):
         XPATH_LINK % ('comicnavlink', 'Previous'),
         XPATH_IMG % ('Previous'),
         # Art, ConsolersDLC, etc.
-        u'//nav//a[contains(text(), "\u2039")]',
+        '//nav//a[contains(text(), "\u2039")]',
         # LatchkeyKingdom
         '//a[d:class("navi") and img[contains(@src, "Previous")]]',
         # KATRAN
@@ -43,7 +43,7 @@ class ComicFury(ParserScraper):
         XPATH_LINK % ('comicnavlink', 'Next'),
         XPATH_IMG % ('Next'),
         # Art, ConsolersDLC, etc.
-        u'//nav//a[contains(text(), "\u203A")]',
+        '//nav//a[contains(text(), "\u203A")]',
         # LatchkeyKingdom
         '//a[d:class("navi") and img[contains(@src, "Next")]]',
         # RedSpot, KATRAN

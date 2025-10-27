@@ -92,7 +92,7 @@ def check_robotstxt(url: str, session: Session) -> None:
     roboturl = _get_roboturl(url)
     rp = _get_robotstxt_parser(roboturl, session)
     if not rp.can_fetch(configuration.App, str(url)):
-        raise IOError("%s is disallowed by %s" % (url, roboturl))
+        raise OSError(f"{url} is disallowed by {roboturl}")
 
 
 def _get_roboturl(url: str) -> str:
@@ -101,7 +101,7 @@ def _get_roboturl(url: str) -> str:
     return parse.urlunsplit((pu.scheme, pu.netloc, "/robots.txt", None, None))
 
 
-@functools.lru_cache()
+@functools.lru_cache
 def _get_robotstxt_parser(url, session: Session) -> robotparser.RobotFileParser:
     """Get a RobotFileParser for the given robots.txt URL."""
     rp = robotparser.RobotFileParser()
