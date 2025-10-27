@@ -2,3 +2,6 @@
 .gitattributes export-ignore
 .github export-ignore
 .gitignore export-ignore
+.staticsite.py export-ignore
+Jenkinsfile export-ignore
+doc/.theme/ export-ignore
