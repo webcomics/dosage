@@ -33,7 +33,7 @@ def json(url, pagename):
 
 
 def png(url, name='empty'):
-    add(GET, url, _img(name), content_type='image/jpeg')
+    add(GET, url, _img(name), content_type='image/png')
 
 
 def jpeg(url, name='empty'):

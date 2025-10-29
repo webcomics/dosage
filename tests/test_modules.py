@@ -37,16 +37,19 @@ class TestModules:
         run('--numstrips', '2', 'turnoff')
 
     @responses.activate
-    def test_gocomics_index(self, run):
+    def test_gocomics_index(self, capfd, run):
         httpmocks.page('https://www.gocomics.com/calvinandhobbesespanol',
             'gocomics-root')
         httpmocks.page(re.compile('.*espanol/2020/03/25'), 'gocomics-page')
         httpmocks.page(re.compile('.*espanol/2012/07/22'), 'gocomics-page')
 
-        httpmocks.png(re.compile(r'https://assets\..*'))
+        httpmocks.png(re.compile(r'https://featureassets\..*'))
 
         run('CalvinAndHobbesEnEspanol')
         run('CalvinAndHobbesEnEspanol:2012/07/22')
+
+        out = capfd.readouterr().out
+        assert 'ERROR' not in out
 
     @responses.activate
     def test_unsounded(self, capfd, run):
