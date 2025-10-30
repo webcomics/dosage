@@ -318,7 +318,7 @@ class Turnoff(ParserScraper):
     imageSearch = '//article[d:class("post-content")]//img'
     prevSearch = '//div[d:class("prev")]//a'
     nextSearch = '//a[text()="next"]'
-    stripUrl = url + 'geek/%s'
+    stripUrl = url + 'geek/%s/'
     firstStripUrl = stripUrl % 'tcp-buddies'
     multipleImagesPerStrip = True
     starter = bounceStarter
