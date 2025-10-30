@@ -113,8 +113,8 @@ class ScenesFromAMultiverse(_BasicScraper):
     help = 'Index format: yyyy/mm/dd/stripname'
 
 
-class SchlockMercenary(_ParserScraper):
-    url = 'http://www.schlockmercenary.com/'
+class SchlockMercenary(ParserScraper):
+    url = 'https://www.schlockmercenary.com/'
     stripUrl = url + '%s'
     firstStripUrl = stripUrl % '2000-06-12'
     imageSearch = '//div[@class="strip-image-wrapper"]/img'
