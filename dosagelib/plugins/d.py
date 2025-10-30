@@ -208,21 +208,6 @@ class DieselSweetiesOld(_ParserScraper):
         return 'sw%02d' % index
 
 
-class Dilbert(_ParserScraper):
-    url = 'https://dilbert.com/'
-    stripUrl = url + 'strip/%s'
-    firstStripUrl = stripUrl % '1989-04-16'
-    starter = indirectStarter
-    prevSearch = '//div[d:class("nav-left")]/a'
-    imageSearch = '//img[d:class("img-comic")]'
-    latestSearch = '//a[@class="img-comic-link"]'
-    help = 'Index format: yyyy-mm-dd'
-
-    def namer(self, image_url, page_url):
-        name = page_url.rsplit("/", 1)[1]
-        return "%s" % name
-
-
 class DocRat(WordPressWebcomic):
     url = 'https://www.docrat.com.au/'
     stripUrl = url + 'comic/%s/'

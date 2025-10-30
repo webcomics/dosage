@@ -1682,6 +1682,7 @@ class Removed(Scraper):
             cls('ComicsKingdom/FunnyOnlineAnimals'),
             cls('ComicsKingdom/GodsHands'),
             cls('ComicsKingdom/MaraLlaveKeeperOfTime'),
+            cls('Dilbert'),
             cls('GoComics/DarrinBell'),
             cls('GoComics/EverydayPeopleCartoons'),
         )
