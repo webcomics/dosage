@@ -3,8 +3,9 @@
 # SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
+from __future__ import annotations
+
 from re import compile, escape
-from typing import List
 
 from .. import util
 from ..helpers import bounceStarter, indirectStarter, joinPathPartsNamer
@@ -41,7 +42,7 @@ class CaptainSNES(_BasicScraper):
 
 
 class CarryOn(ParserScraper):
-    url = 'http://www.hirezfox.com/km/co/'
+    url = 'https://www.hirezfox.com/km/co/co1024/'
     stripUrl = url + 'd/%s.html'
     firstStripUrl = stripUrl % '20040701'
     imageSearch = '//div[d:class("strip")]/img'
@@ -58,7 +59,7 @@ class CarryOn(ParserScraper):
 
 class CarryOnAliceBlueAndTheGardensOfQ(CarryOn):
     name = 'CarryOn/AliceBlueAndTheGardensOfQ'
-    url = 'http://www.hirezfox.com/km/abgq/abgq1024/'
+    url = 'https://www.hirezfox.com/km/abgq/abgq1024/'
     stripUrl = url + 'd/%s.html'
     firstStripUrl = stripUrl % '20050401'
     endOfLife = True
@@ -70,7 +71,7 @@ class CarryOnAliceBlueAndTheGardensOfQ(CarryOn):
 
 class CarryOnLegendOfAnneBunny(CarryOn):
     name = 'CarryOn/LegendOfAnneBunny'
-    url = 'http://www.hirezfox.com/km/loab/loab1024/'
+    url = 'https://www.hirezfox.com/km/loab/loab1024/'
     stripUrl = url + 'd/%s.html'
     firstStripUrl = stripUrl % '20040701'
     endOfLife = True
@@ -137,7 +138,7 @@ class CatenaManor(ParserScraper):
     imageSearch = '//img[d:class("comicthumbnail")]'
     multipleImagesPerStrip = True
     endOfLife = True
-    strips: List[str] = []
+    strips: list[str] = []
 
     def starter(self):
         # Retrieve archive links and select valid range
