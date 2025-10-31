@@ -8,6 +8,7 @@ import codecs
 import contextlib
 import glob
 import logging
+import mimetypes
 import os
 from datetime import datetime
 from typing import Iterator
@@ -59,6 +60,8 @@ class ComicImage:
         self.url = url
         filename = getFilename(filename)
         self.filename, self.ext = os.path.splitext(filename)
+        if not self.ext:
+            self.ext = '.bin'
         self.text = text
 
     def connect(self, lastchange=None):
@@ -75,18 +78,15 @@ class ComicImage:
         content_type = unquote(self.urlobj.headers.get(
             'content-type', 'application/octet-stream'))
         content_type = content_type.split(';', 1)[0]
-        if '/' in content_type:
-            maintype, subtype = content_type.split('/', 1)
-        else:
-            maintype = content_type
-            subtype = None
+        maintype = content_type.split('/', 1)[0]
         if maintype != 'image' and content_type not in (
                 'application/octet-stream', 'application/x-shockwave-flash'):
             raise IOError('content type %r is not an image at %s' % (
                 content_type, self.url))
-        # Always use mime type for file extension if it is sane.
-        if maintype == 'image':
-            self.ext = '.' + subtype.replace('jpeg', 'jpg')
+        # Try to guess "better" extension from mime type
+        guessed_ext = mimetypes.guess_extension(content_type)
+        if guessed_ext and guessed_ext != '.bin':
+            self.ext = guessed_ext
         self.contentLength = int(self.urlobj.headers.get('content-length', 0))
         logger.debug('... filename = %r, ext = %r, contentLength = %d', self.filename, self.ext, self.contentLength)
 
