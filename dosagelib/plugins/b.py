@@ -229,13 +229,13 @@ class Bloodline(WordPressScraper):
         return imageUrl.rsplit('/', 1)[-1].replace('gen-6', 'Bloodline')
 
 
-class BloomingFaeries(WordPressScraper):
-    adult = True
-    url = 'http://www.bloomingfaeries.com/'
+class BloomingFaeries(ParserScraper):
+    url = 'https://www.bloomingfaeries.com/'
     firstStripUrl = url + 'comic/public/pit-stop/'
-
-    def namer(self, image_url, page_url):
-        return "_".join(image_url.rsplit('/', 3)[1:])
+    imageSearch = '//div[@id="spliced-comic"]//img'
+    prevSearch = '//a[d:class("previous-comic")]'
+    adult = True
+    namer = joinPathPartsNamer(imageparts=range(-3, 0))
 
 
 class BMovieComic(_ParserScraper):

@@ -135,10 +135,10 @@ class TestDosage:
 
     @responses.activate
     def test_fetch_html_and_rss_2(self, tmp_path):
-        httpmocks.page('http://www.bloomingfaeries.com/', 'bf-home')
-        httpmocks.page(re.compile('http://www.*faeries-405/'), 'bf-405')
-        httpmocks.png(re.compile(r'http://www\.blooming.*405.*jpg'))
-        httpmocks.png(re.compile(r'http://www\.blooming.*406.*jpg'), 'tall')
+        httpmocks.page('https://www.bloomingfaeries.com/', 'bf-home')
+        httpmocks.page(re.compile('.*/comic/601.*'), 'bf-601')
+        httpmocks.png(re.compile(r'https://i0\.wp.*/BF601.*jpg'))
+        httpmocks.png(re.compile(r'https://i0\.wp.*/BF602.*jpg'), 'tall')
 
         cmd_ok("--numstrips", "2", "--baseurl", "bla", "--basepath",
             str(tmp_path), "--output", "rss", "--output", "html", "--adult",
@@ -149,8 +149,8 @@ class TestDosage:
 
     @responses.activate
     def test_fetch_html_broken_img(self, tmp_path):
-        httpmocks.page('http://www.bloomingfaeries.com/', 'bf-home')
-        httpmocks.page(re.compile('http://www.*faeries-405/'), 'bf-405')
+        httpmocks.page('https://www.bloomingfaeries.com/', 'bf-home')
+        httpmocks.page(re.compile('.*/comic/601.*'), 'bf-601')
         responses.add(responses.GET, re.compile(r'.*\.jpg'), body=b'\377\330',
             content_type='image/jpeg')
 
