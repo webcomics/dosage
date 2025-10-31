@@ -69,7 +69,7 @@ class ComicsKingdom(scraper.Scraper):
         return (data[urlsearch],)
 
     @classmethod
-    def getmodules(cls):  # noqa: CFQ001
+    def getmodules(cls):
         return (
             # do not edit anything below since these entries are generated from
             # scripts/comicskingdom.py

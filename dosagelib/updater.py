@@ -2,13 +2,15 @@
 # SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
 # SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+from __future__ import annotations
+
 import os
 import re
 from typing import Any, Dict, Optional, Tuple
 
 import dosagelib
-from . import http
 
+from . import http
 
 UPDATE_URL = 'https://api.github.com/repos/webcomics/dosage/releases/latest'
 EXTPRIO = {

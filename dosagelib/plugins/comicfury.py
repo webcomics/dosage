@@ -89,7 +89,7 @@ class ComicFury(ParserScraper):
             not self.match(data, '//div[@id="comicimagewrap"]//img'))
 
     @classmethod
-    def getmodules(cls):  # noqa: CFQ001
+    def getmodules(cls):
         return (
             # Cannot be found via search?!?
             cls('BadassologyByMichaelBay', 'strudelology'),

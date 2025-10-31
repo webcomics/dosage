@@ -76,6 +76,7 @@ universal = true
 [tool.setuptools_scm]
 
 [tool.flake8]
+max-complexity = 10
 max_line_length = 100
 ignore = [
     'E127', 'E128',  # hanging instead of visual indent

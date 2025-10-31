@@ -140,7 +140,7 @@ def getDimensionForImage(filename, maxsize):
     try:
         origsize = imagesize.get(filename)
     except Exception as e:
-        logger.warning("Could not get image size of %r: %s",  # noqa: G200
+        logger.warning("Could not get image size of %r: %s",
             os.path.basename(filename), e)
         return None
 

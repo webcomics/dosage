@@ -53,10 +53,10 @@ repos:
           - flake8-deprecated
           - flake8-eradicate
           - flake8-fixme
-          # - flake8-functions  TODO: Find alternative
           - flake8-future-annotations
-          - flake8-logging-format
+          - flake8-logging
           - flake8-noqa
           - Flake8-pyproject
           - flake8-pytest
           - flake8-pytest-style
+          - mccabe

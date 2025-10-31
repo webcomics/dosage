@@ -196,7 +196,7 @@ def vote_comic(scraperobj) -> int:
         scraperobj.vote()
         logger.info('Vote submitted.', extra=context)
     except Exception as msg:
-        logger.exception(msg, extra=context)  # noqa: G200
+        logger.exception(msg, extra=context)  # noqa: LOG010
         return 1
     return 0
 

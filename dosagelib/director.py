@@ -3,13 +3,15 @@
 # SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
+from __future__ import annotations
+
 import _thread
 import logging
 import os
 import re
 import threading
 from queue import Empty, Queue
-from typing import Collection, Dict
+from typing import Collection
 from urllib.parse import urlparse
 
 from . import events
@@ -45,7 +47,7 @@ class ComicQueue(Queue):
 
 
 # ensure threads download only from one host at a time
-host_locks: Dict[str, threading.Lock] = {}
+host_locks: dict[str, threading.Lock] = {}
 
 
 def get_hostname(url):
@@ -124,7 +126,7 @@ class ComicGetter(threading.Thread):
                                             scraperobj.indexes):
                 scraperobj.setComplete(self.options.basepath)
         except Exception as msg:
-            logger.exception(msg)  # noqa: G200 # FIXME: Legacy stuff, needs refactor
+            logger.exception(msg)  # noqa: LOG010 # FIXME: Legacy stuff, needs refactor
             self.errors += 1
 
     def saveComicStrip(self, strip):
@@ -141,7 +143,7 @@ class ComicGetter(threading.Thread):
                 if self.stopped:
                     break
             except Exception as msg:
-                logger.exception('Could not save image at %r to %r: %s',  # noqa: G200
+                logger.exception('Could not save image at %r to %r: %s',
                     image.referrer, image.filename, msg)
                 self.errors += 1
         return allskipped
@@ -176,7 +178,7 @@ def getComics(options):
         for t in threads:
             errors += t.errors
     except ValueError as msg:
-        logger.exception(msg)  # noqa: G200
+        logger.exception(msg)  # noqa: LOG010
         errors += 1
     except KeyboardInterrupt:
         logger.warning("Interrupted! Waiting for download threads to finish.")
@@ -195,8 +197,7 @@ def getScrapers(comics: Collection[str], basepath: str, adult=True, listing=Fals
         # only scrapers whose directory already exists
         if len(comics) > 1:
             logger.warning("using '@' as comic name ignores all other specified comics.")
-        for comic in get_existing_comics(basepath, adult, listing):
-            yield comic
+        yield from get_existing_comics(basepath, adult, listing)
     else:
         # get only selected comic scrapers
         # store them in a set to eliminate duplicates

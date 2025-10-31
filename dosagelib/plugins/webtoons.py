@@ -48,7 +48,7 @@ class WebToons(ParserScraper):
         return "%s-%03d.%s" % (episodeNum, imageNum, imageExt)
 
     @classmethod
-    def getmodules(cls):  # noqa: CFQ001
+    def getmodules(cls):
         return (
             cls('1000', 'action/one-thousand', 1217),
             cls('10thDimensionBoys', 'comedy/10th-dimension-boys', 71),

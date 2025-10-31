@@ -40,7 +40,7 @@ class GoComics(ParserScraper):
         return f'{self.url}/{index}'
 
     @classmethod
-    def getmodules(cls):  # noqa: CFQ001
+    def getmodules(cls):
         return (
             # do not edit anything below since these entries are generated from
             # scripts/gocomics.py

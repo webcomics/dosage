@@ -202,7 +202,7 @@ class Scraper:
                 try:
                     yield self.getComicStrip(url, data)
                 except ValueError as msg:
-                    logger.exception(msg)  # noqa: G200
+                    logger.exception(msg)  # noqa: LOG010
             if self.isfirststrip(url):
                 logger.debug("Stop at first URL %r", url)
                 self.hitFirstStripUrl = True
@@ -238,7 +238,7 @@ class Scraper:
                 prevUrl = self.fetchUrl(url, data, self.prevSearch)
             except ValueError as msg:
                 # assume there is no previous URL, but print a warning
-                logger.warning("%s Assuming no previous comic strips exist.", msg)  # noqa: G200
+                logger.warning("%s Assuming no previous comic strips exist.", msg)
             else:
                 prevUrl = self.link_modifier(url, prevUrl)
                 logger.debug("Found previous URL %r", prevUrl)
