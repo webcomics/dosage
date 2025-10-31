@@ -1,17 +1,17 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
-from .common import WordPressScraper
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 from ..helpers import indirectStarter
+from .common import WordPressScraper
 
 
 class WebcomicFactory(WordPressScraper):
     starter = indirectStarter
 
     def __init__(self, name, url):
-        super(WebcomicFactory, self).__init__(name)
+        super().__init__(name)
         self.url = url
         self.firstStripUrl = url
 

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 from ..scraper import ParserScraper
 
 
@@ -10,7 +10,7 @@ class KindOfNormal(ParserScraper):
     prevSearch = '//a[@class="prev"]'
 
     def __init__(self, name, url):
-        super(KindOfNormal, self).__init__(name)
+        super().__init__(name)
         self.url = 'http://wumo.com/' + url
 
     @classmethod

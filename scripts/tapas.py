@@ -28,7 +28,7 @@ class TapasUpdater(ComicListUpdater):
         shortName = name.replace(' ', '').replace('\'', '')
         titleNum = int(parse.parse_qs(parse.urlsplit(url).query)['title_no'][0])
         url = url.rsplit('/', 1)[0].replace('/series/', '')
-        return u"cls('%s', '%s', %d)," % (shortName, url, titleNum)
+        return f"cls('{shortName}', '{url}', {titleNum}),"
 
 
 if __name__ == '__main__':

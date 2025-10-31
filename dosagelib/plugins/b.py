@@ -184,7 +184,7 @@ class BirdBoy(WordPressScraper):
         if filename == 'image.jpg':
             [year, month] = imageUrl.rsplit('/', 3)[-3:-1]
             pageNr = int(pageUrl.rsplit('/', 1)[-2].rsplit('-', 1)[-1])
-            filename = '{0}-{1}-Vol2-pg{2}.jpg'.format(year, month, pageNr)
+            filename = f'{year}-{month}-Vol2-pg{pageNr}.jpg'
         elif filename == '27637.jpg':
             filename = 'BB_Vol2_Cover.jpg'
         return filename

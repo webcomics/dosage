@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2021 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2021 Tobias Gruetzmacher
 from .common import WordPressScraper
 
 
@@ -10,7 +10,7 @@ class KrisStraub(WordPressScraper):
 
     def __init__(self, name, firstDate):
         super().__init__(name)
-        self.url = 'https://{}.krisstraub.com/'.format(name.lower())
+        self.url = f'https://{name.lower()}.krisstraub.com/'
         self.stripUrl = self.url + '%s.shtml'
         self.firstStripUrl = self.stripUrl % firstDate
 

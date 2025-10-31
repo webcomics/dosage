@@ -1,9 +1,11 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
-from typing import Sequence, Union
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
+from __future__ import annotations
+
+from collections.abc import Sequence
 
 from ..scraper import ParserScraper
 
@@ -22,7 +24,7 @@ __all__ = (
 
 
 class ComicControlScraper(ParserScraper):
-    imageSearch: Union[Sequence[str], str] = '//img[@id="cc-comic"]'
+    imageSearch: Sequence[str] | str = '//img[@id="cc-comic"]'
     prevSearch = '//a[@rel="prev"]'
     nextSearch = '//a[@rel="next"]'
     latestSearch = '//a[@rel="last"]'

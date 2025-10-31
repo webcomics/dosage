@@ -3,7 +3,7 @@
 # Copyright (C) 2012-2014 Bastian Kleineidam
 # Copyright (C) 2015-2020 Tobias Gruetzmacher
 # Copyright (C) 2019-2020 Daniel Ring
-from .common import WordPressScraper, WordPressNavi
+from .common import WordPressNavi, WordPressScraper
 
 
 class PetiteSymphony(WordPressNavi):
@@ -11,7 +11,7 @@ class PetiteSymphony(WordPressNavi):
     help = 'Index format: named number'
 
     def __init__(self, name):
-        super(PetiteSymphony, self).__init__('PetiteSymphony/' +
+        super().__init__('PetiteSymphony/' +
                                              name.capitalize())
         self.url = 'http://%s.petitesymphony.com/' % name
         self.stripUrl = self.url + 'comic/%s'
@@ -26,7 +26,7 @@ class PetiteSymphony(WordPressNavi):
 
 class ComicsBreak(WordPressScraper):
     def __init__(self, name, archive=None, adult=False):
-        super(ComicsBreak, self).__init__('ComicsBreak/' + name)
+        super().__init__('ComicsBreak/' + name)
         self.url = 'http://%s.comicsbreak.com/' % name.lower()
         if archive:
             self.url = 'https://web.archive.org/web/{}/{}'.format(
@@ -45,7 +45,7 @@ class ComicsBreak(WordPressScraper):
                 filename = filename.replace('p57', 'p56')
             return filename
         else:
-            return super(ComicsBreak, self).namer(imageUrl, pageUrl)
+            return super().namer(imageUrl, pageUrl)
 
     @classmethod
     def getmodules(cls):

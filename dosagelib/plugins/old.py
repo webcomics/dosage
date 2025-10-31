@@ -22,7 +22,7 @@ class Removed(Scraper):
     }
 
     def __init__(self, name, reason='del'):
-        super(Removed, self).__init__(name)
+        super().__init__(name)
         self.reason = reason
 
     def getDisabledReasons(self):
@@ -1697,7 +1697,7 @@ class Renamed(Scraper):
         return cls.count
 
     def __init__(self, name, newname):
-        super(Renamed, self).__init__(name)
+        super().__init__(name)
         self.newname = newname
         self.i = self.counter()
 

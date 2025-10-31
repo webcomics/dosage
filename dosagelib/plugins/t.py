@@ -227,7 +227,7 @@ class TheWhiteboard(_ParserScraper):
     def _parse_page(self, data):
         # Ugly hack to fix broken HTML
         data = self.BROKEN_PAGE_MIDDLE.sub('<', data)
-        return super(TheWhiteboard, self)._parse_page(data)
+        return super()._parse_page(data)
 
     def imageUrlModifier(self, url, data):
         return self.url + url

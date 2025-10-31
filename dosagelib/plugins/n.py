@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2021 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile, escape
 
 from ..helpers import bounceStarter, indirectStarter, joinPathPartsNamer
@@ -77,7 +77,7 @@ class Newshounds(_ParserScraper):
         # Add navigation link between comic and graphic novel
         if url == self.stripUrl % 'nh2/20070201':
             return self.stripUrl % 'nh1/20061208'
-        return super(Newshounds, self).getPrevUrl(url, data)
+        return super().getPrevUrl(url, data)
 
 
 class NewWorld(WordPressScraper):

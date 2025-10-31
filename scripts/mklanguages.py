@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 '''update languages.py from pycountry'''
-import os
 import codecs
+import os
 
 from dosagelib.scraper import scrapers
 
@@ -35,7 +35,7 @@ def write_languages(f, langs):
     """Write language information."""
     f.write("Languages = {%s" % os.linesep)
     for lang in sorted(langs):
-        f.write("    %r: %r,%s" % (lang, langs[lang], os.linesep))
+        f.write(f"    {lang!r}: {langs[lang]!r},{os.linesep}")
     f.write("}%s" % os.linesep)
 
 

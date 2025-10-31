@@ -8,8 +8,8 @@ import logging
 import os
 import re
 import threading
+from collections.abc import Collection
 from queue import Empty, Queue
-from typing import Collection, Dict
 from urllib.parse import urlparse
 
 from . import events
@@ -45,7 +45,7 @@ class ComicQueue(Queue):
 
 
 # ensure threads download only from one host at a time
-host_locks: Dict[str, threading.Lock] = {}
+host_locks: dict[str, threading.Lock] = {}
 
 
 def get_hostname(url):
@@ -67,7 +67,7 @@ class ComicGetter(threading.Thread):
 
     def __init__(self, options, jobs) -> None:
         """Store options."""
-        super(ComicGetter, self).__init__()
+        super().__init__()
         self.options = options
         self.jobs = jobs
         self.origname = self.name

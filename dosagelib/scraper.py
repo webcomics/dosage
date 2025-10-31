@@ -10,7 +10,7 @@ import os
 import pathlib
 import re
 import warnings
-from typing import Collection, Dict, List, Optional, Pattern, Sequence, Union
+from collections.abc import Collection, Sequence
 from urllib.parse import urljoin
 
 import lxml
@@ -55,14 +55,14 @@ class Scraper:
     implementation.'''
 
     # The URL for the comic strip
-    url: Optional[str] = None
+    url: str | None = None
 
     # A string that is interpolated with the strip index to yield the URL for a
     # particular strip.
-    stripUrl: Optional[str] = None
+    stripUrl: str | None = None
 
     # Stop search for previous URLs at this URL
-    firstStripUrl: Optional[str] = None
+    firstStripUrl: str | None = None
 
     # if more than one image per URL is expected
     multipleImagesPerStrip: bool = False
@@ -78,15 +78,15 @@ class Scraper:
 
     # an expression that will locate the URL for the previous strip in a page
     # this can also be a list or tuple
-    prevSearch: Optional[Union[Sequence[Union[str, Pattern]], str, Pattern]] = None
+    prevSearch: Sequence[str | re.Pattern] | str | re.Pattern | None = None
 
     # an expression that will locate the strip image URLs strip in a page
     # this can also be a list or tuple
-    imageSearch: Optional[Union[Sequence[Union[str, Pattern]], str, Pattern]] = None
+    imageSearch: Sequence[str | re.Pattern] | str | re.Pattern | None = None
 
     # an expression to store a text together with the image
     # sometimes comic strips have additional text info for each comic
-    textSearch: Optional[Union[Sequence[Union[str, Pattern]], str, Pattern]] = None
+    textSearch: Sequence[str | re.Pattern] | str | re.Pattern | None = None
 
     # Is the additional text required or optional?  When it is required (the
     # default), you see an error message whenever a comic page is encountered
@@ -184,8 +184,7 @@ class Scraper:
             msg += u" (including adult content)"
         logger.info(msg)
         for url in urls:
-            for strip in self.getStripsFor(url, maxstrips):
-                yield strip
+            yield from self.getStripsFor(url, maxstrips)
 
     def getStripsFor(self, url, maxstrips):
         """Get comic strips for an URL. If maxstrips is a positive number, stop after
@@ -546,7 +545,7 @@ class Cache:
     slow.
     """
     def __init__(self) -> None:
-        self.data: List[Scraper] = []
+        self.data: list[Scraper] = []
         self.userdirs: set[pathlib.Path] = set()
 
     def find(self, comic: str) -> Scraper:
@@ -627,7 +626,7 @@ class Cache:
 
     def validate(self) -> None:
         """Check for duplicate scraper names."""
-        d: Dict[str, Scraper] = {}
+        d: dict[str, Scraper] = {}
         for scraper in self.data:
             name = scraper.name.lower()
             if name in d:

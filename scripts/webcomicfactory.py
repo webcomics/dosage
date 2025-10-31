@@ -17,8 +17,7 @@ class WebComicFactoryUpdater(scriptutil.ComicListUpdater):
 
         firstlinks = self.xpath(data, '//a[d:class("comic-nav-first")]')
         if not firstlinks:
-            print("INFO:", "No first link on »%s«, already first page?" %
-                  (url))
+            print("INFO:", "No first link on »{url}«, already first page?")
             return url
         return firstlinks[0].attrib['href']
 
@@ -38,7 +37,7 @@ class WebComicFactoryUpdater(scriptutil.ComicListUpdater):
             self.add_comic(name, comicurl)
 
     def get_entry(self, name, url):
-        return (u"cls('%s',\n    '%s')," % (name, url))
+        return (f"cls('{name}',\n    '{url}'),")
 
 
 if __name__ == '__main__':

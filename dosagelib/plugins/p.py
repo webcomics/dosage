@@ -158,7 +158,7 @@ class PHDComics(ParserScraper):
     # Ugly hack :(
     def _parse_page(self, data):
         data = self.BROKEN_COMMENT_END.sub('-->', data)
-        return super(PHDComics, self)._parse_page(data)
+        return super()._parse_page(data)
 
     def shouldSkipUrl(self, url, data):
         """Skip pages without images."""

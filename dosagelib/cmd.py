@@ -156,7 +156,7 @@ def display_version(verbose: bool) -> None:
                 attrs = {'version': version, 'app': AppName,
                     'url': url, 'currentversion': __version__}
                 print(text % attrs)
-        except (IOError, KeyError) as err:
+        except (OSError, KeyError) as err:
             print(f'An error occured while checking for an update of {AppName}: {err!r}')
 
 

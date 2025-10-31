@@ -12,9 +12,9 @@ class NamirDeiter(ParserScraper):
 
     def __init__(self, name, baseUrl, first=None, last=None):
         if name == 'NamirDeiter':
-            super(NamirDeiter, self).__init__(name)
+            super().__init__(name)
         else:
-            super(NamirDeiter, self).__init__('NamirDeiter/' + name)
+            super().__init__('NamirDeiter/' + name)
 
         self.url = 'https://' + baseUrl + '/'
         self.stripUrl = self.url + 'comics/index.php?date=%s'

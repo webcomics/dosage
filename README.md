@@ -76,7 +76,7 @@ are old enough to view them.
 ### Dependencies
 
 Since dosage is written in [Python](http://www.python.org/), a Python
-installation is required: Dosage needs at least Python 3.8. Dosage requires
+installation is required: Dosage needs at least Python 3.9. Dosage requires
 some Python modules from PyPI, so installation with `pip` is recommended.
 
 ### Optional dependencies

@@ -13,7 +13,7 @@ class ATestScraper(scraper.BasicScraper):
     pass
 
 
-class TestVote(object):
+class TestVote:
     @responses.activate
     def test_vote(self):
         responses.add(responses.POST, 'https://buildbox.23.gs/count/')
