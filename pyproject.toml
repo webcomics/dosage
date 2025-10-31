@@ -1,42 +1,42 @@
 [build-system]
-requires = ["setuptools>=66.0", "setuptools_scm>=7.1"]
 build-backend = "setuptools.build_meta"
+requires = [ "setuptools>=66", "setuptools-scm>=7.1" ]
 
 [project]
 name = "dosage"
 description = "a comic strip downloader and archiver"
 readme = "README.md"
-maintainers = [{name = "Tobias Gruetzmacher", email = "tobias-dosage@23.gs"}]
-license = {text = "MIT License"}
+keywords = [ "archiver", "comic", "crawler", "downloader", "webcomic" ]
+license = { text = "MIT License" }
+maintainers = [ { name = "Tobias Gruetzmacher", email = "tobias-dosage@23.gs" } ]
 classifiers = [
-    "Development Status :: 5 - Production/Stable",
-    "Environment :: Console",
-    "Intended Audience :: End Users/Desktop",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
-    "Topic :: Internet :: WWW/HTTP",
-    "Topic :: Multimedia :: Graphics",
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Console",
+  "Intended Audience :: End Users/Desktop",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Internet :: WWW/HTTP",
+  "Topic :: Multimedia :: Graphics",
 ]
-keywords = ["comic", "webcomic", "downloader", "archiver", "crawler"]
+dynamic = [ "version" ]
 requires-python = ">=3.8"
+
 dependencies = [
-    "imagesize",
-    "lxml>=4.0.0",
-    "platformdirs",
-    "requests>=2.0",
-    "rich",
-    "importlib_resources>=5.0.0;python_version<'3.9'",
+  "imagesize",
+  "importlib-resources>=5; python_version<'3.9'",
+  "lxml>=4",
+  "platformdirs",
+  "requests>=2",
+  "rich",
 ]
-dynamic = ["version"]
 
 [project.urls]
 Homepage = "https://dosage.rocks"
@@ -46,15 +46,15 @@ Code = "https://github.com/webcomics/dosage"
 [project.optional-dependencies]
 bash = ["argcomplete"]
 compression = [
-    "brotli; platform_python_implementation == 'CPython'",
-    "brotlicffi; platform_python_implementation != 'CPython'",
-    "zstandard",
+  "brotli; platform_python_implementation == 'CPython'",
+  "brotlicffi; platform_python_implementation != 'CPython'",
+  "zstandard;python_version<'3.14'",
 ]
 dev = [
-    "allure-pytest",
-    "pytest-cov",
-    "pytest-xdist",
-    "responses",
+  "allure-pytest",
+  "pytest-cov",
+  "pytest-xdist",
+  "responses",
 ]
 
 [project.scripts]
@@ -64,14 +64,11 @@ dosage = "dosagelib.cmd:main"
 hook-dirs = "dosagelib.__pyinstaller:get_hook_dirs"
 
 [tool.setuptools]
-platforms = ["Any"]
-license-files = ["COPYING"]
+platforms = [ "Any" ]
+license-files = [ "COPYING" ]
 
 [tool.setuptools.packages]
-find = {namespaces = false}
-
-[tool.distutils.bdist_wheel]
-universal = true
+find = { namespaces = false }
 
 [tool.setuptools_scm]
 
@@ -79,25 +76,25 @@ universal = true
 max-complexity = 10
 max_line_length = 100
 ignore = [
-    'E127', 'E128',  # hanging instead of visual indent
-    'W504'  # line breaks after binary operator
+  'E127', 'E128',  # hanging instead of visual indent
+  'W504'  # line breaks after binary operator
 ]
 noqa-require-code = true
 no-accept-encodings = true
 min-version = "3.8"
 extend-exclude = [
-    '.venv',
-    'build',
+  '.venv',
+  'build',
 ]
 
 [tool.isort]
 profile = "black"
-src_paths = ["dosagelib", "scripts", "tests"]
-known_third_party = ["responses"]
+src_paths = [ "dosagelib", "scripts", "tests" ]
+known_third_party = [ "responses" ]
 
 [tool.coverage.run]
 branch = true
-source = ["dosagelib", "tests"]
+source = [ "dosagelib", "tests" ]
 
 [tool.coverage.html]
 show_contexts = true

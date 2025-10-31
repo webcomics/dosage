@@ -1,6 +1,6 @@
 def pys = [
-    [name: 'Python 3.13', docker: '3.13-bookworm', tox:'py313', main: true],
-    [name: 'Python 3.12', docker: '3.12-bookworm', tox:'py312', main: false],
+    [name: 'Python 3.14', docker: '3.14-bookworm', tox:'py314', main: true],
+    [name: 'Python 3.13', docker: '3.13-bookworm', tox:'py313', main: false],
     [name: 'Python 3.8',  docker: '3.8-bookworm',  tox:'py38',  main: false],
 ]
 
@@ -73,6 +73,7 @@ pys.each { py ->
 parallel(tasks)
 parallel modern: {
         stage('Modern Windows binary') {
+            // FIXME: Update to 3.14 when brotli wheel is available
             windowsBuild('3.13', 'dosage.exe')
         }
     },
