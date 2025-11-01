@@ -6,7 +6,7 @@
 from re import compile, escape
 
 from .. import util
-from ..helpers import bounceStarter, indirectStarter, joinPathPartsNamer, queryNamer
+from ..helpers import bounceStarter, indirectStarter, joinPathPartsNamer
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
 from .common import ComicControlScraper, WordPressNavi, WordPressScraper
@@ -145,12 +145,12 @@ class PeterAndWhitney(_ParserScraper):
 class PHDComics(ParserScraper):
     BROKEN_COMMENT_END = compile(r'--!>')
 
-    baseUrl = 'http://phdcomics.com/'
+    baseUrl = 'https://phdcomics.com/'
     url = baseUrl + 'comics.php'
     stripUrl = baseUrl + 'comics/archive.php?comicid=%s'
     firstStripUrl = stripUrl % '1'
-    imageSearch = ('//img[@id="comic2"]',
-        r'//img[d:class("img-responsive") and re:test(@name, "comic\d+")]')
+    imageSearch = (r'//img[starts-with(@name, "comic") and re:test(@src, "\.[a-z]{3,4}$")]',
+        '//img[d:class("img-responsive") and @title]')
     multipleImagesPerStrip = True
     prevSearch = '//a[img[contains(@src, "prev_button")]]'
     nextSearch = '//a[img[contains(@src, "next_button")]]'
@@ -177,12 +177,6 @@ class Picklewhistle(ComicControlScraper):
 class PicPakDog(WordPressScraper):
     url = 'http://www.picpak.net/'
     firstStripUrl = url + 'comic/dogs-cant-spell/'
-
-
-# Keep, because naming is different to PHDComics...
-class PiledHigherAndDeeper(PHDComics):
-    starter = bounceStarter
-    namer = queryNamer('comicid', use_page_url=True)
 
 
 class Pixel(_BasicScraper):

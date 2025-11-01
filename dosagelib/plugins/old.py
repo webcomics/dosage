@@ -1801,4 +1801,5 @@ class Renamed(Scraper):
             cls('GoComics/OutOfTheGenePoolReRuns', 'GoComics/OutOfTheGenePool'),
             cls('GoComics/SnoopyEnEspanol', 'GoComics/PeanutsEnEspanol'),
             cls('GoComics/TheWizardOfIdSpanish', 'GoComics/WizardOfIdEnEspanol'),
+            cls('PiledHigherAndDeeper', 'PHDComics'),
         )
