@@ -3,10 +3,10 @@
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
 import json
 
-from ..scraper import ParserScraper
+from .. import scraper, util
 
 
-class MangaDex(ParserScraper):
+class MangaDex(scraper.ParserScraper):
     multipleImagesPerStrip = True
 
     def __init__(self, name, mangaId):
@@ -68,7 +68,7 @@ class MangaDex(ParserScraper):
 
     def getPrevUrl(self, url, data):
         # Determine previous chapter ID from cached list
-        chapterId = url.rsplit('/', 1)[-1]
+        chapterId = util.urlpathsplit(url)[-1]
         chapter = list(filter(lambda c: c['id'] == chapterId, self.chapters))
         if len(chapter) == 0:
             return None

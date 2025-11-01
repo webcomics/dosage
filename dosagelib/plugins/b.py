@@ -5,6 +5,7 @@
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile, escape
 
+from .. import util
 from ..helpers import indirectStarter, joinPathPartsNamer
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
@@ -131,9 +132,9 @@ class BeyondTheVeil(WordPressScraper):
     firstStripUrl = stripUrl % '01252010'
     endOfLife = True
 
-    def namer(self, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         # Fix inconsistent filenames
-        filename = imageUrl.rsplit('/', 1)[-1]
+        filename = util.urlpathsplit(image_url)[-1]
         filename = filename.replace('BtV_pg43_bw', '2014-04-25-BtV_pg43_bw')
         filename = filename.replace('BtVpg28Ch7b', '2014-07-04-BtVpg28Ch7b')
         return filename
@@ -178,28 +179,26 @@ class BirdBoy(WordPressScraper):
                 strip = 'page-{0}'.format(pageNr)
         return self.stripUrl.format(volume, strip)
 
-    def namer(self, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         # Fix inconsistent filenames
-        filename = imageUrl.rsplit('/', 1)[-1]
+        imgparts = util.urlpathsplit(image_url)
+        filename = imgparts[-1]
         if filename == 'image.jpg':
-            [year, month] = imageUrl.rsplit('/', 3)[-3:-1]
-            pageNr = int(pageUrl.rsplit('/', 1)[-2].rsplit('-', 1)[-1])
-            filename = '{0}-{1}-Vol2-pg{2}.jpg'.format(year, month, pageNr)
+            year, month = imgparts[-3:-1]
+            pageNr = int(page_url.rsplit('/', 1)[-2].rsplit('-', 1)[-1])
+            filename = f'{year}-{month}-Vol2-pg{pageNr}.jpg'
         elif filename == '27637.jpg':
             filename = 'BB_Vol2_Cover.jpg'
         return filename
 
 
-class BittersweetCandyBowl(_ParserScraper):
+class BittersweetCandyBowl(ParserScraper):
     url = 'https://www.bittersweetcandybowl.com/'
     stripUrl = url + '%s.html'
     firstStripUrl = stripUrl % 'c1/p1'
     imageSearch = '//img[@id="page_img"]'
     prevSearch = '//a[@rel="prev"]'
-
-    def namer(self, imageUrl, pageUrl):
-        filename = imageUrl.rsplit('/', 2)
-        return filename[1] + '_' + filename[2]
+    namer = joinPathPartsNamer(imageparts=range(-2, 0))
 
 
 class BlankIt(_ParserScraper):
@@ -224,9 +223,9 @@ class Bloodline(WordPressScraper):
     firstStripUrl = stripUrl % 'pg-1-2'
     imageSearch = '//div[@id="comic"]//img[not(contains(@src, "TWC-vote-image"))]'
 
-    def namer(self, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         # Fix filenames of early comics
-        return imageUrl.rsplit('/', 1)[-1].replace('gen-6', 'Bloodline')
+        return util.urlpathsplit(image_url)[-1].replace('gen-6', 'Bloodline')
 
 
 class BloomingFaeries(ParserScraper):

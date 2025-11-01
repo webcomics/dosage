@@ -1,10 +1,11 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: 2019 Daniel Ring
 from re import compile, escape
 
+from .. import util
 from ..scraper import BasicScraper, ParserScraper
 from ..util import tagre
 from .common import WordPressNavi, WordPressScraper
@@ -67,8 +68,8 @@ class IslaAukate(ParserScraper):
     imageSearch = '//div[@id="comicpage"]/img'
     prevSearch = '//nav[@class="comicnav"]/a[text()="Prev"]'
 
-    def namer(self, imageUrl, pageUrl):
-        filename = imageUrl.rsplit('/', 1)[-1]
+    def namer(self, image_url, page_url):
+        filename = util.urlpathsplit(image_url)[-1]
         return filename.rsplit('_', 1)[0]
 
 
@@ -79,9 +80,9 @@ class IslaAukateColor(ParserScraper):
     imageSearch = '//div[@id="comicpage"]/img'
     prevSearch = '//nav[@class="comicnav"]/a[text()="Prev"]'
 
-    def namer(self, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         # Fix filenames of early comics
-        filename = imageUrl.rsplit('/', 1)[-1]
+        filename = util.urlpathsplit(image_url)[-1]
         if filename[0].isdigit():
             filename = 'Aukate' + filename
         return filename.rsplit('_', 1)[0] + '.' + filename.rsplit('.', 1)[-1]

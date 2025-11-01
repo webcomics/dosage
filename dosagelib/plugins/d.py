@@ -157,14 +157,14 @@ class DerTodUndDasMaedchen(_ParserScraper):
 
 class DesertFox(WordPressWebcomic):
     url = 'https://desertfoxcomics.net/'
-    stripUrl = url + 'comics/%s/'
+    stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'origins-1'
 
-    def namer(self, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         # Fix inconsistent filenames
-        filename = imageUrl.rsplit('/', 1)[-1]
+        filename = util.urlpathsplit(image_url)[-1]
         filename = filename.replace('Pg', 'Page').replace('Desert-Fox', '')
-        if 'origins' in pageUrl:
+        if 'origins' in page_url:
             filename = filename.replace('Page-', 'Page-0-')
         return filename
 
@@ -204,7 +204,7 @@ class DieselSweetiesOld(_ParserScraper):
         return self.stripUrl % '4000'
 
     def namer(self, image_url, page_url):
-        index = int(image_url.split('/')[-1].split('.')[0])
+        index = int(util.urlpathsplit(image_url)[-1].split('.')[0])
         return 'sw%02d' % index
 
 
@@ -221,7 +221,7 @@ class DocRat(WordPressWebcomic):
         return filename
 
 
-class DoemainOfOurOwn(_ParserScraper):
+class DoemainOfOurOwn(ParserScraper):
     url = 'http://www.doemain.com/'
     stripUrl = url + 'html/%s.html'
     firstStripUrl = stripUrl % '1999/1999-04-24'
@@ -230,9 +230,9 @@ class DoemainOfOurOwn(_ParserScraper):
     endOfLife = True
     help = 'Index format: yyyy-mm-dd'
 
-    def namer(self, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         # Fix date formatting
-        filename = imageUrl.rsplit('/', 1)[-1]
+        filename = util.urlpathsplit(image_url)[-1]
         if len(filename) > 6 and filename[0:6].isdigit():
             month = filename[0:2]
             day = filename[2:4]

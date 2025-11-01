@@ -1,18 +1,16 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
-from ..helpers import indirectStarter
-from ..scraper import ParserScraper
-from ..util import getQueryParams
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+from .. import helpers, scraper, util
 
 
-class CloneManga(ParserScraper):
+class CloneManga(scraper.ParserScraper):
     baseUrl = 'http://manga.clone-army.org'
     imageSearch = '//div[d:class("subsectionContainer")]//img'
     prevSearch = '//a[span[text()="<<"]]'
     latestSearch = '//a[span[text()=">|"]]'
-    starter = indirectStarter
+    starter = helpers.indirectStarter
     help = 'Index format: n'
 
     def __init__(self, name, shortName, endOfLife=False) -> None:
@@ -23,8 +21,8 @@ class CloneManga(ParserScraper):
         self.endOfLife = endOfLife
 
     def namer(self, image_url, page_url):
-        origname = image_url.rsplit('/', 1)[1]
-        params = getQueryParams(page_url)
+        origname = util.urlpathsplit(image_url)[-1]
+        params = util.getQueryParams(page_url)
         if 'page' in params:
             return '{:03}_{}'.format(int(params['page'][0]), origname)
         else:

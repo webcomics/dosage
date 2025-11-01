@@ -5,7 +5,8 @@
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile, escape
 
-from ..helpers import bounceStarter, indirectStarter
+from .. import util
+from ..helpers import bounceStarter, indirectStarter, joinPathPartsNamer
 from ..scraper import BasicScraper, ParserScraper
 from ..util import tagre
 from .common import ComicControlScraper, WordPressNaviIn, WordPressScraper
@@ -54,9 +55,9 @@ class HarkAVagrant(BasicScraper):
     help = 'Index format: number'
 
     def namer(self, image_url, page_url):
-        filename = image_url.rsplit('/', 1)[1]
+        filename = util.urlpathsplit(image_url)[-1]
         num = page_url.rsplit('=', 1)[1]
-        return '%s-%s' % (num, filename)
+        return f'{num}-{filename}'
 
 
 class HavocInc(WordPressScraper):
@@ -78,9 +79,7 @@ class Hellkats(ParserScraper):
     latestSearch = '//div[@class="post-title"]//a'
     starter = indirectStarter
     adult = True
-
-    def namer(self, imageUrl, pageUrl):
-        return pageUrl.rsplit('/', 2)[1] + '.' + imageUrl.rsplit('.', 1)[-1]
+    namer = joinPathPartsNamer(pageparts=(-2,))
 
 
 class HeyFox(WordPressScraper):
@@ -127,12 +126,12 @@ class HijinksEnsuePhoto(WordPressNaviIn):
 
 
 class HowToBeAWerewolf(ComicControlScraper):
-    url = 'http://howtobeawerewolf.com/'
+    url = 'https://www.howtobeawerewolf.com/'
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % 'coming-february-3rd'
 
-    def namer(self, imageUrl, pageUrl):
-        filename = imageUrl.rsplit('/', 1)[-1]
+    def namer(self, image_url, page_url):
+        filename = util.urlpathsplit(image_url)[-1]
         if filename[0].isdigit():
             filename = filename.split('-', 1)[1]
         return filename

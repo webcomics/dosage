@@ -245,7 +245,7 @@ class FurPiled(ParserScraper):
 
     def getPrevUrl(self, url, data):
         # Skip missing pages
-        nextStrip = int(url.rsplit('/', 1)[-1].split('.', 1)[0].replace('fp-', '')) - 1
+        nextStrip = int(util.urlpathsplit(url)[-1].split('.', 1)[0].replace('fp-', '')) - 1
         if nextStrip in [407, 258, 131, 110, 97, 31]:
             nextStrip = nextStrip - 1
         return self.stripUrl % nextStrip

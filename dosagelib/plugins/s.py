@@ -367,9 +367,9 @@ class SMBC(ComicControlScraper):
     textSearch = '//img[@id="cc-comic"]/@title'
     multipleImagesPerStrip = True
 
-    def namer(self, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         # Remove random noise from filename
-        filename = imageUrl.rsplit('/', 1)[-1]
+        filename = util.urlpathsplit(image_url)[-1]
         if '-' in filename and len(filename.rsplit('-', 1)[-1]) > 12:
             filename = filename.rsplit('-', 1)[-1]
         elif len(filename) > 22 and filename[0] == '1':
@@ -390,7 +390,7 @@ class SnowFlame(WordPressScraper):
         return self.stripUrl % tuple(index.split('-'))
 
     def namer(self, image_url, page_url):
-        prefix, filename = image_url.rsplit('/', 1)
+        filename = util.urlpathsplit(image_url)[-1]
         ro = compile(r'snowflame-([^-]+)-([^-]+)')
         mo = ro.search(page_url)
         chapter = mo.group(1)
@@ -543,9 +543,9 @@ class StandStillStaySilent(_ParserScraper):
     imageSearch = '//img[@class="comicnormal"]'
     prevSearch = '//a[./img[contains(@src, "nav_prev")]]'
 
-    def namer(self, imageUrl, pageUrl):
-        chapter = '2' if ('adv2_comicpages' in imageUrl) else '1'
-        return '%s-%s' % (chapter, imageUrl.rsplit('/', 1)[-1].replace('page_', ''))
+    def namer(self, image_url, page_url):
+        chapter = '2' if ('adv2_comicpages' in image_url) else '1'
+        return '%s-%s' % (chapter, util.urlpathsplit(image_url)[-1].replace('page_', ''))
 
 
 class StarCrossdDestiny(ParserScraper):
@@ -566,7 +566,7 @@ class StarCrossdDestiny(ParserScraper):
             image_url = sub('(?:strips)|(?:images)', 'book1', image_url)
         elif not image_url.find('strips') == -1:
             image_url = image_url.replace('strips/', '')
-        directory, filename = image_url.split('/')[-2:]
+        directory, filename = util.urlpathsplit(image_url)[-2:]
         return directory + '-' + filename
 
 
@@ -579,9 +579,7 @@ class StarfireAgency(ParserScraper):
     latestSearch = '//div[@class="post-title"]//a'
     starter = indirectStarter
     adult = True
-
-    def namer(self, imageUrl, pageUrl):
-        return util.urlpathsplit(pageUrl)[-1]
+    namer = joinPathPartsNamer(pageparts=(-1,))
 
 
 class StarTrip(ComicControlScraper):

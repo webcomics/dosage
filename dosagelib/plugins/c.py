@@ -49,9 +49,9 @@ class CarryOn(ParserScraper):
     prevSearch = '//a[text()="Previous Day"]'
     multipleImagesPerStrip = True
 
-    def namer(self, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         # Fix filenames of early comics
-        filename = imageUrl.rsplit('/', 1)[-1]
+        filename = util.urlpathsplit(image_url)[-1]
         if filename[0].isdigit():
             filename = 'co' + filename
         return filename
@@ -64,9 +64,9 @@ class CarryOnAliceBlueAndTheGardensOfQ(CarryOn):
     firstStripUrl = stripUrl % '20050401'
     endOfLife = True
 
-    def namer(self, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         # Fix filenames
-        return 'abgq' + imageUrl.rsplit('/', 1)[-1]
+        return 'abgq' + util.urlpathsplit(image_url)[-1]
 
 
 class CarryOnLegendOfAnneBunny(CarryOn):
@@ -76,9 +76,9 @@ class CarryOnLegendOfAnneBunny(CarryOn):
     firstStripUrl = stripUrl % '20040701'
     endOfLife = True
 
-    def namer(self, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         # Fix filenames of early comics
-        filename = imageUrl.rsplit('/', 1)[-1]
+        filename = util.urlpathsplit(image_url)[-1]
         if filename[0].isdigit():
             filename = 'ab' + filename
         return filename
@@ -461,9 +461,9 @@ class CutLoose(ParserScraper):
     starter = bounceStarter
     adult = True
 
-    def namer(self, imageUrl, pageUrl):
-        postDate = '-'.join(util.urlpathsplit(pageUrl)[-3:])
-        filename = imageUrl.rsplit('/', 1)[-1]
+    def namer(self, image_url, page_url):
+        postDate = '-'.join(util.urlpathsplit(page_url)[-3:])
+        filename = util.urlpathsplit(image_url)[-1]
         return f'{postDate}_{filename}'
 
 

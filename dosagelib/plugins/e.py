@@ -121,10 +121,10 @@ class Erfworld(ParserScraper):
         """Skip pages without images."""
         return not self.match(data, self.imageSearch)
 
-    def namer(self, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         # Fix inconsistent filenames
-        filename = imageUrl.rsplit('/', 1)[-1]
-        page = util.urlpathsplit(pageUrl.replace('+', '-'))
+        filename = util.urlpathsplit(image_url)[-1]
+        page = util.urlpathsplit(page_url.replace('+', '-'))
         return '_'.join(page[:1] + [filename])
 
     def getPrevUrl(self, url, data):
@@ -153,10 +153,10 @@ class ErmaFelnaEDF(ParserScraper):
     latestSearch = '//a[@title="Current Comic"]'
     starter = indirectStarter
 
-    def namer(self, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         # Fix inconsistent filenames
-        postDate = '-'.join(util.urlpathsplit(pageUrl)[-3:])
-        filename = imageUrl.rsplit('/', 1)[-1]
+        postDate = '-'.join(util.urlpathsplit(page_url)[-3:])
+        filename = util.urlpathsplit(image_url)[-1]
         return f'{postDate}_{filename}'
 
 

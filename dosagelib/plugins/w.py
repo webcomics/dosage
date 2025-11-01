@@ -5,6 +5,7 @@
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import IGNORECASE, compile, escape
 
+from .. import util
 from ..helpers import bounceStarter, joinPathPartsNamer
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
@@ -62,12 +63,12 @@ class WereIWolf(_ParserScraper):
                 '3 Black and White - Princess and Knight',
                 '4 Black and White - part 3')
 
-    def namer(self, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         # Prepend chapter number to image filename
         for chapter in self.chapters:
-            if chapter in pageUrl:
+            if chapter in page_url:
                 chapterNum = chapter[0]
-        return chapterNum + '_' + imageUrl.rsplit('/', 1)[-1]
+        return chapterNum + '_' + util.urlpathsplit(image_url)[-1]
 
     def getPrevUrl(self, url, data):
         # Fix missing navigation links between chapters

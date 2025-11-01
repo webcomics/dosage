@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: MIT
 # SPDX-FileCopyrightText: © 2019 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
+from .. import util
 from .common import WordPressSpliced
 
 
@@ -27,9 +28,9 @@ class AlienDice(WordPressSpliced):
             return self.stripUrl % 'day-29-part-2-page-3-2'
         return super().getPrevUrl(url, data)
 
-    def namer(self, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         # Fix inconsistent filename
-        return imageUrl.rsplit('/', 1)[-1].replace('20010831', '2001-08-31')
+        return util.urlpathsplit(image_url)[-1].replace('20010831', '2001-08-31')
 
 
 class AlienDiceLegacy(WordPressSpliced):

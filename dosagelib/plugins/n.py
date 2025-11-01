@@ -1,10 +1,11 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2021 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile, escape
 
+from .. import util
 from ..helpers import bounceStarter, indirectStarter, joinPathPartsNamer
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
@@ -31,10 +32,7 @@ class NatalieDee(_BasicScraper):
                                 before="overflow"))
     prevSearch = compile(tagre("a", "href", r'([^"]+)') + "&lt;&lt; Yesterday")
     help = 'Index format: mmddyy'
-
-    def namer(self, image_url, page_url):
-        unused, date, filename = image_url.rsplit('/', 2)
-        return '%s-%s' % (date, filename)
+    namer = joinPathPartsNamer(imageparts=range(-2, 0), joinchar='-')
 
 
 class Nedroid(WordPressScraper):
@@ -124,9 +122,7 @@ class Nightshift(ParserScraper):
     latestSearch = '//div[@class="post-title"]//a'
     starter = indirectStarter
     adult = True
-
-    def namer(self, imageUrl, pageUrl):
-        return pageUrl.rsplit('/', 2)[1] + '.' + imageUrl.rsplit('.', 1)[-1]
+    namer = joinPathPartsNamer(pageparts=(-2,))
 
 
 class Nimona(_ParserScraper):
@@ -179,12 +175,12 @@ class NonPlayerCharacter(ParserScraper):
 
 
 class NotAVillain(WordPressWebcomic):
-    url = 'http://navcomic.com/'
+    url = 'https://navcomic.com/'
     stripUrl = url + 'not-a-villain/%s/'
     firstStripUrl = stripUrl % 'v1-001'
 
-    def namer(self, imageUrl, pageUrl):
-        filename = imageUrl.rsplit('/', 1)[-1]
+    def namer(self, image_url, page_url):
+        filename = util.urlpathsplit(image_url)[-1]
         # Fix filenames missing "Page"
         if filename[2].isdigit():
             filename = filename[0] + '-Page' + filename[2:]

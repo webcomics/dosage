@@ -1,9 +1,10 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2020 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
-from .common import WordPressScraper, WordPressNavi
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
+from .. import util
+from .common import WordPressNavi, WordPressScraper
 
 
 class PetiteSymphony(WordPressNavi):
@@ -35,17 +36,17 @@ class ComicsBreak(WordPressScraper):
         if adult:
             self.adult = adult
 
-    def namer(self, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         if self.name == 'ComicsBreak/Djandora':
             # Fix inconsistent filenames
-            filename = imageUrl.rsplit('/', 1)[-1]
+            filename = util.urlpathsplit(image_url)[-1]
             filename = filename.replace('2014-10-31-Page70', 'Page70')
             filename = filename.replace('a3p69eng', 'Page69')
-            if '2015/08/a4p57eng' in imageUrl:
+            if '2015/08/a4p57eng' in image_url:
                 filename = filename.replace('p57', 'p56')
             return filename
         else:
-            return super(ComicsBreak, self).namer(imageUrl, pageUrl)
+            return super().namer(image_url, page_url)
 
     @classmethod
     def getmodules(cls):

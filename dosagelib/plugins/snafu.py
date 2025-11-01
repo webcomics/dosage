@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 import re
 
+from .. import util
 from .common import ComicControlScraper
-
 
 FILENAMECRAP = re.compile(r'_[0-9a-f]{72}(?=\.)')
 
@@ -16,7 +16,7 @@ class Snafu(ComicControlScraper):
         self.url = 'https://snafu-comics.com/' + path
 
     def namer(self, image_url, page_url):
-        return FILENAMECRAP.sub('', image_url.rsplit('/', 1)[-1])
+        return FILENAMECRAP.sub('', util.urlpathsplit(image_url)[-1])
 
     @classmethod
     def getmodules(cls):

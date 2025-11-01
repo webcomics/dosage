@@ -1,12 +1,13 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 import re
 
-from ..scraper import ParserScraper
+from .. import util
 from ..helpers import bounceStarter
+from ..scraper import ParserScraper
 
 
 class WLPComics(ParserScraper):
@@ -21,7 +22,7 @@ class WLPComics(ParserScraper):
 
     def namer(self, image_url, page_url):
         return (page_url.rsplit('/', 1)[-1].split('.')[0] + '_' +
-                image_url.rsplit('/', 1)[-1])
+                util.urlpathsplit(image_url)[-1])
 
 
 class ChichiChan(WLPComics):
@@ -60,9 +61,9 @@ class PeterIsTheWolfAdult(WLPComics):
     adult = True
     endOfLife = True
 
-    def namer(self, imageUrl, pageUrl):
-        name = pageUrl.rsplit('/', 1)[-1].split('.')[0] + '_' + imageUrl.rsplit('/', 1)[-1]
-        if 'adult' in imageUrl:
+    def namer(self, image_url, page_url):
+        name = page_url.rsplit('/', 1)[-1].split('.')[0] + '_' + util.urlpathsplit(image_url)[-1]
+        if 'adult' in image_url:
             name = name.split('.')
             return name[0] + '_adult.' + name[1]
         return name

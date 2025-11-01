@@ -59,9 +59,9 @@ class unDivine(ComicControlScraper):
     stripUrl = url + 'comic/%s'
     firstStripUrl = stripUrl % 'page-1'
 
-    def namer(self, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         # Fix inconsistent filenames
-        filename = imageUrl.rsplit('/', 1)[-1].replace(' ', '-')
+        filename = util.urlpathsplit(image_url)[-1].replace(' ', '-')
         filename = filename.replace('10B311D9-0992-4D74-AEB8-DAB714DA67C6', 'UD-322')
         filename = filename.replace('99266624-7EF7-4E99-9EC9-DDB5F59CBDFD', 'UD-311')
         filename = filename.replace('33C6A5A1-F703-4A0A-BCD5-DE1A09359D8E', 'UD-310')

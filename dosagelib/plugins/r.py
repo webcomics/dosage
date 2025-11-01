@@ -7,7 +7,7 @@ from re import compile
 from urllib.parse import urljoin
 
 from .. import util
-from ..helpers import bounceStarter
+from ..helpers import bounceStarter, joinPathPartsNamer
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
 from .common import WordPressNavi, WordPressScraper, WordPressWebcomic
@@ -30,8 +30,8 @@ class RayFox(WordPressNavi):
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'not-a-super-hero/it-begins'
 
-    def namer(self, imageUrl, pageUrl):
-        filename = imageUrl.rsplit('/', 1)[-1].split('.', 1)[0]
+    def namer(self, image_url, page_url):
+        filename = util.urlpathsplit(image_url)[-1].split('.', 1)[0]
         if filename == 'j':
             filename = 'RF_E3_P52'
         elif filename == '46' or filename == '55' or filename == '61':
@@ -58,10 +58,10 @@ class RealLife(WordPressScraper):
     firstStripUrl = stripUrl % 'title-1'
     help = 'Index format: monthname-dd-yyyy'
 
-    def namer(self, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         # Fix inconsisntent filenames
-        filename = imageUrl.rsplit('/', 1)[-1]
-        if pageUrl.rsplit('=', 1)[-1] == 'may-27-2014':
+        filename = util.urlpathsplit(image_url)[-1]
+        if page_url.rsplit('=', 1)[-1] == 'may-27-2014':
             filename = filename.replace('20140219_3121', '20140527')
         filename = filename.replace('5-Finished', '20140623_3161')
         filename = filename.replace('520140722', '20140722')
@@ -94,9 +94,9 @@ class Recursion(_ParserScraper):
     imageSearch = '//div[@class="content"]//img'
     prevSearch = '//link[@rel="prev"]'
 
-    def namer(self, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         # Fix inconsistent filenames
-        filename = imageUrl.rsplit('/', 1)[-1]
+        filename = util.urlpathsplit(image_url)[-1]
         filename = filename.replace('0bf62e92-2c98-4fb2-8ed7-4584980beb17', 'page0005')
         filename = filename.replace('76112837-c5cd-4df7-8c53-3ed5c25194cf', 'page0003')
         filename = filename.replace('ed271080-6b1b-4d7a-8509-b2d8a15da805', 'page0002')
@@ -104,14 +104,11 @@ class Recursion(_ParserScraper):
         return filename
 
 
-class RedMeat(_ParserScraper):
-    url = 'http://www.redmeat.com/max-cannon/FreshMeat'
-    imageSearch = '//div[@class="comicStrip"]//img'
-    prevSearch = '//a[@class="prev"]'
-
-    def namer(self, image_url, page_url):
-        parts = image_url.rsplit('/', 2)
-        return '_'.join(parts[1:3])
+class RedMeat(ParserScraper):
+    url = 'https://www.redmeat.com/'
+    imageSearch = '//article[d:class("comic")]//img'
+    prevSearch = '//a[d:class("prev")]'
+    namer = joinPathPartsNamer(imageparts=range(-2, 0))
 
 
 class Requiem(WordPressScraper):

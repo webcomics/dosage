@@ -21,19 +21,9 @@ try:
 except ImportError:
     pycountry = None
 
-from . import configuration, http, languages, loader
+from . import configuration, http, languages, loader, util, xml
 from .comic import ComicStrip
 from .events import getHandler
-from .util import (
-    get_page,
-    get_system_uid,
-    makeSequence,
-    normaliseURL,
-    prettyMatcherList,
-    tagre,
-    uniq,
-)
-from .xml import NS
 
 logger = logging.getLogger(__name__)
 ARCHIVE_ORG_URL = re.compile(r'https?://web\.archive\.org/web/[^/]*/')
@@ -145,16 +135,16 @@ class Scraper:
         # map modifier function on image URLs
         urls = [self.imageUrlModifier(x, data) for x in urls]
         # remove duplicate URLs
-        urls = uniq(urls)
+        urls = util.uniq(urls)
         if len(urls) > 1 and not self.multipleImagesPerStrip:
             logger.warning("Found %d images instead of 1 at %s with expressions %r",
-                len(urls), url, prettyMatcherList(self.imageSearch))
+                len(urls), url, util.prettyMatcherList(self.imageSearch))
             image = urls[0]
             logger.warning("Choosing image %r", image)
             urls = (image,)
         elif not urls:
             logger.warning("Found no images at %r with expressions %r", url,
-                prettyMatcherList(self.imageSearch))
+                util.prettyMatcherList(self.imageSearch))
         if self.textSearch:
             text = self.fetchText(url, data, self.textSearch,
                 optional=self.textOptional)
@@ -257,7 +247,7 @@ class Scraper:
 
     def namer(self, image_url: str, page_url: str) -> str:
         """Return filename for given image and page URL."""
-        return image_url.rsplit('/', 1)[1]
+        return util.urlpathsplit(image_url)[-1]
 
     def link_modifier(self, fromurl: str, tourl: str) -> str:
         """Optional modification of parsed link (previous/back/latest) URLs.
@@ -275,7 +265,7 @@ class Scraper:
 
     def vote(self) -> None:
         """Cast a public vote for this comic."""
-        uid = get_system_uid()
+        uid = util.get_system_uid()
         data = {"name": self.name.replace('/', '_'), "uid": uid}
         response = self.session.post(configuration.VoteUrl, data=data)
         response.raise_for_status()
@@ -327,7 +317,7 @@ class Scraper:
         methods should be able to use the data if they so desire... (Affected
         methods: shouldSkipUrl, imageUrlModifier)
         """
-        return get_page(url, self.session, allow_errors=self.allow_errors)
+        return util.get_page(url, self.session, allow_errors=self.allow_errors)
 
     def extract_image_urls(self, url, data):
         """
@@ -388,7 +378,7 @@ class BasicScraper(Scraper):
     any).
     """
 
-    BASE_SEARCH = re.compile(tagre("base", "href", '([^"]*)'))
+    BASE_SEARCH = re.compile(util.tagre("base", "href", '([^"]*)'))
 
     def getPage(self, url):
         content = super().getPage(url).text
@@ -404,7 +394,7 @@ class BasicScraper(Scraper):
     def fetchUrls(self, url, data, urlSearch):
         """Search all entries for given URL pattern(s) in a HTML page."""
         searchUrls = []
-        searches = makeSequence(urlSearch)
+        searches = util.makeSequence(urlSearch)
         for search in searches:
             for match in search.finditer(data[0]):
                 searchUrl = match.group(1)
@@ -412,7 +402,7 @@ class BasicScraper(Scraper):
                     raise ValueError("Pattern %s matched empty URL at %s." %
                                      (search.pattern, url))
                 logger.debug('matched URL %r with pattern %r', searchUrl, search.pattern)
-                searchUrls.append(normaliseURL(urljoin(data[1], searchUrl)))
+                searchUrls.append(util.normaliseURL(urljoin(data[1], searchUrl)))
             if searchUrls:
                 # do not search other links if one pattern matched
                 break
@@ -519,7 +509,7 @@ class ParserScraper(Scraper):
         return text.strip()
 
     def _matchPattern(self, data, patterns):
-        patterns = makeSequence(patterns)
+        patterns = util.makeSequence(patterns)
         for search in patterns:
             matched = False
             for match in self.match(data, search):
@@ -532,7 +522,7 @@ class ParserScraper(Scraper):
 
     def match(self, data, pattern):
         """Match an XPath pattern against a page."""
-        return data.xpath(pattern, namespaces=NS)
+        return data.xpath(pattern, namespaces=xml.NS)
 
 
 # Legacy aliases

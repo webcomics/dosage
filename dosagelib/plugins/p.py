@@ -5,6 +5,7 @@
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
 from re import compile, escape
 
+from .. import util
 from ..helpers import bounceStarter, indirectStarter, joinPathPartsNamer, queryNamer
 from ..scraper import ParserScraper, _BasicScraper, _ParserScraper
 from ..util import tagre
@@ -211,8 +212,8 @@ class PlushAndBlood(ParserScraper):
     prevSearch = '//a[contains(text(), "PREV")]'
 
 
-class PokeyThePenguin(_ParserScraper):
-    url = 'http://www.yellow5.com/pokey/archive/'
+class PokeyThePenguin(ParserScraper):
+    url = 'https://www.yellow5.com/pokey/archive/'
     stripUrl = url + 'index%s.html'
     firstStripUrl = stripUrl % '1'
     imageSearch = '//p/img'
@@ -226,7 +227,7 @@ class PokeyThePenguin(_ParserScraper):
         mo = compile(r"index(\d+)\.html").search(url)
         num = int(mo.group(1)) - 1
         prefix = url.rsplit('/', 1)[0]
-        return "%s/index%d.html" % (prefix, num)
+        return f"{prefix}/index{num}.html"
 
 
 class PoorlyDrawnLines(ParserScraper):
@@ -308,14 +309,14 @@ class ProphecyOfTheCircle(WordPressNavi):
     stripUrl = url + 'comic/%s/'
     firstStripUrl = stripUrl % 'prologue'
 
-    def namer(self, imageUrl, pageUrl):
+    def namer(self, image_url, page_url):
         # Fix duplicate filenames
-        filename = imageUrl.rsplit('/', 1)[-1]
-        if '2015/12/jamet101' in imageUrl:
+        filename = util.urlpathsplit(image_url)[-1]
+        if '2015/12/jamet101' in image_url:
             filename = filename.replace('101', '10')
-        elif '2012-02-20-jahrd156' in imageUrl:
+        elif '2012-02-20-jahrd156' in image_url:
             filename = filename.replace('156', '157')
-        elif '2011-10-02-jahrd137' in imageUrl:
+        elif '2011-10-02-jahrd137' in image_url:
             filename = filename.replace('137', '137-1')
         # Fix inconsistent filenames
         if filename[0] == '2':
@@ -355,4 +356,4 @@ class PvPOnline(ParserScraper):
     endOfLife = True
 
     def namer(self, image_url, page_url):
-        return 'pvp' + image_url.rsplit('/', 1)[-1]
+        return 'pvp' + util.urlpathsplit(image_url)[-1]
