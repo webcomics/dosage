@@ -6,6 +6,31 @@ The format is based on
 
 ## [Unreleased]
 
+## [3.2] - 2025-11-04
+
+### Security
+
+- Fixes [CVE-2025-64184]: Directory Traversal through crafted HTTP responses
+
+[CVE-2025-64184]: https://github.com/webcomics/dosage/security/advisories/GHSA-4vcx-3pj3-44m7
+
+### Added
+
+- Support for Python 3.14
+- Some comics
+- DEV: Trusted publishing
+
+### Changed
+
+- "Smarter" URL splitting, trailing slashes shouldn't confuse modules anymore
+- DEV: Switched default branch name to `main`
+- DEV: Switched from CodeClimate to qlty.sh
+
+# Fixed
+
+- Some comic modules
+- Add `Accept-Language` header to all requests to satisfy some WAFs
+
 ## [3.1] - 2025-05-19
 
 ### Added
@@ -863,7 +888,8 @@ the 2.16 release to fix the broken update check in that release.
 - Initial public release
 
 
-[Unreleased]: https://github.com/webcomics/dosage/compare/3.1...HEAD
+[Unreleased]: https://github.com/webcomics/dosage/compare/3.2...HEAD
+[3.2]: https://github.com/webcomics/dosage/compare/3.1...3.2
 [3.1]: https://github.com/webcomics/dosage/compare/3.0...3.1
 [3.0]: https://github.com/webcomics/dosage/compare/2.17...3.0
 [2.17]: https://github.com/webcomics/dosage/compare/2.16...2.17
