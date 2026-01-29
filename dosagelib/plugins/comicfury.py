@@ -89,6 +89,19 @@ class ComicFury(ParserScraper):
             not self.match(data, '//div[@id="comicimagewrap"]//img'))
 
     @classmethod
+    def handleurl(cls, url) -> list[ParserScraper]:
+        import re
+        m = re.match(r"^http.*comicfury\.com/read/([^/]+)/?.*", url.lower())
+        if m != None:
+            name = m.group(1)
+            return [cls(name, name)]
+        m = re.match(r"^http.*://(.+?)\.thecomicseries\.com/?.*", url.lower())
+        if m != None:
+            name = m.group(1)
+            return [cls(name, name)]
+        return []
+
+    @classmethod
     def getmodules(cls):
         return (
             # Cannot be found via search?!?

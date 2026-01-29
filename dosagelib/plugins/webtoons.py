@@ -50,7 +50,7 @@ class WebToons(ParserScraper):
     @classmethod
     def handleurl(cls, url) -> list[ParserScraper]:
         import re
-        m = re.match(r"^http.*webtoons.com/.+?/(.+?/.+?)/.+title_no=(\d+)", url.lower())
+        m = re.match(r"^http.*webtoons\.com/.+?/(.+?/.+?)/.+title_no=(\d+)", url.lower())
         if m != None:
             path = m.group(1)
             number = m.group(2)
