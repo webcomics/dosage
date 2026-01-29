@@ -210,7 +210,7 @@ def getScrapers(comics: Collection[str], basepath: str, adult=True, listing=Fals
                 # make the following command work:
                 # find Comics -type d | xargs -n1 -P10 dosage -b Comics
                 comic = comic[len(basepath) + 1:].lstrip(os.sep)
-            if ':' in comic:
+            if ':' in comic and not (comic.startswith("http:") or comic.startswith("https:")):
                 name, index = comic.split(':', 1)
                 indexes = index.split(',')
             else:

@@ -96,6 +96,14 @@ class Scraper:
     session: http.Session = http.default_session
 
     @classmethod
+    def handlesurl(cls, url) -> bool:
+        return False
+
+    @classmethod
+    def handleurl(cls, url) -> list[Scraper]:
+        return []
+
+    @classmethod
     def getmodules(cls) -> Collection[Scraper]:
         if cls.url is None:
             return ()
@@ -537,6 +545,7 @@ class Cache:
     """
     def __init__(self) -> None:
         self.data: List[Scraper] = []
+        self.scrapers: List[Scraper] = []
         self.userdirs: set[pathlib.Path] = set()
 
     def find(self, comic: str) -> Scraper:
@@ -547,6 +556,12 @@ class Cache:
         if not comic:
             raise ValueError("empty comic name")
         candidates = []
+
+        for scraper in self.scrapers:
+            if scraper.handlesurl(comic):
+                candidates.extend(scraper.handleurl(comic))
+                #THINK Maybe just return?
+
         cname = comic.lower()
         for scraper in self.all(include_removed=True):
             lname = scraper.name.lower()
@@ -600,6 +615,7 @@ class Cache:
         classes = 0
         for plugin in loader.get_module_plugins(module, Scraper):
             classes += 1
+            self.scrapers.append(plugin)
             self.data.extend(plugin.getmodules())
         return classes
 
@@ -614,6 +630,13 @@ class Cache:
             return self.data
         else:
             return [x for x in self.data if x.url]
+
+    def getbyurl(self, url) -> list[Scraper]:
+        res = []
+        for plugin in self.scrapers:
+            if plugin.handlesurl(url):
+                res.extend(plugin.handleurl(url))
+        return res
 
     def validate(self) -> None:
         """Check for duplicate scraper names."""
