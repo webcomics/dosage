@@ -553,9 +553,6 @@ class Cache:
             raise ValueError("empty comic name")
         candidates = []
 
-        candidates.extend(self.getbyurl(comic))
-        #THINK Maybe just return if not empty?
-
         cname = comic.lower()
         for scraper in self.all(include_removed=True):
             lname = scraper.name.lower()
@@ -625,11 +622,17 @@ class Cache:
         else:
             return [x for x in self.data if x.url]
 
-    def getbyurl(self, url) -> list[Scraper]:
-        res = []
+    def findbyurl(self, url) -> list[Scraper]:
+        candidates = []
         for plugin in self.plugins:
-            res.extend(plugin.handleurl(url))
-        return res
+            candidates.extend(plugin.handleurl(url))
+
+        if len(candidates) > 1:
+            comics = ", ".join(x.name for x in candidates)
+            raise ValueError('multiple comics found: %s' % comics)
+        elif not candidates:
+            raise ValueError('comic %r not found' % comic)
+        return candidates[0]
 
     def validate(self) -> None:
         """Check for duplicate scraper names."""
