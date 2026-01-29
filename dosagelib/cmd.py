@@ -115,7 +115,7 @@ def setup_options(console: console.Console) -> ArgumentParser:
     parser.add_argument('--list-all', action='store_true',
         help=argparse.SUPPRESS)
     comic_arg = parser.add_argument('comic', nargs='*',
-        help='comic module name (including case insensitive substrings)')
+        help='comic module name (including case insensitive substrings).  Also accepts URLs on certain websites (ComicFury, WebToons).')
     comic_arg.completer = scraper_completion
     with contextlib.suppress(ImportError):
         completers = importlib.import_module('argcomplete.completers')
