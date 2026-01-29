@@ -96,10 +96,6 @@ class Scraper:
     session: http.Session = http.default_session
 
     @classmethod
-    def handlesurl(cls, url) -> bool:
-        return False
-
-    @classmethod
     def handleurl(cls, url) -> list[Scraper]:
         return []
 
@@ -545,7 +541,7 @@ class Cache:
     """
     def __init__(self) -> None:
         self.data: List[Scraper] = []
-        self.scrapers: List[Scraper] = []
+        self.plugins: List[Scraper] = []
         self.userdirs: set[pathlib.Path] = set()
 
     def find(self, comic: str) -> Scraper:
@@ -557,10 +553,8 @@ class Cache:
             raise ValueError("empty comic name")
         candidates = []
 
-        for scraper in self.scrapers:
-            if scraper.handlesurl(comic):
-                candidates.extend(scraper.handleurl(comic))
-                #THINK Maybe just return?
+        candidates.extend(self.getbyurl(comic))
+        #THINK Maybe just return if not empty?
 
         cname = comic.lower()
         for scraper in self.all(include_removed=True):
@@ -615,7 +609,7 @@ class Cache:
         classes = 0
         for plugin in loader.get_module_plugins(module, Scraper):
             classes += 1
-            self.scrapers.append(plugin)
+            self.plugins.append(plugin)
             self.data.extend(plugin.getmodules())
         return classes
 
@@ -633,9 +627,8 @@ class Cache:
 
     def getbyurl(self, url) -> list[Scraper]:
         res = []
-        for plugin in self.scrapers:
-            if plugin.handlesurl(url):
-                res.extend(plugin.handleurl(url))
+        for plugin in self.plugins:
+            res.extend(plugin.handleurl(url))
         return res
 
     def validate(self) -> None:

@@ -47,17 +47,6 @@ class WebToons(ParserScraper):
         imageExt = pageUrl.rsplit('.', 1)[-1].split('?', 1)[0]
         return "%s-%03d.%s" % (episodeNum, imageNum, imageExt)
 
-    #DUMMY Redundant
-    @classmethod
-    def handlesurl(cls, url) -> bool:
-        import re
-        m = re.match(r"^http.*webtoons.com/.+?/(.+?/.+?)/.+title_no=(\d+)", url.lower())
-        if m != None:
-            path = m.group(1)
-            number = m.group(2)
-            return True
-        return False
-
     @classmethod
     def handleurl(cls, url) -> list[ParserScraper]:
         import re
