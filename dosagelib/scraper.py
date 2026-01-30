@@ -54,6 +54,7 @@ class Scraper:
     # Stop search for previous URLs at this URL
     firstStripUrl: Optional[str] = None
 
+    #THINK Is there harm in defaulting this to True?
     # if more than one image per URL is expected
     multipleImagesPerStrip: bool = False
 

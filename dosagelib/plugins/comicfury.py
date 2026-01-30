@@ -91,14 +91,21 @@ class ComicFury(ParserScraper):
     @classmethod
     def handleurl(cls, url) -> list[ParserScraper]:
         import re
-        m = re.match(r"^http.*comicfury\.com/read/([^/]+)/?.*", url.lower())
-        if m != None:
-            name = m.group(1)
-            return [cls(name, name)]
-        m = re.match(r"^http.*://(.+?)\.thecomicseries\.com/?.*", url.lower())
-        if m != None:
-            name = m.group(1)
-            return [cls(name, name)]
+        rs = [
+            r"^http.*comicfury\.com/read/([^/]+)/?.*",
+            r"^http.*://(.+?)\.thecomicseries\.com/?.*",
+            r"^http.*://(.+?)\.the-comic\.org/?.*",
+            r"^http.*://(.+?)\.thecomicstrip\.org/?.*",
+            r"^http.*://(.+?)\.cfw\.me/?.*",
+            r"^http.*://(.+?)\.webcomic\.ws/?.*"
+        ]
+        for r in rs:
+            m = re.match(r, url.lower())
+            if m != None:
+                name = m.group(1)
+                ps = cls(name, name)
+                ps.multipleImagesPerStrip = True
+                return [ps]
         return []
 
     @classmethod
