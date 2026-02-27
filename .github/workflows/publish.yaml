@@ -34,7 +34,7 @@ jobs:
           python3 -m build
 
       - name: Store the distribution packages
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: ${{ env.dists-artifact-name }}
           path: dist/*
