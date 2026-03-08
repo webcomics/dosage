@@ -48,6 +48,16 @@ class WebToons(ParserScraper):
         return "%s-%03d.%s" % (episodeNum, imageNum, imageExt)
 
     @classmethod
+    def handleurl(cls, url) -> list[ParserScraper]:
+        import re
+        m = re.match(r"^http.*webtoons\.com/.+?/(.+?/.+?)/.+title_no=(\d+)", url.lower())
+        if m != None:
+            path = m.group(1)
+            number = m.group(2)
+            return [cls(path, path, number)]
+        return []
+
+    @classmethod
     def getmodules(cls):
         return (
             cls('1000', 'action/one-thousand', 1217),
