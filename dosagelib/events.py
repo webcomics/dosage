@@ -139,9 +139,13 @@ def getDimensionForImage(filename, maxsize):
     The scaling preserves the aspect ratio."""
     try:
         origsize = imagesize.get(filename)
-    except Exception as e:
-        logger.warning("Could not get image size of %r: %s",
-            os.path.basename(filename), e)
+    except Exception:
+        # imagesize < 2.0.0
+        origsize = (-1, -1)
+
+    if origsize == (-1, -1):
+        logger.warning("Could not get image size of %r",
+            os.path.basename(filename))
         return None
 
     width, height = origsize
