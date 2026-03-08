@@ -4,7 +4,6 @@
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 from __future__ import annotations
 
-import codecs
 import contextlib
 import glob
 import logging
@@ -123,11 +122,11 @@ class ComicImage:
     @contextlib.contextmanager
     def fileout(self, filename, encoding=None):
         """Write content to given filename. Checks for zero-sized files.
-        If encoding is given writes to a codec.open() file."""
+        If encoding is given writes to a text file, otherwise to a binary file."""
         def getfp(filename, encoding):
             """Get open file object."""
             if encoding:
-                return codecs.open(filename, 'w', encoding)
+                return open(filename, 'w', encoding=encoding)
             return open(filename, 'wb')
 
         try:

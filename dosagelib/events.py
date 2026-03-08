@@ -2,7 +2,6 @@
 # SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
 # SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
-import codecs
 import json
 import logging
 import os
@@ -139,9 +138,13 @@ def getDimensionForImage(filename, maxsize):
     The scaling preserves the aspect ratio."""
     try:
         origsize = imagesize.get(filename)
-    except Exception as e:
-        logger.warning("Could not get image size of %r: %s",
-            os.path.basename(filename), e)
+    except Exception:
+        # imagesize < 2.0.0
+        origsize = (-1, -1)
+
+    if origsize == (-1, -1):
+        logger.warning("Could not get image size of %r",
+            os.path.basename(filename))
         return None
 
     width, height = origsize
@@ -161,7 +164,6 @@ class HtmlEventHandler(EventHandler):
     """Output in HTML format."""
 
     name = 'html'
-    encoding = 'utf-8'
 
     def fnFromDate(self, date):
         """Get filename from date."""
@@ -202,16 +204,16 @@ class HtmlEventHandler(EventHandler):
             self.yesterdayUrl = None
         self.tomorrowUrl = self.getUrlFromFilename(self.fnFromDate(tomorrow))
 
-        self.html = codecs.open(fn, 'w', self.encoding)
-        self.html.write(u'''<!DOCTYPE html>
+        self.html = open(fn, 'w', encoding='utf-8')
+        self.html.write(f'''<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=%s"/>
-<meta name="generator" content="%s"/>
-<title>Comics for %s</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="generator" content="{configuration.App}"/>
+<title>Comics for {time.strftime('%Y/%m/%d', today)}</title>
 </head>
 <body>
-''' % (self.encoding, configuration.App, time.strftime('%Y/%m/%d', today)))
+''')
         self.addNavLinks()
         self.html.write(u'<ul>\n')
         # last comic name (eg. CalvinAndHobbes)
@@ -263,7 +265,6 @@ class JSONEventHandler(EventHandler):
     """Output metadata for comics in JSON format."""
 
     name = 'json'
-    encoding = 'utf-8'
 
     def start(self):
         """Start with empty data."""
@@ -278,7 +279,7 @@ class JSONEventHandler(EventHandler):
         """Return dictionary with comic info."""
         if scraper not in self.data:
             if os.path.exists(self.jsonFn(scraper)):
-                with codecs.open(self.jsonFn(scraper), 'r', self.encoding) as f:
+                with open(self.jsonFn(scraper), 'r', encoding='utf-8') as f:
                     self.data[scraper] = json.load(f)
             else:
                 self.data[scraper] = {'pages': {}}
@@ -311,8 +312,9 @@ class JSONEventHandler(EventHandler):
     def end(self):
         """Write all JSON data to files."""
         for scraper in self.data:
-            with codecs.open(self.jsonFn(scraper), 'w', self.encoding) as f:
-                json.dump(self.data[scraper], f, indent=2, separators=(',', ': '), sort_keys=True)
+            with open(self.jsonFn(scraper), 'w', encoding='utf-8') as f:
+                json.dump(self.data[scraper], f, indent=2,
+                    separators=(',', ': '), sort_keys=True)
 
 
 _handler_classes = {}
