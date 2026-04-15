@@ -54,6 +54,7 @@ class Scraper:
     # Stop search for previous URLs at this URL
     firstStripUrl: Optional[str] = None
 
+    #THINK Is there harm in defaulting this to True?
     # if more than one image per URL is expected
     multipleImagesPerStrip: bool = False
 
@@ -94,6 +95,10 @@ class Scraper:
 
     # HTTP session for configuration & cookies
     session: http.Session = http.default_session
+
+    @classmethod
+    def handleurl(cls, url) -> list[Scraper]:
+        return []
 
     @classmethod
     def getmodules(cls) -> Collection[Scraper]:
@@ -537,6 +542,7 @@ class Cache:
     """
     def __init__(self) -> None:
         self.data: List[Scraper] = []
+        self.plugins: List[Scraper] = []
         self.userdirs: set[pathlib.Path] = set()
 
     def find(self, comic: str) -> Scraper:
@@ -547,6 +553,7 @@ class Cache:
         if not comic:
             raise ValueError("empty comic name")
         candidates = []
+
         cname = comic.lower()
         for scraper in self.all(include_removed=True):
             lname = scraper.name.lower()
@@ -600,6 +607,7 @@ class Cache:
         classes = 0
         for plugin in loader.get_module_plugins(module, Scraper):
             classes += 1
+            self.plugins.append(plugin)
             self.data.extend(plugin.getmodules())
         return classes
 
@@ -614,6 +622,18 @@ class Cache:
             return self.data
         else:
             return [x for x in self.data if x.url]
+
+    def findbyurl(self, url) -> list[Scraper]:
+        candidates = []
+        for plugin in self.plugins:
+            candidates.extend(plugin.handleurl(url))
+
+        if len(candidates) > 1:
+            comics = ", ".join(x.name for x in candidates)
+            raise ValueError('multiple comics found: %s' % comics)
+        elif not candidates:
+            raise ValueError('comic %r not found' % comic)
+        return candidates[0]
 
     def validate(self) -> None:
         """Check for duplicate scraper names."""
