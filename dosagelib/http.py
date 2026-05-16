@@ -118,9 +118,10 @@ def _get_robotstxt_parser(url, session: Session) -> robotparser.RobotFileParser:
         elif req.status_code == 200:
             rp.parse(req.text.splitlines())
             logger.trace('GET %r successful, %i bytes', url, len(req.content))
-            if rp.default_entry:
+            # Newer versions (3.14.5+) of RobotFileParser don't use default_entry anymore
+            de = hasattr(rp, "groups") and rp.groups.get("*") or rp.default_entry
+            if de:
                 # Filter default deny rules
-                de = rp.default_entry
                 de.rulelines = [rule for rule in de.rulelines if rule.allowance]
     return rp
 
