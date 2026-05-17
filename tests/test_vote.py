@@ -6,35 +6,37 @@ import pytest
 import requests
 import responses
 
-from dosagelib import cmd, scraper
+from dosagelib import scraper
 
 
 class ATestScraper(scraper.BasicScraper):
     pass
 
 
-class TestVote(object):
-    @responses.activate
-    def test_vote(self):
-        responses.add(responses.POST, 'https://buildbox.23.gs/count/')
+@responses.activate
+def test_vote():
+    responses.add(responses.POST, 'https://buildbox.23.gs/count/')
 
+    ATestScraper('Test_Test').vote()
+
+
+@responses.activate
+def test_vote_err():
+    responses.add(responses.POST, 'https://buildbox.23.gs/count/', status=500)
+
+    with pytest.raises(requests.exceptions.HTTPError):
         ATestScraper('Test_Test').vote()
 
-    @responses.activate
-    def test_vote_err(self):
-        responses.add(responses.POST, 'https://buildbox.23.gs/count/', status=500)
 
-        with pytest.raises(requests.exceptions.HTTPError):
-            ATestScraper('Test_Test').vote()
+@responses.activate
+def test_run_vote(run):
+    responses.add(responses.POST, 'https://buildbox.23.gs/count/')
 
-    @responses.activate
-    def test_run_vote(self):
-        responses.add(responses.POST, 'https://buildbox.23.gs/count/')
+    run('--vote', 'xkcd')
 
-        assert cmd.main(('-v', '--vote', 'xkcd')) == 0
 
-    @responses.activate
-    def test_run_vote_err(self):
-        responses.add(responses.POST, 'https://buildbox.23.gs/count/', status=500)
+@responses.activate
+def test_run_vote_err(run):
+    responses.add(responses.POST, 'https://buildbox.23.gs/count/', status=500)
 
-        assert cmd.main(('-v', '--allow-multiple', '--vote', 'xkcd')) == 1
+    run('--vote', 'xkcd', expected=1)
