@@ -140,10 +140,14 @@ class RichHandler(logging.Handler):
     def colorexception(self, ei):
         """
         Format and return the specified exception information as a string with ANSI
-        colors (on PYthon 3.13+).
+        colors (on Python 3.13+).
         """
         sio = io.StringIO()
-        traceback.print_exception(ei[0], ei[1], ei[2], limit=None, file=sio, colorize=True)
+        import inspect
+        if inspect.getfullargspec(traceback.print_exception).varkw:
+            traceback.print_exception(ei[0], ei[1], ei[2], file=sio, colorize=True)
+        else:
+            traceback.print_exception(ei[0], ei[1], ei[2], file=sio)
         s = sio.getvalue()
         sio.close()
         if s[-1:] == "\n":

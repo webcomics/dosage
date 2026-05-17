@@ -1,19 +1,15 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Tobias Gruetzmacher
 import time
+
 from dosagelib.rss import parseFeed
 
 
-class TestFeed(object):
-    """
-    Tests for rss.py
-    """
+def test_parseFeed():
+    testTime = time.localtime(1560000000.0)
+    feed = parseFeed('./tests/mocks/dailydose.rss', testTime)
 
-    def test_parseFeed(self):
-        testTime = time.localtime(1560000000.0)
-        feed = parseFeed('./tests/mocks/dailydose.rss', testTime)
+    xmlBlob = feed.getXML()
 
-        xmlBlob = feed.getXML()
-
-        assert u'PlumedDotage - 4034.png'.encode() in xmlBlob
-        assert u'PachinkoParlor - 20190626.jpg'.encode() not in xmlBlob
+    assert b'PlumedDotage - 4034.png' in xmlBlob
+    assert b'PachinkoParlor - 20190626.jpg' not in xmlBlob
