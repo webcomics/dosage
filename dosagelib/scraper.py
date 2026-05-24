@@ -110,8 +110,7 @@ class Scraper:
 
     @indexes.setter
     def indexes(self, val):
-        if val:
-            self._indexes = tuple(sorted(val))
+        self._indexes = tuple(sorted(val)) if val else ()
 
     def __init__(self, name: str) -> None:
         """Initialize internal variables."""
