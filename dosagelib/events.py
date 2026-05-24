@@ -173,8 +173,8 @@ class HtmlEventHandler(EventHandler):
 
     def addNavLinks(self):
         if self.yesterdayUrl:
-            self.html.write(u'<a href="%s">Previous Day</a> | ' % self.yesterdayUrl)
-        self.html.write(u'<a href="%s">Next Day</a>\n' % self.tomorrowUrl)
+            self.html.write('<a href="%s">Previous Day</a> | ' % self.yesterdayUrl)
+        self.html.write('<a href="%s">Next Day</a>\n' % self.tomorrowUrl)
 
     def start(self):
         """Start HTML output."""
@@ -215,13 +215,13 @@ class HtmlEventHandler(EventHandler):
 <body>
 ''')
         self.addNavLinks()
-        self.html.write(u'<ul>\n')
+        self.html.write('<ul>\n')
         # last comic name (eg. CalvinAndHobbes)
         self.lastComic = None
         # last comic strip URL (eg. http://example.com/page42)
         self.lastUrl = None
 
-    def comicDownloaded(self, comic, filename, text=None):
+    def comicDownloaded(self, comic, filename):
         """Write HTML entry for downloaded comic."""
         if self.lastComic != comic.scraper.name:
             self.newComic(comic)
@@ -231,32 +231,32 @@ class HtmlEventHandler(EventHandler):
         imageUrl = self.getUrlFromFilename(filename)
         pageUrl = comic.referrer
         if pageUrl != self.lastUrl:
-            self.html.write(u'<li><a href="%s">%s</a>\n' % (pageUrl, pageUrl))
-        self.html.write(u'<br/><img src="%s"' % imageUrl)
+            self.html.write('<li><a href="{}">{}</a>\n'.format(pageUrl, pageUrl))
+        self.html.write('<br/><img src="%s"' % imageUrl)
         if size:
             self.html.write(' width="%d" height="%d"' % size)
         self.html.write('/>\n')
-        if text:
-            self.html.write(u'<br/>%s\n' % text)
+        if comic.text:
+            self.html.write('<br/>%s\n' % comic.text)
         self.lastComic = comic.scraper.name
         self.lastUrl = pageUrl
 
     def newComic(self, comic):
         """Start new comic list in HTML."""
         if self.lastUrl is not None:
-            self.html.write(u'</li>\n')
+            self.html.write('</li>\n')
         if self.lastComic is not None:
-            self.html.write(u'</ul>\n')
-        self.html.write(u'<li>%s</li>\n' % comic.scraper.name)
-        self.html.write(u'<ul>\n')
+            self.html.write('</ul>\n')
+        self.html.write('<li>%s</li>\n' % comic.scraper.name)
+        self.html.write('<ul>\n')
 
     def end(self):
         """End HTML output."""
         if self.lastUrl is not None:
-            self.html.write(u'</li>\n')
+            self.html.write('</li>\n')
         if self.lastComic is not None:
-            self.html.write(u'</ul>\n')
-        self.html.write(u'</ul>\n')
+            self.html.write('</ul>\n')
+        self.html.write('</ul>\n')
         self.addNavLinks()
         self.html.close()
 
@@ -279,7 +279,7 @@ class JSONEventHandler(EventHandler):
         """Return dictionary with comic info."""
         if scraper not in self.data:
             if os.path.exists(self.jsonFn(scraper)):
-                with open(self.jsonFn(scraper), 'r', encoding='utf-8') as f:
+                with open(self.jsonFn(scraper), encoding='utf-8') as f:
                     self.data[scraper] = json.load(f)
             else:
                 self.data[scraper] = {'pages': {}}
@@ -352,7 +352,7 @@ def clear_handlers():
     del _handlers[:]
 
 
-class MultiHandler(object):
+class MultiHandler:
     """Encapsulate a list of handlers."""
 
     def start(self):
