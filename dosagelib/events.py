@@ -2,6 +2,7 @@
 # SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
 # SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
+import html
 import json
 import logging
 import os
@@ -113,7 +114,7 @@ class RSSEventHandler(EventHandler):
             description += ' width="%d" height="%d"' % size
         description += '/>'
         if comic.text:
-            description += '<br/>%s' % comic.text
+            description += '<br/>%s' % html.escape(comic.text)
         description += '<br/><a href="%s">View Comic Online</a>' % pageUrl
         args = (
             title,
@@ -237,7 +238,7 @@ class HtmlEventHandler(EventHandler):
             self.html.write(' width="%d" height="%d"' % size)
         self.html.write('/>\n')
         if comic.text:
-            self.html.write('<br/>%s\n' % comic.text)
+            self.html.write('<br/>%s\n' % html.escape(comic.text))
         self.lastComic = comic.scraper.name
         self.lastUrl = pageUrl
 
