@@ -449,6 +449,8 @@ class ParserScraper(Scraper):
     # Taken directly from LXML
     XML_DECL = re.compile(
         r'^(<\?xml[^>]+)\s+encoding\s*=\s*["\'][^"\']*["\'](\s*\?>|)', re.U)
+    XML_INVALID = re.compile(
+        r'[\x00-\x08\x0B\x0C\x0E-\x1F\uD800-\uDFFF\uFFFE\uFFFF]')
 
     def getPage(self, url):
         page = super().getPage(url)
@@ -462,7 +464,10 @@ class ParserScraper(Scraper):
             tree = self._parse_page(text)
         else:
             tree = self._parse_page(page.content)
-        tree.make_links_absolute(url)
+
+        # same as make_links_absolute, but removes XML-invalid codepoints
+        tree.rewrite_links(lambda href: urljoin(url,
+            self.XML_INVALID.sub('', href)))
         return tree
 
     def _parse_page(self, data):

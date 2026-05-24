@@ -108,3 +108,11 @@ def test_mangadex_gone(capfd, run):
 
     captured = capfd.readouterr()
     assert 'ERROR: Comic' in captured.out
+
+
+@responses.activate
+def test_ai_broken_xml(run):
+    httpmocks.page(re.compile(r'.*/strongest-of-talithar-26/'), 'ai-sot-26')
+    httpmocks.png(re.compile(r'.*\.png'))
+
+    run('ArtificialIncident:strongest-of-talithar-26')
