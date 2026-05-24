@@ -10,7 +10,6 @@ from dosagelib.scraper import scrapers
 
 def test_get_scrapers():
     for scraperobj in scrapers.all():
-        scraperobj.indexes = ["bla"]
         assert scraperobj.url, "missing url in %s" % scraperobj.name
 
 
