@@ -6,6 +6,22 @@ The format is based on
 
 ## [Unreleased]
 
+## [3.3] - 2026-05-25
+
+### Security
+
+- Fixes a [stored XSS] in HTML/RSS output.
+
+[stored XSS]: https://github.com/webcomics/dosage/security/advisories/GHSA-75mw-h36v-2jv7
+
+### Fixed
+
+- Compatibility with imagesize 2.0.0 restored
+- Some comic modules
+- Compatibility with robots.txt parsing on Python 3.13 (> 3.13.13), 3.14
+  (3.14.5+) and future Python versions
+- Edge-case parsing of XML entities in links (#385)
+
 ## [3.2] - 2025-11-04
 
 ### Security
@@ -888,7 +904,8 @@ the 2.16 release to fix the broken update check in that release.
 - Initial public release
 
 
-[Unreleased]: https://github.com/webcomics/dosage/compare/3.2...HEAD
+[Unreleased]: https://github.com/webcomics/dosage/compare/3.3...HEAD
+[3.3]: https://github.com/webcomics/dosage/compare/3.2...3.3
 [3.2]: https://github.com/webcomics/dosage/compare/3.1...3.2
 [3.1]: https://github.com/webcomics/dosage/compare/3.0...3.1
 [3.0]: https://github.com/webcomics/dosage/compare/2.17...3.0
