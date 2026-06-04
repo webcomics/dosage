@@ -5,16 +5,15 @@ on:
   - push
   - pull_request
 
-permissions:
-  contents: read
-  id-token: write
-
 env:
   DEFAULT_PYTHON: '3.14'
 
 jobs:
   tests:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     strategy:
       matrix:
         python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
@@ -23,19 +22,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v6
-        with:
-          python-version: ${{ matrix.python-version }}
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8.2.0
 
       - name: Run Pre-Commit
         uses: pre-commit/action@v3.0.1
         if: ${{ matrix.python-version == env.DEFAULT_PYTHON }}
         continue-on-error: true
 
-      - name: Install dependencies
+      - name: Install tox
         run: |
-          pip install tox tox-gh-actions
+          uv tool install --python ${{ matrix.python-version }} tox --with tox-gh
 
       - name: Test with tox
         run: tox
@@ -43,12 +40,51 @@ jobs:
       - name: Submit Coverage to Qlty  # New "name" of CodeClimate Quality
         uses: qltysh/qlty-action/coverage@v2
         # OIDC on "external" pull requests doesn't work
-        if: ${{ matrix.python-version == env.DEFAULT_PYTHON && github.event.pull_request.head.repo.full_name == github.repository }}
+        if: matrix.python-version == env.DEFAULT_PYTHON && github.event.pull_request.head.repo.full_name == github.repository
         with:
           oidc: true
           files: '.tox/reports/*/coverage.lcov'
 
-      - name: Submit Coverage to CodeCov
-        uses: codecov/codecov-action@v6
+      - name: Store coverage file
+        uses: actions/upload-artifact@v7
+        if: matrix.python-version == env.DEFAULT_PYTHON
         with:
-          directory: '.tox/reports'
+          name: coveragepy
+          path: .coverage
+          include-hidden-files: true
+
+  coverage:
+    name: Coverage
+    runs-on: ubuntu-latest
+    needs: tests
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
+    permissions:
+      # Allows the action to publish new comments directly on trusted PRs.
+      # Forked pull_request runs are downgraded to read-only by GitHub.
+      pull-requests: write
+      # Allows updating the python-coverage-comment-action branch and editing
+      # existing comments when direct publication is allowed.
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - uses: actions/download-artifact@v8
+        id: download
+        with:
+          name: coveragepy
+          merge-multiple: true
+
+      - name: Coverage comment
+        id: coverage_comment
+        uses: py-cov-action/python-coverage-comment-action@v3
+        with:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Store Pull Request comment to be posted
+        uses: actions/upload-artifact@v7
+        if: steps.coverage_comment.outputs.COMMENT_FILE_WRITTEN == 'true'
+        with:
+          name: python-coverage-comment-action
+          path: python-coverage-comment-action.txt
