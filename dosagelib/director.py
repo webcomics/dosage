@@ -210,13 +210,17 @@ def getScrapers(comics: Collection[str], basepath: str, adult=True, listing=Fals
                 # make the following command work:
                 # find Comics -type d | xargs -n1 -P10 dosage -b Comics
                 comic = comic[len(basepath) + 1:].lstrip(os.sep)
-            if ':' in comic:
-                name, index = comic.split(':', 1)
-                indexes = index.split(',')
+            if comic.startswith("http:") or comic.startswith("https:"):
+              scraper = scrapercache.findbyurl(comic)
+              indexes = None
             else:
-                name = comic
-                indexes = None
-            scraper = scrapercache.find(name)
+              if ':' in comic:
+                  name, index = comic.split(':', 1)
+                  indexes = index.split(',')
+              else:
+                  name = comic
+                  indexes = None
+              scraper = scrapercache.find(name)
             if shouldRunScraper(scraper, adult, listing):
                 # FIXME: Find a better way to work with indexes
                 scraper.indexes = indexes
