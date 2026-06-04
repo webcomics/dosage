@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/webcomics/dosage/actions/workflows/ci.yaml/badge.svg)](https://github.com/webcomics/dosage/actions/workflows/ci.yaml)
 [![Maintainability](https://qlty.sh/badges/be23128b-277b-4431-a5df-400e3648be2a/maintainability.svg)](https://qlty.sh/gh/webcomics/projects/dosage)
-[![codecov](https://codecov.io/gh/webcomics/dosage/branch/main/graph/badge.svg)](https://codecov.io/gh/webcomics/dosage)
+[![Coverage](https://raw.githubusercontent.com/webcomics/dosage/python-coverage-comment-action-data/badge.svg)](https://htmlpreview.github.io/?https://github.com/webcomics/dosage/blob/python-coverage-comment-action-data/htmlcov/index.html)
 ![GitHub last commit](https://img.shields.io/github/last-commit/webcomics/dosage)
 ![License](https://img.shields.io/github/license/webcomics/dosage)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
