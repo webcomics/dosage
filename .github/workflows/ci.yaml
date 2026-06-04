@@ -35,7 +35,7 @@ jobs:
           uv tool install --python ${{ matrix.python-version }} tox --with tox-gh
 
       - name: Test with tox
-        run: tox
+        run: uvx tox
 
       - name: Submit Coverage to Qlty  # New "name" of CodeClimate Quality
         uses: qltysh/qlty-action/coverage@v2
