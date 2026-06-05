@@ -107,7 +107,7 @@ class RSSEventHandler(EventHandler):
         size = None
         if self.allowdownscale:
             size = getDimensionForImage(filename, MaxImageSize)
-        title = '%s - %s' % (comic.scraper.name, os.path.basename(filename))
+        title = f'{comic.scraper.name} - {os.path.basename(filename)}'
         pageUrl = comic.referrer
         description = '<img src="%s"' % imageUrl
         if size:
@@ -232,7 +232,7 @@ class HtmlEventHandler(EventHandler):
         imageUrl = self.getUrlFromFilename(filename)
         pageUrl = comic.referrer
         if pageUrl != self.lastUrl:
-            self.html.write('<li><a href="{}">{}</a>\n'.format(pageUrl, pageUrl))
+            self.html.write(f'<li><a href="{pageUrl}">{pageUrl}</a>\n')
         self.html.write('<br/><img src="%s"' % imageUrl)
         if size:
             self.html.write(' width="%d" height="%d"' % size)
@@ -324,7 +324,7 @@ _handler_classes = {}
 def addHandlerClass(clazz):
     """Register handler class."""
     if not issubclass(clazz, EventHandler):
-        raise ValueError("%s must be subclassed from %s" % (clazz, EventHandler))
+        raise ValueError(f"{clazz} must be subclassed from {EventHandler}")
     _handler_classes[clazz.name] = clazz
 
 

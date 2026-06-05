@@ -72,7 +72,7 @@ class PeterIsTheWolfAdult(WLPComics):
         # Fix loop in site navigation
         if url == self.stripUrl % '194':
             return self.stripUrl % '193'
-        return super(PeterIsTheWolfAdult, self).getPrevUrl(url, data)
+        return super().getPrevUrl(url, data)
 
 
 class PeterIsTheWolfGeneral(WLPComics):
@@ -92,7 +92,7 @@ class PeterIsTheWolfGeneral(WLPComics):
             return self.stripUrl % '228'
         if url == self.stripUrl % '153':
             return self.stripUrl % '152'
-        return super(PeterIsTheWolfGeneral, self).getPrevUrl(url, data)
+        return super().getPrevUrl(url, data)
 
 
 class Stellar(WLPComics):

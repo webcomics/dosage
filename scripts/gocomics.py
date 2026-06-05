@@ -56,7 +56,7 @@ class GoComicsUpdater(ComicListUpdater):
     def get_entry(self, name: str, data: tuple[str, str]) -> str:
         url, lang = data
         langopt = ", '%s'" % lang if lang else ''
-        return u"cls('%s', '%s'%s)," % (name, url, langopt)
+        return f"cls('{name}', '{url}'{langopt}),"
 
 
 if __name__ == '__main__':

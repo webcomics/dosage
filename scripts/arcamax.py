@@ -37,7 +37,7 @@ class ArcamaxUpdater(scriptutil.ComicListUpdater):
         self.handle_url('http://www.arcamax.com/comics')
 
     def get_entry(self, name, entry):
-        return u"cls('%s', '%s')," % (name, entry)
+        return f"cls('{name}', '{entry}'),"
 
 
 if __name__ == '__main__':

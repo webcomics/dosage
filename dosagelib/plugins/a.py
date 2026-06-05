@@ -78,7 +78,7 @@ class AdventuresOfFifne(ParserScraper):
         # Fix broken navigation links
         if url == self.stripUrl % 'lg06':
             return self.stripUrl % 'lg05'
-        return super(AdventuresOfFifne, self).getPrevUrl(url, data)
+        return super().getPrevUrl(url, data)
 
 
 class AfterStrife(WordPressNavi):
@@ -280,7 +280,8 @@ class AntiheroForHire(ParserScraper):
     def starter(self):
         # Build list of chapters for navigation
         page = self.getPage(self.url)
-        self.chapters = self.match(page, '//ul[d:class("archive-group-list")]//a[d:class("archive-item-link")]/@href')
+        self.chapters = self.match(page, '//ul[d:class("archive-group-list")]'
+            '//a[d:class("archive-item-link")]/@href')
         return self.chapters[0]
 
     def getPrevUrl(self, url, data):
@@ -333,8 +334,8 @@ class AstronomyPOTD(ParserScraper):
         return self.match(data, '//iframe')  # videos
 
     def namer(self, image_url, page_url):
-        return '%s-%s' % (page_url.split('/')[-1].split('.')[0][2:],
-                          util.urlpathsplit(image_url)[-1])
+        return '-'.join((page_url.split('/')[-1].split('.')[0][2:],
+            util.urlpathsplit(image_url)[-1]))
 
 
 class ATaleOfTails(WordPressScraper):

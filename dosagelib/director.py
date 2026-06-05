@@ -69,7 +69,7 @@ class ComicGetter(threading.Thread):
 
     def __init__(self, options, jobs) -> None:
         """Store options."""
-        super(ComicGetter, self).__init__()
+        super().__init__()
         self.options = options
         self.jobs = jobs
         self.origname = self.name

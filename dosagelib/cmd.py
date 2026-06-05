@@ -133,8 +133,8 @@ def scraper_completion(**kwargs) -> Iterable[str]:
 def display_version(verbose: bool) -> None:
     """Display application name, version, copyright and license."""
     print(configuration.App)
-    print("Using Python {} ({}) on {}".format(platform.python_version(),
-        platform.python_implementation(), platform.platform()))
+    print(f"Using Python {platform.python_version()} "
+        f"({platform.python_implementation()}) on {platform.platform()}")
     print(configuration.Copyright)
     print(configuration.Freeware)
     print("For support see", configuration.SupportUrl)
@@ -156,7 +156,7 @@ def display_version(verbose: bool) -> None:
                 attrs = {'version': version, 'app': AppName,
                     'url': url, 'currentversion': __version__}
                 print(text % attrs)
-        except (IOError, KeyError) as err:
+        except (OSError, KeyError) as err:
             print(f'An error occured while checking for an update of {AppName}: {err!r}')
 
 
@@ -293,12 +293,12 @@ def get_tagged_scraper(scraperobj, reasons: dict[str, str]) -> tuple[str, str]:
     if scraperobj.adult:
         tags.append(TAG_ADULT)
     if scraperobj.lang != "en":
-        tags.append("%s:%s" % (TAG_LANG, scraperobj.lang))
+        tags.append(f"{TAG_LANG}:{scraperobj.lang}")
     disabled = scraperobj.getDisabledReasons()
     if disabled and reasons is not None:
         reasons.update(disabled)
     for reason in disabled:
-        tags.append("%s:%s" % (TAG_DISABLED, reason))
+        tags.append(f"{TAG_DISABLED}:{reason}")
 
     return scraperobj.name, "[" + ", ".join(tags) + "]" if tags else ""
 

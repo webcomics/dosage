@@ -43,7 +43,7 @@ class ComicListUpdater:
             if self.sleep > 0:
                 time.sleep(self.sleep)
             return data
-        except IOError as msg:
+        except OSError as msg:
             print("ERROR:", msg, file=sys.stderr)
             raise
 
@@ -121,7 +121,7 @@ class ComicListUpdater:
         dup = self.find_dups(name)
         fp.write(" " * indent)
         if dup is not None:
-            fp.write(u"# %s has a duplicate in %s\n" % (name, dup))
+            fp.write(f"# {name} has a duplicate in {dup}\n")
         else:
             fp.write(self.get_entry(
                 truncate_name(name),

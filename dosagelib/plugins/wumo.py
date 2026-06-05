@@ -10,7 +10,7 @@ class KindOfNormal(ParserScraper):
     prevSearch = '//a[@class="prev"]'
 
     def __init__(self, name, url):
-        super(KindOfNormal, self).__init__(name)
+        super().__init__(name)
         self.url = 'http://wumo.com/' + url
 
     @classmethod

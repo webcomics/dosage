@@ -4,8 +4,8 @@
 # SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
 
-from ..scraper import ParserScraper, _ParserScraper
 from ..helpers import bounceStarter, indirectStarter
+from ..scraper import ParserScraper, _ParserScraper
 
 
 class Vexxarr(_ParserScraper):
@@ -20,7 +20,7 @@ class Vexxarr(_ParserScraper):
 
     def namer(self, imageUrl, pageUrl):
         page = pageUrl.rsplit('=', 1)[-1]
-        return '20%s-%s-%s' % (page[4:6], page[0:2], page[2:4])
+        return f'20{page[4:6]}-{page[0:2]}-{page[2:4]}'
 
 
 class VGCats(_ParserScraper):

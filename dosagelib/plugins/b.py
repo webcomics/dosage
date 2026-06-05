@@ -172,11 +172,11 @@ class BirdBoy(WordPressScraper):
         except ValueError:
             pageNr = None  # Use the string to fetch a cover page
         if volume == 'synopsis':
-            strip = '{0}{1}'.format(pageNr, '-02' if strip in [1, 3] else '')
+            strip = '{}{}'.format(pageNr, '-02' if strip in [1, 3] else '')
         else:
             volume = 'volume-' + volume
             if pageNr is not None:
-                strip = 'page-{0}'.format(pageNr)
+                strip = f'page-{pageNr}'
         return self.stripUrl.format(volume, strip)
 
     def namer(self, image_url, page_url):

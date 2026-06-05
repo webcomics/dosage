@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2022 Tobias Gruetzmacher
-from ..scraper import ParserScraper
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 from ..helpers import indirectStarter
+from ..scraper import ParserScraper
 
 
 class Creators(ParserScraper):
@@ -13,7 +13,7 @@ class Creators(ParserScraper):
     starter = indirectStarter
 
     def __init__(self, name, path, lang=None):
-        super(Creators, self).__init__('Creators/' + name)
+        super().__init__('Creators/' + name)
         self.url = 'https://www.creators.com/features/' + path
         if lang:
             self.lang = lang

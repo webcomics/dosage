@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2019-2022 Tobias Gruetzmacher
-# Copyright (C) 2019-2020 Daniel Ring
+# SPDX-FileCopyrightText: © 2019 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2019 Daniel Ring
 from ..helpers import bounceStarter
 from ..scraper import ParserScraper
 
@@ -15,15 +15,15 @@ class DMFA(ParserScraper):
 
     def __init__(self, name, first, last=None):
         if name == 'DMFA':
-            super(DMFA, self).__init__(name)
+            super().__init__(name)
         else:
-            super(DMFA, self).__init__('DMFA/' + name)
+            super().__init__('DMFA/' + name)
 
         self.firstStripUrl = self.stripUrl % first
 
         if last:
             self.url = self.stripUrl % last
-            self.starter = super(DMFA, self).starter
+            self.starter = super().starter
             self.endOfLife = True
 
     @classmethod

@@ -1,15 +1,16 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2015-2017 Tobias Gruetzmacher
-import xml.dom.minidom
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 import time
+import xml.dom.minidom
+
 from .configuration import App
 
 # TODO: Not sure if this RSS output is "valid", should be though.
 #       Might also be nice categorise Comics under one Item
 
 
-class Feed(object):
+class Feed:
     """Write an RSS feed with comic strip images."""
 
     def __init__(self, title, link, description, lang='en-us', encoding="utf-8"):

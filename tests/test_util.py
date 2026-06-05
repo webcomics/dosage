@@ -38,10 +38,10 @@ def match_tag(matcher, tag, value, domatch=True):
     text = tag % value
     match = matcher.search(text)
     if domatch:
-        assert match, "{} should match {}".format(matcher.pattern, text)
+        assert match, f"{matcher.pattern} should match {text}"
         assert match.group(1) == value
     else:
-        assert not match, "{} should not match {}".format(matcher.pattern, text)
+        assert not match, f"{matcher.pattern} should not match {text}"
 
 
 def test_system_uid():

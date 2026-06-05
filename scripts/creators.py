@@ -37,7 +37,7 @@ class CreatorsUpdater(scriptutil.ComicListUpdater):
 
     def get_entry(self, name, path):
         langopt = ", 'es'" if name.lower().endswith('spanish') else ''
-        return u"cls('%s', '%s'%s)," % (name, path, langopt)
+        return f"cls('{name}', '{path}'{langopt}),"
 
 
 if __name__ == '__main__':

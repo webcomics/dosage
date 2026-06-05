@@ -1,14 +1,13 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2004-2008 Tristan Seligmann and Jonathan Jacobs
-# Copyright (C) 2012-2014 Bastian Kleineidam
-# Copyright (C) 2015-2021 Tobias Gruetzmacher
+# SPDX-FileCopyrightText: © 2004 Tristan Seligmann and Jonathan Jacobs
+# SPDX-FileCopyrightText: © 2012 Bastian Kleineidam
+# SPDX-FileCopyrightText: © 2015 Tobias Gruetzmacher
 import json
 import multiprocessing
 import os
 import re
 import warnings
 from urllib.parse import urlsplit
-
 
 # Dictionary with per-host locks.
 _locks = {}
@@ -100,8 +99,7 @@ def _check_strip(outdir, strip, multipleImagesPerStrip):
         files.append(fn)
     assert images, 'failed to find images at %s' % strip.strip_url
     if not multipleImagesPerStrip:
-        assert len(images) == 1, 'found more than 1 image at {}: {}'.format(
-            strip.strip_url, images)
+        assert len(images) == 1, f'found more than 1 image at {strip.strip_url}: {images}'
     return files
 
 
@@ -130,8 +128,7 @@ def _check_stripurl(strip, scraperobj):
     ro = re.compile(urlmatch)
     mo = ro.match(strip.strip_url)
     if not mo:
-        warnings.warn('strip URL {!r} does not match stripUrl pattern {}'.format(
-            strip.strip_url, urlmatch))
+        warnings.warn(f'strip URL {strip.strip_url!r} does not match stripUrl pattern {urlmatch}')
 
 
 class ProxyConfig:

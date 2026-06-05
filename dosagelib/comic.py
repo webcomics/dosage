@@ -80,14 +80,14 @@ class ComicImage:
         maintype = content_type.split('/', 1)[0]
         if maintype != 'image' and content_type not in (
                 'application/octet-stream', 'application/x-shockwave-flash'):
-            raise IOError('content type %r is not an image at %s' % (
-                content_type, self.url))
+            raise OSError(f'content type {content_type!r} is not an image at {self.url}')
         # Try to guess "better" extension from mime type
         guessed_ext = mimetypes.guess_extension(content_type)
         if guessed_ext and guessed_ext != '.bin':
             self.ext = guessed_ext
         self.contentLength = int(self.urlobj.headers.get('content-length', 0))
-        logger.debug('... filename = %r, ext = %r, contentLength = %d', self.filename, self.ext, self.contentLength)
+        logger.debug('... filename = %r, ext = %r, contentLength = %d',
+            self.filename, self.ext, self.contentLength)
 
     def save(self, basepath):
         """Save comic URL to filename on disk."""

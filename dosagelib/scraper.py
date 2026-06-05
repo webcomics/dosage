@@ -10,7 +10,7 @@ import os
 import pathlib
 import re
 import warnings
-from typing import Collection, Dict, List, Optional, Pattern, Sequence, Union
+from typing import Collection, Pattern, Sequence
 from urllib.parse import urljoin
 
 import lxml
@@ -45,14 +45,14 @@ class Scraper:
     implementation.'''
 
     # The URL for the comic strip
-    url: Optional[str] = None
+    url: str | None = None
 
     # A string that is interpolated with the strip index to yield the URL for a
     # particular strip.
-    stripUrl: Optional[str] = None
+    stripUrl: str | None = None
 
     # Stop search for previous URLs at this URL
-    firstStripUrl: Optional[str] = None
+    firstStripUrl: str | None = None
 
     # if more than one image per URL is expected
     multipleImagesPerStrip: bool = False
@@ -68,15 +68,15 @@ class Scraper:
 
     # an expression that will locate the URL for the previous strip in a page
     # this can also be a list or tuple
-    prevSearch: Optional[Union[Sequence[Union[str, Pattern]], str, Pattern]] = None
+    prevSearch: Sequence[str | Pattern] | str | Pattern | None = None
 
     # an expression that will locate the strip image URLs strip in a page
     # this can also be a list or tuple
-    imageSearch: Optional[Union[Sequence[Union[str, Pattern]], str, Pattern]] = None
+    imageSearch: Sequence[str | Pattern] | str | Pattern | None = None
 
     # an expression to store a text together with the image
     # sometimes comic strips have additional text info for each comic
-    textSearch: Optional[Union[Sequence[Union[str, Pattern]], str, Pattern]] = None
+    textSearch: Sequence[str | Pattern] | str | Pattern | None = None
 
     # Is the additional text required or optional?  When it is required (the
     # default), you see an error message whenever a comic page is encountered
@@ -154,15 +154,15 @@ class Scraper:
     def getStrips(self, maxstrips=None):
         """Get comic strips."""
         if maxstrips:
-            word = u"strip" if maxstrips == 1 else "strips"
-            msg = u'Retrieving %d %s' % (maxstrips, word)
+            word = "strip" if maxstrips == 1 else "strips"
+            msg = 'Retrieving %d %s' % (maxstrips, word)
         else:
-            msg = u'Retrieving all strips'
+            msg = 'Retrieving all strips'
         if self.indexes:
             if len(self.indexes) == 1:
-                msg += u" for index %s" % self.indexes[0]
+                msg += " for index %s" % self.indexes[0]
             else:
-                msg += u" for indexes %s" % self.indexes
+                msg += " for indexes %s" % self.indexes
             # Always call starter() since it might initialize cookies.
             # See for example Oglaf comic.
             self.starter()
@@ -170,11 +170,10 @@ class Scraper:
         else:
             urls = [self.starter()]
         if self.adult:
-            msg += u" (including adult content)"
+            msg += " (including adult content)"
         logger.info(msg)
         for url in urls:
-            for strip in self.getStripsFor(url, maxstrips):
-                yield strip
+            yield from self.getStripsFor(url, maxstrips)
 
     def getStripsFor(self, url, maxstrips):
         """Get comic strips for an URL. If maxstrips is a positive number, stop after
@@ -503,7 +502,7 @@ class ParserScraper(Scraper):
             except AttributeError:
                 text.append(match)
             logger.debug('Matched text %r with XPath %r', text, search)
-        text = u' '.join(text)
+        text = ' '.join(text)
         if text.strip() == '':
             if optional:
                 return None
@@ -540,7 +539,7 @@ class Cache:
     slow.
     """
     def __init__(self) -> None:
-        self.data: List[Scraper] = []
+        self.data: list[Scraper] = []
         self.userdirs: set[pathlib.Path] = set()
 
     def find(self, comic: str) -> Scraper:
@@ -621,7 +620,7 @@ class Cache:
 
     def validate(self) -> None:
         """Check for duplicate scraper names."""
-        d: Dict[str, Scraper] = {}
+        d: dict[str, Scraper] = {}
         for scraper in self.data:
             name = scraper.name.lower()
             if name in d:

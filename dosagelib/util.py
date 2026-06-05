@@ -140,7 +140,7 @@ def case_insensitive_re(name):
     @return: the case insensitive regex
     @rtype: string
     """
-    return "".join("[%s%s]" % (c.lower(), c.upper()) for c in name)
+    return "".join(f"[{c.lower()}{c.upper()}]" for c in name)
 
 
 def get_page(url, session, **kwargs):
@@ -227,7 +227,7 @@ def check_content_size(url, headers, max_content_bytes):
     if 'content-length' in headers:
         size = int(headers['content-length'])
         if size > max_content_bytes:
-            raise IOError(
+            raise OSError(
                 'URL content of %s with %d bytes exceeds %d bytes.' %
                 (url, size, max_content_bytes))
 

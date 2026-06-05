@@ -395,7 +395,7 @@ class SnowFlame(WordPressScraper):
         mo = ro.search(page_url)
         chapter = mo.group(1)
         page = mo.group(2)
-        return "%s-%s-%s" % (chapter, page, filename)
+        return f"{chapter}-{page}-{filename}"
 
 
 class SodiumEyes(WordPressScraper):
@@ -535,7 +535,7 @@ class SSDD(_ParserScraper):
         )
 
 
-class StandStillStaySilent(_ParserScraper):
+class StandStillStaySilent(ParserScraper):
     baseUrl = 'http://sssscomic.com/'
     url = baseUrl + 'comic2.php'
     stripUrl = baseUrl + 'comic%s.php?page=%s'
@@ -545,7 +545,8 @@ class StandStillStaySilent(_ParserScraper):
 
     def namer(self, image_url, page_url):
         chapter = '2' if ('adv2_comicpages' in image_url) else '1'
-        return '%s-%s' % (chapter, util.urlpathsplit(image_url)[-1].replace('page_', ''))
+        return '-'.join((chapter,
+            util.urlpathsplit(image_url)[-1].replace('page_', '')))
 
 
 class StarCrossdDestiny(ParserScraper):

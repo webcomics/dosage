@@ -12,8 +12,7 @@ class PetiteSymphony(WordPressNavi):
     help = 'Index format: named number'
 
     def __init__(self, name):
-        super(PetiteSymphony, self).__init__('PetiteSymphony/' +
-                                             name.capitalize())
+        super().__init__('PetiteSymphony/' + name.capitalize())
         self.url = 'http://%s.petitesymphony.com/' % name
         self.stripUrl = self.url + 'comic/%s'
 
@@ -27,11 +26,10 @@ class PetiteSymphony(WordPressNavi):
 
 class ComicsBreak(WordPressScraper):
     def __init__(self, name, archive=None, adult=False):
-        super(ComicsBreak, self).__init__('ComicsBreak/' + name)
+        super().__init__('ComicsBreak/' + name)
         self.url = 'http://%s.comicsbreak.com/' % name.lower()
         if archive:
-            self.url = 'https://web.archive.org/web/{}/{}'.format(
-                archive, self.url)
+            self.url = f'https://web.archive.org/web/{archive}/{self.url}'
             self.endOfLife = True
         if adult:
             self.adult = adult

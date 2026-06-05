@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: MIT
 # SPDX-FileCopyrightText: © 2019 Tobias Gruetzmacher
 # SPDX-FileCopyrightText: © 2019 Daniel Ring
-from ..scraper import ParserScraper
 from ..helpers import indirectStarter
+from ..scraper import ParserScraper
 
 
 class Wrongside(ParserScraper):
@@ -25,7 +25,7 @@ class Wrongside(ParserScraper):
     def getPrevUrl(self, url, data):
         if self.match(data, self.prevSearch) == [] and len(self.archive) > 0:
             return self.archive.pop()
-        return super(Wrongside, self).getPrevUrl(url, data)
+        return super().getPrevUrl(url, data)
 
     def namer(self, imageUrl, pageUrl):
         page = self.getPage(pageUrl)
