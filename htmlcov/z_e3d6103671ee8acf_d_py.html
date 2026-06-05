@@ -73,7 +73,7 @@
             <a id="nextFileLink" class="nav" href="z_e3d6103671ee8acf_derideal_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.14.1">coverage.py v7.14.1</a>,
-            created at 2026-06-04 14:58 +0000
+            created at 2026-06-05 00:27 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -240,7 +240,7 @@
     <p class="run"><span class="n"><a id="t150" href="#t150">150</a></span><span class="t">    <span class="nam">stripUrl</span> <span class="op">=</span> <span class="nam">url</span> <span class="op">+</span> <span class="str">'?bild=%s.jpg'</span>&nbsp;</span><span class="r"><label for="ctxs150" class="ctx">(empty)</label></span></p>
     <p class="run"><span class="n"><a id="t151" href="#t151">151</a></span><span class="t">    <span class="nam">firstStripUrl</span> <span class="op">=</span> <span class="nam">stripUrl</span> <span class="op">%</span> <span class="str">'00_01_01'</span>&nbsp;</span><span class="r"><label for="ctxs151" class="ctx">(empty)</label></span></p>
     <p class="run"><span class="n"><a id="t152" href="#t152">152</a></span><span class="t">    <span class="nam">imageSearch</span> <span class="op">=</span> <span class="str">'//img[contains(@src, "images/tod/teil2")]'</span>&nbsp;</span><span class="r"><label for="ctxs152" class="ctx">(empty)</label></span></p>
-    <p class="run"><span class="n"><a id="t153" href="#t153">153</a></span><span class="t">    <span class="nam">prevSearch</span> <span class="op">=</span> <span class="str">u'//a[text()="zur\u00FCck"]'</span>&nbsp;</span><span class="r"><label for="ctxs153" class="ctx">(empty)</label></span></p>
+    <p class="run"><span class="n"><a id="t153" href="#t153">153</a></span><span class="t">    <span class="nam">prevSearch</span> <span class="op">=</span> <span class="str">'//a[text()="zur\u00FCck"]'</span>&nbsp;</span><span class="r"><label for="ctxs153" class="ctx">(empty)</label></span></p>
     <p class="run"><span class="n"><a id="t154" href="#t154">154</a></span><span class="t">    <span class="nam">help</span> <span class="op">=</span> <span class="str">'Index format: nn_nn_nn'</span>&nbsp;</span><span class="r"><label for="ctxs154" class="ctx">(empty)</label></span></p>
     <p class="run"><span class="n"><a id="t155" href="#t155">155</a></span><span class="t">    <span class="nam">lang</span> <span class="op">=</span> <span class="str">'de'</span>&nbsp;</span><span class="r"><label for="ctxs155" class="ctx">(empty)</label></span></p>
     <p class="pln"><span class="n"><a id="t156" href="#t156">156</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -327,7 +327,7 @@
     <p class="mis show_mis"><span class="n"><a id="t237" href="#t237">237</a></span><span class="t">            <span class="nam">month</span> <span class="op">=</span> <span class="nam">filename</span><span class="op">[</span><span class="num">0</span><span class="op">:</span><span class="num">2</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
     <p class="mis show_mis"><span class="n"><a id="t238" href="#t238">238</a></span><span class="t">            <span class="nam">day</span> <span class="op">=</span> <span class="nam">filename</span><span class="op">[</span><span class="num">2</span><span class="op">:</span><span class="num">4</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
     <p class="mis show_mis"><span class="n"><a id="t239" href="#t239">239</a></span><span class="t">            <span class="nam">year</span> <span class="op">=</span> <span class="op">(</span><span class="str">'19'</span> <span class="key">if</span> <span class="nam">filename</span><span class="op">[</span><span class="num">4</span><span class="op">]</span> <span class="op">==</span> <span class="str">'9'</span> <span class="key">else</span> <span class="str">'20'</span><span class="op">)</span> <span class="op">+</span> <span class="nam">filename</span><span class="op">[</span><span class="num">4</span><span class="op">:</span><span class="num">6</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t240" href="#t240">240</a></span><span class="t">            <span class="nam">filename</span> <span class="op">=</span> <span class="str">'%s-%s-%s%s'</span> <span class="op">%</span> <span class="op">(</span><span class="nam">year</span><span class="op">,</span> <span class="nam">month</span><span class="op">,</span> <span class="nam">day</span><span class="op">,</span> <span class="nam">filename</span><span class="op">[</span><span class="num">6</span><span class="op">:</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis show_mis"><span class="n"><a id="t240" href="#t240">240</a></span><span class="t">            <span class="nam">filename</span> <span class="op">=</span> <span class="fst">f'</span><span class="op">{</span><span class="nam">year</span><span class="op">}</span><span class="fst">-</span><span class="op">{</span><span class="nam">month</span><span class="op">}</span><span class="fst">-</span><span class="op">{</span><span class="nam">day</span><span class="op">}</span><span class="op">{</span><span class="nam">filename</span><span class="op">[</span><span class="num">6</span><span class="op">:</span><span class="op">]</span><span class="op">}</span><span class="fst">'</span>&nbsp;</span><span class="r"></span></p>
     <p class="mis show_mis"><span class="n"><a id="t241" href="#t241">241</a></span><span class="t">        <span class="key">return</span> <span class="nam">filename</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t242" href="#t242">242</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t243" href="#t243">243</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -476,7 +476,7 @@
             <a class="nav" href="z_e3d6103671ee8acf_derideal_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.14.1">coverage.py v7.14.1</a>,
-            created at 2026-06-04 14:58 +0000
+            created at 2026-06-05 00:27 +0000
         </p>
     </div>
 </footer>

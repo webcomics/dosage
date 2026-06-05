@@ -72,7 +72,7 @@
             <a id="nextFileLink" class="nav" href="z_e3d6103671ee8acf_c_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.14.1">coverage.py v7.14.1</a>,
-            created at 2026-06-04 14:58 +0000
+            created at 2026-06-05 00:27 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -261,11 +261,11 @@
     <p class="mis show_mis"><span class="n"><a id="t172" href="#t172">172</a></span><span class="t">        <span class="key">except</span> <span class="nam">ValueError</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="mis show_mis"><span class="n"><a id="t173" href="#t173">173</a></span><span class="t">            <span class="nam">pageNr</span> <span class="op">=</span> <span class="key">None</span>  <span class="com"># Use the string to fetch a cover page</span>&nbsp;</span><span class="r"></span></p>
     <p class="mis show_mis"><span class="n"><a id="t174" href="#t174">174</a></span><span class="t">        <span class="key">if</span> <span class="nam">volume</span> <span class="op">==</span> <span class="str">'synopsis'</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t175" href="#t175">175</a></span><span class="t">            <span class="nam">strip</span> <span class="op">=</span> <span class="str">'{0}{1}'</span><span class="op">.</span><span class="nam">format</span><span class="op">(</span><span class="nam">pageNr</span><span class="op">,</span> <span class="str">'-02'</span> <span class="key">if</span> <span class="nam">strip</span> <span class="key">in</span> <span class="op">[</span><span class="num">1</span><span class="op">,</span> <span class="num">3</span><span class="op">]</span> <span class="key">else</span> <span class="str">''</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis show_mis"><span class="n"><a id="t175" href="#t175">175</a></span><span class="t">            <span class="nam">strip</span> <span class="op">=</span> <span class="str">'{}{}'</span><span class="op">.</span><span class="nam">format</span><span class="op">(</span><span class="nam">pageNr</span><span class="op">,</span> <span class="str">'-02'</span> <span class="key">if</span> <span class="nam">strip</span> <span class="key">in</span> <span class="op">[</span><span class="num">1</span><span class="op">,</span> <span class="num">3</span><span class="op">]</span> <span class="key">else</span> <span class="str">''</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t176" href="#t176">176</a></span><span class="t">        <span class="key">else</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="mis show_mis"><span class="n"><a id="t177" href="#t177">177</a></span><span class="t">            <span class="nam">volume</span> <span class="op">=</span> <span class="str">'volume-'</span> <span class="op">+</span> <span class="nam">volume</span>&nbsp;</span><span class="r"></span></p>
     <p class="mis show_mis"><span class="n"><a id="t178" href="#t178">178</a></span><span class="t">            <span class="key">if</span> <span class="nam">pageNr</span> <span class="key">is</span> <span class="key">not</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t179" href="#t179">179</a></span><span class="t">                <span class="nam">strip</span> <span class="op">=</span> <span class="str">'page-{0}'</span><span class="op">.</span><span class="nam">format</span><span class="op">(</span><span class="nam">pageNr</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis show_mis"><span class="n"><a id="t179" href="#t179">179</a></span><span class="t">                <span class="nam">strip</span> <span class="op">=</span> <span class="fst">f'</span><span class="fst">page-</span><span class="op">{</span><span class="nam">pageNr</span><span class="op">}</span><span class="fst">'</span>&nbsp;</span><span class="r"></span></p>
     <p class="mis show_mis"><span class="n"><a id="t180" href="#t180">180</a></span><span class="t">        <span class="key">return</span> <span class="nam">self</span><span class="op">.</span><span class="nam">stripUrl</span><span class="op">.</span><span class="nam">format</span><span class="op">(</span><span class="nam">volume</span><span class="op">,</span> <span class="nam">strip</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t181" href="#t181">181</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t182" href="#t182">182</a></span><span class="t">    <span class="key">def</span> <span class="nam">namer</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">image_url</span><span class="op">,</span> <span class="nam">page_url</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"><label for="ctxs182" class="ctx">(empty)</label></span></p>
@@ -431,7 +431,7 @@
             <a class="nav" href="z_e3d6103671ee8acf_c_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.14.1">coverage.py v7.14.1</a>,
-            created at 2026-06-04 14:58 +0000
+            created at 2026-06-05 00:27 +0000
         </p>
     </div>
 </footer>
