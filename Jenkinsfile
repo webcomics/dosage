@@ -1,7 +1,7 @@
 def pys = [
     [name: 'Python 3.14', docker: '3.14-bookworm', tox:'py314', main: true],
     [name: 'Python 3.13', docker: '3.13-bookworm', tox:'py313', main: false],
-    [name: 'Python 3.8',  docker: '3.8-bookworm',  tox:'py38',  main: false],
+    [name: 'Python 3.10', docker: '3.10-bookworm', tox:'py310', main: false],
 ]
 
 properties([
@@ -75,12 +75,6 @@ parallel modern: {
         stage('Modern Windows binary') {
             // FIXME: Update to 3.14 when brotli wheel is available
             windowsBuild('3.13', 'dosage.exe')
-        }
-    },
-    legacy: {
-        stage('Legacy Windows binary') {
-            // Still compatible with Windows 7
-            windowsBuild('3.8', 'dosage-legacy.exe')
         }
     },
     report: {
