@@ -232,6 +232,7 @@ class WebToons(ParserScraper):
             cls('InTheBleakMidwinter', 'sf/in-the-bleak-midwinter', 1946),
             cls('ItsMine', 'drama/its-mine', 2010),
             cls('JackieRose', 'supernatural/jackie-rose', 613),
+            cls('JamNKen', 'canvas/jamnken', 924814),
             cls('JingleJungle', 'slice-of-life/jingle-jungle', 282),
             cls('JustACat', 'fantasy/just-a-cat', 7633),
             cls('JustAskYuli', 'slice-of-life/just-ask-yuli', 402),
