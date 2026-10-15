@@ -694,7 +694,7 @@ class SwordsAndSausages(_ParserScraper):
     url = 'https://www.tigerknight.com/ss'
     stripUrl = url + '/%s'
     firstStripUrl = stripUrl % '1-1'
-    imageSearch = '//img[d:class("comic-image")]'
+    imageSearch = '//*[@id="comic"]/button/img'
     prevSearch = '//a[./span[contains(text(), "Previous")]]'
     multipleImagesPerStrip = True
 
