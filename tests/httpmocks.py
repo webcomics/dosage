@@ -40,9 +40,10 @@ def jpeg(url, name='empty'):
     add(GET, url, _img(name), content_type='image/jpeg')
 
 
-def xkcd(latest='xkcd-1899'):
+def xkcd(latest='xkcd-1899', previous='xkcd-1898'):
     page('https://xkcd.com/', latest)
     page('https://xkcd.com/1899/', latest)
-    for num in (302, 303, 1898):
+    page('https://xkcd.com/1898/', previous)
+    for num in (302, 303):
         page('https://xkcd.com/%i/' % num, 'xkcd-%i' % num)
     png(re.compile(r'https://imgs\.xkcd\.com/.*\.png'))

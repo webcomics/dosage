@@ -46,3 +46,16 @@ def test_xss_text(tmp_path, run):
     rss = (tmp_path / 'Comics' / 'dailydose.rss').read_text()
     # HTML in RSS is escaped...
     assert "&lt;script&gt;alert" not in rss
+
+
+@responses.activate
+def test_xss_page_url(tmp_path, run):
+    """Demonstrate that page URLs don't expose RSS/HTML to stored XSS"""
+    httpmocks.xkcd(previous='xkcd-1898-xss-url')
+    run("-o", "html", "-o", "rss", "xkcd")
+    html = next((tmp_path / 'Comics' / 'html').glob('*.html')).read_text()
+    assert "<svg onload" not in html
+    assert "&lt;svg onload" in html
+    rss = (tmp_path / 'Comics' / 'dailydose.rss').read_text()
+    # HTML in RSS is escaped...
+    assert "&lt;svg onload" not in rss
