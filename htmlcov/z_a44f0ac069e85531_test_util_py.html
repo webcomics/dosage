@@ -9,8 +9,9 @@
         contexts = {
   "a": "(empty)",
   "b": "tests/test_util.py::test_regex[\u003cimg src=\"%s\"\u003e-/bla/foo-True]|run",
-  "c": "tests/test_util.py::test_system_uid|run",
-  "d": "tests/test_util.py::test_normalisation|run"
+  "c": "tests/test_util.py::test_regex[\u003cimg origsrc=\"%s\"\u003e-/bla/-False]|run",
+  "d": "tests/test_util.py::test_normalisation|run",
+  "e": "tests/test_util.py::test_system_uid|run"
 }
     </script>
     <script src="coverage_html_cb_54cfdca1.js" defer></script>
@@ -74,8 +75,8 @@
             <a id="indexLink" class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
             <a id="nextFileLink" class="nav" href="z_a44f0ac069e85531_test_version_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.17.0">coverage.py v7.17.0</a>,
-            created at 2026-11-02 09:03 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.17.3">coverage.py v7.17.3</a>,
+            created at 2026-11-23 16:50 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -129,7 +130,7 @@
     <p class="run"><span class="n"><a id="t37" href="#t37">37</a></span><span class="t"><span class="key">def</span> <span class="nam">match_tag</span><span class="op">(</span><span class="nam">matcher</span><span class="op">,</span> <span class="nam">tag</span><span class="op">,</span> <span class="nam">value</span><span class="op">,</span> <span class="nam">domatch</span><span class="op">=</span><span class="key">True</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"><label for="ctxs37" class="ctx">(empty)</label></span></p>
     <p class="run"><span class="n"><a id="t38" href="#t38">38</a></span><span class="t">    <span class="nam">text</span> <span class="op">=</span> <span class="nam">tag</span> <span class="op">%</span> <span class="nam">value</span>&nbsp;</span><input type="checkbox" id="ctxs38"><span class="r"><label for="ctxs38" class="ctx">1 ctx</label></span><span class="ctxs">1b</span></p>
     <p class="run"><span class="n"><a id="t39" href="#t39">39</a></span><span class="t">    <span class="nam">match</span> <span class="op">=</span> <span class="nam">matcher</span><span class="op">.</span><span class="nam">search</span><span class="op">(</span><span class="nam">text</span><span class="op">)</span>&nbsp;</span><input type="checkbox" id="ctxs39"><span class="r"><label for="ctxs39" class="ctx">1 ctx</label></span><span class="ctxs">1b</span></p>
-    <p class="run"><span class="n"><a id="t40" href="#t40">40</a></span><span class="t">    <span class="key">if</span> <span class="nam">domatch</span><span class="op">:</span>&nbsp;</span><input type="checkbox" id="ctxs40"><span class="r"><label for="ctxs40" class="ctx">2 ctx</label></span><span class="ctxs">1bc</span></p>
+    <p class="run"><span class="n"><a id="t40" href="#t40">40</a></span><span class="t">    <span class="key">if</span> <span class="nam">domatch</span><span class="op">:</span>&nbsp;</span><input type="checkbox" id="ctxs40"><span class="r"><label for="ctxs40" class="ctx">2 ctx</label></span><span class="ctxs">1cb</span></p>
     <p class="run"><span class="n"><a id="t41" href="#t41">41</a></span><span class="t">        <span class="key">assert</span> <span class="nam">match</span><span class="op">,</span> <span class="fst">f&quot;</span><span class="op">{</span><span class="nam">matcher</span><span class="op">.</span><span class="nam">pattern</span><span class="op">}</span><span class="fst"> should match </span><span class="op">{</span><span class="nam">text</span><span class="op">}</span><span class="fst">&quot;</span>&nbsp;</span><input type="checkbox" id="ctxs41"><span class="r"><label for="ctxs41" class="ctx">1 ctx</label></span><span class="ctxs">1b</span></p>
     <p class="run"><span class="n"><a id="t42" href="#t42">42</a></span><span class="t">        <span class="key">assert</span> <span class="nam">match</span><span class="op">.</span><span class="nam">group</span><span class="op">(</span><span class="num">1</span><span class="op">)</span> <span class="op">==</span> <span class="nam">value</span>&nbsp;</span><input type="checkbox" id="ctxs42"><span class="r"><label for="ctxs42" class="ctx">1 ctx</label></span><span class="ctxs">1b</span></p>
     <p class="pln"><span class="n"><a id="t43" href="#t43">43</a></span><span class="t">    <span class="key">else</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
@@ -138,7 +139,7 @@
     <p class="pln"><span class="n"><a id="t46" href="#t46">46</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t47" href="#t47">47</a></span><span class="t"><span class="key">def</span> <span class="nam">test_system_uid</span><span class="op">(</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"><label for="ctxs47" class="ctx">(empty)</label></span></p>
     <p class="pln"><span class="n"><a id="t48" href="#t48">48</a></span><span class="t">    <span class="str">&quot;&quot;&quot;Tests for unique system IDs.&quot;&quot;&quot;</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t49" href="#t49">49</a></span><span class="t">    <span class="key">assert</span> <span class="nam">get_system_uid</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><input type="checkbox" id="ctxs49"><span class="r"><label for="ctxs49" class="ctx">1 ctx</label></span><span class="ctxs">1c</span></p>
+    <p class="run"><span class="n"><a id="t49" href="#t49">49</a></span><span class="t">    <span class="key">assert</span> <span class="nam">get_system_uid</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><input type="checkbox" id="ctxs49"><span class="r"><label for="ctxs49" class="ctx">1 ctx</label></span><span class="ctxs">1e</span></p>
 </main>
 <footer>
     <div class="content">
@@ -147,8 +148,8 @@
             <a class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
             <a class="nav" href="z_a44f0ac069e85531_test_version_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.17.0">coverage.py v7.17.0</a>,
-            created at 2026-11-02 09:03 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.17.3">coverage.py v7.17.3</a>,
+            created at 2026-11-23 16:50 +0000
         </p>
     </div>
 </footer>
