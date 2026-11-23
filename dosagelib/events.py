@@ -115,7 +115,7 @@ class RSSEventHandler(EventHandler):
         description += '/>'
         if comic.text:
             description += '<br/>%s' % html.escape(comic.text)
-        description += '<br/><a href="%s">View Comic Online</a>' % pageUrl
+        description += '<br/><a href="%s">View Comic Online</a>' % html.escape(pageUrl)
         args = (
             title,
             imageUrl,
@@ -232,7 +232,8 @@ class HtmlEventHandler(EventHandler):
         imageUrl = self.getUrlFromFilename(filename)
         pageUrl = comic.referrer
         if pageUrl != self.lastUrl:
-            self.html.write(f'<li><a href="{pageUrl}">{pageUrl}</a>\n')
+            escapedUrl = html.escape(pageUrl)
+            self.html.write(f'<li><a href="{escapedUrl}">{escapedUrl}</a>\n')
         self.html.write('<br/><img src="%s"' % imageUrl)
         if size:
             self.html.write(' width="%d" height="%d"' % size)
